@@ -1,0 +1,116 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gettext</Name>
+        <Homepage>http://www.gnu.org/software/gettext/gettext.html</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3+</License>
+        <IsA>app:console</IsA>
+        <IsA>library</IsA>
+        <Summary>GNU libraries and utilities for producing multi-lingual messages</Summary>
+        <Description>The GNU gettext package provides a set of tools and documentation for producing multi-lingual messages in programs. Tools include a set of conventions about how programs should be written to support message catalogs, a directory and file naming organization for the message catalogs, a runtime library which supports the retrieval of translated messages, and stand-alone programs for handling the translatable and the already translated strings. Gettext provides an easy to use library and tools for creating, using, and modifying natural language catalogs and is a powerful and simple method for internationalizing programs.</Description>
+        <Archive sha1sum="a2dc46d788edb0078ab20da7bd194bdb6da2f0d9" type="targz">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.3.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>acl-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>ncurses</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>gettext-docs</Name>
+        <PartOf>system.doc</PartOf>
+        <RuntimeDependencies>
+            <Dependency>gettext</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="doc">/usr/share/doc/gettext/html</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>gettext</Name>
+        <RuntimeDependencies>
+            <Dependency>acl</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>ncurses</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>libunistring</Dependency>
+            <Dependency>libgomp</Dependency>
+            <Dependency>libxml2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/gettext</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>gettext-devel</Name>
+        <PartOf>system.devel</PartOf>
+        <Summary>Development files for gettext</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">gettext</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="header">/usr/include</Path>
+            <!-- FIXME: Remove this if not necessary -->
+            <Path fileType="man">/usr/share/man/man3</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="6">
+            <Date>2014-05-11</Date>
+            <Version>0.18.3.2</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2014-03-29</Date>
+            <Version>0.18.3.2</Version>
+            <Comment>Minor version bump.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-08-27</Date>
+            <Version>0.18.3.1</Version>
+            <Comment>Version bump, clean gettext.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-02-11</Date>
+            <Version>0.18.2</Version>
+            <Comment>Fix dep, release bump.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-02-11</Date>
+            <Version>0.18.2</Version>
+            <Comment>Güncellendi.</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2010-10-11</Date>
+            <Version>0.18.1.1</Version>
+            <Comment>First release</Comment>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,146 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>freetype</Name>
+        <Homepage>http://www.freetype.org/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>FTL</License>
+        <License>GPLv2</License>
+        <IsA>library</IsA>
+        <Summary>A high-quality and portable font engine</Summary>
+        <Description>FreeType 2 is a software font engine that is designed to be small, efficient, highly customizable, and portable while capable of producing high-quality output. It can be used in graphics libraries, display servers, font conversion tools, text image generation tools, and many other products as well.</Description>
+        <Archive sha1sum="d3c26cc17ec7fe6c36f4efc02ef92ab6aa3f4b46" type="tarbz2">mirrors://sourceforge/freetype/freetype-2.5.3.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>zlib-devel</Dependency>
+            <Dependency>bzip2</Dependency>
+            <Dependency>libpng-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+             <Patch level="1">freetype-2.2.1-enable-valid.patch</Patch>
+             <Patch level="1">freetype-2.5.1-enable-sph.patch</Patch>
+             <Patch level="1">freetype-2.5.1-enable-spr.patch</Patch>
+             <Patch level="0">fix_segfault_with_harfbuzz.diff</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>freetype</Name>
+        <RuntimeDependencies>
+            <Dependency>zlib</Dependency>
+            <Dependency>bzip2</Dependency>
+            <Dependency>libpng</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>freetype-devel</Name>
+        <PartOf>system.devel</PartOf>
+        <Summary>Development files for freetype</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">freetype</Dependency>
+            <Dependency>harfbuzz-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/lib32/pkgconfig</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>freetype-32bit</Name>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for freetype</Summary>
+        <BuildType>emul32</BuildType>
+        <BuildDependencies>
+            <Dependency>zlib-32bit</Dependency>
+            <Dependency>libpng-32bit</Dependency>
+            <Dependency>harfbuzz-32bit</Dependency>
+        </BuildDependencies>
+        <RuntimeDependencies>
+            <Dependency release="current">freetype</Dependency>
+            <Dependency>zlib-32bit</Dependency>
+            <Dependency>libpng-32bit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib32</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="9">
+            <Date>2014-05-11</Date>
+            <Version>2.5.3</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="8">
+            <Date>2014-03-29</Date>
+            <Version>2.5.3</Version>
+            <Comment>Version bump</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="7">
+            <Date>2013-12-11</Date>
+            <Version>2.5.2</Version>
+            <Comment>Version bump, cleanup.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2013-11-26</Date>
+            <Version>2.5.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>Richard de Bruin</Name>
+            <Email>richdb@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2013-10-28</Date>
+            <Version>2.5.0.1</Version>
+            <Comment>rebuild.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-07-26</Date>
+            <Version>2.5.0.1</Version>
+            <Comment>Fix deps,release bump.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-06-28</Date>
+            <Version>2.5.0.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-01-14</Date>
+            <Version>2.4.11</Version>
+            <Comment>New release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-11-24</Date>
+            <Version>2.4.10</Version>
+            <Comment>First release</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,110 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>cloog</Name>
+        <Homepage>http://www.cloog.org/</Homepage>
+        <Packager>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <IsA>app:console</IsA>
+        <IsA>library</IsA>
+        <Summary>Chunky Loop Generator</Summary>
+        <Description>cloog is CLooG is a free software and library to generate code for scanning Z-polyhedra. It is used by the GCC Graphite optimization framework.</Description>
+        <Archive sha1sum="2dc70313e8e2c6610b856d627bce9c9c3f848077" type="targz">http://www.bastoul.net/cloog/pages/download/cloog-0.18.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gmp-devel</Dependency>
+            <Dependency>ppl-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">cloog-0.18.1-isl-compat.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>cloog</Name>
+        <RuntimeDependencies>
+            <Dependency>gmp</Dependency>
+            <Dependency>isl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc/cloog/</Path>
+            <Path fileType="info">/usr/share/info</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>cloog-devel</Name>
+        <Summary>Development files for cloog</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">cloog</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="header">/usr/lib/pkgconfig/cloog.pc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="8">
+            <Date>2014-09-06</Date>
+            <Version>0.18.1</Version>
+            <Comment>Rebuild for new isl and new toolchain.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="7">
+            <Date>2014-05-11</Date>
+            <Version>0.18.1</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2014-03-29</Date>
+            <Version>0.18.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2013-08-27</Date>
+            <Version>0.18.0</Version>
+            <Comment>Clean cloog.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-07-26</Date>
+            <Version>0.18.0</Version>
+            <Comment>Move pc files to devel pack, rebuild.</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-04-23</Date>
+            <Version>0.18.0</Version>
+            <Comment>Dep fixed</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2012-02-16</Date>
+            <Version>0.18.0</Version>
+            <Comment>New release</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-06-22</Date>
+            <Version>0.17.0</Version>
+            <Comment>First release</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,98 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>rsyslog</Name>
+        <Homepage>http://www.rsyslog.com</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3+</License>
+        <IsA>service</IsA>
+        <Summary>Enhanced system logging and kernel message trapping daemons</Summary>
+        <Description>rsyslog is an enhanced multi-threaded syslogd supporting, among others, MySQL, syslog/tcp, RFC 3195, permitted sender lists, filtering on any message part, and fine grain output format control. It is quite compatible with stock sysklogd and can be used as a drop-in replacement.</Description>
+        <Archive sha1sum="1f6ab5eec635adff84361a376663ca7bd7473f5b" type="targz">http://www.rsyslog.com/files/download/rsyslog/rsyslog-7.6.3.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>zlib-devel</Dependency>
+            <Dependency>json-c-devel</Dependency>
+            <Dependency>libestr-devel</Dependency>
+            <Dependency>libgcrypt-devel</Dependency>
+            <Dependency>liblogging-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>rsyslog</Name>
+        <RuntimeDependencies>
+            <Dependency>zlib</Dependency>
+            <Dependency>json-c</Dependency>
+            <Dependency>libestr</Dependency>
+            <Dependency>libuuid</Dependency>
+            <Dependency>libgcrypt</Dependency>
+            <Dependency>liblogging</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/rsyslogd</Path>
+            <Path fileType="library">/usr/lib/rsyslog</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="config">/etc/logrotate.d</Path>
+            <Path fileType="config">/etc/conf.d</Path>
+            <Path fileType="config">/etc/rsyslog.conf</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/logrotate.d/rsyslog">rsyslog.logrotate</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/rsyslog.conf">rsyslog.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/conf.d/rsyslog">rsyslog.sysconfig</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="service.py">System.Service</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="6">
+            <Date>2014-05-11</Date>
+            <Version>7.6.3</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2014-03-30</Date>
+            <Version>7.6.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2014-02-13</Date>
+            <Version>7.2.5</Version>
+            <Comment>Rebuild Unused</Comment>
+            <Name>Varol Maksutoğlu</Name>
+            <Email>waroi@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-07-26</Date>
+            <Version>7.2.5</Version>
+            <Comment>Release bump, fix dep.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-01-14</Date>
+            <Version>7.2.5</Version>
+            <Comment>New release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-11-21</Date>
+            <Version>7.2.3</Version>
+            <Comment>First release</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

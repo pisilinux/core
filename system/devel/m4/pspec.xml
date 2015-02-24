@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>m4</Name>
+        <Homepage>http://www.gnu.org/software/m4/m4.html</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <IsA>app:console</IsA>
+        <Summary>GNU macro processor</Summary>
+        <Description>The m4 utility is a macro processor that shall read one or more text files, process them according to their included macro statements, and write the results to standard output</Description>
+        <Archive sha1sum="4f80aed6d8ae3dacf97a0cb6e989845269e342f0" type="targz">mirrors://gnu/m4/m4-1.4.17.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gettext-devel</Dependency>
+            <Dependency>libsigsegv</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>m4</Name>
+        <RuntimeDependencies>
+            <Dependency>libsigsegv</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2014-05-11</Date>
+            <Version>1.4.17</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-10-23</Date>
+            <Version>1.4.17</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-07-12</Date>
+            <Version>1.4.16</Version>
+            <Comment>First release</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

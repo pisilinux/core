@@ -1,0 +1,117 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pam</Name>
+        <Homepage>http://www.kernel.org/pub/linux/libs/pam/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>PAM</License>
+        <IsA>library</IsA>
+        <Summary>Pluggable Authentication Modules</Summary>
+        <Description>PAM (Pluggable Authentication Modules) is a system security tool that allows system administrators to set authentication policy without having to recompile programs that handle authentication.</Description>
+        <Archive sha1sum="f8ce53c67363f78d520392fa1c253c4978058be1" type="tarbz2">http://www.linux-pam.org/library/Linux-PAM-1.1.8.tar.bz2</Archive>
+        <AdditionalFiles>
+            <AdditionalFile target="dlopen.sh" permission="0755">dlopen.sh</AdditionalFile>
+            <AdditionalFile target="dlopen-test.sh" permission="0755">dlopen-test.sh</AdditionalFile>
+        </AdditionalFiles>
+        <BuildDependencies>
+            <Dependency>perl</Dependency>
+            <Dependency>gettext</Dependency>
+            <Dependency>cracklib</Dependency>
+            <Dependency>audit-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+<!--             <Patch level="1">Linux-PAM-1.1.6-destdir.patch</Patch> -->
+            <Patch level="1">no-lib64.patch</Patch>
+            <Patch level="1">nosex-libtirpc-underlinking.patch</Patch>
+            <Patch level="1">pam-1.1.8-cve-2013-7041.patch</Patch>
+            <Patch level="1">pam-1.1.8-cve-2014-2583.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>pam</Name>
+        <RuntimeDependencies>
+            <Dependency>audit</Dependency>
+            <Dependency>cracklib</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="data">/var/run/console</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/limit.d/90-nproc.conf">90-nproc.conf</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="postInstall.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <Package>
+        <Name>pam-devel</Name>
+        <PartOf>system.devel</PartOf>
+        <Summary>Development files for pam</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">pam</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="man">/usr/share/man/man3</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="6">
+            <Date>2014-06-10</Date>
+            <Version>1.1.8</Version>
+            <Comment>Add patch CVE.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2014-05-11</Date>
+            <Version>1.1.8</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-10-22</Date>
+            <Version>1.1.8</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-05-16</Date>
+            <Version>1.1.6</Version>
+            <Comment>Sandbox fixed.</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-02-21</Date>
+            <Version>1.1.6</Version>
+            <Comment>Build with new automake, enable tests.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-09-13</Date>
+            <Version>1.1.6</Version>
+            <Comment>First release</Comment>
+            <Name>Erdem Artan</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

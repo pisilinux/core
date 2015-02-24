@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>tar</Name>
+        <Homepage>http://www.gnu.org/software/tar/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3+</License>
+        <IsA>app:console</IsA>
+        <Summary>A GNU file archiving program</Summary>
+        <Description>The GNU tar program saves many files together in one archive and can restore individual files (or all of the files) from that archive.</Description>
+        <Archive sha1sum="5ce4233e1774e990b930f3c46990267b28448962" type="tarxz">http://ftp.gnu.org/gnu/tar/tar-1.27.1.tar.xz</Archive>
+        <AdditionalFiles>
+            <AdditionalFile target="doc/tar.1">tar.1</AdditionalFile>
+        </AdditionalFiles>
+        <BuildDependencies>
+            <Dependency>gzip</Dependency>
+            <Dependency>bzip2</Dependency>
+            <Dependency>gettext</Dependency>
+            <Dependency>ncompress</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>tar</Name>
+        <RuntimeDependencies>
+            <Dependency>acl</Dependency>
+            <Dependency>glibc</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="info">/usr/share/info</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="5">
+            <Date>2014-05-11</Date>
+            <Version>1.27.1</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+	<Update release="4">
+            <Date>2013-11-23</Date>
+            <Version>1.27.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>Richard de Bruin</Name>
+            <Email>richdb@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-10-24</Date>
+            <Version>1.27</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-07-31</Date>
+            <Version>1.26</Version>
+            <Comment>Fix deps.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-08-23</Date>
+            <Version>1.26</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

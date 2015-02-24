@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>dhcpcd</Name>
+        <Homepage>http://roy.marples.name/dhcpcd</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>A dhcp client only</Summary>
+        <Description>An RFC2131 and RFC1541 compliant DHCP client daemon. dhcpcd gets an IP address and other information from a corresponding DHCP server, configures the network interface automatically, and tries to renew the lease time according to RFC2131 or RFC1541 depending on the command line option.</Description>
+        <Archive sha1sum="571748397e420a95c0679615cbea8e1830bc3f3c" type="tarbz2">http://ftp.osuosl.org/pub/blfs/conglomeration/dhcpcd/dhcpcd-6.7.1.tar.bz2</Archive>
+    </Source>
+
+    <Package>
+        <Name>dhcpcd</Name>
+        <RuntimeDependencies>
+            <Dependency>libudev</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="data">/lib/dhcpcd</Path>
+            <Path fileType="library">/usr/lib/dhcpcd/dev/udev.so</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/var/lib/dhcpcd</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="7">
+            <Date>2015-02-03</Date>
+            <Version>6.7.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Hakan Yıldız</Name>
+            <Email>hknyldz93@gmail.com</Email>
+        </Update>
+        <Update release="6">
+            <Date>2014-05-11</Date>
+            <Version>6.3.2</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2014-04-03</Date>
+            <Version>6.3.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-10-31</Date>
+            <Version>6.0.5</Version>
+            <Comment>Really revert back to 6.0.5.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-10-28</Date>
+            <Version>6.0.5</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-01-14</Date>
+            <Version>5.6.7</Version>
+            <Comment>New release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-08-23</Date>
+            <Version>5.6.1</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

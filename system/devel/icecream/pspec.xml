@@ -1,0 +1,104 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>icecream</Name>
+        <Homepage>http://en.opensuse.org/Icecream</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>service</IsA>
+        <Summary>Distributed C(++) compiling tool</Summary>
+        <Description>Icecream is a program for distributed compiling of C/C++ code across several machines based on ideas and code by distcc.</Description>
+        <Archive sha1sum="b1edce8d2385aa0caf93f731e292463bde98e8b0" type="tarbz2">ftp://ftp.suse.com/pub/projects/icecream/icecc-1.0.1.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>librsync-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>icecream</Name>
+        <RuntimeDependencies>
+            <Dependency>librsync</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>libcap-ng</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/opt/icecream/sbin/iceccd</Path>
+            <Path fileType="executable">/opt/icecream/bin/icecc</Path>
+            <Path fileType="executable">/usr/libexec/icecc</Path>
+            <Path fileType="library">/opt/icecream/lib</Path>
+            <Path fileType="executable">/opt/icecream/bin</Path>
+            <Path fileType="header">/opt/icecream/include/</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/icecc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/lib/systemd/system/icecream-daemon.service</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/lib/systemd/system/icecream-daemon.service">icecream-daemon.service</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="daemon.py">System.Service</COMAR>
+        </Provides>
+    </Package>
+
+    <Package>
+        <Name>icecream-scheduler</Name>
+        <Summary>Icecream scheduler which should only run on the master icecream node</Summary>
+        <RuntimeDependencies>
+            <Dependency>icecream</Dependency>
+            <Dependency>libgcc</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/opt/icecream/sbin/icecc-scheduler</Path>
+            <Path fileType="data">/lib/systemd/system/icecream-scheduler.service</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/lib/systemd/system/icecream-scheduler.service">icecream-scheduler.service</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="scheduler.py">System.Service</COMAR>
+        </Provides>
+    </Package>
+
+    <History>
+        <Update release="5">
+            <Date>2014-05-11</Date>
+            <Version>1.0.1</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-10-22</Date>
+            <Version>1.0.1</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-07-24</Date>
+            <Version>1.0.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-02-18</Date>
+            <Version>0.9.98.3</Version>
+            <Comment>v.bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-10-09</Date>
+            <Version>0.9.7</Version>
+            <Comment>First release</Comment>
+            <Name>Erdem Artan</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

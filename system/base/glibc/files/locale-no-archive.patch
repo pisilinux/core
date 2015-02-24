@@ -1,0 +1,11 @@
+--- localedata/Makefile.orig    2014-09-07 11:09:09.000000000 +0300
++++ localedata/Makefile 2014-09-10 14:23:59.866621115 +0300
+@@ -217,7 +217,7 @@
+
+ # Sometimes the whole collection of locale files should be installed.
+ LOCALEDEF=I18NPATH=. GCONV_PATH=$(common-objpfx)iconvdata LC_ALL=C \
+-$(rtld-prefix) $(common-objpfx)locale/localedef
++$(rtld-prefix) $(common-objpfx)locale/localedef  --no-archive
+ install-locales: $(INSTALL-SUPPORTED-LOCALES)
+
+ install-locales-dir:

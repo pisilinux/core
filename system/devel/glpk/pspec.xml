@@ -1,0 +1,82 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>glpk</Name>
+        <Homepage>http://www.gnu.org/software/glpk/glpk.html</Homepage>
+        <Packager>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>library</IsA>
+        <Summary>GNU Linear Programming Kit</Summary>
+        <Description>The GLPK (GNU Linear Programming Kit) package is intended for solving large-scale linear programming (LP), mixed integer programming (MIP), and other related problems. It is a set of routines written in ANSI C and organized in the form of a callable library.</Description>
+        <Archive sha1sum="893058aada022a8dfc63c675ebcd7e7e86a3a363" type="targz">mirrors://gnu/glpk/glpk-4.55.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>glpk</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>glpk-devel</Name>
+        <Summary>Development files for glpk</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">glpk</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="6">
+            <Date>2014-09-06</Date>
+            <Version>4.55</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2014-05-11</Date>
+            <Version>4.54</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2014-02-27</Date>
+            <Version>4.52</Version>
+            <Comment>Rebuild Unused</Comment>
+            <Name>Varol Maksutoğlu</Name>
+            <Email>waroi@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-08-28</Date>
+            <Version>4.52</Version>
+            <Comment>Version bump, clean glpk.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-02-18</Date>
+            <Version>4.48</Version>
+            <Comment>v.bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-08-16</Date>
+            <Version>4.47</Version>
+            <Comment>First release</Comment>
+            <Name>Ramazan Utku</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

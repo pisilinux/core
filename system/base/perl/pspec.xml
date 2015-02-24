@@ -1,0 +1,100 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>perl</Name>
+        <Homepage>http://www.perl.org/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>Artistic</License>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>Larry Wall's Practical Extraction and Reporting Language</Summary>
+        <Description>Perl is a high-level programming language with roots in C, sed, awk and shell scripting. Perl is good at handling processes and files, and is especially good at handling text. Perl's hallmarks are practicality and efficiency. While it is used to do a lot of different things, Perl's most common applications are system administration utilities and web programming. A large proportion of the CGI scripts on the web are written in Perl. You need the perl package installed on your system so that your system can handle Perl scripts.</Description>
+        <Archive sha1sum="e925e4fc36e90eace19a1ca850f912618ba6788f" type="tarbz2">http://www.cpan.org/src/5.0/perl-5.20.0.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>db-devel</Dependency>
+            <Dependency>gdbm-devel</Dependency>
+            <Dependency>zlib-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>perl-vutil-revert.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>perl-docs</Name>
+        <PartOf>programming.language.perl</PartOf>
+        <Summary>Documentation files for perl</Summary>
+        <Files>
+            <Path fileType="doc">/usr/share/doc/html</Path>
+            <Path fileType="doc">/usr/share/doc/perl/html</Path>
+            <Path fileType="man">/usr/share/man/</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>perl</Name>
+        <RuntimeDependencies>
+            <Dependency>db</Dependency>
+            <Dependency>gdbm</Dependency>
+            <Dependency>zlib</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <!-- FIXME: Update perl version in target path  when Perl version changes! -->
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/perl5/vendor_perl/5.20.0/Turkish.pm">Turkish.pm</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+       <Update release="7">
+            <Date>2014-09-10</Date>
+            <Version>5.20.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2014-05-11</Date>
+            <Version>5.18.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-08-28</Date>
+            <Version>5.18.1</Version>
+            <Comment>Version bump, clean perl.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-07-26</Date>
+            <Version>5.16.2</Version>
+            <Comment>Release bump, rebuild.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-02-19</Date>
+            <Version>5.16.2</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-09-06</Date>
+            <Version>5.16.1</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

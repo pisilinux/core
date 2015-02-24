@@ -1,0 +1,214 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>python</Name>
+        <Homepage>http://www.python.org/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>PSF-2.2</License>
+        <IsA>app:console</IsA>
+        <Summary>An interpreted, interactive, object-orientated programming language</Summary>
+        <Description>Python is a dynamic object-oriented programming language that can be used for many kinds of software development. It offers strong support for integration with other languages and tools, comes with extensive standard libraries, and can be learned in a few days.</Description>
+        <Archive sha1sum="3172f6e957713c2d9fca462cc16068222fd1b9d3" type="tarxz">http://www.python.org/ftp/python/2.7.9/Python-2.7.9.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>bzip2</Dependency>
+            <Dependency>tcl-devel</Dependency>
+            <Dependency>gdbm-devel</Dependency>
+            <Dependency>zlib-devel</Dependency>
+            <Dependency>expat-devel</Dependency>
+            <Dependency>tcltk-devel</Dependency>
+            <Dependency>libffi-devel</Dependency>
+            <Dependency>sqlite-devel</Dependency>
+            <Dependency>ncurses-devel</Dependency>
+            <Dependency>openssl-devel</Dependency>
+            <Dependency>readline-devel</Dependency>
+            <!-- Bootstrap -->
+            <!-- Comment these deps when bootstrapping -->
+        </BuildDependencies>
+        <Patches>
+            <Patch>pisilinux_platform.patch</Patch>
+            <!-- Look into /usr/lib/pisi-linux first -->
+            <Patch>add-pisilinux-to-search-path.patch</Patch>
+            <!-- Use UTF-8 by default -->
+            <Patch>default-utf8.patch</Patch>
+            <!-- Disable egginfo -->
+            <Patch level="1">disable-egginfo.patch</Patch>
+            <!-- some Turkish locale fixes, usually caused by tolower() -->
+            <Patch level="1">trfix_emaillib.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>python</Name>
+        <RuntimeDependencies>
+            <Dependency>gdbm</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency>bzip2</Dependency>
+            <Dependency>expat</Dependency>
+            <Dependency>libffi</Dependency>
+            <Dependency>sqlite</Dependency>
+            <Dependency>ncurses</Dependency>
+            <Dependency>openssl</Dependency>
+            <Dependency>readline</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <!-- "Makefile" and the config-32/64.h file are needed by
+            distutils/sysconfig.py:_init_posix(), so we include them in the core
+            package, along with their parent directories (https://bugzilla.redhat.com/show_bug.cgi?id=531901)
+            -->
+            <Path fileType="header">/usr/include/python2.7/pyconfig.h</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/etc/pythonstart">pythonstart</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/env.d/04python">04python</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <!--COMAR script="package.py">System.Package</COMAR-->
+            <COMAR script="pakhandler.py">System.PackageHandler</COMAR>
+        </Provides>
+        <BuildFlags>
+            <Flag>noDelta</Flag>
+        </BuildFlags>
+    </Package>
+
+    <Package>
+        <Name>python-devel</Name>
+        <PartOf>system.devel</PartOf>
+        <Summary>Development files for python</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">python</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <!-- Bootstrap -->
+    <!-- Comment these packages (python-tk and idle) when bootstrapping -->
+    <Package>
+        <Name>python-tk</Name>
+        <IsA>library</IsA>
+        <PartOf>programming.language.python</PartOf>
+        <Summary>Python modules for Tk</Summary>
+        <RuntimeDependencies>
+            <Dependency>tcl</Dependency>
+            <Dependency>tcltk</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/python*/lib-tk</Path>
+            <Path fileType="library">/usr/lib/python*/lib-dynload/_tkinter.so</Path>
+        </Files>
+    </Package>
+
+    <!-- Bootstrap -->
+    <!-- Comment these packages (python-tk and idle) when bootstrapping -->
+    <Package>
+        <Name>idle</Name>
+        <Icon>idle</Icon>
+        <IsA>app:gui</IsA>
+        <PartOf>programming.environment</PartOf>
+        <Summary>An Integrated Development Environment for Python</Summary>
+        <RuntimeDependencies>
+            <Dependency>python-tk</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin/idle</Path>
+            <Path fileType="library">/usr/lib/python*/idlelib</Path>
+            <Path fileType="data">/usr/share/applications</Path>
+            <Path fileType="data">/usr/share/pixmaps</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile permission="0644" target="/usr/share/pixmaps/idle.png">python-logo.png</AdditionalFile>
+            <AdditionalFile permission="0644" target="/usr/share/applications/idle.desktop">idle.desktop</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="11">
+            <Date>2014-12-12</Date>
+            <Version>2.7.9</Version>
+            <Comment>Version bump and security fixes.</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+        <Update release="10">
+            <Date>2014-07-05</Date>
+            <Version>2.7.8</Version>
+            <Comment>Version bump and security fixes.</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+        <Update release="9">
+            <Date>2014-06-02</Date>
+            <Version>2.7.7</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="8">
+            <Date>2014-05-11</Date>
+            <Version>2.7.6</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="7">
+            <Date>2014-04-25</Date>
+            <Version>2.7.6</Version>
+            <Comment>Add upstream patch.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2014-02-20</Date>
+            <Version>2.7.6</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2013-09-05</Date>
+            <Version>2.7.5</Version>
+            <Comment>Add missing method to pakhandler.py</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-08-31</Date>
+            <Version>2.7.5</Version>
+            <Comment>Clean python.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-08-21</Date>
+            <Version>2.7.5</Version>
+            <Comment>Add some patches.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-07-16</Date>
+            <Version>2.7.5</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="1" type="security">
+            <Date>2012-07-11</Date>
+            <Version>2.7.3</Version>
+            <Comment>First release</Comment>
+            <Name>Erdem Artan</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

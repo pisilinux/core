@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>miscfiles</Name>
+        <Homepage>http://freshmeat.net/projects/miscfiles/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>data</IsA>
+        <Summary>Miscellaneous files</Summary>
+        <Description>miscfiles is a collection of data files for freely available information, like airport, country, currencies, city information, and codes. It also includes the Unicode character database.</Description>
+        <Archive sha1sum="c96420756b4ee5e02ffedf2e185b0f147e16db14" type="targz">http://ftp.gnu.org/gnu/miscfiles/miscfiles-1.5.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>miscfiles</Name>
+        <Files>
+            <Path fileType="data">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/rfc</Path>
+            <Path fileType="data">/usr/share/dict</Path>
+            <Path fileType="data">/usr/share/misc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2014-05-11</Date>
+            <Version>1.5</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-10-30</Date>
+            <Version>1.5</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-11-24</Date>
+            <Version>1.5</Version>
+            <Comment>First release</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

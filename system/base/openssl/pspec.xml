@@ -1,0 +1,155 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>openssl</Name>
+        <Homepage>http://www.openssl.org/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>as-is</License>
+        <IsA>app:console</IsA>
+        <IsA>library</IsA>
+        <Summary>Toolkit for SSL v2/v3 and TLS v1</Summary>
+        <Description>OpenSSL is a cryptography toolkit implementing the Secure Sockets Layer (SSL v2/v3) and Transport Layer Security (TLS v1) network protocols and related cryptography standards required by them.</Description>
+        <Archive sha1sum="2f264f7f6bb973af444cd9fc6ee65c8588f610cc" type="targz">ftp://ftp.openssl.org/source/openssl-1.0.2.tar.gz</Archive>
+        <AdditionalFiles>
+            <AdditionalFile target="openssl-1.0.0-beta4-ca-dir.patch">openssl-1.0.0-beta4-ca-dir.patch</AdditionalFile>
+        </AdditionalFiles>
+        <BuildDependencies>
+            <Dependency>zlib</Dependency>
+            <Dependency>perl</Dependency>
+            <Dependency>sed</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">openssl-1.0.0a-ldflags-norpath.patch</Patch>
+            <Patch level="1">openssl-1.0.0-beta4-ca-dir.patch</Patch>
+            <Patch level="1">openssl-1.0.0-beta5-enginesdir.patch</Patch>
+            <Patch>openssl-1.0.2-parallel-build.patch</Patch>
+            <Patch>openssl-1.0.2-ipv6.patch</Patch>
+            <Patch>openssl-1.0.2-s_client-verify.patch</Patch>
+            <Patch>openssl-include.patch</Patch>
+            <Patch>openssl_fix_for_x32.patch</Patch>
+            <Patch>openssl-optflags.patch</Patch>
+	    <!--<Patch level="1">openssl-1.0.1f-perl-5.18.patch</Patch>-->
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>openssl</Name>
+        <RuntimeDependencies>
+            <Dependency>zlib</Dependency>
+            <Dependency>ca-certificates</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+
+    <Package>
+        <Name>openssl-devel</Name>
+        <PartOf>system.devel</PartOf>
+        <Summary>Development files for openssl</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">openssl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/lib32/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>openssl-32bit</Name>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for openssl</Summary>
+        <BuildType>_emul32</BuildType>
+        <BuildDependencies>
+            <Dependency>zlib-32bit</Dependency>
+        </BuildDependencies>
+        <RuntimeDependencies>
+            <Dependency release="current">openssl</Dependency>
+            <Dependency>zlib-32bit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib32</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="9">
+            <Date>2015-02-17</Date>
+            <Version>1.0.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+        <Update release="8">
+            <Date>2014-11-05</Date>
+            <Version>1.0.1j</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+        <Update release="7">
+            <Date>2014-06-05</Date>
+            <Version>1.0.1h</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2014-05-11</Date>
+            <Version>1.0.1g</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2014-04-09</Date>
+            <Version>1.0.1g</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2014-02-02</Date>
+            <Version>1.0.1f</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-08-28</Date>
+            <Version>1.0.1e</Version>
+            <Comment>Clean openssl.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-01-14</Date>
+            <Version>1.0.1e</Version>
+            <Comment>New release</Comment>
+            <Type package="openssl">security</Type>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-08-31</Date>
+            <Version>1.0.1c</Version>
+            <Comment>First release</Comment>
+            <Type package="openssl">security</Type>
+            <Name>Erdem Artan</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

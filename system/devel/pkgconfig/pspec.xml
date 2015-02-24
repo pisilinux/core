@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pkgconfig</Name>
+        <Homepage>http://www.freedesktop.org/software/pkgconfig/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>Package Config system that manages compile/link flags for libraries</Summary>
+        <Description>Package Config system that manages compile/link flags for libraries. It helps you insert the correct compiler options on the command line.</Description>
+        <Archive sha1sum="71853779b12f958777bffcb8ca6d849b4d3bed46" type="targz">http://pkgconfig.freedesktop.org/releases/pkg-config-0.28.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gnuconfig</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>pkgconfig</Name>
+        <RuntimeDependencies>
+            <Dependency>glib2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="data">/usr/share/pkgconfig</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="5">
+            <Date>2014-05-11</Date>
+            <Version>0.28</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-08-31</Date>
+            <Version>0.28</Version>
+            <Comment>Clean pkgconfig.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-08-01</Date>
+            <Version>0.28</Version>
+            <Comment>Fix deps.</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-02-18</Date>
+            <Version>0.28</Version>
+            <Comment>Fixed</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-09-15</Date>
+            <Version>0.27.1</Version>
+            <Comment>First release</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

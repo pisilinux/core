@@ -1,0 +1,130 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>polkit</Name>
+        <Homepage>http://www.freedesktop.org/wiki/Software/PolicyKit</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2+</License>
+        <IsA>service</IsA>
+        <IsA>library</IsA>
+        <IsA>app:console</IsA>
+        <Summary>PolicyKit Authorization Framework</Summary>
+        <Description>polkit is a toolkit for defining and handling authorizations. It is used for allowing unprivileged processes to speak to privileged processes.</Description>
+        <Archive sha1sum="374397f1c32fa1290be0fce378fe9bab541ee4bf" type="targz">http://www.freedesktop.org/software/polkit/releases/polkit-0.112.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>pam-devel</Dependency>
+            <Dependency>dbus-devel</Dependency>
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>expat-devel</Dependency>
+            <Dependency>dbus-glib-devel</Dependency>
+            <Dependency>spidermonkey-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">disable-docs.patch</Patch>
+            <Patch level="1">use-system-locale-in-gobject-api.diff</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>polkit-devel</Name>
+        <PartOf>system.devel</PartOf>
+        <Summary>Development headers for polkit</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">polkit</Dependency>
+            <Dependency>glib2-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>polkit</Name>
+        <RuntimeDependencies>
+            <Dependency>pam</Dependency>
+            <Dependency>dbus</Dependency>
+            <Dependency>glib2</Dependency>
+            <Dependency>expat</Dependency>
+            <Dependency>dbus-glib</Dependency>
+            <Dependency>spidermonkey</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="executable">/usr/libexec</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/usr/share/polkit-1</Path>
+            <Path fileType="data">/usr/share/dbus-1</Path>
+            <Path fileType="data">/usr/share/gir-1.0</Path>
+            <Path fileType="data">/var/lib/polkit-1</Path>
+            <Path fileType="data">/lib/systemd</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/man/man8/pklocalauthority.8">man/pklocalauthority.8</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/man/man8/polkit.8">man/polkit.8</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/man/man8/polkitd.8">man/polkitd.8</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/man/man1/pkaction.1">man/pkaction.1</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/man/man1/pkcheck.1">man/pkcheck.1</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/man/man1/pkexec.1">man/pkexec.1</AdditionalFile>
+
+            <AdditionalFile owner="root" permission="0644" target="/etc/polkit-1/rules.d/70-desktop-policy.conf">70-desktop-policy.conf</AdditionalFile>
+            <!-- Example policy files from fedora
+            <AdditionalFile owner="root" permission="0644" target="/var/lib/polkit-1/localauthority/10-vendor.d/10-desktop-policy.pkla">10-desktop-policy.pkla</AdditionalFile>
+            -->
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="6">
+            <Date>2014-06-10</Date>
+            <Version>0.112</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2014-05-11</Date>
+            <Version>0.112</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2014-04-01</Date>
+            <Version>0.112</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-07-28</Date>
+            <Version>0.111</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-02-11</Date>
+            <Version>0.110</Version>
+            <Comment>Güncellendi.</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2013-01-11</Date>
+            <Version>0.107</Version>
+            <Comment>First release</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,120 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>guile</Name>
+        <Homepage>http://www.gnu.org/software/guile/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <License>LGPLv2+</License>
+        <IsA>app:console</IsA>
+        <IsA>library</IsA>
+        <Summary>GNU Scheme interpreter and library</Summary>
+        <Description>GUILE (GNU's Ubiquitous Intelligent Language for Extension) is a library implementation of the Scheme programming language, written in C. GUILE provides a machine-independent execution platform that can be linked in as a library during the building of extensible programs.</Description>
+        <Archive sha1sum="ae86544b39048a160f4db1c0653a79b40b6c1ee6" type="tarxz">mirrors://gnu/guile/guile-2.0.11.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>gc-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>guile</Name>
+        <RuntimeDependencies>
+            <Dependency>gc</Dependency>
+            <Dependency>gmp</Dependency>
+            <Dependency>libffi</Dependency>
+            <Dependency>libtool-ltdl</Dependency>
+            <Dependency>libunistring</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="library">/usr/lib/lib*</Path>
+            <Path fileType="data">/usr/share/guile</Path>
+            <Path fileType="data">/usr/share/emacs</Path>
+            <Path fileType="library">/usr/lib/guile/2.0</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>guile-devel</Name>
+        <Summary>Development files for guile</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">guile</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="executable">/usr/bin/guile-snarf</Path>
+            <Path fileType="executable">/usr/bin/guile-config</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="8">
+            <Date>2014-11-30</Date>
+            <Version>2.0.11</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="7">
+            <Date>2014-05-24</Date>
+            <Version>2.0.11</Version>
+            <Comment>Rebuild for gcc.</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2014-05-11</Date>
+            <Version>2.0.9</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2014-02-25</Date>
+            <Version>2.0.9</Version>
+            <Comment>Rebuild Unused</Comment>
+            <Name>Varol Maksutoğlu</Name>
+            <Email>waroi@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-08-27</Date>
+            <Version>2.0.9</Version>
+            <Comment>Clean guile.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-07-22</Date>
+            <Version>2.09</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-02-18</Date>
+            <Version>2.0.7</Version>
+            <Comment>v.bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-10-03</Date>
+            <Version>2.0.6</Version>
+            <Comment>First release</Comment>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>comar-api</Name>
+        <Homepage>http://www.pisilinux.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>library</IsA>
+        <Summary>Utility functions for Comar scripts</Summary>
+        <Description>Generic utility library for common Comar script operations.</Description>
+        <Archive sha1sum="80afa9f07cd15b9042cce9c1b8f1c4dcd457c552" type="targz">http://source.pisilinux.org/1.0/comar-api-2.4.9.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>python</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">run_dir.patch</Patch>
+            <Patch level="1">pisilinux.patch</Patch>
+            <Patch level="1">add-stopdependencies.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>comar-api</Name>
+        <RuntimeDependencies>
+            <Dependency>python</Dependency>
+            <Dependency>pisilinux-python</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib/pisilinux</Path>
+            <Path fileType="library">/usr/lib/python2.7</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="4" type="critical">
+            <Date>2014-08-20</Date>
+            <Version>2.4.9</Version>
+            <Comment>Fix paths.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2014-05-11</Date>
+            <Version>2.4.9</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-08-31</Date>
+            <Version>2.4.9</Version>
+            <Comment>Release bump, clean comar-api.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2010-11-29</Date>
+            <Version>2.4.9</Version>
+            <Comment>First release</Comment>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

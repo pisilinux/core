@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gzip</Name>
+        <Homepage>http://www.gnu.org/software/gzip</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <License>LGPLv2.1</License>
+        <IsA>app:console</IsA>
+        <Summary>Standard GNU compressor</Summary>
+        <Description>gzip (GNU zip) is a popular data compression program written for the GNU project.</Description>
+        <Archive sha1sum="05bd01fc90178b806e0c13f9526e2ad392084085" type="tarxz">http://ftp.gnu.org/gnu/gzip/gzip-1.6.tar.xz</Archive>
+    </Source>
+
+    <Package>
+        <Name>gzip</Name>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2014-05-11</Date>
+            <Version>1.6</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-08-31</Date>
+            <Version>1.6</Version>
+            <Comment>Version bumm, clean gzip.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-08-23</Date>
+            <Version>1.5</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

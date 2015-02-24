@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>pycurl</Name>
+        <Homepage>http://pycurl.sourceforge.net/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2.1</License>
+        <IsA>library</IsA>
+        <Summary>Python cURL Module</Summary>
+        <Description>PycURL is a Python interface to libcurl. PycURL can be used to fetch objects identified by a URL from a Python program.</Description>
+        <Archive sha1sum="fd82722e2abc108b7bd469ab6a743cebe8cd8f78" type="targz">http://pycurl.sourceforge.net/download/pycurl-7.19.3.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>curl</Dependency>
+            <Dependency>python</Dependency>
+            <Dependency>openssl</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>pycurl</Name>
+        <RuntimeDependencies>
+            <Dependency>curl</Dependency>
+            <Dependency>python</Dependency>
+            <Dependency>openssl</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="6">
+            <Date>2014-05-11</Date>
+            <Version>7.19.3.1</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2014-04-01</Date>
+            <Version>7.19.3.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvarice@gmail.com</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-12-19</Date>
+            <Version>7.19.0.2</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-03-12</Date>
+            <Version>7.19.0.2</Version>
+            <Comment>Version bum.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-03-12</Date>
+            <Version>7.19.0</Version>
+            <Comment>Fix pisi https issue</Comment>
+            <Name>Pisi Linux Admins</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2010-10-11</Date>
+            <Version>7.19.0</Version>
+            <Comment>First release</Comment>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

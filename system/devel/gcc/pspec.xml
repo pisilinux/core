@@ -1,0 +1,238 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>gcc</Name>
+        <Homepage>http://gcc.gnu.org</Homepage>
+        <Packager>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3+</License>
+        <License>LGPLv3+</License>
+        <IsA>app:console</IsA>
+        <IsA>library</IsA>
+        <Summary>The GNU Compiler Collection, includes C, C++, Objective-C and Fortran compilers</Summary>
+        <Description>The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, as well as libraries for these languages</Description>
+        <Archive sha1sum="79dbcb09f44232822460d80b033c962c0237c6d8" type="tarbz2">ftp://gcc.gnu.org/pub/gcc/releases/gcc-4.9.2/gcc-4.9.2.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>binutils</Dependency>
+            <Dependency>bison</Dependency>
+            <Dependency>gettext</Dependency>
+            <Dependency>ncurses</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency>gnuconfig</Dependency>
+            <Dependency>patch</Dependency>
+            <Dependency>sed</Dependency>
+            <Dependency>texinfo</Dependency>
+            <Dependency>gmp</Dependency>
+            <Dependency>mpfr</Dependency>
+            <Dependency>libmpc</Dependency>
+            <Dependency>ppl</Dependency>
+            <Dependency>cloog</Dependency>
+            <Dependency>isl</Dependency>
+            <Dependency>elfutils</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <!-- Pisilinux Patches -->
+            <!-- Fix paths in 64bit -->
+            <Patch level="1">pisilinux/64.patch</Patch>
+            <Patch>gcc-4.9-isl-0.13-hack.patch</Patch>
+            <Patch level="0">pisilinux/gcc-4.8-filename-output.patch</Patch>
+            <!-- Add gcc options to output file in PISILINUX.OPTs section -->
+            <Patch level="1">pisilinux/gcc_47_based-record_gcc_options.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>libquadmath</Name>
+        <IsA>library</IsA>
+        <PartOf>system.base</PartOf>
+        <Summary>The GNU Fortran Compiler Quadmath Runtime Library</Summary>
+        <Files>
+            <Path fileType="library">/usr/lib/libquadmath.so*</Path>
+            <Path fileType="library">/usr/lib/libquadmath.spec*</Path>
+            <Path fileType="library">/usr/lib32/libquadmath.so*</Path>
+            <Path fileType="library">/usr/lib32/libquadmath.spec*</Path>
+            <Path fileType="info">/usr/share/info/libquadmath.info</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>libgcc</Name>
+        <IsA>library</IsA>
+        <PartOf>system.base</PartOf>
+        <Summary>Contains a shared library of support routines used by GCC's runtime, and thus by every program on the system</Summary>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib/libstdc++.so*</Path>
+            <Path fileType="library">/usr/lib/libgcc_s.so*</Path>
+            <Path fileType="library">/usr/lib32/libstdc++.so*</Path>
+            <Path fileType="library">/usr/lib32/libgcc_s.so*</Path>
+            <Path fileType="library">/usr/share/gcc-*</Path>
+            <Path fileType="library">/usr/share/gdb</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>libgomp</Name>
+        <IsA>library</IsA>
+        <Summary>Contains GCC shared support library which is needed for OpenMP 2.5 support</Summary>
+        <Files>
+            <Path fileType="library">/usr/lib/libgomp.so*</Path>
+            <Path fileType="library">/usr/lib/libgomp.spec*</Path>
+            <Path fileType="library">/usr/lib32/libgomp.so*</Path>
+            <Path fileType="library">/usr/lib32/libgomp.spec*</Path>
+            <Path fileType="info">/usr/share/info/libgomp.info</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>libgfortran</Name>
+        <RuntimeDependencies>
+            <Dependency>libquadmath</Dependency>
+        </RuntimeDependencies>
+        <IsA>library</IsA>
+        <Summary>Contains GCC shared support library for gfortran</Summary>
+        <Files>
+            <Path fileType="library">/usr/lib/libgfortran.so*</Path>
+            <Path fileType="library">/usr/lib32/libgfortran.so*</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>libobjc</Name>
+        <IsA>library</IsA>
+        <Summary>Contains GCC shared support library for objc</Summary>
+        <Files>
+            <Path fileType="library">/usr/lib/libobjc.so*</Path>
+            <Path fileType="library">/usr/lib32/libobjc.so*</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>gcc-l10n</Name>
+        <PartOf>system.locale</PartOf>
+        <Summary>Contains available GCC localization files, includes also turkish translations</Summary>
+        <RuntimeDependencies>
+            <Dependency>gcc</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="localedata">/usr/share/locale</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>gcc</Name>
+        <RuntimeDependencies>
+            <Dependency>gmp</Dependency>
+            <Dependency>isl</Dependency>
+            <Dependency>mpfr</Dependency>
+            <Dependency>cloog</Dependency>
+            <Dependency>libmpc</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/lib</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/lib32</Path>
+            <Path fileType="library">/usr/libexec</Path>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/gfilt">gfilt</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/libexec/gSTLFilt.pl">gSTLFilt.pl</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="12">
+            <Date>2014-11-28</Date>
+            <Version>4.9.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="11">
+            <Date>2014-09-12</Date>
+            <Version>4.9.1</Version>
+            <Comment>Rebuild for new glibc.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="10">
+            <Date>2014-09-06</Date>
+            <Version>4.9.1</Version>
+            <Comment>Version bump, cleanup.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="9">
+            <Date>2014-05-11</Date>
+            <Version>4.9.0</Version>
+            <Comment>Rebuild, add patch.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="8">
+            <Date>2014-04-28</Date>
+            <Version>4.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="7">
+            <Date>2014-04-01</Date>
+            <Version>4.8.2</Version>
+            <Comment>Rebuild for dependency changes.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2013-11-11</Date>
+            <Version>4.8.2</Version>
+            <Comment>backport ICE fix
+                     http://gcc.gnu.org/bugzilla//show_bug.cgi?id=56710 - commit 3d1f8279
+                     http://gcc.gnu.org/bugzilla/show_bug.cgi?id=57653</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2013-10-22</Date>
+            <Version>4.8.2</Version>
+            <Comment>Cleanup, version bump.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-10-14</Date>
+            <Version>4.8.1</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-07-23</Date>
+            <Version>4.8.1</Version>
+            <Comment>Version bump, cleanup patches.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2012-10-14</Date>
+            <Version>4.7.2</Version>
+            <Comment>Cleanup package, add some patches.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-10-14</Date>
+            <Version>4.7.2</Version>
+            <Comment>First release</Comment>
+            <Name>Erdem Artan</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

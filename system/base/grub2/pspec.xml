@@ -1,0 +1,162 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>grub2</Name>
+        <Homepage>http://www.gnu.org/software/grub/</Homepage>
+        <Packager>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv3</License>
+        <PartOf>system.base</PartOf>
+        <IsA>app:gui</IsA>
+        <Summary>GNU GRUB is a Multiboot boot loader.</Summary>
+        <Description>GNU GRUB (short for GNU GRand Unified Bootloader) is a boot loader package from the GNU Project.</Description>
+        <Archive sha1sum="1bf580f1e8bce4909a7ac7ca485cee02b00ed383" type="tarxz">ftp://alpha.gnu.org/gnu/grub/grub-2.02~beta2.tar.xz</Archive>
+        <Archive sha1sum="4ec712aced1c2b4cb6cd1cbd83fc2154249d6977" type="tarxz" target="grub-2.02~beta2/grub-extras">http://source.pisilinux.org/1.0/grub2_extras_915resolution_r10.tar.xz</Archive>
+        <Archive sha1sum="30797ba7a86fc32213b9ae994c9fa45f37d01170" type="gz">http://ftp.gnu.org/gnu/unifont/unifont-6.3.20131217/unifont-6.3.20131217.bdf.gz</Archive>
+        <Archive sha1sum="f87919489d3caa336aac74b39b01b91b1987ba83" type="tarxz" target="grub-2.02~beta2/themes">http://source.pisilinux.org/1.0/grub2-theme-pisilinux-0.2.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>autogen</Dependency>
+            <Dependency>binutils</Dependency>
+            <Dependency>bison</Dependency>
+            <Dependency>flex</Dependency>
+            <Dependency>gcc</Dependency>
+            <Dependency>help2man</Dependency>
+            <Dependency>texinfo</Dependency>
+            <Dependency>freetype-devel</Dependency>
+            <Dependency>zlib-devel</Dependency>
+            <Dependency>ncurses-devel</Dependency>
+            <Dependency>xz-devel</Dependency>
+            <Dependency>fuse-devel</Dependency>
+            <Dependency>lvm2-devel</Dependency>
+            <Dependency>device-mapper-devel</Dependency>
+            <Dependency>gettext-devel</Dependency>
+            <Dependency>dejavu-fonts</Dependency>
+        </BuildDependencies>
+        <Replaces>
+            <Package>grub</Package>
+        </Replaces>
+        <Patches>
+            <Patch level="1">pisi_name_and_initramfs.patch</Patch>
+            <Patch level="1">mkconfig-fix.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>grub2</Name>
+        <RuntimeDependencies>
+            <Dependency>freetype</Dependency>
+            <Dependency>xz</Dependency>
+            <Dependency>fuse</Dependency>
+            <Dependency>lvm2</Dependency>
+            <Dependency>device-mapper</Dependency>
+            <Dependency>os-prober</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="library">/usr/lib/grub/i386-pc/</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/grub</Path>
+            <Path fileType="data">/usr/share/info</Path>
+            <Path fileType="data">/boot/grub2</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man/man1</Path>
+            <Path fileType="man">/usr/share/man/man8</Path>
+            <Path fileType="config">/etc/bash_completion.d</Path>
+            <Path fileType="config">/etc/grub.d</Path>
+            <Path fileType="config">/etc/default</Path>
+        </Files>
+        <AdditionalFiles>
+             <AdditionalFile owner="root" permission="0644" target="/usr/share/grub/pisi-grub-bg.png">pisi-grub-bg.png</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/default/grub">grub-defaults</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <History>
+        <Update release="11">
+            <Date>2014-07-20</Date>
+            <Version>2.02_beta2</Version>
+            <Comment>New artwork.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="10">
+            <Date>2014-05-11</Date>
+            <Version>2.02_beta2</Version>
+            <Comment>Release bump.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="9">
+            <Date>2014-01-21</Date>
+            <Version>2.02_beta2</Version>
+            <Comment>Version bump</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="8">
+            <Date>2013-12-31</Date>
+            <Version>2.00_5148</Version>
+            <Comment>Fix finding other distros.
+                     Fix build with current freetype.</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="7">
+            <Date>2013-09-02</Date>
+            <Version>2.00_5148</Version>
+            <Comment>Version bump</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2013-08-24</Date>
+            <Version>2.00</Version>
+            <Comment>Comment GRUB_GFXPAYLOAD_LINUX=keep out.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2013-07-28</Date>
+            <Version>2.00</Version>
+            <Comment>Fix deps.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-06-17</Date>
+            <Version>2.00</Version>
+            <Comment>Set default grub2 resolution to 1024x768</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-03-03</Date>
+            <Version>2.00</Version>
+            <Comment>
+                     Add default Pisi Linux theme
+                     Remove unneeded unifont dep
+                     Manually create Dejavu pf2 fonts
+            </Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-02-09</Date>
+            <Version>2.00</Version>
+            <Comment>Enable splash again.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-11-28</Date>
+            <Version>2.00</Version>
+            <Comment>First release</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
