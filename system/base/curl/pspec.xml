@@ -14,7 +14,7 @@
         <IsA>library</IsA>
         <Summary>A utility for getting files from remote servers</Summary>
         <Description>curl is a command line tool for transferring data with URL syntax, supporting various protocols.</Description>
-        <Archive sha1sum="1446603f4df89b6d1cafc4d6a8617c892651b3ff" type="tarbz2">http://curl.haxx.se/download/curl-7.40.0.tar.bz2</Archive>
+        <Archive sha1sum="6784591ed7dc3452a8ef6fba050777c50775c4f1" type="tarbz2">http://curl.haxx.se/download/curl-7.41.0.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>zlib-devel</Dependency>
             <Dependency>openssl-devel</Dependency>
@@ -61,6 +61,13 @@
     </Package>
 
     <History>
+        <Update release="12">
+            <Date>2015-02-25</Date>
+            <Version>7.41.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Dmitry Patsura</Name>
+            <Email>talk@dmtry.me</Email>
+        </Update>
         <Update release="11">
             <Date>2015-01-11</Date>
             <Version>7.40.0</Version>
