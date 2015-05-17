@@ -57,6 +57,6 @@ def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     #Remove default starfiled theme.
-    pisitools.removeDir("/usr/share/grub/themes/starfield")
+    # pisitools.removeDir("/usr/share/grub/themes/starfield")
 
     pisitools.dodoc("ABOUT-NLS", "AUTHORS", "BUGS", "ChangeLog", "COPYING", "TODO", "README")
