@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+i<?xml version="1.0" ?>
 <!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
@@ -22,20 +22,16 @@
             <Dependency>bc</Dependency>
             <Dependency>pisi</Dependency>
             <Dependency>cpio</Dependency>
-            <Dependency>unifdef</Dependency>
-            <Dependency>elfutils</Dependency>
+            <Dependency>docbook-xsl</Dependency>
             <Dependency>diffutils</Dependency>
             <Dependency>xmlto</Dependency>
-            <Dependency>asciidoc</Dependency>
-            <Dependency>pciutils-devel</Dependency>
-            <Dependency>numactl-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
             <Patch level="1" compressionType="gz">patches/linux/patch-4.0.3.gz</Patch>
-	    <!--mageia 3rd patch-->
-	  <!--<Patch level="1">patches/mageia/3rd-3rdparty-1.0-tree.patch</Patch>-->
-	    <!--<Patch level="1">patches/mageia/3rd-3rdparty-merge.patch</Patch>--><!--bunu halletmek lazım-->
+           <!--mageia 3rd patch-->
+           <!--<Patch level="1">patches/mageia/3rd-3rdparty-1.0-tree.patch</Patch>-->
+            <!--<Patch level="1">patches/mageia/3rd-3rdparty-merge.patch</Patch>--><!--bunu halletmek lazım-->
             <!--<Patch level="1">patches/mageia/3rd-acerhk-0.5.35.patch</Patch>
             <Patch level="1">patches/mageia/3rd-acerhk-kbuild.patch</Patch>
             <Patch level="1">patches/mageia/3rd-acerhk-extra-cflags.patch</Patch>
