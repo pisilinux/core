@@ -14,8 +14,9 @@
         <IsA>library</IsA>
         <Summary>A utility for getting files from remote servers</Summary>
         <Description>curl is a command line tool for transferring data with URL syntax, supporting various protocols.</Description>
-        <Archive sha1sum="6784591ed7dc3452a8ef6fba050777c50775c4f1" type="tarbz2">http://curl.haxx.se/download/curl-7.41.0.tar.bz2</Archive>
+        <Archive sha1sum="f65708915875b8cb35edb51d8dd31440dc02fbd3" type="tarbz2">http://curl.haxx.se/download/curl-7.42.1.tar.bz2</Archive>
         <BuildDependencies>
+            <Dependency>glibc-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
             <Dependency>openssl-devel</Dependency>
             <Dependency>libidn-devel</Dependency>
@@ -61,12 +62,19 @@
     </Package>
 
     <History>
-        <Update release="12">
-            <Date>2015-02-25</Date>
-            <Version>7.41.0</Version>
+        <Update release="13">
+            <Date>2015-05-01</Date>
+            <Version>7.42.1</Version>
             <Comment>Version bump.</Comment>
-            <Name>Dmitry Patsura</Name>
-            <Email>talk@dmtry.me</Email>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="12">
+            <Date>2015-04-27</Date>
+            <Version>7.42.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
         </Update>
         <Update release="11">
             <Date>2015-01-11</Date>

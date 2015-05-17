@@ -36,8 +36,8 @@ def setup():
 
     if get.buildTYPE() == "emul32":
         options += "\
-                    --enable-xml-docs \
-                    --enable-doxygen-docs"
+                    --disable-xml-docs \
+                    --disable-doxygen-docs"
         # Build only libdbus
         pisitools.dosed("Makefile.am", "(.*SUBDIRS=dbus) .*", "\\1")
 

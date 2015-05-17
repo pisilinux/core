@@ -53,9 +53,12 @@
         <BuildType>emul32</BuildType>
         <BuildDependencies>
             <Dependency>libusb-32bit</Dependency>
+            <Dependency>glibc-32bit</Dependency>
         </BuildDependencies>
         <RuntimeDependencies>
             <Dependency>libusb-32bit</Dependency>
+            <Dependency>libusb</Dependency>
+            <Dependency>glibc-32bit</Dependency>
             <Dependency release="current">libusb-compat</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -65,7 +68,7 @@
 
     <History>
         <Update release="4">
-            <Date>2014-09-08</Date>
+            <Date>2015-05-05</Date>
             <Version>0.1.5</Version>
             <Comment>
                 Rebuild for libusbx libusb changes

@@ -14,7 +14,7 @@
         <Description>Project's main aim is to create a library for use by user level applications to access USB devices regardless of OS.</Description>
         <Archive sha1sum="c5d14ced155233ceeb5107c7eb3b94b16649ae05" type="tarbz2">http://downloads.sourceforge.net/project/libusb/libusb-1.0/libusb-1.0.19/libusb-1.0.19.tar.bz2</Archive>
         <BuildDependencies>
-            <Dependency>libudev-devel</Dependency>
+            <Dependency>eudev-devel</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -27,7 +27,7 @@
             <Package>libusbx</Package>
         </Conflicts>
         <RuntimeDependencies>
-            <Dependency>libudev</Dependency>
+            <Dependency>eudev</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -68,11 +68,12 @@
         <Summary>32-bit shared libraries for libusb</Summary>
         <BuildType>emul32</BuildType>
         <BuildDependencies>
-            <Dependency>libudev-32bit</Dependency>
+            <Dependency>glibc-32bit</Dependency>
         </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">libusb</Dependency>
-            <Dependency>libudev-32bit</Dependency>
+	    <Dependency>eudev-32bit</Dependency>
+            <Dependency>glibc-32bit</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib32</Path>
@@ -81,7 +82,7 @@
 
     <History>
         <Update release="7">
-            <Date>2014-09-08</Date>
+            <Date>2014-04-30</Date>
             <Version>1.0.19</Version>
             <Comment>
                 rename libusbx to libusb like upsteam

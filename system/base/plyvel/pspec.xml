@@ -11,7 +11,10 @@
         <Summary>Plyvel, a fast and feature-rich Python interface to LevelDB.</Summary>
         <Description>Plyvel has a rich feature set, high performance, and a friendly Pythonic API.</Description>
         <BuildDependencies>
-            <Dependency>cython</Dependency>
+	  <Dependency>cython</Dependency>
+          <Dependency>python-devel</Dependency>
+          <Dependency>leveldb-devel</Dependency>
+          <Dependency>python-setuptools</Dependency>
         </BuildDependencies>
         <Archive sha1sum="9f416a0fbd0c123b94df18bc7aa47a697ddb0bc7" type="targz">https://pypi.python.org/packages/source/p/plyvel/plyvel-0.8.tar.gz</Archive>
     </Source>

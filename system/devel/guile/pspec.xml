@@ -17,6 +17,8 @@
         <Archive sha1sum="ae86544b39048a160f4db1c0653a79b40b6c1ee6" type="tarxz">mirrors://gnu/guile/guile-2.0.11.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>gc-devel</Dependency>
+            <Dependency>gettext-devel</Dependency>
+            <Dependency>gmp-devel</Dependency>
         </BuildDependencies>
         <Patches>
         </Patches>
@@ -30,6 +32,7 @@
             <Dependency>libffi</Dependency>
             <Dependency>libtool-ltdl</Dependency>
             <Dependency>libunistring</Dependency>
+            <Dependency>readline</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="config">/etc</Path>
@@ -40,6 +43,7 @@
             <Path fileType="library">/usr/lib/lib*</Path>
             <Path fileType="data">/usr/share/guile</Path>
             <Path fileType="data">/usr/share/emacs</Path>
+	    <Path fileType="data">/usr/share/gdb/auto-load</Path>
             <Path fileType="library">/usr/lib/guile/2.0</Path>
         </Files>
     </Package>

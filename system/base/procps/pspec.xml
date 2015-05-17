@@ -14,7 +14,7 @@
         <Description>procps is the package that has a bunch of small useful utilities that give information about processes using the /proc filesystem. The package includes the programs ps, top, vmstat, w, kill, free, slabtop, and skill.</Description>
         <Archive sha1sum="a0c86790569dec26b5d9037e8868ca907acc9829" type="targz">http://procps.sf.net/procps-3.2.8.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>ncurses</Dependency>
+            <Dependency>ncurses-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch level="1">procps-3.2.5-proc-mount.patch</Patch>

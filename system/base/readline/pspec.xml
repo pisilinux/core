@@ -40,6 +40,9 @@
         <Name>readline-devel</Name>
         <PartOf>system.devel</PartOf>
         <Summary>Development files for readline</Summary>
+        <BuildDependencies>
+            <Dependency>glibc-32bit</Dependency>
+        </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">readline</Dependency>
         </RuntimeDependencies>
@@ -60,6 +63,7 @@
         <RuntimeDependencies>
             <Dependency release="current">readline</Dependency>
             <Dependency>ncurses-32bit</Dependency>
+            <Dependency>glibc-32bit</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib32</Path>

@@ -78,6 +78,6 @@ def install():
     for i in unneeded_man:
         pisitools.remove("/usr/share/man/man1/%s" %i)
 
-    pisitools.remove("/usr/share/info/configure.info")
-    pisitools.remove("/usr/share/info/standards.info")
+    #pisitools.remove("/usr/share/info/configure.info")
+    #pisitools.remove("/usr/share/info/standards.info")
 

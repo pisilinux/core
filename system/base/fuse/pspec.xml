@@ -13,6 +13,9 @@
         <Summary>An interface for filesystems implemented in userspace</Summary>
         <Description>fuse is a backend allowing regular users to (un)mount filesystems for their own use.</Description>
         <Archive sha1sum="94bd1974a9f2173ac3c2cf122f9fa3c35996b88e" type="targz">mirrors://sourceforge/project/fuse/fuse-2.X/2.9.3/fuse-2.9.3.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>gettext-devel</Dependency>
+        </BuildDependencies>
         <Patches>
             <Patch>skip_umount_test.patch</Patch>
         </Patches>
@@ -21,7 +24,7 @@
     <Package>
         <Name>fuse</Name>
         <RuntimeDependencies>
-        <Dependency>glibc</Dependency>
+            <Dependency>glibc</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/bin</Path>

@@ -13,6 +13,10 @@
         <Summary>Python sandboxing module</Summary>
         <Description>catbox is a Python sandboxing module commonly used by the package management system of PiSi Linux, PiSi.</Description>
         <Archive sha1sum="665015a412bec41abf18e6126f2d0fbb6b1c094a" type="targz">https://github.com/baris/catbox/archive/catbox-1.6.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>python-setuptools</Dependency>
+            <Dependency>python-devel</Dependency>
+        </BuildDependencies>
     </Source>
 
     <Package>
@@ -28,6 +32,13 @@
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2015-03-19</Date>
+            <Version>1.6.1</Version>
+            <Comment>Fix Buildeps.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="5">
             <Date>2014-05-11</Date>
             <Version>1.6.1</Version>

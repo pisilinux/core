@@ -58,14 +58,13 @@ def setup():
         options += "\
                      --bindir=/bin \
                      --sbindir=/sbin \
-                     --enable-static \
                      --enable-partx \
                      --enable-raw \
                      --enable-write \
                      --enable-tunelp \
-                     --with-audit \
+                     --without-audit \
                      --with-udev \
-                     --with-utempter \
+                     --without-utempter \
                    "
 
     autotools.autoreconf("-fi")
@@ -86,6 +85,8 @@ def install():
     pisitools.remove("/usr/share/man/man1/kill.1")
 
     if get.buildTYPE() == "emul32": return
+
+    #pisitools.removeDir("/usr/lib32/pkgconfig")
 
     pisitools.dodoc("ABOUT-NLS", "AUTHORS", "ChangeLog", "COPYING", "README*")
     pisitools.insinto("/%s/%s" % (get.docDIR(), get.srcNAME()), "Documentation")

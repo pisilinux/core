@@ -15,6 +15,7 @@
         <Archive sha1sum="b08197d146930a5543a7b99e871cba3da614f6f0" type="targz">mirrors://sourceforge/expat/expat-2.1.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>gnuconfig</Dependency>
+	    <Dependency>glibc-devel</Dependency>
         </BuildDependencies>
         <Patches>
         </Patches>
@@ -34,6 +35,9 @@
         <Name>expat-devel</Name>
         <PartOf>system.devel</PartOf>
         <Summary>Development files for expat</Summary>
+        <BuildDependencies>
+            <Dependency>glibc-32bit</Dependency>
+        </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">expat</Dependency>
         </RuntimeDependencies>

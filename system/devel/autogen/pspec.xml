@@ -14,8 +14,11 @@
         <Description>autogen is a tool designed to simplify the creation and maintenance of programs that contain large amounts of repetitious text.</Description>
         <Archive sha1sum="3d5aa8d99742e92098bb438c684bee5e978a8dd7" type="tarxz">ftp://ftp.gnu.org/gnu/autogen/rel5.18.4/autogen-5.18.4.tar.xz</Archive>
         <BuildDependencies>
+            <Dependency>gc-devel</Dependency>
+            <Dependency>gmp-devel</Dependency>
             <Dependency>guile-devel</Dependency>
             <Dependency>libxml2-devel</Dependency>
+	    <Dependency>which</Dependency>
         </BuildDependencies>
     </Source>
 

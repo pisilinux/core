@@ -13,6 +13,9 @@
         <Summary>Fast C/C++ compiler cache</Summary>
         <Description>ccache is a compiler cache. It speeds up recompilation of C/C++ code by caching previous compiles and detecting when the same compile is being done.</Description>
         <Archive sha1sum="0feaad22c35ecee7c9782ca51a948be69b242114" type="tarxz">http://samba.org/ftp/ccache/ccache-3.2.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>zlib-devel</Dependency>
+        </BuildDependencies>
     </Source>
 
     <Package>

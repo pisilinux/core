@@ -11,18 +11,21 @@ from pisi.actionsapi import get
 
 def setup():
     shelltools.export("CFLAGS", "%s -D_FILE_OFFSET_BITS=64" % get.CFLAGS())
-    autotools.configure("--disable-static \
-                         --with-fuse=external \
-                         --enable-extras \
-                         --enable-posix-acls \
-                         --enable-ldscript \
-                         --disable-ldconfig")
+    autotools.configure("--prefix=/usr \
+                        --sbin=/usr/bin \
+                        --mandir=/usr/share/man \
+                        --disable-ldconfig \
+                        --disable-static \
+                        --with-fuse=external \
+                        --enable-posix-acls \
+                        --enable-extras")
 
 def build():
     autotools.make()
 
 def install():
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    autotools.rawInstall("DESTDIR=%s rootbindir=/usr/bin rootsbindir=/usr/bin rootlibdir=/usr/lib" % get.installDIR())
+    
     pisitools.domove("/usr/bin/ntfs-3g.*", "/bin")
 
     # Create some compat symlinks
