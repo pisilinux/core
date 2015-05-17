@@ -556,13 +556,9 @@
                 <Dependency>bc</Dependency>
                 <Dependency>pisi</Dependency>
                 <Dependency>cpio</Dependency>
-                <Dependency>unifdef</Dependency>
-                <Dependency>elfutils</Dependency>
+                <Dependency>docbook-xsl</Dependency>
                 <Dependency>diffutils</Dependency>
                 <Dependency>xmlto</Dependency>
-                <Dependency>asciidoc</Dependency>
-                <Dependency>pciutils-devel</Dependency>
-                <Dependency>numactl-devel</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch compressionType="gz" level="1">patches/linux/patch-4.0.3.gz</Patch>
@@ -1166,6 +1162,363 @@
                 <Requires>
                     <Action package="kernel">systemRestart</Action>
                 </Requires>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>mkinitramfs</Name>
+            <Homepage>http://www.busybox.net</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>GPLv2</License>
+            <IsA>app:console</IsA>
+            <PartOf>kernel.tools</PartOf>
+            <Summary xml:lang="en">A tool to create the initramfs image</Summary>
+            <Summary xml:lang="tr">initramfs image dosyası yaratmak için araç</Summary>
+            <Description xml:lang="fr">Un outil pour créer les images initramfs</Description>
+            <Description xml:lang="en">mkinitramfs contains a tool to create the initramfs image with busybox.</Description>
+            <Description xml:lang="tr">initramfs image dosyası yaratmak için araç</Description>
+            <Archive type="binary" sha1sum="c35fcf085f1bb73b851d7525c135a483c903b13d">http://source.pisilinux.org/1.0/README.mkinitramfs</Archive>
+            <SourceURI>kernel/tools/mkinitramfs/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>mkinitramfs</Name>
+            <RuntimeDependencies>
+                <Dependency>disktype</Dependency>
+                <Dependency>busybox</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="config">/etc</Path>
+                <Path fileType="executable">/sbin</Path>
+                <Path fileType="executable">/lib/initramfs</Path>
+                <Path fileType="doc">/usr/share/doc/mkinitramfs</Path>
+            </Files>
+            <Provides>
+                <COMAR script="pakhandler.py">System.PackageHandler</COMAR>
+            </Provides>
+            <AdditionalFiles>
+                <AdditionalFile target="/sbin/mkinitramfs" permission="0755" owner="root">mkinitramfs</AdditionalFile>
+                <AdditionalFile target="/lib/initramfs/init" permission="0755" owner="root">init</AdditionalFile>
+                <AdditionalFile target="/lib/initramfs/udhcpc.script" permission="0755" owner="root">udhcpc.script</AdditionalFile>
+                <AdditionalFile target="/lib/initramfs/hotplug" permission="0755" owner="root">hotplug</AdditionalFile>
+                <AdditionalFile target="/lib/initramfs/profile.rc" permission="0644" owner="root">profile.rc</AdditionalFile>
+                <AdditionalFile target="/etc/initramfs.conf.example" permission="0644" owner="root">initramfs.conf</AdditionalFile>
+            </AdditionalFiles>
+        </Package>
+        <History>
+            <Update release="8">
+                <Date>2014-05-11</Date>
+                <Version>1.0.7</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="7">
+                <Date>2014-05-10</Date>
+                <Version>1.0.7</Version>
+                <Comment>Fix probing LVM devices</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="6">
+                <Date>2013-09-10</Date>
+                <Version>1.0.7</Version>
+                <Comment>Disable mount tmpfs on /run</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="5">
+                <Date>2013-09-05</Date>
+                <Version>1.0.7</Version>
+                <Comment>Add missing method to pakhandler.py</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
+                <Date>2013-09-03</Date>
+                <Version>1.0.7</Version>
+                <Comment>Fix default plymouth theme name.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2013-06-17</Date>
+                <Version>1.0.7</Version>
+                <Comment>Fix resume path.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-02-13</Date>
+                <Version>1.0.7</Version>
+                <Comment>Change loopbackimage address and name.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2013-01-13</Date>
+                <Version>1.0.7</Version>
+                <Comment>First release</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>docbook-xml</Name>
+            <Homepage>http://www.docbook.org/xml/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>LGPLv2.1</License>
+            <IsA>data</IsA>
+            <PartOf>office.docbook</PartOf>
+            <Summary xml:lang="en">Docbook XML DTD</Summary>
+            <Summary xml:lang="tr">Docbook XML DTD</Summary>
+            <Description xml:lang="en">Contains Docbook DTD for XML. A widely used XML scheme for writing documentation and help</Description>
+            <Description xml:lang="tr">Docbook XML belirtimi (DTD) sürümlerini içerir.</Description>
+            <Archive type="zip" sha1sum="b9ae7a41056bfaf885581812d60651b7b5531519">http://www.docbook.org/xml/4.1.2/docbkx412.zip</Archive>
+            <Archive type="zip" sha1sum="0b4c6d8228f4526185de51b8afbcfe0ec8939849">http://www.oasis-open.org/docbook/xml/4.1/docbkx41.zip</Archive>
+            <Archive type="zip" sha1sum="5e3a35663cd028c5c5fbb959c3858fec2d7f8b9e">http://www.docbook.org/xml/4.2/docbook-xml-4.2.zip</Archive>
+            <Archive type="zip" sha1sum="e79a59e9164c1013b8cc9f64f96f909a184ca016">http://www.docbook.org/xml/4.3/docbook-xml-4.3.zip</Archive>
+            <Archive type="zip" sha1sum="7c4d91c82ad3747e1b5600c91782758e5d91c22b">http://www.docbook.org/xml/4.4/docbook-xml-4.4.zip</Archive>
+            <Archive type="zip" sha1sum="b9124233b50668fb508773aa2b3ebc631d7c1620">http://www.docbook.org/xml/4.5/docbook-xml-4.5.zip</Archive>
+            <SourceURI>office/docbook/docbook-xml/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>docbook-xml</Name>
+            <RuntimeDependencies>
+                <Dependency>sgml-common</Dependency>
+                <Dependency>libxml2</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="doc">/usr/share/doc/</Path>
+                <Path fileType="data">/usr/share/xml</Path>
+                <Path fileType="data">/etc/xml/docbook</Path>
+                <Path fileType="data">/etc/xml/catalog</Path>
+            </Files>
+            <AdditionalFiles>
+                <AdditionalFile target="/etc/xml/docbook" permission="0644" owner="root">docbook</AdditionalFile>
+                <AdditionalFile target="/etc/xml/catalog" permission="0644" owner="root">catalog</AdditionalFile>
+            </AdditionalFiles>
+        </Package>
+        <History>
+            <Update release="4">
+                <Date>2014-11-17</Date>
+                <Version>4.5</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Stefan Gronewold(groni)</Name>
+                <Email>groni@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2014-05-18</Date>
+                <Version>4.5</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Stefan Gronewold(groni)</Name>
+                <Email>groni@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2014-01-22</Date>
+                <Version>4.5</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Stefan Gronewold(groni)</Name>
+                <Email>groni@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2011-09-16</Date>
+                <Version>4.5</Version>
+                <Comment>First release</Comment>
+                <Name>Pisi Linux Admins</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>docbook-xsl</Name>
+            <Homepage>http://wiki.docbook.org/topic/DocBookXslStylesheets</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>BSD</License>
+            <IsA>data</IsA>
+            <PartOf>office.docbook</PartOf>
+            <Summary xml:lang="en">Norman Walsh&apos;s XSL stylesheets for DocBook XML</Summary>
+            <Summary xml:lang="tr">Docbook XSL biçemyaprakları</Summary>
+            <Description xml:lang="en">These XSL stylesheets allow you to transform any DocBook XML document to other formats such as HTML, FO and XHTML.</Description>
+            <Description xml:lang="tr">Docbook XSL biçemyapraklarını (stylesheets) içerir.</Description>
+            <Archive type="tarbz2" sha1sum="1d668c845bb43c65115d1a1d9542f623801cfb6f">http://sourceforge.net/projects/docbook/files/docbook-xsl/1.78.1/docbook-xsl-1.78.1.tar.bz2</Archive>
+            <AdditionalFiles>
+                <AdditionalFile target="Makefile">Makefile</AdditionalFile>
+            </AdditionalFiles>
+            <Patches>
+                <Patch level="1">docbook-xsl-pagesetup.patch</Patch>
+                <Patch level="1">docbook-xsl-newmethods.patch</Patch>
+                <Patch level="1">docbook-xsl-non-constant-expressions.patch</Patch>
+                <Patch level="1">docbook-xsl-list-item-body.patch</Patch>
+                <Patch level="1">docbook-xsl-mandir.patch</Patch>
+            </Patches>
+            <SourceURI>office/docbook/docbook-xsl/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>docbook-xsl</Name>
+            <RuntimeDependencies>
+                <Dependency>docbook-xml</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="doc">/usr/share/doc/docbook-xsl</Path>
+                <Path fileType="data">/usr/share/xml</Path>
+            </Files>
+            <Provides>
+                <COMAR script="package.py">System.Package</COMAR>
+            </Provides>
+        </Package>
+        <History>
+            <Update release="4">
+                <Date>2014-11-17</Date>
+                <Version>1.78.1</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Stefan Gronewold(groni)</Name>
+                <Email>groni@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2014-05-18</Date>
+                <Version>1.78.1</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Stefan Gronewold(groni)</Name>
+                <Email>groni@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2014-01-22</Date>
+                <Version>1.78.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Stefan Gronewold(groni)</Name>
+                <Email>groni@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2012-10-10</Date>
+                <Version>1.77.1</Version>
+                <Comment>First release</Comment>
+                <Name>Erdem Artan</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>sgml-common</Name>
+            <Homepage>http://www.linuxfromscratch.org/blfs/view/svn/pst/sgml-common.html</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>GPLv2</License>
+            <IsA>data</IsA>
+            <PartOf>office.docbook</PartOf>
+            <Summary xml:lang="en">Base ISO character entities and utilities for SGML</Summary>
+            <Summary xml:lang="tr">SGML ISO karakter nesneleri ve yardımcı programları</Summary>
+            <Description xml:lang="en">Sgml-common is a collection of entities and document type definitions (DTDs) useful for SGML processing.</Description>
+            <Description xml:lang="tr">sgml-common SGML uygulamaları için kullanışlı olan içerikler ve belge tip belirtimleri (DTD) topluluğudur.</Description>
+            <Archive type="targz" sha1sum="b7d211c19b83accb92dcb51719de65227fb4c27c">http://gd.tuwien.ac.at/hci/kde/devel/docbook/SOURCES/sgml-common-0.6.3.tgz</Archive>
+            <Patches>
+                <Patch level="1">sgml-common-0.6.3-configure.in.patch</Patch>
+                <Patch level="1">sgml-common-0.6.3-manpage-1.patch</Patch>
+            </Patches>
+            <SourceURI>office/docbook/sgml-common/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>sgml-common</Name>
+            <Files>
+                <Path fileType="config">/etc/sgml</Path>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="doc">/usr/share/doc/sgml-common</Path>
+                <Path fileType="man">/usr/share/man</Path>
+                <Path fileType="data">/usr/share/sgml</Path>
+            </Files>
+            <Provides>
+                <COMAR script="package.py">System.Package</COMAR>
+            </Provides>
+        </Package>
+        <History>
+            <Update release="2">
+                <Date>2014-05-18</Date>
+                <Version>0.6.3</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2010-10-13</Date>
+                <Version>0.6.3</Version>
+                <Comment>First release</Comment>
+                <Name>Pisi Linux Admins</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>xmlto</Name>
+            <Homepage>https://fedorahosted.org/xmlto/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>GPLv2+</License>
+            <IsA>app:console</IsA>
+            <PartOf>office.docbook</PartOf>
+            <Summary xml:lang="en">A frontend to an XSL toolchain</Summary>
+            <Summary xml:lang="tr">XML ve DocBook için dönüşüm aracı</Summary>
+            <Description xml:lang="en">The purpose of xmlto is to convert an XML file to the desired format using whatever means necessary.</Description>
+            <Description xml:lang="tr">xmlto uygulamasının amacı verilen bir XML dosyasını istenen bir biçime dönüştürmektir.</Description>
+            <Archive type="targz" sha1sum="4b1daa7a15fc64176446332d55e8befa9a6d90bf">https://fedorahosted.org/releases/x/m/xmlto/xmlto-0.0.26.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>libxslt</Dependency>
+                <Dependency>docbook-xsl</Dependency>
+                <Dependency>docbook-xml</Dependency>
+            </BuildDependencies>
+            <SourceURI>office/docbook/xmlto/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>xmlto</Name>
+            <RuntimeDependencies>
+                <Dependency>docbook-xsl</Dependency>
+                <Dependency>docbook-xml</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="doc">/usr/share/doc/xmlto</Path>
+                <Path fileType="data">/usr/share/xmlto</Path>
+                <Path fileType="man">/usr/share/man</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="3">
+                <Date>2014-05-18</Date>
+                <Version>0.0.26</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Richard de Bruin</Name>
+                <Email>richdb@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2014-01-18</Date>
+                <Version>0.0.25</Version>
+                <Comment>Rebuild for 1.0</Comment>
+                <Name>Richard de Bruin</Name>
+                <Email>richdb@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2012-09-17</Date>
+                <Version>0.0.25</Version>
+                <Comment>First release</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
             </Update>
         </History>
     </SpecFile>
@@ -16682,112 +17035,6 @@
     </SpecFile>
     <SpecFile>
         <Source>
-            <Name>icecream</Name>
-            <Homepage>http://en.opensuse.org/Icecream</Homepage>
-            <Packager>
-                <Name>PisiLinux Community</Name>
-                <Email>admins@pisilinux.org</Email>
-            </Packager>
-            <License>GPLv2</License>
-            <IsA>service</IsA>
-            <PartOf>system.devel</PartOf>
-            <Summary xml:lang="en">Distributed C(++) compiling tool</Summary>
-            <Summary xml:lang="tr">Dağıtık C(++) derleme aracı</Summary>
-            <Summary xml:lang="es">Herramienta de compilación C(++) distribuida</Summary>
-            <Description xml:lang="fr">Icecream est un programme de compilation de code C/C++ distribuée sur plusieurs machines basé sur le code et les idées directrices de distcc.</Description>
-            <Description xml:lang="en">Icecream is a program for distributed compiling of C/C++ code across several machines based on ideas and code by distcc.</Description>
-            <Description xml:lang="tr">Icecream; C/C++ kaynak kodunun, birden fazla makinede dağıtık olarak derlenmesi fikrine dayanan, &quot;distcc&quot; kodu temelinde yazılmış bir uygulamadır.</Description>
-            <Description xml:lang="es">Icecream es un programa para compilación de código C/C++ distribuida en varios servidores, basado en ideas y código de distcc.</Description>
-            <Archive type="tarbz2" sha1sum="b1edce8d2385aa0caf93f731e292463bde98e8b0">ftp://ftp.suse.com/pub/projects/icecream/icecc-1.0.1.tar.bz2</Archive>
-            <BuildDependencies>
-                <Dependency>librsync-devel</Dependency>
-            </BuildDependencies>
-            <SourceURI>system/devel/icecream/pspec.xml</SourceURI>
-        </Source>
-        <Package>
-            <Name>icecream</Name>
-            <RuntimeDependencies>
-                <Dependency>librsync</Dependency>
-                <Dependency>libgcc</Dependency>
-                <Dependency>libcap-ng</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="executable">/opt/icecream/sbin/iceccd</Path>
-                <Path fileType="executable">/opt/icecream/bin/icecc</Path>
-                <Path fileType="executable">/usr/libexec/icecc</Path>
-                <Path fileType="library">/opt/icecream/lib</Path>
-                <Path fileType="executable">/opt/icecream/bin</Path>
-                <Path fileType="header">/opt/icecream/include/</Path>
-                <Path fileType="doc">/usr/share/doc</Path>
-                <Path fileType="data">/usr/share/icecc</Path>
-                <Path fileType="man">/usr/share/man</Path>
-                <Path fileType="data">/lib/systemd/system/icecream-daemon.service</Path>
-            </Files>
-            <Provides>
-                <COMAR script="daemon.py">System.Service</COMAR>
-            </Provides>
-            <AdditionalFiles>
-                <AdditionalFile target="/lib/systemd/system/icecream-daemon.service" permission="0644" owner="root">icecream-daemon.service</AdditionalFile>
-            </AdditionalFiles>
-        </Package>
-        <Package>
-            <Name>icecream-scheduler</Name>
-            <Summary xml:lang="en">Icecream scheduler which should only run on the master icecream node</Summary>
-            <RuntimeDependencies>
-                <Dependency>icecream</Dependency>
-                <Dependency>libgcc</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="executable">/opt/icecream/sbin/icecc-scheduler</Path>
-                <Path fileType="data">/lib/systemd/system/icecream-scheduler.service</Path>
-            </Files>
-            <Provides>
-                <COMAR script="scheduler.py">System.Service</COMAR>
-            </Provides>
-            <AdditionalFiles>
-                <AdditionalFile target="/lib/systemd/system/icecream-scheduler.service" permission="0644" owner="root">icecream-scheduler.service</AdditionalFile>
-            </AdditionalFiles>
-        </Package>
-        <History>
-            <Update release="5">
-                <Date>2014-05-11</Date>
-                <Version>1.0.1</Version>
-                <Comment>Release bump.</Comment>
-                <Name>Marcin Bojara</Name>
-                <Email>marcin@pisilinux.org</Email>
-            </Update>
-            <Update release="4">
-                <Date>2013-10-22</Date>
-                <Version>1.0.1</Version>
-                <Comment>Rebuild.</Comment>
-                <Name>Serdar Soytetir</Name>
-                <Email>kaptan@pisilinux.org</Email>
-            </Update>
-            <Update release="3">
-                <Date>2013-07-24</Date>
-                <Version>1.0.1</Version>
-                <Comment>Version bump.</Comment>
-                <Name>Yusuf Aydemir</Name>
-                <Email>yusuf.aydemir@pisilinux.org</Email>
-            </Update>
-            <Update release="2">
-                <Date>2013-02-18</Date>
-                <Version>0.9.98.3</Version>
-                <Comment>v.bump</Comment>
-                <Name>PisiLinux Community</Name>
-                <Email>admins@pisilinux.org</Email>
-            </Update>
-            <Update release="1">
-                <Date>2012-10-09</Date>
-                <Version>0.9.7</Version>
-                <Comment>First release</Comment>
-                <Name>Erdem Artan</Name>
-                <Email>admins@pisilinux.org</Email>
-            </Update>
-        </History>
-    </SpecFile>
-    <SpecFile>
-        <Source>
             <Name>libmpc</Name>
             <Homepage>http://www.multiprecision.org/</Homepage>
             <Packager>
@@ -19450,6 +19697,65 @@
             <Update release="1">
                 <Date>2012-11-14</Date>
                 <Version>3.2.6</Version>
+                <Comment>First release</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>disktype</Name>
+            <Homepage>http://disktype.sourceforge.net/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>BSD</License>
+            <IsA>app:console</IsA>
+            <PartOf>hardware.disk</PartOf>
+            <Summary xml:lang="en">Detect the content format of a disk or disk image</Summary>
+            <Summary xml:lang="tr">Disk veya disk görüntüsünün biçimsel içeriğini saptar</Summary>
+            <Description xml:lang="en">The purpose of disktype is to detect the content format of a disk or disk image. It knows about common file systems, partition tables, and boot codes.The program is written in C and is designed to compile on any modern Unix flavour.</Description>
+            <Description xml:lang="tr">Disktype&apos;ın amacı disk veya disk görüntüsünün içerik yapısını denetlemektir. Yaygın dosya sistemlerini, bölümleme tablolarını ve önyükleme kodlarını bilir. C dilinde yazılmış, herhangi bir modern Unix derleme tadında tasarlanmıştır.</Description>
+            <Archive type="targz" sha1sum="5ccc55d1c47f9a37becce7336c4aa3a7a43cc89c">mirrors://sourceforge/disktype/disktype-9.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>klibc</Dependency>
+                <Dependency>colorgcc</Dependency>
+            </BuildDependencies>
+            <Patches>
+                <Patch level="1">disktype.patch</Patch>
+                <Patch level="1">vfat.patch</Patch>
+                <Patch level="1">ext4.patch</Patch>
+            </Patches>
+            <SourceURI>hardware/disk/disktype/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>disktype</Name>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+                <Path fileType="man">/usr/share/man</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="3">
+                <Date>2015-04-01</Date>
+                <Version>9</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-10-29</Date>
+                <Version>9</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2012-08-23</Date>
+                <Version>9</Version>
                 <Comment>First release</Comment>
                 <Name>PisiLinux Community</Name>
                 <Email>admins@pisilinux.org</Email>
