@@ -13,38 +13,41 @@
         <IsA>library</IsA>
         <Summary>Various useful Linux utilities</Summary>
         <Description>The util-linux package contains a large variety of low-level system utilities that are necessary for a Linux system to function.</Description>
-        <Archive sha1sum="ecf75bbb77bba874fc11fc27423aa67b395b7ae5" type="tarxz">http://www.kernel.org/pub/linux/utils/util-linux/v2.24/util-linux-2.24.1.tar.xz</Archive>
+        <Archive sha1sum="73aee8f0ecc5f25c206a92e0c6ed7f14a5e01d66" type="tarxz">https://www.kernel.org/pub/linux/utils/util-linux/v2.26/util-linux-2.26.1.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>zlib</Dependency>
-            <Dependency>audit</Dependency>
+            <Dependency>zlib-devel</Dependency>
+            <Dependency>eudev-devel</Dependency>
+            <Dependency>python-devel</Dependency>
             <Dependency>shadow</Dependency>
-            <Dependency>ncurses</Dependency>
+            <Dependency>ncurses-devel</Dependency>
             <Dependency>libcap-ng-devel</Dependency>
-            <Dependency releaseFrom="2">utempter-devel</Dependency>
+            <Dependency>glibc-32bit</Dependency>
+            <!-- <Dependency releaseFrom="2">utempter-devel</Dependency>-->
         </BuildDependencies>
         <Patches>
-            <Patch level="1">ntfs-3g.patch</Patch>
+             <!--<Patch level="1">ntfs-3g.patch</Patch>
             <Patch level="1">0001-libmount-FS-id-and-parent-ID-could-be-zero.patch</Patch>
             <Patch level="1">0001-switch_root-verify-initramfs-by-f_type-not-devno.patch</Patch>
-            <Patch level="1">move_is_mountinfo.patch</Patch>
+            <Patch level="1">move_is_mountinfo.patch</Patch>-->
             <!-- makeing /var/log/lastlog -->
-            <Patch level="1">upstream/util-linux-ng-2.21-login-lastlog.patch</Patch>
-        </Patches>
+             <Patch level="1">upstream/util-linux-ng-2.21-login-lastlog.patch</Patch>
+	 </Patches>
     </Source>
 
     <Package>
         <Name>util-linux</Name>
         <RuntimeDependencies>
-            <Dependency version="current">libuuid</Dependency>
-            <Dependency version="current">libblkid</Dependency>
+            <Dependency version="current">libutil-linux</Dependency>
             <Dependency>zlib</Dependency>
             <Dependency>perl</Dependency>
-            <Dependency>audit</Dependency>
             <Dependency>ncurses</Dependency>
-            <Dependency>libudev</Dependency>
-            <Dependency>utempter</Dependency>
+            <Dependency>eudev</Dependency>
+            <!--<Dependency>utempter</Dependency>-->
             <Dependency>libcap-ng</Dependency>
         </RuntimeDependencies>
+        <Conflicts>
+            <Package releaseTo="8">util-linux</Package>
+        </Conflicts>
         <Files>
             <Path fileType="config">/etc</Path>
             <Path fileType="executable">/bin</Path>
@@ -58,9 +61,6 @@
             <Path fileType="data">/usr/share/getopt</Path>
             <Path fileType="data">/usr/share/bash-completion/completions</Path>
             <Path fileType="localedata">/usr/share/locale</Path>
-            <Path fileType="header">/usr/include</Path>
-            <Path fileType="library">/usr/lib</Path>
-            <Path fileType="library">/lib</Path>
         </Files>
     </Package>
 
@@ -71,101 +71,107 @@
         <PartOf>util.misc</PartOf>
         <Summary>Helper daemon to guarantee uniqueness of time-based UUIDs</Summary>
         <RuntimeDependencies>
-            <Dependency>libuuid</Dependency>
+            <Dependency>libutil-linux</Dependency>
         </RuntimeDependencies>
+	<Conflicts>
+            <Package releaseTo="8">uuidd</Package>
+        </Conflicts>
         <!-- FIXME: Add COMAR service -->
         <Files>
             <Path fileType="executable">/usr/bin/uuidgen</Path>
             <Path fileType="executable">/usr/sbin/uuidd</Path>
+	    <Path fileType="config">/usr/lib/tmpfiles.d/uuidd.conf</Path>
             <Path fileType="man">/usr/share/man/man1/uuidgen.1</Path>
             <Path fileType="man">/usr/share/man/man8/uuidd.8</Path>
         </Files>
+        <AdditionalFiles>
+            <AdditionalFile target="/usr/lib/tmpfiles.d/uuidd.conf" permission="0644" owner="root">uuidd.tmpfiles</AdditionalFile>
+        </AdditionalFiles> 
     </Package>
 
     <Package>
-        <Name>libuuid</Name>
+        <Name>libutil-linux</Name>
         <IsA>library</IsA>
-        <Summary>A library for UUID processing</Summary>
+        <Summary>util-linux runtime library</Summary>
+        <RuntimeDependencies>
+            <Dependency>python</Dependency>
+        </RuntimeDependencies>
+        <Conflicts>
+            <Package releaseTo="8">libblkid</Package>
+            <Package releaseTo="8">libuuid</Package>
+        </Conflicts>
+        <Replaces>
+            <Package>libblkid</Package>
+            <Package>libuuid</Package>
+        </Replaces>
         <Files>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="library">/usr/lib</Path>
             <Path fileType="man">/usr/share/man/man3/uuid*</Path>
-            <Path fileType="library">/lib/libuuid.*</Path>
-            <Path fileType="library">/usr/lib/libuuid.so</Path>
-        </Files>
-    </Package>
-
-    <Package>
-        <Name>libuuid-devel</Name>
-        <IsA>header</IsA>
-        <PartOf>system.devel</PartOf>
-        <Summary>libuuid header files</Summary>
-        <RuntimeDependencies>
-            <Dependency release="current">libuuid</Dependency>
-        </RuntimeDependencies>
-        <Files>
-            <Path fileType="header">/usr/include/uuid/*</Path>
-            <Path fileType="data">/usr/lib/pkgconfig/</Path>
-            <Path fileType="data">/usr/lib32/pkgconfig/uuid.pc</Path>
-            <Path fileType="data">/usr/lib32/pkgconfig/blkid.pc</Path>
-        </Files>
-    </Package>
-
-    <Package>
-        <Name>libblkid</Name>
-        <IsA>library</IsA>
-        <Summary>A library for block device identifying</Summary>
-        <RuntimeDependencies>
-            <Dependency>libuuid</Dependency>
-        </RuntimeDependencies>
-        <Files>
             <Path fileType="man">/usr/share/man/man3/libblkid*</Path>
             <Path fileType="man">/usr/share/man/man8/blkid*</Path>
-            <Path fileType="library">/lib/libblkid.*</Path>
-            <Path fileType="library">/usr/lib/libblkid.so</Path>
+
         </Files>
     </Package>
 
     <Package>
-        <Name>libblkid-devel</Name>
+        <Name>libutil-linux-devel</Name>
         <IsA>header</IsA>
         <PartOf>system.devel</PartOf>
-        <Summary>libblkid header files</Summary>
+        <Summary>libutil-linux header files</Summary>
         <RuntimeDependencies>
-            <Dependency release="current">libblkid</Dependency>
+            <Dependency release="current">libutil-linux</Dependency>
         </RuntimeDependencies>
+	<Conflicts>
+            <Package releaseTo="8">libblkid-devel</Package>
+            <Package releaseTo="8">libuuid-devel</Package>
+        </Conflicts>
+        <Replaces>
+            <Package>libblkid-devel</Package>
+            <Package>libuuid-devel</Package>
+        </Replaces>
         <Files>
-            <Path fileType="header">/usr/include/blkid/*</Path>
-            <Path fileType="data">/usr/lib/pkgconfig/blkid.pc</Path>
+            <Path fileType="header">/usr/include/</Path>
+            <Path fileType="data">/usr/lib/pkgconfig/*.pc</Path>
         </Files>
     </Package>
 
     <Package>
-        <Name>libuuid-32bit</Name>
+        <Name>libutil-linux-32bit</Name>
         <PartOf>emul32</PartOf>
-        <Summary>32-bit shared libraries for libuuid</Summary>
+        <Summary>32-bit shared libraries for libutil-linux</Summary>
         <BuildType>emul32</BuildType>
         <RuntimeDependencies>
-            <Dependency release="current">libuuid</Dependency>
+            <Dependency>glibc-32bit</Dependency>
         </RuntimeDependencies>
+        <Conflicts>
+            <Package releaseTo="8">libblkid-32bit</Package>
+            <Package releaseTo="8">libuuid-32bit</Package>
+        </Conflicts>
+        <Replaces>
+            <Package>libblkid-32bit</Package>
+            <Package>libuuid-32bit</Package>
+        </Replaces>
         <Files>
-            <Path fileType="library">/usr/lib32/libuuid.*</Path>
-        </Files>
-    </Package>
-
-    <Package>
-        <Name>libblkid-32bit</Name>
-        <PartOf>emul32</PartOf>
-        <Summary>32-bit shared libraries for libblkid</Summary>
-        <BuildType>emul32</BuildType>
-        <RuntimeDependencies>
-            <Dependency release="current">libblkid</Dependency>
-            <Dependency release="current">libuuid-32bit</Dependency>
-        </RuntimeDependencies>
-        <Files>
-            <Path fileType="library">/usr/lib32/libblkid.*</Path>
+            <Path fileType="library">/usr/lib32/</Path>
         </Files>
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2015-04-29</Date>
+            <Version>2.26.1</Version>
+            <Comment>Version bump, change pisi</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="8">
+            <Date>2015-04-01</Date>
+            <Version>2.26.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2014-05-11</Date>
             <Version>2.24.1</Version>

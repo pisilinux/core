@@ -15,11 +15,11 @@
         <Archive sha1sum="3172f6e957713c2d9fca462cc16068222fd1b9d3" type="tarxz">http://www.python.org/ftp/python/2.7.9/Python-2.7.9.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>bzip2</Dependency>
-            <Dependency>tcl-devel</Dependency>
+            <!--<Dependency>tcl-devel</Dependency>-->
             <Dependency>gdbm-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
             <Dependency>expat-devel</Dependency>
-            <Dependency>tcltk-devel</Dependency>
+            <!--<Dependency>tcltk-devel</Dependency>-->
             <Dependency>libffi-devel</Dependency>
             <Dependency>sqlite-devel</Dependency>
             <Dependency>ncurses-devel</Dependency>
@@ -93,7 +93,7 @@
     </Package>
 
     <!-- Bootstrap -->
-    <!-- Comment these packages (python-tk and idle) when bootstrapping -->
+    <!-- Comment these packages (python-tk and idle) when bootstrapping 
     <Package>
         <Name>python-tk</Name>
         <IsA>library</IsA>
@@ -107,11 +107,11 @@
             <Path fileType="library">/usr/lib/python*/lib-tk</Path>
             <Path fileType="library">/usr/lib/python*/lib-dynload/_tkinter.so</Path>
         </Files>
-    </Package>
+    </Package>-->
 
     <!-- Bootstrap -->
     <!-- Comment these packages (python-tk and idle) when bootstrapping -->
-    <Package>
+    <!--<Package>
         <Name>idle</Name>
         <Icon>idle</Icon>
         <IsA>app:gui</IsA>
@@ -130,7 +130,7 @@
             <AdditionalFile permission="0644" target="/usr/share/pixmaps/idle.png">python-logo.png</AdditionalFile>
             <AdditionalFile permission="0644" target="/usr/share/applications/idle.desktop">idle.desktop</AdditionalFile>
         </AdditionalFiles>
-    </Package>
+    </Package>-->
 
     <History>
         <Update release="11">

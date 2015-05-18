@@ -14,6 +14,7 @@
         <Description>Snappy is a compression/decompression library. It does not aim for maximum compression, or compatibility with any other compression library; instead, it aims for very high speeds and reasonable compression.</Description>
         <BuildDependencies>
             <Dependency>lzo-devel</Dependency>
+            <Dependency>zlib-devel</Dependency>
         </BuildDependencies>
         <Archive sha1sum="2988f1227622d79c1e520d4317e299b61d042852" type="targz">http://snappy.googlecode.com/files/snappy-1.1.1.tar.gz</Archive>
         <Patches>
@@ -22,6 +23,9 @@
     </Source>
     <Package>
         <Name>snappy</Name>
+        <RuntimeDependencies>
+            <Dependency>libgcc</Dependency>
+        </RuntimeDependencies>
         <Files>
         <Path fileType="library">/usr/lib</Path>
         <Path fileType="doc">/usr/share/doc</Path>

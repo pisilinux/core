@@ -14,7 +14,7 @@
         <Description>Libxml2 is the XML C parser and toolkit developed for the Gnome project (but usable outside of the Gnome platform).</Description>
         <Archive sha1sum="eb3e2146c6d68aea5c2a4422ed76fe196f933c21" type="targz">ftp://xmlsoft.org/libxml2/libxml2-2.9.1.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>python</Dependency>
+            <Dependency>python-devel</Dependency>
             <Dependency>xz-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
             <Dependency>readline-devel</Dependency>
@@ -75,6 +75,7 @@
             <Dependency>xz-32bit</Dependency>
             <Dependency>zlib-32bit</Dependency>
             <Dependency>readline-32bit</Dependency>
+            <Dependency>glibc-32bit</Dependency>
         </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">libxml2</Dependency>

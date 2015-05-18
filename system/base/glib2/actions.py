@@ -13,9 +13,11 @@ from pisi.actionsapi import shelltools
 def setup():
     options = "--with-pcre=system \
                --disable-fam \
+               --disable-libelf \
+               --enable-gtk-doc=no \
                --disable-static \
                --enable-shared \
-               --enable-man \
+               --disable-man \
                --enable-systemtap"
 
 
@@ -28,7 +30,7 @@ def setup():
         shelltools.export("CXX", "%s -m32" % get.CXX())
         shelltools.export("PKG_CONFIG_PATH", "/usr/lib32/pkgconfig")
 
-    autotools.autoreconf("-vif")
+    #autotools.autoreconf("-vif")
     autotools.configure(options)
 
     pisitools.dosed("libtool", " -shared ", " -Wl,--as-needed -shared ")

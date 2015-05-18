@@ -14,7 +14,9 @@
         <Description>pyliblzma provides a python interface for the liblzma library to read/write data that has been compressed/decompressed with lzma utils.</Description>
         <Archive sha1sum="6240ec6f830f35f4087b8926a95c2074320b7ed5" type="tarbz2">http://pypi.python.org/packages/source/p/pyliblzma/pyliblzma-0.5.3.tar.bz2</Archive>
         <BuildDependencies>
-            <Dependency>xz</Dependency>
+            <Dependency>xz-devel</Dependency>
+            <Dependency>python-setuptools</Dependency>
+            <Dependency>python-devel</Dependency>
         </BuildDependencies>
     </Source>
 

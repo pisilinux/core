@@ -16,7 +16,7 @@
         <Description>acl contains the getfacl and setfacl utilities needed for manipulating access control lists along with the needed libraries.</Description>
         <Archive sha1sum="537dddc0ee7b6aa67960a3de2d36f1e2ff2059d9" type="targz">http://download.savannah.gnu.org/releases-noredirect/acl/acl-2.2.52.src.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>attr</Dependency>
+            <Dependency>attr-devel</Dependency>
         </BuildDependencies>
     </Source>
     <Package>
@@ -46,6 +46,13 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2015-03-15</Date>
+            <Version>2.2.52</Version>
+            <Comment>fix build deps.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2014-09-30</Date>
             <Version>2.2.52</Version>

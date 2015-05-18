@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>xmlto</Name>
+        <Homepage>https://fedorahosted.org/xmlto/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <IsA>app:console</IsA>
+        <Summary>A frontend to an XSL toolchain</Summary>
+        <Description>The purpose of xmlto is to convert an XML file to the desired format using whatever means necessary.</Description>
+        <Archive sha1sum="4b1daa7a15fc64176446332d55e8befa9a6d90bf" type="targz">https://fedorahosted.org/releases/x/m/xmlto/xmlto-0.0.26.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>libxslt</Dependency>
+            <Dependency>docbook-xsl</Dependency>
+            <Dependency>docbook-xml</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>xmlto</Name>
+        <RuntimeDependencies>
+            <Dependency>docbook-xsl</Dependency>
+            <Dependency>docbook-xml</Dependency>
+            <!-- FIXME: Disabled for now as it brings whole texlive
+            <Dependency>latex-passivetex</Dependency>
+            -->
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="doc">/usr/share/doc/xmlto</Path>
+            <Path fileType="data">/usr/share/xmlto</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="3">
+            <Date>2014-05-18</Date>
+            <Version>0.0.26</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Richard de Bruin</Name>
+            <Email>richdb@pisilinux.org</Email>
+        </Update>
+	<Update release="2">
+            <Date>2014-01-18</Date>
+            <Version>0.0.25</Version>
+            <Comment>Rebuild for 1.0</Comment>
+            <Name>Richard de Bruin</Name>
+            <Email>richdb@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2012-09-17</Date>
+            <Version>0.0.25</Version>
+            <Comment>First release</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

@@ -14,16 +14,19 @@
         <Description>Python modules for Pisi Linux provides functions for common task, with the aim of easing development.</Description>
         <Archive sha1sum="d5615ef8f2beb69929a3588fd5a96832a8c66a40" type="targz">http://source.pisilinux.org/1.0/pisilinux-python-0.4.8.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>python</Dependency>
-            <Dependency>libX11-devel</Dependency>
+            <Dependency>python-devel</Dependency>
+	    <!--<Dependency>libX11-devel</Dependency>-->
         </BuildDependencies>
+       <Patches>
+            <Patch level="1">remove_libX11_dep.patch</Patch>
+      </Patches>
     </Source>
 
     <Package>
         <Name>pisilinux-python</Name>
         <RuntimeDependencies>
             <Dependency>python</Dependency>
-            <Dependency>libX11</Dependency>
+	    <!--<Dependency>libX11</Dependency>-->
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib</Path>
@@ -33,6 +36,13 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2015-03-11</Date>
+            <Version>0.4.8</Version>
+            <Comment>Remove libX11 dependency.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2014-05-11</Date>
             <Version>0.4.8</Version>

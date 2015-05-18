@@ -11,7 +11,7 @@ from pisi.actionsapi import get
 
 import os
 
-WorkDir = "glibc-2.20"
+WorkDir = "glibc-2.21"
 
 arch = "x86-64" if get.ARCH() == "x86_64" and not get.buildTYPE() == "emul32" else "i686"
 defaultflags = "-O3 -g -fasynchronous-unwind-tables -mtune=generic -march=%s" % arch
@@ -53,16 +53,13 @@ def setup():
                --libexecdir=/usr/lib/misc \
                --with-bugurl=https://bugs.pisilinux.org \
                --enable-add-ons \
-               --enable-bind-now \
-               --enable-kernel=2.6.32 \
-               --enable-stackguard-randomization \
-               --without-selinux \
-               --without-gd \
-               --disable-profile \
                --enable-obsolete-rpc \
+               --enable-kernel=2.6.32 \
+               --enable-bind-now --disable-profile \
+               --enable-stackguard-randomization \
                --enable-lock-elision \
                --enable-multi-arch \
-               --with-tls"
+               --disable-werror"
     if get.buildTYPE() == "emul32":
         options += "\
                     --libdir=/usr/lib32 \

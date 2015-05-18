@@ -1,0 +1,478 @@
+#
+# Mageia kernel series file
+#
+# This file describes the order in which patches should be applied
+# in the kernel and why the patch is needed.
+#
+# Luiz Fernando N. Capitulino
+# <lcapitulino@mandriva.com.br>
+
+###
+### Upstream git
+###
+
+###
+### Stable Queue
+###
+
+###
+### Arch x86
+###
+
+# laptop needing pci=assign-busses (#18989, needs to be submitted upstream)
+x86-pci-toshiba-equium-a60-assign-busses.patch
+
+# If users choose a bad video mode, allow to jump to
+# a working one (TTL: forever)
+x86-boot-video-80x25-if-break.patch
+
+# Allow poweroff on UP machines running SMP kernels
+x86-default_poweroff_up_machines.patch
+
+# Fix #38760, need to be revised and submitted upstream
+# BROKEN: x86-cpufreq-speedstep-dothan-3.patch
+
+# raise vmalloc to fix https://bugs.mageia.org/show_bug.cgi?id=904
+x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch
+
+# slows down boot
+Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch
+
+# regression fix
+x86-spinlocks-Fix-regression-in-spinlock-contention-.patch
+
+###
+### Core
+###
+genirq-Set-initial-affinity-in-irq_set_affinity_hint.patch
+genirq-Fix-null-pointer-reference-in-irq_set_affinit.patch
+
+iommu-vt-d-Remove-unused-variable.patch
+
+rcu-Fix-rcu_barrier-race-that-could-result-in-too-sh.patch
+
+# efi fixes
+x86-efi-Store-upper-bits-of-command-line-buffer-addr.patch
+firmware-efi-Fix-error-handling-in-add_sysfs_runtime_map_entr.patch
+
+###
+### i2c
+###
+
+###
+### PCI core
+###
+
+# BROKEN: pci-pciprobe-CardBusNo.patch
+
+# http://lkml.org/lkml/2008/9/12/52
+pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch
+pci-quirks-drop-devinit-exit.patch
+
+# Intel ACS quirks
+pci-Add-Wellsburg-X99-to-Intel-PCH-root-port-ACS-qui.patch
+pci-acs-quirks-for-Intel-9-series-PCH-root-ports.patch
+
+###
+### PNP core
+###
+
+# Turns pnpbios off by default, useful, since pnpbios
+# is know to cause problems (TTL: forever)
+pnp-pnpbios-off-by-default.patch
+
+pnp-isapnp-async-init.patch
+
+###
+### ACPI
+###
+
+# CLEVO M360S acpi irq workaround
+acpi-CLEVO-M360S-disable_acpi_irq.patch
+
+# Clevo M720SR freezes with C3
+acpi-processor-M720SR-limit-to-C2.patch
+
+# fixes boot regression on some hw since kernel 3.11
+acpi-init-Fix-the-ordering-of-acpi_reserve_resources.patch
+# audio regression
+acpi-PNP-add-two-IDs-to-list-for-PNPACPI-device-enum.patch
+# MB regression
+acpi-SBS-Add-5-us-delay-to-fix-SBS-hangs-on-MacBook.patch
+acpi-sbs-enable-battery-manager-when-present.patch
+# backlight override
+acpi-video-Allow-forcing-native-backlight-on-non-win.patch
+# fix booting on new hw
+acpi-ACPICA-Add-Windows-2015-string-to-_OSI-support.patch
+# less log flooding
+acpi-table-Use-pr_debug-instead-of-pr_info-for-MADT-.patch
+
+###
+### Block
+###
+
+# epsa2 SCSI driver, don't know from where it came
+scsi-ppscsi-2.6.2.patch
+
+# epsa2 is far behind
+scsi-ppscsi_fixes.patch
+
+# Fix build of ppscsi on 2.6.24
+scsi-ppscsi-sg-helper-update.patch
+
+# Update/fix for ppscsi on 2.6.25
+scsi-ppscsi-update-for-scsi_data_buffer.patch
+
+# https://qa.mandriva.com/show_bug.cgi?id=45393
+scsi-ppscsi-mdvbz45393.patch
+
+# epsa2 3.0 buildfix
+scsi-ppscsi-3.0-buildfix.patch
+
+# Don't know know why this is needed
+scsi-megaraid-new-sysfs-name.patch
+
+# Looks like fixes from Arnaud, not sure why they're needed
+ide-pci-sis5513-965.patch
+
+mpt-vmware-fix.patch
+
+# adds aliases to support upgrade from old dm-raid45 patch
+dm-raid-aliases.patch
+
+# disable floppy autoloading (mga #4696)
+block-floppy-disable-pnp-modalias.patch
+
+# prefer ata over ide drivers
+ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch
+
+# korg #81551
+ata-revert-Disabling-the-async-PM-for-JMicron-chip-363-361.patch
+ata-jmicron-disable-broken-async_suspend.patch
+
+# raid fixes
+md-raid5-dont-record-new-size-if-resize_stripes-fails.patch
+
+# blk-mq
+blk-mq-fix-CPU-hotplug-handling.patch
+blk-mq-fix-race-between-timeout-and-CPU-hotplug.patch
+blk-mq-fix-FUA-request-hang.patch
+blk-mq-don-t-lose-requests-if-a-stopped-queue-restar.patch
+
+# QNAP fix
+scsi-add-1024-max-sectors-black-list-flag.patch
+
+###
+### File-system
+###
+
+# aufs from: http://aufs.sourceforge.net/ (mga#8314)
+fs-aufs-3.19.patch
+fs-aufs-3.19-modular.patch
+
+# btrfs crash
+fs-btrfs-fix-BUG_ON-in-btrfs_orphan_add-when-delete-unu.patch
+fs-btrfs-unlock-i_mutex-after-attempting-to-delete-subvolume-during-send.patch
+
+# efi fix
+fs-efivarfs-Ensure-VariableName-is-NUL-terminated.patch
+
+# ext4 fix
+fs-ext4-fix-data-corruption-caused-by-unwritten-and-del.patch
+fs-ext4-move-check-under-lock-scope-to-close-a-race.patch
+
+# core
+fs-mnt-Fix-fs_fully_visible-to-verify-the-root-director.patch
+fs-mnt-Fail-collect_mounts-when-applied-to-unmounted-mo.patch
+fs-path_openat-fix-double-fput.patch
+fs-splice-sendfile-at-once-fails-for-big-files.patch
+
+###
+### FireWire
+###
+
+# adding module aliases to ease upgrade from ieee1394
+firewire-ieee1394-module-aliases.patch
+
+###
+### GPU/DRM
+###
+
+# new Q57 Host Bridge id
+char-agp-intel-new-Q57-id.patch
+
+# External mach64 drm support from git://anongit.freedesktop.org/git/mesa/drm
+gpu-drm-mach64.patch
+gpu-drm-mach64-fixes.patch
+gpu-drm-mach64-2.6.31.patch
+gpu-drm-mach64-fix-for-changed-drm_pci_alloc.patch
+gpu-drm-mach64-fix-for-changed-drm_ioctl.patch
+gpu-drm-mach64-2.6.36-buildfix.patch
+gpu-drm-mach64-2.6.37-buildfix.patch
+gpu-drm-mach64-3.0-buildfix.patch
+gpu-drm-mach64-include-module.h.patch
+gpu-drm-mach64-3.3-buildfix.patch
+gpu-drm-mach64-3.6-buildfix.patch
+gpu-drm-mach64-3.7-buildfix.patch
+gpu-drm-mach64-3.12-buildfix.patch
+gpu-drm-mach64-restore-mach64_PCI_IDS.patch
+gpu-drm-mach64-linux-3.14-buildfix.patch
+gpu-drm-mach64-3.17-buildfix.patch
+gpu-drm-mach64-3.18-buildfix.patch
+
+# i915, nice speedups
+gpu-drm-i915-Make-sample_c-messages-go-faster-on-Haswell.patch
+gpu-drm-i915-Improve-HiZ-throughput-on-Cherryview.patch
+gpu-drm-i915-Enable-the-HiZ-RAW-Stall-Optimization-on-Broadwell.patch
+gpu-drm-i915-Ensure-the-HiZ-RAW-Stall-Optimization-is-on-for-Cherryview.patch
+# i915, vlv crash
+gpu-drm-i915-fix-vlv-crash.patch
+
+###
+### Hardware Monitoring
+###
+
+###
+### Input
+###
+
+input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch
+
+# mga #14897
+Input-psmouse-support-for-the-FocalTech-PS-2-protoco.patch
+Input-psmouse-remove-hardcoded-touchpad-size-from-th.patch
+Input-psmouse-ensure-that-focaltech-reports-consiste.patch
+Input-psmouse-disable-changing-resolution-rate-scale.patch
+Input-psmouse-disable-palm-detection-in-the-focaltec.patch
+
+###
+### idle
+###
+
+###
+### Kbuild
+###
+
+###
+### Media
+###
+
+###
+### Misc
+###
+
+###
+### MM
+###
+
+mm-vmscan-wake-up-all-pfmemalloc-throttled-processes.patch
+
+# div/0 fix
+mm-writeback-use-1-instead-of-1-to-protect-against-div-.patch
+
+###
+### Network
+###
+
+# SiS 190 fixes
+net-sis190-fix-list-usage.patch
+
+# netfilter IFWLOG support
+net-netfilter-IFWLOG.patch
+net-netfilter-IFWLOG-mdv.patch
+net-netfilter-IFWLOG-2.6.35-buildfix.patch
+net-netfilter-IFWLOG-2.6.37-buildfix.patch
+net-ipv4-netfilter-ipt_IFWLOG-3.6-buildfix.patch
+net-netfilter-IFWLOG-3.7-buildfix.patch
+
+# netfilter psd support
+net-netfilter-psd.patch
+net-netfilter-psd-mdv.patch
+net-netfilter-psd-2.6.35-buildfix.patch
+
+# ath9k
+net-wireless-ath9k-Update-PCI-IDs-for-AR9565.patch
+
+# brcmfmac
+net-wireless-brcmfmac-Add-support-for-bcm43340_1-wireless-chipsets.patch
+net-wireless-brcmfmac-avoid-null-pointer-access-when-brcmf_msgbuf.patch
+net-wireless-brcmfmac-check-result-of-USB-firmware-request.patch
+
+###
+### Platform drivers
+###
+
+# Allow access to Shuttle WMI interface controls
+# (Mainly allow turning on/off webcam and wireless on Shuttle DA18IE and DA18IM)
+platform-x86-add-shuttle-wmi-driver.patch
+platform-x86-shuttle-wmi-drop-devinit-exit.patch
+
+###
+### RTC
+###
+
+###
+### Serial
+###
+
+# Export pci_ids.h to user space, needed by ldetect
+include-kbuild-export-pci_ids.patch
+
+###
+### Sound
+###
+
+# adds bluetooth sco support
+sound-bluetooth-SCO-support.patch
+
+# VT1613
+sound-alsa-add-VT1613-AC97-codec-support.patch
+
+# Alsa updates for Dell
+sound-alsa-hda-realtek-Support-Dell-headset-mode-for-ALC256.patch
+sound-alsa-hda-realtek-Support-headset-mode-for-ALC286-288.patch
+sound-alsa-hda-realtek-Support-Dell-headset-mode-for-ALC288.patch
+
+# emu10k
+alsa-emu10k1-emu10k2-32-bit-dma-mode.patch
+alsa-emu10k1-fix-card-shortname-string-buffer-overflow.patch
+
+###
+### Staging
+###
+
+
+###
+### TTY
+###
+
+###
+### USB
+###
+
+# http://qa.mandriva.com/show_bug.cgi?id=30638
+bluetooth-hci_usb-disable-isoc-transfers.patch
+
+hid-usbhid-IBM-BladeCenterHS20-quirk.patch
+
+usb-storage-unusual_devs-add-id.patch
+usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch
+
+# xhci fixes
+usb-xhci-remove-unused-parameter-xhci-in-function-xhci-handshake.patch
+usb-xhci-clean-up-work-to-remove-unused-parameters-for-functions-in-xhci-mem.c.patch
+usb-xhci-fix-isoc-endpoint-dequeue-from-advancing-too-far-on-transaction-error.patch
+usb-xhci-Solve-full-event-ring-by-increasing-TRBS_PER_SEGMENT-to-256.patch
+usb-xhci-gracefully-handle-xhci_irq-dead-device.patch
+
+# uas
+uas-allow-uas_use_uas_driver-to-return-usb-storage-flags.patch
+uas-add-us_fl_max_sectors_240-flag.patch
+uas-set-max_sectors_240-quirk-for-asm1053-devices.patch
+
+# misc fixes
+usb-cdc-acm-prevent-infinite-loop-when-parsing-cdc-headers.patch
+usb-chipidea-otg-remove-mutex-unlock-and-lock-while-stop-and-start-role.patch
+
+###
+### V4L
+###
+
+# pwc driver name in /proc/bus/devices, /sys fix and "advertisement" removal
+media-usb-pwc-lie-in-proc-usb-devices.patch
+
+###
+### Video
+###
+
+# Mageia framebuffer boot logo
+video-mageia-logo.patch
+
+# https://qa.mandriva.com/show_bug.cgi?id=59260
+# https://bugzilla.kernel.org/show_bug.cgi?id=26232
+# DISABLED: video-fb-avoid-oops-when-fw-fb-is-removed.patch
+# DISABLED: video-fb-avoid-deadlock-caused-by-fb_set_suspend.patch
+
+# fbdev oops
+video-fbdev-fix-possible-null-dereference.patch
+# fbdev fixes
+video-fbdev-Add-additional-vesa-modes.patch
+video-fbdev-Check-Standard-Timing-against-DMT.patch
+video-fbdev-Validate-mode-timing-against-monspec.patch
+video-fbdev-Fix-sparse-warning-messages.patch
+video-fbdev-fix-CVT-vertical-front-and-back-porch-values.patch
+video-fbdev-fix-sys_copyarea.patch
+
+###
+### 3rdparty
+###
+
+3rd-3rdparty-1.0-tree.patch
+
+# TODO: fix up patch below to include all archs?
+3rd-3rdparty-merge.patch
+
+# acerhk
+3rd-acerhk-0.5.35.patch
+3rd-acerhk-kbuild.patch
+3rd-acerhk-extra-cflags.patch
+3rd-acerhk-proc_dir_entry-owner.patch
+3rd-acerhk-fix-build-with-function-tracer.patch
+3rd-acerhk-2.6.36-buildfix.patch
+3rd-acerhk-fix-include.patch
+
+# aes2501
+3rd-aes2501-r19.patch
+3rd-aes2501-kbuild.patch
+3rd-aes2501-rmmod-oops-fix.patch
+
+# ndiswrapper
+3rd-ndiswrapper-1.59.patch
+3rd-ndiswrapper-Kconfig.patch
+3rd-ndiswrapper-Makefile-build-fix.patch
+3rd-ndiswrapper-linux-3.14-buildfix.patch
+
+# rfswitch
+3rd-rfswitch-1.3.patch
+3rd-rfswitch-build-fix.patch
+3rd-rfswitch-3.0-buildfix.patch
+
+# viahss
+3rd-viahss-0.92.patch
+3rd-viahss-config.patch
+3rd-viahss-module-license.patch
+3rd-viahss-2.6.35-buildfix.patch
+3rd-viahss-3.0-buildfix.patch
+
+# add rtl8723bs support (mga#15874)
+3rd-rtl8723bs.patch
+3rd-rtl8723bs-buildfix.patch
+3rd-rtl8723bs-updates.patch
+3rd-rtl8723bs-revert-4.0-changes.patch
+
+###
+### Security
+###
+
+###
+### Smack fixes
+###
+
+###
+### XEN
+###
+
+###
+### ARM
+###
+
+###
+### IA64
+###
+
+# fix broken header generation
+KVM-ia64-drop-kvm.h-from-installed-user-headers.patch
+
+###
+### Tools
+###

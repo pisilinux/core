@@ -10,13 +10,13 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    #shelltools.export("CXXFLAGS","%s  -fno-rtti -fno-exceptions" % get.CXXFLAGS())
+    #autotools.autoreconf("-fi")
+    shelltools.export("PAGE", "a4")
     autotools.configure("--prefix=/usr \
-                         --with-appresdir=/usr/share/X11/app-defaults \
-                         --with-x")
+                         --without-x")
 
 def build():
-    shelltools.export("LC_ALL", "C")
+    #shelltools.export("LC_ALL", "C")
     autotools.make()
 
 def install():

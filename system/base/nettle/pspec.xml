@@ -9,7 +9,6 @@
             <Email>admins@pisilinux.org</Email>
         </Packager>
         <License>LGPLv2.1</License>
-        <PartOf>util.crypt</PartOf>
         <IsA>library</IsA>
         <Summary>The Nettle package contains the low-level cryptographic library</Summary>
         <Description>The Nettle package contains the low-level cryptographic library that is designed to fit easily in many contexts.</Description>
@@ -54,10 +53,12 @@
         <BuildType>emul32</BuildType>
         <BuildDependencies>
             <Dependency>gmp-32bit</Dependency>
+            <Dependency>glibc-32bit</Dependency>
         </BuildDependencies>
         <RuntimeDependencies>
-            <Dependency release="current">nettle-devel</Dependency>
-            <Dependency>gmp-32bit</Dependency>
+            <Dependency release="current">nettle</Dependency>
+            <Dependency>glibc-32bit</Dependency>
+            <Dependency>gmp</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib32/</Path>

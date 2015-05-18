@@ -34,6 +34,9 @@
         <Name>libidn-devel</Name>
         <PartOf>system.devel</PartOf>
         <Summary>Development files for libidn</Summary>
+        <BuildDependencies>
+            <Dependency>glibc-32bit</Dependency>
+        </BuildDependencies>
         <RuntimeDependencies>
             <Dependency>libidn</Dependency>
         </RuntimeDependencies>
