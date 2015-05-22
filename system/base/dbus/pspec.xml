@@ -29,7 +29,7 @@
             <Dependency>expat</Dependency>
             <Dependency>libcap-ng</Dependency>
             <!--libX11 dbus-x11 paketi ayrılınca buradan silinecek-->
-            <Dependency>libX11</Dependency>
+            <!--<Dependency>libX11</Dependency>-->
             <!--<Dependency>systemd-units</Dependency>-->
         </RuntimeDependencies>
         <Files>
@@ -52,7 +52,8 @@
              <COMAR script="package.py">System.Package</COMAR>
         </Provides>
     </Package>
-        <Package>
+
+    <Package>
         <Name>dbus-x11</Name>
         <PartOf>x11.util</PartOf>
         <RuntimeDependencies>

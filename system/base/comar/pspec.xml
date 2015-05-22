@@ -16,6 +16,7 @@
         <BuildDependencies>
             <Dependency>dbus-devel</Dependency>
             <Dependency>python-devel</Dependency>
+	    <Dependency>cmake</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch level="1">run_dir.patch</Patch>
@@ -30,6 +31,7 @@
             <Dependency>dbus</Dependency>
             <Dependency>python</Dependency>
             <Dependency>polkit</Dependency>
+            <Dependency>dbus-python</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -47,7 +49,7 @@
 
     <History>
         <Update release="4">
-            <Date>2015-04-01</Date>
+            <Date>2015-04-22</Date>
             <Version>3.0.3</Version>
             <Comment>Fix run dir path.</Comment>
             <Name>Marcin Bojara</Name>

@@ -561,7 +561,7 @@
                 <Dependency>xmlto</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="gz" level="1">patches/linux/patch-4.0.3.gz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.0.4.xz</Patch>
             </Patches>
             <SourceURI>kernel/kernel/pspec.xml</SourceURI>
         </Source>
@@ -623,8 +623,8 @@
             <Update release="51">
                 <Type package="kernel">security</Type>
                 <Date>2015-05-14</Date>
-                <Version>4.0.3</Version>
-                <Comment>Version bump to 4.0.3 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.0.3</Comment>
+                <Version>4.0.4</Version>
+                <Comment>Version bump to 4.0.4 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.0.4</Comment>
                 <Name>Ertuğrul Erata</Name>
                 <Email>ertugrulerata@gmail.com</Email>
             </Update>
@@ -4706,7 +4706,7 @@
             <Summary xml:lang="tr">Plyvel, LevelDB için, hızlı ve zengin özellikli Python arabirimi.</Summary>
             <Description xml:lang="en">Plyvel has a rich feature set, high performance, and a friendly Pythonic API.</Description>
             <Description xml:lang="tr">Plyvel zengin özelliklere sahip bir set, yüksek performanslı, ve kullanıcı dostu bir Pythonic API.</Description>
-            <Archive type="targz" sha1sum="9f416a0fbd0c123b94df18bc7aa47a697ddb0bc7">https://pypi.python.org/packages/source/p/plyvel/plyvel-0.8.tar.gz</Archive>
+            <Archive type="targz" sha1sum="6dfa70be59daafe73ffada429a608592d24a8d3c">https://pypi.python.org/packages/source/p/plyvel/plyvel-0.9.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>cython</Dependency>
                 <Dependency>python-devel</Dependency>
@@ -4728,6 +4728,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2015-05-17</Date>
+                <Version>0.9</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2014-06-08</Date>
                 <Version>0.8</Version>
@@ -4762,7 +4769,6 @@
             <Archive type="targz" sha1sum="7a00f7861d26683ab7e3f4418860bd426deed9b5">http://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.0.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>python-devel</Dependency>
-                <Dependency>python3</Dependency>
                 <Dependency>dbus-devel</Dependency>
                 <Dependency>dbus-glib-devel</Dependency>
                 <Dependency>glib2-devel</Dependency>
@@ -4777,7 +4783,8 @@
             <Name>dbus-python-common</Name>
             <Summary xml:lang="en">Common dbus-python files shared between dbus-python and dbus-python3</Summary>
             <RuntimeDependencies>
-                <Dependency>dbus</Dependency>
+                <Dependency>dbus-devel</Dependency>
+                <Dependency release="6">dbus-python</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -4788,7 +4795,6 @@
         <Package>
             <Name>dbus-python</Name>
             <RuntimeDependencies>
-                <Dependency release="6">dbus-python-common</Dependency>
                 <Dependency>python</Dependency>
                 <Dependency>dbus</Dependency>
                 <Dependency>glib2</Dependency>
@@ -4798,24 +4804,9 @@
                 <Path fileType="library">/usr/lib/python2*</Path>
             </Files>
         </Package>
-        <Package>
-            <Name>dbus-python3</Name>
-            <Summary xml:lang="en">D-Bus Python3 bindings</Summary>
-            <PartOf>programming.language.python</PartOf>
-            <RuntimeDependencies>
-                <Dependency release="6">dbus-python-common</Dependency>
-                <Dependency>python3</Dependency>
-                <Dependency>dbus</Dependency>
-                <Dependency>glib2</Dependency>
-                <Dependency>dbus-glib</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="library">/usr/lib/python3*</Path>
-            </Files>
-        </Package>
         <History>
             <Update release="6">
-                <Date>2015-04-01</Date>
+                <Date>2015-05-22</Date>
                 <Version>1.2.0</Version>
                 <Comment>Release bump.</Comment>
                 <Name>Kamil Atlı</Name>
@@ -7035,6 +7026,94 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>libXau</Name>
+            <Homepage>http://www.x.org/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>MIT</License>
+            <IsA>library</IsA>
+            <PartOf>system.base</PartOf>
+            <Summary xml:lang="fr">Librairie Au de X.Org.</Summary>
+            <Summary xml:lang="en">X.Org Au library</Summary>
+            <Summary xml:lang="tr">X.Org Au kitaplığı.</Summary>
+            <Summary xml:lang="de">X.Org Au Bibliothek</Summary>
+            <Description xml:lang="en">libXau provides functions to manage X authorization files</Description>
+            <Description xml:lang="tr">libXau, X yetkilendirme dosyalarını yönetmek için işlevler sağlar.</Description>
+            <Archive type="targz" sha1sum="2544aa44737897832d9bf80151f30f7e0bb4f341">http://xorg.freedesktop.org/archive/individual/lib/libXau-1.0.8.tar.gz</Archive>
+            <Patches>
+                <Patch level="1">visibility.patch</Patch>
+            </Patches>
+            <SourceURI>system/base/libXau.orig/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>libXau</Name>
+            <Files>
+                <Path fileType="library">/usr/lib</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libXau-devel</Name>
+            <Summary xml:lang="en">Development files for libXau</Summary>
+            <Summary xml:lang="tr">libXau için geliştirme dosyaları</Summary>
+            <PartOf>system.devel</PartOf>
+            <RuntimeDependencies>
+                <Dependency release="4">libXau</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="header">/usr/include/X11</Path>
+                <Path fileType="data">/usr/lib/pkgconfig</Path>
+                <Path fileType="data">/usr/lib32/pkgconfig</Path>
+                <Path fileType="man">/usr/share/man</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libXau-32bit</Name>
+            <Summary xml:lang="en">32-bit shared libraries for libXau</Summary>
+            <Summary xml:lang="tr">libXau için 32-bit paylaşımlı kitaplıklar</Summary>
+            <PartOf>emul32</PartOf>
+            <BuildType>emul32</BuildType>
+            <RuntimeDependencies>
+                <Dependency release="4">libXau</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library">/usr/lib32</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="4">
+                <Date>2014-05-11</Date>
+                <Version>1.0.8</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2013-10-07</Date>
+                <Version>1.0.8</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-06-21</Date>
+                <Version>1.0.8</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2012-08-23</Date>
+                <Version>1.0.7</Version>
+                <Comment>First release</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>ca-certificates</Name>
             <Homepage>http://packages.qa.debian.org/c/ca-certificates.html</Homepage>
             <Packager>
@@ -7911,6 +7990,125 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>libX11</Name>
+            <Homepage>http://www.x.org/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>MIT</License>
+            <IsA>library</IsA>
+            <PartOf>system.base</PartOf>
+            <Summary xml:lang="fr">Librairie X11 de X.Org.</Summary>
+            <Summary xml:lang="en">X.Org X11 library</Summary>
+            <Summary xml:lang="tr">X.Org X11 kitaplığı</Summary>
+            <Summary xml:lang="de">X.Org X11 Bibliothek</Summary>
+            <Description xml:lang="en">Core X11 protocol client library.</Description>
+            <Archive type="tarbz2" sha1sum="0dd74854e6f6bb8a322e88ba3e89f87c3dcf9e08">mirrors://xorg/individual/lib/libX11-1.6.2.tar.bz2</Archive>
+            <BuildDependencies>
+                <Dependency>libxcb-devel</Dependency>
+                <Dependency>xorg-proto</Dependency>
+                <Dependency>xtrans</Dependency>
+            </BuildDependencies>
+            <Patches>
+                <Patch level="1">fix-segfault.diff</Patch>
+                <Patch level="1">fix-null-pointer.patch</Patch>
+            </Patches>
+            <SourceURI>system/base/libX11.orig/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>libX11</Name>
+            <RuntimeDependencies>
+                <Dependency>libxcb</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library">/usr/lib/libX11*</Path>
+                <Path fileType="data">/usr/lib/X11</Path>
+                <Path fileType="data">/usr/share/X11</Path>
+                <Path fileType="doc">/usr/share/doc/libX11</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libX11-devel</Name>
+            <Summary xml:lang="en">Development files for X11 library</Summary>
+            <Summary xml:lang="tr">libX11 için geliştirme dosyaları</Summary>
+            <PartOf>system.devel</PartOf>
+            <RuntimeDependencies>
+                <Dependency release="6">libX11</Dependency>
+                <Dependency>libxcb-devel</Dependency>
+                <Dependency>xorg-proto</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="header">/usr/include/X11</Path>
+                <Path fileType="data">/usr/lib/pkgconfig</Path>
+                <Path fileType="data">/usr/lib32/pkgconfig</Path>
+                <Path fileType="man">/usr/share/man</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libX11-32bit</Name>
+            <Summary xml:lang="en">32-bit shared libraries for libX11</Summary>
+            <Summary xml:lang="tr">libX11 için 32-bit paylaşımlı kitaplıklar</Summary>
+            <PartOf>emul32</PartOf>
+            <BuildType>emul32</BuildType>
+            <BuildDependencies>
+                <Dependency>libxcb-32bit</Dependency>
+            </BuildDependencies>
+            <RuntimeDependencies>
+                <Dependency release="6">libX11</Dependency>
+                <Dependency>libxcb-32bit</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library">/usr/lib32</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="6">
+                <Date>2014-05-11</Date>
+                <Version>1.6.2</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="5">
+                <Date>2013-10-07</Date>
+                <Version>1.6.2</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
+                <Date>2013-09-12</Date>
+                <Version>1.6.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2013-07-30</Date>
+                <Version>1.6.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-06-21</Date>
+                <Version>1.6.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2012-11-24</Date>
+                <Version>1.5.0</Version>
+                <Comment>First release</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>python-pyliblzma</Name>
             <Homepage>http://pypi.python.org/pypi/pyliblzma</Homepage>
             <Packager>
@@ -8030,6 +8228,85 @@
             <Update release="1">
                 <Date>2012-08-23</Date>
                 <Version>3.0.4</Version>
+                <Comment>First release</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>libXdmcp</Name>
+            <Homepage>http://x.org/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>MIT</License>
+            <IsA>library</IsA>
+            <PartOf>system.base</PartOf>
+            <Summary xml:lang="fr">Librairie Xdmcp de X.Org.</Summary>
+            <Summary xml:lang="en">X.Org Xdmcp library</Summary>
+            <Summary xml:lang="tr">X.Org Xdmcp kitaplığı.</Summary>
+            <Summary xml:lang="de">X.Org Xdmcp Bibliothek</Summary>
+            <Description xml:lang="en">LibXdmcp is the X Display Manager Control Protocol library.</Description>
+            <Description xml:lang="tr">LibXdmcp, X Ekran Yöneticisi Denetim Protokolü kitaplığıdır.</Description>
+            <Archive type="tarbz2" sha1sum="3b63e8fc1600c51d9897d017da190fc6c16245b6">http://xorg.freedesktop.org/archive/individual/lib/libXdmcp-1.1.1.tar.bz2</Archive>
+            <SourceURI>system/base/libXdmcp.orig/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>libXdmcp</Name>
+            <Files>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libXdmcp-devel</Name>
+            <Summary xml:lang="en">Development files for libXdmcp</Summary>
+            <Summary xml:lang="tr">libXdmcp için geliştirme dosyaları</Summary>
+            <PartOf>system.devel</PartOf>
+            <RuntimeDependencies>
+                <Dependency release="3">libXdmcp</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="header">/usr/include/X11</Path>
+                <Path fileType="data">/usr/lib/pkgconfig</Path>
+                <Path fileType="data">/usr/lib32/pkgconfig</Path>
+                <Path fileType="doc">/usr/share/doc/*/*.xml</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libXdmcp-32bit</Name>
+            <Summary xml:lang="en">32-bit shared libraries for libXdmcp</Summary>
+            <Summary xml:lang="tr">libXdmcp için 32-bit paylaşımlı kitaplıklar</Summary>
+            <PartOf>emul32</PartOf>
+            <BuildType>emul32</BuildType>
+            <RuntimeDependencies>
+                <Dependency release="3">libXdmcp</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library">/usr/lib32</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="3">
+                <Date>2014-05-11</Date>
+                <Version>1.1.1</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-10-08</Date>
+                <Version>1.1.1</Version>
+                <Comment>Rebuild, clean actions.py.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2012-08-23</Date>
+                <Version>1.1.1</Version>
                 <Comment>First release</Comment>
                 <Name>PisiLinux Community</Name>
                 <Email>admins@pisilinux.org</Email>
@@ -8297,6 +8574,289 @@
                 <Version>4.2.1</Version>
                 <Comment>First release</Comment>
                 <Name>Pisi Linux Admins</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>udev</Name>
+            <Homepage>http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>GPLv2</License>
+            <IsA>app:console</IsA>
+            <PartOf>system.base</PartOf>
+            <Summary xml:lang="en">Linux dynamic and persistent device naming support</Summary>
+            <Summary xml:lang="tr">Linux dinamik ve sürekli aygıt isimlendirme desteği (kernel dışındaki devfs)</Summary>
+            <Description xml:lang="fr">udev permet aux utilisateurs Linux d&apos;avoir un répertoire /dev dynamique et donne la possibilité d&apos;avoir des noms de périphériques persistants.</Description>
+            <Description xml:lang="en">udev allows Linux users to have a dynamic /dev directory and it provides the ability to have persistent device names.</Description>
+            <Description xml:lang="tr">udev linux kullanıcılarının dinamik /dev dizinine sahip olmalarına olanek verir ve tutarlı cihaz isimleri almasını sağlar.</Description>
+            <Description xml:lang="de">udev ermöglicht Linux Benutzern ein dynamisches /dev Verzeichnis und beständige Gerätenamen</Description>
+            <Archive type="tarxz" sha1sum="3436d5829876010e0747b6bf6e7dcbe365e2e5ef">http://www.freedesktop.org/software/systemd/systemd-214.tar.xz</Archive>
+            <BuildDependencies>
+                <Dependency>glib2-devel</Dependency>
+                <Dependency>gperf</Dependency>
+                <Dependency>acl-devel</Dependency>
+                <Dependency>libkmod-devel</Dependency>
+                <Dependency>libutil-linux-devel</Dependency>
+            </BuildDependencies>
+            <SourceURI>system/base/udev/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>udev</Name>
+            <RuntimeDependencies>
+                <Dependency release="16">libudev</Dependency>
+                <Dependency>acl</Dependency>
+                <Dependency>libkmod</Dependency>
+                <Dependency>libutil-linux</Dependency>
+                <Dependency>util-linux</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="executable">/bin</Path>
+                <Path fileType="executable">/sbin</Path>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="executable">/usr/sbin</Path>
+                <Path fileType="executable">/lib/udev</Path>
+                <Path fileType="library">/lib</Path>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="config">/etc</Path>
+                <Path fileType="config">/usr/lib/tmpfiles.d/udev.conf</Path>
+                <Path fileType="data">/run/udev</Path>
+                <Path fileType="data">/lib/systemd</Path>
+                <Path fileType="data">/etc/udev/rules.d</Path>
+                <Path fileType="data">/lib/udev/rules.d</Path>
+                <Path fileType="data">/usr/share/dbus-1/services</Path>
+                <Path fileType="data">/usr/share/bash-completion/completions</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+                <Path fileType="man">/usr/share/man</Path>
+            </Files>
+            <Provides>
+                <COMAR script="package.py">System.Package</COMAR>
+            </Provides>
+            <AdditionalFiles>
+                <AdditionalFile target="/usr/lib/tmpfiles.d/udev.conf" permission="0644" owner="root">tmpfiles.conf</AdditionalFile>
+            </AdditionalFiles>
+        </Package>
+        <Package>
+            <Name>udev-devel</Name>
+            <Summary xml:lang="en">Development files for udev</Summary>
+            <PartOf>system.devel</PartOf>
+            <RuntimeDependencies>
+                <Dependency release="16">udev</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="header">/usr/include/systemd/sd-daemon.h</Path>
+                <Path fileType="data">/usr/lib32/pkgconfig/libsystemd-daemon.pc</Path>
+                <Path fileType="data">/usr/lib/pkgconfig/libsystemd-daemon.pc</Path>
+                <Path fileType="data">/usr/share/pkgconfig/udev.pc</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libudev</Name>
+            <Summary xml:lang="en">Dynamic library to access udev device information</Summary>
+            <Summary xml:lang="tr">udev aygıt bilgilerini sunan kitaplık</Summary>
+            <Files>
+                <Path fileType="library">/usr/lib/libudev*</Path>
+                <Path fileType="library">/lib/libudev*</Path>
+            </Files>
+            <Conflicts>
+                <Package releaseTo="3">udev</Package>
+            </Conflicts>
+        </Package>
+        <Package>
+            <Name>libudev-devel</Name>
+            <Summary xml:lang="en">Development files for libudev</Summary>
+            <Summary xml:lang="tr">libudev için geliştirme dosyaları</Summary>
+            <PartOf>system.devel</PartOf>
+            <RuntimeDependencies>
+                <Dependency release="16">udev</Dependency>
+                <Dependency release="16">libudev</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="header">/usr/include/libudev.h</Path>
+                <Path fileType="data">/usr/lib/pkgconfig/libudev.pc</Path>
+                <Path fileType="data">/usr/lib32/pkgconfig/libudev.pc</Path>
+                <Path fileType="data">/usr/share/gtk-doc/html/libudev</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libgudev1</Name>
+            <Summary xml:lang="en">Libraries for adding libudev support to applications that use glib</Summary>
+            <Summary xml:lang="tr">glib kullanan uygulamalara libudev desteği eklemek için kullanılan kitaplık</Summary>
+            <RuntimeDependencies>
+                <Dependency>glib2</Dependency>
+                <Dependency>libudev</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library">/usr/lib/libgudev*</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libgudev1-devel</Name>
+            <Summary xml:lang="en">Development files for libgudev1</Summary>
+            <Summary xml:lang="tr">libgudev1 için geliştirme dosyaları</Summary>
+            <PartOf>system.devel</PartOf>
+            <RuntimeDependencies>
+                <Dependency>libudev-devel</Dependency>
+                <Dependency release="16">libgudev1</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="header">/usr/include/gudev-1.0</Path>
+                <Path fileType="data">/usr/lib/pkgconfig/gudev-1.0*</Path>
+                <Path fileType="data">/usr/lib32/pkgconfig/gudev-1.0*</Path>
+                <Path fileType="data">/usr/share/gir-1.0/GUdev-1.0.gir</Path>
+                <Path fileType="doc">/usr/share/gtk-doc/html/gudev</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libudev-32bit</Name>
+            <Summary xml:lang="en">32-bit shared libraries for libudev</Summary>
+            <Summary xml:lang="tr">udev için 32-bit paylaşımlı kitaplıklar</Summary>
+            <PartOf>emul32</PartOf>
+            <BuildType>emul32</BuildType>
+            <BuildDependencies>
+                <Dependency>libkmod-32bit</Dependency>
+                <Dependency>libutil-linux-32bit</Dependency>
+            </BuildDependencies>
+            <RuntimeDependencies>
+                <Dependency release="16">libudev</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library">/usr/lib32/libudev*</Path>
+                <Path fileType="library">/lib32/libudev*</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libgudev1-32bit</Name>
+            <Summary xml:lang="en">32-bit shared libraries for libgudev1</Summary>
+            <PartOf>emul32</PartOf>
+            <BuildType>emul32</BuildType>
+            <BuildDependencies>
+                <Dependency>glib2-32bit</Dependency>
+            </BuildDependencies>
+            <RuntimeDependencies>
+                <Dependency release="16">libgudev1</Dependency>
+                <Dependency release="16">libudev-32bit</Dependency>
+                <Dependency>glib2-32bit</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library">/usr/lib32/libgudev*</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="16">
+                <Date>2015-05-01</Date>
+                <Version>214</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="15">
+                <Date>2014-05-11</Date>
+                <Version>212</Version>
+                <Comment>Add upstream patches.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="14">
+                <Date>2014-03-28</Date>
+                <Version>212</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="13">
+                <Date>2014-03-12</Date>
+                <Version>211</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="12">
+                <Date>2014-03-07</Date>
+                <Version>210</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="11">
+                <Date>2014-02-26</Date>
+                <Version>210</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="10">
+                <Date>2014-02-20</Date>
+                <Version>209</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="9">
+                <Date>2014-01-11</Date>
+                <Version>208</Version>
+                <Comment>Add tmpfiles.conf, git updates.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="8">
+                <Date>2013-10-30</Date>
+                <Version>208</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="7">
+                <Date>2013-09-10</Date>
+                <Version>206</Version>
+                <Comment>Add /run/udev directory.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="6">
+                <Date>2013-08-13</Date>
+                <Version>206</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="5">
+                <Date>2013-07-28</Date>
+                <Version>204</Version>
+                <Comment>Fix pc files for emul32.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
+                <Date>2013-06-13</Date>
+                <Version>204</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2013-03-30</Date>
+                <Version>200</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-01-24</Date>
+                <Version>197</Version>
+                <Comment>Version bump, add emul32</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2012-10-11</Date>
+                <Version>194</Version>
+                <Comment>First release</Comment>
+                <Name>Erdem Artan</Name>
                 <Email>admins@pisilinux.org</Email>
             </Update>
         </History>
@@ -11960,6 +12520,7 @@
             <BuildDependencies>
                 <Dependency>dbus-devel</Dependency>
                 <Dependency>python-devel</Dependency>
+                <Dependency>cmake</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">run_dir.patch</Patch>
@@ -11974,6 +12535,7 @@
                 <Dependency>dbus</Dependency>
                 <Dependency>python</Dependency>
                 <Dependency>polkit</Dependency>
+                <Dependency>dbus-python</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin</Path>
@@ -11990,7 +12552,7 @@
         </Package>
         <History>
             <Update release="4">
-                <Date>2015-04-01</Date>
+                <Date>2015-04-22</Date>
                 <Version>3.0.3</Version>
                 <Comment>Fix run dir path.</Comment>
                 <Name>Marcin Bojara</Name>
@@ -12614,6 +13176,123 @@
             <Update release="1">
                 <Date>2012-12-15</Date>
                 <Version>3.7.14</Version>
+                <Comment>First release</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>libxcb</Name>
+            <Homepage>http://xcb.freedesktop.org/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>MIT</License>
+            <IsA>library</IsA>
+            <PartOf>system.base</PartOf>
+            <Summary xml:lang="en">The X protocol C-language Binding (XCB)</Summary>
+            <Summary xml:lang="tr">X protokolü için C dili bağlayıcısı (XCB)</Summary>
+            <Description xml:lang="en">The X protocol C-language Binding (XCB) is a replacement for Xlib featuring a small footprint, latency hiding, direct access to the protocol, improved threading support, and extensibility.</Description>
+            <Archive type="tarbz2" sha1sum="8343b417d7eeb2a2c6b6c4a87a03a4fd0fc65c46">http://xcb.freedesktop.org/dist/libxcb-1.11.tar.bz2</Archive>
+            <BuildDependencies>
+                <Dependency>libXau-devel</Dependency>
+                <Dependency>libXdmcp-devel</Dependency>
+                <Dependency>libxslt</Dependency>
+                <Dependency versionFrom="1.11">xcb-proto</Dependency>
+            </BuildDependencies>
+            <SourceURI>system/base/libxcb.orig/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>libxcb</Name>
+            <RuntimeDependencies>
+                <Dependency>libXau</Dependency>
+                <Dependency>libXdmcp</Dependency>
+                <Dependency>glibc</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="man">/usr/share/man</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libxcb-devel</Name>
+            <Summary xml:lang="en">Development files for libxcb</Summary>
+            <Summary xml:lang="tr">libxcb için geliştirme dosyaları</Summary>
+            <PartOf>system.devel</PartOf>
+            <RuntimeDependencies>
+                <Dependency release="6">libxcb</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="header">/usr/include/xcb</Path>
+                <Path fileType="data">/usr/lib/pkgconfig</Path>
+                <Path fileType="data">/usr/lib32/pkgconfig</Path>
+            </Files>
+            <AdditionalFiles>
+                <AdditionalFile target="/usr/lib/pkgconfig/pthread-stubs.pc" permission="0644" owner="root">pthread-stubs.pc</AdditionalFile>
+            </AdditionalFiles>
+        </Package>
+        <Package>
+            <Name>libxcb-32bit</Name>
+            <Summary xml:lang="en">32-bit shared libraries for libxcb</Summary>
+            <Summary xml:lang="tr">libxcb için 32-bit paylaşımlı kitaplıklar</Summary>
+            <PartOf>emul32</PartOf>
+            <BuildType>emul32</BuildType>
+            <BuildDependencies>
+                <Dependency>libXau-32bit</Dependency>
+                <Dependency>libXdmcp-32bit</Dependency>
+            </BuildDependencies>
+            <RuntimeDependencies>
+                <Dependency release="6">libxcb</Dependency>
+                <Dependency>libXau-32bit</Dependency>
+                <Dependency>libXdmcp-32bit</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library">/usr/lib32</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="6">
+                <Date>2014-09-02</Date>
+                <Version>1.11</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="5">
+                <Date>2014-05-11</Date>
+                <Version>1.10</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
+                <Date>2014-03-07</Date>
+                <Version>1.10</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2013-10-08</Date>
+                <Version>1.9.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-07-28</Date>
+                <Version>1.9.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2012-11-18</Date>
+                <Version>1.9</Version>
                 <Comment>First release</Comment>
                 <Name>Erdinç Gültekin</Name>
                 <Email>admins@pisilinux.org</Email>
@@ -14882,7 +15561,6 @@
             <RuntimeDependencies>
                 <Dependency>expat</Dependency>
                 <Dependency>libcap-ng</Dependency>
-                <Dependency>libX11</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="config">/etc/dbus-1</Path>
@@ -15363,6 +16041,82 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>xtrans</Name>
+            <Homepage>http://www.x.org/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>MIT</License>
+            <IsA>library</IsA>
+            <PartOf>system.devel</PartOf>
+            <Summary xml:lang="fr">Librairie trans de X.Org.</Summary>
+            <Summary xml:lang="en">X.Org trans library</Summary>
+            <Summary xml:lang="tr">X.Org trans kitaplığı.</Summary>
+            <Summary xml:lang="de">X.Org trans Bibliothek</Summary>
+            <Description xml:lang="en">xtrans includes a number of routines to make X implementations transport-independent.</Description>
+            <Description xml:lang="tr">xtrans, X gerçeklemelerini taşıma türünden bağımsız yapmak için kullanılan bazı yordamları içerir.</Description>
+            <Archive type="tarbz2" sha1sum="2d3ae1839d841f568bc481c6116af7d2a9f9ba59">mirrors://xorg/individual/lib/xtrans-1.3.5.tar.bz2</Archive>
+            <BuildDependencies>
+                <Dependency>util-macros</Dependency>
+            </BuildDependencies>
+            <SourceURI>system/devel/xtrans/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>xtrans</Name>
+            <Files>
+                <Path fileType="header">/usr/include/X11/Xtrans</Path>
+                <Path fileType="data">/usr/share/aclocal</Path>
+                <Path fileType="data">/usr/share/pkgconfig</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="6">
+                <Date>2015-05-05</Date>
+                <Version>1.3.5</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="5">
+                <Date>2014-07-11</Date>
+                <Version>1.3.4</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
+                <Date>2014-05-11</Date>
+                <Version>1.3.3</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2014-02-05</Date>
+                <Version>1.3.3</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2014-01-17</Date>
+                <Version>1.3.2</Version>
+                <Comment>Version bump</Comment>
+                <Name>Richard de Bruin</Name>
+                <Email>richdb@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2012-08-19</Date>
+                <Version>1.2.7</Version>
+                <Comment>First release</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>intltool</Name>
             <Homepage>http://www.gnome.org/</Homepage>
             <Packager>
@@ -15415,6 +16169,151 @@
             <Update release="1">
                 <Date>2012-09-19</Date>
                 <Version>0.50.2</Version>
+                <Comment>First release</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>cmake</Name>
+            <Homepage>http://www.cmake.org</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>BSD</License>
+            <IsA>app:console</IsA>
+            <PartOf>system.devel</PartOf>
+            <Summary xml:lang="en">Cross-platform, open-source make system</Summary>
+            <Summary xml:lang="tr">Cmake, açık kaynak kodlu ve birden fazla platformda çalışan bir &apos;make&apos; sistemidir.</Summary>
+            <Description xml:lang="fr">CMake, système make open-source et multi-plateforme. CMake est utilisé pour contrôler le processus de compilation de logiciel en utilisant une plate-forme de fichiers de configuration simple et indépendante de compilateur. CMake génère des makefiles et un environnement de travail natifs pouvant être utilisés dans l&apos;environnement du compilateur de votre choix.</Description>
+            <Description xml:lang="en">CMake, the cross-platform, open-source make system. CMake is used to control the software compilation process using simple platform and compiler independent configuration files. CMake generates native makefiles and workspaces that can be used in the compiler environment of your choice.</Description>
+            <Description xml:lang="tr">Cmake, açık kaynak kodlu ve birden fazla platformda çalışan bir &apos;make&apos; sistemidir. Yazılım derleme sürecini kontrol etmek için kullanılan CMake, derleyici bağımsız yapılandırma dosyalarının oluşturulmasını sağlar.</Description>
+            <Archive type="targz" sha1sum="d22be01828508027617494c8b59d5999d4c1490e">http://www.cmake.org/files/v3.2/cmake-3.2.2.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>curl-devel</Dependency>
+                <Dependency>expat-devel</Dependency>
+                <Dependency>libarchive-devel</Dependency>
+                <Dependency>ncurses-devel</Dependency>
+                <Dependency>zlib-devel</Dependency>
+            </BuildDependencies>
+            <SourceURI>system/devel/cmake/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>cmake</Name>
+            <RuntimeDependencies>
+                <Dependency>curl</Dependency>
+                <Dependency>expat</Dependency>
+                <Dependency>libarchive</Dependency>
+                <Dependency>libgcc</Dependency>
+                <Dependency>ncurses</Dependency>
+                <Dependency>zlib</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="data">/usr/share/cmake</Path>
+                <Path fileType="data">/usr/share/aclocal/</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+                <Path fileType="man">/usr/share/man</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="14">
+                <Date>2015-04-17</Date>
+                <Version>3.2.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="13">
+                <Date>2015-04-04</Date>
+                <Version>3.2.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="12">
+                <Date>2015-02-27</Date>
+                <Version>3.1.3</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Stefan Gronewold(groni)</Name>
+                <Email>groni@pisilinux.org</Email>
+            </Update>
+            <Update release="11">
+                <Date>2014-12-17</Date>
+                <Version>3.0.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="10">
+                <Date>2014-08-23</Date>
+                <Version>3.0.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="9">
+                <Date>2014-05-11</Date>
+                <Version>2.8.12.2</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="8">
+                <Date>2014-03-29</Date>
+                <Version>2.8.12.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="7">
+                <Date>2013-12-11</Date>
+                <Version>2.8.12.1</Version>
+                <Comment>Fix finding freetype issue.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="6">
+                <Date>2013-11-24</Date>
+                <Version>2.8.12.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="5">
+                <Date>2013-10-23</Date>
+                <Version>2.8.12</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
+                <Date>2013-08-28</Date>
+                <Version>2.8.11.2</Version>
+                <Comment>Clean cmake.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2013-08-01</Date>
+                <Version>2.8.10.2</Version>
+                <Comment>Fix deps.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-02-17</Date>
+                <Version>2.8.10.2</Version>
+                <Comment>Version bump</Comment>
+                <Name>Ertan Güven</Name>
+                <Email>ertan@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2012-12-01</Date>
+                <Version>2.8.10</Version>
                 <Comment>First release</Comment>
                 <Name>Yusuf Aydemir</Name>
                 <Email>yusuf.aydemir@pisilinux.org</Email>
@@ -16702,6 +17601,131 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>xorg-proto</Name>
+            <Homepage>http://x.org/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>MIT</License>
+            <IsA>library</IsA>
+            <PartOf>system.devel</PartOf>
+            <Summary xml:lang="fr">Entêtes de protocole de X.Org.</Summary>
+            <Summary xml:lang="en">X.Org Protocol Headers</Summary>
+            <Summary xml:lang="tr">X.Org Protokol Başlıkları</Summary>
+            <Summary xml:lang="de">X.Org Protokoll Header</Summary>
+            <Description xml:lang="en">This package includes the protocol headers needed for X11 development.</Description>
+            <Description xml:lang="tr">Bu paket, X11 geliştirme için gerekli protokol başlıklarını içerir.</Description>
+            <Archive type="tarbz2" sha1sum="ef1765eeb5e9e38d080225fe6a64ed7cd2984b46">mirrors://xorg/individual/proto/bigreqsproto-1.1.2.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="432371cdc464881029c3f39f9bf81cc80a484e54">mirrors://xorg/individual/proto/presentproto-1.0.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="aa7b5abcfd5bbfad7cb681ce89dc1d6e381e3044">mirrors://xorg/individual/proto/compositeproto-0.4.2.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="bd0f0f4dc8f37eaabd9279d10fe2889710507358">mirrors://xorg/individual/proto/damageproto-1.2.1.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="3b8b273b8ef3d8dbab998df9ec1dddf99edf4d91">mirrors://xorg/individual/proto/dmxproto-2.3.1.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="2bc4e8f00778b1f3fe58b4c4f93607ac2adafbbf">mirrors://xorg/individual/proto/dri2proto-2.8.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="1007eaa2f83022653a224f7d2e676ea51cba2f2b">mirrors://xorg/individual/proto/dri3proto-1.0.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="ab605af5da8c98c0c2f8b2c578fed7c864ee996a">mirrors://xorg/individual/proto/fixesproto-5.0.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="28c108bd6438c332122c10871c1fc6415591755f">mirrors://xorg/individual/proto/fontsproto-2.1.3.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="20e061c463bed415051f0f89e968e331a2078551">mirrors://xorg/individual/proto/glproto-1.4.17.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="126b6ad57b5432e154485f900920765eae8fda45">mirrors://xorg/individual/proto/inputproto-2.3.1.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="a2cc82357c22a1f4d6243017982c32703c95575c">mirrors://xorg/individual/proto/kbproto-1.0.6.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="4ddb7781ebc2418d681a6f5e16d777aed56ea35e">mirrors://xorg/individual/proto/printproto-1.0.5.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="65d2fc4440adf1557cde2b36901a3de21ab189c1">mirrors://xorg/individual/proto/randrproto-1.4.0.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="1f48c4b0004d8b133efd0498e8d88d68d3b9199c">mirrors://xorg/individual/proto/recordproto-1.14.2.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="7ae9868a358859fe539482b02414aa15c2d8b1e4">mirrors://xorg/individual/proto/renderproto-0.11.1.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="9ff9bb9243b0474330959dc3853973523c9dd9ce">mirrors://xorg/individual/proto/resourceproto-1.2.0.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="640a2cbef5893aacda74799e6fa4d973e629b753">mirrors://xorg/individual/proto/scrnsaverproto-1.2.2.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="aa60e3b93c6a78ad03f1c502b910e7c45faaedbc">mirrors://xorg/individual/proto/videoproto-2.3.2.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="59ae9ec6414964440bf654b207618e5dd66a32fb">mirrors://xorg/individual/proto/xcmiscproto-1.2.2.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="b8d736342dcb73b71584d99a1cb9806d93c25ff8">mirrors://xorg/individual/proto/xextproto-7.3.0.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="312a2ea708b257520c1af4393b69d73a393a478f">mirrors://xorg/individual/proto/xf86bigfontproto-1.2.0.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="97a06120e7195c968875e8ba42e82c90ab54948b">mirrors://xorg/individual/proto/xf86dgaproto-2.1.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="23e861f40ba0f0cbbfd7db7ba2ef623762ffca17">mirrors://xorg/individual/proto/xf86driproto-2.1.1.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="11d54c3210887631ea71e8f8030a77692e964fc4">mirrors://xorg/individual/proto/xf86vidmodeproto-2.3.1.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="818bffc16139d6e3de4344c83f00c495d3536753">mirrors://xorg/individual/proto/xineramaproto-1.2.1.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="b34e7438623c8016cc8338549e5fcc29e2f64034">mirrors://xorg/individual/proto/xproto-7.0.27.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="4abb036371670ecc25d32e48b3277fe203ae5203">mirrors://xorg/individual/proto/xproxymanagementprotocol-1.0.3.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="90f8600fb06c0c347551ad7096ef50492d86ba45">https://github.com/bbidulock/vncproto/releases/download/vncproto-1.1/vncproto-1.1.tar.bz2</Archive>
+            <BuildDependencies>
+                <Dependency>util-macros</Dependency>
+                <Dependency>libxslt</Dependency>
+            </BuildDependencies>
+            <Patches>
+                <Patch level="1">docdir.patch</Patch>
+            </Patches>
+            <SourceURI>system/devel/xorg-proto/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>xorg-proto</Name>
+            <Files>
+                <Path fileType="header">/usr/include</Path>
+                <Path fileType="data">/usr/lib/pkgconfig</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+                <Path fileType="man">/usr/share/man/man7/Xprint.7</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="8">
+                <Date>2015-01-27</Date>
+                <Version>7.6</Version>
+                <Comment>Update xproto</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="7">
+                <Date>2014-09-20</Date>
+                <Version>7.6</Version>
+                <Comment>Update vncproto, fix dependencies.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="6">
+                <Date>2014-08-31</Date>
+                <Version>7.6</Version>
+                <Comment>Update.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="5">
+                <Date>2014-05-11</Date>
+                <Version>7.6</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
+                <Date>2014-04-15</Date>
+                <Version>7.6</Version>
+                <Comment>xproto fontsproto version bump</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2014-03-07</Date>
+                <Version>7.6</Version>
+                <Comment>add presentproto dri3proto</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-04-13</Date>
+                <Version>7.6</Version>
+                <Comment>Update:
+                     xproto to version 7.0.24
+                     inputproto to version 2.3 (needed for xorg-server-0.14.0)</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2012-10-15</Date>
+                <Version>7.6</Version>
+                <Comment>First release</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>libmpc</Name>
             <Homepage>http://www.multiprecision.org/</Homepage>
             <Packager>
@@ -16784,6 +17808,213 @@
             <Update release="1">
                 <Date>2012-09-09</Date>
                 <Version>1.0.1</Version>
+                <Comment>First release</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>libarchive</Name>
+            <Homepage>http://code.google.com/p/libarchive/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>BSD</License>
+            <IsA>library</IsA>
+            <PartOf>system.devel</PartOf>
+            <Summary xml:lang="en">Library for reading and writing streaming archives</Summary>
+            <Summary xml:lang="tr">Birçok farklı akış arşiv formatını yaratan ve okuyan programlama kitaplığı</Summary>
+            <Description xml:lang="en">libarchive includes a library and command-line tools for reading and writing tar, cpio, zip, ISO, and other archive formats.</Description>
+            <Description xml:lang="tr">libarchive, tar, cpio, zip, ISO ve diğer arşiv biçimlerini okumak ve yazmak için bir kitaplık ve komut satırı araçları içerir.</Description>
+            <Archive type="targz" sha1sum="6a991777ecb0f890be931cec4aec856d1a195489">http://www.libarchive.org/downloads/libarchive-3.1.2.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>acl-devel</Dependency>
+                <Dependency>attr-devel</Dependency>
+                <Dependency>bzip2</Dependency>
+                <Dependency>libxml2-devel</Dependency>
+                <Dependency>openssl-devel</Dependency>
+                <Dependency>xz-devel</Dependency>
+                <Dependency>lzo-devel</Dependency>
+                <Dependency>zlib-devel</Dependency>
+            </BuildDependencies>
+            <SourceURI>system/devel/libarchive/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>libarchive</Name>
+            <RuntimeDependencies>
+                <Dependency>lzo</Dependency>
+                <Dependency>nettle</Dependency>
+                <Dependency>xz</Dependency>
+                <Dependency>acl</Dependency>
+                <Dependency>zlib</Dependency>
+                <Dependency>attr</Dependency>
+                <Dependency>bzip2</Dependency>
+                <Dependency>libxml2</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="man">/usr/share/man</Path>
+                <Path fileType="doc">/usr/share/doc/libarchive</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libarchive-devel</Name>
+            <Summary xml:lang="en">Development files for libarchive</Summary>
+            <Summary xml:lang="tr">libarchive için geliştirme dosyaları</Summary>
+            <RuntimeDependencies>
+                <Dependency release="6">libarchive</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="header">/usr/include</Path>
+                <Path fileType="data">/usr/lib/pkgconfig</Path>
+                <Path fileType="man">/usr/share/man/man3</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="6">
+                <Date>2014-05-11</Date>
+                <Version>3.1.2</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="5">
+                <Date>2014-01-28</Date>
+                <Version>3.1.2</Version>
+                <Comment>unused fix.</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
+                <Date>2013-08-28</Date>
+                <Version>3.1.2</Version>
+                <Comment>Clean libarchive.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2013-08-01</Date>
+                <Version>3.1.2</Version>
+                <Comment>Fix deps.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-02-18</Date>
+                <Version>3.1.2</Version>
+                <Comment>Version bump</Comment>
+                <Name>Ertan Güven</Name>
+                <Email>ertan@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2012-08-19</Date>
+                <Version>3.0.4</Version>
+                <Comment>First release</Comment>
+                <Name>Ramazan Utku</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>libxslt</Name>
+            <Homepage>http://xmlsoft.org/XSLT/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>MIT</License>
+            <IsA>library</IsA>
+            <PartOf>system.devel</PartOf>
+            <Summary xml:lang="en">XSLT libraries and tools</Summary>
+            <Summary xml:lang="tr">XSLT kitaplığı ve araçları</Summary>
+            <Description xml:lang="fr">Libxslt est la librairie XSLT C développée pour le projet GNOME. XSLT étant lui-même un langage XML permettant de définir une transformation de contenu XML.</Description>
+            <Description xml:lang="en">Libxslt is the XSLT C library developed for the GNOME project. XSLT itself is a an XML language to define transformation for XML.</Description>
+            <Description xml:lang="tr">Libxslt, GNOME projesi için geliştirilen XSLT C kitaplığıdır. XSLT&apos;nin kendisi, XML oluşumunu tanımlayan bir XML dilidir.</Description>
+            <Archive type="targz" sha1sum="4df177de629b2653db322bfb891afa3c0d1fa221">ftp://ftp.xmlsoft.org/libxml2/libxslt-1.1.28.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>libxml2-devel</Dependency>
+                <Dependency>libgcrypt-devel</Dependency>
+            </BuildDependencies>
+            <SourceURI>system/devel/libxslt/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>libxslt-docs</Name>
+            <Summary xml:lang="tr">libxslt için belgelendirme dosyaları</Summary>
+            <RuntimeDependencies>
+                <Dependency release="3">libxslt</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libxslt-devel</Name>
+            <Summary xml:lang="tr">libxslt için geliştirme dosyaları</Summary>
+            <RuntimeDependencies>
+                <Dependency release="3">libxslt</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="executable">/usr/bin/*-config</Path>
+                <Path fileType="header">/usr/include</Path>
+                <Path fileType="data">/usr/lib/pkgconfig</Path>
+                <Path fileType="data">/usr/lib32/pkgconfig</Path>
+                <Path fileType="data">/usr/share/aclocal</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libxslt</Name>
+            <RuntimeDependencies>
+                <Dependency>libgcrypt</Dependency>
+                <Dependency>libxml2</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="man">/usr/share/man</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libxslt-32bit</Name>
+            <Summary xml:lang="en">32-bit shared libraries for libxslt</Summary>
+            <Summary xml:lang="tr">libxslt için 32-bit paylaşımlı kitaplıklar</Summary>
+            <PartOf>emul32</PartOf>
+            <BuildType>emul32</BuildType>
+            <BuildDependencies>
+                <Dependency>libxml2-32bit</Dependency>
+                <Dependency>libgcrypt-32bit</Dependency>
+            </BuildDependencies>
+            <RuntimeDependencies>
+                <Dependency release="3">libxslt</Dependency>
+                <Dependency>libxml2-32bit</Dependency>
+                <Dependency>libgcrypt-32bit</Dependency>
+                <Dependency>glibc-32bit</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library">/usr/lib32</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="3">
+                <Date>2014-05-20</Date>
+                <Version>1.1.28</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-08-31</Date>
+                <Version>1.1.28</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2012-09-15</Date>
+                <Version>1.1.27</Version>
                 <Comment>First release</Comment>
                 <Name>Serdar Soytetir</Name>
                 <Email>kaptan@pisilinux.org</Email>
@@ -17309,6 +18540,80 @@
                 <Comment>First release</Comment>
                 <Name>Yusuf Aydemir</Name>
                 <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>xcb-proto</Name>
+            <Homepage>http://xcb.freedesktop.org/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>MIT</License>
+            <IsA>data</IsA>
+            <PartOf>system.devel</PartOf>
+            <Summary xml:lang="en">XCB protocol descriptions</Summary>
+            <Summary xml:lang="tr">XCB protokol tanımlamaları</Summary>
+            <Description xml:lang="en">XCB is a project to enable efficient language bindings to the X11 protocol. This package contains the protocol descriptions themselves. Language bindings use these protocol descriptions to generate code for marshalling the protocol.</Description>
+            <Archive type="tarbz2" sha1sum="608bd60663e223464d38acec0183ddb827776401">http://xcb.freedesktop.org/dist/xcb-proto-1.11.tar.bz2</Archive>
+            <BuildDependencies>
+                <Dependency>libxml2</Dependency>
+            </BuildDependencies>
+            <SourceURI>system/devel/xcb-proto/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>xcb-proto</Name>
+            <Files>
+                <Path fileType="data">/usr/lib/pkgconfig</Path>
+                <Path fileType="library">/usr/lib/python*</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+                <Path fileType="data">/usr/share/xcb</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="6">
+                <Date>2014-09-02</Date>
+                <Version>1.11</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="5">
+                <Date>2014-05-11</Date>
+                <Version>1.10</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
+                <Date>2014-02-03</Date>
+                <Version>1.10</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2013-10-22</Date>
+                <Version>1.8</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2012-11-18</Date>
+                <Version>1.8</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2012-11-18</Date>
+                <Version>1.8</Version>
+                <Comment>First release</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>admins@pisilinux.org</Email>
             </Update>
         </History>
     </SpecFile>
@@ -18309,6 +19614,61 @@
                 <Version>0.10</Version>
                 <Comment>First release</Comment>
                 <Name>Erdem Artan</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>colorgcc</Name>
+            <Homepage>http://www.console-colors.de</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>GPLv2</License>
+            <IsA>app:console</IsA>
+            <PartOf>system.devel</PartOf>
+            <Summary xml:lang="en">GCC output colorizer</Summary>
+            <Summary xml:lang="tr">GCC çıktısını renklendiren bir araç.</Summary>
+            <Description xml:lang="en">A tool that colorizes GCC output.</Description>
+            <Archive type="targz" sha1sum="c2944ecaaa58f41f37cc15304f4f9eae0c366cd9">http://source.pisilinux.org/1.0/colorgcc-1.3.2.tar.gz</Archive>
+            <Patches>
+                <Patch level="1">colorgcc-1.3.2-handle-translated-output.patch</Patch>
+                <Patch level="1">colorgcc-1.3.2-mdkconf.patch</Patch>
+                <Patch level="1">add-i686-gnu-stuff.patch</Patch>
+            </Patches>
+            <SourceURI>system/devel/colorgcc/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>colorgcc</Name>
+            <RuntimeDependencies>
+                <Dependency>gcc</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="executable">/usr/share/colorgcc</Path>
+                <Path fileType="config">/etc</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+            <AdditionalFiles>
+                <AdditionalFile target="/etc/profile.d/20colorgcc.sh" permission="0644" owner="root">colorgcc.sh</AdditionalFile>
+                <AdditionalFile target="/etc/profile.d/20colorgcc.csh" permission="0644" owner="root">colorgcc.csh</AdditionalFile>
+            </AdditionalFiles>
+        </Package>
+        <History>
+            <Update release="2">
+                <Date>2014-01-21</Date>
+                <Version>1.3.2</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Stefan Gronewold(groni)</Name>
+                <Email>groni@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2011-02-28</Date>
+                <Version>1.3.2</Version>
+                <Comment>First release</Comment>
+                <Name>Pisi Linux Admins</Name>
                 <Email>admins@pisilinux.org</Email>
             </Update>
         </History>
