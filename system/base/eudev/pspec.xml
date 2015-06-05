@@ -12,7 +12,7 @@
         <IsA>console</IsA>
         <Summary>eudev is a fork of system-udev</Summary>
         <Description>eudev is a fork of system-udev with the goal of obtaining better compatibility with existing software such as OpenRC and Upstart, older kernels, various toolchains and anything else required by users and various distributions.</Description>
-        <Archive sha1sum="18a81b6da182c0c30823ea976ab0c8c70ba1a621" type="targz">https://github.com/gentoo/eudev/archive/v3.1.tar.gz</Archive>
+        <Archive sha1sum="2a1ab1f301b8d0fe1754f13d4b5fe63d84173bf3" type="targz">https://github.com/gentoo/eudev/archive/v3.1.1.tar.gz</Archive>
         <AdditionalFiles>
             <!-- http://www.linuxfromscratch.org/lfs/view/development/chapter06/eudev.html -->
             <AdditionalFile target="config.cache">config.cache</AdditionalFile>
@@ -119,6 +119,13 @@
     </Package>
 
     <History>
+        <Update release="4">
+            <Date>2015-06-05</Date>
+            <Version>3.1.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="3">
             <Date>2015-05-30</Date>
             <Version>3.1</Version>
