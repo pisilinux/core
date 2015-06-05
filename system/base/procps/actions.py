@@ -27,7 +27,11 @@ def build():
     autotools.make()
 
 def install():
-    autotools.rawInstall('ln_f="ln -sf" ldconfig="true" lib64=lib DESTDIR=%s SKIP="/bin/kill /usr/share/man/man1/kill.1"' % get.installDIR())
+    autotools.rawInstall('ln_f="ln -sf" ldconfig="true" lib64=lib DESTDIR=%s' % get.installDIR())
+    
+    #remove conflicts
+    pisitools.remove("/usr/bin/kill")
+    pisitools.remove("/usr/share/man/man1/kill.1")
 
     pisitools.dosym("libproc-%s.so" % get.srcVERSION(), "/lib/libproc.so")
 

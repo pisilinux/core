@@ -562,6 +562,7 @@
             </BuildDependencies>
             <Patches>
                 <Patch compressionType="xz" level="1">patches/linux/patch-4.0.4.xz</Patch>
+                <Patch level="1">patches/pisilinux_aufs4-standalone.patch</Patch>
             </Patches>
             <SourceURI>kernel/kernel/pspec.xml</SourceURI>
         </Source>
@@ -2293,7 +2294,7 @@
             <Description xml:lang="fr">La commande grep recherche dans un ou plusieurs fichiers les lignes correspondant à un motif défini. Par défaut grep affiche les lignes éligibles.</Description>
             <Description xml:lang="en">The grep command searches one or more input files for lines containing a match to a specified pattern. By default, grep prints the matching lines.</Description>
             <Description xml:lang="tr">Grep komutu bir veya daha fazla verilen dosyada aranan parçayı bulmaya yarayan bir programdır. Ön tanımlı olarak grep eşleşen satırları çıktıya verir.</Description>
-            <Archive type="tarxz" sha1sum="55aac6158b51baa505669cf8f86440bcc106ec65">http://ftp.gnu.org/gnu/grep/grep-2.20.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="c7e6525c5c5aaa1bc3c1774db1697f42b11c2d85">ftp://mirrors.kernel.org/gnu/grep/grep-2.21.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>gettext</Dependency>
                 <Dependency>libpcre-devel</Dependency>
@@ -2314,6 +2315,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2015-06-05</Date>
+                <Version>2.21</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2014-06-04</Date>
                 <Version>2.20</Version>
@@ -3784,7 +3792,7 @@
             <Summary xml:lang="tr">Çeşitli kullanışlı Linux araçları</Summary>
             <Description xml:lang="en">The util-linux package contains a large variety of low-level system utilities that are necessary for a Linux system to function.</Description>
             <Description xml:lang="tr">util-linux paketi, bir Linux sisteminin işlevsel olması için gerekli olan birçok düşük seviye sistem uygulamasını içerir.</Description>
-            <Archive type="tarxz" sha1sum="73aee8f0ecc5f25c206a92e0c6ed7f14a5e01d66">https://www.kernel.org/pub/linux/utils/util-linux/v2.26/util-linux-2.26.1.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="ac0b880a12392b2cbbe12239ab7613c25349093d">https://www.kernel.org/pub/linux/utils/util-linux/v2.26/util-linux-2.26.2.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>eudev-devel</Dependency>
@@ -3802,7 +3810,7 @@
         <Package>
             <Name>util-linux</Name>
             <RuntimeDependencies>
-                <Dependency version="2.26.1">libutil-linux</Dependency>
+                <Dependency version="2.26.2">libutil-linux</Dependency>
                 <Dependency>zlib</Dependency>
                 <Dependency>perl</Dependency>
                 <Dependency>ncurses</Dependency>
@@ -3882,7 +3890,7 @@
             <IsA>header</IsA>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="9">libutil-linux</Dependency>
+                <Dependency release="10">libutil-linux</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/</Path>
@@ -3919,6 +3927,13 @@
             </Replaces>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2015-06-05</Date>
+                <Version>2.26.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="9">
                 <Date>2015-04-29</Date>
                 <Version>2.26.1</Version>
@@ -4954,14 +4969,10 @@
             <Description xml:lang="fr">L&apos;outil awk interprète un langage de programmation spécifique permettant d&apos;effectuer les tâches de modifications simples de données en quelques lignes de code. Il vous permet de faire des changements dans différents fichiers texte lorsqu&apos;un certain patron apparaît ou d&apos;extraire des données de fragments de lignes tout en laissant de côté le reste. Gawk est l&apos;implémentation GNU d&apos;awk.</Description>
             <Description xml:lang="en">The awk utility interprets a special-purpose programming language that makes it possible to handle simple data-reformatting jobs with just a few lines of code. It helps you to make changes in various text files wherever certain patterns appear, or extract data from parts of certain lines while discarding the rest. Gawk is the GNU implementation of awk.</Description>
             <Description xml:lang="tr">awk uygulaması az bir kod ile basit veri formatı düzenleme işlerinizi yapabilmenize olanak sağlayan özel amaçlı bir programlama dilidir. Uygulama birçok farklı metin dosyası içinde aradığınız parçaları bulup değiştirmenize veya diğer satırlardan ayırarak işlemenize yardımcı olur. Gawk programı awk&apos;ın GNU sürümüdür.</Description>
-            <Archive type="tarxz" sha1sum="547feb48d20e923aff58daccee97c94e047fdc18">http://ftp.gnu.org/gnu/gawk/gawk-4.1.1.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="76b0acbbdeaa0e58466675c5faf68895eedd8306">ftp://mirrors.kernel.org/gnu/gawk/gawk-4.1.3.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>gettext-devel</Dependency>
             </BuildDependencies>
-            <Patches>
-                <Patch level="1">gawk-4.1.1-sandbox_issue.patch</Patch>
-                <Patch level="1">gawk-4.1.1-sigpipe.patch</Patch>
-            </Patches>
             <SourceURI>system/base/gawk/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -4984,6 +4995,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2015-06-05</Date>
+                <Version>4.1.3</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2014-05-11</Date>
                 <Version>4.1.1</Version>
@@ -5919,7 +5937,7 @@
             <Description xml:lang="fr">Le programme tar fournit la possibilité de manipuler des archives de type tar. Vous pouvez l&apos;utiliser pour créer ou extraires des archives. Ajouter des fichiers à des archives existantes, les mettre à jour ou tout simplement lister leur contenu.</Description>
             <Description xml:lang="en">The GNU tar program saves many files together in one archive and can restore individual files (or all of the files) from that archive.</Description>
             <Description xml:lang="tr">GNU tar birden fazla dosyayı tek bir arşiv dosyasında birleştiren ve daha sonra bu arşiv dosyasından geri çıkartabilen bir uygulamadır.</Description>
-            <Archive type="tarxz" sha1sum="5ce4233e1774e990b930f3c46990267b28448962">http://ftp.gnu.org/gnu/tar/tar-1.27.1.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="40f3470a96b80749531fe48dbba99e43b6dfa7d3">http://mirrors.kernel.org/gnu/tar/tar-1.28.tar.xz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="doc/tar.1">tar.1</AdditionalFile>
             </AdditionalFiles>
@@ -5947,6 +5965,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2015-06-05</Date>
+                <Version>1.28</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2014-05-11</Date>
                 <Version>1.27.1</Version>
@@ -10387,7 +10412,7 @@
     <SpecFile>
         <Source>
             <Name>procps</Name>
-            <Homepage>http://procps.sourceforge.net/</Homepage>
+            <Homepage>http://gitorious.org/procps</Homepage>
             <Packager>
                 <Name>PisiLinux Community</Name>
                 <Email>admins@pisilinux.org</Email>
@@ -10400,62 +10425,10 @@
             <Description xml:lang="fr">procps est un paquet regroupant une multitude de petits utilitaires utiles donnant des informations concernant les process en utilisant le système de fichier /proc. Le paquet inclus les programmes ps, top, vmstat, w, kill, free, slabtop et skill.</Description>
             <Description xml:lang="en">procps is the package that has a bunch of small useful utilities that give information about processes using the /proc filesystem. The package includes the programs ps, top, vmstat, w, kill, free, slabtop, and skill.</Description>
             <Description xml:lang="tr">Procps /proc dosya sistemini kullanarak çalışan süreçler hakkında bilgi vermeye yarayan bazı kullanışlı uygulamaları içeren bir pakettir. Paket ps, top, vmstat, w, kill, free, slabtop ve skill gibi uygulamaları içerir.</Description>
-            <Archive type="targz" sha1sum="a0c86790569dec26b5d9037e8868ca907acc9829">http://procps.sf.net/procps-3.2.8.tar.gz</Archive>
+            <Archive type="tarxz" sha1sum="484db198d6a18a42b4011d5ecb2cb784a81b0e4f">http://downloads.sourceforge.net/project/procps-ng/Production/procps-ng-3.3.10.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>ncurses-devel</Dependency>
             </BuildDependencies>
-            <Patches>
-                <Patch level="1">procps-3.2.5-proc-mount.patch</Patch>
-                <Patch level="1">nohz.patch</Patch>
-                <Patch level="1">procps-3.2.5-eof.diff</Patch>
-                <Patch level="1">procps-3.2.2-top-termsize.patch</Patch>
-                <Patch level="1">procps-3.2.2-w-simply-work.diff</Patch>
-                <Patch level="1">procps-3.2.7-top.1.diff</Patch>
-                <Patch level="1">pwdx-bufferoverflow.diff</Patch>
-                <Patch level="1">procps-3.2.7-libselinux.patch</Patch>
-                <Patch level="1">procps-3.2.7-ps-libselinux.patch</Patch>
-                <Patch level="1">procps-3.2.7-misc.patch</Patch>
-                <Patch level="1">procps-3.2.7-FAQ.patch</Patch>
-                <Patch level="1">procps-3.2.7-noproc.patch</Patch>
-                <Patch level="1">procps-3.2.7-pseudo.patch</Patch>
-                <Patch level="1">procps-3.2.7-0x9b.patch</Patch>
-                <Patch level="1">procps-3.2.7-sysctl-writeonly.patch</Patch>
-                <Patch level="1">procps-3.2.7-top-rc.patch</Patch>
-                <Patch level="1">procps-3.2.7-top-remcpu.patch</Patch>
-                <Patch level="1">procps-3.2.7-top-env-vmsize.patch</Patch>
-                <Patch level="1">procps-3.2.7-top-env-cpuloop.patch</Patch>
-                <Patch level="1">procps-3.2.7-vmstat-cpusteal.patch</Patch>
-                <Patch level="1">procps-3.2.7-longcmd.patch</Patch>
-                <Patch level="1">procps-3.2.7-vmstat-pgpg.patch</Patch>
-                <Patch level="1">procps-3.2.7-sysctl-ignore.patch</Patch>
-                <Patch level="1">procps-3.2.7-top-sorthigh.path</Patch>
-                <Patch level="1">procps-3.2.7-w-best.patch</Patch>
-                <Patch level="1">procps-3.2.7-watch-unicode.patch</Patch>
-                <Patch level="1">procps-3.2.7-ps-stime.patch</Patch>
-                <Patch level="1">procps-3.2.7-ps-eip64.patch</Patch>
-                <Patch level="1">procps-3.2.7-psman.patch</Patch>
-                <Patch level="1">procps-3.2.7-top-cpu0.patch</Patch>
-                <Patch level="1">procps-3.2.7-top-cpuint.patch</Patch>
-                <Patch level="1">procps-3.2.7-top-manpage.patch</Patch>
-                <Patch level="1">procps-3.2.7-top-clrscr.patch</Patch>
-                <Patch level="1">procps-3.2.7-ps-man-fmt.patch</Patch>
-                <Patch level="1">procps-3.2.7-vmstat-partstats-long.patch</Patch>
-                <Patch level="1">procps-3.2.7-vmstat-header.patch</Patch>
-                <Patch level="1">procps-3.2.7-slabtop-once.patch</Patch>
-                <Patch level="1">procps-3.2.7-vmstat-timestamp.patch</Patch>
-                <Patch level="1">procps-3.2.7-vmstat-timestamp-manpage.patch</Patch>
-                <Patch level="1">procps-3.2.7-ps-cgroup.patch</Patch>
-                <Patch level="1">procps-3.2.7-vmstat-partstats-reqwrites.patch</Patch>
-                <Patch level="1">procps-3.2.7-free-hlmem.patch</Patch>
-                <Patch level="1">procps-3.2.8-threads.patch</Patch>
-                <Patch level="1">procps-enable-core.patch</Patch>
-                <Patch level="1">procps-3.2.8-setlocale.patch</Patch>
-                <Patch level="1">procps-pmap-smaps.patch</Patch>
-                <Patch level="1">procps-3.2.8-vmstat-getopt.patch</Patch>
-                <Patch level="1">procps-3.2.8-ps-cgroup-suppress-root-group.patch</Patch>
-                <Patch level="1">procps-3.2.8-make.patch</Patch>
-                <Patch level="1">procps-3.2.8-constructor-order.patch</Patch>
-            </Patches>
             <SourceURI>system/base/procps/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -10467,13 +10440,22 @@
                 <Path fileType="executable">/bin</Path>
                 <Path fileType="executable">/sbin</Path>
                 <Path fileType="library">/lib</Path>
+                <Path fileType="library">/usr/lib</Path>
                 <Path fileType="executable">/usr/bin</Path>
                 <Path fileType="doc">/usr/share/doc</Path>
                 <Path fileType="man">/usr/share/man</Path>
+                <Path fileType="locale">/usr/share/locale</Path>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2015-06-06</Date>
+                <Version>3.3.10</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2014-05-11</Date>
                 <Version>3.2.8</Version>
@@ -12618,7 +12600,7 @@
             <Summary xml:lang="tr">eudev sistemd-udev uygulamasının çatalı</Summary>
             <Description xml:lang="en">eudev is a fork of system-udev with the goal of obtaining better compatibility with existing software such as OpenRC and Upstart, older kernels, various toolchains and anything else required by users and various distributions.</Description>
             <Description xml:lang="tr">eudev sistem-udev uygulamasının OpenRC, Upstart gibi başlangıç sistemleri ile uyumu için  hazırlanmış çatalı</Description>
-            <Archive type="targz" sha1sum="18a81b6da182c0c30823ea976ab0c8c70ba1a621">https://github.com/gentoo/eudev/archive/v3.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="2a1ab1f301b8d0fe1754f13d4b5fe63d84173bf3">https://github.com/gentoo/eudev/archive/v3.1.1.tar.gz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="config.cache">config.cache</AdditionalFile>
             </AdditionalFiles>
@@ -12676,7 +12658,7 @@
             <Summary xml:lang="en">Development files for eudev</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="3">eudev</Dependency>
+                <Dependency release="4">eudev</Dependency>
                 <Dependency>glib2-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -12718,6 +12700,13 @@
             </Replaces>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2015-06-05</Date>
+                <Version>3.1.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="3">
                 <Date>2015-05-30</Date>
                 <Version>3.1</Version>
@@ -15456,7 +15445,7 @@
             <Description xml:lang="en">Patch takes a patch file generated by diff command, and applies it to the original files, thus producing patched files.</Description>
             <Description xml:lang="tr">Özgün dosyaları, diff komutu ile üretilmiş yama dosyasını uygulayarak, yeni biçimlerine çevirir.</Description>
             <Description xml:lang="es">Recibe una archivo de parche generado por el comando diff y lo aplica a los archivos originales, así produciendo archivos parcheados.</Description>
-            <Archive type="tarxz" sha1sum="b2e29867263095e0f8bfd4b1319124b04102f2b0">ftp://ftp.gnu.org/gnu/patch/patch-2.7.4.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="8fd8f8f8ba640d871bce1bd33c7fd5e2ebe03a1e">ftp://ftp.gnu.org/gnu/patch/patch-2.7.5.tar.xz</Archive>
             <SourceURI>system/devel/patch/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -15471,6 +15460,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2015-06-05</Date>
+                <Version>2.7.5</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2015-02-01</Date>
                 <Version>2.7.4</Version>
