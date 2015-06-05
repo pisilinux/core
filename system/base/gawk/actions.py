@@ -19,8 +19,8 @@ def setup():
 def build():
     autotools.make()
 
-def check():
-    autotools.make("-j1 check diffout")
+#def check():
+#    autotools.make("-j1 check diffout")
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
