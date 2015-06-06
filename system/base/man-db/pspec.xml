@@ -14,7 +14,7 @@
         <IsA>data:doc</IsA>
         <Summary>Application to read Linux man pages</Summary>
         <Description>Man package consists of programs which is used to read most of the documentation available in linux system. For example, you can write "man nameoftheprogram" into the konsole or "man:nameoftheprogram" into the konqueror to get a detailed usage information for many programs.</Description>
-        <Archive sha1sum="9f549ac89f993303ac1203a165961885a53e7d14" type="tarxz">http://download.savannah.gnu.org/releases/man-db/man-db-2.6.3.tar.xz</Archive>
+        <Archive sha1sum="6a4b08ccacb555120a2bce852329d93c9c78247e" type="tarxz">http://download.savannah.gnu.org/releases/man-db/man-db-2.7.1.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>less</Dependency>
             <Dependency>gzip</Dependency>
@@ -22,15 +22,15 @@
             <Dependency>gdbm-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
             <Dependency>gettext-devel</Dependency>
-            <Dependency>libpipeline-devel</Dependency>
+            <Dependency release="6">libpipeline-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">man-db-2.5.9-sgr.patch</Patch>
+            <!--<Patch level="1">man-db-2.5.9-sgr.patch</Patch>
             <Patch level="1">man-db-2.6.1-locale-fallback.patch</Patch>
             <Patch level="1">man-db-2.6.1-so-links.patch</Patch>
             <Patch level="1">man-db-2.6.1-wildcards.patch</Patch>
             <Patch level="1">man-db-2.6.2-invalid-cache.patch</Patch>
-            <Patch level="1">man-db-2.6.3-overrides.patch</Patch>
+            <Patch level="1">man-db-2.6.3-overrides.patch</Patch>-->
         </Patches>
     </Source>
 
@@ -40,7 +40,7 @@
             <Dependency>gdbm</Dependency>
             <Dependency>zlib</Dependency>
             <Dependency>gettext</Dependency>
-            <Dependency>libpipeline</Dependency>
+            <Dependency release="6">libpipeline</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="config">/etc</Path>
@@ -60,6 +60,13 @@
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2015-06-06</Date>
+            <Version>2.7.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="5">
             <Date>2014-05-11</Date>
             <Version>2.6.3</Version>
