@@ -32,6 +32,11 @@ def install():
     #remove conflicts
     pisitools.remove("/usr/bin/kill")
     pisitools.remove("/usr/share/man/man1/kill.1")
+    
+    # for mudur and comar
+    pisitools.dosym("/usr/bin/sysctl", "/sbin/sysctl")
+    pisitools.dosym("/usr/bin/pidof", "/sbin/pidof")
+    pisitools.dosym("/usr/bin/ps", "/bin/ps")
 
     pisitools.dosym("libproc-%s.so" % get.srcVERSION(), "/lib/libproc.so")
 
