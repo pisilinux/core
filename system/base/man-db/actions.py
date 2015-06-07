@@ -27,7 +27,7 @@ def install():
     pisitools.dodir("/var/cache/man")
 
     # These are shipped with groff
-    pisitools.remove("/usr/bin/zsoelim")
-    pisitools.remove("/usr/share/man/man1/zsoelim.1")
+    #pisitools.remove("/usr/bin/zsoelim")
+    #pisitools.remove("/usr/share/man/man1/zsoelim.1")
 
     pisitools.dodoc("README")
