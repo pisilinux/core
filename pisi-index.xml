@@ -1278,6 +1278,727 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>module-virtualbox</Name>
+            <Homepage>http://www.virtualbox.org</Homepage>
+            <Packager>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Packager>
+            <License>GPLv2</License>
+            <IsA>driver</IsA>
+            <PartOf>kernel.drivers</PartOf>
+            <Summary xml:lang="en">Kernel modules for VirtualBox</Summary>
+            <Description xml:lang="en">This package provides the kernel support for VirtualBox.</Description>
+            <Archive type="tarxz" sha1sum="8850ebc24e00640835b682a5f8bbc8f05313d2d7">http://source.pisilinux.org/1.0/module-virtualbox-4.3.28.tar.xz</Archive>
+            <BuildDependencies>
+                <Dependency version="4.0.5">kernel-module-headers</Dependency>
+            </BuildDependencies>
+            <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>module-virtualbox</Name>
+            <BuildFlags>
+                <Flag>noDelta</Flag>
+            </BuildFlags>
+            <RuntimeDependencies>
+                <Dependency version="4.0.5">kernel</Dependency>
+                <Dependency version="4.3.28">module-virtualbox-userspace</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library" permanent="true">/lib/modules</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>module-virtualbox-userspace</Name>
+            <Summary xml:lang="en">Userspace documentation, tools, udev and modprobe rules for the kernel driver virtualbox</Summary>
+            <Summary xml:lang="tr">virtualbox çekirdek sürücüsü için kullanıcı tarafı belgeler, araçlar, udev ve modprobe kuralları</Summary>
+            <BuildFlags>
+                <Flag>noDelta</Flag>
+            </BuildFlags>
+            <Files>
+                <Path fileType="data">/lib/udev/rules.d</Path>
+            </Files>
+            <AdditionalFiles>
+                <AdditionalFile target="/lib/udev/rules.d/10-vboxdrv.rules" permission="0644" owner="root">10-vboxdrv.rules</AdditionalFile>
+            </AdditionalFiles>
+        </Package>
+        <History>
+            <Update release="44">
+                <Date>2015-06-09</Date>
+                <Version>4.3.28</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="43">
+                <Date>2015-05-14</Date>
+                <Version>4.3.20</Version>
+                <Comment>Rebuild for kernel 3.19.8</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="42">
+                <Date>2015-05-05</Date>
+                <Version>4.3.20</Version>
+                <Comment>Rebuild for kernel 3.19.6</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="41">
+                <Date>2015-04-24</Date>
+                <Version>4.3.20</Version>
+                <Comment>Rebuild for kernel 3.19.5</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="40">
+                <Date>2015-04-16</Date>
+                <Version>4.3.20</Version>
+                <Comment>Rebuild for kernel 3.19.4</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="39">
+                <Date>2015-04-02</Date>
+                <Version>4.3.20</Version>
+                <Comment>Rebuild for kernel 3.19.3</Comment>
+                <Name>Hakan Yıldız</Name>
+                <Email>hknyldz93@gmail.com</Email>
+            </Update>
+            <Update release="38">
+                <Date>2015-03-08</Date>
+                <Version>4.3.20</Version>
+                <Comment>Rebuild for kernel 3.19.1</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="37">
+                <Date>2015-03-01</Date>
+                <Version>4.3.20</Version>
+                <Comment>Rebuild for kernel 3.19.0</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="36">
+                <Date>2015-01-28</Date>
+                <Version>4.3.20</Version>
+                <Comment>Rebuild for kernel 3.18.3</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="35">
+                <Date>2015-01-09</Date>
+                <Version>4.3.20</Version>
+                <Comment>Version bump, kernel 3.18.1</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="34">
+                <Date>2014-11-29</Date>
+                <Version>4.3.18</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="33">
+                <Date>2014-11-21</Date>
+                <Version>4.3.18</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="32">
+                <Date>2014-10-19</Date>
+                <Version>4.3.18</Version>
+                <Comment>Version bump, 4.3.18</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="31">
+                <Date>2014-09-19</Date>
+                <Version>4.3.16</Version>
+                <Comment>Version bump, 4.3.16</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="30">
+                <Date>2014-09-03</Date>
+                <Version>4.3.14</Version>
+                <Comment>Rebuild for kernel 3.16.1</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="29">
+                <Date>2014-07-24</Date>
+                <Version>4.3.14</Version>
+                <Comment>Version bump for kernel 3.15.6</Comment>
+                <Name>Vedat Demir</Name>
+                <Email>vedat@pisilinux.org</Email>
+            </Update>
+            <Update release="28">
+                <Date>2014-06-15</Date>
+                <Version>4.3.10</Version>
+                <Comment>Rebuild for kernel 3.15.0</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="27">
+                <Date>2014-05-29</Date>
+                <Version>4.3.10</Version>
+                <Comment>Rebuild for kernel 3.14.4.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="26">
+                <Date>2014-05-02</Date>
+                <Version>4.3.10</Version>
+                <Comment>Rebuild for kernel 3.14.2.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="25">
+                <Date>2014-04-15</Date>
+                <Version>4.3.10</Version>
+                <Comment>Rebuild for kernel 3.13.10.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="24">
+                <Date>2014-04-07</Date>
+                <Version>4.3.10</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="23">
+                <Date>2014-03-29</Date>
+                <Version>4.3.8</Version>
+                <Comment>Rebuild for 3.13.6</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="22">
+                <Date>2014-03-09</Date>
+                <Version>4.3.8</Version>
+                <Comment>Rebuild for 3.12.13</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+            <Update release="21">
+                <Date>2014-03-01</Date>
+                <Version>4.3.8</Version>
+                <Comment>Rebuild for 3.12.13</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+            <Update release="20">
+                <Date>2014-01-17</Date>
+                <Version>4.3.6</Version>
+                <Comment>Rebuild for 3.12.8</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="19">
+                <Date>2013-12-22</Date>
+                <Version>4.3.6</Version>
+                <Comment>Version bump</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="18">
+                <Date>2013-12-17</Date>
+                <Version>4.3.2</Version>
+                <Comment>Rebuild for 3.12.5</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="17">
+                <Date>2013-12-12</Date>
+                <Version>4.3.2</Version>
+                <Comment>Rebuild for 3.12.5</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="16">
+                <Date>2013-11-23</Date>
+                <Version>4.3.2</Version>
+                <Comment>Rebuild for 3.10.20</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="15">
+                <Date>2013-11-11</Date>
+                <Version>4.3.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="14">
+                <Date>2013-11-05</Date>
+                <Version>4.2.18</Version>
+                <Comment>Rebuild for 3.10.18</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="13">
+                <Date>2013-10-09</Date>
+                <Version>4.2.18</Version>
+                <Comment>version bump</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="12">
+                <Date>2013-09-28</Date>
+                <Version>4.2.16</Version>
+                <Comment>3.10.13</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="11">
+                <Date>2013-09-18</Date>
+                <Version>4.2.16</Version>
+                <Comment>3.10.12</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="10">
+                <Date>2013-08-20</Date>
+                <Version>4.2.16</Version>
+                <Comment>3.10.10</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="10">
+                <Date>2013-08-20</Date>
+                <Version>4.2.16</Version>
+                <Comment>3.10.9</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="9">
+                <Date>2013-08-20</Date>
+                <Version>4.2.16</Version>
+                <Comment>Kernel 3.10.6</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="8">
+                <Date>2013-07-06</Date>
+                <Version>4.2.16</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="7">
+                <Date>2013-06-15</Date>
+                <Version>4.2.12</Version>
+                <Comment>Kernel 3.8.13</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="6">
+                <Date>2013-06-01</Date>
+                <Version>4.2.12</Version>
+                <Comment>Kernel 3.9.4</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="5">
+                <Date>2013-05-26</Date>
+                <Version>4.2.12</Version>
+                <Comment>Kernel 3.9.3</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
+                <Date>2013-05-04</Date>
+                <Version>4.2.12</Version>
+                <Comment>Update</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2013-04-14</Date>
+                <Version>4.2.12</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-03-02</Date>
+                <Version>4.2.8</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2013-01-22</Date>
+                <Version>4.2.6</Version>
+                <Comment>First release</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>module-virtualbox-guest</Name>
+            <Homepage>http://www.virtualbox.org</Homepage>
+            <Packager>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Packager>
+            <License>GPLv2</License>
+            <IsA>driver</IsA>
+            <PartOf>kernel.drivers</PartOf>
+            <Summary xml:lang="en">Kernel modules for VirtualBox guest machines</Summary>
+            <Summary xml:lang="tr">VirtualBox misafir makineleri için çekirdek modülleri</Summary>
+            <Description xml:lang="en">This package provides the kernel modules needed for mouse integration and shared folder support between VirtualBox host and guest systems.</Description>
+            <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
+            <Archive type="tarxz" sha1sum="82194515516139801fdc690198495b043d1c9cbe">http://source.pisilinux.org/1.0/module-virtualbox-guest-4.3.28.tar.xz</Archive>
+            <BuildDependencies>
+                <Dependency version="4.0.5">kernel-module-headers</Dependency>
+            </BuildDependencies>
+            <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>module-virtualbox-guest</Name>
+            <BuildFlags>
+                <Flag>noDelta</Flag>
+            </BuildFlags>
+            <RuntimeDependencies>
+                <Dependency version="4.0.5">kernel</Dependency>
+                <Dependency>baselayout</Dependency>
+                <Dependency version="4.3.28">module-virtualbox-guest-userspace</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library" permanent="true">/lib/modules</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>module-virtualbox-guest-userspace</Name>
+            <Summary xml:lang="en">Userspace documentation, tools, udev and modprobe rules for the kernel driver virtualbox-guest</Summary>
+            <Summary xml:lang="tr">virtualbox-guest çekirdek sürücüsü için kullanıcı tarafı belgeler, araçlar, udev ve modprobe kuralları</Summary>
+            <BuildFlags>
+                <Flag>noDelta</Flag>
+            </BuildFlags>
+            <Files>
+                <Path fileType="config">/etc/conf.d</Path>
+                <Path fileType="data">/lib/udev/rules.d</Path>
+                <Path fileType="executable">/lib/udev/vbox-guest.sh</Path>
+            </Files>
+            <AdditionalFiles>
+                <AdditionalFile target="/etc/conf.d/virtualbox-guest" permission="0644" owner="root">virtualbox-guest.conf</AdditionalFile>
+                <AdditionalFile target="/lib/udev/vbox-guest.sh" permission="0755" owner="root">vbox-guest.sh</AdditionalFile>
+                <AdditionalFile target="/lib/udev/rules.d/48-vbox-guest.rules" permission="0644" owner="root">48-vbox-guest.rules</AdditionalFile>
+            </AdditionalFiles>
+        </Package>
+        <History>
+            <Update release="43">
+                <Date>2015-06-09</Date>
+                <Version>4.3.28</Version>
+                <Comment>Version Bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="42">
+                <Date>2015-05-14</Date>
+                <Version>4.3.20</Version>
+                <Comment>Rebuild for kernel 3.19.8</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="41">
+                <Date>2015-05-05</Date>
+                <Version>4.3.20</Version>
+                <Comment>Rebuild for kernel 3.19.6</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="40">
+                <Date>2015-04-24</Date>
+                <Version>4.3.20</Version>
+                <Comment>Rebuild for kernel 3.19.5</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="39">
+                <Date>2015-04-16</Date>
+                <Version>4.3.20</Version>
+                <Comment>Rebuild for kernel 3.19.4</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="38">
+                <Date>2015-04-02</Date>
+                <Version>4.3.20</Version>
+                <Comment>Rebuild for kernel 3.19.3</Comment>
+                <Name>Hakan Yıldız</Name>
+                <Email>hknyldz93@gmail.com</Email>
+            </Update>
+            <Update release="37">
+                <Date>2015-03-08</Date>
+                <Version>4.3.20</Version>
+                <Comment>Rebuild for kernel 3.19.1</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="36">
+                <Date>2015-03-01</Date>
+                <Version>4.3.20</Version>
+                <Comment>Rebuild for kernel 3.19.0</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="35">
+                <Date>2015-01-28</Date>
+                <Version>4.3.20</Version>
+                <Comment>Rebuild for kernel 3.18.3</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="34">
+                <Date>2015-01-09</Date>
+                <Version>4.3.20</Version>
+                <Comment>Version bump, kernel 3.18.1</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="33">
+                <Date>2014-11-29</Date>
+                <Version>4.3.18</Version>
+                <Comment>Version bump, kernel 3.17.4</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="32">
+                <Date>2014-10-19</Date>
+                <Version>4.3.18</Version>
+                <Comment>Version bump, kernel 3.17.1</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="31">
+                <Date>2014-09-19</Date>
+                <Version>4.3.16</Version>
+                <Comment>Version bump, kernel 3.16.3</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="30">
+                <Date>2014-09-03</Date>
+                <Version>4.3.14</Version>
+                <Comment>Rebuild for kernel 3.16.1</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="29">
+                <Date>2014-07-24</Date>
+                <Version>4.3.14</Version>
+                <Comment>Version bump for kernel 3.15.6</Comment>
+                <Name>Vedat Demir</Name>
+                <Email>vedatn@pisilinux.org</Email>
+            </Update>
+            <Update release="28">
+                <Date>2014-06-15</Date>
+                <Version>4.3.10</Version>
+                <Comment>Rebuild for kernel 3.15.0</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="27">
+                <Date>2014-05-29</Date>
+                <Version>4.3.10</Version>
+                <Comment>Rebuild for kernel 3.14.4.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="26">
+                <Date>2014-05-02</Date>
+                <Version>4.3.10</Version>
+                <Comment>Rebuild for kernel 3.14.2.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="25">
+                <Date>2014-04-15</Date>
+                <Version>4.3.10</Version>
+                <Comment>Rebuild for kernel 3.13.10.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="24">
+                <Date>2014-04-07</Date>
+                <Version>4.3.10</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="23">
+                <Date>2014-03-29</Date>
+                <Version>4.3.8</Version>
+                <Comment>Rebuild for 3.13.6</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+            <Update release="22">
+                <Date>2014-03-09</Date>
+                <Version>4.3.8</Version>
+                <Comment>Rebuild for 3.12.13</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+            <Update release="21">
+                <Date>2014-03-01</Date>
+                <Version>4.3.8</Version>
+                <Comment>Rebuild for 3.12.13</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+            <Update release="20">
+                <Date>2014-01-17</Date>
+                <Version>4.3.6</Version>
+                <Comment>Rebuild for 3.12.8</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="19">
+                <Date>2013-12-21</Date>
+                <Version>4.3.6</Version>
+                <Comment>Version bump</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="18">
+                <Date>2013-12-17</Date>
+                <Version>4.3.2</Version>
+                <Comment>Rebuild for 3.12.5</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="17">
+                <Date>2013-12-12</Date>
+                <Version>4.3.2</Version>
+                <Comment>Rebuild for 3.12.5</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="16">
+                <Date>2013-11-23</Date>
+                <Version>4.3.2</Version>
+                <Comment>Rebuild for 3.10.20</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="15">
+                <Date>2013-11-11</Date>
+                <Version>4.3.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="14">
+                <Date>2013-11-05</Date>
+                <Version>4.2.18</Version>
+                <Comment>Rebuild for 3.10.18</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="13">
+                <Date>2013-10-10</Date>
+                <Version>4.2.18</Version>
+                <Comment>version bump</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="12">
+                <Date>2013-09-28</Date>
+                <Version>4.2.16</Version>
+                <Comment>3.10.13</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="11">
+                <Date>2013-09-18</Date>
+                <Version>4.2.16</Version>
+                <Comment>3.10.12</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="10">
+                <Date>2013-08-30</Date>
+                <Version>4.2.16</Version>
+                <Comment>3.10.10</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="9">
+                <Date>2013-08-20</Date>
+                <Version>4.2.16</Version>
+                <Comment>3.10.9</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="8">
+                <Date>2013-08-20</Date>
+                <Version>4.2.16</Version>
+                <Comment>Kernel 3.10.6</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="7">
+                <Date>2013-07-06</Date>
+                <Version>4.2.16</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="6">
+                <Date>2013-06-01</Date>
+                <Version>4.2.12</Version>
+                <Comment>Kernel 3.8.13</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="5">
+                <Date>2013-06-01</Date>
+                <Version>4.2.12</Version>
+                <Comment>Kernel 3.9.4</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
+                <Date>2013-05-04</Date>
+                <Version>4.2.12</Version>
+                <Comment>Update</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2013-04-14</Date>
+                <Version>4.2.12</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-03-02</Date>
+                <Version>4.2.8</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2013-01-22</Date>
+                <Version>4.2.6</Version>
+                <Comment>First release</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>docbook-xml</Name>
             <Homepage>http://www.docbook.org/xml/</Homepage>
             <Packager>
@@ -2728,8 +3449,8 @@
             <Summary xml:lang="en">A somewhat comprehensive collection of Linux man pages</Summary>
             <Summary xml:lang="tr">Kapsamlı Linux kılavuz dökümanları</Summary>
             <Description xml:lang="en">A large collection of man pages (documentation) from the Linux Documentation Project (LDP).</Description>
-            <Archive type="tarxz" sha1sum="100aa96f83c04b44dd2e25e178a589c4a13cafbf">https://www.kernel.org/pub/linux/docs/man-pages/man-pages-3.81.tar.xz</Archive>
-            <Archive type="tarxz" sha1sum="b9c65a46e2061a1b2d4ee7bcc3e46603517b1f42" target="man-pages-3.81">http://www.kernel.org/pub/linux/docs/man-pages/man-pages-posix/man-pages-posix-2003-a.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="e7008e7f683d77b11e7fae9a080ec06a83bec328">https://www.kernel.org/pub/linux/docs/man-pages/man-pages-4.00.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="b9c65a46e2061a1b2d4ee7bcc3e46603517b1f42" target="man-pages-4.00">http://www.kernel.org/pub/linux/docs/man-pages/man-pages-posix/man-pages-posix-2003-a.tar.xz</Archive>
             <SourceURI>system/base/man-pages/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -2747,6 +3468,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2015-06-08</Date>
+                <Version>4.00</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2015-03-09</Date>
                 <Version>3.81</Version>
@@ -3090,7 +3818,7 @@
             <Description xml:lang="fr">e2frprogs fournit les outils de système de fichier à utiliser avec les systèmes de fichier de type ext2. Il prend également en charge les système de fichier de type ext3/4 avec support de la journalisation.</Description>
             <Description xml:lang="en">e2fsprogs provides the filesystem utilities for use with the ext2 filesystem. It also supports the ext3/4 filesystem with journaling support.</Description>
             <Description xml:lang="tr">e2fsprogs ext2 dosya sistemi için standart dosya sistemi uygulamaları sağlar. ext3/4 dosya sistemlerinin günlüğe kaydetme özelliklerini de destekler.</Description>
-            <Archive type="targz" sha1sum="083c1bb0d1e85672e8038a2fadf70b24e7409db7">mirrors://sourceforge/e2fsprogs/e2fsprogs-1.42.12.tar.gz</Archive>
+            <Archive type="targz" sha1sum="77d1412472ac5a67f8954166ec16c37616074c37">mirrors://sourceforge/e2fsprogs/e2fsprogs-1.42.13.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>libutil-linux-devel</Dependency>
                 <Dependency>libutil-linux</Dependency>
@@ -3099,7 +3827,6 @@
             </BuildDependencies>
             <Patches>
                 <Patch level="1">ntfs-3g.patch</Patch>
-                <Patch level="1">e2fsprogs-1.41.8-strip-me.patch</Patch>
             </Patches>
             <SourceURI>system/base/e2fsprogs/pspec.xml</SourceURI>
         </Source>
@@ -3130,7 +3857,7 @@
             <Summary xml:lang="tr">e2fsprogs için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="8">e2fsprogs</Dependency>
+                <Dependency release="9">e2fsprogs</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -3139,6 +3866,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2015-06-08</Date>
+                <Version>1.42.13</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2015-04-30</Date>
                 <Version>1.42.12</Version>
@@ -16431,7 +17165,7 @@
             <Description xml:lang="en">This module provides an interface to James Clark&apos;s XML parser, expat. As in expat, a single instance of the parser can only parse one document. Calls to parsestring after the first for a given instance will die.</Description>
             <Description xml:lang="tr">Bu modül James Clark&apos;ın XML ayrıştırıcısı expat için bir arayüz sağlar. Expat&apos;ta olduğu gibi ayrıştırıcıdan türetilen her nesne sadece bir dosyayı ayrıştırabilir.</Description>
             <Description xml:lang="es">Este módulo facilita una interfaz al parser XML de James Clark, expat. Como en expat, una sola instancia del parser puede analizar solamente un documento. Llamadas a parsestring después del primero de una instancia determinada morirán.</Description>
-            <Archive type="targz" sha1sum="68c7ee61b413c2e8255699b1987fca598e0a39d8">mirrors://cpan/authors/id/T/TO/TODDR/XML-Parser-2.41.tar.gz</Archive>
+            <Archive type="targz" sha1sum="0ab6b932713ec1f9927a1b1c619b6889a5c12849">mirrors://cpan/authors/id/T/TO/TODDR/XML-Parser-2.44.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>expat-devel</Dependency>
                 <Dependency>perl</Dependency>
@@ -16451,6 +17185,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2015-06-07</Date>
+                <Version>2.44</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-09-12</Date>
                 <Version>2.41</Version>
@@ -17099,7 +17840,7 @@
             <Description xml:lang="fr">Libtool est une librairie utilitaire partagée pour développeurs.</Description>
             <Description xml:lang="en">Libtool is a shared library tool for developers.</Description>
             <Description xml:lang="tr">Libtool, program geliştiriciler için bir paylaşımlı kütüphane aracıdır.</Description>
-            <Archive type="tarxz" sha1sum="4671f3323f2fbc712a70afce57602ce906a82a15">mirrors://gnu/libtool/libtool-2.4.2.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="3e7504b832eb2dd23170c91b6af72e15b56eb94e">mirrors://gnu/libtool/libtool-2.4.6.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>gnuconfig</Dependency>
                 <Dependency>autoconf</Dependency>
@@ -17136,14 +17877,24 @@
             <Summary xml:lang="tr">libtool için 32-bit paylaşımlı kitaplıklar</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
+            <BuildDependencies>
+                <Dependency>glibc-32bit</Dependency>
+            </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="5">libtool-ltdl</Dependency>
+                <Dependency>glibc-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2015-06-08</Date>
+                <Version>2.4.6</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2014-11-28</Date>
                 <Version>2.4.2</Version>
