@@ -1218,6 +1218,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2014-06-04</Date>
+                <Version>1.0.7</Version>
+                <Comment>Add aufs module initramfs</Comment>
+                <Name>Burak Ertürk</Name>
+                <Email>burakerturk@pisilinux.org</Email>
+            </Update>
             <Update release="8">
                 <Date>2014-05-11</Date>
                 <Version>1.0.7</Version>
@@ -13496,8 +13503,8 @@
             <Description xml:lang="fr">SQLite est une petite librairie C implémentant un moteur de base de données SQL auto-configurée, auto-suffisante, pouvant être embarquée. Gère des bases de données de tailles allant jusqu&apos;à 2 téraOctets.</Description>
             <Description xml:lang="en">SQLite is a small C library that implements a self-contained, embeddable, zero-configuration SQL database engine. Supports databases up to 2 terabytes in size.</Description>
             <Description xml:lang="tr">SQLite hiçbir ayar gerektirmeyen, başka programların içine gömülebilir bir SQL veritabanı motorudur. 2 terabayta kadar büyüklükteki veritabanlarını tutabilir.</Description>
-            <Archive type="targz" sha1sum="2fe3f6226a2a08a2e814b97cd53e36bb3c597112">http://www.sqlite.org/2015/sqlite-autoconf-3080803.tar.gz</Archive>
-            <Archive type="zip" sha1sum="27c2cada8e663f694c0469bcae09eb0d8c55dd7c">http://www.sqlite.org/2015/sqlite-doc-3080803.zip</Archive>
+            <Archive type="targz" sha1sum="c2f2c17d3dc4c4e179d35cc04e4420636d48a152">http://www.sqlite.org/2015/sqlite-autoconf-3081002.tar.gz</Archive>
+            <Archive type="zip" sha1sum="2e816999255e4fced7d93b6ad3650a361a446288">http://www.sqlite.org/2015/sqlite-doc-3081002.zip</Archive>
             <BuildDependencies>
                 <Dependency>readline-devel</Dependency>
             </BuildDependencies>
@@ -13509,10 +13516,10 @@
                 <Dependency>readline</Dependency>
             </RuntimeDependencies>
             <Files>
-                <Path fileType="executable">/usr/bin</Path>
                 <Path fileType="library">/usr/lib</Path>
-                <Path fileType="doc">/usr/share/doc</Path>
                 <Path fileType="man">/usr/share/man</Path>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="doc">/usr/share/doc/sqlite/README</Path>
             </Files>
         </Package>
         <Package>
@@ -13521,7 +13528,7 @@
             <Summary xml:lang="tr">sqlite için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="12">sqlite</Dependency>
+                <Dependency release="13">sqlite</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13538,8 +13545,8 @@
                 <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="12">sqlite</Dependency>
                 <Dependency>glibc-32bit</Dependency>
+                <Dependency release="13">sqlite</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
@@ -13547,6 +13554,8 @@
         </Package>
         <Package>
             <Name>sqlite-tcl</Name>
+            <Summary xml:lang="en">sqlite Tcl Extension Architecture (TEA)</Summary>
+            <PartOf>programming.language.tcl</PartOf>
             <BuildDependencies>
                 <Dependency>tcl-devel</Dependency>
             </BuildDependencies>
@@ -13554,23 +13563,42 @@
                 <Dependency>sqlite</Dependency>
             </RuntimeDependencies>
             <Files>
-                <Path fileType="library">/usr/lib/sqlite3.8.8.3</Path>
+                <Path fileType="library">/usr/lib/sqlite3.8.10.2</Path>
             </Files>
         </Package>
         <Package>
             <Name>sqlite-tcl-32bit</Name>
+            <Summary xml:lang="en">sqlite-tcl-32bit için paylaşımlı kitaplıklar</Summary>
+            <PartOf>emul32</PartOf>
             <BuildDependencies>
                 <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency>sqlite</Dependency>
                 <Dependency>glibc-32bit</Dependency>
+                <Dependency>sqlite</Dependency>
             </RuntimeDependencies>
             <Files>
-                <Path fileType="library">/usr/lib32/sqlite3.8.8.3/</Path>
+                <Path fileType="library">/usr/lib32/sqlite3.8.10.2/</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>sqlite-doc</Name>
+            <Summary xml:lang="en">sqlite-doc, sqlite için doküman belgeleri</Summary>
+            <RuntimeDependencies>
+                <Dependency>sqlite</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library">/usr/share/doc/sqlite/</Path>
             </Files>
         </Package>
         <History>
+            <Update release="13">
+                <Date>2015-06-08</Date>
+                <Version>3.8.10.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Osman Erkan</Name>
+                <Email>osman.erkan@pisilinux.org</Email>
+            </Update>
             <Update release="12">
                 <Date>2015-02-28</Date>
                 <Version>3.8.8.3</Version>
