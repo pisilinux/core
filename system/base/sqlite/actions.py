@@ -24,40 +24,40 @@ def setup():
                          "-DSQLITE_SOUNDEX",
                          "-DSQLITE_ENABLE_RTREE",
                          "-DSQLITE_ENABLE_API_ARMOR")
-    
+
     pisitools.cflags.sub("-O[s\d]", "-O3")
-    
+
     autotools.configure("--disable-static \
                          --enable-readline \
                          --enable-threadsafe")
-    
-    shelltools.cd("tea")
-    autotools.configure(" \
-                         --enable-shared \
-                         --with-tcl='/usr/lib/' \
-                         --with-tclinclude='/usr/include' \
-                         --enable-64bit \
-                         --enable-threads")
-    
+
+    #shelltools.cd("tea")
+    #autotools.configure(" \
+    #                     --enable-shared \
+    #                     --with-tcl='/usr/lib/' \
+    #                     --with-tclinclude='/usr/include' \
+    #                     --enable-64bit \
+    #                     --enable-threads")
+
 def build():
     autotools.make("-j1")
-    
-    shelltools.cd("tea")
-    autotools.make("-j1")
-    
+
+    #shelltools.cd("tea")
+    #autotools.make("-j1")
+
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    
-    shelltools.cd("%s/sqlite-autoconf-3081002/tea" % get.workDIR())
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+
+    #shelltools.cd("%s/sqlite-autoconf-3081002/tea" % get.workDIR())
+    #autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     pisitools.dodoc("README*")
-    
+
     shelltools.cd("%s/sqlite-doc-3081002" % get.workDIR())
     shelltools.system("pwd")
-    
+
     pisitools.insinto("/usr/share/doc/sqlite", "../sqlite-doc-3081002/*")
-    
+
     # fix permissions and remove obsolete files; https://bugs.archlinux.org/task/24605
     shelltools.system("find %s -type f -perm 755 -exec ls -lha {} \;" % get.installDIR())
     shelltools.system("find %s -type f -perm 755 -exec chmod 644 {} \;" % get.installDIR())
