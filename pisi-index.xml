@@ -13553,35 +13553,6 @@
             </Files>
         </Package>
         <Package>
-            <Name>sqlite-tcl</Name>
-            <Summary xml:lang="en">sqlite Tcl Extension Architecture (TEA)</Summary>
-            <PartOf>programming.language.tcl</PartOf>
-            <BuildDependencies>
-                <Dependency>tcl-devel</Dependency>
-            </BuildDependencies>
-            <RuntimeDependencies>
-                <Dependency>sqlite</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="library">/usr/lib/sqlite3.8.10.2</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>sqlite-tcl-32bit</Name>
-            <Summary xml:lang="en">sqlite-tcl-32bit için paylaşımlı kitaplıklar</Summary>
-            <PartOf>emul32</PartOf>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
-            <RuntimeDependencies>
-                <Dependency>glibc-32bit</Dependency>
-                <Dependency>sqlite</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="library">/usr/lib32/sqlite3.8.10.2/</Path>
-            </Files>
-        </Package>
-        <Package>
             <Name>sqlite-doc</Name>
             <Summary xml:lang="en">sqlite-doc, sqlite için doküman belgeleri</Summary>
             <RuntimeDependencies>
