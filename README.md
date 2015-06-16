@@ -22,6 +22,8 @@ Paketleme Kuralları;
 -----------------------------------------------------------------
 
 Yardım için;
-kendi github hesabınıza fork edebilir yaptığınız değişiklikleri pull request ile gönderebilirsiniz. 
---------------------------------------------------
+kendi github hesabınıza fork edebilir, yaptığınız değişiklikleri pull request ile gönderebilirsiniz. 
+
+------------------------------------------------------------------
+
 [![Throughput Graph](https://graphs.waffle.io/pisilinux/core/throughput.svg)](https://waffle.io/pisilinux/core/metrics)
