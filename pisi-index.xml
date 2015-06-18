@@ -11780,7 +11780,7 @@
             <Description xml:lang="fr">Programme servant à identifiant le format d&apos;un fichier en analysant les données binaires en cherchant des patrons connus.</Description>
             <Description xml:lang="en">Program to identify a file&apos;s format by scanning binary data for patterns.</Description>
             <Description xml:lang="tr">İkili veri taraması kullanarak (dosya uzantısına bakmadan) dosya biçimini tanımlamaya yarayan bir uygulamadır.</Description>
-            <Archive type="targz" sha1sum="20fa06592291555f2b478ea2fb70b53e9e8d1f7c">ftp://ftp.astron.com/pub/file/file-5.22.tar.gz</Archive>
+            <Archive type="targz" sha1sum="c817fb4c27f01934993ece3b013adbdc4deab67e">ftp://ftp.astron.com/pub/file/file-5.23.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>zlib</Dependency>
                 <Dependency>python-devel</Dependency>
@@ -11803,6 +11803,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2015-06-17</Date>
+                <Version>5.23</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2015-04-02</Date>
                 <Version>5.22</Version>
@@ -13544,7 +13551,7 @@
             <Summary xml:lang="tr">Linux kernel modülleri yönetim araçları</Summary>
             <Description xml:lang="en">Linux kernel module management utilities</Description>
             <Description xml:lang="tr">Linux kernel modülleri yönetim araçları</Description>
-            <Archive type="tarxz" sha1sum="40a17f9208e841b3fd74984520cc7ba309674ab3">https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-20.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="b2c1a0a1f2979fd29c7b0825ed19254c332246b4">https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-21.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>chrpath</Dependency>
                 <Dependency>xz-32bit</Dependency>
@@ -13564,7 +13571,7 @@
                 <Dependency>xz</Dependency>
                 <Dependency>zlib</Dependency>
                 <Dependency>glibc</Dependency>
-                <Dependency version="20">libkmod</Dependency>
+                <Dependency version="21">libkmod</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin</Path>
@@ -13593,7 +13600,7 @@
             <Name>libkmod-devel</Name>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency version="20">libkmod</Dependency>
+                <Dependency version="21">libkmod</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13627,6 +13634,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="15">
+                <Date>2015-06-17</Date>
+                <Version>21</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="14">
                 <Date>2015-03-26</Date>
                 <Version>20</Version>
