@@ -1285,6 +1285,587 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>cpupowertools</Name>
+            <Homepage>http://www.kernel.org</Homepage>
+            <Packager>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Packager>
+            <License>GPLv2</License>
+            <IsA>app:console</IsA>
+            <PartOf>kernel.tools</PartOf>
+            <Summary xml:lang="en">CPU power management tools</Summary>
+            <Summary xml:lang="tr">CPU güç/frekans yönetim araçları</Summary>
+            <Description xml:lang="en">cpupowertools contains utilities to manage power management and frequency scaling policies of modern CPUs.</Description>
+            <Description xml:lang="tr">cpupowertools, işlemcinin çeşitli güç ve frekans parametrelerinin yönetilmesini sağlayan çeşitli araçları içeren bir pakettir.</Description>
+            <Archive type="targz" sha1sum="553164212ea3a162a2ff63276c60fe7dd04e9ad1">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.0.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>pciutils-devel</Dependency>
+            </BuildDependencies>
+            <Patches>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.0.5.xz</Patch>
+            </Patches>
+            <SourceURI>kernel/tools/cpupowertools/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>cpupowertools</Name>
+            <RuntimeDependencies>
+                <Dependency>pciutils</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="config">/etc/conf.d</Path>
+                <Path fileType="executable">/usr/bin/cpupower</Path>
+                <Path fileType="executable">/usr/bin/*-decode</Path>
+                <Path fileType="library">/usr/lib/libcpupower*</Path>
+                <Path fileType="header">/usr/include</Path>
+                <Path fileType="man">/usr/share/man/man1/cpupower*</Path>
+                <Path fileType="locale">/usr/share/locale/*/*/cpupower.mo</Path>
+            </Files>
+            <AdditionalFiles>
+                <AdditionalFile target="/etc/conf.d/cpupower" permission="0644" owner="root">cpupower.conf.d</AdditionalFile>
+            </AdditionalFiles>
+        </Package>
+        <History>
+            <Update release="51">
+                <Date>2015-06-16</Date>
+                <Version>4.0.5</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="50">
+                <Date>2015-05-22</Date>
+                <Version>3.19.8</Version>
+                <Comment>Version bump to 3.19.8</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="49">
+                <Date>2015-05-05</Date>
+                <Version>3.19.6</Version>
+                <Comment>Version bump to 3.19.6</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="48">
+                <Date>2015-04-16</Date>
+                <Version>3.19.5</Version>
+                <Comment>Version bump to 3.19.3</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="47">
+                <Date>2015-04-16</Date>
+                <Version>3.19.4</Version>
+                <Comment>Version bump to 3.19.4</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="46">
+                <Date>2015-04-02</Date>
+                <Version>3.19.3</Version>
+                <Comment>Version bump to 3.19.3</Comment>
+                <Name>Hakan Yıldız</Name>
+                <Email>hknyldz93@gmail.com</Email>
+            </Update>
+            <Update release="45">
+                <Date>2015-03-08</Date>
+                <Version>3.19.1</Version>
+                <Comment>Version bump to 3.19.1</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="44">
+                <Date>2015-03-01</Date>
+                <Version>3.19.0</Version>
+                <Comment>Version bump</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="43">
+                <Date>2015-01-28</Date>
+                <Version>3.18.3</Version>
+                <Comment>Version bump</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="42">
+                <Type package="kernel">security</Type>
+                <Date>2015-01-08</Date>
+                <Version>3.18.1</Version>
+                <Comment>Version bump to 3.18.1 https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.18.1</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="41">
+                <Type package="kernel">security</Type>
+                <Date>2014-11-28</Date>
+                <Version>3.17.4</Version>
+                <Comment>Version bump to 3.17.4 https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.17.4</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="40">
+                <Type package="kernel">security</Type>
+                <Date>2014-10-18</Date>
+                <Version>3.17.1</Version>
+                <Comment>Version bump to 3.17.1 https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.17.1</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="39">
+                <Type package="kernel">security</Type>
+                <Date>2014-09-19</Date>
+                <Version>3.16.3</Version>
+                <Comment>Version bump to 3.16.3 https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.16.3</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="38">
+                <Type package="kernel">security</Type>
+                <Date>2014-09-03</Date>
+                <Version>3.16.1</Version>
+                <Comment>Version bump to 3.16.1 https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.16.1</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="37">
+                <Type package="kernel">security</Type>
+                <Date>2014-07-24</Date>
+                <Version>3.15.6</Version>
+                <Comment>Version bump to 3.15.6 https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.15.6</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="36">
+                <Type package="kernel">security</Type>
+                <Date>2014-06-15</Date>
+                <Version>3.15.0</Version>
+                <Comment>Version bump to 3.15 https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.15</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="35">
+                <Type package="kernel">security</Type>
+                <Date>2014-05-27</Date>
+                <Version>3.14.4</Version>
+                <Comment>Version bump to 3.14.4 https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.14.4</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="34">
+                <Type package="kernel">security</Type>
+                <Date>2014-05-02</Date>
+                <Version>3.14.2</Version>
+                <Comment>Version bump to 3.14.2 https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.14.2</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="33">
+                <Type package="kernel">security</Type>
+                <Date>2014-04-15</Date>
+                <Version>3.13.10</Version>
+                <Comment>Version bump to 3.13.10 https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.13.10</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="32">
+                <Type package="kernel">security</Type>
+                <Date>2014-03-22</Date>
+                <Version>3.13.6</Version>
+                <Comment>Version bump to 3.13.6 https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.13.6</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="31">
+                <Type package="kernel">security</Type>
+                <Date>2014-03-01</Date>
+                <Version>3.12.13</Version>
+                <Comment>Version bump to 3.12.13 https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.12.13</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="30">
+                <Type package="kernel">security</Type>
+                <Date>2014-01-16</Date>
+                <Version>3.12.8</Version>
+                <Comment>Version bump to 3.12.8 https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.12.8</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="29">
+                <Type package="kernel">security</Type>
+                <Date>2013-12-17</Date>
+                <Version>3.12.5</Version>
+                <Comment>Add Maegia patch series and some cpu usage improvements.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="28">
+                <Type package="kernel">security</Type>
+                <Date>2013-12-12</Date>
+                <Version>3.12.5</Version>
+                <Comment>Version bump to 3.12.5 https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.12.5</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="27">
+                <Type package="kernel">security</Type>
+                <Date>2013-11-23</Date>
+                <Version>3.10.20</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.20</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="26">
+                <Type package="kernel">security</Type>
+                <Date>2013-11-05</Date>
+                <Version>3.10.18</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.18</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="25">
+                <Type package="kernel">security</Type>
+                <Date>2013-10-07</Date>
+                <Version>3.10.15</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.15</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="24">
+                <Type package="kernel">security</Type>
+                <Date>2013-09-27</Date>
+                <Version>3.10.13</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.13</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="23">
+                <Type package="kernel">security</Type>
+                <Date>2013-09-15</Date>
+                <Version>3.10.12</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.12</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="22">
+                <Type package="kernel">security</Type>
+                <Date>2013-08-29</Date>
+                <Version>3.10.10</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.10</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="21">
+                <Type package="kernel">security</Type>
+                <Date>2013-08-20</Date>
+                <Version>3.10.9</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.9</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="20">
+                <Type package="kernel">security</Type>
+                <Date>2013-08-12</Date>
+                <Version>3.10.6</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.6</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="19">
+                <Type package="kernel">security</Type>
+                <Date>2013-08-11</Date>
+                <Version>3.10.5</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.5</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="18">
+                <Type package="kernel">security</Type>
+                <Date>2013-08-01</Date>
+                <Version>3.10.4</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.4</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="17">
+                <Type package="kernel">security</Type>
+                <Date>2013-07-17</Date>
+                <Version>3.10.2</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.2</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="16">
+                <Type package="kernel">security</Type>
+                <Date>2013-07-17</Date>
+                <Version>3.10.1</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10.1</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="15">
+                <Type package="kernel">security</Type>
+                <Date>2013-07-04</Date>
+                <Version>3.10.0</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.10</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="14">
+                <Type package="kernel">security</Type>
+                <Date>2013-06-21</Date>
+                <Version>3.8.13</Version>
+                <Comment>Fix TSC calibration failure</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="13">
+                <Type package="kernel">security</Type>
+                <Date>2013-06-15</Date>
+                <Version>3.8.13</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.8.13</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="12">
+                <Type package="kernel">security</Type>
+                <Date>2013-04-18</Date>
+                <Version>3.8.8</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.8.8</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="11">
+                <Type package="kernel">security</Type>
+                <Date>2013-03-31</Date>
+                <Version>3.8.5</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.8.5</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="10">
+                <Type package="kernel">security</Type>
+                <Date>2013-03-25</Date>
+                <Version>3.8.4</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.8.4</Comment>
+                <Name>Yoyo Fernández</Name>
+                <Email>admins@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="9">
+                <Type package="kernel">security</Type>
+                <Date>2013-03-14</Date>
+                <Version>3.8.3</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.8.3</Comment>
+                <Name>Richard de Bruin</Name>
+                <Email>admins@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="8">
+                <Type package="kernel">security</Type>
+                <Date>2013-03-06</Date>
+                <Version>3.8.2</Version>
+                <Comment>https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.8.2</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>admins@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="7">
+                <Type package="kernel">security</Type>
+                <Date>2013-03-03</Date>
+                <Version>3.8.1</Version>
+                <Comment>update to current line</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>admins@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="7">
+                <Type package="kernel">security</Type>
+                <Date>2013-02-22</Date>
+                <Version>3.8.0</Version>
+                <Comment>update to final line with patch</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>admins@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="6">
+                <Type package="kernel">security</Type>
+                <Date>2013-02-17</Date>
+                <Version>3.8.0</Version>
+                <Comment>obsoletemans wifi fixing</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>admins@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="5">
+                <Type package="kernel">security</Type>
+                <Date>2013-02-12</Date>
+                <Version>3.8.0</Version>
+                <Comment>bump to -rc7</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>admins@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="4">
+                <Type package="kernel">security</Type>
+                <Date>2013-02-06</Date>
+                <Version>3.7.6</Version>
+                <Comment>http://www.kernel.org/pub/linux/kernel/v3.0/ChangeLog-3.7.6</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>admins@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="3">
+                <Type package="kernel">security</Type>
+                <Date>2013-01-28</Date>
+                <Version>3.7.5</Version>
+                <Comment>http://www.kernel.org/pub/linux/kernel/v3.0/ChangeLog-3.7.5</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>admins@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="2">
+                <Type package="kernel">security</Type>
+                <Date>2013-01-18</Date>
+                <Version>3.7.4</Version>
+                <Comment>http://www.kernel.org/pub/linux/kernel/v3.0/ChangeLog-3.7.4</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>admins@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="1">
+                <Type package="kernel">security</Type>
+                <Date>2013-01-15</Date>
+                <Version>3.7.2</Version>
+                <Comment>First release</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>admins@pisilinux.org</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>module-virtualbox</Name>
             <Homepage>http://www.virtualbox.org</Homepage>
             <Packager>
@@ -1649,6 +2230,192 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>module-bbswitch</Name>
+            <Homepage>https://github.com/Bumblebee-Project/bbswitch</Homepage>
+            <Packager>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Packager>
+            <License>GPL</License>
+            <IsA>app:gui</IsA>
+            <PartOf>kernel.drivers</PartOf>
+            <Summary xml:lang="en">Kernel module allowing to switch dedicated graphics card on Optimus laptops</Summary>
+            <Summary xml:lang="tr">Optimus grafik kartlı bir dizüstü bilgisayarda grafik kartını seçmeye yarayan çekirdek modülüdür.</Summary>
+            <Description xml:lang="en">kernel module allowing to switch dedicated graphics card on Optimus laptops</Description>
+            <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
+            <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency version="4.0.5">kernel-module-headers</Dependency>
+            </BuildDependencies>
+            <SourceURI>kernel/drivers/module-bbswitch/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>module-bbswitch</Name>
+            <RuntimeDependencies>
+                <Dependency version="4.0.5">kernel</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library" permanent="true">/lib/modules</Path>
+                <Path fileType="config">/etc</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+            <AdditionalFiles>
+                <AdditionalFile target="/etc/modprobe.d/bbswitch.conf" permission="0644" owner="root">bbswitch.conf</AdditionalFile>
+                <AdditionalFile target="/etc/debmod.d/kmod-bbswitch.conf" permission="0644" owner="root">kmod-bbswitch.conf</AdditionalFile>
+            </AdditionalFiles>
+        </Package>
+        <History>
+            <Update release="20">
+                <Date>2015-06-16</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for new kernel</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="19">
+                <Date>2015-05-22</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.19.8</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="18">
+                <Date>2015-05-05</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.19.6</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="17">
+                <Date>2015-04-24</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.19.5</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="16">
+                <Date>2015-04-16</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.19.4</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="15">
+                <Date>2015-04-02</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.19.3</Comment>
+                <Name>Hakan Yıldız</Name>
+                <Email>hknyldz93@gmail.com</Email>
+            </Update>
+            <Update release="14">
+                <Date>2015-03-08</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.19.1</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="13">
+                <Date>2015-03-01</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.19.0</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="12">
+                <Date>2015-01-28</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.18.3</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="11">
+                <Date>2015-01-09</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.18.1</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="10">
+                <Date>2014-11-29</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.17.4</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="9">
+                <Date>2014-10-18</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.17.1</Comment>
+                <Name>Kamil Atlı</Name>
+                <Email>suvari@pisilinux.org</Email>
+            </Update>
+            <Update release="8">
+                <Date>2014-09-19</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.16.3</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="7">
+                <Date>2014-09-03</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.16.1</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="6">
+                <Date>2014-07-24</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.15.6</Comment>
+                <Name>Vedat Demir</Name>
+                <Email>vedat@pisilinux.org</Email>
+            </Update>
+            <Update release="5">
+                <Date>2014-06-15</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.15.0</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="5">
+                <Date>2014-05-29</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.14.4.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
+                <Date>2014-05-02</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.14.2.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2014-04-15</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.13.10.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2014-03-29</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel 3.13.6.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2014-03-09</Date>
+                <Version>0.8</Version>
+                <Comment>First release.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>module-virtualbox-guest</Name>
             <Homepage>http://www.virtualbox.org</Homepage>
             <Packager>
@@ -2001,6 +2768,351 @@
                 <Comment>First release</Comment>
                 <Name>Marcin Bojara</Name>
                 <Email>marcin@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>module-broadcom-wl</Name>
+            <Homepage>http://www.broadcom.com/support/802.11/linux_sta.php</Homepage>
+            <Packager>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Packager>
+            <License>freedist</License>
+            <IsA>driver</IsA>
+            <PartOf>kernel.drivers</PartOf>
+            <Summary xml:lang="en">Broadcom&apos;s IEEE 802.11a/b/g/n hybrid Linux device driver for use with Broadcom&apos;s BCM4311, BCM4312, BCM4321, and BCM4322 based hardware</Summary>
+            <Summary xml:lang="tr">Broadcom&apos;un BCM4311, BCM4312, BCM4321 ve BCM4322 tabanlı kablosuz bağdaştırıcıları için IEEE 802.11a/b/g/n aygıt sürücüleri</Summary>
+            <Description xml:lang="en">This package contains Broadcom&apos;s IEEE 802.11a/b/g/n hybrid Linux device driver for use with Broadcom&apos;s BCM4311, BCM4312, BCM4321, and BCM4322 based hardware. You must read the LICENSE.txt file in the docs directory before using this software.</Description>
+            <Description xml:lang="tr">Bu paket Broadcom&apos;un BCM4311, BCM4312, BCM4321 ve BCM4322 tabanlı kablosuz bağdaştırıcıları ile kullanımı için IEEE 802.11a/b/g/n aygıt sürücülerini içerir. Bu yazılımı kullanmadan önce belgeler dizinindeki LICENSE.txt dosyasında yer alan lisans sözleşmesini okumalısınız.</Description>
+            <Archive type="targz" sha1sum="e02beac9cc713011551c483ae5f20f065f5b88c7" target="i686">http://www.broadcom.com/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
+            <Archive type="targz" sha1sum="bd55f1fdc6b0a4d0a70dc4ba4bb4169a824e238c" target="x86_64">http://www.broadcom.com/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency version="4.0.5">kernel-module-headers</Dependency>
+            </BuildDependencies>
+            <Patches>
+                <Patch level="1">patch/linux-recent.patch</Patch>
+                <Patch level="1">patch/license.patch</Patch>
+                <Patch level="1">patch/gcc.patch</Patch>
+                <Patch level="1">patch/wlan.patch</Patch>
+                <Patch level="1">patch/broadcom-sta-6.30.223.248-linux-3.18-null-pointer-crash.patch</Patch>
+            </Patches>
+            <SourceURI>kernel/drivers/module-broadcom-wl/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>module-broadcom-wl</Name>
+            <BuildFlags>
+                <Flag>noDelta</Flag>
+            </BuildFlags>
+            <RuntimeDependencies>
+                <Dependency version="4.0.5">kernel</Dependency>
+                <Dependency release="40">module-broadcom-wl-userspace</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library" permanent="true">/lib/modules</Path>
+            </Files>
+            <Replaces>
+                <Package>broadcom-wl</Package>
+            </Replaces>
+        </Package>
+        <Package>
+            <Name>module-broadcom-wl-userspace</Name>
+            <Summary xml:lang="en">modprobe rules and documents for broadcom-wl kernel driver</Summary>
+            <Summary xml:lang="tr">broadcom-wl çekirdek sürücüsü için modprobe kuralları ve belgeler</Summary>
+            <BuildFlags>
+                <Flag>noDelta</Flag>
+            </BuildFlags>
+            <Files>
+                <Path fileType="data">/etc/modprobe.d</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+            <AdditionalFiles>
+                <AdditionalFile target="/etc/modprobe.d/broadcom-wl.conf" permission="0644" owner="root">conf/broadcom-wl</AdditionalFile>
+                <AdditionalFile target="/etc/modprobe.d/broadcom-wl-alias.conf" permission="0644" owner="root">conf/broadcom-wl-alias.conf</AdditionalFile>
+                <AdditionalFile target="/etc/modprobe.d/broadcom-wl-blacklist.conf" permission="0644" owner="root">conf/broadcom-wl-blacklist.conf</AdditionalFile>
+            </AdditionalFiles>
+        </Package>
+        <History>
+            <Update release="40">
+                <Date>2015-06-16</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 4.0.5</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="38">
+                <Date>2015-05-22</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 3.19.6</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="37">
+                <Date>2015-05-05</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 3.19.6</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="36">
+                <Date>2015-04-24</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 3.19.5</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="35">
+                <Date>2015-04-16</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 3.19.4</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="34">
+                <Date>2015-04-02</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 3.19.3</Comment>
+                <Name>Hakan Yıldız</Name>
+                <Email>hknyldz93@gmail.com</Email>
+            </Update>
+            <Update release="33">
+                <Date>2015-03-08</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 3.19.1</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="32">
+                <Date>2015-03-01</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 3.19.0</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="31">
+                <Date>2015-02-28</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 3.18.3</Comment>
+                <Name>Hakan Yıldız</Name>
+                <Email>hknyldz93@gmail.com</Email>
+            </Update>
+            <Update release="30">
+                <Date>2014-11-29</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 3.17.4</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="29">
+                <Date>2014-10-19</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 3.17.1</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="28">
+                <Date>2014-09-19</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 3.16.3</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="27">
+                <Date>2014-09-03</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 3.16.1</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="26">
+                <Date>2014-07-23</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Version bump for kernel 3.15.6</Comment>
+                <Name>Vedat Demir</Name>
+                <Email>vedat@pisilinux.org</Email>
+            </Update>
+            <Update release="25">
+                <Date>2014-06-15</Date>
+                <Version>6.30.223.141</Version>
+                <Comment>Rebuild for kernel 3.15.0</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="24">
+                <Date>2014-05-29</Date>
+                <Version>6.30.223.141</Version>
+                <Comment>Rebuild for kernel 3.14.4.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="23">
+                <Date>2014-05-02</Date>
+                <Version>6.30.223.141</Version>
+                <Comment>Rebuild for kernel 3.14.2.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="22">
+                <Date>2014-04-15</Date>
+                <Version>6.30.223.141</Version>
+                <Comment>Rebuild for kernel 3.13.10.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="21">
+                <Date>2014-03-29</Date>
+                <Version>6.30.223.141</Version>
+                <Comment>Rebuild for 3.13.6</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+            <Update release="20">
+                <Date>2014-03-01</Date>
+                <Version>6.30.223.141</Version>
+                <Comment>Rebuild for 3.12.13</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="19">
+                <Date>2014-01-17</Date>
+                <Version>6.30.223.141</Version>
+                <Comment>Rebuild for 3.12.8</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="18">
+                <Date>2013-12-17</Date>
+                <Version>6.30.223.141</Version>
+                <Comment>Rebuild for 3.12.5</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="17">
+                <Date>2013-12-14</Date>
+                <Version>6.30.223.141</Version>
+                <Comment>Rebuild for 3.12.5</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="16">
+                <Date>2013-11-23</Date>
+                <Version>5.100.82.112</Version>
+                <Comment>Rebuild for 3.10.20</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="15">
+                <Date>2013-11-05</Date>
+                <Version>5.100.82.112</Version>
+                <Comment>Rebuild for 3.10.18</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
+            <Update release="14">
+                <Date>2013-10-09</Date>
+                <Version>5.100.82.112</Version>
+                <Comment>fix solution broadcom-wl</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="13">
+                <Date>2013-09-28</Date>
+                <Version>5.100.82.112</Version>
+                <Comment>fix solution broadcom-wl</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="12">
+                <Date>2013-09-18</Date>
+                <Version>5.100.82.112</Version>
+                <Comment>fix solution broadcom-wl</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="11">
+                <Date>2013-09-05</Date>
+                <Version>5.100.82.112</Version>
+                <Comment>fix solution broadcom-wl</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="10">
+                <Date>2013-08-30</Date>
+                <Version>5.100.82.112</Version>
+                <Comment>3.10.10</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="10">
+                <Date>2013-08-20</Date>
+                <Version>5.100.82.112</Version>
+                <Comment>3.10.9</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="9">
+                <Date>2013-08-20</Date>
+                <Version>5.100.82.112</Version>
+                <Comment>3.10.x</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="8">
+                <Date>2013-08-11</Date>
+                <Version>5.100.82.112</Version>
+                <Comment>without blacklist</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="7">
+                <Date>2013-07-26</Date>
+                <Version>5.100.82.112</Version>
+                <Comment>Rebuild for Kernel 3.10.x</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="6">
+                <Date>2013-06-15</Date>
+                <Version>5.100.82.112</Version>
+                <Comment>rebuild for Kernel 3.8.13</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="5">
+                <Date>2013-05-26</Date>
+                <Version>5.100.82.112</Version>
+                <Comment>rebuild for Kernel 3.9.4</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>erdincgultekin@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
+                <Date>2013-05-26</Date>
+                <Version>5.100.82.112</Version>
+                <Comment>Kernel 3.9.3</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2013-02-07</Date>
+                <Version>5.100.82.112</Version>
+                <Comment>Runtime dep</Comment>
+                <Name>Ertan Güven</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-02-01</Date>
+                <Version>5.100.82.112</Version>
+                <Comment>bump+fix for new kernel-line</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2011-09-15</Date>
+                <Version>5.100.82.38</Version>
+                <Comment>First release</Comment>
+                <Name>Pisi Linux Admins</Name>
+                <Email>admins@pisilinux.org</Email>
             </Update>
         </History>
     </SpecFile>
@@ -17979,7 +19091,7 @@
             <Description xml:lang="fr">Libtool est une librairie utilitaire partagée pour développeurs.</Description>
             <Description xml:lang="en">Libtool is a shared library tool for developers.</Description>
             <Description xml:lang="tr">Libtool, program geliştiriciler için bir paylaşımlı kütüphane aracıdır.</Description>
-            <Archive type="tarxz" sha1sum="3e7504b832eb2dd23170c91b6af72e15b56eb94e">mirrors://gnu/libtool/libtool-2.4.6.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="4671f3323f2fbc712a70afce57602ce906a82a15">mirrors://gnu/libtool/libtool-2.4.2.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>gnuconfig</Dependency>
                 <Dependency>autoconf</Dependency>
@@ -18016,24 +19128,14 @@
             <Summary xml:lang="tr">libtool için 32-bit paylaşımlı kitaplıklar</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency>glibc-32bit</Dependency>
+                <Dependency release="5">libtool-ltdl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
-            <Update release="6">
-                <Date>2015-06-08</Date>
-                <Version>2.4.6</Version>
-                <Comment>Version bump.</Comment>
-                <Name>Ertuğrul Erata</Name>
-                <Email>ertugrulerata@gmail.com</Email>
-            </Update>
             <Update release="5">
                 <Date>2014-11-28</Date>
                 <Version>2.4.2</Version>
