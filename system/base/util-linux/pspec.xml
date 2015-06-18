@@ -31,7 +31,7 @@
             <Patch level="1">move_is_mountinfo.patch</Patch>-->
             <!-- makeing /var/log/lastlog -->
              <Patch level="1">upstream/util-linux-ng-2.21-login-lastlog.patch</Patch>
-	 </Patches>
+         </Patches>
     </Source>
 
     <Package>
@@ -73,14 +73,14 @@
         <RuntimeDependencies>
             <Dependency>libutil-linux</Dependency>
         </RuntimeDependencies>
-	<Conflicts>
+     <Conflicts>
             <Package releaseTo="8">uuidd</Package>
         </Conflicts>
         <!-- FIXME: Add COMAR service -->
         <Files>
             <Path fileType="executable">/usr/bin/uuidgen</Path>
             <Path fileType="executable">/usr/sbin/uuidd</Path>
-	    <Path fileType="config">/usr/lib/tmpfiles.d/uuidd.conf</Path>
+            <Path fileType="config">/usr/lib/tmpfiles.d/uuidd.conf</Path>
             <Path fileType="man">/usr/share/man/man1/uuidgen.1</Path>
             <Path fileType="man">/usr/share/man/man8/uuidd.8</Path>
         </Files>
@@ -122,7 +122,7 @@
         <RuntimeDependencies>
             <Dependency release="current">libutil-linux</Dependency>
         </RuntimeDependencies>
-	<Conflicts>
+        <Conflicts>
             <Package releaseTo="8">libblkid-devel</Package>
             <Package releaseTo="8">libuuid-devel</Package>
         </Conflicts>
