@@ -14,10 +14,16 @@
         <Summary>C extensions for the Python</Summary>
         <Description>Cython is a language that makes writing C extensions for the Python language as easy as Python itself.</Description>
         <Archive sha1sum="a80bd1462ca5e99934908f030549d204951f8da6" type="targz">http://www.cython.org/release/Cython-0.22.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>python-devel</Dependency>
+        </BuildDependencies>
     </Source>
 
     <Package>
         <Name>cython</Name>
+        <RuntimeDependencies>
+            <Dependency>python</Dependency>
+        </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="library">/usr/lib</Path>
