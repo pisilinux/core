@@ -12479,9 +12479,17 @@
                 <AdditionalFile target="/usr/lib/pisilinux/pisi/actionsapi/pkgconfig.py" permission="0644" owner="root">pkgconfig.py</AdditionalFile>
                 <AdditionalFile target="/usr/lib/tmpfiles.d/pisi.conf" permission="0644" owner="root">tmpfiles.conf</AdditionalFile>
                 <AdditionalFile target="/usr/lib/pisilinux/pisi/actionsapi/qt5.py" permission="0644" owner="root">qt5.py</AdditionalFile>
+                <AdditionalFile target="/usr/lib/pisilinux/pisi/actionsapi/kde5.py" permission="0644" owner="root">kde5.py</AdditionalFile>
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="33">
+                <Date>2015-06-03</Date>
+                <Version>2.6</Version>
+                <Comment>Add kde5 api</Comment>
+                <Name>Vedat Demir</Name>
+                <Email>vedat@pisilinux.org</Email>
+            </Update>
             <Update release="32">
                 <Date>2015-05-04</Date>
                 <Version>2.6</Version>
@@ -14488,7 +14496,7 @@
             <Summary xml:lang="tr">eudev sistemd-udev uygulamasının çatalı</Summary>
             <Description xml:lang="en">eudev is a fork of system-udev with the goal of obtaining better compatibility with existing software such as OpenRC and Upstart, older kernels, various toolchains and anything else required by users and various distributions.</Description>
             <Description xml:lang="tr">eudev sistem-udev uygulamasının OpenRC, Upstart gibi başlangıç sistemleri ile uyumu için  hazırlanmış çatalı</Description>
-            <Archive type="targz" sha1sum="2a1ab1f301b8d0fe1754f13d4b5fe63d84173bf3">https://github.com/gentoo/eudev/archive/v3.1.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="af5d5703c3aa9253897b034c561796ef796aab83">https://github.com/gentoo/eudev/archive/v3.1.2.tar.gz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="config.cache">config.cache</AdditionalFile>
             </AdditionalFiles>
@@ -14546,7 +14554,7 @@
             <Summary xml:lang="en">Development files for eudev</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="4">eudev</Dependency>
+                <Dependency release="5">eudev</Dependency>
                 <Dependency>glib2-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -14588,6 +14596,13 @@
             </Replaces>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2015-06-20</Date>
+                <Version>3.1.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2015-06-05</Date>
                 <Version>3.1.1</Version>
