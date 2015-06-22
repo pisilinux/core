@@ -1,0 +1,346 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>module-broadcom-wl</Name>
+        <Homepage>http://www.broadcom.com/support/802.11/linux_sta.php</Homepage>
+        <Packager>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Packager>
+        <License>freedist</License>
+        <IsA>driver</IsA>
+        <Summary>Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver for use with Broadcom's BCM4311, BCM4312, BCM4321, and BCM4322 based hardware</Summary>
+        <Description>This package contains Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver for use with Broadcom's BCM4311, BCM4312, BCM4321, and BCM4322 based hardware. You must read the LICENSE.txt file in the docs directory before using this software.</Description>
+        <Archive sha1sum="e02beac9cc713011551c483ae5f20f065f5b88c7" type="targz" target="i686">http://www.broadcom.com/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
+        <Archive sha1sum="bd55f1fdc6b0a4d0a70dc4ba4bb4169a824e238c" type="targz" target="x86_64">http://www.broadcom.com/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency version="4.0.5">kernel-module-headers</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">patch/linux-40.patch</Patch>
+            <Patch level="1">patch/linux-recent.patch</Patch>
+            <Patch level="1">patch/license.patch</Patch>
+            <Patch level="1">patch/gcc.patch</Patch>
+            <Patch level="1">patch/wlan.patch</Patch>
+            <Patch level="1">patch/broadcom-sta-6.30.223.248-linux-3.18-null-pointer-crash.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>module-broadcom-wl</Name>
+        <RuntimeDependencies>
+            <Dependency version="4.0.5">kernel</Dependency>
+            <Dependency release="current">module-broadcom-wl-userspace</Dependency>
+        </RuntimeDependencies>
+        <Replaces>
+            <Package>broadcom-wl</Package>
+        </Replaces>
+        <Files>
+            <Path fileType="library" permanent="true">/lib/modules</Path>
+        </Files>
+        <BuildFlags>
+            <Flag>noDelta</Flag>
+        </BuildFlags>
+    </Package>
+
+    <Package>
+        <Name>module-broadcom-wl-userspace</Name>
+        <Summary>modprobe rules and documents for broadcom-wl kernel driver</Summary>
+        <Files>
+            <Path fileType="data">/etc/modprobe.d</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/modprobe.d/broadcom-wl.conf">conf/broadcom-wl</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/modprobe.d/broadcom-wl-alias.conf">conf/broadcom-wl-alias.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/modprobe.d/broadcom-wl-blacklist.conf">conf/broadcom-wl-blacklist.conf</AdditionalFile>
+        </AdditionalFiles>
+        <BuildFlags>
+            <Flag>noDelta</Flag>
+        </BuildFlags>
+    </Package>
+
+    <History>
+        <Update release="40">
+            <Date>2015-06-16</Date>
+            <Version>6.30.223.248</Version>
+            <Comment>Rebuild for kernel 4.0.5</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="38">
+            <Date>2015-05-22</Date>
+            <Version>6.30.223.248</Version>
+            <Comment>Rebuild for kernel 3.19.6</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="37">
+            <Date>2015-05-05</Date>
+            <Version>6.30.223.248</Version>
+            <Comment>Rebuild for kernel 3.19.6</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="36">
+            <Date>2015-04-24</Date>
+            <Version>6.30.223.248</Version>
+            <Comment>Rebuild for kernel 3.19.5</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="35">
+            <Date>2015-04-16</Date>
+            <Version>6.30.223.248</Version>
+            <Comment>Rebuild for kernel 3.19.4</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="34">
+            <Date>2015-04-02</Date>
+            <Version>6.30.223.248</Version>
+            <Comment>Rebuild for kernel 3.19.3</Comment>
+            <Name>Hakan Yıldız</Name>
+            <Email>hknyldz93@gmail.com</Email>
+        </Update>
+        <Update release="33">
+            <Date>2015-03-08</Date>
+            <Version>6.30.223.248</Version>
+            <Comment>Rebuild for kernel 3.19.1</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="32">
+            <Date>2015-03-01</Date>
+            <Version>6.30.223.248</Version>
+            <Comment>Rebuild for kernel 3.19.0</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="31">
+            <Date>2015-02-28</Date>
+            <Version>6.30.223.248</Version>
+            <Comment>Rebuild for kernel 3.18.3</Comment>
+            <Name>Hakan Yıldız</Name>
+            <Email>hknyldz93@gmail.com</Email>
+        </Update>
+        <Update release="30">
+            <Date>2014-11-29</Date>
+            <Version>6.30.223.248</Version>
+            <Comment>Rebuild for kernel 3.17.4</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="29">
+            <Date>2014-10-19</Date>
+            <Version>6.30.223.248</Version>
+            <Comment>Rebuild for kernel 3.17.1</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="28">
+            <Date>2014-09-19</Date>
+            <Version>6.30.223.248</Version>
+            <Comment>Rebuild for kernel 3.16.3</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="27">
+            <Date>2014-09-03</Date>
+            <Version>6.30.223.248</Version>
+            <Comment>Rebuild for kernel 3.16.1</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="26">
+            <Date>2014-07-23</Date>
+            <Version>6.30.223.248</Version>
+            <Comment>Version bump for kernel 3.15.6</Comment>
+            <Name>Vedat Demir</Name>
+            <Email>vedat@pisilinux.org</Email>
+        </Update>
+        <Update release="25">
+            <Date>2014-06-15</Date>
+            <Version>6.30.223.141</Version>
+            <Comment>Rebuild for kernel 3.15.0</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="24">
+            <Date>2014-05-29</Date>
+            <Version>6.30.223.141</Version>
+            <Comment>Rebuild for kernel 3.14.4.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="23">
+            <Date>2014-05-02</Date>
+            <Version>6.30.223.141</Version>
+            <Comment>Rebuild for kernel 3.14.2.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="22">
+            <Date>2014-04-15</Date>
+            <Version>6.30.223.141</Version>
+            <Comment>Rebuild for kernel 3.13.10.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="21">
+            <Date>2014-03-29</Date>
+            <Version>6.30.223.141</Version>
+            <Comment>Rebuild for 3.13.6</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="20">
+            <Date>2014-03-01</Date>
+            <Version>6.30.223.141</Version>
+            <Comment>Rebuild for 3.12.13</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+         <Update release="19">
+            <Date>2014-01-17</Date>
+            <Version>6.30.223.141</Version>
+            <Comment>Rebuild for 3.12.8</Comment>
+            <Name>Yusuf Aydemir</Name>
+            <Email>yusuf.aydemir@pisilinux.org</Email>
+        </Update>
+        <Update release="18">
+            <Date>2013-12-17</Date>
+            <Version>6.30.223.141</Version>
+            <Comment>Rebuild for 3.12.5</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="17">
+            <Date>2013-12-14</Date>
+            <Version>6.30.223.141</Version>
+            <Comment>Rebuild for 3.12.5</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="16">
+            <Date>2013-11-23</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>Rebuild for 3.10.20</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="15">
+            <Date>2013-11-05</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>Rebuild for 3.10.18</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
+        </Update>
+        <Update release="14">
+            <Date>2013-10-09</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>fix solution broadcom-wl</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="13">
+            <Date>2013-09-28</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>fix solution broadcom-wl</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="12">
+            <Date>2013-09-18</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>fix solution broadcom-wl</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="11">
+            <Date>2013-09-05</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>fix solution broadcom-wl</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="10">
+            <Date>2013-08-30</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>3.10.10</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="10">
+            <Date>2013-08-20</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>3.10.9</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="9">
+            <Date>2013-08-20</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>3.10.x</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="8">
+            <Date>2013-08-11</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>without blacklist</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="7">
+            <Date>2013-07-26</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>Rebuild for Kernel 3.10.x</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin@pisilinux.org</Email>
+        </Update>
+        <Update release="6">
+            <Date>2013-06-15</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>rebuild for Kernel 3.8.13</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="5">
+            <Date>2013-05-26</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>rebuild for Kernel 3.9.4</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>erdincgultekin@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2013-05-26</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>Kernel 3.9.3</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="3">
+            <Date>2013-02-07</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>Runtime dep</Comment>
+            <Name>Ertan Güven</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2013-02-01</Date>
+            <Version>5.100.82.112</Version>
+            <Comment>bump+fix for new kernel-line</Comment>
+            <Name>Erdinç Gültekin</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2011-09-15</Date>
+            <Version>5.100.82.38</Version>
+            <Comment>First release</Comment>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
