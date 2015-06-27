@@ -15,6 +15,7 @@
 ### Stable Queue
 ###
 
+
 ###
 ### Arch x86
 ###
@@ -38,22 +39,9 @@ x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch
 # slows down boot
 Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch
 
-# regression fix
-x86-spinlocks-Fix-regression-in-spinlock-contention-.patch
-
 ###
 ### Core
 ###
-genirq-Set-initial-affinity-in-irq_set_affinity_hint.patch
-genirq-Fix-null-pointer-reference-in-irq_set_affinit.patch
-
-iommu-vt-d-Remove-unused-variable.patch
-
-rcu-Fix-rcu_barrier-race-that-could-result-in-too-sh.patch
-
-# efi fixes
-x86-efi-Store-upper-bits-of-command-line-buffer-addr.patch
-firmware-efi-Fix-error-handling-in-add_sysfs_runtime_map_entr.patch
 
 ###
 ### i2c
@@ -70,18 +58,11 @@ pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch
 pci-quirks-drop-devinit-exit.patch
 
 # Intel ACS quirks
-pci-Add-Wellsburg-X99-to-Intel-PCH-root-port-ACS-qui.patch
 pci-acs-quirks-for-Intel-9-series-PCH-root-ports.patch
 
 ###
 ### PNP core
 ###
-
-# Turns pnpbios off by default, useful, since pnpbios
-# is know to cause problems (TTL: forever)
-pnp-pnpbios-off-by-default.patch
-
-pnp-isapnp-async-init.patch
 
 ###
 ### ACPI
@@ -92,20 +73,6 @@ acpi-CLEVO-M360S-disable_acpi_irq.patch
 
 # Clevo M720SR freezes with C3
 acpi-processor-M720SR-limit-to-C2.patch
-
-# fixes boot regression on some hw since kernel 3.11
-acpi-init-Fix-the-ordering-of-acpi_reserve_resources.patch
-# audio regression
-acpi-PNP-add-two-IDs-to-list-for-PNPACPI-device-enum.patch
-# MB regression
-acpi-SBS-Add-5-us-delay-to-fix-SBS-hangs-on-MacBook.patch
-acpi-sbs-enable-battery-manager-when-present.patch
-# backlight override
-acpi-video-Allow-forcing-native-backlight-on-non-win.patch
-# fix booting on new hw
-acpi-ACPICA-Add-Windows-2015-string-to-_OSI-support.patch
-# less log flooding
-acpi-table-Use-pr_debug-instead-of-pr_info-for-MADT-.patch
 
 ###
 ### Block
@@ -150,42 +117,17 @@ ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch
 ata-revert-Disabling-the-async-PM-for-JMicron-chip-363-361.patch
 ata-jmicron-disable-broken-async_suspend.patch
 
-# raid fixes
-md-raid5-dont-record-new-size-if-resize_stripes-fails.patch
-
-# blk-mq
-blk-mq-fix-CPU-hotplug-handling.patch
-blk-mq-fix-race-between-timeout-and-CPU-hotplug.patch
-blk-mq-fix-FUA-request-hang.patch
-blk-mq-don-t-lose-requests-if-a-stopped-queue-restar.patch
-
-# QNAP fix
-scsi-add-1024-max-sectors-black-list-flag.patch
+# Nice SSD speedup
+block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch
+block-cfq-iosched-fix-the-setting-of-IOPS-mode-on-SSDs.patch
 
 ###
 ### File-system
 ###
 
 # aufs from: http://aufs.sourceforge.net/ (mga#8314)
-fs-aufs-3.19.patch
-fs-aufs-3.19-modular.patch
-
-# btrfs crash
-fs-btrfs-fix-BUG_ON-in-btrfs_orphan_add-when-delete-unu.patch
-fs-btrfs-unlock-i_mutex-after-attempting-to-delete-subvolume-during-send.patch
-
-# efi fix
-fs-efivarfs-Ensure-VariableName-is-NUL-terminated.patch
-
-# ext4 fix
-fs-ext4-fix-data-corruption-caused-by-unwritten-and-del.patch
-fs-ext4-move-check-under-lock-scope-to-close-a-race.patch
-
-# core
-fs-mnt-Fix-fs_fully_visible-to-verify-the-root-director.patch
-fs-mnt-Fail-collect_mounts-when-applied-to-unmounted-mo.patch
-fs-path_openat-fix-double-fput.patch
-fs-splice-sendfile-at-once-fails-for-big-files.patch
+fs-aufs4.patch
+fs-aufs4-modular.patch
 
 ###
 ### FireWire
@@ -220,14 +162,6 @@ gpu-drm-mach64-linux-3.14-buildfix.patch
 gpu-drm-mach64-3.17-buildfix.patch
 gpu-drm-mach64-3.18-buildfix.patch
 
-# i915, nice speedups
-gpu-drm-i915-Make-sample_c-messages-go-faster-on-Haswell.patch
-gpu-drm-i915-Improve-HiZ-throughput-on-Cherryview.patch
-gpu-drm-i915-Enable-the-HiZ-RAW-Stall-Optimization-on-Broadwell.patch
-gpu-drm-i915-Ensure-the-HiZ-RAW-Stall-Optimization-is-on-for-Cherryview.patch
-# i915, vlv crash
-gpu-drm-i915-fix-vlv-crash.patch
-
 ###
 ### Hardware Monitoring
 ###
@@ -237,13 +171,6 @@ gpu-drm-i915-fix-vlv-crash.patch
 ###
 
 input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch
-
-# mga #14897
-Input-psmouse-support-for-the-FocalTech-PS-2-protoco.patch
-Input-psmouse-remove-hardcoded-touchpad-size-from-th.patch
-Input-psmouse-ensure-that-focaltech-reports-consiste.patch
-Input-psmouse-disable-changing-resolution-rate-scale.patch
-Input-psmouse-disable-palm-detection-in-the-focaltec.patch
 
 ###
 ### idle
@@ -257,6 +184,8 @@ Input-psmouse-disable-palm-detection-in-the-focaltec.patch
 ### Media
 ###
 
+media-Fix-regression-in-some-more-dib0700-based-devi.patch
+
 ###
 ### Misc
 ###
@@ -264,11 +193,6 @@ Input-psmouse-disable-palm-detection-in-the-focaltec.patch
 ###
 ### MM
 ###
-
-mm-vmscan-wake-up-all-pfmemalloc-throttled-processes.patch
-
-# div/0 fix
-mm-writeback-use-1-instead-of-1-to-protect-against-div-.patch
 
 ###
 ### Network
@@ -289,14 +213,6 @@ net-netfilter-IFWLOG-3.7-buildfix.patch
 net-netfilter-psd.patch
 net-netfilter-psd-mdv.patch
 net-netfilter-psd-2.6.35-buildfix.patch
-
-# ath9k
-net-wireless-ath9k-Update-PCI-IDs-for-AR9565.patch
-
-# brcmfmac
-net-wireless-brcmfmac-Add-support-for-bcm43340_1-wireless-chipsets.patch
-net-wireless-brcmfmac-avoid-null-pointer-access-when-brcmf_msgbuf.patch
-net-wireless-brcmfmac-check-result-of-USB-firmware-request.patch
 
 ###
 ### Platform drivers
@@ -322,21 +238,6 @@ include-kbuild-export-pci_ids.patch
 ### Sound
 ###
 
-# adds bluetooth sco support
-sound-bluetooth-SCO-support.patch
-
-# VT1613
-sound-alsa-add-VT1613-AC97-codec-support.patch
-
-# Alsa updates for Dell
-sound-alsa-hda-realtek-Support-Dell-headset-mode-for-ALC256.patch
-sound-alsa-hda-realtek-Support-headset-mode-for-ALC286-288.patch
-sound-alsa-hda-realtek-Support-Dell-headset-mode-for-ALC288.patch
-
-# emu10k
-alsa-emu10k1-emu10k2-32-bit-dma-mode.patch
-alsa-emu10k1-fix-card-shortname-string-buffer-overflow.patch
-
 ###
 ### Staging
 ###
@@ -350,29 +251,10 @@ alsa-emu10k1-fix-card-shortname-string-buffer-overflow.patch
 ### USB
 ###
 
-# http://qa.mandriva.com/show_bug.cgi?id=30638
-bluetooth-hci_usb-disable-isoc-transfers.patch
-
 hid-usbhid-IBM-BladeCenterHS20-quirk.patch
 
 usb-storage-unusual_devs-add-id.patch
 usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch
-
-# xhci fixes
-usb-xhci-remove-unused-parameter-xhci-in-function-xhci-handshake.patch
-usb-xhci-clean-up-work-to-remove-unused-parameters-for-functions-in-xhci-mem.c.patch
-usb-xhci-fix-isoc-endpoint-dequeue-from-advancing-too-far-on-transaction-error.patch
-usb-xhci-Solve-full-event-ring-by-increasing-TRBS_PER_SEGMENT-to-256.patch
-usb-xhci-gracefully-handle-xhci_irq-dead-device.patch
-
-# uas
-uas-allow-uas_use_uas_driver-to-return-usb-storage-flags.patch
-uas-add-us_fl_max_sectors_240-flag.patch
-uas-set-max_sectors_240-quirk-for-asm1053-devices.patch
-
-# misc fixes
-usb-cdc-acm-prevent-infinite-loop-when-parsing-cdc-headers.patch
-usb-chipidea-otg-remove-mutex-unlock-and-lock-while-stop-and-start-role.patch
 
 ###
 ### V4L
@@ -387,21 +269,6 @@ media-usb-pwc-lie-in-proc-usb-devices.patch
 
 # Mageia framebuffer boot logo
 video-mageia-logo.patch
-
-# https://qa.mandriva.com/show_bug.cgi?id=59260
-# https://bugzilla.kernel.org/show_bug.cgi?id=26232
-# DISABLED: video-fb-avoid-oops-when-fw-fb-is-removed.patch
-# DISABLED: video-fb-avoid-deadlock-caused-by-fb_set_suspend.patch
-
-# fbdev oops
-video-fbdev-fix-possible-null-dereference.patch
-# fbdev fixes
-video-fbdev-Add-additional-vesa-modes.patch
-video-fbdev-Check-Standard-Timing-against-DMT.patch
-video-fbdev-Validate-mode-timing-against-monspec.patch
-video-fbdev-Fix-sparse-warning-messages.patch
-video-fbdev-fix-CVT-vertical-front-and-back-porch-values.patch
-video-fbdev-fix-sys_copyarea.patch
 
 ###
 ### 3rdparty
@@ -431,6 +298,7 @@ video-fbdev-fix-sys_copyarea.patch
 3rd-ndiswrapper-Kconfig.patch
 3rd-ndiswrapper-Makefile-build-fix.patch
 3rd-ndiswrapper-linux-3.14-buildfix.patch
+3rd-ndiswrapper-4.0-buildfix.patch
 
 # rfswitch
 3rd-rfswitch-1.3.patch
@@ -448,7 +316,6 @@ video-fbdev-fix-sys_copyarea.patch
 3rd-rtl8723bs.patch
 3rd-rtl8723bs-buildfix.patch
 3rd-rtl8723bs-updates.patch
-3rd-rtl8723bs-revert-4.0-changes.patch
 
 ###
 ### Security
@@ -469,9 +336,6 @@ video-fbdev-fix-sys_copyarea.patch
 ###
 ### IA64
 ###
-
-# fix broken header generation
-KVM-ia64-drop-kvm.h-from-installed-user-headers.patch
 
 ###
 ### Tools

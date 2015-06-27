@@ -29,12 +29,68 @@ i<?xml version="1.0" ?>
         <Patches>
             <!-- Linux patches -->
             <Patch level="1" compressionType="xz">patches/linux/patch-4.1.xz</Patch>
-            <!--aufs4-standalone support-->
-            <!--<Patch level="1">patches/pisilinux_aufs4-standalone.patch</Patch>--><!--aufs patch conflict upstream patch-->
-            <!--mageia 3rd patch-->
-            <!--<Patch level="1">patches/mageia/3rd-3rdparty-1.0-tree.patch</Patch>-->
-            <!--<Patch level="1">patches/mageia/3rd-3rdparty-merge.patch</Patch>--><!--bunu halletmek lazım-->
-            <!--<Patch level="1">patches/mageia/3rd-acerhk-0.5.35.patch</Patch>
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.1.0/1.mga6/PATCHES/patches/series-->
+            <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
+            <Patch level="1">patches/mageia/x86-boot-video-80x25-if-break.patch</Patch>
+            <Patch level="1">patches/mageia/x86-default_poweroff_up_machines.patch</Patch>
+            <Patch level="1">patches/mageia/x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch</Patch>
+            <Patch level="1">patches/mageia/pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch</Patch>
+            <Patch level="1">patches/mageia/pci-quirks-drop-devinit-exit.patch</Patch>
+            <Patch level="1">patches/mageia/acpi-CLEVO-M360S-disable_acpi_irq.patch</Patch>
+            <Patch level="1">patches/mageia/acpi-processor-M720SR-limit-to-C2.patch</Patch>
+            <Patch level="1">patches/mageia/scsi-ppscsi-2.6.2.patch</Patch>
+            <Patch level="1">patches/mageia/scsi-ppscsi_fixes.patch</Patch>
+            <Patch level="1">patches/mageia/scsi-ppscsi-sg-helper-update.patch</Patch>
+            <Patch level="1">patches/mageia/scsi-ppscsi-update-for-scsi_data_buffer.patch</Patch>
+            <Patch level="1">patches/mageia/scsi-ppscsi-mdvbz45393.patch</Patch>
+            <Patch level="1">patches/mageia/scsi-ppscsi-3.0-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/scsi-megaraid-new-sysfs-name.patch</Patch>
+            <Patch level="1">patches/mageia/ide-pci-sis5513-965.patch</Patch>
+            <Patch level="1">patches/mageia/mpt-vmware-fix.patch</Patch>
+            <Patch level="1">patches/mageia/dm-raid-aliases.patch</Patch>
+            <Patch level="1">patches/mageia/block-floppy-disable-pnp-modalias.patch</Patch>
+            <Patch level="1">patches/mageia/ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch</Patch>
+            <Patch level="1">patches/mageia/ata-jmicron-disable-broken-async_suspend.patch</Patch>
+            <Patch level="1">patches/mageia/firewire-ieee1394-module-aliases.patch</Patch>
+            <Patch level="1">patches/mageia/char-agp-intel-new-Q57-id.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-mach64.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-mach64-fixes.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-mach64-2.6.31.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-mach64-fix-for-changed-drm_pci_alloc.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-mach64-fix-for-changed-drm_ioctl.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-mach64-2.6.36-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-mach64-2.6.37-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-mach64-3.0-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-mach64-include-module.h.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-mach64-3.3-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-mach64-3.6-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-mach64-3.7-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-mach64-3.12-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-mach64-restore-mach64_PCI_IDS.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-mach64-linux-3.14-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-mach64-3.17-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-mach64-3.18-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch</Patch>
+            <Patch level="1">patches/mageia/net-sis190-fix-list-usage.patch</Patch>
+            <Patch level="1">patches/mageia/net-netfilter-IFWLOG.patch</Patch>
+            <Patch level="1">patches/mageia/net-netfilter-IFWLOG-mdv.patch</Patch>
+            <Patch level="1">patches/mageia/net-netfilter-IFWLOG-2.6.35-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/net-netfilter-IFWLOG-2.6.37-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/net-ipv4-netfilter-ipt_IFWLOG-3.6-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/net-netfilter-IFWLOG-3.7-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/net-netfilter-psd.patch</Patch>
+            <Patch level="1">patches/mageia/net-netfilter-psd-mdv.patch</Patch>
+            <Patch level="1">patches/mageia/net-netfilter-psd-2.6.35-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
+            <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
+            <Patch level="1">patches/mageia/include-kbuild-export-pci_ids.patch</Patch>
+            <Patch level="1">patches/mageia/hid-usbhid-IBM-BladeCenterHS20-quirk.patch</Patch>
+            <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id.patch</Patch>
+            <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/media-usb-pwc-lie-in-proc-usb-devices.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty-1.0-tree.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-3rdparty-merge.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-acerhk-0.5.35.patch</Patch>
             <Patch level="1">patches/mageia/3rd-acerhk-kbuild.patch</Patch>
             <Patch level="1">patches/mageia/3rd-acerhk-extra-cflags.patch</Patch>
             <Patch level="1">patches/mageia/3rd-acerhk-proc_dir_entry-owner.patch</Patch>
@@ -53,10 +109,25 @@ i<?xml version="1.0" ?>
             <Patch level="1">patches/mageia/3rd-viahss-module-license.patch</Patch>
             <Patch level="1">patches/mageia/3rd-viahss-2.6.35-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-viahss-3.0-buildfix.patch</Patch>
+            <!--new 3rd patch from 3.19.8-->
             <Patch level="1">patches/mageia/3rd-rtl8723bs.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8723bs-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8723bs-updates.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8723bs-revert-4.0-changes.patch</Patch>-->
+            <!--#new patch 3.19.3/1.mga5 -->
+            <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
+            <!--<Patch level="1">patches/mageia/patch-3.19.7-rc1.patch</Patch>-->
+            <Patch level="1">patches/mageia/pci-acs-quirks-for-Intel-9-series-PCH-root-ports.patch</Patch>
+            <!--#new patch 3.19.8/1.mga5 -->
+            <Patch level="1">patches/mageia/ata-revert-Disabling-the-async-PM-for-JMicron-chip-363-361.patch</Patch>
+            <!--#new patch 3.19.8/2.mga5 -->
+            <Patch level="1">patches/mageia/media-Fix-regression-in-some-more-dib0700-based-devi.patch</Patch>
+             <!--#new patch 4.1.0/1.mga6 -->
+            <Patch level="1">patches/mageia/3rd-ndiswrapper-4.0-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch</Patch>
+            <Patch level="1">patches/mageia/block-cfq-iosched-fix-the-setting-of-IOPS-mode-on-SSDs.patch</Patch>
+            <Patch level="1">patches/mageia/fs-aufs4.patch</Patch>
+            <Patch level="1">patches/mageia/fs-aufs4-modular.patch</Patch>
+            <!--<Patch level="1">patches/mageia/media-Fix-regression-in-some-more-dib0700-based-devi.patch</Patch>-->
         </Patches>
     </Source>
 

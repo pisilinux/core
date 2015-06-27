@@ -28,6 +28,10 @@
     </Package>
     <Package>
         <Name>libseccomp-devel</Name>
+        <Summary>Development files for libseccomp</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">libseccomp</Dependency>
+        </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
         </Files>
