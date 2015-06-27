@@ -34,8 +34,10 @@ i<?xml version="1.0" ?>
             <Patch level="1">patches/mageia/x86-boot-video-80x25-if-break.patch</Patch>
             <Patch level="1">patches/mageia/x86-default_poweroff_up_machines.patch</Patch>
             <Patch level="1">patches/mageia/x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch</Patch>
+            <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
             <Patch level="1">patches/mageia/pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch</Patch>
             <Patch level="1">patches/mageia/pci-quirks-drop-devinit-exit.patch</Patch>
+            <Patch level="1">patches/mageia/pci-acs-quirks-for-Intel-9-series-PCH-root-ports.patch</Patch>
             <Patch level="1">patches/mageia/acpi-CLEVO-M360S-disable_acpi_irq.patch</Patch>
             <Patch level="1">patches/mageia/acpi-processor-M720SR-limit-to-C2.patch</Patch>
             <Patch level="1">patches/mageia/scsi-ppscsi-2.6.2.patch</Patch>
@@ -50,7 +52,12 @@ i<?xml version="1.0" ?>
             <Patch level="1">patches/mageia/dm-raid-aliases.patch</Patch>
             <Patch level="1">patches/mageia/block-floppy-disable-pnp-modalias.patch</Patch>
             <Patch level="1">patches/mageia/ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch</Patch>
+            <Patch level="1">patches/mageia/ata-revert-Disabling-the-async-PM-for-JMicron-chip-363-361.patch</Patch>
             <Patch level="1">patches/mageia/ata-jmicron-disable-broken-async_suspend.patch</Patch>
+            <Patch level="1">patches/mageia/block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch</Patch>
+            <Patch level="1">patches/mageia/block-cfq-iosched-fix-the-setting-of-IOPS-mode-on-SSDs.patch</Patch>
+            <Patch level="1">patches/mageia/fs-aufs4.patch</Patch>
+            <Patch level="1">patches/mageia/fs-aufs4-modular.patch</Patch>
             <Patch level="1">patches/mageia/firewire-ieee1394-module-aliases.patch</Patch>
             <Patch level="1">patches/mageia/char-agp-intel-new-Q57-id.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64.patch</Patch>
@@ -66,11 +73,12 @@ i<?xml version="1.0" ?>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.6-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.7-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.12-buildfix.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-mach64-restore-mach64_PCI_IDS.patch</Patch>
+<!--             <Patch level="1">patches/mageia/gpu-drm-mach64-restore-mach64_PCI_IDS.patch</Patch> -->
             <Patch level="1">patches/mageia/gpu-drm-mach64-linux-3.14-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.17-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.18-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch</Patch>
+            <Patch level="1">patches/mageia/media-Fix-regression-in-some-more-dib0700-based-devi.patch</Patch>
             <Patch level="1">patches/mageia/net-sis190-fix-list-usage.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-IFWLOG.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-IFWLOG-mdv.patch</Patch>
@@ -97,10 +105,14 @@ i<?xml version="1.0" ?>
             <Patch level="1">patches/mageia/3rd-acerhk-fix-build-with-function-tracer.patch</Patch>
             <Patch level="1">patches/mageia/3rd-acerhk-2.6.36-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-acerhk-fix-include.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-aes2501-r19.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-aes2501-kbuild.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-aes2501-rmmod-oops-fix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-ndiswrapper-1.59.patch</Patch>
             <Patch level="1">patches/mageia/3rd-ndiswrapper-Kconfig.patch</Patch>
             <Patch level="1">patches/mageia/3rd-ndiswrapper-Makefile-build-fix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-ndiswrapper-linux-3.14-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-ndiswrapper-4.0-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rfswitch-1.3.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rfswitch-build-fix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rfswitch-3.0-buildfix.patch</Patch>
@@ -109,25 +121,9 @@ i<?xml version="1.0" ?>
             <Patch level="1">patches/mageia/3rd-viahss-module-license.patch</Patch>
             <Patch level="1">patches/mageia/3rd-viahss-2.6.35-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-viahss-3.0-buildfix.patch</Patch>
-            <!--new 3rd patch from 3.19.8-->
             <Patch level="1">patches/mageia/3rd-rtl8723bs.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8723bs-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8723bs-updates.patch</Patch>
-            <!--#new patch 3.19.3/1.mga5 -->
-            <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
-            <!--<Patch level="1">patches/mageia/patch-3.19.7-rc1.patch</Patch>-->
-            <Patch level="1">patches/mageia/pci-acs-quirks-for-Intel-9-series-PCH-root-ports.patch</Patch>
-            <!--#new patch 3.19.8/1.mga5 -->
-            <Patch level="1">patches/mageia/ata-revert-Disabling-the-async-PM-for-JMicron-chip-363-361.patch</Patch>
-            <!--#new patch 3.19.8/2.mga5 -->
-            <Patch level="1">patches/mageia/media-Fix-regression-in-some-more-dib0700-based-devi.patch</Patch>
-             <!--#new patch 4.1.0/1.mga6 -->
-            <Patch level="1">patches/mageia/3rd-ndiswrapper-4.0-buildfix.patch</Patch>
-            <Patch level="1">patches/mageia/block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch</Patch>
-            <Patch level="1">patches/mageia/block-cfq-iosched-fix-the-setting-of-IOPS-mode-on-SSDs.patch</Patch>
-            <Patch level="1">patches/mageia/fs-aufs4.patch</Patch>
-            <Patch level="1">patches/mageia/fs-aufs4-modular.patch</Patch>
-            <!--<Patch level="1">patches/mageia/media-Fix-regression-in-some-more-dib0700-based-devi.patch</Patch>-->
         </Patches>
     </Source>
 
@@ -183,7 +179,7 @@ i<?xml version="1.0" ?>
 
     <History>
          <Update release="53">
-            <Date>2015-06-22</Date>
+            <Date>2015-06-27</Date>
             <Version>4.1.0</Version>
             <Comment>Version bump to 4.1 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.1</Comment>
             <Type package="kernel">security</Type>
