@@ -1311,7 +1311,7 @@
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.0.5.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.0.6.xz</Patch>
             </Patches>
             <SourceURI>kernel/tools/cpupowertools/pspec.xml</SourceURI>
         </Source>
@@ -1334,6 +1334,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="52">
+                <Date>2015-06-24</Date>
+                <Version>4.0.6</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="51">
                 <Date>2015-06-16</Date>
                 <Version>4.0.5</Version>
@@ -1887,7 +1894,7 @@
             <Description xml:lang="en">This package provides the kernel support for VirtualBox.</Description>
             <Archive type="tarxz" sha1sum="8850ebc24e00640835b682a5f8bbc8f05313d2d7">http://source.pisilinux.org/1.0/module-virtualbox-4.3.28.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.0.5">kernel-module-headers</Dependency>
+                <Dependency version="4.0.6">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -1897,7 +1904,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.0.5">kernel</Dependency>
+                <Dependency version="4.0.6">kernel</Dependency>
                 <Dependency version="4.3.28">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -1919,6 +1926,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="45">
+                <Date>2015-06-24</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.0.6.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="44">
                 <Date>2015-06-09</Date>
                 <Version>4.3.28</Version>
@@ -2253,14 +2267,14 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.0.5">kernel-module-headers</Dependency>
+                <Dependency version="4.0.6">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-bbswitch/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="4.0.5">kernel</Dependency>
+                <Dependency version="4.0.6">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2273,6 +2287,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="21">
+                <Date>2015-06-24</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel-4.0.6.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="20">
                 <Date>2015-06-16</Date>
                 <Version>0.8</Version>
@@ -2439,7 +2460,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
             <Archive type="tarxz" sha1sum="82194515516139801fdc690198495b043d1c9cbe">http://source.pisilinux.org/1.0/module-virtualbox-guest-4.3.28.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.0.5">kernel-module-headers</Dependency>
+                <Dependency version="4.0.6">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -2449,7 +2470,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.0.5">kernel</Dependency>
+                <Dependency version="4.0.6">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
                 <Dependency version="4.3.28">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
@@ -2476,6 +2497,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="44">
+                <Date>2015-06-24</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.0.6.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="43">
                 <Date>2015-06-09</Date>
                 <Version>4.3.28</Version>
@@ -2797,7 +2825,7 @@
             <Archive type="targz" sha1sum="e02beac9cc713011551c483ae5f20f065f5b88c7" target="i686">http://www.broadcom.com/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <Archive type="targz" sha1sum="bd55f1fdc6b0a4d0a70dc4ba4bb4169a824e238c" target="x86_64">http://www.broadcom.com/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.0.5">kernel-module-headers</Dependency>
+                <Dependency version="4.0.6">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">patch/linux-40.patch</Patch>
@@ -2815,8 +2843,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.0.5">kernel</Dependency>
-                <Dependency release="40">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="4.0.6">kernel</Dependency>
+                <Dependency release="41">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2843,6 +2871,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="41">
+                <Date>2015-06-16</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 4.0.6</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="40">
                 <Date>2015-06-16</Date>
                 <Version>6.30.223.248</Version>
@@ -13644,11 +13679,8 @@
             <Summary xml:lang="en">Development files for libidn</Summary>
             <Summary xml:lang="tr">libidn için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency>libidn</Dependency>
+                <Dependency release="4">libidn</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13663,7 +13695,11 @@
             <Summary xml:lang="tr">libidn için 32-bit paylaşımlı kitaplıklar</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
+            <BuildDependencies>
+                <Dependency>glibc-32bit</Dependency>
+            </BuildDependencies>
             <RuntimeDependencies>
+                <Dependency>glibc-32bit</Dependency>
                 <Dependency release="4">libidn</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -15089,7 +15125,7 @@
             <Name>glibc-devel</Name>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency>glibc</Dependency>
+                <Dependency release="11">glibc</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -18815,6 +18851,7 @@
             <Archive type="targz" sha1sum="cc135ab6c95723cfbba034feb9630446de475341">http://downloads.sourceforge.net/project/libseccomp/libseccomp-2.1.1/libseccomp-2.1.1.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>glibc</Dependency>
+                <Dependency>util-linux</Dependency>
             </BuildDependencies>
             <SourceURI>system/devel/libseccomp/pspec.xml</SourceURI>
         </Source>
@@ -18828,6 +18865,10 @@
         </Package>
         <Package>
             <Name>libseccomp-devel</Name>
+            <Summary xml:lang="en">Development files for libseccomp</Summary>
+            <RuntimeDependencies>
+                <Dependency release="1">libseccomp</Dependency>
+            </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
