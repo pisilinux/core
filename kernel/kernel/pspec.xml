@@ -12,7 +12,7 @@ i<?xml version="1.0" ?>
         <IsA>kernel</IsA>
         <Summary>The Linux kernel (the core of the Linux operating system) for Pisi Linux</Summary>
         <Description>kernel contains the Linux kernel, the core of any Linux operating system. The kernel handles the basic functions of the operating system: memory allocation, process allocation, device input and output, etc.</Description>
-        <Archive sha1sum="553164212ea3a162a2ff63276c60fe7dd04e9ad1" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.0.tar.gz</Archive>
+        <Archive sha1sum="dce24ac1874f362000e40027075e7d24ba123b73" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.1.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -28,8 +28,8 @@ i<?xml version="1.0" ?>
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.1.xz</Patch>
-            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.1.0/1.mga6/PATCHES/patches/series-->
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.1.1.xz</Patch>
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.1.1/1.mga6/PATCHES/patches/series-->
             <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
             <Patch level="1">patches/mageia/x86-boot-video-80x25-if-break.patch</Patch>
             <Patch level="1">patches/mageia/x86-default_poweroff_up_machines.patch</Patch>
@@ -73,7 +73,7 @@ i<?xml version="1.0" ?>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.6-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.7-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.12-buildfix.patch</Patch>
-<!--             <Patch level="1">patches/mageia/gpu-drm-mach64-restore-mach64_PCI_IDS.patch</Patch> -->
+            <Patch level="1">patches/mageia/gpu-drm-mach64-restore-mach64_PCI_IDS.patch</Patch><!--deneme-->
             <Patch level="1">patches/mageia/gpu-drm-mach64-linux-3.14-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.17-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.18-buildfix.patch</Patch>
@@ -179,9 +179,9 @@ i<?xml version="1.0" ?>
 
     <History>
          <Update release="53">
-            <Date>2015-06-27</Date>
-            <Version>4.1.0</Version>
-            <Comment>Version bump to 4.1 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.1</Comment>
+            <Date>2015-07-08</Date>
+            <Version>4.1.1</Version>
+            <Comment>Version bump to 4.1.1 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.1.1</Comment>
             <Type package="kernel">security</Type>
             <Name>Ertuğrul Erata</Name>
             <Email>ertugrulerata@gmail.com</Email>
