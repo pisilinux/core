@@ -28,7 +28,7 @@ i<?xml version="1.0" ?>
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.0.7.xz</Patch>
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.0.8.xz</Patch>
             <!--aufs4-standalone support-->
             <Patch level="1">patches/pisilinux_aufs4-standalone.patch</Patch>
             <!--mageia 3rd patch-->
@@ -111,6 +111,14 @@ i<?xml version="1.0" ?>
     </Package>
 
     <History>
+          <Update release="55">
+            <Date>2015-07-12</Date>
+            <Version>4.0.8</Version>
+            <Comment>Version bump to 4.0.8 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.0.8</Comment>
+            <Type package="kernel">security</Type>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+         </Update>
          <Update release="54">
             <Date>2015-06-30</Date>
             <Version>4.0.7</Version>
