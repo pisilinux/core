@@ -561,7 +561,7 @@
                 <Dependency>xmlto</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.0.7.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.0.8.xz</Patch>
                 <Patch level="1">patches/pisilinux_aufs4-standalone.patch</Patch>
             </Patches>
             <SourceURI>kernel/kernel/pspec.xml</SourceURI>
@@ -621,6 +621,14 @@
             </Files>
         </Package>
         <History>
+            <Update release="55">
+                <Type package="kernel">security</Type>
+                <Date>2015-07-12</Date>
+                <Version>4.0.8</Version>
+                <Comment>Version bump to 4.0.8 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.0.8</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="54">
                 <Type package="kernel">security</Type>
                 <Date>2015-06-30</Date>
@@ -1319,7 +1327,7 @@
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.0.7.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.0.8.xz</Patch>
             </Patches>
             <SourceURI>kernel/tools/cpupowertools/pspec.xml</SourceURI>
         </Source>
@@ -1342,6 +1350,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="54">
+                <Date>2015-07-13</Date>
+                <Version>4.0.8</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="53">
                 <Date>2015-06-30</Date>
                 <Version>4.0.7</Version>
@@ -1909,7 +1924,7 @@
             <Description xml:lang="en">This package provides the kernel support for VirtualBox.</Description>
             <Archive type="tarxz" sha1sum="8850ebc24e00640835b682a5f8bbc8f05313d2d7">http://source.pisilinux.org/1.0/module-virtualbox-4.3.28.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.0.7">kernel-module-headers</Dependency>
+                <Dependency version="4.0.8">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -1919,7 +1934,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.0.7">kernel</Dependency>
+                <Dependency version="4.0.8">kernel</Dependency>
                 <Dependency version="4.3.28">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -1941,6 +1956,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="47">
+                <Date>2015-07-13</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.0.8.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="46">
                 <Date>2015-06-30</Date>
                 <Version>4.3.28</Version>
@@ -2289,14 +2311,14 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.0.7">kernel-module-headers</Dependency>
+                <Dependency version="4.0.8">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-bbswitch/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="4.0.7">kernel</Dependency>
+                <Dependency version="4.0.8">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2309,6 +2331,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="23">
+                <Date>2015-07-13</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel-4.0.8.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="22">
                 <Date>2015-06-30</Date>
                 <Version>0.8</Version>
@@ -2489,7 +2518,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
             <Archive type="tarxz" sha1sum="82194515516139801fdc690198495b043d1c9cbe">http://source.pisilinux.org/1.0/module-virtualbox-guest-4.3.28.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.0.7">kernel-module-headers</Dependency>
+                <Dependency version="4.0.8">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -2499,7 +2528,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.0.7">kernel</Dependency>
+                <Dependency version="4.0.8">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
                 <Dependency version="4.3.28">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
@@ -2526,6 +2555,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="45">
+                <Date>2015-07-13</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.0.8.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="45">
                 <Date>2015-06-24</Date>
                 <Version>4.3.28</Version>
@@ -2861,7 +2897,7 @@
             <Archive type="targz" sha1sum="e02beac9cc713011551c483ae5f20f065f5b88c7" target="i686">http://www.broadcom.com/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <Archive type="targz" sha1sum="bd55f1fdc6b0a4d0a70dc4ba4bb4169a824e238c" target="x86_64">http://www.broadcom.com/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.0.7">kernel-module-headers</Dependency>
+                <Dependency version="4.0.8">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">patch/linux-40.patch</Patch>
@@ -2879,8 +2915,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.0.7">kernel</Dependency>
-                <Dependency release="42">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="4.0.8">kernel</Dependency>
+                <Dependency release="43">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2907,6 +2943,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="43">
+                <Date>2015-07-13</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 4.0.8.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="42">
                 <Date>2015-06-30</Date>
                 <Version>6.30.223.248</Version>
@@ -10356,6 +10399,12 @@
                 <Patch compressionType="gzip" level="0">official/bash43-031.tar.gz</Patch>
                 <Patch compressionType="gzip" level="0">official/bash43-032.tar.gz</Patch>
                 <Patch compressionType="gzip" level="0">official/bash43-033.tar.gz</Patch>
+                <Patch compressionType="gzip" level="0">official/bash43-034.tar.gz</Patch>
+                <Patch compressionType="gzip" level="0">official/bash43-035.tar.gz</Patch>
+                <Patch compressionType="gzip" level="0">official/bash43-036.tar.gz</Patch>
+                <Patch compressionType="gzip" level="0">official/bash43-037.tar.gz</Patch>
+                <Patch compressionType="gzip" level="0">official/bash43-038.tar.gz</Patch>
+                <Patch compressionType="gzip" level="0">official/bash43-039.tar.gz</Patch>
                 <Patch level="1">fedora/bash-2.02-security.patch</Patch>
                 <Patch level="1">fedora/bash-2.03-paths.patch</Patch>
                 <Patch level="1">fedora/bash-2.03-profile.patch</Patch>
@@ -10403,8 +10452,15 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2015-07-09</Date>
+                <Version>4.3_p39</Version>
+                <Comment>Update</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
             <Update release="8">
-                <Date>2015-05-22</Date>
+                <Date>2015-08-20</Date>
                 <Version>4.3_p33</Version>
                 <Comment>Update</Comment>
                 <Name>Yusuf Aydemir</Name>
@@ -10727,7 +10783,7 @@
             <Summary xml:lang="en">The Nettle package contains the low-level cryptographic library.</Summary>
             <Summary xml:lang="pl">Nettle - biblioteka kryptograficzna.</Summary>
             <Description xml:lang="en">The Nettle package contains the low-level cryptographic library that is designed to fit easily in many contexts.</Description>
-            <Archive type="targz" sha1sum="e7477df5f66e650c4c4738ec8e01c2efdb5d1211">ftp://ftp.gnu.org/gnu/nettle/nettle-2.7.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="1836601393522124787e029466935408e22dd204">ftp://ftp.gnu.org/gnu/nettle/nettle-3.1.1.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>gmp-devel</Dependency>
             </BuildDependencies>
@@ -10751,7 +10807,7 @@
             <Summary xml:lang="tr">nettle için geliştirme dosyaları.</Summary>
             <Summary xml:lang="pl">Pliki nagłówkowe biblioteki nettle.</Summary>
             <RuntimeDependencies>
-                <Dependency release="5">nettle</Dependency>
+                <Dependency release="6">nettle</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -10771,7 +10827,7 @@
                 <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="5">nettle</Dependency>
+                <Dependency release="6">nettle</Dependency>
                 <Dependency>glibc-32bit</Dependency>
                 <Dependency>gmp</Dependency>
             </RuntimeDependencies>
@@ -10780,6 +10836,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2015-07-05</Date>
+                <Version>3.1.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2014-05-11</Date>
                 <Version>2.7.1</Version>
@@ -19323,6 +19386,7 @@
             <Archive type="targz" sha1sum="6a991777ecb0f890be931cec4aec856d1a195489">http://www.libarchive.org/downloads/libarchive-3.1.2.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>acl-devel</Dependency>
+                <Dependency>nettle-devel</Dependency>
                 <Dependency>attr-devel</Dependency>
                 <Dependency>bzip2</Dependency>
                 <Dependency>libxml2-devel</Dependency>
@@ -19356,7 +19420,7 @@
             <Summary xml:lang="en">Development files for libarchive</Summary>
             <Summary xml:lang="tr">libarchive için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="6">libarchive</Dependency>
+                <Dependency release="7">libarchive</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -19365,6 +19429,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2015-07-05</Date>
+                <Version>3.1.2</Version>
+                <Comment>Rebuild with nettle.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2014-05-11</Date>
                 <Version>3.1.2</Version>
