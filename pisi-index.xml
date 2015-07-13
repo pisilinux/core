@@ -3248,6 +3248,88 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>slang</Name>
+            <Homepage>http://www.jedsoft.org/slang/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>GPLv2</License>
+            <License>Artistic</License>
+            <IsA>app:console</IsA>
+            <PartOf>programming.library</PartOf>
+            <Summary xml:lang="en">Console display library used by most text viewer</Summary>
+            <Summary xml:lang="tr">Bir çok metin gösterici yazılım tarfından kullanılan konsol görüntüleme kütüphanesi</Summary>
+            <Description xml:lang="fr">S-Lang est une librarie de programmation multi-plateforme conçue pour permettre aux développeur de développer des logiciels robustes et portables. Elle fournit les mécanismes requis pour développer une application interactive telle que la gestion d&apos;affichages/écrans, entrées clavier, disposition de touches et ainsi de suite. La fonctionnalité la plus attractive de cette librairie reste l&apos;interpréteur slang qui peut être embarqué au sein même d&apos;un programme pour le rendre extensible.</Description>
+            <Description xml:lang="en">S-Lang is a multi-platform programmer&apos;s library designed to allow a developer to create robust multi-platform software. It provides facilities required by interactive applications such as display/screen management, keyboard input, keymaps, and so on. The most exciting feature of the library is the slang interpreter that may be easily embedded into a program to make it extensible.</Description>
+            <Description xml:lang="tr">S-lang, yazılım geliştiricilerin bütün işletim sistemlerinde çalışabilen güçlü uygulamalar geliştirmesine yardımcı olan bir uygulama kitaplığıdır. İnteraktif uygulamalar için ekran yönetimi ve klavye girişi gibi araçlar sunar. Kitaplığın en ilginç özelliği programların içine kolayca gömülebilen ve programı genişletilebilir kılan slang yorumlayıcısıdır.</Description>
+            <Archive type="tarbz2" sha1sum="34e68a993888d0ae2ebc7bc31b40bc894813a7e2">ftp://ftp.ntua.gr/pub/lang/slang/slang/v2.2/slang-2.2.4.tar.bz2</Archive>
+            <BuildDependencies>
+                <Dependency>libpng-devel</Dependency>
+                <Dependency>libpcre-devel</Dependency>
+                <Dependency>ncurses-devel</Dependency>
+                <Dependency>readline-devel</Dependency>
+                <Dependency>zlib-devel</Dependency>
+            </BuildDependencies>
+            <SourceURI>programming/library/slang/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>slang</Name>
+            <RuntimeDependencies>
+                <Dependency>libpng</Dependency>
+                <Dependency>libpcre</Dependency>
+                <Dependency>zlib</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="config">/etc</Path>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="data">/usr/share/slsh</Path>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="doc">/usr/share/doc/slang</Path>
+                <Path fileType="man">/usr/share/man</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>slang-devel</Name>
+            <Summary xml:lang="en">Development files for slang</Summary>
+            <Summary xml:lang="tr">slang için geliştirme dosyaları</Summary>
+            <PartOf>system.devel</PartOf>
+            <RuntimeDependencies>
+                <Dependency release="3">slang</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="header">/usr/include</Path>
+                <Path fileType="data">/usr/lib/pkgconfig</Path>
+                <Path fileType="doc">/usr/share/doc/slang/html</Path>
+                <Path fileType="man">/usr/share/man/man3</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="3">
+                <Date>2014-05-11</Date>
+                <Version>2.2.4</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-10-31</Date>
+                <Version>2.2.4</Version>
+                <Comment>rebuild.</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2012-08-23</Date>
+                <Version>2.2.4</Version>
+                <Comment>First release</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>docbook-xml</Name>
             <Homepage>http://www.docbook.org/xml/</Homepage>
             <Packager>
@@ -4894,88 +4976,6 @@
                 <Comment>First release</Comment>
                 <Name>Marcin Bojara</Name>
                 <Email>marcin@pisilinux.org</Email>
-            </Update>
-        </History>
-    </SpecFile>
-    <SpecFile>
-        <Source>
-            <Name>slang</Name>
-            <Homepage>http://www.jedsoft.org/slang/</Homepage>
-            <Packager>
-                <Name>PisiLinux Community</Name>
-                <Email>admins@pisilinux.org</Email>
-            </Packager>
-            <License>GPLv2</License>
-            <License>Artistic</License>
-            <IsA>app:console</IsA>
-            <PartOf>system.base</PartOf>
-            <Summary xml:lang="en">Console display library used by most text viewer</Summary>
-            <Summary xml:lang="tr">Bir çok metin gösterici yazılım tarfından kullanılan konsol görüntüleme kütüphanesi</Summary>
-            <Description xml:lang="fr">S-Lang est une librarie de programmation multi-plateforme conçue pour permettre aux développeur de développer des logiciels robustes et portables. Elle fournit les mécanismes requis pour développer une application interactive telle que la gestion d&apos;affichages/écrans, entrées clavier, disposition de touches et ainsi de suite. La fonctionnalité la plus attractive de cette librairie reste l&apos;interpréteur slang qui peut être embarqué au sein même d&apos;un programme pour le rendre extensible.</Description>
-            <Description xml:lang="en">S-Lang is a multi-platform programmer&apos;s library designed to allow a developer to create robust multi-platform software. It provides facilities required by interactive applications such as display/screen management, keyboard input, keymaps, and so on. The most exciting feature of the library is the slang interpreter that may be easily embedded into a program to make it extensible.</Description>
-            <Description xml:lang="tr">S-lang, yazılım geliştiricilerin bütün işletim sistemlerinde çalışabilen güçlü uygulamalar geliştirmesine yardımcı olan bir uygulama kitaplığıdır. İnteraktif uygulamalar için ekran yönetimi ve klavye girişi gibi araçlar sunar. Kitaplığın en ilginç özelliği programların içine kolayca gömülebilen ve programı genişletilebilir kılan slang yorumlayıcısıdır.</Description>
-            <Archive type="tarbz2" sha1sum="34e68a993888d0ae2ebc7bc31b40bc894813a7e2">ftp://ftp.ntua.gr/pub/lang/slang/slang/v2.2/slang-2.2.4.tar.bz2</Archive>
-            <BuildDependencies>
-                <Dependency>libpng-devel</Dependency>
-                <Dependency>libpcre-devel</Dependency>
-                <Dependency>ncurses-devel</Dependency>
-                <Dependency>readline-devel</Dependency>
-                <Dependency>zlib-devel</Dependency>
-            </BuildDependencies>
-            <SourceURI>system/base/slang/pspec.xml</SourceURI>
-        </Source>
-        <Package>
-            <Name>slang</Name>
-            <RuntimeDependencies>
-                <Dependency>libpng</Dependency>
-                <Dependency>libpcre</Dependency>
-                <Dependency>zlib</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="config">/etc</Path>
-                <Path fileType="executable">/usr/bin</Path>
-                <Path fileType="data">/usr/share/slsh</Path>
-                <Path fileType="library">/usr/lib</Path>
-                <Path fileType="doc">/usr/share/doc/slang</Path>
-                <Path fileType="man">/usr/share/man</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>slang-devel</Name>
-            <Summary xml:lang="en">Development files for slang</Summary>
-            <Summary xml:lang="tr">slang için geliştirme dosyaları</Summary>
-            <PartOf>system.devel</PartOf>
-            <RuntimeDependencies>
-                <Dependency release="3">slang</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="header">/usr/include</Path>
-                <Path fileType="data">/usr/lib/pkgconfig</Path>
-                <Path fileType="doc">/usr/share/doc/slang/html</Path>
-                <Path fileType="man">/usr/share/man/man3</Path>
-            </Files>
-        </Package>
-        <History>
-            <Update release="3">
-                <Date>2014-05-11</Date>
-                <Version>2.2.4</Version>
-                <Comment>Release bump.</Comment>
-                <Name>Marcin Bojara</Name>
-                <Email>marcin@pisilinux.org</Email>
-            </Update>
-            <Update release="2">
-                <Date>2013-10-31</Date>
-                <Version>2.2.4</Version>
-                <Comment>rebuild.</Comment>
-                <Name>Yusuf Aydemir</Name>
-                <Email>yusuf.aydemir@pisilinux.org</Email>
-            </Update>
-            <Update release="1">
-                <Date>2012-08-23</Date>
-                <Version>2.2.4</Version>
-                <Comment>First release</Comment>
-                <Name>PisiLinux Community</Name>
-                <Email>admins@pisilinux.org</Email>
             </Update>
         </History>
     </SpecFile>
@@ -14063,7 +14063,7 @@
             <Summary xml:lang="tr">Gelişmiş sistem günlükleme hizmeti</Summary>
             <Description xml:lang="en">rsyslog is an enhanced multi-threaded syslogd supporting, among others, MySQL, syslog/tcp, RFC 3195, permitted sender lists, filtering on any message part, and fine grain output format control. It is quite compatible with stock sysklogd and can be used as a drop-in replacement.</Description>
             <Description xml:lang="tr">rsyslog, çoklu iş parçacığı, MySQL, syslog/tcp, RFC 3195, izin verilen gönderici listesi, gelişmiş ileti filtreleme gibi özelliklere sahip gelişmiş bir sistem günlükleme hizmetidir.</Description>
-            <Archive type="targz" sha1sum="e8d767f0c3e0b7ed0e20bf3e2513d3c2d5c30239">http://www.rsyslog.com/files/download/rsyslog/rsyslog-8.9.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="b78ae3d9db4e191d7a6dd9c4c7483c82abe039d7">http://www.rsyslog.com/files/download/rsyslog/rsyslog-8.11.0.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>json-c-devel</Dependency>
@@ -14091,6 +14091,7 @@
                 <Path fileType="config">/etc/conf.d</Path>
                 <Path fileType="config">/etc/rsyslog.d</Path>
                 <Path fileType="config">/etc/rsyslog.conf</Path>
+                <Path fileType="data">/var</Path>
             </Files>
             <Provides>
                 <COMAR script="service.py">System.Service</COMAR>
@@ -14103,6 +14104,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2015-07-13</Date>
+                <Version>8.11.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2015-05-05</Date>
                 <Version>8.9.0</Version>
@@ -16836,78 +16844,6 @@
                 <Comment>First release</Comment>
                 <Name>Serdar Soytetir</Name>
                 <Email>kaptan@pisilinux.org</Email>
-            </Update>
-        </History>
-    </SpecFile>
-    <SpecFile>
-        <Source>
-            <Name>nano</Name>
-            <Homepage>http://www.nano-editor.org/</Homepage>
-            <Packager>
-                <Name>PisiLinux Community</Name>
-                <Email>admins@pisilinux.org</Email>
-            </Packager>
-            <License>GPLv3</License>
-            <IsA>app:console</IsA>
-            <PartOf>system.base</PartOf>
-            <Summary xml:lang="en">GNU GPL&apos;d Pico clone with more functionality</Summary>
-            <Summary xml:lang="tr">Konsol ortamında kullanabileceğiniz bir metin düzenleyicidir.</Summary>
-            <Description xml:lang="fr">Nano est un petit éditeur libre et convivial qui a pour but de remplacer Pico, l&apos;éditeur par défaut inclus dans le paquet non-libre Pine. Plutôt que juste copier l&apos;apparence et le ressenti de Pico, nan implémente également certaines fonctionnalité manquantes (ou désactivées par défaut), tel que &quot;rechercher et remplacer&quot; ou &quot;allez à la ligne numéro&quot;.</Description>
-            <Description xml:lang="en">Nano is a small, free and friendly editor which aims to replace Pico, the default editor included in the non-free Pine package. Rather than just copying Pico&apos;s look and feel, nano also implements some missing (or disabled by default) features in Pico, such as &quot;search and replace&quot; and &quot;go to line number&quot;.</Description>
-            <Description xml:lang="tr">Nano özgür olmayan Pine paketinin içindeki metin düzenleme programı olan Pico&apos;nun yerine geçme hedefini güden küçük, özgür ve kullanışlı bir metin düzenleme programıdır. Pico&apos;nun görünüşünü ve işlevini kopyalamaktan çok, Nano aynı zamanda &quot;ara ve değiştir&quot; ve &quot;satır numarasına git&quot; gibi Pico&apos;da olmayan (veya ön tanımlı olarak kapalı) bazı özellikleri sunar.</Description>
-            <Archive type="targz" sha1sum="7ee64425238abb89b7db9721b9ee09ec262f6bb2">http://www.nano-editor.org/dist/v2.3/nano-2.3.5.tar.gz</Archive>
-            <BuildDependencies>
-                <Dependency>ncurses-devel</Dependency>
-                <Dependency>gettext-devel</Dependency>
-                <Dependency>slang</Dependency>
-            </BuildDependencies>
-            <SourceURI>system/base/nano/pspec.xml</SourceURI>
-        </Source>
-        <Package>
-            <Name>nano</Name>
-            <RuntimeDependencies>
-                <Dependency>ncurses</Dependency>
-                <Dependency>file</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="config">/etc</Path>
-                <Path fileType="localedata">/usr/share/locale</Path>
-                <Path fileType="doc">/usr/share/doc/nano</Path>
-                <Path fileType="man">/usr/share/man</Path>
-                <Path fileType="info">/usr/share/info</Path>
-                <Path fileType="data">/usr/share/nano</Path>
-                <Path fileType="executable">/usr/bin</Path>
-                <Path fileType="executable">/bin</Path>
-            </Files>
-        </Package>
-        <History>
-            <Update release="4">
-                <Date>2014-07-11</Date>
-                <Version>2.3.5</Version>
-                <Comment>Version bump.</Comment>
-                <Name>Vedat Demir</Name>
-                <Email>vedat@pisilinux.org</Email>
-            </Update>
-            <Update release="3">
-                <Date>2014-05-11</Date>
-                <Version>2.3.1</Version>
-                <Comment>Release bump.</Comment>
-                <Name>Marcin Bojara</Name>
-                <Email>marcin@pisilinux.org</Email>
-            </Update>
-            <Update release="2">
-                <Date>2013-07-26</Date>
-                <Version>2.3.1</Version>
-                <Comment>Fix dep, release bump.</Comment>
-                <Name>Serdar Soytetir</Name>
-                <Email>kaptan@pisilinux.org</Email>
-            </Update>
-            <Update release="1">
-                <Date>2011-06-27</Date>
-                <Version>2.3.1</Version>
-                <Comment>First release</Comment>
-                <Name>Pisi Linux Admins</Name>
-                <Email>admins@pisilinux.org</Email>
             </Update>
         </History>
     </SpecFile>
