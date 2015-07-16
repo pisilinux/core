@@ -473,7 +473,7 @@
         </Package>
         <History>
             <Update release="8">
-                <Date>2015-05-22</Date>
+                <Date>2015-07-14</Date>
                 <Version>1.6.16</Version>
                 <Comment>Version bump.</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -3586,6 +3586,72 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>os-prober</Name>
+            <Homepage>http://joey.kitenet.net/code/os-prober/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>GPLv2+</License>
+            <IsA>app:console</IsA>
+            <PartOf>system.boot</PartOf>
+            <Summary xml:lang="en">Utility to detect other OSes on a set of drives</Summary>
+            <Summary xml:lang="pl">Narzędzie do wykrywania innych systemów operacyjnych na dyskach</Summary>
+            <Description xml:lang="en">os-probe detects other OSes available on a system and outputs the results in a generic machine-readable format. Support for new OSes and Linux distributions can be added easily.</Description>
+            <Description xml:lang="pl">os-prober wykrywa inne systemy operacyjne dostępne na komputerze i przekazuje rezultaty w standardowym, odczytywalnym maszynowo, formacie. </Description>
+            <Archive type="tarxz" sha1sum="63114ccf7d2ed2f7af3db100bf992eac3c8576a8">http://http.debian.net/debian/pool/main/o/os-prober/os-prober_1.65.tar.xz</Archive>
+            <SourceURI>system/boot/os-prober/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>os-prober</Name>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="data">/var/lib/os-prober</Path>
+                <Path fileType="data">/usr/share/os-prober</Path>
+                <Path fileType="doc">/usr/share/doc/os-prober</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="5">
+                <Date>2015-05-03</Date>
+                <Version>1.65</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="4">
+                <Date>2014-05-11</Date>
+                <Version>1.63</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2013-10-24</Date>
+                <Version>1.63</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-07-28</Date>
+                <Version>1.58</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2013-01-03</Date>
+                <Version>1.57</Version>
+                <Comment>First release</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>grub2</Name>
             <Homepage>http://www.gnu.org/software/grub/</Homepage>
             <Packager>
@@ -3594,7 +3660,7 @@
             </Packager>
             <License>GPLv3</License>
             <IsA>app:gui</IsA>
-            <PartOf>system.base</PartOf>
+            <PartOf>system.boot</PartOf>
             <Summary xml:lang="en">GNU GRUB is a Multiboot boot loader.</Summary>
             <Description xml:lang="en">GNU GRUB (short for GNU GRand Unified Bootloader) is a boot loader package from the GNU Project.</Description>
             <Archive type="tarxz" sha1sum="1bf580f1e8bce4909a7ac7ca485cee02b00ed383">ftp://alpha.gnu.org/gnu/grub/grub-2.02~beta2.tar.xz</Archive>
@@ -8243,72 +8309,6 @@
                 <Version>8.31</Version>
                 <Comment>First release</Comment>
                 <Name>Erdem Artan</Name>
-                <Email>admins@pisilinux.org</Email>
-            </Update>
-        </History>
-    </SpecFile>
-    <SpecFile>
-        <Source>
-            <Name>os-prober</Name>
-            <Homepage>http://joey.kitenet.net/code/os-prober/</Homepage>
-            <Packager>
-                <Name>PisiLinux Community</Name>
-                <Email>admins@pisilinux.org</Email>
-            </Packager>
-            <License>GPLv2+</License>
-            <IsA>app:console</IsA>
-            <PartOf>system.base</PartOf>
-            <Summary xml:lang="en">Utility to detect other OSes on a set of drives</Summary>
-            <Summary xml:lang="pl">Narzędzie do wykrywania innych systemów operacyjnych na dyskach</Summary>
-            <Description xml:lang="en">os-probe detects other OSes available on a system and outputs the results in a generic machine-readable format. Support for new OSes and Linux distributions can be added easily.</Description>
-            <Description xml:lang="pl">os-prober wykrywa inne systemy operacyjne dostępne na komputerze i przekazuje rezultaty w standardowym, odczytywalnym maszynowo, formacie. </Description>
-            <Archive type="tarxz" sha1sum="63114ccf7d2ed2f7af3db100bf992eac3c8576a8">http://http.debian.net/debian/pool/main/o/os-prober/os-prober_1.65.tar.xz</Archive>
-            <SourceURI>system/base/os-prober/pspec.xml</SourceURI>
-        </Source>
-        <Package>
-            <Name>os-prober</Name>
-            <Files>
-                <Path fileType="executable">/usr/bin</Path>
-                <Path fileType="library">/usr/lib</Path>
-                <Path fileType="data">/var/lib/os-prober</Path>
-                <Path fileType="data">/usr/share/os-prober</Path>
-                <Path fileType="doc">/usr/share/doc/os-prober</Path>
-            </Files>
-        </Package>
-        <History>
-            <Update release="5">
-                <Date>2015-05-03</Date>
-                <Version>1.65</Version>
-                <Comment>Version bump.</Comment>
-                <Name>Ertuğrul Erata</Name>
-                <Email>ertugrulerata@gmail.com</Email>
-            </Update>
-            <Update release="4">
-                <Date>2014-05-11</Date>
-                <Version>1.63</Version>
-                <Comment>Release bump.</Comment>
-                <Name>Marcin Bojara</Name>
-                <Email>marcin@pisilinux.org</Email>
-            </Update>
-            <Update release="3">
-                <Date>2013-10-24</Date>
-                <Version>1.63</Version>
-                <Comment>Version bump.</Comment>
-                <Name>Yusuf Aydemir</Name>
-                <Email>yusuf.aydemir@pisilinux.org</Email>
-            </Update>
-            <Update release="2">
-                <Date>2013-07-28</Date>
-                <Version>1.58</Version>
-                <Comment>Version bump.</Comment>
-                <Name>Marcin Bojara</Name>
-                <Email>marcin@pisilinux.org</Email>
-            </Update>
-            <Update release="1">
-                <Date>2013-01-03</Date>
-                <Version>1.57</Version>
-                <Comment>First release</Comment>
-                <Name>Erdinç Gültekin</Name>
                 <Email>admins@pisilinux.org</Email>
             </Update>
         </History>
