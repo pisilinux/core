@@ -25,6 +25,7 @@ def install():
     pisitools.remove("/usr/share/man/man2/llistxattr.2")
     pisitools.remove("/usr/share/man/man2/fremovexattr.2")
     pisitools.remove("/usr/share/man/man2/lgetxattr.2")
+    pisitools.remove("/usr/share/man/man5/attr.5")
 
     # These come from libcap
     pisitools.remove("/usr/share/man/man2/capget.2")
