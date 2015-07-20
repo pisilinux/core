@@ -1,0 +1,32 @@
+
+Adapt for strnicmp has been replaced by strncasecmp,
+and removed upstream in v4.0-rc1~98:
+
+From af3cd13501eb04ca61d017ff4406f1cbffafdc04 Mon Sep 17 00:00:00 2001
+From: Rasmus Villemoes <linux@rasmusvillemoes.dk>
+Date: Thu, 12 Feb 2015 15:02:15 -0800
+Subject: lib/string.c: remove strnicmp()
+
+
+Signed-off-by: Thomas Backlund <tmb@mageia.org>
+
+--- linux/3rdparty/ndiswrapper/ndis.c.orig
++++ linux/3rdparty/ndiswrapper/ndis.c
+@@ -438,7 +438,7 @@ static int read_setting(struct nt_list *
+ 	struct wrap_device_setting *setting;
+ 	mutex_lock(&loader_mutex);
+ 	nt_list_for_each_entry(setting, setting_list, list) {
+-		if (strnicmp(keyname, setting->name, length) == 0) {
++		if (strncasecmp(keyname, setting->name, length) == 0) {
+ 			TRACE2("setting %s='%s'", keyname, setting->value);
+ 			mutex_unlock(&loader_mutex);
+ 			*param = ndis_encode_setting(setting, type);
+@@ -502,7 +502,7 @@ wstdcall void WIN_FUNC(NdisWriteConfigur
+ 
+ 	mutex_lock(&loader_mutex);
+ 	nt_list_for_each_entry(setting, &nmb->wnd->wd->settings, list) {
+-		if (strnicmp(keyname, setting->name, ansi.length) == 0) {
++		if (strncasecmp(keyname, setting->name, ansi.length) == 0) {
+ 			mutex_unlock(&loader_mutex);
+ 			if (ndis_decode_setting(setting, param))
+ 				*status = NDIS_STATUS_FAILURE;
