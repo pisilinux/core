@@ -14,19 +14,18 @@
         <IsA>app:console</IsA>
         <Summary>PolicyKit Authorization Framework</Summary>
         <Description>polkit is a toolkit for defining and handling authorizations. It is used for allowing unprivileged processes to speak to privileged processes.</Description>
-        <Archive sha1sum="374397f1c32fa1290be0fce378fe9bab541ee4bf" type="targz">http://www.freedesktop.org/software/polkit/releases/polkit-0.112.tar.gz</Archive>
+        <Archive sha1sum="ef855c2d04184dceb38e0940dc7bec9cc3da415c" type="targz">http://www.freedesktop.org/software/polkit/releases/polkit-0.113.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>pam-devel</Dependency>
             <Dependency>dbus-devel</Dependency>
+            <Dependency>pam-devel</Dependency>
             <Dependency>glib2-devel</Dependency>
             <Dependency>expat-devel</Dependency>
-            <Dependency>dbus-glib-devel</Dependency>
             <Dependency>spidermonkey-devel</Dependency>
             <Dependency>gobject-introspection-devel</Dependency>
             <Dependency>intltool</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">disable-docs.patch</Patch>
+            <!--Patch level="1">disable-docs.patch</Patch-->
             <Patch level="1">use-system-locale-in-gobject-api.diff</Patch>
         </Patches>
     </Source>
@@ -49,10 +48,8 @@
         <Name>polkit</Name>
         <RuntimeDependencies>
             <Dependency>pam</Dependency>
-            <Dependency>dbus</Dependency>
             <Dependency>glib2</Dependency>
             <Dependency>expat</Dependency>
-            <Dependency>dbus-glib</Dependency>
             <Dependency>spidermonkey</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -86,6 +83,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2015-07-21</Date>
+            <Version>0.113</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2015-06-14</Date>
             <Version>0.112</Version>
