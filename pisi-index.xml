@@ -546,7 +546,7 @@
             <Summary xml:lang="tr">Pisi Linux için Linux çekirdeği</Summary>
             <Summary xml:lang="es">El kernel de Linux (el núcleo del sistema operativo Linux) de Pisi Linux</Summary>
             <Description xml:lang="en">kernel contains the Linux kernel, the core of any Linux operating system. The kernel handles the basic functions of the operating system: memory allocation, process allocation, device input and output, etc.</Description>
-            <Archive type="targz" sha1sum="553164212ea3a162a2ff63276c60fe7dd04e9ad1">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="dce24ac1874f362000e40027075e7d24ba123b73">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.1.tar.gz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
                 <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -561,8 +561,92 @@
                 <Dependency>xmlto</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.0.8.xz</Patch>
-                <Patch level="1">patches/pisilinux_aufs4-standalone.patch</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.1.2.xz</Patch>
+                <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
+                <Patch level="1">patches/mageia/x86-boot-video-80x25-if-break.patch</Patch>
+                <Patch level="1">patches/mageia/x86-default_poweroff_up_machines.patch</Patch>
+                <Patch level="1">patches/mageia/x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch</Patch>
+                <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
+                <Patch level="1">patches/mageia/pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch</Patch>
+                <Patch level="1">patches/mageia/pci-quirks-drop-devinit-exit.patch</Patch>
+                <Patch level="1">patches/mageia/pci-acs-quirks-for-Intel-9-series-PCH-root-ports.patch</Patch>
+                <Patch level="1">patches/mageia/acpi-CLEVO-M360S-disable_acpi_irq.patch</Patch>
+                <Patch level="1">patches/mageia/acpi-processor-M720SR-limit-to-C2.patch</Patch>
+                <Patch level="1">patches/mageia/scsi-megaraid-new-sysfs-name.patch</Patch>
+                <Patch level="1">patches/mageia/ide-pci-sis5513-965.patch</Patch>
+                <Patch level="1">patches/mageia/mpt-vmware-fix.patch</Patch>
+                <Patch level="1">patches/mageia/dm-raid-aliases.patch</Patch>
+                <Patch level="1">patches/mageia/block-floppy-disable-pnp-modalias.patch</Patch>
+                <Patch level="1">patches/mageia/ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch</Patch>
+                <Patch level="1">patches/mageia/ata-revert-Disabling-the-async-PM-for-JMicron-chip-363-361.patch</Patch>
+                <Patch level="1">patches/mageia/ata-jmicron-disable-broken-async_suspend.patch</Patch>
+                <Patch level="1">patches/mageia/block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch</Patch>
+                <Patch level="1">patches/mageia/block-cfq-iosched-fix-the-setting-of-IOPS-mode-on-SSDs.patch</Patch>
+                <Patch level="1">patches/mageia/fs-aufs4.patch</Patch>
+                <Patch level="1">patches/mageia/fs-aufs4-modular.patch</Patch>
+                <Patch level="1">patches/mageia/firewire-ieee1394-module-aliases.patch</Patch>
+                <Patch level="1">patches/mageia/char-agp-intel-new-Q57-id.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-fixes.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-2.6.31.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-fix-for-changed-drm_pci_alloc.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-fix-for-changed-drm_ioctl.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-2.6.36-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-2.6.37-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-3.0-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-include-module.h.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-3.3-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-3.6-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-3.7-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-3.12-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-restore-mach64_PCI_IDS.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-linux-3.14-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-3.17-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-3.18-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch</Patch>
+                <Patch level="1">patches/mageia/media-Fix-regression-in-some-more-dib0700-based-devi.patch</Patch>
+                <Patch level="1">patches/mageia/net-sis190-fix-list-usage.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-IFWLOG.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-IFWLOG-mdv.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-IFWLOG-2.6.35-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-IFWLOG-2.6.37-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/net-ipv4-netfilter-ipt_IFWLOG-3.6-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-IFWLOG-3.7-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-psd.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-psd-mdv.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-psd-2.6.35-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
+                <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
+                <Patch level="1">patches/mageia/include-kbuild-export-pci_ids.patch</Patch>
+                <Patch level="1">patches/mageia/hid-usbhid-IBM-BladeCenterHS20-quirk.patch</Patch>
+                <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id.patch</Patch>
+                <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/media-usb-pwc-lie-in-proc-usb-devices.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-3rdparty-1.0-tree.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-3rdparty-merge.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-acerhk-0.5.35.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-acerhk-kbuild.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-acerhk-extra-cflags.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-acerhk-proc_dir_entry-owner.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-acerhk-fix-build-with-function-tracer.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-acerhk-2.6.36-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-acerhk-fix-include.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-ndiswrapper-1.59.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-ndiswrapper-Kconfig.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-ndiswrapper-Makefile-build-fix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-ndiswrapper-linux-3.14-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-ndiswrapper-4.0-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-rfswitch-1.3.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-rfswitch-build-fix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-rfswitch-3.0-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-viahss-0.92.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-viahss-config.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-viahss-module-license.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-viahss-2.6.35-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-viahss-3.0-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-rtl8723bs.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-rtl8723bs-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-rtl8723bs-updates.patch</Patch>
             </Patches>
             <SourceURI>kernel/kernel/pspec.xml</SourceURI>
         </Source>
@@ -621,6 +705,14 @@
             </Files>
         </Package>
         <History>
+            <Update release="56">
+                <Type package="kernel">security</Type>
+                <Date>2015-07-20</Date>
+                <Version>4.1.2</Version>
+                <Comment>Version bump to 4.1.2 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.1.2</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="55">
                 <Type package="kernel">security</Type>
                 <Date>2015-07-12</Date>
@@ -1322,12 +1414,12 @@
             <Summary xml:lang="tr">CPU güç/frekans yönetim araçları</Summary>
             <Description xml:lang="en">cpupowertools contains utilities to manage power management and frequency scaling policies of modern CPUs.</Description>
             <Description xml:lang="tr">cpupowertools, işlemcinin çeşitli güç ve frekans parametrelerinin yönetilmesini sağlayan çeşitli araçları içeren bir pakettir.</Description>
-            <Archive type="targz" sha1sum="553164212ea3a162a2ff63276c60fe7dd04e9ad1">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="dce24ac1874f362000e40027075e7d24ba123b73">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.1.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.0.8.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.1.2.xz</Patch>
             </Patches>
             <SourceURI>kernel/tools/cpupowertools/pspec.xml</SourceURI>
         </Source>
@@ -1350,6 +1442,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="55">
+                <Date>2015-07-20</Date>
+                <Version>4.1.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="54">
                 <Date>2015-07-13</Date>
                 <Version>4.0.8</Version>
@@ -1924,7 +2023,7 @@
             <Description xml:lang="en">This package provides the kernel support for VirtualBox.</Description>
             <Archive type="tarxz" sha1sum="8850ebc24e00640835b682a5f8bbc8f05313d2d7">http://source.pisilinux.org/1.0/module-virtualbox-4.3.28.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.0.8">kernel-module-headers</Dependency>
+                <Dependency version="4.1.2">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -1934,7 +2033,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.0.8">kernel</Dependency>
+                <Dependency version="4.1.2">kernel</Dependency>
                 <Dependency version="4.3.28">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -1956,6 +2055,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="48">
+                <Date>2015-07-20</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.1.2.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="47">
                 <Date>2015-07-13</Date>
                 <Version>4.3.28</Version>
@@ -2296,6 +2402,58 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>ndiswrapper</Name>
+            <Homepage>http://ndiswrapper.sourceforge.net/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>GPLv2</License>
+            <IsA>app:console</IsA>
+            <IsA>driver</IsA>
+            <PartOf>kernel.drivers</PartOf>
+            <Summary xml:lang="en">A network driver wrapper</Summary>
+            <Summary xml:lang="tr">Bir sürücü ara yazılımı(wrapper)</Summary>
+            <Summary xml:lang="es">Capa de abstracción de controladores</Summary>
+            <Description xml:lang="fr">ndiswrapper permet d&apos;utiliser les pilotes Windows pour les cartes réseau sans-fil sans pilote adéquat sous Linux.</Description>
+            <Description xml:lang="en">module-ndiswrapper allows you to use Windows XP drivers for WLAN cards without proper Linux drivers.</Description>
+            <Description xml:lang="tr">ndiswrapper, Linux sürücüsü olmayan kablosuz kartların Windows sürücüleri kullanılarak çalıştırılmasını sağlayan bir yazılımdır.</Description>
+            <Description xml:lang="es">ndiswrapper permite usar controladores de windows XP para tarjetas WLAN que no tienen controladores propios para Linux.</Description>
+            <Archive type="targz" sha1sum="75fbbda677fe91ee07a6f6a8e19b1f3e2479540f">http://download.sourceforge.net/ndiswrapper/ndiswrapper-1.59.tar.gz</Archive>
+            <AdditionalFiles>
+                <AdditionalFile target="ndiswrapper-1.59.patch">ndiswrapper-1.59.patch</AdditionalFile>
+            </AdditionalFiles>
+            <BuildDependencies>
+                <Dependency version="4.1.2">kernel-module-headers</Dependency>
+            </BuildDependencies>
+            <SourceURI>kernel/drivers/ndiswrapper/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>ndiswrapper</Name>
+            <RuntimeDependencies>
+                <Dependency version="4.1.2">kernel</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library" permanent="true">/lib/modules</Path>
+                <Path fileType="man">/usr/share/man</Path>
+                <Path fileType="data">/etc/ndiswrapper</Path>
+                <Path fileType="executable">/usr/sbin</Path>
+                <Path fileType="executable">/sbin</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="1">
+                <Date>2014-04-28</Date>
+                <Version>1.59</Version>
+                <Comment>First release</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>module-bbswitch</Name>
             <Homepage>https://github.com/Bumblebee-Project/bbswitch</Homepage>
             <Packager>
@@ -2311,14 +2469,14 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.0.8">kernel-module-headers</Dependency>
+                <Dependency version="4.1.2">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-bbswitch/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="4.0.8">kernel</Dependency>
+                <Dependency version="4.1.2">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2331,6 +2489,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="24">
+                <Date>2015-07-20</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel-4.1.2.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="23">
                 <Date>2015-07-13</Date>
                 <Version>0.8</Version>
@@ -2518,7 +2683,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
             <Archive type="tarxz" sha1sum="82194515516139801fdc690198495b043d1c9cbe">http://source.pisilinux.org/1.0/module-virtualbox-guest-4.3.28.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.0.8">kernel-module-headers</Dependency>
+                <Dependency version="4.1.2">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -2528,7 +2693,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.0.8">kernel</Dependency>
+                <Dependency version="4.1.2">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
                 <Dependency version="4.3.28">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
@@ -2555,6 +2720,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="46">
+                <Date>2015-07-20</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.1.2.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="45">
                 <Date>2015-07-13</Date>
                 <Version>4.3.28</Version>
@@ -2897,7 +3069,7 @@
             <Archive type="targz" sha1sum="e02beac9cc713011551c483ae5f20f065f5b88c7" target="i686">http://www.broadcom.com/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <Archive type="targz" sha1sum="bd55f1fdc6b0a4d0a70dc4ba4bb4169a824e238c" target="x86_64">http://www.broadcom.com/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.0.8">kernel-module-headers</Dependency>
+                <Dependency version="4.1.2">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">patch/linux-40.patch</Patch>
@@ -2915,8 +3087,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.0.8">kernel</Dependency>
-                <Dependency release="43">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="4.1.2">kernel</Dependency>
+                <Dependency release="44">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2943,6 +3115,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="44">
+                <Date>2015-07-20</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 4.1.2.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="43">
                 <Date>2015-07-13</Date>
                 <Version>6.30.223.248</Version>
@@ -8701,6 +8880,8 @@
             <BuildDependencies>
                 <Dependency>pam-devel</Dependency>
                 <Dependency>gettext-devel</Dependency>
+                <Dependency>acl-devel</Dependency>
+                <Dependency>attr-devel</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">shadow-strncpy-usage.patch</Patch>
@@ -14700,7 +14881,7 @@
             <BuildDependencies>
                 <Dependency>perl</Dependency>
                 <Dependency>gettext</Dependency>
-                <Dependency>cracklib</Dependency>
+                <Dependency>cracklib-devel</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">no-lib64.patch</Patch>
@@ -21689,7 +21870,7 @@
             <Summary xml:lang="tr">Linux çekirdeği tarafından kullanılan firmware dosyaları</Summary>
             <Description xml:lang="en">linux-firmware contains different firmware files required for some devices to operate correctly.</Description>
             <Description xml:lang="tr">linux-firmware, bazı aygıtların düzgün çalışabilmesi için gerekli firmware dosyalarını içerir.</Description>
-            <Archive type="tarbz2" sha1sum="9df35c158a52394419e2c7bb7f0582c5c9253ca4">http://source.pisilinux.org/1.0/linux-firmware/linux-firmware-20150320.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="0d59830cabba714840a23b2a359cad8d172fd0eb">http://source.pisilinux.org/1.0/linux-firmware/linux-firmware-20150716.tar.bz2</Archive>
             <Archive type="tarxz" sha1sum="dd685266f7bc0acb0d455462637d23e3e895bc96" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/common-fw.tar.xz</Archive>
             <Archive type="tarxz" sha1sum="b2bb7fce3ea67d131f543a48134f7a65f2a8d834" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware-ipw.tar.xz</Archive>
             <Archive type="tarbz2" sha1sum="a5a616a9f765cf9cbb224deb7ccefdc82a7fe4d9" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/firmware-nonfreebox-2-tar.bz2</Archive>
@@ -21716,6 +21897,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="17">
+                <Date>2015-07-20</Date>
+                <Version>20150716</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="16">
                 <Date>2015-03-26</Date>
                 <Version>20150320</Version>
