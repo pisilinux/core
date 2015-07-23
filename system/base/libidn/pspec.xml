@@ -34,9 +34,6 @@
         <Name>libidn-devel</Name>
         <PartOf>system.devel</PartOf>
         <Summary>Development files for libidn</Summary>
-        <BuildDependencies>
-            <Dependency>glibc-32bit</Dependency>
-        </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">libidn</Dependency>
         </RuntimeDependencies>
@@ -53,7 +50,11 @@
         <PartOf>emul32</PartOf>
         <Summary>32-bit shared libraries for libidn</Summary>
         <BuildType>emul32</BuildType>
+        <BuildDependencies>
+            <Dependency>glibc-32bit</Dependency>
+        </BuildDependencies>
         <RuntimeDependencies>
+            <Dependency>glibc-32bit</Dependency>
             <Dependency release="current">libidn</Dependency>
         </RuntimeDependencies>
         <Files>

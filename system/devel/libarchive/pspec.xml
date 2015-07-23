@@ -15,6 +15,7 @@
         <Archive sha1sum="6a991777ecb0f890be931cec4aec856d1a195489" type="targz">http://www.libarchive.org/downloads/libarchive-3.1.2.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>acl-devel</Dependency>
+            <Dependency>nettle-devel</Dependency>
             <Dependency>attr-devel</Dependency>
             <Dependency>bzip2</Dependency>
             <Dependency>libxml2-devel</Dependency>
@@ -58,6 +59,13 @@
     </Package>
 
     <History>
+        <Update release="7">
+            <Date>2015-07-05</Date>
+            <Version>3.1.2</Version>
+            <Comment>Rebuild with nettle.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="6">
             <Date>2014-05-11</Date>
             <Version>3.1.2</Version>

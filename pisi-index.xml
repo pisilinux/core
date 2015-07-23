@@ -473,7 +473,7 @@
         </Package>
         <History>
             <Update release="8">
-                <Date>2015-05-22</Date>
+                <Date>2015-07-14</Date>
                 <Version>1.6.16</Version>
                 <Comment>Version bump.</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -546,7 +546,7 @@
             <Summary xml:lang="tr">Pisi Linux için Linux çekirdeği</Summary>
             <Summary xml:lang="es">El kernel de Linux (el núcleo del sistema operativo Linux) de Pisi Linux</Summary>
             <Description xml:lang="en">kernel contains the Linux kernel, the core of any Linux operating system. The kernel handles the basic functions of the operating system: memory allocation, process allocation, device input and output, etc.</Description>
-            <Archive type="targz" sha1sum="553164212ea3a162a2ff63276c60fe7dd04e9ad1">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="dce24ac1874f362000e40027075e7d24ba123b73">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.1.tar.gz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
                 <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -561,8 +561,92 @@
                 <Dependency>xmlto</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.0.6.xz</Patch>
-                <Patch level="1">patches/pisilinux_aufs4-standalone.patch</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.1.2.xz</Patch>
+                <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
+                <Patch level="1">patches/mageia/x86-boot-video-80x25-if-break.patch</Patch>
+                <Patch level="1">patches/mageia/x86-default_poweroff_up_machines.patch</Patch>
+                <Patch level="1">patches/mageia/x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch</Patch>
+                <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
+                <Patch level="1">patches/mageia/pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch</Patch>
+                <Patch level="1">patches/mageia/pci-quirks-drop-devinit-exit.patch</Patch>
+                <Patch level="1">patches/mageia/pci-acs-quirks-for-Intel-9-series-PCH-root-ports.patch</Patch>
+                <Patch level="1">patches/mageia/acpi-CLEVO-M360S-disable_acpi_irq.patch</Patch>
+                <Patch level="1">patches/mageia/acpi-processor-M720SR-limit-to-C2.patch</Patch>
+                <Patch level="1">patches/mageia/scsi-megaraid-new-sysfs-name.patch</Patch>
+                <Patch level="1">patches/mageia/ide-pci-sis5513-965.patch</Patch>
+                <Patch level="1">patches/mageia/mpt-vmware-fix.patch</Patch>
+                <Patch level="1">patches/mageia/dm-raid-aliases.patch</Patch>
+                <Patch level="1">patches/mageia/block-floppy-disable-pnp-modalias.patch</Patch>
+                <Patch level="1">patches/mageia/ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch</Patch>
+                <Patch level="1">patches/mageia/ata-revert-Disabling-the-async-PM-for-JMicron-chip-363-361.patch</Patch>
+                <Patch level="1">patches/mageia/ata-jmicron-disable-broken-async_suspend.patch</Patch>
+                <Patch level="1">patches/mageia/block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch</Patch>
+                <Patch level="1">patches/mageia/block-cfq-iosched-fix-the-setting-of-IOPS-mode-on-SSDs.patch</Patch>
+                <Patch level="1">patches/mageia/fs-aufs4.patch</Patch>
+                <Patch level="1">patches/mageia/fs-aufs4-modular.patch</Patch>
+                <Patch level="1">patches/mageia/firewire-ieee1394-module-aliases.patch</Patch>
+                <Patch level="1">patches/mageia/char-agp-intel-new-Q57-id.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-fixes.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-2.6.31.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-fix-for-changed-drm_pci_alloc.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-fix-for-changed-drm_ioctl.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-2.6.36-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-2.6.37-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-3.0-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-include-module.h.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-3.3-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-3.6-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-3.7-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-3.12-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-restore-mach64_PCI_IDS.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-linux-3.14-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-3.17-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-mach64-3.18-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch</Patch>
+                <Patch level="1">patches/mageia/media-Fix-regression-in-some-more-dib0700-based-devi.patch</Patch>
+                <Patch level="1">patches/mageia/net-sis190-fix-list-usage.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-IFWLOG.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-IFWLOG-mdv.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-IFWLOG-2.6.35-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-IFWLOG-2.6.37-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/net-ipv4-netfilter-ipt_IFWLOG-3.6-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-IFWLOG-3.7-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-psd.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-psd-mdv.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-psd-2.6.35-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
+                <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
+                <Patch level="1">patches/mageia/include-kbuild-export-pci_ids.patch</Patch>
+                <Patch level="1">patches/mageia/hid-usbhid-IBM-BladeCenterHS20-quirk.patch</Patch>
+                <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id.patch</Patch>
+                <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/media-usb-pwc-lie-in-proc-usb-devices.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-3rdparty-1.0-tree.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-3rdparty-merge.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-acerhk-0.5.35.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-acerhk-kbuild.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-acerhk-extra-cflags.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-acerhk-proc_dir_entry-owner.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-acerhk-fix-build-with-function-tracer.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-acerhk-2.6.36-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-acerhk-fix-include.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-ndiswrapper-1.59.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-ndiswrapper-Kconfig.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-ndiswrapper-Makefile-build-fix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-ndiswrapper-linux-3.14-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-ndiswrapper-4.0-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-rfswitch-1.3.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-rfswitch-build-fix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-rfswitch-3.0-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-viahss-0.92.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-viahss-config.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-viahss-module-license.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-viahss-2.6.35-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-viahss-3.0-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-rtl8723bs.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-rtl8723bs-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-rtl8723bs-updates.patch</Patch>
             </Patches>
             <SourceURI>kernel/kernel/pspec.xml</SourceURI>
         </Source>
@@ -621,6 +705,30 @@
             </Files>
         </Package>
         <History>
+            <Update release="56">
+                <Type package="kernel">security</Type>
+                <Date>2015-07-20</Date>
+                <Version>4.1.2</Version>
+                <Comment>Version bump to 4.1.2 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.1.2</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="55">
+                <Type package="kernel">security</Type>
+                <Date>2015-07-12</Date>
+                <Version>4.0.8</Version>
+                <Comment>Version bump to 4.0.8 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.0.8</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="54">
+                <Type package="kernel">security</Type>
+                <Date>2015-06-30</Date>
+                <Version>4.0.7</Version>
+                <Comment>Version bump to 4.0.7 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.0.7</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="53">
                 <Type package="kernel">security</Type>
                 <Date>2015-06-23</Date>
@@ -1306,12 +1414,12 @@
             <Summary xml:lang="tr">CPU güç/frekans yönetim araçları</Summary>
             <Description xml:lang="en">cpupowertools contains utilities to manage power management and frequency scaling policies of modern CPUs.</Description>
             <Description xml:lang="tr">cpupowertools, işlemcinin çeşitli güç ve frekans parametrelerinin yönetilmesini sağlayan çeşitli araçları içeren bir pakettir.</Description>
-            <Archive type="targz" sha1sum="553164212ea3a162a2ff63276c60fe7dd04e9ad1">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="dce24ac1874f362000e40027075e7d24ba123b73">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.1.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.0.5.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.1.2.xz</Patch>
             </Patches>
             <SourceURI>kernel/tools/cpupowertools/pspec.xml</SourceURI>
         </Source>
@@ -1334,6 +1442,34 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="55">
+                <Date>2015-07-20</Date>
+                <Version>4.1.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="54">
+                <Date>2015-07-13</Date>
+                <Version>4.0.8</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="53">
+                <Date>2015-06-30</Date>
+                <Version>4.0.7</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="52">
+                <Date>2015-06-24</Date>
+                <Version>4.0.6</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="51">
                 <Date>2015-06-16</Date>
                 <Version>4.0.5</Version>
@@ -1887,7 +2023,7 @@
             <Description xml:lang="en">This package provides the kernel support for VirtualBox.</Description>
             <Archive type="tarxz" sha1sum="8850ebc24e00640835b682a5f8bbc8f05313d2d7">http://source.pisilinux.org/1.0/module-virtualbox-4.3.28.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.0.5">kernel-module-headers</Dependency>
+                <Dependency version="4.1.2">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -1897,7 +2033,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.0.5">kernel</Dependency>
+                <Dependency version="4.1.2">kernel</Dependency>
                 <Dependency version="4.3.28">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -1919,6 +2055,34 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="48">
+                <Date>2015-07-20</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.1.2.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="47">
+                <Date>2015-07-13</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.0.8.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="46">
+                <Date>2015-06-30</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.0.7.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="45">
+                <Date>2015-06-24</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.0.6.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="44">
                 <Date>2015-06-09</Date>
                 <Version>4.3.28</Version>
@@ -2238,6 +2402,58 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>ndiswrapper</Name>
+            <Homepage>http://ndiswrapper.sourceforge.net/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>GPLv2</License>
+            <IsA>app:console</IsA>
+            <IsA>driver</IsA>
+            <PartOf>kernel.drivers</PartOf>
+            <Summary xml:lang="en">A network driver wrapper</Summary>
+            <Summary xml:lang="tr">Bir sürücü ara yazılımı(wrapper)</Summary>
+            <Summary xml:lang="es">Capa de abstracción de controladores</Summary>
+            <Description xml:lang="fr">ndiswrapper permet d&apos;utiliser les pilotes Windows pour les cartes réseau sans-fil sans pilote adéquat sous Linux.</Description>
+            <Description xml:lang="en">module-ndiswrapper allows you to use Windows XP drivers for WLAN cards without proper Linux drivers.</Description>
+            <Description xml:lang="tr">ndiswrapper, Linux sürücüsü olmayan kablosuz kartların Windows sürücüleri kullanılarak çalıştırılmasını sağlayan bir yazılımdır.</Description>
+            <Description xml:lang="es">ndiswrapper permite usar controladores de windows XP para tarjetas WLAN que no tienen controladores propios para Linux.</Description>
+            <Archive type="targz" sha1sum="75fbbda677fe91ee07a6f6a8e19b1f3e2479540f">http://download.sourceforge.net/ndiswrapper/ndiswrapper-1.59.tar.gz</Archive>
+            <AdditionalFiles>
+                <AdditionalFile target="ndiswrapper-1.59.patch">ndiswrapper-1.59.patch</AdditionalFile>
+            </AdditionalFiles>
+            <BuildDependencies>
+                <Dependency version="4.1.2">kernel-module-headers</Dependency>
+            </BuildDependencies>
+            <SourceURI>kernel/drivers/ndiswrapper/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>ndiswrapper</Name>
+            <RuntimeDependencies>
+                <Dependency version="4.1.2">kernel</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library" permanent="true">/lib/modules</Path>
+                <Path fileType="man">/usr/share/man</Path>
+                <Path fileType="data">/etc/ndiswrapper</Path>
+                <Path fileType="executable">/usr/sbin</Path>
+                <Path fileType="executable">/sbin</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="1">
+                <Date>2014-04-28</Date>
+                <Version>1.59</Version>
+                <Comment>First release</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>module-bbswitch</Name>
             <Homepage>https://github.com/Bumblebee-Project/bbswitch</Homepage>
             <Packager>
@@ -2253,14 +2469,14 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.0.5">kernel-module-headers</Dependency>
+                <Dependency version="4.1.2">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-bbswitch/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="4.0.5">kernel</Dependency>
+                <Dependency version="4.1.2">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2273,6 +2489,34 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="24">
+                <Date>2015-07-20</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel-4.1.2.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="23">
+                <Date>2015-07-13</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel-4.0.8.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="22">
+                <Date>2015-06-30</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel-4.0.7.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="21">
+                <Date>2015-06-24</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel-4.0.6.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="20">
                 <Date>2015-06-16</Date>
                 <Version>0.8</Version>
@@ -2439,7 +2683,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
             <Archive type="tarxz" sha1sum="82194515516139801fdc690198495b043d1c9cbe">http://source.pisilinux.org/1.0/module-virtualbox-guest-4.3.28.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.0.5">kernel-module-headers</Dependency>
+                <Dependency version="4.1.2">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -2449,7 +2693,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.0.5">kernel</Dependency>
+                <Dependency version="4.1.2">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
                 <Dependency version="4.3.28">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
@@ -2476,6 +2720,34 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="46">
+                <Date>2015-07-20</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.1.2.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="45">
+                <Date>2015-07-13</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.0.8.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="45">
+                <Date>2015-06-24</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.0.7.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="44">
+                <Date>2015-06-24</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.0.6.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="43">
                 <Date>2015-06-09</Date>
                 <Version>4.3.28</Version>
@@ -2797,7 +3069,7 @@
             <Archive type="targz" sha1sum="e02beac9cc713011551c483ae5f20f065f5b88c7" target="i686">http://www.broadcom.com/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <Archive type="targz" sha1sum="bd55f1fdc6b0a4d0a70dc4ba4bb4169a824e238c" target="x86_64">http://www.broadcom.com/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.0.5">kernel-module-headers</Dependency>
+                <Dependency version="4.1.2">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">patch/linux-40.patch</Patch>
@@ -2815,8 +3087,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.0.5">kernel</Dependency>
-                <Dependency release="40">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="4.1.2">kernel</Dependency>
+                <Dependency release="44">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2843,6 +3115,34 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="44">
+                <Date>2015-07-20</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 4.1.2.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="43">
+                <Date>2015-07-13</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 4.0.8.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="42">
+                <Date>2015-06-30</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 4.0.7.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="41">
+                <Date>2015-06-16</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 4.0.6</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="40">
                 <Date>2015-06-16</Date>
                 <Version>6.30.223.248</Version>
@@ -3127,6 +3427,88 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>slang</Name>
+            <Homepage>http://www.jedsoft.org/slang/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>GPLv2</License>
+            <License>Artistic</License>
+            <IsA>app:console</IsA>
+            <PartOf>programming.library</PartOf>
+            <Summary xml:lang="en">Console display library used by most text viewer</Summary>
+            <Summary xml:lang="tr">Bir çok metin gösterici yazılım tarfından kullanılan konsol görüntüleme kütüphanesi</Summary>
+            <Description xml:lang="fr">S-Lang est une librarie de programmation multi-plateforme conçue pour permettre aux développeur de développer des logiciels robustes et portables. Elle fournit les mécanismes requis pour développer une application interactive telle que la gestion d&apos;affichages/écrans, entrées clavier, disposition de touches et ainsi de suite. La fonctionnalité la plus attractive de cette librairie reste l&apos;interpréteur slang qui peut être embarqué au sein même d&apos;un programme pour le rendre extensible.</Description>
+            <Description xml:lang="en">S-Lang is a multi-platform programmer&apos;s library designed to allow a developer to create robust multi-platform software. It provides facilities required by interactive applications such as display/screen management, keyboard input, keymaps, and so on. The most exciting feature of the library is the slang interpreter that may be easily embedded into a program to make it extensible.</Description>
+            <Description xml:lang="tr">S-lang, yazılım geliştiricilerin bütün işletim sistemlerinde çalışabilen güçlü uygulamalar geliştirmesine yardımcı olan bir uygulama kitaplığıdır. İnteraktif uygulamalar için ekran yönetimi ve klavye girişi gibi araçlar sunar. Kitaplığın en ilginç özelliği programların içine kolayca gömülebilen ve programı genişletilebilir kılan slang yorumlayıcısıdır.</Description>
+            <Archive type="tarbz2" sha1sum="34e68a993888d0ae2ebc7bc31b40bc894813a7e2">ftp://ftp.ntua.gr/pub/lang/slang/slang/v2.2/slang-2.2.4.tar.bz2</Archive>
+            <BuildDependencies>
+                <Dependency>libpng-devel</Dependency>
+                <Dependency>libpcre-devel</Dependency>
+                <Dependency>ncurses-devel</Dependency>
+                <Dependency>readline-devel</Dependency>
+                <Dependency>zlib-devel</Dependency>
+            </BuildDependencies>
+            <SourceURI>programming/library/slang/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>slang</Name>
+            <RuntimeDependencies>
+                <Dependency>libpng</Dependency>
+                <Dependency>libpcre</Dependency>
+                <Dependency>zlib</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="config">/etc</Path>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="data">/usr/share/slsh</Path>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="doc">/usr/share/doc/slang</Path>
+                <Path fileType="man">/usr/share/man</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>slang-devel</Name>
+            <Summary xml:lang="en">Development files for slang</Summary>
+            <Summary xml:lang="tr">slang için geliştirme dosyaları</Summary>
+            <PartOf>system.devel</PartOf>
+            <RuntimeDependencies>
+                <Dependency release="3">slang</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="header">/usr/include</Path>
+                <Path fileType="data">/usr/lib/pkgconfig</Path>
+                <Path fileType="doc">/usr/share/doc/slang/html</Path>
+                <Path fileType="man">/usr/share/man/man3</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="3">
+                <Date>2014-05-11</Date>
+                <Version>2.2.4</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-10-31</Date>
+                <Version>2.2.4</Version>
+                <Comment>rebuild.</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2012-08-23</Date>
+                <Version>2.2.4</Version>
+                <Comment>First release</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>docbook-xml</Name>
             <Homepage>http://www.docbook.org/xml/</Homepage>
             <Packager>
@@ -3383,6 +3765,72 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>os-prober</Name>
+            <Homepage>http://joey.kitenet.net/code/os-prober/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>GPLv2+</License>
+            <IsA>app:console</IsA>
+            <PartOf>system.boot</PartOf>
+            <Summary xml:lang="en">Utility to detect other OSes on a set of drives</Summary>
+            <Summary xml:lang="pl">Narzędzie do wykrywania innych systemów operacyjnych na dyskach</Summary>
+            <Description xml:lang="en">os-probe detects other OSes available on a system and outputs the results in a generic machine-readable format. Support for new OSes and Linux distributions can be added easily.</Description>
+            <Description xml:lang="pl">os-prober wykrywa inne systemy operacyjne dostępne na komputerze i przekazuje rezultaty w standardowym, odczytywalnym maszynowo, formacie. </Description>
+            <Archive type="tarxz" sha1sum="63114ccf7d2ed2f7af3db100bf992eac3c8576a8">http://http.debian.net/debian/pool/main/o/os-prober/os-prober_1.65.tar.xz</Archive>
+            <SourceURI>system/boot/os-prober/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>os-prober</Name>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="data">/var/lib/os-prober</Path>
+                <Path fileType="data">/usr/share/os-prober</Path>
+                <Path fileType="doc">/usr/share/doc/os-prober</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="5">
+                <Date>2015-05-03</Date>
+                <Version>1.65</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="4">
+                <Date>2014-05-11</Date>
+                <Version>1.63</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2013-10-24</Date>
+                <Version>1.63</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-07-28</Date>
+                <Version>1.58</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2013-01-03</Date>
+                <Version>1.57</Version>
+                <Comment>First release</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>grub2</Name>
             <Homepage>http://www.gnu.org/software/grub/</Homepage>
             <Packager>
@@ -3391,7 +3839,7 @@
             </Packager>
             <License>GPLv3</License>
             <IsA>app:gui</IsA>
-            <PartOf>system.base</PartOf>
+            <PartOf>system.boot</PartOf>
             <Summary xml:lang="en">GNU GRUB is a Multiboot boot loader.</Summary>
             <Description xml:lang="en">GNU GRUB (short for GNU GRand Unified Bootloader) is a boot loader package from the GNU Project.</Description>
             <Archive type="tarxz" sha1sum="1bf580f1e8bce4909a7ac7ca485cee02b00ed383">ftp://alpha.gnu.org/gnu/grub/grub-2.02~beta2.tar.xz</Archive>
@@ -4773,88 +5221,6 @@
                 <Comment>First release</Comment>
                 <Name>Marcin Bojara</Name>
                 <Email>marcin@pisilinux.org</Email>
-            </Update>
-        </History>
-    </SpecFile>
-    <SpecFile>
-        <Source>
-            <Name>slang</Name>
-            <Homepage>http://www.jedsoft.org/slang/</Homepage>
-            <Packager>
-                <Name>PisiLinux Community</Name>
-                <Email>admins@pisilinux.org</Email>
-            </Packager>
-            <License>GPLv2</License>
-            <License>Artistic</License>
-            <IsA>app:console</IsA>
-            <PartOf>system.base</PartOf>
-            <Summary xml:lang="en">Console display library used by most text viewer</Summary>
-            <Summary xml:lang="tr">Bir çok metin gösterici yazılım tarfından kullanılan konsol görüntüleme kütüphanesi</Summary>
-            <Description xml:lang="fr">S-Lang est une librarie de programmation multi-plateforme conçue pour permettre aux développeur de développer des logiciels robustes et portables. Elle fournit les mécanismes requis pour développer une application interactive telle que la gestion d&apos;affichages/écrans, entrées clavier, disposition de touches et ainsi de suite. La fonctionnalité la plus attractive de cette librairie reste l&apos;interpréteur slang qui peut être embarqué au sein même d&apos;un programme pour le rendre extensible.</Description>
-            <Description xml:lang="en">S-Lang is a multi-platform programmer&apos;s library designed to allow a developer to create robust multi-platform software. It provides facilities required by interactive applications such as display/screen management, keyboard input, keymaps, and so on. The most exciting feature of the library is the slang interpreter that may be easily embedded into a program to make it extensible.</Description>
-            <Description xml:lang="tr">S-lang, yazılım geliştiricilerin bütün işletim sistemlerinde çalışabilen güçlü uygulamalar geliştirmesine yardımcı olan bir uygulama kitaplığıdır. İnteraktif uygulamalar için ekran yönetimi ve klavye girişi gibi araçlar sunar. Kitaplığın en ilginç özelliği programların içine kolayca gömülebilen ve programı genişletilebilir kılan slang yorumlayıcısıdır.</Description>
-            <Archive type="tarbz2" sha1sum="34e68a993888d0ae2ebc7bc31b40bc894813a7e2">ftp://ftp.ntua.gr/pub/lang/slang/slang/v2.2/slang-2.2.4.tar.bz2</Archive>
-            <BuildDependencies>
-                <Dependency>libpng-devel</Dependency>
-                <Dependency>libpcre-devel</Dependency>
-                <Dependency>ncurses-devel</Dependency>
-                <Dependency>readline-devel</Dependency>
-                <Dependency>zlib-devel</Dependency>
-            </BuildDependencies>
-            <SourceURI>system/base/slang/pspec.xml</SourceURI>
-        </Source>
-        <Package>
-            <Name>slang</Name>
-            <RuntimeDependencies>
-                <Dependency>libpng</Dependency>
-                <Dependency>libpcre</Dependency>
-                <Dependency>zlib</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="config">/etc</Path>
-                <Path fileType="executable">/usr/bin</Path>
-                <Path fileType="data">/usr/share/slsh</Path>
-                <Path fileType="library">/usr/lib</Path>
-                <Path fileType="doc">/usr/share/doc/slang</Path>
-                <Path fileType="man">/usr/share/man</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>slang-devel</Name>
-            <Summary xml:lang="en">Development files for slang</Summary>
-            <Summary xml:lang="tr">slang için geliştirme dosyaları</Summary>
-            <PartOf>system.devel</PartOf>
-            <RuntimeDependencies>
-                <Dependency release="3">slang</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="header">/usr/include</Path>
-                <Path fileType="data">/usr/lib/pkgconfig</Path>
-                <Path fileType="doc">/usr/share/doc/slang/html</Path>
-                <Path fileType="man">/usr/share/man/man3</Path>
-            </Files>
-        </Package>
-        <History>
-            <Update release="3">
-                <Date>2014-05-11</Date>
-                <Version>2.2.4</Version>
-                <Comment>Release bump.</Comment>
-                <Name>Marcin Bojara</Name>
-                <Email>marcin@pisilinux.org</Email>
-            </Update>
-            <Update release="2">
-                <Date>2013-10-31</Date>
-                <Version>2.2.4</Version>
-                <Comment>rebuild.</Comment>
-                <Name>Yusuf Aydemir</Name>
-                <Email>yusuf.aydemir@pisilinux.org</Email>
-            </Update>
-            <Update release="1">
-                <Date>2012-08-23</Date>
-                <Version>2.2.4</Version>
-                <Comment>First release</Comment>
-                <Name>PisiLinux Community</Name>
-                <Email>admins@pisilinux.org</Email>
             </Update>
         </History>
     </SpecFile>
@@ -8128,72 +8494,6 @@
     </SpecFile>
     <SpecFile>
         <Source>
-            <Name>os-prober</Name>
-            <Homepage>http://joey.kitenet.net/code/os-prober/</Homepage>
-            <Packager>
-                <Name>PisiLinux Community</Name>
-                <Email>admins@pisilinux.org</Email>
-            </Packager>
-            <License>GPLv2+</License>
-            <IsA>app:console</IsA>
-            <PartOf>system.base</PartOf>
-            <Summary xml:lang="en">Utility to detect other OSes on a set of drives</Summary>
-            <Summary xml:lang="pl">Narzędzie do wykrywania innych systemów operacyjnych na dyskach</Summary>
-            <Description xml:lang="en">os-probe detects other OSes available on a system and outputs the results in a generic machine-readable format. Support for new OSes and Linux distributions can be added easily.</Description>
-            <Description xml:lang="pl">os-prober wykrywa inne systemy operacyjne dostępne na komputerze i przekazuje rezultaty w standardowym, odczytywalnym maszynowo, formacie. </Description>
-            <Archive type="tarxz" sha1sum="63114ccf7d2ed2f7af3db100bf992eac3c8576a8">http://http.debian.net/debian/pool/main/o/os-prober/os-prober_1.65.tar.xz</Archive>
-            <SourceURI>system/base/os-prober/pspec.xml</SourceURI>
-        </Source>
-        <Package>
-            <Name>os-prober</Name>
-            <Files>
-                <Path fileType="executable">/usr/bin</Path>
-                <Path fileType="library">/usr/lib</Path>
-                <Path fileType="data">/var/lib/os-prober</Path>
-                <Path fileType="data">/usr/share/os-prober</Path>
-                <Path fileType="doc">/usr/share/doc/os-prober</Path>
-            </Files>
-        </Package>
-        <History>
-            <Update release="5">
-                <Date>2015-05-03</Date>
-                <Version>1.65</Version>
-                <Comment>Version bump.</Comment>
-                <Name>Ertuğrul Erata</Name>
-                <Email>ertugrulerata@gmail.com</Email>
-            </Update>
-            <Update release="4">
-                <Date>2014-05-11</Date>
-                <Version>1.63</Version>
-                <Comment>Release bump.</Comment>
-                <Name>Marcin Bojara</Name>
-                <Email>marcin@pisilinux.org</Email>
-            </Update>
-            <Update release="3">
-                <Date>2013-10-24</Date>
-                <Version>1.63</Version>
-                <Comment>Version bump.</Comment>
-                <Name>Yusuf Aydemir</Name>
-                <Email>yusuf.aydemir@pisilinux.org</Email>
-            </Update>
-            <Update release="2">
-                <Date>2013-07-28</Date>
-                <Version>1.58</Version>
-                <Comment>Version bump.</Comment>
-                <Name>Marcin Bojara</Name>
-                <Email>marcin@pisilinux.org</Email>
-            </Update>
-            <Update release="1">
-                <Date>2013-01-03</Date>
-                <Version>1.57</Version>
-                <Comment>First release</Comment>
-                <Name>Erdinç Gültekin</Name>
-                <Email>admins@pisilinux.org</Email>
-            </Update>
-        </History>
-    </SpecFile>
-    <SpecFile>
-        <Source>
             <Name>alternatives</Name>
             <Homepage>http://git.fedorahosted.org/git/?p=chkconfig.git;a=summary</Homepage>
             <Packager>
@@ -8580,6 +8880,8 @@
             <BuildDependencies>
                 <Dependency>pam-devel</Dependency>
                 <Dependency>gettext-devel</Dependency>
+                <Dependency>acl-devel</Dependency>
+                <Dependency>attr-devel</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">shadow-strncpy-usage.patch</Patch>
@@ -10278,6 +10580,12 @@
                 <Patch compressionType="gzip" level="0">official/bash43-031.tar.gz</Patch>
                 <Patch compressionType="gzip" level="0">official/bash43-032.tar.gz</Patch>
                 <Patch compressionType="gzip" level="0">official/bash43-033.tar.gz</Patch>
+                <Patch compressionType="gzip" level="0">official/bash43-034.tar.gz</Patch>
+                <Patch compressionType="gzip" level="0">official/bash43-035.tar.gz</Patch>
+                <Patch compressionType="gzip" level="0">official/bash43-036.tar.gz</Patch>
+                <Patch compressionType="gzip" level="0">official/bash43-037.tar.gz</Patch>
+                <Patch compressionType="gzip" level="0">official/bash43-038.tar.gz</Patch>
+                <Patch compressionType="gzip" level="0">official/bash43-039.tar.gz</Patch>
                 <Patch level="1">fedora/bash-2.02-security.patch</Patch>
                 <Patch level="1">fedora/bash-2.03-paths.patch</Patch>
                 <Patch level="1">fedora/bash-2.03-profile.patch</Patch>
@@ -10325,8 +10633,15 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2015-07-09</Date>
+                <Version>4.3_p39</Version>
+                <Comment>Update</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
             <Update release="8">
-                <Date>2015-05-22</Date>
+                <Date>2015-08-20</Date>
                 <Version>4.3_p33</Version>
                 <Comment>Update</Comment>
                 <Name>Yusuf Aydemir</Name>
@@ -10649,7 +10964,7 @@
             <Summary xml:lang="en">The Nettle package contains the low-level cryptographic library.</Summary>
             <Summary xml:lang="pl">Nettle - biblioteka kryptograficzna.</Summary>
             <Description xml:lang="en">The Nettle package contains the low-level cryptographic library that is designed to fit easily in many contexts.</Description>
-            <Archive type="targz" sha1sum="e7477df5f66e650c4c4738ec8e01c2efdb5d1211">ftp://ftp.gnu.org/gnu/nettle/nettle-2.7.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="1836601393522124787e029466935408e22dd204">ftp://ftp.gnu.org/gnu/nettle/nettle-3.1.1.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>gmp-devel</Dependency>
             </BuildDependencies>
@@ -10673,7 +10988,7 @@
             <Summary xml:lang="tr">nettle için geliştirme dosyaları.</Summary>
             <Summary xml:lang="pl">Pliki nagłówkowe biblioteki nettle.</Summary>
             <RuntimeDependencies>
-                <Dependency release="5">nettle</Dependency>
+                <Dependency release="6">nettle</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -10693,7 +11008,7 @@
                 <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="5">nettle</Dependency>
+                <Dependency release="6">nettle</Dependency>
                 <Dependency>glibc-32bit</Dependency>
                 <Dependency>gmp</Dependency>
             </RuntimeDependencies>
@@ -10702,6 +11017,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2015-07-05</Date>
+                <Version>3.1.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2014-05-11</Date>
                 <Version>2.7.1</Version>
@@ -13644,11 +13966,8 @@
             <Summary xml:lang="en">Development files for libidn</Summary>
             <Summary xml:lang="tr">libidn için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency>libidn</Dependency>
+                <Dependency release="4">libidn</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13663,7 +13982,11 @@
             <Summary xml:lang="tr">libidn için 32-bit paylaşımlı kitaplıklar</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
+            <BuildDependencies>
+                <Dependency>glibc-32bit</Dependency>
+            </BuildDependencies>
             <RuntimeDependencies>
+                <Dependency>glibc-32bit</Dependency>
                 <Dependency release="4">libidn</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -13921,7 +14244,7 @@
             <Summary xml:lang="tr">Gelişmiş sistem günlükleme hizmeti</Summary>
             <Description xml:lang="en">rsyslog is an enhanced multi-threaded syslogd supporting, among others, MySQL, syslog/tcp, RFC 3195, permitted sender lists, filtering on any message part, and fine grain output format control. It is quite compatible with stock sysklogd and can be used as a drop-in replacement.</Description>
             <Description xml:lang="tr">rsyslog, çoklu iş parçacığı, MySQL, syslog/tcp, RFC 3195, izin verilen gönderici listesi, gelişmiş ileti filtreleme gibi özelliklere sahip gelişmiş bir sistem günlükleme hizmetidir.</Description>
-            <Archive type="targz" sha1sum="e8d767f0c3e0b7ed0e20bf3e2513d3c2d5c30239">http://www.rsyslog.com/files/download/rsyslog/rsyslog-8.9.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="b78ae3d9db4e191d7a6dd9c4c7483c82abe039d7">http://www.rsyslog.com/files/download/rsyslog/rsyslog-8.11.0.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>json-c-devel</Dependency>
@@ -13949,6 +14272,7 @@
                 <Path fileType="config">/etc/conf.d</Path>
                 <Path fileType="config">/etc/rsyslog.d</Path>
                 <Path fileType="config">/etc/rsyslog.conf</Path>
+                <Path fileType="data">/var</Path>
             </Files>
             <Provides>
                 <COMAR script="service.py">System.Service</COMAR>
@@ -13961,6 +14285,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2015-07-13</Date>
+                <Version>8.11.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2015-05-05</Date>
                 <Version>8.9.0</Version>
@@ -14550,7 +14881,7 @@
             <BuildDependencies>
                 <Dependency>perl</Dependency>
                 <Dependency>gettext</Dependency>
-                <Dependency>cracklib</Dependency>
+                <Dependency>cracklib-devel</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">no-lib64.patch</Patch>
@@ -15089,7 +15420,7 @@
             <Name>glibc-devel</Name>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency>glibc</Dependency>
+                <Dependency release="11">glibc</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -16694,78 +17025,6 @@
                 <Comment>First release</Comment>
                 <Name>Serdar Soytetir</Name>
                 <Email>kaptan@pisilinux.org</Email>
-            </Update>
-        </History>
-    </SpecFile>
-    <SpecFile>
-        <Source>
-            <Name>nano</Name>
-            <Homepage>http://www.nano-editor.org/</Homepage>
-            <Packager>
-                <Name>PisiLinux Community</Name>
-                <Email>admins@pisilinux.org</Email>
-            </Packager>
-            <License>GPLv3</License>
-            <IsA>app:console</IsA>
-            <PartOf>system.base</PartOf>
-            <Summary xml:lang="en">GNU GPL&apos;d Pico clone with more functionality</Summary>
-            <Summary xml:lang="tr">Konsol ortamında kullanabileceğiniz bir metin düzenleyicidir.</Summary>
-            <Description xml:lang="fr">Nano est un petit éditeur libre et convivial qui a pour but de remplacer Pico, l&apos;éditeur par défaut inclus dans le paquet non-libre Pine. Plutôt que juste copier l&apos;apparence et le ressenti de Pico, nan implémente également certaines fonctionnalité manquantes (ou désactivées par défaut), tel que &quot;rechercher et remplacer&quot; ou &quot;allez à la ligne numéro&quot;.</Description>
-            <Description xml:lang="en">Nano is a small, free and friendly editor which aims to replace Pico, the default editor included in the non-free Pine package. Rather than just copying Pico&apos;s look and feel, nano also implements some missing (or disabled by default) features in Pico, such as &quot;search and replace&quot; and &quot;go to line number&quot;.</Description>
-            <Description xml:lang="tr">Nano özgür olmayan Pine paketinin içindeki metin düzenleme programı olan Pico&apos;nun yerine geçme hedefini güden küçük, özgür ve kullanışlı bir metin düzenleme programıdır. Pico&apos;nun görünüşünü ve işlevini kopyalamaktan çok, Nano aynı zamanda &quot;ara ve değiştir&quot; ve &quot;satır numarasına git&quot; gibi Pico&apos;da olmayan (veya ön tanımlı olarak kapalı) bazı özellikleri sunar.</Description>
-            <Archive type="targz" sha1sum="7ee64425238abb89b7db9721b9ee09ec262f6bb2">http://www.nano-editor.org/dist/v2.3/nano-2.3.5.tar.gz</Archive>
-            <BuildDependencies>
-                <Dependency>ncurses-devel</Dependency>
-                <Dependency>gettext-devel</Dependency>
-                <Dependency>slang</Dependency>
-            </BuildDependencies>
-            <SourceURI>system/base/nano/pspec.xml</SourceURI>
-        </Source>
-        <Package>
-            <Name>nano</Name>
-            <RuntimeDependencies>
-                <Dependency>ncurses</Dependency>
-                <Dependency>file</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="config">/etc</Path>
-                <Path fileType="localedata">/usr/share/locale</Path>
-                <Path fileType="doc">/usr/share/doc/nano</Path>
-                <Path fileType="man">/usr/share/man</Path>
-                <Path fileType="info">/usr/share/info</Path>
-                <Path fileType="data">/usr/share/nano</Path>
-                <Path fileType="executable">/usr/bin</Path>
-                <Path fileType="executable">/bin</Path>
-            </Files>
-        </Package>
-        <History>
-            <Update release="4">
-                <Date>2014-07-11</Date>
-                <Version>2.3.5</Version>
-                <Comment>Version bump.</Comment>
-                <Name>Vedat Demir</Name>
-                <Email>vedat@pisilinux.org</Email>
-            </Update>
-            <Update release="3">
-                <Date>2014-05-11</Date>
-                <Version>2.3.1</Version>
-                <Comment>Release bump.</Comment>
-                <Name>Marcin Bojara</Name>
-                <Email>marcin@pisilinux.org</Email>
-            </Update>
-            <Update release="2">
-                <Date>2013-07-26</Date>
-                <Version>2.3.1</Version>
-                <Comment>Fix dep, release bump.</Comment>
-                <Name>Serdar Soytetir</Name>
-                <Email>kaptan@pisilinux.org</Email>
-            </Update>
-            <Update release="1">
-                <Date>2011-06-27</Date>
-                <Version>2.3.1</Version>
-                <Comment>First release</Comment>
-                <Name>Pisi Linux Admins</Name>
-                <Email>admins@pisilinux.org</Email>
             </Update>
         </History>
     </SpecFile>
@@ -18815,6 +19074,7 @@
             <Archive type="targz" sha1sum="cc135ab6c95723cfbba034feb9630446de475341">http://downloads.sourceforge.net/project/libseccomp/libseccomp-2.1.1/libseccomp-2.1.1.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>glibc</Dependency>
+                <Dependency>util-linux</Dependency>
             </BuildDependencies>
             <SourceURI>system/devel/libseccomp/pspec.xml</SourceURI>
         </Source>
@@ -18828,6 +19088,10 @@
         </Package>
         <Package>
             <Name>libseccomp-devel</Name>
+            <Summary xml:lang="en">Development files for libseccomp</Summary>
+            <RuntimeDependencies>
+                <Dependency release="1">libseccomp</Dependency>
+            </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
@@ -19239,6 +19503,7 @@
             <Archive type="targz" sha1sum="6a991777ecb0f890be931cec4aec856d1a195489">http://www.libarchive.org/downloads/libarchive-3.1.2.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>acl-devel</Dependency>
+                <Dependency>nettle-devel</Dependency>
                 <Dependency>attr-devel</Dependency>
                 <Dependency>bzip2</Dependency>
                 <Dependency>libxml2-devel</Dependency>
@@ -19272,7 +19537,7 @@
             <Summary xml:lang="en">Development files for libarchive</Summary>
             <Summary xml:lang="tr">libarchive için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="6">libarchive</Dependency>
+                <Dependency release="7">libarchive</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -19281,6 +19546,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2015-07-05</Date>
+                <Version>3.1.2</Version>
+                <Comment>Rebuild with nettle.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2014-05-11</Date>
                 <Version>3.1.2</Version>
@@ -21598,7 +21870,7 @@
             <Summary xml:lang="tr">Linux çekirdeği tarafından kullanılan firmware dosyaları</Summary>
             <Description xml:lang="en">linux-firmware contains different firmware files required for some devices to operate correctly.</Description>
             <Description xml:lang="tr">linux-firmware, bazı aygıtların düzgün çalışabilmesi için gerekli firmware dosyalarını içerir.</Description>
-            <Archive type="tarbz2" sha1sum="9df35c158a52394419e2c7bb7f0582c5c9253ca4">http://source.pisilinux.org/1.0/linux-firmware/linux-firmware-20150320.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="0d59830cabba714840a23b2a359cad8d172fd0eb">http://source.pisilinux.org/1.0/linux-firmware/linux-firmware-20150716.tar.bz2</Archive>
             <Archive type="tarxz" sha1sum="dd685266f7bc0acb0d455462637d23e3e895bc96" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/common-fw.tar.xz</Archive>
             <Archive type="tarxz" sha1sum="b2bb7fce3ea67d131f543a48134f7a65f2a8d834" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware-ipw.tar.xz</Archive>
             <Archive type="tarbz2" sha1sum="a5a616a9f765cf9cbb224deb7ccefdc82a7fe4d9" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/firmware-nonfreebox-2-tar.bz2</Archive>
@@ -21625,6 +21897,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="17">
+                <Date>2015-07-20</Date>
+                <Version>20150716</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="16">
                 <Date>2015-03-26</Date>
                 <Version>20150320</Version>
