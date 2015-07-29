@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>A high-quality and portable font engine</Summary>
         <Description>FreeType 2 is a software font engine that is designed to be small, efficient, highly customizable, and portable while capable of producing high-quality output. It can be used in graphics libraries, display servers, font conversion tools, text image generation tools, and many other products as well.</Description>
-        <Archive sha1sum="7b7460ef51a8fdb17baae53c6658fc1ad000a1c2" type="tarbz2">mirrors://sourceforge/freetype/freetype-2.5.5.tar.bz2</Archive>
+        <Archive sha1sum="cd2b144205dd2c61693e2d861069367aa3dde1bc" type="tarbz2">mirrors://sourceforge/freetype/freetype-2.6.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>zlib-devel</Dependency>
             <Dependency>bzip2</Dependency>
@@ -72,6 +72,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2015-07-29</Date>
+            <Version>2.6</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="10">
             <Date>2015-05-22</Date>
             <Version>2.5.5</Version>
