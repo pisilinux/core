@@ -5,7 +5,7 @@
         <Name>cryptsetup</Name>
         <Homepage>https://gitlab.com/cryptsetup/cryptsetup</Homepage>
         <Packager>
-            <Name>Erdem Artan</Name>
+            <Name>PisiLinux Community</Name>
             <Email>admins@pisilinux.org</Email>
         </Packager>
         <License>GPLv2</License>
@@ -15,7 +15,7 @@
         <Description>Userspace setup tool for transparent encryption of block devices using dm-crypt</Description>
         <Archive sha1sum="7cb02f1e23ee18cd26391fd856f7644195b4544e" type="tarxz">https://www.kernel.org/pub/linux/utils/cryptsetup/v1.6/cryptsetup-1.6.7.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency releaseFrom="7">device-mapper-devel</Dependency>
+            <Dependency versionFrom="2.02.118">device-mapper-devel</Dependency>
             <Dependency>libgpg-error-devel</Dependency>
             <Dependency>libgcrypt-devel</Dependency>
             <Dependency>python-devel</Dependency>
@@ -27,6 +27,7 @@
 
     <Package>
         <Name>cryptsetup</Name>
+        <PartOf>util.crypt</PartOf>
         <RuntimeDependencies>
             <Dependency version="current">libcryptsetup</Dependency>
             <Dependency>popt</Dependency>
@@ -41,6 +42,7 @@
     
     <Package>
         <Name>libcryptsetup</Name>
+        <PartOf>util.crypt</PartOf>
         <Summary>cryptsetup libraries</Summary>
         <RuntimeDependencies>
             <Dependency>device-mapper</Dependency>
@@ -55,6 +57,7 @@
     
     <Package>
         <Name>libcryptsetup-devel</Name>
+        <PartOf>programming.devel</PartOf>
         <Summary>libcryptsetup devel files</Summary>
         <RuntimeDependencies>
             <Dependency version="current">libcryptsetup</Dependency>
