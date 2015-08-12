@@ -23,9 +23,9 @@
         <Archive sha1sum="28c108bd6438c332122c10871c1fc6415591755f" type="tarbz2">mirrors://xorg/individual/proto/fontsproto-2.1.3.tar.bz2</Archive>
         <Archive sha1sum="20e061c463bed415051f0f89e968e331a2078551" type="tarbz2">mirrors://xorg/individual/proto/glproto-1.4.17.tar.bz2</Archive>
         <Archive sha1sum="126b6ad57b5432e154485f900920765eae8fda45" type="tarbz2">mirrors://xorg/individual/proto/inputproto-2.3.1.tar.bz2</Archive>
-        <Archive sha1sum="a2cc82357c22a1f4d6243017982c32703c95575c" type="tarbz2">mirrors://xorg/individual/proto/kbproto-1.0.6.tar.bz2</Archive>
+        <Archive sha1sum="29fa217174fcdc9e27cba5663357989ef6e381a0" type="targz">mirrors://xorg/individual/proto/kbproto-1.0.7.tar.gz</Archive><!--1-->
         <Archive sha1sum="4ddb7781ebc2418d681a6f5e16d777aed56ea35e" type="tarbz2">mirrors://xorg/individual/proto/printproto-1.0.5.tar.bz2</Archive>
-        <Archive sha1sum="65d2fc4440adf1557cde2b36901a3de21ab189c1" type="tarbz2">mirrors://xorg/individual/proto/randrproto-1.4.0.tar.bz2</Archive>
+        <Archive sha1sum="d78ab1532d5381cacce59866ce331c7f806ad215" type="targz">mirrors://xorg/individual/proto/randrproto-1.5.0.tar.gz</Archive><!--2-->
         <Archive sha1sum="1f48c4b0004d8b133efd0498e8d88d68d3b9199c" type="tarbz2">mirrors://xorg/individual/proto/recordproto-1.14.2.tar.bz2</Archive>
         <Archive sha1sum="7ae9868a358859fe539482b02414aa15c2d8b1e4" type="tarbz2">mirrors://xorg/individual/proto/renderproto-0.11.1.tar.bz2</Archive>
         <Archive sha1sum="9ff9bb9243b0474330959dc3853973523c9dd9ce" type="tarbz2">mirrors://xorg/individual/proto/resourceproto-1.2.0.tar.bz2</Archive>
@@ -38,7 +38,7 @@
         <Archive sha1sum="23e861f40ba0f0cbbfd7db7ba2ef623762ffca17" type="tarbz2">mirrors://xorg/individual/proto/xf86driproto-2.1.1.tar.bz2</Archive>
         <Archive sha1sum="11d54c3210887631ea71e8f8030a77692e964fc4" type="tarbz2">mirrors://xorg/individual/proto/xf86vidmodeproto-2.3.1.tar.bz2</Archive>
         <Archive sha1sum="818bffc16139d6e3de4344c83f00c495d3536753" type="tarbz2">mirrors://xorg/individual/proto/xineramaproto-1.2.1.tar.bz2</Archive>
-        <Archive sha1sum="b34e7438623c8016cc8338549e5fcc29e2f64034" type="tarbz2">mirrors://xorg/individual/proto/xproto-7.0.27.tar.bz2</Archive>
+        <Archive sha1sum="886ad6f989f3314a083af91d6d4e91f63563c489" type="targz">mirrors://xorg/individual/proto/xproto-7.0.28.tar.gz</Archive><!--3-->
         <Archive sha1sum="4abb036371670ecc25d32e48b3277fe203ae5203" type="tarbz2">mirrors://xorg/individual/proto/xproxymanagementprotocol-1.0.3.tar.bz2</Archive>
         <Archive sha1sum="90f8600fb06c0c347551ad7096ef50492d86ba45" type="tarbz2">https://github.com/bbidulock/vncproto/releases/download/vncproto-1.1/vncproto-1.1.tar.bz2</Archive>
         <BuildDependencies>
@@ -65,6 +65,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2015-08-12</Date>
+            <Version>7.6</Version>
+            <Comment>Update kbproto, randrproto and xproto</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="8">
             <Date>2015-01-27</Date>
             <Version>7.6</Version>
