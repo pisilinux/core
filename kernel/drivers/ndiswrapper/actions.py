@@ -20,8 +20,13 @@ def build():
     autotools.make("-C utils")
 
 def install():
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-
+    pisitools.insinto("/lib/modules/%s/extra" % KDIR, "*/*.ko")
+    pisitools.dosbin("utils/ndiswrapper*", "/usr/sbin")
+    pisitools.dosbin("utils/loadndisdriver", "/sbin")
+    
+    # add man
+    pisitools.doman("*.8")
+    
     pisitools.dodir("/etc/ndiswrapper")
 
     pisitools.dodoc("README", "AUTHORS", "ChangeLog")
