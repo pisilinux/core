@@ -15,9 +15,9 @@ def check():
     autotools.make("check")
 
 def install():
-    pisitools.dolib_so("libleveldb.so.1.17")
-    pisitools.dosym("libleveldb.so.1.17", "/usr/lib/libleveldb.so.1")
-    pisitools.dosym("libleveldb.so.1.17", "/usr/lib/libleveldb.so")
+    pisitools.dolib_so("libleveldb.so.1.18")
+    pisitools.dosym("libleveldb.so.1.18", "/usr/lib/libleveldb.so.1")
+    pisitools.dosym("libleveldb.so.1.18", "/usr/lib/libleveldb.so")
 
     pisitools.insinto("/usr/include", "include/*")
     pisitools.insinto("/usr/include", "helpers/memenv/memenv.h")

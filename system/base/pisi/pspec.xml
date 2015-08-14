@@ -24,7 +24,7 @@
             <Dependency>gettext</Dependency>
             <Dependency>libunwind-devel</Dependency>
             <Dependency>intltool</Dependency>
-            <Dependency>leveldb-devel</Dependency>
+            <Dependency versionFrom="1.18">leveldb-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch>initialize_filesdb_once.patch</Patch>
@@ -45,7 +45,7 @@
             <Dependency>plyvel</Dependency>
             <Dependency>python</Dependency>
             <Dependency>gettext</Dependency>
-            <Dependency>leveldb</Dependency>
+            <Dependency versionFrom="1.18">leveldb</Dependency>
             <Dependency>piksemel</Dependency>
             <Dependency>comar-api</Dependency>
             <Dependency>urlgrabber</Dependency>
@@ -85,6 +85,13 @@
     </Package>
 
     <History>
+        <Update release="35">
+            <Date>2015-08-14</Date>
+            <Version>2.6</Version>
+            <Comment>Rebuild for leveldb and plyvel.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="34">
             <Date>2015-08-01</Date>
             <Version>2.6</Version>
