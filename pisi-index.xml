@@ -7079,7 +7079,7 @@
             <BuildDependencies>
                 <Dependency>cython</Dependency>
                 <Dependency>python-devel</Dependency>
-                <Dependency>leveldb-devel</Dependency>
+                <Dependency versionFrom="1.18">leveldb-devel</Dependency>
                 <Dependency>python-setuptools</Dependency>
             </BuildDependencies>
             <SourceURI>system/base/plyvel/pspec.xml</SourceURI>
@@ -7089,7 +7089,7 @@
             <RuntimeDependencies>
                 <Dependency>libgcc</Dependency>
                 <Dependency>python</Dependency>
-                <Dependency>leveldb</Dependency>
+                <Dependency versionFrom="1.18">leveldb</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib</Path>
@@ -7097,6 +7097,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2015-08-14</Date>
+                <Version>0.9</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="3">
                 <Date>2015-05-17</Date>
                 <Version>0.9</Version>
@@ -9302,7 +9309,7 @@
             <Summary xml:lang="tr">Hızlı ve hafif bir anahtar/değer veri kütüphanesi</Summary>
             <Description xml:lang="en">LevelDB is a fast key-value storage library written at Google that provides an ordered mapping from string keys to string values.</Description>
             <Description xml:lang="tr">LevelDB dize değerleri ile dize anahtarlarını eşleme sağlayan, Google&apos;da yazılmış hızlı bir anahtar-değer depolama kütüphanesidir.</Description>
-            <Archive type="targz" sha1sum="5ab342abea35be281225bead169c1699828d1dde">http://source.pisilinux.org/1.0/leveldb-e353fbc7ea81.tar.gz</Archive>
+            <Archive type="targz" sha1sum="18684a0ad7a07920d10f5295b171fbf5eeec7337">https://github.com/google/leveldb/archive/v1.18.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>gperftools-devel</Dependency>
                 <Dependency>snappy-devel</Dependency>
@@ -9324,13 +9331,20 @@
         <Package>
             <Name>leveldb-devel</Name>
             <RuntimeDependencies>
-                <Dependency release="1">leveldb</Dependency>
+                <Dependency release="2">leveldb</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2015-08-14</Date>
+                <Version>1.18</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="1">
                 <Date>2014-06-02</Date>
                 <Version>1.17</Version>
@@ -12597,7 +12611,7 @@
                 <Dependency>gettext</Dependency>
                 <Dependency>libunwind-devel</Dependency>
                 <Dependency>intltool</Dependency>
-                <Dependency>leveldb-devel</Dependency>
+                <Dependency versionFrom="1.18">leveldb-devel</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch>initialize_filesdb_once.patch</Patch>
@@ -12618,7 +12632,7 @@
                 <Dependency>plyvel</Dependency>
                 <Dependency>python</Dependency>
                 <Dependency>gettext</Dependency>
-                <Dependency>leveldb</Dependency>
+                <Dependency versionFrom="1.18">leveldb</Dependency>
                 <Dependency>piksemel</Dependency>
                 <Dependency>comar-api</Dependency>
                 <Dependency>urlgrabber</Dependency>
@@ -12655,6 +12669,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="35">
+                <Date>2015-08-14</Date>
+                <Version>2.6</Version>
+                <Comment>Rebuild for leveldb and plyvel.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="34">
                 <Date>2015-08-01</Date>
                 <Version>2.6</Version>
@@ -18134,7 +18155,7 @@
             <Summary xml:lang="tr">Python için C eklentileri</Summary>
             <Description xml:lang="en">Cython is a language that makes writing C extensions for the Python language as easy as Python itself.</Description>
             <Description xml:lang="tr">Cython, Python için C eklentileri yazmayı kolaylaştıran bir dildir.</Description>
-            <Archive type="targz" sha1sum="85c0494968e49f4aa3d20c58c314b5dffed47886">http://www.cython.org/release/Cython-0.22.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="5a49123b39d89a20fb88bdc7886210c39cdff695">http://www.cython.org/release/Cython-0.23.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>python-devel</Dependency>
             </BuildDependencies>
@@ -18152,6 +18173,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2015-08-14</Date>
+                <Version>0.23</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2015-06-22</Date>
                 <Version>0.22.1</Version>
