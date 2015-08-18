@@ -561,7 +561,7 @@
                 <Dependency>xmlto</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.1.5.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.1.6.xz</Patch>
                 <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
                 <Patch level="1">patches/mageia/x86-boot-video-80x25-if-break.patch</Patch>
                 <Patch level="1">patches/mageia/x86-default_poweroff_up_machines.patch</Patch>
@@ -704,6 +704,14 @@
             </Files>
         </Package>
         <History>
+            <Update release="59">
+                <Type package="kernel">security</Type>
+                <Date>2015-08-18</Date>
+                <Version>4.1.6</Version>
+                <Comment>Version bump to 4.1.6 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.1.6</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="58">
                 <Type package="kernel">security</Type>
                 <Date>2015-08-13</Date>
@@ -1329,6 +1337,9 @@
             <RuntimeDependencies>
                 <Dependency>disktype</Dependency>
                 <Dependency>busybox</Dependency>
+                <Dependency>device-mapper-static</Dependency>
+                <Dependency>lvm2-static</Dependency>
+                <Dependency>mdadm-static</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="config">/etc</Path>
@@ -1350,9 +1361,9 @@
         </Package>
         <History>
             <Update release="9">
-                <Date>2014-06-04</Date>
+                <Date>2015-08-18</Date>
                 <Version>1.0.7</Version>
-                <Comment>Add aufs module initramfs</Comment>
+                <Comment>Add aufs module initramfs, add runtime dependencies for initrd.</Comment>
                 <Name>Burak Ertürk</Name>
                 <Email>burakerturk@pisilinux.org</Email>
             </Update>
@@ -1434,7 +1445,7 @@
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.1.5.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.1.6.xz</Patch>
             </Patches>
             <SourceURI>kernel/tools/cpupowertools/pspec.xml</SourceURI>
         </Source>
@@ -1457,6 +1468,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="58">
+                <Date>2015-08-18</Date>
+                <Version>4.1.6</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="57">
                 <Date>2015-08-13</Date>
                 <Version>4.1.5</Version>
@@ -2052,7 +2070,7 @@
             <Description xml:lang="en">This package provides the kernel support for VirtualBox.</Description>
             <Archive type="tarxz" sha1sum="8850ebc24e00640835b682a5f8bbc8f05313d2d7">http://source.pisilinux.org/1.0/module-virtualbox-4.3.28.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.1.5">kernel-module-headers</Dependency>
+                <Dependency version="4.1.6">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -2062,7 +2080,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.1.5">kernel</Dependency>
+                <Dependency version="4.1.6">kernel</Dependency>
                 <Dependency version="4.3.28">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -2084,6 +2102,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="51">
+                <Date>2015-08-18</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.1.6.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="50">
                 <Date>2015-08-13</Date>
                 <Version>4.3.28</Version>
@@ -2467,7 +2492,7 @@
                 <AdditionalFile target="ndiswrapper-1.59.patch">ndiswrapper-1.59.patch</AdditionalFile>
             </AdditionalFiles>
             <BuildDependencies>
-                <Dependency version="4.1.5">kernel-module-headers</Dependency>
+                <Dependency version="4.1.6">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch>support_kernel-4.0.patch</Patch>
@@ -2480,7 +2505,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.1.5">kernel</Dependency>
+                <Dependency version="4.1.6">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2492,6 +2517,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2014-08-18</Date>
+                <Version>1.59</Version>
+                <Comment>Rebuild for kernel-4.1.6.</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2014-08-13</Date>
                 <Version>1.59</Version>
@@ -2518,14 +2550,14 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.1.5">kernel-module-headers</Dependency>
+                <Dependency version="4.1.6">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-bbswitch/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="4.1.5">kernel</Dependency>
+                <Dependency version="4.1.6">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2538,6 +2570,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="27">
+                <Date>2015-08-18</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel-4.1.6.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="26">
                 <Date>2015-08-13</Date>
                 <Version>0.8</Version>
@@ -2746,7 +2785,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
             <Archive type="tarxz" sha1sum="82194515516139801fdc690198495b043d1c9cbe">http://source.pisilinux.org/1.0/module-virtualbox-guest-4.3.28.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.1.5">kernel-module-headers</Dependency>
+                <Dependency version="4.1.6">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -2756,7 +2795,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.1.5">kernel</Dependency>
+                <Dependency version="4.1.6">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
                 <Dependency version="4.3.28">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
@@ -2783,6 +2822,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="49">
+                <Date>2015-08-18</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.1.6.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="48">
                 <Date>2015-08-13</Date>
                 <Version>4.3.28</Version>
@@ -3146,7 +3192,7 @@
             <Archive type="targz" sha1sum="e02beac9cc713011551c483ae5f20f065f5b88c7" target="i686">http://www.broadcom.com/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <Archive type="targz" sha1sum="bd55f1fdc6b0a4d0a70dc4ba4bb4169a824e238c" target="x86_64">http://www.broadcom.com/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.1.5">kernel-module-headers</Dependency>
+                <Dependency version="4.1.6">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">patch/linux-40.patch</Patch>
@@ -3164,8 +3210,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.1.5">kernel</Dependency>
-                <Dependency release="46">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="4.1.6">kernel</Dependency>
+                <Dependency release="47">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -3192,6 +3238,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="47">
+                <Date>2015-08-18</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 4.1.6.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="46">
                 <Date>2015-08-13</Date>
                 <Version>6.30.223.248</Version>
@@ -7471,7 +7524,7 @@
         </Package>
         <History>
             <Update release="14">
-                <Date>2015-03-04</Date>
+                <Date>2015-08-18</Date>
                 <Version>3.10.0</Version>
                 <Comment>Release bump</Comment>
                 <Name>Yusuf Aydemir</Name>
@@ -11323,7 +11376,7 @@
             <Summary xml:lang="es">Una interfaz para sistemas de archivos implementados en el espacio de usuario</Summary>
             <Description xml:lang="en">fuse is a backend allowing regular users to (un)mount filesystems for their own use.</Description>
             <Description xml:lang="tr">FUSE, kullanıcıların kendileri için dosya sistemleri oluşturmasına, bağlamasına ve bağı koparmasına imkân veren bir arkauç kitaplıktır.</Description>
-            <Archive type="targz" sha1sum="94bd1974a9f2173ac3c2cf122f9fa3c35996b88e">mirrors://sourceforge/project/fuse/fuse-2.X/2.9.3/fuse-2.9.3.tar.gz</Archive>
+            <Archive type="targz" sha1sum="c8b25419f33624dc5240af6a5d26f2c04367ca71">mirrors://sourceforge/project/fuse/fuse-2.X/2.9.4/fuse-2.9.4.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>gettext-devel</Dependency>
             </BuildDependencies>
@@ -11352,7 +11405,7 @@
             <Summary xml:lang="tr">fuse için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="4">fuse</Dependency>
+                <Dependency release="5">fuse</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -11360,6 +11413,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2015-08-18</Date>
+                <Version>2.9.4</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-05-11</Date>
                 <Version>2.9.3</Version>
@@ -11382,7 +11442,7 @@
                 <Email>marcin@pisilinux.org</Email>
             </Update>
             <Update release="1">
-                <Date>2012-20-21</Date>
+                <Date>2012-12-21</Date>
                 <Version>2.9.2</Version>
                 <Comment>First release</Comment>
                 <Name>Yusuf Aydemir</Name>
