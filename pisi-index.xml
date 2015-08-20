@@ -419,12 +419,12 @@
             <Description xml:lang="fr">Le format de Graphique Réseau Portable (Portable Network Graphics - PNG) a été conçu pour remplacer le format GIF plus simple et vieillissant ainsi que, d&apos;une certaine manière, le format TIFF beaucoup plus complexe. L&apos;objectif principal du projet est de se concentrer sur deux aspects majeurs : La toile mondiale (World Wide Web - WWW) et l&apos;édition d&apos;image.</Description>
             <Description xml:lang="en">The Portable Network Graphics (PNG) format was designed to replace the older and simpler GIF format and, to some extent, the much more complex TIFF format. Project&apos;s main aim is to concentrate on two major uses: the World Wide Web (WWW) and image-editing.</Description>
             <Description xml:lang="tr">Taşınabilir Ağ Grafikleri (PNG) formatı eski ve daha basit GIF formatının yerine geçmek ve daha karmaşık yapıdaki TIFF formatını biraz daha genişletmek için tasarlanmıştır. Projenin ana hedefi iki önemli parça üzerine konsantre olmaktır: World Wide Web (WWW) ve resim düzenleme.</Description>
-            <Archive type="tarxz" sha1sum="31855a8438ae795d249574b0da15b34eb0922e13">mirrors://sourceforge/libpng/libpng-1.6.16.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="c6e06510d30beba08c96c468ab269fafb2bb256f">mirrors://sourceforge/libpng/libpng-1.6.18.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>zlib-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="gz" level="1">libpng-1.6.15-apng.patch.gz</Patch>
+                <Patch compressionType="gz" level="1">libpng-1.6.18-apng.patch.gz</Patch>
                 <Patch level="1">libpng-multilib.patch</Patch>
             </Patches>
             <SourceURI>multimedia/graphics/libpng/pspec.xml</SourceURI>
@@ -444,7 +444,7 @@
             <Summary xml:lang="en">Development files for libpng</Summary>
             <Summary xml:lang="tr">libpng için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="8">libpng</Dependency>
+                <Dependency release="9">libpng</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin</Path>
@@ -464,7 +464,7 @@
                 <Dependency>zlib-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="8">libpng</Dependency>
+                <Dependency release="9">libpng</Dependency>
                 <Dependency>zlib-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -472,6 +472,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2015-08-20</Date>
+                <Version>1.6.18</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Osman Erkan</Name>
+                <Email>osman.erkan@pisilinux.org</Email>
+            </Update>
             <Update release="8">
                 <Date>2015-07-14</Date>
                 <Version>1.6.16</Version>
@@ -3563,6 +3570,104 @@
             <Update release="1">
                 <Date>2011-09-15</Date>
                 <Version>5.100.82.38</Version>
+                <Comment>First release</Comment>
+                <Name>Pisi Linux Admins</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>pisilinux-dev-tools</Name>
+            <Homepage>http://www.pisilinux.org</Homepage>
+            <Packager>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Packager>
+            <License>GPLv2</License>
+            <IsA>app:console</IsA>
+            <PartOf>unknown</PartOf>
+            <Summary xml:lang="en">A collection of useful tools that Pisi Linux developers use to make their developing work a lot easier</Summary>
+            <Description xml:lang="en">Pisilinux-dev-tools is a collection of useful tools that Pisilinux developers use to make their developing work a lot easier. Such tools can include packaging preparation, package analysis, etc.</Description>
+            <Archive type="tarxz" sha1sum="202e8ba50f95c150fa6049f42780c6b97ed45cd9">http://source.pisilinux.org/1.0/pisilinux-dev-tools-0.0.2.tar.xz</Archive>
+            <Patches>
+                <Patch>fix_detect_mesa.patch</Patch>
+                <Patch>spped_up.patch</Patch>
+                <Patch>ignore_glibc-32bit.patch</Patch>
+            </Patches>
+            <SourceURI>pisilinux-dev-tools/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>pisilinux-dev-tools</Name>
+            <RuntimeDependencies>
+                <Dependency>chrpath</Dependency>
+                <Dependency>binutils</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="9">
+                <Date>2015-06-28</Date>
+                <Version>0.0.2</Version>
+                <Comment>fix runtime deps.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="8">
+                <Date>2014-09-21</Date>
+                <Version>0.0.2</Version>
+                <Comment>checkelf: ignore glibc-32bit</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="7">
+                <Date>2014-07-01</Date>
+                <Version>0.0.2</Version>
+                <Comment>rebuild.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="6">
+                <Date>2014-06-19</Date>
+                <Version>0.0.2</Version>
+                <Comment>Speed up checkelf.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="5">
+                <Date>2014-06-16</Date>
+                <Version>0.0.2</Version>
+                <Comment>checkelf: fix detect mesa.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
+                <Date>2014-04-11</Date>
+                <Version>0.0.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2014-04-03</Date>
+                <Version>0.0.1</Version>
+                <Comment>Use re.search() for checking command file output.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2013-10-29</Date>
+                <Version>0.0.1</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Pisi Linux Admins</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2011-05-23</Date>
+                <Version>0.0.1</Version>
                 <Comment>First release</Comment>
                 <Name>Pisi Linux Admins</Name>
                 <Email>admins@pisilinux.org</Email>
@@ -17918,7 +18023,7 @@
             <Description xml:lang="fr">CMake, système make open-source et multi-plateforme. CMake est utilisé pour contrôler le processus de compilation de logiciel en utilisant une plate-forme de fichiers de configuration simple et indépendante de compilateur. CMake génère des makefiles et un environnement de travail natifs pouvant être utilisés dans l&apos;environnement du compilateur de votre choix.</Description>
             <Description xml:lang="en">CMake, the cross-platform, open-source make system. CMake is used to control the software compilation process using simple platform and compiler independent configuration files. CMake generates native makefiles and workspaces that can be used in the compiler environment of your choice.</Description>
             <Description xml:lang="tr">Cmake, açık kaynak kodlu ve birden fazla platformda çalışan bir &apos;make&apos; sistemidir. Yazılım derleme sürecini kontrol etmek için kullanılan CMake, derleyici bağımsız yapılandırma dosyalarının oluşturulmasını sağlar.</Description>
-            <Archive type="tar" sha1sum="6b2982b52e0015451441733fb4adbc5192181770">http://www.cmake.org/files/v3.2/cmake-3.2.3.tar.gz</Archive>
+            <Archive type="targz" sha1sum="799aff559e9f330fefc60e6509f1d025fc3d9c8c">http://www.cmake.org/files/v3.3/cmake-3.3.1.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>curl-devel</Dependency>
                 <Dependency>expat-devel</Dependency>
@@ -17948,6 +18053,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="16">
+                <Date>2015-08-20</Date>
+                <Version>3.3.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
             <Update release="15">
                 <Date>2015-07-28</Date>
                 <Version>3.2.3</Version>
