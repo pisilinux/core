@@ -1,9 +1,8 @@
 # core
 core repository
 ------------------------------------------------------------------------------
-* Bu bir deneysel çalışmadır. 
-* Lütfen sonuçlarına katlanamayacaksanız ilgilenmeyin.
 * Buradan derlenen pisi dosyalarını **Pisi-1.* serisi üzerine kurmayınız.**
+* Pisi-1. sürüm pisi dosyalarını **pisi-2.0 kurulu sistemlere kurmayınız.** 
 
 ------------------------------------------------------------------------------
 
