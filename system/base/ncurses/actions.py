@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Licensed under the GNU General Public License, version 3.
@@ -100,3 +100,6 @@ def install():
     shelltools.cd(WORKDIR)
     shelltools.system("grep -B 100 '$Id' README > license.txt")
     pisitools.dodoc("ANNOUNCE", "NEWS", "README*", "TO-DO", "license.txt")
+
+    #for fix 
+    pisitools.dosym("libncursesw.so.6.0", "%s/libncursesw.so.5" % LIB)
