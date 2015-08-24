@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Console display library</Summary>
         <Description>The NCurses is a library of functions that manage an application's display on character-cell terminals. The NCurses library defines many functions such as moving mouse and cursor, keyboard mapping and dispaying in color.</Description>
-        <Archive sha1sum="3e042e5f2c7223bffdaac9646a533b8c758b65b5" type="targz">mirrors://gnu/ncurses/ncurses-5.9.tar.gz</Archive>
+        <Archive sha1sum="acd606135a5124905da770803c05f1f20dd3b21c" type="targz">mirrors://gnu/ncurses/ncurses-6.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>gnuconfig</Dependency>
         </BuildDependencies>
@@ -57,6 +57,7 @@
         </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">ncurses</Dependency>
+            <Dependency>glibc-32bit</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib32</Path>
@@ -65,6 +66,13 @@
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2015-08-24</Date>
+            <Version>6.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="5">
             <Date>2014-09-14</Date>
             <Version>5.9</Version>
