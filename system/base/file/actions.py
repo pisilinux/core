@@ -16,6 +16,8 @@ def setup():
     autotools.configure("--datadir=/usr/share/misc \
                          --disable-static \
                          --enable-fsect-man5")
+       
+    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
 def build():
     autotools.make()
