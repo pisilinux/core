@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>A set of basic GNU tools commonly used in shell scripts</Summary>
         <Description>Standard GNU file utilities (chmod, cp, dd, dir, ls...), text utilities (sort, tr, head, wc..), and shell utilities (whoami, who,...)</Description>
-        <Archive sha1sum="adead02839225218b85133fa57b4dba02af2291d" type="tarxz">http://ftp.gnu.org/gnu/coreutils/coreutils-8.23.tar.xz</Archive>
+        <Archive sha1sum="cf3d9983461c2b0c074a76804c18464e9a474883" type="tarxz">http://ftp.gnu.org/gnu/coreutils/coreutils-8.24.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>acl-devel</Dependency>
             <Dependency>attr-devel</Dependency>
@@ -20,6 +20,8 @@
             <Dependency>shadow</Dependency>
             <Dependency>gettext-devel</Dependency>
             <Dependency>ncurses-devel</Dependency>
+            <Dependency>gmp-devel</Dependency>
+            <Dependency>libcap-devel</Dependency>
             <Dependency>texinfo</Dependency>
         </BuildDependencies>
         <Patches>
@@ -53,6 +55,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2015-08-25</Date>
+            <Version>8.24</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2015-04-01</Date>
             <Version>8.23</Version>

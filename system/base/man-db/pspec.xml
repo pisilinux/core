@@ -14,7 +14,7 @@
         <IsA>data:doc</IsA>
         <Summary>Application to read Linux man pages</Summary>
         <Description>Man package consists of programs which is used to read most of the documentation available in linux system. For example, you can write "man nameoftheprogram" into the konsole or "man:nameoftheprogram" into the konqueror to get a detailed usage information for many programs.</Description>
-        <Archive sha1sum="6a4b08ccacb555120a2bce852329d93c9c78247e" type="tarxz">http://download.savannah.gnu.org/releases/man-db/man-db-2.7.1.tar.xz</Archive>
+        <Archive sha1sum="26b9044ddfbc711a27cb0539d057f089a3bd8c34" type="tarxz">http://download.savannah.gnu.org/releases/man-db/man-db-2.7.2.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>less</Dependency>
             <Dependency>gzip</Dependency>
@@ -22,7 +22,7 @@
             <Dependency>gdbm-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
             <Dependency>gettext-devel</Dependency>
-            <Dependency release="6">libpipeline-devel</Dependency>
+            <Dependency versionFrom="1.4.0">libpipeline-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <!--<Patch level="1">man-db-2.5.9-sgr.patch</Patch>
@@ -39,8 +39,7 @@
         <RuntimeDependencies>
             <Dependency>gdbm</Dependency>
             <Dependency>zlib</Dependency>
-            <Dependency>gettext</Dependency>
-            <Dependency release="6">libpipeline</Dependency>
+            <Dependency versionFrom="1.4.0">libpipeline</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="config">/etc</Path>
@@ -60,6 +59,13 @@
     </Package>
 
     <History>
+        <Update release="7">
+            <Date>2015-08-25</Date>
+            <Version>2.7.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="6">
             <Date>2015-06-06</Date>
             <Version>2.7.1</Version>
