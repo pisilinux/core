@@ -13,11 +13,13 @@
         <IsA>library</IsA>
         <Summary>GNU libraries and utilities for producing multi-lingual messages</Summary>
         <Description>The GNU gettext package provides a set of tools and documentation for producing multi-lingual messages in programs. Tools include a set of conventions about how programs should be written to support message catalogs, a directory and file naming organization for the message catalogs, a runtime library which supports the retrieval of translated messages, and stand-alone programs for handling the translatable and the already translated strings. Gettext provides an easy to use library and tools for creating, using, and modifying natural language catalogs and is a powerful and simple method for internationalizing programs.</Description>
-        <Archive sha1sum="c473f4f268501d971b913197fb07767e628644bb" type="targz">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.19.4.tar.gz</Archive>
+        <Archive sha1sum="bec084bc9e2ecfb9a30ce17a68b71865449f6c12" type="targz">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.19.5.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>acl-devel</Dependency>
             <Dependency>glib2-devel</Dependency>
-            <Dependency>ncurses</Dependency>
+            <Dependency>ncurses-devel</Dependency>
+            <Dependency>libunistring-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -70,6 +72,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2015-08-25</Date>
+            <Version>0.19.5.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2015-04-03</Date>
             <Version>0.19.4</Version>

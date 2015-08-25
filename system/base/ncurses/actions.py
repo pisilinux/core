@@ -91,7 +91,7 @@ def install():
     shelltools.cd("../%s" % NCURSES)
     for lib in ["ncurses", "form", "panel", "menu"]:
         pisitools.dolib_so("lib/lib%s.so.%s" % (lib, get.srcVERSION()), destinationDirectory = LIB)
-        pisitools.dosym("lib%s.so.%s" % (lib, get.srcVERSION()), "%s/lib%s.so.5" % (LIB, lib))
+        pisitools.dosym("lib%s.so.%s" % (lib, get.srcVERSION()), "%s/lib%s.so.6" % (LIB, lib))
 
     if get.buildTYPE() == "_emul32":
         pisitools.removeDir("/_emul32")
@@ -103,3 +103,7 @@ def install():
 
     #for fix 
     pisitools.dosym("libncursesw.so.6.0", "%s/libncursesw.so.5" % LIB)
+    pisitools.dosym("libncurses.so.6.0", "%s/libncurses.so.5" % LIB)
+    pisitools.dosym("libpanelw.so.6.0", "%s/libpanelw.so.5" % LIB)
+    pisitools.dosym("libformw.so.6.0", "%s/libformw.so.5" % LIB)
+    pisitools.dosym("libmenuw.so.6.0", "%s/libmenuw.so.5" % LIB)
