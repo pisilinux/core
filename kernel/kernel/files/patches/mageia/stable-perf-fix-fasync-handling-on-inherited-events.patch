@@ -1,0 +1,69 @@
+From fed66e2cdd4f127a43fd11b8d92a99bdd429528c Mon Sep 17 00:00:00 2001
+From: Peter Zijlstra <peterz@infradead.org>
+Date: Thu, 11 Jun 2015 10:32:01 +0200
+Subject: perf: Fix fasync handling on inherited events
+
+From: Peter Zijlstra <peterz@infradead.org>
+
+commit fed66e2cdd4f127a43fd11b8d92a99bdd429528c upstream.
+
+Vince reported that the fasync signal stuff doesn't work proper for
+inherited events. So fix that.
+
+Installing fasync allocates memory and sets filp->f_flags |= FASYNC,
+which upon the demise of the file descriptor ensures the allocation is
+freed and state is updated.
+
+Now for perf, we can have the events stick around for a while after the
+original FD is dead because of references from child events. So we
+cannot copy the fasync pointer around. We can however consistently use
+the parent's fasync, as that will be updated.
+
+Reported-and-Tested-by: Vince Weaver <vincent.weaver@maine.edu>
+Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+Cc: Arnaldo Carvalho deMelo <acme@kernel.org>
+Cc: Linus Torvalds <torvalds@linux-foundation.org>
+Cc: Peter Zijlstra <peterz@infradead.org>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: eranian@google.com
+Link: http://lkml.kernel.org/r/1434011521.1495.71.camel@twins
+Signed-off-by: Ingo Molnar <mingo@kernel.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ kernel/events/core.c |   12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+
+--- a/kernel/events/core.c
++++ b/kernel/events/core.c
+@@ -4766,12 +4766,20 @@ static const struct file_operations perf
+  * to user-space before waking everybody up.
+  */
+ 
++static inline struct fasync_struct **perf_event_fasync(struct perf_event *event)
++{
++	/* only the parent has fasync state */
++	if (event->parent)
++		event = event->parent;
++	return &event->fasync;
++}
++
+ void perf_event_wakeup(struct perf_event *event)
+ {
+ 	ring_buffer_wakeup(event);
+ 
+ 	if (event->pending_kill) {
+-		kill_fasync(&event->fasync, SIGIO, event->pending_kill);
++		kill_fasync(perf_event_fasync(event), SIGIO, event->pending_kill);
+ 		event->pending_kill = 0;
+ 	}
+ }
+@@ -6117,7 +6125,7 @@ static int __perf_event_overflow(struct
+ 	else
+ 		perf_event_output(event, data, regs);
+ 
+-	if (event->fasync && event->pending_kill) {
++	if (*perf_event_fasync(event) && event->pending_kill) {
+ 		event->pending_wakeup = 1;
+ 		irq_work_queue(&event->pending);
+ 	}

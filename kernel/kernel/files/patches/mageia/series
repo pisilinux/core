@@ -14,6 +14,33 @@
 ###
 ### Stable Queue
 ###
+stable-ipc-sem-fix-use-after-free-on-ipc_rmid-after-a-task-using-same-semaphore-set-exits.patch
+stable-ipc-sem.c-update-correct-memory-barriers.patch
+stable-mm-hwpoison-fix-page-refcount-of-unknown-non-lru-page.patch
+stable-mm-hwpoison-fix-fail-isolate-hugetlbfs-page-w-refcount-held.patch
+stable-clk-pxa-pxa3xx-fix-cken-register-access.patch
+stable-xen-blkfront-don-t-add-indirect-pages-to-list-when.patch
+stable-xen-blkback-replace-work_pending-with-work_busy-in-purge_persistent_gnt.patch
+stable-rsi-fix-failure-to-load-firmware-after-memory-leak-fix-and-fix-the-leak.patch
+stable-perf-fix-fasync-handling-on-inherited-events.patch
+stable-perf-fix-running-time-accounting.patch
+stable-perf-fix-double-free-of-the-aux-buffer.patch
+stable-perf-fix-perf_event_ioc_period-migration-race.patch
+stable-iwlwifi-pcie-fix-prepare-card-flow.patch
+stable-rtlwifi-rtl8723be-add-module-parameter-for-msi-interrupts.patch
+stable-rtlwifi-fix-null-dereference-when-pci-driver-used-as-an-ap.patch
+stable-x86-xen-build-xen-pv-apic-driver-for-domu-as-well.patch
+stable-xen-xenbus-don-t-leak-memory-when-unmapping-the-ring-on-hvm-backend.patch
+stable-dm-thin-metadata-delete-btrees-when-releasing-metadata-snapshot.patch
+stable-localmodconfig-use-kbuild-files-too.patch
+stable-edac-ppc4xx-access-mci-csrows-array-elements-properly.patch
+stable-hid-hid-input-fix-accessing-freed-memory-during-device-disconnect.patch
+stable-hid-uclogic-fix-limit-in-uclogic_tablet_enable.patch
+stable-drm-radeon-add-new-oland-pci-id.patch
+stable-drm-vmwgfx-fix-execbuf-locking-issues.patch
+
+# DaveM
+stable-net_41.mbox.patch
 
 ###
 ### Arch x86
@@ -37,6 +64,15 @@ x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch
 
 # slows down boot
 Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch
+
+# wrong optimization
+Revert-sched-x86_64-Don-t-save-flags-on-context-swit.patch
+
+# fix unbootable systems
+x86-apic-Fix-fallout-from-x2apic-cleanup.patch
+
+# fixes powertop
+x86-idle-Restore-trace_cpu_idle-to-mwait_idle-calls.patch
 
 ###
 ### Core
@@ -120,6 +156,14 @@ ata-jmicron-disable-broken-async_suspend.patch
 block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch
 block-cfq-iosched-fix-the-setting-of-IOPS-mode-on-SSDs.patch
 
+# libata eh breakage
+ata-Revert-libata-eh-Set-information-field-for-autosense.patch
+ata-Revert-libata-Implement-support-for-sense-data-repor.patch
+ata-Revert-libata-Implement-NCQ-autosense.patch
+
+# ses driver crash
+SCSI-Fix-NULL-pointer-dereference-in-runtime-PM.patch
+
 ###
 ### File-system
 ###
@@ -127,6 +171,9 @@ block-cfq-iosched-fix-the-setting-of-IOPS-mode-on-SSDs.patch
 # aufs from: http://aufs.sourceforge.net/ (mga#8314)
 fs-aufs4.patch
 fs-aufs4-modular.patch
+
+# ext4
+fs-Revert-ext4-remove-block_device_ejected.patch
 
 ###
 ### FireWire
@@ -160,6 +207,10 @@ gpu-drm-mach64-restore-mach64_PCI_IDS.patch
 gpu-drm-mach64-linux-3.14-buildfix.patch
 gpu-drm-mach64-3.17-buildfix.patch
 gpu-drm-mach64-3.18-buildfix.patch
+
+# i915
+gpu-drm-i915-remove-HBR2-from-chv-supported-list.patch
+gpu-drm-i915-Avoid-TP3-on-CHV.patch
 
 ###
 ### Hardware Monitoring

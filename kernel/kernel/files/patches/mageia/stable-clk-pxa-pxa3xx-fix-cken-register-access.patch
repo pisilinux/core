@@ -1,0 +1,38 @@
+From b93028c9af807b9474789e6aba34a6135b6cb708 Mon Sep 17 00:00:00 2001
+From: Robert Jarzmik <robert.jarzmik@free.fr>
+Date: Tue, 4 Aug 2015 08:21:33 +0200
+Subject: clk: pxa: pxa3xx: fix CKEN register access
+
+From: Robert Jarzmik <robert.jarzmik@free.fr>
+
+commit b93028c9af807b9474789e6aba34a6135b6cb708 upstream.
+
+Clocks 0 to 31 are on CKENA, and not CKENB. The clock register names
+were inadequately inverted. As a consequence, all clock operations were
+happening on CKENB, because almost all but 2 clocks are on CKENA.
+
+As the clocks were activated by the bootloader in the former tests, it
+escaped the testing that the wrong clock gate was manipulated. The error
+was revealed by changing the pxa3xx-nand driver to a module, where upon
+unloading, the wrong clock was disabled in CKENB.
+
+Fixes: 9bbb8a338fb2 ("clk: pxa: add pxa3xx clock driver")
+Signed-off-by: Robert Jarzmik <robert.jarzmik@free.fr>
+Signed-off-by: Stephen Boyd <sboyd@codeaurora.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/clk/pxa/clk-pxa3xx.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/drivers/clk/pxa/clk-pxa3xx.c
++++ b/drivers/clk/pxa/clk-pxa3xx.c
+@@ -126,7 +126,7 @@ PARENTS(pxa3xx_ac97_bus) = { "ring_osc_6
+ PARENTS(pxa3xx_sbus) = { "ring_osc_60mhz", "system_bus" };
+ PARENTS(pxa3xx_smemcbus) = { "ring_osc_60mhz", "smemc" };
+ 
+-#define CKEN_AB(bit) ((CKEN_ ## bit > 31) ? &CKENA : &CKENB)
++#define CKEN_AB(bit) ((CKEN_ ## bit > 31) ? &CKENB : &CKENA)
+ #define PXA3XX_CKEN(dev_id, con_id, parents, mult_lp, div_lp, mult_hp,	\
+ 		    div_hp, bit, is_lp, flags)				\
+ 	PXA_CKEN(dev_id, con_id, bit, parents, mult_lp, div_lp,		\

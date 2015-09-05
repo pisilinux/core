@@ -1,0 +1,40 @@
+From 53bc7dc004fecf39e0ba70f2f8d120a1444315d3 Mon Sep 17 00:00:00 2001
+From: Bob Liu <bob.liu@oracle.com>
+Date: Wed, 22 Jul 2015 14:40:10 +0800
+Subject: xen-blkback: replace work_pending with work_busy in purge_persistent_gnt()
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+From: Bob Liu <bob.liu@oracle.com>
+
+commit 53bc7dc004fecf39e0ba70f2f8d120a1444315d3 upstream.
+
+The BUG_ON() in purge_persistent_gnt() will be triggered when previous purge
+work haven't finished.
+
+There is a work_pending() before this BUG_ON, but it doesn't account if the work
+is still currently running.
+
+Acked-by: Roger Pau Monné <roger.pau@citrix.com>
+Signed-off-by: Bob Liu <bob.liu@oracle.com>
+Signed-off-by: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/block/xen-blkback/blkback.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+--- a/drivers/block/xen-blkback/blkback.c
++++ b/drivers/block/xen-blkback/blkback.c
+@@ -362,8 +362,8 @@ static void purge_persistent_gnt(struct
+ 		return;
+ 	}
+ 
+-	if (work_pending(&blkif->persistent_purge_work)) {
+-		pr_alert_ratelimited("Scheduled work from previous purge is still pending, cannot purge list\n");
++	if (work_busy(&blkif->persistent_purge_work)) {
++		pr_alert_ratelimited("Scheduled work from previous purge is still busy, cannot purge list\n");
+ 		return;
+ 	}
+ 
