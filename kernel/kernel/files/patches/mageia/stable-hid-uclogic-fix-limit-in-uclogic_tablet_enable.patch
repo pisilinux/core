@@ -1,0 +1,33 @@
+From 4a8e70f5d0d80675fc17b9ba1e62db8ca6b91775 Mon Sep 17 00:00:00 2001
+From: Dan Carpenter <dan.carpenter@oracle.com>
+Date: Wed, 29 Jul 2015 13:16:06 +0300
+Subject: HID: uclogic: fix limit in uclogic_tablet_enable()
+
+From: Dan Carpenter <dan.carpenter@oracle.com>
+
+commit 4a8e70f5d0d80675fc17b9ba1e62db8ca6b91775 upstream.
+
+The limit should be ARRAY_SIZE(params) (5 elements) here instead of
+sizeof(params) (20 bytes).
+
+Fixes: 08177f40bd00 ('HID: uclogic: merge hid-huion driver in hid-uclogic')
+Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
+Reviewed-by: Nikolai Kondrashov <spbnick@gmail.com>
+Signed-off-by: Jiri Kosina <jkosina@suse.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/hid/hid-uclogic.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/drivers/hid/hid-uclogic.c
++++ b/drivers/hid/hid-uclogic.c
+@@ -858,7 +858,7 @@ static int uclogic_tablet_enable(struct
+ 	for (p = drvdata->rdesc;
+ 	     p <= drvdata->rdesc + drvdata->rsize - 4;) {
+ 		if (p[0] == 0xFE && p[1] == 0xED && p[2] == 0x1D &&
+-		    p[3] < sizeof(params)) {
++		    p[3] < ARRAY_SIZE(params)) {
+ 			v = params[p[3]];
+ 			put_unaligned(cpu_to_le32(v), (s32 *)p);
+ 			p += 4;

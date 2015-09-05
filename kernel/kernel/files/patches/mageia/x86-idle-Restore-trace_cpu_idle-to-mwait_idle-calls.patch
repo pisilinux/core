@@ -1,0 +1,46 @@
+From e43d0189ac02415fe4487f79fc35e8f147e9ea0d Mon Sep 17 00:00:00 2001
+From: Jisheng Zhang <jszhang@marvell.com>
+Date: Thu, 20 Aug 2015 12:54:39 +0800
+Subject: [PATCH] x86/idle: Restore trace_cpu_idle to mwait_idle() calls
+
+Commit b253149b843f ("sched/idle/x86: Restore mwait_idle() to fix boot
+hangs, to improve power savings and to improve performance") restores
+mwait_idle(), but the trace_cpu_idle related calls are missing. This
+causes powertop on my old desktop powered by Intel Core2 E6550 to
+report zero wakeups and zero events.
+
+Add them back to restore the proper behaviour.
+
+Fixes: b253149b843f ("sched/idle/x86: Restore mwait_idle() to ...")
+Signed-off-by: Jisheng Zhang <jszhang@marvell.com>
+Cc: <len.brown@intel.com>
+Cc: stable@vger.kernel.org # 4.1
+Link: http://lkml.kernel.org/r/1440046479-4262-1-git-send-email-jszhang@marvell.com
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+---
+ arch/x86/kernel/process.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/x86/kernel/process.c b/arch/x86/kernel/process.c
+index 397688b..c27cad7 100644
+--- a/arch/x86/kernel/process.c
++++ b/arch/x86/kernel/process.c
+@@ -408,6 +408,7 @@ static int prefer_mwait_c1_over_halt(const struct cpuinfo_x86 *c)
+ static void mwait_idle(void)
+ {
+ 	if (!current_set_polling_and_test()) {
++		trace_cpu_idle_rcuidle(1, smp_processor_id());
+ 		if (this_cpu_has(X86_BUG_CLFLUSH_MONITOR)) {
+ 			smp_mb(); /* quirk */
+ 			clflush((void *)&current_thread_info()->flags);
+@@ -419,6 +420,7 @@ static void mwait_idle(void)
+ 			__sti_mwait(0, 0);
+ 		else
+ 			local_irq_enable();
++		trace_cpu_idle_rcuidle(PWR_EVENT_EXIT, smp_processor_id());
+ 	} else {
+ 		local_irq_enable();
+ 	}
+-- 
+2.4.5
+

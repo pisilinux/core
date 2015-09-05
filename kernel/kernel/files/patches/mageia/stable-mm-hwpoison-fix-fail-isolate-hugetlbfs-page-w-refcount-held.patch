@@ -1,0 +1,48 @@
+From 036138080a4376e5f3e5d0cca8ac99084c5cf06e Mon Sep 17 00:00:00 2001
+From: Wanpeng Li <wanpeng.li@hotmail.com>
+Date: Fri, 14 Aug 2015 15:34:59 -0700
+Subject: mm/hwpoison: fix fail isolate hugetlbfs page w/ refcount held
+
+From: Wanpeng Li <wanpeng.li@hotmail.com>
+
+commit 036138080a4376e5f3e5d0cca8ac99084c5cf06e upstream.
+
+Hugetlbfs pages will get a refcount in get_any_page() or
+madvise_hwpoison() if soft offlining through madvise.  The refcount which
+is held by the soft offline path should be released if we fail to isolate
+hugetlbfs pages.
+
+Fix it by reducing the refcount for both isolation success and failure.
+
+Signed-off-by: Wanpeng Li <wanpeng.li@hotmail.com>
+Acked-by: Naoya Horiguchi <n-horiguchi@ah.jp.nec.com>
+Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
+Signed-off-by: Linus Torvalds <torvalds@linux-foundation.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ mm/memory-failure.c |   13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
+
+--- a/mm/memory-failure.c
++++ b/mm/memory-failure.c
+@@ -1589,13 +1589,12 @@ static int soft_offline_huge_page(struct
+ 	unlock_page(hpage);
+ 
+ 	ret = isolate_huge_page(hpage, &pagelist);
+-	if (ret) {
+-		/*
+-		 * get_any_page() and isolate_huge_page() takes a refcount each,
+-		 * so need to drop one here.
+-		 */
+-		put_page(hpage);
+-	} else {
++	/*
++	 * get_any_page() and isolate_huge_page() takes a refcount each,
++	 * so need to drop one here.
++	 */
++	put_page(hpage);
++	if (!ret) {
+ 		pr_info("soft offline: %#lx hugepage failed to isolate\n", pfn);
+ 		return -EBUSY;
+ 	}

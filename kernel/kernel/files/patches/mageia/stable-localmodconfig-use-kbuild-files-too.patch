@@ -1,0 +1,36 @@
+From c0ddc8c745b7f89c50385fd7aa03c78dc543fa7a Mon Sep 17 00:00:00 2001
+From: Richard Weinberger <richard@nod.at>
+Date: Mon, 27 Jul 2015 00:06:55 +0200
+Subject: localmodconfig: Use Kbuild files too
+
+From: Richard Weinberger <richard@nod.at>
+
+commit c0ddc8c745b7f89c50385fd7aa03c78dc543fa7a upstream.
+
+In kbuild it is allowed to define objects in files named "Makefile"
+and "Kbuild".
+Currently localmodconfig reads objects only from "Makefile"s and misses
+modules like nouveau.
+
+Link: http://lkml.kernel.org/r/1437948415-16290-1-git-send-email-richard@nod.at
+
+Reported-and-tested-by: Leonidas Spyropoulos <artafinde@gmail.com>
+Signed-off-by: Richard Weinberger <richard@nod.at>
+Signed-off-by: Steven Rostedt <rostedt@goodmis.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ scripts/kconfig/streamline_config.pl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/scripts/kconfig/streamline_config.pl
++++ b/scripts/kconfig/streamline_config.pl
+@@ -137,7 +137,7 @@ my $ksource = ($ARGV[0] ? $ARGV[0] : '.'
+ my $kconfig = $ARGV[1];
+ my $lsmod_file = $ENV{'LSMOD'};
+ 
+-my @makefiles = `find $ksource -name Makefile 2>/dev/null`;
++my @makefiles = `find $ksource -name Makefile -or -name Kbuild 2>/dev/null`;
+ chomp @makefiles;
+ 
+ my %depends;

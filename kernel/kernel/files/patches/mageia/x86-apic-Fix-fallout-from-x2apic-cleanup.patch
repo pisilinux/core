@@ -1,0 +1,81 @@
+From a57e456a7b28431b55e407e5ab78ebd5b378d19e Mon Sep 17 00:00:00 2001
+From: Thomas Gleixner <tglx@linutronix.de>
+Date: Sat, 22 Aug 2015 16:41:17 +0200
+Subject: [PATCH] x86/apic: Fix fallout from x2apic cleanup
+
+In the recent x2apic cleanup I got two things really wrong:
+1) The safety check in __disable_x2apic which allows the function to
+   be called unconditionally is backwards. The check is there to
+   prevent access to the apic MSR in case that the machine has no
+   apic. Though right now it returns if the machine has an apic and
+   therefor the disabling of x2apic is never invoked.
+
+2) x2apic_disable() sets x2apic_mode to 0 after registering the local
+   apic. That's wrong, because register_lapic_address() checks x2apic
+   mode and therefor takes the wrong code path.
+
+This results in boot failures on machines with x2apic preenabled by
+BIOS and can also lead to an fatal MSR access on machines without
+apic.
+
+The solutions are simple:
+1) Correct the sanity check for apic availability
+2) Clear x2apic_mode _before_ calling register_lapic_address()
+
+Fixes: 659006bf3ae3 'x86/x2apic: Split enable and setup function'
+Reported-and-tested-by: Javier Monteagudo <javiermon@gmail.com>
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Link: https://bugzilla.redhat.com/show_bug.cgi?id=1224764
+Cc: stable@vger.kernel.org # 4.0+
+Cc: Laura Abbott <labbott@redhat.com>
+Cc: Jiang Liu <jiang.liu@linux.intel.com>
+Cc: Joerg Roedel <joro@8bytes.org>
+Cc: Tony Luck <tony.luck@intel.com>
+Cc: Borislav Petkov <bp@alien8.de>
+---
+ arch/x86/kernel/apic/apic.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/arch/x86/kernel/apic/apic.c b/arch/x86/kernel/apic/apic.c
+index dcb5285..cde732c 100644
+--- a/arch/x86/kernel/apic/apic.c
++++ b/arch/x86/kernel/apic/apic.c
+@@ -1424,7 +1424,7 @@ static inline void __x2apic_disable(void)
+ {
+ 	u64 msr;
+ 
+-	if (cpu_has_apic)
++	if (!cpu_has_apic)
+ 		return;
+ 
+ 	rdmsrl(MSR_IA32_APICBASE, msr);
+@@ -1483,10 +1483,13 @@ void x2apic_setup(void)
+ 
+ static __init void x2apic_disable(void)
+ {
+-	u32 x2apic_id;
++	u32 x2apic_id, state = x2apic_state;
+ 
+-	if (x2apic_state != X2APIC_ON)
+-		goto out;
++	x2apic_mode = 0;
++	x2apic_state = X2APIC_DISABLED;
++
++	if (state != X2APIC_ON)
++		return;
+ 
+ 	x2apic_id = read_apic_id();
+ 	if (x2apic_id >= 255)
+@@ -1494,9 +1497,6 @@ static __init void x2apic_disable(void)
+ 
+ 	__x2apic_disable();
+ 	register_lapic_address(mp_lapic_addr);
+-out:
+-	x2apic_state = X2APIC_DISABLED;
+-	x2apic_mode = 0;
+ }
+ 
+ static __init void x2apic_enable(void)
+-- 
+2.4.5
+

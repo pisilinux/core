@@ -1,0 +1,49 @@
+From 00a2916f7f82c348a2a94dbb572874173bc308a3 Mon Sep 17 00:00:00 2001
+From: Peter Zijlstra <peterz@infradead.org>
+Date: Mon, 27 Jul 2015 10:35:07 +0200
+Subject: perf: Fix running time accounting
+
+From: Peter Zijlstra <peterz@infradead.org>
+
+commit 00a2916f7f82c348a2a94dbb572874173bc308a3 upstream.
+
+A recent fix to the shadow timestamp inadvertly broke the running time
+accounting.
+
+We must not update the running timestamp if we fail to schedule the
+event, the event will not have ran. This can (and did) result in
+negative total runtime because the stopped timestamp was before the
+running timestamp (we 'started' but never stopped the event -- because
+it never really started we didn't have to stop it either).
+
+Reported-and-Tested-by: Vince Weaver <vincent.weaver@maine.edu>
+Fixes: 72f669c0086f ("perf: Update shadow timestamp before add event")
+Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+Cc: Shaohua Li <shli@fb.com>
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ kernel/events/core.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+--- a/kernel/events/core.c
++++ b/kernel/events/core.c
+@@ -1886,8 +1886,6 @@ event_sched_in(struct perf_event *event,
+ 
+ 	perf_pmu_disable(event->pmu);
+ 
+-	event->tstamp_running += tstamp - event->tstamp_stopped;
+-
+ 	perf_set_shadow_time(event, ctx, tstamp);
+ 
+ 	perf_log_itrace_start(event);
+@@ -1899,6 +1897,8 @@ event_sched_in(struct perf_event *event,
+ 		goto out;
+ 	}
+ 
++	event->tstamp_running += tstamp - event->tstamp_stopped;
++
+ 	if (!is_software_event(event))
+ 		cpuctx->active_oncpu++;
+ 	if (!ctx->nr_active++)

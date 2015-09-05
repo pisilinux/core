@@ -1,0 +1,30 @@
+From 741e3b9902d11585e18bfc7f8d47e913616bb070 Mon Sep 17 00:00:00 2001
+From: Larry Finger <Larry.Finger@lwfinger.net>
+Date: Sun, 2 Aug 2015 13:24:13 -0500
+Subject: rtlwifi: rtl8723be: Add module parameter for MSI interrupts
+
+From: Larry Finger <Larry.Finger@lwfinger.net>
+
+commit 741e3b9902d11585e18bfc7f8d47e913616bb070 upstream.
+
+The driver code allows for the disabling of MSI interrupts; however the
+module_parm line was missed and the option fails to show with modinfo.
+
+Signed-off-by: Larry Finger <Larry.Finger@lwfinger.net>
+Signed-off-by: Kalle Valo <kvalo@codeaurora.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/net/wireless/rtlwifi/rtl8723be/sw.c |    1 +
+ 1 file changed, 1 insertion(+)
+
+--- a/drivers/net/wireless/rtlwifi/rtl8723be/sw.c
++++ b/drivers/net/wireless/rtlwifi/rtl8723be/sw.c
+@@ -385,6 +385,7 @@ module_param_named(debug, rtl8723be_mod_
+ module_param_named(ips, rtl8723be_mod_params.inactiveps, bool, 0444);
+ module_param_named(swlps, rtl8723be_mod_params.swctrl_lps, bool, 0444);
+ module_param_named(fwlps, rtl8723be_mod_params.fwctrl_lps, bool, 0444);
++module_param_named(msi, rtl8723be_mod_params.msi_support, bool, 0444);
+ module_param_named(disable_watchdog, rtl8723be_mod_params.disable_watchdog,
+ 		   bool, 0444);
+ MODULE_PARM_DESC(swenc, "Set to 1 for software crypto (default 0)\n");
