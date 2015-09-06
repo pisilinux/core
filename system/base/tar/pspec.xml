@@ -17,10 +17,11 @@
             <AdditionalFile target="doc/tar.1">tar.1</AdditionalFile>
         </AdditionalFiles>
         <BuildDependencies>
-            <Dependency>gzip</Dependency>
-            <Dependency>bzip2</Dependency>
+            <Dependency>acl-devel</Dependency>
             <Dependency>gettext</Dependency>
-            <Dependency>ncompress</Dependency>
+            <!--Dependency>gzip</Dependency>
+            <Dependency>bzip2</Dependency>
+            <Dependency>ncompress</Dependency-->
         </BuildDependencies>
     </Source>
 
@@ -42,7 +43,7 @@
 
     <History>
         <Update release="6">
-            <Date>2015-06-05</Date>
+            <Date>2015-09-06</Date>
             <Version>1.28</Version>
             <Comment>Version bump.</Comment>
             <Name>Ertuğrul Erata</Name>
