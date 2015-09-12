@@ -44,6 +44,8 @@
         <RuntimeDependencies>
             <Dependency release="current">gobject-introspection</Dependency>
             <!-- gobject-introspection's pc file needs libffi's pc file-->
+            <Dependency>libffi</Dependency>
+            <Dependency>glib2</Dependency>
             <Dependency>libffi-devel</Dependency>
             <Dependency>glib2-devel</Dependency>
         </RuntimeDependencies>
