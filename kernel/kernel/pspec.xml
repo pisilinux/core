@@ -1,4 +1,4 @@
-i<?xml version="1.0" ?>
+<?xml version="1.0" ?>
 <!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
@@ -29,8 +29,8 @@ i<?xml version="1.0" ?>
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.1.6.xz</Patch>
-            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.1.6/1.mga6/PATCHES/patches/series-->
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.1.7.xz</Patch>
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.1.7/1.mga6/PATCHES/patches/series-->
             <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
             <Patch level="1">patches/mageia/x86-boot-video-80x25-if-break.patch</Patch>
             <Patch level="1">patches/mageia/x86-default_poweroff_up_machines.patch</Patch>
@@ -53,8 +53,6 @@ i<?xml version="1.0" ?>
             <Patch level="1">patches/mageia/dm-raid-aliases.patch</Patch>
             <Patch level="1">patches/mageia/block-floppy-disable-pnp-modalias.patch</Patch>
             <Patch level="1">patches/mageia/ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch</Patch>
-            <Patch level="1">patches/mageia/ata-revert-Disabling-the-async-PM-for-JMicron-chip-363-361.patch</Patch>
-            <Patch level="1">patches/mageia/ata-jmicron-disable-broken-async_suspend.patch</Patch>
             <Patch level="1">patches/mageia/block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch</Patch>
             <Patch level="1">patches/mageia/block-cfq-iosched-fix-the-setting-of-IOPS-mode-on-SSDs.patch</Patch>
             <Patch level="1">patches/mageia/fs-aufs4.patch</Patch>
@@ -124,16 +122,10 @@ i<?xml version="1.0" ?>
             <Patch level="1">patches/mageia/3rd-rtl8723bs.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8723bs-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8723bs-updates.patch</Patch>
-            <Patch level="1">patches/mageia/Revert-sched-x86_64-Don-t-save-flags-on-context-swit.patch</Patch>
-            <Patch level="1">patches/mageia/SCSI-Fix-NULL-pointer-dereference-in-runtime-PM.patch</Patch>
-            <Patch level="1">patches/mageia/ata-Revert-libata-eh-Set-information-field-for-autosense.patch</Patch>
-            <Patch level="1">patches/mageia/ata-Revert-libata-Implement-support-for-sense-data-repor.patch</Patch>
-            <Patch level="1">patches/mageia/ata-Revert-libata-Implement-NCQ-autosense.patch</Patch>
             <Patch level="1">patches/mageia/fs-Revert-ext4-remove-block_device_ejected.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-i915-remove-HBR2-from-chv-supported-list.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-i915-Avoid-TP3-on-CHV.patch</Patch>
-            <Patch level="1">patches/mageia/x86-apic-Fix-fallout-from-x2apic-cleanup.patch</Patch>
-            <Patch level="1">patches/mageia/x86-idle-Restore-trace_cpu_idle-to-mwait_idle-calls.patch</Patch>
+            <Patch level="1">patches/mageia/Input-evdev-do-not-report-errors-form-flush.patch</Patch>
+            <Patch level="1">patches/mageia/scsi-Fix-NULL-pointer-dereference-in-RTPM-of-block-layer.patch</Patch>
+            <Patch level="1">patches/mageia/scsi-Revert-SCSI-Fix-NULL-pointer-dereference-in-runtime-PM.patch</Patch>
         </Patches>
     </Source>
 
@@ -188,14 +180,14 @@ i<?xml version="1.0" ?>
     </Package>
 
     <History>
-         <!--Update release="60">
-            <Date>2015-09-05</Date>
-            <Version>4.2.0</Version>
-            <Comment>Version bump to 4.2.0 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.2.0</Comment>
+         <Update release="60">
+            <Date>2015-09-18</Date>
+            <Version>4.1.7</Version>
+            <Comment>Version bump to 4.1.7 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.1.7</Comment>
             <Type package="kernel">security</Type>
             <Name>Ertuğrul Erata</Name>
             <Email>ertugrulerata@gmail.com</Email>
-         </Update-->
+         </Update>
          <Update release="59">
             <Date>2015-09-05</Date>
             <Version>4.1.6</Version>

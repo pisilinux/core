@@ -1,0 +1,35 @@
+From a313bdc5310dd807655d3ca3eb2219cd65dfe45a Mon Sep 17 00:00:00 2001
+From: Sebastian Ott <sebott@linux.vnet.ibm.com>
+Date: Thu, 25 Jun 2015 09:32:22 +0200
+Subject: s390/sclp: fix compile error
+
+From: Sebastian Ott <sebott@linux.vnet.ibm.com>
+
+commit a313bdc5310dd807655d3ca3eb2219cd65dfe45a upstream.
+
+Fix this error when compiling with CONFIG_SMP=n and
+CONFIG_DYNAMIC_DEBUG=y:
+
+drivers/s390/char/sclp_early.c: In function 'sclp_read_info_early':
+drivers/s390/char/sclp_early.c:87:19: error: 'EBUSY' undeclared (first use in this function)
+   } while (rc == -EBUSY);
+                   ^
+
+Signed-off-by: Sebastian Ott <sebott@linux.vnet.ibm.com>
+Signed-off-by: Martin Schwidefsky <schwidefsky@de.ibm.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/s390/char/sclp_early.c |    1 +
+ 1 file changed, 1 insertion(+)
+
+--- a/drivers/s390/char/sclp_early.c
++++ b/drivers/s390/char/sclp_early.c
+@@ -7,6 +7,7 @@
+ #define KMSG_COMPONENT "sclp_early"
+ #define pr_fmt(fmt) KMSG_COMPONENT ": " fmt
+ 
++#include <linux/errno.h>
+ #include <asm/ctl_reg.h>
+ #include <asm/sclp.h>
+ #include <asm/ipl.h>

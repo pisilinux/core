@@ -1,0 +1,35 @@
+From 12e244f4b550498bbaf654a52f93633f7dde2dc7 Mon Sep 17 00:00:00 2001
+From: Andy Lutomirski <luto@kernel.org>
+Date: Fri, 14 Aug 2015 15:02:55 -0700
+Subject: x86/ldt: Further fix FPU emulation
+
+From: Andy Lutomirski <luto@kernel.org>
+
+commit 12e244f4b550498bbaf654a52f93633f7dde2dc7 upstream.
+
+The previous fix confused a selector with a segment prefix.  Fix it.
+
+Compile-tested only.
+
+Cc: Juergen Gross <jgross@suse.com>
+Reported-by: Linus Torvalds <torvalds@linux-foundation.org>
+Fixes: 4809146b86c3 ("x86/ldt: Correct FPU emulation access to LDT")
+Signed-off-by: Andy Lutomirski <luto@kernel.org>
+Signed-off-by: Linus Torvalds <torvalds@linux-foundation.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ arch/x86/math-emu/get_address.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/arch/x86/math-emu/get_address.c
++++ b/arch/x86/math-emu/get_address.c
+@@ -157,7 +157,7 @@ static long pm_address(u_char FPU_modrm,
+ 		addr->selector = PM_REG_(segment);
+ 	}
+ 
+-	descriptor = FPU_get_ldt_descriptor(segment);
++	descriptor = FPU_get_ldt_descriptor(addr->selector);
+ 	base_address = SEG_BASE_ADDR(descriptor);
+ 	address = base_address + offset;
+ 	limit = base_address

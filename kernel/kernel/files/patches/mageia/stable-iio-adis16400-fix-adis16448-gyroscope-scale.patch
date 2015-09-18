@@ -1,0 +1,30 @@
+From 8166537283b31d7abaae9e56bd48fbbc30cdc579 Mon Sep 17 00:00:00 2001
+From: Lars-Peter Clausen <lars@metafoo.de>
+Date: Wed, 5 Aug 2015 15:38:13 +0200
+Subject: iio: adis16400: Fix adis16448 gyroscope scale
+
+From: Lars-Peter Clausen <lars@metafoo.de>
+
+commit 8166537283b31d7abaae9e56bd48fbbc30cdc579 upstream.
+
+Use the correct scale for the adis16448 gyroscope output.
+
+Signed-off-by: Lars-Peter Clausen <lars@metafoo.de>
+Signed-off-by: Jonathan Cameron <jic23@kernel.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/iio/imu/adis16400_core.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/drivers/iio/imu/adis16400_core.c
++++ b/drivers/iio/imu/adis16400_core.c
+@@ -780,7 +780,7 @@ static struct adis16400_chip_info adis16
+ 		.flags = ADIS16400_HAS_PROD_ID |
+ 				ADIS16400_HAS_SERIAL_NUMBER |
+ 				ADIS16400_BURST_DIAG_STAT,
+-		.gyro_scale_micro = IIO_DEGREE_TO_RAD(10000), /* 0.01 deg/s */
++		.gyro_scale_micro = IIO_DEGREE_TO_RAD(40000), /* 0.04 deg/s */
+ 		.accel_scale_micro = IIO_G_TO_M_S_2(833), /* 1/1200 g */
+ 		.temp_scale_nano = 73860000, /* 0.07386 C */
+ 		.temp_offset = 31000000 / 73860, /* 31 C = 0x00 */

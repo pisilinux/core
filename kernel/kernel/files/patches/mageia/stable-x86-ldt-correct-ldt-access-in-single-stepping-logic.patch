@@ -1,0 +1,45 @@
+From 136d9d83c07c5e30ac49fc83b27e8c4842f108fc Mon Sep 17 00:00:00 2001
+From: Juergen Gross <jgross@suse.com>
+Date: Thu, 6 Aug 2015 10:04:38 +0200
+Subject: x86/ldt: Correct LDT access in single stepping logic
+
+From: Juergen Gross <jgross@suse.com>
+
+commit 136d9d83c07c5e30ac49fc83b27e8c4842f108fc upstream.
+
+Commit 37868fe113ff ("x86/ldt: Make modify_ldt synchronous")
+introduced a new struct ldt_struct anchored at mm->context.ldt.
+
+convert_ip_to_linear() was changed to reflect this, but indexing
+into the ldt has to be changed as the pointer is no longer void *.
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Andy Lutomirski <luto@kernel.org>
+Cc: Linus Torvalds <torvalds@linux-foundation.org>
+Cc: Peter Zijlstra <peterz@infradead.org>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: bp@suse.de
+Link: http://lkml.kernel.org/r/1438848278-12906-1-git-send-email-jgross@suse.com
+Signed-off-by: Ingo Molnar <mingo@kernel.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ arch/x86/kernel/step.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+--- a/arch/x86/kernel/step.c
++++ b/arch/x86/kernel/step.c
+@@ -28,11 +28,11 @@ unsigned long convert_ip_to_linear(struc
+ 		struct desc_struct *desc;
+ 		unsigned long base;
+ 
+-		seg &= ~7UL;
++		seg >>= 3;
+ 
+ 		mutex_lock(&child->mm->context.lock);
+ 		if (unlikely(!child->mm->context.ldt ||
+-			     (seg >> 3) >= child->mm->context.ldt->size))
++			     seg >= child->mm->context.ldt->size))
+ 			addr = -1L; /* bogus selector, access would fault */
+ 		else {
+ 			desc = &child->mm->context.ldt->entries[seg];
