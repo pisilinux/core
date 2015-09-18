@@ -1,0 +1,34 @@
+From 3294bee87091be5f179474f6c39d1d87769635e2 Mon Sep 17 00:00:00 2001
+From: Dan Carpenter <dan.carpenter@oracle.com>
+Date: Wed, 29 Jul 2015 13:17:06 +0300
+Subject: clk: versatile: off by one in clk_sp810_timerclken_of_get()
+
+From: Dan Carpenter <dan.carpenter@oracle.com>
+
+commit 3294bee87091be5f179474f6c39d1d87769635e2 upstream.
+
+The ">" should be ">=" or we end up reading beyond the end of the array.
+
+Fixes: 6e973d2c4385 ('clk: vexpress: Add separate SP810 driver')
+Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
+Acked-by: Pawel Moll <pawel.moll@arm.com>
+Signed-off-by: Stephen Boyd <sboyd@codeaurora.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/clk/versatile/clk-sp810.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+--- a/drivers/clk/versatile/clk-sp810.c
++++ b/drivers/clk/versatile/clk-sp810.c
+@@ -128,8 +128,8 @@ static struct clk *clk_sp810_timerclken_
+ {
+ 	struct clk_sp810 *sp810 = data;
+ 
+-	if (WARN_ON(clkspec->args_count != 1 || clkspec->args[0] >
+-			ARRAY_SIZE(sp810->timerclken)))
++	if (WARN_ON(clkspec->args_count != 1 ||
++		    clkspec->args[0] >=	ARRAY_SIZE(sp810->timerclken)))
+ 		return NULL;
+ 
+ 	return sp810->timerclken[clkspec->args[0]].clk;

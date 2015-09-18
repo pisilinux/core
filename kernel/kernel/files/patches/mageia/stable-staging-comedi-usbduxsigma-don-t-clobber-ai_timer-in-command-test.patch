@@ -1,0 +1,87 @@
+From 423b24c37dd5794a674c74b0ed56392003a69891 Mon Sep 17 00:00:00 2001
+From: Ian Abbott <abbotti@mev.co.uk>
+Date: Thu, 23 Jul 2015 16:46:57 +0100
+Subject: staging: comedi: usbduxsigma: don't clobber ai_timer in command test
+
+From: Ian Abbott <abbotti@mev.co.uk>
+
+commit 423b24c37dd5794a674c74b0ed56392003a69891 upstream.
+
+`devpriv->ai_timer` is used while an asynchronous command is running on
+the AI subdevice.  It also gets modified by the subdevice's `cmdtest`
+handler for checking new asynchronous commands
+(`usbduxsigma_ai_cmdtest()`), which is not correct as it's allowed to
+check new commands while an old command is still running.  Fix it by
+moving the code which sets up `devpriv->ai_timer` and
+`devpriv->ai_interval` into the subdevice's `cmd` handler,
+`usbduxsigma_ai_cmd()`.
+
+Note that the removed code in `usbduxsigma_ai_cmdtest()` checked that
+`devpriv->ai_timer` did not end up less than than 1, but that could not
+happen because `cmd->scan_begin_arg` had already been checked to be at
+least the minimum required value (at least when `cmd->scan_begin_src ==
+TRIG_TIMER`, which had also been checked to be the case).
+
+Fixes: b986be8527c7 ("staging: comedi: usbduxsigma: tidy up analog input command support)
+Signed-off-by: Ian Abbott <abbotti@mev.co.uk>
+Reviewed-by: Bernd Porr <mail@berndporr.me.uk>
+Reviewed-by: H Hartley Sweeten <hsweeten@visionengravers.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/staging/comedi/drivers/usbduxsigma.c |   37 +++++++++++----------------
+ 1 file changed, 16 insertions(+), 21 deletions(-)
+
+--- a/drivers/staging/comedi/drivers/usbduxsigma.c
++++ b/drivers/staging/comedi/drivers/usbduxsigma.c
+@@ -550,27 +550,6 @@ static int usbduxsigma_ai_cmdtest(struct
+ 	if (err)
+ 		return 3;
+ 
+-	/* Step 4: fix up any arguments */
+-
+-	if (high_speed) {
+-		/*
+-		 * every 2 channels get a time window of 125us. Thus, if we
+-		 * sample all 16 channels we need 1ms. If we sample only one
+-		 * channel we need only 125us
+-		 */
+-		devpriv->ai_interval = interval;
+-		devpriv->ai_timer = cmd->scan_begin_arg / (125000 * interval);
+-	} else {
+-		/* interval always 1ms */
+-		devpriv->ai_interval = 1;
+-		devpriv->ai_timer = cmd->scan_begin_arg / 1000000;
+-	}
+-	if (devpriv->ai_timer < 1)
+-		err |= -EINVAL;
+-
+-	if (err)
+-		return 4;
+-
+ 	return 0;
+ }
+ 
+@@ -668,6 +647,22 @@ static int usbduxsigma_ai_cmd(struct com
+ 
+ 	down(&devpriv->sem);
+ 
++	if (devpriv->high_speed) {
++		/*
++		 * every 2 channels get a time window of 125us. Thus, if we
++		 * sample all 16 channels we need 1ms. If we sample only one
++		 * channel we need only 125us
++		 */
++		unsigned int interval = usbduxsigma_chans_to_interval(len);
++
++		devpriv->ai_interval = interval;
++		devpriv->ai_timer = cmd->scan_begin_arg / (125000 * interval);
++	} else {
++		/* interval always 1ms */
++		devpriv->ai_interval = 1;
++		devpriv->ai_timer = cmd->scan_begin_arg / 1000000;
++	}
++
+ 	for (i = 0; i < len; i++) {
+ 		unsigned int chan  = CR_CHAN(cmd->chanlist[i]);
+ 

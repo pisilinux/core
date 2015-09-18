@@ -1,0 +1,32 @@
+From 1c4b4b0eb1909010b8ebda1ef208bf3ed62e7487 Mon Sep 17 00:00:00 2001
+From: Georgi Djakov <georgi.djakov@linaro.org>
+Date: Tue, 25 Aug 2015 15:27:43 +0300
+Subject: clk: qcom: Fix MSM8916 prng clock enable bit
+
+From: Georgi Djakov <georgi.djakov@linaro.org>
+
+commit 1c4b4b0eb1909010b8ebda1ef208bf3ed62e7487 upstream.
+
+Fix the enable bit of the pseudorandom number generator clock.
+
+Reported-by: Stanimir Varbanov <stanimir.varbanov@linaro.org>
+Fixes: 3966fab8b6ab "clk: qcom: Add MSM8916 Global Clock Controller support"
+Signed-off-by: Georgi Djakov <georgi.djakov@linaro.org>
+Signed-off-by: Stephen Boyd <sboyd@codeaurora.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/clk/qcom/gcc-msm8916.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/drivers/clk/qcom/gcc-msm8916.c
++++ b/drivers/clk/qcom/gcc-msm8916.c
+@@ -2278,7 +2278,7 @@ static struct clk_branch gcc_prng_ahb_cl
+ 	.halt_check = BRANCH_HALT_VOTED,
+ 	.clkr = {
+ 		.enable_reg = 0x45004,
+-		.enable_mask = BIT(0),
++		.enable_mask = BIT(8),
+ 		.hw.init = &(struct clk_init_data){
+ 			.name = "gcc_prng_ahb_clk",
+ 			.parent_names = (const char *[]){

@@ -1,0 +1,37 @@
+From ba30011577330b7e29ecb5916d89c6db9fbc5b3d Mon Sep 17 00:00:00 2001
+From: Marek Szyprowski <m.szyprowski@samsung.com>
+Date: Wed, 12 Aug 2015 10:58:22 +0200
+Subject: clk: s5pv210: add missing call to
+ samsung_clk_of_add_provider()
+
+From: Marek Szyprowski <m.szyprowski@samsung.com>
+
+commit ba30011577330b7e29ecb5916d89c6db9fbc5b3d upstream.
+
+Commit d5e136a21b2028fb1f45143ea7112d5869bfc6c7 ("clk: samsung: Register
+clk provider only after registering its all clocks", merged to v3.17-rc1)
+modified a way that driver registers registers to core framework. This
+change has not been applied to s5pv210 clocks driver, which has been
+merged in parallel to that commit. This patch adds a missing call to
+samsung_clk_of_add_provider(), so the driver is operational again.
+
+Signed-off-by: Marek Szyprowski <m.szyprowski@samsung.com>
+Acked-by: Tomasz Figa <tomasz.figa@gmail.com>
+Signed-off-by: Michael Turquette <mturquette@baylibre.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/clk/samsung/clk-s5pv210.c |    2 ++
+ 1 file changed, 2 insertions(+)
+
+--- a/drivers/clk/samsung/clk-s5pv210.c
++++ b/drivers/clk/samsung/clk-s5pv210.c
+@@ -828,6 +828,8 @@ static void __init __s5pv210_clk_init(st
+ 
+ 	s5pv210_clk_sleep_init();
+ 
++	samsung_clk_of_add_provider(np, ctx);
++
+ 	pr_info("%s clocks: mout_apll = %ld, mout_mpll = %ld\n"
+ 		"\tmout_epll = %ld, mout_vpll = %ld\n",
+ 		is_s5p6442 ? "S5P6442" : "S5PV210",

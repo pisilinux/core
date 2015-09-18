@@ -1,0 +1,70 @@
+From c689a923c867eac40ed3826c1d9328edea8b6bc7 Mon Sep 17 00:00:00 2001
+From: Lars-Peter Clausen <lars@metafoo.de>
+Date: Wed, 5 Aug 2015 15:38:14 +0200
+Subject: iio: Add inverse unit conversion macros
+
+From: Lars-Peter Clausen <lars@metafoo.de>
+
+commit c689a923c867eac40ed3826c1d9328edea8b6bc7 upstream.
+
+Add inverse unit conversion macro to convert from standard IIO units to
+units that might be used by some devices.
+
+Those are useful in combination with scale factors that are specified as
+IIO_VAL_FRACTIONAL. Typically the denominator for those specifications will
+contain the maximum raw value the sensor will generate and the numerator
+the value it maps to in a specific unit. Sometimes datasheets specify those
+in different units than the standard IIO units (e.g. degree/s instead of
+rad/s) and so we need to do a unit conversion.
+
+From a mathematical point of view it does not make a difference whether we
+apply the unit conversion to the numerator or the inverse unit conversion
+to the denominator since (x / y) / z = x / (y * z). But as the denominator
+is typically a larger value and we are rounding both the numerator and
+denominator to integer values using the later method gives us a better
+precision (E.g. the relative error is smaller if we round 8000.3 to 8000
+rather than rounding 8.3 to 8).
+
+This is where in inverse unit conversion macros will be used.
+
+Marked for stable as used by some upcoming fixes.
+
+Signed-off-by: Lars-Peter Clausen <lars@metafoo.de>
+Signed-off-by: Jonathan Cameron <jic23@kernel.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ include/linux/iio/iio.h |   17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+--- a/include/linux/iio/iio.h
++++ b/include/linux/iio/iio.h
+@@ -642,6 +642,15 @@ int iio_str_to_fixpoint(const char *str,
+ #define IIO_DEGREE_TO_RAD(deg) (((deg) * 314159ULL + 9000000ULL) / 18000000ULL)
+ 
+ /**
++ * IIO_RAD_TO_DEGREE() - Convert rad to degree
++ * @rad: A value in rad
++ *
++ * Returns the given value converted from rad to degree
++ */
++#define IIO_RAD_TO_DEGREE(rad) \
++	(((rad) * 18000000ULL + 314159ULL / 2) / 314159ULL)
++
++/**
+  * IIO_G_TO_M_S_2() - Convert g to meter / second**2
+  * @g: A value in g
+  *
+@@ -649,4 +658,12 @@ int iio_str_to_fixpoint(const char *str,
+  */
+ #define IIO_G_TO_M_S_2(g) ((g) * 980665ULL / 100000ULL)
+ 
++/**
++ * IIO_M_S_2_TO_G() - Convert meter / second**2 to g
++ * @ms2: A value in meter / second**2
++ *
++ * Returns the given value converted from meter / second**2 to g
++ */
++#define IIO_M_S_2_TO_G(ms2) (((ms2) * 100000ULL + 980665ULL / 2) / 980665ULL)
++
+ #endif /* _INDUSTRIAL_IO_H_ */

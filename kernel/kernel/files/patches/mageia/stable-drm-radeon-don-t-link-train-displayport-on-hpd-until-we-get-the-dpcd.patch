@@ -1,0 +1,75 @@
+From 924f92bf12bfbef3662619e3ed24a1cea7c1cbcd Mon Sep 17 00:00:00 2001
+From: Stephen Chandler Paul <cpaul@redhat.com>
+Date: Fri, 21 Aug 2015 14:16:12 -0400
+Subject: DRM - radeon: Don't link train DisplayPort on HPD until we get the dpcd
+
+From: Stephen Chandler Paul <cpaul@redhat.com>
+
+commit 924f92bf12bfbef3662619e3ed24a1cea7c1cbcd upstream.
+
+Most of the time this isn't an issue since hotplugging an adaptor will
+trigger a crtc mode change which in turn, causes the driver to probe
+every DisplayPort for a dpcd. However, in cases where hotplugging
+doesn't cause a mode change (specifically when one unplugs a monitor
+from a DisplayPort connector, then plugs that same monitor back in
+seconds later on the same port without any other monitors connected), we
+never probe for the dpcd before starting the initial link training. What
+happens from there looks like this:
+
+	- GPU has only one monitor connected. It's connected via
+	  DisplayPort, and does not go through an adaptor of any sort.
+
+	- User unplugs DisplayPort connector from GPU.
+
+	- Change in HPD is detected by the driver, we probe every
+	  DisplayPort for a possible connection.
+
+	- Probe the port the user originally had the monitor connected
+	  on for it's dpcd. This fails, and we clear the first (and only
+	  the first) byte of the dpcd to indicate we no longer have a
+	  dpcd for this port.
+
+	- User plugs the previously disconnected monitor back into the
+	  same DisplayPort.
+
+	- radeon_connector_hotplug() is called before everyone else,
+	  and tries to handle the link training. Since only the first
+	  byte of the dpcd is zeroed, the driver is able to complete
+	  link training but does so against the wrong dpcd, causing it
+	  to initialize the link with the wrong settings.
+
+	- Display stays blank (usually), dpcd is probed after the
+	  initial link training, and the driver prints no obvious
+	  messages to the log.
+
+In theory, since only one byte of the dpcd is chopped off (specifically,
+the byte that contains the revision information for DisplayPort), it's
+not entirely impossible that this bug may not show on certain monitors.
+For instance, the only reason this bug was visible on my ASUS PB238
+monitor was due to the fact that this monitor using the enhanced framing
+symbol sequence, the flag for which is ignored if the radeon driver
+thinks that the DisplayPort version is below 1.1.
+
+Signed-off-by: Stephen Chandler Paul <cpaul@redhat.com>
+Reviewed-by: Jerome Glisse <jglisse@redhat.com>
+Signed-off-by: Alex Deucher <alexander.deucher@amd.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/radeon/radeon_connectors.c |    5 +++++
+ 1 file changed, 5 insertions(+)
+
+--- a/drivers/gpu/drm/radeon/radeon_connectors.c
++++ b/drivers/gpu/drm/radeon/radeon_connectors.c
+@@ -95,6 +95,11 @@ void radeon_connector_hotplug(struct drm
+ 			if (!radeon_hpd_sense(rdev, radeon_connector->hpd.hpd)) {
+ 				drm_helper_connector_dpms(connector, DRM_MODE_DPMS_OFF);
+ 			} else if (radeon_dp_needs_link_train(radeon_connector)) {
++				/* Don't try to start link training before we
++				 * have the dpcd */
++				if (!radeon_dp_getdpcd(radeon_connector))
++					return;
++
+ 				/* set it to OFF so that drm_helper_connector_dpms()
+ 				 * won't return immediately since the current state
+ 				 * is ON at this point.

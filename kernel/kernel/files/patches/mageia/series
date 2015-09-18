@@ -14,33 +14,72 @@
 ###
 ### Stable Queue
 ###
-stable-ipc-sem-fix-use-after-free-on-ipc_rmid-after-a-task-using-same-semaphore-set-exits.patch
-stable-ipc-sem.c-update-correct-memory-barriers.patch
-stable-mm-hwpoison-fix-page-refcount-of-unknown-non-lru-page.patch
-stable-mm-hwpoison-fix-fail-isolate-hugetlbfs-page-w-refcount-held.patch
-stable-clk-pxa-pxa3xx-fix-cken-register-access.patch
-stable-xen-blkfront-don-t-add-indirect-pages-to-list-when.patch
-stable-xen-blkback-replace-work_pending-with-work_busy-in-purge_persistent_gnt.patch
-stable-rsi-fix-failure-to-load-firmware-after-memory-leak-fix-and-fix-the-leak.patch
-stable-perf-fix-fasync-handling-on-inherited-events.patch
-stable-perf-fix-running-time-accounting.patch
-stable-perf-fix-double-free-of-the-aux-buffer.patch
-stable-perf-fix-perf_event_ioc_period-migration-race.patch
-stable-iwlwifi-pcie-fix-prepare-card-flow.patch
-stable-rtlwifi-rtl8723be-add-module-parameter-for-msi-interrupts.patch
-stable-rtlwifi-fix-null-dereference-when-pci-driver-used-as-an-ap.patch
-stable-x86-xen-build-xen-pv-apic-driver-for-domu-as-well.patch
-stable-xen-xenbus-don-t-leak-memory-when-unmapping-the-ring-on-hvm-backend.patch
-stable-dm-thin-metadata-delete-btrees-when-releasing-metadata-snapshot.patch
-stable-localmodconfig-use-kbuild-files-too.patch
-stable-edac-ppc4xx-access-mci-csrows-array-elements-properly.patch
-stable-hid-hid-input-fix-accessing-freed-memory-during-device-disconnect.patch
-stable-hid-uclogic-fix-limit-in-uclogic_tablet_enable.patch
-stable-drm-radeon-add-new-oland-pci-id.patch
-stable-drm-vmwgfx-fix-execbuf-locking-issues.patch
-
-# DaveM
-stable-net_41.mbox.patch
+stable-x86-ldt-make-modify_ldt-synchronous.patch
+stable-x86-ldt-correct-ldt-access-in-single-stepping-logic.patch
+stable-x86-ldt-correct-fpu-emulation-access-to-ldt.patch
+stable-x86-ldt-further-fix-fpu-emulation.patch
+stable-drm-radeon-don-t-link-train-displayport-on-hpd-until-we-get-the-dpcd.patch
+stable-drm-i915-apply-the-pci_d0-d3-hibernation-workaround-everywhere-on-pre-gen6.patch
+stable-drm-i915-check-dp-link-status-on-long-hpd-too.patch
+stable-drm-radeon-atom-send-out-the-full-aux-address.patch
+stable-drm-radeon-native-send-out-the-full-aux-address.patch
+stable-drm-radeon-fix-hdmi-quantization_range-for-pre-dce5-asics.patch
+stable-drm-i915-preserve-ssc-earlier.patch
+stable-drm-qxl-validate-monitors-config-modes.patch
+stable-drm-i915-allow-dsi-dual-link-to-be-configured-on-any-pipe.patch
+stable-drm-i915-always-mark-the-object-as-dirty-when-used-by-the-gpu.patch
+stable-drm-i915-limit-the-number-of-loops-for-reading-a-split-64bit-register.patch
+stable-s390-sclp-fix-compile-error.patch
+stable-s390-setup-fix-novx-parameter.patch
+stable-iio-bmg160-iio_buffer-and-iio_triggered_buffer-are-required.patch
+stable-iio-event-remove-negative-error-code-from-iio_event_poll.patch
+stable-iio-industrialio-buffer-fix-iio_buffer_poll-return-value.patch
+stable-iio-adis16400-fix-adis16448-gyroscope-scale.patch
+stable-iio-add-inverse-unit-conversion-macros.patch
+stable-iio-adis16480-fix-scale-factors.patch
+stable-sched-fix-cpu_active_mask-cpu_online_mask-race.patch
+stable-staging-comedi-adl_pci7x3x-fix-digital-output-on-pci-7230.patch
+stable-staging-comedi-usbduxsigma-don-t-clobber-ai_timer-in-command-test.patch
+stable-staging-comedi-usbduxsigma-don-t-clobber-ao_timer-in-command-test.patch
+stable-pm-clk-don-t-return-int-on-__pm_clk_enable.patch
+stable-clk-rockchip-rk3288-add-clk_set_rate_parent-to-sclk_mac.patch
+stable-clk-exynos4-fix-wrong-clock-for-exynos4x12-adc.patch
+stable-clk-s5pv210-add-missing-call-to.patch
+stable-clk-pistachio-fix-override-of-clk-pll-settings-from-boot-loader.patch
+stable-clk-pistachio-correct-critical-clock-list.patch
+stable-clk-versatile-off-by-one-in-clk_sp810_timerclken_of_get.patch
+stable-clk-pxa-fix-core-frequency-reporting-unit.patch
+stable-clk-qcom-set-clk_set_rate_parent-on-ce1-clocks.patch
+stable-clk-qcom-fix-msm8916-prng-clock-enable-bit.patch
+stable-pci-fix-ti816x-class-code-quirk.patch
+stable-pci-add-dev_flags-bit-to-access-vpd-through-function-0.patch
+stable-pci-add-vpd-function-0-quirk-for-intel-ethernet-devices.patch
+stable-pci-disable-async-suspend-resume-for-jmicron-multi-function-sata-ahci.patch
+stable-spi-bcm2835-set-up-spi-mode-before-asserting-cs-gpio.patch
+stable-spi-fix-regression-in-spi-bitbang-txrx.h.patch
+stable-spi-sh-msiof-fix-fifo-size-to-64-word-from-256-word.patch
+stable-spi-img-spfi-check-for-timeout-error-before-proceeding.patch
+stable-spi-img-spfi-fix-multiple-calls-to-request-gpio.patch
+stable-spi-img-spfi-fix-kbuild-test-robot-warning.patch
+stable-spi-dw-allow-interface-drivers-to-limit-data-i-o-to-word-sizes.patch
+stable-usb-symbolserial-use-usb_get_serial_port_data.patch
+stable-usb-qcserial-add-hp-lt4111-lte-ev-do-hspa-gobi-4g-module.patch
+stable-usb-ftdi_sio-added-custom-pid-for-customware-products.patch
+stable-usb-pl2303-fix-baud-rate-divisor-calculations.patch
+stable-libxfs-readahead-of-dir3-data-blocks-should-use-the-read-verifier.patch
+stable-xfs-fix-xfs_attr_leafblock-definition.patch
+stable-xfs-fix-file-type-directory-corruption-for-btree-directories.patch
+stable-usb-gadget-m66592-udc-forever-loop-in-set_feature.patch
+stable-doc-usb-gadget-testing-using-the-updated-testusb.c.patch
+stable-usb-dwc3-ep0-fix-mem-corruption-on-out-transfers-of-more-than-512-bytes.patch
+stable-usb-gadget-f_uac2-finalize-wmaxpacketsize-according-to-bandwidth.patch
+stable-usb-host-ehci-sys-delete-useless-bus_to_hcd-conversion.patch
+stable-tty-serial-men_z135_uart.c-fix-race-between-irq-and-set_termios.patch
+stable-asoc-rt5640-fix-line-out-no-sound-issue.patch
+stable-asoc-samsung-remove-redundant-arndale_audio_remove.patch
+stable-asoc-adav80x-remove-.read_flag_mask-setting-from-adav80x_regmap_config.patch
+stable-asoc-arizona-fix-gain-settings-of-fll-in-free-run-mode.patch
+stable-asoc-arizona-poll-for-fll-clock-ok-rather-than-use-interrupts.patch
 
 ###
 ### Arch x86
@@ -64,15 +103,6 @@ x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch
 
 # slows down boot
 Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch
-
-# wrong optimization
-Revert-sched-x86_64-Don-t-save-flags-on-context-swit.patch
-
-# fix unbootable systems
-x86-apic-Fix-fallout-from-x2apic-cleanup.patch
-
-# fixes powertop
-x86-idle-Restore-trace_cpu_idle-to-mwait_idle-calls.patch
 
 ###
 ### Core
@@ -148,21 +178,13 @@ block-floppy-disable-pnp-modalias.patch
 # prefer ata over ide drivers
 ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch
 
-# korg #81551
-ata-revert-Disabling-the-async-PM-for-JMicron-chip-363-361.patch
-ata-jmicron-disable-broken-async_suspend.patch
-
 # Nice SSD speedup
 block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch
 block-cfq-iosched-fix-the-setting-of-IOPS-mode-on-SSDs.patch
 
-# libata eh breakage
-ata-Revert-libata-eh-Set-information-field-for-autosense.patch
-ata-Revert-libata-Implement-support-for-sense-data-repor.patch
-ata-Revert-libata-Implement-NCQ-autosense.patch
-
-# ses driver crash
-SCSI-Fix-NULL-pointer-dereference-in-runtime-PM.patch
+# properly fix null pointer deref introduced in 4.1.7
+scsi-Revert-SCSI-Fix-NULL-pointer-dereference-in-runtime-PM.patch
+scsi-Fix-NULL-pointer-dereference-in-RTPM-of-block-layer.patch
 
 ###
 ### File-system
@@ -208,10 +230,6 @@ gpu-drm-mach64-linux-3.14-buildfix.patch
 gpu-drm-mach64-3.17-buildfix.patch
 gpu-drm-mach64-3.18-buildfix.patch
 
-# i915
-gpu-drm-i915-remove-HBR2-from-chv-supported-list.patch
-gpu-drm-i915-Avoid-TP3-on-CHV.patch
-
 ###
 ### Hardware Monitoring
 ###
@@ -221,6 +239,9 @@ gpu-drm-i915-Avoid-TP3-on-CHV.patch
 ###
 
 input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch
+
+# fixes systemd-logind killing itself
+Input-evdev-do-not-report-errors-form-flush.patch
 
 ###
 ### idle

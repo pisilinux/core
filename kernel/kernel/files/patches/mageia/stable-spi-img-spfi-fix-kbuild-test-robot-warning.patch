@@ -1,0 +1,33 @@
+From 9176c6657b5c313cf504d157e6d91496ee5c8708 Mon Sep 17 00:00:00 2001
+From: Sifan Naeem <sifan.naeem@imgtec.com>
+Date: Thu, 6 Aug 2015 10:33:01 +0100
+Subject: spi: img-spfi: fix kbuild test robot warning
+
+From: Sifan Naeem <sifan.naeem@imgtec.com>
+
+commit 9176c6657b5c313cf504d157e6d91496ee5c8708 upstream.
+
+drivers/spi/spi-img-spfi.c: In function 'img_spfi_setup':
+drivers/spi/spi-img-spfi.c:446: warning: 'ret' may be used
+uninitialized in this function.
+
+Fixes: commit b03ba9e314c1 ("spi: img-spfi: fix multiple calls to request gpio")
+Signed-off-by: Sifan Naeem <sifan.naeem@imgtec.com>
+Signed-off-by: Mark Brown <broonie@kernel.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/spi/spi-img-spfi.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/drivers/spi/spi-img-spfi.c
++++ b/drivers/spi/spi-img-spfi.c
+@@ -444,7 +444,7 @@ static int img_spfi_unprepare(struct spi
+ 
+ static int img_spfi_setup(struct spi_device *spi)
+ {
+-	int ret;
++	int ret = -EINVAL;
+ 	struct img_spfi_device_data *spfi_data = spi_get_ctldata(spi);
+ 
+ 	if (!spfi_data) {

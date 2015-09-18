@@ -1,0 +1,32 @@
+From 5feb5d2003499b1094d898c010a7604d7afddc4c Mon Sep 17 00:00:00 2001
+From: Dan Carpenter <dan.carpenter@oracle.com>
+Date: Thu, 30 Jul 2015 00:30:58 +0300
+Subject: usb: gadget: m66592-udc: forever loop in set_feature()
+
+From: Dan Carpenter <dan.carpenter@oracle.com>
+
+commit 5feb5d2003499b1094d898c010a7604d7afddc4c upstream.
+
+There is an "&&" vs "||" typo here so this loops 3000 times or if we get
+unlucky it could loop forever.
+
+Fixes: ceaa0a6eeadf ('usb: gadget: m66592-udc: add support for TEST_MODE')
+Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
+Signed-off-by: Felipe Balbi <balbi@ti.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/usb/gadget/udc/m66592-udc.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/drivers/usb/gadget/udc/m66592-udc.c
++++ b/drivers/usb/gadget/udc/m66592-udc.c
+@@ -1052,7 +1052,7 @@ static void set_feature(struct m66592 *m
+ 				tmp = m66592_read(m66592, M66592_INTSTS0) &
+ 								M66592_CTSQ;
+ 				udelay(1);
+-			} while (tmp != M66592_CS_IDST || timeout-- > 0);
++			} while (tmp != M66592_CS_IDST && timeout-- > 0);
+ 
+ 			if (tmp == M66592_CS_IDST)
+ 				m66592_bset(m66592,

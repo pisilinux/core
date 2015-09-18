@@ -1,0 +1,33 @@
+From 1cf5a330c05ae37a0a98ac7c9800a6f50d5579ec Mon Sep 17 00:00:00 2001
+From: Nikesh Oswal <Nikesh.Oswal@wolfsonmicro.com>
+Date: Wed, 19 Aug 2015 16:02:24 +0100
+Subject: ASoC: arizona: Fix gain settings of FLL in free-run mode
+
+From: Nikesh Oswal <Nikesh.Oswal@wolfsonmicro.com>
+
+commit 1cf5a330c05ae37a0a98ac7c9800a6f50d5579ec upstream.
+
+The wrong register was used to set the gain of ref loop, when changing
+the FLL output on an active FLL. This patch corrects the offset of the
+gain register.
+
+Signed-off-by: Nikesh Oswal <Nikesh.Oswal@wolfsonmicro.com>
+Signed-off-by: Charles Keepax <ckeepax@opensource.wolfsonmicro.com>
+Signed-off-by: Mark Brown <broonie@kernel.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ sound/soc/codecs/arizona.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/sound/soc/codecs/arizona.c
++++ b/sound/soc/codecs/arizona.c
+@@ -1912,7 +1912,7 @@ static int arizona_enable_fll(struct ari
+ 
+ 	if (already_enabled) {
+ 		/* Facilitate smooth refclk across the transition */
+-		regmap_update_bits_async(fll->arizona->regmap, fll->base + 0x7,
++		regmap_update_bits_async(fll->arizona->regmap, fll->base + 0x9,
+ 					 ARIZONA_FLL1_GAIN_MASK, 0);
+ 		regmap_update_bits_async(fll->arizona->regmap, fll->base + 1,
+ 					 ARIZONA_FLL1_FREERUN,

@@ -1,0 +1,117 @@
+From 69f92f67b68ab7028ffe15f0eea76b59f8859383 Mon Sep 17 00:00:00 2001
+From: Lukas Wunner <lukas@wunner.de>
+Date: Wed, 15 Jul 2015 13:57:35 +0200
+Subject: drm/i915: Preserve SSC earlier
+
+From: Lukas Wunner <lukas@wunner.de>
+
+commit 69f92f67b68ab7028ffe15f0eea76b59f8859383 upstream.
+
+Commit 92122789b2d6 ("drm/i915: preserve SSC if previously set v3")
+added code to intel_modeset_gem_init to override the SSC status read
+from VBT with the SSC status set by BIOS.
+
+However, intel_modeset_gem_init is invoked *after* intel_modeset_init,
+which calls intel_setup_outputs, which *modifies* SSC status by way of
+intel_init_pch_refclk. So unlike advertised, intel_modeset_gem_init
+doesn't preserve the SSC status set by BIOS but whatever
+intel_init_pch_refclk decided on.
+
+This is a problem on dual gpu laptops such as the MacBook Pro which
+require either a handler to switch DDC lines, or the discrete gpu
+to proxy DDC/AUX communication: Both the handler and the discrete
+gpu may initialize after the i915 driver, and consequently, an LVDS
+connector may initially seem disconnected and the SSC therefore
+is disabled by intel_init_pch_refclk, but on reprobe the connector
+may turn out to be connected and the SSC must then be enabled.
+
+Due to 92122789b2d6 however, the SSC is not enabled on reprobe since
+it is assumed BIOS disabled it while in fact it was disabled by
+intel_init_pch_refclk.
+
+Also, because the SSC status is preserved so late, the preserved value
+only ever gets used on resume but not on panel initialization:
+intel_modeset_init calls intel_init_display which indirectly calls
+intel_panel_use_ssc via multiple subroutines, *before* the BIOS value
+overrides the VBT value in intel_modeset_gem_init (intel_panel_use_ssc
+is the sole user of dev_priv->vbt.lvds_use_ssc).
+
+Fix this by moving the code introduced by 92122789b2d6 from
+intel_modeset_gem_init to intel_modeset_init before the invocation
+of intel_setup_outputs and intel_init_display.
+
+Add a DRM_DEBUG_KMS as suggested way back by Jani:
+http://lists.freedesktop.org/archives/intel-gfx/2014-June/046666.html
+
+Bugzilla: https://bugzilla.kernel.org/show_bug.cgi?id=88861
+Bugzilla: https://bugs.freedesktop.org/show_bug.cgi?id=61115
+Tested-by: Paul Hordiienko <pvt.gord@gmail.com>
+    [MBP  6,2 2010  intel ILK + nvidia GT216  pre-retina]
+Tested-by: William Brown <william@blackhats.net.au>
+    [MBP  8,2 2011  intel SNB + amd turks     pre-retina]
+Tested-by: Lukas Wunner <lukas@wunner.de>
+    [MBP  9,1 2012  intel IVB + nvidia GK107  pre-retina]
+Tested-by: Bruno Bierbaumer <bruno@bierbaumer.net>
+    [MBP 11,3 2013  intel HSW + nvidia GK107  retina -- work in progress]
+Fixes: 92122789b2d6 ("drm/i915: preserve SSC if previously set v3")
+Signed-off-by: Lukas Wunner <lukas@wunner.de>
+Reviewed-by: Jesse Barnes <jbarnes@virtuousgeek.org>
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/i915/intel_display.c |   29 ++++++++++++++++++-----------
+ 1 file changed, 18 insertions(+), 11 deletions(-)
+
+--- a/drivers/gpu/drm/i915/intel_display.c
++++ b/drivers/gpu/drm/i915/intel_display.c
+@@ -13781,6 +13781,24 @@ void intel_modeset_init(struct drm_devic
+ 	if (INTEL_INFO(dev)->num_pipes == 0)
+ 		return;
+ 
++	/*
++	 * There may be no VBT; and if the BIOS enabled SSC we can
++	 * just keep using it to avoid unnecessary flicker.  Whereas if the
++	 * BIOS isn't using it, don't assume it will work even if the VBT
++	 * indicates as much.
++	 */
++	if (HAS_PCH_IBX(dev) || HAS_PCH_CPT(dev)) {
++		bool bios_lvds_use_ssc = !!(I915_READ(PCH_DREF_CONTROL) &
++					    DREF_SSC1_ENABLE);
++
++		if (dev_priv->vbt.lvds_use_ssc != bios_lvds_use_ssc) {
++			DRM_DEBUG_KMS("SSC %sabled by BIOS, overriding VBT which says %sabled\n",
++				     bios_lvds_use_ssc ? "en" : "dis",
++				     dev_priv->vbt.lvds_use_ssc ? "en" : "dis");
++			dev_priv->vbt.lvds_use_ssc = bios_lvds_use_ssc;
++		}
++	}
++
+ 	intel_init_display(dev);
+ 	intel_init_audio(dev);
+ 
+@@ -14266,7 +14284,6 @@ void intel_modeset_setup_hw_state(struct
+ 
+ void intel_modeset_gem_init(struct drm_device *dev)
+ {
+-	struct drm_i915_private *dev_priv = dev->dev_private;
+ 	struct drm_crtc *c;
+ 	struct drm_i915_gem_object *obj;
+ 	int ret;
+@@ -14275,16 +14292,6 @@ void intel_modeset_gem_init(struct drm_d
+ 	intel_init_gt_powersave(dev);
+ 	mutex_unlock(&dev->struct_mutex);
+ 
+-	/*
+-	 * There may be no VBT; and if the BIOS enabled SSC we can
+-	 * just keep using it to avoid unnecessary flicker.  Whereas if the
+-	 * BIOS isn't using it, don't assume it will work even if the VBT
+-	 * indicates as much.
+-	 */
+-	if (HAS_PCH_IBX(dev) || HAS_PCH_CPT(dev))
+-		dev_priv->vbt.lvds_use_ssc = !!(I915_READ(PCH_DREF_CONTROL) &
+-						DREF_SSC1_ENABLE);
+-
+ 	intel_modeset_init_hw(dev);
+ 
+ 	intel_setup_overlay(dev);
