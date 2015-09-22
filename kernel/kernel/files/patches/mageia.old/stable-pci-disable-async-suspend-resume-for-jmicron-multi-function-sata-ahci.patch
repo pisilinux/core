@@ -1,0 +1,120 @@
+From 91f15fb30c77d4a0d0d9b97e5cec647650853145 Mon Sep 17 00:00:00 2001
+From: Zhang Rui <rui.zhang@intel.com>
+Date: Mon, 24 Aug 2015 15:27:11 -0500
+Subject: PCI: Disable async suspend/resume for JMicron multi-function SATA/AHCI
+
+From: Zhang Rui <rui.zhang@intel.com>
+
+commit 91f15fb30c77d4a0d0d9b97e5cec647650853145 upstream.
+
+On multi-function JMicron SATA/PATA/AHCI devices, the PATA controller at
+function 1 doesn't work if it is powered on before the SATA controller at
+function 0.  The result is that PATA doesn't work after resume, and we
+print messages like this:
+
+  pata_jmicron 0000:02:00.1: Refused to change power state, currently in D3
+  irq 17: nobody cared (try booting with the "irqpoll" option)
+
+Async resume was introduced in v3.15 by 76569faa62c4 ("PM / sleep:
+Asynchronous threads for resume_noirq").  Prior to that, we powered on
+the functions in order, so this problem shouldn't happen.
+
+e6b7e41cdd8c ("ata: Disabling the async PM for JMicron chip 363/361")
+solved the problem for JMicron 361 and 363 devices.  With async suspend
+disabled, we always power on function 0 before function 1.
+
+Barto then reported the same problem with a JMicron 368 (see comment #57 in
+the bugzilla).
+
+Rather than extending the blacklist piecemeal, disable async suspend for
+all JMicron multi-function SATA/PATA/AHCI devices.
+
+This quirk could stay in the ahci and pata_jmicron drivers, but it's likely
+the problem will occur even if pata_jmicron isn't loaded until after the
+suspend/resume.  Making it a PCI quirk ensures that we'll preserve the
+power-on order even if the drivers aren't loaded.
+
+[bhelgaas: changelog, limit to multi-function, limit to IDE/ATA]
+Link: https://bugzilla.kernel.org/show_bug.cgi?id=81551
+Reported-and-tested-by: Barto <mister.freeman@laposte.net>
+Signed-off-by: Zhang Rui <rui.zhang@intel.com>
+Signed-off-by: Bjorn Helgaas <bhelgaas@google.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/ata/ahci.c         |   13 +------------
+ drivers/ata/pata_jmicron.c |   12 ------------
+ drivers/pci/quirks.c       |   12 ++++++++++++
+ 3 files changed, 13 insertions(+), 24 deletions(-)
+
+--- a/drivers/ata/ahci.c
++++ b/drivers/ata/ahci.c
+@@ -349,6 +349,7 @@ static const struct pci_device_id ahci_p
+ 	/* JMicron 362B and 362C have an AHCI function with IDE class code */
+ 	{ PCI_VDEVICE(JMICRON, 0x2362), board_ahci_ign_iferr },
+ 	{ PCI_VDEVICE(JMICRON, 0x236f), board_ahci_ign_iferr },
++	/* May need to update quirk_jmicron_async_suspend() for additions */
+ 
+ 	/* ATI */
+ 	{ PCI_VDEVICE(ATI, 0x4380), board_ahci_sb600 }, /* ATI SB600 */
+@@ -1377,18 +1378,6 @@ static int ahci_init_one(struct pci_dev
+ 	else if (pdev->vendor == 0x1c44 && pdev->device == 0x8000)
+ 		ahci_pci_bar = AHCI_PCI_BAR_ENMOTUS;
+ 
+-	/*
+-	 * The JMicron chip 361/363 contains one SATA controller and one
+-	 * PATA controller,for powering on these both controllers, we must
+-	 * follow the sequence one by one, otherwise one of them can not be
+-	 * powered on successfully, so here we disable the async suspend
+-	 * method for these chips.
+-	 */
+-	if (pdev->vendor == PCI_VENDOR_ID_JMICRON &&
+-		(pdev->device == PCI_DEVICE_ID_JMICRON_JMB363 ||
+-		pdev->device == PCI_DEVICE_ID_JMICRON_JMB361))
+-		device_disable_async_suspend(&pdev->dev);
+-
+ 	/* acquire resources */
+ 	rc = pcim_enable_device(pdev);
+ 	if (rc)
+--- a/drivers/ata/pata_jmicron.c
++++ b/drivers/ata/pata_jmicron.c
+@@ -143,18 +143,6 @@ static int jmicron_init_one (struct pci_
+ 	};
+ 	const struct ata_port_info *ppi[] = { &info, NULL };
+ 
+-	/*
+-	 * The JMicron chip 361/363 contains one SATA controller and one
+-	 * PATA controller,for powering on these both controllers, we must
+-	 * follow the sequence one by one, otherwise one of them can not be
+-	 * powered on successfully, so here we disable the async suspend
+-	 * method for these chips.
+-	 */
+-	if (pdev->vendor == PCI_VENDOR_ID_JMICRON &&
+-		(pdev->device == PCI_DEVICE_ID_JMICRON_JMB363 ||
+-		pdev->device == PCI_DEVICE_ID_JMICRON_JMB361))
+-		device_disable_async_suspend(&pdev->dev);
+-
+ 	return ata_pci_bmdma_init_one(pdev, ppi, &jmicron_sht, NULL, 0);
+ }
+ 
+--- a/drivers/pci/quirks.c
++++ b/drivers/pci/quirks.c
+@@ -1576,6 +1576,18 @@ DECLARE_PCI_FIXUP_RESUME_EARLY(PCI_VENDO
+ 
+ #endif
+ 
++static void quirk_jmicron_async_suspend(struct pci_dev *dev)
++{
++	if (dev->multifunction) {
++		device_disable_async_suspend(&dev->dev);
++		dev_info(&dev->dev, "async suspend disabled to avoid multi-function power-on ordering issue\n");
++	}
++}
++DECLARE_PCI_FIXUP_CLASS_FINAL(PCI_VENDOR_ID_JMICRON, PCI_ANY_ID, PCI_CLASS_STORAGE_IDE, 8, quirk_jmicron_async_suspend);
++DECLARE_PCI_FIXUP_CLASS_FINAL(PCI_VENDOR_ID_JMICRON, PCI_ANY_ID, PCI_CLASS_STORAGE_SATA_AHCI, 0, quirk_jmicron_async_suspend);
++DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_JMICRON, 0x2362, quirk_jmicron_async_suspend);
++DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_JMICRON, 0x236f, quirk_jmicron_async_suspend);
++
+ #ifdef CONFIG_X86_IO_APIC
+ static void quirk_alder_ioapic(struct pci_dev *pdev)
+ {

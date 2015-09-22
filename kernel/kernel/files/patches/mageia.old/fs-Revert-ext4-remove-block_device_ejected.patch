@@ -1,0 +1,53 @@
+From 42378f40dd5bbe59fa41b0499f10789eb5d44d89 Mon Sep 17 00:00:00 2001
+From: Thomas Backlund <tmb@mageia.org>
+Date: Tue, 18 Aug 2015 22:24:50 +0300
+Subject: [PATCH] Revert "ext4: remove block_device_ejected"
+
+This reverts commit 08439fec266c3cc5702953b4f54bdf5649357de0.
+
+its reported on stable@ ml to break usb storage
+
+Signed-off-by: Thomas Backlund <tmb@mageia.org>
+---
+ fs/ext4/super.c | 18 +++++++++++++++++-
+ 1 file changed, 17 insertions(+), 1 deletion(-)
+
+diff --git a/fs/ext4/super.c b/fs/ext4/super.c
+index ca9d4a2..9829003 100644
+--- a/fs/ext4/super.c
++++ b/fs/ext4/super.c
+@@ -324,6 +324,22 @@ static void save_error_info(struct super_block *sb, const char *func,
+ 	ext4_commit_super(sb, 1);
+ }
+ 
++/*
++ * The del_gendisk() function uninitializes the disk-specific data
++ * structures, including the bdi structure, without telling anyone
++ * else.  Once this happens, any attempt to call mark_buffer_dirty()
++ * (for example, by ext4_commit_super), will cause a kernel OOPS.
++ * This is a kludge to prevent these oops until we can put in a proper
++ * hook in del_gendisk() to inform the VFS and file system layers.
++ */
++static int block_device_ejected(struct super_block *sb)
++{
++	struct inode *bd_inode = sb->s_bdev->bd_inode;
++	struct backing_dev_info *bdi = inode_to_bdi(bd_inode);
++
++	return bdi->dev == NULL;
++}
++
+ static void ext4_journal_commit_callback(journal_t *journal, transaction_t *txn)
+ {
+ 	struct super_block		*sb = journal->j_private;
+@@ -4590,7 +4606,7 @@ static int ext4_commit_super(struct super_block *sb, int sync)
+ 	struct buffer_head *sbh = EXT4_SB(sb)->s_sbh;
+ 	int error = 0;
+ 
+-	if (!sbh)
++	if (!sbh || block_device_ejected(sb))
+ 		return error;
+ 	if (buffer_write_io_error(sbh)) {
+ 		/*
+-- 
+2.4.5
+

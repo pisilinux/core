@@ -1,0 +1,56 @@
+From ad83dbd974feb2e2a8cc071a1d28782bd4d2c70e Mon Sep 17 00:00:00 2001
+From: Ian Abbott <abbotti@mev.co.uk>
+Date: Tue, 11 Aug 2015 13:05:10 +0100
+Subject: staging: comedi: adl_pci7x3x: fix digital output on PCI-7230
+
+From: Ian Abbott <abbotti@mev.co.uk>
+
+commit ad83dbd974feb2e2a8cc071a1d28782bd4d2c70e upstream.
+
+The "adl_pci7x3x" driver replaced the "adl_pci7230" and "adl_pci7432"
+drivers in commits 8f567c373c4b ("staging: comedi: new adl_pci7x3x
+driver") and 657f77d173d3 ("staging: comedi: remove adl_pci7230 and
+adl_pci7432 drivers").  Although the new driver code agrees with the
+user manuals for the respective boards, digital outputs stopped working
+on the PCI-7230.  This has 16 digital output channels and the previous
+adl_pci7230 driver shifted the 16 bit output state left by 16 bits
+before writing to the hardware register.  The new adl_pci7x3x driver
+doesn't do that.  Fix it in `adl_pci7x3x_do_insn_bits()` by checking
+for the special case of the subdevice having only 16 channels and
+duplicating the 16 bit output state into both halves of the 32-bit
+register.  That should work both for what the board actually does and
+for what the user manual says it should do.
+
+Fixes: 8f567c373c4b ("staging: comedi: new adl_pci7x3x driver")
+Signed-off-by: Ian Abbott <abbotti@mev.co.uk>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/staging/comedi/drivers/adl_pci7x3x.c |   16 ++++++++++++++--
+ 1 file changed, 14 insertions(+), 2 deletions(-)
+
+--- a/drivers/staging/comedi/drivers/adl_pci7x3x.c
++++ b/drivers/staging/comedi/drivers/adl_pci7x3x.c
+@@ -120,8 +120,20 @@ static int adl_pci7x3x_do_insn_bits(stru
+ {
+ 	unsigned long reg = (unsigned long)s->private;
+ 
+-	if (comedi_dio_update_state(s, data))
+-		outl(s->state, dev->iobase + reg);
++	if (comedi_dio_update_state(s, data)) {
++		unsigned int val = s->state;
++
++		if (s->n_chan == 16) {
++			/*
++			 * It seems the PCI-7230 needs the 16-bit DO state
++			 * to be shifted left by 16 bits before being written
++			 * to the 32-bit register.  Set the value in both
++			 * halves of the register to be sure.
++			 */
++			val |= val << 16;
++		}
++		outl(val, dev->iobase + reg);
++	}
+ 
+ 	data[1] = s->state;
+ 

@@ -1,0 +1,39 @@
+From 3f8340cc72c9a1a4b49bce7802afd7f248400ef5 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>
+Date: Thu, 27 Aug 2015 17:23:31 +0300
+Subject: drm/radeon/atom: Send out the full AUX address
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+From: =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>
+
+commit 3f8340cc72c9a1a4b49bce7802afd7f248400ef5 upstream.
+
+AUX addresses are 20 bits long. Send out the entire address instead of
+just the low 16 bits.
+
+Cc: Alex Deucher <alexander.deucher@amd.com>
+Cc: "Christian König" <christian.koenig@amd.com>
+Signed-off-by: Ville Syrjälä <ville.syrjala@linux.intel.com>
+Signed-off-by: Alex Deucher <alexander.deucher@amd.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/radeon/atombios_dp.c |    5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+--- a/drivers/gpu/drm/radeon/atombios_dp.c
++++ b/drivers/gpu/drm/radeon/atombios_dp.c
+@@ -171,8 +171,9 @@ radeon_dp_aux_transfer_atom(struct drm_d
+ 		return -E2BIG;
+ 
+ 	tx_buf[0] = msg->address & 0xff;
+-	tx_buf[1] = msg->address >> 8;
+-	tx_buf[2] = msg->request << 4;
++	tx_buf[1] = (msg->address >> 8) & 0xff;
++	tx_buf[2] = (msg->request << 4) |
++		((msg->address >> 16) & 0xf);
+ 	tx_buf[3] = msg->size ? (msg->size - 1) : 0;
+ 
+ 	switch (msg->request & ~DP_AUX_I2C_MOT) {

@@ -1,0 +1,54 @@
+From e53f21c761d141bbcbce06e9ddab3b4e0a828f2c Mon Sep 17 00:00:00 2001
+From: Zdenko Pulitika <zdenko.pulitika@imgtec.com>
+Date: Wed, 26 Aug 2015 17:11:38 +0100
+Subject: clk: pistachio: Fix override of clk-pll settings from boot loader
+
+From: Zdenko Pulitika <zdenko.pulitika@imgtec.com>
+
+commit e53f21c761d141bbcbce06e9ddab3b4e0a828f2c upstream.
+
+PLL enable callbacks are overriding PLL mode (int/frac) and
+Noise reduction (on/off) settings set by the boot loader which
+results in the incorrect clock rate.
+
+PLL mode and noise reduction are defined by the DSMPD and DACPD bits
+of the PLL control register. PLL .enable() callbacks enable PLL
+by deasserting all power-down bits of the PLL control register,
+including DSMPD and DACPD bits, which is not necessary since
+these bits don't actually enable/disable PLL.
+
+This commit fixes the problem by removing DSMPD and DACPD bits
+from the "PLL enable" mask.
+
+Fixes: 43049b0c83f17("CLK: Pistachio: Add PLL driver")
+Reviewed-by: Andrew Bresitcker <abrestic@chromium.org>
+Signed-off-by: Zdenko Pulitika <zdenko.pulitika@imgtec.com>
+Signed-off-by: Govindraj Raja <govindraj.raja@imgtec.com>
+Signed-off-by: Stephen Boyd <sboyd@codeaurora.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/clk/pistachio/clk-pll.c |    5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+--- a/drivers/clk/pistachio/clk-pll.c
++++ b/drivers/clk/pistachio/clk-pll.c
+@@ -115,8 +115,7 @@ static int pll_gf40lp_frac_enable(struct
+ 	u32 val;
+ 
+ 	val = pll_readl(pll, PLL_CTRL3);
+-	val &= ~(PLL_FRAC_CTRL3_PD | PLL_FRAC_CTRL3_DACPD |
+-		 PLL_FRAC_CTRL3_DSMPD | PLL_FRAC_CTRL3_FOUTPOSTDIVPD |
++	val &= ~(PLL_FRAC_CTRL3_PD | PLL_FRAC_CTRL3_FOUTPOSTDIVPD |
+ 		 PLL_FRAC_CTRL3_FOUT4PHASEPD | PLL_FRAC_CTRL3_FOUTVCOPD);
+ 	pll_writel(pll, val, PLL_CTRL3);
+ 
+@@ -233,7 +232,7 @@ static int pll_gf40lp_laint_enable(struc
+ 	u32 val;
+ 
+ 	val = pll_readl(pll, PLL_CTRL1);
+-	val &= ~(PLL_INT_CTRL1_PD | PLL_INT_CTRL1_DSMPD |
++	val &= ~(PLL_INT_CTRL1_PD |
+ 		 PLL_INT_CTRL1_FOUTPOSTDIVPD | PLL_INT_CTRL1_FOUTVCOPD);
+ 	pll_writel(pll, val, PLL_CTRL1);
+ 

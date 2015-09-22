@@ -1,0 +1,88 @@
+From acace73df2c1913a526c1b41e4741a4a6704c863 Mon Sep 17 00:00:00 2001
+From: Martin Sperl <kernel@martin.sperl.org>
+Date: Tue, 28 Jul 2015 14:03:12 +0000
+Subject: spi: bcm2835: set up spi-mode before asserting cs-gpio
+
+From: Martin Sperl <kernel@martin.sperl.org>
+
+commit acace73df2c1913a526c1b41e4741a4a6704c863 upstream.
+
+When using reverse polarity for clock (spi-cpol) on a device
+the clock line gets altered after chip-select has been asserted
+resulting in an additional clock beat, which confuses hardware.
+
+This did not show when using native-CS, as the same register
+is used to control cs as well as polarity, so the changes came
+into effect at the same time. Unfortunately this is not true
+with gpio-cs.
+
+To avoid this situation this patch moves the setup of polarity
+(spi-cpol and spi-cpha) outside of the chip-select into
+prepare_message, which is run prior to asserting chip-select.
+
+Also fixes resetting 3-wire mode after use of rx-mode, so that
+a 3-Wire sequence TX, RX, TX works as well (right now it runs
+TX, RX, RX instead)
+
+Reported-by: Noralf Tronnes <noralf@tronnes.org>
+Signed-off-by: Martin Sperl <kernel@martin.sperl.org>
+Signed-off-by: Mark Brown <broonie@kernel.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/spi/spi-bcm2835.c |   28 +++++++++++++++++++++++-----
+ 1 file changed, 23 insertions(+), 5 deletions(-)
+
+--- a/drivers/spi/spi-bcm2835.c
++++ b/drivers/spi/spi-bcm2835.c
+@@ -257,13 +257,11 @@ static int bcm2835_spi_transfer_one(stru
+ 	spi_used_hz = cdiv ? (clk_hz / cdiv) : (clk_hz / 65536);
+ 	bcm2835_wr(bs, BCM2835_SPI_CLK, cdiv);
+ 
+-	/* handle all the modes */
++	/* handle all the 3-wire mode */
+ 	if ((spi->mode & SPI_3WIRE) && (tfr->rx_buf))
+ 		cs |= BCM2835_SPI_CS_REN;
+-	if (spi->mode & SPI_CPOL)
+-		cs |= BCM2835_SPI_CS_CPOL;
+-	if (spi->mode & SPI_CPHA)
+-		cs |= BCM2835_SPI_CS_CPHA;
++	else
++		cs &= ~BCM2835_SPI_CS_REN;
+ 
+ 	/* for gpio_cs set dummy CS so that no HW-CS get changed
+ 	 * we can not run this in bcm2835_spi_set_cs, as it does
+@@ -291,6 +289,25 @@ static int bcm2835_spi_transfer_one(stru
+ 	return bcm2835_spi_transfer_one_irq(master, spi, tfr, cs);
+ }
+ 
++static int bcm2835_spi_prepare_message(struct spi_master *master,
++				       struct spi_message *msg)
++{
++	struct spi_device *spi = msg->spi;
++	struct bcm2835_spi *bs = spi_master_get_devdata(master);
++	u32 cs = bcm2835_rd(bs, BCM2835_SPI_CS);
++
++	cs &= ~(BCM2835_SPI_CS_CPOL | BCM2835_SPI_CS_CPHA);
++
++	if (spi->mode & SPI_CPOL)
++		cs |= BCM2835_SPI_CS_CPOL;
++	if (spi->mode & SPI_CPHA)
++		cs |= BCM2835_SPI_CS_CPHA;
++
++	bcm2835_wr(bs, BCM2835_SPI_CS, cs);
++
++	return 0;
++}
++
+ static void bcm2835_spi_handle_err(struct spi_master *master,
+ 				   struct spi_message *msg)
+ {
+@@ -429,6 +446,7 @@ static int bcm2835_spi_probe(struct plat
+ 	master->set_cs = bcm2835_spi_set_cs;
+ 	master->transfer_one = bcm2835_spi_transfer_one;
+ 	master->handle_err = bcm2835_spi_handle_err;
++	master->prepare_message = bcm2835_spi_prepare_message;
+ 	master->dev.of_node = pdev->dev.of_node;
+ 
+ 	bs = spi_master_get_devdata(master);

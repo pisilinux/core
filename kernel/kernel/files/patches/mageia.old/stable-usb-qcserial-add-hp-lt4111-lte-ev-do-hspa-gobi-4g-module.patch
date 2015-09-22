@@ -1,0 +1,30 @@
+From 44840dec6127e4d7c5074f75d2dd96bc4ab85fe3 Mon Sep 17 00:00:00 2001
+From: David Ward <david.ward@ll.mit.edu>
+Date: Tue, 18 Aug 2015 10:36:23 +0200
+Subject: USB: qcserial: add HP lt4111 LTE/EV-DO/HSPA+ Gobi 4G Module
+
+From: David Ward <david.ward@ll.mit.edu>
+
+commit 44840dec6127e4d7c5074f75d2dd96bc4ab85fe3 upstream.
+
+This is an HP-branded Sierra Wireless EM7355:
+https://bugzilla.redhat.com/show_bug.cgi?id=1223646#c2
+
+Signed-off-by: David Ward <david.ward@ll.mit.edu>
+Signed-off-by: Johan Hovold <johan@kernel.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/usb/serial/qcserial.c |    1 +
+ 1 file changed, 1 insertion(+)
+
+--- a/drivers/usb/serial/qcserial.c
++++ b/drivers/usb/serial/qcserial.c
+@@ -139,6 +139,7 @@ static const struct usb_device_id id_tab
+ 	{USB_DEVICE(0x0AF0, 0x8120)},	/* Option GTM681W */
+ 
+ 	/* non-Gobi Sierra Wireless devices */
++	{DEVICE_SWI(0x03f0, 0x4e1d)},	/* HP lt4111 LTE/EV-DO/HSPA+ Gobi 4G Module */
+ 	{DEVICE_SWI(0x0f3d, 0x68a2)},	/* Sierra Wireless MC7700 */
+ 	{DEVICE_SWI(0x114f, 0x68a2)},	/* Sierra Wireless MC7750 */
+ 	{DEVICE_SWI(0x1199, 0x68a2)},	/* Sierra Wireless MC7710 */
