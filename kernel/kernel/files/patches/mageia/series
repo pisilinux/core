@@ -14,6 +14,36 @@
 ###
 ### Stable Queue
 ###
+stable-phylib-fix-device-deletion-order-in-mdiobus_unregister.patch
+stable-sock-diag-fix-panic-in-sock_diag_put_filterinfo.patch
+stable-ipv6-fix-exthdrs-offload-registration-in-out_rt-path.patch
+stable-net-fec-clear-receive-interrupts-before-processing-a-packet.patch
+stable-net-eth-altera-fix-napi-poll_list-corruption.patch
+stable-net-ipv6-correct-pim6-mrt_lock-handling.patch
+stable-net-dsa-bcm_sf2-fix-ageing-conditions-and-operation.patch
+stable-ipv6-fix-multipath-route-replace-error-recovery.patch
+stable-net-dsa-bcm_sf2-fix-64-bits-register-writes.patch
+stable-netlink-mmap-transform-mmap-skb-into-full-skb-on-taps.patch
+stable-sctp-fix-race-on-protocol-netns-initialization.patch
+stable-bridge-fix-igmpv3-mldv2-report-parsing.patch
+stable-net-mvneta-fix-dma-buffer-unmapping-in-mvneta_rx.patch
+stable-rtnetlink-catch-eopnotsupp-errors-from-ndo_bridge_getlink.patch
+stable-net-mlx4_en-really-allow-to-change-rss-key.patch
+stable-macvtap-fix-tunsetsndbuf-values-64k.patch
+stable-netlink-fix-autobind-race-condition-that-leads-to-zero-port-id.patch
+stable-netlink-replace-rhash_portid-with-bound.patch
+stable-net-dsa-actually-force-the-speed-on-the-cpu-port.patch
+stable-openvswitch-zero-flows-on-allocation.patch
+stable-tcp-add-proper-ts-val-into-rst-packets.patch
+stable-fix-af_packet-abi-breakage-in-4.2.patch
+stable-net-revert-net_sched-move-tp-root-allocation-into-fw_init.patch
+stable-fib_rules-fix-fib-rule-dumps-across-multiple-skbs.patch
+stable-ppp-fix-lockdep-splat-in-ppp_dev_uninit.patch
+stable-net-dsa-bcm_sf2-do-not-override-speed-settings.patch
+stable-net-phy-fixed_phy-handle-link-down-case.patch
+stable-of_mdio-add-new-dt-property-managed-to-specify-the-phy-management-type.patch
+stable-mvneta-use-inband-status-only-when-explicitly-enabled.patch
+stable-net-mlx4_core-capping-number-of-requested-msixs-to-max_msix.patch
 
 ###
 ### Arch x86
@@ -58,9 +88,6 @@ cpu-cacheinfo-Fix-teardown-path.patch
 # http://lkml.org/lkml/2008/9/12/52
 pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch
 pci-quirks-drop-devinit-exit.patch
-
-# Intel ACS quirks
-pci-acs-quirks-for-Intel-9-series-PCH-root-ports.patch
 
 ###
 ### PNP core
@@ -117,7 +144,6 @@ ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch
 
 # Nice SSD speedup
 block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch
-block-cfq-iosched-fix-the-setting-of-IOPS-mode-on-SSDs.patch
 
 # properly fix null pointer deref introduced in 4.1.7
 scsi-Revert-SCSI-Fix-NULL-pointer-dereference-in-runtime-PM.patch
@@ -130,11 +156,6 @@ scsi-Fix-NULL-pointer-dereference-in-RTPM-of-block-layer.patch
 # aufs from: http://aufs.sourceforge.net/ (mga#8314)
 fs-aufs4.patch
 fs-aufs4-modular.patch
-# CVE pending
-fs-aufs-CVE-pending.patch
-
-# ext4
-fs-Revert-ext4-remove-block_device_ejected.patch
 
 ###
 ### FireWire
@@ -178,9 +199,6 @@ gpu-drm-mach64-3.18-buildfix.patch
 ###
 
 input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch
-
-# fixes systemd-logind killing itself
-Input-evdev-do-not-report-errors-form-flush.patch
 
 ###
 ### idle
@@ -230,6 +248,7 @@ net-netfilter-psd-2.6.35-buildfix.patch
 # (Mainly allow turning on/off webcam and wireless on Shuttle DA18IE and DA18IM)
 platform-x86-add-shuttle-wmi-driver.patch
 platform-x86-shuttle-wmi-drop-devinit-exit.patch
+platform-x86-shuttle-wmi-4.2-buildfix.patch
 
 ###
 ### RTC
@@ -307,6 +326,7 @@ video-mageia-logo.patch
 3rd-ndiswrapper-Makefile-build-fix.patch
 3rd-ndiswrapper-linux-3.14-buildfix.patch
 3rd-ndiswrapper-4.0-buildfix.patch
+3rd-ndiswrapper-4.2-buildfix.patch
 
 # rfswitch
 3rd-rfswitch-1.3.patch
@@ -324,6 +344,7 @@ video-mageia-logo.patch
 3rd-rtl8723bs.patch
 3rd-rtl8723bs-buildfix.patch
 3rd-rtl8723bs-updates.patch
+3rd-rtl8723bs-4.2-buildfix.patch
 
 ###
 ### Security
@@ -340,7 +361,6 @@ video-mageia-logo.patch
 ###
 ### ARM
 ###
-arm-rockchip-fix-broken-build.patch
 
 ###
 ### IA64

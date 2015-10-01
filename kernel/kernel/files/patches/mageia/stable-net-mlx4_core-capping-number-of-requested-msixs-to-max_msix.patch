@@ -1,0 +1,59 @@
+From foo@baz Wed Sep 30 05:25:07 CEST 2015
+From: Carol L Soto <clsoto@linux.vnet.ibm.com>
+Date: Thu, 27 Aug 2015 14:43:25 -0500
+Subject: net/mlx4_core: Capping number of requested MSIXs to MAX_MSIX
+
+From: Carol L Soto <clsoto@linux.vnet.ibm.com>
+
+[ Upstream commit 9293267a3e2a7a2555d8ddc8f9301525e5b03b1b ]
+
+We currently manage IRQs in pool_bm which is a bit field
+of MAX_MSIX bits. Thus, allocating more than MAX_MSIX
+interrupts can't be managed in pool_bm.
+Fixing this by capping number of requested MSIXs to
+MAX_MSIX.
+
+Signed-off-by: Matan Barak <matanb@mellanox.com>
+Signed-off-by: Carol L Soto <clsoto@linux.vnet.ibm.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ drivers/net/ethernet/mellanox/mlx4/main.c |   10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+--- a/drivers/net/ethernet/mellanox/mlx4/main.c
++++ b/drivers/net/ethernet/mellanox/mlx4/main.c
+@@ -2654,9 +2654,14 @@ static void mlx4_enable_msi_x(struct mlx
+ 
+ 	if (msi_x) {
+ 		int nreq = dev->caps.num_ports * num_online_cpus() + 1;
++		bool shared_ports = false;
+ 
+ 		nreq = min_t(int, dev->caps.num_eqs - dev->caps.reserved_eqs,
+ 			     nreq);
++		if (nreq > MAX_MSIX) {
++			nreq = MAX_MSIX;
++			shared_ports = true;
++		}
+ 
+ 		entries = kcalloc(nreq, sizeof *entries, GFP_KERNEL);
+ 		if (!entries)
+@@ -2679,6 +2684,9 @@ static void mlx4_enable_msi_x(struct mlx
+ 		bitmap_zero(priv->eq_table.eq[MLX4_EQ_ASYNC].actv_ports.ports,
+ 			    dev->caps.num_ports);
+ 
++		if (MLX4_IS_LEGACY_EQ_MODE(dev->caps))
++			shared_ports = true;
++
+ 		for (i = 0; i < dev->caps.num_comp_vectors + 1; i++) {
+ 			if (i == MLX4_EQ_ASYNC)
+ 				continue;
+@@ -2686,7 +2694,7 @@ static void mlx4_enable_msi_x(struct mlx
+ 			priv->eq_table.eq[i].irq =
+ 				entries[i + 1 - !!(i > MLX4_EQ_ASYNC)].vector;
+ 
+-			if (MLX4_IS_LEGACY_EQ_MODE(dev->caps)) {
++			if (shared_ports) {
+ 				bitmap_fill(priv->eq_table.eq[i].actv_ports.ports,
+ 					    dev->caps.num_ports);
+ 				/* We don't set affinity hint when there

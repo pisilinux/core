@@ -1,0 +1,45 @@
+From foo@baz Wed Sep 30 05:25:07 CEST 2015
+From: Daniel Borkmann <daniel@iogearbox.net>
+Date: Wed, 2 Sep 2015 14:00:36 +0200
+Subject: sock, diag: fix panic in sock_diag_put_filterinfo
+
+From: Daniel Borkmann <daniel@iogearbox.net>
+
+[ Upstream commit b382c08656000c12a146723a153b85b13a855b49 ]
+
+diag socket's sock_diag_put_filterinfo() dumps classic BPF programs
+upon request to user space (ss -0 -b). However, native eBPF programs
+attached to sockets (SO_ATTACH_BPF) cannot be dumped with this method:
+
+Their orig_prog is always NULL. However, sock_diag_put_filterinfo()
+unconditionally tries to access its filter length resp. wants to copy
+the filter insns from there. Internal cBPF to eBPF transformations
+attached to sockets don't have this issue, as orig_prog state is kept.
+
+It's currently only used by packet sockets. If we would want to add
+native eBPF support in the future, this needs to be done through
+a different attribute than PACKET_DIAG_FILTER to not confuse possible
+user space disassemblers that work on diag data.
+
+Fixes: 89aa075832b0 ("net: sock: allow eBPF programs to be attached to sockets")
+Signed-off-by: Daniel Borkmann <daniel@iogearbox.net>
+Acked-by: Nicolas Dichtel <nicolas.dichtel@6wind.com>
+Acked-by: Alexei Starovoitov <ast@plumgrid.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ net/core/sock_diag.c |    3 +++
+ 1 file changed, 3 insertions(+)
+
+--- a/net/core/sock_diag.c
++++ b/net/core/sock_diag.c
+@@ -90,6 +90,9 @@ int sock_diag_put_filterinfo(bool may_re
+ 		goto out;
+ 
+ 	fprog = filter->prog->orig_prog;
++	if (!fprog)
++		goto out;
++
+ 	flen = bpf_classic_proglen(fprog);
+ 
+ 	attr = nla_reserve(skb, attrtype, flen);

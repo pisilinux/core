@@ -1,0 +1,55 @@
+From foo@baz Wed Sep 30 05:25:07 CEST 2015
+From: Simon Guinot <simon.guinot@sequanux.org>
+Date: Tue, 15 Sep 2015 22:41:21 +0200
+Subject: net: mvneta: fix DMA buffer unmapping in mvneta_rx()
+
+From: Simon Guinot <simon.guinot@sequanux.org>
+
+[ Upstream commit daf158d0d544cec80b7b30deff8cfc59a6e17610 ]
+
+This patch fixes a regression introduced by the commit a84e32894191
+("net: mvneta: fix refilling for Rx DMA buffers"). Due to this commit
+the newly allocated Rx buffers are DMA-unmapped in place of those passed
+to the networking stack. Obviously, this causes data corruptions.
+
+This patch fixes the issue by ensuring that the right Rx buffers are
+DMA-unmapped.
+
+Reported-by: Oren Laskin <oren@igneous.io>
+Signed-off-by: Simon Guinot <simon.guinot@sequanux.org>
+Fixes: a84e32894191 ("net: mvneta: fix refilling for Rx DMA buffers")
+Cc: <stable@vger.kernel.org> # v3.8+
+Tested-by: Oren Laskin <oren@igneous.io>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ drivers/net/ethernet/marvell/mvneta.c |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+--- a/drivers/net/ethernet/marvell/mvneta.c
++++ b/drivers/net/ethernet/marvell/mvneta.c
+@@ -1479,6 +1479,7 @@ static int mvneta_rx(struct mvneta_port
+ 		struct mvneta_rx_desc *rx_desc = mvneta_rxq_next_desc_get(rxq);
+ 		struct sk_buff *skb;
+ 		unsigned char *data;
++		dma_addr_t phys_addr;
+ 		u32 rx_status;
+ 		int rx_bytes, err;
+ 
+@@ -1486,6 +1487,7 @@ static int mvneta_rx(struct mvneta_port
+ 		rx_status = rx_desc->status;
+ 		rx_bytes = rx_desc->data_size - (ETH_FCS_LEN + MVNETA_MH_SIZE);
+ 		data = (unsigned char *)rx_desc->buf_cookie;
++		phys_addr = rx_desc->buf_phys_addr;
+ 
+ 		if (!mvneta_rxq_desc_is_first_last(rx_status) ||
+ 		    (rx_status & MVNETA_RXD_ERR_SUMMARY)) {
+@@ -1534,7 +1536,7 @@ static int mvneta_rx(struct mvneta_port
+ 		if (!skb)
+ 			goto err_drop_frame;
+ 
+-		dma_unmap_single(dev->dev.parent, rx_desc->buf_phys_addr,
++		dma_unmap_single(dev->dev.parent, phys_addr,
+ 				 MVNETA_RX_BUF_SIZE(pp->pkt_size), DMA_FROM_DEVICE);
+ 
+ 		rcvd_pkts++;
