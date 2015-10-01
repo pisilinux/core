@@ -1,0 +1,39 @@
+From foo@baz Wed Sep 30 05:25:07 CEST 2015
+From: Russell King <rmk+kernel@arm.linux.org.uk>
+Date: Wed, 2 Sep 2015 17:24:14 +0800
+Subject: net: fec: clear receive interrupts before processing a packet
+
+From: Russell King <rmk+kernel@arm.linux.org.uk>
+
+[ Upstream commit ed63f1dcd5788d36f942fbcce350742385e3e18c ]
+
+The patch just to re-submit the patch "db3421c114cfa6326" because the
+patch "4d494cdc92b3b9a0" remove the change.
+
+Clear any pending receive interrupt before we process a pending packet.
+This helps to avoid any spurious interrupts being raised after we have
+fully cleaned the receive ring, while still allowing an interrupt to be
+raised if we receive another packet.
+
+The position of this is critical: we must do this prior to reading the
+next packet status to avoid potentially dropping an interrupt when a
+packet is still pending.
+
+Acked-by: Fugang Duan <B38611@freescale.com>
+Signed-off-by: Russell King <rmk+kernel@arm.linux.org.uk>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ drivers/net/ethernet/freescale/fec_main.c |    1 +
+ 1 file changed, 1 insertion(+)
+
+--- a/drivers/net/ethernet/freescale/fec_main.c
++++ b/drivers/net/ethernet/freescale/fec_main.c
+@@ -1402,6 +1402,7 @@ fec_enet_rx_queue(struct net_device *nde
+ 		if ((status & BD_ENET_RX_LAST) == 0)
+ 			netdev_err(ndev, "rcv is not +last\n");
+ 
++		writel(FEC_ENET_RXF, fep->hwp + FEC_IEVENT);
+ 
+ 		/* Check for errors. */
+ 		if (status & (BD_ENET_RX_LG | BD_ENET_RX_SH | BD_ENET_RX_NO |

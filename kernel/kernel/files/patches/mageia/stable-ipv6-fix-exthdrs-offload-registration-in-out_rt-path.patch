@@ -1,0 +1,33 @@
+From foo@baz Wed Sep 30 05:25:07 CEST 2015
+From: Daniel Borkmann <daniel@iogearbox.net>
+Date: Thu, 3 Sep 2015 00:29:07 +0200
+Subject: ipv6: fix exthdrs offload registration in out_rt path
+
+From: Daniel Borkmann <daniel@iogearbox.net>
+
+[ Upstream commit e41b0bedba0293b9e1e8d1e8ed553104b9693656 ]
+
+We previously register IPPROTO_ROUTING offload under inet6_add_offload(),
+but in error path, we try to unregister it with inet_del_offload(). This
+doesn't seem correct, it should actually be inet6_del_offload(), also
+ipv6_exthdrs_offload_exit() from that commit seems rather incorrect (it
+also uses rthdr_offload twice), but it got removed entirely later on.
+
+Fixes: 3336288a9fea ("ipv6: Switch to using new offload infrastructure.")
+Signed-off-by: Daniel Borkmann <daniel@iogearbox.net>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ net/ipv6/exthdrs_offload.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/net/ipv6/exthdrs_offload.c
++++ b/net/ipv6/exthdrs_offload.c
+@@ -36,6 +36,6 @@ out:
+ 	return ret;
+ 
+ out_rt:
+-	inet_del_offload(&rthdr_offload, IPPROTO_ROUTING);
++	inet6_del_offload(&rthdr_offload, IPPROTO_ROUTING);
+ 	goto out;
+ }

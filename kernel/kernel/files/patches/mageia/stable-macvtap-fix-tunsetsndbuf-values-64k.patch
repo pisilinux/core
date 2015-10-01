@@ -1,0 +1,47 @@
+From foo@baz Wed Sep 30 05:25:07 CEST 2015
+From: "Michael S. Tsirkin" <mst@redhat.com>
+Date: Fri, 18 Sep 2015 13:41:09 +0300
+Subject: macvtap: fix TUNSETSNDBUF values > 64k
+
+From: "Michael S. Tsirkin" <mst@redhat.com>
+
+[ Upstream commit 3ea79249e81e5ed051f2e6480cbde896d99046e8 ]
+
+Upon TUNSETSNDBUF,  macvtap reads the requested sndbuf size into
+a local variable u.
+commit 39ec7de7092b ("macvtap: fix uninitialized access on
+TUNSETIFF") changed its type to u16 (which is the right thing to
+do for all other macvtap ioctls), breaking all values > 64k.
+
+The value of TUNSETSNDBUF is actually a signed 32 bit integer, so
+the right thing to do is to read it into an int.
+
+Cc: David S. Miller <davem@davemloft.net>
+Fixes: 39ec7de7092b ("macvtap: fix uninitialized access on TUNSETIFF")
+Reported-by: Mark A. Peloquin
+Bisected-by: Matthew Rosato <mjrosato@linux.vnet.ibm.com>
+Reported-by: Christian Borntraeger <borntraeger@de.ibm.com>
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+Tested-by:  Matthew Rosato <mjrosato@linux.vnet.ibm.com>
+Acked-by: Christian Borntraeger <borntraeger@de.ibm.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ drivers/net/macvtap.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+--- a/drivers/net/macvtap.c
++++ b/drivers/net/macvtap.c
+@@ -1111,10 +1111,10 @@ static long macvtap_ioctl(struct file *f
+ 		return 0;
+ 
+ 	case TUNSETSNDBUF:
+-		if (get_user(u, up))
++		if (get_user(s, sp))
+ 			return -EFAULT;
+ 
+-		q->sk.sk_sndbuf = u;
++		q->sk.sk_sndbuf = s;
+ 		return 0;
+ 
+ 	case TUNGETVNETHDRSZ:

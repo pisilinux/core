@@ -1,0 +1,138 @@
+From:
+https://github.com/lwfinger/rtl8723bs/commit/49fcb39bc7dc0b7ae61463d493c0b630dc6a27ca
+
+From 49fcb39bc7dc0b7ae61463d493c0b630dc6a27ca Mon Sep 17 00:00:00 2001
+From: Larry Finger <Larry.Finger@lwfinger.net>
+Date: Sat, 15 Aug 2015 10:51:20 -0500
+Subject: [PATCH] rtl8723bs: Fix builds on kernel 4.2
+
+Signed-off-by: Larry Finger <Larry.Finger@lwfinger.net>
+[adapted to mga kernel / tmb]
+Signed-off-by: Thomas Backlund <tmb@mageia.org>
+---
+ hal/hal_com_phycfg.c    | 38 +++++++++++++++++++-------------------
+ os_dep/ioctl_cfg80211.c |  5 +++++
+ 2 files changed, 24 insertions(+), 19 deletions(-)
+
+ 3rdparty/rtl8723bs/hal/hal_com_phycfg.c    |   38 ++++++++++++++---------------
+ 3rdparty/rtl8723bs/os_dep/ioctl_cfg80211.c |    5 +++
+ 2 files changed, 24 insertions(+), 19 deletions(-)
+
+diff -Nurp linux/3rdparty/rtl8723bs.orig/hal/hal_com_phycfg.c linux/3rdparty/rtl8723bs/hal/hal_com_phycfg.c
+--- linux/3rdparty/rtl8723bs.orig/hal/hal_com_phycfg.c	2015-09-30 00:51:13.000000000 +0300
++++ linux/3rdparty/rtl8723bs/hal/hal_com_phycfg.c	2015-09-30 01:49:37.475440016 +0300
+@@ -2254,7 +2254,7 @@ Hal_ChannelPlanToRegulation(
+ #ifdef CONFIG_LOAD_PHY_PARA_FROM_FILE
+ 
+ extern char *rtw_phy_file_path;
+-static char	file_path[PATH_MAX];
++static char	rtl_file_path[PATH_MAX];
+ 
+ #define GetLineFromBuffer(buffer)	 strsep(&buffer, "\n")
+ 
+@@ -2276,11 +2276,11 @@ phy_ConfigMACWithParaFile(
+ 
+ 	if ((pHalData->mac_reg_len == 0) && (pHalData->mac_reg == NULL))
+ 	{
+-		rtw_merge_string(file_path, PATH_MAX, rtw_phy_file_path, pFileName);
++		rtw_merge_string(rtl_file_path, PATH_MAX, rtw_phy_file_path, pFileName);
+ 	
+-		if (rtw_is_file_readable(file_path) == true)
++		if (rtw_is_file_readable(rtl_file_path) == true)
+ 		{
+-			rlen = rtw_retrive_from_file(file_path, pHalData->para_file_buf, MAX_PARA_FILE_BUF_LEN);
++			rlen = rtw_retrive_from_file(rtl_file_path, pHalData->para_file_buf, MAX_PARA_FILE_BUF_LEN);
+ 			if (rlen > 0)
+ 			{
+ 				rtStatus = _SUCCESS;
+@@ -2375,11 +2375,11 @@ phy_ConfigBBWithParaFile(
+ 
+ 	if ((pBufLen != NULL) && (*pBufLen == 0) && (pBuf == NULL))
+ 	{
+-		rtw_merge_string(file_path, PATH_MAX, rtw_phy_file_path, pFileName);
++		rtw_merge_string(rtl_file_path, PATH_MAX, rtw_phy_file_path, pFileName);
+ 	
+-		if (rtw_is_file_readable(file_path) == true)
++		if (rtw_is_file_readable(rtl_file_path) == true)
+ 		{
+-			rlen = rtw_retrive_from_file(file_path, pHalData->para_file_buf, MAX_PARA_FILE_BUF_LEN);
++			rlen = rtw_retrive_from_file(rtl_file_path, pHalData->para_file_buf, MAX_PARA_FILE_BUF_LEN);
+ 			if (rlen > 0)
+ 			{
+ 				rtStatus = _SUCCESS;
+@@ -2824,11 +2824,11 @@ phy_ConfigBBWithPgParaFile(
+ 
+ 	if ((pHalData->bb_phy_reg_pg_len == 0) && (pHalData->bb_phy_reg_pg == NULL))
+ 	{
+-		rtw_merge_string(file_path, PATH_MAX, rtw_phy_file_path, pFileName);
++		rtw_merge_string(rtl_file_path, PATH_MAX, rtw_phy_file_path, pFileName);
+ 	
+-		if (rtw_is_file_readable(file_path) == true)
++		if (rtw_is_file_readable(rtl_file_path) == true)
+ 		{
+-			rlen = rtw_retrive_from_file(file_path, pHalData->para_file_buf, MAX_PARA_FILE_BUF_LEN);
++			rlen = rtw_retrive_from_file(rtl_file_path, pHalData->para_file_buf, MAX_PARA_FILE_BUF_LEN);
+ 			if (rlen > 0)
+ 			{
+ 				rtStatus = _SUCCESS;
+@@ -2904,11 +2904,11 @@ PHY_ConfigRFWithParaFile(
+ 
+ 	if ((pBufLen != NULL) && (*pBufLen == 0) && (pBuf == NULL))
+ 	{
+-		rtw_merge_string(file_path, PATH_MAX, rtw_phy_file_path, pFileName);
++		rtw_merge_string(rtl_file_path, PATH_MAX, rtw_phy_file_path, pFileName);
+ 
+-		if (rtw_is_file_readable(file_path) == true)
++		if (rtw_is_file_readable(rtl_file_path) == true)
+ 		{
+-			rlen = rtw_retrive_from_file(file_path, pHalData->para_file_buf, MAX_PARA_FILE_BUF_LEN);
++			rlen = rtw_retrive_from_file(rtl_file_path, pHalData->para_file_buf, MAX_PARA_FILE_BUF_LEN);
+ 			if (rlen > 0)
+ 			{
+ 				rtStatus = _SUCCESS;
+@@ -3178,11 +3178,11 @@ PHY_ConfigRFWithTxPwrTrackParaFile(
+ 
+ 	if ((pHalData->rf_tx_pwr_track_len == 0) && (pHalData->rf_tx_pwr_track == NULL))
+ 	{
+-		rtw_merge_string(file_path, PATH_MAX, rtw_phy_file_path, pFileName);
++		rtw_merge_string(rtl_file_path, PATH_MAX, rtw_phy_file_path, pFileName);
+ 	
+-		if (rtw_is_file_readable(file_path) == true)
++		if (rtw_is_file_readable(rtl_file_path) == true)
+ 		{
+-			rlen = rtw_retrive_from_file(file_path, pHalData->para_file_buf, MAX_PARA_FILE_BUF_LEN);
++			rlen = rtw_retrive_from_file(rtl_file_path, pHalData->para_file_buf, MAX_PARA_FILE_BUF_LEN);
+ 			if (rlen > 0)
+ 			{
+ 				rtStatus = _SUCCESS;
+@@ -3527,11 +3527,11 @@ PHY_ConfigRFWithPowerLimitTableParaFile(
+ 
+ 	if ((pHalData->rf_tx_pwr_lmt_len == 0) && (pHalData->rf_tx_pwr_lmt == NULL))
+ 	{
+-		rtw_merge_string(file_path, PATH_MAX, rtw_phy_file_path, pFileName);
++		rtw_merge_string(rtl_file_path, PATH_MAX, rtw_phy_file_path, pFileName);
+ 	
+-		if (rtw_is_file_readable(file_path) == true)
++		if (rtw_is_file_readable(rtl_file_path) == true)
+ 		{
+-			rlen = rtw_retrive_from_file(file_path, pHalData->para_file_buf, MAX_PARA_FILE_BUF_LEN);
++			rlen = rtw_retrive_from_file(rtl_file_path, pHalData->para_file_buf, MAX_PARA_FILE_BUF_LEN);
+ 			if (rlen > 0)
+ 			{
+ 				rtStatus = _SUCCESS;
+diff -Nurp linux/3rdparty/rtl8723bs.orig/os_dep/ioctl_cfg80211.c linux/3rdparty/rtl8723bs/os_dep/ioctl_cfg80211.c
+--- linux/3rdparty/rtl8723bs.orig/os_dep/ioctl_cfg80211.c	2015-09-30 00:51:13.000000000 +0300
++++ linux/3rdparty/rtl8723bs/os_dep/ioctl_cfg80211.c	2015-09-30 01:49:37.476440020 +0300
+@@ -587,7 +587,12 @@ void rtw_cfg80211_indicate_disconnect(_a
+ 
+ 	if (!padapter->mlmepriv.not_indic_disco) {
+ 		if(check_fwstate(&padapter->mlmepriv, _FW_LINKED))		
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 2, 0))
++			cfg80211_disconnected(padapter->pnetdev, 0,
++					      NULL, 0, true, GFP_ATOMIC);
++#else
+ 			cfg80211_disconnected(padapter->pnetdev, 0, NULL, 0, GFP_ATOMIC);
++#endif
+ 		else
+ 			cfg80211_connect_result(padapter->pnetdev, NULL, NULL, 0, NULL, 0, 
+ 				WLAN_STATUS_UNSPECIFIED_FAILURE, GFP_ATOMIC/*GFP_KERNEL*/);

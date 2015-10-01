@@ -1,0 +1,35 @@
+From foo@baz Wed Sep 30 05:25:07 CEST 2015
+From: Richard Laing <richard.laing@alliedtelesis.co.nz>
+Date: Thu, 3 Sep 2015 13:52:31 +1200
+Subject: net/ipv6: Correct PIM6 mrt_lock handling
+
+From: Richard Laing <richard.laing@alliedtelesis.co.nz>
+
+[ Upstream commit 25b4a44c19c83d98e8c0807a7ede07c1f28eab8b ]
+
+In the IPv6 multicast routing code the mrt_lock was not being released
+correctly in the MFC iterator, as a result adding or deleting a MIF would
+cause a hang because the mrt_lock could not be acquired.
+
+This fix is a copy of the code for the IPv4 case and ensures that the lock
+is released correctly.
+
+Signed-off-by: Richard Laing <richard.laing@alliedtelesis.co.nz>
+Acked-by: Cong Wang <cwang@twopensource.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ net/ipv6/ip6mr.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/net/ipv6/ip6mr.c
++++ b/net/ipv6/ip6mr.c
+@@ -550,7 +550,7 @@ static void ipmr_mfc_seq_stop(struct seq
+ 
+ 	if (it->cache == &mrt->mfc6_unres_queue)
+ 		spin_unlock_bh(&mfc_unres_lock);
+-	else if (it->cache == mrt->mfc6_cache_array)
++	else if (it->cache == &mrt->mfc6_cache_array[it->ct])
+ 		read_unlock(&mrt_lock);
+ }
+ 

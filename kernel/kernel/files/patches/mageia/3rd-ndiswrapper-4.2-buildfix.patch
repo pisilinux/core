@@ -1,0 +1,30 @@
+--- linux/3rdparty/ndiswrapper/loader.c.orig	2015-09-30 00:51:13.000000000 +0300
++++ linux/3rdparty/ndiswrapper/loader.c	2015-09-30 01:27:16.209213900 +0300
+@@ -21,6 +21,7 @@
+ #include <linux/module.h>
+ #include <linux/kmod.h>
+ #include <linux/miscdevice.h>
++#include <linux/vmalloc.h>
+ #include <asm/uaccess.h>
+ 
+ /*
+--- linux/3rdparty/ndiswrapper/ntoskernel.c.orig	2015-09-30 00:51:13.000000000 +0300
++++ linux/3rdparty/ndiswrapper/ntoskernel.c	2015-09-30 01:29:08.011792825 +0300
+@@ -13,6 +13,7 @@
+  *
+  */
+ 
++#include <linux/vmalloc.h>
+ #include "ntoskernel.h"
+ #include "ndis.h"
+ #include "usb.h"
+--- linux/3rdparty/ndiswrapper/pe_linker.c.orig	2015-09-30 00:51:13.000000000 +0300
++++ linux/3rdparty/ndiswrapper/pe_linker.c	2015-09-30 01:30:49.965320953 +0300
+@@ -19,6 +19,7 @@
+ 
+ #else
+ 
++#include <linux/vmalloc.h>
+ #include <linux/types.h>
+ #include <asm/errno.h>
+ 

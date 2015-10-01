@@ -208,7 +208,7 @@ diff -p -up linux-2.6.28/net/ipv4/netfilter/ipt_psd.c.orig linux-2.6.28/net/ipv4
 +module_exit(ipt_psd_fini);
 --- a/net/ipv4/netfilter/Kconfig
 +++ b/net/ipv4/netfilter/Kconfig
-@@ -69,6 +69,14 @@ config IP_NF_MATCH_ECN
+@@ -193,6 +193,14 @@ config IP_NF_MATCH_ECN
  	(e.g. when running oldconfig). It selects
  	CONFIG_NETFILTER_XT_MATCH_ECN.
  
@@ -222,7 +222,7 @@ diff -p -up linux-2.6.28/net/ipv4/netfilter/ipt_psd.c.orig linux-2.6.28/net/ipv4
 +
  config IP_NF_MATCH_RPFILTER
  	tristate '"rpfilter" reverse path filter match support'
- 	depends on NETFILTER_ADVANCED && (IP_NF_MANGLE || IP_NF_RAW)
+ 	depends on NETFILTER_ADVANCED
 --- linux/include/uapi/linux/netfilter_ipv4/Kbuild.orig
 +++ linux/include/uapi/linux/netfilter_ipv4/Kbuild
 @@ -8,4 +8,5 @@ header-y += ipt_REJECT.h
