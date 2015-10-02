@@ -553,7 +553,7 @@
             <Summary xml:lang="tr">Pisi Linux için Linux çekirdeği</Summary>
             <Summary xml:lang="es">El kernel de Linux (el núcleo del sistema operativo Linux) de Pisi Linux</Summary>
             <Description xml:lang="en">kernel contains the Linux kernel, the core of any Linux operating system. The kernel handles the basic functions of the operating system: memory allocation, process allocation, device input and output, etc.</Description>
-            <Archive type="targz" sha1sum="dce24ac1874f362000e40027075e7d24ba123b73">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="70db3c22960e3da16b7d7b0a55066154b8d92900">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.2.tar.gz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
                 <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -568,15 +568,15 @@
                 <Dependency>xmlto</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.1.6.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.2.2.xz</Patch>
                 <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
                 <Patch level="1">patches/mageia/x86-boot-video-80x25-if-break.patch</Patch>
                 <Patch level="1">patches/mageia/x86-default_poweroff_up_machines.patch</Patch>
                 <Patch level="1">patches/mageia/x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch</Patch>
                 <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
+                <Patch level="1">patches/mageia/cpu-cacheinfo-Fix-teardown-path.patch</Patch>
                 <Patch level="1">patches/mageia/pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch</Patch>
                 <Patch level="1">patches/mageia/pci-quirks-drop-devinit-exit.patch</Patch>
-                <Patch level="1">patches/mageia/pci-acs-quirks-for-Intel-9-series-PCH-root-ports.patch</Patch>
                 <Patch level="1">patches/mageia/acpi-CLEVO-M360S-disable_acpi_irq.patch</Patch>
                 <Patch level="1">patches/mageia/acpi-processor-M720SR-limit-to-C2.patch</Patch>
                 <Patch level="1">patches/mageia/scsi-megaraid-new-sysfs-name.patch</Patch>
@@ -585,10 +585,7 @@
                 <Patch level="1">patches/mageia/dm-raid-aliases.patch</Patch>
                 <Patch level="1">patches/mageia/block-floppy-disable-pnp-modalias.patch</Patch>
                 <Patch level="1">patches/mageia/ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch</Patch>
-                <Patch level="1">patches/mageia/ata-revert-Disabling-the-async-PM-for-JMicron-chip-363-361.patch</Patch>
-                <Patch level="1">patches/mageia/ata-jmicron-disable-broken-async_suspend.patch</Patch>
                 <Patch level="1">patches/mageia/block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch</Patch>
-                <Patch level="1">patches/mageia/block-cfq-iosched-fix-the-setting-of-IOPS-mode-on-SSDs.patch</Patch>
                 <Patch level="1">patches/mageia/fs-aufs4.patch</Patch>
                 <Patch level="1">patches/mageia/fs-aufs4-modular.patch</Patch>
                 <Patch level="1">patches/mageia/firewire-ieee1394-module-aliases.patch</Patch>
@@ -623,6 +620,7 @@
                 <Patch level="1">patches/mageia/net-netfilter-psd-2.6.35-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
                 <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
+                <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/include-kbuild-export-pci_ids.patch</Patch>
                 <Patch level="1">patches/mageia/hid-usbhid-IBM-BladeCenterHS20-quirk.patch</Patch>
                 <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id.patch</Patch>
@@ -642,6 +640,7 @@
                 <Patch level="1">patches/mageia/3rd-ndiswrapper-Makefile-build-fix.patch</Patch>
                 <Patch level="1">patches/mageia/3rd-ndiswrapper-linux-3.14-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/3rd-ndiswrapper-4.0-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-ndiswrapper-4.2-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/3rd-rfswitch-1.3.patch</Patch>
                 <Patch level="1">patches/mageia/3rd-rfswitch-build-fix.patch</Patch>
                 <Patch level="1">patches/mageia/3rd-rfswitch-3.0-buildfix.patch</Patch>
@@ -653,16 +652,9 @@
                 <Patch level="1">patches/mageia/3rd-rtl8723bs.patch</Patch>
                 <Patch level="1">patches/mageia/3rd-rtl8723bs-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/3rd-rtl8723bs-updates.patch</Patch>
-                <Patch level="1">patches/mageia/Revert-sched-x86_64-Don-t-save-flags-on-context-swit.patch</Patch>
-                <Patch level="1">patches/mageia/SCSI-Fix-NULL-pointer-dereference-in-runtime-PM.patch</Patch>
-                <Patch level="1">patches/mageia/ata-Revert-libata-eh-Set-information-field-for-autosense.patch</Patch>
-                <Patch level="1">patches/mageia/ata-Revert-libata-Implement-support-for-sense-data-repor.patch</Patch>
-                <Patch level="1">patches/mageia/ata-Revert-libata-Implement-NCQ-autosense.patch</Patch>
-                <Patch level="1">patches/mageia/fs-Revert-ext4-remove-block_device_ejected.patch</Patch>
-                <Patch level="1">patches/mageia/gpu-drm-i915-remove-HBR2-from-chv-supported-list.patch</Patch>
-                <Patch level="1">patches/mageia/gpu-drm-i915-Avoid-TP3-on-CHV.patch</Patch>
-                <Patch level="1">patches/mageia/x86-apic-Fix-fallout-from-x2apic-cleanup.patch</Patch>
-                <Patch level="1">patches/mageia/x86-idle-Restore-trace_cpu_idle-to-mwait_idle-calls.patch</Patch>
+                <Patch level="1">patches/mageia/3rd-rtl8723bs-4.2-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/scsi-Fix-NULL-pointer-dereference-in-RTPM-of-block-layer.patch</Patch>
+                <Patch level="1">patches/mageia/scsi-Revert-SCSI-Fix-NULL-pointer-dereference-in-runtime-PM.patch</Patch>
             </Patches>
             <SourceURI>kernel/kernel/pspec.xml</SourceURI>
         </Source>
@@ -721,6 +713,30 @@
             </Files>
         </Package>
         <History>
+            <Update release="62">
+                <Type package="kernel">security</Type>
+                <Date>2015-10-01</Date>
+                <Version>4.2.2</Version>
+                <Comment>Version bump to 4.2.2 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.2.2</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="61">
+                <Type package="kernel">security</Type>
+                <Date>2015-09-23</Date>
+                <Version>4.1.8</Version>
+                <Comment>Version bump to 4.1.8 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.1.8</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="60">
+                <Type package="kernel">security</Type>
+                <Date>2015-09-18</Date>
+                <Version>4.1.7</Version>
+                <Comment>Version bump to 4.1.7 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.1.7</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="59">
                 <Type package="kernel">security</Type>
                 <Date>2015-09-05</Date>
@@ -1457,12 +1473,12 @@
             <Summary xml:lang="tr">CPU güç/frekans yönetim araçları</Summary>
             <Description xml:lang="en">cpupowertools contains utilities to manage power management and frequency scaling policies of modern CPUs.</Description>
             <Description xml:lang="tr">cpupowertools, işlemcinin çeşitli güç ve frekans parametrelerinin yönetilmesini sağlayan çeşitli araçları içeren bir pakettir.</Description>
-            <Archive type="targz" sha1sum="dce24ac1874f362000e40027075e7d24ba123b73">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="70db3c22960e3da16b7d7b0a55066154b8d92900">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.2.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.1.6.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.2.2.xz</Patch>
             </Patches>
             <SourceURI>kernel/tools/cpupowertools/pspec.xml</SourceURI>
         </Source>
@@ -1485,6 +1501,27 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="61">
+                <Date>2015-10-01</Date>
+                <Version>4.2.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="60">
+                <Date>2015-09-23</Date>
+                <Version>4.1.8</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="59">
+                <Date>2015-09-18</Date>
+                <Version>4.1.7</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="58">
                 <Date>2015-08-18</Date>
                 <Version>4.1.6</Version>
@@ -2087,7 +2124,7 @@
             <Description xml:lang="en">This package provides the kernel support for VirtualBox.</Description>
             <Archive type="tarxz" sha1sum="8850ebc24e00640835b682a5f8bbc8f05313d2d7">http://source.pisilinux.org/1.0/module-virtualbox-4.3.28.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.1.6">kernel-module-headers</Dependency>
+                <Dependency version="4.2.2">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -2097,7 +2134,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.1.6">kernel</Dependency>
+                <Dependency version="4.2.2">kernel</Dependency>
                 <Dependency version="4.3.28">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -2119,6 +2156,27 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="54">
+                <Date>2015-10-01</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.2.2.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="53">
+                <Date>2015-09-23</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.1.8.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="52">
+                <Date>2015-09-18</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.1.7.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="51">
                 <Date>2015-08-18</Date>
                 <Version>4.3.28</Version>
@@ -2507,9 +2565,10 @@
             <Archive type="targz" sha1sum="75fbbda677fe91ee07a6f6a8e19b1f3e2479540f">http://download.sourceforge.net/ndiswrapper/ndiswrapper-1.59.tar.gz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="ndiswrapper-1.59.patch">ndiswrapper-1.59.patch</AdditionalFile>
+                <AdditionalFile target="kernel-4.2.patch">kernel-4.2.patch</AdditionalFile>
             </AdditionalFiles>
             <BuildDependencies>
-                <Dependency version="4.1.6">kernel-module-headers</Dependency>
+                <Dependency version="4.2.2">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch>support_kernel-4.0.patch</Patch>
@@ -2522,7 +2581,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.1.6">kernel</Dependency>
+                <Dependency version="4.2.2">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2534,6 +2593,20 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2014-10-01</Date>
+                <Version>1.59</Version>
+                <Comment>Rebuild for kernel-4.2.2.</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2014-09-23</Date>
+                <Version>1.59</Version>
+                <Comment>Rebuild for kernel-4.1.8.</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2014-08-18</Date>
                 <Version>1.59</Version>
@@ -2567,14 +2640,14 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.1.6">kernel-module-headers</Dependency>
+                <Dependency version="4.2.2">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-bbswitch/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="4.1.6">kernel</Dependency>
+                <Dependency version="4.2.2">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2587,6 +2660,27 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="30">
+                <Date>2015-10-01</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel-4.2.2.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="29">
+                <Date>2015-09-23</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel-4.1.8.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="28">
+                <Date>2015-09-18</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel-4.1.7.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="27">
                 <Date>2015-08-18</Date>
                 <Version>0.8</Version>
@@ -2802,7 +2896,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
             <Archive type="tarxz" sha1sum="82194515516139801fdc690198495b043d1c9cbe">http://source.pisilinux.org/1.0/module-virtualbox-guest-4.3.28.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.1.6">kernel-module-headers</Dependency>
+                <Dependency version="4.2.2">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -2812,7 +2906,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.1.6">kernel</Dependency>
+                <Dependency version="4.2.2">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
                 <Dependency version="4.3.28">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
@@ -2839,10 +2933,24 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="51">
+                <Date>2015-10-01</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.2.2.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="50">
+                <Date>2015-08-23</Date>
+                <Version>4.3.28</Version>
+                <Comment>Rebuild for kernel-4.1.8.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="49">
                 <Date>2015-08-18</Date>
                 <Version>4.3.28</Version>
-                <Comment>Rebuild for kernel-4.1.6.</Comment>
+                <Comment>Rebuild for kernel-4.1.7.</Comment>
                 <Name>Ertuğrul Erata</Name>
                 <Email>ertugrulerata@gmail.com</Email>
             </Update>
@@ -3209,7 +3317,7 @@
             <Archive type="targz" sha1sum="e02beac9cc713011551c483ae5f20f065f5b88c7" target="i686">http://www.broadcom.com/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <Archive type="targz" sha1sum="bd55f1fdc6b0a4d0a70dc4ba4bb4169a824e238c" target="x86_64">http://www.broadcom.com/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.1.6">kernel-module-headers</Dependency>
+                <Dependency version="4.2.2">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">patch/linux-40.patch</Patch>
@@ -3218,6 +3326,7 @@
                 <Patch level="1">patch/gcc.patch</Patch>
                 <Patch level="1">patch/wlan.patch</Patch>
                 <Patch level="1">patch/broadcom-sta-6.30.223.248-linux-3.18-null-pointer-crash.patch</Patch>
+                <Patch>patch/0018-cfg80211_disconnected.patch</Patch>
             </Patches>
             <SourceURI>kernel/drivers/module-broadcom-wl/pspec.xml</SourceURI>
         </Source>
@@ -3227,8 +3336,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.1.6">kernel</Dependency>
-                <Dependency release="47">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="4.2.2">kernel</Dependency>
+                <Dependency release="50">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -3255,6 +3364,27 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="50">
+                <Date>2015-10-01</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 4.2.2.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="49">
+                <Date>2015-09-23</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 4.1.8.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="48">
+                <Date>2015-09-18</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 4.1.7.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="47">
                 <Date>2015-08-18</Date>
                 <Version>6.30.223.248</Version>
@@ -4038,6 +4168,7 @@
                 <Dependency>fuse</Dependency>
                 <Dependency>lvm2</Dependency>
                 <Dependency>device-mapper</Dependency>
+                <Dependency>mtools</Dependency>
                 <Dependency>os-prober</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -22108,7 +22239,7 @@
             <Summary xml:lang="tr">Linux çekirdeği tarafından kullanılan firmware dosyaları</Summary>
             <Description xml:lang="en">linux-firmware contains different firmware files required for some devices to operate correctly.</Description>
             <Description xml:lang="tr">linux-firmware, bazı aygıtların düzgün çalışabilmesi için gerekli firmware dosyalarını içerir.</Description>
-            <Archive type="tarbz2" sha1sum="34c35c4a428630e7546c753f378d79a56be9791e">http://source.pisilinux.org/1.0/linux-firmware/linux-firmware-20150824.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="053e48266c07116bf86d0848655e9c0c02076609">http://source.pisilinux.org/1.0/linux-firmware/linux-firmware-20150924.tar.bz2</Archive>
             <Archive type="tarxz" sha1sum="dd685266f7bc0acb0d455462637d23e3e895bc96" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/common-fw.tar.xz</Archive>
             <Archive type="tarxz" sha1sum="b2bb7fce3ea67d131f543a48134f7a65f2a8d834" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware-ipw.tar.xz</Archive>
             <Archive type="tarbz2" sha1sum="a5a616a9f765cf9cbb224deb7ccefdc82a7fe4d9" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/firmware-nonfreebox-2-tar.bz2</Archive>
@@ -22121,6 +22252,8 @@
             <Archive type="tarxz" sha1sum="5d333e75f02a57861565337c14f6944090a242a8" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/nouveau-1.tar.xz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="intel/ibt-hw-37.7.10-fw-1.80.2.3.d.bseq">fw/ibt-hw-37.7.10-fw-1.80.2.3.d.bseq</AdditionalFile>
+                <AdditionalFile target="iwlwifi-7260-14.ucode">iwlwifi-7260-14.ucode</AdditionalFile>
+                <AdditionalFile target="iwlwifi-7260-15.ucode">iwlwifi-7260-15.ucode</AdditionalFile>
             </AdditionalFiles>
             <SourceURI>hardware/firmware/linux-firmware/pspec.xml</SourceURI>
         </Source>
@@ -22135,6 +22268,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="19">
+                <Date>2015-09-06</Date>
+                <Version>20150924</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="18">
                 <Date>2015-09-06</Date>
                 <Version>20150824</Version>
