@@ -1,0 +1,87 @@
+From 6fe7ccfd77415a6ba250c10c580eb3f9acf79753 Mon Sep 17 00:00:00 2001
+From: Jozsef Kadlecsik <kadlec@blackhole.kfki.hu>
+Date: Tue, 25 Aug 2015 11:17:51 +0200
+Subject: [PATCH] netfilter: ipset: Out of bound access in hash:net* types
+ fixed
+
+Dave Jones reported that KASan detected out of bounds access in hash:net*
+types:
+
+[   23.139532] ==================================================================
+[   23.146130] BUG: KASan: out of bounds access in hash_net4_add_cidr+0x1db/0x220 at addr ffff8800d4844b58
+[   23.152937] Write of size 4 by task ipset/457
+[   23.159742] =============================================================================
+[   23.166672] BUG kmalloc-512 (Not tainted): kasan: bad access detected
+[   23.173641] -----------------------------------------------------------------------------
+[   23.194668] INFO: Allocated in hash_net_create+0x16a/0x470 age=7 cpu=1 pid=456
+[   23.201836]  __slab_alloc.constprop.66+0x554/0x620
+[   23.208994]  __kmalloc+0x2f2/0x360
+[   23.216105]  hash_net_create+0x16a/0x470
+[   23.223238]  ip_set_create+0x3e6/0x740
+[   23.230343]  nfnetlink_rcv_msg+0x599/0x640
+[   23.237454]  netlink_rcv_skb+0x14f/0x190
+[   23.244533]  nfnetlink_rcv+0x3f6/0x790
+[   23.251579]  netlink_unicast+0x272/0x390
+[   23.258573]  netlink_sendmsg+0x5a1/0xa50
+[   23.265485]  SYSC_sendto+0x1da/0x2c0
+[   23.272364]  SyS_sendto+0xe/0x10
+[   23.279168]  entry_SYSCALL_64_fastpath+0x12/0x6f
+
+The bug is fixed in the patch and the testsuite is extended in ipset
+to check cidr handling more thoroughly.
+
+Signed-off-by: Jozsef Kadlecsik <kadlec@blackhole.kfki.hu>
+---
+ net/netfilter/ipset/ip_set_hash_gen.h | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/net/netfilter/ipset/ip_set_hash_gen.h b/net/netfilter/ipset/ip_set_hash_gen.h
+index afe905c..691b54f 100644
+--- a/net/netfilter/ipset/ip_set_hash_gen.h
++++ b/net/netfilter/ipset/ip_set_hash_gen.h
+@@ -152,9 +152,13 @@ htable_bits(u32 hashsize)
+ #define SET_HOST_MASK(family)	(family == AF_INET ? 32 : 128)
+ 
+ #ifdef IP_SET_HASH_WITH_NET0
++/* cidr from 0 to SET_HOST_MASK() value and c = cidr + 1 */
+ #define NLEN(family)		(SET_HOST_MASK(family) + 1)
++#define CIDR_POS(c)		((c) - 1)
+ #else
++/* cidr from 1 to SET_HOST_MASK() value and c = cidr + 1 */
+ #define NLEN(family)		SET_HOST_MASK(family)
++#define CIDR_POS(c)		((c) - 2)
+ #endif
+ 
+ #else
+@@ -305,7 +309,7 @@ mtype_add_cidr(struct htype *h, u8 cidr, u8 nets_length, u8 n)
+ 		} else if (h->nets[i].cidr[n] < cidr) {
+ 			j = i;
+ 		} else if (h->nets[i].cidr[n] == cidr) {
+-			h->nets[cidr - 1].nets[n]++;
++			h->nets[CIDR_POS(cidr)].nets[n]++;
+ 			return;
+ 		}
+ 	}
+@@ -314,7 +318,7 @@ mtype_add_cidr(struct htype *h, u8 cidr, u8 nets_length, u8 n)
+ 			h->nets[i].cidr[n] = h->nets[i - 1].cidr[n];
+ 	}
+ 	h->nets[i].cidr[n] = cidr;
+-	h->nets[cidr - 1].nets[n] = 1;
++	h->nets[CIDR_POS(cidr)].nets[n] = 1;
+ }
+ 
+ static void
+@@ -325,8 +329,8 @@ mtype_del_cidr(struct htype *h, u8 cidr, u8 nets_length, u8 n)
+ 	for (i = 0; i < nets_length; i++) {
+ 		if (h->nets[i].cidr[n] != cidr)
+ 			continue;
+-		h->nets[cidr - 1].nets[n]--;
+-		if (h->nets[cidr - 1].nets[n] > 0)
++		h->nets[CIDR_POS(cidr)].nets[n]--;
++		if (h->nets[CIDR_POS(cidr)].nets[n] > 0)
+ 			return;
+ 		for (j = i; j < net_end && h->nets[j].cidr[n]; j++)
+ 			h->nets[j].cidr[n] = h->nets[j + 1].cidr[n];
+-- 
+2.6.0
+

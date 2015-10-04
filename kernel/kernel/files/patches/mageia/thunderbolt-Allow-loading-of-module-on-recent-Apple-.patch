@@ -1,0 +1,45 @@
+From a42fb351ca1f340f8307468be765e3f77ddedda9 Mon Sep 17 00:00:00 2001
+From: Knuth Posern <knuth@posern.org>
+Date: Sun, 20 Sep 2015 21:25:22 +0200
+Subject: [PATCH] thunderbolt: Allow loading of module on recent Apple MacBooks
+ with thunderbolt 2 controller
+
+The pci device ids listed in the thunderbolt driver are to restrictive,
+which prevents the driver from being loaded on recent Apple MacBooks
+using a thunderbolt 2 controller. In particular this prevented any
+hot-plugging functionality for thunderbolt based ethernet dongles
+(i.e. Apples thunderbolt gigabit ethernet broadcom tg3 based dongle
+Model A1433 EMC 2590).
+
+Changing the subvendor and subdevice to PCI_ANY_ID the thunderbolt driver
+loads and binds to the pci device 07:00.0 System peripheral:
+Intel Corporation Device 156c which is the thunderbolt 2 controller on
+the MacBookPro12,1.
+
+Successfully tested on MacBookPro12,1. With the patch the thunderbolt
+module gets now loaded on boot. And it provides hot-plugging support both
+for a cold-plugged and a warm-plugged ethernet dongle.
+
+Signed-off-by: Andreas Noever <andreas.noever@gmail.com>
+Acked-by: Knuth Posern <knuth@posern.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ drivers/thunderbolt/nhi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/thunderbolt/nhi.c b/drivers/thunderbolt/nhi.c
+index c68fe12..20a41f7 100644
+--- a/drivers/thunderbolt/nhi.c
++++ b/drivers/thunderbolt/nhi.c
+@@ -643,7 +643,7 @@ static struct pci_device_id nhi_ids[] = {
+ 	{
+ 		.class = PCI_CLASS_SYSTEM_OTHER << 8, .class_mask = ~0,
+ 		.vendor = PCI_VENDOR_ID_INTEL, .device = 0x156c,
+-		.subvendor = 0x2222, .subdevice = 0x1111,
++		.subvendor = PCI_ANY_ID, .subdevice = PCI_ANY_ID,
+ 	},
+ 	{ 0,}
+ };
+-- 
+2.6.0
+

@@ -1,0 +1,56 @@
+From dca7794539eff04b786fb6907186989e5eaaa9c2 Mon Sep 17 00:00:00 2001
+From: Mathias Nyman <mathias.nyman@linux.intel.com>
+Date: Mon, 21 Sep 2015 17:46:16 +0300
+Subject: [PATCH] xhci: change xhci 1.0 only restrictions to support xhci 1.1
+
+Some changes between xhci 0.96 and xhci 1.0 specifications forced us to
+check the hci version in code, some of these checks were implemented as
+hci_version == 1.0, which will not work with new xhci 1.1 controllers.
+
+xhci 1.1 behaves similar to xhci 1.0 in these cases, so change these
+checks to hci_version >= 1.0
+
+Cc: <stable@vger.kernel.org>
+Signed-off-by: Mathias Nyman <mathias.nyman@linux.intel.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ drivers/usb/host/xhci-mem.c  | 6 +++---
+ drivers/usb/host/xhci-ring.c | 4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/usb/host/xhci-mem.c b/drivers/usb/host/xhci-mem.c
+index 9a8c936..8497fb8 100644
+--- a/drivers/usb/host/xhci-mem.c
++++ b/drivers/usb/host/xhci-mem.c
+@@ -1498,10 +1498,10 @@ int xhci_endpoint_init(struct xhci_hcd *xhci,
+ 	 * use Event Data TRBs, and we don't chain in a link TRB on short
+ 	 * transfers, we're basically dividing by 1.
+ 	 *
+-	 * xHCI 1.0 specification indicates that the Average TRB Length should
+-	 * be set to 8 for control endpoints.
++	 * xHCI 1.0 and 1.1 specification indicates that the Average TRB Length
++	 * should be set to 8 for control endpoints.
+ 	 */
+-	if (usb_endpoint_xfer_control(&ep->desc) && xhci->hci_version == 0x100)
++	if (usb_endpoint_xfer_control(&ep->desc) && xhci->hci_version >= 0x100)
+ 		ep_ctx->tx_info |= cpu_to_le32(AVG_TRB_LENGTH_FOR_EP(8));
+ 	else
+ 		ep_ctx->tx_info |=
+diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
+index 1c61e5e..43291f9 100644
+--- a/drivers/usb/host/xhci-ring.c
++++ b/drivers/usb/host/xhci-ring.c
+@@ -3470,8 +3470,8 @@ int xhci_queue_ctrl_tx(struct xhci_hcd *xhci, gfp_t mem_flags,
+ 	if (start_cycle == 0)
+ 		field |= 0x1;
+ 
+-	/* xHCI 1.0 6.4.1.2.1: Transfer Type field */
+-	if (xhci->hci_version == 0x100) {
++	/* xHCI 1.0/1.1 6.4.1.2.1: Transfer Type field */
++	if (xhci->hci_version >= 0x100) {
+ 		if (urb->transfer_buffer_length > 0) {
+ 			if (setup->bRequestType & USB_DIR_IN)
+ 				field |= TRB_TX_TYPE(TRB_DATA_IN);
+-- 
+2.6.0
+
