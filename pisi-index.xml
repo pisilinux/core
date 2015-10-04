@@ -13749,7 +13749,7 @@
             <Description xml:lang="en">OpenSSL is a cryptography toolkit implementing the Secure Sockets Layer (SSL v2/v3) and Transport Layer Security (TLS v1) network protocols and related cryptography standards required by them.</Description>
             <Description xml:lang="tr">OpenSSL, Güvenlik Soketleri Katmanı (SSL v2/v3) ve Aktarım Katmanı Güvenliği (TLSv1) ağ protokolleri ile bu protokollerin gerektirdiği şifreleme standartlarını uygulayan bir şifreleme aracıdır.</Description>
             <Description xml:lang="de">OpenSSL ist ein Kryptographie Werkzeug, das die Netzwerkprotokolle Secure Sockets Layer (SSL v2/v3) und Transport Layer Security (TLS v1) sowie deren erforderliche zugehörige Kryptographie Standards implementiert.</Description>
-            <Archive type="targz" sha1sum="6e4a5e91159eb32383296c7c83ac0e59b83a0a44">ftp://ftp.openssl.org/source/openssl-1.0.2c.tar.gz</Archive>
+            <Archive type="targz" sha1sum="d01d17b44663e8ffa6a33a5a30053779d9593c3d">ftp://ftp.openssl.org/source/openssl-1.0.2d.tar.gz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="openssl-1.0.0-beta4-ca-dir.patch">openssl-1.0.0-beta4-ca-dir.patch</AdditionalFile>
             </AdditionalFiles>
@@ -13769,7 +13769,6 @@
                 <Patch>openssl_fix_for_x32_2.patch</Patch>
                 <Patch>openssl-ca-certificates.patch</Patch>
                 <Patch>CVE-2014-0198.patch</Patch>
-                <Patch>openssl-1.0.2a-parallel-build.patch</Patch>
                 <Patch>openssl-1.0.2a-x32-asm.patch</Patch>
             </Patches>
             <SourceURI>system/base/openssl/pspec.xml</SourceURI>
@@ -13796,7 +13795,7 @@
             <Summary xml:lang="tr">openssl için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="12">openssl</Dependency>
+                <Dependency release="13">openssl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13815,7 +13814,7 @@
                 <Dependency>zlib-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="12">openssl</Dependency>
+                <Dependency release="13">openssl</Dependency>
                 <Dependency>zlib-32bit</Dependency>
                 <Dependency>glibc-32bit</Dependency>
             </RuntimeDependencies>
@@ -13824,6 +13823,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="13">
+                <Date>2015-10-02</Date>
+                <Version>1.0.2d</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="12">
                 <Date>2015-06-13</Date>
                 <Version>1.0.2c</Version>
