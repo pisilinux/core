@@ -18,7 +18,7 @@
         </BuildDependencies>
         <Patches>
         <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.2.2.xz</Patch>
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.2.3.xz</Patch>
         </Patches>
     </Source>
 
@@ -43,7 +43,14 @@
             <COMAR script="service.py">System.Service</COMAR>
         </Provides>-->
     </Package>
-    <History>        
+    <History>
+        <Update release="62">
+            <Date>2015-10-05</Date>
+            <Version>4.2.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+         </Update>
         <Update release="61">
             <Date>2015-10-01</Date>
             <Version>4.2.2</Version>
