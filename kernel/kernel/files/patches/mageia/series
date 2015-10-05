@@ -14,36 +14,6 @@
 ###
 ### Stable Queue
 ###
-stable-phylib-fix-device-deletion-order-in-mdiobus_unregister.patch
-stable-sock-diag-fix-panic-in-sock_diag_put_filterinfo.patch
-stable-ipv6-fix-exthdrs-offload-registration-in-out_rt-path.patch
-stable-net-fec-clear-receive-interrupts-before-processing-a-packet.patch
-stable-net-eth-altera-fix-napi-poll_list-corruption.patch
-stable-net-ipv6-correct-pim6-mrt_lock-handling.patch
-stable-net-dsa-bcm_sf2-fix-ageing-conditions-and-operation.patch
-stable-ipv6-fix-multipath-route-replace-error-recovery.patch
-stable-net-dsa-bcm_sf2-fix-64-bits-register-writes.patch
-stable-netlink-mmap-transform-mmap-skb-into-full-skb-on-taps.patch
-stable-sctp-fix-race-on-protocol-netns-initialization.patch
-stable-bridge-fix-igmpv3-mldv2-report-parsing.patch
-stable-net-mvneta-fix-dma-buffer-unmapping-in-mvneta_rx.patch
-stable-rtnetlink-catch-eopnotsupp-errors-from-ndo_bridge_getlink.patch
-stable-net-mlx4_en-really-allow-to-change-rss-key.patch
-stable-macvtap-fix-tunsetsndbuf-values-64k.patch
-stable-netlink-fix-autobind-race-condition-that-leads-to-zero-port-id.patch
-stable-netlink-replace-rhash_portid-with-bound.patch
-stable-net-dsa-actually-force-the-speed-on-the-cpu-port.patch
-stable-openvswitch-zero-flows-on-allocation.patch
-stable-tcp-add-proper-ts-val-into-rst-packets.patch
-stable-fix-af_packet-abi-breakage-in-4.2.patch
-stable-net-revert-net_sched-move-tp-root-allocation-into-fw_init.patch
-stable-fib_rules-fix-fib-rule-dumps-across-multiple-skbs.patch
-stable-ppp-fix-lockdep-splat-in-ppp_dev_uninit.patch
-stable-net-dsa-bcm_sf2-do-not-override-speed-settings.patch
-stable-net-phy-fixed_phy-handle-link-down-case.patch
-stable-of_mdio-add-new-dt-property-managed-to-specify-the-phy-management-type.patch
-stable-mvneta-use-inband-status-only-when-explicitly-enabled.patch
-stable-net-mlx4_core-capping-number-of-requested-msixs-to-max_msix.patch
 
 ###
 ### Arch x86
@@ -67,6 +37,9 @@ x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch
 
 # slows down boot
 Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch
+
+# efi bootfix
+x86-efi-Fix-boot-crash-by-mapping-EFI-memmap-entries.patch
 
 ###
 ### Core
@@ -157,6 +130,10 @@ scsi-Fix-NULL-pointer-dereference-in-RTPM-of-block-layer.patch
 fs-aufs4.patch
 fs-aufs4-modular.patch
 
+# Bind mount escape fixes (CVE-2015-2925)
+fs-dcache-Handle-escaped-paths-in-prepend_path.patch
+fs-vfs-Test-for-and-handle-paths-that-are-unreachable-from-their-mnt_root.patch
+
 ###
 ### FireWire
 ###
@@ -240,6 +217,17 @@ net-netfilter-psd.patch
 net-netfilter-psd-mdv.patch
 net-netfilter-psd-2.6.35-buildfix.patch
 
+# netfilter fixes
+net-netfilter-conntrack-use-nf_ct_tmpl_free-in-CT-synpro.patch
+net-netfilter-nfnetlink-work-around-wrong-endianess-in-r.patch
+net-netfilter-bridge-fix-IPv6-packets-not-being-bridged-.patch
+net-netfilter-nf_tables-Use-32-bit-addressing-register-f.patch
+net-netfilter-ipset-Out-of-bound-access-in-hash-net-type.patch
+net-netfilter-ipset-Fixing-unnamed-union-init.patch
+
+# wireless lockup
+net-wireless-rtlwifi-rtl8821ae-Fix-system-lockups-on-boot.patch
+
 ###
 ### Platform drivers
 ###
@@ -275,6 +263,10 @@ include-kbuild-export-pci_ids.patch
 ###
 
 ###
+### Thunderbolt
+thunderbolt-Allow-loading-of-module-on-recent-Apple-.patch
+
+###
 ### USB
 ###
 
@@ -282,6 +274,12 @@ hid-usbhid-IBM-BladeCenterHS20-quirk.patch
 
 usb-storage-unusual_devs-add-id.patch
 usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch
+
+# boot hang fix
+usb-phy-phy-generic-Fix-reset-behaviour-on-legacy-bo.patch
+
+# xhci 1.1 support
+usb-xhci-change-xhci-1.0-only-restrictions-to-support-xh.patch
 
 ###
 ### V4L
