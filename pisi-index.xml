@@ -567,14 +567,13 @@
                 <Dependency>xmlto</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.2.3.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.2.4.xz</Patch>
                 <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
                 <Patch level="1">patches/mageia/x86-boot-video-80x25-if-break.patch</Patch>
                 <Patch level="1">patches/mageia/x86-default_poweroff_up_machines.patch</Patch>
                 <Patch level="1">patches/mageia/x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch</Patch>
                 <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
-                <Patch level="1">patches/mageia/x86-efi-Fix-boot-crash-by-mapping-EFI-memmap-entries.patch</Patch>
-                <Patch level="1">patches/mageia/cpu-cacheinfo-Fix-teardown-path.patch</Patch>
+                <Patch level="1">patches/mageia/x86-efi-Fix-multiple-GOP-device-support.patch</Patch>
                 <Patch level="1">patches/mageia/pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch</Patch>
                 <Patch level="1">patches/mageia/pci-quirks-drop-devinit-exit.patch</Patch>
                 <Patch level="1">patches/mageia/acpi-CLEVO-M360S-disable_acpi_irq.patch</Patch>
@@ -588,8 +587,6 @@
                 <Patch level="1">patches/mageia/block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch</Patch>
                 <Patch level="1">patches/mageia/fs-aufs4.patch</Patch>
                 <Patch level="1">patches/mageia/fs-aufs4-modular.patch</Patch>
-                <Patch level="1">patches/mageia/fs-dcache-Handle-escaped-paths-in-prepend_path.patch</Patch>
-                <Patch level="1">patches/mageia/fs-vfs-Test-for-and-handle-paths-that-are-unreachable-from-their-mnt_root.patch</Patch>
                 <Patch level="1">patches/mageia/firewire-ieee1394-module-aliases.patch</Patch>
                 <Patch level="1">patches/mageia/char-agp-intel-new-Q57-id.patch</Patch>
                 <Patch level="1">patches/mageia/gpu-drm-mach64.patch</Patch>
@@ -610,6 +607,7 @@
                 <Patch level="1">patches/mageia/gpu-drm-mach64-3.17-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/gpu-drm-mach64-3.18-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch</Patch>
+                <Patch level="1">patches/mageia/input-alps-Only-the-Dell-Latitude-D420_430_620_630-have-separate-stick-button-bits.patch</Patch>
                 <Patch level="1">patches/mageia/net-sis190-fix-list-usage.patch</Patch>
                 <Patch level="1">patches/mageia/net-netfilter-IFWLOG.patch</Patch>
                 <Patch level="1">patches/mageia/net-netfilter-IFWLOG-mdv.patch</Patch>
@@ -620,13 +618,8 @@
                 <Patch level="1">patches/mageia/net-netfilter-psd.patch</Patch>
                 <Patch level="1">patches/mageia/net-netfilter-psd-mdv.patch</Patch>
                 <Patch level="1">patches/mageia/net-netfilter-psd-2.6.35-buildfix.patch</Patch>
-                <Patch level="1">patches/mageia/net-netfilter-conntrack-use-nf_ct_tmpl_free-in-CT-synpro.patch</Patch>
-                <Patch level="1">patches/mageia/net-netfilter-nfnetlink-work-around-wrong-endianess-in-r.patch</Patch>
-                <Patch level="1">patches/mageia/net-netfilter-bridge-fix-IPv6-packets-not-being-bridged-.patch</Patch>
-                <Patch level="1">patches/mageia/net-netfilter-nf_tables-Use-32-bit-addressing-register-f.patch</Patch>
-                <Patch level="1">patches/mageia/net-netfilter-ipset-Out-of-bound-access-in-hash-net-type.patch</Patch>
-                <Patch level="1">patches/mageia/net-netfilter-ipset-Fixing-unnamed-union-init.patch</Patch>
                 <Patch level="1">patches/mageia/net-wireless-rtlwifi-rtl8821ae-Fix-system-lockups-on-boot.patch</Patch>
+                <Patch level="1">patches/mageia/net-wireless-iwlwifi-fix-firmware-filename-for-3160.patch</Patch>
                 <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
                 <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
                 <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
@@ -635,8 +628,6 @@
                 <Patch level="1">patches/mageia/hid-usbhid-IBM-BladeCenterHS20-quirk.patch</Patch>
                 <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id.patch</Patch>
                 <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch</Patch>
-                <Patch level="1">patches/mageia/usb-phy-phy-generic-Fix-reset-behaviour-on-legacy-bo.patch</Patch>
-                <Patch level="1">patches/mageia/usb-xhci-change-xhci-1.0-only-restrictions-to-support-xh.patch</Patch>
                 <Patch level="1">patches/mageia/media-usb-pwc-lie-in-proc-usb-devices.patch</Patch>
                 <Patch level="1">patches/mageia/3rd-3rdparty-1.0-tree.patch</Patch>
                 <Patch level="1">patches/mageia/3rd-3rdparty-merge.patch</Patch>
@@ -725,6 +716,14 @@
             </Files>
         </Package>
         <History>
+            <Update release="64">
+                <Type package="kernel">security</Type>
+                <Date>2015-11-26</Date>
+                <Version>4.2.4</Version>
+                <Comment>Version bump to 4.2.4 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.2.4</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="63">
                 <Type package="kernel">security</Type>
                 <Date>2015-10-04</Date>
@@ -1498,7 +1497,7 @@
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.2.3.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.2.4.xz</Patch>
             </Patches>
             <SourceURI>kernel/tools/cpupowertools/pspec.xml</SourceURI>
         </Source>
@@ -1521,6 +1520,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="63">
+                <Date>2015-11-26</Date>
+                <Version>4.2.4</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="62">
                 <Date>2015-10-05</Date>
                 <Version>4.2.3</Version>
@@ -2149,9 +2155,9 @@
             <PartOf>kernel.drivers</PartOf>
             <Summary xml:lang="en">Kernel modules for VirtualBox</Summary>
             <Description xml:lang="en">This package provides the kernel support for VirtualBox.</Description>
-            <Archive type="tarxz" sha1sum="8850ebc24e00640835b682a5f8bbc8f05313d2d7">http://source.pisilinux.org/1.0/module-virtualbox-4.3.28.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="14e3d8630f779dc1349d9aa488fa7e6604b9ba3e">http://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-5.0.4.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.2.3">kernel-module-headers</Dependency>
+                <Dependency version="4.2.4">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -2161,8 +2167,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.2.3">kernel</Dependency>
-                <Dependency version="4.3.28">module-virtualbox-userspace</Dependency>
+                <Dependency version="4.2.4">kernel</Dependency>
+                <Dependency version="5.0.4">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2183,6 +2189,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="56">
+                <Date>2015-11-26</Date>
+                <Version>5.0.4</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="55">
                 <Date>2015-10-05</Date>
                 <Version>4.3.28</Version>
@@ -2602,7 +2615,7 @@
                 <AdditionalFile target="kernel-4.2.patch">kernel-4.2.patch</AdditionalFile>
             </AdditionalFiles>
             <BuildDependencies>
-                <Dependency version="4.2.3">kernel-module-headers</Dependency>
+                <Dependency version="4.2.4">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch>support_kernel-4.0.patch</Patch>
@@ -2615,7 +2628,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.2.3">kernel</Dependency>
+                <Dependency version="4.2.4">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2627,6 +2640,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2014-11-26</Date>
+                <Version>1.59</Version>
+                <Comment>Rebuild for kernel-4.2.4.</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
             <Update release="5">
                 <Date>2014-10-05</Date>
                 <Version>1.59</Version>
@@ -2681,14 +2701,14 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.2.3">kernel-module-headers</Dependency>
+                <Dependency version="4.2.4">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-bbswitch/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="4.2.3">kernel</Dependency>
+                <Dependency version="4.2.4">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2701,6 +2721,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="32">
+                <Date>2015-11-26</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel-4.2.4.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="31">
                 <Date>2015-10-05</Date>
                 <Version>0.8</Version>
@@ -2942,9 +2969,9 @@
             <Summary xml:lang="tr">VirtualBox misafir makineleri için çekirdek modülleri</Summary>
             <Description xml:lang="en">This package provides the kernel modules needed for mouse integration and shared folder support between VirtualBox host and guest systems.</Description>
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
-            <Archive type="tarxz" sha1sum="82194515516139801fdc690198495b043d1c9cbe">http://source.pisilinux.org/1.0/module-virtualbox-guest-4.3.28.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="cd1f7c62e17ef3d9b5f7aef7d83fd160355eb396">http://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-5.0.4.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.2.3">kernel-module-headers</Dependency>
+                <Dependency version="4.2.4">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -2954,9 +2981,9 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.2.3">kernel</Dependency>
+                <Dependency version="4.2.4">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
-                <Dependency version="4.3.28">module-virtualbox-guest-userspace</Dependency>
+                <Dependency version="5.0.4">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2981,6 +3008,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="53">
+                <Date>2015-11-26</Date>
+                <Version>5.0.4</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="52">
                 <Date>2015-10-05</Date>
                 <Version>4.3.28</Version>
@@ -3372,7 +3406,7 @@
             <Archive type="targz" sha1sum="e02beac9cc713011551c483ae5f20f065f5b88c7" target="i686">http://www.broadcom.com/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <Archive type="targz" sha1sum="bd55f1fdc6b0a4d0a70dc4ba4bb4169a824e238c" target="x86_64">http://www.broadcom.com/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.2.3">kernel-module-headers</Dependency>
+                <Dependency version="4.2.4">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">patch/linux-40.patch</Patch>
@@ -3391,8 +3425,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.2.3">kernel</Dependency>
-                <Dependency release="51">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="4.2.4">kernel</Dependency>
+                <Dependency release="52">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -3419,6 +3453,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="52">
+                <Date>2015-11-26</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 4.2.4.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="51">
                 <Date>2015-10-05</Date>
                 <Version>6.30.223.248</Version>
@@ -6416,11 +6457,12 @@
             <Summary xml:lang="tr">Çeşitli kullanışlı Linux araçları</Summary>
             <Description xml:lang="en">The util-linux package contains a large variety of low-level system utilities that are necessary for a Linux system to function.</Description>
             <Description xml:lang="tr">util-linux paketi, bir Linux sisteminin işlevsel olması için gerekli olan birçok düşük seviye sistem uygulamasını içerir.</Description>
-            <Archive type="tarxz" sha1sum="ac0b880a12392b2cbbe12239ab7613c25349093d">https://www.kernel.org/pub/linux/utils/util-linux/v2.26/util-linux-2.26.2.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="0549760ba1d2eb0e48b41b926d54ac55533369af">https://www.kernel.org/pub/linux/utils/util-linux/v2.27/util-linux-2.27.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>eudev-devel</Dependency>
                 <Dependency>python-devel</Dependency>
+                <Dependency>readline-devel</Dependency>
                 <Dependency>shadow</Dependency>
                 <Dependency>ncurses-devel</Dependency>
                 <Dependency>libcap-ng-devel</Dependency>
@@ -6434,10 +6476,11 @@
         <Package>
             <Name>util-linux</Name>
             <RuntimeDependencies>
-                <Dependency version="2.26.2">libutil-linux</Dependency>
+                <Dependency version="2.27">libutil-linux</Dependency>
                 <Dependency>zlib</Dependency>
                 <Dependency>perl</Dependency>
                 <Dependency>ncurses</Dependency>
+                <Dependency>readline</Dependency>
                 <Dependency>eudev</Dependency>
                 <Dependency>libcap-ng</Dependency>
             </RuntimeDependencies>
@@ -6514,7 +6557,7 @@
             <IsA>header</IsA>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="10">libutil-linux</Dependency>
+                <Dependency release="11">libutil-linux</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/</Path>
@@ -6551,6 +6594,13 @@
             </Replaces>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2015-10-09</Date>
+                <Version>2.27</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="10">
                 <Date>2015-06-05</Date>
                 <Version>2.26.2</Version>
@@ -17450,7 +17500,7 @@
             <Description xml:lang="fr">D-Bus fourni à la fois un daemon système (pour les événements els que l&apos;&quot;ajout d&apos;un nouveau périphérique&quot; ou &quot;file d&apos;impression changée&quot;) et un daemon propre à chaque session utilisateur (pour les besoins généraux de communication entre processus utilisateurs). De plus, le bus de message est construit en se basant sur un framework (cadre de développement) de passage de message de un-vers-un pouvant être utilisé par n&apos;importe quelles applications pour communiquer directement (sans passer par le daemon de bus de message). Pour l&apos;instant les applications pouvant communiquer doivent être situées sur le même ordinateur, mais l&apos;option TCP/IP est disponible et le support de processus distant est prévu.</Description>
             <Description xml:lang="en">D-Bus supplies both a system daemon (for events such as &quot;new hardware device added&quot; or &quot;printer queue changed&quot;) and a per-user-login-session daemon (for general IPC needs among user applications). Also, the message bus is built on top of a general one-to-one message passing framework, which can be used by any two apps to communicate directly (without going through the message bus daemon). Currently the communicating applications are on one computer, but TCP/IP option is available and remote support planned.</Description>
             <Description xml:lang="tr">D-Bus, sistem ve kullanıcılar için olmak üzere iki tane artalan süreci (daemon) sunar. Mesaj yolu, bire bir mesaj geçiş araçları üzerine inşa edilmiştir. Bu sayede iki program birbiriyle bir mesaj yolu artalan süreci kullanmadan, direkt olarak haberleşebilir. Şu an için haberleşme araçları aynı bilgisayar üzerinde çalışabilmektedir, fakat TCP/IP ile uzaktan haberleşme de planlanmaktadır.</Description>
-            <Archive type="targz" sha1sum="9e95dfa2fa05c6028a9bc7d76a151b59411711e9">http://dbus.freedesktop.org/releases/dbus/dbus-1.9.14.tar.gz</Archive>
+            <Archive type="targz" sha1sum="eec3c798633f623e960eb1d9f93b47648f389443">http://dbus.freedesktop.org/releases/dbus/dbus-1.10.0.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>expat-devel</Dependency>
                 <Dependency>libX11-devel</Dependency>
@@ -17501,7 +17551,7 @@
             <Summary xml:lang="tr">dbus için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="12">dbus</Dependency>
+                <Dependency release="13">dbus</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -17529,6 +17579,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="13">
+                <Date>2015-10-09</Date>
+                <Version>1.10.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="12">
                 <Date>2015-05-11</Date>
                 <Version>1.9.14</Version>
