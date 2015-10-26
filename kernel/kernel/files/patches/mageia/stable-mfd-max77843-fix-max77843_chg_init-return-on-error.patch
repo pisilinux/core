@@ -1,0 +1,34 @@
+From 1b52e50f2a402a266f1ba2281f0a57e87637a047 Mon Sep 17 00:00:00 2001
+From: Javier Martinez Canillas <javier@osg.samsung.com>
+Date: Mon, 21 Sep 2015 14:26:54 +0200
+Subject: mfd: max77843: Fix max77843_chg_init() return on error
+
+From: Javier Martinez Canillas <javier@osg.samsung.com>
+
+commit 1b52e50f2a402a266f1ba2281f0a57e87637a047 upstream.
+
+If i2c_new_dummy() fails in max77843_chg_init(), an PTR_ERR(NULL) is
+returned which is 0. So the function was wrongly returning a success
+value instead of an error code.
+
+Fixes: c7f585fe46d8 ("mfd: max77843: Add max77843 MFD driver core driver")
+Signed-off-by: Javier Martinez Canillas <javier@osg.samsung.com>
+Reviewed-by: Krzysztof Kozlowski <k.kozlowski@samsung.com>
+Signed-off-by: Lee Jones <lee.jones@linaro.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/mfd/max77843.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/drivers/mfd/max77843.c
++++ b/drivers/mfd/max77843.c
+@@ -79,7 +79,7 @@ static int max77843_chg_init(struct max7
+ 	if (!max77843->i2c_chg) {
+ 		dev_err(&max77843->i2c->dev,
+ 				"Cannot allocate I2C device for Charger\n");
+-		return PTR_ERR(max77843->i2c_chg);
++		return -ENODEV;
+ 	}
+ 	i2c_set_clientdata(max77843->i2c_chg, max77843);
+ 

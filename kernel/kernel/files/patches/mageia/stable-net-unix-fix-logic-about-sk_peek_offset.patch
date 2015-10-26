@@ -1,0 +1,67 @@
+From foo@baz Thu Oct 22 17:25:24 PDT 2015
+From: Andrey Vagin <avagin@openvz.org>
+Date: Fri, 2 Oct 2015 00:05:36 +0300
+Subject: net/unix: fix logic about sk_peek_offset
+
+From: Andrey Vagin <avagin@openvz.org>
+
+[ Upstream commit e9193d60d363e4dff75ff6d43a48f22be26d59c7 ]
+
+Now send with MSG_PEEK can return data from multiple SKBs.
+
+Unfortunately we take into account the peek offset for each skb,
+that is wrong. We need to apply the peek offset only once.
+
+In addition, the peek offset should be used only if MSG_PEEK is set.
+
+Cc: "David S. Miller" <davem@davemloft.net> (maintainer:NETWORKING
+Cc: Eric Dumazet <edumazet@google.com> (commit_signer:1/14=7%)
+Cc: Aaron Conole <aconole@bytheb.org>
+Fixes: 9f389e35674f ("af_unix: return data from multiple SKBs on recv() with MSG_PEEK flag")
+Signed-off-by: Andrey Vagin <avagin@openvz.org>
+Tested-by: Aaron Conole <aconole@bytheb.org>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ net/unix/af_unix.c |   12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
+
+--- a/net/unix/af_unix.c
++++ b/net/unix/af_unix.c
+@@ -2064,6 +2064,11 @@ static int unix_stream_read_generic(stru
+ 		goto out;
+ 	}
+ 
++	if (flags & MSG_PEEK)
++		skip = sk_peek_offset(sk, flags);
++	else
++		skip = 0;
++
+ 	do {
+ 		int chunk;
+ 		struct sk_buff *skb, *last;
+@@ -2112,7 +2117,6 @@ unlock:
+ 			break;
+ 		}
+ 
+-		skip = sk_peek_offset(sk, flags);
+ 		while (skip >= unix_skb_len(skb)) {
+ 			skip -= unix_skb_len(skb);
+ 			last = skb;
+@@ -2179,14 +2183,12 @@ unlock:
+ 			if (UNIXCB(skb).fp)
+ 				scm.fp = scm_fp_dup(UNIXCB(skb).fp);
+ 
+-			if (skip) {
+-				sk_peek_offset_fwd(sk, chunk);
+-				skip -= chunk;
+-			}
++			sk_peek_offset_fwd(sk, chunk);
+ 
+ 			if (UNIXCB(skb).fp)
+ 				break;
+ 
++			skip = 0;
+ 			last = skb;
+ 			last_len = skb->len;
+ 			unix_state_lock(sk);

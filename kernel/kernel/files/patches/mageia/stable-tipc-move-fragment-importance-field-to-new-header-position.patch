@@ -1,0 +1,57 @@
+From foo@baz Thu Oct 22 17:25:24 PDT 2015
+From: Jon Paul Maloy <jon.maloy@ericsson.com>
+Date: Wed, 14 Oct 2015 09:23:18 -0400
+Subject: tipc: move fragment importance field to new header position
+
+From: Jon Paul Maloy <jon.maloy@ericsson.com>
+
+[ Upstream commit dde4b5ae65de659b9ec64bafdde0430459fcb495 ]
+
+In commit e3eea1eb47a ("tipc: clean up handling of message priorities")
+we introduced a field in the packet header for keeping track of the
+priority of fragments, since this value is not present in the specified
+protocol header. Since the value so far only is used at the transmitting
+end of the link, we have not yet officially defined it as part of the
+protocol.
+
+Unfortunately, the field we use for keeping this value, bits 13-15 in
+in word 5, has turned out to be a poor choice; it is already used by the
+broadcast protocol for carrying the 'network id' field of the sending
+node. Since packet fragments also need to be transported across the
+broadcast protocol, the risk of conflict is obvious, and we see this
+happen when we use network identities larger than 2^13-1. This has
+escaped our testing because we have so far only been using small network
+id values.
+
+We now move this field to bits 0-2 in word 9, a field that is guaranteed
+to be unused by all involved protocols.
+
+Fixes: e3eea1eb47a ("tipc: clean up handling of message priorities")
+Signed-off-by: Jon Maloy <jon.maloy@ericsson.com>
+Acked-by: Ying Xue <ying.xue@windriver.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ net/tipc/msg.h |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+--- a/net/tipc/msg.h
++++ b/net/tipc/msg.h
+@@ -357,7 +357,7 @@ static inline u32 msg_importance(struct
+ 	if (likely((usr <= TIPC_CRITICAL_IMPORTANCE) && !msg_errcode(m)))
+ 		return usr;
+ 	if ((usr == MSG_FRAGMENTER) || (usr == MSG_BUNDLER))
+-		return msg_bits(m, 5, 13, 0x7);
++		return msg_bits(m, 9, 0, 0x7);
+ 	return TIPC_SYSTEM_IMPORTANCE;
+ }
+ 
+@@ -366,7 +366,7 @@ static inline void msg_set_importance(st
+ 	int usr = msg_user(m);
+ 
+ 	if (likely((usr == MSG_FRAGMENTER) || (usr == MSG_BUNDLER)))
+-		msg_set_bits(m, 5, 13, 0x7, i);
++		msg_set_bits(m, 9, 0, 0x7, i);
+ 	else if (i < TIPC_SYSTEM_IMPORTANCE)
+ 		msg_set_user(m, i);
+ 	else

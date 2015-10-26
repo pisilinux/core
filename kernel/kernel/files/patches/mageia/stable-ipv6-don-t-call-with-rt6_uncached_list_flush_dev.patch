@@ -1,0 +1,72 @@
+From foo@baz Thu Oct 22 17:25:24 PDT 2015
+From: "Eric W. Biederman" <ebiederm@xmission.com>
+Date: Mon, 12 Oct 2015 11:02:08 -0500
+Subject: ipv6: Don't call with rt6_uncached_list_flush_dev
+
+From: "Eric W. Biederman" <ebiederm@xmission.com>
+
+[ Upstream commit e332bc67cf5e5e5b71a1aec9750d0791aac65183 ]
+
+As originally written rt6_uncached_list_flush_dev makes no sense when
+called with dev == NULL as it attempts to flush all uncached routes
+regardless of network namespace when dev == NULL.  Which is simply
+incorrect behavior.
+
+Furthermore at the point rt6_ifdown is called with dev == NULL no more
+network devices exist in the network namespace so even if the code in
+rt6_uncached_list_flush_dev were to attempt something sensible it
+would be meaningless.
+
+Therefore remove support in rt6_uncached_list_flush_dev for handling
+network devices where dev == NULL, and only call rt6_uncached_list_flush_dev
+ when rt6_ifdown is called with a network device.
+
+Fixes: 8d0b94afdca8 ("ipv6: Keep track of DST_NOCACHE routes in case of iface down/unregister")
+Signed-off-by: "Eric W. Biederman" <ebiederm@xmission.com>
+Reviewed-by: Martin KaFai Lau <kafai@fb.com>
+Tested-by: Martin KaFai Lau <kafai@fb.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ net/ipv6/route.c |   12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
+
+--- a/net/ipv6/route.c
++++ b/net/ipv6/route.c
+@@ -139,6 +139,9 @@ static void rt6_uncached_list_flush_dev(
+ 	struct net_device *loopback_dev = net->loopback_dev;
+ 	int cpu;
+ 
++	if (dev == loopback_dev)
++		return;
++
+ 	for_each_possible_cpu(cpu) {
+ 		struct uncached_list *ul = per_cpu_ptr(&rt6_uncached_list, cpu);
+ 		struct rt6_info *rt;
+@@ -148,14 +151,12 @@ static void rt6_uncached_list_flush_dev(
+ 			struct inet6_dev *rt_idev = rt->rt6i_idev;
+ 			struct net_device *rt_dev = rt->dst.dev;
+ 
+-			if (rt_idev && (rt_idev->dev == dev || !dev) &&
+-			    rt_idev->dev != loopback_dev) {
++			if (rt_idev->dev == dev) {
+ 				rt->rt6i_idev = in6_dev_get(loopback_dev);
+ 				in6_dev_put(rt_idev);
+ 			}
+ 
+-			if (rt_dev && (rt_dev == dev || !dev) &&
+-			    rt_dev != loopback_dev) {
++			if (rt_dev == dev) {
+ 				rt->dst.dev = loopback_dev;
+ 				dev_hold(rt->dst.dev);
+ 				dev_put(rt_dev);
+@@ -2577,7 +2578,8 @@ void rt6_ifdown(struct net *net, struct
+ 
+ 	fib6_clean_all(net, fib6_ifdown, &adn);
+ 	icmp6_clean_all(fib6_ifdown, &adn);
+-	rt6_uncached_list_flush_dev(net, dev);
++	if (dev)
++		rt6_uncached_list_flush_dev(net, dev);
+ }
+ 
+ struct rt6_mtu_change_arg {

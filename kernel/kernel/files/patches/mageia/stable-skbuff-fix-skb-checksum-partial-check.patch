@@ -1,0 +1,58 @@
+From foo@baz Thu Oct 22 17:25:24 PDT 2015
+From: Pravin B Shelar <pshelar@nicira.com>
+Date: Mon, 28 Sep 2015 17:24:25 -0700
+Subject: skbuff: Fix skb checksum partial check.
+
+From: Pravin B Shelar <pshelar@nicira.com>
+
+[ Upstream commit 31b33dfb0a144469dd805514c9e63f4993729a48 ]
+
+Earlier patch 6ae459bda tried to detect void ckecksum partial
+skb by comparing pull length to checksum offset. But it does
+not work for all cases since checksum-offset depends on
+updates to skb->data.
+
+Following patch fixes it by validating checksum start offset
+after skb-data pointer is updated. Negative value of checksum
+offset start means there is no need to checksum.
+
+Fixes: 6ae459bda ("skbuff: Fix skb checksum flag on skb pull")
+Reported-by: Andrew Vagin <avagin@odin.com>
+Signed-off-by: Pravin B Shelar <pshelar@nicira.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ include/linux/skbuff.h |    2 +-
+ net/core/skbuff.c      |    9 +++++----
+ 2 files changed, 6 insertions(+), 5 deletions(-)
+
+--- a/include/linux/skbuff.h
++++ b/include/linux/skbuff.h
+@@ -2602,7 +2602,7 @@ static inline void skb_postpull_rcsum(st
+ 	if (skb->ip_summed == CHECKSUM_COMPLETE)
+ 		skb->csum = csum_sub(skb->csum, csum_partial(start, len, 0));
+ 	else if (skb->ip_summed == CHECKSUM_PARTIAL &&
+-		 skb_checksum_start_offset(skb) <= len)
++		 skb_checksum_start_offset(skb) < 0)
+ 		skb->ip_summed = CHECKSUM_NONE;
+ }
+ 
+--- a/net/core/skbuff.c
++++ b/net/core/skbuff.c
+@@ -2958,11 +2958,12 @@ EXPORT_SYMBOL_GPL(skb_append_pagefrags);
+  */
+ unsigned char *skb_pull_rcsum(struct sk_buff *skb, unsigned int len)
+ {
++	unsigned char *data = skb->data;
++
+ 	BUG_ON(len > skb->len);
+-	skb->len -= len;
+-	BUG_ON(skb->len < skb->data_len);
+-	skb_postpull_rcsum(skb, skb->data, len);
+-	return skb->data += len;
++	__skb_pull(skb, len);
++	skb_postpull_rcsum(skb, data, len);
++	return skb->data;
+ }
+ EXPORT_SYMBOL_GPL(skb_pull_rcsum);
+ 
