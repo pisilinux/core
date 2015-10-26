@@ -1,0 +1,49 @@
+From foo@baz Thu Oct 22 17:25:24 PDT 2015
+From: Eric Dumazet <edumazet@google.com>
+Date: Tue, 29 Sep 2015 18:52:25 -0700
+Subject: net: add pfmemalloc check in sk_add_backlog()
+
+From: Eric Dumazet <edumazet@google.com>
+
+[ Upstream commit c7c49b8fde26b74277188bdc6c9dca38db6fa35b ]
+
+Greg reported crashes hitting the following check in __sk_backlog_rcv()
+
+	BUG_ON(!sock_flag(sk, SOCK_MEMALLOC));
+
+The pfmemalloc bit is currently checked in sk_filter().
+
+This works correctly for TCP, because sk_filter() is ran in
+tcp_v[46]_rcv() before hitting the prequeue or backlog checks.
+
+For UDP or other protocols, this does not work, because the sk_filter()
+is ran from sock_queue_rcv_skb(), which might be called _after_ backlog
+queuing if socket is owned by user by the time packet is processed by
+softirq handler.
+
+Fixes: b4b9e35585089 ("netvm: set PF_MEMALLOC as appropriate during SKB processing")
+Signed-off-by: Eric Dumazet <edumazet@google.com>
+Reported-by: Greg Thelen <gthelen@google.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ include/net/sock.h |    8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+--- a/include/net/sock.h
++++ b/include/net/sock.h
+@@ -826,6 +826,14 @@ static inline __must_check int sk_add_ba
+ 	if (sk_rcvqueues_full(sk, limit))
+ 		return -ENOBUFS;
+ 
++	/*
++	 * If the skb was allocated from pfmemalloc reserves, only
++	 * allow SOCK_MEMALLOC sockets to use it as this socket is
++	 * helping free memory
++	 */
++	if (skb_pfmemalloc(skb) && !sock_flag(sk, SOCK_MEMALLOC))
++		return -ENOMEM;
++
+ 	__sk_add_backlog(sk, skb);
+ 	sk->sk_backlog.len += skb->truesize;
+ 	return 0;

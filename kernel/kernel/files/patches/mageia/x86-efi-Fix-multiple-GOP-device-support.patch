@@ -1,0 +1,92 @@
+From 8a53554e12e98d1759205afd7b8e9e2ea0936f48 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?K=C5=91v=C3=A1g=C3=B3=2C=20Zolt=C3=A1n?=
+ <dirty.ice.hu@gmail.com>
+Date: Mon, 12 Oct 2015 15:13:56 +0100
+Subject: [PATCH] x86/efi: Fix multiple GOP device support
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+When multiple GOP devices exists, but none of them implements
+ConOut, the code should just choose the first GOP (according to
+the comments). But currently 'fb_base' will refer to the last GOP,
+while other parameters to the first GOP, which will likely
+result in a garbled display.
+
+I can reliably reproduce this bug using my ASRock Z87M Extreme4
+motherboard with CSM and integrated GPU disabled, and two PCIe
+video cards (NVidia GT640 and GTX980), booting from efi-stub
+(booting from grub works fine).  On the primary display the
+ASRock logo remains and on the secondary screen it is garbled
+up completely.
+
+Signed-off-by: Kővágó, Zoltán <DirtY.iCE.hu@gmail.com>
+Signed-off-by: Matt Fleming <matt.fleming@intel.com>
+Cc: <stable@vger.kernel.org>
+Cc: Linus Torvalds <torvalds@linux-foundation.org>
+Cc: Matthew Garrett <mjg59@srcf.ucam.org>
+Cc: Peter Zijlstra <peterz@infradead.org>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Link: http://lkml.kernel.org/r/1444659236-24837-2-git-send-email-matt@codeblueprint.co.uk
+Signed-off-by: Ingo Molnar <mingo@kernel.org>
+---
+ arch/x86/boot/compressed/eboot.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/arch/x86/boot/compressed/eboot.c b/arch/x86/boot/compressed/eboot.c
+index ee1b6d3..db51c1f 100644
+--- a/arch/x86/boot/compressed/eboot.c
++++ b/arch/x86/boot/compressed/eboot.c
+@@ -667,6 +667,7 @@ setup_gop32(struct screen_info *si, efi_guid_t *proto,
+ 		bool conout_found = false;
+ 		void *dummy = NULL;
+ 		u32 h = handles[i];
++		u32 current_fb_base;
+ 
+ 		status = efi_call_early(handle_protocol, h,
+ 					proto, (void **)&gop32);
+@@ -678,7 +679,7 @@ setup_gop32(struct screen_info *si, efi_guid_t *proto,
+ 		if (status == EFI_SUCCESS)
+ 			conout_found = true;
+ 
+-		status = __gop_query32(gop32, &info, &size, &fb_base);
++		status = __gop_query32(gop32, &info, &size, &current_fb_base);
+ 		if (status == EFI_SUCCESS && (!first_gop || conout_found)) {
+ 			/*
+ 			 * Systems that use the UEFI Console Splitter may
+@@ -692,6 +693,7 @@ setup_gop32(struct screen_info *si, efi_guid_t *proto,
+ 			pixel_format = info->pixel_format;
+ 			pixel_info = info->pixel_information;
+ 			pixels_per_scan_line = info->pixels_per_scan_line;
++			fb_base = current_fb_base;
+ 
+ 			/*
+ 			 * Once we've found a GOP supporting ConOut,
+@@ -770,6 +772,7 @@ setup_gop64(struct screen_info *si, efi_guid_t *proto,
+ 		bool conout_found = false;
+ 		void *dummy = NULL;
+ 		u64 h = handles[i];
++		u32 current_fb_base;
+ 
+ 		status = efi_call_early(handle_protocol, h,
+ 					proto, (void **)&gop64);
+@@ -781,7 +784,7 @@ setup_gop64(struct screen_info *si, efi_guid_t *proto,
+ 		if (status == EFI_SUCCESS)
+ 			conout_found = true;
+ 
+-		status = __gop_query64(gop64, &info, &size, &fb_base);
++		status = __gop_query64(gop64, &info, &size, &current_fb_base);
+ 		if (status == EFI_SUCCESS && (!first_gop || conout_found)) {
+ 			/*
+ 			 * Systems that use the UEFI Console Splitter may
+@@ -795,6 +798,7 @@ setup_gop64(struct screen_info *si, efi_guid_t *proto,
+ 			pixel_format = info->pixel_format;
+ 			pixel_info = info->pixel_information;
+ 			pixels_per_scan_line = info->pixels_per_scan_line;
++			fb_base = current_fb_base;
+ 
+ 			/*
+ 			 * Once we've found a GOP supporting ConOut,
+-- 
+2.6.2
+

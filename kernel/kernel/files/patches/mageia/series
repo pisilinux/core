@@ -14,6 +14,47 @@
 ###
 ### Stable Queue
 ###
+stable-net-ibm-emac-bump-version-numbers-for-correct-work-with-ethtool.patch
+stable-l2tp-protect-tunnel-del_work-by-ref_count.patch
+stable-af_unix-convert-the-unix_sk-macro-to-an-inline-function-for-type-safety.patch
+stable-af_unix-return-data-from-multiple-skbs-on-recv-with-msg_peek-flag.patch
+stable-net-unix-fix-logic-about-sk_peek_offset.patch
+stable-skbuff-fix-skb-checksum-flag-on-skb-pull.patch
+stable-skbuff-fix-skb-checksum-partial-check.patch
+stable-net-dsa-fix-preparation-of-a-port-stp-update.patch
+stable-inet-fix-races-in-reqsk_queue_hash_req.patch
+stable-net-add-pfmemalloc-check-in-sk_add_backlog.patch
+stable-ppp-don-t-override-sk-sk_state-in-pppoe_flush_dev.patch
+stable-inet-fix-race-in-reqsk_queue_unlink.patch
+stable-bpf-fix-panic-in-so_get_filter-with-native-ebpf-programs.patch
+stable-ovs-do-not-allocate-memory-from-offline-numa-node.patch
+stable-act_mirred-clear-sender-cpu-before-sending-to-tx.patch
+stable-bpf-clear-sender_cpu-before-xmit.patch
+stable-ipv6-don-t-call-with-rt6_uncached_list_flush_dev.patch
+stable-ethtool-use-kcalloc-instead-of-kmalloc-for-ethtool_get_strings.patch
+stable-tipc-move-fragment-importance-field-to-new-header-position.patch
+stable-netlink-trim-skb-to-alloc-size-to-avoid-msg_trunc.patch
+stable-drm-fix-locking-for-sysfs-dpms-file.patch
+stable-crypto-sparc-initialize-blkcipher.ivsize.patch
+stable-crypto-camellia_aesni_avx-fix-cpu-feature-checks.patch
+stable-crypto-ahash-ensure-statesize-is-non-zero.patch
+stable-memcg-convert-threshold-to-bytes.patch
+stable-btrfs-check-unsupported-filters-in-balance-arguments.patch
+stable-btrfs-fix-use-after-free-iterating-extrefs.patch
+stable-arm64-errata-use-kbuild_cflags_module-for-erratum-843419.patch
+stable-arm-ux500-simplify-secondary-cpu-boot.patch
+stable-nfsd-blocklayout-accept-any-minlength.patch
+stable-mfd-max77843-fix-max77843_chg_init-return-on-error.patch
+stable-i2c-rcar-enable-runtimepm-before-registering-to-the-core.patch
+stable-i2c-s3c2410-enable-runtimepm-before-registering-to-the-core.patch
+stable-i2c-designware-do-not-use-parameters-from-acpi-on-dell-inspiron-7348.patch
+stable-i2c-designware-platdrv-enable-runtimepm-before-registering-to-the-core.patch
+stable-workqueue-make-sure-delayed-work-run-in-local-cpu.patch
+stable-kvm-x86-clean-up-kvm_arch_vcpu_runnable.patch
+stable-kvm-x86-fix-smi-to-halted-vcpu.patch
+stable-kvm-x86-fix-rsm-into-64-bit-protected-mode.patch
+stable-drm-qxl-fix-framebuffer-dirty-rectangle-tracking.patch
+stable-drm-nouveau-fbcon-take-runpm-reference-when-userspace-has-an-open-fd.patch
 
 ###
 ### Arch x86
@@ -38,15 +79,12 @@ x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch
 # slows down boot
 Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch
 
-# efi bootfix
-x86-efi-Fix-boot-crash-by-mapping-EFI-memmap-entries.patch
+# EFI
+x86-efi-Fix-multiple-GOP-device-support.patch
 
 ###
 ### Core
 ###
-
-# amd cpu boot crash (mga#16527)
-cpu-cacheinfo-Fix-teardown-path.patch
 
 ###
 ### i2c
@@ -130,9 +168,8 @@ scsi-Fix-NULL-pointer-dereference-in-RTPM-of-block-layer.patch
 fs-aufs4.patch
 fs-aufs4-modular.patch
 
-# Bind mount escape fixes (CVE-2015-2925)
-fs-dcache-Handle-escaped-paths-in-prepend_path.patch
-fs-vfs-Test-for-and-handle-paths-that-are-unreachable-from-their-mnt_root.patch
+# btrfs memleak
+fs-btrfs-fix-possible-leak-in-btrfs_ioctl_balance.patch
 
 ###
 ### FireWire
@@ -177,6 +214,9 @@ gpu-drm-mach64-3.18-buildfix.patch
 
 input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch
 
+# fix alps breakage
+input-alps-Only-the-Dell-Latitude-D420_430_620_630-have-separate-stick-button-bits.patch
+
 ###
 ### idle
 ###
@@ -217,16 +257,11 @@ net-netfilter-psd.patch
 net-netfilter-psd-mdv.patch
 net-netfilter-psd-2.6.35-buildfix.patch
 
-# netfilter fixes
-net-netfilter-conntrack-use-nf_ct_tmpl_free-in-CT-synpro.patch
-net-netfilter-nfnetlink-work-around-wrong-endianess-in-r.patch
-net-netfilter-bridge-fix-IPv6-packets-not-being-bridged-.patch
-net-netfilter-nf_tables-Use-32-bit-addressing-register-f.patch
-net-netfilter-ipset-Out-of-bound-access-in-hash-net-type.patch
-net-netfilter-ipset-Fixing-unnamed-union-init.patch
-
 # wireless lockup
 net-wireless-rtlwifi-rtl8821ae-Fix-system-lockups-on-boot.patch
+
+# iwlwifi borked fw reference
+net-wireless-iwlwifi-fix-firmware-filename-for-3160.patch
 
 ###
 ### Platform drivers
@@ -274,12 +309,6 @@ hid-usbhid-IBM-BladeCenterHS20-quirk.patch
 
 usb-storage-unusual_devs-add-id.patch
 usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch
-
-# boot hang fix
-usb-phy-phy-generic-Fix-reset-behaviour-on-legacy-bo.patch
-
-# xhci 1.1 support
-usb-xhci-change-xhci-1.0-only-restrictions-to-support-xh.patch
 
 ###
 ### V4L

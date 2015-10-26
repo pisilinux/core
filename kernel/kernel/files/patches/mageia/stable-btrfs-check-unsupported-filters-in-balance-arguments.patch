@@ -1,0 +1,57 @@
+From 8eb934591f8bf584969454a658f629cd06e59f3a Mon Sep 17 00:00:00 2001
+From: David Sterba <dsterba@suse.com>
+Date: Mon, 12 Oct 2015 16:55:54 +0200
+Subject: btrfs: check unsupported filters in balance arguments
+
+From: David Sterba <dsterba@suse.com>
+
+commit 8eb934591f8bf584969454a658f629cd06e59f3a upstream.
+
+We don't verify that all the balance filter arguments supplemented by
+the flags are actually known to the kernel. Thus we let it silently pass
+and do nothing.
+
+At the moment this means only the 'limit' filter, but we're going to add
+a few more soon so it's better to have that fixed. Also in older stable
+kernels so that it works with newer userspace tools.
+
+Signed-off-by: David Sterba <dsterba@suse.com>
+Signed-off-by: Chris Mason <clm@fb.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ fs/btrfs/ioctl.c   |    5 +++++
+ fs/btrfs/volumes.h |    8 ++++++++
+ 2 files changed, 13 insertions(+)
+
+--- a/fs/btrfs/ioctl.c
++++ b/fs/btrfs/ioctl.c
+@@ -4647,6 +4647,11 @@ locked:
+ 		bctl->flags |= BTRFS_BALANCE_TYPE_MASK;
+ 	}
+ 
++	if (bctl->flags & ~(BTRFS_BALANCE_ARGS_MASK | BTRFS_BALANCE_TYPE_MASK)) {
++		ret = -EINVAL;
++		goto out_bargs;
++	}
++
+ do_balance:
+ 	/*
+ 	 * Ownership of bctl and mutually_exclusive_operation_running
+--- a/fs/btrfs/volumes.h
++++ b/fs/btrfs/volumes.h
+@@ -376,6 +376,14 @@ struct map_lookup {
+ #define BTRFS_BALANCE_ARGS_VRANGE	(1ULL << 4)
+ #define BTRFS_BALANCE_ARGS_LIMIT	(1ULL << 5)
+ 
++#define BTRFS_BALANCE_ARGS_MASK			\
++	(BTRFS_BALANCE_ARGS_PROFILES |		\
++	 BTRFS_BALANCE_ARGS_USAGE |		\
++	 BTRFS_BALANCE_ARGS_DEVID | 		\
++	 BTRFS_BALANCE_ARGS_DRANGE |		\
++	 BTRFS_BALANCE_ARGS_VRANGE |		\
++	 BTRFS_BALANCE_ARGS_LIMIT)
++
+ /*
+  * Profile changing flags.  When SOFT is set we won't relocate chunk if
+  * it already has the target profile (even though it may be

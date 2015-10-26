@@ -1,0 +1,32 @@
+From 73917739334c6509833b0403b81d4a04a8784bdf Mon Sep 17 00:00:00 2001
+From: Paolo Bonzini <pbonzini@redhat.com>
+Date: Tue, 13 Oct 2015 10:19:35 +0200
+Subject: KVM: x86: fix SMI to halted VCPU
+
+From: Paolo Bonzini <pbonzini@redhat.com>
+
+commit 73917739334c6509833b0403b81d4a04a8784bdf upstream.
+
+An SMI to a halted VCPU must wake it up, hence a VCPU with a pending
+SMI must be considered runnable.
+
+Fixes: 64d6067057d9658acb8675afcfba549abdb7fc16
+Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ arch/x86/kvm/x86.c |    3 +++
+ 1 file changed, 3 insertions(+)
+
+--- a/arch/x86/kvm/x86.c
++++ b/arch/x86/kvm/x86.c
+@@ -8030,6 +8030,9 @@ static inline bool kvm_vcpu_has_events(s
+ 	if (atomic_read(&vcpu->arch.nmi_queued))
+ 		return true;
+ 
++	if (test_bit(KVM_REQ_SMI, &vcpu->requests))
++		return true;
++
+ 	if (kvm_arch_interrupt_allowed(vcpu) &&
+ 	    kvm_cpu_has_interrupt(vcpu))
+ 		return true;

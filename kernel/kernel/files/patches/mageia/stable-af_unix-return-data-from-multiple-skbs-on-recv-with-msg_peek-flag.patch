@@ -1,0 +1,60 @@
+From foo@baz Thu Oct 22 17:25:24 PDT 2015
+From: Aaron Conole <aconole@bytheb.org>
+Date: Sat, 26 Sep 2015 18:50:43 -0400
+Subject: af_unix: return data from multiple SKBs on recv() with MSG_PEEK flag
+
+From: Aaron Conole <aconole@bytheb.org>
+
+[ Upstream commit 9f389e35674f5b086edd70ed524ca0f287259725 ]
+
+AF_UNIX sockets now return multiple skbs from recv() when MSG_PEEK flag
+is set.
+
+This is referenced in kernel bugzilla #12323 @
+https://bugzilla.kernel.org/show_bug.cgi?id=12323
+
+As described both in the BZ and lkml thread @
+http://lkml.org/lkml/2008/1/8/444 calling recv() with MSG_PEEK on an
+AF_UNIX socket only reads a single skb, where the desired effect is
+to return as much skb data has been queued, until hitting the recv
+buffer size (whichever comes first).
+
+The modified MSG_PEEK path will now move to the next skb in the tree
+and jump to the again: label, rather than following the natural loop
+structure. This requires duplicating some of the loop head actions.
+
+This was tested using the python socketpair python code attached to
+the bugzilla issue.
+
+Signed-off-by: Aaron Conole <aconole@bytheb.org>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ net/unix/af_unix.c |   15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
+
+--- a/net/unix/af_unix.c
++++ b/net/unix/af_unix.c
+@@ -2179,8 +2179,21 @@ unlock:
+ 			if (UNIXCB(skb).fp)
+ 				scm.fp = scm_fp_dup(UNIXCB(skb).fp);
+ 
+-			sk_peek_offset_fwd(sk, chunk);
++			if (skip) {
++				sk_peek_offset_fwd(sk, chunk);
++				skip -= chunk;
++			}
+ 
++			if (UNIXCB(skb).fp)
++				break;
++
++			last = skb;
++			last_len = skb->len;
++			unix_state_lock(sk);
++			skb = skb_peek_next(skb, &sk->sk_receive_queue);
++			if (skb)
++				goto again;
++			unix_state_unlock(sk);
+ 			break;
+ 		}
+ 	} while (size);

@@ -1,0 +1,51 @@
+From 36d48fb5766aee9717e429f772046696b215282d Mon Sep 17 00:00:00 2001
+From: Wolfram Sang <wsa+renesas@sang-engineering.com>
+Date: Fri, 9 Oct 2015 10:39:24 +0100
+Subject: i2c: designware-platdrv: enable RuntimePM before registering to the core
+
+From: Wolfram Sang <wsa+renesas@sang-engineering.com>
+
+commit 36d48fb5766aee9717e429f772046696b215282d upstream.
+
+The core may register clients attached to this master which may use
+funtionality from the master. So, RuntimePM must be enabled before, otherwise
+this will fail.
+
+Signed-off-by: Wolfram Sang <wsa+renesas@sang-engineering.com>
+Signed-off-by: Wolfram Sang <wsa@the-dreams.de>
+Acked-by: Mika Westerberg <mika.westerberg@linux.intel.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/i2c/busses/i2c-designware-platdrv.c |   13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+
+--- a/drivers/i2c/busses/i2c-designware-platdrv.c
++++ b/drivers/i2c/busses/i2c-designware-platdrv.c
+@@ -273,12 +273,6 @@ static int dw_i2c_probe(struct platform_
+ 	adap->dev.parent = &pdev->dev;
+ 	adap->dev.of_node = pdev->dev.of_node;
+ 
+-	r = i2c_add_numbered_adapter(adap);
+-	if (r) {
+-		dev_err(&pdev->dev, "failure adding adapter\n");
+-		return r;
+-	}
+-
+ 	if (dev->pm_runtime_disabled) {
+ 		pm_runtime_forbid(&pdev->dev);
+ 	} else {
+@@ -288,6 +282,13 @@ static int dw_i2c_probe(struct platform_
+ 		pm_runtime_enable(&pdev->dev);
+ 	}
+ 
++	r = i2c_add_numbered_adapter(adap);
++	if (r) {
++		dev_err(&pdev->dev, "failure adding adapter\n");
++		pm_runtime_disable(&pdev->dev);
++		return r;
++	}
++
+ 	return 0;
+ }
+ 

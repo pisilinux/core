@@ -1,0 +1,58 @@
+From b10d92a54dac25a6152f1aa1ffc95c12908035ce Mon Sep 17 00:00:00 2001
+From: Paolo Bonzini <pbonzini@redhat.com>
+Date: Wed, 14 Oct 2015 15:25:52 +0200
+Subject: KVM: x86: fix RSM into 64-bit protected mode
+
+From: Paolo Bonzini <pbonzini@redhat.com>
+
+commit b10d92a54dac25a6152f1aa1ffc95c12908035ce upstream.
+
+In order to get into 64-bit protected mode, you need to enable
+paging while EFER.LMA=1.  For this to work, CS.L must be 0.
+Currently, we load the segments before CR0 and CR4, which means
+that if RSM returns into 64-bit protected mode CS.L is already 1
+and everything breaks.
+
+Luckily, CS.L=0 is always the case when executing RSM, because it
+is forbidden to execute RSM from 64-bit protected mode.  Hence it
+is enough to load CR0 and CR4 first, and only then the segments.
+
+Fixes: 660a5d517aaab9187f93854425c4c63f4a09195c
+Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ arch/x86/kvm/emulate.c |   10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+--- a/arch/x86/kvm/emulate.c
++++ b/arch/x86/kvm/emulate.c
+@@ -2418,7 +2418,7 @@ static int rsm_load_state_64(struct x86_
+ 	u64 val, cr0, cr4;
+ 	u32 base3;
+ 	u16 selector;
+-	int i;
++	int i, r;
+ 
+ 	for (i = 0; i < 16; i++)
+ 		*reg_write(ctxt, i) = GET_SMSTATE(u64, smbase, 0x7ff8 - i * 8);
+@@ -2460,13 +2460,17 @@ static int rsm_load_state_64(struct x86_
+ 	dt.address =                GET_SMSTATE(u64, smbase, 0x7e68);
+ 	ctxt->ops->set_gdt(ctxt, &dt);
+ 
++	r = rsm_enter_protected_mode(ctxt, cr0, cr4);
++	if (r != X86EMUL_CONTINUE)
++		return r;
++
+ 	for (i = 0; i < 6; i++) {
+-		int r = rsm_load_seg_64(ctxt, smbase, i);
++		r = rsm_load_seg_64(ctxt, smbase, i);
+ 		if (r != X86EMUL_CONTINUE)
+ 			return r;
+ 	}
+ 
+-	return rsm_enter_protected_mode(ctxt, cr0, cr4);
++	return X86EMUL_CONTINUE;
+ }
+ 
+ static int em_rsm(struct x86_emulate_ctxt *ctxt)
