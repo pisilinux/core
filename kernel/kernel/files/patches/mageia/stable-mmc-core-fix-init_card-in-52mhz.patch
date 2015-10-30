@@ -1,0 +1,82 @@
+From 08b137d90eec51b0e90c42e123ca8ceb118d233f Mon Sep 17 00:00:00 2001
+From: Chaotian Jing <chaotian.jing@mediatek.com>
+Date: Mon, 12 Oct 2015 17:22:23 +0800
+Subject: mmc: core: Fix init_card in 52Mhz
+
+From: Chaotian Jing <chaotian.jing@mediatek.com>
+
+commit 08b137d90eec51b0e90c42e123ca8ceb118d233f upstream.
+
+Suppose that we got a data crc error, and it triggers the mmc_reset.
+mmc_reset will call mmc_send_status to see if HW reset was supported.
+before issue CMD13, it will do retune, and if EMMC was in HS400 mode,
+it will reduce frequency to 52Mhz firstly, then results in card init
+was doing at 52Mhz.
+The mmc_send_status was originally only done for mmc_test, should drop
+it. And, rename the "eMMC hardware reset" to "Reset test", as we would
+also be able to use the test for SD-cards.
+
+Signed-off-by: Chaotian Jing <chaotian.jing@mediatek.com>
+Suggested-by: Adrian Hunter <adrian.hunter@intel.com>
+Fixes: bd11e8bd03ca ("mmc: core: Flag re-tuning is needed on CRC errors")
+Signed-off-by: Ulf Hansson <ulf.hansson@linaro.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/mmc/card/mmc_test.c |    9 +++------
+ drivers/mmc/core/mmc.c      |    7 -------
+ 2 files changed, 3 insertions(+), 13 deletions(-)
+
+--- a/drivers/mmc/card/mmc_test.c
++++ b/drivers/mmc/card/mmc_test.c
+@@ -2263,15 +2263,12 @@ static int mmc_test_profile_sglen_r_nonb
+ /*
+  * eMMC hardware reset.
+  */
+-static int mmc_test_hw_reset(struct mmc_test_card *test)
++static int mmc_test_reset(struct mmc_test_card *test)
+ {
+ 	struct mmc_card *card = test->card;
+ 	struct mmc_host *host = card->host;
+ 	int err;
+ 
+-	if (!mmc_card_mmc(card) || !mmc_can_reset(card))
+-		return RESULT_UNSUP_CARD;
+-
+ 	err = mmc_hw_reset(host);
+ 	if (!err)
+ 		return RESULT_OK;
+@@ -2605,8 +2602,8 @@ static const struct mmc_test_case mmc_te
+ 	},
+ 
+ 	{
+-		.name = "eMMC hardware reset",
+-		.run = mmc_test_hw_reset,
++		.name = "Reset test",
++		.run = mmc_test_reset,
+ 	},
+ };
+ 
+--- a/drivers/mmc/core/mmc.c
++++ b/drivers/mmc/core/mmc.c
+@@ -1924,7 +1924,6 @@ EXPORT_SYMBOL(mmc_can_reset);
+ static int mmc_reset(struct mmc_host *host)
+ {
+ 	struct mmc_card *card = host->card;
+-	u32 status;
+ 
+ 	if (!(host->caps & MMC_CAP_HW_RESET) || !host->ops->hw_reset)
+ 		return -EOPNOTSUPP;
+@@ -1937,12 +1936,6 @@ static int mmc_reset(struct mmc_host *ho
+ 
+ 	host->ops->hw_reset(host);
+ 
+-	/* If the reset has happened, then a status command will fail */
+-	if (!mmc_send_status(card, &status)) {
+-		mmc_host_clk_release(host);
+-		return -ENOSYS;
+-	}
+-
+ 	/* Set initial state and call mmc_set_ios */
+ 	mmc_set_initial_state(host);
+ 	mmc_host_clk_release(host);
