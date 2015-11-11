@@ -14,9 +14,6 @@
 ###
 ### Stable Queue
 ###
-stable-mac80211-fix-hwflags-debugfs-file-format.patch
-stable-ath9k-declare-required-extra-tx-headroom.patch
-stable-mmc-core-fix-init_card-in-52mhz.patch
 
 ###
 ### Arch x86
@@ -41,8 +38,11 @@ x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch
 # slows down boot
 Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch
 
-# EFI
-x86-efi-Fix-multiple-GOP-device-support.patch
+# (CVE-2015-5307)
+x86-KVM-x86-work-around-infinite-loop-in-microcode-when-AC-is-delivered.patch
+
+# (CVE-2015-8104)
+x86-KVM-svm-unconditionally-intercept-DB.patch
 
 ###
 ### Core
@@ -131,9 +131,6 @@ scsi-Fix-NULL-pointer-dereference-in-RTPM-of-block-layer.patch
 fs-aufs4.patch
 fs-aufs4-modular.patch
 
-# btrfs memleak
-fs-btrfs-fix-possible-leak-in-btrfs_ioctl_balance.patch
-
 ###
 ### FireWire
 ###
@@ -177,9 +174,6 @@ gpu-drm-mach64-3.18-buildfix.patch
 
 input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch
 
-# fix alps breakage
-input-alps-Only-the-Dell-Latitude-D420_430_620_630-have-separate-stick-button-bits.patch
-
 ###
 ### idle
 ###
@@ -220,11 +214,14 @@ net-netfilter-psd.patch
 net-netfilter-psd-mdv.patch
 net-netfilter-psd-2.6.35-buildfix.patch
 
-# wireless lockup
-net-wireless-rtlwifi-rtl8821ae-Fix-system-lockups-on-boot.patch
+# netfilter fixes
+net-netfilter-ipset-Fix-extension-alignment.patch
+net-netfilter-ipset-Fix-hash-type-expiration.patch
+net-netfilter-ipset-Fix-hash-type-expire-release-empty-hash-bucket-block.patch
+net-netfilter-Fix-removal-of-GRE-expectation-entries-created-by-PPTP.patch
 
-# iwlwifi borked fw reference
-net-wireless-iwlwifi-fix-firmware-filename-for-3160.patch
+# rtlwifi hang fix
+net-wireless-rtlwifi-rtl8821ae-Fix-lockups-on-boot.patch
 
 ###
 ### Platform drivers
