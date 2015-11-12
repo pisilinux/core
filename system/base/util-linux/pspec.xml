@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>Various useful Linux utilities</Summary>
         <Description>The util-linux package contains a large variety of low-level system utilities that are necessary for a Linux system to function.</Description>
-        <Archive sha1sum="0549760ba1d2eb0e48b41b926d54ac55533369af" type="tarxz">https://www.kernel.org/pub/linux/utils/util-linux/v2.27/util-linux-2.27.tar.xz</Archive>
+        <Archive sha1sum="462bca6320535d39b62216d8609da5531bfef0bb" type="tarxz">https://www.kernel.org/pub/linux/utils/util-linux/v2.27/util-linux-2.27.1.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>zlib-devel</Dependency>
             <Dependency>eudev-devel</Dependency>
@@ -75,7 +75,7 @@
         <RuntimeDependencies>
             <Dependency>libutil-linux</Dependency>
         </RuntimeDependencies>
-     <Conflicts>
+        <Conflicts>
             <Package releaseTo="8">uuidd</Package>
         </Conflicts>
         <!-- FIXME: Add COMAR service -->
@@ -160,6 +160,13 @@
     </Package>
 
     <History>
+        <Update release="12">
+            <Date>2015-11-12</Date>
+            <Version>2.27.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="11">
             <Date>2015-10-09</Date>
             <Version>2.27</Version>
