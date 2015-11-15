@@ -59,7 +59,9 @@ def configure(parameters = '', installPrefix = prefix, sourceDir = '..'):
             -DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
             -DBUILD_TESTING=OFF \
             -DCMAKE_BUILD_TYPE=Release \
-            -DLIB_INSTALL_DIR:PATH=%s %s" % (appsdir, includedir, configdir, libexecdir, localedir, qmldir, plugindir, moduledir, pythondir, sysconfdir, htmldir, mandir, libdir, parameters), installPrefix, sourceDir)
+            -DLIB_INSTALL_DIR:PATH=%s %s \
+            -DCMAKE_INSTALL_LIBDIR=lib \
+            -DCMAKE_INSTALL_PREFIX=%s" % (appsdir, includedir, configdir, libexecdir, localedir, qmldir, plugindir, moduledir, pythondir, sysconfdir, htmldir, mandir, libdir, parameters, prefix), installPrefix, sourceDir)
 
     shelltools.cd("..")
 
