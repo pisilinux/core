@@ -12,7 +12,7 @@
         <IsA>kernel</IsA>
         <Summary>The Linux kernel (the core of the Linux operating system) for Pisi Linux</Summary>
         <Description>kernel contains the Linux kernel, the core of any Linux operating system. The kernel handles the basic functions of the operating system: memory allocation, process allocation, device input and output, etc.</Description>
-        <Archive sha1sum="70db3c22960e3da16b7d7b0a55066154b8d92900" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.2.tar.gz</Archive>
+        <Archive sha1sum="309d9bedd8c9ef4a79695f04dcf65c0b551d784c" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.3.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -28,10 +28,28 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.2.6.xz</Patch>
-            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.2.6/1.mga6/PATCHES/patches/series-->
+            <!--Patch level="1" compressionType="xz">patches/linux/patch-4.2.6.xz</Patch-->
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.3.0/2.mga6/PATCHES/patches/series-->
             <!--stable patches-->
-
+            <Patch level="1">patches/mageia/stable-arm-8449-1-fix-bug-in-vdsomunge-swab32-macro.patch</Patch>
+            <Patch level="1">patches/mageia/stable-usb-qcserial-add-sierra-wireless-mc74xx-em74xx.patch</Patch>
+            <Patch level="1">patches/mageia/stable-tipc-linearize-arriving-name_distr-and-link_proto-buffers.patch</Patch>
+            <Patch level="1">patches/mageia/stable-net-bcmgenet-software-reset-ephy-after-power-on.patch</Patch>
+            <Patch level="1">patches/mageia/stable-ipv4-fix-to-not-remove-local-route-on-link-down.patch</Patch>
+            <Patch level="1">patches/mageia/stable-ipv4-update-rtnh_f_linkdown-flag-on-up-event.patch</Patch>
+            <Patch level="1">patches/mageia/stable-stmmac-correctly-report-ptp-capabilities.patch</Patch>
+            <Patch level="1">patches/mageia/stable-ipmr-fix-possible-race-resulting-from-improper-usage-of-ip_inc_stats_bh-in-preemptible-context.patch</Patch>
+            <Patch level="1">patches/mageia/stable-qmi_wwan-fix-entry-for-hp-lt4112-lte-hspa-gobi-4g-module.patch</Patch>
+            <Patch level="1">patches/mageia/stable-sit-fix-sit0-percpu-double-allocations.patch</Patch>
+            <Patch level="1">patches/mageia/stable-sfc-push-partner-queue-for-skb-xmit_more.patch</Patch>
+            <Patch level="1">patches/mageia/stable-net-avoid-null-deref-in-inet_ctl_sock_destroy.patch</Patch>
+            <Patch level="1">patches/mageia/stable-ipv6-clean-up-dev_snmp6-proc-entry-when-we-fail-to-initialize-inet6_dev.patch</Patch>
+            <Patch level="1">patches/mageia/stable-ipv4-disable-bh-when-changing-ip-local-port-range.patch</Patch>
+            <Patch level="1">patches/mageia/stable-net-fix-prefsrc-lookups.patch</Patch>
+            <Patch level="1">patches/mageia/stable-tun_dst-fix-potential-null-dereference.patch</Patch>
+            <Patch level="1">patches/mageia/stable-packet-race-condition-in-packet_bind.patch</Patch>
+            <Patch level="1">patches/mageia/stable-bonding-fix-panic-on-non-arphrd_ether-enslave-failure.patch</Patch>
+            <Patch level="1">patches/mageia/stable-net-fix-a-race-in-dst_release.patch</Patch>
             <!--other patches-->
             <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
             <Patch level="1">patches/mageia/x86-boot-video-80x25-if-break.patch</Patch>
@@ -40,11 +58,15 @@
             <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
             <Patch level="1">patches/mageia/x86-KVM-x86-work-around-infinite-loop-in-microcode-when-AC-is-delivered.patch</Patch>
             <Patch level="1">patches/mageia/x86-KVM-svm-unconditionally-intercept-DB.patch</Patch>
+            <Patch level="1">patches/mageia/Revert-x86-efi-Request-desired-alignment-via-the-PE-.patch</Patch>
+            <Patch level="1">patches/mageia/Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch</Patch>
             <Patch level="1">patches/mageia/base-cacheinfo-silence-DT-warnings.patch</Patch>
             <Patch level="1">patches/mageia/pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch</Patch>
             <Patch level="1">patches/mageia/pci-quirks-drop-devinit-exit.patch</Patch>
             <Patch level="1">patches/mageia/acpi-CLEVO-M360S-disable_acpi_irq.patch</Patch>
             <Patch level="1">patches/mageia/acpi-processor-M720SR-limit-to-C2.patch</Patch>
+            <Patch level="1">patches/mageia/ACPI-video-Add-a-quirk-to-force-acpi-video-backlight.patch</Patch>
+            <Patch level="1">patches/mageia/ACPI-video-Add-a-quirk-to-force-native-backlight-on-.patch</Patch>
             <!--Patch level="1">patches/mageia/scsi-ppscsi-2.6.2.patch</Patch>
             <Patch level="1">patches/mageia/scsi-ppscsi_fixes.patch</Patch>
             <Patch level="1">patches/mageia/scsi-ppscsi-sg-helper-update.patch</Patch>
@@ -58,8 +80,8 @@
             <Patch level="1">patches/mageia/block-floppy-disable-pnp-modalias.patch</Patch>
             <Patch level="1">patches/mageia/ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch</Patch>
             <Patch level="1">patches/mageia/block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch</Patch>
-            <Patch level="1">patches/mageia/fs-aufs4.patch</Patch>
-            <Patch level="1">patches/mageia/fs-aufs4-modular.patch</Patch>
+            <Patch level="1">patches/mageia/fs-aufs-4.3.patch</Patch>
+            <Patch level="1">patches/mageia/fs-aufs-4.3-modular.patch</Patch>
             <Patch level="1">patches/mageia/firewire-ieee1394-module-aliases.patch</Patch>
             <Patch level="1">patches/mageia/char-agp-intel-new-Q57-id.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64.patch</Patch>
@@ -99,7 +121,6 @@
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/include-kbuild-export-pci_ids.patch</Patch>
-            <Patch level="1">patches/mageia/thunderbolt-Allow-loading-of-module-on-recent-Apple-.patch</Patch>
             <Patch level="1">patches/mageia/hid-usbhid-IBM-BladeCenterHS20-quirk.patch</Patch>
             <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id.patch</Patch>
             <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch</Patch>
@@ -131,11 +152,10 @@
             <Patch level="1">patches/mageia/3rd-viahss-2.6.35-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-viahss-3.0-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8723bs.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8723bs-buildfix.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8723bs-updates.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8723bs-4.2-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/scsi-Fix-NULL-pointer-dereference-in-RTPM-of-block-layer.patch</Patch>
             <Patch level="1">patches/mageia/scsi-Revert-SCSI-Fix-NULL-pointer-dereference-in-runtime-PM.patch</Patch>
+            <Patch level="1">patches/mageia/ahci-Add-Marvell-88se91a2-device-id.patch</Patch>
+            <Patch level="1">patches/mageia/ahci-add-new-Intel-device-IDs.patch</Patch>
         </Patches>
     </Source>
 
@@ -189,7 +209,15 @@
         </Files>
     </Package>
 
-    <History>
+    <History>  
+          <Update release="67">
+            <Date>2015-12-01</Date>
+            <Version>4.3.0</Version>
+            <Comment>Version bump to 4.3.0</Comment>
+            <Type package="kernel">security</Type>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+          </Update>
           <Update release="66">
             <Date>2015-11-11</Date>
             <Version>4.2.6</Version>
