@@ -1,0 +1,55 @@
+From foo@baz Tue Nov 17 14:33:46 PST 2015
+From: David Ahern <dsa@cumulusnetworks.com>
+Date: Tue, 3 Nov 2015 15:59:28 -0800
+Subject: net: Fix prefsrc lookups
+
+From: David Ahern <dsa@cumulusnetworks.com>
+
+[ Upstream commit e1b8d903c6c3862160d2d5036806a94786c8fc4e ]
+
+A bug report (https://bugzilla.kernel.org/show_bug.cgi?id=107071) noted
+that the follwoing ip command is failing with v4.3:
+
+    $ ip route add 10.248.5.0/24 dev bond0.250 table vlan_250 src 10.248.5.154
+    RTNETLINK answers: Invalid argument
+
+021dd3b8a142d changed the lookup of the given preferred source address to
+use the table id passed in, but this assumes the local entries are in the
+given table which is not necessarily true for non-VRF use cases. When
+validating the preferred source fallback to the local table on failure.
+
+Fixes: 021dd3b8a142d ("net: Add routes to the table associated with the device")
+Signed-off-by: David Ahern <dsa@cumulusnetworks.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ net/ipv4/fib_semantics.c |   13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
+
+--- a/net/ipv4/fib_semantics.c
++++ b/net/ipv4/fib_semantics.c
+@@ -864,14 +864,21 @@ static bool fib_valid_prefsrc(struct fib
+ 	if (cfg->fc_type != RTN_LOCAL || !cfg->fc_dst ||
+ 	    fib_prefsrc != cfg->fc_dst) {
+ 		u32 tb_id = cfg->fc_table;
++		int rc;
+ 
+ 		if (tb_id == RT_TABLE_MAIN)
+ 			tb_id = RT_TABLE_LOCAL;
+ 
+-		if (inet_addr_type_table(cfg->fc_nlinfo.nl_net,
+-					 fib_prefsrc, tb_id) != RTN_LOCAL) {
+-			return false;
++		rc = inet_addr_type_table(cfg->fc_nlinfo.nl_net,
++					  fib_prefsrc, tb_id);
++
++		if (rc != RTN_LOCAL && tb_id != RT_TABLE_LOCAL) {
++			rc = inet_addr_type_table(cfg->fc_nlinfo.nl_net,
++						  fib_prefsrc, RT_TABLE_LOCAL);
+ 		}
++
++		if (rc != RTN_LOCAL)
++			return false;
+ 	}
+ 	return true;
+ }

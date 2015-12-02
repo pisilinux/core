@@ -1,0 +1,33 @@
+From foo@baz Tue Nov 17 14:33:46 PST 2015
+From: Eric Dumazet <edumazet@google.com>
+Date: Mon, 2 Nov 2015 07:50:07 -0800
+Subject: net: avoid NULL deref in inet_ctl_sock_destroy()
+
+From: Eric Dumazet <edumazet@google.com>
+
+[ Upstream commit 8fa677d2706d325d71dab91bf6e6512c05214e37 ]
+
+Under low memory conditions, tcp_sk_init() and icmp_sk_init()
+can both iterate on all possible cpus and call inet_ctl_sock_destroy(),
+with eventual NULL pointer.
+
+Signed-off-by: Eric Dumazet <edumazet@google.com>
+Reported-by: Dmitry Vyukov <dvyukov@google.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ include/net/inet_common.h |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+--- a/include/net/inet_common.h
++++ b/include/net/inet_common.h
+@@ -41,7 +41,8 @@ int inet_recv_error(struct sock *sk, str
+ 
+ static inline void inet_ctl_sock_destroy(struct sock *sk)
+ {
+-	sock_release(sk->sk_socket);
++	if (sk)
++		sock_release(sk->sk_socket);
+ }
+ 
+ #endif

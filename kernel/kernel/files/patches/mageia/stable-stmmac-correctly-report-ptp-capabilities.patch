@@ -1,0 +1,39 @@
+From foo@baz Tue Nov 17 14:33:46 PST 2015
+From: Phil Reid <preid@electromag.com.au>
+Date: Fri, 30 Oct 2015 16:43:55 +0800
+Subject: stmmac: Correctly report PTP capabilities.
+
+From: Phil Reid <preid@electromag.com.au>
+
+[ Upstream commit e6dbe1eb2db0d7a14991c06278dd3030c45fb825 ]
+
+priv->hwts_*_en indicate if timestamping is enabled/disabled at run
+time. But  priv->dma_cap.time_stamp  and priv->dma_cap.atime_stamp
+indicates HW is support for PTPv1/PTPv2.
+
+Signed-off-by: Phil Reid <preid@electromag.com.au>
+Acked-by: Richard Cochran <richardcochran@gmail.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ drivers/net/ethernet/stmicro/stmmac/stmmac_ethtool.c |    7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+--- a/drivers/net/ethernet/stmicro/stmmac/stmmac_ethtool.c
++++ b/drivers/net/ethernet/stmicro/stmmac/stmmac_ethtool.c
+@@ -721,10 +721,13 @@ static int stmmac_get_ts_info(struct net
+ {
+ 	struct stmmac_priv *priv = netdev_priv(dev);
+ 
+-	if ((priv->hwts_tx_en) && (priv->hwts_rx_en)) {
++	if ((priv->dma_cap.time_stamp || priv->dma_cap.atime_stamp)) {
+ 
+-		info->so_timestamping = SOF_TIMESTAMPING_TX_HARDWARE |
++		info->so_timestamping = SOF_TIMESTAMPING_TX_SOFTWARE |
++					SOF_TIMESTAMPING_TX_HARDWARE |
++					SOF_TIMESTAMPING_RX_SOFTWARE |
+ 					SOF_TIMESTAMPING_RX_HARDWARE |
++					SOF_TIMESTAMPING_SOFTWARE |
+ 					SOF_TIMESTAMPING_RAW_HARDWARE;
+ 
+ 		if (priv->ptp_clock)

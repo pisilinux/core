@@ -1,0 +1,51 @@
+From fa5c35011a8d5f3d0c597a6336107eafd1b6046c Mon Sep 17 00:00:00 2001
+From: Matt Fleming <matt.fleming@intel.com>
+Date: Fri, 7 Aug 2015 09:36:56 +0100
+Subject: [PATCH] Revert "x86/efi: Request desired alignment via the PE/COFF
+ headers"
+
+This reverts commit:
+
+  aeffc4928ea2 ("x86/efi: Request desired alignment via the PE/COFF headers")
+
+Linn reports that Signtool complains that kernels built with
+CONFIG_EFI_STUB=y are violating the PE/COFF specification because
+the 'SizeOfImage' field is not a multiple of 'SectionAlignment'.
+
+This violation was introduced as an optimisation to skip having
+the kernel relocate itself during boot and instead have the
+firmware place it at a correctly aligned address.
+
+No one else has complained and I'm not aware of any firmware
+implementations that refuse to boot with commit aeffc4928ea2,
+but it's a real bug, so revert the offending commit.
+
+Reported-by: Linn Crosetto <linn@hp.com>
+Signed-off-by: Matt Fleming <matt.fleming@intel.com>
+Cc: H. Peter Anvin <hpa@zytor.com>
+Cc: Linus Torvalds <torvalds@linux-foundation.org>
+Cc: Michael Brown <mbrown@fensystems.co.uk>
+Cc: Peter Zijlstra <peterz@infradead.org>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Link: http://lkml.kernel.org/r/1438936621-5215-3-git-send-email-matt@codeblueprint.co.uk
+Signed-off-by: Ingo Molnar <mingo@kernel.org>
+---
+ arch/x86/boot/header.S | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/x86/boot/header.S b/arch/x86/boot/header.S
+index 16ef025..7a6d43a 100644
+--- a/arch/x86/boot/header.S
++++ b/arch/x86/boot/header.S
+@@ -154,7 +154,7 @@ extra_header_fields:
+ #else
+ 	.quad	0				# ImageBase
+ #endif
+-	.long	CONFIG_PHYSICAL_ALIGN		# SectionAlignment
++	.long	0x20				# SectionAlignment
+ 	.long	0x20				# FileAlignment
+ 	.word	0				# MajorOperatingSystemVersion
+ 	.word	0				# MinorOperatingSystemVersion
+-- 
+2.3.10
+
