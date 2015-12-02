@@ -1,0 +1,39 @@
+#
+# https://forums.virtualbox.org/viewtopic.php?uid=80969&f=7&t=70150&start=0
+# kernel 4.3-rc1 heads up
+#
+--- ./vboxdrv/linux/SUPDrv-linux.c.orig	2015-09-25 20:56:04.704532570 -0700
++++ ./vboxdrv/linux/SUPDrv-linux.c	2015-09-25 20:57:17.265521751 -0700
+@@ -485,6 +485,7 @@
+      * opened, at least we'll blindly assume that here.
+      */
+ #ifdef CONFIG_VBOXDRV_AS_MISC
++#if LINUX_VERSION_CODE < KERNEL_VERSION(4,3,0)
+     rc = misc_deregister(&gMiscDeviceUsr);
+     if (rc < 0)
+     {
+@@ -495,6 +496,10 @@
+     {
+         Log(("misc_deregister failed with rc=%#x on vboxdrv\n", rc));
+     }
++#else
++    misc_deregister(&gMiscDeviceUsr);
++    misc_deregister(&gMiscDeviceSys);
++#endif
+ #else  /* !CONFIG_VBOXDRV_AS_MISC */
+ # ifdef CONFIG_DEVFS_FS
+     /*
+--- ./vboxnetadp/linux/VBoxNetAdp-linux.c.orig	2015-09-25 20:55:42.309667865 -0700
++++ ./vboxnetadp/linux/VBoxNetAdp-linux.c	2015-09-25 20:58:49.331034237 -0700
+@@ -436,7 +436,11 @@
+ 
+     vboxNetAdpShutdown();
+     /* Remove control device */
++    #if LINUX_VERSION_CODE < KERNEL_VERSION(4,3,0)
+     rc = misc_deregister(&g_CtlDev);
++    #else
++        misc_deregister(&g_CtlDev);
++    #endif
+     if (rc < 0)
+     {
+         printk(KERN_ERR "misc_deregister failed with rc=%x\n", rc);
