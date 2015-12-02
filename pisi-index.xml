@@ -552,7 +552,7 @@
             <Summary xml:lang="tr">Pisi Linux için Linux çekirdeği</Summary>
             <Summary xml:lang="es">El kernel de Linux (el núcleo del sistema operativo Linux) de Pisi Linux</Summary>
             <Description xml:lang="en">kernel contains the Linux kernel, the core of any Linux operating system. The kernel handles the basic functions of the operating system: memory allocation, process allocation, device input and output, etc.</Description>
-            <Archive type="targz" sha1sum="70db3c22960e3da16b7d7b0a55066154b8d92900">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.2.tar.gz</Archive>
+            <Archive type="targz" sha1sum="309d9bedd8c9ef4a79695f04dcf65c0b551d784c">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.3.tar.gz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
                 <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -567,21 +567,41 @@
                 <Dependency>xmlto</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.2.5.xz</Patch>
-                <Patch level="1">patches/mageia/stable-mac80211-fix-hwflags-debugfs-file-format.patch</Patch>
-                <Patch level="1">patches/mageia/stable-ath9k-declare-required-extra-tx-headroom.patch</Patch>
-                <Patch level="1">patches/mageia/stable-mmc-core-fix-init_card-in-52mhz.patch</Patch>
+                <Patch level="1">patches/mageia/stable-arm-8449-1-fix-bug-in-vdsomunge-swab32-macro.patch</Patch>
+                <Patch level="1">patches/mageia/stable-usb-qcserial-add-sierra-wireless-mc74xx-em74xx.patch</Patch>
+                <Patch level="1">patches/mageia/stable-tipc-linearize-arriving-name_distr-and-link_proto-buffers.patch</Patch>
+                <Patch level="1">patches/mageia/stable-net-bcmgenet-software-reset-ephy-after-power-on.patch</Patch>
+                <Patch level="1">patches/mageia/stable-ipv4-fix-to-not-remove-local-route-on-link-down.patch</Patch>
+                <Patch level="1">patches/mageia/stable-ipv4-update-rtnh_f_linkdown-flag-on-up-event.patch</Patch>
+                <Patch level="1">patches/mageia/stable-stmmac-correctly-report-ptp-capabilities.patch</Patch>
+                <Patch level="1">patches/mageia/stable-ipmr-fix-possible-race-resulting-from-improper-usage-of-ip_inc_stats_bh-in-preemptible-context.patch</Patch>
+                <Patch level="1">patches/mageia/stable-qmi_wwan-fix-entry-for-hp-lt4112-lte-hspa-gobi-4g-module.patch</Patch>
+                <Patch level="1">patches/mageia/stable-sit-fix-sit0-percpu-double-allocations.patch</Patch>
+                <Patch level="1">patches/mageia/stable-sfc-push-partner-queue-for-skb-xmit_more.patch</Patch>
+                <Patch level="1">patches/mageia/stable-net-avoid-null-deref-in-inet_ctl_sock_destroy.patch</Patch>
+                <Patch level="1">patches/mageia/stable-ipv6-clean-up-dev_snmp6-proc-entry-when-we-fail-to-initialize-inet6_dev.patch</Patch>
+                <Patch level="1">patches/mageia/stable-ipv4-disable-bh-when-changing-ip-local-port-range.patch</Patch>
+                <Patch level="1">patches/mageia/stable-net-fix-prefsrc-lookups.patch</Patch>
+                <Patch level="1">patches/mageia/stable-tun_dst-fix-potential-null-dereference.patch</Patch>
+                <Patch level="1">patches/mageia/stable-packet-race-condition-in-packet_bind.patch</Patch>
+                <Patch level="1">patches/mageia/stable-bonding-fix-panic-on-non-arphrd_ether-enslave-failure.patch</Patch>
+                <Patch level="1">patches/mageia/stable-net-fix-a-race-in-dst_release.patch</Patch>
                 <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
                 <Patch level="1">patches/mageia/x86-boot-video-80x25-if-break.patch</Patch>
                 <Patch level="1">patches/mageia/x86-default_poweroff_up_machines.patch</Patch>
                 <Patch level="1">patches/mageia/x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch</Patch>
                 <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
-                <Patch level="1">patches/mageia/x86-efi-Fix-multiple-GOP-device-support.patch</Patch>
+                <Patch level="1">patches/mageia/x86-KVM-x86-work-around-infinite-loop-in-microcode-when-AC-is-delivered.patch</Patch>
+                <Patch level="1">patches/mageia/x86-KVM-svm-unconditionally-intercept-DB.patch</Patch>
+                <Patch level="1">patches/mageia/Revert-x86-efi-Request-desired-alignment-via-the-PE-.patch</Patch>
+                <Patch level="1">patches/mageia/Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch</Patch>
                 <Patch level="1">patches/mageia/base-cacheinfo-silence-DT-warnings.patch</Patch>
                 <Patch level="1">patches/mageia/pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch</Patch>
                 <Patch level="1">patches/mageia/pci-quirks-drop-devinit-exit.patch</Patch>
                 <Patch level="1">patches/mageia/acpi-CLEVO-M360S-disable_acpi_irq.patch</Patch>
                 <Patch level="1">patches/mageia/acpi-processor-M720SR-limit-to-C2.patch</Patch>
+                <Patch level="1">patches/mageia/ACPI-video-Add-a-quirk-to-force-acpi-video-backlight.patch</Patch>
+                <Patch level="1">patches/mageia/ACPI-video-Add-a-quirk-to-force-native-backlight-on-.patch</Patch>
                 <Patch level="1">patches/mageia/scsi-megaraid-new-sysfs-name.patch</Patch>
                 <Patch level="1">patches/mageia/ide-pci-sis5513-965.patch</Patch>
                 <Patch level="1">patches/mageia/mpt-vmware-fix.patch</Patch>
@@ -589,9 +609,8 @@
                 <Patch level="1">patches/mageia/block-floppy-disable-pnp-modalias.patch</Patch>
                 <Patch level="1">patches/mageia/ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch</Patch>
                 <Patch level="1">patches/mageia/block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch</Patch>
-                <Patch level="1">patches/mageia/fs-aufs4.patch</Patch>
-                <Patch level="1">patches/mageia/fs-aufs4-modular.patch</Patch>
-                <Patch level="1">patches/mageia/fs-btrfs-fix-possible-leak-in-btrfs_ioctl_balance.patch</Patch>
+                <Patch level="1">patches/mageia/fs-aufs-4.3.patch</Patch>
+                <Patch level="1">patches/mageia/fs-aufs-4.3-modular.patch</Patch>
                 <Patch level="1">patches/mageia/firewire-ieee1394-module-aliases.patch</Patch>
                 <Patch level="1">patches/mageia/char-agp-intel-new-Q57-id.patch</Patch>
                 <Patch level="1">patches/mageia/gpu-drm-mach64.patch</Patch>
@@ -612,7 +631,6 @@
                 <Patch level="1">patches/mageia/gpu-drm-mach64-3.17-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/gpu-drm-mach64-3.18-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch</Patch>
-                <Patch level="1">patches/mageia/input-alps-Only-the-Dell-Latitude-D420_430_620_630-have-separate-stick-button-bits.patch</Patch>
                 <Patch level="1">patches/mageia/net-sis190-fix-list-usage.patch</Patch>
                 <Patch level="1">patches/mageia/net-netfilter-IFWLOG.patch</Patch>
                 <Patch level="1">patches/mageia/net-netfilter-IFWLOG-mdv.patch</Patch>
@@ -623,13 +641,15 @@
                 <Patch level="1">patches/mageia/net-netfilter-psd.patch</Patch>
                 <Patch level="1">patches/mageia/net-netfilter-psd-mdv.patch</Patch>
                 <Patch level="1">patches/mageia/net-netfilter-psd-2.6.35-buildfix.patch</Patch>
-                <Patch level="1">patches/mageia/net-wireless-rtlwifi-rtl8821ae-Fix-system-lockups-on-boot.patch</Patch>
-                <Patch level="1">patches/mageia/net-wireless-iwlwifi-fix-firmware-filename-for-3160.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-ipset-Fix-extension-alignment.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-ipset-Fix-hash-type-expiration.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-ipset-Fix-hash-type-expire-release-empty-hash-bucket-block.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-Fix-removal-of-GRE-expectation-entries-created-by-PPTP.patch</Patch>
+                <Patch level="1">patches/mageia/net-wireless-rtlwifi-rtl8821ae-Fix-lockups-on-boot.patch</Patch>
                 <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
                 <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
                 <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/include-kbuild-export-pci_ids.patch</Patch>
-                <Patch level="1">patches/mageia/thunderbolt-Allow-loading-of-module-on-recent-Apple-.patch</Patch>
                 <Patch level="1">patches/mageia/hid-usbhid-IBM-BladeCenterHS20-quirk.patch</Patch>
                 <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id.patch</Patch>
                 <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch</Patch>
@@ -658,11 +678,10 @@
                 <Patch level="1">patches/mageia/3rd-viahss-2.6.35-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/3rd-viahss-3.0-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/3rd-rtl8723bs.patch</Patch>
-                <Patch level="1">patches/mageia/3rd-rtl8723bs-buildfix.patch</Patch>
-                <Patch level="1">patches/mageia/3rd-rtl8723bs-updates.patch</Patch>
-                <Patch level="1">patches/mageia/3rd-rtl8723bs-4.2-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/scsi-Fix-NULL-pointer-dereference-in-RTPM-of-block-layer.patch</Patch>
                 <Patch level="1">patches/mageia/scsi-Revert-SCSI-Fix-NULL-pointer-dereference-in-runtime-PM.patch</Patch>
+                <Patch level="1">patches/mageia/ahci-Add-Marvell-88se91a2-device-id.patch</Patch>
+                <Patch level="1">patches/mageia/ahci-add-new-Intel-device-IDs.patch</Patch>
             </Patches>
             <SourceURI>kernel/kernel/pspec.xml</SourceURI>
         </Source>
@@ -721,6 +740,22 @@
             </Files>
         </Package>
         <History>
+            <Update release="67">
+                <Type package="kernel">security</Type>
+                <Date>2015-12-01</Date>
+                <Version>4.3.0</Version>
+                <Comment>Version bump to 4.3.0</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="66">
+                <Type package="kernel">security</Type>
+                <Date>2015-11-11</Date>
+                <Version>4.2.6</Version>
+                <Comment>Version bump to 4.2.5 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.2.5</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="65">
                 <Type package="kernel">security</Type>
                 <Date>2015-11-30</Date>
@@ -1505,13 +1540,10 @@
             <Summary xml:lang="tr">CPU güç/frekans yönetim araçları</Summary>
             <Description xml:lang="en">cpupowertools contains utilities to manage power management and frequency scaling policies of modern CPUs.</Description>
             <Description xml:lang="tr">cpupowertools, işlemcinin çeşitli güç ve frekans parametrelerinin yönetilmesini sağlayan çeşitli araçları içeren bir pakettir.</Description>
-            <Archive type="targz" sha1sum="70db3c22960e3da16b7d7b0a55066154b8d92900">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.2.tar.gz</Archive>
+            <Archive type="targz" sha1sum="309d9bedd8c9ef4a79695f04dcf65c0b551d784c">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.3.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
-            <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.2.5.xz</Patch>
-            </Patches>
             <SourceURI>kernel/tools/cpupowertools/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -1533,6 +1565,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="66">
+                <Date>2015-12-01</Date>
+                <Version>4.3.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="65">
+                <Date>2015-11-11</Date>
+                <Version>4.2.6</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="64">
                 <Date>2015-11-30</Date>
                 <Version>4.2.5</Version>
@@ -2177,8 +2223,11 @@
             <Description xml:lang="en">This package provides the kernel support for VirtualBox.</Description>
             <Archive type="tarxz" sha1sum="14e3d8630f779dc1349d9aa488fa7e6604b9ba3e">http://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-5.0.4.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.2.5">kernel-module-headers</Dependency>
+                <Dependency version="4.3.0">kernel-module-headers</Dependency>
             </BuildDependencies>
+            <Patches>
+                <Patch>vbox_linux-4.3.diff</Patch>
+            </Patches>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -2187,7 +2236,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.2.5">kernel</Dependency>
+                <Dependency version="4.3.0">kernel</Dependency>
                 <Dependency version="5.0.4">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -2209,6 +2258,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="58">
+                <Date>2015-12-01</Date>
+                <Version>5.0.4</Version>
+                <Comment>Rebuild for kernel-4.3.0.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="57">
+                <Date>2015-11-11</Date>
+                <Version>5.0.4</Version>
+                <Comment>Rebuild for kernel-4.2.6.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="57">
                 <Date>2015-11-30</Date>
                 <Version>5.0.4</Version>
@@ -2642,7 +2705,7 @@
                 <AdditionalFile target="kernel-4.2.patch">kernel-4.2.patch</AdditionalFile>
             </AdditionalFiles>
             <BuildDependencies>
-                <Dependency version="4.2.5">kernel-module-headers</Dependency>
+                <Dependency version="4.3.0">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch>support_kernel-4.0.patch</Patch>
@@ -2655,7 +2718,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.2.5">kernel</Dependency>
+                <Dependency version="4.3.0">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2667,6 +2730,20 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2015-12-01</Date>
+                <Version>1.59</Version>
+                <Comment>Rebuild for kernel-4.2.6.</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+            <Update release="8">
+                <Date>2014-11-11</Date>
+                <Version>1.59</Version>
+                <Comment>Rebuild for kernel-4.2.6.</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
             <Update release="7">
                 <Date>2014-11-30</Date>
                 <Version>1.59</Version>
@@ -2735,14 +2812,14 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.2.5">kernel-module-headers</Dependency>
+                <Dependency version="4.3.0">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-bbswitch/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="4.2.5">kernel</Dependency>
+                <Dependency version="4.3.0">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2755,6 +2832,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="35">
+                <Date>2015-12-01</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel-4.3.0.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="34">
+                <Date>2015-11-11</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for kernel-4.2.6.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="33">
                 <Date>2015-11-30</Date>
                 <Version>0.8</Version>
@@ -3012,7 +3103,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
             <Archive type="tarxz" sha1sum="cd1f7c62e17ef3d9b5f7aef7d83fd160355eb396">http://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-5.0.4.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.2.5">kernel-module-headers</Dependency>
+                <Dependency version="4.3.0">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -3022,7 +3113,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.2.5">kernel</Dependency>
+                <Dependency version="4.3.0">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
                 <Dependency version="5.0.4">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
@@ -3049,6 +3140,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="56">
+                <Date>2015-12-01</Date>
+                <Version>5.0.4</Version>
+                <Comment>Rebuild for kernel-4.3.0.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="55">
+                <Date>2015-11-11</Date>
+                <Version>5.0.4</Version>
+                <Comment>Rebuild for kernel-4.2.6.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="54">
                 <Date>2015-11-30</Date>
                 <Version>5.0.4</Version>
@@ -3454,7 +3559,7 @@
             <Archive type="targz" sha1sum="e02beac9cc713011551c483ae5f20f065f5b88c7" target="i686">http://www.broadcom.com/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <Archive type="targz" sha1sum="bd55f1fdc6b0a4d0a70dc4ba4bb4169a824e238c" target="x86_64">http://www.broadcom.com/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.2.5">kernel-module-headers</Dependency>
+                <Dependency version="4.3.0">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">patch/linux-40.patch</Patch>
@@ -3473,8 +3578,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.2.5">kernel</Dependency>
-                <Dependency release="53">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="4.3.0">kernel</Dependency>
+                <Dependency release="55">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -3501,6 +3606,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="55">
+                <Date>2015-12-01</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 4.3.0.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="54">
+                <Date>2015-11-11</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild for kernel 4.2.6.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="53">
                 <Date>2015-11-30</Date>
                 <Version>6.30.223.248</Version>
@@ -6519,7 +6638,7 @@
             <Summary xml:lang="tr">Çeşitli kullanışlı Linux araçları</Summary>
             <Description xml:lang="en">The util-linux package contains a large variety of low-level system utilities that are necessary for a Linux system to function.</Description>
             <Description xml:lang="tr">util-linux paketi, bir Linux sisteminin işlevsel olması için gerekli olan birçok düşük seviye sistem uygulamasını içerir.</Description>
-            <Archive type="tarxz" sha1sum="0549760ba1d2eb0e48b41b926d54ac55533369af">https://www.kernel.org/pub/linux/utils/util-linux/v2.27/util-linux-2.27.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="462bca6320535d39b62216d8609da5531bfef0bb">https://www.kernel.org/pub/linux/utils/util-linux/v2.27/util-linux-2.27.1.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>eudev-devel</Dependency>
@@ -6538,7 +6657,7 @@
         <Package>
             <Name>util-linux</Name>
             <RuntimeDependencies>
-                <Dependency version="2.27">libutil-linux</Dependency>
+                <Dependency version="2.27.1">libutil-linux</Dependency>
                 <Dependency>zlib</Dependency>
                 <Dependency>perl</Dependency>
                 <Dependency>ncurses</Dependency>
@@ -6619,7 +6738,7 @@
             <IsA>header</IsA>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="11">libutil-linux</Dependency>
+                <Dependency release="12">libutil-linux</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/</Path>
@@ -6656,6 +6775,13 @@
             </Replaces>
         </Package>
         <History>
+            <Update release="12">
+                <Date>2015-11-12</Date>
+                <Version>2.27.1</Version>
+                <Comment>Version Bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="11">
                 <Date>2015-10-09</Date>
                 <Version>2.27</Version>
@@ -12622,7 +12748,7 @@
             <Description xml:lang="en">Netscape Portable Runtime (NSPR) provides a platform-neutral API for system level and libc like functions. The API is used in the Mozilla client, many of Netscape/AOL/iPlanet&apos;s and other software offerings.</Description>
             <Description xml:lang="tr">Netscape Taşınabilir çalışma Zamanı (NSPR) sistem seviyesindeki libc ve benzeri fonksiyonlar için platform bağımsız bir programlama arayüzü sunar. Bu arayüz, Mozilla istemcilerinde, Netscape/AOL/iPlanet&apos;in diğer yazılımlarında kullanılmaktadır.</Description>
             <Description xml:lang="es">Netscape Portable Runtime (NSPR) provee un API independiente de la plataforma a nivel de sistema y funciones como libc. El API está usado en el cliente Mozilla, y muchos otros software de Netscape/AOL/iPlanet.</Description>
-            <Archive type="targz" sha1sum="c87c6a10e0e36866006b45c194d70cd8c67d0934">ftp://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v4.10.8/src/nspr-4.10.8.tar.gz</Archive>
+            <Archive type="targz" sha1sum="d90b61d96248577a551bd322199dfa2438941661">https://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v4.10.10/src/nspr-4.10.10.tar.gz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="nspr/config/nspr.pc.in">nspr.pc.in</AdditionalFile>
                 <AdditionalFile target="generate-pc-config.sh" permission="0755">generate-pc-config.sh</AdditionalFile>
@@ -12650,6 +12776,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2015-11-08</Date>
+                <Version>4.10.10</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Osman Erkan</Name>
+                <Email>osman.erkan@pisilinux.org</Email>
+            </Update>
             <Update release="11">
                 <Date>2015-04-02</Date>
                 <Version>4.10.8</Version>
@@ -14149,7 +14282,7 @@
             <Summary xml:lang="tr">Linux kernel modülleri yönetim araçları</Summary>
             <Description xml:lang="en">Linux kernel module management utilities</Description>
             <Description xml:lang="tr">Linux kernel modülleri yönetim araçları</Description>
-            <Archive type="tarxz" sha1sum="b2c1a0a1f2979fd29c7b0825ed19254c332246b4">https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-21.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="23e9b933887e9405f368a5c429c30414e14148ff">https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-22.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>chrpath</Dependency>
                 <Dependency>xz-32bit</Dependency>
@@ -14169,7 +14302,7 @@
                 <Dependency>xz</Dependency>
                 <Dependency>zlib</Dependency>
                 <Dependency>glibc</Dependency>
-                <Dependency version="21">libkmod</Dependency>
+                <Dependency version="22">libkmod</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin</Path>
@@ -14198,7 +14331,7 @@
             <Name>libkmod-devel</Name>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency version="21">libkmod</Dependency>
+                <Dependency version="22">libkmod</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -14232,6 +14365,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="16">
+                <Date>2015-11-29</Date>
+                <Version>22</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="15">
                 <Date>2015-06-17</Date>
                 <Version>21</Version>
@@ -15833,7 +15973,7 @@
             <Summary xml:lang="tr">Kapsamlı Linux kılavuzları</Summary>
             <Description xml:lang="en">Man package consists of programs which is used to read most of the documentation available in linux system. For example, you can write &quot;man nameoftheprogram&quot; into the konsole or &quot;man:nameoftheprogram&quot; into the konqueror to get a detailed usage information for many programs.</Description>
             <Description xml:lang="tr">man-db paketi Linux ile ilgili yazılmış dökümanların büyük çoğunluğunu okunması için gerekli programları sunar. Örneğin, konsola &quot;man programadı&quot; ya da konquerora &quot;man:programadı&quot; yazarak birçok program hakkında detaylı kullanım bilgisi alabilirsiniz.</Description>
-            <Archive type="tarxz" sha1sum="7c84408b94970b7dbdf2f80011b754fc2b238fee">http://download.savannah.gnu.org/releases/man-db/man-db-2.7.4.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="fd1314f616e055ddde0c02db219f5c9426a0ee5f">http://download.savannah.gnu.org/releases/man-db/man-db-2.7.5.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>less</Dependency>
                 <Dependency>gzip</Dependency>
@@ -15869,6 +16009,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2015-11-29</Date>
+                <Version>2.7.5</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2015-10-27</Date>
                 <Version>2.7.4</Version>
@@ -17618,7 +17765,7 @@
             <Description xml:lang="fr">D-Bus fourni à la fois un daemon système (pour les événements els que l&apos;&quot;ajout d&apos;un nouveau périphérique&quot; ou &quot;file d&apos;impression changée&quot;) et un daemon propre à chaque session utilisateur (pour les besoins généraux de communication entre processus utilisateurs). De plus, le bus de message est construit en se basant sur un framework (cadre de développement) de passage de message de un-vers-un pouvant être utilisé par n&apos;importe quelles applications pour communiquer directement (sans passer par le daemon de bus de message). Pour l&apos;instant les applications pouvant communiquer doivent être situées sur le même ordinateur, mais l&apos;option TCP/IP est disponible et le support de processus distant est prévu.</Description>
             <Description xml:lang="en">D-Bus supplies both a system daemon (for events such as &quot;new hardware device added&quot; or &quot;printer queue changed&quot;) and a per-user-login-session daemon (for general IPC needs among user applications). Also, the message bus is built on top of a general one-to-one message passing framework, which can be used by any two apps to communicate directly (without going through the message bus daemon). Currently the communicating applications are on one computer, but TCP/IP option is available and remote support planned.</Description>
             <Description xml:lang="tr">D-Bus, sistem ve kullanıcılar için olmak üzere iki tane artalan süreci (daemon) sunar. Mesaj yolu, bire bir mesaj geçiş araçları üzerine inşa edilmiştir. Bu sayede iki program birbiriyle bir mesaj yolu artalan süreci kullanmadan, direkt olarak haberleşebilir. Şu an için haberleşme araçları aynı bilgisayar üzerinde çalışabilmektedir, fakat TCP/IP ile uzaktan haberleşme de planlanmaktadır.</Description>
-            <Archive type="targz" sha1sum="eec3c798633f623e960eb1d9f93b47648f389443">http://dbus.freedesktop.org/releases/dbus/dbus-1.10.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="a7bb0e44bb3551b2e607c5a1f927244bec5b8f0a">http://dbus.freedesktop.org/releases/dbus/dbus-1.10.2.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>expat-devel</Dependency>
                 <Dependency>libX11-devel</Dependency>
@@ -17669,7 +17816,7 @@
             <Summary xml:lang="tr">dbus için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="13">dbus</Dependency>
+                <Dependency release="14">dbus</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -17697,6 +17844,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="14">
+                <Date>2015-11-12</Date>
+                <Version>1.10.2</Version>
+                <Comment>Version Bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="13">
                 <Date>2015-10-09</Date>
                 <Version>1.10.0</Version>
@@ -17985,9 +18139,10 @@
             <Description xml:lang="fr">Flex est un outil de génération d&apos;analyseur (scanner). Un analyseur (également appelé tokenizer en anglais) est un programme qui repère les motifs lexicaux (ou lexème) dans du texte. </Description>
             <Description xml:lang="en">Flex is a tool for generating scanners. A scanner, sometimes called a tokenizer, is a program which recognizes lexical patterns in text</Description>
             <Description xml:lang="tr">Flex, metin içindeki sözcüksel kalıpları tanıyan, analiz aracı üretecidir.</Description>
-            <Archive type="targz" sha1sum="40866373afd3ab88a7f7fe26c9b27b035aa1f2a9">mirrors://sourceforge/flex/flex-2.5.39.tar.gz</Archive>
+            <Archive type="targz" sha1sum="cfe10b5de4893ced356adc437e78018e715818c3">mirrors://sourceforge/flex/flex-2.6.0.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>patch</Dependency>
+                <Dependency>texinfo</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">flex-2.5.37-notex.patch</Patch>
@@ -18007,6 +18162,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2015-11-29</Date>
+                <Version>2.6.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2014-06-02</Date>
                 <Version>2.5.39</Version>
@@ -18282,7 +18444,7 @@
             <Description xml:lang="fr">CMake, système make open-source et multi-plateforme. CMake est utilisé pour contrôler le processus de compilation de logiciel en utilisant une plate-forme de fichiers de configuration simple et indépendante de compilateur. CMake génère des makefiles et un environnement de travail natifs pouvant être utilisés dans l&apos;environnement du compilateur de votre choix.</Description>
             <Description xml:lang="en">CMake, the cross-platform, open-source make system. CMake is used to control the software compilation process using simple platform and compiler independent configuration files. CMake generates native makefiles and workspaces that can be used in the compiler environment of your choice.</Description>
             <Description xml:lang="tr">Cmake, açık kaynak kodlu ve birden fazla platformda çalışan bir &apos;make&apos; sistemidir. Yazılım derleme sürecini kontrol etmek için kullanılan CMake, derleyici bağımsız yapılandırma dosyalarının oluşturulmasını sağlar.</Description>
-            <Archive type="targz" sha1sum="799aff559e9f330fefc60e6509f1d025fc3d9c8c">http://www.cmake.org/files/v3.3/cmake-3.3.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="986ac16b09dfa8a667c3b5da58f1ab5fe03206e8">http://www.cmake.org/files/v3.4/cmake-3.4.0.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>curl-devel</Dependency>
                 <Dependency>expat-devel</Dependency>
@@ -18312,6 +18474,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="17">
+                <Date>2015-11-15</Date>
+                <Version>3.4.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
             <Update release="16">
                 <Date>2015-08-20</Date>
                 <Version>3.3.1</Version>
