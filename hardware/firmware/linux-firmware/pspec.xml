@@ -17,8 +17,8 @@
         <IsA>data</IsA>
         <Summary>Firmware files used by the Linux kernel</Summary>
         <Description>linux-firmware contains different firmware files required for some devices to operate correctly.</Description>
-        <!-- linux-firmware commit:  commit  f88e5c2e2ff57026ce8028ba4dde8e7325f251a4 2015-09-24 -->
-        <Archive sha1sum="053e48266c07116bf86d0848655e9c0c02076609" type="tarbz2">http://source.pisilinux.org/1.0/linux-firmware/linux-firmware-20150924.tar.bz2</Archive>
+        <!-- linux-firmware commit: a109a8ffb655aad9341b96c3b83eebad19b06ada 2015-11-27 -->
+        <Archive sha1sum="9bf6021a873c12fe1b4c2dd2525c17b177335a75" type="tarbz2">http://source.pisilinux.org/1.0/linux-firmware/linux-firmware-20151127.tar.bz2</Archive>
         <Archive sha1sum="dd685266f7bc0acb0d455462637d23e3e895bc96" type="tarxz" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/common-fw.tar.xz</Archive>
         <Archive sha1sum="b2bb7fce3ea67d131f543a48134f7a65f2a8d834" type="tarxz" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware-ipw.tar.xz</Archive>
         <Archive sha1sum="a5a616a9f765cf9cbb224deb7ccefdc82a7fe4d9" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/firmware-nonfreebox-2-tar.bz2</Archive>
@@ -30,7 +30,7 @@
         <Archive sha1sum="e40729d30ad6d7a6c88b90ee7bc5fbaeb9458cb7" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/rtl8192se-firmware.tar.bz2</Archive>
         <Archive sha1sum="5d333e75f02a57861565337c14f6944090a242a8" type="tarxz" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/nouveau-1.tar.xz</Archive>
         <AdditionalFiles>
-            <AdditionalFile target="intel/ibt-hw-37.7.10-fw-1.80.2.3.d.bseq">fw/ibt-hw-37.7.10-fw-1.80.2.3.d.bseq</AdditionalFile>
+            <!--AdditionalFile target="intel/ibt-hw-37.7.10-fw-1.80.2.3.d.bseq">fw/ibt-hw-37.7.10-fw-1.80.2.3.d.bseq</AdditionalFile-->
             <AdditionalFile target="iwlwifi-7260-14.ucode">iwlwifi-7260-14.ucode</AdditionalFile>
             <AdditionalFile target="iwlwifi-7260-15.ucode">iwlwifi-7260-15.ucode</AdditionalFile>
         </AdditionalFiles>
@@ -48,6 +48,13 @@
     </Package>
 
     <History>
+        <Update release="20">
+            <Date>2015-12-02</Date>
+            <Version>20151127</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+         </Update>
         <Update release="19">
             <Date>2015-09-06</Date>
             <Version>20150924</Version>
