@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Arbitrary precision arithmetic library</Summary>
         <Description>GMP is a free library for arbitrary precision arithmetic, operating on signed integers, rational numbers, and floating point numbers. There is no practical limit to the precision except the ones implied by the available memory in the machine GMP runs on. GMP has a rich set of functions, and the functions have a regular interface.</Description>
-        <Archive sha1sum="1aaf78358ab9e34aeb61f3ae08174ee9118ece98" type="tarxz">mirrors://gnu/gmp/gmp-6.0.0a.tar.xz</Archive>
+        <Archive sha1sum="99d691607613e749aa5d7c0c2a89aeab38fec070" type="tarxz">mirrors://gnu/gmp/gmp-6.1.0.tar.xz</Archive>
     </Source>
 
     <Package>
@@ -48,6 +48,8 @@
             <Dependency>glibc-32bit</Dependency>
         </BuildDependencies>
         <RuntimeDependencies>
+            <Dependency>libgcc</Dependency>
+            <Dependency>glibc-32bit</Dependency>
             <Dependency release="current">gmp</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -56,6 +58,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2015-12-09</Date>
+            <Version>6.1.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="8">
             <Date>2014-09-06</Date>
             <Version>6.0.0</Version>
