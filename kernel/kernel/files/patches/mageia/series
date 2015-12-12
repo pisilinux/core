@@ -14,25 +14,6 @@
 ###
 ### Stable Queue
 ###
-stable-arm-8449-1-fix-bug-in-vdsomunge-swab32-macro.patch
-stable-usb-qcserial-add-sierra-wireless-mc74xx-em74xx.patch
-stable-tipc-linearize-arriving-name_distr-and-link_proto-buffers.patch
-stable-net-bcmgenet-software-reset-ephy-after-power-on.patch
-stable-ipv4-fix-to-not-remove-local-route-on-link-down.patch
-stable-ipv4-update-rtnh_f_linkdown-flag-on-up-event.patch
-stable-stmmac-correctly-report-ptp-capabilities.patch
-stable-ipmr-fix-possible-race-resulting-from-improper-usage-of-ip_inc_stats_bh-in-preemptible-context.patch
-stable-qmi_wwan-fix-entry-for-hp-lt4112-lte-hspa-gobi-4g-module.patch
-stable-sit-fix-sit0-percpu-double-allocations.patch
-stable-sfc-push-partner-queue-for-skb-xmit_more.patch
-stable-net-avoid-null-deref-in-inet_ctl_sock_destroy.patch
-stable-ipv6-clean-up-dev_snmp6-proc-entry-when-we-fail-to-initialize-inet6_dev.patch
-stable-ipv4-disable-bh-when-changing-ip-local-port-range.patch
-stable-net-fix-prefsrc-lookups.patch
-stable-tun_dst-fix-potential-null-dereference.patch
-stable-packet-race-condition-in-packet_bind.patch
-stable-bonding-fix-panic-on-non-arphrd_ether-enslave-failure.patch
-stable-net-fix-a-race-in-dst_release.patch
 
 ###
 ### Arch x86
@@ -57,9 +38,6 @@ x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch
 # slows down boot
 Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch
 
-# (CVE-2015-5307)
-x86-KVM-x86-work-around-infinite-loop-in-microcode-when-AC-is-delivered.patch
-
 # (CVE-2015-8104)
 x86-KVM-svm-unconditionally-intercept-DB.patch
 
@@ -73,6 +51,9 @@ Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch
 ### Core
 ###
 base-cacheinfo-silence-DT-warnings.patch
+
+# git fix
+certs-add-.gitignore-to-stop-git-nagging-about-x509_.patch
 
 ###
 ### i2c
@@ -197,6 +178,10 @@ gpu-drm-mach64-linux-3.14-buildfix.patch
 gpu-drm-mach64-3.17-buildfix.patch
 gpu-drm-mach64-3.18-buildfix.patch
 
+# drm fixes
+gpu-drm-Fix-an-unwanted-master-inheritance-v2.patch
+gpu-drm-i915-Fix-RPS-pointer-passed-from-wait_ioctl-to-i915_wait_request.patch
+
 ###
 ### Hardware Monitoring
 ###
@@ -255,6 +240,9 @@ net-netfilter-Fix-removal-of-GRE-expectation-entries-created-by-PPTP.patch
 
 # rtlwifi hang fix
 net-wireless-rtlwifi-rtl8821ae-Fix-lockups-on-boot.patch
+
+# net stable fixes from DaveM
+net_43.mbox.patch
 
 ###
 ### Platform drivers
