@@ -1,0 +1,35 @@
+From: Chris Wilson <chris@chris-wilson.co.uk>
+Subject: [PATCH] drm/i915: Fix RPS pointer passed from wait_ioctl to i915_wait_request
+Date: Wed,  2 Dec 2015 09:13:46 +0000
+
+In commit 2e1b873072dfe3bbcc158a9c21acde1ab0d36c55 [v4.2]
+Author: Chris Wilson <chris@chris-wilson.co.uk>
+Date:   Mon Apr 27 13:41:22 2015 +0100
+
+    drm/i915: Convert RPS tracking to a intel_rps_client struct
+
+we converted the __i915_wait_request() to take a new intel_rps_client
+struct (rather than having to pass fake drm_i915_file_private structs).
+However, due to use of passing a void pointer, I didn't spot one
+callsite in wait-ioctl was passing the wrong pointer.
+
+Signed-off-by: Chris Wilson <chris@chris-wilson.co.uk>
+Cc: Daniel Vetter <daniel.vetter@ffwll.ch>
+Cc: stable@vger.kernel.org
+---
+ drivers/gpu/drm/i915/i915_gem.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/i915/i915_gem.c b/drivers/gpu/drm/i915/i915_gem.c
+index f5aef48b93db..cd8c4024af92 100644
+--- a/drivers/gpu/drm/i915/i915_gem.c
++++ b/drivers/gpu/drm/i915/i915_gem.c
+@@ -3045,7 +3045,7 @@ i915_gem_wait_ioctl(struct drm_device *d
+ 		if (ret == 0)
+ 			ret = __i915_wait_request(req[i], reset_counter, true,
+ 						  args->timeout_ns > 0 ? &args->timeout_ns : NULL,
+-						  file->driver_priv);
++						  to_rps_client(file));
+ 		i915_gem_request_unreference__unlocked(req[i]);
+ 	}
+ 	return ret;

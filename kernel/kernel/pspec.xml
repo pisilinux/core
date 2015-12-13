@@ -28,39 +28,20 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <!--Patch level="1" compressionType="xz">patches/linux/patch-4.2.6.xz</Patch-->
-            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.3.0/2.mga6/PATCHES/patches/series-->
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.3.2.xz</Patch>
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.3.2/1.mga6/PATCHES/patches/series-->
             <!--stable patches-->
-            <Patch level="1">patches/mageia/stable-arm-8449-1-fix-bug-in-vdsomunge-swab32-macro.patch</Patch>
-            <Patch level="1">patches/mageia/stable-usb-qcserial-add-sierra-wireless-mc74xx-em74xx.patch</Patch>
-            <Patch level="1">patches/mageia/stable-tipc-linearize-arriving-name_distr-and-link_proto-buffers.patch</Patch>
-            <Patch level="1">patches/mageia/stable-net-bcmgenet-software-reset-ephy-after-power-on.patch</Patch>
-            <Patch level="1">patches/mageia/stable-ipv4-fix-to-not-remove-local-route-on-link-down.patch</Patch>
-            <Patch level="1">patches/mageia/stable-ipv4-update-rtnh_f_linkdown-flag-on-up-event.patch</Patch>
-            <Patch level="1">patches/mageia/stable-stmmac-correctly-report-ptp-capabilities.patch</Patch>
-            <Patch level="1">patches/mageia/stable-ipmr-fix-possible-race-resulting-from-improper-usage-of-ip_inc_stats_bh-in-preemptible-context.patch</Patch>
-            <Patch level="1">patches/mageia/stable-qmi_wwan-fix-entry-for-hp-lt4112-lte-hspa-gobi-4g-module.patch</Patch>
-            <Patch level="1">patches/mageia/stable-sit-fix-sit0-percpu-double-allocations.patch</Patch>
-            <Patch level="1">patches/mageia/stable-sfc-push-partner-queue-for-skb-xmit_more.patch</Patch>
-            <Patch level="1">patches/mageia/stable-net-avoid-null-deref-in-inet_ctl_sock_destroy.patch</Patch>
-            <Patch level="1">patches/mageia/stable-ipv6-clean-up-dev_snmp6-proc-entry-when-we-fail-to-initialize-inet6_dev.patch</Patch>
-            <Patch level="1">patches/mageia/stable-ipv4-disable-bh-when-changing-ip-local-port-range.patch</Patch>
-            <Patch level="1">patches/mageia/stable-net-fix-prefsrc-lookups.patch</Patch>
-            <Patch level="1">patches/mageia/stable-tun_dst-fix-potential-null-dereference.patch</Patch>
-            <Patch level="1">patches/mageia/stable-packet-race-condition-in-packet_bind.patch</Patch>
-            <Patch level="1">patches/mageia/stable-bonding-fix-panic-on-non-arphrd_ether-enslave-failure.patch</Patch>
-            <Patch level="1">patches/mageia/stable-net-fix-a-race-in-dst_release.patch</Patch>
             <!--other patches-->
             <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
             <Patch level="1">patches/mageia/x86-boot-video-80x25-if-break.patch</Patch>
             <Patch level="1">patches/mageia/x86-default_poweroff_up_machines.patch</Patch>
             <Patch level="1">patches/mageia/x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch</Patch>
             <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
-            <Patch level="1">patches/mageia/x86-KVM-x86-work-around-infinite-loop-in-microcode-when-AC-is-delivered.patch</Patch>
             <Patch level="1">patches/mageia/x86-KVM-svm-unconditionally-intercept-DB.patch</Patch>
             <Patch level="1">patches/mageia/Revert-x86-efi-Request-desired-alignment-via-the-PE-.patch</Patch>
             <Patch level="1">patches/mageia/Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch</Patch>
             <Patch level="1">patches/mageia/base-cacheinfo-silence-DT-warnings.patch</Patch>
+            <Patch level="1">patches/mageia/certs-add-.gitignore-to-stop-git-nagging-about-x509_.patch</Patch>
             <Patch level="1">patches/mageia/pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch</Patch>
             <Patch level="1">patches/mageia/pci-quirks-drop-devinit-exit.patch</Patch>
             <Patch level="1">patches/mageia/acpi-CLEVO-M360S-disable_acpi_irq.patch</Patch>
@@ -101,6 +82,8 @@
             <Patch level="1">patches/mageia/gpu-drm-mach64-linux-3.14-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.17-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.18-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-Fix-an-unwanted-master-inheritance-v2.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-i915-Fix-RPS-pointer-passed-from-wait_ioctl-to-i915_wait_request.patch</Patch>
             <Patch level="1">patches/mageia/input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch</Patch>
             <Patch level="1">patches/mageia/net-sis190-fix-list-usage.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-IFWLOG.patch</Patch>
@@ -117,6 +100,7 @@
             <Patch level="1">patches/mageia/net-netfilter-ipset-Fix-hash-type-expire-release-empty-hash-bucket-block.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-Fix-removal-of-GRE-expectation-entries-created-by-PPTP.patch</Patch>
             <Patch level="1">patches/mageia/net-wireless-rtlwifi-rtl8821ae-Fix-lockups-on-boot.patch</Patch>
+            <Patch level="1">patches/mageia/net_43.mbox.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
@@ -209,7 +193,18 @@
         </Files>
     </Package>
 
-    <History>  
+    <History>
+          <Update release="68">
+            <Date>2015-12-12</Date>
+            <Version>4.3.2</Version>
+            <Comment>Version bump to 4.3.2 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.3.2</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+         </Update>
           <Update release="67">
             <Date>2015-12-01</Date>
             <Version>4.3.0</Version>
