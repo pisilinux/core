@@ -12,12 +12,13 @@
         <IsA>app:console</IsA>
         <Summary>Linux USB utilities</Summary>
         <Description>usbutils provides utilities for inspecting devices connected to a USB bus.</Description>
-        <Archive sha1sum="6632f8ac6116fa4fd9e879df3134a206f0c4473c" type="tarbz2">http://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-007.tar.bz2</Archive>
+        <Archive sha1sum="233dee6cd6829476be778554984045663b568b18" type="tarxz">https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-008.tar.xz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="usb.ids">usb.ids</AdditionalFile>
         </AdditionalFiles>
         <BuildDependencies>
             <Dependency>libusb-devel</Dependency>
+            <Dependency>eudev-devel</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -25,6 +26,7 @@
         <Name>usbutils</Name>
         <RuntimeDependencies>
             <Dependency>libusb</Dependency>
+            <Dependency>eudev</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -37,6 +39,13 @@
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2015-12-26</Date>
+            <Version>008</Version>
+            <Comment>Version bump and update usb.ids.</Comment>
+            <Name>Stefan Gronewold</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="5">
             <Date>2014-09-12</Date>
             <Version>007</Version>

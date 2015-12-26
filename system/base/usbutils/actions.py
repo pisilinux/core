@@ -18,6 +18,6 @@ def build():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    pisitools.removeDir("/usr/sbin")
+    #pisitools.removeDir("/usr/sbin")
 
     pisitools.dodoc("AUTHORS", "ChangeLog", "NEWS", "README")
