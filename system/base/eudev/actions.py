@@ -71,3 +71,6 @@ def install():
     pisitools.doman("man/*.5", "man/*.7", "man/*.8")
 
     pisitools.dodoc("README*", "NOTES")
+
+    # Add rules for mount storage
+    pisitools.insinto("/lib/udev/rules.d","rules/60-persistent-storage.rules")
