@@ -27,8 +27,8 @@ def check():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    pisitools.remove("/usr/share/man/man1/mt.1")
-    pisitools.removeDir("/usr/libexec")
-
+    pisitools.removeDir("/usr/share/man/man8")
+    #pisitools.removeDir("/usr/libexec")
+    
     pisitools.dodoc("ChangeLog", "NEWS", "README")
 
