@@ -14,7 +14,7 @@
         <Description>GNU cpio copies files into or out of a cpio or tar archive. The archive can be another file on the disk, a magnetic tape, or a pipe. GNU cpio supports the following archive formats: binary, old ASCII, new ASCII, crc, HPUX binary, HPUX old ASCII, old tar, and POSIX.1 tar.</Description>
         <Archive sha1sum="60358408c76db354f6716724c4bcbcb6e18ab642" type="tarbz2">mirrors://gnu/cpio/cpio-2.12.tar.bz2</Archive>
         <Patches>
-            <Patch level="1">cpio-2.7-svr4compat.patch</Patch>
+            <!--Patch level="1">cpio-2.7-svr4compat.patch</Patch-->
             <Patch level="1">cpio-2.9-exitCode.patch</Patch>
             <Patch level="1">CVE-2010-0624-rpatelib-overflow.patch</Patch>
         </Patches>
@@ -33,7 +33,7 @@
 
     <History>
         <Update release="4">
-            <Date>2015-12-29</Date>
+            <Date>2016-01-03</Date>
             <Version>2.12</Version>
             <Comment>Version bump.</Comment>
             <Name>Ertuğrul Erata</Name>
