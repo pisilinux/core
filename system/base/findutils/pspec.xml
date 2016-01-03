@@ -15,6 +15,7 @@
         <Archive sha1sum="f18e8aaee3f3d4173a1f598001003be8706d28b0" type="targz">http://ftp.gnu.org/pub/gnu/findutils/findutils-4.6.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>gettext-devel</Dependency>
+            <Dependency>texinfo</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -23,10 +24,12 @@
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="library">/usr/lib/find</Path>
+            <Path fileType="library">/usr/libexec</Path>
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="info">/usr/share/info</Path>
             <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="data">/var</Path>
         </Files>
     </Package>
 
