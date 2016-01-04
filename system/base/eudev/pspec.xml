@@ -64,7 +64,8 @@
         </Files>
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/usr/lib/tmpfiles.d/udev.conf">tmpfiles.conf</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/lib/udev/rules.d/10-flash-mounts.rules">10-flash-mounts.rules</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/lib/udev/rules.d/60-persistent-storage.rules">60-persistent-storage.rules</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/lib/udev/rules.d/70-pisilinux.rules">70-yali.rules</AdditionalFile>
         </AdditionalFiles>
         <Provides>
             <COMAR script="package.py">System.Package</COMAR>
@@ -121,7 +122,7 @@
 
     <History>
         <Update release="6">
-            <Date>2016-01-03</Date>
+            <Date>2016-01-04</Date>
             <Version>3.1.2</Version>
             <Comment>Add rules for mount storage, ntfs usb disc too.</Comment>
             <Name>Ertuğrul Erata</Name>
