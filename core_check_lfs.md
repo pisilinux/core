@@ -191,6 +191,6 @@
 - [ ] yacc - Yacc: Yet Another Compiler-Compiler
 - [ ] yasm - Bir çok sentaks ve mimari destekleyen Assembler // *http://www.tortall.net/projects/yasm/releases/yasm-1.3.0.tar.gz*
 - [x] zip - ZIP programı (şifreleme desteği ile birlikte)
-- [ ] zlib - Standart sıkıştırma/açma kütüphanesi
+- [x] zlib - Standart sıkıştırma/açma kütüphanesi
 
-https://gist.github.com/ertugerata/3dd26e482f0f928b7bc9
+dosyanın en güncel hali için: https://gist.github.com/ertugerata/3dd26e482f0f928b7bc9
