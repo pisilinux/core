@@ -1,0 +1,194 @@
+- [x] acl - Erişim denetim listesi için çeşitli araçlar
+- [ ] alternatives - Alternatif yönetim sistemi
+- [x] attr - Gelişkin öznitelikler araçları
+- [x] autoconf - Used to create autoconfiguration files
+- [ ] autogen - Otomatik metin ve program üretme aracı -- arch'da 5.18.6
+- [x] automake - Makefile.am yapılandırma dosyalarından Makefile.in dosyası üreten program
+- [ ] baselayout - Dosya sisteminin temel planı
+- [x] bash - GNU Bource again kabuğu
+- [x] bc - Konsol temelli hesap makinesi
+- [ ] binutils - Makine dili derleme ve bağlama araçları // *LFS 2.25.1*
+- [ ] biosdevname - Biosdevname is a udev helper utility developed // *http://linux.dell.com/biosdevname/biosdevname-0.7.1/biosdevname-0.7.1.tar.gz*
+- [x] bison - Yacc uyumlu yazım ayrıştırma üreteci
+- [ ] busybox - Statik bağlanmış sistem komutları bütünü // *http://busybox.net/downloads/busybox-1.24.1.tar.bz2*
+- [x] bzip2 - Yüksek kaliteli bir veri sıkıştırma uygulaması
+- [ ] ca-certificates - Common CA certificates // https://packages.qa.debian.org/c/ca-certificates.html 20151214*
+- [ ] catbox - Python için sandbox modülü
+- [ ] check - C için birim test ortamı //*BLFS  http://downloads.sourceforge.net/check/check-0.10.0.tar.gz*
+- [x] chrpath - Dinamik kitaplık yükleme yolunu (rpath) değiştirme aracı // BLFS 
+- [ ] cloog - Chunky Loop Generator // *https://github.com/periscop/cloog/archive/cloog-0.18.4.tar.gz*
+- [ ] cmake - Cmake, açık kaynak kodlu ve birden fazla platformda çalışan bir 'make' sistemidir. // * BLFS http://www.cmake.org/files/v3.4/cmake-3.4.1.tar.gz* 
+- [x] colorgcc - GCC çıktısını renklendiren bir araç.
+- [ ] comar - Sistem yapılandırmasını yönetir
+- [ ] comar-api - Çomar betikleri için yardımcı fonksiyonlar
+- [x] coreutils - Standart dosya, metin ve kabuk uygulamaları
+- [x] cpio - Tar ve cpio dosyaları içine yazıp okuyabilen bir dosya arşivleme uygulaması // BLFS
+- [ ] cpupowertools - CPU güç/frekans yönetim araçları
+- [ ] cracklib - Parola Kontrol Kütüphanesi // *BLFS https://github.com/cracklib/cracklib/releases/download/cracklib-2.9.6/cracklib-2.9.6.tar.gz*
+- [ ] cryptsetup - Şifreli dosya sistemleri yaratmak için bir araç // * https://www.kernel.org/pub/linux/utils/cryptsetup/v1.7/cryptsetup-1.7.0.tar.xz*
+- [ ] curl - Uzak sunuculardan dosya indirmek için bir araç // *BLFS http://curl.haxx.se/download/curl-7.46.0.tar.lzma* 
+- [ ] cython - Python için C eklentileri // * http://cython.org/release/Cython-0.23.4.tar.gz*
+- [ ] db - Oracle Berkeley DB // *BLFS http://download.oracle.com/berkeley-db/db-6.1.26.tar.gz *
+- [x] dbus - Uygulamaların birbirleriyle haberleşmesinin basit bir yöntemi
+- [x] dbus-glib - D-Bus için GLib bağlayıcıları
+- [x] dbus-python - D-Bus için Python bağlayıcıları
+- [ ] dhcpcd - DHCP protokolü için istemci // *BLFS http://roy.marples.name/downloads/dhcpcd/dhcpcd-6.9.4.tar.xz *
+- [ ] dietlibc - Düşük boyut için optimize edilmiş C kütüphanesi // http://www.fefe.de/dietlibc/dietlibc-0.33.tar.bz2
+- [x] diffutils - Dosyaları karşılaştırmak ve fark dosyaları oluşturmak için kullanılan araçlar
+- [ ] disktype - Disk veya disk görüntüsünün biçimsel içeriğini saptar
+- [ ] docbook-xml - Docbook XML DTD
+- [ ] docbook-xsl - Docbook XSL biçemyaprakları
+- [x] e2fsprogs - Standart ext2, ext3, ext4 dosya sistemi uygulamaları
+- [ ] elfutils - Derlenmiş objeleri işlemek için gereken aletler koleksiyonu // *BLFS https://fedorahosted.org/releases/e/l/elfutils/0.164/elfutils-0.164.tar.bz2 *
+- [ ] eudev - eudev sistemd-udev uygulamasının çatalı // * https://github.com/gentoo/eudev/archive/v3.1.5.tar.gz* __this release need libgudev__ 
+- [x] expat - XML ayrıştırıcı kütüphaneleri
+- [x] file - Dosya tipini belirlemek için kullanılan bir uygulamadır
+- [x] findutils - Dosya bulmak için kullanılan GNU uygulamaları
+- [x] flex - GNU sözcüksel analiz üreteci
+- [ ] freetype - Yüksek kaliteli ve taşınabilir yazıtipi düzeneği // *BLFS http://downloads.sourceforge.net/freetype/freetype-2.6.2.tar.bz2*
+- [x] fuse - Kullanıcı düzeyinde dosya sistemi oluştumaya yarayan kitaplık // BLFS
+- [x] gawk - Metin işleme uygulaması olan awk'ın GNU versiyonu
+- [ ] gc - C ve C++ için bir çöp toplama kitaplığı
+- [ ] gcc - C/C++ ve Fortran derleyicisi // gcc-5.3.0
+- [x] gdbm - Perl uyumlu standart GNU veritabanı kütüphaneleri
+- [x] gettext - Farklı dillerde ileti katalogları üretmek için gerekli GNU araçları ve kütüphaneleri
+- [ ] glib2 - C programlama dili için glib kütüphanesi // * BLFS http://ftp.gnome.org/pub/gnome/sources/glib/2.46/glib-2.46.2.tar.xz *
+- [ ] glibc - GNU libc6 (glibc2 olarak da bilinir) C kitaplığı // Glibc-2.22
+- [ ] glpk - GNU Doğrusal Programlama Kiti //* http://ftp.gnu.org/gnu/glpk/glpk-4.57.tar.gz*
+- [x] gmp - İstenilen duyarlıkta çalışabilen aritmetik işlem kitaplığı
+- [ ] gnuconfig - Autofoo için temel config dosyaları
+- [ ] gobject-introspection - Introspection system for GObject-based libraries // * BLFS http://ftp.gnome.org/pub/gnome/sources/gobject-introspection/1.46/gobject-introspection-1.46.0.tar.xz *
+- [x] gperf - Mükemmel hash üreticisi
+- [ ] gperftools - Google Performans Araçları // * https://github.com/gperftools/gperftools/releases/download/gperftools-2.4/gperftools-2.4.tar.gz *
+- [x] grep - Grep düzenli ifade eşleme aracı
+- [x] groff - Belge biçimlendirme sistemi
+- [ ] grub2 - GNU GRUB is a Multiboot boot loader.
+- [x] guile - GNU Scheme yorumlayıcısı ve kitaplığı // * BLFS*
+- [x] gzip - GNU dosya arşiv aracı
+- [ ] help2man - Geleneksel --help çıktılarını man sayfalarına dönüştüren bir GNU yazılımı // * ftp://ftp.gnu.org/gnu/help2man/help2man-1.47.3.tar.xz*
+- [x] intltool - Çeşitli kaynak kod dosyalarından satırları ayıklamak için kullanılan betikler
+- [ ] isl - Integer Set Library
+- [x] json-c - C dilinde JSON gerçeklemesi // BLFS
+- [x] kbd - Klavye ve konsol araçları
+- [ ] kernel - Pisi Linux için Linux çekirdeği
+- [ ] klibc - Küçük bir C kütüphanesi (libc) uyarlaması
+- [x] kmod - Linux kernel modülleri yönetim araçları
+- [x] less - Mükemmel bir metin görüntüleyici
+- [ ] leveldb - Hızlı ve hafif bir anahtar/değer veri kütüphanesi
+- [x] libarchive - Birçok farklı akış arşiv formatını yaratan ve okuyan programlama kitaplığı // *BLFS*
+- [x] libatomic_ops - Atomik bellek işlemleri kütüphanesi // BLFS
+- [x] libcap - POSIX 1003.1e desteği
+- [ ] libcap-ng - Alternatif bir POSIX yetenekleri kütüphanesi // * http://people.redhat.com/sgrubb/libcap-ng/libcap-ng-0.7.7.tar.gz*
+- [x] libee - An Event Expression Library inspired by CEE 
+- [ ] libestr - Library for some string essentials // *http://libestr.adiscon.com/files/download/libestr-0.1.10.tar.gz* 
+- [x] libffi - Yabancı işlev arayüzleri için taşınabilir bir kitaplık 
+- [ ] libgcrypt - Genel amaçlı bir şifreleme kitaplığı // *BLFS ftp://ftp.gnupg.org/gcrypt/libgcrypt/libgcrypt-1.6.4.tar.bz2*
+- [ ] libgpg-error - GnuPG bileşenlerinin kullandığı hata değerleri için kitaplık // * BLFS ftp://ftp.gnupg.org/gcrypt/libgpg-error/libgpg-error-1.21.tar.bz2 *
+- [ ] libidn - Uluslararası Alan Adları (IDN) destek kütüphanesi // *BLFS http://ftp.gnu.org/gnu/libidn/libidn-1.32.tar.gz * 
+- [ ] liblogging - Easy to use, portable, open source library for system logging // *http://download.rsyslog.com/liblogging/liblogging-1.0.5.tar.gz *
+- [x] libmpc - Yüksek hassasiyet ve yuvarlama kitaplığı
+- [ ] libpcre - Perl-uyumlu sıradan ifade kütüphanesi // *ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.38.tar.gz *
+- [x] libpipeline - pipeline yönetim kitaplığı
+- [ ] libpng - PNG kütüphanesi // *http://downloads.sourceforge.net/libpng/libpng-1.6.20.tar.xz *
+- [ ] libseccomp - Gelişmiş seccomp kütüphanesi // *https://github.com/seccomp/libseccomp/releases/download/v2.2.3/libseccomp-2.2.3.tar.gz*
+- [x] libsigsegv - Oluşan bellek hatalarının kullanıcı kipinde işlenmesini sağlayan bir kitaplık
+- [ ] libssh2 - SSH2 protokolü için kütüphane // *http://www.libssh2.org/download/libssh2-1.6.0.tar.gz*
+- [ ] libtool - Program geliştiriciler için ortak kütüphane aracı // __libtool-2.4.6__
+- [ ] libunistring - Unicode karakter dizisi kitaplığı // *http://ftp.gnu.org/gnu/libunistring/libunistring-0.9.5.tar.xz*
+- [x] libunwind - Yazılım çağrıları geri izleme aracı
+- [ ] libusb - Userspace access to USB devices // BLFS http://downloads.sourceforge.net/libusb/libusb-1.0.20.tar.bz2
+- [x] libusb-compat - Userspace access to USB devices // BLFS
+- [ ] libuser - Kullanıcı ve grup hesap yönetim kitaplığı // libuser-0.62
+- [ ] libxml2 - XML türü dosyaları işlemeye aracılık eden kütüphanenin 2. sürümü // BLFS *http://xmlsoft.org/sources/libxml2-2.9.3.tar.gz*
+- [x] libxslt - XSLT kitaplığı ve araçları // BLFS
+- [ ] linux-firmware - Linux çekirdeği tarafından kullanılan firmware dosyaları
+- [x] lsb-release - LSB sürüm sorgulama aracı // BLFS
+- [ ] lvm2 - Mantıksal Hacim Yönetimi aracı // *BLFS ftp://sources.redhat.com/pub/lvm2/releases/LVM2.2.02.138.tgz*
+- [x] lzo - Çok hızlı bir sıkıştırma/açma kütüphanesi // BLFS
+- [x] m4 - GNU makro işleyicisi
+- [ ] mailcap - Dosya türleri için yardımcı uygulama ve MIME türü ilişkilendirmeleri // mailcap-2.1.44
+- [x] make - Geleneksel kaynak kod ağaçlarını derleme aracı
+- [x] man-db - Kapsamlı Linux kılavuzları
+- [x] man-pages - Kapsamlı Linux kılavuz dökümanları
+- [ ] mdadm - MD aygıtlarını (Yazılımsal RAID) denetleme aracı // *BLFS http://www.kernel.org/pub/linux/utils/raid/mdadm/mdadm-3.3.4.tar.xz*
+- [ ] mingetty - Sadece sanal konsollar için yekpare bir getty programı
+- [ ] miscfiles - Çeşitli dosyalar
+- [ ] mkinitramfs - initramfs image dosyası yaratmak için araç
+- [ ] module-bbswitch - Optimus grafik kartlı bir dizüstü bilgisayarda grafik kartını seçmeye yarayan çekirdek modülüdür.
+- [ ] module-broadcom-wl - Broadcom'un BCM4311, BCM4312, BCM4321 ve BCM4322 tabanlı kablosuz bağdaştırıcıları için IEEE 802.11a/b/g/n aygıt sürücüleri
+- [ ] module-virtualbox - Kernel modules for VirtualBox
+- [ ] module-virtualbox-guest - VirtualBox misafir makineleri için çekirdek modülleri
+- [ ] mpfr - Multiple precision floating point library // MPFR-3.1.3
+- [ ] mudur - Pisi Linux açılış sistemi
+- [ ] nasm - Assembler derleyicisi // *BLFS http://www.nasm.us/pub/nasm/releasebuilds/2.11.08/nasm-2.11.08.tar.xz*
+- [ ] ncompress - Bir başka sıkışmış dosya açma programı
+- [x] ncurses - Konsol görsel kütüphanesi
+- [ ] ndiswrapper - Bir sürücü ara yazılımı(wrapper)
+- [ ] net-tools - Linux ağ araçları // BLFS http://anduin.linuxfromscratch.org/BLFS/net-tools/net-tools-CVS_20101030.tar.gz ?
+- [x] nettle - The Nettle package contains the low-level cryptographic library. // BLFS
+- [ ] nspr - Netscape Taşınabilir Çalışma Zamanı // *https://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v4.11/src/nspr-4.11.tar.gz *
+- [x] nss-mdns - İsim servisi değiştirme modülü
+- [ ] numactl - NUMA makineleri optimize etmek için bir kitaplık // __move to util.admin?__ 
+- [x] openssl - SSL v2/v3 ve TLS v1 için araç kiti // BLFS
+- [ ] os-prober - Utility to detect other OSes on a set of drives // __1.70__
+- [ ] pam - PAM - Eklenebilir Yetkilendirme Modülleri // *BLFS http://linux-pam.org/library/Linux-PAM-1.2.1.tar.bz2*
+- [x] patch - Yama dosyalarını uygular // 
+- [x] pciutils - PCI veriyolu işlevleri ile ilgili çeşitli programlar // *BLFS 3.4.1*
+- [ ] pcmciautils - PCMCIA veriyolu işlevleri ile ilgili çeşitli araçlar
+- [ ] perl - Perl dili // *5.22.1*
+- [x] perl-Locale-gettext - GNU yerel araçlarına erişim için Perl modülü // 
+- [x] perl-XML-Parser - James Clark'ın XML ayırıştırıcısına bir Perl uzantısı arayüzü
+- [ ] piksemel - iksemel için python desteği
+- [ ] pisi - PİSİ PiSi Linux'un paket yönetim sistemidir
+- [ ] pisilinux-python - PiSi Linux için Python modülleri
+- [x] pkgconfig - Kütüphaneler için derleme bayraklarını yöneten bir paket yapılandırma sistemi
+- [x] plyvel - Plyvel, LevelDB için, hızlı ve zengin özellikli Python arabirimi.
+- [x] polkit - Sistem bileşenleri için erişim politikası servisi
+- [x] popt - Popt komut satırında çalıştıran bir seçenek ayrıştırıcıdır.
+- [ ] ppl - Pharma Polyhedra kitaplığı
+- [x] procps - Geleneksel bilgilendirme yardımcı programları ve süreç işleme araçları
+- [x] psmisc - proc dosya sistemi kullanan bir araç takımı
+- [ ] pycurl - Python cURL Modülü // *https://github.com/pycurl/pycurl/archive/REL_7_19_5_3.tar.gz*
+- [ ] pypolkit - PolicyKit için Python bağlayıcısı 
+- [ ] python - Nesneye yönelik bir programlama dili // *BLFS https://www.python.org/ftp/python/2.7.11/Python-2.7.11.tar.xz*
+- [ ] python-psutil - Platform bağımsız, süreçler hakkında bilgi sağlayan bir Python modülü // *https://pypi.python.org/packages/source/p/psutil/psutil-3.3.0.tar.gz*
+- [x] python-pyliblzma - Python için lzma bağlayıcıları
+- [ ] python-setuptools - Python kurulum araçları // *? https://pypi.python.org/pypi/distribute/0.7.3 , https://pypi.python.org/pypi/setuptools*
+- [x] readline - Diğer bir şirin konsol gösterim kütüphanesi // 
+- [ ] rsyslog - Gelişmiş sistem günlükleme hizmeti // *http://www.rsyslog.com/files/download/rsyslog/rsyslog-8.15.0.tar.gz*
+- [ ] run-parts - run scripts or programs in a directory
+- [ ] scons - Python temelli, esnek, geliştirilebilir inşa aracı // *BLFS http://downloads.sourceforge.net/scons/scons-2.4.1.tar.gz *
+- [x] sed - GNU stream düzenleyici 
+- [x] sgml-common - SGML ISO karakter nesneleri ve yardımcı programları
+- [x] shadow - Kullanıcı hesapları yönetimi için araçlar
+- [x] slang - Bir çok metin gösterici yazılım tarfından kullanılan konsol görüntüleme kütüphanesi //__ why that is not in main?__ 
+- [ ] snappy - Linux için sıkıştırma/ayıklama kütüphanesidir. // *https://github.com/google/snappy/archive/1.1.3.tar.gz*
+- [x] spidermonkey - Javascript C Kitaplığı
+- [ ] sqlite - Bir C kütüphanesi içindeki bir SQL veritabanı motoru // *BLFS http://sqlite.org/2015/sqlite-autoconf-3090200.tar.gz*
+- [x] sysfsutils - Çeşitli sistem araç ve gereçleri
+- [x] sysvinit - Programs which control basic system processes
+- [x] tar - GNU dosya arşivleme uygulaması
+- [x] tcp-wrappers - TCP Wrappers
+- [x] texinfo - GNU info (bilgi) programı ve araçları
+- [x] time - Bir programın sistem kaynak kullanımını izleyen GNU aracı // BLFS
+- [x] timezone - Zamandilimi veri dosyaları ve araçları
+- [ ] unifdef - The unifdef utility selectively processes conditional cpp(1) directives // *http://dotat.at/prog/unifdef/unifdef-2.11.tar.xz*
+- [ ] unzip - pkzip ile sıkıştırılmış dosyalar için açıcı // *BLFS http://downloads.sourceforge.net/infozip/unzip60.tar.gz*
+- [x] urlgrabber - Python için yüksek seviyeli, platform bağımsız bir url-grabber kütüphanesi
+- [x] usbutils - USB listeleme araçları // BLFS
+- [x] util-linux - Çeşitli kullanışlı Linux araçları
+- [ ] util-macros - X.Org X11 Autotools makroları // * BLFS http://ftp.x.org/pub/individual/util/util-macros-1.19.0.tar.bz2*
+- [x] v86d - uvesafb için kullanıcı uzayı yardımcısı
+- [x] vixie-cron - Tam teşekküllü bir crond uyarlaması
+- [x] which - Verilen komutun çalıştırma yolundaki önceliğe göre yerini gösterir // BLFS
+- [x] wireless-tools - Kablosuz ağ kartlarını yapılandırmak için kullanılan bir araç seti // BLFS 29 da biz 30 dayız.
+- [x] xcb-proto - XCB protokol tanımlamaları
+- [ ] xmlto - XML ve DocBook için dönüşüm aracı // * BLFS https://fedorahosted.org/releases/x/m/xmlto/xmlto-0.0.28.tar.bz2*
+- [ ] xorg-proto - X.Org Protokol Başlıkları // * BLFS check pls http://www.linuxfromscratch.org/blfs/view/svn/x/x7proto.html*
+- [ ] xorg-util - X.Org araçları // * check ftp://mirror.csclub.uwaterloo.ca/x.org/individual/util *
+- [x] xtrans - X.Org trans kitaplığı.
+- [x] xz - XZ sıkıştırma araçları
+- [ ] yacc - Yacc: Yet Another Compiler-Compiler
+- [ ] yasm - Bir çok sentaks ve mimari destekleyen Assembler // *http://www.tortall.net/projects/yasm/releases/yasm-1.3.0.tar.gz*
+- [ ] zip - ZIP programı (şifreleme desteği ile birlikte)
+- [ ] zlib - Standart sıkıştırma/açma kütüphanesi
