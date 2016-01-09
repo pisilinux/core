@@ -11,6 +11,7 @@ from pisi.actionsapi import get
 def build():
     autotools.make('OPT="%s" \
                     SHARED="yes" \
+                    PREFIX=/usr \
                     IDSDIR="/usr/share/misc" \
                     MANDIR="/usr/share/man" \
                     all' % get.CFLAGS())

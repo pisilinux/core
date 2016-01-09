@@ -10,13 +10,10 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
-    # write sed commands using pisitools.dosed :)
-    shelltools.system('sed -i "/^SUBDIRS/s/locate//" Makefile.in')
-    shelltools.system('sed -i "/gets is a security hole/d" gnulib/lib/stdio.in.h')
-
     shelltools.export("CFLAGS", "%s -D_GNU_SOURCE" % get.CFLAGS())
 
     autotools.configure("--enable-nls \
+                         --localstatedir=/var/lib/locate \
                          --without-included-regex \
                          --disable-rpath \
                          --disable-assert \
@@ -31,6 +28,6 @@ def check():
     autotools.make("check")
 
 def install():
-    autotools.install()
+    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     pisitools.dodoc("ChangeLog", "NEWS", "TODO", "README")

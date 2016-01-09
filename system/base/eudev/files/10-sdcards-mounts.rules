@@ -5,7 +5,7 @@
 #######################################
 
 # start at sdb to ignore the system hard drive
-KERNEL!="sd[b-z]*", GOTO="exit"
+KERNEL!="mmcblk[0-9]p[0-9]", GOTO="exit"
 ACTION=="add", PROGRAM!="/sbin/blkid %N", GOTO="exit"
 
 # import some useful filesystem info as variables
@@ -13,7 +13,7 @@ IMPORT{program}="/sbin/blkid -o udev -p %N"
 
 # get the label if present, otherwise assign one based on device/partition
 ENV{ID_FS_LABEL}!="", ENV{dir_name}="%E{ID_FS_LABEL}"
-ENV{ID_FS_LABEL}=="", ENV{dir_name}="flash_drive_%k"
+ENV{ID_FS_LABEL}=="", ENV{dir_name}="sd_card_%k"
 
 # create the dir in /media and symlink it to /mnt
 ACTION=="add", RUN+="/bin/mkdir -p '/media/%E{dir_name}'"
