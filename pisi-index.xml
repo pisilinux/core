@@ -4991,7 +4991,7 @@
             <Description xml:lang="fr">Les utilitaires PCI sont une collection de programmes d&apos;inspection et de manipulation de la configuration des périphériques PCI.</Description>
             <Description xml:lang="en">The PCI Utilities are a collection of programs for inspecting and manipulating configuration of PCI devices.</Description>
             <Description xml:lang="tr">Pakette bulunan PCI araçları, PCI veriyolunu kullanan donanımlarınızın görüntülenmesi ve ayarlanması işlevini yürütür.</Description>
-            <Archive type="tarxz" sha1sum="2009c441bfb78811c2991bde03b88c043654c195">ftp://ftp.kernel.org/pub/software/utils/pciutils/pciutils-3.2.1.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="c4582e05ef7113ae9fc9b0502e7b2f4285b1a1b2">ftp://ftp.kernel.org/pub/software/utils/pciutils/pciutils-3.4.1.tar.xz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="pci.ids">pci.ids</AdditionalFile>
             </AdditionalFiles>
@@ -5004,6 +5004,11 @@
         </Source>
         <Package>
             <Name>pciutils</Name>
+            <RuntimeDependencies>
+                <Dependency>zlib</Dependency>
+                <Dependency>eudev</Dependency>
+                <Dependency>libkmod</Dependency>
+            </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/sbin</Path>
                 <Path fileType="library">/usr/lib</Path>
@@ -5017,7 +5022,7 @@
             <Summary xml:lang="tr">pciutils için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="4">pciutils</Dependency>
+                <Dependency release="5">pciutils</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/lib/pkgconfig</Path>
@@ -5025,6 +5030,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-01-03</Date>
+                <Version>3.4.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Kamil Alı</Name>
+                <Email>suvari@pisilinux.org</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-05-11</Date>
                 <Version>3.2.1</Version>
@@ -5675,8 +5687,8 @@
             <Summary xml:lang="en">A somewhat comprehensive collection of Linux man pages</Summary>
             <Summary xml:lang="tr">Kapsamlı Linux kılavuz dökümanları</Summary>
             <Description xml:lang="en">A large collection of man pages (documentation) from the Linux Documentation Project (LDP).</Description>
-            <Archive type="tarxz" sha1sum="8677d75e967c759df11cdff902d94d0c1d910750">https://www.kernel.org/pub/linux/docs/man-pages/man-pages-4.02.tar.xz</Archive>
-            <Archive type="tarxz" sha1sum="b9c65a46e2061a1b2d4ee7bcc3e46603517b1f42" target="man-pages-4.02">http://www.kernel.org/pub/linux/docs/man-pages/man-pages-posix/man-pages-posix-2003-a.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="a8fe81cbea71d1b0bdf9e6d185dd5826da575010">https://www.kernel.org/pub/linux/docs/man-pages/man-pages-4.04.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="b9c65a46e2061a1b2d4ee7bcc3e46603517b1f42" target="man-pages-4.04">http://www.kernel.org/pub/linux/docs/man-pages/man-pages-posix/man-pages-posix-2003-a.tar.xz</Archive>
             <SourceURI>system/base/man-pages/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -5694,6 +5706,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2016-01-03</Date>
+                <Version>4.04</Version>
+                <Comment>Version bump</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="9">
                 <Date>2015-08-25</Date>
                 <Version>4.02</Version>
@@ -10215,7 +10234,6 @@
             <Description xml:lang="tr">GNU cpio dosyaları cpio veya tar arşivlerine kopyalamaya veya bu arşivlerden çıkarmak için tasarlanmıştır. Arşiv diskteki başka bir dosya, manyetik bir teyp veya bir boru sistemi olabilir. GNU cpio şu arşiv formatlarını destekler: ikili, eski ASCII, yeni ASCII, crc, HPUX ikili, HPUX eski ASCII, eski tar ve POSIX.1 tar.</Description>
             <Archive type="tarbz2" sha1sum="60358408c76db354f6716724c4bcbcb6e18ab642">mirrors://gnu/cpio/cpio-2.12.tar.bz2</Archive>
             <Patches>
-                <Patch level="1">cpio-2.7-svr4compat.patch</Patch>
                 <Patch level="1">cpio-2.9-exitCode.patch</Patch>
                 <Patch level="1">CVE-2010-0624-rpatelib-overflow.patch</Patch>
             </Patches>
@@ -10233,7 +10251,7 @@
         </Package>
         <History>
             <Update release="4">
-                <Date>2015-12-29</Date>
+                <Date>2016-01-03</Date>
                 <Version>2.12</Version>
                 <Comment>Version bump.</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -12027,7 +12045,7 @@
             <Description xml:lang="en">The GNU gettext package provides a set of tools and documentation for producing multi-lingual messages in programs. Tools include a set of conventions about how programs should be written to support message catalogs, a directory and file naming organization for the message catalogs, a runtime library which supports the retrieval of translated messages, and stand-alone programs for handling the translatable and the already translated strings. Gettext provides an easy to use library and tools for creating, using, and modifying natural language catalogs and is a powerful and simple method for internationalizing programs.</Description>
             <Description xml:lang="tr">gettext, uygulamalarda farklı dillerde iletiler kullanılmasını sağlayan yerelleştirme araçları ve kütüphanelerini içerir.</Description>
             <Description xml:lang="de">gettext ist eine GNU Bibliothek für Internationalisierung</Description>
-            <Archive type="targz" sha1sum="4d236852bd8d63e14d09eb6fc1f4da20a99f568b">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.19.6.tar.gz</Archive>
+            <Archive type="targz" sha1sum="d8fc932196cc78b83ca1b63c8687ec3d513b40b6">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.19.7.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>acl-devel</Dependency>
                 <Dependency>glib2-devel</Dependency>
@@ -12074,7 +12092,7 @@
             <Summary xml:lang="tr">gettext için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="9">gettext</Dependency>
+                <Dependency release="10">gettext</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/share/aclocal</Path>
@@ -12083,6 +12101,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2016-01-03</Date>
+                <Version>0.19.7</Version>
+                <Comment>Version bump</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="9">
                 <Date>2015-10-27</Date>
                 <Version>0.19.6</Version>
@@ -12639,7 +12664,7 @@
         <Package>
             <Name>mudur</Name>
             <RuntimeDependencies>
-                <Dependency release="7">kbd</Dependency>
+                <Dependency versionFrom="2.0.3">kbd</Dependency>
                 <Dependency>bash</Dependency>
                 <Dependency>dbus</Dependency>
                 <Dependency>kmod</Dependency>
@@ -12675,7 +12700,7 @@
         </Package>
         <History>
             <Update release="17">
-                <Date>2015-05-13</Date>
+                <Date>2016-01-03</Date>
                 <Version>4.4.0</Version>
                 <Comment>fix issue #562, rebuild, depend new kbd and eudev, mount cgroups</Comment>
                 <Name>Marcin Bojara</Name>
@@ -14015,9 +14040,10 @@
             <Description xml:lang="fr">Les utilitaires de recherche GNU sont les utilitaire de recherche de répertoire basique du système d&apos;exploitation GNU. Ces programmes sont typiquement associés à d&apos;autres programmes pour leur fournir une capacité de recherche de fichier et de répertoire puissante et modulaire à d&apos;autres commandes.</Description>
             <Description xml:lang="en">The GNU Find Utilities are the basic directory searching utilities of the GNU operating system. These programs are typically used in conjunction with other programs to provide modular and powerful directory search and file locating capabilities to other commands.</Description>
             <Description xml:lang="tr">GNU Find Utilities GNU işletim sisteminin temel dizin arama uygulamalarıdır. Bu uygulamalar diğer komutlara başka programlar ile birlikte çalışarak modüler ve güçlü dizin ve dosya arama yetenekleri sunar.</Description>
-            <Archive type="targz" sha1sum="e8dd88fa2cc58abffd0bfc1eddab9020231bb024">http://ftp.gnu.org/pub/gnu/findutils/findutils-4.4.2.tar.gz</Archive>
+            <Archive type="targz" sha1sum="f18e8aaee3f3d4173a1f598001003be8706d28b0">http://ftp.gnu.org/pub/gnu/findutils/findutils-4.6.0.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>gettext-devel</Dependency>
+                <Dependency>texinfo</Dependency>
             </BuildDependencies>
             <SourceURI>system/base/findutils/pspec.xml</SourceURI>
         </Source>
@@ -14026,13 +14052,22 @@
             <Files>
                 <Path fileType="executable">/usr/bin</Path>
                 <Path fileType="library">/usr/lib/find</Path>
+                <Path fileType="library">/usr/libexec</Path>
                 <Path fileType="doc">/usr/share/doc</Path>
                 <Path fileType="man">/usr/share/man</Path>
                 <Path fileType="info">/usr/share/info</Path>
                 <Path fileType="localedata">/usr/share/locale</Path>
+                <Path fileType="data">/var</Path>
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-01-03</Date>
+                <Version>4.6.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-11</Date>
                 <Version>4.4.2</Version>
@@ -15371,6 +15406,8 @@
             </Provides>
             <AdditionalFiles>
                 <AdditionalFile target="/usr/lib/tmpfiles.d/udev.conf" permission="0644" owner="root">tmpfiles.conf</AdditionalFile>
+                <AdditionalFile target="/lib/udev/rules.d/60-persistent-storage.rules" permission="0644" owner="root">60-persistent-storage.rules</AdditionalFile>
+                <AdditionalFile target="/lib/udev/rules.d/70-pisilinux.rules" permission="0644" owner="root">70-yali.rules</AdditionalFile>
             </AdditionalFiles>
         </Package>
         <Package>
@@ -15378,7 +15415,7 @@
             <Summary xml:lang="en">Development files for eudev</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="5">eudev</Dependency>
+                <Dependency release="6">eudev</Dependency>
                 <Dependency>glib2-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -15420,6 +15457,13 @@
             </Replaces>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-01-04</Date>
+                <Version>3.1.2</Version>
+                <Comment>Add rules for mount storage, ntfs usb disc too.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2015-06-20</Date>
                 <Version>3.1.2</Version>
