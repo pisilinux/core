@@ -6,13 +6,13 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
-from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 
 def setup():
-    autotools.autoreconf("-vfi")
-    autotools.configure("--disable-static")
+    #autotools.autoreconf("-vfi")
+    autotools.configure("--prefix=/usr \
+                         --disable-static")
     
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
@@ -21,7 +21,5 @@ def build():
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-
-    pisitools.domove("usr/share/pkgconfig/", "/usr/lib/")
 
     pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING", "NEWS", "README", "THANKS", "TODO", "VERSION")
