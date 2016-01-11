@@ -1,4 +1,3 @@
-
  Documentation/ABI/testing/debugfs-aufs             |   50 +
  Documentation/ABI/testing/sysfs-aufs               |   31 +
  Documentation/filesystems/aufs/README              |  383 ++++
@@ -21,7 +20,7 @@
  fs/aufs/Kconfig                                    |  185 ++
  fs/aufs/Makefile                                   |   36 +
  fs/aufs/aufs.h                                     |   46 +
- fs/aufs/branch.c                                   | 1400 +++++++++++++++
+ fs/aufs/branch.c                                   | 1394 +++++++++++++++
  fs/aufs/branch.h                                   |  266 +++
  fs/aufs/cpup.c                                     | 1306 ++++++++++++++
  fs/aufs/cpup.h                                     |   81 +
@@ -29,7 +28,7 @@
  fs/aufs/dbgaufs.h                                  |   35 +
  fs/aufs/dcsub.c                                    |  211 +++
  fs/aufs/dcsub.h                                    |  123 ++
- fs/aufs/debug.c                                    |  427 +++++
+ fs/aufs/debug.c                                    |  425 +++++
  fs/aufs/debug.h                                    |  212 +++
  fs/aufs/dentry.c                                   | 1123 ++++++++++++
  fs/aufs/dentry.h                                   |  221 +++
@@ -43,7 +42,7 @@
  fs/aufs/fhsm.c                                     |  412 +++++
  fs/aufs/file.c                                     |  831 +++++++++
  fs/aufs/file.h                                     |  278 +++
- fs/aufs/finfo.c                                    |  144 ++
+ fs/aufs/finfo.c                                    |  143 ++
  fs/aufs/fstype.h                                   |  387 ++++
  fs/aufs/hfsnotify.c                                |  275 +++
  fs/aufs/hfsplus.c                                  |   43 +
@@ -54,7 +53,7 @@
  fs/aufs/i_op_ren.c                                 | 1002 +++++++++++
  fs/aufs/iinfo.c                                    |  264 +++
  fs/aufs/inode.c                                    |  515 ++++++
- fs/aufs/inode.h                                    |  668 +++++++
+ fs/aufs/inode.h                                    |  672 +++++++
  fs/aufs/ioctl.c                                    |  206 +++
  fs/aufs/loop.c                                     |  133 ++
  fs/aufs/loop.h                                     |   39 +
@@ -72,8 +71,8 @@
  fs/aufs/rwsem.h                                    |  178 ++
  fs/aufs/sbinfo.c                                   |  353 ++++
  fs/aufs/spl.h                                      |   98 ++
- fs/aufs/super.c                                    | 1034 +++++++++++
- fs/aufs/super.h                                    |  629 +++++++
+ fs/aufs/super.c                                    | 1026 +++++++++++
+ fs/aufs/super.h                                    |  628 +++++++
  fs/aufs/sysaufs.c                                  |   91 +
  fs/aufs/sysaufs.h                                  |   88 +
  fs/aufs/sysfs.c                                    |  340 ++++
@@ -82,13 +81,12 @@
  fs/aufs/vfsub.c                                    |  835 +++++++++
  fs/aufs/vfsub.h                                    |  274 +++
  fs/aufs/wbr_policy.c                               |  752 ++++++++
- fs/aufs/whout.c                                    | 1050 +++++++++++
+ fs/aufs/whout.c                                    | 1047 +++++++++++
  fs/aufs/whout.h                                    |   72 +
  fs/aufs/wkq.c                                      |  200 +++
  fs/aufs/wkq.h                                      |   78 +
  fs/aufs/xattr.c                                    |  331 ++++
  fs/aufs/xino.c                                     | 1283 ++++++++++++++
- fs/buffer.c                                        |    2 +-
  fs/dcache.c                                        |    2 +-
  fs/proc/base.c                                     |    2 +-
  fs/proc/nommu.c                                    |    5 +-
@@ -110,7 +108,7 @@
  mm/mmap.c                                          |   17 +-
  mm/nommu.c                                         |   10 +-
  mm/prfile.c                                        |   86 +
- 111 files changed, 33302 insertions(+), 30 deletions(-)
+ 110 files changed, 33284 insertions(+), 29 deletions(-)
 
 diff --git a/Documentation/ABI/testing/debugfs-aufs b/Documentation/ABI/testing/debugfs-aufs
 new file mode 100644
@@ -1716,10 +1714,10 @@ index 0000000..9d502b5
 +Currently this approach is applied to address_space_operations for
 +regular files only.
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 747c653..53ecc33 100644
+index 9bff63c..093dd5b 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -1985,6 +1985,19 @@ F:	include/linux/audit.h
+@@ -2029,6 +2029,19 @@ F:	include/linux/audit.h
  F:	include/uapi/linux/audit.h
  F:	kernel/audit*
  
@@ -1740,10 +1738,10 @@ index 747c653..53ecc33 100644
  M:	Miguel Ojeda Sandonis <miguel.ojeda.sandonis@gmail.com>
  W:	http://miguelojeda.es/auxdisplay.htm
 diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index 674f800..291ec9e 100644
+index 423f4ca..abfdd2b 100644
 --- a/drivers/block/loop.c
 +++ b/drivers/block/loop.c
-@@ -560,6 +560,24 @@ static inline int is_loop_device(struct file *file)
+@@ -706,6 +706,24 @@ static inline int is_loop_device(struct file *file)
  	return i && S_ISBLK(i->i_mode) && MAJOR(i->i_rdev) == LOOP_MAJOR;
  }
  
@@ -1769,10 +1767,10 @@ index 674f800..291ec9e 100644
  
  static ssize_t loop_attr_show(struct device *dev, char *page,
 diff --git a/fs/Kconfig b/fs/Kconfig
-index da3f32f..b9879fe 100644
+index 6ce72d8..4aa31ea 100644
 --- a/fs/Kconfig
 +++ b/fs/Kconfig
-@@ -215,6 +215,7 @@ source "fs/pstore/Kconfig"
+@@ -221,6 +221,7 @@ source "fs/pstore/Kconfig"
  source "fs/sysv/Kconfig"
  source "fs/ufs/Kconfig"
  source "fs/exofs/Kconfig"
@@ -1781,10 +1779,10 @@ index da3f32f..b9879fe 100644
  endif # MISC_FILESYSTEMS
  
 diff --git a/fs/Makefile b/fs/Makefile
-index f79cf40..7562a4d 100644
+index 79f5225..a7c7f16 100644
 --- a/fs/Makefile
 +++ b/fs/Makefile
-@@ -125,3 +125,4 @@ obj-y				+= exofs/ # Multiple modules
+@@ -126,3 +126,4 @@ obj-y				+= exofs/ # Multiple modules
  obj-$(CONFIG_CEPH_FS)		+= ceph/
  obj-$(CONFIG_PSTORE)		+= pstore/
  obj-$(CONFIG_EFIVAR_FS)		+= efivarfs/
@@ -2076,10 +2074,10 @@ index 0000000..75290bd
 +#endif /* __AUFS_H__ */
 diff --git a/fs/aufs/branch.c b/fs/aufs/branch.c
 new file mode 100644
-index 0000000..72a8ee6
+index 0000000..f491422
 --- /dev/null
 +++ b/fs/aufs/branch.c
-@@ -0,0 +1,1400 @@
+@@ -0,0 +1,1394 @@
 +/*
 + * Copyright (C) 2005-2015 Junjiro R. Okajima
 + */
@@ -2199,7 +2197,7 @@ index 0000000..72a8ee6
 +
 +	err = -ENOMEM;
 +	root = sb->s_root;
-+	add_branch = kmalloc(sizeof(*add_branch), GFP_NOFS);
++	add_branch = kzalloc(sizeof(*add_branch), GFP_NOFS);
 +	if (unlikely(!add_branch))
 +		goto out;
 +
@@ -2207,16 +2205,14 @@ index 0000000..72a8ee6
 +	if (unlikely(err))
 +		goto out_br;
 +
-+	add_branch->br_wbr = NULL;
 +	if (au_br_writable(perm)) {
 +		/* may be freed separately at changing the branch permission */
-+		add_branch->br_wbr = kmalloc(sizeof(*add_branch->br_wbr),
++		add_branch->br_wbr = kzalloc(sizeof(*add_branch->br_wbr),
 +					     GFP_NOFS);
 +		if (unlikely(!add_branch->br_wbr))
 +			goto out_hnotify;
 +	}
 +
-+	add_branch->br_fhsm = NULL;
 +	if (au_br_fhsm(perm)) {
 +		err = au_fhsm_br_alloc(add_branch);
 +		if (unlikely(err))
@@ -2421,9 +2417,7 @@ index 0000000..72a8ee6
 +
 +	wbr = br->br_wbr;
 +	au_rw_init(&wbr->wbr_wh_rwsem);
-+	memset(wbr->wbr_wh, 0, sizeof(wbr->wbr_wh));
 +	atomic_set(&wbr->wbr_wh_running, 0);
-+	wbr->wbr_bytes = 0;
 +
 +	/*
 +	 * a limit for rmdir/rename a dir
@@ -2452,12 +2446,10 @@ index 0000000..72a8ee6
 +	struct inode *h_inode;
 +
 +	err = 0;
-+	memset(&br->br_xino, 0, sizeof(br->br_xino));
 +	mutex_init(&br->br_xino.xi_nondir_mtx);
 +	br->br_perm = add->perm;
 +	br->br_path = add->path; /* set first, path_get() later */
 +	spin_lock_init(&br->br_dykey_lock);
-+	memset(br->br_dykey, 0, sizeof(br->br_dykey));
 +	atomic_set(&br->br_count, 0);
 +	atomic_set(&br->br_xino_running, 0);
 +	br->br_id = au_new_br_id(sb);
@@ -2665,7 +2657,7 @@ index 0000000..72a8ee6
 +	for (ull = 0; ull < max; ull++)
 +		if (a[ull])
 +			fput(a[ull]);
-+	au_array_free(a);
++	kvfree(a);
 +}
 +
 +/* ---------------------------------------------------------------------- */
@@ -3415,7 +3407,7 @@ index 0000000..72a8ee6
 +
 +			if (unlikely(err)) {
 +				rerr = -ENOMEM;
-+				br->br_wbr = kmalloc(sizeof(*br->br_wbr),
++				br->br_wbr = kzalloc(sizeof(*br->br_wbr),
 +						     GFP_NOFS);
 +				if (br->br_wbr)
 +					rerr = au_wbr_init(br, sb, br->br_perm);
@@ -3429,7 +3421,7 @@ index 0000000..72a8ee6
 +	} else if (au_br_writable(mod->perm)) {
 +		/* ro --> rw */
 +		err = -ENOMEM;
-+		br->br_wbr = kmalloc(sizeof(*br->br_wbr), GFP_NOFS);
++		br->br_wbr = kzalloc(sizeof(*br->br_wbr), GFP_NOFS);
 +		if (br->br_wbr) {
 +			err = au_wbr_init(br, sb, mod->perm);
 +			if (unlikely(err)) {
@@ -5965,10 +5957,10 @@ index 0000000..2aa87ac
 +#endif /* __AUFS_DCSUB_H__ */
 diff --git a/fs/aufs/debug.c b/fs/aufs/debug.c
 new file mode 100644
-index 0000000..e553cef
+index 0000000..42053aa
 --- /dev/null
 +++ b/fs/aufs/debug.c
-@@ -0,0 +1,427 @@
+@@ -0,0 +1,425 @@
 +/*
 + * Copyright (C) 2005-2015 Junjiro R. Okajima
 + */
@@ -6288,9 +6280,7 @@ index 0000000..e553cef
 +	}
 +
 +	a->mnt.mnt_sb = sb;
-+	a->fake.br_perm = 0;
 +	a->fake.br_path.mnt = &a->mnt;
-+	a->fake.br_xino.xi_file = NULL;
 +	atomic_set(&a->fake.br_count, 0);
 +	smp_mb(); /* atomic_set */
 +	err = do_pri_br(-1, &a->fake);
@@ -6616,7 +6606,7 @@ index 0000000..0a2e7e7
 +#endif /* __AUFS_DEBUG_H__ */
 diff --git a/fs/aufs/dentry.c b/fs/aufs/dentry.c
 new file mode 100644
-index 0000000..c33fb83
+index 0000000..aad25be
 --- /dev/null
 +++ b/fs/aufs/dentry.c
 @@ -0,0 +1,1123 @@
@@ -7176,7 +7166,9 @@ index 0000000..c33fb83
 +		struct dentry *dentry;
 +		struct inode *inode;
 +		mode_t mode;
-+	} orig_h, tmp_h;
++	} orig_h, tmp_h = {
++		.dentry = NULL
++	};
 +	struct au_hdentry *hd;
 +	struct inode *inode, *h_inode;
 +	struct dentry *h_dentry;
@@ -7190,10 +7182,8 @@ index 0000000..c33fb83
 +		orig_h.inode = d_inode(orig_h.dentry);
 +		orig_h.mode = orig_h.inode->i_mode & S_IFMT;
 +	}
-+	memset(&tmp_h, 0, sizeof(tmp_h));
 +	if (tmp->di_bstart >= 0) {
 +		tmp_h.dentry = tmp->di_hdentry[tmp->di_bstart].hd_dentry;
-+		tmp_h.inode = NULL;
 +		if (d_is_positive(tmp_h.dentry)) {
 +			tmp_h.inode = d_inode(tmp_h.dentry);
 +			tmp_h.mode = tmp_h.inode->i_mode & S_IFMT;
@@ -12909,10 +12899,10 @@ index 0000000..488473e
 +#endif /* __AUFS_FILE_H__ */
 diff --git a/fs/aufs/finfo.c b/fs/aufs/finfo.c
 new file mode 100644
-index 0000000..05732c9
+index 0000000..e709205
 --- /dev/null
 +++ b/fs/aufs/finfo.c
-@@ -0,0 +1,144 @@
+@@ -0,0 +1,143 @@
 +/*
 + * Copyright (C) 2005-2015 Junjiro R. Okajima
 + */
@@ -12977,7 +12967,6 @@ index 0000000..05732c9
 +	if (fidir) {
 +		fidir->fd_bbot = -1;
 +		fidir->fd_nent = nbr;
-+		fidir->fd_vdir_cache = NULL;
 +	}
 +
 +	return fidir;
@@ -18398,7 +18387,7 @@ index 0000000..fd815fd
 +}
 diff --git a/fs/aufs/iinfo.c b/fs/aufs/iinfo.c
 new file mode 100644
-index 0000000..b8efd45
+index 0000000..c604f69
 --- /dev/null
 +++ b/fs/aufs/iinfo.c
 @@ -0,0 +1,264 @@
@@ -18509,13 +18498,13 @@ index 0000000..b8efd45
 +	sigen = au_sigen(inode->i_sb);
 +	iinfo = au_ii(inode);
 +	iigen = &iinfo->ii_generation;
-+	spin_lock(&iinfo->ii_genspin);
++	spin_lock(&iigen->ig_spin);
 +	iigen->ig_generation = sigen;
 +	if (half)
 +		au_ig_fset(iigen->ig_flags, HALF_REFRESHED);
 +	else
 +		au_ig_fclr(iigen->ig_flags, HALF_REFRESHED);
-+	spin_unlock(&iinfo->ii_genspin);
++	spin_unlock(&iigen->ig_spin);
 +}
 +
 +/* it may be called at remount time, too */
@@ -18568,7 +18557,7 @@ index 0000000..b8efd45
 +	struct au_iinfo *iinfo = &c->iinfo;
 +	static struct lock_class_key aufs_ii;
 +
-+	spin_lock_init(&iinfo->ii_genspin);
++	spin_lock_init(&iinfo->ii_generation.ig_spin);
 +	au_rw_init(&iinfo->ii_rwsem);
 +	au_rw_class(&iinfo->ii_rwsem, &aufs_ii);
 +	inode_init_once(&c->vfs_inode);
@@ -19189,10 +19178,10 @@ index 0000000..6db3d6f
 +}
 diff --git a/fs/aufs/inode.h b/fs/aufs/inode.h
 new file mode 100644
-index 0000000..a3a1876
+index 0000000..31e31f4
 --- /dev/null
 +++ b/fs/aufs/inode.h
-@@ -0,0 +1,668 @@
+@@ -0,0 +1,672 @@
 +/*
 + * Copyright (C) 2005-2015 Junjiro R. Okajima
 + */
@@ -19241,12 +19230,12 @@ index 0000000..a3a1876
 +	do { (flags) &= ~AuIG_##name; } while (0)
 +
 +struct au_iigen {
++	spinlock_t	ig_spin;
 +	__u32		ig_generation, ig_flags;
 +};
 +
 +struct au_vdir;
 +struct au_iinfo {
-+	spinlock_t		ii_genspin;
 +	struct au_iigen		ii_generation;
 +	struct super_block	*ii_hsb1;	/* no get/put */
 +
@@ -19604,17 +19593,19 @@ index 0000000..a3a1876
 +#endif
 +}
 +
-+static inline unsigned int au_iigen(struct inode *inode, struct au_iigen *iigen)
++static inline unsigned int au_iigen(struct inode *inode, struct au_iigen *iigen_arg)
 +{
 +	unsigned int gen;
 +	struct au_iinfo *iinfo;
++	struct au_iigen *iigen;
 +
 +	iinfo = au_ii(inode);
-+	spin_lock(&iinfo->ii_genspin);
-+	if (iigen)
-+		*iigen = iinfo->ii_generation;
-+	gen = iinfo->ii_generation.ig_generation;
-+	spin_unlock(&iinfo->ii_genspin);
++	iigen = &iinfo->ii_generation;
++	spin_lock(&iigen->ig_spin);
++	if (iigen_arg)
++		*iigen_arg = *iigen;
++	gen = iigen->ig_generation;
++	spin_unlock(&iigen->ig_spin);
 +
 +	return gen;
 +}
@@ -19634,11 +19625,13 @@ index 0000000..a3a1876
 +static inline void au_iigen_dec(struct inode *inode)
 +{
 +	struct au_iinfo *iinfo;
++	struct au_iigen *iigen;
 +
 +	iinfo = au_ii(inode);
-+	spin_lock(&iinfo->ii_genspin);
-+	iinfo->ii_generation.ig_generation--;
-+	spin_unlock(&iinfo->ii_genspin);
++	iigen = &iinfo->ii_generation;
++	spin_lock(&iigen->ig_spin);
++	iigen->ig_generation--;
++	spin_unlock(&iigen->ig_spin);
 +}
 +
 +static inline int au_iigen_test(struct inode *inode, unsigned int sigen)
@@ -25205,10 +25198,10 @@ index 0000000..a66d39e
 +#endif /* __AUFS_SPL_H__ */
 diff --git a/fs/aufs/super.c b/fs/aufs/super.c
 new file mode 100644
-index 0000000..3fe10d3
+index 0000000..98cfd64
 --- /dev/null
 +++ b/fs/aufs/super.c
-@@ -0,0 +1,1034 @@
+@@ -0,0 +1,1026 @@
 +/*
 + * Copyright (C) 2005-2015 Junjiro R. Okajima
 + */
@@ -25667,16 +25660,6 @@ index 0000000..3fe10d3
 +
 +/* ---------------------------------------------------------------------- */
 +
-+void au_array_free(void *array)
-+{
-+	if (array) {
-+		if (!is_vmalloc_addr(array))
-+			kfree(array);
-+		else
-+			vfree(array);
-+	}
-+}
-+
 +void *au_array_alloc(unsigned long long *hint, au_arraycb_t cb,
 +		     struct super_block *sb, void *arg)
 +{
@@ -25753,7 +25736,7 @@ index 0000000..3fe10d3
 +
 +	for (ull = 0; ull < max; ull++)
 +		iput(a[ull]);
-+	au_array_free(a);
++	kvfree(a);
 +}
 +
 +/* ---------------------------------------------------------------------- */
@@ -25978,7 +25961,9 @@ index 0000000..3fe10d3
 +{
 +	int err, do_dx;
 +	unsigned int mntflags;
-+	struct au_opts opts;
++	struct au_opts opts = {
++		.opt = NULL
++	};
 +	struct dentry *root;
 +	struct inode *inode;
 +	struct au_sbinfo *sbinfo;
@@ -25996,7 +25981,6 @@ index 0000000..3fe10d3
 +	}
 +
 +	err = -ENOMEM;
-+	memset(&opts, 0, sizeof(opts));
 +	opts.opt = (void *)__get_free_page(GFP_NOFS);
 +	if (unlikely(!opts.opt))
 +		goto out;
@@ -26097,7 +26081,9 @@ index 0000000..3fe10d3
 +			   int silent __maybe_unused)
 +{
 +	int err;
-+	struct au_opts opts;
++	struct au_opts opts = {
++		.opt = NULL
++	};
 +	struct au_sbinfo *sbinfo;
 +	struct dentry *root;
 +	struct inode *inode;
@@ -26110,7 +26096,6 @@ index 0000000..3fe10d3
 +	}
 +
 +	err = -ENOMEM;
-+	memset(&opts, 0, sizeof(opts));
 +	opts.opt = (void *)__get_free_page(GFP_NOFS);
 +	if (unlikely(!opts.opt))
 +		goto out;
@@ -26245,10 +26230,10 @@ index 0000000..3fe10d3
 +};
 diff --git a/fs/aufs/super.h b/fs/aufs/super.h
 new file mode 100644
-index 0000000..e0f588e
+index 0000000..d151729
 --- /dev/null
 +++ b/fs/aufs/super.h
-@@ -0,0 +1,629 @@
+@@ -0,0 +1,628 @@
 +/*
 + * Copyright (C) 2005-2015 Junjiro R. Okajima
 + */
@@ -26517,7 +26502,6 @@ index 0000000..e0f588e
 +struct inode *au_iget_locked(struct super_block *sb, ino_t ino);
 +typedef unsigned long long (*au_arraycb_t)(struct super_block *sb, void *array,
 +					   unsigned long long max, void *arg);
-+void au_array_free(void *array);
 +void *au_array_alloc(unsigned long long *hint, au_arraycb_t cb,
 +		     struct super_block *sb, void *arg);
 +struct inode **au_iarray_alloc(struct super_block *sb, unsigned long long *max);
@@ -30327,10 +30311,10 @@ index 0000000..53a01fb
 +};
 diff --git a/fs/aufs/whout.c b/fs/aufs/whout.c
 new file mode 100644
-index 0000000..a7f160e
+index 0000000..05ba085
 --- /dev/null
 +++ b/fs/aufs/whout.c
-@@ -0,0 +1,1050 @@
+@@ -0,0 +1,1047 @@
 +/*
 + * Copyright (C) 2005-2015 Junjiro R. Okajima
 + */
@@ -31214,15 +31198,12 @@ index 0000000..a7f160e
 +
 +	SiMustAnyLock(sb);
 +
-+	whtmp = kmalloc(sizeof(*whtmp), gfp);
++	whtmp = kzalloc(sizeof(*whtmp), gfp);
 +	if (unlikely(!whtmp)) {
 +		whtmp = ERR_PTR(-ENOMEM);
 +		goto out;
 +	}
 +
-+	whtmp->dir = NULL;
-+	whtmp->br = NULL;
-+	whtmp->wh_dentry = NULL;
 +	/* no estimation for dir size */
 +	rdhash = au_sbi(sb)->si_rdhash;
 +	if (!rdhash)
@@ -32088,7 +32069,7 @@ index 0000000..c1695b3
 +#endif
 diff --git a/fs/aufs/xino.c b/fs/aufs/xino.c
 new file mode 100644
-index 0000000..f377ce5
+index 0000000..90de8c5
 --- /dev/null
 +++ b/fs/aufs/xino.c
 @@ -0,0 +1,1283 @@
@@ -32339,7 +32320,7 @@ index 0000000..f377ce5
 +	struct au_xino_lock_dir ldir;
 +
 +	err = -ENOMEM;
-+	st = kzalloc(sizeof(*st), GFP_NOFS);
++	st = kmalloc(sizeof(*st), GFP_NOFS);
 +	if (unlikely(!st))
 +		goto out;
 +
@@ -33375,19 +33356,6 @@ index 0000000..f377ce5
 +out:
 +	return err;
 +}
-diff --git a/fs/buffer.c b/fs/buffer.c
-index 82283ab..477e5f3 100644
---- a/fs/buffer.c
-+++ b/fs/buffer.c
-@@ -2473,7 +2473,7 @@ int block_page_mkwrite(struct vm_area_struct *vma, struct vm_fault *vmf,
- 	 * Update file times before taking page lock. We may end up failing the
- 	 * fault so this update may be superfluous but who really cares...
- 	 */
--	file_update_time(vma->vm_file);
-+	vma_file_update_time(vma);
- 
- 	ret = __block_page_mkwrite(vma, vmf, get_block);
- 	sb_end_pagefault(sb);
 diff --git a/fs/dcache.c b/fs/dcache.c
 index 5c33aeb..8aa7f26 100644
 --- a/fs/dcache.c
@@ -33402,10 +33370,10 @@ index 5c33aeb..8aa7f26 100644
  		   void (*finish)(void *))
  {
 diff --git a/fs/proc/base.c b/fs/proc/base.c
-index b25eee4..c83d588 100644
+index bd3e9e6..fc42216 100644
 --- a/fs/proc/base.c
 +++ b/fs/proc/base.c
-@@ -1914,7 +1914,7 @@ static int proc_map_files_get_link(struct dentry *dentry, struct path *path)
+@@ -1921,7 +1921,7 @@ static int proc_map_files_get_link(struct dentry *dentry, struct path *path)
  	down_read(&mm->mmap_sem);
  	vma = find_exact_vma(mm, vm_start, vm_end);
  	if (vma && vma->vm_file) {
@@ -33431,10 +33399,10 @@ index f8595e8..cb8eda0 100644
  		ino = inode->i_ino;
  	}
 diff --git a/fs/proc/task_mmu.c b/fs/proc/task_mmu.c
-index e2d46ad..5e7e631 100644
+index 187b3b5..e03793e 100644
 --- a/fs/proc/task_mmu.c
 +++ b/fs/proc/task_mmu.c
-@@ -280,7 +280,10 @@ show_map_vma(struct seq_file *m, struct vm_area_struct *vma, int is_pid)
+@@ -281,7 +281,10 @@ show_map_vma(struct seq_file *m, struct vm_area_struct *vma, int is_pid)
  	const char *name = NULL;
  
  	if (file) {
@@ -33446,7 +33414,7 @@ index e2d46ad..5e7e631 100644
  		dev = inode->i_sb->s_dev;
  		ino = inode->i_ino;
  		pgoff = ((loff_t)vma->vm_pgoff) << PAGE_SHIFT;
-@@ -1465,7 +1468,7 @@ static int show_numa_map(struct seq_file *m, void *v, int is_pid)
+@@ -1505,7 +1508,7 @@ static int show_numa_map(struct seq_file *m, void *v, int is_pid)
  	struct proc_maps_private *proc_priv = &numa_priv->proc_maps;
  	struct vm_area_struct *vma = v;
  	struct numa_maps *md = &numa_priv->md;
@@ -33505,10 +33473,10 @@ index 819ef3f..fd0414e 100644
  {
  	mm_segment_t old_fs;
 diff --git a/fs/splice.c b/fs/splice.c
-index 5fc1e50..5f8385a 100644
+index 4cf700d..30a091d 100644
 --- a/fs/splice.c
 +++ b/fs/splice.c
-@@ -1102,8 +1102,8 @@ EXPORT_SYMBOL(generic_splice_sendpage);
+@@ -1110,8 +1110,8 @@ EXPORT_SYMBOL(generic_splice_sendpage);
  /*
   * Attempt to initiate a splice from pipe to file.
   */
@@ -33519,7 +33487,7 @@ index 5fc1e50..5f8385a 100644
  {
  	ssize_t (*splice_write)(struct pipe_inode_info *, struct file *,
  				loff_t *, size_t, unsigned int);
-@@ -1119,9 +1119,9 @@ static long do_splice_from(struct pipe_inode_info *pipe, struct file *out,
+@@ -1127,9 +1127,9 @@ static long do_splice_from(struct pipe_inode_info *pipe, struct file *out,
  /*
   * Attempt to initiate a splice from a file to a pipe.
   */
@@ -33545,10 +33513,10 @@ index f87d308..9a290b3 100644
  static inline void fput_light(struct file *file, int fput_needed)
  {
 diff --git a/include/linux/fs.h b/include/linux/fs.h
-index 72d8a84..fabd9d7a 100644
+index 3aa5142..8d48506 100644
 --- a/include/linux/fs.h
 +++ b/include/linux/fs.h
-@@ -1687,6 +1687,12 @@ ssize_t rw_copy_check_uvector(int type, const struct iovec __user * uvector,
+@@ -1672,6 +1672,12 @@ ssize_t rw_copy_check_uvector(int type, const struct iovec __user * uvector,
  			      struct iovec *fast_pointer,
  			      struct iovec **ret_pointer);
  
@@ -33562,10 +33530,10 @@ index 72d8a84..fabd9d7a 100644
  extern ssize_t __vfs_write(struct file *, const char __user *, size_t, loff_t *);
  extern ssize_t vfs_read(struct file *, char __user *, size_t, loff_t *);
 diff --git a/include/linux/mm.h b/include/linux/mm.h
-index 80001de..9248b97 100644
+index 00bad77..cc616b0 100644
 --- a/include/linux/mm.h
 +++ b/include/linux/mm.h
-@@ -1211,6 +1211,28 @@ static inline int fixup_user_fault(struct task_struct *tsk,
+@@ -1183,6 +1183,28 @@ static inline int fixup_user_fault(struct task_struct *tsk,
  }
  #endif
  
@@ -33595,10 +33563,10 @@ index 80001de..9248b97 100644
  extern int access_remote_vm(struct mm_struct *mm, unsigned long addr,
  		void *buf, int len, int write);
 diff --git a/include/linux/mm_types.h b/include/linux/mm_types.h
-index 3d6baa7..750ca95 100644
+index f8d1492..c3a3760 100644
 --- a/include/linux/mm_types.h
 +++ b/include/linux/mm_types.h
-@@ -250,6 +250,7 @@ struct vm_region {
+@@ -272,6 +272,7 @@ struct vm_region {
  	unsigned long	vm_top;		/* region allocated to here */
  	unsigned long	vm_pgoff;	/* the offset in vm_file corresponding to vm_start */
  	struct file	*vm_file;	/* the backing file or NULL */
@@ -33606,7 +33574,7 @@ index 3d6baa7..750ca95 100644
  
  	int		vm_usage;	/* region usage count (access under nommu_region_sem) */
  	bool		vm_icache_flushed : 1; /* true if the icache has been flushed for
-@@ -324,6 +325,7 @@ struct vm_area_struct {
+@@ -346,6 +347,7 @@ struct vm_area_struct {
  	unsigned long vm_pgoff;		/* Offset (within vm_file) in PAGE_SIZE
  					   units, *not* PAGE_CACHE_SIZE */
  	struct file * vm_file;		/* File we map to (can be NULL). */
@@ -33630,7 +33598,7 @@ index da2751d..2e0fca6 100644
 +			 unsigned int flags);
  #endif
 diff --git a/include/uapi/linux/Kbuild b/include/uapi/linux/Kbuild
-index f7b2db4..47098ae 100644
+index 628e6e6..6dd5765 100644
 --- a/include/uapi/linux/Kbuild
 +++ b/include/uapi/linux/Kbuild
 @@ -59,6 +59,7 @@ header-y += atmsvc.h
@@ -33643,7 +33611,7 @@ index f7b2db4..47098ae 100644
  header-y += auxvec.h
 diff --git a/include/uapi/linux/aufs_type.h b/include/uapi/linux/aufs_type.h
 new file mode 100644
-index 0000000..0eb09ee
+index 0000000..a06c985
 --- /dev/null
 +++ b/include/uapi/linux/aufs_type.h
 @@ -0,0 +1,406 @@
@@ -33675,7 +33643,7 @@ index 0000000..0eb09ee
 +
 +#include <linux/limits.h>
 +
-+#define AUFS_VERSION	"4.3"
++#define AUFS_VERSION	"4.x-rcN"
 +
 +/* todo? move this to linux-2.6.19/include/magic.h */
 +#define AUFS_SUPER_MAGIC	('a' << 24 | 'u' << 16 | 'f' << 8 | 's')
@@ -34054,10 +34022,10 @@ index 0000000..0eb09ee
 +
 +#endif /* __AUFS_TYPE_H__ */
 diff --git a/kernel/fork.c b/kernel/fork.c
-index 2845623..71004bd 100644
+index fce002e..2230a0f 100644
 --- a/kernel/fork.c
 +++ b/kernel/fork.c
-@@ -462,7 +462,7 @@ static int dup_mmap(struct mm_struct *mm, struct mm_struct *oldmm)
+@@ -464,7 +464,7 @@ static int dup_mmap(struct mm_struct *mm, struct mm_struct *oldmm)
  			struct inode *inode = file_inode(file);
  			struct address_space *mapping = file->f_mapping;
  
@@ -34080,10 +34048,10 @@ index 2ed4319..e3a53f5 100644
  obj-y += init-mm.o
  
 diff --git a/mm/filemap.c b/mm/filemap.c
-index 327910c..7bbc372 100644
+index 1bb0076..8eaece8 100644
 --- a/mm/filemap.c
 +++ b/mm/filemap.c
-@@ -2089,7 +2089,7 @@ int filemap_page_mkwrite(struct vm_area_struct *vma, struct vm_fault *vmf)
+@@ -2128,7 +2128,7 @@ int filemap_page_mkwrite(struct vm_area_struct *vma, struct vm_fault *vmf)
  	int ret = VM_FAULT_LOCKED;
  
  	sb_start_pagefault(inode->i_sb);
@@ -34093,7 +34061,7 @@ index 327910c..7bbc372 100644
  	if (page->mapping != inode->i_mapping) {
  		unlock_page(page);
 diff --git a/mm/memory.c b/mm/memory.c
-index deb679c..df2ce3e 100644
+index c387430..d434404 100644
 --- a/mm/memory.c
 +++ b/mm/memory.c
 @@ -2035,7 +2035,7 @@ static inline int wp_page_reuse(struct mm_struct *mm,
@@ -34106,7 +34074,7 @@ index deb679c..df2ce3e 100644
  
  	return VM_FAULT_WRITE;
 diff --git a/mm/mmap.c b/mm/mmap.c
-index 79bcc9f..da28c8a 100644
+index 2ce04a6..f555c0a 100644
 --- a/mm/mmap.c
 +++ b/mm/mmap.c
 @@ -275,7 +275,7 @@ static struct vm_area_struct *remove_vma(struct vm_area_struct *vma)
@@ -34127,7 +34095,7 @@ index 79bcc9f..da28c8a 100644
  		}
  		if (next->anon_vma)
  			anon_vma_merge(vma, next);
-@@ -1683,8 +1683,8 @@ out:
+@@ -1681,8 +1681,8 @@ out:
  	return addr;
  
  unmap_and_free_vma:
@@ -34137,7 +34105,7 @@ index 79bcc9f..da28c8a 100644
  
  	/* Undo any partial mapping done by a device driver. */
  	unmap_region(mm, vma, prev, vma->vm_start, vma->vm_end);
-@@ -2485,7 +2485,7 @@ static int __split_vma(struct mm_struct *mm, struct vm_area_struct *vma,
+@@ -2488,7 +2488,7 @@ static int __split_vma(struct mm_struct *mm, struct vm_area_struct *vma,
  		goto out_free_mpol;
  
  	if (new->vm_file)
@@ -34146,7 +34114,7 @@ index 79bcc9f..da28c8a 100644
  
  	if (new->vm_ops && new->vm_ops->open)
  		new->vm_ops->open(new);
-@@ -2504,7 +2504,7 @@ static int __split_vma(struct mm_struct *mm, struct vm_area_struct *vma,
+@@ -2507,7 +2507,7 @@ static int __split_vma(struct mm_struct *mm, struct vm_area_struct *vma,
  	if (new->vm_ops && new->vm_ops->close)
  		new->vm_ops->close(new);
  	if (new->vm_file)
@@ -34155,7 +34123,7 @@ index 79bcc9f..da28c8a 100644
  	unlink_anon_vmas(new);
   out_free_mpol:
  	mpol_put(vma_policy(new));
-@@ -2646,7 +2646,6 @@ SYSCALL_DEFINE5(remap_file_pages, unsigned long, start, unsigned long, size,
+@@ -2649,7 +2649,6 @@ SYSCALL_DEFINE5(remap_file_pages, unsigned long, start, unsigned long, size,
  	struct vm_area_struct *vma;
  	unsigned long populate = 0;
  	unsigned long ret = -EINVAL;
@@ -34163,7 +34131,7 @@ index 79bcc9f..da28c8a 100644
  
  	pr_warn_once("%s (%d) uses deprecated remap_file_pages() syscall. "
  			"See Documentation/vm/remap_file_pages.txt.\n",
-@@ -2690,10 +2689,10 @@ SYSCALL_DEFINE5(remap_file_pages, unsigned long, start, unsigned long, size,
+@@ -2693,10 +2692,10 @@ SYSCALL_DEFINE5(remap_file_pages, unsigned long, start, unsigned long, size,
  		munlock_vma_pages_range(vma, start, start + size);
  	}
  
@@ -34176,7 +34144,7 @@ index 79bcc9f..da28c8a 100644
  out:
  	up_write(&mm->mmap_sem);
  	if (populate)
-@@ -2963,7 +2962,7 @@ struct vm_area_struct *copy_vma(struct vm_area_struct **vmap,
+@@ -2966,7 +2965,7 @@ struct vm_area_struct *copy_vma(struct vm_area_struct **vmap,
  		if (anon_vma_clone(new_vma, vma))
  			goto out_free_mempol;
  		if (new_vma->vm_file)
@@ -34186,7 +34154,7 @@ index 79bcc9f..da28c8a 100644
  			new_vma->vm_ops->open(new_vma);
  		vma_link(mm, new_vma, prev, rb_link, rb_parent);
 diff --git a/mm/nommu.c b/mm/nommu.c
-index ab14a20..fffc566 100644
+index 92be862..29179f7 100644
 --- a/mm/nommu.c
 +++ b/mm/nommu.c
 @@ -671,7 +671,7 @@ static void __put_nommu_region(struct vm_region *region)

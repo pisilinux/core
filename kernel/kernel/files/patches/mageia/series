@@ -38,12 +38,6 @@ x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch
 # slows down boot
 Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch
 
-# (CVE-2015-8104)
-x86-KVM-svm-unconditionally-intercept-DB.patch
-
-# efi borkage
-Revert-x86-efi-Request-desired-alignment-via-the-PE-.patch
-
 # breaks nvidia304
 Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch
 
@@ -51,9 +45,6 @@ Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch
 ### Core
 ###
 base-cacheinfo-silence-DT-warnings.patch
-
-# git fix
-certs-add-.gitignore-to-stop-git-nagging-about-x509_.patch
 
 ###
 ### i2c
@@ -85,7 +76,6 @@ acpi-processor-M720SR-limit-to-C2.patch
 
 # backlight fixes
 ACPI-video-Add-a-quirk-to-force-acpi-video-backlight.patch
-ACPI-video-Add-a-quirk-to-force-native-backlight-on-.patch
 
 ###
 ### Block
@@ -129,12 +119,7 @@ ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch
 # Nice SSD speedup
 block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch
 
-# properly fix null pointer deref introduced in 4.1.7
-scsi-Revert-SCSI-Fix-NULL-pointer-dereference-in-runtime-PM.patch
-scsi-Fix-NULL-pointer-dereference-in-RTPM-of-block-layer.patch
-
 # ahci ids
-ahci-Add-Marvell-88se91a2-device-id.patch
 ahci-add-new-Intel-device-IDs.patch
 
 ###
@@ -142,8 +127,8 @@ ahci-add-new-Intel-device-IDs.patch
 ###
 
 # aufs from: http://aufs.sourceforge.net/ (mga#8314)
-fs-aufs-4.3.patch
-fs-aufs-4.3-modular.patch
+fs-aufs-4.4.patch
+fs-aufs-4.4-modular.patch
 
 ###
 ### FireWire
@@ -179,8 +164,26 @@ gpu-drm-mach64-3.17-buildfix.patch
 gpu-drm-mach64-3.18-buildfix.patch
 
 # drm fixes
-gpu-drm-Fix-an-unwanted-master-inheritance-v2.patch
 gpu-drm-i915-Fix-RPS-pointer-passed-from-wait_ioctl-to-i915_wait_request.patch
+
+# etnaviv / vivante gpu
+gpu-drm-0001-devicetree-add-vendor-prefix-for-Vivante-Corporation.patch
+gpu-drm-0002-drm-etnaviv-add-devicetree-bindings.patch
+gpu-drm-0003-drm-etnaviv-add-initial-etnaviv-DRM-driver.patch
+gpu-drm-0004-MAINTAINERS-add-maintainer-and-reviewers-for-the-etn.patch
+gpu-drm-0005-drm-etnaviv-unlock-on-error-in-etnaviv_gem_get_iova.patch
+gpu-drm-0006-drm-etnaviv-fix-workaround-for-GC500.patch
+
+# vc4 3d accel support
+gpu-drm-0101-drm-Create-a-driver-hook-for-allocating-GEM-object-s.patch
+gpu-drm-0102-drm-vc4-Add-a-BO-cache.patch
+gpu-drm-0103-drm-vc4-Add-create-and-map-BO-ioctls.patch
+gpu-drm-0104-drm-vc4-Add-an-API-for-creating-GPU-shaders-in-GEM-B.patch
+gpu-drm-0105-drm-vc4-Fix-a-typo-in-a-V3D-debug-register.patch
+gpu-drm-0106-drm-vc4-Bind-and-initialize-the-V3D-engine.patch
+gpu-drm-0107-drm-vc4-Add-support-for-drawing-3D-frames.patch
+gpu-drm-0108-drm-vc4-Add-support-for-async-pageflips.patch
+gpu-drm-0109-drm-vc4-Add-an-interface-for-capturing-the-GPU-state.patch
 
 ###
 ### Hardware Monitoring
@@ -231,18 +234,6 @@ net-netfilter-IFWLOG-3.7-buildfix.patch
 net-netfilter-psd.patch
 net-netfilter-psd-mdv.patch
 net-netfilter-psd-2.6.35-buildfix.patch
-
-# netfilter fixes
-net-netfilter-ipset-Fix-extension-alignment.patch
-net-netfilter-ipset-Fix-hash-type-expiration.patch
-net-netfilter-ipset-Fix-hash-type-expire-release-empty-hash-bucket-block.patch
-net-netfilter-Fix-removal-of-GRE-expectation-entries-created-by-PPTP.patch
-
-# rtlwifi hang fix
-net-wireless-rtlwifi-rtl8821ae-Fix-lockups-on-boot.patch
-
-# net stable fixes from DaveM
-net_43.mbox.patch
 
 ###
 ### Platform drivers
@@ -366,6 +357,20 @@ video-mageia-logo.patch
 ###
 ### ARM
 ###
+
+# RPi2 support
+arm-0001-dt-bindings-Add-root-properties-for-Raspberry-Pi-2.patch
+arm-0002-ARM-bcm2835-Add-a-compat-string-for-bcm2836-machine-.patch
+arm-0003-ARM-bcm2835-Add-Kconfig-support-for-bcm2836.patch
+arm-0011-ARM-bcm2835-Define-two-new-packets-from-the-latest-f.patch
+arm-0012-dt-bindings-add-rpi-power-domain-driver-bindings.patch
+arm-0013-ARM-bcm2835-add-rpi-power-domain-driver.patch
+arm-0021-ARM-bcm2835-Split-the-DT-for-peripherals-from-the-DT.patch
+arm-0022-ARM-bcm2835-Move-the-CPU-peripheral-include-out-of-c.patch
+arm-0023-ARM-bcm2835-Add-devicetree-for-bcm2836-and-Raspberry.patch
+arm-0024-ARM-bcm2835-Add-the-auxiliary-clocks-to-the-device-t.patch
+arm-0031-ARM-bcm2835-enable-all-bcm2835-relevant-in-defconfig.patch
+arm-0032-ARM-bcm2835-enable-auxiliary-spi-driver-in-defconfig.patch
 
 ###
 ### IA64

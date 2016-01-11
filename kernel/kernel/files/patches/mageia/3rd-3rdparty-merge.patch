@@ -83,9 +83,9 @@ diff -Nurp linux-4.2.2/Makefile linux-4.2.2-3rd/Makefile
  net-y		:= net/
  libs-y		:= lib/
  core-y		:= usr/
-diff -Nurp linux-4.2.2/scripts/kconfig/Makefile linux-4.2.2-3rd/scripts/kconfig/Makefile
---- linux-4.2.2/scripts/kconfig/Makefile	2015-08-30 21:34:09.000000000 +0300
-+++ linux-4.2.2-3rd/scripts/kconfig/Makefile	2015-09-29 23:04:06.298700940 +0300
+diff -Nurp linux-4.4.0/scripts/kconfig/Makefile linux-4.4.0-3rd/scripts/kconfig/Makefile
+--- linux-4.4.0/scripts/kconfig/Makefile
++++ linux-4.4.0-3rd/scripts/kconfig/Makefile
 @@ -18,26 +18,26 @@ endif
  # We need this, in case the user has it in its environment
  unexport CONFIG_
@@ -144,9 +144,9 @@ diff -Nurp linux-4.2.2/scripts/kconfig/Makefile linux-4.2.2-3rd/scripts/kconfig/
 +defconfig: $(obj)/conf 3rdparty/Makefile
  ifeq ($(KBUILD_DEFCONFIG),)
  	$< $(silent) --defconfig $(Kconfig)
- else
-@@ -101,7 +101,7 @@ else
- 	$(Q)$< $(silent) --defconfig=arch/$(SRCARCH)/configs/$(KBUILD_DEFCONFIG) $(Kconfig)
+ else ifneq ($(wildcard $(srctree)/arch/$(SRCARCH)/configs/$(KBUILD_DEFCONFIG)),)
+@@ -104,26 +104,26 @@ else
+ 	$(Q)$(MAKE) -f $(srctree)/Makefile $(KBUILD_DEFCONFIG)
  endif
  
 -%_defconfig: $(obj)/conf
@@ -154,7 +154,11 @@ diff -Nurp linux-4.2.2/scripts/kconfig/Makefile linux-4.2.2-3rd/scripts/kconfig/
  	$(Q)$< $(silent) --defconfig=arch/$(SRCARCH)/configs/$@ $(Kconfig)
  
  configfiles=$(wildcard $(srctree)/kernel/configs/$@ $(srctree)/arch/$(SRCARCH)/configs/$@)
-@@ -112,14 +112,14 @@ configfiles=$(wildcard $(srctree)/kernel
+ 
+-%.config: $(obj)/conf
++%.config: $(obj)/conf 3rdparty/Makefile
+ 	$(if $(call configfiles),, $(error No configuration exists for this target on this architecture))
+ 	$(Q)$(CONFIG_SHELL) $(srctree)/scripts/kconfig/merge_config.sh -m .config $(configfiles)
  	+$(Q)yes "" | $(MAKE) -f $(srctree)/Makefile oldconfig
  
  PHONY += kvmconfig
@@ -167,12 +171,13 @@ diff -Nurp linux-4.2.2/scripts/kconfig/Makefile linux-4.2.2-3rd/scripts/kconfig/
 +xenconfig: xen.config 3rdparty/Makefile
  	@:
  
--PHONY += tinyconfig
-+PHONY += tinyconfig 3rdparty/Makefile
- tinyconfig:
+ PHONY += tinyconfig
+-tinyconfig:
++tinyconfig: 3rdparty/Makefile
  	$(Q)$(MAKE) -f $(srctree)/Makefile allnoconfig tiny.config
  
-@@ -183,6 +183,9 @@ gconf-objs	:= gconf.o zconf.tab.o
+ # Help text used by make help
+@@ -186,6 +186,9 @@ gconf-objs	:= gconf.o zconf.tab.o
  
  hostprogs-y := conf nconf mconf kxgettext qconf gconf
  
