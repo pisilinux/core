@@ -8,7 +8,7 @@
 - [x] bash - GNU Bource again kabuğu
 - [x] bc - Konsol temelli hesap makinesi
 - [ ] binutils - Makine dili derleme ve bağlama araçları // *LFS 2.25.1*
-- [ ] biosdevname - Biosdevname is a udev helper utility developed // *http://linux.dell.com/biosdevname/biosdevname-0.7.1/biosdevname-0.7.1.tar.gz*
+- [x] biosdevname - Biosdevname is a udev helper utility developed // *http://linux.dell.com/biosdevname/biosdevname-0.7.1/biosdevname-0.7.1.tar.gz*
 - [x] bison - Yacc uyumlu yazım ayrıştırma üreteci
 - [ ] busybox - Statik bağlanmış sistem komutları bütünü // *http://busybox.net/downloads/busybox-1.24.1.tar.bz2*
 - [x] bzip2 - Yüksek kaliteli bir veri sıkıştırma uygulaması
