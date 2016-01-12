@@ -12,7 +12,7 @@
         <IsA>console</IsA>
         <Summary>eudev is a fork of system-udev</Summary>
         <Description>eudev is a fork of system-udev with the goal of obtaining better compatibility with existing software such as OpenRC and Upstart, older kernels, various toolchains and anything else required by users and various distributions.</Description>
-        <Archive sha1sum="af5d5703c3aa9253897b034c561796ef796aab83" type="targz">https://github.com/gentoo/eudev/archive/v3.1.2.tar.gz</Archive>
+        <Archive sha1sum="6d4973a0bf66e5ead4d047d2605d2141da36b335" type="targz">https://github.com/gentoo/eudev/archive/v3.1.5.tar.gz</Archive>
         <AdditionalFiles>
             <!-- http://www.linuxfromscratch.org/lfs/view/development/chapter06/eudev.html -->
             <AdditionalFile target="config.cache">config.cache</AdditionalFile>
@@ -21,7 +21,7 @@
             <Dependency>glibc-devel</Dependency>
             <Dependency>libkmod-devel</Dependency>
             <!--<Dependency>libutil-linux-devel</Dependency>--><!-- alert circle dep.-->
-            <Dependency>glib2-devel</Dependency>
+            <!--Dependency>glib2-devel</Dependency-->
             <Dependency>libpcre-devel</Dependency>
             <!--<Dependency>libxslt</Dependency>--><!--disable manpages-->
             <Dependency>gperf</Dependency>
@@ -33,7 +33,7 @@
         <RuntimeDependencies>
             <Dependency>libkmod</Dependency>
 	    <!--<Dependency>libutil-linux</Dependency>-->
-            <Dependency>glib2</Dependency>
+            <!--Dependency>glib2</Dependency-->
         </RuntimeDependencies>
         <Conflicts>
             <Package releaseTo="16">udev</Package>
@@ -78,7 +78,7 @@
         <Summary>Development files for eudev</Summary>
         <RuntimeDependencies>
             <Dependency release="current">eudev</Dependency>
-            <Dependency>glib2-devel</Dependency>
+            <!--Dependency>glib2-devel</Dependency-->
         </RuntimeDependencies>
         <Conflicts>
             <Package releaseTo="16">udev-devel</Package>
@@ -108,11 +108,11 @@
         <BuildDependencies>
             <Dependency>glibc-32bit</Dependency>
             <Dependency>libkmod-32bit</Dependency>
-            <Dependency>glib2-32bit</Dependency>
+            <!--Dependency>glib2-32bit</Dependency-->
         </BuildDependencies>
         <RuntimeDependencies>
             <Dependency>glibc-32bit</Dependency>
-            <Dependency>glib2-32bit</Dependency>
+            <!--Dependency>glib2-32bit</Dependency-->
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/lib32</Path>
@@ -121,6 +121,14 @@
     </Package>
 
     <History>
+        <Update release="7">
+            <Date>2016-01-03</Date>
+            <Version>3.1.5</Version>
+            <Comment>Version bump.</Comment>
+            <Comment>Add rules for mount storage.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="6">
             <Date>2016-01-04</Date>
             <Version>3.1.2</Version>
