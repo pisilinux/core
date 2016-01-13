@@ -20,12 +20,13 @@ diff --git a/drivers/Makefile b/drivers/Makefile
 index 932e8bf..e8df3d0 100644
 --- a/drivers/Makefile
 +++ b/drivers/Makefile
-@@ -64,9 +64,9 @@ obj-y				+= base/ block/ misc/ mfd/ nfc/
+@@ -69,10 +69,10 @@ obj-$(CONFIG_LIBNVDIMM)		+= nvdimm/
  obj-$(CONFIG_DMA_SHARED_BUFFER) += dma-buf/
  obj-$(CONFIG_NUBUS)		+= nubus/
  obj-y				+= macintosh/
 -obj-$(CONFIG_IDE)		+= ide/
  obj-$(CONFIG_SCSI)		+= scsi/
+ obj-y				+= nvme/
  obj-$(CONFIG_ATA)		+= ata/
 +obj-$(CONFIG_IDE)		+= ide/
  obj-$(CONFIG_TARGET_CORE)	+= target/
