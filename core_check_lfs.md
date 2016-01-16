@@ -2,7 +2,7 @@
 - [ ] alternatives - Alternatif yönetim sistemi
 - [x] attr - Gelişkin öznitelikler araçları
 - [x] autoconf - Used to create autoconfiguration files
-- [ ] autogen - Otomatik metin ve program üretme aracı -- arch'da 5.18.6
+- [x] autogen - Otomatik metin ve program üretme aracı -- arch'da 5.18.6
 - [x] automake - Makefile.am yapılandırma dosyalarından Makefile.in dosyası üreten program
 - [ ] baselayout - Dosya sisteminin temel planı
 - [x] bash - GNU Bource again kabuğu
@@ -12,9 +12,9 @@
 - [x] bison - Yacc uyumlu yazım ayrıştırma üreteci
 - [ ] busybox - Statik bağlanmış sistem komutları bütünü // *http://busybox.net/downloads/busybox-1.24.1.tar.bz2*
 - [x] bzip2 - Yüksek kaliteli bir veri sıkıştırma uygulaması
-- [ ] ca-certificates - Common CA certificates // https://packages.qa.debian.org/c/ca-certificates.html 20151214*
+- [x] ca-certificates - Common CA certificates // https://packages.qa.debian.org/c/ca-certificates.html 20151214*
 - [ ] catbox - Python için sandbox modülü
-- [ ] check - C için birim test ortamı //*BLFS  http://downloads.sourceforge.net/check/check-0.10.0.tar.gz*
+- [x] check - C için birim test ortamı //*BLFS  http://downloads.sourceforge.net/check/check-0.10.0.tar.gz*
 - [x] chrpath - Dinamik kitaplık yükleme yolunu (rpath) değiştirme aracı // BLFS 
 - [ ] cloog - Chunky Loop Generator // *https://github.com/periscop/cloog/archive/cloog-0.18.4.tar.gz*
 - [ ] cmake - Cmake, açık kaynak kodlu ve birden fazla platformda çalışan bir 'make' sistemidir. // * BLFS http://www.cmake.org/files/v3.4/cmake-3.4.1.tar.gz* 
