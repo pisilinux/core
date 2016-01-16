@@ -1,0 +1,167 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>eudev</Name>
+        <Homepage>https://www.gentoo.org/proj/en/eudev/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>console</IsA>
+        <Summary>eudev is a fork of system-udev</Summary>
+        <Description>eudev is a fork of system-udev with the goal of obtaining better compatibility with existing software such as OpenRC and Upstart, older kernels, various toolchains and anything else required by users and various distributions.</Description>
+        <Archive sha1sum="af5d5703c3aa9253897b034c561796ef796aab83" type="targz">https://github.com/gentoo/eudev/archive/v3.1.2.tar.gz</Archive>
+        <AdditionalFiles>
+            <!-- http://www.linuxfromscratch.org/lfs/view/development/chapter06/eudev.html -->
+            <AdditionalFile target="config.cache">config.cache</AdditionalFile>
+        </AdditionalFiles>
+        <BuildDependencies>
+            <Dependency>glibc-devel</Dependency>
+            <Dependency>libkmod-devel</Dependency>
+            <!--<Dependency>libutil-linux-devel</Dependency>--><!-- alert circle dep.-->
+            <Dependency>glib2-devel</Dependency>
+            <Dependency>libpcre-devel</Dependency>
+            <!--<Dependency>libxslt</Dependency>--><!--disable manpages-->
+            <Dependency>gperf</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>eudev</Name>
+        <RuntimeDependencies>
+            <Dependency>libkmod</Dependency>
+	    <!--<Dependency>libutil-linux</Dependency>-->
+            <Dependency>glib2</Dependency>
+        </RuntimeDependencies>
+        <Conflicts>
+            <Package releaseTo="16">udev</Package>
+            <Package releaseTo="16">libudev</Package>
+            <Package releaseTo="16">libgudev1</Package>
+        </Conflicts>
+        <Replaces>
+            <Package>udev</Package>
+            <Package>libudev</Package>
+            <Package>libgudev1</Package>
+        </Replaces>
+        <Files>
+            <Path fileType="executable">/bin</Path>
+            <Path fileType="executable">/sbin</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="executable">/lib/udev</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="config">/usr/lib/tmpfiles.d/udev.conf</Path>
+            <Path fileType="data">/run/udev</Path>
+            <Path fileType="data">/lib/systemd</Path>
+            <Path fileType="data">/etc/udev/rules.d</Path>
+            <Path fileType="data">/lib/udev/rules.d</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/tmpfiles.d/udev.conf">tmpfiles.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/lib/udev/rules.d/60-persistent-storage.rules">60-persistent-storage.rules</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/lib/udev/rules.d/70-pisilinux.rules">70-yali.rules</AdditionalFile>
+        </AdditionalFiles>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+    </Package>
+    
+    <Package>
+        <Name>eudev-devel</Name>
+        <PartOf>system.devel</PartOf>
+        <Summary>Development files for eudev</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">eudev</Dependency>
+            <Dependency>glib2-devel</Dependency>
+        </RuntimeDependencies>
+        <Conflicts>
+            <Package releaseTo="16">udev-devel</Package>
+            <Package releaseTo="16">libudev-devel</Package>
+            <Package releaseTo="16">libgudev1-devel</Package>
+        </Conflicts>
+        <Files>
+            <Path fileType="header">/usr/include/</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/share/pkgconfig</Path> <!-- check this path usr/share/pkgconfig -->
+        </Files>
+    </Package>
+    
+        <Package>
+        <Name>eudev-32bit</Name>
+        <Replaces>
+            <Package>libudev-32bit</Package>
+            <Package>libgudev1-32bit</Package>
+        </Replaces>
+        <Conflicts>
+            <Package releaseTo="16">libudev-32bit</Package>
+            <Package releaseTo="16">libgudev1-32bit</Package>
+        </Conflicts>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for eudev</Summary>
+        <BuildType>emul32</BuildType>
+        <BuildDependencies>
+            <Dependency>glibc-32bit</Dependency>
+            <Dependency>libkmod-32bit</Dependency>
+            <Dependency>glib2-32bit</Dependency>
+        </BuildDependencies>
+        <RuntimeDependencies>
+            <Dependency>glibc-32bit</Dependency>
+            <Dependency>glib2-32bit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/lib32</Path>
+            <Path fileType="library">/usr/lib32</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="6">
+            <Date>2016-01-04</Date>
+            <Version>3.1.2</Version>
+            <Comment>Add rules for mount storage, ntfs usb disc too.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="5">
+            <Date>2015-06-20</Date>
+            <Version>3.1.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="4">
+            <Date>2015-06-05</Date>
+            <Version>3.1.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="3">
+            <Date>2015-05-30</Date>
+            <Version>3.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="2">
+            <Date>2015-05-11</Date>
+            <Version>3.0</Version>
+            <Comment>build emul32 and static too.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="1">
+            <Date>2015-03-29</Date>
+            <Version>3.0</Version>
+            <Comment>First release.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
