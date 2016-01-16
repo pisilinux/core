@@ -26,7 +26,15 @@ def install():
 
     for link in ("/bin/bunzip2", "/bin/bzcat"):
         pisitools.remove(link)
-        pisitools.dosym("/bin/bzip2", link)
+        pisitools.dosym("bzip2", link)
+
+    for wrong_link in ("/bin/bzcmp", "/bin/bzegrep", "/bin/bzfgrep", "/bin/bzless"):
+        pisitools.remove(wrong_link)
+
+    pisitools.dosym("bzgrep", "/bin/bzegrep")
+    pisitools.dosym("bzgrep", "/bin/bzfgrep")
+    pisitools.dosym("bzdiff", "/bin/bzcmp")
+    pisitools.dosym("bzmore", "/bin/bzless")
 
     pisitools.dolib("libbz2.so.%s" % libversion, "/lib")
 
