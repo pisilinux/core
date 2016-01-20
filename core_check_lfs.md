@@ -23,7 +23,7 @@
 - [ ] comar-api - Çomar betikleri için yardımcı fonksiyonlar
 - [x] coreutils - Standart dosya, metin ve kabuk uygulamaları
 - [x] cpio - Tar ve cpio dosyaları içine yazıp okuyabilen bir dosya arşivleme uygulaması // BLFS
-- [ ] cpupowertools - CPU güç/frekans yönetim araçları
+- [x] cpupowertools - CPU güç/frekans yönetim araçları
 - [ ] cracklib - Parola Kontrol Kütüphanesi // *BLFS https://github.com/cracklib/cracklib/releases/download/cracklib-2.9.6/cracklib-2.9.6.tar.gz*
 - [ ] cryptsetup - Şifreli dosya sistemleri yaratmak için bir araç // * https://www.kernel.org/pub/linux/utils/cryptsetup/v1.7/cryptsetup-1.7.0.tar.xz*
 - [ ] curl - Uzak sunuculardan dosya indirmek için bir araç // *BLFS http://curl.haxx.se/download/curl-7.46.0.tar.lzma* 
