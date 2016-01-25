@@ -29,7 +29,7 @@
         <Patches>
             <!-- Linux patches -->
             <!--Patch level="1" compressionType="xz">patches/linux/patch-4.3.2.xz</Patch-->
-            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.4.0/1.mga6/PATCHES/patches/series-->
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.4.0/2.mga6/PATCHES/patches/series-->
             <!--stable patches-->
             <!--other patches-->
             <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
@@ -140,7 +140,9 @@
             <Patch level="1">patches/mageia/3rd-viahss-2.6.35-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-viahss-3.0-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8723bs.patch</Patch>
-            <Patch level="1">patches/mageia/ahci-add-new-Intel-device-IDs.patch</Patch>           
+            <Patch level="1">patches/mageia/ahci-add-new-Intel-device-IDs.patch</Patch>
+            <Patch level="1">patches/mageia/ata-libata-disable-forced-PORTS_IMPL-for-AHCI-1.3.patch</Patch>
+            <Patch level="1">patches/mageia/keys-fix-keyring-ref-leak-in-join_session_keyring.patch</Patch>
             <Patch level="1">patches/mageia/arm-0001-dt-bindings-Add-root-properties-for-Raspberry-Pi-2.patch</Patch>
             <Patch level="1">patches/mageia/arm-0002-ARM-bcm2835-Add-a-compat-string-for-bcm2836-machine-.patch</Patch>
             <Patch level="1">patches/mageia/arm-0003-ARM-bcm2835-Add-Kconfig-support-for-bcm2836.patch</Patch>
@@ -208,9 +210,9 @@
 
     <History>
           <Update release="69">
-            <Date>2016-01-11</Date>
+            <Date>2016-01-25</Date>
             <Version>4.4.0</Version>
-            <Comment>Version bump to 4.4.0</Comment>
+            <Comment>Version bump to 4.4.0,add CVE-2016-0728 patch.</Comment>
             <Type package="kernel">security</Type>
             <Requires>
                 <Action package="kernel">systemRestart</Action>
