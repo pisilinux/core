@@ -52,12 +52,12 @@
 - [ ] gcc - C/C++ ve Fortran derleyicisi // gcc-5.3.0
 - [x] gdbm - Perl uyumlu standart GNU veritabanı kütüphaneleri
 - [x] gettext - Farklı dillerde ileti katalogları üretmek için gerekli GNU araçları ve kütüphaneleri
-- [ ] glib2 - C programlama dili için glib kütüphanesi // * BLFS http://ftp.gnome.org/pub/gnome/sources/glib/2.46/glib-2.46.2.tar.xz *
+- [x] glib2 - C programlama dili için glib kütüphanesi // * BLFS http://ftp.gnome.org/pub/gnome/sources/glib/2.46/glib-2.46.2.tar.xz *
 - [ ] glibc - GNU libc6 (glibc2 olarak da bilinir) C kitaplığı // Glibc-2.22
 - [ ] glpk - GNU Doğrusal Programlama Kiti //* http://ftp.gnu.org/gnu/glpk/glpk-4.57.tar.gz*
 - [x] gmp - İstenilen duyarlıkta çalışabilen aritmetik işlem kitaplığı
 - [ ] gnuconfig - Autofoo için temel config dosyaları
-- [ ] gobject-introspection - Introspection system for GObject-based libraries // * BLFS http://ftp.gnome.org/pub/gnome/sources/gobject-introspection/1.46/gobject-introspection-1.46.0.tar.xz *
+- [x] gobject-introspection - Introspection system for GObject-based libraries // * BLFS http://ftp.gnome.org/pub/gnome/sources/gobject-introspection/1.46/gobject-introspection-1.46.0.tar.xz *
 - [x] gperf - Mükemmel hash üreticisi
 - [ ] gperftools - Google Performans Araçları // * https://github.com/gperftools/gperftools/releases/download/gperftools-2.4/gperftools-2.4.tar.gz *
 - [x] grep - Grep düzenli ifade eşleme aracı
