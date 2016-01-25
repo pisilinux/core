@@ -7487,6 +7487,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-01-17</Date>
+                <Version>1.0.6</Version>
+                <Comment>rebuild for fix #190.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-09-30</Date>
                 <Version>1.0.6</Version>
@@ -7702,7 +7709,7 @@
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
                 <Dependency>dbus-devel</Dependency>
-                <Dependency release="6">dbus-python</Dependency>
+                <Dependency release="7">dbus-python</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -7723,6 +7730,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-01-23</Date>
+                <Version>1.2.0</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2015-05-22</Date>
                 <Version>1.2.0</Version>
@@ -21885,13 +21899,10 @@
             <Description xml:lang="fr">La librairie MPFR est une librairie C pour les calculs à virgules flottantes à précisions multiples à arrondi exact (également appelé arrondi correct). Elle est basée sur la librairie à précision multiple GMP.</Description>
             <Description xml:lang="en">The MPFR library is a C library for multiple-precision floating-point computations with exact rounding (also called correct rounding). It is based on the GMP multiple-precision library.</Description>
             <Description xml:lang="es">MPFR es una librería en C para computaciones de punto flotante de múltiple precisión con redondeo exacto (también llamado redondeo correcto). Está basada en la librería de múltiple precisión GMP.</Description>
-            <Archive type="tarxz" sha1sum="03e593cc6e26639ef5e60be1af8dc527209e5172">http://ftp.gnu.org/gnu/mpfr/mpfr-3.1.2.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="383303f9de5ebe055b03b94642b03465baf9e6c7">http://www.mpfr.org/mpfr-current/mpfr-3.1.3.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>gmp-devel</Dependency>
             </BuildDependencies>
-            <Patches>
-                <Patch level="1">mpfr-3.1.2-p10.patch</Patch>
-            </Patches>
             <SourceURI>system/devel/mpfr/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -21910,7 +21921,7 @@
             <Summary xml:lang="en">Development files for mpfr</Summary>
             <Summary xml:lang="tr">mpfr için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="6">mpfr</Dependency>
+                <Dependency release="7">mpfr</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -21919,6 +21930,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-01-23</Date>
+                <Version>3.1.3</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2014-09-06</Date>
                 <Version>3.1.2_p10</Version>
@@ -22905,20 +22923,21 @@
             <Summary xml:lang="tr">Linux çekirdeği tarafından kullanılan firmware dosyaları</Summary>
             <Description xml:lang="en">linux-firmware contains different firmware files required for some devices to operate correctly.</Description>
             <Description xml:lang="tr">linux-firmware, bazı aygıtların düzgün çalışabilmesi için gerekli firmware dosyalarını içerir.</Description>
-            <Archive type="tarbz2" sha1sum="9bf6021a873c12fe1b4c2dd2525c17b177335a75">http://source.pisilinux.org/1.0/linux-firmware/linux-firmware-20151127.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="03d895382f5c1c4ec0545143970ae2b79ee430fb">http://sourceforge.net/projects/pisilinux/files/source/linux-firmware-20160111.tar.bz2</Archive>
             <Archive type="tarxz" sha1sum="dd685266f7bc0acb0d455462637d23e3e895bc96" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/common-fw.tar.xz</Archive>
             <Archive type="tarxz" sha1sum="b2bb7fce3ea67d131f543a48134f7a65f2a8d834" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware-ipw.tar.xz</Archive>
             <Archive type="tarbz2" sha1sum="a5a616a9f765cf9cbb224deb7ccefdc82a7fe4d9" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/firmware-nonfreebox-2-tar.bz2</Archive>
             <Archive type="tarbz2" sha1sum="6c18b28e62637fb809eaff89fff623ae1d470500" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/ar9170.tar.bz2</Archive>
             <Archive type="tarbz2" sha1sum="aa3b414c2948be5f226a25fa5f37e56fd659a3bb" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/ipw2x00-firmware.tar.bz2</Archive>
             <Archive type="tarbz2" sha1sum="f7ecf5412b7818871fa2798f1b314f8ddddb494e" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/aic94xx-seq.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="9be626663e9b9d15278f2b5cd1c916570eb62727" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/zd12x1-firmware.tar.bz2</Archive>
             <Archive type="tarbz2" sha1sum="16d5f4dcc90f978732a9a5b3b0347672a6cc4c36" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/accessrunner-firmware.tar.bz2</Archive>
             <Archive type="tarbz2" sha1sum="e40729d30ad6d7a6c88b90ee7bc5fbaeb9458cb7" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/rtl8192se-firmware.tar.bz2</Archive>
-            <Archive type="tarxz" sha1sum="5d333e75f02a57861565337c14f6944090a242a8" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/nouveau-1.tar.xz</Archive>
+            <Archive type="tarbz2" sha1sum="ff9e7f4b120476a90cd3fb69d76240166c4ff2a5" target="linux-firmware/mix">http://sourceforge.net/projects/pisilinux/files/source/zd12x1.tar.bz2</Archive>
+            <Archive type="tarxz" sha1sum="3239212ae7c5f60baa749764dcb8f5189e1e2f13" target="linux-firmware/mix">http://sourceforge.net/projects/pisilinux/files/source/nouveau-340-32.tar.xz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="iwlwifi-7260-14.ucode">iwlwifi-7260-14.ucode</AdditionalFile>
                 <AdditionalFile target="iwlwifi-7260-15.ucode">iwlwifi-7260-15.ucode</AdditionalFile>
+                <AdditionalFile target="iwlwifi-7260-16.ucode">iwlwifi-7260-17.ucode</AdditionalFile>
             </AdditionalFiles>
             <SourceURI>hardware/firmware/linux-firmware/pspec.xml</SourceURI>
         </Source>
@@ -22933,6 +22952,20 @@
             </Files>
         </Package>
         <History>
+            <Update release="22">
+                <Date>2016-01-22</Date>
+                <Version>20160111</Version>
+                <Comment>Update nouveau and zd12x1 firmware.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="21">
+                <Date>2016-01-16</Date>
+                <Version>20160111</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="20">
                 <Date>2015-12-02</Date>
                 <Version>20151127</Version>

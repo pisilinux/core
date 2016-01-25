@@ -20,6 +20,8 @@ def setup():
                        --disable-html-docs \
                        --disable-static")
 
+    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
+
 def build():
     shelltools.cd("build-python2")
     autotools.make()
