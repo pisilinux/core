@@ -10,7 +10,7 @@ from pisi.actionsapi import get
 WorkDir="."
 
 def install():
-    for version in ["4.1.2", "4.2", "4.3", "4.4", "4.5"]:
+    for version in ["4.1.2", "4.2", "4.3", "4.4", "4.5", "5.0"]:
         pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s" % version, "*.dtd")
         pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s" % version, "*.mod")
         pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s" % version, "docbook.cat")
