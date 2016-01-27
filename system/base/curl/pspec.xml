@@ -14,7 +14,7 @@
         <IsA>library</IsA>
         <Summary>A utility for getting files from remote servers</Summary>
         <Description>curl is a command line tool for transferring data with URL syntax, supporting various protocols.</Description>
-        <Archive sha1sum="f65708915875b8cb35edb51d8dd31440dc02fbd3" type="tarbz2">http://curl.haxx.se/download/curl-7.42.1.tar.bz2</Archive>
+        <Archive sha1sum="0f8112c50acf1c3896906643adb7f1aeb9b8b633" type="tarbz2">http://curl.haxx.se/download/curl-7.47.0.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>glibc-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
@@ -24,7 +24,7 @@
             <Dependency>ca-certificates</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch>curl-krb5flags.patch</Patch>
+<!--             <Patch>curl-krb5flags.patch</Patch> -->
             <Patch>curl-ac.patch</Patch>
         </Patches>
     </Source>
@@ -47,6 +47,7 @@
             <Path fileType="doc">/usr/share/doc/</Path>
             <Path fileType="man">/usr/share/man/</Path>
             <Path fileType="data">/usr/share/curl</Path>
+            <Path fileType="data">/usr/share/zsh</Path>
         </Files>
     </Package>
 
@@ -66,6 +67,13 @@
     </Package>
 
     <History>
+        <Update release="15">
+            <Date>2016-01-28</Date>
+            <Version>7.47.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="14">
             <Date>2015-05-28</Date>
             <Version>7.42.1</Version>
