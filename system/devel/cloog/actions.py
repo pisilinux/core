@@ -10,14 +10,15 @@ from pisi.actionsapi import get
 
 
 def setup():
-    autotools.configure("--disable-static \
-                         --enable-shared \
-                         --with-isl=system \
+    autotools.configure("--with-isl=system \
                          --with-gmp=system \
                          --with-ppl")
 
 def build():
     autotools.make()
+    
+#def build():
+    #autotools.make("-j1 check")
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
