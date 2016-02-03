@@ -1,0 +1,31 @@
+From 97daf8b97ad6f913a34c82515be64dc9ac08d63e Mon Sep 17 00:00:00 2001
+From: Miklos Szeredi <miklos@szeredi.hu>
+Date: Tue, 10 Nov 2015 17:08:41 +0100
+Subject: [PATCH 1/6] ovl: allow zero size xattr
+
+When ovl_copy_xattr() encountered a zero size xattr no more xattrs were
+copied and the function returned success.  This is clearly not the desired
+behavior.
+
+Signed-off-by: Miklos Szeredi <miklos@szeredi.hu>
+Cc: <stable@vger.kernel.org>
+---
+ fs/overlayfs/copy_up.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/fs/overlayfs/copy_up.c b/fs/overlayfs/copy_up.c
+index 871fcb6..394e87f 100644
+--- a/fs/overlayfs/copy_up.c
++++ b/fs/overlayfs/copy_up.c
+@@ -54,7 +54,7 @@ int ovl_copy_xattr(struct dentry *old, struct dentry *new)
+ 
+ 	for (name = buf; name < (buf + list_size); name += strlen(name) + 1) {
+ 		size = vfs_getxattr(old, name, value, XATTR_SIZE_MAX);
+-		if (size <= 0) {
++		if (size < 0) {
+ 			error = size;
+ 			goto out_free_value;
+ 		}
+-- 
+2.7.0
+
