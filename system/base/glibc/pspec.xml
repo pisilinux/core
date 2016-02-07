@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>GNU libc6 (also called glibc2) C library</Summary>
         <Description>The GNU C library is used as the C library in the GNU system and most systems with the Linux kernel. It defines the system calls and other basic C programming language facilities.</Description>
-        <Archive sha1sum="1157be3fe63baa81b7ba104a103337775a6ed06f" type="tarxz">http://ftp.gnu.org/gnu/libc/glibc-2.21.tar.xz</Archive>
+        <Archive sha1sum="5be95334f197121d8b351059a1c6518305d88e2a" type="tarxz">http://ftp.gnu.org/gnu/libc/glibc-2.22.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>kernel-headers</Dependency>
             <Dependency>gettext</Dependency>
@@ -21,7 +21,7 @@
         </BuildDependencies>
         <Patches>
             <Patch>locale-no-archive.patch</Patch>
-            <Patch>glibc-2.21-roundup.patch</Patch>
+<!--            <Patch>glibc-2.21-roundup.patch</Patch-->
 <!--             <Patch>glibc-2.20-getifaddrs_internal-segfault.patch</Patch> -->
 <!--             <Patch>glibc-2.20-linux-3.16-additions.patch</Patch> -->
 <!--             <Patch>glibc-2.20-do_ftell_wide-memleak.patch</Patch> -->
@@ -1757,6 +1757,13 @@
     </Package>
 
     <History>
+        <Update release="12">
+            <Date>2016-02-05</Date>
+            <Version>2.22</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="11">
             <Date>2015-04-04</Date>
             <Version>2.21</Version>
