@@ -122,9 +122,6 @@ block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch
 # ahci ids
 ahci-add-new-Intel-device-IDs.patch
 
-# ahci fix
-ata-libata-disable-forced-PORTS_IMPL-for-AHCI-1.3.patch
-
 ###
 ### File-system
 ###
@@ -140,6 +137,9 @@ fs-ovl-move-super-block-magic-number-to-magic.h.patch
 fs-ovl-root-copy-attr.patch
 fs-ovl-setattr-check-permissions-before-copy-up.patch
 fs-ovl-check-dentry-positiveness-in-ovl_cleanup_whiteou.patch
+
+# xfs trace fix (mga#17489)
+fs-xfs-Revert-xfs-clear-PF_NOFREEZE-for-xfsaild-kthread.patch
 
 ###
 ### FireWire
@@ -200,6 +200,13 @@ gpu-drm-0109-drm-vc4-Add-an-interface-for-capturing-the-GPU-state.patch
 gpu-drm-radeon-Update-radeon_get_vblank_counter_kms.patch
 gpu-drm-radeon-Drop-unnecessary-unsigned-int-0-check.patch
 
+# vblank fixes
+gpu-drm-No-Op-redundant-calls-to-drm_vblank_off-v2.patch
+gpu-drm-Prevent-vblank-counter-bumps-1-with-active-vblank-clients-v2.patch
+gpu-drm-Fix-drm_vblank_pre_post_modeset-regression-from-Linux-4.4.patch
+gpu-drm-Fix-treatment-of-drm_vblank_offdelay-in-drm_vblank_on-v2.patch
+gpu-drm_nouveau_display-Enable-vblank-irqs-after-display-engine-is-on-again.patch
+
 ###
 ### Hardware Monitoring
 ###
@@ -244,6 +251,7 @@ net-netfilter-IFWLOG-2.6.35-buildfix.patch
 net-netfilter-IFWLOG-2.6.37-buildfix.patch
 net-ipv4-netfilter-ipt_IFWLOG-3.6-buildfix.patch
 net-netfilter-IFWLOG-3.7-buildfix.patch
+net-netfilter-IFWLOG-remove-unused-label.patch
 
 # netfilter psd support
 net-netfilter-psd.patch
