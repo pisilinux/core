@@ -20,9 +20,10 @@
             <Dependency>binutils</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch>locale-no-archive.patch</Patch>
-<!--            <Patch>glibc-2.21-roundup.patch</Patch-->
-<!--             <Patch>glibc-2.20-getifaddrs_internal-segfault.patch</Patch> -->
+            <!--Patch>locale-no-archive.patch</Patch-->
+                 <!--Patch level="1">glibc-2.22-CVE-2015-7547.patch</Patch>
+                 <Patch level="1">glibc-2.22-roundup.patch</Patch-->
+                 <!--Patch>glibc-2.20-getifaddrs_internal-segfault.patch</Patch> -->
 <!--             <Patch>glibc-2.20-linux-3.16-additions.patch</Patch> -->
 <!--             <Patch>glibc-2.20-do_ftell_wide-memleak.patch</Patch> -->
         </Patches>
