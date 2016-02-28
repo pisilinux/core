@@ -25,12 +25,12 @@
             <Dependency>patch</Dependency>
             <Dependency>sed</Dependency>
             <Dependency>texinfo</Dependency>
-            <Dependency>gmp</Dependency>
-            <Dependency>mpfr</Dependency>
-            <Dependency>libmpc</Dependency>
+            <Dependency>gmp-devel</Dependency>
+            <Dependency>mpfr-devel</Dependency>
+            <Dependency>libmpc-devel</Dependency>
             <Dependency>ppl</Dependency>
-            <Dependency>cloog</Dependency>
-            <Dependency>isl</Dependency>
+            <Dependency>zlib-devel</Dependency>
+            <Dependency>isl-devel</Dependency>
             <Dependency>elfutils</Dependency>
         </BuildDependencies>
         <Patches>
@@ -128,7 +128,8 @@
             <Dependency>gmp</Dependency>
             <Dependency>isl</Dependency>
             <Dependency>mpfr</Dependency>
-            <Dependency>cloog</Dependency>
+            <Dependency>zlib</Dependency>
+            <!--Dependency>cloog</Dependency-->
             <Dependency>libmpc</Dependency>
         </RuntimeDependencies>
         <Files>
