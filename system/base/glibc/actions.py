@@ -82,8 +82,8 @@ def build():
         autotools.make()
 
         pisitools.dosed("configparms", "=no", "=yes")
-        shelltools.echo("configparms", "CC += -fstack-protector-strong -D_FORTIFY_SOURCE=2")
-        shelltools.echo("configparms", "CXX += -fstack-protector-strong -D_FORTIFY_SOURCE=2")
+#        shelltools.echo("configparms", "CC += -fstack-protector-strong -D_FORTIFY_SOURCE=2")
+#        shelltools.echo("configparms", "CXX += -fstack-protector-strong -D_FORTIFY_SOURCE=2")
 
     else:
         shelltools.echo("configparms", "slibdir=/lib")
