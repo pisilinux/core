@@ -567,6 +567,7 @@
                 <Dependency>xmlto</Dependency>
             </BuildDependencies>
             <Patches>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.4.2.xz</Patch>
                 <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
                 <Patch level="1">patches/mageia/x86-boot-video-80x25-if-break.patch</Patch>
                 <Patch level="1">patches/mageia/x86-default_poweroff_up_machines.patch</Patch>
@@ -588,6 +589,13 @@
                 <Patch level="1">patches/mageia/block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch</Patch>
                 <Patch level="1">patches/mageia/fs-aufs-4.4.patch</Patch>
                 <Patch level="1">patches/mageia/fs-aufs-4.4-modular.patch</Patch>
+                <Patch level="1">patches/mageia/fs-ovl-allow-zero-size-xattr.patch</Patch>
+                <Patch level="1">patches/mageia/fs-ovl-use-a-minimal-buffer-in-ovl_copy_xattr.patch</Patch>
+                <Patch level="1">patches/mageia/fs-ovl-move-super-block-magic-number-to-magic.h.patch</Patch>
+                <Patch level="1">patches/mageia/fs-ovl-root-copy-attr.patch</Patch>
+                <Patch level="1">patches/mageia/fs-ovl-setattr-check-permissions-before-copy-up.patch</Patch>
+                <Patch level="1">patches/mageia/fs-ovl-check-dentry-positiveness-in-ovl_cleanup_whiteou.patch</Patch>
+                <Patch level="1">patches/mageia/fs-xfs-Revert-xfs-clear-PF_NOFREEZE-for-xfsaild-kthread.patch</Patch>
                 <Patch level="1">patches/mageia/firewire-ieee1394-module-aliases.patch</Patch>
                 <Patch level="1">patches/mageia/char-agp-intel-new-Q57-id.patch</Patch>
                 <Patch level="1">patches/mageia/gpu-drm-mach64.patch</Patch>
@@ -623,6 +631,13 @@
                 <Patch level="1">patches/mageia/gpu-drm-0107-drm-vc4-Add-support-for-drawing-3D-frames.patch</Patch>
                 <Patch level="1">patches/mageia/gpu-drm-0108-drm-vc4-Add-support-for-async-pageflips.patch</Patch>
                 <Patch level="1">patches/mageia/gpu-drm-0109-drm-vc4-Add-an-interface-for-capturing-the-GPU-state.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-radeon-Update-radeon_get_vblank_counter_kms.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-radeon-Drop-unnecessary-unsigned-int-0-check.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-No-Op-redundant-calls-to-drm_vblank_off-v2.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-Prevent-vblank-counter-bumps-1-with-active-vblank-clients-v2.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-Fix-drm_vblank_pre_post_modeset-regression-from-Linux-4.4.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-Fix-treatment-of-drm_vblank_offdelay-in-drm_vblank_on-v2.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm_nouveau_display-Enable-vblank-irqs-after-display-engine-is-on-again.patch</Patch>
                 <Patch level="1">patches/mageia/input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch</Patch>
                 <Patch level="1">patches/mageia/net-sis190-fix-list-usage.patch</Patch>
                 <Patch level="1">patches/mageia/net-netfilter-IFWLOG.patch</Patch>
@@ -631,6 +646,7 @@
                 <Patch level="1">patches/mageia/net-netfilter-IFWLOG-2.6.37-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/net-ipv4-netfilter-ipt_IFWLOG-3.6-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/net-netfilter-IFWLOG-3.7-buildfix.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-IFWLOG-remove-unused-label.patch</Patch>
                 <Patch level="1">patches/mageia/net-netfilter-psd.patch</Patch>
                 <Patch level="1">patches/mageia/net-netfilter-psd-mdv.patch</Patch>
                 <Patch level="1">patches/mageia/net-netfilter-psd-2.6.35-buildfix.patch</Patch>
@@ -667,8 +683,6 @@
                 <Patch level="1">patches/mageia/3rd-viahss-3.0-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/3rd-rtl8723bs.patch</Patch>
                 <Patch level="1">patches/mageia/ahci-add-new-Intel-device-IDs.patch</Patch>
-                <Patch level="1">patches/mageia/ata-libata-disable-forced-PORTS_IMPL-for-AHCI-1.3.patch</Patch>
-                <Patch level="1">patches/mageia/keys-fix-keyring-ref-leak-in-join_session_keyring.patch</Patch>
                 <Patch level="1">patches/mageia/arm-0001-dt-bindings-Add-root-properties-for-Raspberry-Pi-2.patch</Patch>
                 <Patch level="1">patches/mageia/arm-0002-ARM-bcm2835-Add-a-compat-string-for-bcm2836-machine-.patch</Patch>
                 <Patch level="1">patches/mageia/arm-0003-ARM-bcm2835-Add-Kconfig-support-for-bcm2836.patch</Patch>
@@ -739,9 +753,31 @@
             </Files>
         </Package>
         <History>
+            <Update release="71">
+                <Type package="kernel">security</Type>
+                <Date>2016-02-18</Date>
+                <Version>4.4.2</Version>
+                <Comment>Version bump to 4.4.2 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.4.2</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="70">
+                <Type package="kernel">security</Type>
+                <Date>2016-02-02</Date>
+                <Version>4.4.1</Version>
+                <Comment>Version bump to 4.4.1 https://www.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.4.1</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
             <Update release="69">
                 <Type package="kernel">security</Type>
-                <Date>2016-01-25</Date>
+                <Date>2016-01-30</Date>
                 <Version>4.4.0</Version>
                 <Comment>Version bump to 4.4.0,add CVE-2016-0728 patch.</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -1565,6 +1601,9 @@
             <BuildDependencies>
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
+            <Patches>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.4.1.xz</Patch>
+            </Patches>
             <SourceURI>kernel/tools/cpupowertools/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -1586,6 +1625,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="69">
+                <Date>2016-02-03</Date>
+                <Version>4.4.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="68">
                 <Date>2016-01-16</Date>
                 <Version>4.4.0</Version>
@@ -2258,7 +2304,7 @@
             <Description xml:lang="en">This package provides the kernel support for VirtualBox.</Description>
             <Archive type="tarxz" sha1sum="19662922a8a696fe0eb37184024712a781d06a73">http://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-5.0.12.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.4.0">kernel-module-headers</Dependency>
+                <Dependency version="4.4.1">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -2268,7 +2314,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.4.0">kernel</Dependency>
+                <Dependency version="4.4.1">kernel</Dependency>
                 <Dependency version="5.0.12">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -2290,6 +2336,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="62">
+                <Date>2016-02-03</Date>
+                <Version>5.0.12</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="61">
                 <Date>2016-01-16</Date>
                 <Version>5.0.12</Version>
@@ -2758,7 +2811,7 @@
                 <AdditionalFile target="kernel-4.2.patch">kernel-4.2.patch</AdditionalFile>
             </AdditionalFiles>
             <BuildDependencies>
-                <Dependency version="4.4.0">kernel-module-headers</Dependency>
+                <Dependency version="4.4.1">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch>support_kernel-4.0.patch</Patch>
@@ -2771,7 +2824,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.4.0">kernel</Dependency>
+                <Dependency version="4.4.1">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2783,6 +2836,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="12">
+                <Date>2016-02-03</Date>
+                <Version>1.59</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="11">
                 <Date>2016-01-16</Date>
                 <Version>1.59</Version>
@@ -2879,14 +2939,14 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.4.0">kernel-module-headers</Dependency>
+                <Dependency version="4.4.1">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-bbswitch/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="4.4.0">kernel</Dependency>
+                <Dependency version="4.4.1">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2899,6 +2959,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="37">
+                <Date>2016-02-03</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="36">
                 <Date>2016-01-16</Date>
                 <Version>0.8</Version>
@@ -3184,7 +3251,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
             <Archive type="tarxz" sha1sum="4fee388ca9ce5ab342f11edcc0631a694029665b">http://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-5.0.12.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.4.0">kernel-module-headers</Dependency>
+                <Dependency version="4.4.1">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -3194,7 +3261,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.4.0">kernel</Dependency>
+                <Dependency version="4.4.1">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
                 <Dependency version="5.0.12">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
@@ -3221,6 +3288,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="60">
+                <Date>2016-02-03</Date>
+                <Version>5.0.12</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="59">
                 <Date>2016-01-16</Date>
                 <Version>5.0.12</Version>
@@ -3661,7 +3735,7 @@
             <Archive type="targz" sha1sum="e02beac9cc713011551c483ae5f20f065f5b88c7" target="i686">http://www.broadcom.com/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <Archive type="targz" sha1sum="bd55f1fdc6b0a4d0a70dc4ba4bb4169a824e238c" target="x86_64">http://www.broadcom.com/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.4.0">kernel-module-headers</Dependency>
+                <Dependency version="4.4.1">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">patch/linux-40.patch</Patch>
@@ -3680,8 +3754,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.4.0">kernel</Dependency>
-                <Dependency release="57">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="4.4.1">kernel</Dependency>
+                <Dependency release="58">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -3708,6 +3782,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="58">
+                <Date>2016-02-03</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="57">
                 <Date>2016-01-16</Date>
                 <Version>6.30.223.248</Version>
@@ -4212,6 +4293,7 @@
             <Archive type="zip" sha1sum="e79a59e9164c1013b8cc9f64f96f909a184ca016">http://www.docbook.org/xml/4.3/docbook-xml-4.3.zip</Archive>
             <Archive type="zip" sha1sum="7c4d91c82ad3747e1b5600c91782758e5d91c22b">http://www.docbook.org/xml/4.4/docbook-xml-4.4.zip</Archive>
             <Archive type="zip" sha1sum="b9124233b50668fb508773aa2b3ebc631d7c1620">http://www.docbook.org/xml/4.5/docbook-xml-4.5.zip</Archive>
+            <Archive type="zip" sha1sum="49f274e67efdee771300cba4da1f3e4bc00be1ec">http://www.docbook.org/xml/5.0/docbook-5.0.zip</Archive>
             <SourceURI>office/docbook/docbook-xml/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -4232,6 +4314,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-01-28</Date>
+                <Version>5.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-11-17</Date>
                 <Version>4.5</Version>
@@ -4277,7 +4366,7 @@
             <Summary xml:lang="tr">Docbook XSL biçemyaprakları</Summary>
             <Description xml:lang="en">These XSL stylesheets allow you to transform any DocBook XML document to other formats such as HTML, FO and XHTML.</Description>
             <Description xml:lang="tr">Docbook XSL biçemyapraklarını (stylesheets) içerir.</Description>
-            <Archive type="tarbz2" sha1sum="1d668c845bb43c65115d1a1d9542f623801cfb6f">http://sourceforge.net/projects/docbook/files/docbook-xsl/1.78.1/docbook-xsl-1.78.1.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="7487b2acc7106253bb77fcddc7e1a9788601ad23">http://sourceforge.net/projects/docbook/files/docbook-xsl/1.79.1/docbook-xsl-1.79.1.tar.bz2</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="Makefile">Makefile</AdditionalFile>
             </AdditionalFiles>
@@ -4286,7 +4375,6 @@
                 <Patch level="1">docbook-xsl-newmethods.patch</Patch>
                 <Patch level="1">docbook-xsl-non-constant-expressions.patch</Patch>
                 <Patch level="1">docbook-xsl-list-item-body.patch</Patch>
-                <Patch level="1">docbook-xsl-mandir.patch</Patch>
             </Patches>
             <SourceURI>office/docbook/docbook-xsl/pspec.xml</SourceURI>
         </Source>
@@ -4304,6 +4392,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2015-01-28</Date>
+                <Version>1.79.1</Version>
+                <Comment>Version bump</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-11-17</Date>
                 <Version>1.78.1</Version>
@@ -4401,7 +4496,7 @@
             <Summary xml:lang="tr">XML ve DocBook için dönüşüm aracı</Summary>
             <Description xml:lang="en">The purpose of xmlto is to convert an XML file to the desired format using whatever means necessary.</Description>
             <Description xml:lang="tr">xmlto uygulamasının amacı verilen bir XML dosyasını istenen bir biçime dönüştürmektir.</Description>
-            <Archive type="targz" sha1sum="4b1daa7a15fc64176446332d55e8befa9a6d90bf">https://fedorahosted.org/releases/x/m/xmlto/xmlto-0.0.26.tar.gz</Archive>
+            <Archive type="targz" sha1sum="235feb4d2aeccf7467f458a3e18b20445f89cc0f">https://fedorahosted.org/releases/x/m/xmlto/xmlto-0.0.28.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>libxslt</Dependency>
                 <Dependency>util-linux</Dependency>
@@ -4424,6 +4519,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2014-05-18</Date>
+                <Version>0.0.28</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-18</Date>
                 <Version>0.0.26</Version>
@@ -5264,6 +5366,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-02-28</Date>
+                <Version>1.6</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-11</Date>
                 <Version>1.6</Version>
@@ -5303,7 +5412,7 @@
             <Description xml:lang="fr">La commande grep recherche dans un ou plusieurs fichiers les lignes correspondant à un motif défini. Par défaut grep affiche les lignes éligibles.</Description>
             <Description xml:lang="en">The grep command searches one or more input files for lines containing a match to a specified pattern. By default, grep prints the matching lines.</Description>
             <Description xml:lang="tr">Grep komutu bir veya daha fazla verilen dosyada aranan parçayı bulmaya yarayan bir programdır. Ön tanımlı olarak grep eşleşen satırları çıktıya verir.</Description>
-            <Archive type="tarxz" sha1sum="561ba83226872b1c45205bdd583106ee8df0fe79">ftp://mirrors.kernel.org/gnu/grep/grep-2.22.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="76239b0c7f6d93acc820832b8241227619ff1cdb">ftp://mirrors.kernel.org/gnu/grep/grep-2.23.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>gettext</Dependency>
                 <Dependency>libpcre-devel</Dependency>
@@ -5324,6 +5433,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2016-02-28</Date>
+                <Version>2.23</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2015-11-07</Date>
                 <Version>2.22</Version>
@@ -5713,6 +5829,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-02-28</Date>
+                <Version>3.3</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-11</Date>
                 <Version>3.3</Version>
@@ -6792,6 +6915,7 @@
                 <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <Patches>
+                <Patch level="1">ntfs-3g.patch</Patch>
                 <Patch level="1">upstream/util-linux-ng-2.21-login-lastlog.patch</Patch>
             </Patches>
             <SourceURI>system/base/util-linux/pspec.xml</SourceURI>
@@ -6880,7 +7004,7 @@
             <IsA>header</IsA>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="12">libutil-linux</Dependency>
+                <Dependency release="13">libutil-linux</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/</Path>
@@ -6917,6 +7041,13 @@
             </Replaces>
         </Package>
         <History>
+            <Update release="13">
+                <Date>2016-02-28</Date>
+                <Version>2.27.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="12">
                 <Date>2015-11-12</Date>
                 <Version>2.27.1</Version>
@@ -7489,6 +7620,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-02-28</Date>
+                <Version>1.0.6</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2016-01-17</Date>
                 <Version>1.0.6</Version>
@@ -7913,6 +8051,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2016-02-28</Date>
+                <Version>4.1.3</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2015-06-05</Date>
                 <Version>4.1.3</Version>
@@ -8322,7 +8467,7 @@
             <Summary xml:lang="tr">GNU info (bilgi) programı ve araçları</Summary>
             <Summary xml:lang="de">GNU Info Prgramm und Werkzeuge</Summary>
             <Description xml:lang="en">Texinfo is a documentation system that can produce both online information and printed output from a single source file. The GNU Project uses the Texinfo file format for most of its documentation.</Description>
-            <Archive type="targz" sha1sum="110d45256c4219c88dc2fdb8c9c1a20749e4e7c5">mirrors://gnu/texinfo/texinfo-6.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="b6ed8b4af3fe9a4aa7c72081dc61f095f73d895c">mirrors://gnu/texinfo/texinfo-6.1.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>ncurses</Dependency>
             </BuildDependencies>
@@ -8348,6 +8493,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-02-28</Date>
+                <Version>6.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2015-08-24</Date>
                 <Version>6.0</Version>
@@ -8909,6 +9061,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-02-28</Date>
+                <Version>1.28</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2015-09-06</Date>
                 <Version>1.28</Version>
@@ -9083,7 +9242,7 @@
             <Description xml:lang="fr">La librairie PCRE (Expressions Régulières Compatible avec Perl) est un ensemble de fonctions implémentant la recherche de motifs de texte à l&apos;aide d&apos;expressions régulières utilisant la même syntaxe et la même sémantique que Perl5.</Description>
             <Description xml:lang="en">The PCRE (Perl Compatible Regular Expressions) library is a set of functions that implement regular expression pattern matching using the same syntax and semantics as Perl 5.</Description>
             <Description xml:lang="tr">PCRE kütüphanesi, Perl 5 programlama dili sözdizimi ve semantiği ile kalıp eşleştirme (pattern matching) görevini yürüten fonksiyonları barındırır.</Description>
-            <Archive type="tarbz2" sha1sum="9a074e9cbf3eb9f05213fd9ca5bc188644845ccc">http://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.36.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="ae84e3b3ef0764788ce33b1adeff1add938126e1">http://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.38.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>readline-devel</Dependency>
             </BuildDependencies>
@@ -9108,7 +9267,7 @@
             <Summary xml:lang="tr">libpcre için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="8">libpcre</Dependency>
+                <Dependency release="9">libpcre</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -9134,13 +9293,20 @@
             <RuntimeDependencies>
                 <Dependency>libgcc</Dependency>
                 <Dependency>readline</Dependency>
-                <Dependency release="8">libpcre</Dependency>
+                <Dependency release="9">libpcre</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2016-02-25</Date>
+                <Version>8.38</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2015-01-25</Date>
                 <Version>8.36</Version>
@@ -11196,6 +11362,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-02-28</Date>
+                <Version>4.2.2</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2014-05-11</Date>
                 <Version>4.2.2</Version>
@@ -11375,6 +11548,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2016-02-28</Date>
+                <Version>4.3_p39</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="9">
                 <Date>2015-07-09</Date>
                 <Version>4.3_p39</Version>
@@ -11457,7 +11637,7 @@
             <Summary xml:lang="de">Bibliothek, um Passwörter zu prüfen</Summary>
             <Description xml:lang="en">CrackLib tests passwords to determine whether they match certain security-oriented characteristics, with the purpose of stopping users from choosing passwords that are easy to guess.</Description>
             <Description xml:lang="tr">CrackLib, kullanıcıların kolay tahmin edilebilir parolalar seçmelerini engellemek amacıyla parolaların güvenlik odaklı bazı özelliklere sahip olup olmadıklarını denetler.</Description>
-            <Archive type="targz" sha1sum="a780211a87a284297aa473fe2b50584b842a0e98">mirrors://sourceforge/cracklib/cracklib-2.9.2.tar.gz</Archive>
+            <Archive type="targz" sha1sum="80af5eb9a5e6bf37b549d44f2d2288a85c4922bb">mirrors://sourceforge/cracklib/cracklib-2.9.4.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>zlib</Dependency>
                 <Dependency>python</Dependency>
@@ -11486,13 +11666,20 @@
             <Summary xml:lang="tr">cracklib için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="5">cracklib</Dependency>
+                <Dependency release="6">cracklib</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-01-28</Date>
+                <Version>2.9.4</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="5">
                 <Date>2014-10-31</Date>
                 <Version>2.9.2</Version>
@@ -12044,7 +12231,7 @@
             <Summary xml:lang="tr">Standart dosya, metin ve kabuk uygulamaları</Summary>
             <Description xml:lang="en">Utilitaires standards GNU pour fichiers (chmod, cp, dd, dir, ls...), utilitaires texte (sort, tr, head, wc...) et utilitaires d&apos;interpréteur de commande (shell) (whoami, who...)</Description>
             <Description xml:lang="tr">GNU dosya uygulamaları (chmod, cp, dd, dir, ls...), sh uygulamaları (whoami, who,...) ve metin uygulamalarının (sort, tr, head, wc..) birlikteliğinden oluşmaktadır.</Description>
-            <Archive type="tarxz" sha1sum="cf3d9983461c2b0c074a76804c18464e9a474883">http://ftp.gnu.org/gnu/coreutils/coreutils-8.24.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="301f186c24afb882a3ca73d19a102a2ce6f456c3">http://ftp.gnu.org/gnu/coreutils/coreutils-8.25.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>acl-devel</Dependency>
                 <Dependency>attr-devel</Dependency>
@@ -12082,6 +12269,20 @@
             </Files>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2016-02-28</Date>
+                <Version>8.25</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="9">
+                <Date>2016-01-27</Date>
+                <Version>8.25</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Stefan Gronewold</Name>
+                <Email>groni@pisilinux.org</Email>
+            </Update>
             <Update release="8">
                 <Date>2015-08-25</Date>
                 <Version>8.24</Version>
@@ -12205,7 +12406,7 @@
             <Summary xml:lang="tr">gettext için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="10">gettext</Dependency>
+                <Dependency release="11">gettext</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/share/aclocal</Path>
@@ -12214,6 +12415,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2016-02-28</Date>
+                <Version>0.19.7</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="10">
                 <Date>2016-01-03</Date>
                 <Version>0.19.7</Version>
@@ -12512,7 +12720,7 @@
             <Summary xml:lang="tr">ncurses için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="6">ncurses</Dependency>
+                <Dependency release="7">ncurses</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -12532,7 +12740,7 @@
                 <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="6">ncurses</Dependency>
+                <Dependency release="7">ncurses</Dependency>
                 <Dependency>glibc-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -12541,6 +12749,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-02-28</Date>
+                <Version>6.0</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2015-08-24</Date>
                 <Version>6.0</Version>
@@ -12676,6 +12891,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2016-02-28</Date>
+                <Version>5.25</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="10">
                 <Date>2015-10-27</Date>
                 <Version>5.25</Version>
@@ -13814,15 +14036,10 @@
             <Summary xml:lang="tr">Statik bağlanmış sistem komutları bütünü</Summary>
             <Description xml:lang="en">busybox is a single binary which includes versions of a large number of system commands, including a shell.</Description>
             <Description xml:lang="tr">busybox, kabuk da dahil olmak üzere çeşitli sistem komutlarını içeren tek bir çalıştırılabilir dosyadır.</Description>
-            <Archive type="tarbz2" sha1sum="d6e96fefb6f0fb8079f27468b9bf22d8dd96108e">http://busybox.net/downloads/busybox-1.22.1.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="157d14d24748b4505b1a418535688706a2b81680">http://busybox.net/downloads/busybox-1.24.1.tar.bz2</Archive>
             <AdditionalFiles>
                 <AdditionalFile target=".config">config</AdditionalFile>
             </AdditionalFiles>
-            <Patches>
-                <Patch level="1">udhcp-rootpath-rq.patch</Patch>
-                <Patch level="1">suppress-job-control-warning.patch</Patch>
-                <Patch level="1">fix-include.patch</Patch>
-            </Patches>
             <SourceURI>system/base/busybox/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -13832,6 +14049,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-01-29</Date>
+                <Version>1.24.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-05-11</Date>
                 <Version>1.22.1</Version>
@@ -14063,7 +14287,7 @@
             <Description xml:lang="fr">Un client daemon DHCP conforme aux RFC2131 et RFC1541. dhcpcd obtient une adresse IP ainsi que d&apos;autres informations depuis le serveur DHCP correspondant, configure l&apos;interface réseau automatiquement et essaie de renouveler le bail selont les RFC2131 et EFC1541 en fonction des options de la ligne de commande.</Description>
             <Description xml:lang="en">An RFC2131 and RFC1541 compliant DHCP client daemon. dhcpcd gets an IP address and other information from a corresponding DHCP server, configures the network interface automatically, and tries to renew the lease time according to RFC2131 or RFC1541 depending on the command line option.</Description>
             <Description xml:lang="tr">RFC2131 ve RFC1541 uyumlu bir DHCP istemci servisi.dhcpcd ilgili bir DHCP sunucusundan bir IP adresi ve gerekli diğer bilgileri alır, ağ arayüzünü otomatik olarak yapılandırır ve RFC2131 veya RFC1541 komut satırı özelliğine bağlı olarak kiralama zamanını yenilemeyi dener.</Description>
-            <Archive type="tarbz2" sha1sum="1369656c67b2a110d5b7844f94159ae45f495c05">http://ftp.osuosl.org/pub/blfs/conglomeration/dhcpcd/dhcpcd-6.8.1.tar.bz2</Archive>
+            <Archive type="tarxz" sha1sum="bb37e0211858df8a919c494e14a6bbfb67b1f72c">http://ftp.osuosl.org/pub/blfs/conglomeration/dhcpcd/dhcpcd-6.10.1.tar.xz</Archive>
             <SourceURI>system/base/dhcpcd/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -14075,10 +14299,18 @@
                 <Path fileType="executable">/sbin</Path>
                 <Path fileType="doc">/usr/share/doc</Path>
                 <Path fileType="man">/usr/share/man</Path>
+                <Path fileType="man">/usr/share/dhcpcd</Path>
                 <Path fileType="data">/var/lib/dhcpcd</Path>
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2016-01-28</Date>
+                <Version>6.10.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="8">
                 <Date>2015-05-03</Date>
                 <Version>6.8.1</Version>
@@ -14174,6 +14406,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-02-28</Date>
+                <Version>4.6.0</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2016-01-03</Date>
                 <Version>4.6.0</Version>
@@ -14729,7 +14968,7 @@
             <Description xml:lang="en">Userspace setup tool for transparent encryption of block devices using dm-crypt</Description>
             <Description xml:lang="tr">cryptsetup device mapper kullanarak şifrelenmiş dosya sistemleri yaratmak için gerekli bir araçtır.</Description>
             <Icon>cryptsetup</Icon>
-            <Archive type="tarxz" sha1sum="7cb02f1e23ee18cd26391fd856f7644195b4544e">https://www.kernel.org/pub/linux/utils/cryptsetup/v1.6/cryptsetup-1.6.7.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="d2afa5b9d974404f9f5ca15cf6b4f018dde65169">https://www.kernel.org/pub/linux/utils/cryptsetup/v1.7/cryptsetup-1.7.0.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency versionFrom="2.02.118">device-mapper-devel</Dependency>
                 <Dependency>libgpg-error-devel</Dependency>
@@ -14745,7 +14984,7 @@
             <Name>cryptsetup</Name>
             <PartOf>util.crypt</PartOf>
             <RuntimeDependencies>
-                <Dependency version="1.6.7">libcryptsetup</Dependency>
+                <Dependency version="1.7.0">libcryptsetup</Dependency>
                 <Dependency>popt</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -14776,7 +15015,7 @@
             <Summary xml:lang="tr">libcryptsetup için geliştirme dosyaları</Summary>
             <PartOf>programming.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency version="1.6.7">libcryptsetup</Dependency>
+                <Dependency version="1.7.0">libcryptsetup</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -14790,13 +15029,20 @@
             <PartOf>programming.language.python</PartOf>
             <RuntimeDependencies>
                 <Dependency>python</Dependency>
-                <Dependency version="1.6.7">libcryptsetup</Dependency>
+                <Dependency version="1.7.0">libcryptsetup</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib/python2.7/site-packages/pycryptsetup.so</Path>
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2016-01-28</Date>
+                <Version>1.7.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="7">
                 <Date>2015-04-30</Date>
                 <Version>1.6.7</Version>
@@ -14972,7 +15218,7 @@
             <PartOf>util.archive</PartOf>
             <BuildType>minizip</BuildType>
             <RuntimeDependencies>
-                <Dependency release="4">zlib</Dependency>
+                <Dependency release="5">zlib</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib/libminizip*</Path>
@@ -14985,8 +15231,8 @@
             <PartOf>util.archive</PartOf>
             <BuildType>minizip</BuildType>
             <RuntimeDependencies>
-                <Dependency release="4">minizip</Dependency>
-                <Dependency release="4">zlib-devel</Dependency>
+                <Dependency release="5">minizip</Dependency>
+                <Dependency release="5">zlib-devel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/minizip</Path>
@@ -15008,7 +15254,7 @@
             <Summary xml:lang="tr">zlib için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="4">zlib</Dependency>
+                <Dependency release="5">zlib</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/lib/pkgconfig/zlib.pc</Path>
@@ -15030,13 +15276,20 @@
             </BuildDependencies>
             <RuntimeDependencies>
                 <Dependency>glibc-32bit</Dependency>
-                <Dependency release="4">zlib</Dependency>
+                <Dependency release="5">zlib</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32/libz.so*</Path>
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-02-28</Date>
+                <Version>1.2.8</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-05-11</Date>
                 <Version>1.2.8</Version>
@@ -15936,7 +16189,7 @@
             <Summary xml:lang="de">Ein Client, der URLs versteht</Summary>
             <Description xml:lang="en">curl is a command line tool for transferring data with URL syntax, supporting various protocols.</Description>
             <Description xml:lang="tr">curl çeşitli protokolleri destekleyen, URL söz dizimini kullanarak uzak sunuculardan veri aktarmak için kullanılan bir komut satırı aracıdır.</Description>
-            <Archive type="tarbz2" sha1sum="f65708915875b8cb35edb51d8dd31440dc02fbd3">http://curl.haxx.se/download/curl-7.42.1.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="0f8112c50acf1c3896906643adb7f1aeb9b8b633">http://curl.haxx.se/download/curl-7.47.0.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>glibc-devel</Dependency>
                 <Dependency>zlib-devel</Dependency>
@@ -15946,7 +16199,6 @@
                 <Dependency>ca-certificates</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch>curl-krb5flags.patch</Patch>
                 <Patch>curl-ac.patch</Patch>
             </Patches>
             <SourceURI>system/base/curl/pspec.xml</SourceURI>
@@ -15966,6 +16218,7 @@
                 <Path fileType="doc">/usr/share/doc/</Path>
                 <Path fileType="man">/usr/share/man/</Path>
                 <Path fileType="data">/usr/share/curl</Path>
+                <Path fileType="data">/usr/share/zsh</Path>
             </Files>
             <Conflicts>
                 <Package versionTo="5">curl-devel</Package>
@@ -15977,7 +16230,7 @@
             <Summary xml:lang="tr">curl için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="14">curl</Dependency>
+                <Dependency release="15">curl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/lib/pkgconfig</Path>
@@ -15987,6 +16240,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="15">
+                <Date>2016-01-28</Date>
+                <Version>7.47.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="14">
                 <Date>2015-05-28</Date>
                 <Version>7.42.1</Version>
@@ -16124,7 +16384,7 @@
             <Summary xml:lang="tr">XZ için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="7">xz</Dependency>
+                <Dependency release="8">xz</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -16143,13 +16403,20 @@
             </BuildDependencies>
             <RuntimeDependencies>
                 <Dependency>glibc-32bit</Dependency>
-                <Dependency release="7">xz</Dependency>
+                <Dependency release="8">xz</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2016-02-28</Date>
+                <Version>5.2.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2015-10-27</Date>
                 <Version>5.2.2</Version>
@@ -16336,16 +16603,12 @@
             <Description xml:lang="fr">Glibc, La librairie GNU X est utilisée comme la librairie C dans le système GNU et la plupart des système utilisant le noyau Linux. Elle définit les appels système et autres fonctionnalités du langage de programmation C.</Description>
             <Description xml:lang="en">The GNU C library is used as the C library in the GNU system and most systems with the Linux kernel. It defines the system calls and other basic C programming language facilities.</Description>
             <Description xml:lang="tr">Glibc, GNU C kitaplığı, GNU sisteminde ve Linux dağıtımlarının büyük çoğunluğunda C programlama dili kütüphanesi olarak kullanılır. İçinde sistem çağrıları ve C programlama dili için temel fonksiyonları bulundurur.</Description>
-            <Archive type="tarxz" sha1sum="1157be3fe63baa81b7ba104a103337775a6ed06f">http://ftp.gnu.org/gnu/libc/glibc-2.21.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="29f5b672b042ebf799051c00d9c7e2c43344e68a">http://ftp.gnu.org/gnu/libc/glibc-2.23.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>kernel-headers</Dependency>
                 <Dependency>gettext</Dependency>
                 <Dependency>binutils</Dependency>
             </BuildDependencies>
-            <Patches>
-                <Patch>locale-no-archive.patch</Patch>
-                <Patch>glibc-2.21-roundup.patch</Patch>
-            </Patches>
             <SourceURI>system/base/glibc/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -16385,7 +16648,7 @@
             <Name>glibc-devel</Name>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="11">glibc</Dependency>
+                <Dependency release="12">glibc</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -16401,7 +16664,7 @@
             <PartOf>system.base</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="11">glibc</Dependency>
+                <Dependency release="12">glibc</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="config">/etc/ld.so.conf.d/60-glibc-32bit.conf</Path>
@@ -17913,6 +18176,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="12">
+                <Date>2016-02-27</Date>
+                <Version>2.23</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="11">
                 <Date>2015-04-04</Date>
                 <Version>2.21</Version>
@@ -18324,6 +18594,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2016-02-28</Date>
+                <Version>2.7.5</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2015-06-05</Date>
                 <Version>2.7.5</Version>
@@ -18887,6 +19164,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-02-28</Date>
+                <Version>0.29</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2015-10-27</Date>
                 <Version>0.29</Version>
@@ -19116,7 +19400,7 @@
             <Description xml:lang="fr">La collection de compilateurs GNU inclus des façades pour le C, C++, Objective-C, Fortran, hava et Ada ainsi que des librairies pour ces langages (libstdc++, libgcj...)</Description>
             <Description xml:lang="en">The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, as well as libraries for these languages</Description>
             <Description xml:lang="tr">C, C++, Objective-C, Fortran programlama dilleri ile bu dillere ait kütüphaneleri içeren, GNU derleyici paketi</Description>
-            <Archive type="tarbz2" sha1sum="79dbcb09f44232822460d80b033c962c0237c6d8">ftp://gcc.gnu.org/pub/gcc/releases/gcc-4.9.2/gcc-4.9.2.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="0612270b103941da08376df4d0ef4e5662a2e9eb">ftp://gd.tuwien.ac.at/gnu/gcc/releases/gcc-5.3.0/gcc-5.3.0.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>binutils</Dependency>
                 <Dependency>bison</Dependency>
@@ -19127,18 +19411,16 @@
                 <Dependency>patch</Dependency>
                 <Dependency>sed</Dependency>
                 <Dependency>texinfo</Dependency>
-                <Dependency>gmp</Dependency>
-                <Dependency>mpfr</Dependency>
-                <Dependency>libmpc</Dependency>
+                <Dependency>gmp-devel</Dependency>
+                <Dependency>mpfr-devel</Dependency>
+                <Dependency>libmpc-devel</Dependency>
                 <Dependency>ppl</Dependency>
-                <Dependency>cloog</Dependency>
-                <Dependency>isl</Dependency>
+                <Dependency>zlib-devel</Dependency>
+                <Dependency>isl-devel</Dependency>
                 <Dependency>elfutils</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">pisilinux/64.patch</Patch>
-                <Patch>gcc-4.9-isl-0.13-hack.patch</Patch>
-                <Patch level="0">pisilinux/gcc-4.8-filename-output.patch</Patch>
                 <Patch level="1">pisilinux/gcc_47_based-record_gcc_options.patch</Patch>
             </Patches>
             <SourceURI>system/devel/gcc/pspec.xml</SourceURI>
@@ -19221,7 +19503,7 @@
                 <Dependency>gmp</Dependency>
                 <Dependency>isl</Dependency>
                 <Dependency>mpfr</Dependency>
-                <Dependency>cloog</Dependency>
+                <Dependency>zlib</Dependency>
                 <Dependency>libmpc</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -19240,6 +19522,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="13">
+                <Date>2016-02-05</Date>
+                <Version>5.3.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="12">
                 <Date>2014-11-28</Date>
                 <Version>4.9.2</Version>
@@ -19701,13 +19990,10 @@
             <Description xml:lang="fr">Contient des commandes telles que as, ld, nm, objdump, ar, ranlib pour compiler du code assembleur en langage machine ainsi que pour chaîner (link) et manipuler les fichiers binaires objets.</Description>
             <Description xml:lang="en">Contains commands like as, ld, nm, objdump, ar, ranlib for compiling assembly code to the machine language, and for linking and manipulating the binary object files.</Description>
             <Description xml:lang="tr">Assembly kodlarını makine diline derlemek, oluşan obje dosyalarını bağlamak ve ikili dosyalar üzerinde işlemler yapmak için kullanılan as, ld, nm, objdump, ar, ranlib gibi komutları içermektedir.</Description>
-            <Archive type="tarbz2" sha1sum="b46cc90ebaba7ffcf6c6d996d60738881b14e50d">http://ftp.gnu.org/gnu/binutils/binutils-2.25.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="a637508cffeb2323b14bc8dd65378819768ad4ff">http://ftp.gnu.org/gnu/binutils/binutils-2.26.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
-            <Patches>
-                <Patch>binutils-2.25-roundup.patch</Patch>
-            </Patches>
             <SourceURI>system/devel/binutils/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -19724,6 +20010,20 @@
             </Files>
         </Package>
         <History>
+            <Update release="13">
+                <Date>2016-02-28</Date>
+                <Version>2.26</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="12">
+                <Date>2016-02-05</Date>
+                <Version>2.26</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="11">
                 <Date>2015-03-09</Date>
                 <Version>2.25</Version>
@@ -20169,7 +20469,7 @@
             <Description xml:lang="fr">Libtool est une librairie utilitaire partagée pour développeurs.</Description>
             <Description xml:lang="en">Libtool is a shared library tool for developers.</Description>
             <Description xml:lang="tr">Libtool, program geliştiriciler için bir paylaşımlı kütüphane aracıdır.</Description>
-            <Archive type="tarxz" sha1sum="4671f3323f2fbc712a70afce57602ce906a82a15">mirrors://gnu/libtool/libtool-2.4.2.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="3e7504b832eb2dd23170c91b6af72e15b56eb94e">mirrors://gnu/libtool/libtool-2.4.6.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>gnuconfig</Dependency>
                 <Dependency>autoconf</Dependency>
@@ -20207,13 +20507,20 @@
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="5">libtool-ltdl</Dependency>
+                <Dependency release="6">libtool-ltdl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-02-06</Date>
+                <Version>2.4.6</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2014-11-28</Date>
                 <Version>2.4.2</Version>
@@ -20488,13 +20795,20 @@
             <Summary xml:lang="en">Development files for libmpc</Summary>
             <Summary xml:lang="tr">libmpc için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="6">libmpc</Dependency>
+                <Dependency release="7">libmpc</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-02-28</Date>
+                <Version>1.0.3</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2015-03-08</Date>
                 <Version>1.0.3</Version>
@@ -20791,7 +21105,7 @@
             <Summary xml:lang="en">Development files for gmp</Summary>
             <Summary xml:lang="tr">gmp için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="9">gmp</Dependency>
+                <Dependency release="10">gmp</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -20809,13 +21123,20 @@
             <RuntimeDependencies>
                 <Dependency>libgcc</Dependency>
                 <Dependency>glibc-32bit</Dependency>
-                <Dependency release="9">gmp</Dependency>
+                <Dependency release="10">gmp</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2016-02-28</Date>
+                <Version>6.1.0</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="9">
                 <Date>2015-12-09</Date>
                 <Version>6.1.0</Version>
@@ -21030,7 +21351,7 @@
             <Summary xml:lang="tr">C için birim test ortamı</Summary>
             <Description xml:lang="en">check is a unit testing framework for C. It features a simple interface for defining unit tests, putting little in the way of the developer. Tests are run in a separate address space, so Check can catch both assertion failures and code errors that cause segmentation faults or other signals. The output from unit tests can be used within source code editors and IDEs.</Description>
             <Description xml:lang="tr">check C dili için yazılmış bir birim test ortamıdır. Birim test tanımlamak için bir arayüz sunan check, geliştiriciye test yapabilmesi için kolay bir ortam sağlar.</Description>
-            <Archive type="targz" sha1sum="35d3a53446aea7b21a770faedb358d0fc7cba76d">mirrors://sourceforge/check/0.10.0/check-0.10.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="35d3a53446aea7b21a770faedb358d0fc7cba76d">mirrors://sourceforge/check/0.10/check-0.10.0.tar.gz</Archive>
             <SourceURI>system/devel/check/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -21048,7 +21369,7 @@
             <Summary xml:lang="en">Development files for check</Summary>
             <Summary xml:lang="tr">check için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="8">check</Dependency>
+                <Dependency release="10">check</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -21065,6 +21386,20 @@
             </Files>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2016-02-28</Date>
+                <Version>0.10.0</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="9">
+                <Date>2016-02-28</Date>
+                <Version>0.10</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2016-01-15</Date>
                 <Version>0.10.0</Version>
@@ -21139,7 +21474,7 @@
             <Summary xml:lang="tr">Derlenmiş objeleri işlemek için gereken aletler koleksiyonu</Summary>
             <Description xml:lang="en">elfutils contains libraries and utilities to handle ELF objects and is a replacement for libelf.</Description>
             <Description xml:lang="tr">elfutils derlenmiş objeleri işlemek için gereken çeşitli araçlar içerir.</Description>
-            <Archive type="tarbz2" sha1sum="85d48e18359c51e843c49b1894b2f54b85e88ae2">https://fedorahosted.org/releases/e/l/elfutils/0.161/elfutils-0.161.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="b994f2f31e6638415d7f8a3c0c7e04e6bc4ca4a9">https://fedorahosted.org/releases/e/l/elfutils/0.165/elfutils-0.165.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>bzip2</Dependency>
                 <Dependency>xz-devel</Dependency>
@@ -21163,6 +21498,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2016-01-28</Date>
+                <Version>0.165</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="9">
                 <Date>2015-04-09</Date>
                 <Version>0.161</Version>
@@ -21602,15 +21944,12 @@
             <PartOf>system.devel</PartOf>
             <Summary xml:lang="en">Chunky Loop Generator</Summary>
             <Description xml:lang="en">cloog is CLooG is a free software and library to generate code for scanning Z-polyhedra. It is used by the GCC Graphite optimization framework.</Description>
-            <Archive type="targz" sha1sum="2dc70313e8e2c6610b856d627bce9c9c3f848077">http://www.bastoul.net/cloog/pages/download/cloog-0.18.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="8f7568ca1873f8d55bb694c8b9b83f7f4c6c1aa5">http://www.bastoul.net/cloog/pages/download/cloog-0.18.4.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>gmp-devel</Dependency>
                 <Dependency>ppl-devel</Dependency>
                 <Dependency>isl-devel</Dependency>
             </BuildDependencies>
-            <Patches>
-                <Patch level="1">cloog-0.18.1-isl-compat.patch</Patch>
-            </Patches>
             <SourceURI>system/devel/cloog/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -21630,7 +21969,7 @@
             <Name>cloog-devel</Name>
             <Summary xml:lang="en">Development files for cloog</Summary>
             <RuntimeDependencies>
-                <Dependency release="8">cloog</Dependency>
+                <Dependency release="9">cloog</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -21638,6 +21977,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2016-01-27</Date>
+                <Version>0.18.4</Version>
+                <Comment>Version bump</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="8">
                 <Date>2014-09-06</Date>
                 <Version>0.18.1</Version>
@@ -21950,7 +22296,7 @@
             <Summary xml:lang="en">Development files for mpfr</Summary>
             <Summary xml:lang="tr">mpfr için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="7">mpfr</Dependency>
+                <Dependency release="8">mpfr</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -21959,6 +22305,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2016-02-28</Date>
+                <Version>3.1.3</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2016-01-23</Date>
                 <Version>3.1.3</Version>
@@ -22302,7 +22655,7 @@
             <PartOf>system.devel</PartOf>
             <Summary xml:lang="en">Integer Set Library</Summary>
             <Description xml:lang="en">isl is a library for manipulating sets and relations of integer points bounded by linear constraints.</Description>
-            <Archive type="tarbz2" sha1sum="3904274c84fb3068e4f59b6a6b0fe29e7a2b7010">http://isl.gforge.inria.fr/isl-0.13.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="c5a2b201bf05229647e73203c0bf2d9679d4d21f">http://isl.gforge.inria.fr/isl-0.16.1.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>gmp-devel</Dependency>
             </BuildDependencies>
@@ -22323,7 +22676,7 @@
             <Summary xml:lang="en">Development files for isl</Summary>
             <Summary xml:lang="tr">isl için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="8">isl</Dependency>
+                <Dependency release="9">isl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -22331,6 +22684,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2016-01-27</Date>
+                <Version>0.16.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="8">
                 <Date>2015-05-05</Date>
                 <Version>0.13</Version>
@@ -22480,6 +22840,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-02-28</Date>
+                <Version>1.4.17</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-11</Date>
                 <Version>1.4.17</Version>
@@ -22664,6 +23031,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-02-28</Date>
+                <Version>4.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2015-02-21</Date>
                 <Version>4.1</Version>
@@ -23587,7 +23961,7 @@
             <Description xml:lang="fr">FreeType2 est un moteur logiciel de fontes conçu pour être petit, efficace, très flexible et portable tout en étant capable de produire une sortie de très haute qualité. Il peut être utilisé dans les librairies graphiques, les serveurs d&apos;affichage, les outils de conversion, les outils de génération d&apos;images textuelles, ainsi que beaucoup d&apos;autres produits.</Description>
             <Description xml:lang="en">FreeType 2 is a software font engine that is designed to be small, efficient, highly customizable, and portable while capable of producing high-quality output. It can be used in graphics libraries, display servers, font conversion tools, text image generation tools, and many other products as well.</Description>
             <Description xml:lang="tr">FreeType 2; küçük, verimli, özelleştirilebilir, taşınabilir ve yüksek kaliteli çıktı oluşturan bir yazıtipi düzeneğidir. Grafik kütüphaneleri, görüntü sunucuları ve yazıtipi değiştirme araçları gibi birçok üründe kullanılabilir.</Description>
-            <Archive type="tarbz2" sha1sum="cd2b144205dd2c61693e2d861069367aa3dde1bc">mirrors://sourceforge/freetype/freetype-2.6.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="29c22b85b77cb22cf95c13e7062e21f39fe6b17a">mirrors://sourceforge/freetype/freetype-2.6.2.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>bzip2</Dependency>
@@ -23613,7 +23987,7 @@
             <Summary xml:lang="en">Development files for freetype</Summary>
             <Summary xml:lang="tr">freetype için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="11">freetype</Dependency>
+                <Dependency release="12">freetype</Dependency>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>libpng-devel</Dependency>
             </RuntimeDependencies>
@@ -23645,6 +24019,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="12">
+                <Date>2016-01-28</Date>
+                <Version>2.6.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="11">
                 <Date>2015-07-29</Date>
                 <Version>2.6</Version>
