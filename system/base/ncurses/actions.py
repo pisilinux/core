@@ -88,6 +88,13 @@ def install():
     pisitools.dosym("libncursesw.a", "%s/libcursesw.a" % LIB)
     pisitools.dosym("libncurses.a", "%s/libcurses.a" % LIB)
 
+    #for fix 
+    pisitools.dosym("libncursesw.so.6.0", "%s/libncursesw.so.5" % LIB)
+    pisitools.dosym("libncurses.so.6.0", "%s/libncurses.so.5" % LIB)
+    pisitools.dosym("libpanelw.so.6.0", "%s/libpanelw.so.5" % LIB)
+    pisitools.dosym("libformw.so.6.0", "%s/libformw.so.5" % LIB)
+    pisitools.dosym("libmenuw.so.6.0", "%s/libmenuw.so.5" % LIB)
+
     shelltools.cd("../%s" % NCURSES)
     for lib in ["ncurses", "form", "panel", "menu"]:
         pisitools.dolib_so("lib/lib%s.so.%s" % (lib, get.srcVERSION()), destinationDirectory = LIB)
@@ -100,10 +107,3 @@ def install():
     shelltools.cd(WORKDIR)
     shelltools.system("grep -B 100 '$Id' README > license.txt")
     pisitools.dodoc("ANNOUNCE", "NEWS", "README*", "TO-DO", "license.txt")
-
-    #for fix 
-    pisitools.dosym("libncursesw.so.6.0", "%s/libncursesw.so.5" % LIB)
-    pisitools.dosym("libncurses.so.6.0", "%s/libncurses.so.5" % LIB)
-    pisitools.dosym("libpanelw.so.6.0", "%s/libpanelw.so.5" % LIB)
-    pisitools.dosym("libformw.so.6.0", "%s/libformw.so.5" % LIB)
-    pisitools.dosym("libmenuw.so.6.0", "%s/libmenuw.so.5" % LIB)
