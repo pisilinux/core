@@ -50,6 +50,9 @@
         <PartOf>emul32</PartOf>
         <Summary>32-bit shared libraries for libtool-ltdl</Summary>
         <BuildType>emul32</BuildType>
+        <BuildDependencies>
+            <Dependency>glibc-32bit</Dependency>
+        </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">libtool-ltdl</Dependency>
             <Dependency>glibc-32bit</Dependency>
