@@ -4794,15 +4794,12 @@
             <Description xml:lang="en">Perl is a high-level programming language with roots in C, sed, awk and shell scripting. Perl is good at handling processes and files, and is especially good at handling text. Perl&apos;s hallmarks are practicality and efficiency. While it is used to do a lot of different things, Perl&apos;s most common applications are system administration utilities and web programming. A large proportion of the CGI scripts on the web are written in Perl. You need the perl package installed on your system so that your system can handle Perl scripts.</Description>
             <Description xml:lang="tr">Perl kararlı, platform bağımsız programlama dilidir.</Description>
             <Description xml:lang="de">Perl ist eine stabile, plattformunabhängige Programmiersprache</Description>
-            <Archive type="tarbz2" sha1sum="e925e4fc36e90eace19a1ca850f912618ba6788f">http://www.cpan.org/src/5.0/perl-5.20.0.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="29f9b320b0299577a3e1d02e9e8ef8f26f160332">http://www.cpan.org/src/5.0/perl-5.22.1.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>db-devel</Dependency>
                 <Dependency>gdbm-devel</Dependency>
                 <Dependency>zlib-devel</Dependency>
             </BuildDependencies>
-            <Patches>
-                <Patch>perl-vutil-revert.patch</Patch>
-            </Patches>
             <SourceURI>system/base/perl/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -4828,10 +4825,17 @@
                 <Path fileType="doc">/usr/share/doc</Path>
             </Files>
             <AdditionalFiles>
-                <AdditionalFile target="/usr/lib/perl5/vendor_perl/5.20.0/Turkish.pm" permission="0644" owner="root">Turkish.pm</AdditionalFile>
+                <AdditionalFile target="/usr/lib/perl5/vendor_perl/5.22.1/Turkish.pm" permission="0644" owner="root">Turkish.pm</AdditionalFile>
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2016-03-01</Date>
+                <Version>5.22.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2014-09-10</Date>
                 <Version>5.20.0</Version>
@@ -7399,7 +7403,7 @@
                 <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="4">readline</Dependency>
+                <Dependency release="5">readline</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -7416,7 +7420,7 @@
                 <Dependency>ncurses-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="4">readline</Dependency>
+                <Dependency release="5">readline</Dependency>
                 <Dependency>ncurses-32bit</Dependency>
                 <Dependency>glibc-32bit</Dependency>
             </RuntimeDependencies>
@@ -7425,6 +7429,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-02-29</Date>
+                <Version>6.3</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-05-11</Date>
                 <Version>6.3</Version>
@@ -8480,6 +8491,7 @@
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="library">/usr/lib/texinfo</Path>
                 <Path fileType="doc">/usr/share/doc</Path>
                 <Path fileType="man">/usr/share/man</Path>
                 <Path fileType="info">/usr/share/info</Path>
@@ -9292,7 +9304,7 @@
             </BuildDependencies>
             <RuntimeDependencies>
                 <Dependency>libgcc</Dependency>
-                <Dependency>readline</Dependency>
+                <Dependency>glibc-32bit</Dependency>
                 <Dependency release="9">libpcre</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -11757,6 +11769,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-02-29</Date>
+                <Version>481</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2015-10-27</Date>
                 <Version>481</Version>
@@ -18580,6 +18599,9 @@
             <Description xml:lang="tr">Özgün dosyaları, diff komutu ile üretilmiş yama dosyasını uygulayarak, yeni biçimlerine çevirir.</Description>
             <Description xml:lang="es">Recibe una archivo de parche generado por el comando diff y lo aplica a los archivos originales, así produciendo archivos parcheados.</Description>
             <Archive type="tarxz" sha1sum="8fd8f8f8ba640d871bce1bd33c7fd5e2ebe03a1e">ftp://ftp.gnu.org/gnu/patch/patch-2.7.5.tar.xz</Archive>
+            <BuildDependencies>
+                <Dependency>attr-devel</Dependency>
+            </BuildDependencies>
             <SourceURI>system/devel/patch/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -18595,7 +18617,7 @@
         </Package>
         <History>
             <Update release="8">
-                <Date>2016-02-28</Date>
+                <Date>2016-02-29</Date>
                 <Version>2.7.5</Version>
                 <Comment>Rebuild.</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -20126,6 +20148,8 @@
                 <Dependency>gc-devel</Dependency>
                 <Dependency>gettext-devel</Dependency>
                 <Dependency>gmp-devel</Dependency>
+                <Dependency>libunistring-devel</Dependency>
+                <Dependency>libffi-devel</Dependency>
             </BuildDependencies>
             <SourceURI>system/devel/guile/pspec.xml</SourceURI>
         </Source>
@@ -20159,6 +20183,8 @@
             <Summary xml:lang="pl">Pliki nagłówkowe guile.</Summary>
             <RuntimeDependencies>
                 <Dependency release="8">guile</Dependency>
+                <Dependency>gc-devel</Dependency>
+                <Dependency>gmp-devel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -20506,8 +20532,12 @@
             <Summary xml:lang="tr">libtool için 32-bit paylaşımlı kitaplıklar</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
+            <BuildDependencies>
+                <Dependency>glibc-32bit</Dependency>
+            </BuildDependencies>
             <RuntimeDependencies>
                 <Dependency release="6">libtool-ltdl</Dependency>
+                <Dependency>glibc-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
