@@ -17,6 +17,7 @@ def build():
     autotools.make()
 
 def check():
+    pass
     # check fail, need util-linux, in dockerized build check disabled. install util-linux and make check
     #autotools.make("check")
 
