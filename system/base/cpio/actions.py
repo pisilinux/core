@@ -29,6 +29,6 @@ def install():
 
     pisitools.removeDir("/usr/share/man/man8")
     #pisitools.removeDir("/usr/libexec")
-    
+
     pisitools.dodoc("ChangeLog", "NEWS", "README")
 
