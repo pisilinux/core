@@ -20,6 +20,8 @@ def setup():
                          --enable-cpp \
                          --docdir=/%s/%s \
                          --disable-static" % (get.docDIR(), get.srcNAME()))
+    
+    pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 
 def build():
     autotools.make()
