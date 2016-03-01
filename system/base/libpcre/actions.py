@@ -20,12 +20,17 @@ def setup():
                          --enable-cpp \
                          --docdir=/%s/%s \
                          --disable-static" % (get.docDIR(), get.srcNAME()))
+    
+    pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
 
 def build():
     autotools.make()
 
 def check():
-    autotools.make("-j1 check")
+    if get.buildTYPE() == "emul32":
+        pass
+    else:
+        autotools.make("-j1 check")
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
