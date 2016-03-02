@@ -31,7 +31,7 @@ def install():
         autotools.rawInstall("prefix=/emul32 lib=../usr/lib32 DESTDIR=%s RAISE_SETFCAP=no" % get.installDIR())
         return
 
-    autotools.rawInstall("prefix=/usr DESTDIR=%s SBINDIR=%s/sbin RAISE_SETFCAP=no" % ((get.installDIR(),)*2))
+    autotools.rawInstall("prefix=/usr DESTDIR=%s SBINDIR=/sbin RAISE_SETFCAP=no" % (get.installDIR()))
 
     pisitools.insinto("/etc/security", "pam_cap/capability.conf")
 
