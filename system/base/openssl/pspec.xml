@@ -15,7 +15,7 @@
         <Description>OpenSSL is a cryptography toolkit implementing the Secure Sockets Layer (SSL v2/v3) and Transport Layer Security (TLS v1) network protocols and related cryptography standards required by them.</Description>
         <Archive sha1sum="2c5691496761cb18f98476eefa4d35c835448fb6" type="targz">ftp://ftp.openssl.org/source/openssl-1.0.2e.tar.gz</Archive>
         <AdditionalFiles>
-            <AdditionalFile target="openssl-1.0.0-beta4-ca-dir.patch">openssl-1.0.0-beta4-ca-dir.patch</AdditionalFile>
+            <Archive sha1sum="2047c592a6e5a42bd37970bdb4a931428110a927" type="targz">ftp://ftp.openssl.org/source/openssl-1.0.2f.tar.gz</Archive>
         </AdditionalFiles>
         <BuildDependencies>
             <Dependency>zlib-devel</Dependency>
@@ -92,6 +92,13 @@
     </Package>
 
     <History>
+        <Update release="15">
+            <Date>2016-03-02</Date>
+            <Version>1.0.2f</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Update>
         <Update release="14">
             <Date>2015-12-14</Date>
             <Version>1.0.2e</Version>
