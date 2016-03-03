@@ -14,7 +14,8 @@ def setup():
     #shelltools.sym("/bin/true", "%s/py-compile" % get.curDIR())
 
     autotools.autoreconf("-fi")
-    autotools.configure("--disable-static")
+    autotools.configure("--disable-static \
+                         --without-python3")
 
 def build():
     autotools.make()
