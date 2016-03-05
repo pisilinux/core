@@ -4800,6 +4800,10 @@
                 <Dependency>gdbm-devel</Dependency>
                 <Dependency>zlib-devel</Dependency>
             </BuildDependencies>
+            <Patches>
+                <Patch>perl-5.10.0-x86_64-io-test-failure.patch</Patch>
+                <Patch>perl-5.14.1-offtest.patch</Patch>
+            </Patches>
             <SourceURI>system/base/perl/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -4896,7 +4900,7 @@
             <Description xml:lang="en">The gettext module permits access from Perl to the gettext() family of functions for retrieving message strings from databases constructed to internationalize software.</Description>
             <Description xml:lang="tr">Bu modül, çoklu dil desteğini sağlayan gettext() ailesine Perl üzerinden erişimi sağlar.</Description>
             <Description xml:lang="es">El módulo gettext permite Perl acceder a la familia de funciones gettext() para obtener cadenas de mensajes (traducidos) desde bases de datos para la internacionalización de software.</Description>
-            <Archive type="targz" sha1sum="705f519ad61b4a8c522d8aaf98425e0bd21709f2">http://search.cpan.org/CPAN/authors/id/P/PV/PVANDRY/gettext-1.05.tar.gz</Archive>
+            <Archive type="targz" sha1sum="a23d0b35269c8db49418fa8585a8dbbed6b8fefa">http://search.cpan.org/CPAN/authors/id/P/PV/PVANDRY/gettext-1.07.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>perl</Dependency>
             </BuildDependencies>
@@ -4915,6 +4919,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-03</Date>
+                <Version>1.07</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-09-10</Date>
                 <Version>1.05</Version>
@@ -5108,6 +5119,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-03-02</Date>
+                <Version>3.0</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2014-10-01</Date>
                 <Version>3.0</Version>
@@ -5192,7 +5210,7 @@
             <Summary xml:lang="tr">pciutils için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="5">pciutils</Dependency>
+                <Dependency release="6">pciutils</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/lib/pkgconfig</Path>
@@ -5200,6 +5218,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-03-03</Date>
+                <Version>3.4.1</Version>
+                <Comment>pci.ids update.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="5">
                 <Date>2016-01-03</Date>
                 <Version>3.4.1</Version>
@@ -5617,6 +5642,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-03-02</Date>
+                <Version>0.4.8</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2015-08-05</Date>
                 <Version>0.4.8</Version>
@@ -6069,6 +6101,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-03-03</Date>
+                <Version>1.5</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-11</Date>
                 <Version>1.5</Version>
@@ -6343,7 +6382,7 @@
             <Summary xml:lang="tr">dbus-glib için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="5">dbus-glib</Dependency>
+                <Dependency release="6">dbus-glib</Dependency>
                 <Dependency>dbus-devel</Dependency>
                 <Dependency>glib2-devel</Dependency>
             </RuntimeDependencies>
@@ -6354,6 +6393,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-03-03</Date>
+                <Version>0.104</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="5">
                 <Date>2015-05-12</Date>
                 <Version>0.104</Version>
@@ -6403,7 +6449,7 @@
             <PartOf>system.base</PartOf>
             <Summary xml:lang="en">run scripts or programs in a directory</Summary>
             <Description xml:lang="en">run scripts or programs in a directory</Description>
-            <Archive type="targz" sha1sum="019b969ab698c83117254b50fc8f469f10a5d8d6">https://sources.archlinux.org/other/run-parts/debianutils_4.4.tar.gz</Archive>
+            <Archive type="tarxz" sha1sum="1d62ff7cf902c69a6f1ef071cead61a76ce01f86">https://sources.archlinux.org/other/run-parts/debianutils_4.7.tar.xz</Archive>
             <SourceURI>system/base/run-parts/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -6415,6 +6461,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-03</Date>
+                <Version>4.7</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="4">
                 <Date>2015-04-11</Date>
                 <Version>4.4</Version>
@@ -6623,7 +6676,7 @@
             <Summary xml:lang="tr">libffi için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="5">libffi</Dependency>
+                <Dependency release="6">libffi</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/lib/libffi-*</Path>
@@ -6639,8 +6692,11 @@
             <Summary xml:lang="tr">libffi için 32-bit paylaşımlı kitaplıklar</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
+            <BuildDependencies>
+                <Dependency>glibc-32bit</Dependency>
+            </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="5">libffi</Dependency>
+                <Dependency release="6">libffi</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32/libffi.*</Path>
@@ -6648,6 +6704,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-03-01</Date>
+                <Version>3.2.1</Version>
+                <Comment>Rebuild for toolchain.</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
             <Update release="5">
                 <Date>2014-12-02</Date>
                 <Version>3.2.1</Version>
@@ -7168,6 +7231,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-02</Date>
+                <Version>2.21</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Ayhan Yalçınsoy</Name>
+                <Email>ayhanyalcinsoy@pisilinux.org</Email>
+            </Update>
             <Update release="4">
                 <Date>2015-04-06</Date>
                 <Version>2.21</Version>
@@ -7325,6 +7395,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-02</Date>
+                <Version>3.10.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-05-11</Date>
                 <Version>3.10.1</Version>
@@ -7544,7 +7621,7 @@
             <Summary xml:lang="tr">Linux için sıkıştırma/ayıklama kütüphanesidir.</Summary>
             <Description xml:lang="en">Snappy is a compression/decompression library. It does not aim for maximum compression, or compatibility with any other compression library; instead, it aims for very high speeds and reasonable compression.</Description>
             <Description xml:lang="tr">Linux için sıkıştırma/ayıklama kütüphanesidir. Yüksek hızda sıkıştırma yapmak için yazılmış bir kütüphanedir.</Description>
-            <Archive type="targz" sha1sum="2988f1227622d79c1e520d4317e299b61d042852">http://snappy.googlecode.com/files/snappy-1.1.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="63f7a3d2c865a6a39aca9bc5d3412a8b2d607bb4">https://github.com/google/snappy/releases/download/1.1.3/snappy-1.1.3.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>lzo-devel</Dependency>
                 <Dependency>zlib-devel</Dependency>
@@ -7569,13 +7646,20 @@
             <Name>snappy-devel</Name>
             <Summary xml:lang="tr">snappy için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="2">snappy</Dependency>
+                <Dependency release="3">snappy</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2016-03-02</Date>
+                <Version>1.1.3</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2014-06-02</Date>
                 <Version>1.1.1</Version>
@@ -7796,6 +7880,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-02</Date>
+                <Version>0.9</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2015-08-14</Date>
                 <Version>0.9</Version>
@@ -7975,7 +8066,7 @@
             <Summary xml:lang="tr">acl için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="5">acl</Dependency>
+                <Dependency release="6">acl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -7983,6 +8074,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-03-01</Date>
+                <Version>2.2.52</Version>
+                <Comment>Rebuild for toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2015-05-22</Date>
                 <Version>2.2.52</Version>
@@ -8394,7 +8492,7 @@
             <Summary xml:lang="tr">attr için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="6">attr</Dependency>
+                <Dependency release="7">attr</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -8411,13 +8509,20 @@
             </BuildDependencies>
             <RuntimeDependencies>
                 <Dependency>glibc-32bit</Dependency>
-                <Dependency release="6">attr</Dependency>
+                <Dependency release="7">attr</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-03-01</Date>
+                <Version>2.4.47</Version>
+                <Comment>Rebuild for toolchain.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
+            </Update>
             <Update release="6">
                 <Date>2015-03-15</Date>
                 <Version>2.4.47</Version>
@@ -8571,10 +8676,10 @@
             <Summary xml:lang="tr">Alternatif bir POSIX yetenekleri kütüphanesi</Summary>
             <Description xml:lang="en">libcap-ng is a library that makes using POSIX capabilities easier.</Description>
             <Description xml:lang="tr">libcap-ng POSIX yeteneklerinin yönetimini kolaylaştıran bir kütüphanedir.</Description>
-            <Archive type="targz" sha1sum="b4c61c664d9b90810f2e947c46a41ed8abb9e292">http://people.redhat.com/sgrubb/libcap-ng/libcap-ng-0.7.3.tar.gz</Archive>
+            <Archive type="targz" sha1sum="de8ea2c89cb1506a578de7cb032da34c970dd035">http://people.redhat.com/sgrubb/libcap-ng/libcap-ng-0.7.7.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency>attr</Dependency>
-                <Dependency>python</Dependency>
+                <Dependency>attr-devel</Dependency>
+                <Dependency>python-devel</Dependency>
             </BuildDependencies>
             <SourceURI>system/base/libcap-ng/pspec.xml</SourceURI>
         </Source>
@@ -8616,7 +8721,7 @@
             <Summary xml:lang="tr">libcap-ng için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="4">libcap-ng</Dependency>
+                <Dependency release="5">libcap-ng</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/share/aclocal</Path>
@@ -8626,6 +8731,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-03</Date>
+                <Version>0.7.7</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-05-11</Date>
                 <Version>0.7.3</Version>
@@ -8906,16 +9018,13 @@
             <Description xml:lang="fr">Libxml2 est l&apos;analyseur et la boîte à outils XML écrit en C pour le projet Gnome (mais utilisable en dehors de la plateforme Gnome).</Description>
             <Description xml:lang="en">Libxml2 is the XML C parser and toolkit developed for the Gnome project (but usable outside of the Gnome platform).</Description>
             <Description xml:lang="tr">Libxml2, Gnome projesi için geliştirilmiş C dilinde XML ayrıştırıcısıdır. Gnome platformu olmadan da kullanılabilir.</Description>
-            <Archive type="targz" sha1sum="eb3e2146c6d68aea5c2a4422ed76fe196f933c21">ftp://xmlsoft.org/libxml2/libxml2-2.9.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="0301ce933637e0ceda049047dbefd18714f59b6e">ftp://xmlsoft.org/libxml2/libxml2-2.9.3.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>python-devel</Dependency>
                 <Dependency>xz-devel</Dependency>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>readline-devel</Dependency>
             </BuildDependencies>
-            <Patches>
-                <Patch level="1">CVE-2014-0191.patch</Patch>
-            </Patches>
             <SourceURI>system/base/libxml2/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -8948,7 +9057,7 @@
             <Summary xml:lang="tr">libxml2 için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="7">libxml2</Dependency>
+                <Dependency release="8">libxml2</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/lib/pkgconfig</Path>
@@ -8971,15 +9080,23 @@
                 <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="7">libxml2</Dependency>
+                <Dependency release="8">libxml2</Dependency>
                 <Dependency>xz-32bit</Dependency>
                 <Dependency>zlib-32bit</Dependency>
+                <Dependency>glibc-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2016-03-04</Date>
+                <Version>2.9.3</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="7">
                 <Date>2014-07-06</Date>
                 <Version>2.9.1</Version>
@@ -9603,7 +9720,7 @@
             <Summary xml:lang="tr">Python cURL Modülü</Summary>
             <Description xml:lang="en">PycURL is a Python interface to libcurl. PycURL can be used to fetch objects identified by a URL from a Python program.</Description>
             <Description xml:lang="tr">PycURL, python libcurl için python arayüzüdür. PycURL, URL tarafında tanımlanan nesneleri indirmek için bir python programı tarafından kullanılabilir.</Description>
-            <Archive type="targz" sha1sum="fd82722e2abc108b7bd469ab6a743cebe8cd8f78">http://pycurl.sourceforge.net/download/pycurl-7.19.3.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="e8e9c7e9ae91ae32096b8c86cfc7d49976a66d1b">https://dl.bintray.com/pycurl/pycurl/pycurl-7.43.0.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>curl-devel</Dependency>
                 <Dependency>python-devel</Dependency>
@@ -9624,6 +9741,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-03-02</Date>
+                <Version>7.43.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2014-05-11</Date>
                 <Version>7.19.3.1</Version>
@@ -10107,13 +10231,20 @@
         <Package>
             <Name>leveldb-devel</Name>
             <RuntimeDependencies>
-                <Dependency release="2">leveldb</Dependency>
+                <Dependency release="3">leveldb</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2016-03-02</Date>
+                <Version>1.18</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2015-08-14</Date>
                 <Version>1.18</Version>
@@ -10163,6 +10294,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-03-03</Date>
+                <Version>20160104</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="6">
                 <Date>2016-01-15</Date>
                 <Version>20160104</Version>
@@ -10223,7 +10361,7 @@
             <Description xml:lang="fr">Python est un langage de programmation dynamique orienté objet pouvant être utilisé pour différents types de développements logiciels. Il offre une intégration renforcée aussi bien avec les autres langages qu&apos;avec des outils. Il est livré avec des librairies standards couvrant un large périmètre et peut être appris en quelques jours.</Description>
             <Description xml:lang="en">Python is a dynamic object-oriented programming language that can be used for many kinds of software development. It offers strong support for integration with other languages and tools, comes with extensive standard libraries, and can be learned in a few days.</Description>
             <Description xml:lang="tr">Python, yazılım geliştirmenin birçok aşamasında kullanılabilen, dinamik nesne tabanlı bir programlama dilidir. Diğer programlama dilleriyle bütünleşme için sağlam bir destek sunar, kapsamlı standart kütüphanelerle sunulur ve birkaç günde öğrenilebilir.</Description>
-            <Archive type="tarxz" sha1sum="3172f6e957713c2d9fca462cc16068222fd1b9d3">http://www.python.org/ftp/python/2.7.9/Python-2.7.9.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="c3b8bbe3f084c4d4ea13ffb03d75a5e22f9756ff">http://www.python.org/ftp/python/2.7.11/Python-2.7.11.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>bzip2</Dependency>
                 <Dependency>gdbm-devel</Dependency>
@@ -10282,7 +10420,7 @@
             <Summary xml:lang="tr">python için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="11">python</Dependency>
+                <Dependency release="12">python</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -10290,6 +10428,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="12">
+                <Date>2016-03-02</Date>
+                <Version>2.7.11</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="11">
                 <Date>2014-12-12</Date>
                 <Version>2.7.9</Version>
@@ -10384,7 +10529,7 @@
             <Summary xml:lang="tr">Platform bağımsız, süreçler hakkında bilgi sağlayan bir Python modülü</Summary>
             <Description xml:lang="en">python-psutil is a module providing an interface for retrieving information on all running processes and system utilization (CPU, memory) in a portable way by using Python, implementing many functionalities offered by command line tools like ps, top, kill, lsof and netstat.</Description>
             <Description xml:lang="tr">python-psutil, bütün çalışan süreçler ve sistem kullanımı (MİB - Merkezi İşlem Birim(CPU) ve hafıza gibi) hakkında bilgilere erişimek için arayüz sunan bir Python modülüdür. ps, top, kill, lsof, netstat gibi bir çok komut satırı araçlarının sunduğu işlevselliği sağlamaktadır.</Description>
-            <Archive type="targz" sha1sum="d429096c9d0f6221152720f6b84a10b4a63087b3">https://github.com/giampaolo/psutil/archive/release-2.2.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="a00dd7259a104d47659075a862afdef84b826296">https://github.com/giampaolo/psutil/archive/release-4.0.0.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>python-devel</Dependency>
             </BuildDependencies>
@@ -10401,6 +10546,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-03-02</Date>
+                <Version>4.0.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="3">
                 <Date>2015-04-12</Date>
                 <Version>2.2.1</Version>
@@ -10463,13 +10615,20 @@
             <Summary xml:lang="tr">gdbm için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="4">gdbm</Dependency>
+                <Dependency release="5">gdbm</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-02</Date>
+                <Version>1.11</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-05-11</Date>
                 <Version>1.11</Version>
@@ -10534,6 +10693,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-01</Date>
+                <Version>2.12</Version>
+                <Comment>Rebuild for toolchain.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2016-01-03</Date>
                 <Version>2.12</Version>
@@ -10605,7 +10771,7 @@
                 <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="4">expat</Dependency>
+                <Dependency release="5">expat</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -10621,13 +10787,20 @@
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="4">expat</Dependency>
+                <Dependency release="5">expat</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-02</Date>
+                <Version>2.1.0</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-05-11</Date>
                 <Version>2.1.0</Version>
@@ -10782,7 +10955,7 @@
             <Summary xml:lang="en">Development files for libunwind</Summary>
             <Summary xml:lang="tr">libunwind için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="6">libunwind</Dependency>
+                <Dependency release="7">libunwind</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -10790,6 +10963,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-03-02</Date>
+                <Version>1.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2015-01-30</Date>
                 <Version>1.1</Version>
@@ -11054,6 +11234,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-02</Date>
+                <Version>0.5.3</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-05-11</Date>
                 <Version>0.5.3</Version>
@@ -11649,10 +11836,10 @@
             <Summary xml:lang="de">Bibliothek, um Passwörter zu prüfen</Summary>
             <Description xml:lang="en">CrackLib tests passwords to determine whether they match certain security-oriented characteristics, with the purpose of stopping users from choosing passwords that are easy to guess.</Description>
             <Description xml:lang="tr">CrackLib, kullanıcıların kolay tahmin edilebilir parolalar seçmelerini engellemek amacıyla parolaların güvenlik odaklı bazı özelliklere sahip olup olmadıklarını denetler.</Description>
-            <Archive type="targz" sha1sum="80af5eb9a5e6bf37b549d44f2d2288a85c4922bb">mirrors://sourceforge/cracklib/cracklib-2.9.4.tar.gz</Archive>
+            <Archive type="targz" sha1sum="9199e7b8830717565a844430653f5a90a04fcd65">https://github.com/cracklib/cracklib/releases/download/cracklib-2.9.6/cracklib-2.9.6.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency>zlib</Dependency>
-                <Dependency>python</Dependency>
+                <Dependency>zlib-devel</Dependency>
+                <Dependency>python-devel</Dependency>
                 <Dependency>miscfiles</Dependency>
             </BuildDependencies>
             <SourceURI>system/base/cracklib/pspec.xml</SourceURI>
@@ -11678,13 +11865,20 @@
             <Summary xml:lang="tr">cracklib için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="6">cracklib</Dependency>
+                <Dependency release="7">cracklib</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-03-03</Date>
+                <Version>2.9.6</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="6">
                 <Date>2016-01-28</Date>
                 <Version>2.9.4</Version>
@@ -12054,7 +12248,7 @@
             <Summary xml:lang="de">Ein einbettbares Datenbank Engine, dass die Entwickler mit schnellen, zuverlässigen und lokalen Persistenz unterstützt und null Administration erfordert.</Summary>
             <Description xml:lang="en">The Berkeley Database (Berkeley DB) is a programmatic toolkit that provides embedded database support for both traditional and client/server applications. The Berkeley DB includes B+tree, Extended Linear Hashing, Fixed and Variable-length record access methods, transactions, locking, logging, shared memory caching, and database recovery. The Berkeley DB supports C, C++, Java, and Perl APIs. It is used by many applications, including Python and Perl, so this should be installed on all systems.</Description>
             <Description xml:lang="tr">Berkeley DB geliştiricilere yerel süreklilik sağlayan ve herhangi bir ayar gerektirmeden (zero administration) kullanılan, hızlı ve gömülebilir bir veritabanı motorudur.</Description>
-            <Archive type="targz" sha1sum="fa3f8a41ad5101f43d08bc0efb6241c9b6fc1ae9">http://download.oracle.com/berkeley-db/db-5.3.28.tar.gz</Archive>
+            <Archive type="targz" sha1sum="5ae05c6c4a1766270fd5cfb28539e2b7a19c33b2">http://download.oracle.com/berkeley-db/db-6.1.26.tar.gz</Archive>
             <SourceURI>system/base/db/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -12075,7 +12269,7 @@
             <Name>db-devel</Name>
             <Summary xml:lang="en">Development files for db</Summary>
             <RuntimeDependencies>
-                <Dependency release="6">db</Dependency>
+                <Dependency release="7">db</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -12089,7 +12283,7 @@
             <Summary xml:lang="en">Documentation for db</Summary>
             <PartOf>system.doc</PartOf>
             <RuntimeDependencies>
-                <Dependency release="6">db</Dependency>
+                <Dependency release="7">db</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="doc">/usr/share/doc</Path>
@@ -12099,6 +12293,13 @@
             </Replaces>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-03-02</Date>
+                <Version>6.1.26</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2014-09-10</Date>
                 <Version>5.3.28</Version>
@@ -12529,7 +12730,7 @@
             <Summary xml:lang="en">POSIX 1003.1e capabilities library</Summary>
             <Summary xml:lang="tr">POSIX 1003.1e desteği</Summary>
             <Description xml:lang="en">libcap is a library for getting and setting POSIX.1e (formerly POSIX 6) draft 15 capabilities.</Description>
-            <Archive type="tarxz" sha1sum="b2754cddb614567de445ffdaac7a00b9671b858a">https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.24.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="f0b102e4a68e1bbdcb6b143b63c34a250e473088">https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.25.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>attr-devel</Dependency>
                 <Dependency>pam-devel</Dependency>
@@ -12557,7 +12758,7 @@
             <Summary xml:lang="tr">libcap için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="6">libcap</Dependency>
+                <Dependency release="7">libcap</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -12583,6 +12784,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-03-02</Date>
+                <Version>2.25</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2015-03-16</Date>
                 <Version>2.24</Version>
@@ -13929,7 +14137,7 @@
             <Summary xml:lang="tr">wireless-tools için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="5">wireless-tools</Dependency>
+                <Dependency release="6">wireless-tools</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13937,6 +14145,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-03-04</Date>
+                <Version>30</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2015-05-08</Date>
                 <Version>30</Version>
@@ -14505,7 +14720,7 @@
             <Description xml:lang="tr">gperftools için geliştirme başlıklarını içerir.</Description>
             <IsA>library</IsA>
             <RuntimeDependencies>
-                <Dependency release="5">gperftools</Dependency>
+                <Dependency release="6">gperftools</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -14521,13 +14736,20 @@
             <IsA>data:doc</IsA>
             <PartOf>system.doc</PartOf>
             <RuntimeDependencies>
-                <Dependency release="5">gperftools</Dependency>
+                <Dependency release="6">gperftools</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="doc">/usr/share/doc/gperftools</Path>
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-03-02</Date>
+                <Version>2.4</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2016-01-25</Date>
                 <Version>2.4</Version>
@@ -14583,7 +14805,7 @@
             <Description xml:lang="en">OpenSSL is a cryptography toolkit implementing the Secure Sockets Layer (SSL v2/v3) and Transport Layer Security (TLS v1) network protocols and related cryptography standards required by them.</Description>
             <Description xml:lang="tr">OpenSSL, Güvenlik Soketleri Katmanı (SSL v2/v3) ve Aktarım Katmanı Güvenliği (TLSv1) ağ protokolleri ile bu protokollerin gerektirdiği şifreleme standartlarını uygulayan bir şifreleme aracıdır.</Description>
             <Description xml:lang="de">OpenSSL ist ein Kryptographie Werkzeug, das die Netzwerkprotokolle Secure Sockets Layer (SSL v2/v3) und Transport Layer Security (TLS v1) sowie deren erforderliche zugehörige Kryptographie Standards implementiert.</Description>
-            <Archive type="targz" sha1sum="2c5691496761cb18f98476eefa4d35c835448fb6">ftp://ftp.openssl.org/source/openssl-1.0.2e.tar.gz</Archive>
+            <Archive type="targz" sha1sum="36af23887402a5ea4ebef91df8e61654906f58f2">ftp://ftp.openssl.org/source/openssl-1.0.2g.tar.gz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="openssl-1.0.0-beta4-ca-dir.patch">openssl-1.0.0-beta4-ca-dir.patch</AdditionalFile>
             </AdditionalFiles>
@@ -14599,7 +14821,6 @@
                 <Patch level="1">openssl-1.0.0-beta5-enginesdir.patch</Patch>
                 <Patch>openssl-1.0.2-ipv6.patch</Patch>
                 <Patch>openssl-include.patch</Patch>
-                <Patch>openssl_fix_for_x32.patch</Patch>
                 <Patch>openssl_fix_for_x32_2.patch</Patch>
                 <Patch>openssl-ca-certificates.patch</Patch>
                 <Patch>CVE-2014-0198.patch</Patch>
@@ -14629,7 +14850,7 @@
             <Summary xml:lang="tr">openssl için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="14">openssl</Dependency>
+                <Dependency release="15">openssl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -14648,7 +14869,7 @@
                 <Dependency>zlib-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="14">openssl</Dependency>
+                <Dependency release="15">openssl</Dependency>
                 <Dependency>zlib-32bit</Dependency>
                 <Dependency>glibc-32bit</Dependency>
             </RuntimeDependencies>
@@ -14657,6 +14878,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="15">
+                <Date>2016-03-02</Date>
+                <Version>1.0.2g</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ayhan Yalçınsoy</Name>
+                <Email>ayhanyalcinsoy@pisilinux.org</Email>
+            </Update>
             <Update release="14">
                 <Date>2015-12-14</Date>
                 <Version>1.0.2e</Version>
@@ -15915,8 +16143,8 @@
             <Description xml:lang="fr">SQLite est une petite librairie C implémentant un moteur de base de données SQL auto-configurée, auto-suffisante, pouvant être embarquée. Gère des bases de données de tailles allant jusqu&apos;à 2 téraOctets.</Description>
             <Description xml:lang="en">SQLite is a small C library that implements a self-contained, embeddable, zero-configuration SQL database engine. Supports databases up to 2 terabytes in size.</Description>
             <Description xml:lang="tr">SQLite hiçbir ayar gerektirmeyen, başka programların içine gömülebilir bir SQL veritabanı motorudur. 2 terabayta kadar büyüklükteki veritabanlarını tutabilir.</Description>
-            <Archive type="targz" sha1sum="c2f2c17d3dc4c4e179d35cc04e4420636d48a152">http://www.sqlite.org/2015/sqlite-autoconf-3081002.tar.gz</Archive>
-            <Archive type="zip" sha1sum="2e816999255e4fced7d93b6ad3650a361a446288">http://www.sqlite.org/2015/sqlite-doc-3081002.zip</Archive>
+            <Archive type="targz" sha1sum="e2d300e4b24af5ecd67a1396488893fa44864e36">http://www.sqlite.org/2016/sqlite-autoconf-3110000.tar.gz</Archive>
+            <Archive type="zip" sha1sum="9b58a0a48508103352144afee2e47469e74427ba">http://www.sqlite.org/2016/sqlite-doc-3110000.zip</Archive>
             <BuildDependencies>
                 <Dependency>readline-devel</Dependency>
             </BuildDependencies>
@@ -15940,7 +16168,7 @@
             <Summary xml:lang="tr">sqlite için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="13">sqlite</Dependency>
+                <Dependency release="14">sqlite</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -15958,7 +16186,7 @@
             </BuildDependencies>
             <RuntimeDependencies>
                 <Dependency>glibc-32bit</Dependency>
-                <Dependency release="13">sqlite</Dependency>
+                <Dependency release="14">sqlite</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
@@ -15975,6 +16203,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="14">
+                <Date>2016-03-02</Date>
+                <Version>3.11.0.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="13">
                 <Date>2015-06-08</Date>
                 <Version>3.8.10.2</Version>
@@ -16208,7 +16443,7 @@
             <Summary xml:lang="de">Ein Client, der URLs versteht</Summary>
             <Description xml:lang="en">curl is a command line tool for transferring data with URL syntax, supporting various protocols.</Description>
             <Description xml:lang="tr">curl çeşitli protokolleri destekleyen, URL söz dizimini kullanarak uzak sunuculardan veri aktarmak için kullanılan bir komut satırı aracıdır.</Description>
-            <Archive type="tarbz2" sha1sum="0f8112c50acf1c3896906643adb7f1aeb9b8b633">http://curl.haxx.se/download/curl-7.47.0.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="db57162affecaa320b462e35d2adbb37bf30bbe7">http://curl.haxx.se/download/curl-7.47.1.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>glibc-devel</Dependency>
                 <Dependency>zlib-devel</Dependency>
@@ -16249,7 +16484,7 @@
             <Summary xml:lang="tr">curl için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="15">curl</Dependency>
+                <Dependency release="16">curl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/lib/pkgconfig</Path>
@@ -16259,6 +16494,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="16">
+                <Date>2016-03-02</Date>
+                <Version>7.47.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="15">
                 <Date>2016-01-28</Date>
                 <Version>7.47.0</Version>
@@ -18350,7 +18592,7 @@
             <Summary xml:lang="tr">dbus için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="15">dbus</Dependency>
+                <Dependency release="16">dbus</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -18378,6 +18620,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="16">
+                <Date>2016-03-03</Date>
+                <Version>1.10.6</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="15">
                 <Date>2015-12-23</Date>
                 <Version>1.10.6</Version>
@@ -18781,7 +19030,7 @@
             <Summary xml:lang="tr">NUMA makineleri optimize etmek için bir kitaplık</Summary>
             <Description xml:lang="en">numactl consists of a numactl program to run other programs with a specific NUMA policy and a libnuma to do allocations with NUMA policy in applications.</Description>
             <Description xml:lang="tr">numactl, uygulamaları farklı NUMA (Tekdüze Olmayan Bellek Erişimi) politikalarıyla çalıştırmak için gerekli bir araç ve kitaplıktır.</Description>
-            <Archive type="targz" sha1sum="00675527d54491310b1e4eba5a7278d99681aec1">ftp://oss.sgi.com/www/projects/libnuma/download/numactl-2.0.10.tar.gz</Archive>
+            <Archive type="targz" sha1sum="0846670269824078a4eae8a977728175437b0da4">ftp://oss.sgi.com/www/projects/libnuma/download/numactl-2.0.11.tar.gz</Archive>
             <SourceURI>system/devel/numactl/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -18798,7 +19047,7 @@
             <Summary xml:lang="en">Development files for numactl</Summary>
             <Summary xml:lang="tr">numactl için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="4">numactl</Dependency>
+                <Dependency release="5">numactl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -18806,6 +19055,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-02</Date>
+                <Version>2.0.11</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="4">
                 <Date>2015-05-16</Date>
                 <Version>2.0.10</Version>
@@ -21322,6 +21578,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-03-02</Date>
+                <Version>1.19.0</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="6">
                 <Date>2014-07-11</Date>
                 <Version>1.19.0</Version>
