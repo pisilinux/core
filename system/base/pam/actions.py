@@ -11,9 +11,10 @@ from pisi.actionsapi import get
 
 def setup():
     pisitools.flags.add("-fPIC -D_GNU_SOURCE")
-
+    
     autotools.autoreconf("-fi")
-    autotools.configure("--enable-nls \
+    autotools.configure("--libdir=/usr/lib \
+                         --enable-nls \
                          --disable-audit \
                          --enable-securedir=/lib/security \
                          --enable-isadir=/lib/security")

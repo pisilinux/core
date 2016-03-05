@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Pluggable Authentication Modules</Summary>
         <Description>PAM (Pluggable Authentication Modules) is a system security tool that allows system administrators to set authentication policy without having to recompile programs that handle authentication.</Description>
-        <Archive sha1sum="f8ce53c67363f78d520392fa1c253c4978058be1" type="tarbz2">http://www.linux-pam.org/library/Linux-PAM-1.1.8.tar.bz2</Archive>
+        <Archive sha1sum="3620ab5f5e02272825c426622761a19a1a2facca" type="tarbz2">http://www.linux-pam.org/library/Linux-PAM-1.2.1.tar.bz2</Archive>
         <AdditionalFiles>
             <AdditionalFile target="dlopen.sh" permission="0755">dlopen.sh</AdditionalFile>
             <AdditionalFile target="dlopen-test.sh" permission="0755">dlopen-test.sh</AdditionalFile>
@@ -20,14 +20,16 @@
         <BuildDependencies>
             <Dependency>perl</Dependency>
             <Dependency>gettext</Dependency>
-            <Dependency>cracklib-devel</Dependency>
+            <Dependency>gettext</Dependency>
+            <Dependency>libxslt-devel</Dependency>
+            <Dependency>docbook-xsl</Dependency>
         </BuildDependencies>
         <Patches>
 <!--             <Patch level="1">Linux-PAM-1.1.6-destdir.patch</Patch> -->
-            <Patch level="1">no-lib64.patch</Patch>
-            <Patch level="1">nosex-libtirpc-underlinking.patch</Patch>
-            <Patch level="1">pam-1.1.8-cve-2013-7041.patch</Patch>
-            <Patch level="1">pam-1.1.8-cve-2014-2583.patch</Patch>
+<!--             <Patch level="1">no-lib64.patch</Patch> -->
+<!--             <Patch level="1">nosex-libtirpc-underlinking.patch</Patch> -->
+<!--             <Patch level="1">pam-1.1.8-cve-2013-7041.patch</Patch> -->
+<!--             <Patch level="1">pam-1.1.8-cve-2014-2583.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -69,6 +71,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2016-03-05</Date>
+            <Version>1.2.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="7">
             <Date>2015-04-01</Date>
             <Version>1.1.8</Version>
