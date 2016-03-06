@@ -12,11 +12,11 @@
         <IsA>library</IsA>
         <Summary>An alternate POSIX capabilities library</Summary>
         <Description>libcap-ng is a library that makes using POSIX capabilities easier.</Description>
-        <Archive sha1sum="b4c61c664d9b90810f2e947c46a41ed8abb9e292" type="targz">http://people.redhat.com/sgrubb/libcap-ng/libcap-ng-0.7.3.tar.gz</Archive>
+        <Archive sha1sum="de8ea2c89cb1506a578de7cb032da34c970dd035" type="targz">http://people.redhat.com/sgrubb/libcap-ng/libcap-ng-0.7.7.tar.gz</Archive>
         <BuildDependencies>
             <!-- This is only a build dependency -->
-            <Dependency>attr</Dependency>
-            <Dependency>python</Dependency>
+            <Dependency>attr-devel</Dependency>
+            <Dependency>python-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <!--<Patch level="1">libcap-ng-0.6.5-device.patch</Patch>-->
@@ -76,6 +76,13 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2016-03-03</Date>
+            <Version>0.7.7</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="4">
             <Date>2014-05-11</Date>
             <Version>0.7.3</Version>

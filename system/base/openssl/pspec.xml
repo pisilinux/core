@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>Toolkit for SSL v2/v3 and TLS v1</Summary>
         <Description>OpenSSL is a cryptography toolkit implementing the Secure Sockets Layer (SSL v2/v3) and Transport Layer Security (TLS v1) network protocols and related cryptography standards required by them.</Description>
-        <Archive sha1sum="2c5691496761cb18f98476eefa4d35c835448fb6" type="targz">ftp://ftp.openssl.org/source/openssl-1.0.2e.tar.gz</Archive>
+        <Archive sha1sum="36af23887402a5ea4ebef91df8e61654906f58f2" type="targz">ftp://ftp.openssl.org/source/openssl-1.0.2g.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="openssl-1.0.0-beta4-ca-dir.patch">openssl-1.0.0-beta4-ca-dir.patch</AdditionalFile>
         </AdditionalFiles>
@@ -30,7 +30,7 @@
             <Patch>openssl-1.0.2-ipv6.patch</Patch>
             <!--<Patch>openssl-1.0.2-s_client-verify.patch</Patch>-->
             <Patch>openssl-include.patch</Patch>
-            <Patch>openssl_fix_for_x32.patch</Patch>
+            <!--Patch>openssl_fix_for_x32.patch</Patch-->
             <Patch>openssl_fix_for_x32_2.patch</Patch>
             <Patch>openssl-ca-certificates.patch</Patch>
             <Patch>CVE-2014-0198.patch</Patch>
@@ -92,6 +92,13 @@
     </Package>
 
     <History>
+        <Update release="15">
+            <Date>2016-03-02</Date>
+            <Version>1.0.2g</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Update>
         <Update release="14">
             <Date>2015-12-14</Date>
             <Version>1.0.2e</Version>

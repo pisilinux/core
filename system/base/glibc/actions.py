@@ -11,7 +11,7 @@ from pisi.actionsapi import get
 
 import os
 
-WorkDir = "glibc-2.21"
+WorkDir = "glibc-2.23"
 
 arch = "x86-64" if get.ARCH() == "x86_64" and not get.buildTYPE() == "emul32" else "i686"
 defaultflags = "-O3 -g -fasynchronous-unwind-tables -mtune=generic -march=%s" % arch
@@ -82,8 +82,8 @@ def build():
         autotools.make()
 
         pisitools.dosed("configparms", "=no", "=yes")
-        shelltools.echo("configparms", "CC += -fstack-protector-strong -D_FORTIFY_SOURCE=2")
-        shelltools.echo("configparms", "CXX += -fstack-protector-strong -D_FORTIFY_SOURCE=2")
+#        shelltools.echo("configparms", "CC += -fstack-protector-strong -D_FORTIFY_SOURCE=2")
+#        shelltools.echo("configparms", "CXX += -fstack-protector-strong -D_FORTIFY_SOURCE=2")
 
     else:
         shelltools.echo("configparms", "slibdir=/lib")

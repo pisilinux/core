@@ -14,7 +14,7 @@
         <IsA>library</IsA>
         <Summary>The GNU Compiler Collection, includes C, C++, Objective-C and Fortran compilers</Summary>
         <Description>The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, as well as libraries for these languages</Description>
-        <Archive sha1sum="79dbcb09f44232822460d80b033c962c0237c6d8" type="tarbz2">ftp://gcc.gnu.org/pub/gcc/releases/gcc-4.9.2/gcc-4.9.2.tar.bz2</Archive>
+        <Archive sha1sum="0612270b103941da08376df4d0ef4e5662a2e9eb" type="tarbz2">ftp://gd.tuwien.ac.at/gnu/gcc/releases/gcc-5.3.0/gcc-5.3.0.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>binutils</Dependency>
             <Dependency>bison</Dependency>
@@ -25,20 +25,20 @@
             <Dependency>patch</Dependency>
             <Dependency>sed</Dependency>
             <Dependency>texinfo</Dependency>
-            <Dependency>gmp</Dependency>
-            <Dependency>mpfr</Dependency>
-            <Dependency>libmpc</Dependency>
+            <Dependency>gmp-devel</Dependency>
+            <Dependency>mpfr-devel</Dependency>
+            <Dependency>libmpc-devel</Dependency>
             <Dependency>ppl</Dependency>
-            <Dependency>cloog</Dependency>
-            <Dependency>isl</Dependency>
+            <Dependency>zlib-devel</Dependency>
+            <Dependency>isl-devel</Dependency>
             <Dependency>elfutils</Dependency>
         </BuildDependencies>
         <Patches>
             <!-- Pisilinux Patches -->
             <!-- Fix paths in 64bit -->
             <Patch level="1">pisilinux/64.patch</Patch>
-            <Patch>gcc-4.9-isl-0.13-hack.patch</Patch>
-            <Patch level="0">pisilinux/gcc-4.8-filename-output.patch</Patch>
+            <!--Patch>gcc-4.9-isl-0.13-hack.patch</Patch-->
+            <!--Patch level="0">pisilinux/gcc-4.8-filename-output.patch</Patch-->
             <!-- Add gcc options to output file in PISILINUX.OPTs section -->
             <Patch level="1">pisilinux/gcc_47_based-record_gcc_options.patch</Patch>
         </Patches>
@@ -128,7 +128,8 @@
             <Dependency>gmp</Dependency>
             <Dependency>isl</Dependency>
             <Dependency>mpfr</Dependency>
-            <Dependency>cloog</Dependency>
+            <Dependency>zlib</Dependency>
+            <!--Dependency>cloog</Dependency-->
             <Dependency>libmpc</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -148,6 +149,13 @@
     </Package>
 
     <History>
+        <Update release="13">
+            <Date>2016-02-05</Date>
+            <Version>5.3.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="12">
             <Date>2014-11-28</Date>
             <Version>4.9.2</Version>

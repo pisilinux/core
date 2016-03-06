@@ -10,9 +10,14 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
+    shelltools.system("sed -i '/skipping/d' util/packer.c")
+    autotools.autoreconf("-vfi")
     autotools.configure("--with-default-dict=/usr/share/cracklib/pw_dict \
-                         --without-python \
+                         --prefix=/usr    \
                          --disable-static")
+    
+    # for unused
+    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
 def build():
     autotools.make("all")

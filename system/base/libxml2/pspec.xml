@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Version 2 of the library to manipulate XML files</Summary>
         <Description>Libxml2 is the XML C parser and toolkit developed for the Gnome project (but usable outside of the Gnome platform).</Description>
-        <Archive sha1sum="eb3e2146c6d68aea5c2a4422ed76fe196f933c21" type="targz">ftp://xmlsoft.org/libxml2/libxml2-2.9.1.tar.gz</Archive>
+        <Archive sha1sum="0301ce933637e0ceda049047dbefd18714f59b6e" type="targz">ftp://xmlsoft.org/libxml2/libxml2-2.9.3.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>python-devel</Dependency>
             <Dependency>xz-devel</Dependency>
@@ -20,7 +20,7 @@
             <Dependency>readline-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">CVE-2014-0191.patch</Patch>
+<!--             <Patch level="1">CVE-2014-0191.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -81,6 +81,7 @@
             <Dependency release="current">libxml2</Dependency>
             <Dependency>xz-32bit</Dependency>
             <Dependency>zlib-32bit</Dependency>
+            <Dependency>glibc-32bit</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib32</Path>
@@ -88,6 +89,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2016-03-04</Date>
+            <Version>2.9.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="7">
             <Date>2014-07-06</Date>
             <Version>2.9.1</Version>

@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>An interface for filesystems implemented in userspace</Summary>
         <Description>fuse is a backend allowing regular users to (un)mount filesystems for their own use.</Description>
-        <Archive sha1sum="c8b25419f33624dc5240af6a5d26f2c04367ca71" type="targz">mirrors://sourceforge/project/fuse/fuse-2.X/2.9.4/fuse-2.9.4.tar.gz</Archive>
+        <Archive sha1sum="bf71181cdc25f65e5757a8a14d352296722de2e3" type="targz">https://github.com/libfuse/libfuse/releases/download/fuse_2_9_5/fuse-2.9.5.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>gettext-devel</Dependency>
         </BuildDependencies>
@@ -50,6 +50,13 @@
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2015-08-18</Date>
+            <Version>2.9.5</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Update>
         <Update release="5">
             <Date>2015-08-18</Date>
             <Version>2.9.4</Version>

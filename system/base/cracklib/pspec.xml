@@ -12,10 +12,10 @@
         <IsA>library</IsA>
         <Summary>Password Checking Library</Summary>
         <Description>CrackLib tests passwords to determine whether they match certain security-oriented characteristics, with the purpose of stopping users from choosing passwords that are easy to guess.</Description>
-        <Archive sha1sum="80af5eb9a5e6bf37b549d44f2d2288a85c4922bb" type="targz">mirrors://sourceforge/cracklib/cracklib-2.9.4.tar.gz</Archive>
+        <Archive sha1sum="9199e7b8830717565a844430653f5a90a04fcd65" type="targz">https://github.com/cracklib/cracklib/releases/download/cracklib-2.9.6/cracklib-2.9.6.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>zlib</Dependency>
-            <Dependency>python</Dependency>
+            <Dependency>zlib-devel</Dependency>
+            <Dependency>python-devel</Dependency>
             <Dependency>miscfiles</Dependency>
         </BuildDependencies>
     </Source>
@@ -49,6 +49,13 @@
     </Package>
 
     <History>
+        <Update release="7">
+            <Date>2016-03-03</Date>
+            <Version>2.9.6</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="6">
             <Date>2016-01-28</Date>
             <Version>2.9.4</Version>

@@ -19,6 +19,8 @@
             <Dependency>gc-devel</Dependency>
             <Dependency>gettext-devel</Dependency>
             <Dependency>gmp-devel</Dependency>
+            <Dependency>libunistring-devel</Dependency>
+            <Dependency>libffi-devel</Dependency>
         </BuildDependencies>
         <Patches>
         </Patches>
@@ -53,6 +55,8 @@
         <Summary>Development files for guile</Summary>
         <RuntimeDependencies>
             <Dependency release="current">guile</Dependency>
+            <Dependency>gc-devel</Dependency>
+            <Dependency>gmp-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
