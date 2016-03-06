@@ -1,0 +1,116 @@
+From 8160c4e455820d5008a1116d2dca35f0363bb062 Mon Sep 17 00:00:00 2001
+From: "Michael S. Tsirkin" <mst@redhat.com>
+Date: Sun, 28 Feb 2016 16:31:39 +0200
+Subject: vfio: fix ioctl error handling
+
+From: Michael S. Tsirkin <mst@redhat.com>
+
+commit 8160c4e455820d5008a1116d2dca35f0363bb062 upstream.
+
+Calling return copy_to_user(...) in an ioctl will not
+do the right thing if there's a pagefault:
+copy_to_user returns the number of bytes not copied
+in this case.
+
+Fix up vfio to do
+	return copy_to_user(...)) ?
+		-EFAULT : 0;
+
+everywhere.
+
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+Signed-off-by: Alex Williamson <alex.williamson@redhat.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/vfio/pci/vfio_pci.c                  |    9 ++++++---
+ drivers/vfio/platform/vfio_platform_common.c |    9 ++++++---
+ drivers/vfio/vfio_iommu_type1.c              |    6 ++++--
+ 3 files changed, 16 insertions(+), 8 deletions(-)
+
+--- a/drivers/vfio/pci/vfio_pci.c
++++ b/drivers/vfio/pci/vfio_pci.c
+@@ -446,7 +446,8 @@ static long vfio_pci_ioctl(void *device_
+ 		info.num_regions = VFIO_PCI_NUM_REGIONS;
+ 		info.num_irqs = VFIO_PCI_NUM_IRQS;
+ 
+-		return copy_to_user((void __user *)arg, &info, minsz);
++		return copy_to_user((void __user *)arg, &info, minsz) ?
++			-EFAULT : 0;
+ 
+ 	} else if (cmd == VFIO_DEVICE_GET_REGION_INFO) {
+ 		struct pci_dev *pdev = vdev->pdev;
+@@ -520,7 +521,8 @@ static long vfio_pci_ioctl(void *device_
+ 			return -EINVAL;
+ 		}
+ 
+-		return copy_to_user((void __user *)arg, &info, minsz);
++		return copy_to_user((void __user *)arg, &info, minsz) ?
++			-EFAULT : 0;
+ 
+ 	} else if (cmd == VFIO_DEVICE_GET_IRQ_INFO) {
+ 		struct vfio_irq_info info;
+@@ -555,7 +557,8 @@ static long vfio_pci_ioctl(void *device_
+ 		else
+ 			info.flags |= VFIO_IRQ_INFO_NORESIZE;
+ 
+-		return copy_to_user((void __user *)arg, &info, minsz);
++		return copy_to_user((void __user *)arg, &info, minsz) ?
++			-EFAULT : 0;
+ 
+ 	} else if (cmd == VFIO_DEVICE_SET_IRQS) {
+ 		struct vfio_irq_set hdr;
+--- a/drivers/vfio/platform/vfio_platform_common.c
++++ b/drivers/vfio/platform/vfio_platform_common.c
+@@ -219,7 +219,8 @@ static long vfio_platform_ioctl(void *de
+ 		info.num_regions = vdev->num_regions;
+ 		info.num_irqs = vdev->num_irqs;
+ 
+-		return copy_to_user((void __user *)arg, &info, minsz);
++		return copy_to_user((void __user *)arg, &info, minsz) ?
++			-EFAULT : 0;
+ 
+ 	} else if (cmd == VFIO_DEVICE_GET_REGION_INFO) {
+ 		struct vfio_region_info info;
+@@ -240,7 +241,8 @@ static long vfio_platform_ioctl(void *de
+ 		info.size = vdev->regions[info.index].size;
+ 		info.flags = vdev->regions[info.index].flags;
+ 
+-		return copy_to_user((void __user *)arg, &info, minsz);
++		return copy_to_user((void __user *)arg, &info, minsz) ?
++			-EFAULT : 0;
+ 
+ 	} else if (cmd == VFIO_DEVICE_GET_IRQ_INFO) {
+ 		struct vfio_irq_info info;
+@@ -259,7 +261,8 @@ static long vfio_platform_ioctl(void *de
+ 		info.flags = vdev->irqs[info.index].flags;
+ 		info.count = vdev->irqs[info.index].count;
+ 
+-		return copy_to_user((void __user *)arg, &info, minsz);
++		return copy_to_user((void __user *)arg, &info, minsz) ?
++			-EFAULT : 0;
+ 
+ 	} else if (cmd == VFIO_DEVICE_SET_IRQS) {
+ 		struct vfio_irq_set hdr;
+--- a/drivers/vfio/vfio_iommu_type1.c
++++ b/drivers/vfio/vfio_iommu_type1.c
+@@ -999,7 +999,8 @@ static long vfio_iommu_type1_ioctl(void
+ 
+ 		info.iova_pgsizes = vfio_pgsize_bitmap(iommu);
+ 
+-		return copy_to_user((void __user *)arg, &info, minsz);
++		return copy_to_user((void __user *)arg, &info, minsz) ?
++			-EFAULT : 0;
+ 
+ 	} else if (cmd == VFIO_IOMMU_MAP_DMA) {
+ 		struct vfio_iommu_type1_dma_map map;
+@@ -1032,7 +1033,8 @@ static long vfio_iommu_type1_ioctl(void
+ 		if (ret)
+ 			return ret;
+ 
+-		return copy_to_user((void __user *)arg, &unmap, minsz);
++		return copy_to_user((void __user *)arg, &unmap, minsz) ?
++			-EFAULT : 0;
+ 	}
+ 
+ 	return -ENOTTY;

@@ -1,0 +1,36 @@
+From 5f009d3f8e6685fe8c6215082c1696a08b411220 Mon Sep 17 00:00:00 2001
+From: Keith Busch <keith.busch@intel.com>
+Date: Wed, 10 Feb 2016 16:52:47 -0700
+Subject: block: Initialize max_dev_sectors to 0
+
+From: Keith Busch <keith.busch@intel.com>
+
+commit 5f009d3f8e6685fe8c6215082c1696a08b411220 upstream.
+
+The new queue limit is not used by the majority of block drivers, and
+should be initialized to 0 for the driver's requested settings to be used.
+
+Signed-off-by: Keith Busch <keith.busch@intel.com>
+Acked-by: Martin K. Petersen <martin.petersen@oracle.com>
+Reviewed-by: Sagi Grimberg <sagig@mellanox.com>
+Reviewed-by: Christoph Hellwig <hch@lst.de>
+Signed-off-by: Jens Axboe <axboe@fb.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ block/blk-settings.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+--- a/block/blk-settings.c
++++ b/block/blk-settings.c
+@@ -91,8 +91,8 @@ void blk_set_default_limits(struct queue
+ 	lim->seg_boundary_mask = BLK_SEG_BOUNDARY_MASK;
+ 	lim->virt_boundary_mask = 0;
+ 	lim->max_segment_size = BLK_MAX_SEGMENT_SIZE;
+-	lim->max_sectors = lim->max_dev_sectors = lim->max_hw_sectors =
+-		BLK_SAFE_MAX_SECTORS;
++	lim->max_sectors = lim->max_hw_sectors = BLK_SAFE_MAX_SECTORS;
++	lim->max_dev_sectors = 0;
+ 	lim->chunk_sectors = 0;
+ 	lim->max_write_same_sectors = 0;
+ 	lim->max_discard_sectors = 0;

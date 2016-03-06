@@ -1,0 +1,39 @@
+From 4ee34ea3a12396f35b26d90a094c75db95080baa Mon Sep 17 00:00:00 2001
+From: Harvey Hunt <harvey.hunt@imgtec.com>
+Date: Wed, 24 Feb 2016 15:16:43 +0000
+Subject: [PATCH] libata: Align ata_device's id on a cacheline
+
+The id buffer in ata_device is a DMA target, but it isn't explicitly
+cacheline aligned. Due to this, adjacent fields can be overwritten with
+stale data from memory on non coherent architectures. As a result, the
+kernel is sometimes unable to communicate with an ATA device.
+
+Fix this by ensuring that the id buffer is cacheline aligned.
+
+This issue is similar to that fixed by Commit 84bda12af31f
+("libata: align ap->sector_buf").
+
+Signed-off-by: Harvey Hunt <harvey.hunt@imgtec.com>
+Cc: linux-kernel@vger.kernel.org
+Cc: <stable@vger.kernel.org> # 2.6.18
+Signed-off-by: Tejun Heo <tj@kernel.org>
+---
+ include/linux/libata.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/linux/libata.h b/include/linux/libata.h
+index bec2abb..2c4ebef 100644
+--- a/include/linux/libata.h
++++ b/include/linux/libata.h
+@@ -720,7 +720,7 @@ struct ata_device {
+ 	union {
+ 		u16		id[ATA_ID_WORDS]; /* IDENTIFY xxx DEVICE data */
+ 		u32		gscr[SATA_PMP_GSCR_DWORDS]; /* PMP GSCR block */
+-	};
++	} ____cacheline_aligned;
+ 
+ 	/* DEVSLP Timing Variables from Identify Device Data Log */
+ 	u8			devslp_timing[ATA_LOG_DEVSLP_SIZE];
+-- 
+2.7.2
+

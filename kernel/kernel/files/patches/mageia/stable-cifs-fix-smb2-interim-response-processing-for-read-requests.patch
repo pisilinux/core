@@ -1,0 +1,72 @@
+From 6cc3b24235929b54acd5ecc987ef11a425bd209e Mon Sep 17 00:00:00 2001
+From: Pavel Shilovsky <pshilovsky@samba.org>
+Date: Sat, 27 Feb 2016 11:58:18 +0300
+Subject: CIFS: Fix SMB2+ interim response processing for read requests
+
+From: Pavel Shilovsky <pshilovsky@samba.org>
+
+commit 6cc3b24235929b54acd5ecc987ef11a425bd209e upstream.
+
+For interim responses we only need to parse a header and update
+a number credits. Now it is done for all SMB2+ command except
+SMB2_READ which is wrong. Fix this by adding such processing.
+
+Signed-off-by: Pavel Shilovsky <pshilovsky@samba.org>
+Tested-by: Shirish Pargaonkar <shirishpargaonkar@gmail.com>
+Signed-off-by: Steve French <smfrench@gmail.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ fs/cifs/cifssmb.c |   21 ++++++++++++++++++---
+ 1 file changed, 18 insertions(+), 3 deletions(-)
+
+--- a/fs/cifs/cifssmb.c
++++ b/fs/cifs/cifssmb.c
+@@ -1396,11 +1396,10 @@ openRetry:
+  * current bigbuf.
+  */
+ static int
+-cifs_readv_discard(struct TCP_Server_Info *server, struct mid_q_entry *mid)
++discard_remaining_data(struct TCP_Server_Info *server)
+ {
+ 	unsigned int rfclen = get_rfc1002_length(server->smallbuf);
+ 	int remaining = rfclen + 4 - server->total_read;
+-	struct cifs_readdata *rdata = mid->callback_data;
+ 
+ 	while (remaining > 0) {
+ 		int length;
+@@ -1414,10 +1413,20 @@ cifs_readv_discard(struct TCP_Server_Inf
+ 		remaining -= length;
+ 	}
+ 
+-	dequeue_mid(mid, rdata->result);
+ 	return 0;
+ }
+ 
++static int
++cifs_readv_discard(struct TCP_Server_Info *server, struct mid_q_entry *mid)
++{
++	int length;
++	struct cifs_readdata *rdata = mid->callback_data;
++
++	length = discard_remaining_data(server);
++	dequeue_mid(mid, rdata->result);
++	return length;
++}
++
+ int
+ cifs_readv_receive(struct TCP_Server_Info *server, struct mid_q_entry *mid)
+ {
+@@ -1446,6 +1455,12 @@ cifs_readv_receive(struct TCP_Server_Inf
+ 		return length;
+ 	server->total_read += length;
+ 
++	if (server->ops->is_status_pending &&
++	    server->ops->is_status_pending(buf, server, 0)) {
++		discard_remaining_data(server);
++		return -1;
++	}
++
+ 	/* Was the SMB read successful? */
+ 	rdata->result = server->ops->map_error(buf, false);
+ 	if (rdata->result != 0) {

@@ -1,0 +1,94 @@
+From 98e8b6c9ac9d1b1e9d1122dfa6783d5d566bb8f7 Mon Sep 17 00:00:00 2001
+From: Helge Deller <deller@gmx.de>
+Date: Tue, 19 Jan 2016 16:08:49 +0100
+Subject: parisc: Fix ptrace syscall number and return value modification
+
+From: Helge Deller <deller@gmx.de>
+
+commit 98e8b6c9ac9d1b1e9d1122dfa6783d5d566bb8f7 upstream.
+
+Mike Frysinger reported that his ptrace testcase showed strange
+behaviour on parisc: It was not possible to avoid a syscall and the
+return value of a syscall couldn't be changed.
+
+To modify a syscall number, we were missing to save the new syscall
+number to gr20 which is then picked up later in assembly again.
+
+The effect that the return value couldn't be changed is a side-effect of
+another bug in the assembly code. When a process is ptraced, userspace
+expects each syscall to report entrance and exit of a syscall.  If a
+syscall number was given which doesn't exist, we jumped to the normal
+syscall exit code instead of informing userspace that the (non-existant)
+syscall exits. This unexpected behaviour confuses userspace and thus the
+bug was misinterpreted as if we can't change the return value.
+
+This patch fixes both problems and was tested on 64bit kernel with
+32bit userspace.
+
+Signed-off-by: Helge Deller <deller@gmx.de>
+Cc: Mike Frysinger <vapier@gentoo.org>
+Tested-by: Mike Frysinger <vapier@gentoo.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ arch/parisc/kernel/ptrace.c  |   16 +++++++++++-----
+ arch/parisc/kernel/syscall.S |    5 ++++-
+ 2 files changed, 15 insertions(+), 6 deletions(-)
+
+--- a/arch/parisc/kernel/ptrace.c
++++ b/arch/parisc/kernel/ptrace.c
+@@ -269,14 +269,19 @@ long compat_arch_ptrace(struct task_stru
+ 
+ long do_syscall_trace_enter(struct pt_regs *regs)
+ {
+-	long ret = 0;
+-
+ 	/* Do the secure computing check first. */
+ 	secure_computing_strict(regs->gr[20]);
+ 
+ 	if (test_thread_flag(TIF_SYSCALL_TRACE) &&
+-	    tracehook_report_syscall_entry(regs))
+-		ret = -1L;
++	    tracehook_report_syscall_entry(regs)) {
++		/*
++		 * Tracing decided this syscall should not happen or the
++		 * debugger stored an invalid system call number. Skip
++		 * the system call and the system call restart handling.
++		 */
++		regs->gr[20] = -1UL;
++		goto out;
++	}
+ 
+ #ifdef CONFIG_64BIT
+ 	if (!is_compat_task())
+@@ -290,7 +295,8 @@ long do_syscall_trace_enter(struct pt_re
+ 			regs->gr[24] & 0xffffffff,
+ 			regs->gr[23] & 0xffffffff);
+ 
+-	return ret ? : regs->gr[20];
++out:
++	return regs->gr[20];
+ }
+ 
+ void do_syscall_trace_exit(struct pt_regs *regs)
+--- a/arch/parisc/kernel/syscall.S
++++ b/arch/parisc/kernel/syscall.S
+@@ -343,7 +343,7 @@ tracesys_next:
+ #endif
+ 
+ 	comiclr,>>=	__NR_Linux_syscalls, %r20, %r0
+-	b,n	.Lsyscall_nosys
++	b,n	.Ltracesys_nosys
+ 
+ 	LDREGX  %r20(%r19), %r19
+ 
+@@ -359,6 +359,9 @@ tracesys_next:
+ 	be      0(%sr7,%r19)
+ 	ldo	R%tracesys_exit(%r2),%r2
+ 
++.Ltracesys_nosys:
++	ldo	-ENOSYS(%r0),%r28		/* set errno */
++
+ 	/* Do *not* call this function on the gateway page, because it
+ 	makes a direct call to syscall_trace. */
+ 	

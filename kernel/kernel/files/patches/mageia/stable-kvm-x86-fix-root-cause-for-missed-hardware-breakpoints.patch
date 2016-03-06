@@ -1,0 +1,56 @@
+From 70e4da7a8ff62f2775337b705f45c804bb450454 Mon Sep 17 00:00:00 2001
+From: Paolo Bonzini <pbonzini@redhat.com>
+Date: Fri, 26 Feb 2016 12:28:40 +0100
+Subject: KVM: x86: fix root cause for missed hardware breakpoints
+
+From: Paolo Bonzini <pbonzini@redhat.com>
+
+commit 70e4da7a8ff62f2775337b705f45c804bb450454 upstream.
+
+Commit 172b2386ed16 ("KVM: x86: fix missed hardware breakpoints",
+2016-02-10) worked around a case where the debug registers are not loaded
+correctly on preemption and on the first entry to KVM_RUN.
+
+However, Xiao Guangrong pointed out that the root cause must be that
+KVM_DEBUGREG_BP_ENABLED is not being set correctly.  This can indeed
+happen due to the lazy debug exit mechanism, which does not call
+kvm_update_dr7.  Fix it by replacing the existing loop (more or less
+equivalent to kvm_update_dr0123) with calls to all the kvm_update_dr*
+functions.
+
+Fixes: 172b2386ed16a9143d9a456aae5ec87275c61489
+Reviewed-by: Xiao Guangrong <guangrong.xiao@linux.intel.com>
+Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ arch/x86/kvm/x86.c |    9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+
+--- a/arch/x86/kvm/x86.c
++++ b/arch/x86/kvm/x86.c
+@@ -2736,7 +2736,6 @@ void kvm_arch_vcpu_load(struct kvm_vcpu
+ 	}
+ 
+ 	kvm_make_request(KVM_REQ_STEAL_UPDATE, vcpu);
+-	vcpu->arch.switch_db_regs |= KVM_DEBUGREG_RELOAD;
+ }
+ 
+ void kvm_arch_vcpu_put(struct kvm_vcpu *vcpu)
+@@ -6545,12 +6544,12 @@ static int vcpu_enter_guest(struct kvm_v
+ 	 * KVM_DEBUGREG_WONT_EXIT again.
+ 	 */
+ 	if (unlikely(vcpu->arch.switch_db_regs & KVM_DEBUGREG_WONT_EXIT)) {
+-		int i;
+-
+ 		WARN_ON(vcpu->guest_debug & KVM_GUESTDBG_USE_HW_BP);
+ 		kvm_x86_ops->sync_dirty_debug_regs(vcpu);
+-		for (i = 0; i < KVM_NR_DB_REGS; i++)
+-			vcpu->arch.eff_db[i] = vcpu->arch.db[i];
++		kvm_update_dr0123(vcpu);
++		kvm_update_dr6(vcpu);
++		kvm_update_dr7(vcpu);
++		vcpu->arch.switch_db_regs &= ~KVM_DEBUGREG_RELOAD;
+ 	}
+ 
+ 	/*

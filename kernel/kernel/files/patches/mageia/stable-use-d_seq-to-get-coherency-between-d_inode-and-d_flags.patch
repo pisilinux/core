@@ -1,0 +1,100 @@
+From a528aca7f359f4b0b1d72ae406097e491a5ba9ea Mon Sep 17 00:00:00 2001
+From: Al Viro <viro@zeniv.linux.org.uk>
+Date: Mon, 29 Feb 2016 12:12:46 -0500
+Subject: use ->d_seq to get coherency between ->d_inode and ->d_flags
+
+From: Al Viro <viro@zeniv.linux.org.uk>
+
+commit a528aca7f359f4b0b1d72ae406097e491a5ba9ea upstream.
+
+Games with ordering and barriers are way too brittle.  Just
+bump ->d_seq before and after updating ->d_inode and ->d_flags
+type bits, so that verifying ->d_seq would guarantee they are
+coherent.
+
+Signed-off-by: Al Viro <viro@zeniv.linux.org.uk>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ fs/dcache.c            |   20 +++++---------------
+ include/linux/dcache.h |    4 +---
+ 2 files changed, 6 insertions(+), 18 deletions(-)
+
+--- a/fs/dcache.c
++++ b/fs/dcache.c
+@@ -269,9 +269,6 @@ static inline int dname_external(const s
+ 	return dentry->d_name.name != dentry->d_iname;
+ }
+ 
+-/*
+- * Make sure other CPUs see the inode attached before the type is set.
+- */
+ static inline void __d_set_inode_and_type(struct dentry *dentry,
+ 					  struct inode *inode,
+ 					  unsigned type_flags)
+@@ -279,28 +276,18 @@ static inline void __d_set_inode_and_typ
+ 	unsigned flags;
+ 
+ 	dentry->d_inode = inode;
+-	smp_wmb();
+ 	flags = READ_ONCE(dentry->d_flags);
+ 	flags &= ~(DCACHE_ENTRY_TYPE | DCACHE_FALLTHRU);
+ 	flags |= type_flags;
+ 	WRITE_ONCE(dentry->d_flags, flags);
+ }
+ 
+-/*
+- * Ideally, we want to make sure that other CPUs see the flags cleared before
+- * the inode is detached, but this is really a violation of RCU principles
+- * since the ordering suggests we should always set inode before flags.
+- *
+- * We should instead replace or discard the entire dentry - but that sucks
+- * performancewise on mass deletion/rename.
+- */
+ static inline void __d_clear_type_and_inode(struct dentry *dentry)
+ {
+ 	unsigned flags = READ_ONCE(dentry->d_flags);
+ 
+ 	flags &= ~(DCACHE_ENTRY_TYPE | DCACHE_FALLTHRU);
+ 	WRITE_ONCE(dentry->d_flags, flags);
+-	smp_wmb();
+ 	dentry->d_inode = NULL;
+ }
+ 
+@@ -370,9 +357,11 @@ static void dentry_unlink_inode(struct d
+ 	__releases(dentry->d_inode->i_lock)
+ {
+ 	struct inode *inode = dentry->d_inode;
++
++	raw_write_seqcount_begin(&dentry->d_seq);
+ 	__d_clear_type_and_inode(dentry);
+ 	hlist_del_init(&dentry->d_u.d_alias);
+-	dentry_rcuwalk_invalidate(dentry);
++	raw_write_seqcount_end(&dentry->d_seq);
+ 	spin_unlock(&dentry->d_lock);
+ 	spin_unlock(&inode->i_lock);
+ 	if (!inode->i_nlink)
+@@ -1757,8 +1746,9 @@ static void __d_instantiate(struct dentr
+ 	spin_lock(&dentry->d_lock);
+ 	if (inode)
+ 		hlist_add_head(&dentry->d_u.d_alias, &inode->i_dentry);
++	raw_write_seqcount_begin(&dentry->d_seq);
+ 	__d_set_inode_and_type(dentry, inode, add_flags);
+-	dentry_rcuwalk_invalidate(dentry);
++	raw_write_seqcount_end(&dentry->d_seq);
+ 	spin_unlock(&dentry->d_lock);
+ 	fsnotify_d_instantiate(dentry, inode);
+ }
+--- a/include/linux/dcache.h
++++ b/include/linux/dcache.h
+@@ -409,9 +409,7 @@ static inline bool d_mountpoint(const st
+  */
+ static inline unsigned __d_entry_type(const struct dentry *dentry)
+ {
+-	unsigned type = READ_ONCE(dentry->d_flags);
+-	smp_rmb();
+-	return type & DCACHE_ENTRY_TYPE;
++	return dentry->d_flags & DCACHE_ENTRY_TYPE;
+ }
+ 
+ static inline bool d_is_miss(const struct dentry *dentry)

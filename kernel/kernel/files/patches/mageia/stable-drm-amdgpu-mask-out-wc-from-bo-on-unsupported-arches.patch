@@ -1,0 +1,46 @@
+From a187f17f0e15a046aa5d7263b35df55230d92779 Mon Sep 17 00:00:00 2001
+From: Oded Gabbay <oded.gabbay@gmail.com>
+Date: Sat, 30 Jan 2016 07:59:34 +0200
+Subject: drm/amdgpu: mask out WC from BO on unsupported arches
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+From: Oded Gabbay <oded.gabbay@gmail.com>
+
+commit a187f17f0e15a046aa5d7263b35df55230d92779 upstream.
+
+Reviewed-by: Christian König <christian.koenig@amd.com>
+Reviewed-by: Michel Dänzer <michel.daenzer@amd.com>
+Signed-off-by: Oded Gabbay <oded.gabbay@gmail.com>
+Signed-off-by: Alex Deucher <alexander.deucher@amd.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.c |    8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+@@ -33,6 +33,7 @@
+ #include <linux/slab.h>
+ #include <drm/drmP.h>
+ #include <drm/amdgpu_drm.h>
++#include <drm/drm_cache.h>
+ #include "amdgpu.h"
+ #include "amdgpu_trace.h"
+ 
+@@ -261,6 +262,13 @@ int amdgpu_bo_create_restricted(struct a
+ 				       AMDGPU_GEM_DOMAIN_OA);
+ 
+ 	bo->flags = flags;
++
++	/* For architectures that don't support WC memory,
++	 * mask out the WC flag from the BO
++	 */
++	if (!drm_arch_can_wc_memory())
++		bo->flags &= ~AMDGPU_GEM_CREATE_CPU_GTT_USWC;
++
+ 	amdgpu_fill_placement_to_bo(bo, placement);
+ 	/* Kernel allocation are uninterruptible */
+ 	r = ttm_bo_init(&adev->mman.bdev, &bo->tbo, size, type,

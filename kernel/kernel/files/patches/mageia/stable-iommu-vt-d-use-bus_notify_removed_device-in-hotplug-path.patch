@@ -1,0 +1,68 @@
+From e6a8c9b337eed56eb481e1b4dd2180c25a1e5310 Mon Sep 17 00:00:00 2001
+From: Joerg Roedel <jroedel@suse.de>
+Date: Mon, 29 Feb 2016 23:49:47 +0100
+Subject: iommu/vt-d: Use BUS_NOTIFY_REMOVED_DEVICE in hotplug path
+
+From: Joerg Roedel <jroedel@suse.de>
+
+commit e6a8c9b337eed56eb481e1b4dd2180c25a1e5310 upstream.
+
+In the PCI hotplug path of the Intel IOMMU driver, replace
+the usage of the BUS_NOTIFY_DEL_DEVICE notifier, which is
+executed before the driver is unbound from the device, with
+BUS_NOTIFY_REMOVED_DEVICE, which runs after that.
+
+This fixes a kernel BUG being triggered in the VT-d code
+when the device driver tries to unmap DMA buffers and the
+VT-d driver already destroyed all mappings.
+
+Reported-by: Stefani Seibold <stefani@seibold.net>
+Signed-off-by: Joerg Roedel <jroedel@suse.de>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/iommu/dmar.c        |    5 +++--
+ drivers/iommu/intel-iommu.c |    4 ++--
+ 2 files changed, 5 insertions(+), 4 deletions(-)
+
+--- a/drivers/iommu/dmar.c
++++ b/drivers/iommu/dmar.c
+@@ -329,7 +329,8 @@ static int dmar_pci_bus_notifier(struct
+ 	/* Only care about add/remove events for physical functions */
+ 	if (pdev->is_virtfn)
+ 		return NOTIFY_DONE;
+-	if (action != BUS_NOTIFY_ADD_DEVICE && action != BUS_NOTIFY_DEL_DEVICE)
++	if (action != BUS_NOTIFY_ADD_DEVICE &&
++	    action != BUS_NOTIFY_REMOVED_DEVICE)
+ 		return NOTIFY_DONE;
+ 
+ 	info = dmar_alloc_pci_notify_info(pdev, action);
+@@ -339,7 +340,7 @@ static int dmar_pci_bus_notifier(struct
+ 	down_write(&dmar_global_lock);
+ 	if (action == BUS_NOTIFY_ADD_DEVICE)
+ 		dmar_pci_bus_add_dev(info);
+-	else if (action == BUS_NOTIFY_DEL_DEVICE)
++	else if (action == BUS_NOTIFY_REMOVED_DEVICE)
+ 		dmar_pci_bus_del_dev(info);
+ 	up_write(&dmar_global_lock);
+ 
+--- a/drivers/iommu/intel-iommu.c
++++ b/drivers/iommu/intel-iommu.c
+@@ -4367,7 +4367,7 @@ int dmar_iommu_notify_scope_dev(struct d
+ 				rmrru->devices_cnt);
+ 			if(ret < 0)
+ 				return ret;
+-		} else if (info->event == BUS_NOTIFY_DEL_DEVICE) {
++		} else if (info->event == BUS_NOTIFY_REMOVED_DEVICE) {
+ 			dmar_remove_dev_scope(info, rmrr->segment,
+ 				rmrru->devices, rmrru->devices_cnt);
+ 		}
+@@ -4387,7 +4387,7 @@ int dmar_iommu_notify_scope_dev(struct d
+ 				break;
+ 			else if(ret < 0)
+ 				return ret;
+-		} else if (info->event == BUS_NOTIFY_DEL_DEVICE) {
++		} else if (info->event == BUS_NOTIFY_REMOVED_DEVICE) {
+ 			if (dmar_remove_dev_scope(info, atsr->segment,
+ 					atsru->devices, atsru->devices_cnt))
+ 				break;

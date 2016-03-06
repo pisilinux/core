@@ -1,0 +1,78 @@
+From 79e3f4a853ed161cd4c06d84b50beebf961a47c6 Mon Sep 17 00:00:00 2001
+From: Murali Karicheri <m-karicheri2@ti.com>
+Date: Mon, 29 Feb 2016 17:18:22 -0600
+Subject: PCI: keystone: Fix MSI code that retrieves struct pcie_port pointer
+
+From: Murali Karicheri <m-karicheri2@ti.com>
+
+commit 79e3f4a853ed161cd4c06d84b50beebf961a47c6 upstream.
+
+Commit cbce7900598c ("PCI: designware: Make driver arch-agnostic") changed
+the host bridge sysdata pointer from the ARM pci_sys_data to the DesignWare
+pcie_port structure, and changed pcie-designware.c to reflect that.  But it
+did not change the corresponding code in pci-keystone-dw.c, so it caused
+crashes on Keystone:
+
+  Unable to handle kernel NULL pointer dereference at virtual address 00000030
+  pgd = c0003000
+  [00000030] *pgd=80000800004003, *pmd=00000000
+  Internal error: Oops: 206 [#1] PREEMPT SMP ARM
+  CPU: 0 PID: 1 Comm: swapper/0 Not tainted 4.4.2-00139-gb74f926 #2
+  Hardware name: Keystone
+  PC is at ks_dw_pcie_msi_irq_unmask+0x24/0x58
+
+Change pci-keystone-dw.c to expect sysdata to be the struct pcie_port
+pointer.
+
+[bhelgaas: changelog]
+Fixes: cbce7900598c ("PCI: designware: Make driver arch-agnostic")
+Signed-off-by: Murali Karicheri <m-karicheri2@ti.com>
+Signed-off-by: Bjorn Helgaas <bhelgaas@google.com>
+CC: Zhou Wang <wangzhou1@hisilicon.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/pci/host/pci-keystone-dw.c |   11 +++--------
+ 1 file changed, 3 insertions(+), 8 deletions(-)
+
+--- a/drivers/pci/host/pci-keystone-dw.c
++++ b/drivers/pci/host/pci-keystone-dw.c
+@@ -58,11 +58,6 @@
+ 
+ #define to_keystone_pcie(x)	container_of(x, struct keystone_pcie, pp)
+ 
+-static inline struct pcie_port *sys_to_pcie(struct pci_sys_data *sys)
+-{
+-	return sys->private_data;
+-}
+-
+ static inline void update_reg_offset_bit_pos(u32 offset, u32 *reg_offset,
+ 					     u32 *bit_pos)
+ {
+@@ -108,7 +103,7 @@ static void ks_dw_pcie_msi_irq_ack(struc
+ 	struct pcie_port *pp;
+ 
+ 	msi = irq_data_get_msi_desc(d);
+-	pp = sys_to_pcie(msi_desc_to_pci_sysdata(msi));
++	pp = (struct pcie_port *) msi_desc_to_pci_sysdata(msi);
+ 	ks_pcie = to_keystone_pcie(pp);
+ 	offset = d->irq - irq_linear_revmap(pp->irq_domain, 0);
+ 	update_reg_offset_bit_pos(offset, &reg_offset, &bit_pos);
+@@ -146,7 +141,7 @@ static void ks_dw_pcie_msi_irq_mask(stru
+ 	u32 offset;
+ 
+ 	msi = irq_data_get_msi_desc(d);
+-	pp = sys_to_pcie(msi_desc_to_pci_sysdata(msi));
++	pp = (struct pcie_port *) msi_desc_to_pci_sysdata(msi);
+ 	ks_pcie = to_keystone_pcie(pp);
+ 	offset = d->irq - irq_linear_revmap(pp->irq_domain, 0);
+ 
+@@ -167,7 +162,7 @@ static void ks_dw_pcie_msi_irq_unmask(st
+ 	u32 offset;
+ 
+ 	msi = irq_data_get_msi_desc(d);
+-	pp = sys_to_pcie(msi_desc_to_pci_sysdata(msi));
++	pp = (struct pcie_port *) msi_desc_to_pci_sysdata(msi);
+ 	ks_pcie = to_keystone_pcie(pp);
+ 	offset = d->irq - irq_linear_revmap(pp->irq_domain, 0);
+ 

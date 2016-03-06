@@ -14,6 +14,27 @@
 ###
 ### Stable Queue
 ###
+stable-use-d_seq-to-get-coherency-between-d_inode-and-d_flags.patch
+stable-drivers-sh-restore-legacy-clock-domain-on-superh-platforms.patch
+stable-btrfs-fix-deadlock-running-delayed-iputs-at-transaction-commit-time.patch
+stable-btrfs-fix-no_space-in-write-and-rm-loop.patch
+stable-btrfs-async-thread-fix-a-use-after-free-error-for-trace.patch
+stable-drm-amdgpu-mask-out-wc-from-bo-on-unsupported-arches.patch
+stable-block-initialize-max_dev_sectors-to-0.patch
+stable-pci-keystone-fix-msi-code-that-retrieves-struct-pcie_port-pointer.patch
+stable-parisc-fix-ptrace-syscall-number-and-return-value-modification.patch
+stable-mips-kvm-fix-ioctl-error-handling.patch
+stable-kvm-x86-update-tsc-multiplier-on-change.patch
+stable-fbcon-set-a-default-value-to-blink-interval.patch
+stable-cifs-fix-out-of-bounds-access-in-lease-parsing.patch
+stable-cifs-fix-smb2-interim-response-processing-for-read-requests.patch
+stable-fix-cifs_uniqueid_to_ino_t-function-for-s390x.patch
+stable-vfio-fix-ioctl-error-handling.patch
+stable-kvm-x86-fix-root-cause-for-missed-hardware-breakpoints.patch
+stable-arm-arm64-kvm-fix-ioctl-error-handling.patch
+stable-iommu-amd-apply-workaround-for-ats-write-permission-check.patch
+stable-iommu-amd-fix-boot-warning-when-device-00-00.0-is-not-iommu-covered.patch
+stable-iommu-vt-d-use-bus_notify_removed_device-in-hotplug-path.patch
 
 ###
 ### Arch x86
@@ -121,6 +142,14 @@ block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch
 
 # ahci ids
 ahci-add-new-Intel-device-IDs.patch
+ata-Adding-Intel-Lewisburg-device-IDs-for-SATA.patch
+
+# fix unwanted automounting of partitions
+ata-ahci-don-t-mark-HotPlugCapable-Ports-as-external.patch
+
+# libata fixes
+libata-Align-ata_device-s-id-on-a-cacheline.patch
+libata-fix-HDIO_GET_32BIT-ioctl.patch
 
 ###
 ### File-system
@@ -131,15 +160,7 @@ fs-aufs-4.4.patch
 fs-aufs-4.4-modular.patch
 
 # ovl fixes
-fs-ovl-allow-zero-size-xattr.patch
-fs-ovl-use-a-minimal-buffer-in-ovl_copy_xattr.patch
 fs-ovl-move-super-block-magic-number-to-magic.h.patch
-fs-ovl-root-copy-attr.patch
-fs-ovl-setattr-check-permissions-before-copy-up.patch
-fs-ovl-check-dentry-positiveness-in-ovl_cleanup_whiteou.patch
-
-# xfs trace fix (mga#17489)
-fs-xfs-Revert-xfs-clear-PF_NOFREEZE-for-xfsaild-kthread.patch
 
 ###
 ### FireWire
@@ -199,13 +220,6 @@ gpu-drm-0109-drm-vc4-Add-an-interface-for-capturing-the-GPU-state.patch
 # radeon breakage fixes
 gpu-drm-radeon-Update-radeon_get_vblank_counter_kms.patch
 gpu-drm-radeon-Drop-unnecessary-unsigned-int-0-check.patch
-
-# vblank fixes
-gpu-drm-No-Op-redundant-calls-to-drm_vblank_off-v2.patch
-gpu-drm-Prevent-vblank-counter-bumps-1-with-active-vblank-clients-v2.patch
-gpu-drm-Fix-drm_vblank_pre_post_modeset-regression-from-Linux-4.4.patch
-gpu-drm-Fix-treatment-of-drm_vblank_offdelay-in-drm_vblank_on-v2.patch
-gpu-drm_nouveau_display-Enable-vblank-irqs-after-display-engine-is-on-again.patch
 
 ###
 ### Hardware Monitoring
@@ -401,4 +415,8 @@ arm-0032-ARM-bcm2835-enable-auxiliary-spi-driver-in-defconfig.patch
 
 ###
 ### Tools
+###
+
+###
+### UAPI
 ###
