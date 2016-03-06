@@ -1,0 +1,56 @@
+From 2680d6da455b636dd006636780c0f235c6561d70 Mon Sep 17 00:00:00 2001
+From: Owen Hofmann <osh@google.com>
+Date: Tue, 1 Mar 2016 13:36:13 -0800
+Subject: kvm: x86: Update tsc multiplier on change.
+
+From: Owen Hofmann <osh@google.com>
+
+commit 2680d6da455b636dd006636780c0f235c6561d70 upstream.
+
+vmx.c writes the TSC_MULTIPLIER field in vmx_vcpu_load, but only when a
+vcpu has migrated physical cpus. Record the last value written and
+update in vmx_vcpu_load on any change, otherwise a cpu migration must
+occur for TSC frequency scaling to take effect.
+
+Fixes: ff2c3a1803775cc72dc6f624b59554956396b0ee
+Signed-off-by: Owen Hofmann <osh@google.com>
+Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ arch/x86/kvm/vmx.c |   14 +++++++++-----
+ 1 file changed, 9 insertions(+), 5 deletions(-)
+
+--- a/arch/x86/kvm/vmx.c
++++ b/arch/x86/kvm/vmx.c
+@@ -595,6 +595,8 @@ struct vcpu_vmx {
+ 	/* Support for PML */
+ #define PML_ENTITY_NUM		512
+ 	struct page *pml_pg;
++
++	u64 current_tsc_ratio;
+ };
+ 
+ enum segment_cache_field {
+@@ -2062,14 +2064,16 @@ static void vmx_vcpu_load(struct kvm_vcp
+ 		rdmsrl(MSR_IA32_SYSENTER_ESP, sysenter_esp);
+ 		vmcs_writel(HOST_IA32_SYSENTER_ESP, sysenter_esp); /* 22.2.3 */
+ 
+-		/* Setup TSC multiplier */
+-		if (cpu_has_vmx_tsc_scaling())
+-			vmcs_write64(TSC_MULTIPLIER,
+-				     vcpu->arch.tsc_scaling_ratio);
+-
+ 		vmx->loaded_vmcs->cpu = cpu;
+ 	}
+ 
++	/* Setup TSC multiplier */
++	if (kvm_has_tsc_control &&
++	    vmx->current_tsc_ratio != vcpu->arch.tsc_scaling_ratio) {
++		vmx->current_tsc_ratio = vcpu->arch.tsc_scaling_ratio;
++		vmcs_write64(TSC_MULTIPLIER, vmx->current_tsc_ratio);
++	}
++
+ 	vmx_vcpu_pi_load(vcpu, cpu);
+ }
+ 

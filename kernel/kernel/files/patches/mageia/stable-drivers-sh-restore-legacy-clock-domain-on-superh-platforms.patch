@@ -1,0 +1,39 @@
+From 0378ba4899d5fbd8494ed6580cbc81d7b44dbac6 Mon Sep 17 00:00:00 2001
+From: Geert Uytterhoeven <geert+renesas@glider.be>
+Date: Wed, 24 Feb 2016 09:43:23 +0100
+Subject: drivers: sh: Restore legacy clock domain on SuperH platforms
+
+From: Geert Uytterhoeven <geert+renesas@glider.be>
+
+commit 0378ba4899d5fbd8494ed6580cbc81d7b44dbac6 upstream.
+
+CONFIG_ARCH_SHMOBILE is not only enabled for Renesas ARM platforms
+(which are DT based and multi-platform), but also on a select set of
+Renesas SuperH platforms (SH7722/SH7723/SH7724/SH7343/SH7366). Hence
+since commit 0ba58de231066e47 ("drivers: sh: Get rid of
+CONFIG_ARCH_SHMOBILE_MULTI"), the legacy clock domain is no longer
+installed on these SuperH platforms, and module clocks may not be
+enabled when needed, leading to driver failures.
+
+To fix this, add an additional check for CONFIG_OF.
+
+Fixes: 0ba58de231066e47 ("drivers: sh: Get rid of CONFIG_ARCH_SHMOBILE_MULTI").
+Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
+Signed-off-by: Simon Horman <horms+renesas@verge.net.au>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/sh/pm_runtime.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/drivers/sh/pm_runtime.c
++++ b/drivers/sh/pm_runtime.c
+@@ -34,7 +34,7 @@ static struct pm_clk_notifier_block plat
+ 
+ static int __init sh_pm_runtime_init(void)
+ {
+-	if (IS_ENABLED(CONFIG_ARCH_SHMOBILE)) {
++	if (IS_ENABLED(CONFIG_OF) && IS_ENABLED(CONFIG_ARCH_SHMOBILE)) {
+ 		if (!of_find_compatible_node(NULL, NULL,
+ 					     "renesas,cpg-mstp-clocks"))
+ 			return 0;

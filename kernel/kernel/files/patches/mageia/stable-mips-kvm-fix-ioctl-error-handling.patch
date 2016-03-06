@@ -1,0 +1,49 @@
+From 0178fd7dcc4451fcb90bec5e91226586962478d2 Mon Sep 17 00:00:00 2001
+From: "Michael S. Tsirkin" <mst@redhat.com>
+Date: Sun, 28 Feb 2016 17:35:59 +0200
+Subject: mips/kvm: fix ioctl error handling
+
+From: Michael S. Tsirkin <mst@redhat.com>
+
+commit 0178fd7dcc4451fcb90bec5e91226586962478d2 upstream.
+
+Returning directly whatever copy_to_user(...) or copy_from_user(...)
+returns may not do the right thing if there's a pagefault:
+copy_to_user/copy_from_user return the number of bytes not copied in
+this case, but ioctls need to return -EFAULT instead.
+
+Fix up kvm on mips to do
+	return copy_to_user(...)) ?  -EFAULT : 0;
+and
+	return copy_from_user(...)) ?  -EFAULT : 0;
+
+everywhere.
+
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ arch/mips/kvm/mips.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+--- a/arch/mips/kvm/mips.c
++++ b/arch/mips/kvm/mips.c
+@@ -702,7 +702,7 @@ static int kvm_mips_get_reg(struct kvm_v
+ 	} else if ((reg->id & KVM_REG_SIZE_MASK) == KVM_REG_SIZE_U128) {
+ 		void __user *uaddr = (void __user *)(long)reg->addr;
+ 
+-		return copy_to_user(uaddr, vs, 16);
++		return copy_to_user(uaddr, vs, 16) ? -EFAULT : 0;
+ 	} else {
+ 		return -EINVAL;
+ 	}
+@@ -732,7 +732,7 @@ static int kvm_mips_set_reg(struct kvm_v
+ 	} else if ((reg->id & KVM_REG_SIZE_MASK) == KVM_REG_SIZE_U128) {
+ 		void __user *uaddr = (void __user *)(long)reg->addr;
+ 
+-		return copy_from_user(vs, uaddr, 16);
++		return copy_from_user(vs, uaddr, 16) ? -EFAULT : 0;
+ 	} else {
+ 		return -EINVAL;
+ 	}

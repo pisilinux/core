@@ -1,0 +1,63 @@
+From 1ee9f4bd1a97026a7b2d7ae9f1f74b45680d0003 Mon Sep 17 00:00:00 2001
+From: Yadan Fan <ydfan@novell.com>
+Date: Mon, 29 Feb 2016 14:44:57 +0800
+Subject: Fix cifs_uniqueid_to_ino_t() function for s390x
+
+From: Yadan Fan <ydfan@novell.com>
+
+commit 1ee9f4bd1a97026a7b2d7ae9f1f74b45680d0003 upstream.
+
+This issue is caused by commit 02323db17e3a7 ("cifs: fix
+cifs_uniqueid_to_ino_t not to ever return 0"), when BITS_PER_LONG
+is 64 on s390x, the corresponding cifs_uniqueid_to_ino_t()
+function will cast 64-bit fileid to 32-bit by using (ino_t)fileid,
+because ino_t (typdefed __kernel_ino_t) is int type.
+
+It's defined in arch/s390/include/uapi/asm/posix_types.h
+
+    #ifndef __s390x__
+
+    typedef unsigned long   __kernel_ino_t;
+    ...
+    #else /* __s390x__ */
+
+    typedef unsigned int    __kernel_ino_t;
+
+So the #ifdef condition is wrong for s390x, we can just still use
+one cifs_uniqueid_to_ino_t() function with comparing sizeof(ino_t)
+and sizeof(u64) to choose the correct execution accordingly.
+
+Signed-off-by: Yadan Fan <ydfan@suse.com>
+Signed-off-by: Steve French <smfrench@gmail.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ fs/cifs/cifsfs.h |   12 ++++--------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
+
+--- a/fs/cifs/cifsfs.h
++++ b/fs/cifs/cifsfs.h
+@@ -31,19 +31,15 @@
+  * so that it will fit. We use hash_64 to convert the value to 31 bits, and
+  * then add 1, to ensure that we don't end up with a 0 as the value.
+  */
+-#if BITS_PER_LONG == 64
+ static inline ino_t
+ cifs_uniqueid_to_ino_t(u64 fileid)
+ {
++	if ((sizeof(ino_t)) < (sizeof(u64)))
++		return (ino_t)hash_64(fileid, (sizeof(ino_t) * 8) - 1) + 1;
++
+ 	return (ino_t)fileid;
++
+ }
+-#else
+-static inline ino_t
+-cifs_uniqueid_to_ino_t(u64 fileid)
+-{
+-	return (ino_t)hash_64(fileid, (sizeof(ino_t) * 8) - 1) + 1;
+-}
+-#endif
+ 
+ extern struct file_system_type cifs_fs_type;
+ extern const struct address_space_operations cifs_addr_ops;
