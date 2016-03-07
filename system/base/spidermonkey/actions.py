@@ -8,19 +8,24 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 
-WorkDir = "mozjs%s/js/src" % get.srcVERSION()
+#WorkDir = "mozjs%s/js/src" % get.srcVERSION()
 
 def setup():
-   autotools.configure("--enable-jemalloc \
-                        --enable-readline \
+   shelltools.cd("js/src")
+   shelltools.system("sed -i 's/(defined\((@TEMPLATE_FILE)\))/\1/' config/milestone.pl ")
+   
+   autotools.configure("--prefix=/usr       \
+                        --enable-readline   \
                         --enable-threadsafe \
-                        --with-system-nspr \
-                        --enable-system-ffi ")
+                        --with-system-ffi   \
+                        --with-system-nspr")
 
 def build():
+   shelltools.cd("js/src")
     autotools.make()
 
 def install():
+   shelltools.cd("js/src")
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     pisitools.dodoc("README*")
