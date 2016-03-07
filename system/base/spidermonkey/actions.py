@@ -33,6 +33,7 @@ def install():
     pisitools.rename("/usr/lib/pkgconfig/mozjs-..pc", "mozjs-17.0.pc")
     pisitools.removeDir("/usr/include/js-.")
     pisitools.rename("/usr/lib/libmozjs-..so", "libmozjs-17.0.so")
+    pisitools.rename("/usr/lib/libmozjs-..a", "libmozjs-17.0.a")
     pisitools.rename("/usr/bin/js", "js17")
     pisitools.rename("/usr/bin/js-config", "js17-config")
     pisitools.dodoc("README*")
