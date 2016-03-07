@@ -14,6 +14,8 @@ flags = "%s -fPIC" % get.CFLAGS() if get.ARCH() == "x86_64" else get.CFLAGS()
 
 def setup():
     shelltools.export("CFLAGS", flags)
+    
+    shelltools.system("./autogen.sh")
 
     autotools.configure("--enable-nls \
                          --disable-rpath")
