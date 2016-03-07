@@ -21,11 +21,11 @@ def setup():
                         --with-system-nspr")
 
 def build():
-   shelltools.cd("js/src")
+    shelltools.cd("js/src")
     autotools.make()
 
 def install():
-   shelltools.cd("js/src")
+    shelltools.cd("js/src")
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     pisitools.dodoc("README*")
