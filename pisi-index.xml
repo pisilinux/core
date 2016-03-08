@@ -1616,7 +1616,7 @@
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.4.1.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.4.4.xz</Patch>
             </Patches>
             <SourceURI>kernel/tools/cpupowertools/pspec.xml</SourceURI>
         </Source>
@@ -1639,6 +1639,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="70">
+                <Date>2016-03-06</Date>
+                <Version>4.4.4</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="69">
                 <Date>2016-02-03</Date>
                 <Version>4.4.1</Version>
@@ -2318,7 +2325,7 @@
             <Description xml:lang="en">This package provides the kernel support for VirtualBox.</Description>
             <Archive type="tarxz" sha1sum="19662922a8a696fe0eb37184024712a781d06a73">http://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-5.0.12.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.4.1">kernel-module-headers</Dependency>
+                <Dependency version="4.4.4">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -2328,7 +2335,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.4.1">kernel</Dependency>
+                <Dependency version="4.4.4">kernel</Dependency>
                 <Dependency version="5.0.12">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -2350,6 +2357,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="63">
+                <Date>2016-03-07</Date>
+                <Version>5.0.12</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="62">
                 <Date>2016-02-03</Date>
                 <Version>5.0.12</Version>
@@ -2825,7 +2839,7 @@
                 <AdditionalFile target="kernel-4.2.patch">kernel-4.2.patch</AdditionalFile>
             </AdditionalFiles>
             <BuildDependencies>
-                <Dependency version="4.4.1">kernel-module-headers</Dependency>
+                <Dependency version="4.4.4">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch>support_kernel-4.0.patch</Patch>
@@ -2838,7 +2852,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.4.1">kernel</Dependency>
+                <Dependency version="4.4.4">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2850,6 +2864,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="13">
+                <Date>2016-03-07</Date>
+                <Version>1.59</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="12">
                 <Date>2016-02-03</Date>
                 <Version>1.59</Version>
@@ -2953,14 +2974,14 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.4.1">kernel-module-headers</Dependency>
+                <Dependency version="4.4.4">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-bbswitch/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="4.4.1">kernel</Dependency>
+                <Dependency version="4.4.4">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -2973,6 +2994,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="38">
+                <Date>2016-03-07</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="37">
                 <Date>2016-02-03</Date>
                 <Version>0.8</Version>
@@ -3265,7 +3293,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
             <Archive type="tarxz" sha1sum="4fee388ca9ce5ab342f11edcc0631a694029665b">http://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-5.0.12.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.4.1">kernel-module-headers</Dependency>
+                <Dependency version="4.4.4">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -3275,7 +3303,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.4.1">kernel</Dependency>
+                <Dependency version="4.4.4">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
                 <Dependency version="5.0.12">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
@@ -3302,6 +3330,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="61">
+                <Date>2016-03-07</Date>
+                <Version>5.0.12</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="60">
                 <Date>2016-02-03</Date>
                 <Version>5.0.12</Version>
@@ -3749,7 +3784,7 @@
             <Archive type="targz" sha1sum="e02beac9cc713011551c483ae5f20f065f5b88c7" target="i686">http://www.broadcom.com/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <Archive type="targz" sha1sum="bd55f1fdc6b0a4d0a70dc4ba4bb4169a824e238c" target="x86_64">http://www.broadcom.com/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.4.1">kernel-module-headers</Dependency>
+                <Dependency version="4.4.4">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">patch/linux-40.patch</Patch>
@@ -3768,8 +3803,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.4.1">kernel</Dependency>
-                <Dependency release="58">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="4.4.4">kernel</Dependency>
+                <Dependency release="59">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -3796,6 +3831,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="59">
+                <Date>2016-03-07</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="58">
                 <Date>2016-02-03</Date>
                 <Version>6.30.223.248</Version>
@@ -5056,7 +5098,7 @@
             <PartOf>system.base</PartOf>
             <Summary xml:lang="en">Library for some string essentials</Summary>
             <Description xml:lang="en">libestr - some essentials for string handling (and a bit more)</Description>
-            <Archive type="targz" sha1sum="55fb6ad347f987c45d98b422b0436d6ae50d86aa">http://libestr.adiscon.com/files/download/libestr-0.1.9.tar.gz</Archive>
+            <Archive type="targz" sha1sum="35cc717f5ae737a28140dd1472e13ce2ec317c6c">http://libestr.adiscon.com/files/download/libestr-0.1.10.tar.gz</Archive>
             <SourceURI>system/base/libestr/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -5071,7 +5113,7 @@
             <Summary xml:lang="en">Development files for libestr</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="3">libestr</Dependency>
+                <Dependency release="4">libestr</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/libestr.h</Path>
@@ -5079,6 +5121,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-03-08</Date>
+                <Version>0.1.10</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-11</Date>
                 <Version>0.1.9</Version>
@@ -5292,7 +5341,7 @@
             <Summary xml:lang="tr">Genel amaçlı bir şifreleme kitaplığı</Summary>
             <Description xml:lang="en">Libgcrypt is a general purpose crypto library based on the code used in GNU Privacy Guard.</Description>
             <Description xml:lang="tr">Libgcrypt, GNU Privacy Guard kodunu temel alan genel amaçlı bir şifreleme kitaplığıdır.</Description>
-            <Archive type="tarbz2" sha1sum="9456e7b64db9df8360a1407a38c8c958da80bbf1">http://source.pisilinux.org/1.0/libgcrypt-1.6.3.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="c3a5a13e717f7b3e3895650afc1b6e0d3fe9c726">https://www.gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.6.5.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>libgpg-error-devel</Dependency>
             </BuildDependencies>
@@ -5318,7 +5367,7 @@
             <Summary xml:lang="tr">libgcrypt için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="4">libgcrypt</Dependency>
+                <Dependency release="5">libgcrypt</Dependency>
                 <Dependency>libgpg-error-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -5342,13 +5391,20 @@
             <RuntimeDependencies>
                 <Dependency>libgpg-error-32bit</Dependency>
                 <Dependency>glibc-32bit</Dependency>
-                <Dependency release="4">libgcrypt</Dependency>
+                <Dependency release="5">libgcrypt</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-08</Date>
+                <Version>1.6.5</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="4">
                 <Date>2015-04-13</Date>
                 <Version>1.6.3</Version>
@@ -5745,7 +5801,7 @@
             <Summary xml:lang="tr">popt için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="2">popt</Dependency>
+                <Dependency release="3">popt</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/popt.h</Path>
@@ -5754,6 +5810,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2016-03-08</Date>
+                <Version>1.16</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2014-05-11</Date>
                 <Version>1.16</Version>
@@ -6554,6 +6617,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-03-06</Date>
+                <Version>0.7.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2016-01-10</Date>
                 <Version>0.7.1</Version>
@@ -6784,7 +6854,7 @@
             <Summary xml:lang="tr">Geleneksel --help çıktılarını man sayfalarına dönüştüren bir GNU yazılımı</Summary>
             <Description xml:lang="en">Help2man is a tool which generate man page from help text of programs.</Description>
             <Description xml:lang="tr">Help2man programların help çıktılarını man sayfalarına dönüştüren bir araçtır.</Description>
-            <Archive type="tarxz" sha1sum="7eebb6ead072b19863f28acca051bc3e3c40fdf9">http://ftp.gnu.org/gnu/help2man/help2man-1.46.4.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="eec547bc2832d47a23437b680232339862d8ca4c">http://ftp.gnu.org/gnu/help2man/help2man-1.47.3.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>perl-Locale-gettext</Dependency>
             </BuildDependencies>
@@ -6805,6 +6875,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-08</Date>
+                <Version>1.47.3</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="4">
                 <Date>2015-02-12</Date>
                 <Version>1.46.4</Version>
@@ -7324,7 +7401,7 @@
             <Summary xml:lang="tr">json-c için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="5">json-c</Dependency>
+                <Dependency release="6">json-c</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -7345,6 +7422,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-03-08</Date>
+                <Version>0.12</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="5">
                 <Date>2015-04-30</Date>
                 <Version>0.12</Version>
@@ -7960,7 +8044,7 @@
             <Summary xml:lang="en">D-Bus Python bindings</Summary>
             <Summary xml:lang="tr">D-Bus için Python bağlayıcıları</Summary>
             <Description xml:lang="en">dbus-python provides a Python module which wraps the D-Bus programming API.</Description>
-            <Archive type="targz" sha1sum="7a00f7861d26683ab7e3f4418860bd426deed9b5">http://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="078a76d760ba649991b0ac0ae2eaeda41c00ca5b">https://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.4.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>python-devel</Dependency>
                 <Dependency>dbus-devel</Dependency>
@@ -7979,7 +8063,7 @@
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
                 <Dependency>dbus-devel</Dependency>
-                <Dependency release="7">dbus-python</Dependency>
+                <Dependency release="8">dbus-python</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -8000,6 +8084,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2016-03-08</Date>
+                <Version>1.2.4</Version>
+                <Comment>Version Bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="7">
                 <Date>2016-01-23</Date>
                 <Version>1.2.0</Version>
@@ -8309,6 +8400,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="17">
+                <Date>2016-03-06</Date>
+                <Version>3.10.0</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="16">
                 <Date>2016-01-16</Date>
                 <Version>3.10.0</Version>
@@ -9315,7 +9413,7 @@
             <Summary xml:lang="tr">spidermonkey için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="8">spidermonkey</Dependency>
+                <Dependency release="9">spidermonkey</Dependency>
                 <Dependency>nspr-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -9325,6 +9423,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2016-03-06</Date>
+                <Version>17.0.0</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2015-05-08</Date>
                 <Version>17.0.0</Version>
@@ -9577,6 +9682,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-03-08</Date>
+                <Version>1.22.3</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="6">
                 <Date>2015-04-02</Date>
                 <Version>1.22.3</Version>
@@ -10027,6 +10139,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2016-03-08</Date>
+                <Version>2.0.3</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="8">
                 <Date>2015-08-25</Date>
                 <Version>2.0.3</Version>
@@ -13389,7 +13508,7 @@
             <Description xml:lang="en">Netscape Portable Runtime (NSPR) provides a platform-neutral API for system level and libc like functions. The API is used in the Mozilla client, many of Netscape/AOL/iPlanet&apos;s and other software offerings.</Description>
             <Description xml:lang="tr">Netscape Taşınabilir çalışma Zamanı (NSPR) sistem seviyesindeki libc ve benzeri fonksiyonlar için platform bağımsız bir programlama arayüzü sunar. Bu arayüz, Mozilla istemcilerinde, Netscape/AOL/iPlanet&apos;in diğer yazılımlarında kullanılmaktadır.</Description>
             <Description xml:lang="es">Netscape Portable Runtime (NSPR) provee un API independiente de la plataforma a nivel de sistema y funciones como libc. El API está usado en el cliente Mozilla, y muchos otros software de Netscape/AOL/iPlanet.</Description>
-            <Archive type="targz" sha1sum="d90b61d96248577a551bd322199dfa2438941661">https://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v4.10.10/src/nspr-4.10.10.tar.gz</Archive>
+            <Archive type="targz" sha1sum="14fb67a0e686a5c662f92e7f59dfd10053f327dd">https://ftp.mozilla.org/pub/nspr/releases/v4.12/src/nspr-4.12.tar.gz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="nspr/config/nspr.pc.in">nspr.pc.in</AdditionalFile>
                 <AdditionalFile target="generate-pc-config.sh" permission="0755">generate-pc-config.sh</AdditionalFile>
@@ -13408,7 +13527,7 @@
             <Summary xml:lang="tr">nspr için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="11">nspr</Dependency>
+                <Dependency release="13">nspr</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13417,6 +13536,20 @@
             </Files>
         </Package>
         <History>
+            <Update release="13">
+                <Date>2016-03-06</Date>
+                <Version>4.12</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ayhan Yalçınsoy</Name>
+                <Email>ayhanyalcinsoy@pisilinux.org</Email>
+            </Update>
+            <Update release="12">
+                <Date>2016-03-06</Date>
+                <Version>4.10.10</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="11">
                 <Date>2015-11-08</Date>
                 <Version>4.10.10</Version>
@@ -14210,7 +14343,7 @@
             <Summary xml:lang="en">Development files for libestr</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="3">libee</Dependency>
+                <Dependency release="4">libee</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/libee</Path>
@@ -14218,6 +14351,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-03-08</Date>
+                <Version>0.4.1</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-11</Date>
                 <Version>0.4.1</Version>
@@ -14269,6 +14409,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-03-07</Date>
+                <Version>1.24.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2016-01-29</Date>
                 <Version>1.24.1</Version>
@@ -14524,6 +14671,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2016-03-08</Date>
+                <Version>6.10.1</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="9">
                 <Date>2016-01-28</Date>
                 <Version>6.10.1</Version>
@@ -15208,7 +15362,7 @@
             <Description xml:lang="en">Userspace setup tool for transparent encryption of block devices using dm-crypt</Description>
             <Description xml:lang="tr">cryptsetup device mapper kullanarak şifrelenmiş dosya sistemleri yaratmak için gerekli bir araçtır.</Description>
             <Icon>cryptsetup</Icon>
-            <Archive type="tarxz" sha1sum="d2afa5b9d974404f9f5ca15cf6b4f018dde65169">https://www.kernel.org/pub/linux/utils/cryptsetup/v1.7/cryptsetup-1.7.0.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="0299b944441bc6665bce5f1dce6b9d6daf529bec">https://www.kernel.org/pub/linux/utils/cryptsetup/v1.7/cryptsetup-1.7.1.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency versionFrom="2.02.118">device-mapper-devel</Dependency>
                 <Dependency>libgpg-error-devel</Dependency>
@@ -15224,7 +15378,7 @@
             <Name>cryptsetup</Name>
             <PartOf>util.crypt</PartOf>
             <RuntimeDependencies>
-                <Dependency version="1.7.0">libcryptsetup</Dependency>
+                <Dependency version="1.7.1">libcryptsetup</Dependency>
                 <Dependency>popt</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -15255,7 +15409,7 @@
             <Summary xml:lang="tr">libcryptsetup için geliştirme dosyaları</Summary>
             <PartOf>programming.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency version="1.7.0">libcryptsetup</Dependency>
+                <Dependency version="1.7.1">libcryptsetup</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -15269,13 +15423,20 @@
             <PartOf>programming.language.python</PartOf>
             <RuntimeDependencies>
                 <Dependency>python</Dependency>
-                <Dependency version="1.7.0">libcryptsetup</Dependency>
+                <Dependency version="1.7.1">libcryptsetup</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib/python2.7/site-packages/pycryptsetup.so</Path>
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2016-03-08</Date>
+                <Version>1.7.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="8">
                 <Date>2016-01-28</Date>
                 <Version>1.7.0</Version>
@@ -15352,7 +15513,7 @@
             <Description xml:lang="fr">GNU Libidn est une implémentation de Stringprep, Punycode et des spécifications IDNA définies par le groupe de travail Internationalized Domain Names (IDN) de l&apos;IETF servant pour les noms de domaines internationalisés. La librairie C est disponible sous la Licence Publique Générale Lesser.</Description>
             <Description xml:lang="en">GNU Libidn is an implementation of the Stringprep, Punycode and IDNA specifications defined by the IETF Internationalized Domain Names (IDN) working group, used for internationalized domain names. The C library is available under the GNU Lesser General Public License.</Description>
             <Description xml:lang="tr">GNU Libidn, IETF Uluslararasılaştırılmış Domain Adları (IDN) çalışma grubu tarafından tanımlanmış Stringgrep, Punycode ve IDNA tariflerinin bir uygulamasıdır, uluslararası domain adlarının kullanımına olanak sağlar. C kütüphanesi GNU Lesser General Public License altında sağlanabilir.</Description>
-            <Archive type="targz" sha1sum="725587211b229c156e29fa2ad116b0ef71a7ca17">http://ftp.gnu.org/gnu/libidn/libidn-1.28.tar.gz</Archive>
+            <Archive type="targz" sha1sum="ddd018611b98af7c67d434aa42d15d39f45129f5">http://ftp.gnu.org/gnu/libidn/libidn-1.32.tar.gz</Archive>
             <SourceURI>system/base/libidn/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -15373,7 +15534,7 @@
             <Summary xml:lang="tr">libidn için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="4">libidn</Dependency>
+                <Dependency release="5">libidn</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -15393,13 +15554,20 @@
             </BuildDependencies>
             <RuntimeDependencies>
                 <Dependency>glibc-32bit</Dependency>
-                <Dependency release="4">libidn</Dependency>
+                <Dependency release="5">libidn</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32/libidn*</Path>
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-08</Date>
+                <Version>1.32</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-05-11</Date>
                 <Version>1.28</Version>
@@ -18761,7 +18929,7 @@
             <Summary xml:lang="tr">GnuPG bileşenlerinin kullandığı hata değerleri için kitaplık</Summary>
             <Description xml:lang="en">libgpg-error is a library that defines common error values for all GnuPG components.</Description>
             <Description xml:lang="tr">libgpg-error, tüm GnuPG bileşenleri için ortak olan hata değerlerini tanımlayan bir kitaplıktır.</Description>
-            <Archive type="tarbz2" sha1sum="4997951ab058788de48b989013668eb3df1e6939">ftp://ftp.gnupg.org/gcrypt/libgpg-error/libgpg-error-1.19.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="ef1dfb2f8761f019091180596e9e638d8cc37513">ftp://ftp.gnupg.org/gcrypt/libgpg-error/libgpg-error-1.21.tar.bz2</Archive>
             <SourceURI>system/base/libgpg-error/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -18781,7 +18949,7 @@
             <Summary xml:lang="tr">libgpg-error için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="4">libgpg-error</Dependency>
+                <Dependency release="5">libgpg-error</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin/gpg-error-config</Path>
@@ -18801,7 +18969,7 @@
                 <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="4">libgpg-error</Dependency>
+                <Dependency release="5">libgpg-error</Dependency>
                 <Dependency>glibc-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -18809,6 +18977,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-08</Date>
+                <Version>1.21</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="4">
                 <Date>2015-04-13</Date>
                 <Version>1.19</Version>
@@ -19942,6 +20117,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-03-06</Date>
+                <Version>2.44</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2015-06-07</Date>
                 <Version>2.44</Version>
@@ -22192,7 +22374,7 @@
             <Summary xml:lang="tr">Bir çok sentaks ve mimari destekleyen Assembler</Summary>
             <Description xml:lang="en">A complete rewrite of the NASM assembler under the &quot;new&quot; BSD License. Yasm currently supports the x86 and AMD64 instruction sets, accepts NASM and GAS assembler syntaxes, outputs binary, ELF32, ELF64, 32 and 64-bit Mach-O, RDOFF2, COFF, Win32, and Win64 object formats and generates source debugging information in STABS, DWARF 2, and CodeView? 8 formats.</Description>
             <Description xml:lang="tr">NASM Assembler programının yeni BSD lisansı ile baştan yazılmış bir Assembler. En önemli özellikleri x86 ve AMD64 komutsetlerini, NASM ve GAS sentaksını desteklemesidir. İkilik, ELF32, ELF64, 32 ve 64-bit Mach-O, RDOFF2, COFF, Win32 ve Win64 obje formatlarında çıktı üretebilir, hata ayıklamak için STABS, DWARF 2 ve CodeView? 8 formatlarını desteklemektedir.</Description>
-            <Archive type="targz" sha1sum="773d28f27f83c44ac35079add0d3167ca6c1def8">http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="7a22f4fdb65941afbfdbda322698153a9e8b1c05">https://github.com/yasm/yasm/archive/v1.3.0.tar.gz</Archive>
             <SourceURI>system/devel/yasm/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -22209,7 +22391,7 @@
             <Summary xml:lang="en">Development files for yasm</Summary>
             <Summary xml:lang="tr">yasm için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="3">yasm</Dependency>
+                <Dependency release="4">yasm</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -22217,6 +22399,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-03-07</Date>
+                <Version>1.3.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-11</Date>
                 <Version>1.2.0</Version>
@@ -23579,6 +23768,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-03-07</Date>
+                <Version>2.0.4</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2015-06-19</Date>
                 <Version>2.0.4</Version>
