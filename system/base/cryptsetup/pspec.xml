@@ -13,7 +13,7 @@
         <IsA>app:cli</IsA>
         <Summary>Userspace setup tool for transparent encryption of block devices using dm-crypt</Summary>
         <Description>Userspace setup tool for transparent encryption of block devices using dm-crypt</Description>
-        <Archive sha1sum="d2afa5b9d974404f9f5ca15cf6b4f018dde65169" type="tarxz">https://www.kernel.org/pub/linux/utils/cryptsetup/v1.7/cryptsetup-1.7.0.tar.xz</Archive>
+        <Archive sha1sum="0299b944441bc6665bce5f1dce6b9d6daf529bec" type="tarxz">https://www.kernel.org/pub/linux/utils/cryptsetup/v1.7/cryptsetup-1.7.1.tar.xz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="2.02.118">device-mapper-devel</Dependency>
             <Dependency>libgpg-error-devel</Dependency>
@@ -82,6 +82,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2016-03-08</Date>
+            <Version>1.7.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="8">
             <Date>2016-01-28</Date>
             <Version>1.7.0</Version>
