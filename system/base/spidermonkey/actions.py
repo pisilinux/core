@@ -28,12 +28,7 @@ def install():
     shelltools.cd("js/src")
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
    
-    pisitools.dodir("/usr/include/js-17.0")
-    pisitools.domove("/usr/include/js-./*", "/usr/include/js-17.0")
+    #for polkit
     pisitools.rename("/usr/lib/pkgconfig/mozjs-..pc", "mozjs-17.0.pc")
-    pisitools.removeDir("/usr/include/js-.")
-    pisitools.rename("/usr/lib/libmozjs-..so", "libmozjs-17.0.so")
-    pisitools.rename("/usr/lib/libmozjs-..a", "libmozjs-17.0.a")
-    pisitools.rename("/usr/bin/js", "js17")
-    pisitools.rename("/usr/bin/js-config", "js17-config")
+    pisitools.remove("usr/lib/libmozjs-..a")
     pisitools.dodoc("README*")
