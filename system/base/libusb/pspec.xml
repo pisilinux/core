@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Userspace access to USB devices</Summary>
         <Description>Project's main aim is to create a library for use by user level applications to access USB devices regardless of OS.</Description>
-        <Archive sha1sum="c5d14ced155233ceeb5107c7eb3b94b16649ae05" type="tarbz2">http://downloads.sourceforge.net/project/libusb/libusb-1.0/libusb-1.0.19/libusb-1.0.19.tar.bz2</Archive>
+        <Archive sha1sum="9537243f165927bde74ad742e6b3effb0bd50cd2" type="tarbz2">https://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.20/libusb-1.0.20.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>eudev-devel</Dependency>
         </BuildDependencies>
@@ -69,6 +69,7 @@
         <BuildType>emul32</BuildType>
         <BuildDependencies>
             <Dependency>glibc-32bit</Dependency>
+            <Dependency>eudev-32bit</Dependency>
         </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">libusb</Dependency>
@@ -81,6 +82,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2016-03-08</Date>
+            <Version>1.0.20</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="7">
             <Date>2014-04-30</Date>
             <Version>1.0.19</Version>
