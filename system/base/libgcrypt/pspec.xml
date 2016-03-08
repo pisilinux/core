@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>General purpose crypto library</Summary>
         <Description>Libgcrypt is a general purpose crypto library based on the code used in GNU Privacy Guard.</Description>
-        <Archive sha1sum="9456e7b64db9df8360a1407a38c8c958da80bbf1" type="tarbz2">http://source.pisilinux.org/1.0/libgcrypt-1.6.3.tar.bz2</Archive>
+        <Archive sha1sum="c3a5a13e717f7b3e3895650afc1b6e0d3fe9c726" type="tarbz2">https://www.gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.6.5.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>libgpg-error-devel</Dependency>
         </BuildDependencies>
@@ -70,6 +70,13 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2016-03-08</Date>
+            <Version>1.6.5</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="4">
             <Date>2015-04-13</Date>
             <Version>1.6.3</Version>
