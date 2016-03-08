@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>A user and group account administration library</Summary>
         <Description>libuser implements a standardized interface for manipulating and administering user and group accounts. The library uses pluggable back-ends to interface to its data sources.</Description>
-        <Archive sha1sum="78e81c5ac033921e1abb9f93bc6bfa96d6a11ef6" type="tarxz">https://fedorahosted.org/releases/l/i/libuser/libuser-0.61.tar.xz</Archive>
+        <Archive sha1sum="e0fe60dd38f3b5777d0a4ad664725eddd18ef310" type="tarxz">https://fedorahosted.org/releases/l/i/libuser/libuser-0.62.tar.xz</Archive>
         <BuildDependencies>
                 <Dependency>pam-devel</Dependency>
                 <Dependency>popt-devel</Dependency>
@@ -76,6 +76,13 @@
     </Package>
 
     <History>
+        <Update release="7">
+            <Date>2016-03-08</Date>
+            <Version>0.62</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="6">
             <Date>2015-04-07</Date>
             <Version>0.61</Version>
