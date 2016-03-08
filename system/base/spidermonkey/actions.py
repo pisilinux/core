@@ -31,4 +31,8 @@ def install():
     #for polkit
     pisitools.rename("/usr/lib/pkgconfig/mozjs-..pc", "mozjs-17.0.pc")
     pisitools.remove("usr/lib/libmozjs-..a")
+    
     pisitools.dodoc("README*")
+    
+    # add link for polkit
+    pisitools.dosym("/usr/lib/libmozjs-..so", "/usr/lib/libmozjs-17.0.so")
