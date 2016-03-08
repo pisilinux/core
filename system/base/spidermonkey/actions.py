@@ -25,7 +25,6 @@ def build():
     autotools.make()
 
 def install():
-    def install():
     shelltools.cd("js/src")
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
    
