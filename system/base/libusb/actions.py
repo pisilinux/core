@@ -11,10 +11,9 @@ from pisi.actionsapi import get
 def setup():
     autotools.configure("--disable-static \
                          --enable-udev")
-    
 
 def build():
-    autotools.make()
+    autotools.make("-j1")
 
 def check():
     autotools.make("check")
