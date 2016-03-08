@@ -21,6 +21,8 @@ def setup():
                          --disable-gtk-doc")
     
     pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
+    
+    shelltools.system("sed -i 's/SUBDIRS = po docs/SUBDIRS = po/' Makefile")
 
 def build():
     autotools.make()
@@ -30,6 +32,4 @@ def build():
 def install():
     autotools.rawInstall("DESTDIR='%s'" % get.installDIR())
     
-    pisitools.removeDir("/usr/share/gtk-doc")
-
     pisitools.dodoc("ABOUT*", "AUTHORS", "COPYING", "NEWS", "README")
