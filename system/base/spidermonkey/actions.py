@@ -35,4 +35,4 @@ def install():
     pisitools.dodoc("README*")
     
     # add link for polkit
-    pisitools.dosym("/usr/lib/libmozjs-..so", "/usr/lib/libmozjs-17.0.so")
+    pisitools.dosym("libmozjs-..so", "/usr/lib/libmozjs-17.0.so")
