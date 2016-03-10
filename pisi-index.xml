@@ -5048,6 +5048,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-03-09</Date>
+                <Version>1.0.2</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2015-07-22</Date>
                 <Version>1.0.2</Version>
@@ -6006,6 +6013,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2016-03-09</Date>
+                <Version>4.04</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="10">
                 <Date>2016-01-03</Date>
                 <Version>4.04</Version>
@@ -6117,7 +6131,7 @@
             <Summary xml:lang="tr">sysfsutils için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="3">sysfsutils</Dependency>
+                <Dependency release="4">sysfsutils</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -6125,6 +6139,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-03-06</Date>
+                <Version>2.1.0</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-11</Date>
                 <Version>2.1.0</Version>
@@ -6223,7 +6244,7 @@
             <Summary xml:lang="tr">SSH2 protokolü için kütüphane</Summary>
             <Description xml:lang="en">libssh2 is a library implementing the SSH2 protocol as defined by Internet Drafts: SECSH-TRANS, SECSH-USERAUTH, SECSH-CONNECTION, SECSH-ARCH, SECSH-FILEXFER, SECSH-DHGEX, SECSH-NUMBERS, and SECSH-PUBLICKEY.</Description>
             <Description xml:lang="tr">libssh2, SECSH-TRANS, SECSH-USERAUTH, SECSH-CONNECTION, SECSH-ARCH, SECSH-FILEXFER, SECSH-DHGEX, SECSH-NUMBERS ve SECSH-PUBLICKEY gibi Internet Taslakları tarafından belirlenen SSH2 protokolü için geliştirilmiş bir kütüphanedir.</Description>
-            <Archive type="targz" sha1sum="c27ca83e1ffeeac03be98b6eef54448701e044b0">http://www.libssh2.org/download/libssh2-1.4.3.tar.gz</Archive>
+            <Archive type="targz" sha1sum="02fef9bdafce3da466b36581a4ff53d519637aca">https://www.libssh2.org/download/libssh2-1.7.0.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>openssl-devel</Dependency>
                 <Dependency>zlib-devel</Dependency>
@@ -6247,7 +6268,7 @@
             <Summary xml:lang="tr">libssh2 için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="3">libssh2</Dependency>
+                <Dependency release="4">libssh2</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -6256,6 +6277,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-03-08</Date>
+                <Version>1.7.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-11</Date>
                 <Version>1.4.3</Version>
@@ -6478,7 +6506,7 @@
         </Package>
         <History>
             <Update release="6">
-                <Date>2016-03-03</Date>
+                <Date>2016-03-10</Date>
                 <Version>0.104</Version>
                 <Comment>Rebuild with new toolchain.</Comment>
                 <Name>Alihan Öztürk</Name>
@@ -6706,6 +6734,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-09</Date>
+                <Version>018</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-05-11</Date>
                 <Version>018</Version>
@@ -6951,7 +6986,7 @@
             <Summary xml:lang="tr">polkit geliştirme başlıkları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="8">polkit</Dependency>
+                <Dependency release="9">polkit</Dependency>
                 <Dependency>glib2-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -6993,6 +7028,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2016-03-09</Date>
+                <Version>0.113</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2015-07-21</Date>
                 <Version>0.113</Version>
@@ -8085,7 +8127,7 @@
         </Package>
         <History>
             <Update release="8">
-                <Date>2016-03-08</Date>
+                <Date>2016-03-10</Date>
                 <Version>1.2.4</Version>
                 <Comment>Version Bump.</Comment>
                 <Name>Alihan Öztürk</Name>
@@ -8543,6 +8585,7 @@
             </BuildDependencies>
             <Patches>
                 <Patch>tr.patch</Patch>
+                <Patch level="1">mingetty-utf8.patch</Patch>
             </Patches>
             <SourceURI>system/base/mingetty/pspec.xml</SourceURI>
         </Source>
@@ -8559,6 +8602,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-03-09</Date>
+                <Version>1.0.8</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-11</Date>
                 <Version>1.0.8</Version>
@@ -8954,7 +9004,7 @@
             <Summary xml:lang="tr">glib2 için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="15">glib2</Dependency>
+                <Dependency release="16">glib2</Dependency>
                 <Dependency>libpcre-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -8997,7 +9047,7 @@
                 <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="15">glib2</Dependency>
+                <Dependency release="16">glib2</Dependency>
                 <Dependency>libpcre-32bit</Dependency>
                 <Dependency>zlib-32bit</Dependency>
                 <Dependency>libffi-32bit</Dependency>
@@ -9021,6 +9071,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="16">
+                <Date>2016-03-10</Date>
+                <Version>2.46.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="15">
                 <Date>2016-01-25</Date>
                 <Version>2.46.2</Version>
@@ -9766,6 +9823,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2016-03-09</Date>
+                <Version>4.2.4.4</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2014-05-11</Date>
                 <Version>4.2.4.4</Version>
@@ -10978,6 +11042,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-03-09</Date>
+                <Version>1.60</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-11</Date>
                 <Version>1.60</Version>
@@ -11111,7 +11182,7 @@
             <PartOf>system.base</PartOf>
             <Summary xml:lang="en">Userspace access to USB devices</Summary>
             <Description xml:lang="en">Project&apos;s main aim is to create a library for use by user level applications to access USB devices regardless of OS.</Description>
-            <Archive type="tarbz2" sha1sum="c5d14ced155233ceeb5107c7eb3b94b16649ae05">http://downloads.sourceforge.net/project/libusb/libusb-1.0/libusb-1.0.19/libusb-1.0.19.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="9537243f165927bde74ad742e6b3effb0bd50cd2">https://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.20/libusb-1.0.20.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>eudev-devel</Dependency>
             </BuildDependencies>
@@ -11139,7 +11210,7 @@
             <Summary xml:lang="en">Development files for libusb</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="7">libusb</Dependency>
+                <Dependency release="8">libusb</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -11160,9 +11231,10 @@
             <BuildType>emul32</BuildType>
             <BuildDependencies>
                 <Dependency>glibc-32bit</Dependency>
+                <Dependency>eudev-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="7">libusb</Dependency>
+                <Dependency release="8">libusb</Dependency>
                 <Dependency>eudev-32bit</Dependency>
                 <Dependency>glibc-32bit</Dependency>
             </RuntimeDependencies>
@@ -11177,6 +11249,13 @@
             </Replaces>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2016-03-08</Date>
+                <Version>1.0.20</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="7">
                 <Date>2014-04-30</Date>
                 <Version>1.0.19</Version>
@@ -11242,7 +11321,7 @@
             <PartOf>system.base</PartOf>
             <Summary xml:lang="en">Easy to use, portable, open source library for system logging</Summary>
             <Description xml:lang="en">Liblogging offers an enhanced replacement for the syslog() call, but retains its ease of use.</Description>
-            <Archive type="targz" sha1sum="eb9ffea9536517d68e979ffadf23952831756d2a">http://download.rsyslog.com/liblogging/liblogging-1.0.3.tar.gz</Archive>
+            <Archive type="targz" sha1sum="e202bf9412747ecd384678e8b3024a4646d45c2f">http://download.rsyslog.com/liblogging/liblogging-1.0.5.tar.gz</Archive>
             <SourceURI>system/base/liblogging/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -11259,7 +11338,7 @@
             <Summary xml:lang="en">Development files for liblogging</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="2">liblogging</Dependency>
+                <Dependency release="3">liblogging</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/liblogging/stdlog.h</Path>
@@ -11267,6 +11346,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2016-03-08</Date>
+                <Version>1.0.5</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2014-05-11</Date>
                 <Version>1.0.3</Version>
@@ -11465,6 +11551,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-09</Date>
+                <Version>22.21</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="4">
                 <Date>2015-05-03</Date>
                 <Version>22.21</Version>
@@ -11511,7 +11604,7 @@
             <Summary xml:lang="tr">Unicode karakter dizisi kitaplığı</Summary>
             <Description xml:lang="en">This library provides functions for manipulating Unicode strings and for manipulating C strings according to the Unicode standard.</Description>
             <Description xml:lang="tr">Bu kitaplığı unicode standartına göre unicode ve C karakter dizilerinde değişiklik yapmak için kullanılabilecek fonksiyonlar sunar.</Description>
-            <Archive type="targz" sha1sum="e1ea13c24a30bc93932d19eb5ad0704a618506dd">mirrors://gnu/libunistring/libunistring-0.9.3.tar.gz</Archive>
+            <Archive type="targz" sha1sum="87cb4c18fbb1e0f1d8eb38311093835a924b4b12">mirrors://gnu/libunistring/libunistring-0.9.6.tar.gz</Archive>
             <SourceURI>system/base/libunistring/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -11528,13 +11621,20 @@
             <Summary xml:lang="tr">libunistring için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="3">libunistring</Dependency>
+                <Dependency release="4">libunistring</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-03-08</Date>
+                <Version>0.9.6</Version>
+                <Comment>Verison bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-11</Date>
                 <Version>0.9.3</Version>
@@ -11592,6 +11692,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-03-09</Date>
+                <Version>0.10</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-11</Date>
                 <Version>0.10</Version>
@@ -12132,6 +12239,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="13">
+                <Date>2016-03-09</Date>
+                <Version>1.4</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="12">
                 <Date>2016-01-16</Date>
                 <Version>1.4</Version>
@@ -12232,7 +12346,7 @@
             <Summary xml:lang="en">The Nettle package contains the low-level cryptographic library.</Summary>
             <Summary xml:lang="pl">Nettle - biblioteka kryptograficzna.</Summary>
             <Description xml:lang="en">The Nettle package contains the low-level cryptographic library that is designed to fit easily in many contexts.</Description>
-            <Archive type="targz" sha1sum="1836601393522124787e029466935408e22dd204">ftp://ftp.gnu.org/gnu/nettle/nettle-3.1.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="b2eb5b36e65a8d3ed60ff81ec897044dead6dae0">ftp://ftp.gnu.org/gnu/nettle/nettle-3.2.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>gmp-devel</Dependency>
             </BuildDependencies>
@@ -12256,7 +12370,7 @@
             <Summary xml:lang="tr">nettle için geliştirme dosyaları.</Summary>
             <Summary xml:lang="pl">Pliki nagłówkowe biblioteki nettle.</Summary>
             <RuntimeDependencies>
-                <Dependency release="6">nettle</Dependency>
+                <Dependency release="7">nettle</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -12276,15 +12390,22 @@
                 <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="6">nettle</Dependency>
+                <Dependency release="7">nettle</Dependency>
                 <Dependency>glibc-32bit</Dependency>
-                <Dependency>gmp</Dependency>
+                <Dependency>gmp-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32/</Path>
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-03-09</Date>
+                <Version>3.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="6">
                 <Date>2015-07-05</Date>
                 <Version>3.1.1</Version>
@@ -13651,7 +13772,7 @@
             <Summary xml:lang="tr">Kullanıcı ve grup hesap yönetim kitaplığı</Summary>
             <Description xml:lang="en">libuser implements a standardized interface for manipulating and administering user and group accounts. The library uses pluggable back-ends to interface to its data sources.</Description>
             <Description xml:lang="tr">libuser kullanıcı ve grup hesaplarını yönetmek ve işlemek için standart bir arayüz sunar. Kitaplık, sağladığı arayüzün verilere erişimi için genişletilebilir arkauçlar kullanmaktadır.</Description>
-            <Archive type="tarxz" sha1sum="78e81c5ac033921e1abb9f93bc6bfa96d6a11ef6">https://fedorahosted.org/releases/l/i/libuser/libuser-0.61.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="e0fe60dd38f3b5777d0a4ad664725eddd18ef310">https://fedorahosted.org/releases/l/i/libuser/libuser-0.62.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>pam-devel</Dependency>
                 <Dependency>popt-devel</Dependency>
@@ -13688,7 +13809,7 @@
             <Summary xml:lang="tr">libuser için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="6">libuser</Dependency>
+                <Dependency release="7">libuser</Dependency>
                 <Dependency>glib2-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -13697,6 +13818,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-03-08</Date>
+                <Version>0.62</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="6">
                 <Date>2015-04-07</Date>
                 <Version>0.61</Version>
@@ -13781,6 +13909,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-09</Date>
+                <Version>3.3.11</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="4">
                 <Date>2015-08-25</Date>
                 <Version>3.3.11</Version>
@@ -13827,7 +13962,7 @@
             <Summary xml:lang="tr">Dosya türleri için yardımcı uygulama ve MIME türü ilişkilendirmeleri</Summary>
             <Description xml:lang="en">mailcap file is used by the metamail program. Metamail reads the mailcap file to determine how it should display non-text or multimedia material.</Description>
             <Description xml:lang="tr">mailcap dosyası metamail ve bazı diğer uygulamalar tarafından, metin olmayan dosyaların ya da çokluortam dosyalarının nasıl açılacağını keşfetmek için kullanılır.</Description>
-            <Archive type="tarxz" sha1sum="ba0a0bbfda225a27629c5570ade6a8a0bd592de9">https://fedorahosted.org/released/mailcap/mailcap-2.1.42.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="49cb70119c55b78a67131c259c88a2ccb43417d1">https://fedorahosted.org/released/mailcap/mailcap-2.1.45.tar.xz</Archive>
             <Patches>
                 <Patch level="1">extend-mailcap.patch</Patch>
             </Patches>
@@ -13842,6 +13977,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-03-06</Date>
+                <Version>2.1.45</Version>
+                <Comment>Verison bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-11</Date>
                 <Version>2.1.42</Version>
@@ -14483,7 +14625,7 @@
             <Summary xml:lang="en">Development files for lzo</Summary>
             <Summary xml:lang="tr">lzo için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="5">lzo</Dependency>
+                <Dependency release="6">lzo</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -14505,6 +14647,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-03-09</Date>
+                <Version>2.09</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="5">
                 <Date>2015-04-12</Date>
                 <Version>2.09</Version>
@@ -14578,7 +14727,7 @@
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
                 <Dependency>libusb-devel</Dependency>
-                <Dependency release="4">libusb-compat</Dependency>
+                <Dependency release="5">libusb-compat</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin</Path>
@@ -14600,13 +14749,20 @@
                 <Dependency>libusb-32bit</Dependency>
                 <Dependency>libusb</Dependency>
                 <Dependency>glibc-32bit</Dependency>
-                <Dependency release="4">libusb-compat</Dependency>
+                <Dependency release="5">libusb-compat</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-08</Date>
+                <Version>0.1.5</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="4">
                 <Date>2015-05-05</Date>
                 <Version>0.1.5</Version>
@@ -16013,7 +16169,7 @@
             <Summary xml:lang="tr">libpipeline için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="7">libpipeline</Dependency>
+                <Dependency release="8">libpipeline</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -16022,6 +16178,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2016-03-08</Date>
+                <Version>1.4.1</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="7">
                 <Date>2015-08-24</Date>
                 <Version>1.4.1</Version>
@@ -16932,7 +17095,7 @@
                 <Dependency>gdbm-devel</Dependency>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>gettext-devel</Dependency>
-                <Dependency versionFrom="1.4.0">libpipeline-devel</Dependency>
+                <Dependency versionFrom="1.4.1">libpipeline-devel</Dependency>
             </BuildDependencies>
             <SourceURI>system/base/man-db/pspec.xml</SourceURI>
         </Source>
@@ -16941,7 +17104,7 @@
             <RuntimeDependencies>
                 <Dependency>gdbm</Dependency>
                 <Dependency>zlib</Dependency>
-                <Dependency versionFrom="1.4.0">libpipeline</Dependency>
+                <Dependency versionFrom="1.4.1">libpipeline</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="config">/etc</Path>
@@ -16960,6 +17123,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2016-03-09</Date>
+                <Version>2.7.5</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="9">
                 <Date>2015-11-29</Date>
                 <Version>2.7.5</Version>
@@ -18719,7 +18889,7 @@
             <Description xml:lang="fr">D-Bus fourni à la fois un daemon système (pour les événements els que l&apos;&quot;ajout d&apos;un nouveau périphérique&quot; ou &quot;file d&apos;impression changée&quot;) et un daemon propre à chaque session utilisateur (pour les besoins généraux de communication entre processus utilisateurs). De plus, le bus de message est construit en se basant sur un framework (cadre de développement) de passage de message de un-vers-un pouvant être utilisé par n&apos;importe quelles applications pour communiquer directement (sans passer par le daemon de bus de message). Pour l&apos;instant les applications pouvant communiquer doivent être situées sur le même ordinateur, mais l&apos;option TCP/IP est disponible et le support de processus distant est prévu.</Description>
             <Description xml:lang="en">D-Bus supplies both a system daemon (for events such as &quot;new hardware device added&quot; or &quot;printer queue changed&quot;) and a per-user-login-session daemon (for general IPC needs among user applications). Also, the message bus is built on top of a general one-to-one message passing framework, which can be used by any two apps to communicate directly (without going through the message bus daemon). Currently the communicating applications are on one computer, but TCP/IP option is available and remote support planned.</Description>
             <Description xml:lang="tr">D-Bus, sistem ve kullanıcılar için olmak üzere iki tane artalan süreci (daemon) sunar. Mesaj yolu, bire bir mesaj geçiş araçları üzerine inşa edilmiştir. Bu sayede iki program birbiriyle bir mesaj yolu artalan süreci kullanmadan, direkt olarak haberleşebilir. Şu an için haberleşme araçları aynı bilgisayar üzerinde çalışabilmektedir, fakat TCP/IP ile uzaktan haberleşme de planlanmaktadır.</Description>
-            <Archive type="targz" sha1sum="4247d7f86a0164d7dd3eb18a74670eb863ac342c">http://dbus.freedesktop.org/releases/dbus/dbus-1.10.6.tar.gz</Archive>
+            <Archive type="targz" sha1sum="b53ba143b3bc1808eabd4628379f59ea6836694c">https://dbus.freedesktop.org/releases/dbus/dbus-1.11.0.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>expat-devel</Dependency>
                 <Dependency>libX11-devel</Dependency>
@@ -18770,7 +18940,7 @@
             <Summary xml:lang="tr">dbus için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="16">dbus</Dependency>
+                <Dependency release="17">dbus</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -18798,6 +18968,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="17">
+                <Date>2016-03-04</Date>
+                <Version>1.11.0</Version>
+                <Comment>version upgraded.</Comment>
+                <Name>Hakan Yıldız</Name>
+                <Email>hknuldz93@gmail.com</Email>
+            </Update>
             <Update release="16">
                 <Date>2016-03-03</Date>
                 <Version>1.10.6</Version>
@@ -19309,6 +19486,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-03-08</Date>
+                <Version>1.3.5</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="6">
                 <Date>2015-05-05</Date>
                 <Version>1.3.5</Version>
@@ -21167,6 +21351,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2016-03-08</Date>
+                <Version>7.6</Version>
+                <Comment>rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="9">
                 <Date>2015-08-12</Date>
                 <Version>7.6</Version>
@@ -21470,7 +21661,7 @@
             <Name>libxslt-docs</Name>
             <Summary xml:lang="tr">libxslt için belgelendirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="3">libxslt</Dependency>
+                <Dependency release="4">libxslt</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="doc">/usr/share/doc</Path>
@@ -21481,7 +21672,7 @@
             <Summary xml:lang="tr">libxslt için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
                 <Dependency>libxml2-devel</Dependency>
-                <Dependency release="3">libxslt</Dependency>
+                <Dependency release="4">libxslt</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin/*-config</Path>
@@ -21514,7 +21705,7 @@
                 <Dependency>libgcrypt-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="3">libxslt</Dependency>
+                <Dependency release="4">libxslt</Dependency>
                 <Dependency>libxml2-32bit</Dependency>
                 <Dependency>libgcrypt-32bit</Dependency>
                 <Dependency>glibc-32bit</Dependency>
@@ -21524,6 +21715,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-03-08</Date>
+                <Version>1.1.28</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-08-07</Date>
                 <Version>1.1.28</Version>
