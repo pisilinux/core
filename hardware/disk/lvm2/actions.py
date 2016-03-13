@@ -36,8 +36,8 @@ def builddiet():
                          --with-systemdsystemunitdir=no \
                          --enable-udev_sync' % get.CFLAGS())
 
-    pisitools.dosed("lib/misc/configure.h","rpl_malloc","malloc")
-    pisitools.dosed("lib/misc/configure.h","rpl_realloc","realloc")
+    #pisitools.dosed("lib/misc/configure.h","rpl_malloc","malloc")
+    #pisitools.dosed("lib/misc/configure.h","rpl_realloc","realloc")
 
     autotools.make("-j1 -C include")
     autotools.make("-j1 -C lib LIB_SHARED= VERSIONED_SHLIB=")
