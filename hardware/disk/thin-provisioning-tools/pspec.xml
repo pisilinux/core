@@ -1,0 +1,41 @@
+<PISI>
+    <Source>
+        <Name>thin-provisioning-tools</Name>
+        <Homepage>http://github.com/jthornber/thin-provisioning-tools"</Homepage>
+        <Packager>
+            <Name>Ali Algul</Name>
+            <Email>alialgul@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <Summary>A  suite of tools for thin provisioning on Linux</Summary>
+        <Description>A  suite of tools for thin provisioning on Linux</Description>
+        <BuildDependencies>
+            <Dependency>libaio-devel</Dependency>
+            <Dependency>boost-devel</Dependency>
+            <Dependency>expat-devel</Dependency>
+            <Dependency>libgcc</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="eee9a65908a3200e8927a65374b1dcac4ebbe807" type="targz">https://codeload.github.com/jthornber/thin-provisioning-tools/tar.gz/v0.6.0</Archive>
+    </Source>
+    <Package>
+        <Name>thin-provisioning-tools</Name>
+        <RuntimeDependencies>
+            <Dependency>expat</Dependency>
+            <Dependency>libgcc</Dependency> 
+            <Dependency>libaio</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/sbin/</Path>
+            <Path fileType="man">/usr/share/man/man8/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="2">
+            <Date>2016-01-31</Date>
+            <Version>0.6.0</Version>
+            <Comment>First Build</Comment>
+            <Name>Ali Algul</Name>
+            <Email>alialgul@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
