@@ -5907,6 +5907,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2016-03-13</Date>
+                <Version>2.88</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2014-05-11</Date>
                 <Version>2.88</Version>
@@ -7980,7 +7987,7 @@
             <Summary xml:lang="tr">tcp-wrappers için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="2">tcp-wrappers</Dependency>
+                <Dependency release="3">tcp-wrappers</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -7988,6 +7995,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2016-03-13</Date>
+                <Version>7.6</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2014-05-11</Date>
                 <Version>7.6</Version>
@@ -11023,7 +11037,7 @@
             <Description xml:lang="fr">net-tools est une collection de programmes représentant les outils réseau de base du système d&apos;exploitation Linux. S&apos;y trouvent arp, hostname, ifconfig, ipmaddr, iptunnel, mii-tool, nameif, netstat, plipconfig, rarp, route et slattach.</Description>
             <Description xml:lang="en">net-tools is a collection of programs that form the base set of the networking tools for the Linux operating system. It includes arp, hostname, ifconfig, ipmaddr, iptunnel, mii-tool, nameif, netstat, plipconfig, rarp, route and slattach.</Description>
             <Description xml:lang="tr">Net-tools, Linux işletim sisteminde kullanılan ağ ile ilgili temel araçların bir birleşimidir. Arp, hostname, ifconfig, ipmaddr, iptunnel, mii-tool, nameif, netstat, plipconfig, rarp, route ve slattach programlarını içerir.</Description>
-            <Archive type="tarbz2" sha1sum="944fb70641505d5d1139dba3aeb81ba124574b83">ftp://ftp.linux.org.tr/pub/mirrors/gentoo/distfiles/net-tools-1.60.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="944fb70641505d5d1139dba3aeb81ba124574b83">https://sourceforge.net/projects/net-tools/files/net-tools-1.60.tar.bz2</Archive>
             <Patches>
                 <Patch compressionType="bz2" level="1">01_all_net-tools-1.60-2.6-compilefix.patch.bz2</Patch>
                 <Patch compressionType="bz2">02_all_net-tools-1.60-gcc34.patch.bz2</Patch>
@@ -13106,13 +13120,13 @@
             <Summary xml:lang="tr">Zamandilimi veri dosyaları ve araçları</Summary>
             <Description xml:lang="en">timezone includes timezone data files and tools to use them. Package contents are synchronized with glibc tree.</Description>
             <Description xml:lang="tr">timezone zamandilimi veri dosyaları ve bu dosyaları kullanmak için gerekli araçları içerir. Paket içeriği glibc gelişim ağacından oluşturulmaktadır.</Description>
-            <Archive type="targz" sha1sum="96528dcbb790ed181a47db7e4cace4eeaec5728e">http://www.iana.org/time-zones/repository/releases/tzdata2015g.tar.gz</Archive>
+            <Archive type="targz" sha1sum="9ba86f3bfc1c7c3470eeb6963dd6ac84c9195d69">http://www.iana.org/time-zones/repository/releases/tzdata2016a.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>perl</Dependency>
                 <Dependency>gawk</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch>timezone-data-2015c-makefile.patch</Patch>
+                <Patch>timezone-data-2016a-makefile.patch</Patch>
             </Patches>
             <SourceURI>system/base/timezone/pspec.xml</SourceURI>
         </Source>
@@ -13123,6 +13137,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2016-03-13</Date>
+                <Version>2016a</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="5">
                 <Date>2015-10-27</Date>
                 <Version>2015g</Version>
@@ -13310,6 +13331,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-03-13</Date>
+                <Version>1.7</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-11</Date>
                 <Version>1.7</Version>
@@ -16064,6 +16092,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2016-03-13</Date>
+                <Version>8.11.0</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="8">
                 <Date>2015-07-13</Date>
                 <Version>8.11.0</Version>
@@ -19559,6 +19594,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2016-03-13</Date>
+                <Version>2.6.0</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2015-11-29</Date>
                 <Version>2.6.0</Version>
@@ -20024,7 +20066,7 @@
             <Description xml:lang="en">Package Config system that manages compile/link flags for libraries. It helps you insert the correct compiler options on the command line.</Description>
             <Description xml:lang="tr">Kütüphaneler için derleme bayraklarını yöneten, bir paket yapılandırma sistemi. Komut satırından, doğru derleme seçenekleri sunma olanağı sağlar</Description>
             <Description xml:lang="es">Sistema de configuración de paquetes que soporta banderas de compilación/link para librerías. Facilita la inserción de las opciones correctos de compilador en línea de comando</Description>
-            <Archive type="targz" sha1sum="f4b19d203b3896a4293af4b62c7f908063c88a5a">http://pkgconfig.freedesktop.org/releases/pkg-config-0.29.tar.gz</Archive>
+            <Archive type="targz" sha1sum="271ce928f6d673cc16cbced2bfd14a5f2e5d3d37">http://pkgconfig.freedesktop.org/releases/pkg-config-0.29.1.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>gnuconfig</Dependency>
                 <Dependency>glib2-devel</Dependency>
@@ -20046,6 +20088,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2016-03-13</Date>
+                <Version>0.29.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2016-02-28</Date>
                 <Version>0.29</Version>
@@ -20128,13 +20177,20 @@
             <Summary xml:lang="en">Development files for libsigsegv</Summary>
             <Summary xml:lang="tr">libsigsegv için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="4">libsigsegv</Dependency>
+                <Dependency release="5">libsigsegv</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-13</Date>
+                <Version>2.10</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-05-11</Date>
                 <Version>2.10</Version>
@@ -21162,6 +21218,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2016-03-13</Date>
+                <Version>1.15</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2015-01-28</Date>
                 <Version>1.15</Version>
@@ -21491,6 +21554,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-13</Date>
+                <Version>2.69</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2014-11-30</Date>
                 <Version>2.69</Version>
@@ -22416,6 +22486,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2016-03-13</Date>
+                <Version>0.165</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="10">
                 <Date>2016-01-28</Date>
                 <Version>0.165</Version>
@@ -23146,6 +23223,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-03-13</Date>
+                <Version>1.6.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2015-03-19</Date>
                 <Version>1.6.1</Version>
@@ -23206,7 +23290,7 @@
             <Description xml:lang="fr">La librairie MPFR est une librairie C pour les calculs à virgules flottantes à précisions multiples à arrondi exact (également appelé arrondi correct). Elle est basée sur la librairie à précision multiple GMP.</Description>
             <Description xml:lang="en">The MPFR library is a C library for multiple-precision floating-point computations with exact rounding (also called correct rounding). It is based on the GMP multiple-precision library.</Description>
             <Description xml:lang="es">MPFR es una librería en C para computaciones de punto flotante de múltiple precisión con redondeo exacto (también llamado redondeo correcto). Está basada en la librería de múltiple precisión GMP.</Description>
-            <Archive type="tarxz" sha1sum="383303f9de5ebe055b03b94642b03465baf9e6c7">http://www.mpfr.org/mpfr-current/mpfr-3.1.3.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="cedc0055d55b6ee4cd17e1e6119ed412520ff81a">http://www.mpfr.org/mpfr-current/mpfr-3.1.4.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>gmp-devel</Dependency>
             </BuildDependencies>
@@ -23228,7 +23312,7 @@
             <Summary xml:lang="en">Development files for mpfr</Summary>
             <Summary xml:lang="tr">mpfr için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="8">mpfr</Dependency>
+                <Dependency release="9">mpfr</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -23237,6 +23321,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2016-03-13</Date>
+                <Version>3.1.4</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2016-02-28</Date>
                 <Version>3.1.3</Version>
@@ -23337,6 +23428,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2016-03-13</Date>
+                <Version>3.0.4</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2015-03-01</Date>
                 <Version>3.0.4</Version>
@@ -23448,7 +23546,7 @@
             <Summary xml:lang="en">Development files for autogen</Summary>
             <Summary xml:lang="tr">autogen için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="8">autogen</Dependency>
+                <Dependency release="9">autogen</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -23460,6 +23558,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2016-03-13</Date>
+                <Version>5.18.7</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2016-01-11</Date>
                 <Version>5.18.7</Version>
@@ -23534,7 +23639,7 @@
             <Description xml:lang="fr">Yacc fourni un outil général de description d&apos;entrée pour un logiciel. L&apos;utilisateur de Yacc spécifie la structure de l&apos;entrée avec le code à invoquer lorsque de tels structures sont reconnues. Yacc transforme ce qui a été spécifié en sous-routine gérant le processus d&apos;entrée.</Description>
             <Description xml:lang="en">Yacc provides a general tool for describing the input to a computer program. The Yacc user specifies the structures of his input, together with code to be invoked as each such structure is recognized. Yacc turns such a specification into a subroutine that handles the input process</Description>
             <Description xml:lang="tr">Yacc, bir uygulamaya girdi açıklamasını yapan bir araçtır. Yacc kullanıcısı, girdinin yapısını ve bu yapının her seferinde tanındığı kodu belirtir. Yacc; bu tür bir belirlemeyi, girdi sürecini işleyen bir alt yordama çevirir.</Description>
-            <Archive type="targz" sha1sum="697ea853533e325f47b6b13401d05e7c97012729">ftp://metalab.unc.edu/pub/Linux/devel/compiler-tools/yacc-1.9.1.tar.Z</Archive>
+            <Archive type="tarZ" sha1sum="697ea853533e325f47b6b13401d05e7c97012729">http://ibiblio.org/pub/linux/devel/compiler-tools/yacc-1.9.1.tar.Z</Archive>
             <Patches>
                 <Patch>mkstemp.patch</Patch>
                 <Patch level="1">skeleton.c.diff</Patch>
@@ -23551,6 +23656,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-03-13</Date>
+                <Version>1.9.1</Version>
+                <Comment>Rebuild, fix source url.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-11</Date>
                 <Version>1.9.1</Version>
@@ -23608,7 +23720,7 @@
             <Summary xml:lang="en">Development files for isl</Summary>
             <Summary xml:lang="tr">isl için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="9">isl</Dependency>
+                <Dependency release="10">isl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -23616,6 +23728,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2016-03-13</Date>
+                <Version>0.16.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="9">
                 <Date>2016-01-27</Date>
                 <Version>0.16.1</Version>
@@ -24016,7 +24135,7 @@
             <Description xml:lang="fr">NASM est l&apos;assembleur Netwide, un assembleur libre et portable pour les processeurs des séries Intel 80x86 </Description>
             <Description xml:lang="en">NASM is the Netwide Assembler, a free portable assembler for the Intel 80x86 microprocessor series.</Description>
             <Description xml:lang="tr">Intel 80x86 mikroişlemci serisi için aktarılabilir Assembler derleyicisi.</Description>
-            <Archive type="tarxz" sha1sum="e9414964de552cfe8ebc5d7645122d94d014702c">http://www.nasm.us/pub/nasm/releasebuilds/2.11.01/nasm-2.11.01.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="ca90a23753ecd9e42bc416b9a7c65f6687a2d5ee">http://www.nasm.us/pub/nasm/releasebuilds/2.12/nasm-2.12.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>texinfo</Dependency>
             </BuildDependencies>
@@ -24031,6 +24150,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-03-13</Date>
+                <Version>2.12</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2014-05-11</Date>
                 <Version>2.11.01</Version>
@@ -24102,6 +24228,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2016-03-13</Date>
+                <Version>20141105</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2014-12-04</Date>
                 <Version>20141105</Version>
