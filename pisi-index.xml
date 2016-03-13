@@ -5643,6 +5643,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-03-11</Date>
+                <Version>2.4.9</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="4" type="critical">
                 <Date>2014-08-20</Date>
                 <Version>2.4.9</Version>
@@ -9975,6 +9982,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-03-11</Date>
+                <Version>008</Version>
+                <Comment>Rebuild for toolchain and update usb.ids.</Comment>
+                <Name>Stefan Gronewold</Name>
+                <Email>groni@pisilinux.org</Email>
+            </Update>
             <Update release="6">
                 <Date>2015-12-26</Date>
                 <Version>008</Version>
@@ -10093,6 +10107,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2016-03-11</Date>
+                <Version>4.2.1</Version>
+                <Comment>Rebuild for toolchain</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
             <Update release="6">
                 <Date>2015-04-01</Date>
                 <Version>4.2.1</Version>
@@ -10284,7 +10305,7 @@
             <Description xml:lang="fr">Vixie cron (Cron est un daemon qui lance des tâches planifiées) est une implémentation riche basée sur le cron SysV. Chaque utilisateur possède sa propre table de planification (ou crontab - la CRON TABle de Crontab) est un fichier qui contient le planning de cron) et a la possibilité de spécifier des variables d&apos;environnement au sein de la table.</Description>
             <Description xml:lang="en">Vixie cron (Cron is a daemon that runs scheduled tasks.) is a full featured cron implementation based on SysV cron. Each user has his own crontab ( Crontab (CRON TABle) is a file which contains the schedule of cron) and is allowed to specify environment variables within that crontab.</Description>
             <Description xml:lang="tr">Vixie-cron (cron, zamanlanmış görevleri çalıştıran dinleyici programdır.) SysV cron tabanlı tam sürüm cron uygulamasıdır. Her kullanıcı kendi crontab &apos;ına (crontab cron listesini içeren dosyadır.) sahiptir ve bu crontab içinde ortam değişkenlerini yazmasına müsade edilmiştir.</Description>
-            <Archive type="tarbz2" sha1sum="d8b087c0e5f7a2a9c74e3400b660756ab6d800c9">ftp://ftp.linux.org.tr/pub/gentoo/distfiles/vixie-cron-4.1.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="d8b087c0e5f7a2a9c74e3400b660756ab6d800c9">http://ftp.linux.org.tr/gentoo/distfiles/vixie-cron-4.1.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>sed</Dependency>
                 <Dependency>pam-devel</Dependency>
@@ -10326,6 +10347,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2016-03-11</Date>
+                <Version>4.1</Version>
+                <Comment>Rebuild for toolchain.</Comment>
+                <Name>Kamil Atlı</Name>
+                <Email>suvari@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2015-05-04</Date>
                 <Version>4.1</Version>
@@ -13487,6 +13515,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="18">
+                <Date>2016-03-11</Date>
+                <Version>4.4.0</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="17">
                 <Date>2016-01-03</Date>
                 <Version>4.4.0</Version>
@@ -15936,6 +15971,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2016-03-11</Date>
+                <Version>3.0.3</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="4">
                 <Date>2015-04-22</Date>
                 <Version>3.0.3</Version>
@@ -16272,6 +16314,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2016-03-11</Date>
+                <Version>1.3.1</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="3">
                 <Date>2014-05-11</Date>
                 <Version>1.3.1</Version>
@@ -17297,240 +17346,293 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/aa_*</Path>
                 <Path fileType="localedata">/usr/share/locale/aa*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/aa_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-af</Name>
             <IsA>locale:af</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-af</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/af_*</Path>
                 <Path fileType="localedata">/usr/share/locale/af*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/af_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-am</Name>
             <IsA>locale:am</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-am</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/am_*</Path>
                 <Path fileType="localedata">/usr/share/locale/am*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/am_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-an</Name>
             <IsA>locale:an</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-an</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/an_*</Path>
                 <Path fileType="localedata">/usr/share/locale/an*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/an_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-ar</Name>
             <IsA>locale:ar</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ar</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ar_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ar*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ar_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-as</Name>
             <IsA>locale:as</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-as</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/as_*</Path>
                 <Path fileType="localedata">/usr/share/locale/as*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/as_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-ast</Name>
             <IsA>locale:ast</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ast</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ast_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ast*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ast_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-az</Name>
             <IsA>locale:az</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-az</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/az_*</Path>
                 <Path fileType="localedata">/usr/share/locale/az*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/az_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-be</Name>
             <IsA>locale:be</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-be</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/be_*</Path>
                 <Path fileType="localedata">/usr/share/locale/be*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/be_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-bem</Name>
             <IsA>locale:bem</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-bem</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/bem_*</Path>
                 <Path fileType="localedata">/usr/share/locale/bem*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/bem_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-ber</Name>
             <IsA>locale:ber</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ber</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ber_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ber*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ber_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-bg</Name>
             <IsA>locale:bg</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-bg</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/bg_*</Path>
                 <Path fileType="localedata">/usr/share/locale/bg*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/bg_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-bho</Name>
             <IsA>locale:bho</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-bho</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/bho_*</Path>
                 <Path fileType="localedata">/usr/share/locale/bho*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/bho_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-bn</Name>
             <IsA>locale:bn</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-bn</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/bn_*</Path>
                 <Path fileType="localedata">/usr/share/locale/bn*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/bn_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-bo</Name>
             <IsA>locale:bo</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-bo</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/bo_*</Path>
                 <Path fileType="localedata">/usr/share/locale/bo*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/bo_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-br</Name>
             <IsA>locale:br</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-br</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/br_*</Path>
                 <Path fileType="localedata">/usr/share/locale/br*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/br_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-brx</Name>
             <IsA>locale:brx</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-brx</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/brx_*</Path>
                 <Path fileType="localedata">/usr/share/locale/brx*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/brx_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-bs</Name>
             <IsA>locale:bs</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-bs</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/bs_*</Path>
                 <Path fileType="localedata">/usr/share/locale/bs*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/bs_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-byn</Name>
             <IsA>locale:byn</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-byn</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/byn_*</Path>
                 <Path fileType="localedata">/usr/share/locale/byn*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/byn_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-ca</Name>
             <IsA>locale:ca</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ca</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ca_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ca*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ca_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-crh</Name>
             <IsA>locale:crh</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-crn</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/crh_*</Path>
                 <Path fileType="localedata">/usr/share/locale/crh*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/crh_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-cs</Name>
             <IsA>locale:cs</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-cs</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/cs_*</Path>
                 <Path fileType="localedata">/usr/share/locale/cs*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/cs_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-csb</Name>
             <IsA>locale:csb</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-csb</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/csb_*</Path>
                 <Path fileType="localedata">/usr/share/locale/csb*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/csb_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-cv</Name>
             <IsA>locale:cv</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-cv</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/cv_*</Path>
                 <Path fileType="localedata">/usr/share/locale/cv*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/cv_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-cy</Name>
             <IsA>locale:cy</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-cy</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/cy_*</Path>
                 <Path fileType="localedata">/usr/share/locale/cy*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/cy_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-da</Name>
             <IsA>locale:da</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-da</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/da_*</Path>
                 <Path fileType="localedata">/usr/share/locale/da*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/da_*</Path>
             </Files>
         </Package>
         <Package>
             <Name>glibc-locales-de</Name>
             <IsA>locale:de</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-de</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/de_*</Path>
                 <Path fileType="localedata">/usr/share/locale/de*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/de_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17540,6 +17642,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/dv_*</Path>
                 <Path fileType="localedata">/usr/share/locale/dv*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/dv_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17549,6 +17652,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/dz_*</Path>
                 <Path fileType="localedata">/usr/share/locale/dz*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/dz_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17558,6 +17662,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/el_*</Path>
                 <Path fileType="localedata">/usr/share/locale/el*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/el_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17621,6 +17726,7 @@
                 <Path fileType="localedata">/usr/share/locale/en_ZW</Path>
                 <Path fileType="localedata">/usr/lib/locale/en_ZW.utf8</Path>
                 <Path fileType="localedata">/usr/share/locale/en_ZW.utf8</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/en_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17630,6 +17736,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/es*</Path>
                 <Path fileType="localedata">/usr/share/locale/es*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/es_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17639,6 +17746,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/eo*</Path>
                 <Path fileType="localedata">/usr/share/locale/eo*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/eo_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17648,6 +17756,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/et_*</Path>
                 <Path fileType="localedata">/usr/share/locale/et*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/et_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17657,6 +17766,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/eu_*</Path>
                 <Path fileType="localedata">/usr/share/locale/eu*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/eu_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17666,6 +17776,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/fa_*</Path>
                 <Path fileType="localedata">/usr/share/locale/fa*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/fa_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17675,6 +17786,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ff_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ff*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ff_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17684,6 +17796,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/fi_*</Path>
                 <Path fileType="localedata">/usr/share/locale/fi*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/fi_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17693,6 +17806,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/fil_*</Path>
                 <Path fileType="localedata">/usr/share/locale/fil*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/fil_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17702,6 +17816,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/fo_*</Path>
                 <Path fileType="localedata">/usr/share/locale/fo*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/fo_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17711,6 +17826,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/fr_*</Path>
                 <Path fileType="localedata">/usr/share/locale/fr*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/fr_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17720,6 +17836,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/fur_*</Path>
                 <Path fileType="localedata">/usr/share/locale/fur*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/fur_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17729,6 +17846,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/fy_*</Path>
                 <Path fileType="localedata">/usr/share/locale/fy*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/fy_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17738,6 +17856,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ga_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ga*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ga_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17747,6 +17866,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/gd_*</Path>
                 <Path fileType="localedata">/usr/share/locale/gd*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/gd_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17756,6 +17876,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/gez_*</Path>
                 <Path fileType="localedata">/usr/share/locale/gez*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/gez_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17765,6 +17886,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/gl_*</Path>
                 <Path fileType="localedata">/usr/share/locale/gl*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/gl_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17774,6 +17896,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/gu_*</Path>
                 <Path fileType="localedata">/usr/share/locale/gu*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/gu_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17783,6 +17906,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/gv_*</Path>
                 <Path fileType="localedata">/usr/share/locale/gv*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/gv_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17792,6 +17916,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ha_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ha*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ha_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17801,6 +17926,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/he_*</Path>
                 <Path fileType="localedata">/usr/share/locale/he*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/he_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17810,6 +17936,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/hi_*</Path>
                 <Path fileType="localedata">/usr/share/locale/hi*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/hi_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17819,6 +17946,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/hne_*</Path>
                 <Path fileType="localedata">/usr/share/locale/hne*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/hne_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17828,6 +17956,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/hr_*</Path>
                 <Path fileType="localedata">/usr/share/locale/hr*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/hr_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17837,6 +17966,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/hsb_*</Path>
                 <Path fileType="localedata">/usr/share/locale/hsb*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/hsb_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17846,6 +17976,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ht_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ht*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ht_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17855,6 +17986,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/hu_*</Path>
                 <Path fileType="localedata">/usr/share/locale/hu*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/hu_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17864,6 +17996,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/hy_*</Path>
                 <Path fileType="localedata">/usr/share/locale/hy*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/hy_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17873,6 +18006,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ia_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ia*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ia_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17882,6 +18016,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/id_*</Path>
                 <Path fileType="localedata">/usr/share/locale/id*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/id_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17891,6 +18026,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ig_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ig*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ig_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17900,6 +18036,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ik_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ik*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ik_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17909,6 +18046,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/is_*</Path>
                 <Path fileType="localedata">/usr/share/locale/is*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/is_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17918,6 +18056,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/it_*</Path>
                 <Path fileType="localedata">/usr/share/locale/it*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/it_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17927,6 +18066,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/iu_*</Path>
                 <Path fileType="localedata">/usr/share/locale/iu*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/iu_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17936,6 +18076,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/iw_*</Path>
                 <Path fileType="localedata">/usr/share/locale/iw*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/iw_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17945,6 +18086,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ja_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ja*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ja_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17954,6 +18096,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ka_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ka*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ka_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17963,6 +18106,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/kk_*</Path>
                 <Path fileType="localedata">/usr/share/locale/kk*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/kk_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17972,6 +18116,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/kl_*</Path>
                 <Path fileType="localedata">/usr/share/locale/kl*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/kl_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17981,6 +18126,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/km_*</Path>
                 <Path fileType="localedata">/usr/share/locale/km*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/km_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17990,6 +18136,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/kn_*</Path>
                 <Path fileType="localedata">/usr/share/locale/kn*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/kn_*</Path>
             </Files>
         </Package>
         <Package>
@@ -17999,6 +18146,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ko_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ko*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ko_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18008,6 +18156,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/kok_*</Path>
                 <Path fileType="localedata">/usr/share/locale/kok*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/kok_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18017,6 +18166,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ks_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ks*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ks_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18026,6 +18176,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ku_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ku*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ku_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18035,6 +18186,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/kw_*</Path>
                 <Path fileType="localedata">/usr/share/locale/kw*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/kw_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18044,6 +18196,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ky_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ky*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ky_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18053,6 +18206,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/lb_*</Path>
                 <Path fileType="localedata">/usr/share/locale/lb*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/lb_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18062,6 +18216,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/lg_*</Path>
                 <Path fileType="localedata">/usr/share/locale/lg*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/lg_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18071,6 +18226,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/li_*</Path>
                 <Path fileType="localedata">/usr/share/locale/li*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/li_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18080,6 +18236,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/lo_*</Path>
                 <Path fileType="localedata">/usr/share/locale/lo_*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/lo_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18089,6 +18246,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/lt_*</Path>
                 <Path fileType="localedata">/usr/share/locale/lt*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/lt_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18098,6 +18256,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/lv_*</Path>
                 <Path fileType="localedata">/usr/share/locale/lv*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/lv_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18107,6 +18266,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/mag_*</Path>
                 <Path fileType="localedata">/usr/share/locale/mag*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/mag_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18116,6 +18276,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/mai_*</Path>
                 <Path fileType="localedata">/usr/share/locale/mai*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/mai_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18125,6 +18286,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/mg_*</Path>
                 <Path fileType="localedata">/usr/share/locale/mg*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/mg_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18134,6 +18296,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/mhr_*</Path>
                 <Path fileType="localedata">/usr/share/locale/mhr*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/mhr_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18143,6 +18306,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/mi_*</Path>
                 <Path fileType="localedata">/usr/share/locale/mi*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/mi_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18152,6 +18316,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/mk_*</Path>
                 <Path fileType="localedata">/usr/share/locale/mk*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/mk_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18161,6 +18326,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ml_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ml*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ml_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18170,6 +18336,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/mn_*</Path>
                 <Path fileType="localedata">/usr/share/locale/mn*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/mn_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18179,6 +18346,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/mr_*</Path>
                 <Path fileType="localedata">/usr/share/locale/mr*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/mr_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18188,6 +18356,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ms_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ms*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ms_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18197,6 +18366,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/mt_*</Path>
                 <Path fileType="localedata">/usr/share/locale/mt*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/mt_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18206,6 +18376,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/my_*</Path>
                 <Path fileType="localedata">/usr/share/locale/my*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/my_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18215,6 +18386,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/nan_*</Path>
                 <Path fileType="localedata">/usr/share/locale/nan*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/nan_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18224,6 +18396,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/nb_*</Path>
                 <Path fileType="localedata">/usr/share/locale/nb*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/nb_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18233,6 +18406,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/nds_*</Path>
                 <Path fileType="localedata">/usr/share/locale/nds*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/nds_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18242,6 +18416,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ne_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ne*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ne_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18251,6 +18426,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/nl_*</Path>
                 <Path fileType="localedata">/usr/share/locale/nl*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/nl_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18260,6 +18436,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/nn_*</Path>
                 <Path fileType="localedata">/usr/share/locale/nn*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/nn_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18269,6 +18446,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/nr_*</Path>
                 <Path fileType="localedata">/usr/share/locale/nr*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/nr*</Path>
             </Files>
         </Package>
         <Package>
@@ -18278,6 +18456,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/nso_*</Path>
                 <Path fileType="localedata">/usr/share/locale/nso*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/nso_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18287,6 +18466,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/oc_*</Path>
                 <Path fileType="localedata">/usr/share/locale/oc*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/oc_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18296,6 +18476,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/om_*</Path>
                 <Path fileType="localedata">/usr/share/locale/om*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/om_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18305,6 +18486,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/or_*</Path>
                 <Path fileType="localedata">/usr/share/locale/or*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/or_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18314,6 +18496,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/os_*</Path>
                 <Path fileType="localedata">/usr/share/locale/os*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/os_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18323,6 +18506,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/pa_*</Path>
                 <Path fileType="localedata">/usr/share/locale/pa*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/pa_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18332,6 +18516,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/pap_*</Path>
                 <Path fileType="localedata">/usr/share/locale/pap*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/pap_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18341,6 +18526,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/pl_*</Path>
                 <Path fileType="localedata">/usr/share/locale/pl*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/pl_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18350,6 +18536,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ps_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ps*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ps_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18359,6 +18546,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/pt_*</Path>
                 <Path fileType="localedata">/usr/share/locale/pt*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/pt_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18368,6 +18556,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ro_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ro*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ro_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18377,6 +18566,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ru_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ru*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ru_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18386,6 +18576,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/rw_*</Path>
                 <Path fileType="localedata">/usr/share/locale/rw*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/rw_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18395,6 +18586,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sa_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sa*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/sg_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18404,6 +18596,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sc_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sc*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/sc_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18413,6 +18606,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sd_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sd*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/sd_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18422,6 +18616,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/se_*</Path>
                 <Path fileType="localedata">/usr/share/locale/se*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/se_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18431,6 +18626,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/shs_*</Path>
                 <Path fileType="localedata">/usr/share/locale/shs*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/shs_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18440,6 +18636,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/si_*</Path>
                 <Path fileType="localedata">/usr/share/locale/si*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/si_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18449,6 +18646,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sid_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sid*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/sid_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18458,6 +18656,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sk_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sk*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/sk_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18467,6 +18666,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sl_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sl*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/sl_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18476,6 +18676,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/so_*</Path>
                 <Path fileType="localedata">/usr/share/locale/so*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/so_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18485,6 +18686,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sq_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sq*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/sq_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18494,6 +18696,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sr_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sr*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/sr_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18503,6 +18706,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ss_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ss*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ss_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18512,6 +18716,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/st_*</Path>
                 <Path fileType="localedata">/usr/share/locale/st*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/st_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18521,6 +18726,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sv_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sv*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/sv_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18530,6 +18736,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sw_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sw*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/sw_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18539,6 +18746,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ta_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ta*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ta_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18548,6 +18756,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/te_*</Path>
                 <Path fileType="localedata">/usr/share/locale/te*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/te_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18557,6 +18766,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/tg_*</Path>
                 <Path fileType="localedata">/usr/share/locale/tg*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/tg_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18566,6 +18776,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/th_*</Path>
                 <Path fileType="localedata">/usr/share/locale/th*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/th_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18575,6 +18786,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ti_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ti*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ti_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18584,6 +18796,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/tig_*</Path>
                 <Path fileType="localedata">/usr/share/locale/tig*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/tig_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18593,6 +18806,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/tk_*</Path>
                 <Path fileType="localedata">/usr/share/locale/tk*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/tk_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18602,6 +18816,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/tl_*</Path>
                 <Path fileType="localedata">/usr/share/locale/tl*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/tl_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18611,6 +18826,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/tn_*</Path>
                 <Path fileType="localedata">/usr/share/locale/tn*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/tn_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18620,6 +18836,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ts_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ts*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ts_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18629,6 +18846,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/tt_*</Path>
                 <Path fileType="localedata">/usr/share/locale/tt*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/tt_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18638,6 +18856,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ug_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ug*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ug_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18647,6 +18866,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/uk_*</Path>
                 <Path fileType="localedata">/usr/share/locale/uk*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/uk_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18656,6 +18876,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/unm_*</Path>
                 <Path fileType="localedata">/usr/share/locale/unm*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/umn_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18665,6 +18886,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ur_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ur*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ur_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18674,6 +18896,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/uz_*</Path>
                 <Path fileType="localedata">/usr/share/locale/uz*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/uz_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18683,6 +18906,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ve_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ve*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/ve_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18692,6 +18916,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/vi_*</Path>
                 <Path fileType="localedata">/usr/share/locale/vi*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/vi_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18701,6 +18926,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/wa_*</Path>
                 <Path fileType="localedata">/usr/share/locale/wa*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/wa_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18710,6 +18936,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/wae_*</Path>
                 <Path fileType="localedata">/usr/share/locale/wae*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/wae_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18719,6 +18946,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/wal_*</Path>
                 <Path fileType="localedata">/usr/share/locale/wal*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/wal_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18728,6 +18956,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/wo_*</Path>
                 <Path fileType="localedata">/usr/share/locale/wo*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/wo_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18737,6 +18966,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/xh_*</Path>
                 <Path fileType="localedata">/usr/share/locale/xh*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/xh_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18746,6 +18976,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/yi_*</Path>
                 <Path fileType="localedata">/usr/share/locale/yi*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/yi_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18755,6 +18986,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/yo_*</Path>
                 <Path fileType="localedata">/usr/share/locale/yo*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/yo_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18764,6 +18996,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/yue_*</Path>
                 <Path fileType="localedata">/usr/share/locale/yue*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/yue_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18773,6 +19006,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/zh_*</Path>
                 <Path fileType="localedata">/usr/share/locale/zh*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/zh_*</Path>
             </Files>
         </Package>
         <Package>
@@ -18782,6 +19016,7 @@
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/zu_*</Path>
                 <Path fileType="localedata">/usr/share/locale/zu*</Path>
+                <Path fileType="localedata">/usr/share/i18n/locales/zu_*</Path>
             </Files>
         </Package>
         <History>
