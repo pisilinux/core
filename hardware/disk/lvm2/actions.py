@@ -19,7 +19,15 @@ def builddiet():
     autotools.make("distclean")
 
     autotools.autoreconf("-fi")
-    autotools.configure('ac_cv_lib_dl_dlopen=no \
+    autotools.configure('--with-thin-check=    \
+                         --with-thin-dump=     \
+                         --with-thin-repair=   \
+                         --with-thin-restore=  \
+                         --with-cache-check=   \
+                         --with-cache-dump=    \
+                         --with-cache-repair=  \
+                         --with-cache-restore= \
+                         ac_cv_lib_dl_dlopen=no \
                          --with-staticdir="/sbin" \
                          --enable-debug \
                          --with-optimisation=\"%s -Os\" \
@@ -58,7 +66,15 @@ def setup():
     pisitools.dosed("conf/example.conf.in", "use_lvmetad = 0", "use_lvmetad = 1")
 
     autotools.autoreconf("-fi")
-    autotools.configure("--enable-lvm1_fallback \
+    autotools.configure("--with-thin-check=    \
+                         --with-thin-dump=     \
+                         --with-thin-repair=   \
+                         --with-thin-restore=  \
+                         --with-cache-check=   \
+                         --with-cache-dump=    \
+                         --with-cache-repair=  \
+                         --with-cache-restore= \
+                         --enable-lvm1_fallback \
                          --with-default-pid-dir=/run \
                          --with-default-run-dir=/run/lvm \
                          --with-default-locking-dir=/run/lock/lvm \
