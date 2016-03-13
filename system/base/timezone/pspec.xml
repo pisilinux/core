@@ -14,14 +14,15 @@
         <IsA>data</IsA>
         <Summary>Timezone data files and tools</Summary>
         <Description>timezone includes timezone data files and tools to use them. Package contents are synchronized with glibc tree.</Description>
-        <Archive sha1sum="96528dcbb790ed181a47db7e4cace4eeaec5728e" type="targz">http://www.iana.org/time-zones/repository/releases/tzdata2015g.tar.gz</Archive>
+        <Archive sha1sum="9ba86f3bfc1c7c3470eeb6963dd6ac84c9195d69" type="targz">http://www.iana.org/time-zones/repository/releases/tzdata2016a.tar.gz</Archive>
 	<!--<Archive sha1sum="807cf10ef545314989175096aba605bee4062b61" type="targz">http://www.iana.org/time-zones/repository/releases/tzcode2015d.tar.gz</Archive>-->
         <BuildDependencies>
             <Dependency>perl</Dependency>
             <Dependency>gawk</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch>timezone-data-2015c-makefile.patch</Patch>
+<!--             <Patch>timezone-data-2015c-makefile.patch</Patch> -->
+            <Patch>timezone-data-2016a-makefile.patch</Patch>
         </Patches>
         <AdditionalFiles>
         <!--<AdditionalFile permission="0755" target="yearistype.sh">yearistype.sh</AdditionalFile>-->
@@ -36,6 +37,13 @@
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2016-03-13</Date>
+            <Version>2016a</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
         <Update release="5">
             <Date>2015-10-27</Date>
             <Version>2015g</Version>
