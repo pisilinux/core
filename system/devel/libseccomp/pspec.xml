@@ -12,7 +12,7 @@
         <IsA>app:library</IsA>
         <Summary>Enhanced seccomp library</Summary>
         <Description>High level interface to the Linux Kernel's seccomp filter.</Description>
-        <Archive sha1sum="cc135ab6c95723cfbba034feb9630446de475341" type="targz">http://downloads.sourceforge.net/project/libseccomp/libseccomp-2.1.1/libseccomp-2.1.1.tar.gz</Archive>
+        <Archive sha1sum="64f37385851a107a086d2d13e47882063e64e3c1" type="targz">https://github.com/seccomp/libseccomp/archive/v2.3.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>glibc</Dependency>
 	    <Dependency>util-linux</Dependency>
@@ -39,6 +39,13 @@
     </Package>
 
     <History>
+        <Update release="2">
+            <Date>2016-03-13</Date>
+            <Version>2.3.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="1">
             <Date>2014-06-27</Date>
             <Version>2.1.1</Version>
@@ -48,3 +55,4 @@
         </Update>
     </History>
 </PISI>
+
