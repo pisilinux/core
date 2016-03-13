@@ -12,7 +12,8 @@ def setup():
     if get.buildTYPE() != "emul32":
         pisitools.flags.add("-fPIC")
 
-    autotools.configure("--disable-static")
+    autotools.configure("--disable-static \
+                         --with-gmp")
 
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
