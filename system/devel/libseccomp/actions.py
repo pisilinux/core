@@ -6,8 +6,11 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import get
+from pisi.actionsapi import shelltools
+
 
 def setup():
+    shelltools.system("sh ./autogen.sh")
     autotools.configure()
 
 def build():
