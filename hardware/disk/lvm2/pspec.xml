@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Userland logical volume management tools</Summary>
         <Description>LVM2 includes all of the support for handling read/write operations physical and logical volumes.</Description>
-        <Archive sha1sum="4f45406eb122443a0a9a3f2d338d5203d94d93de" type="targz">ftp://sources.redhat.com/pub/lvm2/LVM2.2.02.118.tgz</Archive>
+        <Archive sha1sum="2a7cce6407d91847731d8f2ca2b4ba7dee03225a" type="targz">ftp://sources.redhat.com/pub/lvm2/LVM2.2.02.142.tgz</Archive>
         <BuildDependencies>
             <Dependency releaseFrom="9">libutil-linux-devel</Dependency>
             <Dependency>eudev-devel</Dependency>
@@ -21,7 +21,7 @@
             <!--<Patch level="1">lvm2-2.02.63-always-make-static-libdm.patch</Patch>
             <Patch level="1">lvm2-2.02.92-dynamic-static-ldflags.patch</Patch>
             <Patch level="1">lvm2-2.02.105-pthread-pkgconfig.patch</Patch>
-	  <Patch>lvm2-2.02.106-static-pkgconfig-libs.patch</Patch>-->
+            <Patch>lvm2-2.02.106-static-pkgconfig-libs.patch</Patch>-->
         </Patches>
     </Source>
 
@@ -34,6 +34,7 @@
         <Description>Device-mapper includes the driver enables the definition of new block devices composed of ranges of sectors of existing devices to define disk partitions or logical volumes.</Description>
         <Files>
             <Path fileType="executable">/usr/sbin/dmsetup</Path>
+            <Path fileType="executable">/usr/sbin/dmstats</Path>
             <Path fileType="library">/usr/lib/libdevmapper.a</Path>
             <Path fileType="library">/usr/lib/libdevmapper.so*</Path>
             <Path fileType="data">/lib/udev/rules.d/10-dm.rules</Path>
@@ -42,6 +43,7 @@
             <Path fileType="doc">/usr/share/doc/VERSION_DM</Path>
             <Path fileType="doc">/usr/share/doc/WHATS_NEW_DM</Path>
             <Path fileType="man">/usr/share/man/man8/dmsetup.8</Path>
+            <Path fileType="man">/usr/share/man/man8/dmstats.8</Path>
         </Files>
     </Package>
 
@@ -180,10 +182,19 @@
         <Description>Number of utilities for creating, checking, and repairing logical volumes - statically linked for initramfs.</Description>
         <Files>
             <Path fileType="executable">/sbin/lvm.static</Path>
+            <Path fileType="library">/usr/lib/liblvm2app.a</Path>
+            <Path fileType="library">/usr/lib/liblvm2cmd.a</Path>
         </Files>
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2016-03-13</Date>
+            <Version>2.02.142</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2015-05-02</Date>
             <Version>2.02.118</Version>
