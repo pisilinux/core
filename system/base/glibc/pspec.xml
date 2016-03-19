@@ -31,9 +31,6 @@
     </Source>
     <Package>
         <Name>glibc</Name>
-        <Conflicts>
-            <Package releaseTo="1">timezone</Package>
-        </Conflicts>
         <RuntimeDependencies>
             <Dependency>gettext</Dependency>
             <Dependency versionFrom="2016a">timezone</Dependency>
