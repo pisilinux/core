@@ -17,9 +17,9 @@
         <BuildDependencies>
             <Dependency>libutil-linux-devel</Dependency>
             <!-- The first release shipped within util-linux -->
-            <Dependency>libutil-linux</Dependency>
-            <Dependency>gettext</Dependency>
-            <Dependency>util-linux</Dependency>
+<!--             <Dependency>libutil-linux</Dependency> -->
+            <Dependency>gettext-devel</Dependency>
+<!--             <Dependency>util-linux</Dependency> -->
         </BuildDependencies>
         <Patches>
             <Patch level="1">ntfs-3g.patch</Patch>
@@ -68,7 +68,7 @@
 
     <History>
         <Update release="1">
-            <Date>2016-03-05</Date>
+            <Date>2016-03-19</Date>
             <Version>1.42.13</Version>
             <Comment>First release</Comment>
             <Name>Alihan Öztürk</Name>
