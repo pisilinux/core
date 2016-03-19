@@ -31,12 +31,9 @@
     </Source>
     <Package>
         <Name>glibc</Name>
-        <Conflicts>
-            <Package releaseTo="1">timezone</Package>
-        </Conflicts>
         <RuntimeDependencies>
             <Dependency>gettext</Dependency>
-            <Dependency releaseFrom="2">timezone</Dependency>
+            <Dependency versionFrom="2016a">timezone</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="config">/etc</Path>
