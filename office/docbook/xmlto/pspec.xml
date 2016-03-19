@@ -1,4 +1,3 @@
-
 <?xml version="1.0" ?>
 <!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
@@ -15,7 +14,7 @@
         <Description>The purpose of xmlto is to convert an XML file to the desired format using whatever means necessary.</Description>
         <Archive sha1sum="235feb4d2aeccf7467f458a3e18b20445f89cc0f" type="targz">https://fedorahosted.org/releases/x/m/xmlto/xmlto-0.0.28.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>libxslt</Dependency>
+            <Dependency>libxslt-devel</Dependency>
             <Dependency>util-linux</Dependency>
             <Dependency>docbook-xsl</Dependency>
             <Dependency>docbook-xml</Dependency>
@@ -41,7 +40,7 @@
 
     <History>
         <Update release="1">
-            <Date>2016-03-05</Date>
+            <Date>2016-03-19</Date>
             <Version>0.0.28</Version>
             <Comment>First release</Comment>
             <Name>Alihan Öztürk</Name>
