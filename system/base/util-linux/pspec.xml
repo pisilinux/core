@@ -1,4 +1,3 @@
-
 <?xml version="1.0" ?>
 <!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
@@ -48,9 +47,6 @@
             <!--<Dependency>utempter</Dependency>-->
             <Dependency>libcap-ng</Dependency>
         </RuntimeDependencies>
-        <Conflicts>
-            <Package releaseTo="8">util-linux</Package>
-        </Conflicts>
         <Files>
             <Path fileType="config">/etc</Path>
             <Path fileType="executable">/bin</Path>
@@ -76,9 +72,6 @@
         <RuntimeDependencies>
             <Dependency>libutil-linux</Dependency>
         </RuntimeDependencies>
-        <Conflicts>
-            <Package releaseTo="8">uuidd</Package>
-        </Conflicts>
         <!-- FIXME: Add COMAR service -->
         <Files>
             <Path fileType="executable">/usr/bin/uuidgen</Path>
@@ -99,10 +92,6 @@
         <RuntimeDependencies>
             <Dependency>python</Dependency>
         </RuntimeDependencies>
-        <Conflicts>
-            <Package releaseTo="8">libblkid</Package>
-            <Package releaseTo="8">libuuid</Package>
-        </Conflicts>
         <Replaces>
             <Package>libblkid</Package>
             <Package>libuuid</Package>
@@ -113,7 +102,6 @@
             <Path fileType="man">/usr/share/man/man3/uuid*</Path>
             <Path fileType="man">/usr/share/man/man3/libblkid*</Path>
             <Path fileType="man">/usr/share/man/man8/blkid*</Path>
-
         </Files>
     </Package>
 
@@ -125,10 +113,6 @@
         <RuntimeDependencies>
             <Dependency release="current">libutil-linux</Dependency>
         </RuntimeDependencies>
-        <Conflicts>
-            <Package releaseTo="8">libblkid-devel</Package>
-            <Package releaseTo="8">libuuid-devel</Package>
-        </Conflicts>
         <Replaces>
             <Package>libblkid-devel</Package>
             <Package>libuuid-devel</Package>
@@ -147,10 +131,6 @@
         <RuntimeDependencies>
             <Dependency>glibc-32bit</Dependency>
         </RuntimeDependencies>
-        <Conflicts>
-            <Package releaseTo="8">libblkid-32bit</Package>
-            <Package releaseTo="8">libuuid-32bit</Package>
-        </Conflicts>
         <Replaces>
             <Package>libblkid-32bit</Package>
             <Package>libuuid-32bit</Package>
