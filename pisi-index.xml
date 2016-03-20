@@ -1242,7 +1242,7 @@
         </Package>
         <History>
             <Update release="1">
-                <Date>2016-03-25</Date>
+                <Date>2016-03-20</Date>
                 <Version>5.0</Version>
                 <Comment>First release</Comment>
                 <Name>Alihan Öztürk</Name>
@@ -1362,7 +1362,7 @@
             <Description xml:lang="tr">xmlto uygulamasının amacı verilen bir XML dosyasını istenen bir biçime dönüştürmektir.</Description>
             <Archive type="targz" sha1sum="235feb4d2aeccf7467f458a3e18b20445f89cc0f">https://fedorahosted.org/releases/x/m/xmlto/xmlto-0.0.28.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency>libxslt</Dependency>
+                <Dependency>libxslt-devel</Dependency>
                 <Dependency>util-linux</Dependency>
                 <Dependency>docbook-xsl</Dependency>
                 <Dependency>docbook-xml</Dependency>
@@ -1384,7 +1384,7 @@
         </Package>
         <History>
             <Update release="1">
-                <Date>2016-03-05</Date>
+                <Date>2016-03-19</Date>
                 <Version>0.0.28</Version>
                 <Comment>First release</Comment>
                 <Name>Alihan Öztürk</Name>
@@ -1503,7 +1503,7 @@
         </Package>
         <History>
             <Update release="1">
-                <Date>2016-03-13</Date>
+                <Date>2016-03-19</Date>
                 <Version>2.02_beta2</Version>
                 <Comment>First release</Comment>
                 <Name>Alihan Öztürk</Name>
@@ -2466,9 +2466,7 @@
             <Archive type="targz" sha1sum="77d1412472ac5a67f8954166ec16c37616074c37">mirrors://sourceforge/e2fsprogs/e2fsprogs-1.42.13.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>libutil-linux-devel</Dependency>
-                <Dependency>libutil-linux</Dependency>
-                <Dependency>gettext</Dependency>
-                <Dependency>util-linux</Dependency>
+                <Dependency>gettext-devel</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">ntfs-3g.patch</Patch>
@@ -2512,7 +2510,7 @@
         </Package>
         <History>
             <Update release="1">
-                <Date>2016-03-05</Date>
+                <Date>2016-03-19</Date>
                 <Version>1.42.13</Version>
                 <Comment>First release</Comment>
                 <Name>Alihan Öztürk</Name>
@@ -2977,9 +2975,6 @@
                 <Path fileType="data">/usr/share/bash-completion/completions</Path>
                 <Path fileType="localedata">/usr/share/locale</Path>
             </Files>
-            <Conflicts>
-                <Package releaseTo="8">util-linux</Package>
-            </Conflicts>
         </Package>
         <Package>
             <Name>uuidd</Name>
@@ -2998,9 +2993,6 @@
                 <Path fileType="man">/usr/share/man/man1/uuidgen.1</Path>
                 <Path fileType="man">/usr/share/man/man8/uuidd.8</Path>
             </Files>
-            <Conflicts>
-                <Package releaseTo="8">uuidd</Package>
-            </Conflicts>
             <AdditionalFiles>
                 <AdditionalFile target="/usr/lib/tmpfiles.d/uuidd.conf" permission="0644" owner="root">uuidd.tmpfiles</AdditionalFile>
             </AdditionalFiles>
@@ -3020,10 +3012,6 @@
                 <Path fileType="man">/usr/share/man/man3/libblkid*</Path>
                 <Path fileType="man">/usr/share/man/man8/blkid*</Path>
             </Files>
-            <Conflicts>
-                <Package releaseTo="8">libblkid</Package>
-                <Package releaseTo="8">libuuid</Package>
-            </Conflicts>
             <Replaces>
                 <Package>libblkid</Package>
                 <Package>libuuid</Package>
@@ -3042,10 +3030,6 @@
                 <Path fileType="header">/usr/include/</Path>
                 <Path fileType="data">/usr/lib/pkgconfig/*.pc</Path>
             </Files>
-            <Conflicts>
-                <Package releaseTo="8">libblkid-devel</Package>
-                <Package releaseTo="8">libuuid-devel</Package>
-            </Conflicts>
             <Replaces>
                 <Package>libblkid-devel</Package>
                 <Package>libuuid-devel</Package>
@@ -3063,10 +3047,6 @@
             <Files>
                 <Path fileType="library">/usr/lib32/</Path>
             </Files>
-            <Conflicts>
-                <Package releaseTo="8">libblkid-32bit</Package>
-                <Package releaseTo="8">libuuid-32bit</Package>
-            </Conflicts>
             <Replaces>
                 <Package>libblkid-32bit</Package>
                 <Package>libuuid-32bit</Package>
@@ -7147,7 +7127,7 @@
                 <Dependency>python-psutil</Dependency>
                 <Dependency>libunwind</Dependency>
                 <Dependency>python-pyliblzma</Dependency>
-                <Dependency releaseFrom="16">mudur</Dependency>
+                <Dependency versionFrom="4.4.0">mudur</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin</Path>
@@ -7178,7 +7158,7 @@
         </Package>
         <History>
             <Update release="1">
-                <Date>2015-08-31</Date>
+                <Date>2016-03-19</Date>
                 <Version>2.6</Version>
                 <Comment>First release</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -8697,9 +8677,6 @@
                 <Path fileType="data">/usr/share/curl</Path>
                 <Path fileType="data">/usr/share/zsh</Path>
             </Files>
-            <Conflicts>
-                <Package versionTo="5">curl-devel</Package>
-            </Conflicts>
         </Package>
         <Package>
             <Name>curl-devel</Name>
@@ -8889,7 +8866,7 @@
             <Name>glibc</Name>
             <RuntimeDependencies>
                 <Dependency>gettext</Dependency>
-                <Dependency releaseFrom="2">timezone</Dependency>
+                <Dependency versionFrom="2016a">timezone</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="config">/etc</Path>
@@ -8905,9 +8882,6 @@
                 <Path fileType="executable">/sbin</Path>
                 <Path fileType="data">/var</Path>
             </Files>
-            <Conflicts>
-                <Package releaseTo="1">timezone</Package>
-            </Conflicts>
             <Provides>
                 <COMAR script="package.py">System.Package</COMAR>
                 <COMAR script="nscd.py" name="nscd">System.Service</COMAR>
@@ -8937,6 +8911,9 @@
             <Summary xml:lang="en">32-bit shared libraries for glibc</Summary>
             <PartOf>system.base</PartOf>
             <BuildType>emul32</BuildType>
+            <BuildDependencies>
+                <Dependency>glibc-32bit</Dependency>
+            </BuildDependencies>
             <RuntimeDependencies>
                 <Dependency release="1">glibc</Dependency>
             </RuntimeDependencies>
@@ -10861,7 +10838,7 @@
         </Package>
         <History>
             <Update release="1">
-                <Date>2016-02-29</Date>
+                <Date>2016-03-20</Date>
                 <Version>2.7.5</Version>
                 <Comment>First release</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -11285,6 +11262,7 @@
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>isl-devel</Dependency>
                 <Dependency>elfutils</Dependency>
+                <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">pisilinux/64.patch</Patch>
@@ -11390,7 +11368,7 @@
         </Package>
         <History>
             <Update release="1">
-                <Date>2016-02-05</Date>
+                <Date>2016-03-20</Date>
                 <Version>5.3.0</Version>
                 <Comment>First release</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -11840,8 +11818,8 @@
             <Description xml:lang="tr">Linux Kernel&apos;in seccomp süzgecine yüksek seviyeli arayüz</Description>
             <Archive type="targz" sha1sum="64f37385851a107a086d2d13e47882063e64e3c1">https://github.com/seccomp/libseccomp/archive/v2.3.0.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency>glibc</Dependency>
-                <Dependency>util-linux</Dependency>
+                <Dependency>glibc-devel</Dependency>
+                <Dependency>libutil-linux-devel</Dependency>
             </BuildDependencies>
             <SourceURI>system/devel/libseccomp/pspec.xml</SourceURI>
         </Source>
@@ -11866,7 +11844,7 @@
         </Package>
         <History>
             <Update release="1">
-                <Date>2016-03-13</Date>
+                <Date>2016-03-19</Date>
                 <Version>2.3.0</Version>
                 <Comment>First release</Comment>
                 <Name>Ertuğrul Erata</Name>
