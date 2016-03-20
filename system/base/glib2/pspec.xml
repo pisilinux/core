@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>A library of handy utility functions</Summary>
         <Description>glib2 is the low-level core library that forms the basis for projects such as GTK+ and GNOME. It provides data structure handling for C, portability wrappers, and interfaces for such runtime functionality as an event loop, threads, dynamic loading, and an object system.</Description>
-        <Archive sha1sum="685b3c0529c4d1b7a5e4931bfe2319e5928e4a53" type="tarxz">mirrors://gnome/glib/2.44/glib-2.44.0.tar.xz</Archive>
+        <Archive sha1sum="0138872238ca27a00f68918bbe218658d5806ffa" type="tarxz">mirrors://gnome/glib/2.47/glib-2.47.92.tar.xz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="8.36">libpcre-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
@@ -80,6 +80,7 @@
             <Path fileType="data">/usr/share/glib-2.0/gdb</Path>
             <Path fileType="data">/usr/share/gdb/auto-load/libglib-2.0.so.*-gdb.py*</Path>
             <Path fileType="data">/usr/share/gdb/auto-load/libgobject-2.0.so.*-gdb.py*</Path>
+	    <Path fileType="data">/usr/share/gettext/its/</Path>
             <Path fileType="man">/usr/share/man/man3</Path>
             <Path fileType="man">/usr/share/man/man1/glib-genmarshal.1</Path>
             <Path fileType="man">/usr/share/man/man1/glib-gettextize.1</Path>
@@ -129,6 +130,13 @@
     </Package>
 
     <History>
+      <Update release="15">
+            <Date>2016-03-18</Date>
+            <Version>2.47.92</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ali Algul(gulle)</Name>
+            <Email>alialgul@pisilinux.org</Email>
+        </Update>
         <Update release="14">
             <Date>2015-04-08</Date>
             <Version>2.44.0</Version>
