@@ -93,8 +93,11 @@ def build():
 
 def check():
      shelltools.cd("build")
-     autotools.make("check || true")
 
+     if get.buildTYPE() != "emul32":
+        autotools.make("check || true")
+     else:
+        pass
 
 def install():
     shelltools.cd("build")

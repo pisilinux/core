@@ -23,8 +23,8 @@ def setup():
 def build():
     autotools.make('LDFLAGS="%s"' % get.LDFLAGS())
 
-def build():
-    autotools.make("check")
+#def check():
+#    autotools.make("check")
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
