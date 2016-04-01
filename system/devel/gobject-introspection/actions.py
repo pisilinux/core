@@ -11,7 +11,7 @@ from pisi.actionsapi import get
 
 
 def setup():
-    autotools.autoreconf("-fiv")
+    #autotools.autoreconf("-fiv")
     autotools.configure("--disable-static \
                          --disable-doctool")
     
