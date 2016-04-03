@@ -41,9 +41,6 @@
         <Name>readline-devel</Name>
         <PartOf>system.devel</PartOf>
         <Summary>Development files for readline</Summary>
-        <BuildDependencies>
-            <Dependency>glibc-32bit</Dependency>
-        </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">readline</Dependency>
         </RuntimeDependencies>
@@ -60,6 +57,7 @@
         <BuildType>emul32</BuildType>
         <BuildDependencies>
             <Dependency>ncurses-32bit</Dependency>
+            <Dependency>glibc-32bit</Dependency>
         </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">readline</Dependency>

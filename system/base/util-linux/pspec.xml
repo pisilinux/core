@@ -22,7 +22,6 @@
             <Dependency>shadow</Dependency>
             <Dependency>ncurses-devel</Dependency>
             <Dependency>libcap-ng-devel</Dependency>
-            <Dependency>glibc-32bit</Dependency>
             <!-- <Dependency releaseFrom="2">utempter-devel</Dependency>-->
         </BuildDependencies>
         <Patches>
@@ -128,6 +127,9 @@
         <PartOf>emul32</PartOf>
         <Summary>32-bit shared libraries for libutil-linux</Summary>
         <BuildType>emul32</BuildType>
+        <BuildDependencies>
+            <Dependency>glibc-32bit</Dependency>
+        </BuildDependencies>
         <RuntimeDependencies>
             <Dependency>glibc-32bit</Dependency>
         </RuntimeDependencies>
