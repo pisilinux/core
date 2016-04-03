@@ -13,7 +13,7 @@ fallback = http://source.pisilinux.org/1.0
 generateDebug = False
 jobs = -j5
 ldflags = -Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--sort-common
-ignored_build_types = emul32
+ignored_build_types = emul32,_emul32
 
 [directories]
 cache_root_dir = /var/cache/pisi
