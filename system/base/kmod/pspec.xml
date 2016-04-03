@@ -17,15 +17,13 @@
         <BuildDependencies>
             <Dependency>chrpath</Dependency>
             <!--<Dependency>libxslt</Dependency>-->
-            <Dependency>xz-32bit</Dependency>
             <Dependency>xz-devel</Dependency>
-            <Dependency>zlib-32bit</Dependency>
             <Dependency>zlib-devel</Dependency>
             <Dependency>kernel-module-headers</Dependency>
         </BuildDependencies>
-	<Patches>
-	  <Patch level="1">kmod-15-dynamic-kmod.patch</Patch>
-	</Patches>
+        <Patches>
+            <Patch level="1">kmod-15-dynamic-kmod.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
@@ -96,6 +94,11 @@
         <PartOf>emul32</PartOf>
         <Summary>32bit libraries of libkmod</Summary>
         <BuildType>emul32</BuildType>
+        <BuildDependencies>
+            <Dependency>xz-32bit</Dependency>
+            <Dependency>zlib-32bit</Dependency>
+            <Dependency>glibc-32bit</Dependency>
+        </BuildDependencies>
         <RuntimeDependencies>
             <Dependency>xz-32bit</Dependency>
             <Dependency>zlib-32bit</Dependency>
