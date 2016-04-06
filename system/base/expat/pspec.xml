@@ -16,7 +16,7 @@
         <Archive sha1sum="b08197d146930a5543a7b99e871cba3da614f6f0" type="targz">mirrors://sourceforge/expat/expat-2.1.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>gnuconfig</Dependency>
-	    <Dependency>glibc-devel</Dependency>
+            <Dependency>glibc-devel</Dependency>
         </BuildDependencies>
         <Patches>
         </Patches>
@@ -36,9 +36,6 @@
         <Name>expat-devel</Name>
         <PartOf>system.devel</PartOf>
         <Summary>Development files for expat</Summary>
-        <BuildDependencies>
-            <Dependency>glibc-32bit</Dependency>
-        </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">expat</Dependency>
         </RuntimeDependencies>
@@ -55,6 +52,9 @@
         <PartOf>emul32</PartOf>
         <Summary>32-bit shared libraries for expat</Summary>
         <BuildType>emul32</BuildType>
+        <BuildDependencies>
+            <Dependency>glibc-32bit</Dependency>
+        </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">expat</Dependency>
         </RuntimeDependencies>
@@ -65,7 +65,7 @@
 
     <History>
         <Update release="1">
-            <Date>2016-03-02</Date>
+            <Date>2016-04-06</Date>
             <Version>2.1.0</Version>
             <Comment>First release</Comment>
             <Name>Ertuğrul Erata</Name>
