@@ -1,0 +1,41 @@
+
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>busybox-mkinitcpio</Name>
+        <Homepage>http://www.busybox.net</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>Statically linked binary providing simplified versions of system commands</Summary>
+        <Description>busybox is a single binary which includes versions of a large number of system commands, including a shell.</Description>
+        <Archive sha1sum="157d14d24748b4505b1a418535688706a2b81680" type="tarbz2">http://busybox.net/downloads/busybox-1.24.1.tar.bz2</Archive>
+        <AdditionalFiles>
+            <AdditionalFile target=".config">config</AdditionalFile>
+        </AdditionalFiles>
+        <Patches>
+            <Patch level="1">fix-include.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>busybox-mkinitcpio</Name>
+        <Files>
+            <Path fileType="executable">/usr/lib/initcpio/busybox</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2016-04-23</Date>
+            <Version>1.24.1</Version>
+            <Comment>First release</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
