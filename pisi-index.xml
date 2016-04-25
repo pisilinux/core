@@ -400,6 +400,7 @@
             <Package>gpicview</Package>
             <Package>lxlauncher</Package>
             <Package>screengrab</Package>
+            <Package>glibc-32bit</Package>
         </Obsoletes>
     </Distribution>
     <SpecFile>
@@ -4424,6 +4425,10 @@
                 <Path fileType="localedata">/usr/share/locale/locale.alias</Path>
                 <Path fileType="executable">/sbin</Path>
                 <Path fileType="data">/var</Path>
+                <Path fileType="config">/etc/ld.so.conf.d/60-glibc-32bit.conf</Path>
+                <Path fileType="library">/usr/lib32</Path>
+                <Path fileType="library">/lib32</Path>
+                <Path fileType="library">/lib/ld-linux.so.2</Path>
             </Files>
             <Provides>
                 <COMAR script="package.py">System.Package</COMAR>
@@ -4439,7 +4444,7 @@
             <Name>glibc-devel</Name>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">glibc</Dependency>
+                <Dependency release="2">glibc</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -4450,22 +4455,18 @@
             </Files>
         </Package>
         <Package>
-            <Name>glibc-32bit</Name>
-            <Summary xml:lang="en">32-bit shared libraries for glibc</Summary>
-            <PartOf>system.base</PartOf>
+            <Name>glibc-doc-32bit</Name>
+            <Summary xml:lang="en">32-bit doc for glibc</Summary>
             <BuildType>emul32</BuildType>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="1">glibc</Dependency>
+                <Dependency release="2">glibc</Dependency>
             </RuntimeDependencies>
             <Files>
-                <Path fileType="config">/etc/ld.so.conf.d/60-glibc-32bit.conf</Path>
-                <Path fileType="library">/usr/lib32</Path>
-                <Path fileType="library">/lib32</Path>
-                <Path fileType="library">/lib/ld-linux.so.2</Path>
+                <Path fileType="config">/usr/lib32/glibc32.txt</Path>
             </Files>
+            <AdditionalFiles>
+                <AdditionalFile target="/usr/lib32/glibc32.txt" permission="0644" owner="root">glibc32.txt</AdditionalFile>
+            </AdditionalFiles>
         </Package>
         <Package>
             <Name>glibc-docs</Name>
@@ -6156,6 +6157,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-25</Date>
+                <Version>2.23</Version>
+                <Comment>Remove glibc-32bit repo</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-27</Date>
                 <Version>2.23</Version>
@@ -12667,7 +12675,9 @@
             <IsA>app:console</IsA>
             <PartOf>system.boot</PartOf>
             <Summary xml:lang="en">Statically linked binary providing simplified versions of system commands</Summary>
+            <Summary xml:lang="tr">Statik bağlanmış sistem komutları bütünü</Summary>
             <Description xml:lang="en">busybox is a single binary which includes versions of a large number of system commands, including a shell.</Description>
+            <Description xml:lang="tr">busybox, kabuk da dahil olmak üzere çeşitli sistem komutlarını içeren tek bir çalıştırılabilir dosyadır.</Description>
             <Archive type="tarbz2" sha1sum="157d14d24748b4505b1a418535688706a2b81680">http://busybox.net/downloads/busybox-1.24.1.tar.bz2</Archive>
             <AdditionalFiles>
                 <AdditionalFile target=".config">config</AdditionalFile>
@@ -13431,20 +13441,25 @@
     <SpecFile>
         <Source>
             <Name>mkinitcpio</Name>
-            <Homepage>https://dracut.wiki.kernel.org/index.php/Main_Page</Homepage>
+            <Homepage>https://projects.archlinux.org/mkinitcpio.git/</Homepage>
             <Packager>
                 <Name>Pisi Linux Admins</Name>
                 <Email>admin@pisilinux.org</Email>
             </Packager>
-            <License>GPLv3</License>
+            <License>GPL</License>
             <PartOf>kernel.tools</PartOf>
-            <Summary xml:lang="en">Initramfs generation tool</Summary>
-            <Description xml:lang="en">Dracut is a generic, modular, cross-distribution initramfs generation tool.</Description>
+            <Summary xml:lang="en">Modular initramfs image creation utility</Summary>
+            <Summary xml:lang="tr">İnitramfs oluşturmak için araç</Summary>
+            <Description xml:lang="en">mkinitcpio is a generic, modular, cross-distribution initramfs generation tool.</Description>
+            <Description xml:lang="tr">Mkinitcpio çapraz platform initramfs oluşturmak için kullanılan bir araçtır.</Description>
             <Archive type="targz" sha1sum="40cd47f81adb23186aa685b92bfb42b804e86894">https://github.com/bferturk/mkinitcpio/archive/v19pisi.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>libkmod-devel</Dependency>
                 <Dependency>kmod</Dependency>
                 <Dependency>asciidoc</Dependency>
+                <Dependency>libxslt-devel</Dependency>
+                <Dependency>man-pages</Dependency>
+                <Dependency>man-db</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/tools/mkinitcpio/pspec.xml</SourceURI>
         </Source>
@@ -13456,6 +13471,7 @@
                 <Dependency>libarchive</Dependency>
                 <Dependency>kmod</Dependency>
                 <Dependency>libkmod</Dependency>
+                <Dependency>busybox-mkinitcpio</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin</Path>
@@ -14147,6 +14163,53 @@
             </Update>
         </History>
     </SpecFile>
+    <Package>
+        <Name>mkinitcpio</Name>
+        <Summary xml:lang="en">Modular initramfs image creation utility</Summary>
+        <Summary xml:lang="tr">İnitramfs oluşturmak için araç</Summary>
+        <Description xml:lang="en">mkinitcpio is a generic, modular, cross-distribution initramfs generation tool.</Description>
+        <Description xml:lang="tr">Mkinitcpio çapraz platform initramfs oluşturmak için kullanılan bir araçtır.</Description>
+        <PartOf>kernel.tools</PartOf>
+        <License>GPL</License>
+        <RuntimeDependencies>
+            <Dependency>xz</Dependency>
+            <Dependency>bzip2</Dependency>
+            <Dependency>libarchive</Dependency>
+            <Dependency>kmod</Dependency>
+            <Dependency>libkmod</Dependency>
+            <Dependency>busybox-mkinitcpio</Dependency>
+        </RuntimeDependencies>
+        <Provides>
+            <COMAR script="pakhandler.py">System.PackageHandler</COMAR>
+        </Provides>
+        <History>
+            <Update release="1">
+                <Date>2016-04-23</Date>
+                <Version>19</Version>
+                <Comment>First release</Comment>
+                <Name>Stefan Gronewold (groni)</Name>
+                <Email>groni@pisilinux.org</Email>
+            </Update>
+        </History>
+        <BuildHost>farmV2</BuildHost>
+        <Distribution>PisiLinux</Distribution>
+        <DistributionRelease>2.0</DistributionRelease>
+        <Architecture>x86_64</Architecture>
+        <InstalledSize>129776</InstalledSize>
+        <PackageSize>40373</PackageSize>
+        <PackageHash>9ea9b92b927f50aabd2b3b47f4abe084248276d4</PackageHash>
+        <InstallTarHash>da39a3ee5e6b4b0d3255bfef95601890afd80709</InstallTarHash>
+        <PackageURI>kernel/tools/mkinitcpio/mkinitcpio-19-1-p2-x86_64.pisi</PackageURI>
+        <PackageFormat>1.2</PackageFormat>
+        <Source>
+            <Name>mkinitcpio</Name>
+            <Homepage>https://projects.archlinux.org/mkinitcpio.git/</Homepage>
+            <Packager>
+                <Name>Pisi Linux Admins</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Packager>
+        </Source>
+    </Package>
     <Component>
         <Name>system</Name>
         <LocalName xml:lang="en">FIXME</LocalName>
