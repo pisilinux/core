@@ -48,6 +48,10 @@
             <Path fileType="localedata">/usr/share/locale/locale.alias</Path>
             <Path fileType="executable">/sbin</Path>
             <Path fileType="data">/var</Path>
+            <Path fileType="config">/etc/ld.so.conf.d/60-glibc-32bit.conf</Path>
+            <Path fileType="library">/usr/lib32</Path>
+            <Path fileType="library">/lib32</Path>
+            <Path fileType="library">/lib/ld-linux.so.2</Path>
         </Files>
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/etc/host.conf">host.conf</AdditionalFile>
@@ -76,22 +80,19 @@
     </Package>
 
     <Package>
-        <Name>glibc-32bit</Name>
-        <PartOf>system.base</PartOf>
-        <Summary>32-bit shared libraries for glibc</Summary>
+        <Name>glibc-doc-32bit</Name>
+        <!-- Do not write dep. any package-->
+        <Summary>32-bit doc for glibc</Summary>
         <BuildType>emul32</BuildType>
-        <BuildDependencies>
-            <Dependency>glibc-32bit</Dependency><!-- cyclic dep? -->
-        </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">glibc</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="config">/etc/ld.so.conf.d/60-glibc-32bit.conf</Path>
-            <Path fileType="library">/usr/lib32</Path>
-            <Path fileType="library">/lib32</Path>
-            <Path fileType="library">/lib/ld-linux.so.2</Path>
-        </Files>
+            <Path fileType="config">/usr/lib32/glibc32.txt</Path>
+         </Files>   
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib32/glibc32.txt">glibc32.txt</AdditionalFile>
+        </AdditionalFiles>
     </Package>
 
     <Package>
@@ -1946,6 +1947,13 @@
     </Package>
 
     <History>
+        <Update release="2">
+            <Date>2016-04-25</Date>
+            <Version>2.23</Version>
+            <Comment>Remove glibc-32bit repo</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="1">
             <Date>2016-02-27</Date>
             <Version>2.23</Version>
