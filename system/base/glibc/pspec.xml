@@ -35,6 +35,12 @@
             <Dependency>gettext</Dependency>
             <Dependency versionFrom="2016a">timezone</Dependency>
         </RuntimeDependencies>
+        <Replaces>
+          <Package>glibc-32bit</Package>
+        </Replaces>
+        <Conflicts>
+          <Package>glibc-32bit</Package>
+        </Conflicts> 
         <Files>
             <Path fileType="config">/etc</Path>
             <Path fileType="library">/lib</Path>
@@ -1948,7 +1954,7 @@
 
     <History>
         <Update release="2">
-            <Date>2016-04-25</Date>
+            <Date>2016-04-26</Date>
             <Version>2.23</Version>
             <Comment>Remove glibc-32bit repo</Comment>
             <Name>Ertuğrul Erata</Name>
