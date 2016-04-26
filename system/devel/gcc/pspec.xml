@@ -15,7 +15,7 @@
         <IsA>library</IsA>
         <Summary>The GNU Compiler Collection, includes C, C++, Objective-C and Fortran compilers</Summary>
         <Description>The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, as well as libraries for these languages</Description>
-        <Archive sha1sum="0612270b103941da08376df4d0ef4e5662a2e9eb" type="tarbz2">ftp://gd.tuwien.ac.at/gnu/gcc/releases/gcc-5.3.0/gcc-5.3.0.tar.bz2</Archive>
+        <Archive sha1sum="0612270b103941da08376df4d0ef4e5662a2e9eb" type="tarbz2">https://ftp.gnu.org/gnu/gcc/gcc-5.3.0/gcc-5.3.0.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>binutils</Dependency>
             <Dependency>bison</Dependency>
@@ -33,15 +33,11 @@
             <Dependency>zlib-devel</Dependency>
             <Dependency>isl-devel</Dependency>
             <Dependency>elfutils</Dependency>
-            <Dependency>glibc-32bit</Dependency>
         </BuildDependencies>
         <Patches>
             <!-- Pisilinux Patches -->
             <!-- Fix paths in 64bit -->
             <Patch level="1">pisilinux/64.patch</Patch>
-            <!--Patch>gcc-4.9-isl-0.13-hack.patch</Patch-->
-            <!--Patch level="0">pisilinux/gcc-4.8-filename-output.patch</Patch-->
-            <!-- Add gcc options to output file in PISILINUX.OPTs section -->
             <Patch level="1">pisilinux/gcc_47_based-record_gcc_options.patch</Patch>
         </Patches>
     </Source>
@@ -151,6 +147,13 @@
     </Package>
 
     <History>
+        <Update release="2">
+            <Date>2016-04-26</Date>
+            <Version>5.3.0</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="1">
             <Date>2016-03-20</Date>
             <Version>5.3.0</Version>
