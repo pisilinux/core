@@ -1,4 +1,3 @@
-
 <?xml version="1.0" ?>
 <!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
@@ -59,11 +58,11 @@
         <BuildType>emul32</BuildType>
         <BuildDependencies>
             <Dependency>readline-32bit</Dependency>
-            <Dependency>glibc-32bit</Dependency>
+            
         </BuildDependencies>
         <RuntimeDependencies>
             <Dependency>libgcc</Dependency>
-            <Dependency>glibc-32bit</Dependency>
+            
             <Dependency release="current">libpcre</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -72,6 +71,13 @@
     </Package>
 
     <History>
+        <Update release="2">
+            <Date>2016-04-27</Date>
+            <Version>8.38</Version>
+            <Comment>Release Bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="1">
             <Date>2016-02-25</Date>
             <Version>8.38</Version>
