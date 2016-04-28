@@ -14,27 +14,6 @@
 ###
 ### Stable Queue
 ###
-stable-use-d_seq-to-get-coherency-between-d_inode-and-d_flags.patch
-stable-drivers-sh-restore-legacy-clock-domain-on-superh-platforms.patch
-stable-btrfs-fix-deadlock-running-delayed-iputs-at-transaction-commit-time.patch
-stable-btrfs-fix-no_space-in-write-and-rm-loop.patch
-stable-btrfs-async-thread-fix-a-use-after-free-error-for-trace.patch
-stable-drm-amdgpu-mask-out-wc-from-bo-on-unsupported-arches.patch
-stable-block-initialize-max_dev_sectors-to-0.patch
-stable-pci-keystone-fix-msi-code-that-retrieves-struct-pcie_port-pointer.patch
-stable-parisc-fix-ptrace-syscall-number-and-return-value-modification.patch
-stable-mips-kvm-fix-ioctl-error-handling.patch
-stable-kvm-x86-update-tsc-multiplier-on-change.patch
-stable-fbcon-set-a-default-value-to-blink-interval.patch
-stable-cifs-fix-out-of-bounds-access-in-lease-parsing.patch
-stable-cifs-fix-smb2-interim-response-processing-for-read-requests.patch
-stable-fix-cifs_uniqueid_to_ino_t-function-for-s390x.patch
-stable-vfio-fix-ioctl-error-handling.patch
-stable-kvm-x86-fix-root-cause-for-missed-hardware-breakpoints.patch
-stable-arm-arm64-kvm-fix-ioctl-error-handling.patch
-stable-iommu-amd-apply-workaround-for-ats-write-permission-check.patch
-stable-iommu-amd-fix-boot-warning-when-device-00-00.0-is-not-iommu-covered.patch
-stable-iommu-vt-d-use-bus_notify_removed_device-in-hotplug-path.patch
 
 ###
 ### Arch x86
@@ -142,14 +121,13 @@ block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch
 
 # ahci ids
 ahci-add-new-Intel-device-IDs.patch
-ata-Adding-Intel-Lewisburg-device-IDs-for-SATA.patch
 
-# fix unwanted automounting of partitions
-ata-ahci-don-t-mark-HotPlugCapable-Ports-as-external.patch
+###
+### Char
+###
 
-# libata fixes
-libata-Align-ata_device-s-id-on-a-cacheline.patch
-libata-fix-HDIO_GET_32BIT-ioctl.patch
+# hard locks Dell R720xd
+Revert-ipmi-Start-the-timer-and-thread-on-internal-m.patch
 
 ###
 ### File-system
@@ -161,6 +139,9 @@ fs-aufs-4.4-modular.patch
 
 # ovl fixes
 fs-ovl-move-super-block-magic-number-to-magic.h.patch
+
+# CVE-2016-2847
+pipe-limit-the-per-user-amount-of-pages-allocated-in-pipes_CVE-2016-2847.patch
 
 ###
 ### FireWire
@@ -271,6 +252,10 @@ net-netfilter-IFWLOG-remove-unused-label.patch
 net-netfilter-psd.patch
 net-netfilter-psd-mdv.patch
 net-netfilter-psd-2.6.35-buildfix.patch
+
+# CVE pending
+net-netfilter-x_tables-check-for-size-overflow.patch
+net-netfilter-x_tables-deal-with-bogus-nextoffset-values.patch
 
 ###
 ### Platform drivers

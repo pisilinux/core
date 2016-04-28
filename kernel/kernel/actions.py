@@ -34,3 +34,18 @@ def install():
 
     # Generate some module lists to use within mkinitramfs
     shelltools.system("./generate-module-list %s/lib/modules/%s" % (get.installDIR(), kerneltools.__getSuffix()))
+
+
+    #mkinitcpio default config
+    pisitools.dodir("/etc/mkinitcpio.d")
+    shelltools.touch("linux.preset")
+
+    shelltools.echo("linux.preset", 'ALL_config="/etc/mkinitcpio.conf"\n'+
+
+                    'ALL_kver="/boot/kernel-%s"\n'% get.srcVERSION() +
+
+                    'default_image="/boot/initramfs-%s.img"\n'% get.srcVERSION() +
+
+                    'default_options="-S autodetect"\n')
+
+    pisitools.insinto("/etc/mkinitcpio.d", "linux.preset")
