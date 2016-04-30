@@ -1,5 +1,5 @@
---- grub-2.00/util/grub.d/10_linux.in~	2012-04-18 23:24:38.000000000 +0200
-+++ grub-2.00/util/grub.d/10_linux.in	2012-11-28 22:27:41.652673833 +0100
+--- grub-2.02~beta2.orig/util/grub.d/10_linux.in	2013-12-24 18:45:34.000000000 +0200
++++ grub-2.02~beta2/util/grub.d/10_linux.in	2016-04-28 19:10:54.268739535 +0300
 @@ -29,7 +29,13 @@
  CLASS="--class gnu-linux --class gnu --class os"
  
@@ -14,11 +14,13 @@
 +  fi
  else
    OS="${GRUB_DISTRIBUTOR} GNU/Linux"
-   CLASS="--class $(echo ${GRUB_DISTRIBUTOR} | tr 'A-Z' 'a-z' | cut -d' ' -f1) ${CLASS}"
-@@ -193,6 +199,7 @@
+   CLASS="--class $(echo ${GRUB_DISTRIBUTOR} | tr 'A-Z' 'a-z' | cut -d' ' -f1|LC_ALL=C sed 's,[^[:alnum:]_],_,g') ${CLASS}"
+@@ -186,7 +192,8 @@
+ 
    initrd=
    for i in "initrd.img-${version}" "initrd-${version}.img" "initrd-${version}.gz" \
- 	   "initrd-${version}" "initramfs-${version}.img" \
+-	   "initrd-${version}" "initramfs-${version}.img" \
++	   "initrd-${version}" "initramfs-${version}.img" "initramfs-fallback-${version}.img"\
 +	   "initramfs-${version}.gz" "initramfs-${version}" \
  	   "initrd.img-${alt_version}" "initrd-${alt_version}.img" \
  	   "initrd-${alt_version}" "initramfs-${alt_version}.img" \

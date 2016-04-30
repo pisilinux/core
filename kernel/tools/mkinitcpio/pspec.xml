@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>mkinitcpio</Name>
+        <Homepage>https://projects.archlinux.org/mkinitcpio.git/</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Packager>
+        <License>GPL</License>
+        <Summary>Modular initramfs image creation utility</Summary>
+        <Description>mkinitcpio is a generic, modular, cross-distribution initramfs generation tool.</Description>
+        <Archive sha1sum="40cd47f81adb23186aa685b92bfb42b804e86894" type="targz">https://github.com/bferturk/mkinitcpio/archive/v19pisi.tar.gz</Archive>     
+        <BuildDependencies>
+            <Dependency>libkmod-devel</Dependency>
+            <Dependency>kmod</Dependency>
+            <Dependency>asciidoc</Dependency>
+            <Dependency>libxslt-devel</Dependency>
+            <Dependency>man-pages</Dependency>
+            <Dependency>man-db</Dependency>
+        </BuildDependencies>
+    </Source>
+    
+    <Package>
+        <Name>mkinitcpio</Name>
+        <RuntimeDependencies>
+            <Dependency>xz</Dependency>
+            <Dependency>bzip2</Dependency>
+            <Dependency>libarchive</Dependency>
+            <Dependency>kmod</Dependency>
+            <Dependency>libkmod</Dependency>
+            <Dependency>kernel</Dependency>
+            <Dependency>busybox-mkinitcpio</Dependency>
+        </RuntimeDependencies>
+        <Replaces>
+          <Package>mkinitramfs</Package>
+        </Replaces>
+        <Conflicts>
+          <Package>mkinitramfs</Package>
+        </Conflicts> 
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/etc</Path>
+        </Files>
+        <Provides>
+            <COMAR script="pakhandler.py">System.PackageHandler</COMAR>
+        </Provides>
+    </Package>
+    
+    <History>
+        <Update release="2">
+            <Date>2016-04-27</Date>
+            <Version>19</Version>
+            <Comment>Release Bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2016-04-23</Date>
+            <Version>19</Version>
+            <Comment>First release</Comment>
+            <Name>Stefan Gronewold (groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

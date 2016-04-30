@@ -400,6 +400,7 @@
             <Package>gpicview</Package>
             <Package>lxlauncher</Package>
             <Package>screengrab</Package>
+            <Package>glibc-32bit</Package>
         </Obsoletes>
     </Distribution>
     <SpecFile>
@@ -443,7 +444,7 @@
             <Summary xml:lang="en">Development files for libpng</Summary>
             <Summary xml:lang="tr">libpng için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">libpng</Dependency>
+                <Dependency release="2">libpng</Dependency>
                 <Dependency>zlib-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -464,7 +465,7 @@
                 <Dependency>zlib-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="1">libpng</Dependency>
+                <Dependency release="2">libpng</Dependency>
                 <Dependency>zlib-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -472,6 +473,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.6.21</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>1.6.21</Version>
@@ -664,7 +672,6 @@
             </BuildFlags>
             <RuntimeDependencies>
                 <Dependency>pisi</Dependency>
-                <Dependency>mkinitramfs</Dependency>
                 <Dependency>linux-firmware</Dependency>
                 <Dependency>grub2</Dependency>
             </RuntimeDependencies>
@@ -672,6 +679,7 @@
                 <Path fileType="executable" permanent="true">/boot</Path>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
                 <Path fileType="data">/etc/kernel</Path>
+                <Path fileType="data">/etc/mkinitcpio.d</Path>
             </Files>
             <Provides>
                 <COMAR script="package.py">System.Package</COMAR>
@@ -712,6 +720,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>4.4.4</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Type package="kernel">security</Type>
                 <Date>2016-03-06</Date>
@@ -772,6 +787,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.0.7</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>1.0.7</Version>
@@ -824,12 +846,89 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>4.4.4</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-06</Date>
                 <Version>4.4.4</Version>
                 <Comment>First release</Comment>
                 <Name>Ertuğrul Erata</Name>
                 <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>mkinitcpio</Name>
+            <Homepage>https://projects.archlinux.org/mkinitcpio.git/</Homepage>
+            <Packager>
+                <Name>Pisi Linux Admins</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Packager>
+            <License>GPL</License>
+            <PartOf>kernel.tools</PartOf>
+            <Summary xml:lang="en">Modular initramfs image creation utility</Summary>
+            <Summary xml:lang="tr">İnitramfs oluşturmak için araç</Summary>
+            <Description xml:lang="en">mkinitcpio is a generic, modular, cross-distribution initramfs generation tool.</Description>
+            <Description xml:lang="tr">Mkinitcpio çapraz platform initramfs oluşturmak için kullanılan bir araçtır.</Description>
+            <Archive type="targz" sha1sum="40cd47f81adb23186aa685b92bfb42b804e86894">https://github.com/bferturk/mkinitcpio/archive/v19pisi.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>libkmod-devel</Dependency>
+                <Dependency>kmod</Dependency>
+                <Dependency>asciidoc</Dependency>
+                <Dependency>libxslt-devel</Dependency>
+                <Dependency>man-pages</Dependency>
+                <Dependency>man-db</Dependency>
+            </BuildDependencies>
+            <SourceURI>kernel/tools/mkinitcpio/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>mkinitcpio</Name>
+            <RuntimeDependencies>
+                <Dependency>xz</Dependency>
+                <Dependency>bzip2</Dependency>
+                <Dependency>libarchive</Dependency>
+                <Dependency>kmod</Dependency>
+                <Dependency>libkmod</Dependency>
+                <Dependency>kernel</Dependency>
+                <Dependency>busybox-mkinitcpio</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="data">/usr/share</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+                <Path fileType="data">/etc</Path>
+            </Files>
+            <Conflicts>
+                <Package>mkinitramfs</Package>
+            </Conflicts>
+            <Replaces>
+                <Package>mkinitramfs</Package>
+            </Replaces>
+            <Provides>
+                <COMAR script="pakhandler.py">System.PackageHandler</COMAR>
+            </Provides>
+        </Package>
+        <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>19</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2016-04-23</Date>
+                <Version>19</Version>
+                <Comment>First release</Comment>
+                <Name>Stefan Gronewold (groni)</Name>
+                <Email>groni@pisilinux.org</Email>
             </Update>
         </History>
     </SpecFile>
@@ -880,6 +979,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>5.0.12</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-07</Date>
                 <Version>5.0.12</Version>
@@ -939,6 +1045,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.59</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-07</Date>
                 <Version>1.59</Version>
@@ -985,6 +1098,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.8</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-07</Date>
                 <Version>0.8</Version>
@@ -1048,6 +1168,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>5.0.12</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-07</Date>
                 <Version>5.0.12</Version>
@@ -1095,7 +1222,7 @@
             </BuildFlags>
             <RuntimeDependencies>
                 <Dependency version="4.4.4">kernel</Dependency>
-                <Dependency release="1">module-broadcom-wl-userspace</Dependency>
+                <Dependency release="2">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -1122,6 +1249,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>6.30.223.248</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-07</Date>
                 <Version>6.30.223.248</Version>
@@ -1180,7 +1314,7 @@
             <Summary xml:lang="tr">slang için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">slang</Dependency>
+                <Dependency release="2">slang</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -1190,6 +1324,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.2.4</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2014-05-11</Date>
                 <Version>2.2.4</Version>
@@ -1241,6 +1382,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>5.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-20</Date>
                 <Version>5.0</Version>
@@ -1291,6 +1439,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.79.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2015-03-05</Date>
                 <Version>1.79.1</Version>
@@ -1336,6 +1491,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.6.3</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2014-05-18</Date>
                 <Version>0.6.3</Version>
@@ -1383,6 +1545,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.0.28</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-19</Date>
                 <Version>0.0.28</Version>
@@ -1421,6 +1590,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.71</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>1.71</Version>
@@ -1446,7 +1622,7 @@
             <Archive type="tarxz" sha1sum="1bf580f1e8bce4909a7ac7ca485cee02b00ed383">ftp://alpha.gnu.org/gnu/grub/grub-2.02~beta2.tar.xz</Archive>
             <Archive type="tarxz" sha1sum="4ec712aced1c2b4cb6cd1cbd83fc2154249d6977" target="grub-2.02~beta2/grub-extras">http://source.pisilinux.org/1.0/grub2_extras_915resolution_r10.tar.xz</Archive>
             <Archive type="gz" sha1sum="30797ba7a86fc32213b9ae994c9fa45f37d01170">http://ftp.gnu.org/gnu/unifont/unifont-6.3.20131217/unifont-6.3.20131217.bdf.gz</Archive>
-            <Archive type="tarxz" sha1sum="f87919489d3caa336aac74b39b01b91b1987ba83" target="grub-2.02~beta2/themes">http://source.pisilinux.org/1.0/grub2-theme-pisilinux-0.2.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="8f8790d18341ae86a2129421f47a3e415ab150f5" target="grub-2.02~beta2/themes">https://sourceforge.net/projects/pisilinux/files/source/grub2-theme-pisilinux-0.3.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>autogen</Dependency>
                 <Dependency>binutils</Dependency>
@@ -1463,6 +1639,7 @@
                 <Dependency>lvm2-devel</Dependency>
                 <Dependency>device-mapper-devel</Dependency>
                 <Dependency>gettext-devel</Dependency>
+                <Dependency>noto-fonts</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">pisi_name_and_initramfs.patch</Patch>
@@ -1502,12 +1679,66 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.02_beta2</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
-                <Date>2016-03-19</Date>
+                <Date>2016-04-20</Date>
                 <Version>2.02_beta2</Version>
                 <Comment>First release</Comment>
                 <Name>Alihan Öztürk</Name>
                 <Email>alihan@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>busybox-mkinitcpio</Name>
+            <Homepage>http://www.busybox.net</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>GPLv2</License>
+            <IsA>app:console</IsA>
+            <PartOf>system.boot</PartOf>
+            <Summary xml:lang="en">Statically linked binary providing simplified versions of system commands</Summary>
+            <Summary xml:lang="tr">Statik bağlanmış sistem komutları bütünü</Summary>
+            <Description xml:lang="en">busybox is a single binary which includes versions of a large number of system commands, including a shell.</Description>
+            <Description xml:lang="tr">busybox, kabuk da dahil olmak üzere çeşitli sistem komutlarını içeren tek bir çalıştırılabilir dosyadır.</Description>
+            <Archive type="tarbz2" sha1sum="157d14d24748b4505b1a418535688706a2b81680">http://busybox.net/downloads/busybox-1.24.1.tar.bz2</Archive>
+            <AdditionalFiles>
+                <AdditionalFile target=".config">config</AdditionalFile>
+            </AdditionalFiles>
+            <Patches>
+                <Patch level="1">fix-include.patch</Patch>
+            </Patches>
+            <SourceURI>system/boot/busybox-mkinitcpio/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>busybox-mkinitcpio</Name>
+            <Files>
+                <Path fileType="executable">/usr/lib/initcpio/busybox</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.24.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2016-04-23</Date>
+                <Version>1.24.1</Version>
+                <Comment>First release</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
             </Update>
         </History>
     </SpecFile>
@@ -1568,6 +1799,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>5.22.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-01</Date>
                 <Version>5.22.1</Version>
@@ -1612,6 +1850,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.07</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-03</Date>
                 <Version>1.07</Version>
@@ -1657,6 +1902,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.0.2</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-09</Date>
                 <Version>1.0.2</Version>
@@ -1694,7 +1946,7 @@
             <Summary xml:lang="en">Development files for libestr</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">libestr</Dependency>
+                <Dependency release="2">libestr</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/libestr.h</Path>
@@ -1702,6 +1954,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.1.10</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>0.1.10</Version>
@@ -1742,6 +2001,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>3.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>3.0</Version>
@@ -1798,7 +2064,7 @@
             <Summary xml:lang="tr">pciutils için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">pciutils</Dependency>
+                <Dependency release="2">pciutils</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/lib/pkgconfig</Path>
@@ -1806,6 +2072,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>3.4.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-03</Date>
                 <Version>3.4.1</Version>
@@ -1857,7 +2130,7 @@
             <Summary xml:lang="tr">libgcrypt için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">libgcrypt</Dependency>
+                <Dependency release="2">libgcrypt</Dependency>
                 <Dependency>libgpg-error-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -1876,18 +2149,23 @@
             <BuildType>emul32</BuildType>
             <BuildDependencies>
                 <Dependency>libgpg-error-32bit</Dependency>
-                <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
                 <Dependency>libgpg-error-32bit</Dependency>
-                <Dependency>glibc-32bit</Dependency>
-                <Dependency release="1">libgcrypt</Dependency>
+                <Dependency release="2">libgcrypt</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.6.5</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>1.6.5</Version>
@@ -1914,7 +2192,7 @@
             <Description xml:lang="fr">gzip (GNU zip) est un programme populaire de compression de donnée écrit pour le projet GNU.</Description>
             <Description xml:lang="en">gzip (GNU zip) is a popular data compression program written for the GNU project.</Description>
             <Description xml:lang="tr">Gzip (GNU zip) GNU projesi için geliştirilmiş popüler bir veri sıkıştırma programıdır.</Description>
-            <Archive type="tarxz" sha1sum="05bd01fc90178b806e0c13f9526e2ad392084085">http://ftp.gnu.org/gnu/gzip/gzip-1.6.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="224bc2af5202eccf47f22357023d222011f9de78">http://ftp.gnu.org/gnu/gzip/gzip-1.8.tar.xz</Archive>
             <SourceURI>system/base/gzip/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -1927,6 +2205,20 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2016-04-27</Date>
+                <Version>1.8</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.8</Version>
+                <Comment>Versiyon bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>1.6</Version>
@@ -1973,6 +2265,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.23</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>2.23</Version>
@@ -2021,6 +2320,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.4.9</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-11</Date>
                 <Version>2.4.9</Version>
@@ -2076,6 +2382,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.4.8</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>0.4.8</Version>
@@ -2123,7 +2436,7 @@
             <Summary xml:lang="tr">popt için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">popt</Dependency>
+                <Dependency release="2">popt</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/popt.h</Path>
@@ -2132,6 +2445,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.16</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>1.16</Version>
@@ -2201,6 +2521,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.88</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>2.88</Version>
@@ -2243,6 +2570,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>3.3</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>3.3</Version>
@@ -2286,6 +2620,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>4.04</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-09</Date>
                 <Version>4.04</Version>
@@ -2334,7 +2675,7 @@
             <Summary xml:lang="tr">sysfsutils için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">sysfsutils</Dependency>
+                <Dependency release="2">sysfsutils</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -2342,6 +2683,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.1.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-06</Date>
                 <Version>2.1.0</Version>
@@ -2381,6 +2729,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.5</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-03</Date>
                 <Version>1.5</Version>
@@ -2429,7 +2784,7 @@
             <Summary xml:lang="tr">libssh2 için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">libssh2</Dependency>
+                <Dependency release="2">libssh2</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -2438,6 +2793,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.7.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>1.7.0</Version>
@@ -2500,7 +2862,7 @@
             <Summary xml:lang="tr">e2fsprogs için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">e2fsprogs</Dependency>
+                <Dependency release="2">e2fsprogs</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -2509,6 +2871,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.42.13</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-19</Date>
                 <Version>1.42.13</Version>
@@ -2569,7 +2938,7 @@
             <Summary xml:lang="tr">dbus-glib için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">dbus-glib</Dependency>
+                <Dependency release="2">dbus-glib</Dependency>
                 <Dependency>dbus-devel</Dependency>
                 <Dependency>glib2-devel</Dependency>
             </RuntimeDependencies>
@@ -2580,6 +2949,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.104</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-10</Date>
                 <Version>0.104</Version>
@@ -2613,6 +2989,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>4.7</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-03</Date>
                 <Version>4.7</Version>
@@ -2657,6 +3040,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.7.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-06</Date>
                 <Version>0.7.1</Version>
@@ -2704,6 +3094,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>018</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-09</Date>
                 <Version>018</Version>
@@ -2744,7 +3141,7 @@
             <Summary xml:lang="tr">libffi için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">libffi</Dependency>
+                <Dependency release="2">libffi</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/lib/libffi-*</Path>
@@ -2760,11 +3157,8 @@
             <Summary xml:lang="tr">libffi için 32-bit paylaşımlı kitaplıklar</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="1">libffi</Dependency>
+                <Dependency release="2">libffi</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32/libffi.*</Path>
@@ -2772,6 +3166,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>3.2.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-01</Date>
                 <Version>3.2.1</Version>
@@ -2806,6 +3207,7 @@
             <Name>help2man</Name>
             <RuntimeDependencies>
                 <Dependency>perl-Locale-gettext</Dependency>
+                <Dependency>mkinitcpio</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin</Path>
@@ -2817,6 +3219,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.47.3</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>1.47.3</Version>
@@ -2865,7 +3274,7 @@
             <Summary xml:lang="tr">polkit geliştirme başlıkları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">polkit</Dependency>
+                <Dependency release="2">polkit</Dependency>
                 <Dependency>glib2-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -2907,6 +3316,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.113</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-09</Date>
                 <Version>0.113</Version>
@@ -2942,7 +3358,6 @@
                 <Dependency>shadow</Dependency>
                 <Dependency>ncurses-devel</Dependency>
                 <Dependency>libcap-ng-devel</Dependency>
-                <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">ntfs-3g.patch</Patch>
@@ -3024,7 +3439,7 @@
             <IsA>header</IsA>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">libutil-linux</Dependency>
+                <Dependency release="2">libutil-linux</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/</Path>
@@ -3041,9 +3456,6 @@
             <Summary xml:lang="tr">util-linux için 32-bit paylaşımlı kitaplıklar</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
-            <RuntimeDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32/</Path>
             </Files>
@@ -3053,6 +3465,13 @@
             </Replaces>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.27.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>2.27.1</Version>
@@ -3092,6 +3511,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.21</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>2.21</Version>
@@ -3136,7 +3562,7 @@
             <Summary xml:lang="tr">json-c için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">json-c</Dependency>
+                <Dependency release="2">json-c</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -3149,14 +3575,18 @@
             <Summary xml:lang="en">32-bit shared libraries for json-c</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.12</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>0.12</Version>
@@ -3200,6 +3630,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>3.10.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>3.10.1</Version>
@@ -3253,11 +3690,8 @@
             <Summary xml:lang="en">Development files for readline</Summary>
             <Summary xml:lang="tr">readline için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="1">readline</Dependency>
+                <Dependency release="2">readline</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -3274,15 +3708,21 @@
                 <Dependency>ncurses-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="1">readline</Dependency>
+                <Dependency release="2">readline</Dependency>
                 <Dependency>ncurses-32bit</Dependency>
-                <Dependency>glibc-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>6.3</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-29</Date>
                 <Version>6.3</Version>
@@ -3325,6 +3765,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>610b</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-05</Date>
                 <Version>610b</Version>
@@ -3374,13 +3821,20 @@
             <Name>snappy-devel</Name>
             <Summary xml:lang="tr">snappy için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">snappy</Dependency>
+                <Dependency release="2">snappy</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.1.3</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>1.1.3</Version>
@@ -3429,6 +3883,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.0.6</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>1.0.6</Version>
@@ -3498,7 +3959,7 @@
             <Summary xml:lang="tr">tcp-wrappers için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">tcp-wrappers</Dependency>
+                <Dependency release="2">tcp-wrappers</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -3506,6 +3967,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>7.6</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>7.6</Version>
@@ -3552,6 +4020,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.9</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>0.9</Version>
@@ -3595,7 +4070,7 @@
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
                 <Dependency>dbus-devel</Dependency>
-                <Dependency release="1">dbus-python</Dependency>
+                <Dependency release="2">dbus-python</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -3616,6 +4091,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.2.4</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-10</Date>
                 <Version>1.2.4</Version>
@@ -3668,7 +4150,7 @@
             <Summary xml:lang="tr">acl için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">acl</Dependency>
+                <Dependency release="2">acl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -3676,6 +4158,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.2.52</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-01</Date>
                 <Version>2.2.52</Version>
@@ -3727,6 +4216,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>4.1.3</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>4.1.3</Version>
@@ -3799,6 +4295,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>3.10.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-06</Date>
                 <Version>3.10.0</Version>
@@ -3847,6 +4350,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.0.8</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-09</Date>
                 <Version>1.0.8</Version>
@@ -3892,7 +4402,7 @@
             <Summary xml:lang="tr">attr için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">attr</Dependency>
+                <Dependency release="2">attr</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -3904,18 +4414,21 @@
             <Summary xml:lang="en">32-bit shared libraries for attr</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency>glibc-32bit</Dependency>
-                <Dependency release="1">attr</Dependency>
+                <Dependency release="2">attr</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.4.47</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-01</Date>
                 <Version>2.4.47</Version>
@@ -3968,6 +4481,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>6.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>6.1</Version>
@@ -4037,7 +4557,7 @@
             <Summary xml:lang="tr">libcap-ng için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">libcap-ng</Dependency>
+                <Dependency release="2">libcap-ng</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/share/aclocal</Path>
@@ -4047,6 +4567,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.7.7</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-03</Date>
                 <Version>0.7.7</Version>
@@ -4101,6 +4628,7 @@
                 <Path fileType="data">/usr/share/glib-2.0</Path>
                 <Path fileType="data">/usr/share/systemtap</Path>
                 <Path fileType="data">/usr/share/glib-2.0/schemas</Path>
+                <Path fileType="data">/usr/share/gettext</Path>
             </Files>
             <Provides>
                 <COMAR script="pakhandler.py">System.PackageHandler</COMAR>
@@ -4116,7 +4644,7 @@
             <Summary xml:lang="tr">glib2 için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">glib2</Dependency>
+                <Dependency release="2">glib2</Dependency>
                 <Dependency>libpcre-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -4156,15 +4684,13 @@
                 <Dependency>zlib-32bit</Dependency>
                 <Dependency>libffi-32bit</Dependency>
                 <Dependency>dbus-32bit</Dependency>
-                <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="1">glib2</Dependency>
+                <Dependency release="2">glib2</Dependency>
                 <Dependency>libpcre-32bit</Dependency>
                 <Dependency>zlib-32bit</Dependency>
                 <Dependency>libffi-32bit</Dependency>
                 <Dependency>dbus-32bit</Dependency>
-                <Dependency>glibc-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin/32</Path>
@@ -4183,6 +4709,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.46.2</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-10</Date>
                 <Version>2.46.2</Version>
@@ -4247,7 +4780,7 @@
             <Summary xml:lang="tr">libxml2 için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">libxml2</Dependency>
+                <Dependency release="2">libxml2</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/lib/pkgconfig</Path>
@@ -4267,19 +4800,24 @@
                 <Dependency>xz-32bit</Dependency>
                 <Dependency>zlib-32bit</Dependency>
                 <Dependency>readline-32bit</Dependency>
-                <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="1">libxml2</Dependency>
+                <Dependency release="2">libxml2</Dependency>
                 <Dependency>xz-32bit</Dependency>
                 <Dependency>zlib-32bit</Dependency>
-                <Dependency>glibc-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.9.3</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-04</Date>
                 <Version>2.9.3</Version>
@@ -4331,6 +4869,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.28</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>1.28</Version>
@@ -4386,7 +4931,7 @@
             <Summary xml:lang="tr">spidermonkey için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">spidermonkey</Dependency>
+                <Dependency release="2">spidermonkey</Dependency>
                 <Dependency>nspr-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -4396,6 +4941,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>17.0.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-06</Date>
                 <Version>17.0.0</Version>
@@ -4446,7 +4998,7 @@
             <Summary xml:lang="tr">libpcre için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">libpcre</Dependency>
+                <Dependency release="2">libpcre</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -4467,18 +5019,23 @@
             <BuildType>emul32</BuildType>
             <BuildDependencies>
                 <Dependency>readline-32bit</Dependency>
-                <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
                 <Dependency>libgcc</Dependency>
-                <Dependency>glibc-32bit</Dependency>
-                <Dependency release="1">libpcre</Dependency>
+                <Dependency release="2">libpcre</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>8.38</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-25</Date>
                 <Version>8.38</Version>
@@ -4543,6 +5100,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.22.3</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>1.22.3</Version>
@@ -4585,6 +5149,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>4.2.4.4</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-09</Date>
                 <Version>4.2.4.4</Version>
@@ -4630,6 +5201,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>7.43.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>7.43.0</Version>
@@ -4681,6 +5259,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>008</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-11</Date>
                 <Version>008</Version>
@@ -4764,6 +5349,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>4.2.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-11</Date>
                 <Version>4.2.1</Version>
@@ -4839,6 +5431,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.0.3</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>2.0.3</Version>
@@ -4906,6 +5505,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>4.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-11</Date>
                 <Version>4.1</Version>
@@ -4952,13 +5558,20 @@
         <Package>
             <Name>leveldb-devel</Name>
             <RuntimeDependencies>
-                <Dependency release="1">leveldb</Dependency>
+                <Dependency release="2">leveldb</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.18</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>1.18</Version>
@@ -5001,6 +5614,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>20160104</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-03</Date>
                 <Version>20160104</Version>
@@ -5085,7 +5705,7 @@
             <Summary xml:lang="tr">python için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">python</Dependency>
+                <Dependency release="2">python</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -5093,6 +5713,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.7.11</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>2.7.11</Version>
@@ -5134,6 +5761,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>4.0.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>4.0.0</Version>
@@ -5182,13 +5816,20 @@
             <Summary xml:lang="tr">gdbm için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">gdbm</Dependency>
+                <Dependency release="2">gdbm</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.11</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>1.11</Version>
@@ -5232,6 +5873,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.12</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-01</Date>
                 <Version>2.12</Version>
@@ -5278,11 +5926,8 @@
             <Summary xml:lang="en">Development files for expat</Summary>
             <Summary xml:lang="tr">expat için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="1">expat</Dependency>
+                <Dependency release="2">expat</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -5298,15 +5943,22 @@
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="1">expat</Dependency>
+                <Dependency release="2">expat</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.1.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
-                <Date>2016-03-02</Date>
+                <Date>2016-04-06</Date>
                 <Version>2.1.0</Version>
                 <Comment>First release</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -5377,6 +6029,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.60</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-09</Date>
                 <Version>1.60</Version>
@@ -5424,7 +6083,7 @@
             <Summary xml:lang="en">Development files for libunwind</Summary>
             <Summary xml:lang="tr">libunwind için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">libunwind</Dependency>
+                <Dependency release="2">libunwind</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -5432,6 +6091,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>1.1</Version>
@@ -5482,7 +6148,7 @@
             <Summary xml:lang="en">Development files for libusb</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">libusb</Dependency>
+                <Dependency release="2">libusb</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -5502,13 +6168,11 @@
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
             <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
                 <Dependency>eudev-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="1">libusb</Dependency>
+                <Dependency release="2">libusb</Dependency>
                 <Dependency>eudev-32bit</Dependency>
-                <Dependency>glibc-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
@@ -5521,6 +6185,13 @@
             </Replaces>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.0.20</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>1.0.20</Version>
@@ -5543,7 +6214,7 @@
             <PartOf>system.base</PartOf>
             <Summary xml:lang="en">Easy to use, portable, open source library for system logging</Summary>
             <Description xml:lang="en">Liblogging offers an enhanced replacement for the syslog() call, but retains its ease of use.</Description>
-            <Archive type="targz" sha1sum="e202bf9412747ecd384678e8b3024a4646d45c2f">http://download.rsyslog.com/liblogging/liblogging-1.0.5.tar.gz</Archive>
+            <Archive type="targz" sha1sum="e202bf9412747ecd384678e8b3024a4646d45c2f">https://sourceforge.net/projects/pisilinux/files/source/liblogging-1.0.5.tar.gz</Archive>
             <SourceURI>system/base/liblogging/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -5560,7 +6231,7 @@
             <Summary xml:lang="en">Development files for liblogging</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">liblogging</Dependency>
+                <Dependency release="2">liblogging</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/liblogging/stdlog.h</Path>
@@ -5568,6 +6239,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.0.5</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>1.0.5</Version>
@@ -5612,6 +6290,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.5.3</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>0.5.3</Version>
@@ -5653,6 +6338,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>3.0.4</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-05</Date>
                 <Version>3.0.4</Version>
@@ -5703,6 +6395,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>22.21</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-09</Date>
                 <Version>22.21</Version>
@@ -5745,13 +6444,20 @@
             <Summary xml:lang="tr">libunistring için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">libunistring</Dependency>
+                <Dependency release="2">libunistring</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.9.6</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>0.9.6</Version>
@@ -5795,6 +6501,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.10</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-09</Date>
                 <Version>0.10</Version>
@@ -5841,6 +6554,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>4.2.2</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>4.2.2</Version>
@@ -5892,6 +6612,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.06.95</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-05</Date>
                 <Version>1.06.95</Version>
@@ -5978,6 +6705,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>4.3_p39</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>4.3_p39</Version>
@@ -6033,13 +6767,20 @@
             <Summary xml:lang="tr">cracklib için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">cracklib</Dependency>
+                <Dependency release="2">cracklib</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.9.6</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-03</Date>
                 <Version>2.9.6</Version>
@@ -6089,6 +6830,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>481</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-29</Date>
                 <Version>481</Version>
@@ -6132,6 +6880,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.4</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-09</Date>
                 <Version>1.4</Version>
@@ -6179,7 +6934,7 @@
             <Summary xml:lang="tr">nettle için geliştirme dosyaları.</Summary>
             <Summary xml:lang="pl">Pliki nagłówkowe biblioteki nettle.</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">nettle</Dependency>
+                <Dependency release="2">nettle</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -6196,11 +6951,9 @@
             <BuildType>emul32</BuildType>
             <BuildDependencies>
                 <Dependency>gmp-32bit</Dependency>
-                <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="1">nettle</Dependency>
-                <Dependency>glibc-32bit</Dependency>
+                <Dependency release="2">nettle</Dependency>
                 <Dependency>gmp-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -6208,6 +6961,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>3.2</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-09</Date>
                 <Version>3.2</Version>
@@ -6255,7 +7015,7 @@
             <Name>db-devel</Name>
             <Summary xml:lang="en">Development files for db</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">db</Dependency>
+                <Dependency release="2">db</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -6269,7 +7029,7 @@
             <Summary xml:lang="en">Documentation for db</Summary>
             <PartOf>system.doc</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">db</Dependency>
+                <Dependency release="2">db</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="doc">/usr/share/doc</Path>
@@ -6279,6 +7039,13 @@
             </Replaces>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>6.1.26</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>6.1.26</Version>
@@ -6334,7 +7101,7 @@
             <Summary xml:lang="tr">fuse için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">fuse</Dependency>
+                <Dependency release="2">fuse</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -6342,6 +7109,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.9.5</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2015-08-18</Date>
                 <Version>2.9.5</Version>
@@ -6404,6 +7178,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>8.25</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>8.25</Version>
@@ -6478,7 +7259,7 @@
             <Summary xml:lang="tr">gettext için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">gettext</Dependency>
+                <Dependency release="2">gettext</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/share/aclocal</Path>
@@ -6487,6 +7268,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.19.7</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>0.19.7</Version>
@@ -6540,7 +7328,7 @@
             <Summary xml:lang="tr">libcap için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">libcap</Dependency>
+                <Dependency release="2">libcap</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -6555,10 +7343,8 @@
             <BuildType>emul32</BuildType>
             <BuildDependencies>
                 <Dependency>attr-32bit</Dependency>
-                <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency>glibc-32bit</Dependency>
                 <Dependency>attr-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -6566,6 +7352,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.25</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>2.25</Version>
@@ -6609,6 +7402,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2016a</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>2016a</Version>
@@ -6659,7 +7459,7 @@
             <Summary xml:lang="tr">ncurses için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">ncurses</Dependency>
+                <Dependency release="2">ncurses</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -6675,12 +7475,8 @@
             <Summary xml:lang="en">32-bit shared libraries for ncurses</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>_emul32</BuildType>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="1">ncurses</Dependency>
-                <Dependency>glibc-32bit</Dependency>
+                <Dependency release="2">ncurses</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
@@ -6688,6 +7484,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>6.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>6.0</Version>
@@ -6726,6 +7529,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.7</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>1.7</Version>
@@ -6774,6 +7584,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>5.25</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>5.25</Version>
@@ -6847,6 +7664,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>4.4.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-11</Date>
                 <Version>4.4.0</Version>
@@ -6892,7 +7716,7 @@
             <Summary xml:lang="tr">nspr için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">nspr</Dependency>
+                <Dependency release="2">nspr</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -6901,6 +7725,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>4.12</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-06</Date>
                 <Version>4.12</Version>
@@ -6962,7 +7793,7 @@
             <Summary xml:lang="tr">libuser için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">libuser</Dependency>
+                <Dependency release="2">libuser</Dependency>
                 <Dependency>glib2-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -6971,6 +7802,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.62</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>0.62</Version>
@@ -7020,6 +7858,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>3.3.11</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-09</Date>
                 <Version>3.3.11</Version>
@@ -7060,6 +7905,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.1.45</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-06</Date>
                 <Version>2.1.45</Version>
@@ -7157,8 +8009,15 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.6</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
-                <Date>2016-03-19</Date>
+                <Date>2016-04-17</Date>
                 <Version>2.6</Version>
                 <Comment>First release</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -7208,7 +8067,7 @@
             <Summary xml:lang="tr">wireless-tools için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">wireless-tools</Dependency>
+                <Dependency release="2">wireless-tools</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -7216,6 +8075,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>30</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-04</Date>
                 <Version>30</Version>
@@ -7260,7 +8126,7 @@
             <Summary xml:lang="en">Development files for libestr</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">libee</Dependency>
+                <Dependency release="2">libee</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/libee</Path>
@@ -7268,6 +8134,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.4.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>0.4.1</Version>
@@ -7305,6 +8178,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.24.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-07</Date>
                 <Version>1.24.1</Version>
@@ -7344,7 +8224,7 @@
             <Summary xml:lang="en">Development files for lzo</Summary>
             <Summary xml:lang="tr">lzo için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">lzo</Dependency>
+                <Dependency release="2">lzo</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -7355,17 +8235,18 @@
             <Summary xml:lang="en">32-bit shared libraries for lzo</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
-            <RuntimeDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.09</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-09</Date>
                 <Version>2.09</Version>
@@ -7411,7 +8292,7 @@
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
                 <Dependency>libusb-devel</Dependency>
-                <Dependency release="1">libusb-compat</Dependency>
+                <Dependency release="2">libusb-compat</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin</Path>
@@ -7427,19 +8308,24 @@
             <BuildType>emul32</BuildType>
             <BuildDependencies>
                 <Dependency>libusb-32bit</Dependency>
-                <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
                 <Dependency>libusb-32bit</Dependency>
                 <Dependency>libusb</Dependency>
-                <Dependency>glibc-32bit</Dependency>
-                <Dependency release="1">libusb-compat</Dependency>
+                <Dependency release="2">libusb-compat</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.1.5</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>0.1.5</Version>
@@ -7482,6 +8368,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>6.10.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>6.10.1</Version>
@@ -7528,6 +8421,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>4.6.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>4.6.0</Version>
@@ -7580,7 +8480,7 @@
             <Description xml:lang="tr">gperftools için geliştirme başlıklarını içerir.</Description>
             <IsA>library</IsA>
             <RuntimeDependencies>
-                <Dependency release="1">gperftools</Dependency>
+                <Dependency release="2">gperftools</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -7596,13 +8496,20 @@
             <IsA>data:doc</IsA>
             <PartOf>system.doc</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">gperftools</Dependency>
+                <Dependency release="2">gperftools</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="doc">/usr/share/doc/gperftools</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.4</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>2.4</Version>
@@ -7675,7 +8582,7 @@
             <Summary xml:lang="tr">openssl için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">openssl</Dependency>
+                <Dependency release="2">openssl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -7694,15 +8601,21 @@
                 <Dependency>zlib-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="1">openssl</Dependency>
+                <Dependency release="2">openssl</Dependency>
                 <Dependency>zlib-32bit</Dependency>
-                <Dependency>glibc-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.0.2g</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>1.0.2g</Version>
@@ -7730,9 +8643,7 @@
             <Archive type="tarxz" sha1sum="23e9b933887e9405f368a5c429c30414e14148ff">https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-22.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>chrpath</Dependency>
-                <Dependency>xz-32bit</Dependency>
                 <Dependency>xz-devel</Dependency>
-                <Dependency>zlib-32bit</Dependency>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>kernel-module-headers</Dependency>
             </BuildDependencies>
@@ -7800,16 +8711,26 @@
             <Summary xml:lang="en">32bit libraries of libkmod</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
+            <BuildDependencies>
+                <Dependency>xz-32bit</Dependency>
+                <Dependency>zlib-32bit</Dependency>
+            </BuildDependencies>
             <RuntimeDependencies>
                 <Dependency>xz-32bit</Dependency>
                 <Dependency>zlib-32bit</Dependency>
-                <Dependency>glibc-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>22</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-05</Date>
                 <Version>22</Version>
@@ -7903,6 +8824,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.7.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>1.7.1</Version>
@@ -7951,7 +8879,7 @@
             <Summary xml:lang="tr">libidn için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">libidn</Dependency>
+                <Dependency release="2">libidn</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -7966,18 +8894,21 @@
             <Summary xml:lang="tr">libidn için 32-bit paylaşımlı kitaplıklar</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency>glibc-32bit</Dependency>
-                <Dependency release="1">libidn</Dependency>
+                <Dependency release="2">libidn</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32/libidn*</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.32</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>1.32</Version>
@@ -8015,7 +8946,7 @@
             <PartOf>util.archive</PartOf>
             <BuildType>minizip</BuildType>
             <RuntimeDependencies>
-                <Dependency release="1">zlib</Dependency>
+                <Dependency release="2">zlib</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib/libminizip*</Path>
@@ -8028,8 +8959,8 @@
             <PartOf>util.archive</PartOf>
             <BuildType>minizip</BuildType>
             <RuntimeDependencies>
-                <Dependency release="1">minizip</Dependency>
-                <Dependency release="1">zlib-devel</Dependency>
+                <Dependency release="2">minizip</Dependency>
+                <Dependency release="2">zlib-devel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/minizip</Path>
@@ -8051,7 +8982,7 @@
             <Summary xml:lang="tr">zlib için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">zlib</Dependency>
+                <Dependency release="2">zlib</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/lib/pkgconfig/zlib.pc</Path>
@@ -8068,18 +8999,21 @@
             <Summary xml:lang="tr">zlib için 32-bit paylaşımlı kitaplıklar</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency>glibc-32bit</Dependency>
-                <Dependency release="1">zlib</Dependency>
+                <Dependency release="2">zlib</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32/libz.so*</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.2.8</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>1.2.8</Version>
@@ -8141,6 +9075,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>3.0.3</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-11</Date>
                 <Version>3.0.3</Version>
@@ -8206,6 +9147,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>8.11.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>8.11.0</Version>
@@ -8243,6 +9191,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.1.10</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-05</Date>
                 <Version>0.1.10</Version>
@@ -8283,7 +9238,7 @@
             <Summary xml:lang="tr">libpipeline için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">libpipeline</Dependency>
+                <Dependency release="2">libpipeline</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -8292,6 +9247,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.4.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>1.4.1</Version>
@@ -8337,6 +9299,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.3.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-11</Date>
                 <Version>1.3.1</Version>
@@ -8419,7 +9388,7 @@
             <Summary xml:lang="en">Development files for eudev</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">eudev</Dependency>
+                <Dependency release="2">eudev</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/</Path>
@@ -8438,12 +9407,8 @@
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
             <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
                 <Dependency>libkmod-32bit</Dependency>
             </BuildDependencies>
-            <RuntimeDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/lib32</Path>
                 <Path fileType="library">/usr/lib32</Path>
@@ -8458,6 +9423,13 @@
             </Replaces>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>3.1.5</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-05</Date>
                 <Version>3.1.5</Version>
@@ -8508,7 +9480,7 @@
             <Summary xml:lang="tr">sqlite için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">sqlite</Dependency>
+                <Dependency release="2">sqlite</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -8521,12 +9493,8 @@
             <Summary xml:lang="en">32-bit shared libraries for sqlite</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency>glibc-32bit</Dependency>
-                <Dependency release="1">sqlite</Dependency>
+                <Dependency release="2">sqlite</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
@@ -8543,6 +9511,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>3.11.0.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>3.11.0.0</Version>
@@ -8610,7 +9585,7 @@
             <Summary xml:lang="tr">pam için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">pam</Dependency>
+                <Dependency release="2">pam</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -8618,6 +9593,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.2.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-05</Date>
                 <Version>1.2.1</Version>
@@ -8684,7 +9666,7 @@
             <Summary xml:lang="tr">curl için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">curl</Dependency>
+                <Dependency release="2">curl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/lib/pkgconfig</Path>
@@ -8694,6 +9676,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>7.47.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>7.47.1</Version>
@@ -8740,7 +9729,7 @@
             <Summary xml:lang="tr">XZ için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">xz</Dependency>
+                <Dependency release="2">xz</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -8754,18 +9743,21 @@
             <Summary xml:lang="tr">XZ için 32-bit paylaşımlı kitaplıklar</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency>glibc-32bit</Dependency>
-                <Dependency release="1">xz</Dependency>
+                <Dependency release="2">xz</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>5.2.2</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>5.2.2</Version>
@@ -8828,6 +9820,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.7.5</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-09</Date>
                 <Version>2.7.5</Version>
@@ -8881,7 +9880,17 @@
                 <Path fileType="localedata">/usr/share/locale/locale.alias</Path>
                 <Path fileType="executable">/sbin</Path>
                 <Path fileType="data">/var</Path>
+                <Path fileType="config">/etc/ld.so.conf.d/60-glibc-32bit.conf</Path>
+                <Path fileType="library">/usr/lib32</Path>
+                <Path fileType="library">/lib32</Path>
+                <Path fileType="library">/lib/ld-linux.so.2</Path>
             </Files>
+            <Conflicts>
+                <Package>glibc-32bit</Package>
+            </Conflicts>
+            <Replaces>
+                <Package>glibc-32bit</Package>
+            </Replaces>
             <Provides>
                 <COMAR script="package.py">System.Package</COMAR>
                 <COMAR script="nscd.py" name="nscd">System.Service</COMAR>
@@ -8896,7 +9905,7 @@
             <Name>glibc-devel</Name>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">glibc</Dependency>
+                <Dependency release="2">glibc</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -8907,22 +9916,19 @@
             </Files>
         </Package>
         <Package>
-            <Name>glibc-32bit</Name>
-            <Summary xml:lang="en">32-bit shared libraries for glibc</Summary>
-            <PartOf>system.base</PartOf>
+            <Name>glibc-doc-32bit</Name>
+            <Summary xml:lang="en">32-bit doc for glibc</Summary>
+            <PartOf>system.doc</PartOf>
             <BuildType>emul32</BuildType>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="1">glibc</Dependency>
+                <Dependency release="2">glibc</Dependency>
             </RuntimeDependencies>
             <Files>
-                <Path fileType="config">/etc/ld.so.conf.d/60-glibc-32bit.conf</Path>
-                <Path fileType="library">/usr/lib32</Path>
-                <Path fileType="library">/lib32</Path>
-                <Path fileType="library">/lib/ld-linux.so.2</Path>
+                <Path fileType="config">/usr/lib32/glibc32.txt</Path>
             </Files>
+            <AdditionalFiles>
+                <AdditionalFile target="/usr/lib32/glibc32.txt" permission="0644" owner="root">glibc32.txt</AdditionalFile>
+            </AdditionalFiles>
         </Package>
         <Package>
             <Name>glibc-docs</Name>
@@ -10613,6 +11619,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-26</Date>
+                <Version>2.23</Version>
+                <Comment>Remove glibc-32bit repo</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-27</Date>
                 <Version>2.23</Version>
@@ -10690,7 +11703,7 @@
             <Summary xml:lang="tr">dbus için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">dbus</Dependency>
+                <Dependency release="2">dbus</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -10708,16 +11721,19 @@
             <BuildType>emul32</BuildType>
             <BuildDependencies>
                 <Dependency>expat-32bit</Dependency>
-                <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
-            <RuntimeDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.11.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-04</Date>
                 <Version>1.11.0</Version>
@@ -10764,7 +11780,7 @@
             <Summary xml:lang="tr">libgpg-error için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="1">libgpg-error</Dependency>
+                <Dependency release="2">libgpg-error</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin/gpg-error-config</Path>
@@ -10780,18 +11796,21 @@
             <Summary xml:lang="tr">libgpg-error için 32-bit paylaşımlı kitaplıklar</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="1">libgpg-error</Dependency>
-                <Dependency>glibc-32bit</Dependency>
+                <Dependency release="2">libgpg-error</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.21</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>1.21</Version>
@@ -10837,6 +11856,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.7.5</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-20</Date>
                 <Version>2.7.5</Version>
@@ -10885,6 +11911,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.6.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>2.6.0</Version>
@@ -10928,7 +11961,7 @@
             <Summary xml:lang="en">Development files for numactl</Summary>
             <Summary xml:lang="tr">numactl için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">numactl</Dependency>
+                <Dependency release="2">numactl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -10936,6 +11969,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.0.11</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>2.0.11</Version>
@@ -10977,6 +12017,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.3.5</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>1.3.5</Version>
@@ -11023,6 +12070,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.51.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>0.51.0</Version>
@@ -11078,6 +12132,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>3.4.3</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>3.4.3</Version>
@@ -11127,6 +12188,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.29.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>0.29.1</Version>
@@ -11167,13 +12235,20 @@
             <Summary xml:lang="en">Development files for libsigsegv</Summary>
             <Summary xml:lang="tr">libsigsegv için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">libsigsegv</Dependency>
+                <Dependency release="2">libsigsegv</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.10</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>2.10</Version>
@@ -11217,6 +12292,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.23.4</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>0.23.4</Version>
@@ -11244,7 +12326,7 @@
             <Description xml:lang="fr">La collection de compilateurs GNU inclus des façades pour le C, C++, Objective-C, Fortran, hava et Ada ainsi que des librairies pour ces langages (libstdc++, libgcj...)</Description>
             <Description xml:lang="en">The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, as well as libraries for these languages</Description>
             <Description xml:lang="tr">C, C++, Objective-C, Fortran programlama dilleri ile bu dillere ait kütüphaneleri içeren, GNU derleyici paketi</Description>
-            <Archive type="tarbz2" sha1sum="0612270b103941da08376df4d0ef4e5662a2e9eb">ftp://gd.tuwien.ac.at/gnu/gcc/releases/gcc-5.3.0/gcc-5.3.0.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="0612270b103941da08376df4d0ef4e5662a2e9eb">https://ftp.gnu.org/gnu/gcc/gcc-5.3.0/gcc-5.3.0.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>binutils</Dependency>
                 <Dependency>bison</Dependency>
@@ -11262,7 +12344,6 @@
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>isl-devel</Dependency>
                 <Dependency>elfutils</Dependency>
-                <Dependency>glibc-32bit</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">pisilinux/64.patch</Patch>
@@ -11367,6 +12448,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-26</Date>
+                <Version>5.3.0</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-20</Date>
                 <Version>5.3.0</Version>
@@ -11413,6 +12501,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.44</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-06</Date>
                 <Version>2.44</Version>
@@ -11449,6 +12544,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.6.49</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>0.6.49</Version>
@@ -11477,7 +12579,8 @@
             <BuildDependencies>
                 <Dependency>libffi-devel</Dependency>
                 <Dependency>python-devel</Dependency>
-                <Dependency versionFrom="2.44.0">glib2-devel</Dependency>
+                <Dependency versionFrom="2.46.2">glib2-devel</Dependency>
+                <Dependency>chrpath</Dependency>
             </BuildDependencies>
             <SourceURI>system/devel/gobject-introspection/pspec.xml</SourceURI>
         </Source>
@@ -11498,7 +12601,7 @@
             <Name>gobject-introspection-devel</Name>
             <Summary xml:lang="en">Development files for gobject-introspection</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">gobject-introspection</Dependency>
+                <Dependency release="2">gobject-introspection</Dependency>
                 <Dependency>libffi</Dependency>
                 <Dependency>glib2</Dependency>
                 <Dependency>libffi-devel</Dependency>
@@ -11516,6 +12619,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.46.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>1.46.0</Version>
@@ -11562,13 +12672,20 @@
             <Summary xml:lang="en">Development files for glpk</Summary>
             <Summary xml:lang="tr">glpk için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">glpk</Dependency>
+                <Dependency release="2">glpk</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>4.59</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>4.59</Version>
@@ -11595,9 +12712,9 @@
             <Description xml:lang="en">Contains commands like as, ld, nm, objdump, ar, ranlib for compiling assembly code to the machine language, and for linking and manipulating the binary object files.</Description>
             <Description xml:lang="tr">Assembly kodlarını makine diline derlemek, oluşan obje dosyalarını bağlamak ve ikili dosyalar üzerinde işlemler yapmak için kullanılan as, ld, nm, objdump, ar, ranlib gibi komutları içermektedir.</Description>
             <Archive type="tarbz2" sha1sum="a637508cffeb2323b14bc8dd65378819768ad4ff">http://ftp.gnu.org/gnu/binutils/binutils-2.26.tar.bz2</Archive>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
+            <Patches>
+                <Patch level="1">binutils-gdb.git-e20365c.patch</Patch>
+            </Patches>
             <SourceURI>system/devel/binutils/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -11614,10 +12731,17 @@
             </Files>
         </Package>
         <History>
-            <Update release="1">
-                <Date>2016-02-28</Date>
+            <Update release="2">
+                <Date>2016-04-26</Date>
                 <Version>2.26</Version>
-                <Comment>First release</Comment>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="1">
+                <Date>2016-04-03</Date>
+                <Version>2.26</Version>
+                <Comment>First release, fix for syslinux build</Comment>
                 <Name>Ertuğrul Erata</Name>
                 <Email>ertugrulerata@gmail.com</Email>
             </Update>
@@ -11680,7 +12804,7 @@
             <Summary xml:lang="tr">guile için geliştirme dosyaları</Summary>
             <Summary xml:lang="pl">Pliki nagłówkowe guile.</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">guile</Dependency>
+                <Dependency release="2">guile</Dependency>
                 <Dependency>gc-devel</Dependency>
                 <Dependency>gmp-devel</Dependency>
             </RuntimeDependencies>
@@ -11693,6 +12817,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.0.11</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2014-11-30</Date>
                 <Version>2.0.11</Version>
@@ -11744,6 +12875,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.15</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>1.15</Version>
@@ -11784,7 +12922,7 @@
             <Summary xml:lang="en">libatomic_ops için geliştirme dosyaları</Summary>
             <Summary>libatomic_ops için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">libatomic_ops</Dependency>
+                <Dependency release="2">libatomic_ops</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -11792,6 +12930,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>7.4.2</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>7.4.2</Version>
@@ -11835,7 +12980,7 @@
             <Name>libseccomp-devel</Name>
             <Summary xml:lang="en">Development files for libseccomp</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">libseccomp</Dependency>
+                <Dependency release="2">libseccomp</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -11843,6 +12988,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.3.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-19</Date>
                 <Version>2.3.0</Version>
@@ -11905,18 +13057,21 @@
             <Summary xml:lang="tr">libtool için 32-bit paylaşımlı kitaplıklar</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="1">libtool-ltdl</Dependency>
-                <Dependency>glibc-32bit</Dependency>
+                <Dependency release="2">libtool-ltdl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.4.6</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-06</Date>
                 <Version>2.4.6</Version>
@@ -11962,6 +13117,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.69</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>2.69</Version>
@@ -11998,7 +13160,7 @@
             <Archive type="tarbz2" sha1sum="ab605af5da8c98c0c2f8b2c578fed7c864ee996a">mirrors://xorg/individual/proto/fixesproto-5.0.tar.bz2</Archive>
             <Archive type="tarbz2" sha1sum="28c108bd6438c332122c10871c1fc6415591755f">mirrors://xorg/individual/proto/fontsproto-2.1.3.tar.bz2</Archive>
             <Archive type="tarbz2" sha1sum="20e061c463bed415051f0f89e968e331a2078551">mirrors://xorg/individual/proto/glproto-1.4.17.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="126b6ad57b5432e154485f900920765eae8fda45">mirrors://xorg/individual/proto/inputproto-2.3.1.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="62b29a0c3b4ede9d129a0598cc6becf628a2158a">mirrors://xorg/individual/proto/inputproto-2.3.2.tar.bz2</Archive>
             <Archive type="targz" sha1sum="29fa217174fcdc9e27cba5663357989ef6e381a0">mirrors://xorg/individual/proto/kbproto-1.0.7.tar.gz</Archive>
             <Archive type="tarbz2" sha1sum="4ddb7781ebc2418d681a6f5e16d777aed56ea35e">mirrors://xorg/individual/proto/printproto-1.0.5.tar.bz2</Archive>
             <Archive type="targz" sha1sum="d78ab1532d5381cacce59866ce331c7f806ad215">mirrors://xorg/individual/proto/randrproto-1.5.0.tar.gz</Archive>
@@ -12006,7 +13168,7 @@
             <Archive type="tarbz2" sha1sum="7ae9868a358859fe539482b02414aa15c2d8b1e4">mirrors://xorg/individual/proto/renderproto-0.11.1.tar.bz2</Archive>
             <Archive type="tarbz2" sha1sum="9ff9bb9243b0474330959dc3853973523c9dd9ce">mirrors://xorg/individual/proto/resourceproto-1.2.0.tar.bz2</Archive>
             <Archive type="tarbz2" sha1sum="640a2cbef5893aacda74799e6fa4d973e629b753">mirrors://xorg/individual/proto/scrnsaverproto-1.2.2.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="aa60e3b93c6a78ad03f1c502b910e7c45faaedbc">mirrors://xorg/individual/proto/videoproto-2.3.2.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="4556b5c2243a2ca290ea2140dc1a427c4bac8ba2">mirrors://xorg/individual/proto/videoproto-2.3.3.tar.bz2</Archive>
             <Archive type="tarbz2" sha1sum="59ae9ec6414964440bf654b207618e5dd66a32fb">mirrors://xorg/individual/proto/xcmiscproto-1.2.2.tar.bz2</Archive>
             <Archive type="tarbz2" sha1sum="b8d736342dcb73b71584d99a1cb9806d93c25ff8">mirrors://xorg/individual/proto/xextproto-7.3.0.tar.bz2</Archive>
             <Archive type="tarbz2" sha1sum="312a2ea708b257520c1af4393b69d73a393a478f">mirrors://xorg/individual/proto/xf86bigfontproto-1.2.0.tar.bz2</Archive>
@@ -12036,6 +13198,20 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2016-04-27</Date>
+                <Version>7.6</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>7.6</Version>
+                <Comment>A few updates</Comment>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>7.6</Version>
@@ -12084,13 +13260,20 @@
             <Summary xml:lang="en">Development files for libmpc</Summary>
             <Summary xml:lang="tr">libmpc için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">libmpc</Dependency>
+                <Dependency release="2">libmpc</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.0.3</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>1.0.3</Version>
@@ -12142,6 +13325,7 @@
                 <Dependency>libxml2</Dependency>
             </RuntimeDependencies>
             <Files>
+                <Path fileType="executable">/usr/bin</Path>
                 <Path fileType="library">/usr/lib</Path>
                 <Path fileType="man">/usr/share/man</Path>
                 <Path fileType="doc">/usr/share/doc/libarchive</Path>
@@ -12152,7 +13336,7 @@
             <Summary xml:lang="en">Development files for libarchive</Summary>
             <Summary xml:lang="tr">libarchive için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">libarchive</Dependency>
+                <Dependency release="2">libarchive</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -12161,8 +13345,15 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>3.1.2</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
-                <Date>2016-03-13</Date>
+                <Date>2016-04-16</Date>
                 <Version>3.1.2</Version>
                 <Comment>First release</Comment>
                 <Name>Alihan Öztürk</Name>
@@ -12197,7 +13388,7 @@
             <Name>libxslt-docs</Name>
             <Summary xml:lang="tr">libxslt için belgelendirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">libxslt</Dependency>
+                <Dependency release="2">libxslt</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="doc">/usr/share/doc</Path>
@@ -12208,7 +13399,7 @@
             <Summary xml:lang="tr">libxslt için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
                 <Dependency>libxml2-devel</Dependency>
-                <Dependency release="1">libxslt</Dependency>
+                <Dependency release="2">libxslt</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin/*-config</Path>
@@ -12241,16 +13432,22 @@
                 <Dependency>libgcrypt-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="1">libxslt</Dependency>
+                <Dependency release="2">libxslt</Dependency>
                 <Dependency>libxml2-32bit</Dependency>
                 <Dependency>libgcrypt-32bit</Dependency>
-                <Dependency>glibc-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.1.28</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-08</Date>
                 <Version>1.1.28</Version>
@@ -12296,7 +13493,7 @@
             <Summary xml:lang="en">Development files for gmp</Summary>
             <Summary xml:lang="tr">gmp için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">gmp</Dependency>
+                <Dependency release="2">gmp</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -12308,19 +13505,22 @@
             <Summary xml:lang="en">32-bit shared libraries for gmp</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
-            <BuildDependencies>
-                <Dependency>glibc-32bit</Dependency>
-            </BuildDependencies>
             <RuntimeDependencies>
                 <Dependency>libgcc</Dependency>
-                <Dependency>glibc-32bit</Dependency>
-                <Dependency release="1">gmp</Dependency>
+                <Dependency release="2">gmp</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>6.1.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>6.1.0</Version>
@@ -12364,6 +13564,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.33.20120825</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>0.33.20120825</Version>
@@ -12405,6 +13612,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.19.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-02</Date>
                 <Version>1.19.0</Version>
@@ -12447,7 +13661,7 @@
             <Summary xml:lang="en">Development files for check</Summary>
             <Summary xml:lang="tr">check için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">check</Dependency>
+                <Dependency release="2">check</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -12464,6 +13678,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.10.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>0.10.0</Version>
@@ -12512,9 +13733,34 @@
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
+        <Package>
+            <Name>elfutils-32bit</Name>
+            <Summary xml:lang="en">32-bit shared libraries for elfutils</Summary>
+            <Summary xml:lang="tr">elfutils için 32-bit paylaşımlı kitaplıklar</Summary>
+            <BuildType>emul32</BuildType>
+            <BuildDependencies>
+                <Dependency>xz-32bit</Dependency>
+                <Dependency>zlib-32bit</Dependency>
+            </BuildDependencies>
+            <RuntimeDependencies>
+                <Dependency>xz-32bit</Dependency>
+                <Dependency>zlib-32bit</Dependency>
+                <Dependency release="2">elfutils</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library">/usr/lib32</Path>
+            </Files>
+        </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.165</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
-                <Date>2016-03-13</Date>
+                <Date>2016-04-07</Date>
                 <Version>0.165</Version>
                 <Comment>First release</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -12561,6 +13807,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>7.6</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2017-03-18</Date>
                 <Version>7.6</Version>
@@ -12600,6 +13853,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.11</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>1.11</Version>
@@ -12649,7 +13909,7 @@
             <Summary xml:lang="tr">gc için geliştirme dosyaları</Summary>
             <Summary xml:lang="pl">Pliki nagłówkowe gc</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">gc</Dependency>
+                <Dependency release="2">gc</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/</Path>
@@ -12657,6 +13917,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>7.4.2</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>7.4.2</Version>
@@ -12696,6 +13963,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.16</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-05</Date>
                 <Version>0.16</Version>
@@ -12740,7 +14014,7 @@
             <Summary xml:lang="en">Development files for yasm</Summary>
             <Summary xml:lang="tr">yasm için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">yasm</Dependency>
+                <Dependency release="2">yasm</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -12748,6 +14022,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.3.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-07</Date>
                 <Version>1.3.0</Version>
@@ -12796,7 +14077,7 @@
             <Name>cloog-devel</Name>
             <Summary xml:lang="en">Development files for cloog</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">cloog</Dependency>
+                <Dependency release="2">cloog</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -12804,6 +14085,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.18.4</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>0.18.4</Version>
@@ -12839,6 +14127,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.11</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>2.11</Version>
@@ -12883,6 +14178,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.4.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>2.4.1</Version>
@@ -12925,6 +14227,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.6.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>1.6.1</Version>
@@ -12972,7 +14281,7 @@
             <Summary xml:lang="en">Development files for mpfr</Summary>
             <Summary xml:lang="tr">mpfr için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">mpfr</Dependency>
+                <Dependency release="2">mpfr</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -12981,6 +14290,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>3.1.4</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>3.1.4</Version>
@@ -13032,6 +14348,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>3.0.4</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>3.0.4</Version>
@@ -13087,7 +14410,7 @@
             <Summary xml:lang="en">Development files for autogen</Summary>
             <Summary xml:lang="tr">autogen için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">autogen</Dependency>
+                <Dependency release="2">autogen</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13099,6 +14422,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>5.18.7</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>5.18.7</Version>
@@ -13141,6 +14471,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.9.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>1.9.1</Version>
@@ -13184,7 +14521,7 @@
             <Summary xml:lang="en">Development files for isl</Summary>
             <Summary xml:lang="tr">isl için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">isl</Dependency>
+                <Dependency release="2">isl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13192,6 +14529,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>0.16.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>0.16.1</Version>
@@ -13240,6 +14584,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.3.2</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>1.3.2</Version>
@@ -13285,6 +14636,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.4.17</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>1.4.17</Version>
@@ -13351,7 +14709,7 @@
             <Summary xml:lang="en">Development files for ppl</Summary>
             <Summary xml:lang="tr">ppl için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">ppl</Dependency>
+                <Dependency release="2">ppl</Dependency>
                 <Dependency>gmp-devel</Dependency>
                 <Dependency>libgcc</Dependency>
             </RuntimeDependencies>
@@ -13363,6 +14721,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>1.2</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>1.2</Version>
@@ -13414,6 +14779,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>4.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-02-28</Date>
                 <Version>4.1</Version>
@@ -13454,6 +14826,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.12</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>2.12</Version>
@@ -13490,6 +14869,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>20141105</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>20141105</Version>
@@ -13540,6 +14926,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.0.4</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-07</Date>
                 <Version>2.0.4</Version>
@@ -13569,7 +14962,7 @@
             <Summary xml:lang="tr">Linux çekirdeği tarafından kullanılan firmware dosyaları</Summary>
             <Description xml:lang="en">linux-firmware contains different firmware files required for some devices to operate correctly.</Description>
             <Description xml:lang="tr">linux-firmware, bazı aygıtların düzgün çalışabilmesi için gerekli firmware dosyalarını içerir.</Description>
-            <Archive type="tarbz2" sha1sum="03d895382f5c1c4ec0545143970ae2b79ee430fb">http://sourceforge.net/projects/pisilinux/files/source/linux-firmware-20160111.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="d7bd31f512cabebf003762412447c45f90a0e462">http://sourceforge.net/projects/pisilinux/files/source/linux-firmware-20160328.tar.bz2</Archive>
             <Archive type="tarxz" sha1sum="dd685266f7bc0acb0d455462637d23e3e895bc96" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/common-fw.tar.xz</Archive>
             <Archive type="tarxz" sha1sum="b2bb7fce3ea67d131f543a48134f7a65f2a8d834" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware-ipw.tar.xz</Archive>
             <Archive type="tarbz2" sha1sum="a5a616a9f765cf9cbb224deb7ccefdc82a7fe4d9" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/firmware-nonfreebox-2-tar.bz2</Archive>
@@ -13583,7 +14976,8 @@
             <AdditionalFiles>
                 <AdditionalFile target="iwlwifi-7260-14.ucode">iwlwifi-7260-14.ucode</AdditionalFile>
                 <AdditionalFile target="iwlwifi-7260-15.ucode">iwlwifi-7260-15.ucode</AdditionalFile>
-                <AdditionalFile target="iwlwifi-7260-16.ucode">iwlwifi-7260-17.ucode</AdditionalFile>
+                <AdditionalFile target="iwlwifi-7260-16.ucode">iwlwifi-7260-16.ucode</AdditionalFile>
+                <AdditionalFile target="iwlwifi-7260-17.ucode">iwlwifi-7260-17.ucode</AdditionalFile>
             </AdditionalFiles>
             <SourceURI>hardware/firmware/linux-firmware/pspec.xml</SourceURI>
         </Source>
@@ -13598,6 +14992,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>20160111</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-01-22</Date>
                 <Version>20160111</Version>
@@ -13657,6 +15058,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>3.4</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>3.4</Version>
@@ -13702,6 +15110,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>9</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2015-04-01</Date>
                 <Version>9</Version>
@@ -13740,6 +15155,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>4.0.18</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2014-02-12</Date>
                 <Version>4.0.18</Version>
@@ -13800,7 +15222,7 @@
             <Summary xml:lang="tr">device-mapper için geliştirme dosyaları</Summary>
             <Description xml:lang="en">Device-mapper-devel contains files needed to develop applications that use the device-mapper libraries.</Description>
             <RuntimeDependencies>
-                <Dependency release="1">device-mapper</Dependency>
+                <Dependency release="2">device-mapper</Dependency>
                 <Dependency>eudev-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -13814,7 +15236,7 @@
             <Summary xml:lang="tr">Device mapper durum servisi</Summary>
             <Description xml:lang="en">This package contains the dmeventd daemon for monitoring the state of device-mapper devices.</Description>
             <RuntimeDependencies>
-                <Dependency release="1">device-mapper</Dependency>
+                <Dependency release="2">device-mapper</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/sbin/dmeventd</Path>
@@ -13831,7 +15253,7 @@
             <Summary xml:lang="tr">device-mapper-event için geliştirme dosyaları</Summary>
             <Description xml:lang="en">This contains contains files needed to develop applications that use the device-mapper event library.</Description>
             <RuntimeDependencies>
-                <Dependency release="1">device-mapper-event</Dependency>
+                <Dependency release="2">device-mapper-event</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/libdevmapper-event.h</Path>
@@ -13843,8 +15265,8 @@
             <Summary xml:lang="en">Userland logical volume management tools</Summary>
             <Description xml:lang="en">LVM2 includes all of the support for handling read/write operations on physical volumes,creating volume groups from one or more physical volumes and creating one or more logical volumes in volume groups.</Description>
             <RuntimeDependencies>
-                <Dependency release="1">device-mapper</Dependency>
-                <Dependency release="1">device-mapper-event</Dependency>
+                <Dependency release="2">device-mapper</Dependency>
+                <Dependency release="2">device-mapper-event</Dependency>
                 <Dependency>libutil-linux</Dependency>
                 <Dependency>eudev</Dependency>
             </RuntimeDependencies>
@@ -13894,9 +15316,9 @@
             <Description xml:lang="en">This package contains files needed to develop applications that use the lvm2 libraries.</Description>
             <RuntimeDependencies>
                 <Dependency>libutil-linux-devel</Dependency>
-                <Dependency release="1">lvm2</Dependency>
-                <Dependency release="1">device-mapper-devel</Dependency>
-                <Dependency release="1">device-mapper-event-devel</Dependency>
+                <Dependency release="2">lvm2</Dependency>
+                <Dependency release="2">device-mapper-devel</Dependency>
+                <Dependency release="2">device-mapper-event-devel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/lvm2cmd.h</Path>
@@ -13937,6 +15359,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.02.142</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>2.02.142</Version>
@@ -13989,7 +15418,7 @@
             <Summary xml:lang="en">Development files for freetype</Summary>
             <Summary xml:lang="tr">freetype için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">freetype</Dependency>
+                <Dependency release="2">freetype</Dependency>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>libpng-devel</Dependency>
             </RuntimeDependencies>
@@ -14012,7 +15441,6 @@
                 <Dependency>libpng-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency>glibc-32bit</Dependency>
                 <Dependency>zlib-32bit</Dependency>
                 <Dependency>libpng-32bit</Dependency>
             </RuntimeDependencies>
@@ -14021,6 +15449,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2016-04-27</Date>
+                <Version>2.6.3</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-03-13</Date>
                 <Version>2.6.3</Version>

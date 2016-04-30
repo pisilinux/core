@@ -21,4 +21,4 @@ def cleanupPackage(metapath, filepath):
     pass
 
 def postCleanupPackage(metapath, filepath):
-    generate_initramfs(filepath)
+    pass
