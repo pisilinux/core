@@ -672,7 +672,6 @@
             </BuildFlags>
             <RuntimeDependencies>
                 <Dependency>pisi</Dependency>
-                <Dependency>mkinitramfs</Dependency>
                 <Dependency>linux-firmware</Dependency>
                 <Dependency>grub2</Dependency>
             </RuntimeDependencies>
@@ -896,6 +895,7 @@
                 <Dependency>libarchive</Dependency>
                 <Dependency>kmod</Dependency>
                 <Dependency>libkmod</Dependency>
+                <Dependency>kernel</Dependency>
                 <Dependency>busybox-mkinitcpio</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -905,6 +905,12 @@
                 <Path fileType="doc">/usr/share/doc</Path>
                 <Path fileType="data">/etc</Path>
             </Files>
+            <Conflicts>
+                <Package>mkinitramfs</Package>
+            </Conflicts>
+            <Replaces>
+                <Package>mkinitramfs</Package>
+            </Replaces>
             <Provides>
                 <COMAR script="pakhandler.py">System.PackageHandler</COMAR>
             </Provides>
@@ -3201,6 +3207,7 @@
             <Name>help2man</Name>
             <RuntimeDependencies>
                 <Dependency>perl-Locale-gettext</Dependency>
+                <Dependency>mkinitcpio</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin</Path>

@@ -30,8 +30,15 @@
             <Dependency>libarchive</Dependency>
             <Dependency>kmod</Dependency>
             <Dependency>libkmod</Dependency>
+            <Dependency>kernel</Dependency>
             <Dependency>busybox-mkinitcpio</Dependency>
         </RuntimeDependencies>
+        <Replaces>
+          <Package>mkinitramfs</Package>
+        </Replaces>
+        <Conflicts>
+          <Package>mkinitramfs</Package>
+        </Conflicts> 
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="library">/usr/lib</Path>
