@@ -28,35 +28,11 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.4.4.xz</Patch>
-            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.4.4/1.mga6/PATCHES/patches/series-->
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.4.8.xz</Patch>
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.4.6/1.mga6/PATCHES/patches/series-->
             <!--stable patches-->
-            <Patch level="1">patches/mageia/stable-use-d_seq-to-get-coherency-between-d_inode-and-d_flags.patch</Patch>
-            <Patch level="1">patches/mageia/stable-drivers-sh-restore-legacy-clock-domain-on-superh-platforms.patch</Patch>
-            <Patch level="1">patches/mageia/stable-btrfs-fix-deadlock-running-delayed-iputs-at-transaction-commit-time.patch</Patch>
-            <Patch level="1">patches/mageia/stable-btrfs-fix-no_space-in-write-and-rm-loop.patch</Patch>
-            <Patch level="1">patches/mageia/stable-btrfs-async-thread-fix-a-use-after-free-error-for-trace.patch</Patch>
-            <Patch level="1">patches/mageia/stable-drm-amdgpu-mask-out-wc-from-bo-on-unsupported-arches.patch</Patch>
-            <Patch level="1">patches/mageia/stable-block-initialize-max_dev_sectors-to-0.patch</Patch>
-            <Patch level="1">patches/mageia/stable-pci-keystone-fix-msi-code-that-retrieves-struct-pcie_port-pointer.patch</Patch>
-            <Patch level="1">patches/mageia/stable-parisc-fix-ptrace-syscall-number-and-return-value-modification.patch</Patch>
-            <Patch level="1">patches/mageia/stable-mips-kvm-fix-ioctl-error-handling.patch</Patch>
-            <Patch level="1">patches/mageia/stable-kvm-x86-update-tsc-multiplier-on-change.patch</Patch>
-            <Patch level="1">patches/mageia/stable-fbcon-set-a-default-value-to-blink-interval.patch</Patch>
-            <Patch level="1">patches/mageia/stable-cifs-fix-out-of-bounds-access-in-lease-parsing.patch</Patch>
-            <Patch level="1">patches/mageia/stable-cifs-fix-smb2-interim-response-processing-for-read-requests.patch</Patch>
-            <Patch level="1">patches/mageia/stable-fix-cifs_uniqueid_to_ino_t-function-for-s390x.patch</Patch>
-            <Patch level="1">patches/mageia/stable-vfio-fix-ioctl-error-handling.patch</Patch>
-            <Patch level="1">patches/mageia/stable-kvm-x86-fix-root-cause-for-missed-hardware-breakpoints.patch</Patch>
-            <Patch level="1">patches/mageia/stable-arm-arm64-kvm-fix-ioctl-error-handling.patch</Patch>
-            <Patch level="1">patches/mageia/stable-iommu-amd-apply-workaround-for-ats-write-permission-check.patch</Patch>
-            <Patch level="1">patches/mageia/stable-iommu-amd-fix-boot-warning-when-device-00-00.0-is-not-iommu-covered.patch</Patch>
-            <Patch level="1">patches/mageia/stable-iommu-vt-d-use-bus_notify_removed_device-in-hotplug-path.patch</Patch>
             <!--other patches-->
-            <Patch level="1">patches/mageia/ata-Adding-Intel-Lewisburg-device-IDs-for-SATA.patch</Patch>
-            <Patch level="1">patches/mageia/ata-ahci-don-t-mark-HotPlugCapable-Ports-as-external.patch</Patch>
-            <Patch level="1">patches/mageia/libata-Align-ata_device-s-id-on-a-cacheline.patch</Patch>
-            <Patch level="1">patches/mageia/libata-fix-HDIO_GET_32BIT-ioctl.patch</Patch>
+            <Patch level="1">patches/mageia/Revert-ipmi-Start-the-timer-and-thread-on-internal-m.patch</Patch>
             <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
             <Patch level="1">patches/mageia/x86-boot-video-80x25-if-break.patch</Patch>
             <Patch level="1">patches/mageia/x86-default_poweroff_up_machines.patch</Patch>
@@ -85,6 +61,7 @@
             <Patch level="1">patches/mageia/fs-aufs-4.4.patch</Patch>
             <Patch level="1">patches/mageia/fs-aufs-4.4-modular.patch</Patch>
             <Patch level="1">patches/mageia/fs-ovl-move-super-block-magic-number-to-magic.h.patch</Patch>
+            <Patch level="1">patches/mageia/pipe-limit-the-per-user-amount-of-pages-allocated-in-pipes_CVE-2016-2847.patch</Patch>
             <Patch level="1">patches/mageia/firewire-ieee1394-module-aliases.patch</Patch>
             <Patch level="1">patches/mageia/char-agp-intel-new-Q57-id.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64.patch</Patch>
@@ -134,6 +111,8 @@
             <Patch level="1">patches/mageia/net-netfilter-psd.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-psd-mdv.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-psd-2.6.35-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/net-netfilter-x_tables-check-for-size-overflow.patch</Patch>
+            <Patch level="1">patches/mageia/net-netfilter-x_tables-deal-with-bogus-nextoffset-values.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
@@ -182,7 +161,6 @@
             <Patch level="1">patches/mageia/arm-0024-ARM-bcm2835-Add-the-auxiliary-clocks-to-the-device-t.patch</Patch>
             <Patch level="1">patches/mageia/arm-0031-ARM-bcm2835-enable-all-bcm2835-relevant-in-defconfig.patch</Patch>
             <Patch level="1">patches/mageia/arm-0032-ARM-bcm2835-enable-auxiliary-spi-driver-in-defconfig.patch</Patch>
-        mageia/net-netfilter-IFWLOG-remove-unused-label.patch
         </Patches>
     </Source>
 
@@ -197,7 +175,7 @@
             <Path fileType="executable" permanent="true">/boot</Path>
             <Path fileType="library" permanent="true">/lib/modules</Path>
             <Path fileType="data">/etc/kernel</Path>
-            <Path fileType="data">/etc/mkinitcpio.d</Path>
+            <Path fileType="config">/etc/mkinitcpio.d</Path>
         </Files>
         <Provides>
             <COMAR script="package.py">System.Package</COMAR>
@@ -239,12 +217,16 @@
     <History>
         <Update release="2">
             <Date>2016-04-27</Date>
-            <Version>4.4.4</Version>
-            <Comment>Release Bump</Comment>
-            <Name>PisiLinux Community</Name>
-            <Email>admin@pisilinux.org</Email>
+            <Version>4.4.8</Version>
+            <Comment>Version Bump.</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
         </Update>
-           <Update release="1">
+        <Update release="1">
             <Date>2016-03-06</Date>
             <Version>4.4.4</Version>
             <Comment>First release</Comment>
@@ -254,6 +236,6 @@
             </Requires>
             <Name>Ertuğrul Erata</Name>
             <Email>ertugrulerata@gmail.com</Email>
-          </Update>
+        </Update>
     </History>
 </PISI>
