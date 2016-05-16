@@ -1,3 +1,4 @@
+
 <?xml version="1.0" ?>
 <!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
@@ -12,7 +13,7 @@
         <IsA>app:console</IsA>
         <Summary>A tool for automatically generating Makefile.in files compliant with the GNU Coding Standards</Summary>
         <Description>Automake is a tool for automatically generating Makefile.in files compliant with the GNU Coding Standards.</Description>
-        <Archive sha1sum="c279b35ca6c410809dac8ade143b805fb48b7655" type="tarxz">mirrors://gnu/automake/automake-1.15.tar.xz</Archive>
+        <Archive sha1sum="2ed5a20fd22bf1c2f4e2375ac8f2debfdc2b75c7" type="targz">mirrors://gnu/automake/automake-1.8.5.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>perl</Dependency>
             <Dependency>autoconf</Dependency>
@@ -38,17 +39,16 @@
         </Files>
     </Package>
 
-    <History>
-        <Update release="2">
-            <Date>2016-04-27</Date>
-            <Version>1.15</Version>
-            <Comment>Release Bump</Comment>
-            <Name>PisiLinux Community</Name>
-            <Email>admin@pisilinux.org</Email>
+    <History><Update release="2">
+            <Date>2016-05-16</Date>
+            <Version>1.8.5</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold</Name>
+            <Email>groni@pisilinux.org</Email>
         </Update>
         <Update release="1">
             <Date>2016-03-13</Date>
-            <Version>1.15</Version>
+            <Version>1.8.5</Version>
             <Comment>First release</Comment>
             <Name>Ertuğrul Erata</Name>
             <Email>ertugrulerata@gmail.com</Email>
