@@ -12,19 +12,20 @@
         <IsA>driver</IsA>
         <Summary>Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver for use with Broadcom's BCM4311, BCM4312, BCM4321, and BCM4322 based hardware</Summary>
         <Description>This package contains Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver for use with Broadcom's BCM4311, BCM4312, BCM4321, and BCM4322 based hardware. You must read the LICENSE.txt file in the docs directory before using this software.</Description>
-        <Archive sha1sum="e02beac9cc713011551c483ae5f20f065f5b88c7" type="targz" target="i686">http://www.broadcom.com/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
-        <Archive sha1sum="bd55f1fdc6b0a4d0a70dc4ba4bb4169a824e238c" type="targz" target="x86_64">http://www.broadcom.com/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_248.tar.gz</Archive>
+        <Archive sha1sum="8acbdbb4ab4ab4123d1773b616904798fbef9277" type="targz" target="i686">http://www.broadcom.com/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
+        <Archive sha1sum="1f568bb989d175813c5631c6629d9479eae6f3be" type="targz" target="x86_64">http://www.broadcom.com/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
         <BuildDependencies>
             <Dependency version="4.4.8">kernel-module-headers</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">patch/linux-40.patch</Patch>
-            <Patch level="1">patch/linux-recent.patch</Patch>
+<!--             <Patch level="1">patch/linux-40.patch</Patch> -->
+<!--             <Patch level="1">patch/linux-recent.patch</Patch> -->
             <Patch level="1">patch/license.patch</Patch>
+            <Patch level="1">patch/wl_linux.c.patch</Patch>
             <Patch level="1">patch/gcc.patch</Patch>
             <Patch level="1">patch/wlan.patch</Patch>
-            <Patch level="1">patch/broadcom-sta-6.30.223.248-linux-3.18-null-pointer-crash.patch</Patch>
-            <Patch>patch/0018-cfg80211_disconnected.patch</Patch>
+<!--             <Patch level="1">patch/broadcom-sta-6.30.223.248-linux-3.18-null-pointer-crash.patch</Patch> -->
+<!--             <Patch>patch/0018-cfg80211_disconnected.patch</Patch> -->
             <!--Patch>patch/0019-broadcom-sta-6.30.223.248-3.18-null-pointer-fix.patch</Patch-->
         </Patches>
     </Source>
@@ -64,8 +65,15 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2016-05-29</Date>
+            <Version>6.30.223.271</Version>
+            <Comment>Version Bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="2">
-            <Date>2016-04-30</Date>
+            <Date>2016-05-23</Date>
             <Version>6.30.223.248</Version>
             <Comment>Release Bump</Comment>
             <Name>PisiLinux Community</Name>
