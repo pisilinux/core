@@ -24,8 +24,6 @@ def setup():
                          --with-rootprefix=      \
                          --with-rootlibdir=/lib  \
                          --enable-split-usr      \
-                         --disable-introspection \
-                         --disable-blkid \
                          --enable-gudev         \
                          --enable-static        \
                          --disable-manpages \
