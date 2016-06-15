@@ -20,6 +20,7 @@ def setup():
                          "-DSQLITE_ENABLE_FTS3",
                          "-DSQLITE_ENABLE_FTS4",
                          "-DSQLITE_ENABLE_FTS5",
+                         "-DSQLITE_ENABLE_DBSTAT_VTAB=1",
                          "-DSQLITE_ENABLE_FTS3_PARENTHESIS",
                          "-DSQLITE_ENABLE_STMT_SCANSTATUS",
                          "-DSQLITE_SOUNDEX",
