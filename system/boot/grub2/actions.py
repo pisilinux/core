@@ -9,7 +9,11 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 
+WorkDir="grub-%s" % (get.srcVERSION().replace("_", "~"))
+
+
 def setup():
+    
     shelltools.copy("../unifont*.bdf", "./unifont.bdf")
     shelltools.export("GRUB_CONTRIB", "%s/grub-%s/grub-extras" % (get.workDIR(), get.srcVERSION()))
 
@@ -22,12 +26,33 @@ def setup():
                          --with-grubdir=grub2 \
                          --program-transform-name='s,grub,grub2,'\
                          --program-prefix= \
+                         --with-platform=pc \
+                         --target='i386' \
                          --htmldir='/usr/share/doc/grub2/html' ")
-
+    
+    
+    shelltools.copytree("../grub-%s" % (get.srcVERSION().replace("_", "~")), "../grub-%s-efi" % get.srcVERSION())
+    shelltools.cd("../grub-%s-efi" % get.srcVERSION())
+    shelltools.system("./autogen.sh")
+    autotools.configure("--disable-werror \
+                         --with-grubdir=grub2 \
+                         --program-transform-name='s,grub,grub2,'\
+                         --program-prefix= \
+                         --with-platform=efi \
+                         --target=x86_64  \
+                         --htmldir='/usr/share/doc/grub2/html' ")
+    
+    
+    shelltools.cd("..")
+    
+    
 def build():
     #make-dist for creating all updated translation files
     autotools.make("dist")
     autotools.make()
+    shelltools.cd("../grub-%s-efi" % get.srcVERSION())
+    autotools.make()
+    shelltools.cd("..")
 
 def install():
     # Install unicode.pf2 using downloaded font source. 
@@ -35,6 +60,7 @@ def install():
 
     # Create directory for grub.cfg file
     pisitools.dodir("/boot/grub2")
+    
     pisitools.insinto("/boot/grub2", "unicode.pf2")
 
     # Insall our theme
@@ -56,7 +82,15 @@ def install():
 
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    #Remove default starfiled theme.
-    # pisitools.removeDir("/usr/share/grub/themes/starfield")
-
     pisitools.dodoc("ABOUT-NLS", "AUTHORS", "BUGS", "ChangeLog", "COPYING", "TODO", "README")
+    
+    shelltools.cd("../grub-%s-efi" % get.srcVERSION())
+    
+    autotools.rawInstall("DESTDIR=%s/efi" % get.installDIR())
+    
+    
+    shelltools.copytree("/%s/efi/usr/lib/grub/x86_64-efi" % get.installDIR(), "%s/usr/lib/grub/x86_64-efi" % get.installDIR())
+    pisitools.removeDir("/efi")
+
+
+
