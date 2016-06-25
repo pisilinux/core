@@ -58,6 +58,7 @@
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="executable">/usr/sbin</Path>
             <Path fileType="library">/usr/lib/grub/i386-pc/</Path>
+            <Path fileType="library">/usr/lib/grub/x86_64-efi</Path>
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="data">/usr/share/grub</Path>
             <Path fileType="data">/usr/share/info</Path>
@@ -72,10 +73,18 @@
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/grub/pisi-grub-bg.png">pisi-grub-bg.png</AdditionalFile>
             <AdditionalFile owner="root" permission="0644" target="/etc/default/grub">grub-defaults</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/update-grub">update-grub</AdditionalFile>
         </AdditionalFiles>
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2016-06-25</Date>
+            <Version>2.02_beta2</Version>
+            <Comment>Add efi</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>2.02_beta2</Version>
