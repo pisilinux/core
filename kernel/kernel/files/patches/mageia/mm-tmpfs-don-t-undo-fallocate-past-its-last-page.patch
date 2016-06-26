@@ -1,0 +1,39 @@
+From b9b4bb26af017dbe930cd4df7f9b2fc3a0497bfe Mon Sep 17 00:00:00 2001
+From: Anthony Romano <anthony.romano@coreos.com>
+Date: Fri, 24 Jun 2016 14:48:43 -0700
+Subject: [PATCH] tmpfs: don't undo fallocate past its last page
+
+When fallocate is interrupted it will undo a range that extends one byte
+past its range of allocated pages.  This can corrupt an in-use page by
+zeroing out its first byte.  Instead, undo using the inclusive byte
+range.
+
+Fixes: 1635f6a74152f1d ("tmpfs: undo fallocation on failure")
+Link: http://lkml.kernel.org/r/1462713387-16724-1-git-send-email-anthony.romano@coreos.com
+Signed-off-by: Anthony Romano <anthony.romano@coreos.com>
+Cc: Vlastimil Babka <vbabka@suse.cz>
+Cc: Hugh Dickins <hughd@google.com>
+Cc: Brandon Philips <brandon@ifup.co>
+Cc: <stable@vger.kernel.org>
+Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
+Signed-off-by: Linus Torvalds <torvalds@linux-foundation.org>
+---
+ mm/shmem.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/mm/shmem.c b/mm/shmem.c
+index a361449..24463b6 100644
+--- a/mm/shmem.c
++++ b/mm/shmem.c
+@@ -2227,7 +2227,7 @@ static long shmem_fallocate(struct file *file, int mode, loff_t offset,
+ 			/* Remove the !PageUptodate pages we added */
+ 			shmem_undo_range(inode,
+ 				(loff_t)start << PAGE_SHIFT,
+-				(loff_t)index << PAGE_SHIFT, true);
++				((loff_t)index << PAGE_SHIFT) - 1, true);
+ 			goto undone;
+ 		}
+ 
+-- 
+2.9.0
+

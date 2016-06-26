@@ -1,0 +1,49 @@
+From e838a45f9392a5bd2be1cd3ab0b16ae85857461c Mon Sep 17 00:00:00 2001
+From: Mel Gorman <mgorman@techsingularity.net>
+Date: Fri, 24 Jun 2016 14:49:37 -0700
+Subject: [PATCH] mm, sl[au]b: add __GFP_ATOMIC to the GFP reclaim mask
+
+Commit d0164adc89f6 ("mm, page_alloc: distinguish between being unable
+to sleep, unwilling to sleep and avoiding waking kswapd") modified
+__GFP_WAIT to explicitly identify the difference between atomic callers
+and those that were unwilling to sleep.  Later the definition was
+removed entirely.
+
+The GFP_RECLAIM_MASK is the set of flags that affect watermark checking
+and reclaim behaviour but __GFP_ATOMIC was never added.  Without it,
+atomic users of the slab allocator strip the __GFP_ATOMIC flag and
+cannot access the page allocator atomic reserves.  This patch addresses
+the problem.
+
+The user-visible impact depends on the workload but potentially atomic
+allocations unnecessarily fail without this path.
+
+Link: http://lkml.kernel.org/r/20160610093832.GK2527@techsingularity.net
+Signed-off-by: Mel Gorman <mgorman@techsingularity.net>
+Reported-by: Marcin Wojtas <mw@semihalf.com>
+Acked-by: Vlastimil Babka <vbabka@suse.cz>
+Acked-by: Michal Hocko <mhocko@suse.com>
+Cc: <stable@vger.kernel.org>	[4.4+]
+Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
+Signed-off-by: Linus Torvalds <torvalds@linux-foundation.org>
+---
+ mm/internal.h | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/mm/internal.h b/mm/internal.h
+index a37e5b6..2524ec8 100644
+--- a/mm/internal.h
++++ b/mm/internal.h
+@@ -24,7 +24,8 @@
+  */
+ #define GFP_RECLAIM_MASK (__GFP_RECLAIM|__GFP_HIGH|__GFP_IO|__GFP_FS|\
+ 			__GFP_NOWARN|__GFP_REPEAT|__GFP_NOFAIL|\
+-			__GFP_NORETRY|__GFP_MEMALLOC|__GFP_NOMEMALLOC)
++			__GFP_NORETRY|__GFP_MEMALLOC|__GFP_NOMEMALLOC|\
++			__GFP_ATOMIC)
+ 
+ /* The GFP flags allowed during early boot */
+ #define GFP_BOOT_MASK (__GFP_BITS_MASK & ~(__GFP_RECLAIM|__GFP_IO|__GFP_FS))
+-- 
+2.9.0
+

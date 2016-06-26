@@ -83,9 +83,9 @@ diff -Nurp linux-4.2.2/Makefile linux-4.2.2-3rd/Makefile
  net-y		:= net/
  libs-y		:= lib/
  core-y		:= usr/
-diff -Nurp linux-4.4.0/scripts/kconfig/Makefile linux-4.4.0-3rd/scripts/kconfig/Makefile
---- linux-4.4.0/scripts/kconfig/Makefile
-+++ linux-4.4.0-3rd/scripts/kconfig/Makefile
+diff -Nurp linux-4.6/scripts/kconfig/Makefile linux-4.6-3rd/scripts/kconfig/Makefile
+--- linux-4.6/scripts/kconfig/Makefile
++++ linux-4.6-3rd/scripts/kconfig/Makefile
 @@ -18,26 +18,26 @@ endif
  # We need this, in case the user has it in its environment
  unexport CONFIG_
@@ -144,9 +144,9 @@ diff -Nurp linux-4.4.0/scripts/kconfig/Makefile linux-4.4.0-3rd/scripts/kconfig/
 +defconfig: $(obj)/conf 3rdparty/Makefile
  ifeq ($(KBUILD_DEFCONFIG),)
  	$< $(silent) --defconfig $(Kconfig)
- else ifneq ($(wildcard $(srctree)/arch/$(SRCARCH)/configs/$(KBUILD_DEFCONFIG)),)
-@@ -104,26 +104,26 @@ else
- 	$(Q)$(MAKE) -f $(srctree)/Makefile $(KBUILD_DEFCONFIG)
+ else
+@@ -106,26 +106,26 @@ else
+ endif
  endif
  
 -%_defconfig: $(obj)/conf
@@ -173,11 +173,11 @@ diff -Nurp linux-4.4.0/scripts/kconfig/Makefile linux-4.4.0-3rd/scripts/kconfig/
  
  PHONY += tinyconfig
 -tinyconfig:
-+tinyconfig: 3rdparty/Makefile
++tinyconfig: 
  	$(Q)$(MAKE) -f $(srctree)/Makefile allnoconfig tiny.config
  
  # Help text used by make help
-@@ -186,6 +186,9 @@ gconf-objs	:= gconf.o zconf.tab.o
+@@ -188,6 +188,9 @@ gconf-objs	:= gconf.o zconf.tab.o
  
  hostprogs-y := conf nconf mconf kxgettext qconf gconf
  

@@ -12,7 +12,7 @@
         <IsA>kernel</IsA>
         <Summary>The Linux kernel (the core of the Linux operating system) for Pisi Linux</Summary>
         <Description>kernel contains the Linux kernel, the core of any Linux operating system. The kernel handles the basic functions of the operating system: memory allocation, process allocation, device input and output, etc.</Description>
-        <Archive sha1sum="180ab617036593212274177eff3a67f437c1b5ea" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.4.tar.gz</Archive>
+        <Archive sha1sum="57cd77757651a05a2e63b2faac010fc17ce399e7" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.6.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -28,8 +28,8 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.4.8.xz</Patch>
-            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.4.6/1.mga6/PATCHES/patches/series-->
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.6.3.xz</Patch>
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.6.3/1.mga6/PATCHES/patches/series-->
             <!--stable patches-->
             <!--other patches-->
             <Patch level="1">patches/mageia/Revert-ipmi-Start-the-timer-and-thread-on-internal-m.patch</Patch>
@@ -45,6 +45,7 @@
             <Patch level="1">patches/mageia/acpi-CLEVO-M360S-disable_acpi_irq.patch</Patch>
             <Patch level="1">patches/mageia/acpi-processor-M720SR-limit-to-C2.patch</Patch>
             <Patch level="1">patches/mageia/ACPI-video-Add-a-quirk-to-force-acpi-video-backlight.patch</Patch>
+            <Patch level="1">patches/mageia/acpi-ACPICA-Namespace-Fix-deadlock-triggered-by-MLC-suppo.patch</Patch>
             <!--Patch level="1">patches/mageia/scsi-ppscsi-2.6.2.patch</Patch>
             <Patch level="1">patches/mageia/scsi-ppscsi_fixes.patch</Patch>
             <Patch level="1">patches/mageia/scsi-ppscsi-sg-helper-update.patch</Patch>
@@ -58,10 +59,8 @@
             <Patch level="1">patches/mageia/block-floppy-disable-pnp-modalias.patch</Patch>
             <Patch level="1">patches/mageia/ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch</Patch>
             <Patch level="1">patches/mageia/block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch</Patch>
-            <Patch level="1">patches/mageia/fs-aufs-4.4.patch</Patch>
-            <Patch level="1">patches/mageia/fs-aufs-4.4-modular.patch</Patch>
-            <Patch level="1">patches/mageia/fs-ovl-move-super-block-magic-number-to-magic.h.patch</Patch>
-            <Patch level="1">patches/mageia/pipe-limit-the-per-user-amount-of-pages-allocated-in-pipes_CVE-2016-2847.patch</Patch>
+            <Patch level="1">patches/mageia/fs-aufs-4.6.patch</Patch>
+            <Patch level="1">patches/mageia/fs-aufs-4.6-modular.patch</Patch>
             <Patch level="1">patches/mageia/firewire-ieee1394-module-aliases.patch</Patch>
             <Patch level="1">patches/mageia/char-agp-intel-new-Q57-id.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64.patch</Patch>
@@ -81,25 +80,10 @@
             <Patch level="1">patches/mageia/gpu-drm-mach64-linux-3.14-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.17-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.18-buildfix.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-i915-Fix-RPS-pointer-passed-from-wait_ioctl-to-i915_wait_request.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-0001-devicetree-add-vendor-prefix-for-Vivante-Corporation.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-0002-drm-etnaviv-add-devicetree-bindings.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-0003-drm-etnaviv-add-initial-etnaviv-DRM-driver.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-0004-MAINTAINERS-add-maintainer-and-reviewers-for-the-etn.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-0005-drm-etnaviv-unlock-on-error-in-etnaviv_gem_get_iova.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-0006-drm-etnaviv-fix-workaround-for-GC500.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-0101-drm-Create-a-driver-hook-for-allocating-GEM-object-s.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-0102-drm-vc4-Add-a-BO-cache.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-0103-drm-vc4-Add-create-and-map-BO-ioctls.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-0104-drm-vc4-Add-an-API-for-creating-GPU-shaders-in-GEM-B.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-0105-drm-vc4-Fix-a-typo-in-a-V3D-debug-register.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-0106-drm-vc4-Bind-and-initialize-the-V3D-engine.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-0107-drm-vc4-Add-support-for-drawing-3D-frames.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-0108-drm-vc4-Add-support-for-async-pageflips.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-0109-drm-vc4-Add-an-interface-for-capturing-the-GPU-state.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-radeon-Update-radeon_get_vblank_counter_kms.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-radeon-Drop-unnecessary-unsigned-int-0-check.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-i915-fbc-Disable-on-HSW-by-default-for-now.patch</Patch>
             <Patch level="1">patches/mageia/input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch</Patch>
+            <Patch level="1">patches/mageia/mm-sl-au-b-add-__GFP_ATOMIC-to-the-GFP-reclaim-mask.patch</Patch>
+            <Patch level="1">patches/mageia/mm-tmpfs-don-t-undo-fallocate-past-its-last-page.patch</Patch>
             <Patch level="1">patches/mageia/net-sis190-fix-list-usage.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-IFWLOG.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-IFWLOG-mdv.patch</Patch>
@@ -111,8 +95,6 @@
             <Patch level="1">patches/mageia/net-netfilter-psd.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-psd-mdv.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-psd-2.6.35-buildfix.patch</Patch>
-            <Patch level="1">patches/mageia/net-netfilter-x_tables-check-for-size-overflow.patch</Patch>
-            <Patch level="1">patches/mageia/net-netfilter-x_tables-deal-with-bogus-nextoffset-values.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
@@ -133,12 +115,9 @@
             <!--<Patch level="1">patches/mageia/3rd-aes2501-r19.patch</Patch>
             <Patch level="1">patches/mageia/3rd-aes2501-kbuild.patch</Patch>
             <Patch level="1">patches/mageia/3rd-aes2501-rmmod-oops-fix.patch</Patch -2-->
-            <Patch level="1">patches/mageia/3rd-ndiswrapper-1.59.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-ndiswrapper-1.60.patch</Patch>
             <Patch level="1">patches/mageia/3rd-ndiswrapper-Kconfig.patch</Patch>
             <Patch level="1">patches/mageia/3rd-ndiswrapper-Makefile-build-fix.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-ndiswrapper-linux-3.14-buildfix.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-ndiswrapper-4.0-buildfix.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-ndiswrapper-4.2-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rfswitch-1.3.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rfswitch-build-fix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rfswitch-3.0-buildfix.patch</Patch>
@@ -149,18 +128,8 @@
             <Patch level="1">patches/mageia/3rd-viahss-3.0-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8723bs.patch</Patch>
             <Patch level="1">patches/mageia/ahci-add-new-Intel-device-IDs.patch</Patch>
-            <Patch level="1">patches/mageia/arm-0001-dt-bindings-Add-root-properties-for-Raspberry-Pi-2.patch</Patch>
-            <Patch level="1">patches/mageia/arm-0002-ARM-bcm2835-Add-a-compat-string-for-bcm2836-machine-.patch</Patch>
-            <Patch level="1">patches/mageia/arm-0003-ARM-bcm2835-Add-Kconfig-support-for-bcm2836.patch</Patch>
-            <Patch level="1">patches/mageia/arm-0011-ARM-bcm2835-Define-two-new-packets-from-the-latest-f.patch</Patch>
-            <Patch level="1">patches/mageia/arm-0012-dt-bindings-add-rpi-power-domain-driver-bindings.patch</Patch>
-            <Patch level="1">patches/mageia/arm-0013-ARM-bcm2835-add-rpi-power-domain-driver.patch</Patch>
-            <Patch level="1">patches/mageia/arm-0021-ARM-bcm2835-Split-the-DT-for-peripherals-from-the-DT.patch</Patch>
-            <Patch level="1">patches/mageia/arm-0022-ARM-bcm2835-Move-the-CPU-peripheral-include-out-of-c.patch</Patch>
-            <Patch level="1">patches/mageia/arm-0023-ARM-bcm2835-Add-devicetree-for-bcm2836-and-Raspberry.patch</Patch>
-            <Patch level="1">patches/mageia/arm-0024-ARM-bcm2835-Add-the-auxiliary-clocks-to-the-device-t.patch</Patch>
-            <Patch level="1">patches/mageia/arm-0031-ARM-bcm2835-enable-all-bcm2835-relevant-in-defconfig.patch</Patch>
-            <Patch level="1">patches/mageia/arm-0032-ARM-bcm2835-enable-auxiliary-spi-driver-in-defconfig.patch</Patch>
+            <Patch level="1">patches/mageia/block-sd-Fix-rw_max-for-devices-that-report-an-optimal-xfe.patch</Patch>
+            <Patch level="1">patches/mageia/arm-0001-ARM-bcm2835-dt-Add-the-ethernet-to-the-device-trees.patch</Patch>
         </Patches>
     </Source>
 
@@ -216,6 +185,17 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2016-06-26</Date>
+            <Version>4.6.3</Version>
+            <Comment>Version Bump.</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-30</Date>
             <Version>4.4.8</Version>

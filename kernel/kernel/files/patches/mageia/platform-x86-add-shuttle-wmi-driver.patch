@@ -1419,12 +1419,12 @@ diff -Nurp linux-3.14.2/drivers/platform/x86/shuttle-wmi.c linux-3.14.2-shuttle/
 +
 +module_init(shuttle_wmi_init);
 +module_exit(shuttle_wmi_exit);
-diff -Nurp linux-3.14.2/MAINTAINERS linux-3.14.2-shuttle/MAINTAINERS
---- linux-3.14.2/MAINTAINERS	2014-03-31 06:40:15.000000000 +0300
-+++ linux-3.14.2-shuttle/MAINTAINERS	2014-04-26 18:33:26.869761100 +0300
-@@ -7880,6 +7880,12 @@ S:	Odd Fixes
+diff -Nurp linux-4.6/MAINTAINERS linux-4.6-shuttle/MAINTAINERS
+--- linux-4.6/MAINTAINERS
++++ linux-4.6-shuttle/MAINTAINERS
+@@ -10130,6 +10130,12 @@ S:	Orphan
  F:	drivers/media/platform/sh_vou.c
- F:	include/media/sh_vou.h
+ F:	include/media/drv-intf/sh_vou.h
  
 +SHUTTLE WMI EXTRAS DRIVER
 +M:	Herton Ronaldo Krzesinski <herton@mandriva.com.br>
