@@ -22,7 +22,7 @@ def setup():
     kerneltools.configure()
 
 def build():
-    kerneltools.build(debugSymbols=True)
+    kerneltools.build(debugSymbols=False)
 
 def install():
     kerneltools.install()
