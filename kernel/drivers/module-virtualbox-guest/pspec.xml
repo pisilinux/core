@@ -14,14 +14,14 @@
         <Description>This package provides the kernel modules needed for mouse integration and shared folder support between VirtualBox host and guest systems.</Description>
         <Archive sha1sum="7d1e0c0db7db8ce14e930ad1078f89a5d8cd0b42" type="tarxz">http://sourceforge.net/projects/pisiiso/files/source/module-virtualbox-guest-5.1.0b.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency version="4.4.8">kernel-module-headers</Dependency>
+            <Dependency version="4.6.3">kernel-module-headers</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>module-virtualbox-guest</Name>
         <RuntimeDependencies>
-            <Dependency version="4.4.8">kernel</Dependency>
+            <Dependency version="4.6.3">kernel</Dependency>
             <Dependency>baselayout</Dependency>
             <Dependency version="current">module-virtualbox-guest-userspace</Dependency>
         </RuntimeDependencies>
@@ -53,9 +53,9 @@
 
     <History>
         <Update release="3">
-            <Date>2016-06-17</Date>
+            <Date>2016-06-28</Date>
             <Version>5.1.0b</Version>
-            <Comment>Version Bump</Comment>
+            <Comment>Rebuild for new kernel.</Comment>
             <Name>PisiLinux Community</Name>
             <Email>admin@pisilinux.org</Email>
         </Update>
