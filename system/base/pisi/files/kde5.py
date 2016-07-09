@@ -46,20 +46,20 @@ def configure(parameters = '', installPrefix = prefix, sourceDir = '..'):
     cmaketools.configure("-DDATA_INSTALL_DIR:PATH=%s \
             -DINCLUDE_INSTALL_DIR:PATH=%s \
             -DCONFIG_INSTALL_DIR:PATH=%s \
-            -DLIBEXEC_INSTALL_DIR:PATH=%s \
+            -DKDE_INSTALL_LIBEXECDIR:PATH=%s \
             -DLOCALE_INSTALL_DIR:PATH=%s \
-            -DQML_INSTALL_DIR:PATH=%s \
-            -DPLUGIN_INSTALL_DIR:PATH=%s \
+            -DKDE_INSTALL_QMLDIR:PATH=%s \
+            -DKDE_INSTALL_PLUGINDIR:PATH=%s \
             -DECM_MKSPECS_INSTALL_DIR:PATH=%s \
             -DPYTHON_EXECUTABLE:PATH=%s \
-            -DSYSCONF_INSTALL_DIR:PATH=%s \
+            -DKDE_INSTALL_SYSCONFDIR:PATH=%s \
             -DHTML_INSTALL_DIR:PATH=%s \
             -DMAN_INSTALL_DIR:PATH=%s \
             -DCMAKE_SKIP_RPATH:BOOL=ON \
             -DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
             -DBUILD_TESTING=OFF \
             -DCMAKE_BUILD_TYPE=Release \
-            -DLIB_INSTALL_DIR:PATH=%s %s \
+            -DKDE_INSTALL_LIBDIR:PATH=%s %s \
             -DCMAKE_INSTALL_LIBDIR=lib \
             -DCMAKE_INSTALL_PREFIX=%s" % (appsdir, includedir, configdir, libexecdir, localedir, qmldir, plugindir, moduledir, pythondir, sysconfdir, htmldir, mandir, libdir, parameters, prefix), installPrefix, sourceDir)
 
