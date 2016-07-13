@@ -77,6 +77,9 @@ acpi-processor-M720SR-limit-to-C2.patch
 # backlight fixes
 ACPI-video-Add-a-quirk-to-force-acpi-video-backlight.patch
 
+#
+acpi-ACPICA-Namespace-Fix-deadlock-triggered-by-MLC-suppo.patch
+
 ###
 ### Block
 ###
@@ -122,6 +125,9 @@ block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch
 # ahci ids
 ahci-add-new-Intel-device-IDs.patch
 
+#
+block-sd-Fix-rw_max-for-devices-that-report-an-optimal-xfe.patch
+
 ###
 ### Char
 ###
@@ -134,14 +140,8 @@ Revert-ipmi-Start-the-timer-and-thread-on-internal-m.patch
 ###
 
 # aufs from: http://aufs.sourceforge.net/ (mga#8314)
-fs-aufs-4.4.patch
-fs-aufs-4.4-modular.patch
-
-# ovl fixes
-fs-ovl-move-super-block-magic-number-to-magic.h.patch
-
-# CVE-2016-2847
-pipe-limit-the-per-user-amount-of-pages-allocated-in-pipes_CVE-2016-2847.patch
+fs-aufs-4.6.patch
+fs-aufs-4.6-modular.patch
 
 ###
 ### FireWire
@@ -176,31 +176,8 @@ gpu-drm-mach64-linux-3.14-buildfix.patch
 gpu-drm-mach64-3.17-buildfix.patch
 gpu-drm-mach64-3.18-buildfix.patch
 
-# drm fixes
-gpu-drm-i915-Fix-RPS-pointer-passed-from-wait_ioctl-to-i915_wait_request.patch
-
-# etnaviv / vivante gpu
-gpu-drm-0001-devicetree-add-vendor-prefix-for-Vivante-Corporation.patch
-gpu-drm-0002-drm-etnaviv-add-devicetree-bindings.patch
-gpu-drm-0003-drm-etnaviv-add-initial-etnaviv-DRM-driver.patch
-gpu-drm-0004-MAINTAINERS-add-maintainer-and-reviewers-for-the-etn.patch
-gpu-drm-0005-drm-etnaviv-unlock-on-error-in-etnaviv_gem_get_iova.patch
-gpu-drm-0006-drm-etnaviv-fix-workaround-for-GC500.patch
-
-# vc4 3d accel support
-gpu-drm-0101-drm-Create-a-driver-hook-for-allocating-GEM-object-s.patch
-gpu-drm-0102-drm-vc4-Add-a-BO-cache.patch
-gpu-drm-0103-drm-vc4-Add-create-and-map-BO-ioctls.patch
-gpu-drm-0104-drm-vc4-Add-an-API-for-creating-GPU-shaders-in-GEM-B.patch
-gpu-drm-0105-drm-vc4-Fix-a-typo-in-a-V3D-debug-register.patch
-gpu-drm-0106-drm-vc4-Bind-and-initialize-the-V3D-engine.patch
-gpu-drm-0107-drm-vc4-Add-support-for-drawing-3D-frames.patch
-gpu-drm-0108-drm-vc4-Add-support-for-async-pageflips.patch
-gpu-drm-0109-drm-vc4-Add-an-interface-for-capturing-the-GPU-state.patch
-
-# radeon breakage fixes
-gpu-drm-radeon-Update-radeon_get_vblank_counter_kms.patch
-gpu-drm-radeon-Drop-unnecessary-unsigned-int-0-check.patch
+# hsw screen glitches
+gpu-drm-i915-fbc-Disable-on-HSW-by-default-for-now.patch
 
 ###
 ### Hardware Monitoring
@@ -232,6 +209,12 @@ input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch
 ### MM
 ###
 
+# fixes some failing atomic allocations
+mm-sl-au-b-add-__GFP_ATOMIC-to-the-GFP-reclaim-mask.patch
+
+# tmpfs fix
+mm-tmpfs-don-t-undo-fallocate-past-its-last-page.patch
+
 ###
 ### Network
 ###
@@ -252,10 +235,6 @@ net-netfilter-IFWLOG-remove-unused-label.patch
 net-netfilter-psd.patch
 net-netfilter-psd-mdv.patch
 net-netfilter-psd-2.6.35-buildfix.patch
-
-# CVE pending
-net-netfilter-x_tables-check-for-size-overflow.patch
-net-netfilter-x_tables-deal-with-bogus-nextoffset-values.patch
 
 ###
 ### Platform drivers
@@ -342,12 +321,9 @@ video-mageia-logo.patch
 3rd-aes2501-rmmod-oops-fix.patch
 
 # ndiswrapper
-3rd-ndiswrapper-1.59.patch
+3rd-ndiswrapper-1.60.patch
 3rd-ndiswrapper-Kconfig.patch
 3rd-ndiswrapper-Makefile-build-fix.patch
-3rd-ndiswrapper-linux-3.14-buildfix.patch
-3rd-ndiswrapper-4.0-buildfix.patch
-3rd-ndiswrapper-4.2-buildfix.patch
 
 # rfswitch
 3rd-rfswitch-1.3.patch
@@ -381,18 +357,8 @@ video-mageia-logo.patch
 ###
 
 # RPi2 support
-arm-0001-dt-bindings-Add-root-properties-for-Raspberry-Pi-2.patch
-arm-0002-ARM-bcm2835-Add-a-compat-string-for-bcm2836-machine-.patch
-arm-0003-ARM-bcm2835-Add-Kconfig-support-for-bcm2836.patch
-arm-0011-ARM-bcm2835-Define-two-new-packets-from-the-latest-f.patch
-arm-0012-dt-bindings-add-rpi-power-domain-driver-bindings.patch
-arm-0013-ARM-bcm2835-add-rpi-power-domain-driver.patch
-arm-0021-ARM-bcm2835-Split-the-DT-for-peripherals-from-the-DT.patch
-arm-0022-ARM-bcm2835-Move-the-CPU-peripheral-include-out-of-c.patch
-arm-0023-ARM-bcm2835-Add-devicetree-for-bcm2836-and-Raspberry.patch
-arm-0024-ARM-bcm2835-Add-the-auxiliary-clocks-to-the-device-t.patch
-arm-0031-ARM-bcm2835-enable-all-bcm2835-relevant-in-defconfig.patch
-arm-0032-ARM-bcm2835-enable-auxiliary-spi-driver-in-defconfig.patch
+# Read MAC address from DT
+arm-0001-ARM-bcm2835-dt-Add-the-ethernet-to-the-device-trees.patch
 
 ###
 ### IA64

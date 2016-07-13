@@ -15,7 +15,7 @@
         <Archive sha1sum="8acbdbb4ab4ab4123d1773b616904798fbef9277" type="targz" target="i686">http://www.broadcom.com/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
         <Archive sha1sum="1f568bb989d175813c5631c6629d9479eae6f3be" type="targz" target="x86_64">http://www.broadcom.com/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency version="4.4.8">kernel-module-headers</Dependency>
+            <Dependency version="4.6.3">kernel-module-headers</Dependency>
         </BuildDependencies>
         <Patches>
 <!--             <Patch level="1">patch/linux-40.patch</Patch> -->
@@ -33,7 +33,7 @@
     <Package>
         <Name>module-broadcom-wl</Name>
         <RuntimeDependencies>
-            <Dependency version="4.4.8">kernel</Dependency>
+            <Dependency version="4.6.3">kernel</Dependency>
             <Dependency release="current">module-broadcom-wl-userspace</Dependency>
         </RuntimeDependencies>
         <Replaces>
@@ -66,9 +66,9 @@
 
     <History>
         <Update release="3">
-            <Date>2016-05-29</Date>
+            <Date>2016-06-28</Date>
             <Version>6.30.223.271</Version>
-            <Comment>Version Bump</Comment>
+            <Comment>Rebuild for new kernel.</Comment>
             <Name>PisiLinux Community</Name>
             <Email>admin@pisilinux.org</Email>
         </Update>

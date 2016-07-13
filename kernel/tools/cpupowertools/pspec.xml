@@ -12,13 +12,13 @@
         <IsA>app:console</IsA>
         <Summary>CPU power management tools</Summary>
         <Description>cpupowertools contains utilities to manage power management and frequency scaling policies of modern CPUs.</Description>
-        <Archive sha1sum="180ab617036593212274177eff3a67f437c1b5ea" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.4.tar.gz</Archive>
+        <Archive sha1sum="57cd77757651a05a2e63b2faac010fc17ce399e7" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.6.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>pciutils-devel</Dependency>
         </BuildDependencies>
         <Patches>
         <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.4.4.xz</Patch>
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.6.3.xz</Patch>
         </Patches>
     </Source>
 
@@ -44,6 +44,13 @@
         </Provides>-->
     </Package>
     <History>
+        <Update release="3">
+            <Date>2016-06-28</Date>
+            <Version>4.6.3</Version>
+            <Comment>Release Bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>4.4.4</Version>

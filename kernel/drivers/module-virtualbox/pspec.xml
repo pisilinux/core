@@ -14,7 +14,7 @@
         <Description>This package provides the kernel support for VirtualBox.</Description>
         <Archive sha1sum="beb0bfb3e677ba3bd97dc254bd61bfe546f732de" type="tarxz">http://sourceforge.net/projects/pisiiso/files/source/module-virtualbox-5.1.0b.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency version="4.4.8">kernel-module-headers</Dependency>
+            <Dependency version="4.6.3">kernel-module-headers</Dependency>
         </BuildDependencies>
         <!--Patches>
             <Patch>vbox_linux-4.3.diff</Patch>
@@ -24,7 +24,7 @@
     <Package>
         <Name>module-virtualbox</Name>
         <RuntimeDependencies>
-            <Dependency version="4.4.8">kernel</Dependency>
+            <Dependency version="4.6.3">kernel</Dependency>
             <Dependency version="current">module-virtualbox-userspace</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -51,9 +51,9 @@
 
     <History>
         <Update release="3">
-            <Date>2016-06-17</Date>
+            <Date>2016-06-28</Date>
             <Version>5.1.0b</Version>
-            <Comment>Version Bump</Comment>
+            <Comment>Rebuild for new kernel</Comment>
             <Name>PisiLinux Community</Name>
             <Email>admin@pisilinux.org</Email>
         </Update>
