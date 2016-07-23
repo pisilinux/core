@@ -12,12 +12,15 @@
         <IsA>console</IsA>
         <Summary>eudev is a fork of system-udev</Summary>
         <Description>eudev is a fork of system-udev with the goal of obtaining better compatibility with existing software such as OpenRC and Upstart, older kernels, various toolchains and anything else required by users and various distributions.</Description>
-        <Archive sha1sum="6d4973a0bf66e5ead4d047d2605d2141da36b335" type="targz">https://github.com/gentoo/eudev/archive/v3.1.5.tar.gz</Archive>
+        <Archive sha1sum="2898e23da5a3ba481cf5742d8189242d33e30868" type="targz">https://github.com/gentoo/eudev/archive/v3.2.tar.gz</Archive>
+        <AdditionalFiles>
+        <!-- http://www.linuxfromscratch.org/lfs/view/development/chapter06/eudev.html -->
+             <AdditionalFile target="config.cache">config.cache</AdditionalFile>
+        </AdditionalFiles>
         <BuildDependencies>
             <Dependency>glibc-devel</Dependency>
             <Dependency>libkmod-devel</Dependency>
             <Dependency>libutil-linux-devel</Dependency>
-            <Dependency>glib2-devel</Dependency>
             <Dependency>libpcre-devel</Dependency>
             <Dependency>libxslt-devel</Dependency>
             <Dependency>gperf</Dependency>
@@ -28,19 +31,8 @@
         <Name>eudev</Name>
         <RuntimeDependencies>
             <Dependency>libkmod</Dependency>
-            <!--<Dependency>libutil-linux</Dependency>-->
-            <!--Dependency>glib2</Dependency-->
+            <Dependency>libutil-linux</Dependency>-
         </RuntimeDependencies>
-        <Conflicts>
-            <Package releaseTo="16">udev</Package>
-            <Package releaseTo="16">libudev</Package>
-            <Package releaseTo="16">libgudev1</Package>
-        </Conflicts>
-        <Replaces>
-            <Package>udev</Package>
-            <Package>libudev</Package>
-            <Package>libgudev1</Package>
-        </Replaces>
         <Files>
             <Path fileType="executable">/bin</Path>
             <Path fileType="executable">/sbin</Path>
@@ -72,13 +64,7 @@
         <Summary>Development files for eudev</Summary>
         <RuntimeDependencies>
             <Dependency release="current">eudev</Dependency>
-            <!--Dependency>glib2-devel</Dependency-->
         </RuntimeDependencies>
-        <Conflicts>
-            <Package releaseTo="16">udev-devel</Package>
-            <Package releaseTo="16">libudev-devel</Package>
-            <Package releaseTo="16">libgudev1-devel</Package>
-        </Conflicts>
         <Files>
             <Path fileType="header">/usr/include/</Path>
             <Path fileType="library">/usr/lib/pkgconfig</Path>
@@ -88,17 +74,6 @@
     
         <Package>
         <Name>eudev-32bit</Name>
-        
-        <Replaces>
-            <Package>libudev-32bit</Package>
-            <Package>libgudev1-32bit</Package>
-        </Replaces>
-        
-        <Conflicts>
-            <Package releaseTo="16">libudev-32bit</Package>
-            <Package releaseTo="16">libgudev1-32bit</Package>
-        </Conflicts>
-        
         <PartOf>emul32</PartOf>
         <Summary>32-bit shared libraries for eudev</Summary>
         <BuildType>emul32</BuildType>
@@ -107,10 +82,7 @@
             <Dependency>libkmod-32bit</Dependency>
             <Dependency>libutil-linux-32bit</Dependency>
         </BuildDependencies>
-        
-        <RuntimeDependencies>
-            <!--Dependency>glib2-32bit</Dependency-->
-        </RuntimeDependencies>
+
         <Files>
             <Path fileType="library">/lib32</Path>
             <Path fileType="library">/usr/lib32</Path>
@@ -118,6 +90,13 @@
     </Package>
 
     <History>
+        <Update release="4">
+            <Date>2016-07-23</Date>
+            <Version>3.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="3">
             <Date>2016-06-15</Date>
             <Version>3.1.5</Version>
