@@ -47,7 +47,7 @@ def configure(parameters = '', installPrefix = prefix, sourceDir = '..'):
                           -DKDE_INSTALL_LIBEXECDIR=%s \
                           -DCMAKE_INSTALL_LIBDIR=lib \
                           -DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
-                          -DKDE_INSTALL_QMLDIR:PATH=%s \
+                          -DKDE_INSTALL_QMLDIR=%s \
                           -DKDE_INSTALL_SYSCONFDIR=%s \
                           -DKDE_INSTALL_PLUGINDIR=%s \
                           -DECM_MKSPECS_INSTALL_DIR=%s \
