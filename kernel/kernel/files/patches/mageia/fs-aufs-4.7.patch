@@ -23,17 +23,17 @@
  fs/aufs/aufs.h                                     |   46 +
  fs/aufs/branch.c                                   | 1393 +++++++++++++++
  fs/aufs/branch.h                                   |  296 ++++
- fs/aufs/cpup.c                                     | 1366 +++++++++++++++
+ fs/aufs/cpup.c                                     | 1370 +++++++++++++++
  fs/aufs/cpup.h                                     |   81 +
  fs/aufs/dbgaufs.c                                  |  419 +++++
  fs/aufs/dbgaufs.h                                  |   35 +
  fs/aufs/dcsub.c                                    |  211 +++
  fs/aufs/dcsub.h                                    |  123 ++
- fs/aufs/debug.c                                    |  429 +++++
+ fs/aufs/debug.c                                    |  428 +++++
  fs/aufs/debug.h                                    |  212 +++
- fs/aufs/dentry.c                                   | 1123 ++++++++++++
- fs/aufs/dentry.h                                   |  221 +++
- fs/aufs/dinfo.c                                    |  535 ++++++
+ fs/aufs/dentry.c                                   | 1115 ++++++++++++
+ fs/aufs/dentry.h                                   |  239 +++
+ fs/aufs/dinfo.c                                    |  539 ++++++
  fs/aufs/dir.c                                      |  743 ++++++++
  fs/aufs/dir.h                                      |  118 ++
  fs/aufs/dynop.c                                    |  356 ++++
@@ -41,34 +41,34 @@
  fs/aufs/export.c                                   |  824 +++++++++
  fs/aufs/f_op.c                                     |  757 ++++++++
  fs/aufs/fhsm.c                                     |  412 +++++
- fs/aufs/file.c                                     |  831 +++++++++
+ fs/aufs/file.c                                     |  830 +++++++++
  fs/aufs/file.h                                     |  278 +++
  fs/aufs/finfo.c                                    |  136 ++
  fs/aufs/fstype.h                                   |  387 ++++
  fs/aufs/hfsnotify.c                                |  274 +++
  fs/aufs/hfsplus.c                                  |   43 +
  fs/aufs/hnotify.c                                  |  697 ++++++++
- fs/aufs/i_op.c                                     | 1394 +++++++++++++++
+ fs/aufs/i_op.c                                     | 1401 +++++++++++++++
  fs/aufs/i_op_add.c                                 |  911 ++++++++++
- fs/aufs/i_op_del.c                                 |  497 ++++++
+ fs/aufs/i_op_del.c                                 |  498 ++++++
  fs/aufs/i_op_ren.c                                 | 1002 +++++++++++
- fs/aufs/iinfo.c                                    |  267 +++
+ fs/aufs/iinfo.c                                    |  271 +++
  fs/aufs/inode.c                                    |  504 ++++++
- fs/aufs/inode.h                                    |  676 +++++++
+ fs/aufs/inode.h                                    |  681 ++++++++
  fs/aufs/ioctl.c                                    |  206 +++
  fs/aufs/loop.c                                     |  133 ++
  fs/aufs/loop.h                                     |   39 +
  fs/aufs/magic.mk                                   |   30 +
  fs/aufs/module.c                                   |  209 +++
  fs/aufs/module.h                                   |   76 +
- fs/aufs/mvdown.c                                   |  690 ++++++++
+ fs/aufs/mvdown.c                                   |  691 ++++++++
  fs/aufs/opts.c                                     | 1846 ++++++++++++++++++++
  fs/aufs/opts.h                                     |  198 +++
  fs/aufs/plink.c                                    |  489 ++++++
  fs/aufs/poll.c                                     |   39 +
  fs/aufs/posix_acl.c                                |   85 +
  fs/aufs/procfs.c                                   |  156 ++
- fs/aufs/rdu.c                                      |  376 ++++
+ fs/aufs/rdu.c                                      |  368 ++++
  fs/aufs/rwsem.h                                    |  185 ++
  fs/aufs/sbinfo.c                                   |  340 ++++
  fs/aufs/spl.h                                      |   98 ++
@@ -78,18 +78,19 @@
  fs/aufs/sysaufs.h                                  |   88 +
  fs/aufs/sysfs.c                                    |  340 ++++
  fs/aufs/sysrq.c                                    |  144 ++
- fs/aufs/vdir.c                                     |  875 ++++++++++
+ fs/aufs/vdir.c                                     |  876 ++++++++++
  fs/aufs/vfsub.c                                    |  871 +++++++++
  fs/aufs/vfsub.h                                    |  297 ++++
  fs/aufs/wbr_policy.c                               |  752 ++++++++
  fs/aufs/whout.c                                    | 1047 +++++++++++
  fs/aufs/whout.h                                    |   72 +
  fs/aufs/wkq.c                                      |  205 +++
- fs/aufs/wkq.h                                      |   80 +
- fs/aufs/xattr.c                                    |  331 ++++
+ fs/aufs/wkq.h                                      |   82 +
+ fs/aufs/xattr.c                                    |  332 ++++
  fs/aufs/xino.c                                     | 1304 ++++++++++++++
  fs/dcache.c                                        |    2 +-
  fs/fcntl.c                                         |    4 +-
+ fs/inode.c                                         |    2 +-
  fs/proc/base.c                                     |    2 +-
  fs/proc/nommu.c                                    |    5 +-
  fs/proc/task_mmu.c                                 |    7 +-
@@ -97,7 +98,7 @@
  fs/read_write.c                                    |   22 +
  fs/splice.c                                        |   10 +-
  include/linux/file.h                               |    1 +
- include/linux/fs.h                                 |    8 +
+ include/linux/fs.h                                 |    9 +
  include/linux/mm.h                                 |   22 +
  include/linux/mm_types.h                           |    2 +
  include/linux/splice.h                             |    6 +
@@ -110,7 +111,7 @@
  mm/mmap.c                                          |   33 +-
  mm/nommu.c                                         |   10 +-
  mm/prfile.c                                        |   86 +
- 111 files changed, 33388 insertions(+), 29 deletions(-)
+ 112 files changed, 33420 insertions(+), 30 deletions(-)
 
 diff --git a/Documentation/ABI/testing/debugfs-aufs b/Documentation/ABI/testing/debugfs-aufs
 new file mode 100644
@@ -1725,10 +1726,10 @@ index 0000000..49afc58
 +Currently this approach is applied to address_space_operations for
 +regular files only.
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 9c567a4..a62aea4 100644
+index 952fd2a..6a8f0f8 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -2128,6 +2128,19 @@ F:	include/linux/audit.h
+@@ -2210,6 +2210,19 @@ F:	include/linux/audit.h
  F:	include/uapi/linux/audit.h
  F:	kernel/audit*
  
@@ -1749,7 +1750,7 @@ index 9c567a4..a62aea4 100644
  M:	Miguel Ojeda Sandonis <miguel.ojeda.sandonis@gmail.com>
  W:	http://miguelojeda.es/auxdisplay.htm
 diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index 80cf8ad..ba9e4a7 100644
+index 1fa8cc2..7339e65 100644
 --- a/drivers/block/loop.c
 +++ b/drivers/block/loop.c
 @@ -712,6 +712,24 @@ static inline int is_loop_device(struct file *file)
@@ -1778,10 +1779,10 @@ index 80cf8ad..ba9e4a7 100644
  
  static ssize_t loop_attr_show(struct device *dev, char *page,
 diff --git a/fs/Kconfig b/fs/Kconfig
-index 6725f59..2ced198 100644
+index b8fcb41..78adefb 100644
 --- a/fs/Kconfig
 +++ b/fs/Kconfig
-@@ -235,6 +235,7 @@ source "fs/pstore/Kconfig"
+@@ -236,6 +236,7 @@ source "fs/pstore/Kconfig"
  source "fs/sysv/Kconfig"
  source "fs/ufs/Kconfig"
  source "fs/exofs/Kconfig"
@@ -2085,7 +2086,7 @@ index 0000000..49f43b4
 +#endif /* __AUFS_H__ */
 diff --git a/fs/aufs/branch.c b/fs/aufs/branch.c
 new file mode 100644
-index 0000000..5259d30
+index 0000000..baf786e
 --- /dev/null
 +++ b/fs/aufs/branch.c
 @@ -0,0 +1,1393 @@
@@ -2391,7 +2392,7 @@ index 0000000..5259d30
 +	bindex = au_br_index(sb, br->br_id);
 +	if (0 <= bindex) {
 +		hdir = au_hi(d_inode(sb->s_root), bindex);
-+		au_hn_imtx_lock_nested(hdir, AuLsc_I_PARENT);
++		au_hn_inode_lock_nested(hdir, AuLsc_I_PARENT);
 +	} else {
 +		h_dentry = au_br_dentry(br);
 +		h_inode = d_inode(h_dentry);
@@ -2405,7 +2406,7 @@ index 0000000..5259d30
 +		wbr_wh_write_unlock(wbr);
 +	}
 +	if (hdir)
-+		au_hn_imtx_unlock(hdir);
++		au_hn_inode_unlock(hdir);
 +	else
 +		inode_unlock(h_inode);
 +	vfsub_mnt_drop_write(au_br_mnt(br));
@@ -2516,7 +2517,7 @@ index 0000000..5259d30
 +
 +	AuRwMustWriteLock(&dinfo->di_rwsem);
 +
-+	hdp = dinfo->di_hdentry + bindex;
++	hdp = au_hdentry(dinfo, bindex);
 +	memmove(hdp + 1, hdp, sizeof(*hdp) * amount);
 +	au_h_dentry_init(hdp);
 +	dinfo->di_bbot++;
@@ -2572,6 +2573,7 @@ index 0000000..5259d30
 +	root = sb->s_root;
 +	root_inode = d_inode(root);
 +	IMustLock(root_inode);
++	IiMustWriteLock(root_inode);
 +	err = test_add(sb, add, remount);
 +	if (unlikely(err < 0))
 +		goto out;
@@ -2991,14 +2993,13 @@ index 0000000..5259d30
 +
 +	AuRwMustWriteLock(&dinfo->di_rwsem);
 +
-+	hdp = dinfo->di_hdentry;
++	hdp = au_hdentry(dinfo, bindex);
 +	if (bindex < bbot)
-+		memmove(hdp + bindex, hdp + bindex + 1,
-+			sizeof(*hdp) * (bbot - bindex));
-+	hdp[0 + bbot].hd_dentry = NULL;
++		memmove(hdp, hdp + 1, sizeof(*hdp) * (bbot - bindex));
++	/* au_h_dentry_init(au_hdentry(dinfo, bbot); */
 +	dinfo->di_bbot--;
 +
-+	p = krealloc(hdp, sizeof(*p) * bbot, AuGFP_SBILIST);
++	p = krealloc(dinfo->di_hdentry, sizeof(*p) * bbot, AuGFP_SBILIST);
 +	if (p)
 +		dinfo->di_hdentry = p;
 +	/* harmless error */
@@ -3206,7 +3207,7 @@ index 0000000..5259d30
 +	inode = ilookup(sb, ibusy.ino);
 +	if (!inode
 +	    || inode->i_ino == AUFS_ROOT_INO
-+	    || is_bad_inode(inode))
++	    || au_is_bad_inode(inode))
 +		goto out_unlock;
 +
 +	ii_read_lock_child(inode);
@@ -3786,10 +3787,10 @@ index 0000000..32a4d8f
 +#endif /* __AUFS_BRANCH_H__ */
 diff --git a/fs/aufs/cpup.c b/fs/aufs/cpup.c
 new file mode 100644
-index 0000000..dbf96fd
+index 0000000..52f87de
 --- /dev/null
 +++ b/fs/aufs/cpup.c
-@@ -0,0 +1,1366 @@
+@@ -0,0 +1,1370 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + */
@@ -4879,23 +4880,27 @@ index 0000000..dbf96fd
 +	int err;
 +	unsigned int flags_orig;
 +	aufs_bindex_t bsrc_orig;
-+	struct dentry *h_d_dst, *h_d_start;
 +	struct au_dinfo *dinfo;
-+	struct au_hdentry *hdp;
++	struct {
++		struct au_hdentry *hd;
++		struct dentry *h_dentry;
++	} hdst, hsrc;
 +
 +	dinfo = au_di(cpg->dentry);
 +	AuRwMustWriteLock(&dinfo->di_rwsem);
 +
 +	bsrc_orig = cpg->bsrc;
 +	cpg->bsrc = dinfo->di_btop;
-+	hdp = dinfo->di_hdentry;
-+	h_d_dst = hdp[0 + cpg->bdst].hd_dentry;
++	hdst.hd = au_hdentry(dinfo, cpg->bdst);
++	hdst.h_dentry = hdst.hd->hd_dentry;
++	hdst.hd->hd_dentry = wh_dentry;
 +	dinfo->di_btop = cpg->bdst;
-+	hdp[0 + cpg->bdst].hd_dentry = wh_dentry;
-+	h_d_start = NULL;
++
++	hsrc.h_dentry = NULL;
 +	if (file) {
-+		h_d_start = hdp[0 + cpg->bsrc].hd_dentry;
-+		hdp[0 + cpg->bsrc].hd_dentry = au_hf_top(file)->f_path.dentry;
++		hsrc.hd = au_hdentry(dinfo, cpg->bsrc);
++		hsrc.h_dentry = hsrc.hd->hd_dentry;
++		hsrc.hd->hd_dentry = au_hf_top(file)->f_path.dentry;
 +	}
 +	flags_orig = cpg->flags;
 +	cpg->flags = !AuCpup_DTIME;
@@ -4904,9 +4909,9 @@ index 0000000..dbf96fd
 +	if (file) {
 +		if (!err)
 +			err = au_reopen_nondir(file);
-+		hdp[0 + cpg->bsrc].hd_dentry = h_d_start;
++		hsrc.hd->hd_dentry = hsrc.h_dentry;
 +	}
-+	hdp[0 + cpg->bdst].hd_dentry = h_d_dst;
++	hdst.hd->hd_dentry = hdst.h_dentry;
 +	dinfo->di_btop = cpg->bsrc;
 +	cpg->bsrc = bsrc_orig;
 +
@@ -6057,10 +6062,10 @@ index 0000000..5d2cf66
 +#endif /* __AUFS_DCSUB_H__ */
 diff --git a/fs/aufs/debug.c b/fs/aufs/debug.c
 new file mode 100644
-index 0000000..14e69cb
+index 0000000..44bdb5f
 --- /dev/null
 +++ b/fs/aufs/debug.c
-@@ -0,0 +1,429 @@
+@@ -0,0 +1,428 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + */
@@ -6196,7 +6201,7 @@ index 0000000..14e69cb
 +	int err, hn;
 +
 +	err = do_pri_inode(-1, inode, -1, NULL);
-+	if (err || !au_test_aufs(inode->i_sb) || is_bad_inode(inode))
++	if (err || !au_test_aufs(inode->i_sb) || au_is_bad_inode(inode))
 +		return;
 +
 +	iinfo = au_ii(inode);
@@ -6226,9 +6231,9 @@ index 0000000..14e69cb
 +{
 +	struct dentry *wh = NULL;
 +	int hn;
++	struct inode *inode;
 +	struct au_iinfo *iinfo;
 +	struct au_hinode *hi;
-+	struct inode *inode;
 +
 +	if (!dentry || IS_ERR(dentry)) {
 +		dpri("d%d: err %ld\n", bindex, PTR_ERR(dentry));
@@ -6243,11 +6248,12 @@ index 0000000..14e69cb
 +	     d_unhashed(dentry) ? "un" : "");
 +	hn = -1;
 +	inode = NULL;
-+	if (bindex >= 0
-+	    && d_is_positive(dentry)
-+	    && au_test_aufs(dentry->d_sb))
++	if (d_is_positive(dentry))
 +		inode = d_inode(dentry);
-+	if (inode && !is_bad_inode(inode)) {
++	if (inode
++	    && au_test_aufs(dentry->d_sb)
++	    && bindex >= 0
++	    && !au_is_bad_inode(inode)) {
 +		iinfo = au_ii(inode);
 +		hi = au_hinode(iinfo, bindex);
 +		hn = !!au_hn(hi);
@@ -6262,7 +6268,6 @@ index 0000000..14e69cb
 +	struct au_dinfo *dinfo;
 +	aufs_bindex_t bindex;
 +	int err;
-+	struct au_hdentry *hdp;
 +
 +	err = do_pri_dentry(-1, dentry);
 +	if (err || !au_test_aufs(dentry->d_sb))
@@ -6277,9 +6282,8 @@ index 0000000..14e69cb
 +	     dinfo->di_tmpfile);
 +	if (dinfo->di_btop < 0)
 +		return;
-+	hdp = dinfo->di_hdentry;
 +	for (bindex = dinfo->di_btop; bindex <= dinfo->di_bbot; bindex++)
-+		do_pri_dentry(bindex, hdp[0 + bindex].hd_dentry);
++		do_pri_dentry(bindex, au_hdentry(dinfo, bindex)->hd_dentry);
 +}
 +
 +static int do_pri_file(aufs_bindex_t bindex, struct file *file)
@@ -6710,10 +6714,10 @@ index 0000000..0567f31
 +#endif /* __AUFS_DEBUG_H__ */
 diff --git a/fs/aufs/dentry.c b/fs/aufs/dentry.c
 new file mode 100644
-index 0000000..ce2a136
+index 0000000..4bb1530
 --- /dev/null
 +++ b/fs/aufs/dentry.c
-@@ -0,0 +1,1123 @@
+@@ -0,0 +1,1115 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + */
@@ -6724,14 +6728,6 @@ index 0000000..ce2a136
 +
 +#include <linux/namei.h>
 +#include "aufs.h"
-+
-+#define AuLkup_ALLOW_NEG	1
-+#define AuLkup_IGNORE_PERM	(1 << 1)
-+#define au_ftest_lkup(flags, name)	((flags) & AuLkup_##name)
-+#define au_fset_lkup(flags, name) \
-+	do { (flags) |= AuLkup_##name; } while (0)
-+#define au_fclr_lkup(flags, name) \
-+	do { (flags) &= ~AuLkup_##name; } while (0)
 +
 +struct au_do_lookup_args {
 +	unsigned int		flags;
@@ -6835,15 +6831,15 @@ index 0000000..ce2a136
 + * otherwise an error.
 + * can be called at unlinking with @type is zero.
 + */
-+int au_lkup_dentry(struct dentry *dentry, aufs_bindex_t btop, mode_t type)
++int au_lkup_dentry(struct dentry *dentry, aufs_bindex_t btop,
++		   unsigned int flags)
 +{
 +	int npositive, err;
 +	aufs_bindex_t bindex, btail, bdiropq;
 +	unsigned char isdir, dirperm1;
 +	struct qstr whname;
 +	struct au_do_lookup_args args = {
-+		.flags		= 0,
-+		.type		= type
++		.flags		= flags
 +	};
 +	const struct qstr *name = &dentry->d_name;
 +	struct dentry *parent;
@@ -6859,8 +6855,6 @@ index 0000000..ce2a136
 +		goto out;
 +
 +	isdir = !!d_is_dir(dentry);
-+	if (!type)
-+		au_fset_lkup(args.flags, ALLOW_NEG);
 +	dirperm1 = !!au_opt_test(au_mntflags(sb), DIRPERM1);
 +
 +	npositive = 0;
@@ -6874,9 +6868,7 @@ index 0000000..ce2a136
 +		if (h_dentry) {
 +			if (d_is_positive(h_dentry))
 +				npositive++;
-+			if (type != S_IFDIR)
-+				break;
-+			continue;
++			break;
 +		}
 +		h_parent = au_h_dptr(parent, bindex);
 +		if (!h_parent || !d_is_dir(h_parent))
@@ -7110,8 +7102,9 @@ index 0000000..ce2a136
 +	bbot = dinfo->di_bbot;
 +	bwh = dinfo->di_bwh;
 +	bdiropq = dinfo->di_bdiropq;
-+	p = dinfo->di_hdentry + dinfo->di_btop;
-+	for (bindex = dinfo->di_btop; bindex <= bbot; bindex++, p++) {
++	bindex = dinfo->di_btop;
++	p = au_hdentry(dinfo, bindex);
++	for (; bindex <= bbot; bindex++, p++) {
 +		if (!p->hd_dentry)
 +			continue;
 +
@@ -7130,7 +7123,7 @@ index 0000000..ce2a136
 +		}
 +
 +		/* swap two lower dentries, and loop again */
-+		q = dinfo->di_hdentry + new_bindex;
++		q = au_hdentry(dinfo, new_bindex);
 +		tmp = *q;
 +		*q = *p;
 +		*p = tmp;
@@ -7154,16 +7147,18 @@ index 0000000..ce2a136
 +	dinfo->di_btop = -1;
 +	dinfo->di_bbot = -1;
 +	bbot = au_dbbot(parent);
-+	p = dinfo->di_hdentry;
-+	for (bindex = 0; bindex <= bbot; bindex++, p++)
++	bindex = 0;
++	p = au_hdentry(dinfo, bindex);
++	for (; bindex <= bbot; bindex++, p++)
 +		if (p->hd_dentry) {
 +			dinfo->di_btop = bindex;
 +			break;
 +		}
 +
 +	if (dinfo->di_btop >= 0) {
-+		p = dinfo->di_hdentry + bbot;
-+		for (bindex = bbot; bindex >= 0; bindex--, p--)
++		bindex = bbot;
++		p = au_hdentry(dinfo, bindex);
++		for (; bindex >= 0; bindex--, p--)
 +			if (p->hd_dentry) {
 +				dinfo->di_bbot = bindex;
 +				err = 0;
@@ -7280,14 +7275,14 @@ index 0000000..ce2a136
 +	err = 0;
 +	AuDebugOn(dinfo->di_btop < 0);
 +	orig_h.mode = 0;
-+	orig_h.dentry = dinfo->di_hdentry[dinfo->di_btop].hd_dentry;
++	orig_h.dentry = au_hdentry(dinfo, dinfo->di_btop)->hd_dentry;
 +	orig_h.inode = NULL;
 +	if (d_is_positive(orig_h.dentry)) {
 +		orig_h.inode = d_inode(orig_h.dentry);
 +		orig_h.mode = orig_h.inode->i_mode & S_IFMT;
 +	}
 +	if (tmp->di_btop >= 0) {
-+		tmp_h.dentry = tmp->di_hdentry[tmp->di_btop].hd_dentry;
++		tmp_h.dentry = au_hdentry(tmp, tmp->di_btop)->hd_dentry;
 +		if (d_is_positive(tmp_h.dentry)) {
 +			tmp_h.inode = d_inode(tmp_h.dentry);
 +			tmp_h.mode = tmp_h.inode->i_mode & S_IFMT;
@@ -7316,7 +7311,7 @@ index 0000000..ce2a136
 +				AuDebugOn(dinfo->di_btop != dinfo->di_bbot);
 +				au_set_h_dptr(dentry, dinfo->di_btop, NULL);
 +				au_di_cp(dinfo, tmp);
-+				hd = tmp->di_hdentry + tmp->di_btop;
++				hd = au_hdentry(tmp, tmp->di_btop);
 +				au_set_h_dptr(dentry, tmp->di_btop,
 +					      dget(hd->hd_dentry));
 +			}
@@ -7367,13 +7362,13 @@ index 0000000..ce2a136
 +					dinfo->di_bbot = tmp->di_bbot;
 +				dinfo->di_bwh = tmp->di_bwh;
 +				dinfo->di_bdiropq = tmp->di_bdiropq;
-+				hd = tmp->di_hdentry;
 +				bbot = dinfo->di_bbot;
-+				for (bindex = tmp->di_btop; bindex <= bbot;
-+				     bindex++) {
++				bindex = tmp->di_btop;
++				hd = au_hdentry(tmp, bindex);
++				for (; bindex <= bbot; bindex++, hd++) {
 +					if (au_h_dptr(dentry, bindex))
 +						continue;
-+					h_dentry = hd[bindex].hd_dentry;
++					h_dentry = hd->hd_dentry;
 +					if (!h_dentry)
 +						continue;
 +					AuDebugOn(d_is_negative(h_dentry));
@@ -7384,7 +7379,8 @@ index 0000000..ce2a136
 +					au_set_h_dptr(dentry, bindex,
 +						      dget(h_dentry));
 +				}
-+				err = au_refresh_hinode(inode, dentry);
++				if (inode)
++					err = au_refresh_hinode(inode, dentry);
 +				au_dbg_verify_dinode(dentry);
 +			}
 +		} else {
@@ -7473,7 +7469,7 @@ index 0000000..ce2a136
 +	 * if current working dir is removed, it returns an error.
 +	 * but the dentry is legal.
 +	 */
-+	err = au_lkup_dentry(dentry, /*btop*/0, /*type*/0);
++	err = au_lkup_dentry(dentry, /*btop*/0, AuLkup_ALLOW_NEG);
 +	AuDbgDentry(dentry);
 +	au_di_swap(tmp, dinfo);
 +	if (err == -ENOENT)
@@ -7752,7 +7748,7 @@ index 0000000..ce2a136
 +	inode = NULL;
 +	if (d_really_is_positive(dentry))
 +		inode = d_inode(dentry);
-+	if (unlikely(inode && is_bad_inode(inode))) {
++	if (unlikely(inode && au_is_bad_inode(inode))) {
 +		err = -EINVAL;
 +		AuTraceErr(err);
 +		goto out_dgrade;
@@ -7839,10 +7835,10 @@ index 0000000..ce2a136
 +};
 diff --git a/fs/aufs/dentry.h b/fs/aufs/dentry.h
 new file mode 100644
-index 0000000..3e48b5c
+index 0000000..bdc1af6
 --- /dev/null
 +++ b/fs/aufs/dentry.h
-@@ -0,0 +1,221 @@
+@@ -0,0 +1,239 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + */
@@ -7875,6 +7871,17 @@ index 0000000..3e48b5c
 +
 +/* ---------------------------------------------------------------------- */
 +
++/* flags for au_lkup_dentry() */
++#define AuLkup_ALLOW_NEG	1
++#define AuLkup_IGNORE_PERM	(1 << 1)
++#define au_ftest_lkup(flags, name)	((flags) & AuLkup_##name)
++#define au_fset_lkup(flags, name) \
++	do { (flags) |= AuLkup_##name; } while (0)
++#define au_fclr_lkup(flags, name) \
++	do { (flags) &= ~AuLkup_##name; } while (0)
++
++/* ---------------------------------------------------------------------- */
++
 +/* dentry.c */
 +extern const struct dentry_operations aufs_dop, aufs_dop_noreval;
 +struct au_branch;
@@ -7882,7 +7889,8 @@ index 0000000..3e48b5c
 +int au_h_verify(struct dentry *h_dentry, unsigned int udba, struct inode *h_dir,
 +		struct dentry *h_parent, struct au_branch *br);
 +
-+int au_lkup_dentry(struct dentry *dentry, aufs_bindex_t btop, mode_t type);
++int au_lkup_dentry(struct dentry *dentry, aufs_bindex_t btop,
++		   unsigned int flags);
 +int au_lkup_neg(struct dentry *dentry, aufs_bindex_t bindex, int wh);
 +int au_refresh_dentry(struct dentry *dentry, struct dentry *parent);
 +int au_reval_dpath(struct dentry *dentry, unsigned int sigen);
@@ -7990,6 +7998,12 @@ index 0000000..3e48b5c
 +	hdentry->hd_dentry = NULL;
 +}
 +
++static inline struct au_hdentry *au_hdentry(struct au_dinfo *di,
++					    aufs_bindex_t bindex)
++{
++	return di->di_hdentry + bindex;
++}
++
 +static inline void au_hdput(struct au_hdentry *hd)
 +{
 +	if (hd)
@@ -8066,10 +8080,10 @@ index 0000000..3e48b5c
 +#endif /* __AUFS_DENTRY_H__ */
 diff --git a/fs/aufs/dinfo.c b/fs/aufs/dinfo.c
 new file mode 100644
-index 0000000..b2eb8c2
+index 0000000..43b5509
 --- /dev/null
 +++ b/fs/aufs/dinfo.c
-@@ -0,0 +1,535 @@
+@@ -0,0 +1,539 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + */
@@ -8128,7 +8142,7 @@ index 0000000..b2eb8c2
 +	bindex = dinfo->di_btop;
 +	if (bindex >= 0) {
 +		bbot = dinfo->di_bbot;
-+		p = dinfo->di_hdentry + bindex;
++		p = au_hdentry(dinfo, bindex);
 +		while (bindex++ <= bbot)
 +			au_hdput(p++);
 +	}
@@ -8380,7 +8394,7 @@ index 0000000..b2eb8c2
 +	if (au_dbtop(dentry) < 0 || bindex < au_dbtop(dentry))
 +		return NULL;
 +	AuDebugOn(bindex < 0);
-+	d = au_di(dentry)->di_hdentry[0 + bindex].hd_dentry;
++	d = au_hdentry(au_di(dentry), bindex)->hd_dentry;
 +	AuDebugOn(d && au_dcount(d) <= 0);
 +	return d;
 +}
@@ -8469,11 +8483,14 @@ index 0000000..b2eb8c2
 +void au_set_h_dptr(struct dentry *dentry, aufs_bindex_t bindex,
 +		   struct dentry *h_dentry)
 +{
-+	struct au_hdentry *hd = au_di(dentry)->di_hdentry + bindex;
++	struct au_dinfo *dinfo;
++	struct au_hdentry *hd;
 +	struct au_branch *br;
 +
 +	DiMustWriteLock(dentry);
 +
++	dinfo = au_di(dentry);
++	hd = au_hdentry(dinfo, bindex);
 +	au_hdput(hd);
 +	hd->hd_dentry = h_dentry;
 +	if (h_dentry) {
@@ -8523,6 +8540,7 @@ index 0000000..b2eb8c2
 +	struct au_dinfo *dinfo;
 +	struct dentry *h_d;
 +	struct au_hdentry *hdp;
++	aufs_bindex_t bindex, bbot;
 +
 +	DiMustWriteLock(dentry);
 +
@@ -8530,21 +8548,21 @@ index 0000000..b2eb8c2
 +	if (!dinfo || dinfo->di_btop < 0)
 +		return;
 +
-+	hdp = dinfo->di_hdentry;
 +	if (do_put_zero) {
-+		aufs_bindex_t bindex, bbot;
-+
 +		bbot = dinfo->di_bbot;
-+		for (bindex = dinfo->di_btop; bindex <= bbot; bindex++) {
-+			h_d = hdp[0 + bindex].hd_dentry;
++		bindex = dinfo->di_btop;
++		hdp = au_hdentry(dinfo, bindex);
++		for (; bindex <= bbot; bindex++, hdp++) {
++			h_d = hdp->hd_dentry;
 +			if (h_d && d_is_negative(h_d))
 +				au_set_h_dptr(dentry, bindex, NULL);
 +		}
 +	}
 +
-+	dinfo->di_btop = -1;
-+	while (++dinfo->di_btop <= dinfo->di_bbot)
-+		if (hdp[0 + dinfo->di_btop].hd_dentry)
++	dinfo->di_btop = 0;
++	hdp = au_hdentry(dinfo, dinfo->di_btop);
++	for (; dinfo->di_btop <= dinfo->di_bbot; dinfo->di_btop++, hdp++)
++		if (hdp->hd_dentry)
 +			break;
 +	if (dinfo->di_btop > dinfo->di_bbot) {
 +		dinfo->di_btop = -1;
@@ -8552,9 +8570,9 @@ index 0000000..b2eb8c2
 +		return;
 +	}
 +
-+	dinfo->di_bbot++;
-+	while (0 <= --dinfo->di_bbot)
-+		if (hdp[0 + dinfo->di_bbot].hd_dentry)
++	hdp = au_hdentry(dinfo, dinfo->di_bbot);
++	for (; dinfo->di_bbot >= 0; dinfo->di_bbot--, hdp--)
++		if (hdp->hd_dentry)
 +			break;
 +	AuDebugOn(dinfo->di_btop > dinfo->di_bbot || dinfo->di_bbot < 0);
 +}
@@ -8607,7 +8625,7 @@ index 0000000..b2eb8c2
 +}
 diff --git a/fs/aufs/dir.c b/fs/aufs/dir.c
 new file mode 100644
-index 0000000..4dc666e
+index 0000000..27bef0b
 --- /dev/null
 +++ b/fs/aufs/dir.c
 @@ -0,0 +1,743 @@
@@ -8740,14 +8758,14 @@ index 0000000..4dc666e
 +	if (err)
 +		goto out_unlock;
 +	hdir = au_hi(dir, btop);
-+	au_hn_imtx_lock_nested(hdir, AuLsc_I_PARENT);
++	au_hn_inode_lock_nested(hdir, AuLsc_I_PARENT);
 +	h_dir = au_h_iptr(dir, btop);
 +	if (h_dir->i_nlink
 +	    && timespec_compare(&h_dir->i_mtime, &dt.dt_mtime) < 0) {
 +		dt.dt_h_path = h_path;
 +		au_dtime_revert(&dt);
 +	}
-+	au_hn_imtx_unlock(hdir);
++	au_hn_inode_unlock(hdir);
 +	vfsub_mnt_drop_write(h_path.mnt);
 +	au_cpup_attr_timesizes(dir);
 +
@@ -9066,7 +9084,7 @@ index 0000000..4dc666e
 +
 +/* ---------------------------------------------------------------------- */
 +
-+static int aufs_iterate(struct file *file, struct dir_context *ctx)
++static int aufs_iterate_shared(struct file *file, struct dir_context *ctx)
 +{
 +	int err;
 +	struct dentry *dentry;
@@ -9344,7 +9362,7 @@ index 0000000..4dc666e
 +	.owner		= THIS_MODULE,
 +	.llseek		= default_llseek,
 +	.read		= generic_read_dir,
-+	.iterate	= aufs_iterate,
++	.iterate_shared	= aufs_iterate_shared,
 +	.unlocked_ioctl	= aufs_ioctl_dir,
 +#ifdef CONFIG_COMPAT
 +	.compat_ioctl	= aufs_compat_ioctl_dir,
@@ -9909,7 +9927,7 @@ index 0000000..8680bfc
 +#endif /* __AUFS_DYNOP_H__ */
 diff --git a/fs/aufs/export.c b/fs/aufs/export.c
 new file mode 100644
-index 0000000..8755b1e
+index 0000000..98a7036
 --- /dev/null
 +++ b/fs/aufs/export.c
 @@ -0,0 +1,824 @@
@@ -10135,7 +10153,7 @@ index 0000000..8755b1e
 +
 +	dentry = ERR_PTR(-ESTALE);
 +	sigen = au_sigen(sb);
-+	if (unlikely(is_bad_inode(inode)
++	if (unlikely(au_is_bad_inode(inode)
 +		     || IS_DEADDIR(inode)
 +		     || sigen != au_iigen(inode, NULL)))
 +		goto out_iput;
@@ -10739,7 +10757,7 @@ index 0000000..8755b1e
 +}
 diff --git a/fs/aufs/f_op.c b/fs/aufs/f_op.c
 new file mode 100644
-index 0000000..b0b0fff
+index 0000000..504b767
 --- /dev/null
 +++ b/fs/aufs/f_op.c
 @@ -0,0 +1,757 @@
@@ -11086,10 +11104,19 @@ index 0000000..b0b0fff
 +	sb = inode->i_sb;
 +	si_read_lock(sb, AuLock_FLUSH | AuLock_NOPLMW);
 +
-+	h_file = au_read_pre(file, /*keep_fi*/0);
++	h_file = au_read_pre(file, /*keep_fi*/1);
 +	err = PTR_ERR(h_file);
 +	if (IS_ERR(h_file))
 +		goto out;
++
++	if (au_test_loopback_kthread()) {
++		au_warn_loopback(h_file->f_path.dentry->d_sb);
++		if (file->f_mapping != h_file->f_mapping) {
++			file->f_mapping = h_file->f_mapping;
++			smp_mb(); /* unnecessary? */
++		}
++	}
++	fi_read_unlock(file);
 +
 +	err = au_do_iter(h_file, MAY_READ, kio, iov_iter);
 +	/* todo: necessary? */
@@ -11139,19 +11166,10 @@ index 0000000..b0b0fff
 +	sb = inode->i_sb;
 +	si_read_lock(sb, AuLock_FLUSH | AuLock_NOPLMW);
 +
-+	h_file = au_read_pre(file, /*keep_fi*/1);
++	h_file = au_read_pre(file, /*keep_fi*/0);
 +	err = PTR_ERR(h_file);
 +	if (IS_ERR(h_file))
 +		goto out;
-+
-+	if (au_test_loopback_kthread()) {
-+		au_warn_loopback(h_file->f_path.dentry->d_sb);
-+		if (file->f_mapping != h_file->f_mapping) {
-+			file->f_mapping = h_file->f_mapping;
-+			smp_mb(); /* unnecessary? */
-+		}
-+	}
-+	fi_read_unlock(file);
 +
 +	err = vfsub_splice_to(h_file, ppos, pipe, len, flags);
 +	/* todo: necessasry? */
@@ -11920,10 +11938,10 @@ index 0000000..e3cb6ed
 +}
 diff --git a/fs/aufs/file.c b/fs/aufs/file.c
 new file mode 100644
-index 0000000..27c5bf8
+index 0000000..4b68aef
 --- /dev/null
 +++ b/fs/aufs/file.c
-@@ -0,0 +1,831 @@
+@@ -0,0 +1,830 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + */
@@ -12265,11 +12283,11 @@ index 0000000..27c5bf8
 +
 +	btop = dinfo->di_btop;
 +	dinfo->di_btop = btgt;
-+	hdp = dinfo->di_hdentry;
-+	h_dentry = hdp[0 + btgt].hd_dentry;
-+	hdp[0 + btgt].hd_dentry = hi_wh;
++	hdp = au_hdentry(dinfo, btgt);
++	h_dentry = hdp->hd_dentry;
++	hdp->hd_dentry = hi_wh;
 +	err = au_reopen_nondir(file);
-+	hdp[0 + btgt].hd_dentry = h_dentry;
++	hdp->hd_dentry = h_dentry;
 +	dinfo->di_btop = btop;
 +
 +	return err;
@@ -12684,8 +12702,7 @@ index 0000000..27c5bf8
 +}
 +
 +/* it will never be called, but necessary to support O_DIRECT */
-+static ssize_t aufs_direct_IO(struct kiocb *iocb, struct iov_iter *iter,
-+			      loff_t offset)
++static ssize_t aufs_direct_IO(struct kiocb *iocb, struct iov_iter *iter)
 +{ BUG(); return 0; }
 +
 +/* they will never be called. */
@@ -13576,7 +13593,7 @@ index 0000000..725b2ff
 +#endif /* __AUFS_FSTYPE_H__ */
 diff --git a/fs/aufs/hfsnotify.c b/fs/aufs/hfsnotify.c
 new file mode 100644
-index 0000000..07b4ecc
+index 0000000..6afef3f
 --- /dev/null
 +++ b/fs/aufs/hfsnotify.c
 @@ -0,0 +1,274 @@
@@ -13600,7 +13617,7 @@ index 0000000..07b4ecc
 +{
 +	struct au_hnotify *hn = container_of(mark, struct au_hnotify,
 +					     hn_mark);
-+	AuDbg("here\n");
++	/* AuDbg("here\n"); */
 +	au_cache_free_hnotify(hn);
 +	smp_mb__before_atomic();
 +	if (atomic64_dec_and_test(&au_hfsn_ifree))
@@ -13724,7 +13741,7 @@ index 0000000..07b4ecc
 +{
 +	struct au_br_hfsnotify *hfsn = group->private;
 +
-+	AuDbg("here\n");
++	/* AuDbg("here\n"); */
 +	kfree(hfsn);
 +}
 +
@@ -14608,10 +14625,10 @@ index 0000000..3016c5e
 +}
 diff --git a/fs/aufs/i_op.c b/fs/aufs/i_op.c
 new file mode 100644
-index 0000000..1572a7d
+index 0000000..cc1e312
 --- /dev/null
 +++ b/fs/aufs/i_op.c
-@@ -0,0 +1,1394 @@
+@@ -0,0 +1,1401 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + */
@@ -14798,8 +14815,9 @@ index 0000000..1572a7d
 +	if (!err)
 +		err = au_digen_test(parent, au_sigen(sb));
 +	if (!err) {
++		/* regardless LOOKUP_CREATE, always ALLOW_NEG */
 +		npositive = au_lkup_dentry(dentry, au_dbtop(parent),
-+					   /*type*/0);
++					   AuLkup_ALLOW_NEG);
 +		err = npositive;
 +	}
 +	di_read_unlock(parent, AuLock_IR);
@@ -14880,6 +14898,7 @@ index 0000000..1572a7d
 +			    umode_t create_mode, int *opened)
 +{
 +	int err, h_opened = *opened;
++	unsigned int lkup_flags;
 +	struct dentry *parent;
 +	struct dentry *d;
 +	struct au_sphlhead *aopen;
@@ -14893,14 +14912,18 @@ index 0000000..1572a7d
 +	};
 +
 +	IMustLock(dir);
-+	AuDbg("open_flag 0x%x\n", open_flag);
++	AuDbg("open_flag 0%o\n", open_flag);
 +	AuDbgDentry(dentry);
 +
 +	err = 0;
 +	if (!au_di(dentry)) {
-+		d = aufs_lookup(dir, dentry, /*flags*/0);
++		lkup_flags = LOOKUP_OPEN;
++		if (open_flag & O_CREAT)
++			lkup_flags |= LOOKUP_CREATE;
++		d = aufs_lookup(dir, dentry, lkup_flags);
 +		if (IS_ERR(d)) {
 +			err = PTR_ERR(d);
++			AuTraceErr(err);
 +			goto out;
 +		} else if (d) {
 +			/*
@@ -14908,8 +14931,8 @@ index 0000000..1572a7d
 +			 * another error will be returned later.
 +			 */
 +			d_drop(d);
-+			dput(d);
 +			AuDbgDentry(d);
++			dput(d);
 +		}
 +		AuDbgDentry(dentry);
 +	}
@@ -14926,7 +14949,7 @@ index 0000000..1572a7d
 +
 +	parent = dentry->d_parent;	/* dir is locked */
 +	di_write_lock_parent(parent);
-+	err = au_lkup_dentry(dentry, /*btop*/0, /*type*/0);
++	err = au_lkup_dentry(dentry, /*btop*/0, AuLkup_ALLOW_NEG);
 +	if (unlikely(err))
 +		goto out_unlock;
 +
@@ -15122,7 +15145,7 @@ index 0000000..1572a7d
 +void au_pin_hdir_unlock(struct au_pin *p)
 +{
 +	if (p->hdir)
-+		au_hn_imtx_unlock(p->hdir);
++		au_hn_inode_unlock(p->hdir);
 +}
 +
 +int au_pin_hdir_lock(struct au_pin *p)
@@ -15134,7 +15157,7 @@ index 0000000..1572a7d
 +		goto out;
 +
 +	/* even if an error happens later, keep this lock */
-+	au_hn_imtx_lock_nested(p->hdir, p->lsc_hi);
++	au_hn_inode_lock_nested(p->hdir, p->lsc_hi);
 +
 +	err = -EBUSY;
 +	if (unlikely(p->hdir->hi_inode != d_inode(p->h_parent)))
@@ -15175,17 +15198,17 @@ index 0000000..1572a7d
 +	return err;
 +}
 +
-+void au_pin_hdir_set_owner(struct au_pin *p, struct task_struct *task)
++static void au_pin_hdir_set_owner(struct au_pin *p, struct task_struct *task)
 +{
-+#if defined(CONFIG_DEBUG_MUTEXES) || defined(CONFIG_SMP)
-+	p->hdir->hi_inode->i_mutex.owner = task;
++#if !defined(CONFIG_RWSEM_GENERIC_SPINLOCK) && defined(CONFIG_RWSEM_SPIN_ON_OWNER)
++	p->hdir->hi_inode->i_rwsem.owner = task;
 +#endif
 +}
 +
 +void au_pin_hdir_acquire_nest(struct au_pin *p)
 +{
 +	if (p->hdir) {
-+		mutex_acquire_nest(&p->hdir->hi_inode->i_mutex.dep_map,
++		rwsem_acquire_nest(&p->hdir->hi_inode->i_rwsem.dep_map,
 +				   p->lsc_hi, 0, NULL, _RET_IP_);
 +		au_pin_hdir_set_owner(p, current);
 +	}
@@ -15195,7 +15218,7 @@ index 0000000..1572a7d
 +{
 +	if (p->hdir) {
 +		au_pin_hdir_set_owner(p, p->task);
-+		mutex_release(&p->hdir->hi_inode->i_mutex.dep_map, 1, _RET_IP_);
++		rwsem_release(&p->hdir->hi_inode->i_rwsem.dep_map, 1, _RET_IP_);
 +	}
 +}
 +
@@ -15624,15 +15647,15 @@ index 0000000..1572a7d
 +	return err;
 +}
 +
-+ssize_t au_srxattr(struct dentry *dentry, struct au_srxattr *arg)
++ssize_t au_srxattr(struct dentry *dentry, struct inode *inode,
++		   struct au_srxattr *arg)
 +{
 +	int err;
 +	struct path h_path;
 +	struct super_block *sb;
 +	struct au_icpup_args *a;
-+	struct inode *inode, *h_inode;
++	struct inode *h_inode;
 +
-+	inode = d_inode(dentry);
 +	IMustLock(inode);
 +
 +	err = -ENOMEM;
@@ -15654,6 +15677,7 @@ index 0000000..1572a7d
 +	inode_unlock(a->h_inode);
 +	switch (arg->type) {
 +	case AU_XATTR_SET:
++		AuDebugOn(d_is_negative(h_path.dentry));
 +		err = vfsub_setxattr(h_path.dentry,
 +				     arg->u.set.name, arg->u.set.value,
 +				     arg->u.set.size, arg->u.set.flags);
@@ -16925,10 +16949,10 @@ index 0000000..8e3fb61
 +}
 diff --git a/fs/aufs/i_op_del.c b/fs/aufs/i_op_del.c
 new file mode 100644
-index 0000000..bda70b0
+index 0000000..35b923c
 --- /dev/null
 +++ b/fs/aufs/i_op_del.c
-@@ -0,0 +1,497 @@
+@@ -0,0 +1,498 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + */
@@ -16985,7 +17009,8 @@ index 0000000..bda70b0
 +			au_di_cp(tmp, dinfo);
 +			au_di_swap(tmp, dinfo);
 +			/* returns the number of positive dentries */
-+			need_wh = au_lkup_dentry(dentry, btop + 1, /*type*/0);
++			need_wh = au_lkup_dentry(dentry, btop + 1,
++						 /* AuLkup_IGNORE_PERM */ 0);
 +			au_di_swap(tmp, dinfo);
 +			au_rw_write_unlock(&tmp->di_rwsem);
 +			au_di_free(tmp);
@@ -17428,7 +17453,7 @@ index 0000000..bda70b0
 +}
 diff --git a/fs/aufs/i_op_ren.c b/fs/aufs/i_op_ren.c
 new file mode 100644
-index 0000000..fdc2992
+index 0000000..df697de
 --- /dev/null
 +++ b/fs/aufs/i_op_ren.c
 @@ -0,0 +1,1002 @@
@@ -17526,9 +17551,9 @@ index 0000000..fdc2992
 +{
 +	int rerr;
 +
-+	au_hn_imtx_lock_nested(a->src_hinode, AuLsc_I_CHILD);
++	au_hn_inode_lock_nested(a->src_hinode, AuLsc_I_CHILD);
 +	rerr = au_diropq_remove(a->src_dentry, a->btgt);
-+	au_hn_imtx_unlock(a->src_hinode);
++	au_hn_inode_unlock(a->src_hinode);
 +	au_set_dbdiropq(a->src_dentry, a->src_bdiropq);
 +	if (rerr)
 +		RevertFailure("remove diropq %pd", a->src_dentry);
@@ -17683,9 +17708,9 @@ index 0000000..fdc2992
 +	err = 0;
 +	a->src_bdiropq = au_dbdiropq(a->src_dentry);
 +	a->src_hinode = au_hi(a->src_inode, a->btgt);
-+	au_hn_imtx_lock_nested(a->src_hinode, AuLsc_I_CHILD);
++	au_hn_inode_lock_nested(a->src_hinode, AuLsc_I_CHILD);
 +	diropq = au_diropq_create(a->src_dentry, a->btgt);
-+	au_hn_imtx_unlock(a->src_hinode);
++	au_hn_inode_unlock(a->src_hinode);
 +	if (IS_ERR(diropq))
 +		err = PTR_ERR(diropq);
 +	else
@@ -18436,10 +18461,10 @@ index 0000000..fdc2992
 +}
 diff --git a/fs/aufs/iinfo.c b/fs/aufs/iinfo.c
 new file mode 100644
-index 0000000..3a10d8f
+index 0000000..fae4c27
 --- /dev/null
 +++ b/fs/aufs/iinfo.c
-@@ -0,0 +1,267 @@
+@@ -0,0 +1,271 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + */
@@ -18564,7 +18589,7 @@ index 0000000..3a10d8f
 +	struct au_iinfo *iinfo;
 +	aufs_bindex_t bindex, bbot;
 +
-+	AuDebugOn(is_bad_inode(inode));
++	AuDebugOn(au_is_bad_inode(inode));
 +	IiMustWriteLock(inode);
 +
 +	iinfo = au_ii(inode);
@@ -18622,6 +18647,7 @@ index 0000000..3a10d8f
 +{
 +	struct au_iinfo *iinfo;
 +	struct super_block *sb;
++	struct au_hinode *hi;
 +	int nbr, i;
 +
 +	sb = inode->i_sb;
@@ -18629,12 +18655,13 @@ index 0000000..3a10d8f
 +	nbr = au_sbbot(sb) + 1;
 +	if (unlikely(nbr <= 0))
 +		nbr = 1;
-+	iinfo->ii_hinode = kmalloc_array(nbr, sizeof(*iinfo->ii_hinode),
-+					 GFP_NOFS);
-+	if (iinfo->ii_hinode) {
++	hi = kmalloc_array(nbr, sizeof(*iinfo->ii_hinode), GFP_NOFS);
++	if (hi) {
 +		au_ninodes_inc(sb);
-+		for (i = 0; i < nbr; i++)
-+			au_hinode_init(iinfo->ii_hinode + i);
++
++		iinfo->ii_hinode = hi;
++		for (i = 0; i < nbr; i++, hi++)
++			au_hinode_init(hi);
 +
 +		iinfo->ii_generation.ig_generation = au_sigen(sb);
 +		iinfo->ii_btop = -1;
@@ -18655,9 +18682,11 @@ index 0000000..3a10d8f
 +	err = -ENOMEM;
 +	hip = krealloc(iinfo->ii_hinode, sizeof(*hip) * nbr, GFP_NOFS);
 +	if (hip) {
-+		for (i = iinfo->ii_bbot + 1; i < nbr; i++)
-+			au_hinode_init(hip + i);
 +		iinfo->ii_hinode = hip;
++		i = iinfo->ii_bbot + 1;
++		hip += i;
++		for (; i < nbr; i++, hip++)
++			au_hinode_init(hip);
 +		err = 0;
 +	}
 +
@@ -18672,7 +18701,7 @@ index 0000000..3a10d8f
 +	aufs_bindex_t bindex, bbot;
 +	const unsigned char unlinked = !inode->i_nlink;
 +
-+	AuDebugOn(is_bad_inode(inode));
++	AuDebugOn(au_is_bad_inode(inode));
 +
 +	sb = inode->i_sb;
 +	au_ninodes_dec(sb);
@@ -18709,7 +18738,7 @@ index 0000000..3a10d8f
 +}
 diff --git a/fs/aufs/inode.c b/fs/aufs/inode.c
 new file mode 100644
-index 0000000..d599b4c
+index 0000000..a4b994e
 --- /dev/null
 +++ b/fs/aufs/inode.c
 @@ -0,0 +1,504 @@
@@ -18749,7 +18778,7 @@ index 0000000..d599b4c
 +	struct au_iinfo *iinfo;
 +	struct au_hinode *p, *q, tmp;
 +
-+	AuDebugOn(is_bad_inode(inode));
++	AuDebugOn(au_is_bad_inode(inode));
 +	IiMustWriteLock(inode);
 +
 +	*update = 0;
@@ -19219,10 +19248,10 @@ index 0000000..d599b4c
 +}
 diff --git a/fs/aufs/inode.h b/fs/aufs/inode.h
 new file mode 100644
-index 0000000..0d654e8
+index 0000000..3fc5a58
 --- /dev/null
 +++ b/fs/aufs/inode.h
-@@ -0,0 +1,676 @@
+@@ -0,0 +1,681 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + */
@@ -19323,7 +19352,6 @@ index 0000000..0d654e8
 +void au_pin_hdir_unlock(struct au_pin *p);
 +int au_pin_hdir_lock(struct au_pin *p);
 +int au_pin_hdir_relock(struct au_pin *p);
-+void au_pin_hdir_set_owner(struct au_pin *p, struct task_struct *task);
 +void au_pin_hdir_acquire_nest(struct au_pin *p);
 +void au_pin_hdir_release(struct au_pin *p);
 +
@@ -19518,10 +19546,10 @@ index 0000000..0d654e8
 +int au_cpup_xattr(struct dentry *h_dst, struct dentry *h_src, int ignore_flags,
 +		  unsigned int verbose);
 +ssize_t aufs_listxattr(struct dentry *dentry, char *list, size_t size);
-+ssize_t aufs_getxattr(struct dentry *dentry, const char *name, void *value,
-+		      size_t size);
-+int aufs_setxattr(struct dentry *dentry, const char *name, const void *value,
-+		  size_t size, int flags);
++ssize_t aufs_getxattr(struct dentry *dentry, struct inode *inode,
++		      const char *name, void *value, size_t size);
++int aufs_setxattr(struct dentry *dentry, struct inode *inode, const char *name,
++		  const void *value, size_t size, int flags);
 +int aufs_removexattr(struct dentry *dentry, const char *name);
 +
 +/* void au_xattr_init(struct super_block *sb); */
@@ -19561,7 +19589,8 @@ index 0000000..0d654e8
 +		} acl_set;
 +	} u;
 +};
-+ssize_t au_srxattr(struct dentry *dentry, struct au_srxattr *arg);
++ssize_t au_srxattr(struct dentry *dentry, struct inode *inode,
++		   struct au_srxattr *arg);
 +#endif
 +
 +/* ---------------------------------------------------------------------- */
@@ -19690,6 +19719,11 @@ index 0000000..0d654e8
 +					  aufs_bindex_t bindex)
 +{
 +	return iinfo->ii_hinode + bindex;
++}
++
++static inline int au_is_bad_inode(struct inode *inode)
++{
++	return !!(is_bad_inode(inode) || !au_hinode(au_ii(inode), 0));
 +}
 +
 +static inline aufs_bindex_t au_ii_br_id(struct inode *inode,
@@ -19878,20 +19912,20 @@ index 0000000..0d654e8
 +	au_hn_ctl(hdir, /*do_set*/1);
 +}
 +
-+static inline void au_hn_imtx_lock(struct au_hinode *hdir)
++static inline void au_hn_inode_lock(struct au_hinode *hdir)
 +{
 +	inode_lock(hdir->hi_inode);
 +	au_hn_suspend(hdir);
 +}
 +
-+static inline void au_hn_imtx_lock_nested(struct au_hinode *hdir,
++static inline void au_hn_inode_lock_nested(struct au_hinode *hdir,
 +					  unsigned int sc __maybe_unused)
 +{
 +	inode_lock_nested(hdir->hi_inode, sc);
 +	au_hn_suspend(hdir);
 +}
 +
-+static inline void au_hn_imtx_unlock(struct au_hinode *hdir)
++static inline void au_hn_inode_unlock(struct au_hinode *hdir)
 +{
 +	au_hn_resume(hdir);
 +	inode_unlock(hdir->hi_inode);
@@ -20630,10 +20664,10 @@ index 0000000..1383e3d
 +#endif /* __AUFS_MODULE_H__ */
 diff --git a/fs/aufs/mvdown.c b/fs/aufs/mvdown.c
 new file mode 100644
-index 0000000..334f25c
+index 0000000..a48aa1c
 --- /dev/null
 +++ b/fs/aufs/mvdown.c
-@@ -0,0 +1,690 @@
+@@ -0,0 +1,691 @@
 +/*
 + * Copyright (C) 2011-2016 Junjiro R. Okajima
 + */
@@ -21087,7 +21121,8 @@ index 0000000..334f25c
 +	au_di_swap(tmp, dinfo);
 +
 +	/* returns the number of positive dentries */
-+	err = au_lkup_dentry(a->dentry, a->mvd_bsrc + 1, /*type*/0);
++	err = au_lkup_dentry(a->dentry, a->mvd_bsrc + 1,
++			     /* AuLkup_IGNORE_PERM */ 0);
 +	if (!err)
 +		a->bwh = au_dbwh(a->dentry);
 +	else if (err > 0)
@@ -21326,7 +21361,7 @@ index 0000000..334f25c
 +}
 diff --git a/fs/aufs/opts.c b/fs/aufs/opts.c
 new file mode 100644
-index 0000000..23a146d
+index 0000000..79c7d71
 --- /dev/null
 +++ b/fs/aufs/opts.c
 @@ -0,0 +1,1846 @@
@@ -22988,13 +23023,13 @@ index 0000000..23a146d
 +			continue;
 +
 +		hdir = au_hi(dir, bindex);
-+		au_hn_imtx_lock_nested(hdir, AuLsc_I_PARENT);
++		au_hn_inode_lock_nested(hdir, AuLsc_I_PARENT);
 +		if (wbr)
 +			wbr_wh_write_lock(wbr);
 +		err = au_wh_init(br, sb);
 +		if (wbr)
 +			wbr_wh_write_unlock(wbr);
-+		au_hn_imtx_unlock(hdir);
++		au_hn_inode_unlock(hdir);
 +
 +		if (!err && do_free) {
 +			kfree(wbr);
@@ -23922,7 +23957,7 @@ index 0000000..dd2baf5
 +}
 diff --git a/fs/aufs/posix_acl.c b/fs/aufs/posix_acl.c
 new file mode 100644
-index 0000000..0ddd469
+index 0000000..1ee17ee
 --- /dev/null
 +++ b/fs/aufs/posix_acl.c
 @@ -0,0 +1,85 @@
@@ -23986,7 +24021,8 @@ index 0000000..0ddd469
 +		},
 +	};
 +
-+	inode_lock(inode);
++	IMustLock(inode);
++
 +	if (inode->i_ino == AUFS_ROOT_INO)
 +		dentry = dget(inode->i_sb->s_root);
 +	else {
@@ -24001,14 +24037,13 @@ index 0000000..0ddd469
 +		}
 +	}
 +
-+	ssz = au_srxattr(dentry, &arg);
++	ssz = au_srxattr(dentry, inode, &arg);
 +	dput(dentry);
 +	err = ssz;
 +	if (ssz >= 0)
 +		err = 0;
 +
 +out:
-+	inode_unlock(inode);
 +	return err;
 +}
 diff --git a/fs/aufs/procfs.c b/fs/aufs/procfs.c
@@ -24175,10 +24210,10 @@ index 0000000..e5a4e37
 +}
 diff --git a/fs/aufs/rdu.c b/fs/aufs/rdu.c
 new file mode 100644
-index 0000000..7180f18
+index 0000000..54abc14
 --- /dev/null
 +++ b/fs/aufs/rdu.c
-@@ -0,0 +1,376 @@
+@@ -0,0 +1,368 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + */
@@ -24316,7 +24351,7 @@ index 0000000..7180f18
 +	arg.end += rdu->sz;
 +
 +	err = -ENOTDIR;
-+	if (unlikely(!file->f_op->iterate))
++	if (unlikely(!file->f_op->iterate && !file->f_op->iterate_shared))
 +		goto out;
 +
 +	err = security_file_permission(file, MAY_READ);
@@ -24326,15 +24361,7 @@ index 0000000..7180f18
 +
 +	dentry = file->f_path.dentry;
 +	inode = d_inode(dentry);
-+#if 1
-+	inode_lock(inode);
-+#else
-+	/* todo: create a new inline func inode_lock_killable() */
-+	err = mutex_lock_killable(&inode->i_mutex);
-+	AuTraceErr(err);
-+	if (unlikely(err))
-+		goto out;
-+#endif
++	inode_lock_shared(inode);
 +
 +	arg.sb = inode->i_sb;
 +	err = si_read_lock(arg.sb, AuLock_FLUSH | AuLock_NOPLM);
@@ -24391,7 +24418,7 @@ index 0000000..7180f18
 +out_si:
 +	si_read_unlock(arg.sb);
 +out_mtx:
-+	inode_unlock(inode);
++	inode_unlock_shared(inode);
 +out:
 +	AuTraceErr(err);
 +	return err;
@@ -25198,7 +25225,7 @@ index 0000000..f9b5288
 +#endif /* __AUFS_SPL_H__ */
 diff --git a/fs/aufs/super.c b/fs/aufs/super.c
 new file mode 100644
-index 0000000..18190aa
+index 0000000..8bd2d9c
 --- /dev/null
 +++ b/fs/aufs/super.c
 @@ -0,0 +1,1026 @@
@@ -25227,6 +25254,7 @@ index 0000000..18190aa
 +	if (c) {
 +		au_icntnr_init(c);
 +		c->vfs_inode.i_version = 1; /* sigen(sb); */
++		c->iinfo.ii_hinode = NULL;
 +		return &c->vfs_inode;
 +	}
 +	return NULL;
@@ -25242,7 +25270,7 @@ index 0000000..18190aa
 +
 +static void aufs_destroy_inode(struct inode *inode)
 +{
-+	if (!is_bad_inode(inode))
++	if (!au_is_bad_inode(inode))
 +		au_iinfo_fin(inode);
 +	call_rcu(&inode->i_rcu, aufs_destroy_inode_cb);
 +}
@@ -25289,11 +25317,12 @@ index 0000000..18190aa
 +
 +	err = 0;
 +	bbot = au_sbbot(sb);
-+	hdp = au_di(sb->s_root)->di_hdentry;
-+	for (bindex = 0; !err && bindex <= bbot; bindex++) {
++	bindex = 0;
++	hdp = au_hdentry(au_di(sb->s_root), bindex);
++	for (; !err && bindex <= bbot; bindex++, hdp++) {
 +		br = au_sbr(sb, bindex);
 +		path.mnt = au_br_mnt(br);
-+		path.dentry = hdp[bindex].hd_dentry;
++		path.dentry = hdp->hd_dentry;
 +		err = au_seq_path(seq, &path);
 +		if (!err) {
 +			au_optstr_br_perm(&perm, br->br_perm);
@@ -25368,7 +25397,6 @@ index 0000000..18190aa
 +	struct qstr *name;
 +	struct file *f;
 +	struct dentry *d, *h_root;
-+	struct au_hdentry *hdp;
 +
 +	AuRwMustAnyLock(&sbinfo->si_rwsem);
 +
@@ -25382,8 +25410,7 @@ index 0000000..18190aa
 +	brid = au_xino_brid(sb);
 +	if (brid >= 0) {
 +		bindex = au_br_index(sb, brid);
-+		hdp = au_di(sb->s_root)->di_hdentry;
-+		h_root = hdp[0 + bindex].hd_dentry;
++		h_root = au_hdentry(au_di(sb->s_root), bindex)->hd_dentry;
 +	}
 +	d = f->f_path.dentry;
 +	name = &d->d_name;
@@ -25707,7 +25734,7 @@ index 0000000..18190aa
 +	head = arg;
 +	spin_lock(&sb->s_inode_list_lock);
 +	list_for_each_entry(inode, head, i_sb_list) {
-+		if (!is_bad_inode(inode)
++		if (!au_is_bad_inode(inode)
 +		    && au_ii(inode)->ii_btop >= 0) {
 +			spin_lock(&inode->i_lock);
 +			if (atomic_read(&inode->i_count)) {
@@ -27548,10 +27575,10 @@ index 0000000..7d22979
 +}
 diff --git a/fs/aufs/vdir.c b/fs/aufs/vdir.c
 new file mode 100644
-index 0000000..feddcc2
+index 0000000..0a9ff00
 --- /dev/null
 +++ b/fs/aufs/vdir.c
-@@ -0,0 +1,875 @@
+@@ -0,0 +1,876 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + */
@@ -28178,6 +28205,7 @@ index 0000000..feddcc2
 +	err = 0;
 +	inode = file_inode(file);
 +	IMustLock(inode);
++	IiMustWriteLock(inode);
 +	SiMustAnyLock(inode->i_sb);
 +
 +	allocated = NULL;
@@ -29306,7 +29334,7 @@ index 0000000..2e54bad
 +}
 diff --git a/fs/aufs/vfsub.h b/fs/aufs/vfsub.h
 new file mode 100644
-index 0000000..4e08d33
+index 0000000..291bfae
 --- /dev/null
 +++ b/fs/aufs/vfsub.h
 @@ -0,0 +1,297 @@
@@ -29519,7 +29547,7 @@ index 0000000..4e08d33
 +static inline int vfsub_update_time(struct inode *h_inode, struct timespec *ts,
 +				    int flags)
 +{
-+	return generic_update_time(h_inode, ts, flags);
++	return update_time(h_inode, ts, flags);
 +	/* no vfsub_update_h_iattr() since we don't have struct path */
 +}
 +
@@ -30367,7 +30395,7 @@ index 0000000..91a010a
 +};
 diff --git a/fs/aufs/whout.c b/fs/aufs/whout.c
 new file mode 100644
-index 0000000..78f97ed
+index 0000000..16a96f88
 --- /dev/null
 +++ b/fs/aufs/whout.c
 @@ -0,0 +1,1047 @@
@@ -30926,7 +30954,7 @@ index 0000000..78f97ed
 +	h_root = au_h_dptr(a->sb->s_root, bindex);
 +	AuDebugOn(h_root != au_br_dentry(a->br));
 +
-+	au_hn_imtx_lock_nested(hdir, AuLsc_I_PARENT);
++	au_hn_inode_lock_nested(hdir, AuLsc_I_PARENT);
 +	wbr_wh_write_lock(wbr);
 +	err = au_h_verify(wbr->wbr_whbase, au_opt_udba(a->sb), hdir->hi_inode,
 +			  h_root, a->br);
@@ -30950,7 +30978,7 @@ index 0000000..78f97ed
 +	if (!err)
 +		err = au_wh_init(a->br, a->sb);
 +	wbr_wh_write_unlock(wbr);
-+	au_hn_imtx_unlock(hdir);
++	au_hn_inode_unlock(hdir);
 +	di_read_unlock(a->sb->s_root, AuLock_IR);
 +	if (!err)
 +		au_fhsm_wrote(a->sb, bindex, /*force*/0);
@@ -31378,12 +31406,12 @@ index 0000000..78f97ed
 +	err = vfsub_mnt_want_write(au_br_mnt(a->br));
 +	if (unlikely(err))
 +		goto out_mnt;
-+	au_hn_imtx_lock_nested(hdir, AuLsc_I_PARENT);
++	au_hn_inode_lock_nested(hdir, AuLsc_I_PARENT);
 +	err = au_h_verify(a->wh_dentry, au_opt_udba(sb), h_dir, h_parent,
 +			  a->br);
 +	if (!err)
 +		err = au_whtmp_rmdir(a->dir, bindex, a->wh_dentry, &a->whlist);
-+	au_hn_imtx_unlock(hdir);
++	au_hn_inode_unlock(hdir);
 +	vfsub_mnt_drop_write(au_br_mnt(a->br));
 +
 +out_mnt:
@@ -31709,10 +31737,10 @@ index 0000000..65c0137
 +}
 diff --git a/fs/aufs/wkq.h b/fs/aufs/wkq.h
 new file mode 100644
-index 0000000..752b9c5
+index 0000000..0b870cc
 --- /dev/null
 +++ b/fs/aufs/wkq.h
-@@ -0,0 +1,80 @@
+@@ -0,0 +1,82 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + */
@@ -31726,6 +31754,8 @@ index 0000000..752b9c5
 +#define __AUFS_WKQ_H__
 +
 +#ifdef __KERNEL__
++
++#include <linux/percpu_counter.h>
 +
 +struct super_block;
 +
@@ -31795,10 +31825,10 @@ index 0000000..752b9c5
 +#endif /* __AUFS_WKQ_H__ */
 diff --git a/fs/aufs/xattr.c b/fs/aufs/xattr.c
 new file mode 100644
-index 0000000..890c107
+index 0000000..c12518f
 --- /dev/null
 +++ b/fs/aufs/xattr.c
-@@ -0,0 +1,331 @@
+@@ -0,0 +1,332 @@
 +/*
 + * Copyright (C) 2014-2016 Junjiro R. Okajima
 + */
@@ -32021,6 +32051,7 @@ index 0000000..890c107
 +				    arg->u.list.list, arg->u.list.size);
 +		break;
 +	case AU_XATTR_GET:
++		AuDebugOn(d_is_negative(h_path.dentry));
 +		err = vfs_getxattr(h_path.dentry,
 +				   arg->u.get.name, arg->u.get.value,
 +				   arg->u.get.size);
@@ -32049,8 +32080,8 @@ index 0000000..890c107
 +	return au_lgxattr(dentry, &arg);
 +}
 +
-+ssize_t aufs_getxattr(struct dentry *dentry, const char *name, void *value,
-+		      size_t size)
++ssize_t aufs_getxattr(struct dentry *dentry, struct inode *inode __maybe_unused,
++		      const char *name, void *value, size_t size)
 +{
 +	struct au_lgxattr arg = {
 +		.type = AU_XATTR_GET,
@@ -32064,8 +32095,8 @@ index 0000000..890c107
 +	return au_lgxattr(dentry, &arg);
 +}
 +
-+int aufs_setxattr(struct dentry *dentry, const char *name, const void *value,
-+		  size_t size, int flags)
++int aufs_setxattr(struct dentry *dentry, struct inode *inode, const char *name,
++		  const void *value, size_t size, int flags)
 +{
 +	struct au_srxattr arg = {
 +		.type = AU_XATTR_SET,
@@ -32077,7 +32108,7 @@ index 0000000..890c107
 +		},
 +	};
 +
-+	return au_srxattr(dentry, &arg);
++	return au_srxattr(dentry, inode, &arg);
 +}
 +
 +int aufs_removexattr(struct dentry *dentry, const char *name)
@@ -32089,7 +32120,7 @@ index 0000000..890c107
 +		},
 +	};
 +
-+	return au_srxattr(dentry, &arg);
++	return au_srxattr(dentry, d_inode(dentry), &arg);
 +}
 +
 +/* ---------------------------------------------------------------------- */
@@ -32132,7 +32163,7 @@ index 0000000..890c107
 +#endif
 diff --git a/fs/aufs/xino.c b/fs/aufs/xino.c
 new file mode 100644
-index 0000000..c0eb51f
+index 0000000..4d1d5d4
 --- /dev/null
 +++ b/fs/aufs/xino.c
 @@ -0,0 +1,1304 @@
@@ -32370,7 +32401,7 @@ index 0000000..c0eb51f
 +		bindex = au_br_index(sb, brid);
 +	if (bindex >= 0) {
 +		ldir->hdir = au_hi(d_inode(sb->s_root), bindex);
-+		au_hn_imtx_lock_nested(ldir->hdir, AuLsc_I_PARENT);
++		au_hn_inode_lock_nested(ldir->hdir, AuLsc_I_PARENT);
 +	} else {
 +		ldir->parent = dget_parent(xino->f_path.dentry);
 +		ldir->dir = d_inode(ldir->parent);
@@ -32381,7 +32412,7 @@ index 0000000..c0eb51f
 +static void au_xino_unlock_dir(struct au_xino_lock_dir *ldir)
 +{
 +	if (ldir->hdir)
-+		au_hn_imtx_unlock(ldir->hdir);
++		au_hn_inode_unlock(ldir->hdir);
 +	else {
 +		inode_unlock(ldir->dir);
 +		dput(ldir->parent);
@@ -32723,7 +32754,7 @@ index 0000000..c0eb51f
 +	struct au_branch *br;
 +	vfs_writef_t xwrite;
 +
-+	AuDebugOn(is_bad_inode(inode));
++	AuDebugOn(au_is_bad_inode(inode));
 +
 +	sb = inode->i_sb;
 +	mnt_flags = au_mntflags(sb);
@@ -33251,7 +33282,6 @@ index 0000000..c0eb51f
 +	ino = AUFS_ROOT_INO;
 +	writef = au_sbi(sb)->si_xwrite;
 +	for (bindex = 0, p = fpair; bindex <= bbot; bindex++, p++) {
-+		br = au_sbr(sb, bindex);
 +		bshared = is_sb_shared(sb, bindex, bindex - 1);
 +		if (bshared >= 0) {
 +			/* shared xino */
@@ -33261,6 +33291,7 @@ index 0000000..c0eb51f
 +
 +		if (!p->new) {
 +			/* new xino */
++			br = au_sbr(sb, bindex);
 +			p->old = br->br_xino.xi_file;
 +			p->new = au_xino_create2(base, br->br_xino.xi_file);
 +			err = PTR_ERR(p->new);
@@ -33441,10 +33472,10 @@ index 0000000..c0eb51f
 +	return err;
 +}
 diff --git a/fs/dcache.c b/fs/dcache.c
-index d5ecc6e..4de75b2 100644
+index d6847d7..c3c0b6d 100644
 --- a/fs/dcache.c
 +++ b/fs/dcache.c
-@@ -1156,7 +1156,7 @@ enum d_walk_ret {
+@@ -1202,7 +1202,7 @@ enum d_walk_ret {
   *
   * The @enter() and @finish() callbacks are called with d_lock held.
   */
@@ -33475,11 +33506,24 @@ index 350a2c8..6f42279 100644
  	if (error)
  		return error;
  
+diff --git a/fs/inode.c b/fs/inode.c
+index 4ccbc21..aa6d071 100644
+--- a/fs/inode.c
++++ b/fs/inode.c
+@@ -1591,7 +1591,7 @@ EXPORT_SYMBOL(generic_update_time);
+  * This does the actual work of updating an inodes time or version.  Must have
+  * had called mnt_want_write() before calling this.
+  */
+-static int update_time(struct inode *inode, struct timespec *time, int flags)
++int update_time(struct inode *inode, struct timespec *time, int flags)
+ {
+ 	int (*update_time)(struct inode *, struct timespec *, int);
+ 
 diff --git a/fs/proc/base.c b/fs/proc/base.c
-index 0d163a8..b958f79 100644
+index a11eb71..8f10865 100644
 --- a/fs/proc/base.c
 +++ b/fs/proc/base.c
-@@ -1934,7 +1934,7 @@ static int map_files_get_link(struct dentry *dentry, struct path *path)
+@@ -1939,7 +1939,7 @@ static int map_files_get_link(struct dentry *dentry, struct path *path)
  	down_read(&mm->mmap_sem);
  	vma = find_exact_vma(mm, vm_start, vm_end);
  	if (vma && vma->vm_file) {
@@ -33505,7 +33549,7 @@ index f8595e8..cb8eda0 100644
  		ino = inode->i_ino;
  	}
 diff --git a/fs/proc/task_mmu.c b/fs/proc/task_mmu.c
-index 5415835..c41eb73 100644
+index 4648c7f..061cb85 100644
 --- a/fs/proc/task_mmu.c
 +++ b/fs/proc/task_mmu.c
 @@ -298,7 +298,10 @@ show_map_vma(struct seq_file *m, struct vm_area_struct *vma, int is_pid)
@@ -33520,7 +33564,7 @@ index 5415835..c41eb73 100644
  		dev = inode->i_sb->s_dev;
  		ino = inode->i_ino;
  		pgoff = ((loff_t)vma->vm_pgoff) << PAGE_SHIFT;
-@@ -1617,7 +1620,7 @@ static int show_numa_map(struct seq_file *m, void *v, int is_pid)
+@@ -1624,7 +1627,7 @@ static int show_numa_map(struct seq_file *m, void *v, int is_pid)
  	struct proc_maps_private *proc_priv = &numa_priv->proc_maps;
  	struct vm_area_struct *vma = v;
  	struct numa_maps *md = &numa_priv->md;
@@ -33546,10 +33590,10 @@ index faacb0c..17b43be 100644
  		ino = inode->i_ino;
  		pgoff = (loff_t)vma->vm_pgoff << PAGE_SHIFT;
 diff --git a/fs/read_write.c b/fs/read_write.c
-index cf377cf..0ebcdc5 100644
+index 933b53a..2d13282 100644
 --- a/fs/read_write.c
 +++ b/fs/read_write.c
-@@ -534,6 +534,28 @@ ssize_t __vfs_write(struct file *file, const char __user *p, size_t count,
+@@ -515,6 +515,28 @@ ssize_t __vfs_write(struct file *file, const char __user *p, size_t count,
  }
  EXPORT_SYMBOL(__vfs_write);
  
@@ -33607,7 +33651,7 @@ index dd9bf7e..9326c2a 100644
  	ssize_t (*splice_read)(struct file *, loff_t *,
  			       struct pipe_inode_info *, size_t, unsigned int);
 diff --git a/include/linux/file.h b/include/linux/file.h
-index f87d308..9a290b3 100644
+index 7444f5f..bdac0be 100644
 --- a/include/linux/file.h
 +++ b/include/linux/file.h
 @@ -19,6 +19,7 @@ struct dentry;
@@ -33619,10 +33663,10 @@ index f87d308..9a290b3 100644
  static inline void fput_light(struct file *file, int fput_needed)
  {
 diff --git a/include/linux/fs.h b/include/linux/fs.h
-index 70e61b5..351bb05 100644
+index dd28814..b689a48 100644
 --- a/include/linux/fs.h
 +++ b/include/linux/fs.h
-@@ -1277,6 +1277,7 @@ extern void fasync_free(struct fasync_struct *);
+@@ -1306,6 +1306,7 @@ extern void fasync_free(struct fasync_struct *);
  /* can be called from interrupts */
  extern void kill_fasync(struct fasync_struct **, int, int);
  
@@ -33630,7 +33674,7 @@ index 70e61b5..351bb05 100644
  extern void __f_setown(struct file *filp, struct pid *, enum pid_type, int force);
  extern void f_setown(struct file *filp, unsigned long arg, int force);
  extern void f_delown(struct file *filp);
-@@ -1660,6 +1661,7 @@ struct file_operations {
+@@ -1690,6 +1691,7 @@ struct file_operations {
  	ssize_t (*sendpage) (struct file *, struct page *, int, size_t, loff_t *, int);
  	unsigned long (*get_unmapped_area)(struct file *, unsigned long, unsigned long, unsigned long, unsigned long);
  	int (*check_flags)(int);
@@ -33638,7 +33682,7 @@ index 70e61b5..351bb05 100644
  	int (*flock) (struct file *, int, struct file_lock *);
  	ssize_t (*splice_write)(struct pipe_inode_info *, struct file *, loff_t *, size_t, unsigned int);
  	ssize_t (*splice_read)(struct file *, loff_t *, struct pipe_inode_info *, size_t, unsigned int);
-@@ -1718,6 +1720,12 @@ ssize_t rw_copy_check_uvector(int type, const struct iovec __user * uvector,
+@@ -1750,6 +1752,12 @@ ssize_t rw_copy_check_uvector(int type, const struct iovec __user * uvector,
  			      struct iovec *fast_pointer,
  			      struct iovec **ret_pointer);
  
@@ -33651,11 +33695,19 @@ index 70e61b5..351bb05 100644
  extern ssize_t __vfs_read(struct file *, char __user *, size_t, loff_t *);
  extern ssize_t __vfs_write(struct file *, const char __user *, size_t, loff_t *);
  extern ssize_t vfs_read(struct file *, char __user *, size_t, loff_t *);
+@@ -2105,6 +2113,7 @@ extern int current_umask(void);
+ extern void ihold(struct inode * inode);
+ extern void iput(struct inode *);
+ extern int generic_update_time(struct inode *, struct timespec *, int);
++extern int update_time(struct inode *, struct timespec *, int);
+ 
+ /* /sys/fs */
+ extern struct kobject *fs_kobj;
 diff --git a/include/linux/mm.h b/include/linux/mm.h
-index 8f468e0..4ab3095 100644
+index ece042d..1e24513 100644
 --- a/include/linux/mm.h
 +++ b/include/linux/mm.h
-@@ -1251,6 +1251,28 @@ static inline int fixup_user_fault(struct task_struct *tsk,
+@@ -1239,6 +1239,28 @@ static inline int fixup_user_fault(struct task_struct *tsk,
  }
  #endif
  
@@ -33685,10 +33737,10 @@ index 8f468e0..4ab3095 100644
  extern int access_remote_vm(struct mm_struct *mm, unsigned long addr,
  		void *buf, int len, int write);
 diff --git a/include/linux/mm_types.h b/include/linux/mm_types.h
-index c2d75b4..9e324fe 100644
+index ca3e517..10bc491 100644
 --- a/include/linux/mm_types.h
 +++ b/include/linux/mm_types.h
-@@ -269,6 +269,7 @@ struct vm_region {
+@@ -274,6 +274,7 @@ struct vm_region {
  	unsigned long	vm_top;		/* region allocated to here */
  	unsigned long	vm_pgoff;	/* the offset in vm_file corresponding to vm_start */
  	struct file	*vm_file;	/* the backing file or NULL */
@@ -33696,7 +33748,7 @@ index c2d75b4..9e324fe 100644
  
  	int		vm_usage;	/* region usage count (access under nommu_region_sem) */
  	bool		vm_icache_flushed : 1; /* true if the icache has been flushed for
-@@ -343,6 +344,7 @@ struct vm_area_struct {
+@@ -348,6 +349,7 @@ struct vm_area_struct {
  	unsigned long vm_pgoff;		/* Offset (within vm_file) in PAGE_SIZE
  					   units */
  	struct file * vm_file;		/* File we map to (can be NULL). */
@@ -33720,7 +33772,7 @@ index da2751d..2e0fca6 100644
 +			 unsigned int flags);
  #endif
 diff --git a/include/uapi/linux/Kbuild b/include/uapi/linux/Kbuild
-index 813ffb2e..ac2202e 100644
+index 8bdae34..65dbd5f 100644
 --- a/include/uapi/linux/Kbuild
 +++ b/include/uapi/linux/Kbuild
 @@ -59,6 +59,7 @@ header-y += atmsvc.h
@@ -33733,7 +33785,7 @@ index 813ffb2e..ac2202e 100644
  header-y += auxvec.h
 diff --git a/include/uapi/linux/aufs_type.h b/include/uapi/linux/aufs_type.h
 new file mode 100644
-index 0000000..2e0c537
+index 0000000..4e08bdf
 --- /dev/null
 +++ b/include/uapi/linux/aufs_type.h
 @@ -0,0 +1,406 @@
@@ -33765,7 +33817,7 @@ index 0000000..2e0c537
 +
 +#include <linux/limits.h>
 +
-+#define AUFS_VERSION	"4.6"
++#define AUFS_VERSION	"4.x-rcN"
 +
 +/* todo? move this to linux-2.6.19/include/magic.h */
 +#define AUFS_SUPER_MAGIC	('a' << 24 | 'u' << 16 | 'f' << 8 | 's')
@@ -34144,10 +34196,10 @@ index 0000000..2e0c537
 +
 +#endif /* __AUFS_TYPE_H__ */
 diff --git a/kernel/fork.c b/kernel/fork.c
-index d277e83..683b8a2 100644
+index 4a7ec0c..8c8f7ac 100644
 --- a/kernel/fork.c
 +++ b/kernel/fork.c
-@@ -475,7 +475,7 @@ static int dup_mmap(struct mm_struct *mm, struct mm_struct *oldmm)
+@@ -479,7 +479,7 @@ static int dup_mmap(struct mm_struct *mm, struct mm_struct *oldmm)
  			struct inode *inode = file_inode(file);
  			struct address_space *mapping = file->f_mapping;
  
@@ -34157,7 +34209,7 @@ index d277e83..683b8a2 100644
  				atomic_dec(&inode->i_writecount);
  			i_mmap_lock_write(mapping);
 diff --git a/mm/Makefile b/mm/Makefile
-index deb467e..0f6ae63 100644
+index 78c6f7d..aea4230 100644
 --- a/mm/Makefile
 +++ b/mm/Makefile
 @@ -37,7 +37,7 @@ obj-y			:= filemap.o mempool.o oom_kill.o \
@@ -34170,10 +34222,10 @@ index deb467e..0f6ae63 100644
  obj-y += init-mm.o
  
 diff --git a/mm/filemap.c b/mm/filemap.c
-index f2479af..31f4b0d 100644
+index 20f3b1f..ee827ce 100644
 --- a/mm/filemap.c
 +++ b/mm/filemap.c
-@@ -2211,7 +2211,7 @@ int filemap_page_mkwrite(struct vm_area_struct *vma, struct vm_fault *vmf)
+@@ -2208,7 +2208,7 @@ int filemap_page_mkwrite(struct vm_area_struct *vma, struct vm_fault *vmf)
  	int ret = VM_FAULT_LOCKED;
  
  	sb_start_pagefault(inode->i_sb);
@@ -34183,10 +34235,10 @@ index f2479af..31f4b0d 100644
  	if (page->mapping != inode->i_mapping) {
  		unlock_page(page);
 diff --git a/mm/memory.c b/mm/memory.c
-index 07493e3..dc696bc 100644
+index cd1f29e..f0c204c 100644
 --- a/mm/memory.c
 +++ b/mm/memory.c
-@@ -2098,7 +2098,7 @@ static inline int wp_page_reuse(struct mm_struct *mm,
+@@ -2100,7 +2100,7 @@ static inline int wp_page_reuse(struct mm_struct *mm,
  		}
  
  		if (!page_mkwrite)
@@ -34196,10 +34248,10 @@ index 07493e3..dc696bc 100644
  
  	return VM_FAULT_WRITE;
 diff --git a/mm/mmap.c b/mm/mmap.c
-index bd2e1a53..7328b74 100644
+index de2c176..b7f391c 100644
 --- a/mm/mmap.c
 +++ b/mm/mmap.c
-@@ -166,7 +166,7 @@ static struct vm_area_struct *remove_vma(struct vm_area_struct *vma)
+@@ -162,7 +162,7 @@ static struct vm_area_struct *remove_vma(struct vm_area_struct *vma)
  	if (vma->vm_ops && vma->vm_ops->close)
  		vma->vm_ops->close(vma);
  	if (vma->vm_file)
@@ -34208,7 +34260,7 @@ index bd2e1a53..7328b74 100644
  	mpol_put(vma_policy(vma));
  	kmem_cache_free(vm_area_cachep, vma);
  	return next;
-@@ -785,7 +785,7 @@ again:			remove_next = 1 + (end > next->vm_end);
+@@ -782,7 +782,7 @@ again:			remove_next = 1 + (end > next->vm_end);
  	if (remove_next) {
  		if (file) {
  			uprobe_munmap(next, next->vm_start, next->vm_end);
@@ -34217,7 +34269,7 @@ index bd2e1a53..7328b74 100644
  		}
  		if (next->anon_vma)
  			anon_vma_merge(vma, next);
-@@ -1566,8 +1566,8 @@ out:
+@@ -1563,8 +1563,8 @@ out:
  	return addr;
  
  unmap_and_free_vma:
@@ -34227,7 +34279,7 @@ index bd2e1a53..7328b74 100644
  
  	/* Undo any partial mapping done by a device driver. */
  	unmap_region(mm, vma, prev, vma->vm_start, vma->vm_end);
-@@ -2362,7 +2362,7 @@ static int __split_vma(struct mm_struct *mm, struct vm_area_struct *vma,
+@@ -2358,7 +2358,7 @@ static int __split_vma(struct mm_struct *mm, struct vm_area_struct *vma,
  		goto out_free_mpol;
  
  	if (new->vm_file)
@@ -34236,7 +34288,7 @@ index bd2e1a53..7328b74 100644
  
  	if (new->vm_ops && new->vm_ops->open)
  		new->vm_ops->open(new);
-@@ -2381,7 +2381,7 @@ static int __split_vma(struct mm_struct *mm, struct vm_area_struct *vma,
+@@ -2377,7 +2377,7 @@ static int __split_vma(struct mm_struct *mm, struct vm_area_struct *vma,
  	if (new->vm_ops && new->vm_ops->close)
  		new->vm_ops->close(new);
  	if (new->vm_file)
@@ -34245,7 +34297,7 @@ index bd2e1a53..7328b74 100644
  	unlink_anon_vmas(new);
   out_free_mpol:
  	mpol_put(vma_policy(new));
-@@ -2523,7 +2523,7 @@ SYSCALL_DEFINE5(remap_file_pages, unsigned long, start, unsigned long, size,
+@@ -2528,7 +2528,7 @@ SYSCALL_DEFINE5(remap_file_pages, unsigned long, start, unsigned long, size,
  	struct vm_area_struct *vma;
  	unsigned long populate = 0;
  	unsigned long ret = -EINVAL;
@@ -34254,7 +34306,7 @@ index bd2e1a53..7328b74 100644
  
  	pr_warn_once("%s (%d) uses deprecated remap_file_pages() syscall. See Documentation/vm/remap_file_pages.txt.\n",
  		     current->comm, current->pid);
-@@ -2590,10 +2590,27 @@ SYSCALL_DEFINE5(remap_file_pages, unsigned long, start, unsigned long, size,
+@@ -2597,10 +2597,27 @@ SYSCALL_DEFINE5(remap_file_pages, unsigned long, start, unsigned long, size,
  		}
  	}
  
@@ -34283,7 +34335,7 @@ index bd2e1a53..7328b74 100644
  out:
  	up_write(&mm->mmap_sem);
  	if (populate)
-@@ -2864,7 +2881,7 @@ struct vm_area_struct *copy_vma(struct vm_area_struct **vmap,
+@@ -2873,7 +2890,7 @@ struct vm_area_struct *copy_vma(struct vm_area_struct **vmap,
  		if (anon_vma_clone(new_vma, vma))
  			goto out_free_mempol;
  		if (new_vma->vm_file)
@@ -34293,7 +34345,7 @@ index bd2e1a53..7328b74 100644
  			new_vma->vm_ops->open(new_vma);
  		vma_link(mm, new_vma, prev, rb_link, rb_parent);
 diff --git a/mm/nommu.c b/mm/nommu.c
-index c8bd59a..4cfc2fc 100644
+index c2e588802..c39edc4 100644
 --- a/mm/nommu.c
 +++ b/mm/nommu.c
 @@ -644,7 +644,7 @@ static void __put_nommu_region(struct vm_region *region)

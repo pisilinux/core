@@ -134,15 +134,12 @@ diff --git a/arch/arm/boot/dts/bcm283x.dtsi b/arch/arm/boot/dts/bcm283x.dtsi
 index 8aaf193..04504b7 100644
 --- a/arch/arm/boot/dts/bcm283x.dtsi
 +++ b/arch/arm/boot/dts/bcm283x.dtsi
-@@ -230,6 +230,8 @@
+@@ -287,6 +287,8 @@
  			compatible = "brcm,bcm2835-usb";
  			reg = <0x7e980000 0x10000>;
  			interrupts = <1 9>;
 +			#address-cells = <1>;
 +			#size-cells = <0>;
  		};
- 	};
  
--- 
-2.8.1
-
+ 		v3d: v3d@7ec00000 {

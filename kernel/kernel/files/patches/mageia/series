@@ -77,9 +77,6 @@ acpi-processor-M720SR-limit-to-C2.patch
 # backlight fixes
 ACPI-video-Add-a-quirk-to-force-acpi-video-backlight.patch
 
-#
-acpi-ACPICA-Namespace-Fix-deadlock-triggered-by-MLC-suppo.patch
-
 ###
 ### Block
 ###
@@ -125,9 +122,6 @@ block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch
 # ahci ids
 ahci-add-new-Intel-device-IDs.patch
 
-#
-block-sd-Fix-rw_max-for-devices-that-report-an-optimal-xfe.patch
-
 ###
 ### Char
 ###
@@ -140,8 +134,9 @@ Revert-ipmi-Start-the-timer-and-thread-on-internal-m.patch
 ###
 
 # aufs from: http://aufs.sourceforge.net/ (mga#8314)
-fs-aufs-4.6.patch
-fs-aufs-4.6-modular.patch
+fs-aufs-4.7.patch
+fs-aufs-4.7-modular.patch
+fs-aufs-4.7-ver-fix.patch
 
 ###
 ### FireWire
@@ -176,9 +171,6 @@ gpu-drm-mach64-linux-3.14-buildfix.patch
 gpu-drm-mach64-3.17-buildfix.patch
 gpu-drm-mach64-3.18-buildfix.patch
 
-# hsw screen glitches
-gpu-drm-i915-fbc-Disable-on-HSW-by-default-for-now.patch
-
 ###
 ### Hardware Monitoring
 ###
@@ -209,12 +201,6 @@ input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch
 ### MM
 ###
 
-# fixes some failing atomic allocations
-mm-sl-au-b-add-__GFP_ATOMIC-to-the-GFP-reclaim-mask.patch
-
-# tmpfs fix
-mm-tmpfs-don-t-undo-fallocate-past-its-last-page.patch
-
 ###
 ### Network
 ###
@@ -235,6 +221,12 @@ net-netfilter-IFWLOG-remove-unused-label.patch
 net-netfilter-psd.patch
 net-netfilter-psd-mdv.patch
 net-netfilter-psd-2.6.35-buildfix.patch
+
+#  iwlwifi fixes
+net-wireless-iwlwifi-add-new-8260-PCI-IDs.patch
+net-wireless-iwlwifi-add-new-8265.patch
+net-wireless-iwlwifi-pcie-enable-interrupts-before-releasing-the-NICs-CPU.patch
+net-wireless-iwlwifi-pcie-fix-a-race-in-firmware-loading-flow.patch
 
 ###
 ### Platform drivers
@@ -324,6 +316,7 @@ video-mageia-logo.patch
 3rd-ndiswrapper-1.60.patch
 3rd-ndiswrapper-Kconfig.patch
 3rd-ndiswrapper-Makefile-build-fix.patch
+3rd-ndiswrapper-4.7-buildfix.patch
 
 # rfswitch
 3rd-rfswitch-1.3.patch
@@ -339,6 +332,7 @@ video-mageia-logo.patch
 
 # add rtl8723bs support (mga#15874)
 3rd-rtl8723bs.patch
+3rd-rtl8723bs-4.7-buildfix.patch
 
 ###
 ### Security
