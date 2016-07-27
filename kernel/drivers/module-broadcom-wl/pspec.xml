@@ -5,8 +5,8 @@
         <Name>module-broadcom-wl</Name>
         <Homepage>http://www.broadcom.com/support/802.11/linux_sta.php</Homepage>
         <Packager>
-            <Name>Serdar Soytetir</Name>
-            <Email>kaptan@pisilinux.org</Email>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
         </Packager>
         <License>freedist</License>
         <IsA>driver</IsA>
@@ -15,30 +15,21 @@
         <Archive sha1sum="8acbdbb4ab4ab4123d1773b616904798fbef9277" type="targz" target="i686">http://www.broadcom.com/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
         <Archive sha1sum="1f568bb989d175813c5631c6629d9479eae6f3be" type="targz" target="x86_64">http://www.broadcom.com/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency version="4.6.3">kernel-module-headers</Dependency>
+            <Dependency version="4.7.0">kernel-module-headers</Dependency>
         </BuildDependencies>
         <Patches>
-<!--             <Patch level="1">patch/linux-40.patch</Patch> -->
-<!--             <Patch level="1">patch/linux-recent.patch</Patch> -->
             <Patch level="1">patch/license.patch</Patch>
             <Patch level="1">patch/wl_linux.c.patch</Patch>
-            <Patch level="1">patch/gcc.patch</Patch>
-            <Patch level="1">patch/wlan.patch</Patch>
-<!--             <Patch level="1">patch/broadcom-sta-6.30.223.248-linux-3.18-null-pointer-crash.patch</Patch> -->
-<!--             <Patch>patch/0018-cfg80211_disconnected.patch</Patch> -->
-            <!--Patch>patch/0019-broadcom-sta-6.30.223.248-3.18-null-pointer-fix.patch</Patch-->
+            <Patch level="1">patch/linux47.patch</Patch>
         </Patches>
     </Source>
 
     <Package>
         <Name>module-broadcom-wl</Name>
         <RuntimeDependencies>
-            <Dependency version="4.6.3">kernel</Dependency>
+            <Dependency version="4.7.0">kernel</Dependency>
             <Dependency release="current">module-broadcom-wl-userspace</Dependency>
         </RuntimeDependencies>
-        <Replaces>
-            <Package>broadcom-wl</Package>
-        </Replaces>
         <Files>
             <Path fileType="library" permanent="true">/lib/modules</Path>
         </Files>
@@ -66,7 +57,7 @@
 
     <History>
         <Update release="3">
-            <Date>2016-06-28</Date>
+            <Date>2016-07-27</Date>
             <Version>6.30.223.271</Version>
             <Comment>Rebuild for new kernel.</Comment>
             <Name>PisiLinux Community</Name>
