@@ -22,10 +22,6 @@ def cleanupPackage(metapath, filepath):
     pass
 
 def postCleanupPackage(metapath, filepath):
-    pass    
-    
-    
-    
+    pass
     
 
-    

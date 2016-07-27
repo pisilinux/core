@@ -47,10 +47,10 @@ diff -Nurp linux-4.2.2/arch/mips/Kconfig linux-4.2.2-3rd/arch/mips/Kconfig
 diff -Nurp linux-4.2.2/arch/powerpc/Kconfig linux-4.2.2-3rd/arch/powerpc/Kconfig
 --- linux-4.2.2/arch/powerpc/Kconfig	2015-08-30 21:34:09.000000000 +0300
 +++ linux-4.2.2-3rd/arch/powerpc/Kconfig	2015-09-29 23:02:44.025347276 +0300
-@@ -1092,3 +1092,5 @@ config PPC_LIB_RHEAP
- 	bool
- 
+@@ -1112,3 +1112,5 @@ config PPC_LIB_RHEAP
  source "arch/powerpc/kvm/Kconfig"
+ 
+ source "kernel/livepatch/Kconfig"
 +
 +source "3rdparty/Kconfig"
 diff -Nurp linux-4.2.2/arch/sparc/Kconfig linux-4.2.2-3rd/arch/sparc/Kconfig
