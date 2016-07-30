@@ -73,13 +73,19 @@
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/grub/pisi-grub-bg.png">pisi-grub-bg.png</AdditionalFile>
             <AdditionalFile owner="root" permission="0644" target="/etc/default/grub">grub-defaults</AdditionalFile>
-            <AdditionalFile owner="root" permission="0755" target="/etc/grub.d/42_custom">42_custom</AdditionalFile>
             <AdditionalFile owner="root" permission="0755" target="/usr/bin/update-grub">update-grub</AdditionalFile>
         </AdditionalFiles>
     </Package>
 
     <History>
-        <Update release="4">
+      <Update release="5">
+            <Date>2016-07-30</Date>
+            <Version>2.02_beta2</Version>
+            <Comment>Add windows 42_custom remove</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+       <Update release="4">
             <Date>2016-07-12</Date>
             <Version>2.02_beta2</Version>
             <Comment>Add windows 42_custom</Comment>
