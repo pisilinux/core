@@ -54,7 +54,7 @@ def configure(parameters = '', installPrefix = prefix, sourceDir = '..'):
                           -DBUILD_TESTING=OFF \
                           -DKDE_INSTALL_LIBDIR=lib \
                           -Wno-dev \
-                          -DCMAKE_INSTALL_PREFIX=%s" % (libexecdir, qmldir, sysconfdir, plugindir, moduledir, prefix), installPrefix, sourceDir)
+                          -DCMAKE_INSTALL_PREFIX=%s %s" % (libexecdir, qmldir, sysconfdir, plugindir, moduledir, prefix, parameters), installPrefix, sourceDir)
 
     shelltools.cd("..")
 

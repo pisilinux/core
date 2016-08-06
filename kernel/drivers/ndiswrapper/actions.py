@@ -13,9 +13,6 @@ from pisi.actionsapi import get
 KDIR = kerneltools.getKernelVersion()
 
 def build():
-    shelltools.system("patch -p1 < ndiswrapper-1.59.patch")
-    shelltools.system("patch -p1 < kernel-4.2.patch")
-    
     autotools.make("-C driver KVERS_UNAME=%s" % KDIR)
 
     autotools.make("-C utils")
