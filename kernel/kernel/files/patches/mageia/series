@@ -38,14 +38,8 @@ x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch
 # slows down boot
 Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch
 
-#
-Revert-cpufreq-pcc-cpufreq-update-default-value-of-c.patch
-
 # breaks nvidia304
 Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch
-
-#
-x86-power-64-Fix-hibernation-return-address-corrupti.patch
 
 ###
 ### Core
@@ -128,9 +122,6 @@ block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch
 # ahci ids
 ahci-add-new-Intel-device-IDs.patch
 
-#
-megaraid_sas-Do-not-fire-MR_DCMD_PD_LIST_QUERY-to-co.patch
-
 ###
 ### Char
 ###
@@ -146,10 +137,6 @@ Revert-ipmi-Start-the-timer-and-thread-on-internal-m.patch
 fs-aufs-4.7.patch
 fs-aufs-4.7-modular.patch
 fs-aufs-4.7-ver-fix.patch
-
-# ext4
-fs-ext4-don-t-call-ext4_should_journal_data-on-the-jour.patch
-fs-ext4-fix-deadlock-during-page-writeback.patch
 
 ###
 ### FireWire
@@ -235,16 +222,6 @@ net-netfilter-psd.patch
 net-netfilter-psd-mdv.patch
 net-netfilter-psd-2.6.35-buildfix.patch
 
-#  iwlwifi fixes
-net-wireless-iwlwifi-add-new-8260-PCI-IDs.patch
-net-wireless-iwlwifi-add-new-8265.patch
-net-wireless-iwlwifi-pcie-enable-interrupts-before-releasing-the-NICs-CPU.patch
-net-wireless-iwlwifi-pcie-fix-a-race-in-firmware-loading-flow.patch
-
-#
-net-bcma-add-PCI-ID-for-Foxconn-s-BCM43142-device.patch
-net-brcmfmac-restore-stopping-netdev-queue-when-bus-clog.patch
-
 ###
 ### Platform drivers
 ###
@@ -256,12 +233,8 @@ platform-x86-shuttle-wmi-drop-devinit-exit.patch
 platform-x86-shuttle-wmi-4.2-buildfix.patch
 
 #
-hp-wmi-Fix-wifi-cannot-be-hard-unblocked.patch
-
-Bluetooth-Add-support-of-13d3-3490-AR3012-device.patch
 intel_th-Fix-a-deadlock-in-modprobing.patch
 intel_th-pci-Add-Kaby-Lake-PCH-H-support.patch
-pinctrl-cherryview-prevent-concurrent-access-to-GPIO.patch
 
 ###
 ### RTC
@@ -300,24 +273,12 @@ hid-usbhid-IBM-BladeCenterHS20-quirk.patch
 usb-storage-unusual_devs-add-id.patch
 usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch
 
-#
-usb-dwc3-fix-for-the-isoc-transfer-EP_BUSY-flag.patch
-usb-renesas_usbhs-fix-NULL-pointer-dereference-in-xf.patch
-
-#
-HID-uhid-fix-timeout-when-probe-races-with-IO.patch
-
 ###
 ### V4L
 ###
 
 # pwc driver name in /proc/bus/devices, /sys fix and "advertisement" removal
 media-usb-pwc-lie-in-proc-usb-devices.patch
-
-#
-media-media-usbtv-prevent-access-to-free-d-resources.patch
-media-vb2-core-Skip-planes-array-verification-if-pb-.patch
-media-videobuf2-v4l2-Verify-planes-array-in-buffer-d.patch
 
 ###
 ### Video

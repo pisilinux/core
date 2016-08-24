@@ -28,8 +28,8 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <!--Patch level="1" compressionType="xz">patches/linux/patch-4.6.3.xz</Patch-->
-            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.7.0/2.mga6/PATCHES/patches/series-->
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.7.2.xz</Patch>
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.7.2/2.mga6/PATCHES/patches/series-->
             <!--stable patches-->
             <!--other patches-->
             <Patch level="1">patches/mageia/Revert-ipmi-Start-the-timer-and-thread-on-internal-m.patch</Patch>
@@ -37,10 +37,8 @@
             <Patch level="1">patches/mageia/x86-boot-video-80x25-if-break.patch</Patch>
             <Patch level="1">patches/mageia/x86-default_poweroff_up_machines.patch</Patch>
             <Patch level="1">patches/mageia/x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch</Patch>
-            <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
-            <Patch level="1">patches/mageia/Revert-cpufreq-pcc-cpufreq-update-default-value-of-c.patch</Patch>
+            <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>           
             <Patch level="1">patches/mageia/Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch</Patch>
-            <Patch level="1">patches/mageia/x86-power-64-Fix-hibernation-return-address-corrupti.patch</Patch>
             <Patch level="1">patches/mageia/base-cacheinfo-silence-DT-warnings.patch</Patch>
             <Patch level="1">patches/mageia/pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch</Patch>
             <Patch level="1">patches/mageia/pci-quirks-drop-devinit-exit.patch</Patch>
@@ -63,8 +61,6 @@
             <Patch level="1">patches/mageia/fs-aufs-4.7.patch</Patch>
             <Patch level="1">patches/mageia/fs-aufs-4.7-modular.patch</Patch>
             <Patch level="1">patches/mageia/fs-aufs-4.7-ver-fix.patch</Patch>
-            <Patch level="1">patches/mageia/fs-ext4-don-t-call-ext4_should_journal_data-on-the-jour.patch</Patch>
-            <Patch level="1">patches/mageia/fs-ext4-fix-deadlock-during-page-writeback.patch</Patch>
             <Patch level="1">patches/mageia/firewire-ieee1394-module-aliases.patch</Patch>
             <Patch level="1">patches/mageia/char-agp-intel-new-Q57-id.patch</Patch>
             <!--remove external mach64 support for buildfix-->
@@ -97,31 +93,16 @@
             <Patch level="1">patches/mageia/net-netfilter-psd.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-psd-mdv.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-psd-2.6.35-buildfix.patch</Patch>
-            <Patch level="1">patches/mageia/net-wireless-iwlwifi-add-new-8260-PCI-IDs.patch</Patch>
-            <Patch level="1">patches/mageia/net-wireless-iwlwifi-add-new-8265.patch</Patch>
-            <Patch level="1">patches/mageia/net-wireless-iwlwifi-pcie-enable-interrupts-before-releasing-the-NICs-CPU.patch</Patch>
-            <Patch level="1">patches/mageia/net-wireless-iwlwifi-pcie-fix-a-race-in-firmware-loading-flow.patch</Patch>
-            <Patch level="1">patches/mageia/net-bcma-add-PCI-ID-for-Foxconn-s-BCM43142-device.patch</Patch>
-            <Patch level="1">patches/mageia/net-brcmfmac-restore-stopping-netdev-queue-when-bus-clog.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
-            <Patch level="1">patches/mageia/hp-wmi-Fix-wifi-cannot-be-hard-unblocked.patch</Patch>
-            <Patch level="1">patches/mageia/Bluetooth-Add-support-of-13d3-3490-AR3012-device.patch</Patch>
             <Patch level="1">patches/mageia/intel_th-Fix-a-deadlock-in-modprobing.patch</Patch>
-            <Patch level="1">patches/mageia/intel_th-pci-Add-Kaby-Lake-PCH-H-support.patch</Patch>
-            <Patch level="1">patches/mageia/pinctrl-cherryview-prevent-concurrent-access-to-GPIO.patch</Patch>
+            <Patch level="1">patches/mageia/intel_th-pci-Add-Kaby-Lake-PCH-H-support.patch</Patch>         
             <Patch level="1">patches/mageia/include-kbuild-export-pci_ids.patch</Patch>
             <Patch level="1">patches/mageia/hid-usbhid-IBM-BladeCenterHS20-quirk.patch</Patch>
             <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id.patch</Patch>
             <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch</Patch>
-            <Patch level="1">patches/mageia/usb-dwc3-fix-for-the-isoc-transfer-EP_BUSY-flag.patch</Patch>
-            <Patch level="1">patches/mageia/usb-renesas_usbhs-fix-NULL-pointer-dereference-in-xf.patch</Patch>
-            <Patch level="1">patches/mageia/HID-uhid-fix-timeout-when-probe-races-with-IO.patch</Patch>
             <Patch level="1">patches/mageia/media-usb-pwc-lie-in-proc-usb-devices.patch</Patch>
-            <Patch level="1">patches/mageia/media-media-usbtv-prevent-access-to-free-d-resources.patch</Patch>
-            <Patch level="1">patches/mageia/media-vb2-core-Skip-planes-array-verification-if-pb-.patch</Patch>
-            <Patch level="1">patches/mageia/media-videobuf2-v4l2-Verify-planes-array-in-buffer-d.patch</Patch>
             <Patch level="1">patches/mageia/3rd-3rdparty-1.0-tree.patch</Patch>
             <Patch level="1">patches/mageia/3rd-3rdparty-merge.patch</Patch>
             <Patch level="1">patches/mageia/3rd-acerhk-0.5.35.patch</Patch>
@@ -150,7 +131,6 @@
             <Patch level="1">patches/mageia/3rd-rtl8723bs.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8723bs-4.7-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/ahci-add-new-Intel-device-IDs.patch</Patch>
-            <Patch level="1">patches/mageia/megaraid_sas-Do-not-fire-MR_DCMD_PD_LIST_QUERY-to-co.patch</Patch>
             <Patch level="1">patches/mageia/arm-0001-ARM-bcm2835-dt-Add-the-ethernet-to-the-device-trees.patch</Patch>
         </Patches>
     </Source>
@@ -207,6 +187,17 @@
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2016-08-24</Date>
+            <Version>4.7.2</Version>
+            <Comment>version bump.</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="5">
             <Date>2016-08-06</Date>
             <Version>4.7.0</Version>
