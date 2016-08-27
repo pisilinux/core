@@ -21,8 +21,6 @@ def postInstall(fromVersion, fromRelease, toVersion, toRelease):
     createNode(600, "root", "root",     10, 200,    "/lib/udev/devices/skip")
     createNode(660, "root", "dialout",  108, 0,     "/lib/udev/devices/ppp")
 
-    os.system("/sbin/udevadm hwdb --update")
-
     if os.path.exists("/lib/udev/devices/rtc"):
         os.unlink("/lib/udev/devices/rtc")
 
