@@ -62,6 +62,7 @@ def setup():
                      --enable-raw \
                      --enable-write \
                      --enable-tunelp \
+                     --enable-runuser \
                      --without-audit \
                      --with-udev \
                      --without-utempter \
