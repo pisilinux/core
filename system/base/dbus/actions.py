@@ -1,47 +1,38 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Licensed under the GNU General Public License, version 3.
-# See the file http://www.gnu.org/licenses/gpl.txt
+# Licensed under the GNU General Public License, version 2.
+# See the file http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
-from pisi.actionsapi import get
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import get
 from pisi.actionsapi import shelltools
 
 def setup():
     pisitools.dosed("configure.ac", '(AS_AC_EXPAND\(EXPANDED_LOCALSTATEDIR, )"\$localstatedir"\)', r'\1 "")')
     for f in ["bus/Makefile.am", "bus/Makefile.in"]:
         pisitools.dosed(f, "\$\(localstatedir\)(\/run\/dbus)", "\\1")
-    options = "\
-               --disable-selinux \
-               --disable-static \
-               --disable-tests \
-               --disable-asserts \
-               --disable-checks \
-               --disable-embedded-tests \
-               --disable-modular-tests \
-               --disable-doxygen-docs \
-               --disable-libaudit \
-               --disable-systemd \
-               --disable-silent-rules \
-               --enable-inotify \
+    options = "--with-xml=expat \
                --with-system-pid-file=/run/dbus/pid \
                --with-system-socket=/run/dbus/system_bus_socket \
                --with-console-auth-dir=/run/console/ \
                --with-session-socket-dir=/tmp \
                --with-dbus-user=dbus \
-               --enable-abstract-sockets=auto \
+               --disable-selinux \
+               --disable-systemd \
+               --disable-static \
+               --disable-tests \
+               --disable-asserts \
+               --disable-doxygen-docs \
                --disable-xml-docs"
 
     if get.buildTYPE() == "emul32":
-        options += "\
-                    --disable-xml-docs \
-                    --disable-doxygen-docs"
+        options += " --libdir=/usr/lib32"
+        shelltools.export("CFLAGS", "%s -m32" % get.CFLAGS())
         # Build only libdbus
         pisitools.dosed("Makefile.am", "(.*SUBDIRS=dbus) .*", "\\1")
 
-    
     autotools.autoreconf("-vif")
     autotools.configure(options)
 
@@ -53,7 +44,6 @@ def check():
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    if get.buildTYPE() == "emul32": return
 
     # needs to exist for the system socket
     pisitools.dodir("/run/dbus")
