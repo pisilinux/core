@@ -48,7 +48,7 @@
              <AdditionalFile owner="root" permission="0644" target="/usr/lib/tmpfiles.d/dbus.conf">tmpfiles.conf</AdditionalFile>
         </AdditionalFiles>
         <Provides>
-             <COMAR script="package.py">System.Package</COMAR>
+<!--              <COMAR script="package.py">System.Package</COMAR> -->
         </Provides>
     </Package>
 
@@ -98,6 +98,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2016-09-27</Date>
+            <Version>1.11.0</Version>
+            <Comment>Fix Release</Comment>
+            <Name>Ergün Salman</Name>
+            <Email>poyraz76@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>1.11.0</Version>
