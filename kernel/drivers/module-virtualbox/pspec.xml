@@ -12,7 +12,7 @@
         <IsA>driver</IsA>
         <Summary>Kernel modules for VirtualBox</Summary>
         <Description>This package provides the kernel support for VirtualBox.</Description>
-        <Archive sha1sum="5c8ec1f8f106a2a7a06ab0c2427e292d7690959a" type="tarxz">https://sourceforge.net/projects/pisi-source/files/kernel-4.7/module-virtualbox-5.1.4.tar.xz</Archive>
+        <Archive sha1sum="0df92af2c8e981b3a12ee0a3e8e5558f72bccedb" type="tarxz">https://sourceforge.net/projects/pisi-source/files/kernel-4.7/module-virtualbox-5.1.6.tar.xz</Archive>
         <BuildDependencies>
             <Dependency version="4.7.2">kernel-module-headers</Dependency>
         </BuildDependencies>
@@ -50,6 +50,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2016-09-23</Date>
+            <Version>5.1.6</Version>
+            <Comment>Version bump</Comment>
+            <Name>Ergün Salman</Name>
+            <Email>poyraz76@pisilinux.org</Email>
+        </Update>
         <Update release="8">
             <Date>2016-08-24</Date>
             <Version>5.1.4</Version>
