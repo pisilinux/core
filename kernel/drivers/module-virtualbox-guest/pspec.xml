@@ -12,7 +12,7 @@
         <IsA>driver</IsA>
         <Summary>Kernel modules for VirtualBox guest machines</Summary>
         <Description>This package provides the kernel modules needed for mouse integration and shared folder support between VirtualBox host and guest systems.</Description>
-        <Archive sha1sum="b81d45dab1bc991b80b504def83b275f152bd4bf" type="tarxz">https://sourceforge.net/projects/pisi-source/files/kernel-4.7/module-virtualbox-guest-5.1.4.tar.xz</Archive>
+        <Archive sha1sum="a419ccd79204a225da891139a2b75f56de71980b" type="tarxz">https://sourceforge.net/projects/pisi-source/files/kernel-4.7/module-virtualbox-guest-5.1.6.tar.xz</Archive>
         <BuildDependencies>
             <Dependency version="4.7.2">kernel-module-headers</Dependency>
         </BuildDependencies>
@@ -52,6 +52,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2016-09-23</Date>
+            <Version>5.1.6</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Ergün Salman</Name>
+            <Email>poyraz76@pisilinux.org</Email>
+        </Update>
         <Update release="8">
             <Date>2016-08-24</Date>
             <Version>5.1.4</Version>
