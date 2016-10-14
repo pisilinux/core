@@ -12,7 +12,7 @@
         <IsA>kernel</IsA>
         <Summary>The Linux kernel (the core of the Linux operating system) for Pisi Linux</Summary>
         <Description>kernel contains the Linux kernel, the core of any Linux operating system. The kernel handles the basic functions of the operating system: memory allocation, process allocation, device input and output, etc.</Description>
-        <Archive sha1sum="36922e152e9268a68070577c613da502a6c3d577" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.7.tar.gz</Archive>
+        <Archive sha1sum="a85e6ca968b10ec0eace2daaaa59fc8734d0db74" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.8.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -28,8 +28,8 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.7.2.xz</Patch>
-            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.7.2/2.mga6/PATCHES/patches/series-->
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.8.1.xz</Patch>
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.8.1/1.mga6/PATCHES/patches/series-->
             <!--stable patches-->
             <!--other patches-->
             <Patch level="1">patches/mageia/Revert-ipmi-Start-the-timer-and-thread-on-internal-m.patch</Patch>
@@ -37,7 +37,7 @@
             <Patch level="1">patches/mageia/x86-boot-video-80x25-if-break.patch</Patch>
             <Patch level="1">patches/mageia/x86-default_poweroff_up_machines.patch</Patch>
             <Patch level="1">patches/mageia/x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch</Patch>
-            <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>           
+            <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
             <Patch level="1">patches/mageia/Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch</Patch>
             <Patch level="1">patches/mageia/base-cacheinfo-silence-DT-warnings.patch</Patch>
             <Patch level="1">patches/mageia/pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch</Patch>
@@ -96,8 +96,6 @@
             <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
-            <Patch level="1">patches/mageia/intel_th-Fix-a-deadlock-in-modprobing.patch</Patch>
-            <Patch level="1">patches/mageia/intel_th-pci-Add-Kaby-Lake-PCH-H-support.patch</Patch>         
             <Patch level="1">patches/mageia/include-kbuild-export-pci_ids.patch</Patch>
             <Patch level="1">patches/mageia/hid-usbhid-IBM-BladeCenterHS20-quirk.patch</Patch>
             <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id.patch</Patch>
@@ -130,8 +128,7 @@
             <Patch level="1">patches/mageia/3rd-viahss-3.0-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8723bs.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8723bs-4.7-buildfix.patch</Patch>
-            <Patch level="1">patches/mageia/ahci-add-new-Intel-device-IDs.patch</Patch>
-            <Patch level="1">patches/mageia/arm-0001-ARM-bcm2835-dt-Add-the-ethernet-to-the-device-trees.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-rtl8723bs-4.8-buildfix.patch</Patch>
         </Patches>
     </Source>
 
@@ -188,8 +185,8 @@
 
     <History>
         <Update release="6">
-            <Date>2016-08-24</Date>
-            <Version>4.7.2</Version>
+            <Date>2016-10-14</Date>
+            <Version>4.8.1</Version>
             <Comment>Version Bump.</Comment>
             <Type package="kernel">security</Type>
             <Requires>

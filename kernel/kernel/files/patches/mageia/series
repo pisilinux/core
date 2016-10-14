@@ -119,8 +119,12 @@ ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch
 # Nice SSD speedup
 block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch
 
-# ahci ids
-ahci-add-new-Intel-device-IDs.patch
+# Include new BFQ I/O scheduler
+# (See http://algo.ing.unimo.it/people/paolo/disk_sched)
+# DISABLED: 0001-block-cgroups-kconfig-build-bits-for-BFQ-v7r11-4.7.0.patch
+# DISABLED: 0002-block-introduce-the-BFQ-v7r11-I-O-sched-for-4.7.0.patch
+# DISABLED: 0003-block-bfq-add-Early-Queue-Merge-EQM-to-BFQ-v7r11-for.patch
+# DISABLED: 0004-block-bfq-turn-BFQ-v7r11-for-4.7.0-into-BFQ-v8r3-for.patch
 
 ###
 ### Char
@@ -232,10 +236,6 @@ platform-x86-add-shuttle-wmi-driver.patch
 platform-x86-shuttle-wmi-drop-devinit-exit.patch
 platform-x86-shuttle-wmi-4.2-buildfix.patch
 
-#
-intel_th-Fix-a-deadlock-in-modprobing.patch
-intel_th-pci-Add-Kaby-Lake-PCH-H-support.patch
-
 ###
 ### RTC
 ###
@@ -331,6 +331,7 @@ video-mageia-logo.patch
 # add rtl8723bs support (mga#15874)
 3rd-rtl8723bs.patch
 3rd-rtl8723bs-4.7-buildfix.patch
+3rd-rtl8723bs-4.8-buildfix.patch
 
 ###
 ### Security
@@ -347,10 +348,6 @@ video-mageia-logo.patch
 ###
 ### ARM
 ###
-
-# RPi2 support
-# Read MAC address from DT
-arm-0001-ARM-bcm2835-dt-Add-the-ethernet-to-the-device-trees.patch
 
 ###
 ### IA64
