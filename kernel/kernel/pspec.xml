@@ -28,8 +28,8 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.8.1.xz</Patch>
-            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.8.1/1.mga6/PATCHES/patches/series-->
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.8.2.xz</Patch>
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.8.2/1.mga6/PATCHES/patches/series-->
             <!--stable patches-->
             <!--other patches-->
             <Patch level="1">patches/mageia/Revert-ipmi-Start-the-timer-and-thread-on-internal-m.patch</Patch>
@@ -129,6 +129,8 @@
             <Patch level="1">patches/mageia/3rd-rtl8723bs.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8723bs-4.7-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8723bs-4.8-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/tools-testing-selftest-Makefile-remove-powerpc-reference.patch</Patch>
+            <Patch level="1">patches/mageia/Revert-include-uapi-linux-atm_zatm.h-include-linux-t.patch</Patch>
         </Patches>
     </Source>
 
@@ -185,8 +187,8 @@
 
     <History>
         <Update release="7">
-            <Date>2016-10-14</Date>
-            <Version>4.8.1</Version>
+            <Date>2016-10-18</Date>
+            <Version>4.8.2</Version>
             <Comment>Version Bump.</Comment>
             <Type package="kernel">security</Type>
             <Requires>

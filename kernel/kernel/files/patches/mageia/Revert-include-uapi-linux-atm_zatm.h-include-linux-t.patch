@@ -1,0 +1,37 @@
+From e461958e7a7eb8df2e022e02f782dff5f60a44d0 Mon Sep 17 00:00:00 2001
+From: Thomas Backlund <tmb@mageia.org>
+Date: Sun, 16 Oct 2016 20:09:27 +0300
+Subject: [PATCH] Revert "include/uapi/linux/atm_zatm.h: include linux/time.h"
+
+This reverts commit cf00713a655d3019be7faa184402f16c43a0fed3.
+
+It causes linux-atm build breakage between glibc headers and kernel headers...
+
+Fixws are in progress upstream as of:
+https://patchwork.kernel.org/patch/9294305/
+
+But it's not accepted yet so it might still change, and since its uapi
+we dont want to expose changes that might never land upstream.
+
+Reported by: Pascal Terjam <pterjan@gmail.com>
+Signed-off-by: Thomas Backlund <tmb@mageia.org>
+
+---
+ include/uapi/linux/atm_zatm.h | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/include/uapi/linux/atm_zatm.h b/include/uapi/linux/atm_zatm.h
+index 5cd4d4d..9c9c6ad 100644
+--- a/include/uapi/linux/atm_zatm.h
++++ b/include/uapi/linux/atm_zatm.h
+@@ -14,7 +14,6 @@
+ 
+ #include <linux/atmapi.h>
+ #include <linux/atmioc.h>
+-#include <linux/time.h>
+ 
+ #define ZATM_GETPOOL	_IOW('a',ATMIOC_SARPRV+1,struct atmif_sioc)
+ 						/* get pool statistics */
+-- 
+2.10.1
+

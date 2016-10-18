@@ -357,6 +357,11 @@ video-mageia-logo.patch
 ### Tools
 ###
 
+# wipe powerpc refrence so we can nuke dangling symlinks (mga#17676)
+tools-testing-selftest-Makefile-remove-powerpc-reference.patch
+
 ###
 ### UAPI
 ###
+# breaks linux-arm build
+Revert-include-uapi-linux-atm_zatm.h-include-linux-t.patch
