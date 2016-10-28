@@ -1,0 +1,73 @@
+From b5a9b340789b2b24c6896bcf7a065c31a4db671c Mon Sep 17 00:00:00 2001
+From: Vincent Guittot <vincent.guittot@linaro.org>
+Date: Wed, 19 Oct 2016 14:45:23 +0200
+Subject: [PATCH] sched/fair: Fix incorrect task group ->load_avg
+
+A scheduler performance regression has been reported by Joseph Salisbury,
+which he bisected back to:
+
+  3d30544f0212 ("sched/fair: Apply more PELT fixes)
+
+The regression triggers when several levels of task groups are involved
+(read: SystemD) and cpu_possible_mask != cpu_present_mask.
+
+The root cause is that group entity's load (tg_child->se[i]->avg.load_avg)
+is initialized to scale_load_down(se->load.weight). During the creation of
+a child task group, its group entities on possible CPUs are attached to
+parent's cfs_rq (tg_parent) and their loads are added to the parent's load
+(tg_parent->load_avg) with update_tg_load_avg().
+
+But only the load on online CPUs will then be updated to reflect real load,
+whereas load on other CPUs will stay at the initial value.
+
+The result is a tg_parent->load_avg that is higher than the real load, the
+weight of group entities (tg_parent->se[i]->load.weight) on online CPUs is
+smaller than it should be, and the task group gets a less running time than
+what it could expect.
+
+( This situation can be detected with /proc/sched_debug. The ".tg_load_avg"
+  of the task group will be much higher than sum of ".tg_load_avg_contrib"
+  of online cfs_rqs of the task group. )
+
+The load of group entities don't have to be intialized to something else
+than 0 because their load will increase when an entity is attached.
+
+Reported-by: Joseph Salisbury <joseph.salisbury@canonical.com>
+Tested-by: Dietmar Eggemann <dietmar.eggemann@arm.com>
+Signed-off-by: Vincent Guittot <vincent.guittot@linaro.org>
+Acked-by: Peter Zijlstra <a.p.zijlstra@chello.nl>
+Cc: <stable@vger.kernel.org> # 4.8.x
+Cc: Linus Torvalds <torvalds@linux-foundation.org>
+Cc: Peter Zijlstra <peterz@infradead.org>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: joonwoop@codeaurora.org
+Fixes: 3d30544f0212 ("sched/fair: Apply more PELT fixes)
+Link: http://lkml.kernel.org/r/1476881123-10159-1-git-send-email-vincent.guittot@linaro.org
+Signed-off-by: Ingo Molnar <mingo@kernel.org>
+---
+ kernel/sched/fair.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/kernel/sched/fair.c b/kernel/sched/fair.c
+index 76ee7de..d941c97 100644
+--- a/kernel/sched/fair.c
++++ b/kernel/sched/fair.c
+@@ -690,7 +690,14 @@ void init_entity_runnable_average(struct sched_entity *se)
+ 	 * will definitely be update (after enqueue).
+ 	 */
+ 	sa->period_contrib = 1023;
+-	sa->load_avg = scale_load_down(se->load.weight);
++	/*
++	 * Tasks are intialized with full load to be seen as heavy tasks until
++	 * they get a chance to stabilize to their real load level.
++	 * Group entities are intialized with zero load to reflect the fact that
++	 * nothing has been attached to the task group yet.
++	 */
++	if (entity_is_task(se))
++		sa->load_avg = scale_load_down(se->load.weight);
+ 	sa->load_sum = sa->load_avg * LOAD_AVG_MAX;
+ 	/*
+ 	 * At this point, util_avg won't be used in select_task_rq_fair anyway
+-- 
+2.10.1
+
