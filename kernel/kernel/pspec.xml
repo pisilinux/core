@@ -28,8 +28,8 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.8.2.xz</Patch>
-            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.8.2/1.mga6/PATCHES/patches/series-->
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.8.4.xz</Patch>
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.8.4/1.mga6/PATCHES/patches/series-->
             <!--stable patches-->
             <!--other patches-->
             <Patch level="1">patches/mageia/Revert-ipmi-Start-the-timer-and-thread-on-internal-m.patch</Patch>
@@ -40,6 +40,7 @@
             <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
             <Patch level="1">patches/mageia/Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch</Patch>
             <Patch level="1">patches/mageia/base-cacheinfo-silence-DT-warnings.patch</Patch>
+            <Patch level="1">patches/mageia/kernel-sched-fair-Fix-incorrect-task-group-load_avg.patch</Patch>            
             <Patch level="1">patches/mageia/pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch</Patch>
             <Patch level="1">patches/mageia/pci-quirks-drop-devinit-exit.patch</Patch>
             <Patch level="1">patches/mageia/acpi-CLEVO-M360S-disable_acpi_irq.patch</Patch>
@@ -58,6 +59,10 @@
             <Patch level="1">patches/mageia/block-floppy-disable-pnp-modalias.patch</Patch>
             <Patch level="1">patches/mageia/ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch</Patch>
             <Patch level="1">patches/mageia/block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch</Patch>
+            <Patch level="1">patches/mageia/linux-BFQ-v8r4.patch</Patch>
+            <Patch level="1">patches/mageia/nvmepatch1-V4.patch</Patch>
+            <Patch level="1">patches/mageia/nvmepatch2-V4.patch</Patch>
+            <Patch level="1">patches/mageia/nvmepatch3-V4.patch</Patch>            
             <Patch level="1">patches/mageia/fs-aufs-4.7.patch</Patch>
             <Patch level="1">patches/mageia/fs-aufs-4.7-modular.patch</Patch>
             <Patch level="1">patches/mageia/fs-aufs-4.7-ver-fix.patch</Patch>
@@ -81,6 +86,8 @@
             <Patch level="1">patches/mageia/gpu-drm-mach64-linux-3.14-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.17-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.18-buildfix.patch</Patch--><!--1-->
+            <Patch level="1">patches/mageia/drm-i915-gen9-fix-DDB-partitioning-for-multi-screen-cases.patch</Patch>
+            <Patch level="1">patches/mageia/skl_uncondition_memory_bandwitdth_WA_n_adjusted_mode_in_SAGV_check_on_a7fac751ddba.patch</Patch>           
             <Patch level="1">patches/mageia/input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch</Patch>
             <Patch level="1">patches/mageia/net-sis190-fix-list-usage.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-IFWLOG.patch</Patch>
@@ -93,6 +100,8 @@
             <Patch level="1">patches/mageia/net-netfilter-psd.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-psd-mdv.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-psd-2.6.35-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/net-wireless-rtlwifi-Fix-regression-caused-by-commit-d86e64768859.patch</Patch>
+            <Patch level="1">patches/mageia/net-add-recursion-limit-to-GRO.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
@@ -187,8 +196,8 @@
 
     <History>
         <Update release="7">
-            <Date>2016-10-18</Date>
-            <Version>4.8.2</Version>
+            <Date>2016-10-28</Date>
+            <Version>4.8.4</Version>
             <Comment>Version Bump.</Comment>
             <Type package="kernel">security</Type>
             <Requires>

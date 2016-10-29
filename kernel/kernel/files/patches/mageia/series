@@ -46,6 +46,8 @@ Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch
 ###
 base-cacheinfo-silence-DT-warnings.patch
 
+kernel-sched-fair-Fix-incorrect-task-group-load_avg.patch
+
 ###
 ### i2c
 ###
@@ -121,10 +123,15 @@ block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch
 
 # Include new BFQ I/O scheduler
 # (See http://algo.ing.unimo.it/people/paolo/disk_sched)
-# DISABLED: 0001-block-cgroups-kconfig-build-bits-for-BFQ-v7r11-4.7.0.patch
-# DISABLED: 0002-block-introduce-the-BFQ-v7r11-I-O-sched-for-4.7.0.patch
-# DISABLED: 0003-block-bfq-add-Early-Queue-Merge-EQM-to-BFQ-v7r11-for.patch
-# DISABLED: 0004-block-bfq-turn-BFQ-v7r11-for-4.7.0-into-BFQ-v8r3-for.patch
+# 
+# Release of BFQ I/O scheduler v8r4 (rediffed from git https://github.com/linusw/linux-bfq)
+linux-BFQ-v8r4.patch
+
+# Let NVME drives enter in power state
+# (see https://github.com/damige/linux-nvme/tree/master/src)
+nvmepatch1-V4.patch
+nvmepatch2-V4.patch
+nvmepatch3-V4.patch
 
 ###
 ### Char
@@ -174,6 +181,14 @@ gpu-drm-mach64-restore-mach64_PCI_IDS.patch
 gpu-drm-mach64-linux-3.14-buildfix.patch
 gpu-drm-mach64-3.17-buildfix.patch
 gpu-drm-mach64-3.18-buildfix.patch
+
+# Attempt to fix FIFO underrun problems:
+# (from https://patchwork.freedesktop.org/patch/113642/ and 
+# from https://bugs.freedesktop.org/attachment.cgi?id=127264, reference from
+# https://bugs.freedesktop.org/show_bug.cgi?id=97450). Does not completely resolve the
+# issues but reduce.
+drm-i915-gen9-fix-DDB-partitioning-for-multi-screen-cases.patch
+skl_uncondition_memory_bandwitdth_WA_n_adjusted_mode_in_SAGV_check_on_a7fac751ddba.patch
 
 ###
 ### Hardware Monitoring
@@ -225,6 +240,12 @@ net-netfilter-IFWLOG-remove-unused-label.patch
 net-netfilter-psd.patch
 net-netfilter-psd-mdv.patch
 net-netfilter-psd-2.6.35-buildfix.patch
+
+# rtlwifi regression
+net-wireless-rtlwifi-Fix-regression-caused-by-commit-d86e64768859.patch
+
+# CVE-2016-7039
+net-add-recursion-limit-to-GRO.patch
 
 ###
 ### Platform drivers
