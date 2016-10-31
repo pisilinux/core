@@ -1,0 +1,78 @@
+From 56a76c0123d6cb034975901c80fce2627338ef9e Mon Sep 17 00:00:00 2001
+From: Chris Wilson <chris@chris-wilson.co.uk>
+Date: Wed, 5 Oct 2016 13:21:43 +0100
+Subject: drm/prime: Pass the right module owner through to dma_buf_export()
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+From: Chris Wilson <chris@chris-wilson.co.uk>
+
+commit 56a76c0123d6cb034975901c80fce2627338ef9e upstream.
+
+dma_buf_export() adds a reference to the owning module to the dmabuf (to
+prevent the driver from being unloaded whilst a third party still refers
+to the dmabuf). However, drm_gem_prime_export() was passing its own
+THIS_MODULE (i.e. drm.ko) rather than the driver. Extract the right
+owner from the device->fops instead.
+
+v2: Use C99 initializers to zero out unset elements of
+dma_buf_export_info
+v3: Extract the right module from dev->fops.
+
+Testcase: igt/vgem_basic/unload
+Reported-by: Petri Latvala <petri.latvala@intel.com>
+Signed-off-by: Chris Wilson <chris@chris-wilson.co.uk>
+Cc: Petri Latvala <petri.latvala@intel.com>
+Cc: Christian König <christian.koenig@amd.com>
+Tested-by: Petri Latvala <petri.latvala@intel.com>
+Reviewed-by: Petri Latvala <petri.latvala@intel.com>
+Reviewed-by: Christian König <christian.koenig@amd.com>
+Signed-off-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+Link: http://patchwork.freedesktop.org/patch/msgid/20161005122145.1507-1-chris@chris-wilson.co.uk
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/drm_prime.c |   17 ++++++++++-------
+ include/drm/drmP.h          |    3 ++-
+ 2 files changed, 12 insertions(+), 8 deletions(-)
+
+--- a/drivers/gpu/drm/drm_prime.c
++++ b/drivers/gpu/drm/drm_prime.c
+@@ -335,14 +335,17 @@ static const struct dma_buf_ops drm_gem_
+  * using the PRIME helpers.
+  */
+ struct dma_buf *drm_gem_prime_export(struct drm_device *dev,
+-				     struct drm_gem_object *obj, int flags)
++				     struct drm_gem_object *obj,
++				     int flags)
+ {
+-	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
+-
+-	exp_info.ops = &drm_gem_prime_dmabuf_ops;
+-	exp_info.size = obj->size;
+-	exp_info.flags = flags;
+-	exp_info.priv = obj;
++	struct dma_buf_export_info exp_info = {
++		.exp_name = KBUILD_MODNAME, /* white lie for debug */
++		.owner = dev->driver->fops->owner,
++		.ops = &drm_gem_prime_dmabuf_ops,
++		.size = obj->size,
++		.flags = flags,
++		.priv = obj,
++	};
+ 
+ 	if (dev->driver->gem_prime_res_obj)
+ 		exp_info.resv = dev->driver->gem_prime_res_obj(obj);
+--- a/include/drm/drmP.h
++++ b/include/drm/drmP.h
+@@ -938,7 +938,8 @@ static inline int drm_debugfs_remove_fil
+ #endif
+ 
+ extern struct dma_buf *drm_gem_prime_export(struct drm_device *dev,
+-		struct drm_gem_object *obj, int flags);
++					    struct drm_gem_object *obj,
++					    int flags);
+ extern int drm_gem_prime_handle_to_fd(struct drm_device *dev,
+ 		struct drm_file *file_priv, uint32_t handle, uint32_t flags,
+ 		int *prime_fd);

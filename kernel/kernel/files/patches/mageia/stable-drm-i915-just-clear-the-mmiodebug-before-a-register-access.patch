@@ -1,0 +1,43 @@
+From f856f847b22c52be82f712ea6ada946c6db884d7 Mon Sep 17 00:00:00 2001
+From: Chris Wilson <chris@chris-wilson.co.uk>
+Date: Mon, 3 Oct 2016 13:45:14 +0100
+Subject: drm/i915: Just clear the mmiodebug before a register access
+
+From: Chris Wilson <chris@chris-wilson.co.uk>
+
+commit f856f847b22c52be82f712ea6ada946c6db884d7 upstream.
+
+When we enable the per-register access mmiodebug, it is to detect which
+access is illegal. Reporting on earlier untraced access outside of the
+mmiodebug does not help debugging (as the suspicion is immediately put
+upon the current register which is not at fault)!
+
+References: https://bugs.freedesktop.org/show_bug.cgi?id=97985
+Signed-off-by: Chris Wilson <chris@chris-wilson.co.uk>
+Cc: Mika Kuoppala <mika.kuoppala@intel.com>
+Reviewed-by: Mika Kuoppala <mika.kuoppala@intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/20161003124516.12388-1-chris@chris-wilson.co.uk
+(cherry picked from commit dda960335e020835f7f1c12760e7f0b525b451e2)
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/i915/intel_uncore.c |    7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+
+--- a/drivers/gpu/drm/i915/intel_uncore.c
++++ b/drivers/gpu/drm/i915/intel_uncore.c
+@@ -796,10 +796,9 @@ __unclaimed_reg_debug(struct drm_i915_pr
+ 		      const bool read,
+ 		      const bool before)
+ {
+-	if (WARN(check_for_unclaimed_mmio(dev_priv),
+-		 "Unclaimed register detected %s %s register 0x%x\n",
+-		 before ? "before" : "after",
+-		 read ? "reading" : "writing to",
++	if (WARN(check_for_unclaimed_mmio(dev_priv) && !before,
++		 "Unclaimed %s register 0x%x\n",
++		 read ? "read from" : "write to",
+ 		 i915_mmio_reg_offset(reg)))
+ 		i915.mmio_debug--; /* Only report the first N failures */
+ }

@@ -1,0 +1,33 @@
+From 281269f8a0b00f5c95de5158e8595ed51bdb4b0a Mon Sep 17 00:00:00 2001
+From: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
+Date: Wed, 10 Aug 2016 07:18:16 +0200
+Subject: iio: light: us5182d: Add missing error code assignment before test
+
+From: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
+
+commit 281269f8a0b00f5c95de5158e8595ed51bdb4b0a upstream.
+
+It is likely that checking the result of 'pm_runtime_set_active' is
+expected here.
+
+Fixes: f0e5f57d3ac2 ("iio: light: us8152d: Add power management support")
+
+Signed-off-by: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
+Signed-off-by: Jonathan Cameron <jic23@kernel.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/iio/light/us5182d.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/drivers/iio/light/us5182d.c
++++ b/drivers/iio/light/us5182d.c
+@@ -894,7 +894,7 @@ static int us5182d_probe(struct i2c_clie
+ 		goto out_err;
+ 
+ 	if (data->default_continuous) {
+-		pm_runtime_set_active(&client->dev);
++		ret = pm_runtime_set_active(&client->dev);
+ 		if (ret < 0)
+ 			goto out_err;
+ 	}

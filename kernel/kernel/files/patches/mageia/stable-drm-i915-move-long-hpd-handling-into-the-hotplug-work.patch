@@ -1,0 +1,102 @@
+From 1015811609c0328b5ed670d07748591b837e74eb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>
+Date: Mon, 3 Oct 2016 10:55:15 +0300
+Subject: drm/i915: Move long hpd handling into the hotplug work
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+From: Ville Syrjälä <ville.syrjala@linux.intel.com>
+
+commit 1015811609c0328b5ed670d07748591b837e74eb upstream.
+
+We can't rely on connector->status in the detect() hook if the long hpd
+was already handled by the dig_port_work as that won't update
+connector->status. Thus we have to defer the long hpd handling entirely
+until the hotplug work runs to avoid the double long hpd handling
+the "detect_done" flag is trying to prevent.
+
+We'll start to depend on connector->status being up to date in a
+following patch.
+
+Cc: Damien Cassou <damien@cassou.me>
+Cc: freedesktop.org@gp.mailgun.org
+Cc: Arno <blouin.arno@gmail.com>
+Cc: Shubhangi Shrivastava <shubhangi.shrivastava@intel.com>
+Cc: Sivakumar Thulasimani <sivakumar.thulasimani@intel.com>
+Cc: Ander Conselvan de Oliveira <conselvan2@gmail.com>
+Tested-by: Arno <blouin.arno@gmail.com>
+Bugzilla: https://bugs.freedesktop.org/show_bug.cgi?id=83348
+Signed-off-by: Ville Syrjälä <ville.syrjala@linux.intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/1475481316-8194-1-git-send-email-ville.syrjala@linux.intel.com
+Reviewed-by: Ander Conselvan de Oliveira <conselvan2@gmail.com>
+(cherry picked from commit 27d4efc5591a5853de54713bc717de73c8951e17)
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/i915/intel_dp.c |   48 +++++++++++++++++++---------------------
+ 1 file changed, 23 insertions(+), 25 deletions(-)
+
+--- a/drivers/gpu/drm/i915/intel_dp.c
++++ b/drivers/gpu/drm/i915/intel_dp.c
+@@ -4696,36 +4696,34 @@ intel_dp_hpd_pulse(struct intel_digital_
+ 		      port_name(intel_dig_port->port),
+ 		      long_hpd ? "long" : "short");
+ 
++	if (long_hpd) {
++		intel_dp->detect_done = false;
++		return IRQ_NONE;
++	}
++
+ 	power_domain = intel_display_port_aux_power_domain(intel_encoder);
+ 	intel_display_power_get(dev_priv, power_domain);
+ 
+-	if (long_hpd) {
+-		intel_dp_long_pulse(intel_dp->attached_connector);
+-		if (intel_dp->is_mst)
+-			ret = IRQ_HANDLED;
+-		goto put_power;
+-
+-	} else {
+-		if (intel_dp->is_mst) {
+-			if (intel_dp_check_mst_status(intel_dp) == -EINVAL) {
+-				/*
+-				 * If we were in MST mode, and device is not
+-				 * there, get out of MST mode
+-				 */
+-				DRM_DEBUG_KMS("MST device may have disappeared %d vs %d\n",
+-					      intel_dp->is_mst, intel_dp->mst_mgr.mst_state);
+-				intel_dp->is_mst = false;
+-				drm_dp_mst_topology_mgr_set_mst(&intel_dp->mst_mgr,
+-								intel_dp->is_mst);
+-				goto put_power;
+-			}
++	if (intel_dp->is_mst) {
++		if (intel_dp_check_mst_status(intel_dp) == -EINVAL) {
++			/*
++			 * If we were in MST mode, and device is not
++			 * there, get out of MST mode
++			 */
++			DRM_DEBUG_KMS("MST device may have disappeared %d vs %d\n",
++				      intel_dp->is_mst, intel_dp->mst_mgr.mst_state);
++			intel_dp->is_mst = false;
++			drm_dp_mst_topology_mgr_set_mst(&intel_dp->mst_mgr,
++							intel_dp->is_mst);
++			intel_dp->detect_done = false;
++			goto put_power;
+ 		}
++	}
+ 
+-		if (!intel_dp->is_mst) {
+-			if (!intel_dp_short_pulse(intel_dp)) {
+-				intel_dp_long_pulse(intel_dp->attached_connector);
+-				goto put_power;
+-			}
++	if (!intel_dp->is_mst) {
++		if (!intel_dp_short_pulse(intel_dp)) {
++			intel_dp->detect_done = false;
++			goto put_power;
+ 		}
+ 	}
+ 

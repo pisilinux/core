@@ -1,0 +1,92 @@
+From be5c571b2ff3a164d2e14ccc100cb5b2b3d3fb7c Mon Sep 17 00:00:00 2001
+From: Paulo Zanoni <paulo.r.zanoni@intel.com>
+Date: Thu, 29 Sep 2016 16:36:48 -0300
+Subject: drm/i915/gen9: only add the planes actually affected by ddb changes
+
+From: Paulo Zanoni <paulo.r.zanoni@intel.com>
+
+commit be5c571b2ff3a164d2e14ccc100cb5b2b3d3fb7c upstream.
+
+We were previously adding all the planes owned by the CRTC even when
+the ddb partitioning didn't change for them. As a consequence, a lot
+of functions were being called when we were just moving the cursor
+around the screen, such as skylake_update_primary_plane().
+
+This was causing flickering on the primary plane when moving the
+cursor. I'm not 100% sure which operation caused the flickering, but
+we were writing to a lot of registers, so it could be any of these
+writes. With this patch, just moving the mouse won't add the primary
+plane to the commit since it won't trigger a change in DDB
+partitioning.
+
+v2: Use skl_ddb_entry_equal() (Lyude).
+v3: Change Reported-and-bisected-by: to Reported-by: for checkpatch
+
+Fixes: 05a76d3d6ad1 ("drm/i915/skl: Ensure pipes with changed wms get added to the state")
+Bugzilla: https://bugs.freedesktop.org/show_bug.cgi?id=97888
+Cc: Mike Lothian <mike@fireburn.co.uk>
+Reported-by: Mike Lothian <mike@fireburn.co.uk>
+Signed-off-by: Paulo Zanoni <paulo.r.zanoni@intel.com>
+Signed-off-by: Lyude <cpaul@redhat.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/1475177808-29955-1-git-send-email-paulo.r.zanoni@intel.com
+(cherry picked from commit 7f60e200e254cd53ad1bd74a56bdd23e813ac4b7)
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/i915/intel_pm.c |   37 ++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 36 insertions(+), 1 deletion(-)
+
+--- a/drivers/gpu/drm/i915/intel_pm.c
++++ b/drivers/gpu/drm/i915/intel_pm.c
+@@ -3940,6 +3940,41 @@ pipes_modified(struct drm_atomic_state *
+ 	return ret;
+ }
+ 
++int
++skl_ddb_add_affected_planes(struct intel_crtc_state *cstate)
++{
++	struct drm_atomic_state *state = cstate->base.state;
++	struct drm_device *dev = state->dev;
++	struct drm_crtc *crtc = cstate->base.crtc;
++	struct intel_crtc *intel_crtc = to_intel_crtc(crtc);
++	struct drm_i915_private *dev_priv = to_i915(dev);
++	struct intel_atomic_state *intel_state = to_intel_atomic_state(state);
++	struct skl_ddb_allocation *new_ddb = &intel_state->wm_results.ddb;
++	struct skl_ddb_allocation *cur_ddb = &dev_priv->wm.skl_hw.ddb;
++	struct drm_plane_state *plane_state;
++	struct drm_plane *plane;
++	enum pipe pipe = intel_crtc->pipe;
++	int id;
++
++	WARN_ON(!drm_atomic_get_existing_crtc_state(state, crtc));
++
++	drm_for_each_plane_mask(plane, dev, crtc->state->plane_mask) {
++		id = skl_wm_plane_id(to_intel_plane(plane));
++
++		if (skl_ddb_entry_equal(&cur_ddb->plane[pipe][id],
++					&new_ddb->plane[pipe][id]) &&
++		    skl_ddb_entry_equal(&cur_ddb->y_plane[pipe][id],
++					&new_ddb->y_plane[pipe][id]))
++			continue;
++
++		plane_state = drm_atomic_get_plane_state(state, plane);
++		if (IS_ERR(plane_state))
++			return PTR_ERR(plane_state);
++	}
++
++	return 0;
++}
++
+ static int
+ skl_compute_ddb(struct drm_atomic_state *state)
+ {
+@@ -4004,7 +4039,7 @@ skl_compute_ddb(struct drm_atomic_state
+ 		if (ret)
+ 			return ret;
+ 
+-		ret = drm_atomic_add_affected_planes(state, &intel_crtc->base);
++		ret = skl_ddb_add_affected_planes(cstate);
+ 		if (ret)
+ 			return ret;
+ 	}

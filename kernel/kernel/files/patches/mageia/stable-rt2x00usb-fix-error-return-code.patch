@@ -1,0 +1,37 @@
+From 410280bac6224e066f4cf0b87db08f0418a135b6 Mon Sep 17 00:00:00 2001
+From: Christophe Jaillet <christophe.jaillet@wanadoo.fr>
+Date: Thu, 11 Aug 2016 16:38:54 +0200
+Subject: rt2x00usb: Fix error return code
+
+From: Christophe Jaillet <christophe.jaillet@wanadoo.fr>
+
+commit 410280bac6224e066f4cf0b87db08f0418a135b6 upstream.
+
+We know that 'retval = 0' because it has been tested a few lines above.
+So, if 'devm_kmalloc' fails, 0 will be returned instead of an error code.
+Return -ENOMEM instead.
+
+Fixes: 8b4c0009313f ("rt2x00usb: Use usb anchor to manage URB")
+Signed-off-by: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
+Acked-by: Stanislaw Gruszka <sgruszka@redhat.com>
+Signed-off-by: Kalle Valo <kvalo@codeaurora.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/net/wireless/ralink/rt2x00/rt2x00usb.c |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+--- a/drivers/net/wireless/ralink/rt2x00/rt2x00usb.c
++++ b/drivers/net/wireless/ralink/rt2x00/rt2x00usb.c
+@@ -831,8 +831,10 @@ int rt2x00usb_probe(struct usb_interface
+ 	rt2x00dev->anchor = devm_kmalloc(&usb_dev->dev,
+ 					sizeof(struct usb_anchor),
+ 					GFP_KERNEL);
+-	if (!rt2x00dev->anchor)
++	if (!rt2x00dev->anchor) {
++		retval = -ENOMEM;
+ 		goto exit_free_reg;
++	}
+ 
+ 	init_usb_anchor(rt2x00dev->anchor);
+ 	return 0;

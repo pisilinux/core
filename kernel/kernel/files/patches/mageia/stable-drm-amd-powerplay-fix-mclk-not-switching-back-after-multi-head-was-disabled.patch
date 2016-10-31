@@ -1,0 +1,46 @@
+From 9716ebc38dfabe6c8e5e3c809e9f3c61dd3740f9 Mon Sep 17 00:00:00 2001
+From: Rex Zhu <Rex.Zhu@amd.com>
+Date: Wed, 14 Sep 2016 13:20:34 +0800
+Subject: drm/amd/powerplay: fix mclk not switching back after multi-head was disabled
+
+From: Rex Zhu <Rex.Zhu@amd.com>
+
+commit 9716ebc38dfabe6c8e5e3c809e9f3c61dd3740f9 upstream.
+
+Signed-off-by: Rex Zhu <Rex.Zhu@amd.com>
+Reviewed-by: Alex Deucher <alexander.deucher@amd.com>
+Signed-off-by: Alex Deucher <alexander.deucher@amd.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/amd/powerplay/eventmgr/eventactionchains.c |    2 ++
+ drivers/gpu/drm/amd/powerplay/eventmgr/psm.c               |    3 ++-
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+
+--- a/drivers/gpu/drm/amd/powerplay/eventmgr/eventactionchains.c
++++ b/drivers/gpu/drm/amd/powerplay/eventmgr/eventactionchains.c
+@@ -262,6 +262,8 @@ static const pem_event_action * const di
+ 	unblock_adjust_power_state_tasks,
+ 	set_cpu_power_state,
+ 	notify_hw_power_source_tasks,
++	get_2d_performance_state_tasks,
++	set_performance_state_tasks,
+ 	/* updateDALConfigurationTasks,
+ 	variBrightDisplayConfigurationChangeTasks, */
+ 	adjust_power_state_tasks,
+--- a/drivers/gpu/drm/amd/powerplay/eventmgr/psm.c
++++ b/drivers/gpu/drm/amd/powerplay/eventmgr/psm.c
+@@ -100,11 +100,12 @@ int psm_adjust_power_state_dynamic(struc
+ 	if (requested == NULL)
+ 		return 0;
+ 
++	phm_apply_state_adjust_rules(hwmgr, requested, pcurrent);
++
+ 	if (pcurrent == NULL || (0 != phm_check_states_equal(hwmgr, &pcurrent->hardware, &requested->hardware, &equal)))
+ 		equal = false;
+ 
+ 	if (!equal || phm_check_smc_update_required_for_display_configuration(hwmgr)) {
+-		phm_apply_state_adjust_rules(hwmgr, requested, pcurrent);
+ 		phm_set_power_state(hwmgr, &pcurrent->hardware, &requested->hardware);
+ 		hwmgr->current_ps = requested;
+ 	}

@@ -1,0 +1,33 @@
+From 6999aeabbb703a81a204cb6f9f8f151759a99ac4 Mon Sep 17 00:00:00 2001
+From: Wei Yongjun <weiyj.lk@gmail.com>
+Date: Sat, 20 Aug 2016 15:25:32 +0000
+Subject: spi: spi-fsl-dspi: Drop extra spi_master_put in device remove function
+
+From: Wei Yongjun <weiyj.lk@gmail.com>
+
+commit 6999aeabbb703a81a204cb6f9f8f151759a99ac4 upstream.
+
+The call sequence spi_alloc_master/spi_register_master/spi_unregister_master
+is complete; it reduces the device reference count to zero, which and results
+in device memory being freed. The subsequent call to spi_master_put is
+unnecessary and results in an access to free memory. Drop it.
+
+Fixes: 9298bc727385 ("spi: spi-fsl-dspi: Remove spi-bitbang")
+Signed-off-by: Wei Yongjun <weiyj.lk@gmail.com>
+Signed-off-by: Mark Brown <broonie@kernel.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/spi/spi-fsl-dspi.c |    1 -
+ 1 file changed, 1 deletion(-)
+
+--- a/drivers/spi/spi-fsl-dspi.c
++++ b/drivers/spi/spi-fsl-dspi.c
+@@ -760,7 +760,6 @@ static int dspi_remove(struct platform_d
+ 	/* Disconnect from the SPI framework */
+ 	clk_disable_unprepare(dspi->clk);
+ 	spi_unregister_master(dspi->master);
+-	spi_master_put(dspi->master);
+ 
+ 	return 0;
+ }

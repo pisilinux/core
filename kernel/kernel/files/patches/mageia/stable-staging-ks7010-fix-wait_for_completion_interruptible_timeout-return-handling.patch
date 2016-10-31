@@ -1,0 +1,44 @@
+From 9d29f14db1095f52ca00b8162b242d6fce07d19f Mon Sep 17 00:00:00 2001
+From: Nicholas Mc Guire <hofrat@osadl.org>
+Date: Mon, 25 Jul 2016 21:21:50 +0200
+Subject: staging: ks7010: fix wait_for_completion_interruptible_timeout return handling
+
+From: Nicholas Mc Guire <hofrat@osadl.org>
+
+commit 9d29f14db1095f52ca00b8162b242d6fce07d19f upstream.
+
+wait_for_completion_interruptible_timeout return 0 on timeout and
+-ERESTARTSYS if interrupted. The check for
+!wait_for_completion_interruptible_timeout() would report an interrupt
+as timeout. Further, while HZ/50 will work most of the time it could
+fail for HZ < 50, so this is switched to msecs_to_jiffies(20).
+
+Fixes: 13a9930d15b4 ("staging: ks7010: add driver from Nanonote extra-repository")
+
+Signed-off-by: Nicholas Mc Guire <hofrat@osadl.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/staging/ks7010/ks_hostif.c |    8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+--- a/drivers/staging/ks7010/ks_hostif.c
++++ b/drivers/staging/ks7010/ks_hostif.c
+@@ -74,11 +74,15 @@ void ks_wlan_hw_wakeup_task(struct work_
+ 	struct ks_wlan_private *priv =
+ 	    container_of(work, struct ks_wlan_private, ks_wlan_wakeup_task);
+ 	int ps_status = atomic_read(&priv->psstatus.status);
++	long time_left;
+ 
+ 	if (ps_status == PS_SNOOZE) {
+ 		ks_wlan_hw_wakeup_request(priv);
+-		if (!wait_for_completion_interruptible_timeout(&priv->psstatus.wakeup_wait, HZ / 50)) {	/* 20ms timeout */
+-			DPRINTK(1, "wake up timeout !!!\n");
++		time_left = wait_for_completion_interruptible_timeout(
++				&priv->psstatus.wakeup_wait,
++				msecs_to_jiffies(20));
++		if (time_left <= 0) {
++			DPRINTK(1, "wake up timeout or interrupted !!!\n");
+ 			schedule_work(&priv->ks_wlan_wakeup_task);
+ 			return;
+ 		}

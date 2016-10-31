@@ -1,0 +1,142 @@
+From 23f889bdf6ee5cfff012d8b09f6bec920c691696 Mon Sep 17 00:00:00 2001
+From: David Weinehall <david.weinehall@linux.intel.com>
+Date: Wed, 17 Aug 2016 15:47:48 +0300
+Subject: Revert "drm/i915: Check live status before reading edid"
+
+From: David Weinehall <david.weinehall@linux.intel.com>
+
+commit 23f889bdf6ee5cfff012d8b09f6bec920c691696 upstream.
+
+This reverts commit 237ed86c693d8a8e4db476976aeb30df4deac74b.
+
+Our current implementation of live status check (repeat 9 times
+with 10ms delays between each attempt as a workaround for
+buggy displays) imposes a rather serious penalty, time wise,
+on intel_hdmi_detect().  Since we we already skip live status
+checks on platforms before gen 7, and since we seem to have
+coped quite well before the live status check was introduced
+for newer platforms too, the previous behaviour is probably
+preferable, at least unless someone can point to a use-case
+that the live status check improves (apart from "Bspec says so".)
+
+Signed-off-by: David Weinehall <david.weinehall@linux.intel.com>
+Fixes: 237ed86c693d ("drm/i915: Check live status before reading edid")
+Fixes: f8d03ea0053b ("drm/i915: increase the tries for HDMI hotplug live status checking")
+Bugzilla: https://bugs.freedesktop.org/show_bug.cgi?id=97139
+Bugzilla: https://bugs.freedesktop.org/show_bug.cgi?id=94014
+Acked-by: Chris Wilson <chris@chris-wilson.co.uk>
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/20160817124748.31208-1-david.weinehall@linux.intel.com
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/i915/intel_dp.c   |    2 -
+ drivers/gpu/drm/i915/intel_drv.h  |    2 -
+ drivers/gpu/drm/i915/intel_hdmi.c |   43 ++++++++------------------------------
+ 3 files changed, 11 insertions(+), 36 deletions(-)
+
+--- a/drivers/gpu/drm/i915/intel_dp.c
++++ b/drivers/gpu/drm/i915/intel_dp.c
+@@ -4148,7 +4148,7 @@ static bool bxt_digital_port_connected(s
+  *
+  * Return %true if @port is connected, %false otherwise.
+  */
+-bool intel_digital_port_connected(struct drm_i915_private *dev_priv,
++static bool intel_digital_port_connected(struct drm_i915_private *dev_priv,
+ 					 struct intel_digital_port *port)
+ {
+ 	if (HAS_PCH_IBX(dev_priv))
+--- a/drivers/gpu/drm/i915/intel_drv.h
++++ b/drivers/gpu/drm/i915/intel_drv.h
+@@ -1388,8 +1388,6 @@ void intel_edp_drrs_disable(struct intel
+ void intel_edp_drrs_invalidate(struct drm_device *dev,
+ 		unsigned frontbuffer_bits);
+ void intel_edp_drrs_flush(struct drm_device *dev, unsigned frontbuffer_bits);
+-bool intel_digital_port_connected(struct drm_i915_private *dev_priv,
+-					 struct intel_digital_port *port);
+ 
+ void
+ intel_dp_program_link_training_pattern(struct intel_dp *intel_dp,
+--- a/drivers/gpu/drm/i915/intel_hdmi.c
++++ b/drivers/gpu/drm/i915/intel_hdmi.c
+@@ -1422,24 +1422,22 @@ intel_hdmi_dp_dual_mode_detect(struct dr
+ }
+ 
+ static bool
+-intel_hdmi_set_edid(struct drm_connector *connector, bool force)
++intel_hdmi_set_edid(struct drm_connector *connector)
+ {
+ 	struct drm_i915_private *dev_priv = to_i915(connector->dev);
+ 	struct intel_hdmi *intel_hdmi = intel_attached_hdmi(connector);
+-	struct edid *edid = NULL;
++	struct edid *edid;
+ 	bool connected = false;
+ 
+-	if (force) {
+-		intel_display_power_get(dev_priv, POWER_DOMAIN_GMBUS);
++	intel_display_power_get(dev_priv, POWER_DOMAIN_GMBUS);
+ 
+-		edid = drm_get_edid(connector,
+-				    intel_gmbus_get_adapter(dev_priv,
+-				    intel_hdmi->ddc_bus));
++	edid = drm_get_edid(connector,
++			    intel_gmbus_get_adapter(dev_priv,
++			    intel_hdmi->ddc_bus));
+ 
+-		intel_hdmi_dp_dual_mode_detect(connector, edid != NULL);
++	intel_hdmi_dp_dual_mode_detect(connector, edid != NULL);
+ 
+-		intel_display_power_put(dev_priv, POWER_DOMAIN_GMBUS);
+-	}
++	intel_display_power_put(dev_priv, POWER_DOMAIN_GMBUS);
+ 
+ 	to_intel_connector(connector)->detect_edid = edid;
+ 	if (edid && edid->input & DRM_EDID_INPUT_DIGITAL) {
+@@ -1465,37 +1463,16 @@ static enum drm_connector_status
+ intel_hdmi_detect(struct drm_connector *connector, bool force)
+ {
+ 	enum drm_connector_status status;
+-	struct intel_hdmi *intel_hdmi = intel_attached_hdmi(connector);
+ 	struct drm_i915_private *dev_priv = to_i915(connector->dev);
+-	bool live_status = false;
+-	unsigned int try;
+ 
+ 	DRM_DEBUG_KMS("[CONNECTOR:%d:%s]\n",
+ 		      connector->base.id, connector->name);
+ 
+ 	intel_display_power_get(dev_priv, POWER_DOMAIN_GMBUS);
+ 
+-	for (try = 0; !live_status && try < 9; try++) {
+-		if (try)
+-			msleep(10);
+-		live_status = intel_digital_port_connected(dev_priv,
+-				hdmi_to_dig_port(intel_hdmi));
+-	}
+-
+-	if (!live_status) {
+-		DRM_DEBUG_KMS("HDMI live status down\n");
+-		/*
+-		 * Live status register is not reliable on all intel platforms.
+-		 * So consider live_status only for certain platforms, for
+-		 * others, read EDID to determine presence of sink.
+-		 */
+-		if (INTEL_INFO(dev_priv)->gen < 7 || IS_IVYBRIDGE(dev_priv))
+-			live_status = true;
+-	}
+-
+ 	intel_hdmi_unset_edid(connector);
+ 
+-	if (intel_hdmi_set_edid(connector, live_status)) {
++	if (intel_hdmi_set_edid(connector)) {
+ 		struct intel_hdmi *intel_hdmi = intel_attached_hdmi(connector);
+ 
+ 		hdmi_to_dig_port(intel_hdmi)->base.type = INTEL_OUTPUT_HDMI;
+@@ -1521,7 +1498,7 @@ intel_hdmi_force(struct drm_connector *c
+ 	if (connector->status != connector_status_connected)
+ 		return;
+ 
+-	intel_hdmi_set_edid(connector, true);
++	intel_hdmi_set_edid(connector);
+ 	hdmi_to_dig_port(intel_hdmi)->base.type = INTEL_OUTPUT_HDMI;
+ }
+ 

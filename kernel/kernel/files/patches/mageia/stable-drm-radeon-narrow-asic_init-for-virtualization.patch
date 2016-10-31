@@ -1,0 +1,33 @@
+From 884031f0aacf57dad1575f96714efc80de9b19cc Mon Sep 17 00:00:00 2001
+From: Alex Deucher <alexander.deucher@amd.com>
+Date: Mon, 19 Sep 2016 12:35:22 -0400
+Subject: drm/radeon: narrow asic_init for virtualization
+
+From: Alex Deucher <alexander.deucher@amd.com>
+
+commit 884031f0aacf57dad1575f96714efc80de9b19cc upstream.
+
+Only needed on CIK+ due to the way pci reset is handled
+by the GPU.
+
+Signed-off-by: Alex Deucher <alexander.deucher@amd.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/radeon/radeon_device.c |    5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+--- a/drivers/gpu/drm/radeon/radeon_device.c
++++ b/drivers/gpu/drm/radeon/radeon_device.c
+@@ -661,8 +661,9 @@ bool radeon_card_posted(struct radeon_de
+ {
+ 	uint32_t reg;
+ 
+-	/* for pass through, always force asic_init */
+-	if (radeon_device_is_virtual())
++	/* for pass through, always force asic_init for CI */
++	if (rdev->family >= CHIP_BONAIRE &&
++	    radeon_device_is_virtual())
+ 		return false;
+ 
+ 	/* required for EFI mode on macbook2,1 which uses an r5xx asic */

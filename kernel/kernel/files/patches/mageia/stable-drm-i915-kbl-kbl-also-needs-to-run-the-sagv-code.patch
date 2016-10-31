@@ -1,0 +1,64 @@
+From 17777d61f4a87d7b6d5585e8fdffa83773c594e7 Mon Sep 17 00:00:00 2001
+From: Paulo Zanoni <paulo.r.zanoni@intel.com>
+Date: Thu, 22 Sep 2016 18:00:29 -0300
+Subject: drm/i915/kbl: KBL also needs to run the SAGV code
+
+From: Paulo Zanoni <paulo.r.zanoni@intel.com>
+
+commit 17777d61f4a87d7b6d5585e8fdffa83773c594e7 upstream.
+
+According to BSpec, it's the "core CPUs" that need the code, which
+means SKL and KBL, but not BXT.
+
+I don't have a KBL to test this patch on it.
+
+v2: Only SKL should have I915_SAGV_NOT_CONTROLLED.
+
+Reviewed-by: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Signed-off-by: Paulo Zanoni <paulo.r.zanoni@intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/1474578035-424-4-git-send-email-paulo.r.zanoni@intel.com
+(cherry picked from commit 6e3100ec21e7c774a0fc01e36a1e0739530c2f71)
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/i915/intel_pm.c |   14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
+
+--- a/drivers/gpu/drm/i915/intel_pm.c
++++ b/drivers/gpu/drm/i915/intel_pm.c
+@@ -2881,8 +2881,14 @@ skl_wm_plane_id(const struct intel_plane
+ static bool
+ intel_has_sagv(struct drm_i915_private *dev_priv)
+ {
+-	return IS_SKYLAKE(dev_priv) &&
+-	       dev_priv->sagv_status != I915_SAGV_NOT_CONTROLLED;
++	if (IS_KABYLAKE(dev_priv))
++		return true;
++
++	if (IS_SKYLAKE(dev_priv) &&
++	    dev_priv->sagv_status != I915_SAGV_NOT_CONTROLLED)
++		return true;
++
++	return false;
+ }
+ 
+ /*
+@@ -2920,7 +2926,7 @@ intel_enable_sagv(struct drm_i915_privat
+ 	 * Some skl systems, pre-release machines in particular,
+ 	 * don't actually have an SAGV.
+ 	 */
+-	if (ret == -ENXIO) {
++	if (IS_SKYLAKE(dev_priv) && ret == -ENXIO) {
+ 		DRM_DEBUG_DRIVER("No SAGV found on system, ignoring\n");
+ 		dev_priv->sagv_status = I915_SAGV_NOT_CONTROLLED;
+ 		return 0;
+@@ -2974,7 +2980,7 @@ intel_disable_sagv(struct drm_i915_priva
+ 	 * Some skl systems, pre-release machines in particular,
+ 	 * don't actually have an SAGV.
+ 	 */
+-	if (result == -ENXIO) {
++	if (IS_SKYLAKE(dev_priv) && result == -ENXIO) {
+ 		DRM_DEBUG_DRIVER("No SAGV found on system, ignoring\n");
+ 		dev_priv->sagv_status = I915_SAGV_NOT_CONTROLLED;
+ 		return 0;

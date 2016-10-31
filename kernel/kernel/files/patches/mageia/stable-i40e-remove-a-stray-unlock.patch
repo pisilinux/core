@@ -1,0 +1,32 @@
+From be0cb0a66a1d426f7cd9b170c008725044ae147a Mon Sep 17 00:00:00 2001
+From: Dan Carpenter <dan.carpenter@oracle.com>
+Date: Wed, 3 Aug 2016 22:01:07 +0300
+Subject: i40e: remove a stray unlock
+
+From: Dan Carpenter <dan.carpenter@oracle.com>
+
+commit be0cb0a66a1d426f7cd9b170c008725044ae147a upstream.
+
+We shifted the locking around a bit but forgot to delete this unlock so
+now it can unlock twice.
+
+Fixes: cd3be169a5ff ('i40e: Move the mutex lock in i40e_client_unregister')
+Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
+Tested-by: Andrew Bowers <andrewx.bowers@intel.com>
+Signed-off-by: Jeff Kirsher <jeffrey.t.kirsher@intel.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/net/ethernet/intel/i40e/i40e_client.c |    1 -
+ 1 file changed, 1 deletion(-)
+
+--- a/drivers/net/ethernet/intel/i40e/i40e_client.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_client.c
+@@ -1009,7 +1009,6 @@ int i40e_unregister_client(struct i40e_c
+ 	if (!i40e_client_is_registered(client)) {
+ 		pr_info("i40e: Client %s has not been registered\n",
+ 			client->name);
+-		mutex_unlock(&i40e_client_mutex);
+ 		ret = -ENODEV;
+ 		goto out;
+ 	}

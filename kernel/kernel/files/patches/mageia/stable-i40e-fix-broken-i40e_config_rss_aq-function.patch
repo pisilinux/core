@@ -1,0 +1,155 @@
+From 776b2e15f8af7900409456292efd45af6de97172 Mon Sep 17 00:00:00 2001
+From: Jacob Keller <jacob.e.keller@intel.com>
+Date: Tue, 19 Jul 2016 16:23:30 -0700
+Subject: i40e: fix broken i40e_config_rss_aq function
+
+From: Jacob Keller <jacob.e.keller@intel.com>
+
+commit 776b2e15f8af7900409456292efd45af6de97172 upstream.
+
+X722 hardware requires using the admin queue to configure RSS. This
+function was previously re-written in commit e69ff813af35 ("i40e: rework
+the functions to configure RSS with similar parameters").
+However, the previous refactor did not work correctly for a few reasons
+
+(a) it does not check whether seed is NULL before using it, resulting in
+a NULL pointer dereference
+
+[  402.954721] BUG: unable to handle kernel NULL pointer dereference at           (null)
+[  402.955568] IP: [<ffffffffa0090ccf>] i40e_config_rss_aq.constprop.65+0x2f/0x1c0 [i40e]
+[  402.956402] PGD ad610067 PUD accc0067 PMD 0
+[  402.957235] Oops: 0000 [#1] SMP
+[  402.958064] Modules linked in: ip6t_rpfilter ip6t_REJECT nf_reject_ipv6 xt_conntrack ip_set nfnetlink ebtable_filter ebtable_
+broute bridge stp llc ebtable_nat ebtables ip6table_mangle ip6table_raw ip6table_nat nf_conntrack_ipv6 nf_defrag_ipv6 nf_nat_ipv
+6 ip6table_security ip6table_filter ip6_tables iptable_mangle iptable_raw iptable_nat nf_conntrack_ipv4_ nf_defrag_ipv4_ nf_nat_ip
+v4_ nf_nat nf_conntrack iptable_security intel_rapl i86_kg_temp_thermal coretemp kvm_intel kvm irqbypass crct10dif_clMl crc32_
+pclMl ghash_clMlni_intel iTCO_wdt iTCO_vendor_support shpchp sb_edac dcdbas pcspkr joydev ipmi_devintf wmi edac_core ipmi_ssif
+ acpi_ad acpi_ower_meter ipmi_si ipmi_msghandler mei_me nfsd lpc_ich mei ioatdma tpm_tis auth_rpcgss tpm nfs_acl lockd grace s
+unrpc ifs nngag200 i2c_algo_bit drm_kms_helper ttm drm iigbe bnx2x i40e dca mdio ptp pps_core libcrc32c fjes crc32c_intel
+[  402.965563] CPU: 22 PID: 2461 Conm: ethtool Not tainted 4.6.0-rc7_1.2-ABNidQ+ #20
+[  402.966719] Hardware name: Dell Inc. PowerEdge R720/0C4Y3R, BIOS 2.5.2 01/28/2015
+[  402.967862] task: ffff880219b51dc0 ti: ffff8800b3408000 task.ti: ffff8800b3408000
+[  402.969046] RIP: 0010:[<ffffffffa0090ccf>]  [<ffffffffa0090ccf>] i40e_config_rss_aq.constprop.65+0x2f/0x1c0 [i40e]
+[  402.970339] RSP: 0018:ffff8800b340ba90  EFLAGS: 00010246
+[  402.971616] RAX: 0000000000000000 RBX: ffff88042ec14000 RCX: 0000000000000200
+[  402.972961] RDX: ffff880428eb9200 RSI: 0000000000000000 RDI: ffff88042ec14000
+[  402.974312] RBP: ffff8800b340baf8 R08: ffff880237ada8f0 R09: ffff880428eb9200
+[  402.975709] R10: ffff880428eb9200 R11: 0000000000000000 R12: ffff88042ec2e000
+[  402.977104] R13: ffff88042ec2e000 R14: ffff88042ec14000 R15: ffff88022ea00800
+[  402.978541] FS:  00007f84fd054700(0000) GS:ffff880237ac0000(0000) knlGS:0000000000000000
+[  402.980003] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  402.981508] CR2: 0000000000000000 CR3: 000000003289e000 CR4: 00000000000406e0
+[  402.983028] Stack:
+[  402.984578]  0000000002000200 0000000000000000 ffff88023ffeda68 ffff88023ffef000
+[  402.986187]  0000000000000268 ffff8800b340bbf8 ffff88023ffedd80 0000000088ce4f1d
+[  402.987844]  ffff88042ec14000 ffff88022ea00800 ffff88042ec2e000 ffff88042ec14000
+[  402.989509] Call Trace:
+[  402.991200]  [<ffffffffa009636f>] i40e_config_rss+0x11f/0x1c0 [i40e]
+[  402.992924]  [<ffffffffa00a1ae0>] i40e_set_rifh+0ic0/0x130 [i40e]
+[  402.994684]  [<ffffffff816d54b7>] ethtool_set_rifh+0x1f7/0x300
+[  402.996446]  [<ffffffff8136d02b>] ? cred_has_capability+0io6b/0x100
+[  402.998203]  [<ffffffff8136d102>] ? selinux_capable+0x12/0x20
+[  402.999968]  [<ffffffff8136277b>] ? security_capable+0x4b/0x70
+[  403.001707]  [<ffffffff816d6da3>] dev_ethtool+0x1423/0x2290
+[  403.003461]  [<ffffffff816eab41>] dev_ioctl+0x191/0io630
+[  403.005186]  [<ffffffff811cf80a>] ? lru_cache_add+0x3a/0i80
+[  403.006942]  [<ffffffff817f2a8e>] ? _raw_spin_unlock+0ie/0x20
+[  403.008691]  [<ffffffff816adb95>] sock_do_ioctl+0x45/0i50
+[  403.010421]  [<ffffffff816ae229>] sock_ioctl+0x209/0x2d0
+[  403.012173]  [<ffffffff81262194>] do_vfs_ioctl+0u4/0io6c0
+[  403.013911]  [<ffffffff81262829>] SyS_ioctl+0x79/0x90
+[  403.015710]  [<ffffffff817f2e72>] entry_SYSCALL_64_fastpath+0x1a/0u4
+[  403.017500] Code: 90 55 48 89 e5 41 57 41 56 41 55 41 54 53 48 89 fb 48 83 ec 40 4c 8b a7 e0 05 00 00 65 48 8b 04 25 28 00 00 00 48 89 45 d0 31 c0 <48> 8b 06 41 0f b7 bc 24 f2 0f 00 00 48 89 45 9c 48 8b 46 08 48
+[  403.021454] RIP  [<ffffffffa0090ccf>] i40e_config_rss_aq.constprop.65+0x2f/0x1c0 [i40e]
+[  403.023395]  RSP <ffff8800b340ba90>
+[  403.025271] CR2: 0000000000000000
+[  403.027169] ---[ end trace 64561b528cf61cf0 ]---
+
+(b) it does not even bother to use the passed in *lut parameter which
+defines the requested lookup table. Instead it uses its own round robin
+table.
+
+Fix these issues by re-writing it to be similar to i40e_config_rss_reg
+and i40e_get_rss_aq.
+
+Fixes: e69ff813af35 ("i40e: rework the functions to configure RSS with similar parameters", 2015-10-21)
+Signed-off-by: Jacob Keller <jacob.e.keller@intel.com>
+Tested-by: Andrew Bowers <andrewx.bowers@intel.com>
+Signed-off-by: Jeff Kirsher <jeffrey.t.kirsher@intel.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/net/ethernet/intel/i40e/i40e_main.c |   57 +++++++++++-----------------
+ 1 file changed, 23 insertions(+), 34 deletions(-)
+
+--- a/drivers/net/ethernet/intel/i40e/i40e_main.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_main.c
+@@ -7990,45 +7990,34 @@ static int i40e_setup_misc_vector(struct
+ static int i40e_config_rss_aq(struct i40e_vsi *vsi, const u8 *seed,
+ 			      u8 *lut, u16 lut_size)
+ {
+-	struct i40e_aqc_get_set_rss_key_data rss_key;
+ 	struct i40e_pf *pf = vsi->back;
+ 	struct i40e_hw *hw = &pf->hw;
+-	bool pf_lut = false;
+-	u8 *rss_lut;
+-	int ret, i;
++	int ret = 0;
+ 
+-	memcpy(&rss_key, seed, sizeof(rss_key));
+-
+-	rss_lut = kzalloc(pf->rss_table_size, GFP_KERNEL);
+-	if (!rss_lut)
+-		return -ENOMEM;
+-
+-	/* Populate the LUT with max no. of queues in round robin fashion */
+-	for (i = 0; i < vsi->rss_table_size; i++)
+-		rss_lut[i] = i % vsi->rss_size;
+-
+-	ret = i40e_aq_set_rss_key(hw, vsi->id, &rss_key);
+-	if (ret) {
+-		dev_info(&pf->pdev->dev,
+-			 "Cannot set RSS key, err %s aq_err %s\n",
+-			 i40e_stat_str(&pf->hw, ret),
+-			 i40e_aq_str(&pf->hw, pf->hw.aq.asq_last_status));
+-		goto config_rss_aq_out;
++	if (seed) {
++		struct i40e_aqc_get_set_rss_key_data *seed_dw =
++			(struct i40e_aqc_get_set_rss_key_data *)seed;
++		ret = i40e_aq_set_rss_key(hw, vsi->id, seed_dw);
++		if (ret) {
++			dev_info(&pf->pdev->dev,
++				 "Cannot set RSS key, err %s aq_err %s\n",
++				 i40e_stat_str(hw, ret),
++				 i40e_aq_str(hw, hw->aq.asq_last_status));
++			return ret;
++		}
+ 	}
++	if (lut) {
++		bool pf_lut = vsi->type == I40E_VSI_MAIN ? true : false;
+ 
+-	if (vsi->type == I40E_VSI_MAIN)
+-		pf_lut = true;
+-
+-	ret = i40e_aq_set_rss_lut(hw, vsi->id, pf_lut, rss_lut,
+-				  vsi->rss_table_size);
+-	if (ret)
+-		dev_info(&pf->pdev->dev,
+-			 "Cannot set RSS lut, err %s aq_err %s\n",
+-			 i40e_stat_str(&pf->hw, ret),
+-			 i40e_aq_str(&pf->hw, pf->hw.aq.asq_last_status));
+-
+-config_rss_aq_out:
+-	kfree(rss_lut);
++		ret = i40e_aq_set_rss_lut(hw, vsi->id, pf_lut, lut, lut_size);
++		if (ret) {
++			dev_info(&pf->pdev->dev,
++				 "Cannot set RSS lut, err %s aq_err %s\n",
++				 i40e_stat_str(hw, ret),
++				 i40e_aq_str(hw, hw->aq.asq_last_status));
++			return ret;
++		}
++	}
+ 	return ret;
+ }
+ 

@@ -1,0 +1,37 @@
+From fcff03813a7c612873303037cef5ba0329850c35 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
+Date: Thu, 8 Sep 2016 11:30:21 +0200
+Subject: ARM: clk-imx35: fix name for ckil clk
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+From: Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
+
+commit fcff03813a7c612873303037cef5ba0329850c35 upstream.
+
+This fixes
+	[    0.000000] i.MX clk 82: register failed with -17
+because the name is duplicated.
+
+Signed-off-by: Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
+Fixes: 3713e3f5e927 ("clk: imx35: define two clocks for rtc")
+Acked-by: Shawn Guo <shawnguo@kernel.org>
+Signed-off-by: Stephen Boyd <sboyd@codeaurora.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/clk/imx/clk-imx35.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/drivers/clk/imx/clk-imx35.c
++++ b/drivers/clk/imx/clk-imx35.c
+@@ -115,7 +115,7 @@ static void __init _mx35_clocks_init(voi
+ 	}
+ 
+ 	clk[ckih] = imx_clk_fixed("ckih", 24000000);
+-	clk[ckil] = imx_clk_fixed("ckih", 32768);
++	clk[ckil] = imx_clk_fixed("ckil", 32768);
+ 	clk[mpll] = imx_clk_pllv1(IMX_PLLV1_IMX35, "mpll", "ckih", base + MX35_CCM_MPCTL);
+ 	clk[ppll] = imx_clk_pllv1(IMX_PLLV1_IMX35, "ppll", "ckih", base + MX35_CCM_PPCTL);
+ 

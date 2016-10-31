@@ -1,0 +1,33 @@
+From 7514e3688811e610640ec2201ca14dfebfe13442 Mon Sep 17 00:00:00 2001
+From: Wei Yongjun <weiyongjun1@huawei.com>
+Date: Sat, 17 Sep 2016 16:01:22 +0000
+Subject: crypto: ccp - Fix return value check in ccp_dmaengine_register()
+
+From: Wei Yongjun <weiyongjun1@huawei.com>
+
+commit 7514e3688811e610640ec2201ca14dfebfe13442 upstream.
+
+Fix the retrn value check which testing the wrong variable
+in ccp_dmaengine_register().
+
+Fixes: 58ea8abf4904 ("crypto: ccp - Register the CCP as a DMA resource")
+Signed-off-by: Wei Yongjun <weiyongjun1@huawei.com>
+Acked-by: Gary R Hook <gary.hook@amd.com>
+Signed-off-by: Herbert Xu <herbert@gondor.apana.org.au>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/crypto/ccp/ccp-dmaengine.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/drivers/crypto/ccp/ccp-dmaengine.c
++++ b/drivers/crypto/ccp/ccp-dmaengine.c
+@@ -650,7 +650,7 @@ int ccp_dmaengine_register(struct ccp_de
+ 	dma_desc_cache_name = devm_kasprintf(ccp->dev, GFP_KERNEL,
+ 					     "%s-dmaengine-desc-cache",
+ 					     ccp->name);
+-	if (!dma_cmd_cache_name)
++	if (!dma_desc_cache_name)
+ 		return -ENOMEM;
+ 	ccp->dma_desc_cache = kmem_cache_create(dma_desc_cache_name,
+ 						sizeof(struct ccp_dma_desc),

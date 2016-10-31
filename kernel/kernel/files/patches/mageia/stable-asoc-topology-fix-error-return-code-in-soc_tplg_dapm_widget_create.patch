@@ -1,0 +1,31 @@
+From 8ae3ea48df0d746b663057cf0b972a18d0777b7b Mon Sep 17 00:00:00 2001
+From: Wei Yongjun <weiyj.lk@gmail.com>
+Date: Wed, 10 Aug 2016 13:43:12 +0000
+Subject: ASoC: topology: Fix error return code in soc_tplg_dapm_widget_create()
+
+From: Wei Yongjun <weiyj.lk@gmail.com>
+
+commit 8ae3ea48df0d746b663057cf0b972a18d0777b7b upstream.
+
+Fix to return error code -ENOMEM instead of 0 when failed to create
+widget, as done elsewhere in this function.
+
+Fixes: 8a9782346dcc ("ASoC: topology: Add topology core")
+Signed-off-by: Wei Yongjun <weiyj.lk@gmail.com>
+Signed-off-by: Mark Brown <broonie@kernel.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ sound/soc/soc-topology.c |    1 +
+ 1 file changed, 1 insertion(+)
+
+--- a/sound/soc/soc-topology.c
++++ b/sound/soc/soc-topology.c
+@@ -1475,6 +1475,7 @@ widget:
+ 	if (widget == NULL) {
+ 		dev_err(tplg->dev, "ASoC: failed to create widget %s controls\n",
+ 			w->name);
++		ret = -ENOMEM;
+ 		goto hdr_err;
+ 	}
+ 

@@ -1,0 +1,43 @@
+From 05a76d3d6ad1ee9f9814f88949cc9305fc165460 Mon Sep 17 00:00:00 2001
+From: Lyude <cpaul@redhat.com>
+Date: Wed, 17 Aug 2016 15:55:57 -0400
+Subject: drm/i915/skl: Ensure pipes with changed wms get added to the state
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+From: Lyude <cpaul@redhat.com>
+
+commit 05a76d3d6ad1ee9f9814f88949cc9305fc165460 upstream.
+
+If we're enabling a pipe, we'll need to modify the watermarks on all
+active planes. Since those planes won't be added to the state on
+their own, we need to add them ourselves.
+
+Signed-off-by: Lyude <cpaul@redhat.com>
+Reviewed-by: Matt Roper <matthew.d.roper@intel.com>
+Cc: Ville Syrjälä <ville.syrjala@linux.intel.com>
+Cc: Daniel Vetter <daniel.vetter@intel.com>
+Cc: Radhakrishna Sripada <radhakrishna.sripada@intel.com>
+Cc: Hans de Goede <hdegoede@redhat.com>
+Signed-off-by: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/1471463761-26796-6-git-send-email-cpaul@redhat.com
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/i915/intel_pm.c |    4 ++++
+ 1 file changed, 4 insertions(+)
+
+--- a/drivers/gpu/drm/i915/intel_pm.c
++++ b/drivers/gpu/drm/i915/intel_pm.c
+@@ -4065,6 +4065,10 @@ skl_compute_ddb(struct drm_atomic_state
+ 		ret = skl_ddb_add_affected_planes(cstate);
+ 		if (ret)
+ 			return ret;
++
++		ret = drm_atomic_add_affected_planes(state, &intel_crtc->base);
++		if (ret)
++			return ret;
+ 	}
+ 
+ 	return 0;

@@ -1,0 +1,50 @@
+From 4973ca9a01e2354b159acedec1b9b8eb8de02ab7 Mon Sep 17 00:00:00 2001
+From: "Steinar H. Gunderson" <sgunderson@bigfoot.com>
+Date: Sun, 9 Oct 2016 14:21:50 +0200
+Subject: HID: add quirk for Akai MIDImix.
+
+From: Steinar H. Gunderson <sgunderson@bigfoot.com>
+
+commit 4973ca9a01e2354b159acedec1b9b8eb8de02ab7 upstream.
+
+The Akai MIDImix (09e8:0031) is a MIDI fader controller that speaks
+regular MIDI and works well with Linux. However, initialization gets
+delayed due to reports timeout:
+
+  [3643645.631124] hid-generic 0003:09E8:0031.0020: timeout initializing reports
+  [3643645.632416] hid-generic 0003:09E8:0031.0020: hiddev0: USB HID v1.11 Device [AKAI MIDI Mix] on usb-0000:00:14.0-2/input0
+
+Adding "usbhid.quirks=0x09e8:0x0031:0x20000000" on the kernel
+command line makes the issues go away.
+
+Signed-off-by: Steinar H. Gunderson <sgunderson@bigfoot.com>
+Signed-off-by: Jiri Kosina <jkosina@suse.cz>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/hid/hid-ids.h           |    3 +++
+ drivers/hid/usbhid/hid-quirks.c |    1 +
+ 2 files changed, 4 insertions(+)
+
+--- a/drivers/hid/hid-ids.h
++++ b/drivers/hid/hid-ids.h
+@@ -64,6 +64,9 @@
+ #define USB_VENDOR_ID_AKAI		0x2011
+ #define USB_DEVICE_ID_AKAI_MPKMINI2	0x0715
+ 
++#define USB_VENDOR_ID_AKAI_09E8		0x09E8
++#define USB_DEVICE_ID_AKAI_09E8_MIDIMIX	0x0031
++
+ #define USB_VENDOR_ID_ALCOR		0x058f
+ #define USB_DEVICE_ID_ALCOR_USBRS232	0x9720
+ 
+--- a/drivers/hid/usbhid/hid-quirks.c
++++ b/drivers/hid/usbhid/hid-quirks.c
+@@ -56,6 +56,7 @@ static const struct hid_blacklist {
+ 
+ 	{ USB_VENDOR_ID_AIREN, USB_DEVICE_ID_AIREN_SLIMPLUS, HID_QUIRK_NOGET },
+ 	{ USB_VENDOR_ID_AKAI, USB_DEVICE_ID_AKAI_MPKMINI2, HID_QUIRK_NO_INIT_REPORTS },
++	{ USB_VENDOR_ID_AKAI_09E8, USB_DEVICE_ID_AKAI_09E8_MIDIMIX, HID_QUIRK_NO_INIT_REPORTS },
+ 	{ USB_VENDOR_ID_ATEN, USB_DEVICE_ID_ATEN_UC100KM, HID_QUIRK_NOGET },
+ 	{ USB_VENDOR_ID_ATEN, USB_DEVICE_ID_ATEN_CS124U, HID_QUIRK_NOGET },
+ 	{ USB_VENDOR_ID_ATEN, USB_DEVICE_ID_ATEN_2PORTKVM, HID_QUIRK_NOGET },

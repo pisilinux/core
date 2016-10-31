@@ -1,0 +1,111 @@
+From 16c83fad79ca912b8b5bbdcb5272794a2be41262 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>
+Date: Mon, 3 Oct 2016 10:55:16 +0300
+Subject: drm/i915: Allow DP to work w/o EDID
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+From: Ville Syrjälä <ville.syrjala@linux.intel.com>
+
+commit 16c83fad79ca912b8b5bbdcb5272794a2be41262 upstream.
+
+Allow returning "connected" or "unknown" connector status for DP branch
+devices that don't have an EDID. Currently we'd claim the thing as
+"disconnected" if there is no EDID.
+
+This stuff used to broken already, I think, but it got more broken by
+commit f21a21983ef1 ("drm/i915: Splitting intel_dp_detect")
+
+Cc: Damien Cassou <damien@cassou.me>
+Cc: freedesktop.org@gp.mailgun.org
+Cc: Arno <blouin.arno@gmail.com>
+Cc: Shubhangi Shrivastava <shubhangi.shrivastava@intel.com>
+Cc: Sivakumar Thulasimani <sivakumar.thulasimani@intel.com>
+Cc: Ander Conselvan de Oliveira <conselvan2@gmail.com>
+Tested-by: Arno <blouin.arno@gmail.com>
+Fixes: f21a21983ef1 ("drm/i915: Splitting intel_dp_detect")
+Bugzilla: https://bugs.freedesktop.org/show_bug.cgi?id=83348
+Signed-off-by: Ville Syrjälä <ville.syrjala@linux.intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/1475481316-8194-2-git-send-email-ville.syrjala@linux.intel.com
+Reviewed-by: Ander Conselvan de Oliveira <conselvan2@gmail.com>
+(cherry picked from commit 5cb651a7959310ef4dbb0b93f005b10286789656)
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/i915/intel_dp.c |   22 +++++++++-------------
+ 1 file changed, 9 insertions(+), 13 deletions(-)
+
+--- a/drivers/gpu/drm/i915/intel_dp.c
++++ b/drivers/gpu/drm/i915/intel_dp.c
+@@ -4207,7 +4207,7 @@ intel_dp_unset_edid(struct intel_dp *int
+ 	intel_dp->has_audio = false;
+ }
+ 
+-static void
++static enum drm_connector_status
+ intel_dp_long_pulse(struct intel_connector *intel_connector)
+ {
+ 	struct drm_connector *connector = &intel_connector->base;
+@@ -4232,7 +4232,7 @@ intel_dp_long_pulse(struct intel_connect
+ 	else
+ 		status = connector_status_disconnected;
+ 
+-	if (status != connector_status_connected) {
++	if (status == connector_status_disconnected) {
+ 		intel_dp->compliance_test_active = 0;
+ 		intel_dp->compliance_test_type = 0;
+ 		intel_dp->compliance_test_data = 0;
+@@ -4284,8 +4284,8 @@ intel_dp_long_pulse(struct intel_connect
+ 	intel_dp->aux.i2c_defer_count = 0;
+ 
+ 	intel_dp_set_edid(intel_dp);
+-
+-	status = connector_status_connected;
++	if (is_edp(intel_dp) || intel_connector->detect_edid)
++		status = connector_status_connected;
+ 	intel_dp->detect_done = true;
+ 
+ 	/* Try to read the source of the interrupt */
+@@ -4303,12 +4303,11 @@ intel_dp_long_pulse(struct intel_connect
+ 	}
+ 
+ out:
+-	if ((status != connector_status_connected) &&
+-	    (intel_dp->is_mst == false))
++	if (status != connector_status_connected && !intel_dp->is_mst)
+ 		intel_dp_unset_edid(intel_dp);
+ 
+ 	intel_display_power_put(to_i915(dev), power_domain);
+-	return;
++	return status;
+ }
+ 
+ static enum drm_connector_status
+@@ -4317,7 +4316,7 @@ intel_dp_detect(struct drm_connector *co
+ 	struct intel_dp *intel_dp = intel_attached_dp(connector);
+ 	struct intel_digital_port *intel_dig_port = dp_to_dig_port(intel_dp);
+ 	struct intel_encoder *intel_encoder = &intel_dig_port->base;
+-	struct intel_connector *intel_connector = to_intel_connector(connector);
++	enum drm_connector_status status = connector->status;
+ 
+ 	DRM_DEBUG_KMS("[CONNECTOR:%d:%s]\n",
+ 		      connector->base.id, connector->name);
+@@ -4332,14 +4331,11 @@ intel_dp_detect(struct drm_connector *co
+ 
+ 	/* If full detect is not performed yet, do a full detect */
+ 	if (!intel_dp->detect_done)
+-		intel_dp_long_pulse(intel_dp->attached_connector);
++		status = intel_dp_long_pulse(intel_dp->attached_connector);
+ 
+ 	intel_dp->detect_done = false;
+ 
+-	if (is_edp(intel_dp) || intel_connector->detect_edid)
+-		return connector_status_connected;
+-	else
+-		return connector_status_disconnected;
++	return status;
+ }
+ 
+ static void

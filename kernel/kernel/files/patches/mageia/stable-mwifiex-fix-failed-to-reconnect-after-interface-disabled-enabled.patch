@@ -1,0 +1,39 @@
+From c8ccf3ade7851054f82bf88f5fcd393a394038a3 Mon Sep 17 00:00:00 2001
+From: Amitkumar Karwar <akarwar@marvell.com>
+Date: Mon, 25 Jul 2016 21:21:06 +0530
+Subject: mwifiex: fix failed to reconnect after interface disabled/enabled
+
+From: Amitkumar Karwar <akarwar@marvell.com>
+
+commit c8ccf3ade7851054f82bf88f5fcd393a394038a3 upstream.
+
+Recent patch "mwifiex: fix NULL pointer" skips extended scan event
+handling when suspend is in progress. It created a problem for scan
+after interface disabled/enabled case.
+
+This patch solves the problem by checking netif_running() status.
+
+Fixes:16d25da94f3d654 ("mwifiex: fix NULL pointer dereference during suspend")
+Signed-off-by: Amitkumar Karwar <akarwar@marvell.com>
+Signed-off-by: Kalle Valo <kvalo@codeaurora.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/net/wireless/marvell/mwifiex/sta_event.c |    6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+--- a/drivers/net/wireless/marvell/mwifiex/sta_event.c
++++ b/drivers/net/wireless/marvell/mwifiex/sta_event.c
+@@ -708,7 +708,11 @@ int mwifiex_process_sta_event(struct mwi
+ 
+ 	case EVENT_EXT_SCAN_REPORT:
+ 		mwifiex_dbg(adapter, EVENT, "event: EXT_SCAN Report\n");
+-		if (adapter->ext_scan && !priv->scan_aborting)
++		/* We intend to skip this event during suspend, but handle
++		 * it in interface disabled case
++		 */
++		if (adapter->ext_scan && (!priv->scan_aborting ||
++					  !netif_running(priv->netdev)))
+ 			ret = mwifiex_handle_event_ext_scan_report(priv,
+ 						adapter->event_skb->data);
+ 

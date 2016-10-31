@@ -1,0 +1,33 @@
+From 992f961480d23e9ef9e686e512a419efef723523 Mon Sep 17 00:00:00 2001
+From: Phil Turnbull <phil.turnbull@oracle.com>
+Date: Fri, 2 Sep 2016 15:35:31 -0400
+Subject: staging: sm750fb: Correctly set CLOCK_PHASE bit of display controller.
+
+From: Phil Turnbull <phil.turnbull@oracle.com>
+
+commit 992f961480d23e9ef9e686e512a419efef723523 upstream.
+
+Commit 6fba39cf32a3 ("staging: sm750fb: use BIT macro for
+PANEL_DISPLAY_CTRL single-bit fields") accidentally changed the
+CLOCK_PHASE logic from '|=' to '=' which clears all the previously set
+bits.
+
+Fixes: 6fba39cf32a3 ("staging: sm750fb: use BIT macro for PANEL_DISPLAY_CTRL single-bit fields")
+Signed-off-by: Phil Turnbull <phil.turnbull@oracle.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/staging/sm750fb/ddk750_mode.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/drivers/staging/sm750fb/ddk750_mode.c
++++ b/drivers/staging/sm750fb/ddk750_mode.c
+@@ -63,7 +63,7 @@ static unsigned long displayControlAdjus
+ 	dispControl |= (CRT_DISPLAY_CTRL_CRTSELECT | CRT_DISPLAY_CTRL_RGBBIT);
+ 
+ 	/* Set bit 14 of display controller */
+-	dispControl = DISPLAY_CTRL_CLOCK_PHASE;
++	dispControl |= DISPLAY_CTRL_CLOCK_PHASE;
+ 
+ 	POKE32(CRT_DISPLAY_CTRL, dispControl);
+ 

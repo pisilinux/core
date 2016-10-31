@@ -1,0 +1,30 @@
+From c4795ca642b8bd76b5b6ffba41ba909543273d43 Mon Sep 17 00:00:00 2001
+From: Alex Deucher <alexander.deucher@amd.com>
+Date: Mon, 22 Aug 2016 16:31:36 -0400
+Subject: drm/amdgpu: fix IB alignment for UVD
+
+From: Alex Deucher <alexander.deucher@amd.com>
+
+commit c4795ca642b8bd76b5b6ffba41ba909543273d43 upstream.
+
+According to the hw team, it should be 16, not 8.
+
+Cc: Peter Fang <peter.fang@amd.com>
+Signed-off-by: Alex Deucher <alexander.deucher@amd.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c
+@@ -292,7 +292,7 @@ static int amdgpu_info_ioctl(struct drm_
+ 			type = AMD_IP_BLOCK_TYPE_UVD;
+ 			ring_mask = adev->uvd.ring.ready ? 1 : 0;
+ 			ib_start_alignment = AMDGPU_GPU_PAGE_SIZE;
+-			ib_size_alignment = 8;
++			ib_size_alignment = 16;
+ 			break;
+ 		case AMDGPU_HW_IP_VCE:
+ 			type = AMD_IP_BLOCK_TYPE_VCE;

@@ -1,0 +1,40 @@
+From 4a236d01b5e0d7e6f4ee9e6c4056fce10b38e8ad Mon Sep 17 00:00:00 2001
+From: Arnd Bergmann <arnd@arndb.de>
+Date: Thu, 15 Sep 2016 17:57:40 +0200
+Subject: staging: android ion/hisi: fix dependencies
+
+From: Arnd Bergmann <arnd@arndb.de>
+
+commit 4a236d01b5e0d7e6f4ee9e6c4056fce10b38e8ad upstream.
+
+The newly added Hi6220 Ion code fails to build when the ION_OF helpers
+are not present:
+
+drivers/staging/android/ion/hisilicon/hi6220_ion.o: In function `hi6220_ion_remove':
+hi6220_ion.c:(.text.hi6220_ion_remove+0x4c): undefined reference to `ion_destroy_platform_data'
+drivers/staging/android/ion/hisilicon/hi6220_ion.o: In function `hi6220_ion_probe':
+hi6220_ion.c:(.text.hi6220_ion_probe+0x5c): undefined reference to `ion_parse_dt'
+hi6220_ion.c:(.text.hi6220_ion_probe+0xf8): undefined reference to `ion_destroy_platform_data'
+
+This selects the symbol when needed.
+
+Fixes: 2b40182a19bc ("staging: android: ion: Add ion driver for Hi6220 SoC platform")
+Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+Acked-by: Laura Abbott <labbott@redhat.com>
+Reviewed-by: Sumit Semwal <sumit.semwal@linaro.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/staging/android/ion/Kconfig |    1 +
+ 1 file changed, 1 insertion(+)
+
+--- a/drivers/staging/android/ion/Kconfig
++++ b/drivers/staging/android/ion/Kconfig
+@@ -36,6 +36,7 @@ config ION_TEGRA
+ config ION_HISI
+ 	tristate "Ion for Hisilicon"
+ 	depends on ARCH_HISI && ION
++	select ION_OF
+ 	help
+ 	  Choose this option if you wish to use ion on Hisilicon Platform.
+ 

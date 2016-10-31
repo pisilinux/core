@@ -1,0 +1,44 @@
+From eefa1d8961584c5b76afded94960ca4344bc638b Mon Sep 17 00:00:00 2001
+From: Mike Marciniszyn <mike.marciniszyn@intel.com>
+Date: Tue, 6 Sep 2016 04:36:33 -0700
+Subject: IB/rdmavt: Correct sparse annotation
+
+From: Mike Marciniszyn <mike.marciniszyn@intel.com>
+
+commit eefa1d8961584c5b76afded94960ca4344bc638b upstream.
+
+The __must_hold() is sufficent to correct the sparse
+context imbalance inside a function.
+
+Per Documentation/sparse.txt:
+__must_hold - The specified lock is held on function entry and exit.
+
+Fixes: Commit c0a67f6ba356 ("IB/rdmavt: Annotate rvt_reset_qp()")
+Reviewed-by: Dennis Dalessandro <dennis.dalessandro@intel.com>
+Signed-off-by: Mike Marciniszyn <mike.marciniszyn@intel.com>
+Signed-off-by: Dennis Dalessandro <dennis.dalessandro@intel.com>
+Signed-off-by: Doug Ledford <dledford@redhat.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/infiniband/sw/rdmavt/qp.c |    9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
+
+--- a/drivers/infiniband/sw/rdmavt/qp.c
++++ b/drivers/infiniband/sw/rdmavt/qp.c
+@@ -501,12 +501,9 @@ static void rvt_remove_qp(struct rvt_dev
+  */
+ static void rvt_reset_qp(struct rvt_dev_info *rdi, struct rvt_qp *qp,
+ 		  enum ib_qp_type type)
+-	__releases(&qp->s_lock)
+-	__releases(&qp->s_hlock)
+-	__releases(&qp->r_lock)
+-	__acquires(&qp->r_lock)
+-	__acquires(&qp->s_hlock)
+-	__acquires(&qp->s_lock)
++	__must_hold(&qp->r_lock)
++	__must_hold(&qp->s_hlock)
++	__must_hold(&qp->s_lock)
+ {
+ 	if (qp->state != IB_QPS_RESET) {
+ 		qp->state = IB_QPS_RESET;

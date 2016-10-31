@@ -1,0 +1,479 @@
+From 27082493e9c6371b05370a619ab9d2877c5f4726 Mon Sep 17 00:00:00 2001
+From: Lyude <cpaul@redhat.com>
+Date: Wed, 24 Aug 2016 07:48:10 +0200
+Subject: drm/i915/skl: Update DDB values atomically with wms/plane attrs
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+From: Lyude <cpaul@redhat.com>
+
+commit 27082493e9c6371b05370a619ab9d2877c5f4726 upstream.
+
+Now that we can hook into update_crtcs and control the order in which we
+update CRTCs at each modeset, we can finish the final step of fixing
+Skylake's watermark handling by performing DDB updates at the same time
+as plane updates and watermark updates.
+
+The first major change in this patch is skl_update_crtcs(), which
+handles ensuring that we order each CRTC update in our atomic commits
+properly so that they honor the DDB flush order.
+
+The second major change in this patch is the order in which we flush the
+pipes. While the previous order may have worked, it can't be used in
+this approach since it no longer will do the right thing. For example,
+using the old ddb flush order:
+
+We have pipes A, B, and C enabled, and we're disabling C. Initial ddb
+allocation looks like this:
+
+|   A   |   B   |xxxxxxx|
+
+Since we're performing the ddb updates after performing any CRTC
+disablements in intel_atomic_commit_tail(), the space to the right of
+pipe B is unallocated.
+
+1. Flush pipes with new allocation contained into old space. None
+   apply, so we skip this
+2. Flush pipes having their allocation reduced, but overlapping with a
+   previous allocation. None apply, so we also skip this
+3. Flush pipes that got more space allocated. This applies to A and B,
+   giving us the following update order: A, B
+
+This is wrong, since updating pipe A first will cause it to overlap with
+B and potentially burst into flames. Our new order (see the code
+comments for details) would update the pipes in the proper order: B, A.
+
+As well, we calculate the order for each DDB update during the check
+phase, and reference it later in the commit phase when we hit
+skl_update_crtcs().
+
+This long overdue patch fixes the rest of the underruns on Skylake.
+
+Changes since v1:
+ - Add skl_ddb_entry_write() for cursor into skl_write_cursor_wm()
+Changes since v2:
+ - Use the method for updating CRTCs that Ville suggested
+ - In skl_update_wm(), only copy the watermarks for the crtc that was
+   passed to us
+Changes since v3:
+ - Small comment fix in skl_ddb_allocation_overlaps()
+Changes since v4:
+ - Remove the second loop in intel_update_crtcs() and use Ville's
+   suggestion for updating the ddb allocations in the right order
+ - Get rid of the second loop and just use the ddb state as it updates
+   to determine what order to update everything in (thanks for the
+   suggestion Ville)
+ - Simplify skl_ddb_allocation_overlaps()
+ - Split actual overlap checking into it's own helper
+
+Fixes: 0e8fb7ba7ca5 ("drm/i915/skl: Flush the WM configuration")
+Fixes: 8211bd5bdf5e ("drm/i915/skl: Program the DDB allocation")
+[omitting CC for stable, since this patch will need to be changed for
+such backports first]
+
+Testcase: kms_cursor_legacy
+Testcase: plane-all-modeset-transition
+Signed-off-by: Lyude <cpaul@redhat.com>
+Cc: Ville Syrjälä <ville.syrjala@linux.intel.com>
+Cc: Daniel Vetter <daniel.vetter@intel.com>
+Cc: Radhakrishna Sripada <radhakrishna.sripada@intel.com>
+Cc: Hans de Goede <hdegoede@redhat.com>
+Cc: Matt Roper <matthew.d.roper@intel.com>
+Signed-off-by: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/1471961565-28540-2-git-send-email-cpaul@redhat.com
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/i915/intel_display.c |   93 ++++++++++++++--
+ drivers/gpu/drm/i915/intel_drv.h     |    7 +
+ drivers/gpu/drm/i915/intel_pm.c      |  200 +++++++----------------------------
+ 3 files changed, 132 insertions(+), 168 deletions(-)
+
+--- a/drivers/gpu/drm/i915/intel_display.c
++++ b/drivers/gpu/drm/i915/intel_display.c
+@@ -12967,16 +12967,23 @@ static void verify_wm_state(struct drm_c
+ 			  hw_entry->start, hw_entry->end);
+ 	}
+ 
+-	/* cursor */
+-	hw_entry = &hw_ddb.plane[pipe][PLANE_CURSOR];
+-	sw_entry = &sw_ddb->plane[pipe][PLANE_CURSOR];
+-
+-	if (!skl_ddb_entry_equal(hw_entry, sw_entry)) {
+-		DRM_ERROR("mismatch in DDB state pipe %c cursor "
+-			  "(expected (%u,%u), found (%u,%u))\n",
+-			  pipe_name(pipe),
+-			  sw_entry->start, sw_entry->end,
+-			  hw_entry->start, hw_entry->end);
++	/*
++	 * cursor
++	 * If the cursor plane isn't active, we may not have updated it's ddb
++	 * allocation. In that case since the ddb allocation will be updated
++	 * once the plane becomes visible, we can skip this check
++	 */
++	if (intel_crtc->cursor_addr) {
++		hw_entry = &hw_ddb.plane[pipe][PLANE_CURSOR];
++		sw_entry = &sw_ddb->plane[pipe][PLANE_CURSOR];
++
++		if (!skl_ddb_entry_equal(hw_entry, sw_entry)) {
++			DRM_ERROR("mismatch in DDB state pipe %c cursor "
++				  "(expected (%u,%u), found (%u,%u))\n",
++				  pipe_name(pipe),
++				  sw_entry->start, sw_entry->end,
++				  hw_entry->start, hw_entry->end);
++		}
+ 	}
+ }
+ 
+@@ -13728,6 +13735,65 @@ static void intel_update_crtcs(struct dr
+ 	}
+ }
+ 
++static void skl_update_crtcs(struct drm_atomic_state *state,
++			     unsigned int *crtc_vblank_mask)
++{
++	struct drm_device *dev = state->dev;
++	struct drm_i915_private *dev_priv = to_i915(dev);
++	struct intel_atomic_state *intel_state = to_intel_atomic_state(state);
++	struct drm_crtc *crtc;
++	struct drm_crtc_state *old_crtc_state;
++	struct skl_ddb_allocation *new_ddb = &intel_state->wm_results.ddb;
++	struct skl_ddb_allocation *cur_ddb = &dev_priv->wm.skl_hw.ddb;
++	unsigned int updated = 0;
++	bool progress;
++	enum pipe pipe;
++
++	/*
++	 * Whenever the number of active pipes changes, we need to make sure we
++	 * update the pipes in the right order so that their ddb allocations
++	 * never overlap with eachother inbetween CRTC updates. Otherwise we'll
++	 * cause pipe underruns and other bad stuff.
++	 */
++	do {
++		int i;
++		progress = false;
++
++		for_each_crtc_in_state(state, crtc, old_crtc_state, i) {
++			bool vbl_wait = false;
++			unsigned int cmask = drm_crtc_mask(crtc);
++			pipe = to_intel_crtc(crtc)->pipe;
++
++			if (updated & cmask || !crtc->state->active)
++				continue;
++			if (skl_ddb_allocation_overlaps(state, cur_ddb, new_ddb,
++							pipe))
++				continue;
++
++			updated |= cmask;
++
++			/*
++			 * If this is an already active pipe, it's DDB changed,
++			 * and this isn't the last pipe that needs updating
++			 * then we need to wait for a vblank to pass for the
++			 * new ddb allocation to take effect.
++			 */
++			if (!skl_ddb_allocation_equals(cur_ddb, new_ddb, pipe) &&
++			    !crtc->state->active_changed &&
++			    intel_state->wm_results.dirty_pipes != updated)
++				vbl_wait = true;
++
++			intel_update_crtc(crtc, state, old_crtc_state,
++					  crtc_vblank_mask);
++
++			if (vbl_wait)
++				intel_wait_for_vblank(dev, pipe);
++
++			progress = true;
++		}
++	} while (progress);
++}
++
+ static void intel_atomic_commit_tail(struct drm_atomic_state *state)
+ {
+ 	struct drm_device *dev = state->dev;
+@@ -15303,8 +15369,6 @@ void intel_init_display_hooks(struct drm
+ 		dev_priv->display.crtc_disable = i9xx_crtc_disable;
+ 	}
+ 
+-	dev_priv->display.update_crtcs = intel_update_crtcs;
+-
+ 	/* Returns the core display clock speed */
+ 	if (IS_SKYLAKE(dev_priv) || IS_KABYLAKE(dev_priv))
+ 		dev_priv->display.get_display_clock_speed =
+@@ -15394,6 +15458,11 @@ void intel_init_display_hooks(struct drm
+ 			skl_modeset_calc_cdclk;
+ 	}
+ 
++	if (dev_priv->info.gen >= 9)
++		dev_priv->display.update_crtcs = skl_update_crtcs;
++	else
++		dev_priv->display.update_crtcs = intel_update_crtcs;
++
+ 	switch (INTEL_INFO(dev_priv)->gen) {
+ 	case 2:
+ 		dev_priv->display.queue_flip = intel_gen2_queue_flip;
+--- a/drivers/gpu/drm/i915/intel_drv.h
++++ b/drivers/gpu/drm/i915/intel_drv.h
+@@ -1720,6 +1720,13 @@ void skl_ddb_get_hw_state(struct drm_i91
+ bool skl_can_enable_sagv(struct drm_atomic_state *state);
+ int skl_enable_sagv(struct drm_i915_private *dev_priv);
+ int skl_disable_sagv(struct drm_i915_private *dev_priv);
++bool skl_ddb_allocation_equals(const struct skl_ddb_allocation *old,
++			       const struct skl_ddb_allocation *new,
++			       enum pipe pipe);
++bool skl_ddb_allocation_overlaps(struct drm_atomic_state *state,
++				 const struct skl_ddb_allocation *old,
++				 const struct skl_ddb_allocation *new,
++				 enum pipe pipe);
+ void skl_write_cursor_wm(struct intel_crtc *intel_crtc,
+ 			 const struct skl_wm_values *wm);
+ void skl_write_plane_wm(struct intel_crtc *intel_crtc,
+--- a/drivers/gpu/drm/i915/intel_pm.c
++++ b/drivers/gpu/drm/i915/intel_pm.c
+@@ -3843,6 +3843,11 @@ void skl_write_plane_wm(struct intel_crt
+ 			   wm->plane[pipe][plane][level]);
+ 	}
+ 	I915_WRITE(PLANE_WM_TRANS(pipe, plane), wm->plane_trans[pipe][plane]);
++
++	skl_ddb_entry_write(dev_priv, PLANE_BUF_CFG(pipe, plane),
++			    &wm->ddb.plane[pipe][plane]);
++	skl_ddb_entry_write(dev_priv, PLANE_NV12_BUF_CFG(pipe, plane),
++			    &wm->ddb.y_plane[pipe][plane]);
+ }
+ 
+ void skl_write_cursor_wm(struct intel_crtc *intel_crtc,
+@@ -3859,170 +3864,46 @@ void skl_write_cursor_wm(struct intel_cr
+ 			   wm->plane[pipe][PLANE_CURSOR][level]);
+ 	}
+ 	I915_WRITE(CUR_WM_TRANS(pipe), wm->plane_trans[pipe][PLANE_CURSOR]);
+-}
+-
+-static void skl_write_wm_values(struct drm_i915_private *dev_priv,
+-				const struct skl_wm_values *new)
+-{
+-	struct drm_device *dev = &dev_priv->drm;
+-	struct intel_crtc *crtc;
+-
+-	for_each_intel_crtc(dev, crtc) {
+-		int i;
+-		enum pipe pipe = crtc->pipe;
+-
+-		if ((new->dirty_pipes & drm_crtc_mask(&crtc->base)) == 0)
+-			continue;
+-		if (!crtc->active)
+-			continue;
+-
+-		for (i = 0; i < intel_num_planes(crtc); i++) {
+-			skl_ddb_entry_write(dev_priv,
+-					    PLANE_BUF_CFG(pipe, i),
+-					    &new->ddb.plane[pipe][i]);
+-			skl_ddb_entry_write(dev_priv,
+-					    PLANE_NV12_BUF_CFG(pipe, i),
+-					    &new->ddb.y_plane[pipe][i]);
+-		}
+ 
+-		skl_ddb_entry_write(dev_priv, CUR_BUF_CFG(pipe),
+-				    &new->ddb.plane[pipe][PLANE_CURSOR]);
+-	}
++	skl_ddb_entry_write(dev_priv, CUR_BUF_CFG(pipe),
++			    &wm->ddb.plane[pipe][PLANE_CURSOR]);
+ }
+ 
+-/*
+- * When setting up a new DDB allocation arrangement, we need to correctly
+- * sequence the times at which the new allocations for the pipes are taken into
+- * account or we'll have pipes fetching from space previously allocated to
+- * another pipe.
+- *
+- * Roughly the sequence looks like:
+- *  1. re-allocate the pipe(s) with the allocation being reduced and not
+- *     overlapping with a previous light-up pipe (another way to put it is:
+- *     pipes with their new allocation strickly included into their old ones).
+- *  2. re-allocate the other pipes that get their allocation reduced
+- *  3. allocate the pipes having their allocation increased
+- *
+- * Steps 1. and 2. are here to take care of the following case:
+- * - Initially DDB looks like this:
+- *     |   B    |   C    |
+- * - enable pipe A.
+- * - pipe B has a reduced DDB allocation that overlaps with the old pipe C
+- *   allocation
+- *     |  A  |  B  |  C  |
+- *
+- * We need to sequence the re-allocation: C, B, A (and not B, C, A).
+- */
+-
+-static void
+-skl_wm_flush_pipe(struct drm_i915_private *dev_priv, enum pipe pipe, int pass)
++bool skl_ddb_allocation_equals(const struct skl_ddb_allocation *old,
++			       const struct skl_ddb_allocation *new,
++			       enum pipe pipe)
+ {
+-	int plane;
+-
+-	DRM_DEBUG_KMS("flush pipe %c (pass %d)\n", pipe_name(pipe), pass);
+-
+-	for_each_plane(dev_priv, pipe, plane) {
+-		I915_WRITE(PLANE_SURF(pipe, plane),
+-			   I915_READ(PLANE_SURF(pipe, plane)));
+-	}
+-	I915_WRITE(CURBASE(pipe), I915_READ(CURBASE(pipe)));
++	return new->pipe[pipe].start == old->pipe[pipe].start &&
++	       new->pipe[pipe].end == old->pipe[pipe].end;
+ }
+ 
+-static bool
+-skl_ddb_allocation_included(const struct skl_ddb_allocation *old,
+-			    const struct skl_ddb_allocation *new,
+-			    enum pipe pipe)
++static inline bool skl_ddb_entries_overlap(const struct skl_ddb_entry *a,
++					   const struct skl_ddb_entry *b)
+ {
+-	uint16_t old_size, new_size;
+-
+-	old_size = skl_ddb_entry_size(&old->pipe[pipe]);
+-	new_size = skl_ddb_entry_size(&new->pipe[pipe]);
+-
+-	return old_size != new_size &&
+-	       new->pipe[pipe].start >= old->pipe[pipe].start &&
+-	       new->pipe[pipe].end <= old->pipe[pipe].end;
++	return a->start < b->end && b->start < a->end;
+ }
+ 
+-static void skl_flush_wm_values(struct drm_i915_private *dev_priv,
+-				struct skl_wm_values *new_values)
++bool skl_ddb_allocation_overlaps(struct drm_atomic_state *state,
++				 const struct skl_ddb_allocation *old,
++				 const struct skl_ddb_allocation *new,
++				 enum pipe pipe)
+ {
+-	struct drm_device *dev = &dev_priv->drm;
+-	struct skl_ddb_allocation *cur_ddb, *new_ddb;
+-	bool reallocated[I915_MAX_PIPES] = {};
+-	struct intel_crtc *crtc;
+-	enum pipe pipe;
+-
+-	new_ddb = &new_values->ddb;
+-	cur_ddb = &dev_priv->wm.skl_hw.ddb;
+-
+-	/*
+-	 * First pass: flush the pipes with the new allocation contained into
+-	 * the old space.
+-	 *
+-	 * We'll wait for the vblank on those pipes to ensure we can safely
+-	 * re-allocate the freed space without this pipe fetching from it.
+-	 */
+-	for_each_intel_crtc(dev, crtc) {
+-		if (!crtc->active)
+-			continue;
+-
+-		pipe = crtc->pipe;
+-
+-		if (!skl_ddb_allocation_included(cur_ddb, new_ddb, pipe))
+-			continue;
+-
+-		skl_wm_flush_pipe(dev_priv, pipe, 1);
+-		intel_wait_for_vblank(dev, pipe);
+-
+-		reallocated[pipe] = true;
+-	}
+-
+-
+-	/*
+-	 * Second pass: flush the pipes that are having their allocation
+-	 * reduced, but overlapping with a previous allocation.
+-	 *
+-	 * Here as well we need to wait for the vblank to make sure the freed
+-	 * space is not used anymore.
+-	 */
+-	for_each_intel_crtc(dev, crtc) {
+-		if (!crtc->active)
+-			continue;
++	struct drm_device *dev = state->dev;
++	struct intel_crtc *intel_crtc;
++	enum pipe otherp;
+ 
+-		pipe = crtc->pipe;
++	for_each_intel_crtc(dev, intel_crtc) {
++		otherp = intel_crtc->pipe;
+ 
+-		if (reallocated[pipe])
++		if (otherp == pipe)
+ 			continue;
+ 
+-		if (skl_ddb_entry_size(&new_ddb->pipe[pipe]) <
+-		    skl_ddb_entry_size(&cur_ddb->pipe[pipe])) {
+-			skl_wm_flush_pipe(dev_priv, pipe, 2);
+-			intel_wait_for_vblank(dev, pipe);
+-			reallocated[pipe] = true;
+-		}
++		if (skl_ddb_entries_overlap(&new->pipe[pipe],
++					    &old->pipe[otherp]))
++			return true;
+ 	}
+ 
+-	/*
+-	 * Third pass: flush the pipes that got more space allocated.
+-	 *
+-	 * We don't need to actively wait for the update here, next vblank
+-	 * will just get more DDB space with the correct WM values.
+-	 */
+-	for_each_intel_crtc(dev, crtc) {
+-		if (!crtc->active)
+-			continue;
+-
+-		pipe = crtc->pipe;
+-
+-		/*
+-		 * At this point, only the pipes more space than before are
+-		 * left to re-allocate.
+-		 */
+-		if (reallocated[pipe])
+-			continue;
+-
+-		skl_wm_flush_pipe(dev_priv, pipe, 3);
+-	}
++	return false;
+ }
+ 
+ static int skl_update_pipe_wm(struct drm_crtc_state *cstate,
+@@ -4224,7 +4105,7 @@ static void skl_update_wm(struct drm_crt
+ 	struct skl_wm_values *hw_vals = &dev_priv->wm.skl_hw;
+ 	struct intel_crtc_state *cstate = to_intel_crtc_state(crtc->state);
+ 	struct skl_pipe_wm *pipe_wm = &cstate->wm.skl.optimal;
+-	int pipe;
++	enum pipe pipe = intel_crtc->pipe;
+ 
+ 	if ((results->dirty_pipes & drm_crtc_mask(crtc)) == 0)
+ 		return;
+@@ -4233,15 +4114,22 @@ static void skl_update_wm(struct drm_crt
+ 
+ 	mutex_lock(&dev_priv->wm.wm_mutex);
+ 
+-	skl_write_wm_values(dev_priv, results);
+-	skl_flush_wm_values(dev_priv, results);
+-
+ 	/*
+-	 * Store the new configuration (but only for the pipes that have
+-	 * changed; the other values weren't recomputed).
++	 * If this pipe isn't active already, we're going to be enabling it
++	 * very soon. Since it's safe to update a pipe's ddb allocation while
++	 * the pipe's shut off, just do so here. Already active pipes will have
++	 * their watermarks updated once we update their planes.
+ 	 */
+-	for_each_pipe_masked(dev_priv, pipe, results->dirty_pipes)
+-		skl_copy_wm_for_pipe(hw_vals, results, pipe);
++	if (crtc->state->active_changed) {
++		int plane;
++
++		for (plane = 0; plane < intel_num_planes(intel_crtc); plane++)
++			skl_write_plane_wm(intel_crtc, results, plane);
++
++		skl_write_cursor_wm(intel_crtc, results);
++	}
++
++	skl_copy_wm_for_pipe(hw_vals, results, pipe);
+ 
+ 	mutex_unlock(&dev_priv->wm.wm_mutex);
+ }

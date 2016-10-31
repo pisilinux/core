@@ -1,0 +1,45 @@
+From 1335a9516d3d52f157ad87456efdd8dc9ae1747b Mon Sep 17 00:00:00 2001
+From: Larry Finger <Larry.Finger@lwfinger.net>
+Date: Sun, 5 Jun 2016 14:11:19 -0500
+Subject: staging: r8188eu: Fix scheduling while atomic splat
+
+From: Larry Finger <Larry.Finger@lwfinger.net>
+
+commit 1335a9516d3d52f157ad87456efdd8dc9ae1747b upstream.
+
+Commit fadbe0cd5292851608e2e01b91d9295fa287b9fe ("staging: rtl8188eu:
+Remove rtw_zmalloc(), wrapper for kzalloc()") changed all allocation
+calls to be GFP_KERNEL even though the original wrapper was testing
+to determine if the caller was in atomic mode. Most of the mistakes
+were corrected with commit 33dc85c3c667209c930b2dac5ccbc2a365e06b7a
+("staging: r8188eu: Fix scheduling while atomic error introduced in
+commit fadbe0cd"); however, two kzalloc calls were missed as the
+call only happens when the driver is shutting down.
+
+Fixes: fadbe0cd5292851608e2e01b91d9295fa287b9fe ("staging: rtl8188eu: Remove rtw_zmalloc(), wrapper for kzalloc()")
+Signed-off-by: Larry Finger <Larry.Finger@lwfinger.net>
+Cc: navin patidar <navin.patidar@gmail.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/staging/rtl8188eu/core/rtw_cmd.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+--- a/drivers/staging/rtl8188eu/core/rtw_cmd.c
++++ b/drivers/staging/rtl8188eu/core/rtw_cmd.c
+@@ -670,13 +670,13 @@ u8 rtw_addbareq_cmd(struct adapter *pada
+ 	u8	res = _SUCCESS;
+ 
+ 
+-	ph2c = kzalloc(sizeof(struct cmd_obj), GFP_KERNEL);
++	ph2c = kzalloc(sizeof(struct cmd_obj), GFP_ATOMIC);
+ 	if (!ph2c) {
+ 		res = _FAIL;
+ 		goto exit;
+ 	}
+ 
+-	paddbareq_parm = kzalloc(sizeof(struct addBaReq_parm), GFP_KERNEL);
++	paddbareq_parm = kzalloc(sizeof(struct addBaReq_parm), GFP_ATOMIC);
+ 	if (!paddbareq_parm) {
+ 		kfree(ph2c);
+ 		res = _FAIL;

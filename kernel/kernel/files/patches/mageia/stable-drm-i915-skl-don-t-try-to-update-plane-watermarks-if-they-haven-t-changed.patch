@@ -1,0 +1,79 @@
+From ccebc23b57c313229526dc76383ce82f5e0b9001 Mon Sep 17 00:00:00 2001
+From: Lyude <cpaul@redhat.com>
+Date: Mon, 29 Aug 2016 12:31:27 -0400
+Subject: drm/i915/skl: Don't try to update plane watermarks if they haven't changed
+
+From: Lyude <cpaul@redhat.com>
+
+commit ccebc23b57c313229526dc76383ce82f5e0b9001 upstream.
+
+i915 sometimes needs to disable planes in the middle of an atomic
+commit, and then reenable them later in the same commit. Because of
+this, we can't make the assumption that the state of the plane actually
+changed. Since the state of the plane hasn't actually changed, neither
+have it's watermarks. And if the watermarks hasn't changed then we
+haven't populated skl_results with anything, which means we'll end up
+zeroing out a plane's watermarks in the middle of the atomic commit
+without restoring them later.
+
+Simple reproduction recipe:
+ - Get a SKL laptop, launch any kind of X session
+ - Get two extra monitors
+ - Keep hotplugging both displays (so that the display configuration
+   jumps from 1 active pipe to 3 active pipes and back)
+ - Eventually underrun
+
+Changes since v1:
+ - Fix incorrect use of "it's"
+Changes since v2:
+ - Add reproduction recipe
+
+Signed-off-by: Lyude <cpaul@redhat.com>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Fixes: 62e0fb880123 ("drm/i915/skl: Update plane watermarks atomically during plane updates")
+Signed-off-by: Lyude <cpaul@redhat.com>
+Testcase: kms_plane
+Signed-off-by: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/1472488288-27280-1-git-send-email-cpaul@redhat.com
+Cc: drm-intel-fixes@lists.freedesktop.org
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+
+---
+ drivers/gpu/drm/i915/intel_display.c |    7 ++++++-
+ drivers/gpu/drm/i915/intel_sprite.c  |    8 ++++++++
+ 2 files changed, 14 insertions(+), 1 deletion(-)
+
+--- a/drivers/gpu/drm/i915/intel_display.c
++++ b/drivers/gpu/drm/i915/intel_display.c
+@@ -3068,7 +3068,12 @@ static void skylake_disable_primary_plan
+ 	struct intel_crtc *intel_crtc = to_intel_crtc(crtc);
+ 	int pipe = intel_crtc->pipe;
+ 
+-	skl_write_plane_wm(intel_crtc, &dev_priv->wm.skl_results, 0);
++	/*
++	 * We only populate skl_results on watermark updates, and if the
++	 * plane's visiblity isn't actually changing neither is its watermarks.
++	 */
++	if (!to_intel_plane_state(crtc->primary->state)->visible)
++		skl_write_plane_wm(intel_crtc, &dev_priv->wm.skl_results, 0);
+ 
+ 	I915_WRITE(PLANE_CTL(pipe, 0), 0);
+ 	I915_WRITE(PLANE_SURF(pipe, 0), 0);
+--- a/drivers/gpu/drm/i915/intel_sprite.c
++++ b/drivers/gpu/drm/i915/intel_sprite.c
+@@ -314,6 +314,14 @@ skl_disable_plane(struct drm_plane *dpla
+ 	const int pipe = intel_plane->pipe;
+ 	const int plane = intel_plane->plane + 1;
+ 
++	/*
++	 * We only populate skl_results on watermark updates, and if the
++	 * plane's visiblity isn't actually changing neither is its watermarks.
++	 */
++	if (!to_intel_plane_state(dplane->state)->visible)
++		skl_write_plane_wm(to_intel_crtc(crtc),
++				   &dev_priv->wm.skl_results, plane);
++
+ 	I915_WRITE(PLANE_CTL(pipe, plane), 0);
+ 
+ 	I915_WRITE(PLANE_SURF(pipe, plane), 0);

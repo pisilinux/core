@@ -1,0 +1,35 @@
+From 50d2e6dc1f83db0563c7d6603967bf9585ce934b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ondrej=20Mosn=C3=A1=C4=8Dek?= <omosnacek@gmail.com>
+Date: Fri, 23 Sep 2016 10:47:32 +0200
+Subject: crypto: gcm - Fix IV buffer size in crypto_gcm_setkey
+
+From: Ondrej Mosnáček <omosnacek@gmail.com>
+
+commit 50d2e6dc1f83db0563c7d6603967bf9585ce934b upstream.
+
+The cipher block size for GCM is 16 bytes, and thus the CTR transform
+used in crypto_gcm_setkey() will also expect a 16-byte IV. However,
+the code currently reserves only 8 bytes for the IV, causing
+an out-of-bounds access in the CTR transform. This patch fixes
+the issue by setting the size of the IV buffer to 16 bytes.
+
+Fixes: 84c911523020 ("[CRYPTO] gcm: Add support for async ciphers")
+Signed-off-by: Ondrej Mosnacek <omosnacek@gmail.com>
+Signed-off-by: Herbert Xu <herbert@gondor.apana.org.au>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ crypto/gcm.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/crypto/gcm.c
++++ b/crypto/gcm.c
+@@ -117,7 +117,7 @@ static int crypto_gcm_setkey(struct cryp
+ 	struct crypto_skcipher *ctr = ctx->ctr;
+ 	struct {
+ 		be128 hash;
+-		u8 iv[8];
++		u8 iv[16];
+ 
+ 		struct crypto_gcm_setkey_result result;
+ 

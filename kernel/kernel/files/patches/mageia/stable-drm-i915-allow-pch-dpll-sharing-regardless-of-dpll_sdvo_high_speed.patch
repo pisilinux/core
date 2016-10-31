@@ -1,0 +1,76 @@
+From a3fd4c67af3d8a81d241b3d51b3525f36f1d68bb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>
+Date: Mon, 26 Sep 2016 11:30:46 +0300
+Subject: drm/i915: Allow PCH DPLL sharing regardless of DPLL_SDVO_HIGH_SPEED
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+From: Ville Syrjälä <ville.syrjala@linux.intel.com>
+
+commit a3fd4c67af3d8a81d241b3d51b3525f36f1d68bb upstream.
+
+DPLL_SDVO_HIGH_SPEED must be set for SDVO/HDMI/DP, but nowhere is it
+forbidden to set it for LVDS/CRT as well. So let's also set it on
+CRT to make it possible to share the DPLL between HDMI and CRT.
+
+What that bit apparently does is enable the x5 clock to the port,
+which then pumps out the bits on both edges of the clock. The DAC
+doesn't need that clock since it's not pumping out bits, but I don't
+think it hurts to have the DPLL output that clock anyway.
+
+This is fairly important on IVB since it has only two DPLLs with three
+pipes. So trying to drive three or more PCH ports with three pipes
+is only possible when at least one of the DPLLs gets shared between
+two of the pipes.
+
+SNB doesn't really need to do this since it has only two pipes. It could
+be done to avoid enabling the second DPLL at all in certain cases, but
+I'm not sure that's such a huge win. So let's not do it for SNB, at
+least for now. On ILK it never makes sense as the DPLLs can't be shared.
+
+v2: Just always enable the high speed clock to keep things simple (Daniel)
+    Beef up the commit message a bit (Daniel)
+
+Cc: Nick Yamane <nick.diego@gmail.com>
+Cc: Daniel Vetter <daniel.vetter@ffwll.ch>
+Tested-by: Nick Yamane <nick.diego@gmail.com>
+Bugzilla: https://bugs.freedesktop.org/show_bug.cgi?id=97204
+Signed-off-by: Ville Syrjälä <ville.syrjala@linux.intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/1474878646-17711-1-git-send-email-ville.syrjala@linux.intel.com
+Reviewed-by: Ander Conselvan de Oliveira <conselvan2@gmail.com>
+(cherry picked from commit 7d7f8633a82763577727762ff3ac1df3017cb8fe)
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/i915/intel_display.c |   18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+--- a/drivers/gpu/drm/i915/intel_display.c
++++ b/drivers/gpu/drm/i915/intel_display.c
+@@ -9007,6 +9007,24 @@ static void ironlake_compute_dpll(struct
+ 	if (intel_crtc_has_dp_encoder(crtc_state))
+ 		dpll |= DPLL_SDVO_HIGH_SPEED;
+ 
++	/*
++	 * The high speed IO clock is only really required for
++	 * SDVO/HDMI/DP, but we also enable it for CRT to make it
++	 * possible to share the DPLL between CRT and HDMI. Enabling
++	 * the clock needlessly does no real harm, except use up a
++	 * bit of power potentially.
++	 *
++	 * We'll limit this to IVB with 3 pipes, since it has only two
++	 * DPLLs and so DPLL sharing is the only way to get three pipes
++	 * driving PCH ports at the same time. On SNB we could do this,
++	 * and potentially avoid enabling the second DPLL, but it's not
++	 * clear if it''s a win or loss power wise. No point in doing
++	 * this on ILK at all since it has a fixed DPLL<->pipe mapping.
++	 */
++	if (INTEL_INFO(dev_priv)->num_pipes == 3 &&
++	    intel_crtc_has_type(crtc_state, INTEL_OUTPUT_ANALOG))
++		dpll |= DPLL_SDVO_HIGH_SPEED;
++
+ 	/* compute bitmask from p1 value */
+ 	dpll |= (1 << (crtc_state->dpll.p1 - 1)) << DPLL_FPA01_P1_POST_DIV_SHIFT;
+ 	/* also FPA1 */

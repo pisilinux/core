@@ -1,0 +1,40 @@
+From 427920292b00474d978d632bc03a8e4e50029af3 Mon Sep 17 00:00:00 2001
+From: Alex Deucher <alexander.deucher@amd.com>
+Date: Tue, 27 Sep 2016 14:51:53 -0400
+Subject: drm/radeon/si/dpm: fix phase shedding setup
+
+From: Alex Deucher <alexander.deucher@amd.com>
+
+commit 427920292b00474d978d632bc03a8e4e50029af3 upstream.
+
+Used the wrong index to setup the phase shedding mask.
+
+Signed-off-by: Alex Deucher <alexander.deucher@amd.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/radeon/si_dpm.c       |    2 +-
+ drivers/gpu/drm/radeon/sislands_smc.h |    1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+--- a/drivers/gpu/drm/radeon/si_dpm.c
++++ b/drivers/gpu/drm/radeon/si_dpm.c
+@@ -4112,7 +4112,7 @@ static int si_populate_smc_voltage_table
+ 							      &rdev->pm.dpm.dyn_state.phase_shedding_limits_table)) {
+ 				si_populate_smc_voltage_table(rdev, &si_pi->vddc_phase_shed_table, table);
+ 
+-				table->phaseMaskTable.lowMask[SISLANDS_SMC_VOLTAGEMASK_VDDC] =
++				table->phaseMaskTable.lowMask[SISLANDS_SMC_VOLTAGEMASK_VDDC_PHASE_SHEDDING] =
+ 					cpu_to_be32(si_pi->vddc_phase_shed_table.mask_low);
+ 
+ 				si_write_smc_soft_register(rdev, SI_SMC_SOFT_REGISTER_phase_shedding_delay,
+--- a/drivers/gpu/drm/radeon/sislands_smc.h
++++ b/drivers/gpu/drm/radeon/sislands_smc.h
+@@ -194,6 +194,7 @@ typedef struct SISLANDS_SMC_SWSTATE SISL
+ #define SISLANDS_SMC_VOLTAGEMASK_VDDC  0
+ #define SISLANDS_SMC_VOLTAGEMASK_MVDD  1
+ #define SISLANDS_SMC_VOLTAGEMASK_VDDCI 2
++#define SISLANDS_SMC_VOLTAGEMASK_VDDC_PHASE_SHEDDING 3
+ #define SISLANDS_SMC_VOLTAGEMASK_MAX   4
+ 
+ struct SISLANDS_SMC_VOLTAGEMASKTABLE

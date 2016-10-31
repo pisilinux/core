@@ -1,0 +1,41 @@
+From 9afe11e956766eaac4643adaaf49f223dd536c92 Mon Sep 17 00:00:00 2001
+From: Nicholas Mc Guire <hofrat@osadl.org>
+Date: Mon, 25 Jul 2016 21:22:27 +0200
+Subject: staging: ks7010: declare private functions static
+
+From: Nicholas Mc Guire <hofrat@osadl.org>
+
+commit 9afe11e956766eaac4643adaaf49f223dd536c92 upstream.
+
+Private functions in ks_hostif.c can be declared static.
+
+Fixes: 13a9930d15b4 ("staging: ks7010: add driver from Nanonote extra-repository")
+
+Signed-off-by: Nicholas Mc Guire <hofrat@osadl.org>
+Reviewed-by: Wolfram Sang <wsa@the-dreams.de>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/staging/ks7010/ks_hostif.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+--- a/drivers/staging/ks7010/ks_hostif.c
++++ b/drivers/staging/ks7010/ks_hostif.c
+@@ -69,7 +69,7 @@ inline u32 get_DWORD(struct ks_wlan_priv
+ 	return data;
+ }
+ 
+-void ks_wlan_hw_wakeup_task(struct work_struct *work)
++static void ks_wlan_hw_wakeup_task(struct work_struct *work)
+ {
+ 	struct ks_wlan_private *priv =
+ 	    container_of(work, struct ks_wlan_private, ks_wlan_wakeup_task);
+@@ -1509,7 +1509,7 @@ void hostif_infrastructure_set_request(s
+ 	ks_wlan_hw_tx(priv, pp, hif_align_size(sizeof(*pp)), NULL, NULL, NULL);
+ }
+ 
+-void hostif_infrastructure_set2_request(struct ks_wlan_private *priv)
++static void hostif_infrastructure_set2_request(struct ks_wlan_private *priv)
+ {
+ 	struct hostif_infrastructure_set2_request_t *pp;
+ 	uint16_t capability;

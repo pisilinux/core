@@ -1,0 +1,80 @@
+From babf985d1e1b0677cb264acd01319d2b9c8f4327 Mon Sep 17 00:00:00 2001
+From: Uma Krishnan <ukrishn@linux.vnet.ibm.com>
+Date: Fri, 2 Sep 2016 15:39:16 -0500
+Subject: scsi: cxlflash: Remove the device cleanly in the system shutdown path
+
+From: Uma Krishnan <ukrishn@linux.vnet.ibm.com>
+
+commit babf985d1e1b0677cb264acd01319d2b9c8f4327 upstream.
+
+Commit 704c4b0ddc03 ("cxlflash: Shutdown notify support for CXL Flash
+cards") was recently introduced to notify the AFU when a system is going
+down. Due to the position of the cxlflash driver in the device stack,
+cxlflash devices are _always_ removed during a reboot/shutdown. This can
+lead to a crash if the cxlflash shutdown hook is invoked _after_ the
+shutdown hook for the owning virtual PHB. Furthermore, the current
+implementation of shutdown/remove hooks for cxlflash are not tolerant to
+being invoked when the device is not enabled. This can also lead to a
+crash in situations where the remove hook is invoked after the device
+has been removed via the vPHBs shutdown hook. An example of this
+scenario would be an EEH reset failure while a reboot/shutdown is in
+progress.
+
+To solve both problems, the shutdown hook for cxlflash is updated to
+simply remove the device. This path already includes the AFU
+notification and thus this solution will continue to perform the
+original intent. At the same time, the remove hook is updated to protect
+against being called when the device is not enabled.
+
+Fixes: 704c4b0ddc03 ("cxlflash: Shutdown notify support for CXL Flash
+cards")
+Signed-off-by: Uma Krishnan <ukrishn@linux.vnet.ibm.com>
+Acked-by: Matthew R. Ochs <mrochs@linux.vnet.ibm.com>
+Signed-off-by: Martin K. Petersen <martin.petersen@oracle.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/scsi/cxlflash/main.c |   18 ++++++------------
+ 1 file changed, 6 insertions(+), 12 deletions(-)
+
+--- a/drivers/scsi/cxlflash/main.c
++++ b/drivers/scsi/cxlflash/main.c
+@@ -823,17 +823,6 @@ static void notify_shutdown(struct cxlfl
+ }
+ 
+ /**
+- * cxlflash_shutdown() - shutdown handler
+- * @pdev:	PCI device associated with the host.
+- */
+-static void cxlflash_shutdown(struct pci_dev *pdev)
+-{
+-	struct cxlflash_cfg *cfg = pci_get_drvdata(pdev);
+-
+-	notify_shutdown(cfg, false);
+-}
+-
+-/**
+  * cxlflash_remove() - PCI entry point to tear down host
+  * @pdev:	PCI device associated with the host.
+  *
+@@ -844,6 +833,11 @@ static void cxlflash_remove(struct pci_d
+ 	struct cxlflash_cfg *cfg = pci_get_drvdata(pdev);
+ 	ulong lock_flags;
+ 
++	if (!pci_is_enabled(pdev)) {
++		pr_debug("%s: Device is disabled\n", __func__);
++		return;
++	}
++
+ 	/* If a Task Management Function is active, wait for it to complete
+ 	 * before continuing with remove.
+ 	 */
+@@ -2685,7 +2679,7 @@ static struct pci_driver cxlflash_driver
+ 	.id_table = cxlflash_pci_table,
+ 	.probe = cxlflash_probe,
+ 	.remove = cxlflash_remove,
+-	.shutdown = cxlflash_shutdown,
++	.shutdown = cxlflash_remove,
+ 	.err_handler = &cxlflash_err_handler,
+ };
+ 

@@ -1,0 +1,42 @@
+From 51ab70bed997f64f091a639dbe22b629725a7faf Mon Sep 17 00:00:00 2001
+From: Thomas Hellstrom <thellstrom@vmware.com>
+Date: Mon, 10 Oct 2016 10:51:24 -0700
+Subject: drm/vmwgfx: Limit the user-space command buffer size
+
+From: Thomas Hellstrom <thellstrom@vmware.com>
+
+commit 51ab70bed997f64f091a639dbe22b629725a7faf upstream.
+
+With older hardware versions, the user could specify arbitrarily large
+command buffer sizes, causing a vmalloc / vmap space exhaustion.
+
+Signed-off-by: Thomas Hellstrom <thellstrom@vmware.com>
+Reviewed-by: Brian Paul <brianp@vmware.com>
+Reviewed-by: Sinclair Yeh <syeh@vmware.com>
+Signed-off-by: Sinclair Yeh <syeh@vmware.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/vmwgfx/vmwgfx_execbuf.c |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+--- a/drivers/gpu/drm/vmwgfx/vmwgfx_execbuf.c
++++ b/drivers/gpu/drm/vmwgfx/vmwgfx_execbuf.c
+@@ -3848,14 +3848,14 @@ static void *vmw_execbuf_cmdbuf(struct v
+ 	int ret;
+ 
+ 	*header = NULL;
+-	if (!dev_priv->cman || kernel_commands)
+-		return kernel_commands;
+-
+ 	if (command_size > SVGA_CB_MAX_SIZE) {
+ 		DRM_ERROR("Command buffer is too large.\n");
+ 		return ERR_PTR(-EINVAL);
+ 	}
+ 
++	if (!dev_priv->cman || kernel_commands)
++		return kernel_commands;
++
+ 	/* If possible, add a little space for fencing. */
+ 	cmdbuf_size = command_size + 512;
+ 	cmdbuf_size = min_t(size_t, cmdbuf_size, SVGA_CB_MAX_SIZE);

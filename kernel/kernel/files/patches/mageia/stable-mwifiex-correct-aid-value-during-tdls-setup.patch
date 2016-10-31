@@ -1,0 +1,36 @@
+From b64db1b252e9974a43a51ba083fa7d03e4716167 Mon Sep 17 00:00:00 2001
+From: Xinming Hu <huxm@marvell.com>
+Date: Tue, 9 Aug 2016 20:20:44 +0530
+Subject: mwifiex: correct aid value during tdls setup
+
+From: Xinming Hu <huxm@marvell.com>
+
+commit b64db1b252e9974a43a51ba083fa7d03e4716167 upstream.
+
+AID gets updated during TDLS setup, but modified value isn't reflected
+in "priv->assoc_rsp_buf". This causes TDLS setup failure. The problem is
+fixed here.
+
+Fixes: 4aff53ef18e4a4 ("mwifiex: parsing aid while receiving..")
+Signed-off-by: Xinming Hu <huxm@marvell.com>
+Signed-off-by: Amitkumar Karwar <akarwar@marvell.com>
+Signed-off-by: Kalle Valo <kvalo@codeaurora.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/net/wireless/marvell/mwifiex/join.c |    3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+--- a/drivers/net/wireless/marvell/mwifiex/join.c
++++ b/drivers/net/wireless/marvell/mwifiex/join.c
+@@ -669,9 +669,8 @@ int mwifiex_ret_802_11_associate(struct
+ 	priv->assoc_rsp_size = min(le16_to_cpu(resp->size) - S_DS_GEN,
+ 				   sizeof(priv->assoc_rsp_buf));
+ 
+-	memcpy(priv->assoc_rsp_buf, &resp->params, priv->assoc_rsp_size);
+-
+ 	assoc_rsp->a_id = cpu_to_le16(aid);
++	memcpy(priv->assoc_rsp_buf, &resp->params, priv->assoc_rsp_size);
+ 
+ 	if (status_code) {
+ 		priv->adapter->dbg.num_cmd_assoc_failure++;

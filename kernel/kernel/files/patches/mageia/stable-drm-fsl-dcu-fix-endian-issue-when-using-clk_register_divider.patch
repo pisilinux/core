@@ -1,0 +1,50 @@
+From 6cc4758ae91c0582f07e3c94c7de1ad0975feff5 Mon Sep 17 00:00:00 2001
+From: Stefan Agner <stefan@agner.ch>
+Date: Fri, 2 Sep 2016 11:23:37 -0700
+Subject: drm/fsl-dcu: fix endian issue when using clk_register_divider
+
+From: Stefan Agner <stefan@agner.ch>
+
+commit 6cc4758ae91c0582f07e3c94c7de1ad0975feff5 upstream.
+
+Since using clk_register_divider to setup the pixel clock, regmap
+is no longer used. Regmap did take care of DCU using different
+endianness. Check endianness using the device-tree property
+"big-endian" to determine the location of DIV_RATIO.
+
+Fixes: 2d701449bce1 ("drm/fsl-dcu: use common clock framework for pixel clock divider")
+Reported-by: Meng Yi <meng.yi@nxp.com>
+Signed-off-by: Stefan Agner <stefan@agner.ch>
+Tested-by: Meng Yi <meng.yi@nxp.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/fsl-dcu/fsl_dcu_drm_drv.c |    6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+--- a/drivers/gpu/drm/fsl-dcu/fsl_dcu_drm_drv.c
++++ b/drivers/gpu/drm/fsl-dcu/fsl_dcu_drm_drv.c
+@@ -330,6 +330,7 @@ static int fsl_dcu_drm_probe(struct plat
+ 	const char *pix_clk_in_name;
+ 	const struct of_device_id *id;
+ 	int ret;
++	u8 div_ratio_shift = 0;
+ 
+ 	fsl_dev = devm_kzalloc(dev, sizeof(*fsl_dev), GFP_KERNEL);
+ 	if (!fsl_dev)
+@@ -382,11 +383,14 @@ static int fsl_dcu_drm_probe(struct plat
+ 		pix_clk_in = fsl_dev->clk;
+ 	}
+ 
++	if (of_property_read_bool(dev->of_node, "big-endian"))
++		div_ratio_shift = 24;
++
+ 	pix_clk_in_name = __clk_get_name(pix_clk_in);
+ 	snprintf(pix_clk_name, sizeof(pix_clk_name), "%s_pix", pix_clk_in_name);
+ 	fsl_dev->pix_clk = clk_register_divider(dev, pix_clk_name,
+ 			pix_clk_in_name, 0, base + DCU_DIV_RATIO,
+-			0, 8, CLK_DIVIDER_ROUND_CLOSEST, NULL);
++			div_ratio_shift, 8, CLK_DIVIDER_ROUND_CLOSEST, NULL);
+ 	if (IS_ERR(fsl_dev->pix_clk)) {
+ 		dev_err(dev, "failed to register pix clk\n");
+ 		ret = PTR_ERR(fsl_dev->pix_clk);

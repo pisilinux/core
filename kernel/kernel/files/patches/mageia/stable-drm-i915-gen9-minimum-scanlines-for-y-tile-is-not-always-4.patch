@@ -1,0 +1,133 @@
+From ccc1057477bc99678896b51adce6b6ee4019dc37 Mon Sep 17 00:00:00 2001
+From: Paulo Zanoni <paulo.r.zanoni@intel.com>
+Date: Thu, 22 Sep 2016 18:00:31 -0300
+Subject: drm/i915/gen9: minimum scanlines for Y tile is not always 4
+
+From: Paulo Zanoni <paulo.r.zanoni@intel.com>
+
+commit ccc1057477bc99678896b51adce6b6ee4019dc37 upstream.
+
+During watermarks calculations, this value is used in 3 different
+places. Only one of them was not using a hardcoded 4. Move the code up
+so everybody can benefit from the actual value.
+
+This should only help on situations with Y tiling + 90/270 rotation +
+1 or 2 bpp or NV12.
+
+Reviewed-by: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Signed-off-by: Paulo Zanoni <paulo.r.zanoni@intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/1474578035-424-6-git-send-email-paulo.r.zanoni@intel.com
+(cherry picked from commit 1186fa85eb9b3cc0589990fbc39617e50e38759a)
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/i915/intel_pm.c |   56 ++++++++++++++++++++++------------------
+ 1 file changed, 32 insertions(+), 24 deletions(-)
+
+--- a/drivers/gpu/drm/i915/intel_pm.c
++++ b/drivers/gpu/drm/i915/intel_pm.c
+@@ -3476,7 +3476,8 @@ static uint32_t skl_wm_method1(uint32_t
+ 
+ static uint32_t skl_wm_method2(uint32_t pixel_rate, uint32_t pipe_htotal,
+ 			       uint32_t horiz_pixels, uint8_t cpp,
+-			       uint64_t tiling, uint32_t latency)
++			       uint64_t tiling, uint32_t latency,
++			       uint32_t y_min_scanlines)
+ {
+ 	uint32_t ret;
+ 	uint32_t plane_bytes_per_line, plane_blocks_per_line;
+@@ -3489,9 +3490,9 @@ static uint32_t skl_wm_method2(uint32_t
+ 
+ 	if (tiling == I915_FORMAT_MOD_Y_TILED ||
+ 	    tiling == I915_FORMAT_MOD_Yf_TILED) {
+-		plane_bytes_per_line *= 4;
++		plane_bytes_per_line *= y_min_scanlines;
+ 		plane_blocks_per_line = DIV_ROUND_UP(plane_bytes_per_line, 512);
+-		plane_blocks_per_line /= 4;
++		plane_blocks_per_line /= y_min_scanlines;
+ 	} else if (tiling == DRM_FORMAT_MOD_NONE) {
+ 		plane_blocks_per_line = DIV_ROUND_UP(plane_bytes_per_line, 512) + 1;
+ 	} else {
+@@ -3548,6 +3549,7 @@ static int skl_compute_plane_wm(const st
+ 	uint8_t cpp;
+ 	uint32_t width = 0, height = 0;
+ 	uint32_t plane_pixel_rate;
++	uint32_t y_min_scanlines;
+ 
+ 	if (latency == 0 || !cstate->base.active || !intel_pstate->visible) {
+ 		*enabled = false;
+@@ -3563,38 +3565,44 @@ static int skl_compute_plane_wm(const st
+ 	cpp = drm_format_plane_cpp(fb->pixel_format, 0);
+ 	plane_pixel_rate = skl_adjusted_plane_pixel_rate(cstate, intel_pstate);
+ 
++	if (intel_rotation_90_or_270(pstate->rotation)) {
++		int cpp = (fb->pixel_format == DRM_FORMAT_NV12) ?
++			drm_format_plane_cpp(fb->pixel_format, 1) :
++			drm_format_plane_cpp(fb->pixel_format, 0);
++
++		switch (cpp) {
++		case 1:
++			y_min_scanlines = 16;
++			break;
++		case 2:
++			y_min_scanlines = 8;
++			break;
++		default:
++			WARN(1, "Unsupported pixel depth for rotation");
++		case 4:
++			y_min_scanlines = 4;
++			break;
++		}
++	} else {
++		y_min_scanlines = 4;
++	}
++
+ 	method1 = skl_wm_method1(plane_pixel_rate, cpp, latency);
+ 	method2 = skl_wm_method2(plane_pixel_rate,
+ 				 cstate->base.adjusted_mode.crtc_htotal,
+ 				 width,
+ 				 cpp,
+ 				 fb->modifier[0],
+-				 latency);
++				 latency,
++				 y_min_scanlines);
+ 
+ 	plane_bytes_per_line = width * cpp;
+ 	plane_blocks_per_line = DIV_ROUND_UP(plane_bytes_per_line, 512);
+ 
+ 	if (fb->modifier[0] == I915_FORMAT_MOD_Y_TILED ||
+ 	    fb->modifier[0] == I915_FORMAT_MOD_Yf_TILED) {
+-		uint32_t min_scanlines = 4;
+-		uint32_t y_tile_minimum;
+-		if (intel_rotation_90_or_270(pstate->rotation)) {
+-			int cpp = (fb->pixel_format == DRM_FORMAT_NV12) ?
+-				drm_format_plane_cpp(fb->pixel_format, 1) :
+-				drm_format_plane_cpp(fb->pixel_format, 0);
+-
+-			switch (cpp) {
+-			case 1:
+-				min_scanlines = 16;
+-				break;
+-			case 2:
+-				min_scanlines = 8;
+-				break;
+-			case 8:
+-				WARN(1, "Unsupported pixel depth for rotation");
+-			}
+-		}
+-		y_tile_minimum = plane_blocks_per_line * min_scanlines;
++		uint32_t y_tile_minimum = plane_blocks_per_line *
++					  y_min_scanlines;
+ 		selected_result = max(method2, y_tile_minimum);
+ 	} else {
+ 		if ((ddb_allocation / plane_blocks_per_line) >= 1)
+@@ -3609,7 +3617,7 @@ static int skl_compute_plane_wm(const st
+ 	if (level >= 1 && level <= 7) {
+ 		if (fb->modifier[0] == I915_FORMAT_MOD_Y_TILED ||
+ 		    fb->modifier[0] == I915_FORMAT_MOD_Yf_TILED)
+-			res_lines += 4;
++			res_lines += y_min_scanlines;
+ 		else
+ 			res_blocks++;
+ 	}

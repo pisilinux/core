@@ -1,0 +1,335 @@
+From 62e0fb880123c98793e5c3ba8355501b0305e92e Mon Sep 17 00:00:00 2001
+From: Lyude <cpaul@redhat.com>
+Date: Mon, 22 Aug 2016 12:50:08 -0400
+Subject: drm/i915/skl: Update plane watermarks atomically during plane updates
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+From: Lyude <cpaul@redhat.com>
+
+commit 62e0fb880123c98793e5c3ba8355501b0305e92e upstream.
+
+Thanks to Ville for suggesting this as a potential solution to pipe
+underruns on Skylake.
+
+On Skylake all of the registers for configuring planes, including the
+registers for configuring their watermarks, are double buffered. New
+values written to them won't take effect until said registers are
+"armed", which is done by writing to the PLANE_SURF (or in the case of
+cursor planes, the CURBASE register) register.
+
+With this in mind, up until now we've been updating watermarks on skl
+like this:
+
+  non-modeset {
+   - calculate (during atomic check phase)
+   - finish_atomic_commit:
+     - intel_pre_plane_update:
+        - intel_update_watermarks()
+     - {vblank happens; new watermarks + old plane values => underrun }
+     - drm_atomic_helper_commit_planes_on_crtc:
+        - start vblank evasion
+        - write new plane registers
+        - end vblank evasion
+  }
+
+  or
+
+  modeset {
+   - calculate (during atomic check phase)
+   - finish_atomic_commit:
+     - crtc_enable:
+        - intel_update_watermarks()
+     - {vblank happens; new watermarks + old plane values => underrun }
+     - drm_atomic_helper_commit_planes_on_crtc:
+        - start vblank evasion
+        - write new plane registers
+        - end vblank evasion
+  }
+
+Now we update watermarks atomically like this:
+
+  non-modeset {
+   - calculate (during atomic check phase)
+   - finish_atomic_commit:
+     - intel_pre_plane_update:
+        - intel_update_watermarks() (wm values aren't written yet)
+     - drm_atomic_helper_commit_planes_on_crtc:
+        - start vblank evasion
+        - write new plane registers
+        - write new wm values
+        - end vblank evasion
+  }
+
+  modeset {
+   - calculate (during atomic check phase)
+   - finish_atomic_commit:
+     - crtc_enable:
+        - intel_update_watermarks() (actual wm values aren't written
+          yet)
+     - drm_atomic_helper_commit_planes_on_crtc:
+        - start vblank evasion
+        - write new plane registers
+	- write new wm values
+        - end vblank evasion
+  }
+
+So this patch moves all of the watermark writes into the right place;
+inside of the vblank evasion where we update all of the registers for
+each plane. While this patch doesn't fix everything, it does allow us to
+update the watermark values in the way the hardware expects us to.
+
+Changes since original patch series:
+ - Remove mutex_lock/mutex_unlock since they don't do anything and we're
+   not touching global state
+ - Move skl_write_cursor_wm/skl_write_plane_wm functions into
+   intel_pm.c, make externally visible
+ - Add skl_write_plane_wm calls to skl_update_plane
+ - Fix conditional for for loop in skl_write_plane_wm (level < max_level
+   should be level <= max_level)
+ - Make diagram in commit more accurate to what's actually happening
+ - Add Fixes:
+
+Changes since v1:
+ - Use IS_GEN9() instead of IS_SKYLAKE() since these fixes apply to more
+   then just Skylake
+ - Update description to make it clear this patch doesn't fix everything
+ - Check if pipes were actually changed before writing watermarks
+
+Changes since v2:
+ - Write PIPE_WM_LINETIME during vblank evasion
+
+Changes since v3:
+ - Rebase against new SAGV patch changes
+
+Changes since v4:
+ - Add a parameter to choose what skl_wm_values struct to use when
+   writing new plane watermarks
+
+Changes since v5:
+ - Remove cursor ddb entry write in skl_write_cursor_wm(), defer until
+   patch 6
+ - Write WM_LINETIME in intel_begin_crtc_commit()
+
+Changes since v6:
+ - Remove redundant dirty_pipes check in skl_write_plane_wm (we check
+   this in all places where we call this function, and it was supposed
+   to have been removed earlier anyway)
+ - In i9xx_update_cursor(), use dev_priv->info.gen >= 9 instead of
+   IS_GEN9(dev_priv). We do this everywhere else and I'd imagine this
+   needs to be done for gen10 as well
+
+Changes since v7:
+ - Fix rebase fail (unused variable obj)
+ - Make struct skl_wm_values *wm const
+ - Fix indenting
+ - Use INTEL_GEN() instead of dev_priv->info.gen
+
+Changes since v8:
+ - Don't forget calls to skl_write_plane_wm() when disabling planes
+ - Use INTEL_GEN(), not INTEL_INFO()->gen in intel_begin_crtc_commit()
+
+Fixes: 2d41c0b59afc ("drm/i915/skl: SKL Watermark Computation")
+Signed-off-by: Lyude <cpaul@redhat.com>
+Reviewed-by: Matt Roper <matthew.d.roper@intel.com>
+Cc: stable@vger.kernel.org
+Cc: Ville Syrjälä <ville.syrjala@linux.intel.com>
+Cc: Daniel Vetter <daniel.vetter@intel.com>
+Cc: Radhakrishna Sripada <radhakrishna.sripada@intel.com>
+Cc: Hans de Goede <hdegoede@redhat.com>
+Signed-off-by: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/1471884608-10671-1-git-send-email-cpaul@redhat.com
+Link: http://patchwork.freedesktop.org/patch/msgid/1471884608-10671-1-git-send-email-cpaul@redhat.com
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+
+---
+ drivers/gpu/drm/i915/intel_display.c |   21 +++++++++++++-
+ drivers/gpu/drm/i915/intel_drv.h     |    5 +++
+ drivers/gpu/drm/i915/intel_pm.c      |   50 +++++++++++++++++++++++------------
+ drivers/gpu/drm/i915/intel_sprite.c  |    6 ++++
+ 4 files changed, 64 insertions(+), 18 deletions(-)
+
+--- a/drivers/gpu/drm/i915/intel_display.c
++++ b/drivers/gpu/drm/i915/intel_display.c
+@@ -2980,6 +2980,7 @@ static void skylake_update_primary_plane
+ 	struct intel_crtc *intel_crtc = to_intel_crtc(crtc_state->base.crtc);
+ 	struct drm_framebuffer *fb = plane_state->base.fb;
+ 	struct drm_i915_gem_object *obj = intel_fb_obj(fb);
++	const struct skl_wm_values *wm = &dev_priv->wm.skl_results;
+ 	int pipe = intel_crtc->pipe;
+ 	u32 plane_ctl, stride_div, stride;
+ 	u32 tile_height, plane_offset, plane_size;
+@@ -3031,6 +3032,9 @@ static void skylake_update_primary_plane
+ 	intel_crtc->adjusted_x = x_offset;
+ 	intel_crtc->adjusted_y = y_offset;
+ 
++	if (wm->dirty_pipes & drm_crtc_mask(&intel_crtc->base))
++		skl_write_plane_wm(intel_crtc, wm, 0);
++
+ 	I915_WRITE(PLANE_CTL(pipe, 0), plane_ctl);
+ 	I915_WRITE(PLANE_OFFSET(pipe, 0), plane_offset);
+ 	I915_WRITE(PLANE_SIZE(pipe, 0), plane_size);
+@@ -3061,7 +3065,10 @@ static void skylake_disable_primary_plan
+ {
+ 	struct drm_device *dev = crtc->dev;
+ 	struct drm_i915_private *dev_priv = to_i915(dev);
+-	int pipe = to_intel_crtc(crtc)->pipe;
++	struct intel_crtc *intel_crtc = to_intel_crtc(crtc);
++	int pipe = intel_crtc->pipe;
++
++	skl_write_plane_wm(intel_crtc, &dev_priv->wm.skl_results, 0);
+ 
+ 	I915_WRITE(PLANE_CTL(pipe, 0), 0);
+ 	I915_WRITE(PLANE_SURF(pipe, 0), 0);
+@@ -10306,9 +10313,13 @@ static void i9xx_update_cursor(struct dr
+ 	struct drm_device *dev = crtc->dev;
+ 	struct drm_i915_private *dev_priv = to_i915(dev);
+ 	struct intel_crtc *intel_crtc = to_intel_crtc(crtc);
++	const struct skl_wm_values *wm = &dev_priv->wm.skl_results;
+ 	int pipe = intel_crtc->pipe;
+ 	uint32_t cntl = 0;
+ 
++	if (INTEL_GEN(dev_priv) >= 9 && wm->dirty_pipes & drm_crtc_mask(crtc))
++		skl_write_cursor_wm(intel_crtc, wm);
++
+ 	if (plane_state && plane_state->visible) {
+ 		cntl = MCURSOR_GAMMA_ENABLE;
+ 		switch (plane_state->base.crtc_w) {
+@@ -14221,10 +14232,12 @@ static void intel_begin_crtc_commit(stru
+ 				    struct drm_crtc_state *old_crtc_state)
+ {
+ 	struct drm_device *dev = crtc->dev;
++	struct drm_i915_private *dev_priv = to_i915(dev);
+ 	struct intel_crtc *intel_crtc = to_intel_crtc(crtc);
+ 	struct intel_crtc_state *old_intel_state =
+ 		to_intel_crtc_state(old_crtc_state);
+ 	bool modeset = needs_modeset(crtc->state);
++	enum pipe pipe = intel_crtc->pipe;
+ 
+ 	/* Perform vblank evasion around commit operation */
+ 	intel_pipe_update_start(intel_crtc);
+@@ -14239,8 +14252,12 @@ static void intel_begin_crtc_commit(stru
+ 
+ 	if (to_intel_crtc_state(crtc->state)->update_pipe)
+ 		intel_update_pipe_config(intel_crtc, old_intel_state);
+-	else if (INTEL_INFO(dev)->gen >= 9)
++	else if (INTEL_GEN(dev_priv) >= 9) {
+ 		skl_detach_scalers(intel_crtc);
++
++		I915_WRITE(PIPE_WM_LINETIME(pipe),
++			   dev_priv->wm.skl_hw.wm_linetime[pipe]);
++	}
+ }
+ 
+ static void intel_finish_crtc_commit(struct drm_crtc *crtc,
+--- a/drivers/gpu/drm/i915/intel_drv.h
++++ b/drivers/gpu/drm/i915/intel_drv.h
+@@ -1720,6 +1720,11 @@ void skl_ddb_get_hw_state(struct drm_i91
+ bool skl_can_enable_sagv(struct drm_atomic_state *state);
+ int skl_enable_sagv(struct drm_i915_private *dev_priv);
+ int skl_disable_sagv(struct drm_i915_private *dev_priv);
++void skl_write_cursor_wm(struct intel_crtc *intel_crtc,
++			 const struct skl_wm_values *wm);
++void skl_write_plane_wm(struct intel_crtc *intel_crtc,
++			const struct skl_wm_values *wm,
++			int plane);
+ uint32_t ilk_pipe_pixel_rate(const struct intel_crtc_state *pipe_config);
+ bool ilk_disable_lp_wm(struct drm_device *dev);
+ int sanitize_rc6_option(struct drm_i915_private *dev_priv, int enable_rc6);
+--- a/drivers/gpu/drm/i915/intel_pm.c
++++ b/drivers/gpu/drm/i915/intel_pm.c
+@@ -3828,6 +3828,39 @@ static void skl_ddb_entry_write(struct d
+ 		I915_WRITE(reg, 0);
+ }
+ 
++void skl_write_plane_wm(struct intel_crtc *intel_crtc,
++			const struct skl_wm_values *wm,
++			int plane)
++{
++	struct drm_crtc *crtc = &intel_crtc->base;
++	struct drm_device *dev = crtc->dev;
++	struct drm_i915_private *dev_priv = to_i915(dev);
++	int level, max_level = ilk_wm_max_level(dev);
++	enum pipe pipe = intel_crtc->pipe;
++
++	for (level = 0; level <= max_level; level++) {
++		I915_WRITE(PLANE_WM(pipe, plane, level),
++			   wm->plane[pipe][plane][level]);
++	}
++	I915_WRITE(PLANE_WM_TRANS(pipe, plane), wm->plane_trans[pipe][plane]);
++}
++
++void skl_write_cursor_wm(struct intel_crtc *intel_crtc,
++			 const struct skl_wm_values *wm)
++{
++	struct drm_crtc *crtc = &intel_crtc->base;
++	struct drm_device *dev = crtc->dev;
++	struct drm_i915_private *dev_priv = to_i915(dev);
++	int level, max_level = ilk_wm_max_level(dev);
++	enum pipe pipe = intel_crtc->pipe;
++
++	for (level = 0; level <= max_level; level++) {
++		I915_WRITE(CUR_WM(pipe, level),
++			   wm->plane[pipe][PLANE_CURSOR][level]);
++	}
++	I915_WRITE(CUR_WM_TRANS(pipe), wm->plane_trans[pipe][PLANE_CURSOR]);
++}
++
+ static void skl_write_wm_values(struct drm_i915_private *dev_priv,
+ 				const struct skl_wm_values *new)
+ {
+@@ -3835,7 +3868,7 @@ static void skl_write_wm_values(struct d
+ 	struct intel_crtc *crtc;
+ 
+ 	for_each_intel_crtc(dev, crtc) {
+-		int i, level, max_level = ilk_wm_max_level(dev);
++		int i;
+ 		enum pipe pipe = crtc->pipe;
+ 
+ 		if ((new->dirty_pipes & drm_crtc_mask(&crtc->base)) == 0)
+@@ -3843,21 +3876,6 @@ static void skl_write_wm_values(struct d
+ 		if (!crtc->active)
+ 			continue;
+ 
+-		I915_WRITE(PIPE_WM_LINETIME(pipe), new->wm_linetime[pipe]);
+-
+-		for (level = 0; level <= max_level; level++) {
+-			for (i = 0; i < intel_num_planes(crtc); i++)
+-				I915_WRITE(PLANE_WM(pipe, i, level),
+-					   new->plane[pipe][i][level]);
+-			I915_WRITE(CUR_WM(pipe, level),
+-				   new->plane[pipe][PLANE_CURSOR][level]);
+-		}
+-		for (i = 0; i < intel_num_planes(crtc); i++)
+-			I915_WRITE(PLANE_WM_TRANS(pipe, i),
+-				   new->plane_trans[pipe][i]);
+-		I915_WRITE(CUR_WM_TRANS(pipe),
+-			   new->plane_trans[pipe][PLANE_CURSOR]);
+-
+ 		for (i = 0; i < intel_num_planes(crtc); i++) {
+ 			skl_ddb_entry_write(dev_priv,
+ 					    PLANE_BUF_CFG(pipe, i),
+--- a/drivers/gpu/drm/i915/intel_sprite.c
++++ b/drivers/gpu/drm/i915/intel_sprite.c
+@@ -203,6 +203,9 @@ skl_update_plane(struct drm_plane *drm_p
+ 	struct intel_plane *intel_plane = to_intel_plane(drm_plane);
+ 	struct drm_framebuffer *fb = plane_state->base.fb;
+ 	struct drm_i915_gem_object *obj = intel_fb_obj(fb);
++	const struct skl_wm_values *wm = &dev_priv->wm.skl_results;
++	struct drm_crtc *crtc = crtc_state->base.crtc;
++	struct intel_crtc *intel_crtc = to_intel_crtc(crtc);
+ 	const int pipe = intel_plane->pipe;
+ 	const int plane = intel_plane->plane + 1;
+ 	u32 plane_ctl, stride_div, stride;
+@@ -238,6 +241,9 @@ skl_update_plane(struct drm_plane *drm_p
+ 	crtc_w--;
+ 	crtc_h--;
+ 
++	if (wm->dirty_pipes & drm_crtc_mask(crtc))
++		skl_write_plane_wm(intel_crtc, wm, plane);
++
+ 	if (key->flags) {
+ 		I915_WRITE(PLANE_KEYVAL(pipe, plane), key->min_value);
+ 		I915_WRITE(PLANE_KEYMAX(pipe, plane), key->max_value);

@@ -28,9 +28,89 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.8.4.xz</Patch>
-            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.8.4/1.mga6/PATCHES/patches/series-->
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.8.5.xz</Patch>
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.8.5/2.mga6/PATCHES/patches/series-->
             <!--stable patches-->
+            <Patch level="1">patches/mageia/stable-drm-vc4-fix-races-when-the-cs-reads-from-render-targets.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-prime-pass-the-right-module-owner-through-to-dma_buf_export.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-backlight-setup-and-cache-pwm-alternate-increment-value.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-backlight-setup-backlight-pwm-alternate-increment-on-backlight-enable.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-amdgpu-fix-ib-alignment-for-uvd.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-amdgpu-dce10-disable-hpd-on-local-panels.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-amdgpu-dce8-disable-hpd-on-local-panels.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-amdgpu-dce11-disable-hpd-on-local-panels.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-amdgpu-dce11-add-missing-drm_mode_config_cleanup-call.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-amdgpu-initialize-the-context-reset_counter-in-amdgpu_ctx_init.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-amdgpu-change-vblank_time-s-calculation-method-to-reduce-computational-error.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-radeon-narrow-asic_init-for-virtualization.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-radeon-si-dpm-fix-phase-shedding-setup.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-radeon-change-vblank_time-s-calculation-method-to-reduce-computational-error.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-vmwgfx-limit-the-user-space-command-buffer-size.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-fsl-dcu-fix-endian-issue-when-using-clk_register_divider.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-amd-powerplay-fix-mclk-not-switching-back-after-multi-head-was-disabled.patch</Patch>
+            <Patch level="1">patches/mageia/stable-hid-add-quirk-for-akai-midimix.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-skl-update-plane-watermarks-atomically-during-plane-updates.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-move-crtc-updating-in-atomic_commit-into-it-s-own-hook.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-skl-update-ddb-values-atomically-with-wms-plane-attrs.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-skl-don-t-try-to-update-plane-watermarks-if-they-haven-t-changed.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-gen9-only-add-the-planes-actually-affected-by-ddb-changes.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-gen9-fix-the-wawmmemoryreadlatency-implementation.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-gen9-minimum-scanlines-for-y-tile-is-not-always-4.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-gen9-fix-plane_blocks_per_line-on-watermarks-calculations.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-gen9-fix-the-watermark-res_blocks-value.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-sagv-is-not-skl-only-so-rename-a-few-things.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-introduce-intel_has_sagv.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-kbl-kbl-also-needs-to-run-the-sagv-code.patch</Patch>
+            <Patch level="1">patches/mageia/stable-revert-drm-i915-check-live-status-before-reading-edid.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-account-for-tseg-size-when-determining-865g-stolen-base.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-skl-ensure-pipes-with-changed-wms-get-added-to-the-state.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-allow-pch-dpll-sharing-regardless-of-dpll_sdvo_high_speed.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-move-long-hpd-handling-into-the-hotplug-work.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-allow-dp-to-work-w-o-edid.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-just-clear-the-mmiodebug-before-a-register-access.patch</Patch>
+            <Patch level="1">patches/mageia/stable-drm-i915-unalias-obj-phys_handle-and-obj-userptr.patch</Patch>
+            <Patch level="1">patches/mageia/stable-posix_acl-clear-sgid-bit-when-setting-file-permissions.patch</Patch>
+            <Patch level="1">patches/mageia/stable-rt2x00usb-fix-error-return-code.patch</Patch>
+            <Patch level="1">patches/mageia/stable-scsi-cxlflash-remove-the-device-cleanly-in-the-system-shutdown-path.patch</Patch>
+            <Patch level="1">patches/mageia/stable-genirq-generic_chip-add-irq_unmap-callback.patch</Patch>
+            <Patch level="1">patches/mageia/stable-coresight-remove-erroneous-dma_free_coherent-in-tmc_probe.patch</Patch>
+            <Patch level="1">patches/mageia/stable-uio-fix-dmem_region_start-computation.patch</Patch>
+            <Patch level="1">patches/mageia/stable-arm-clk-imx35-fix-name-for-ckil-clk.patch</Patch>
+            <Patch level="1">patches/mageia/stable-spi-spi-fsl-dspi-drop-extra-spi_master_put-in-device-remove-function.patch</Patch>
+            <Patch level="1">patches/mageia/stable-i40e-remove-a-stray-unlock.patch</Patch>
+            <Patch level="1">patches/mageia/stable-i40e-fix-broken-i40e_config_rss_aq-function.patch</Patch>
+            <Patch level="1">patches/mageia/stable-mwifiex-correct-aid-value-during-tdls-setup.patch</Patch>
+            <Patch level="1">patches/mageia/stable-mwifiex-fix-failed-to-reconnect-after-interface-disabled-enabled.patch</Patch>
+            <Patch level="1">patches/mageia/stable-ath10k-add-wmi_service_periodic_chan_stat_support-wmi-service.patch</Patch>
+            <Patch level="1">patches/mageia/stable-ath10k-fix-sending-frame-in-management-path-in-push-txq-logic.patch</Patch>
+            <Patch level="1">patches/mageia/stable-ath10k-fix-reporting-channel-survey-data.patch</Patch>
+            <Patch level="1">patches/mageia/stable-ath10k-fix-throughput-regression-in-multi-client-mode.patch</Patch>
+            <Patch level="1">patches/mageia/stable-crypto-marvell-don-t-overwrite-default-creq-state-during-initialization.patch</Patch>
+            <Patch level="1">patches/mageia/stable-crypto-gcm-fix-iv-buffer-size-in-crypto_gcm_setkey.patch</Patch>
+            <Patch level="1">patches/mageia/stable-crypto-marvell-update-transformation-context-for-each-dequeued-req.patch</Patch>
+            <Patch level="1">patches/mageia/stable-crypto-arm-ghash-ce-add-missing-async-import-export.patch</Patch>
+            <Patch level="1">patches/mageia/stable-crypto-ccp-fix-return-value-check-in-ccp_dmaengine_register.patch</Patch>
+            <Patch level="1">patches/mageia/stable-hwrng-omap-only-fail-if-pm_runtime_get_sync-returns-0.patch</Patch>
+            <Patch level="1">patches/mageia/stable-asoc-topology-fix-error-return-code-in-soc_tplg_dapm_widget_create.patch</Patch>
+            <Patch level="1">patches/mageia/stable-asoc-dapm-fix-possible-uninitialized-variable-in-snd_soc_dapm_get_volsw.patch</Patch>
+            <Patch level="1">patches/mageia/stable-asoc-dapm-fix-value-setting-for-_enum_double-mux-s-second-channel.patch</Patch>
+            <Patch level="1">patches/mageia/stable-asoc-dapm-fix-kcontrol-creation-for-output-driver-widget.patch</Patch>
+            <Patch level="1">patches/mageia/stable-asoc-sst-bxt-rt298-fix-obsoleted-initializers-for-array.patch</Patch>
+            <Patch level="1">patches/mageia/stable-asoc-sst-bxt-da7219_max98357a-fix-obsoleted-initializers-for-array.patch</Patch>
+            <Patch level="1">patches/mageia/stable-iio-ad5755-fix-off-by-one-on-devnr-limit-check.patch</Patch>
+            <Patch level="1">patches/mageia/stable-iio-light-us5182d-add-missing-error-code-assignment-before-test.patch</Patch>
+            <Patch level="1">patches/mageia/stable-staging-android-ion-hisi-fix-dependencies.patch</Patch>
+            <Patch level="1">patches/mageia/stable-staging-sm750fb-correctly-set-clock_phase-bit-of-display-controller.patch</Patch>
+            <Patch level="1">patches/mageia/stable-staging-r8188eu-fix-scheduling-while-atomic-splat.patch</Patch>
+            <Patch level="1">patches/mageia/stable-staging-ks7010-fix-wait_for_completion_interruptible_timeout-return-handling.patch</Patch>
+            <Patch level="1">patches/mageia/stable-staging-ks7010-declare-private-functions-static.patch</Patch>
+            <Patch level="1">patches/mageia/stable-ib-hfi1-move-iowait_init-to-priv-allocate.patch</Patch>
+            <Patch level="1">patches/mageia/stable-ib-rdmavt-correct-sparse-annotation.patch</Patch>
+            <Patch level="1">patches/mageia/stable-ib-qib-remove-qpt_mask-global.patch</Patch>
+            <Patch level="1">patches/mageia/stable-ib-mlx5-fix-steering-resource-leak.patch</Patch>
+            <Patch level="1">patches/mageia/stable-power-bq24257-fix-use-of-uninitialized-pointer-bq-charger.patch</Patch>
+            <Patch level="1">patches/mageia/stable-dmaengine-ipu-remove-bogus-no_irq-reference.patch</Patch>
+            <Patch level="1">patches/mageia/stable-mm-hugetlb-check-for-reserved-hugepages-during-memory-offline.patch</Patch>
             <!--other patches-->
             <Patch level="1">patches/mageia/Revert-ipmi-Start-the-timer-and-thread-on-internal-m.patch</Patch>
             <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
@@ -40,7 +120,7 @@
             <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
             <Patch level="1">patches/mageia/Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch</Patch>
             <Patch level="1">patches/mageia/base-cacheinfo-silence-DT-warnings.patch</Patch>
-            <Patch level="1">patches/mageia/kernel-sched-fair-Fix-incorrect-task-group-load_avg.patch</Patch>            
+            <Patch level="1">patches/mageia/kernel-governor-cpupower-Correct-return-type-of-cpu_power_is_cpu_onl.patch</Patch>
             <Patch level="1">patches/mageia/pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch</Patch>
             <Patch level="1">patches/mageia/pci-quirks-drop-devinit-exit.patch</Patch>
             <Patch level="1">patches/mageia/acpi-CLEVO-M360S-disable_acpi_irq.patch</Patch>
@@ -86,8 +166,7 @@
             <Patch level="1">patches/mageia/gpu-drm-mach64-linux-3.14-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.17-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.18-buildfix.patch</Patch--><!--1-->
-            <Patch level="1">patches/mageia/drm-i915-gen9-fix-DDB-partitioning-for-multi-screen-cases.patch</Patch>
-            <Patch level="1">patches/mageia/skl_uncondition_memory_bandwitdth_WA_n_adjusted_mode_in_SAGV_check_on_a7fac751ddba.patch</Patch>           
+            <Patch level="1">patches/mageia/drm-i915-gen9-fix-DDB-partitioning-for-multi-screen-cases.patch</Patch>        
             <Patch level="1">patches/mageia/input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch</Patch>
             <Patch level="1">patches/mageia/net-sis190-fix-list-usage.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-IFWLOG.patch</Patch>
@@ -196,8 +275,8 @@
 
     <History>
         <Update release="7">
-            <Date>2016-10-28</Date>
-            <Version>4.8.4</Version>
+            <Date>2016-10-30</Date>
+            <Version>4.8.5</Version>
             <Comment>Version Bump.</Comment>
             <Type package="kernel">security</Type>
             <Requires>

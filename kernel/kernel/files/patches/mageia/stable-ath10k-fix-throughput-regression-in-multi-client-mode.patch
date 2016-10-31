@@ -1,0 +1,54 @@
+From 18f53fe0f30331e826b075709ed7b26b9283235e Mon Sep 17 00:00:00 2001
+From: Rajkumar Manoharan <rmanohar@qti.qualcomm.com>
+Date: Fri, 2 Sep 2016 19:46:10 +0300
+Subject: ath10k: fix throughput regression in multi client mode
+
+From: Rajkumar Manoharan <rmanohar@qti.qualcomm.com>
+
+commit 18f53fe0f30331e826b075709ed7b26b9283235e upstream.
+
+commit 7a0adc83f34d ("ath10k: improve tx scheduling") is causing
+severe throughput drop in multi client mode. This issue is originally
+reported in veriwave setup with 50 clients with TCP downlink traffic.
+While increasing number of clients, the average throughput drops
+gradually. With 50 clients, the combined peak throughput is decreased
+to 98 Mbps whereas reverting given commit restored it to 550 Mbps.
+
+Processing txqs for every tx completion is causing overhead. Ideally for
+management frame tx completion, pending txqs processing can be avoided.
+The change partly reverts the commit "ath10k: improve tx scheduling".
+Processing pending txqs after all skbs tx completion will yeild enough
+room to burst tx frames.
+
+Fixes: 7a0adc83f34d ("ath10k: improve tx scheduling")
+Signed-off-by: Rajkumar Manoharan <rmanohar@qti.qualcomm.com>
+Signed-off-by: Kalle Valo <kvalo@qca.qualcomm.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/net/wireless/ath/ath10k/htt_rx.c |    2 ++
+ drivers/net/wireless/ath/ath10k/txrx.c   |    2 --
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+--- a/drivers/net/wireless/ath/ath10k/htt_rx.c
++++ b/drivers/net/wireless/ath/ath10k/htt_rx.c
+@@ -2394,6 +2394,8 @@ static void ath10k_htt_txrx_compl_task(u
+ 	skb_queue_splice_init(&htt->rx_in_ord_compl_q, &rx_ind_q);
+ 	spin_unlock_irqrestore(&htt->rx_in_ord_compl_q.lock, flags);
+ 
++	ath10k_mac_tx_push_pending(ar);
++
+ 	spin_lock_irqsave(&htt->tx_fetch_ind_q.lock, flags);
+ 	skb_queue_splice_init(&htt->tx_fetch_ind_q, &tx_ind_q);
+ 	spin_unlock_irqrestore(&htt->tx_fetch_ind_q.lock, flags);
+--- a/drivers/net/wireless/ath/ath10k/txrx.c
++++ b/drivers/net/wireless/ath/ath10k/txrx.c
+@@ -119,8 +119,6 @@ int ath10k_txrx_tx_unref(struct ath10k_h
+ 	ieee80211_tx_status(htt->ar->hw, msdu);
+ 	/* we do not own the msdu anymore */
+ 
+-	ath10k_mac_tx_push_pending(ar);
+-
+ 	return 0;
+ }
+ 

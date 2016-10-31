@@ -1,0 +1,56 @@
+From 86c7e6836479c4045a9a81ed5ea76c51d719f9c1 Mon Sep 17 00:00:00 2001
+From: Arnd Bergmann <arnd@arndb.de>
+Date: Sat, 3 Sep 2016 01:22:02 +0200
+Subject: dmaengine: ipu: remove bogus NO_IRQ reference
+
+From: Arnd Bergmann <arnd@arndb.de>
+
+commit 86c7e6836479c4045a9a81ed5ea76c51d719f9c1 upstream.
+
+A workaround for a warning introduced a use of the NO_IRQ
+macro that should have been gone for a long time.
+
+It is clear from the code that the value cannot actually
+be used, but apparently there was a configuration at
+some point that caused a warning, so instead of just
+reverting that patch, this rearranges the code in a way that
+the warning cannot reappear.
+
+Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+Fixes: 6ef41cf6f721 ("dmaengine :ipu: change ipu_irq_handler() to remove compile warning")
+Signed-off-by: Vinod Koul <vinod.koul@intel.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/dma/ipu/ipu_irq.c |    9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+
+--- a/drivers/dma/ipu/ipu_irq.c
++++ b/drivers/dma/ipu/ipu_irq.c
+@@ -286,22 +286,21 @@ static void ipu_irq_handler(struct irq_d
+ 		raw_spin_unlock(&bank_lock);
+ 		while ((line = ffs(status))) {
+ 			struct ipu_irq_map *map;
+-			unsigned int irq = NO_IRQ;
++			unsigned int irq;
+ 
+ 			line--;
+ 			status &= ~(1UL << line);
+ 
+ 			raw_spin_lock(&bank_lock);
+ 			map = src2map(32 * i + line);
+-			if (map)
+-				irq = map->irq;
+-			raw_spin_unlock(&bank_lock);
+-
+ 			if (!map) {
++				raw_spin_unlock(&bank_lock);
+ 				pr_err("IPU: Interrupt on unmapped source %u bank %d\n",
+ 				       line, i);
+ 				continue;
+ 			}
++			irq = map->irq;
++			raw_spin_unlock(&bank_lock);
+ 			generic_handle_irq(irq);
+ 		}
+ 	}

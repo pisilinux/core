@@ -1,0 +1,103 @@
+From 6e7fdb873d6255ca3c999dd5c6c18962a769ed3e Mon Sep 17 00:00:00 2001
+From: Paulo Zanoni <paulo.r.zanoni@intel.com>
+Date: Thu, 22 Sep 2016 18:00:28 -0300
+Subject: drm/i915: introduce intel_has_sagv()
+
+From: Paulo Zanoni <paulo.r.zanoni@intel.com>
+
+commit 6e7fdb873d6255ca3c999dd5c6c18962a769ed3e upstream.
+
+And use it to move knowledge about the SAGV-supporting platforms from
+the callers to the SAGV code.
+
+We'll add more platforms to intel_has_sagv(), so IMHO it makes more
+sense to move all this to a single function instead of patching all
+the callers every time we add SAGV support to a new platform.
+
+v2: Move I915_SAGV_NOT_CONTROLLED to the new function (Lyude).
+
+Reviewed-by: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Signed-off-by: Paulo Zanoni <paulo.r.zanoni@intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/1474578035-424-3-git-send-email-paulo.r.zanoni@intel.com
+(cherry picked from commit 56feca91973459d0b62cbb2610b62d341025ed89)
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/i915/intel_display.c |    5 ++---
+ drivers/gpu/drm/i915/intel_pm.c      |   22 ++++++++++++++++++----
+ 2 files changed, 20 insertions(+), 7 deletions(-)
+
+--- a/drivers/gpu/drm/i915/intel_display.c
++++ b/drivers/gpu/drm/i915/intel_display.c
+@@ -13891,7 +13891,7 @@ static void intel_atomic_commit_tail(str
+ 		 * SKL workaround: bspec recommends we disable the SAGV when we
+ 		 * have more then one pipe enabled
+ 		 */
+-		if (IS_SKYLAKE(dev_priv) && !intel_can_enable_sagv(state))
++		if (!intel_can_enable_sagv(state))
+ 			intel_disable_sagv(dev_priv);
+ 
+ 		intel_modeset_verify_disabled(dev);
+@@ -13949,8 +13949,7 @@ static void intel_atomic_commit_tail(str
+ 		intel_modeset_verify_crtc(crtc, old_crtc_state, crtc->state);
+ 	}
+ 
+-	if (IS_SKYLAKE(dev_priv) && intel_state->modeset &&
+-	    intel_can_enable_sagv(state))
++	if (intel_state->modeset && intel_can_enable_sagv(state))
+ 		intel_enable_sagv(dev_priv);
+ 
+ 	drm_atomic_helper_commit_hw_done(state);
+--- a/drivers/gpu/drm/i915/intel_pm.c
++++ b/drivers/gpu/drm/i915/intel_pm.c
+@@ -2878,6 +2878,13 @@ skl_wm_plane_id(const struct intel_plane
+ 	}
+ }
+ 
++static bool
++intel_has_sagv(struct drm_i915_private *dev_priv)
++{
++	return IS_SKYLAKE(dev_priv) &&
++	       dev_priv->sagv_status != I915_SAGV_NOT_CONTROLLED;
++}
++
+ /*
+  * SAGV dynamically adjusts the system agent voltage and clock frequencies
+  * depending on power and performance requirements. The display engine access
+@@ -2894,8 +2901,10 @@ intel_enable_sagv(struct drm_i915_privat
+ {
+ 	int ret;
+ 
+-	if (dev_priv->sagv_status == I915_SAGV_NOT_CONTROLLED ||
+-	    dev_priv->sagv_status == I915_SAGV_ENABLED)
++	if (!intel_has_sagv(dev_priv))
++		return 0;
++
++	if (dev_priv->sagv_status == I915_SAGV_ENABLED)
+ 		return 0;
+ 
+ 	DRM_DEBUG_KMS("Enabling the SAGV\n");
+@@ -2943,8 +2952,10 @@ intel_disable_sagv(struct drm_i915_priva
+ {
+ 	int ret, result;
+ 
+-	if (dev_priv->sagv_status == I915_SAGV_NOT_CONTROLLED ||
+-	    dev_priv->sagv_status == I915_SAGV_DISABLED)
++	if (!intel_has_sagv(dev_priv))
++		return 0;
++
++	if (dev_priv->sagv_status == I915_SAGV_DISABLED)
+ 		return 0;
+ 
+ 	DRM_DEBUG_KMS("Disabling the SAGV\n");
+@@ -2985,6 +2996,9 @@ bool intel_can_enable_sagv(struct drm_at
+ 	enum pipe pipe;
+ 	int level, plane;
+ 
++	if (!intel_has_sagv(dev_priv))
++		return false;
++
+ 	/*
+ 	 * SKL workaround: bspec recommends we disable the SAGV when we have
+ 	 * more then one pipe enabled

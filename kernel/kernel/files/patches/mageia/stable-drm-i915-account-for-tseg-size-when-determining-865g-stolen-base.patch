@@ -1,0 +1,118 @@
+From d721b02fd00bf133580f431b82ef37f3b746dfb2 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>
+Date: Mon, 8 Aug 2016 13:58:39 +0300
+Subject: drm/i915: Account for TSEG size when determining 865G stolen base
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+From: Ville Syrjälä <ville.syrjala@linux.intel.com>
+
+commit d721b02fd00bf133580f431b82ef37f3b746dfb2 upstream.
+
+Looks like the TSEG lives just above TOUD, stolen comes after TSEG.
+
+The spec seems somewhat self-contradictory in places, in the ESMRAMC
+register desctription it says:
+ TSEG Size:
+  10=(TOUD + 512 KB) to TOUD
+  11 =(TOUD + 1 MB) to TOUD
+
+so that agrees with TSEG being at TOUD. But the example given
+elsehwere in the spec says:
+
+ TOUD equals 62.5 MB = 03E7FFFFh
+ TSEG selected as 512 KB in size,
+ Graphics local memory selected as 1 MB in size
+ General System RAM available in system = 62.5 MB
+ General system RAM range00000000h to 03E7FFFFh
+ TSEG address range03F80000h to 03FFFFFFh
+ TSEG pre-allocated from03F80000h to 03FFFFFFh
+ Graphics local memory pre-allocated from03E80000h to 03F7FFFFh
+
+so here we have TSEG above stolen.
+
+Real world evidence agrees with the TOUD->TSEG->stolen order however, so
+let's fix up the code to account for the TSEG size.
+
+Cc: Taketo Kabe <fdporg@vega.pgw.jp>
+Cc: Chris Wilson <chris@chris-wilson.co.uk>
+Cc: Daniel Vetter <daniel.vetter@ffwll.ch>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: Ingo Molnar <mingo@redhat.com>
+Cc: "H. Peter Anvin" <hpa@zytor.com>
+Cc: x86@kernel.org
+Fixes: 0ad98c74e093 ("drm/i915: Determine the stolen memory base address on gen2")
+Fixes: a4dff76924fe ("x86/gpu: Add Intel graphics stolen memory quirk for gen2 platforms")
+Reported-by: Taketo Kabe <fdporg@vega.pgw.jp>
+Tested-by: Taketo Kabe <fdporg@vega.pgw.jp>
+Bugzilla: https://bugs.freedesktop.org/show_bug.cgi?id=96473
+Signed-off-by: Ville Syrjälä <ville.syrjala@linux.intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/1470653919-27251-1-git-send-email-ville.syrjala@linux.intel.com
+Link: http://download.intel.com/design/chipsets/datashts/25251405.pdf
+Reviewed-by: Chris Wilson <chris@chris-wilson.co.uk>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ arch/x86/kernel/early-quirks.c         |    9 ++-------
+ drivers/gpu/drm/i915/i915_gem_stolen.c |   23 +++++++++++++++++------
+ 2 files changed, 19 insertions(+), 13 deletions(-)
+
+--- a/arch/x86/kernel/early-quirks.c
++++ b/arch/x86/kernel/early-quirks.c
+@@ -317,16 +317,11 @@ static phys_addr_t __init i85x_stolen_ba
+ static phys_addr_t __init i865_stolen_base(int num, int slot, int func,
+ 					   size_t stolen_size)
+ {
+-	u16 toud;
++	u16 toud = 0;
+ 
+-	/*
+-	 * FIXME is the graphics stolen memory region
+-	 * always at TOUD? Ie. is it always the last
+-	 * one to be allocated by the BIOS?
+-	 */
+ 	toud = read_pci_config_16(0, 0, 0, I865_TOUD);
+ 
+-	return (phys_addr_t)toud << 16;
++	return (phys_addr_t)(toud << 16) + i845_tseg_size();
+ }
+ 
+ static phys_addr_t __init gen3_stolen_base(int num, int slot, int func,
+--- a/drivers/gpu/drm/i915/i915_gem_stolen.c
++++ b/drivers/gpu/drm/i915/i915_gem_stolen.c
+@@ -115,17 +115,28 @@ static unsigned long i915_stolen_to_phys
+ 
+ 		base = bsm & INTEL_BSM_MASK;
+ 	} else if (IS_I865G(dev)) {
++		u32 tseg_size = 0;
+ 		u16 toud = 0;
++		u8 tmp;
++
++		pci_bus_read_config_byte(dev->pdev->bus, PCI_DEVFN(0, 0),
++					 I845_ESMRAMC, &tmp);
++
++		if (tmp & TSEG_ENABLE) {
++			switch (tmp & I845_TSEG_SIZE_MASK) {
++			case I845_TSEG_SIZE_512K:
++				tseg_size = KB(512);
++				break;
++			case I845_TSEG_SIZE_1M:
++				tseg_size = MB(1);
++				break;
++			}
++		}
+ 
+-		/*
+-		 * FIXME is the graphics stolen memory region
+-		 * always at TOUD? Ie. is it always the last
+-		 * one to be allocated by the BIOS?
+-		 */
+ 		pci_bus_read_config_word(dev->pdev->bus, PCI_DEVFN(0, 0),
+ 					 I865_TOUD, &toud);
+ 
+-		base = toud << 16;
++		base = (toud << 16) + tseg_size;
+ 	} else if (IS_I85X(dev)) {
+ 		u32 tseg_size = 0;
+ 		u32 tom;

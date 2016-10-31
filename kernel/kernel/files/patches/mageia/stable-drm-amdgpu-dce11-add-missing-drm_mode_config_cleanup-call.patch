@@ -1,0 +1,31 @@
+From 140c94da3c3338c0ff4cc127cf9bec87905ca83c Mon Sep 17 00:00:00 2001
+From: Grazvydas Ignotas <notasas@gmail.com>
+Date: Mon, 3 Oct 2016 00:06:45 +0300
+Subject: drm/amdgpu/dce11: add missing drm_mode_config_cleanup call
+
+From: Grazvydas Ignotas <notasas@gmail.com>
+
+commit 140c94da3c3338c0ff4cc127cf9bec87905ca83c upstream.
+
+All other amdgpu/dce_v* files have this call, it's only mysteriously
+missing from dce_v11_0.c since the file was added and causes leaks.
+
+Fixes: aaa36a976bbb ("drm/amdgpu: Add initial VI support")
+Signed-off-by: Grazvydas Ignotas <notasas@gmail.com>
+Signed-off-by: Alex Deucher <alexander.deucher@amd.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/amd/amdgpu/dce_v11_0.c |    1 +
+ 1 file changed, 1 insertion(+)
+
+--- a/drivers/gpu/drm/amd/amdgpu/dce_v11_0.c
++++ b/drivers/gpu/drm/amd/amdgpu/dce_v11_0.c
+@@ -3112,6 +3112,7 @@ static int dce_v11_0_sw_fini(void *handl
+ 
+ 	dce_v11_0_afmt_fini(adev);
+ 
++	drm_mode_config_cleanup(adev->ddev);
+ 	adev->mode_info.mode_config_initialized = false;
+ 
+ 	return 0;

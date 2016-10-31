@@ -1,0 +1,37 @@
+From 481e46fe7a88557b66330cbb047b25cc13eff4b9 Mon Sep 17 00:00:00 2001
+From: Suzuki K Poulose <suzuki.poulose@arm.com>
+Date: Thu, 25 Aug 2016 15:18:54 -0600
+Subject: coresight: Remove erroneous dma_free_coherent in tmc_probe
+
+From: Suzuki K Poulose <suzuki.poulose@arm.com>
+
+commit 481e46fe7a88557b66330cbb047b25cc13eff4b9 upstream.
+
+commit de5461970b3e9e194 ("coresight: tmc: allocating memory when needed")
+removed the static allocation of buffer for the trace data in ETR mode in
+tmc_probe. However it failed to remove the "devm_free_coherent" in
+tmc_probe when the probe fails due to other reasons. This patch gets
+rid of the incorrect dma_free_coherent() call.
+
+Fixes: commit de5461970b3e9e194 ("coresight: tmc: allocating memory when needed")
+Cc: Mathieu Poirier <mathieu.poirier@linaro.org>
+Signed-off-by: Suzuki K Poulose <suzuki.poulose@arm.com>
+Signed-off-by: Mathieu Poirier <mathieu.poirier@linaro.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/hwtracing/coresight/coresight-tmc.c |    3 ---
+ 1 file changed, 3 deletions(-)
+
+--- a/drivers/hwtracing/coresight/coresight-tmc.c
++++ b/drivers/hwtracing/coresight/coresight-tmc.c
+@@ -388,9 +388,6 @@ static int tmc_probe(struct amba_device
+ err_misc_register:
+ 	coresight_unregister(drvdata->csdev);
+ err_devm_kzalloc:
+-	if (drvdata->config_type == TMC_CONFIG_TYPE_ETR)
+-		dma_free_coherent(dev, drvdata->size,
+-				drvdata->vaddr, drvdata->paddr);
+ 	return ret;
+ }
+ 

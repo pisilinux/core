@@ -1,0 +1,37 @@
+From ce199ad690bd0a6ac6bf9e4df2c87b59d76f84da Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Nicolai=20H=C3=A4hnle?= <nicolai.haehnle@amd.com>
+Date: Tue, 4 Oct 2016 09:43:30 +0200
+Subject: drm/amdgpu: initialize the context reset_counter in amdgpu_ctx_init
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+From: Nicolai Hähnle <nicolai.haehnle@amd.com>
+
+commit ce199ad690bd0a6ac6bf9e4df2c87b59d76f84da upstream.
+
+Ensure that we really only report a GPU reset if one has happened since the
+creation of the context.
+
+Signed-off-by: Nicolai Hähnle <nicolai.haehnle@amd.com>
+Reviewed-by: Christian König <christian.koenig@amd.com>
+Signed-off-by: Alex Deucher <alexander.deucher@amd.com>
+Signed-off-by: Alex Deucher <alexander.deucher@amd.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ctx.c |    3 +++
+ 1 file changed, 3 insertions(+)
+
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ctx.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ctx.c
+@@ -43,6 +43,9 @@ static int amdgpu_ctx_init(struct amdgpu
+ 		ctx->rings[i].sequence = 1;
+ 		ctx->rings[i].fences = &ctx->fences[amdgpu_sched_jobs * i];
+ 	}
++
++	ctx->reset_counter = atomic_read(&adev->gpu_reset_counter);
++
+ 	/* create context entity for each ring */
+ 	for (i = 0; i < adev->num_rings; i++) {
+ 		struct amdgpu_ring *ring = adev->rings[i];

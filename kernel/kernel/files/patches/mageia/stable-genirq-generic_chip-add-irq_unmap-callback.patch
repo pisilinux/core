@@ -1,0 +1,68 @@
+From ee26c013cdee0b947e29d6cadfb9ff3341c69ff9 Mon Sep 17 00:00:00 2001
+From: Sebastian Frias <sf84@laposte.net>
+Date: Mon, 1 Aug 2016 16:27:38 +0200
+Subject: genirq/generic_chip: Add irq_unmap callback
+
+From: Sebastian Frias <sf84@laposte.net>
+
+commit ee26c013cdee0b947e29d6cadfb9ff3341c69ff9 upstream.
+
+Without this patch irq_domain_disassociate() cannot properly release the
+interrupt. In fact, irq_map_generic_chip() checks a bit on 'gc->installed'
+but said bit is never cleared, only set.
+
+Commit 088f40b7b027 ("genirq: Generic chip: Add linear irq domain support")
+added irq_map_generic_chip() function and also stated "This lacks a removal
+function for now".
+
+This commit provides an implementation of an unmap function that can be
+called by irq_domain_disassociate().
+
+[ tglx: Made the function static and removed the export as we have neither
+  	a prototype nor a modular user. ]
+
+Fixes: 088f40b7b027 ("genirq: Generic chip: Add linear irq domain support")
+Signed-off-by: Sebastian Frias <sf84@laposte.net>
+Cc: Marc Zyngier <marc.zyngier@arm.com>
+Cc: Mason <slash.tmp@free.fr>
+Cc: Jason Cooper <jason@lakedaemon.net>
+Link: http://lkml.kernel.org/r/579F5C5A.2070507@laposte.net
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ kernel/irq/generic-chip.c |   21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+
+--- a/kernel/irq/generic-chip.c
++++ b/kernel/irq/generic-chip.c
+@@ -411,8 +411,29 @@ int irq_map_generic_chip(struct irq_doma
+ }
+ EXPORT_SYMBOL_GPL(irq_map_generic_chip);
+ 
++static void irq_unmap_generic_chip(struct irq_domain *d, unsigned int virq)
++{
++	struct irq_data *data = irq_domain_get_irq_data(d, virq);
++	struct irq_domain_chip_generic *dgc = d->gc;
++	unsigned int hw_irq = data->hwirq;
++	struct irq_chip_generic *gc;
++	int irq_idx;
++
++	gc = irq_get_domain_generic_chip(d, hw_irq);
++	if (!gc)
++		return;
++
++	irq_idx = hw_irq % dgc->irqs_per_chip;
++
++	clear_bit(irq_idx, &gc->installed);
++	irq_domain_set_info(d, virq, hw_irq, &no_irq_chip, NULL, NULL, NULL,
++			    NULL);
++
++}
++
+ struct irq_domain_ops irq_generic_chip_ops = {
+ 	.map	= irq_map_generic_chip,
++	.unmap  = irq_unmap_generic_chip,
+ 	.xlate	= irq_domain_xlate_onetwocell,
+ };
+ EXPORT_SYMBOL_GPL(irq_generic_chip_ops);

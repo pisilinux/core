@@ -1,0 +1,40 @@
+From 09951d83fc58a6f772de09c08e370f6d9970dbb6 Mon Sep 17 00:00:00 2001
+From: Romain Perier <romain.perier@free-electrons.com>
+Date: Tue, 9 Aug 2016 11:03:18 +0200
+Subject: crypto: marvell - Update transformation context for each dequeued req
+
+From: Romain Perier <romain.perier@free-electrons.com>
+
+commit 09951d83fc58a6f772de09c08e370f6d9970dbb6 upstream.
+
+So far, sub part of mv_cesa_int was responsible of dequeuing complete
+requests, then call the 'cleanup' operation on these reqs and call the
+crypto api callback 'complete'. The problem is that the transformation
+context 'ctx' is retrieved only once before the while loop. Which means
+that the wrong 'cleanup' operation might be called on the wrong type of
+cesa requests, it can lead to memory corruptions with this message:
+
+marvell-cesa f1090000.crypto: dma_pool_free cesa_padding, 5a5a5a5a/5a5a5a5a (bad dma)
+
+This commit fixes the issue, by updating the transformation context for
+each dequeued cesa request.
+
+Fixes: commit 85030c5168f1 ("crypto: marvell - Add support for chai...")
+Signed-off-by: Romain Perier <romain.perier@free-electrons.com>
+Signed-off-by: Herbert Xu <herbert@gondor.apana.org.au>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/crypto/marvell/cesa.c |    1 +
+ 1 file changed, 1 insertion(+)
+
+--- a/drivers/crypto/marvell/cesa.c
++++ b/drivers/crypto/marvell/cesa.c
+@@ -166,6 +166,7 @@ static irqreturn_t mv_cesa_int(int irq,
+ 			if (!req)
+ 				break;
+ 
++			ctx = crypto_tfm_ctx(req->tfm);
+ 			mv_cesa_complete_req(ctx, req, 0);
+ 		}
+ 	}

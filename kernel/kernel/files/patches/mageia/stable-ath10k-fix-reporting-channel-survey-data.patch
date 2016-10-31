@@ -1,0 +1,37 @@
+From 77eb3d693182b4eaa88c6ba406fbb92b1f1bd636 Mon Sep 17 00:00:00 2001
+From: Ashok Raj Nagarajan <arnagara@qti.qualcomm.com>
+Date: Fri, 2 Sep 2016 10:59:53 +0530
+Subject: ath10k: fix reporting channel survey data
+
+From: Ashok Raj Nagarajan <arnagara@qti.qualcomm.com>
+
+commit 77eb3d693182b4eaa88c6ba406fbb92b1f1bd636 upstream.
+
+When user requests for survey dump data, driver is providing wrong survey
+information. This information we sent is the survey data that we have
+collected during previous user request.
+
+This issue occurs because we request survey dump for wrong channel. With
+this change, we correctly display the correct and current survey
+information to userspace.
+
+Fixes: fa7937e3d5c2 ("ath10k: update bss channel survey information")
+Signed-off-by: Ashok Raj Nagarajan <arnagara@qti.qualcomm.com>
+Signed-off-by: Kalle Valo <kvalo@qca.qualcomm.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/net/wireless/ath/ath10k/mac.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/drivers/net/wireless/ath/ath10k/mac.c
++++ b/drivers/net/wireless/ath/ath10k/mac.c
+@@ -6558,7 +6558,7 @@ static int ath10k_get_survey(struct ieee
+ 		goto exit;
+ 	}
+ 
+-	ath10k_mac_update_bss_chan_survey(ar, survey->channel);
++	ath10k_mac_update_bss_chan_survey(ar, &sband->channels[idx]);
+ 
+ 	spin_lock_bh(&ar->data_lock);
+ 	memcpy(survey, ar_survey, sizeof(*survey));

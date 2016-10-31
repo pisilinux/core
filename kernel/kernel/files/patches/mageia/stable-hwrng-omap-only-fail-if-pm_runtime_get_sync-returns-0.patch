@@ -1,0 +1,44 @@
+From ad8529fde9e3601180a839867a8ab041109aebb5 Mon Sep 17 00:00:00 2001
+From: Dave Gerlach <d-gerlach@ti.com>
+Date: Tue, 20 Sep 2016 10:25:40 -0500
+Subject: hwrng: omap - Only fail if pm_runtime_get_sync returns < 0
+
+From: Dave Gerlach <d-gerlach@ti.com>
+
+commit ad8529fde9e3601180a839867a8ab041109aebb5 upstream.
+
+Currently omap-rng checks the return value of pm_runtime_get_sync and
+reports failure if anything is returned, however it should be checking
+if ret < 0 as pm_runtime_get_sync return 0 on success but also can return
+1 if the device was already active which is not a failure case. Only
+values < 0 are actual failures.
+
+Fixes: 61dc0a446e5d ("hwrng: omap - Fix assumption that runtime_get_sync will always succeed")
+Signed-off-by: Dave Gerlach <d-gerlach@ti.com>
+Signed-off-by: Herbert Xu <herbert@gondor.apana.org.au>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/char/hw_random/omap-rng.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+--- a/drivers/char/hw_random/omap-rng.c
++++ b/drivers/char/hw_random/omap-rng.c
+@@ -385,7 +385,7 @@ static int omap_rng_probe(struct platfor
+ 
+ 	pm_runtime_enable(&pdev->dev);
+ 	ret = pm_runtime_get_sync(&pdev->dev);
+-	if (ret) {
++	if (ret < 0) {
+ 		dev_err(&pdev->dev, "Failed to runtime_get device: %d\n", ret);
+ 		pm_runtime_put_noidle(&pdev->dev);
+ 		goto err_ioremap;
+@@ -443,7 +443,7 @@ static int __maybe_unused omap_rng_resum
+ 	int ret;
+ 
+ 	ret = pm_runtime_get_sync(dev);
+-	if (ret) {
++	if (ret < 0) {
+ 		dev_err(dev, "Failed to runtime_get device: %d\n", ret);
+ 		pm_runtime_put_noidle(dev);
+ 		return ret;
