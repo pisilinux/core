@@ -14,86 +14,6 @@
 ###
 ### Stable Queue
 ###
-stable-drm-vc4-fix-races-when-the-cs-reads-from-render-targets.patch
-stable-drm-prime-pass-the-right-module-owner-through-to-dma_buf_export.patch
-stable-drm-i915-backlight-setup-and-cache-pwm-alternate-increment-value.patch
-stable-drm-i915-backlight-setup-backlight-pwm-alternate-increment-on-backlight-enable.patch
-stable-drm-amdgpu-fix-ib-alignment-for-uvd.patch
-stable-drm-amdgpu-dce10-disable-hpd-on-local-panels.patch
-stable-drm-amdgpu-dce8-disable-hpd-on-local-panels.patch
-stable-drm-amdgpu-dce11-disable-hpd-on-local-panels.patch
-stable-drm-amdgpu-dce11-add-missing-drm_mode_config_cleanup-call.patch
-stable-drm-amdgpu-initialize-the-context-reset_counter-in-amdgpu_ctx_init.patch
-stable-drm-amdgpu-change-vblank_time-s-calculation-method-to-reduce-computational-error.patch
-stable-drm-radeon-narrow-asic_init-for-virtualization.patch
-stable-drm-radeon-si-dpm-fix-phase-shedding-setup.patch
-stable-drm-radeon-change-vblank_time-s-calculation-method-to-reduce-computational-error.patch
-stable-drm-vmwgfx-limit-the-user-space-command-buffer-size.patch
-stable-drm-fsl-dcu-fix-endian-issue-when-using-clk_register_divider.patch
-stable-drm-amd-powerplay-fix-mclk-not-switching-back-after-multi-head-was-disabled.patch
-stable-hid-add-quirk-for-akai-midimix.patch
-stable-drm-i915-skl-update-plane-watermarks-atomically-during-plane-updates.patch
-stable-drm-i915-move-crtc-updating-in-atomic_commit-into-it-s-own-hook.patch
-stable-drm-i915-skl-update-ddb-values-atomically-with-wms-plane-attrs.patch
-stable-drm-i915-skl-don-t-try-to-update-plane-watermarks-if-they-haven-t-changed.patch
-stable-drm-i915-gen9-only-add-the-planes-actually-affected-by-ddb-changes.patch
-stable-drm-i915-gen9-fix-the-wawmmemoryreadlatency-implementation.patch
-stable-drm-i915-gen9-minimum-scanlines-for-y-tile-is-not-always-4.patch
-stable-drm-i915-gen9-fix-plane_blocks_per_line-on-watermarks-calculations.patch
-stable-drm-i915-gen9-fix-the-watermark-res_blocks-value.patch
-stable-drm-i915-sagv-is-not-skl-only-so-rename-a-few-things.patch
-stable-drm-i915-introduce-intel_has_sagv.patch
-stable-drm-i915-kbl-kbl-also-needs-to-run-the-sagv-code.patch
-stable-revert-drm-i915-check-live-status-before-reading-edid.patch
-stable-drm-i915-account-for-tseg-size-when-determining-865g-stolen-base.patch
-stable-drm-i915-skl-ensure-pipes-with-changed-wms-get-added-to-the-state.patch
-stable-drm-i915-allow-pch-dpll-sharing-regardless-of-dpll_sdvo_high_speed.patch
-stable-drm-i915-move-long-hpd-handling-into-the-hotplug-work.patch
-stable-drm-i915-allow-dp-to-work-w-o-edid.patch
-stable-drm-i915-just-clear-the-mmiodebug-before-a-register-access.patch
-stable-drm-i915-unalias-obj-phys_handle-and-obj-userptr.patch
-stable-posix_acl-clear-sgid-bit-when-setting-file-permissions.patch
-stable-rt2x00usb-fix-error-return-code.patch
-stable-scsi-cxlflash-remove-the-device-cleanly-in-the-system-shutdown-path.patch
-stable-genirq-generic_chip-add-irq_unmap-callback.patch
-stable-coresight-remove-erroneous-dma_free_coherent-in-tmc_probe.patch
-stable-uio-fix-dmem_region_start-computation.patch
-stable-arm-clk-imx35-fix-name-for-ckil-clk.patch
-stable-spi-spi-fsl-dspi-drop-extra-spi_master_put-in-device-remove-function.patch
-stable-i40e-remove-a-stray-unlock.patch
-stable-i40e-fix-broken-i40e_config_rss_aq-function.patch
-stable-mwifiex-correct-aid-value-during-tdls-setup.patch
-stable-mwifiex-fix-failed-to-reconnect-after-interface-disabled-enabled.patch
-stable-ath10k-add-wmi_service_periodic_chan_stat_support-wmi-service.patch
-stable-ath10k-fix-sending-frame-in-management-path-in-push-txq-logic.patch
-stable-ath10k-fix-reporting-channel-survey-data.patch
-stable-ath10k-fix-throughput-regression-in-multi-client-mode.patch
-stable-crypto-marvell-don-t-overwrite-default-creq-state-during-initialization.patch
-stable-crypto-gcm-fix-iv-buffer-size-in-crypto_gcm_setkey.patch
-stable-crypto-marvell-update-transformation-context-for-each-dequeued-req.patch
-stable-crypto-arm-ghash-ce-add-missing-async-import-export.patch
-stable-crypto-ccp-fix-return-value-check-in-ccp_dmaengine_register.patch
-stable-hwrng-omap-only-fail-if-pm_runtime_get_sync-returns-0.patch
-stable-asoc-topology-fix-error-return-code-in-soc_tplg_dapm_widget_create.patch
-stable-asoc-dapm-fix-possible-uninitialized-variable-in-snd_soc_dapm_get_volsw.patch
-stable-asoc-dapm-fix-value-setting-for-_enum_double-mux-s-second-channel.patch
-stable-asoc-dapm-fix-kcontrol-creation-for-output-driver-widget.patch
-stable-asoc-sst-bxt-rt298-fix-obsoleted-initializers-for-array.patch
-stable-asoc-sst-bxt-da7219_max98357a-fix-obsoleted-initializers-for-array.patch
-stable-iio-ad5755-fix-off-by-one-on-devnr-limit-check.patch
-stable-iio-light-us5182d-add-missing-error-code-assignment-before-test.patch
-stable-staging-android-ion-hisi-fix-dependencies.patch
-stable-staging-sm750fb-correctly-set-clock_phase-bit-of-display-controller.patch
-stable-staging-r8188eu-fix-scheduling-while-atomic-splat.patch
-stable-staging-ks7010-fix-wait_for_completion_interruptible_timeout-return-handling.patch
-stable-staging-ks7010-declare-private-functions-static.patch
-stable-ib-hfi1-move-iowait_init-to-priv-allocate.patch
-stable-ib-rdmavt-correct-sparse-annotation.patch
-stable-ib-qib-remove-qpt_mask-global.patch
-stable-ib-mlx5-fix-steering-resource-leak.patch
-stable-power-bq24257-fix-use-of-uninitialized-pointer-bq-charger.patch
-stable-dmaengine-ipu-remove-bogus-no_irq-reference.patch
-stable-mm-hugetlb-check-for-reserved-hugepages-during-memory-offline.patch
 
 ###
 ### Arch x86
@@ -120,6 +40,9 @@ Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch
 
 # breaks nvidia304
 Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch
+
+# fix non-booting systems
+x86-smpboot-Init-apic-mapping-before-usage.patch
 
 ###
 ### Core
@@ -216,6 +139,9 @@ nvmepatch1-V4.patch
 nvmepatch2-V4.patch
 nvmepatch3-V4.patch
 
+# fix feature check, reported on dev@ ml
+dm-raid-fix-compat_features-validation.patch
+
 ###
 ### Char
 ###
@@ -228,9 +154,8 @@ Revert-ipmi-Start-the-timer-and-thread-on-internal-m.patch
 ###
 
 # aufs from: http://aufs.sourceforge.net/ (mga#8314)
-fs-aufs-4.7.patch
-fs-aufs-4.7-modular.patch
-fs-aufs-4.7-ver-fix.patch
+fs-aufs-4.8.patch
+fs-aufs-4.8-modular.patch
 
 ###
 ### FireWire
@@ -270,7 +195,8 @@ gpu-drm-mach64-3.18-buildfix.patch
 # also from https://bugs.freedesktop.org/attachment.cgi?id=127264, first reference from
 # https://bugs.freedesktop.org/show_bug.cgi?id=97450). Does not completely resolve the
 # issues but reduce.
-drm-i915-gen9-fix-DDB-partitioning-for-multi-screen-cases.patch
+# now in drm-next: https://cgit.freedesktop.org/~airlied/linux/commit?h=drm-next&id=5a920b85f2c6e3fd7d9dd9bb3f3345e9085e2360
+gpu-drm-i915-gen9-fix-DDB-partitioning-for-multi-screen-cases.patch
 
 ###
 ### Hardware Monitoring

@@ -1,5 +1,7 @@
-
+From cf4747d7535a936105f0abe8d8109d3fe339162b Mon Sep 17 00:00:00 2001
 From: Larry Finger <Larry.Finger@lwfinger.net>
+Date: Wed, 12 Oct 2016 13:54:04 -0500
+Subject: [PATCH] rtlwifi: Fix regression caused by commit d86e64768859
 
 In commit d86e64768859 ("rtlwifi: rtl818x: constify local structures"),
 the configuration struct for most of the drivers was changed to be
@@ -19,11 +21,9 @@ previous patch, is now constantfied.
 Fixes: d86e64768859 ("rtlwifi: rtl818x: constify local structures")
 Suggested-by: Johannes Berg <johannes@sipsolutions.net>
 Signed-off-by: Larry Finger <Larry.Finger@lwfinger.net>
-Cc: Stable <stable@vger.kernel.org>
+Cc: Stable <stable@vger.kernel.org> # 4.8
 Cc: Julia Lawall <Julia.Lawall@lip6.fr>
----
-
-V2 - Fix warnings that were generated for some compiler versions.
+Signed-off-by: Kalle Valo <kvalo@codeaurora.org>
 ---
  drivers/net/wireless/realtek/rtlwifi/core.c         |  2 +-
  drivers/net/wireless/realtek/rtlwifi/rtl8188ee/sw.c |  8 ++++----
@@ -86,10 +86,10 @@ index e7b11b4..f361808 100644
  	.mod_params = &rtl88ee_mod_params,
  
 diff --git a/drivers/net/wireless/realtek/rtlwifi/rtl8192ce/sw.c b/drivers/net/wireless/realtek/rtlwifi/rtl8192ce/sw.c
-index 5c46a98..691ddef 100644
+index 87aa209..8b6e37c 100644
 --- a/drivers/net/wireless/realtek/rtlwifi/rtl8192ce/sw.c
 +++ b/drivers/net/wireless/realtek/rtlwifi/rtl8192ce/sw.c
-@@ -92,6 +92,7 @@ int rtl92c_init_sw_vars(struct ieee80211_hw *hw)
+@@ -96,6 +96,7 @@ int rtl92c_init_sw_vars(struct ieee80211_hw *hw)
  	struct rtl_priv *rtlpriv = rtl_priv(hw);
  	struct rtl_pci *rtlpci = rtl_pcidev(rtl_pcipriv(hw));
  	struct rtl_hal *rtlhal = rtl_hal(rtl_priv(hw));
@@ -97,7 +97,7 @@ index 5c46a98..691ddef 100644
  
  	rtl8192ce_bt_reg_init(hw);
  
-@@ -163,15 +164,12 @@ int rtl92c_init_sw_vars(struct ieee80211_hw *hw)
+@@ -167,15 +168,12 @@ int rtl92c_init_sw_vars(struct ieee80211_hw *hw)
  	}
  
  	/* request fw */
@@ -117,7 +117,7 @@ index 5c46a98..691ddef 100644
  				      rtlpriv->io.dev, GFP_KERNEL, hw,
  				      rtl_fw_cb);
  	if (err) {
-@@ -258,7 +256,6 @@ static const struct rtl_hal_cfg rtl92ce_hal_cfg = {
+@@ -262,7 +260,6 @@ static const struct rtl_hal_cfg rtl92ce_hal_cfg = {
  	.bar_id = 2,
  	.write_readback = true,
  	.name = "rtl92c_pci",
@@ -126,10 +126,10 @@ index 5c46a98..691ddef 100644
  	.mod_params = &rtl92ce_mod_params,
  
 diff --git a/drivers/net/wireless/realtek/rtlwifi/rtl8192cu/sw.c b/drivers/net/wireless/realtek/rtlwifi/rtl8192cu/sw.c
-index 92588e0..b84e13a 100644
+index 7c6f7f0..f953320 100644
 --- a/drivers/net/wireless/realtek/rtlwifi/rtl8192cu/sw.c
 +++ b/drivers/net/wireless/realtek/rtlwifi/rtl8192cu/sw.c
-@@ -55,6 +55,7 @@ static int rtl92cu_init_sw_vars(struct ieee80211_hw *hw)
+@@ -59,6 +59,7 @@ static int rtl92cu_init_sw_vars(struct ieee80211_hw *hw)
  {
  	struct rtl_priv *rtlpriv = rtl_priv(hw);
  	int err;
@@ -137,7 +137,7 @@ index 92588e0..b84e13a 100644
  
  	rtlpriv->dm.dm_initialgain_enable = true;
  	rtlpriv->dm.dm_flag = 0;
-@@ -73,18 +74,18 @@ static int rtl92cu_init_sw_vars(struct ieee80211_hw *hw)
+@@ -77,18 +78,18 @@ static int rtl92cu_init_sw_vars(struct ieee80211_hw *hw)
  	}
  	if (IS_VENDOR_UMC_A_CUT(rtlpriv->rtlhal.version) &&
  	    !IS_92C_SERIAL(rtlpriv->rtlhal.version)) {
@@ -161,7 +161,7 @@ index 92588e0..b84e13a 100644
  				      GFP_KERNEL, hw, rtl_fw_cb);
  	return err;
  }
-@@ -183,7 +184,6 @@ static struct rtl_hal_usbint_cfg rtl92cu_interface_cfg = {
+@@ -187,7 +188,6 @@ static struct rtl_hal_usbint_cfg rtl92cu_interface_cfg = {
  
  static struct rtl_hal_cfg rtl92cu_hal_cfg = {
  	.name = "rtl92c_usb",
@@ -170,10 +170,10 @@ index 92588e0..b84e13a 100644
  	.mod_params = &rtl92cu_mod_params,
  	.usb_interface_cfg = &rtl92cu_interface_cfg,
 diff --git a/drivers/net/wireless/realtek/rtlwifi/rtl8192de/sw.c b/drivers/net/wireless/realtek/rtlwifi/rtl8192de/sw.c
-index a9c39eb..2d65e40 100644
+index 0538a4d..1ebfee1 100644
 --- a/drivers/net/wireless/realtek/rtlwifi/rtl8192de/sw.c
 +++ b/drivers/net/wireless/realtek/rtlwifi/rtl8192de/sw.c
-@@ -88,6 +88,7 @@ static int rtl92d_init_sw_vars(struct ieee80211_hw *hw)
+@@ -92,6 +92,7 @@ static int rtl92d_init_sw_vars(struct ieee80211_hw *hw)
  	u8 tid;
  	struct rtl_priv *rtlpriv = rtl_priv(hw);
  	struct rtl_pci *rtlpci = rtl_pcidev(rtl_pcipriv(hw));
@@ -181,7 +181,7 @@ index a9c39eb..2d65e40 100644
  
  	rtlpriv->dm.dm_initialgain_enable = true;
  	rtlpriv->dm.dm_flag = 0;
-@@ -177,10 +178,10 @@ static int rtl92d_init_sw_vars(struct ieee80211_hw *hw)
+@@ -181,10 +182,10 @@ static int rtl92d_init_sw_vars(struct ieee80211_hw *hw)
  
  	rtlpriv->max_fw_size = 0x8000;
  	pr_info("Driver for Realtek RTL8192DE WLAN interface\n");
@@ -194,7 +194,7 @@ index a9c39eb..2d65e40 100644
  				      rtlpriv->io.dev, GFP_KERNEL, hw,
  				      rtl_fw_cb);
  	if (err) {
-@@ -262,7 +263,6 @@ static const struct rtl_hal_cfg rtl92de_hal_cfg = {
+@@ -266,7 +267,6 @@ static const struct rtl_hal_cfg rtl92de_hal_cfg = {
  	.bar_id = 2,
  	.write_readback = true,
  	.name = "rtl8192de",
@@ -238,10 +238,10 @@ index ac299cb..46b605de3 100644
  	.mod_params = &rtl92ee_mod_params,
  
 diff --git a/drivers/net/wireless/realtek/rtlwifi/rtl8192se/sw.c b/drivers/net/wireless/realtek/rtlwifi/rtl8192se/sw.c
-index a652d45..998cefb 100644
+index 5e8e02d..3e1eaea 100644
 --- a/drivers/net/wireless/realtek/rtlwifi/rtl8192se/sw.c
 +++ b/drivers/net/wireless/realtek/rtlwifi/rtl8192se/sw.c
-@@ -85,12 +85,13 @@ static void rtl92se_fw_cb(const struct firmware *firmware, void *context)
+@@ -89,12 +89,13 @@ static void rtl92se_fw_cb(const struct firmware *firmware, void *context)
  	struct ieee80211_hw *hw = context;
  	struct rtl_priv *rtlpriv = rtl_priv(hw);
  	struct rt_firmware *pfirmware = NULL;
@@ -256,7 +256,7 @@ index a652d45..998cefb 100644
  		rtlpriv->max_fw_size = 0;
  		return;
  	}
-@@ -113,6 +114,7 @@ static int rtl92s_init_sw_vars(struct ieee80211_hw *hw)
+@@ -117,6 +118,7 @@ static int rtl92s_init_sw_vars(struct ieee80211_hw *hw)
  	struct rtl_pci *rtlpci = rtl_pcidev(rtl_pcipriv(hw));
  	int err = 0;
  	u16 earlyrxthreshold = 7;
@@ -264,7 +264,7 @@ index a652d45..998cefb 100644
  
  	rtlpriv->dm.dm_initialgain_enable = true;
  	rtlpriv->dm.dm_flag = 0;
-@@ -210,9 +212,9 @@ static int rtl92s_init_sw_vars(struct ieee80211_hw *hw)
+@@ -214,9 +216,9 @@ static int rtl92s_init_sw_vars(struct ieee80211_hw *hw)
  	rtlpriv->max_fw_size = RTL8190_MAX_FIRMWARE_CODE_SIZE*2 +
  			       sizeof(struct fw_hdr);
  	pr_info("Driver for Realtek RTL8192SE/RTL8191SE\n"
@@ -276,7 +276,7 @@ index a652d45..998cefb 100644
  				      rtlpriv->io.dev, GFP_KERNEL, hw,
  				      rtl92se_fw_cb);
  	if (err) {
-@@ -306,7 +308,6 @@ static const struct rtl_hal_cfg rtl92se_hal_cfg = {
+@@ -310,7 +312,6 @@ static const struct rtl_hal_cfg rtl92se_hal_cfg = {
  	.bar_id = 1,
  	.write_readback = false,
  	.name = "rtl92s_pci",
@@ -424,3 +424,6 @@ index 595f7d5..dafe486 100644
  	struct rtl_hal_ops *ops;
  	struct rtl_mod_params *mod_params;
  	struct rtl_hal_usbint_cfg *usb_interface_cfg;
+-- 
+2.10.1
+
