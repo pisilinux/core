@@ -1,0 +1,39 @@
+From 5c33677c87cbe44ae04df69c4a29c1750a9ec4e5 Mon Sep 17 00:00:00 2001
+From: Andy Whitcroft <apw@canonical.com>
+Date: Tue, 11 Oct 2016 15:16:57 +0100
+Subject: [PATCH] dm raid: fix compat_features validation
+
+In ecbfb9f118bce4 ("dm raid: add raid level takeover support") a new
+compatible feature flag was added.  Validation for these compat_features
+was added but this only passes for new raid mappings with this feature
+flag.  This causes previously created raid mappings to be failed at
+import.
+
+Check compat_features for the only valid combination.
+
+Fixes: ecbfb9f118bce4 ("dm raid: add raid level takeover support")
+Cc: stable@vger.kernel.org # v4.8
+Signed-off-by: Andy Whitcroft <apw@canonical.com>
+Signed-off-by: Heinz Mauelshagen <heinzm@redhat.com>
+Signed-off-by: Mike Snitzer <snitzer@redhat.com>
+---
+ drivers/md/dm-raid.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/md/dm-raid.c b/drivers/md/dm-raid.c
+index 8abde6b..2a39700 100644
+--- a/drivers/md/dm-raid.c
++++ b/drivers/md/dm-raid.c
+@@ -2258,7 +2258,8 @@ static int super_validate(struct raid_set *rs, struct md_rdev *rdev)
+ 	if (!mddev->events && super_init_validation(rs, rdev))
+ 		return -EINVAL;
+ 
+-	if (le32_to_cpu(sb->compat_features) != FEATURE_FLAG_SUPPORTS_V190) {
++	if (le32_to_cpu(sb->compat_features) &&
++	    le32_to_cpu(sb->compat_features) != FEATURE_FLAG_SUPPORTS_V190) {
+ 		rs->ti->error = "Unable to assemble array: Unknown flag(s) in compatible feature flags";
+ 		return -EINVAL;
+ 	}
+-- 
+2.10.1
+
