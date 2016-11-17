@@ -1,0 +1,64 @@
+From 16d917b130d782b94fa02afc7bdf0d4aae689da4 Mon Sep 17 00:00:00 2001
+From: Bjorn Helgaas <bhelgaas@google.com>
+Date: Tue, 8 Nov 2016 14:25:24 -0600
+Subject: [PATCH] PCI: Don't attempt to claim shadow copies of ROM
+
+If we're using a shadow copy of a PCI device ROM, the shadow copy is in RAM
+and the device never sees accesses to it and doesn't respond to it.  We
+don't have to route the shadow range to the PCI device, and the device
+doesn't have to claim the range.
+
+Previously we treated the shadow copy as though it were the ROM BAR, and we
+failed to claim it because the region wasn't routed to the device:
+
+  pci 0000:01:00.0: Video device with shadowed ROM at [mem 0x000c0000-0x000dffff]
+  pci_bus 0000:01: Allocating resources
+  pci 0000:01:00.0: can't claim BAR 6 [mem 0x000c0000-0x000dffff]: no compatible bridge window
+
+The failure path of pcibios_allocate_dev_rom_resource() cleared out the
+resource start address, which also caused the following ioremap() warning:
+
+  WARNING: CPU: 0 PID: 116 at /build/linux-akdJXO/linux-4.8.0/arch/x86/mm/ioremap.c:121 __ioremap_caller+0x1ec/0x370
+  ioremap on RAM at 0x0000000000000000 - 0x000000000001ffff
+
+Handle an option ROM shadow copy as RAM, without trying to insert it into
+the iomem resource tree.
+
+This fixes a regression caused by 0c0e0736acad ("PCI: Set ROM shadow
+location in arch code, not in PCI core"), which appeared in v4.6.  The
+regression causes video device initialization to fail.  This was reported
+on AMD Turks, but it likely affects others as well.
+
+Fixes: 0c0e0736acad ("PCI: Set ROM shadow location in arch code, not in PCI core")
+Reported-and-tested-by: Vecu Bosseur <vecu.bosseur@gmail.com>
+Link: https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1627496
+Link: https://bugzilla.kernel.org/show_bug.cgi?id=175391
+Link: https://bugzilla.redhat.com/show_bug.cgi?id=1352272
+Signed-off-by: Bjorn Helgaas <bhelgaas@google.com>
+CC: stable@vger.kernel.org	# v4.6+
+---
+ drivers/pci/setup-res.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/drivers/pci/setup-res.c b/drivers/pci/setup-res.c
+index 66c4d8f..9526e34 100644
+--- a/drivers/pci/setup-res.c
++++ b/drivers/pci/setup-res.c
+@@ -121,6 +121,14 @@ int pci_claim_resource(struct pci_dev *dev, int resource)
+ 		return -EINVAL;
+ 	}
+ 
++	/*
++	 * If we have a shadow copy in RAM, the PCI device doesn't respond
++	 * to the shadow range, so we don't need to claim it, and upstream
++	 * bridges don't need to route the range to the device.
++	 */
++	if (res->flags & IORESOURCE_ROM_SHADOW)
++		return 0;
++
+ 	root = pci_find_parent_resource(dev, res);
+ 	if (!root) {
+ 		dev_info(&dev->dev, "can't claim BAR %d %pR: no compatible bridge window\n",
+-- 
+2.10.2
+
