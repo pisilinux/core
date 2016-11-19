@@ -41,9 +41,6 @@ Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch
 # breaks nvidia304
 Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch
 
-# fix non-booting systems
-x86-smpboot-Init-apic-mapping-before-usage.patch
-
 ###
 ### Core
 ###
@@ -67,6 +64,9 @@ kernel-governor-cpupower-Correct-return-type-of-cpu_power_is_cpu_onl.patch
 # http://lkml.org/lkml/2008/9/12/52
 pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch
 pci-quirks-drop-devinit-exit.patch
+
+# fix video detection failure on Amd Turks
+PCI-Don-t-attempt-to-claim-shadow-copies-of-ROM.patch
 
 ###
 ### PNP core
@@ -139,9 +139,6 @@ nvmepatch1-V4.patch
 nvmepatch2-V4.patch
 nvmepatch3-V4.patch
 
-# fix feature check, reported on dev@ ml
-dm-raid-fix-compat_features-validation.patch
-
 ###
 ### Char
 ###
@@ -190,13 +187,12 @@ gpu-drm-mach64-linux-3.14-buildfix.patch
 gpu-drm-mach64-3.17-buildfix.patch
 gpu-drm-mach64-3.18-buildfix.patch
 
-# Attempt to fix FIFO underrun problems:
-# (from https://patchwork.freedesktop.org/patch/113642/ and 
-# also from https://bugs.freedesktop.org/attachment.cgi?id=127264, first reference from
-# https://bugs.freedesktop.org/show_bug.cgi?id=97450). Does not completely resolve the
-# issues but reduce.
-# now in drm-next: https://cgit.freedesktop.org/~airlied/linux/commit?h=drm-next&id=5a920b85f2c6e3fd7d9dd9bb3f3345e9085e2360
-gpu-drm-i915-gen9-fix-DDB-partitioning-for-multi-screen-cases.patch
+# amdgpu crash
+gpu-drm-amdgpu-fix-crash-in-acp_hw_fini.patch
+
+# i915 dp fix
+gpu-drm-i915-dp-BDW-cdclk-fix-for-DP-audio.patch
+gpu-drm-i915-dp-Extend-BDW-DP-audio-workaround-to-GEN9-p.patch
 
 ###
 ### Hardware Monitoring
@@ -251,9 +247,6 @@ net-netfilter-psd-2.6.35-buildfix.patch
 
 # rtlwifi regression
 net-wireless-rtlwifi-Fix-regression-caused-by-commit-d86e64768859.patch
-
-# CVE-2016-7039
-net-add-recursion-limit-to-GRO.patch
 
 ###
 ### Platform drivers
