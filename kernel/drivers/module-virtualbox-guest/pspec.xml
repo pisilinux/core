@@ -14,14 +14,14 @@
         <Description>This package provides the kernel modules needed for mouse integration and shared folder support between VirtualBox host and guest systems.</Description>
         <Archive sha1sum="a419ccd79204a225da891139a2b75f56de71980b" type="tarxz">https://sourceforge.net/projects/pisi-source/files/kernel-4.7/module-virtualbox-guest-5.1.6.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency version="4.8.6">kernel-module-headers</Dependency>
+            <Dependency version="4.8.8">kernel-module-headers</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>module-virtualbox-guest</Name>
         <RuntimeDependencies>
-            <Dependency version="4.8.6">kernel</Dependency>
+            <Dependency version="4.8.8">kernel</Dependency>
             <Dependency>baselayout</Dependency>
             <Dependency version="current">module-virtualbox-guest-userspace</Dependency>
         </RuntimeDependencies>
@@ -52,6 +52,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2016-11-18</Date>
+            <Version>5.1.6</Version>
+            <Comment>Rebuild for new kernel.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="10">
             <Date>2016-11-02</Date>
             <Version>5.1.6</Version>
