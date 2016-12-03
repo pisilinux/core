@@ -16,10 +16,10 @@
         <BuildDependencies>
             <Dependency>pciutils-devel</Dependency>
         </BuildDependencies>
-        <Patches>    
-        <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.8.6.xz</Patch>
-            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.8.6/1.mga6/PATCHES/patches/series-->
+                <Patches>
+            <!-- Linux patches -->
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.8.8.xz</Patch>
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.8.8/1.mga6/PATCHES/patches/series-->
             <!--stable patches-->
             <!--other patches-->
             <Patch level="1">patches/mageia/Revert-ipmi-Start-the-timer-and-thread-on-internal-m.patch</Patch>
@@ -28,12 +28,12 @@
             <Patch level="1">patches/mageia/x86-default_poweroff_up_machines.patch</Patch>
             <Patch level="1">patches/mageia/x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch</Patch>
             <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
-            <Patch level="1">patches/mageia/x86-smpboot-Init-apic-mapping-before-usage.patch</Patch>
             <Patch level="1">patches/mageia/Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch</Patch>
             <Patch level="1">patches/mageia/base-cacheinfo-silence-DT-warnings.patch</Patch>
             <Patch level="1">patches/mageia/kernel-governor-cpupower-Correct-return-type-of-cpu_power_is_cpu_onl.patch</Patch>
             <Patch level="1">patches/mageia/pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch</Patch>
             <Patch level="1">patches/mageia/pci-quirks-drop-devinit-exit.patch</Patch>
+            <Patch level="1">patches/mageia/PCI-Don-t-attempt-to-claim-shadow-copies-of-ROM.patch</Patch>
             <Patch level="1">patches/mageia/acpi-CLEVO-M360S-disable_acpi_irq.patch</Patch>
             <Patch level="1">patches/mageia/acpi-processor-M720SR-limit-to-C2.patch</Patch>
             <Patch level="1">patches/mageia/ACPI-video-Add-a-quirk-to-force-acpi-video-backlight.patch</Patch>
@@ -54,7 +54,6 @@
             <Patch level="1">patches/mageia/nvmepatch1-V4.patch</Patch>
             <Patch level="1">patches/mageia/nvmepatch2-V4.patch</Patch>
             <Patch level="1">patches/mageia/nvmepatch3-V4.patch</Patch>
-            <Patch level="1">patches/mageia/dm-raid-fix-compat_features-validation.patch</Patch>
             <Patch level="1">patches/mageia/fs-aufs-4.8.patch</Patch>
             <Patch level="1">patches/mageia/fs-aufs-4.8-modular.patch</Patch>
             <Patch level="1">patches/mageia/firewire-ieee1394-module-aliases.patch</Patch>
@@ -77,7 +76,9 @@
             <Patch level="1">patches/mageia/gpu-drm-mach64-linux-3.14-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.17-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.18-buildfix.patch</Patch--><!--1-->
-            <Patch level="1">patches/mageia/gpu-drm-i915-gen9-fix-DDB-partitioning-for-multi-screen-cases.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-amdgpu-fix-crash-in-acp_hw_fini.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-i915-dp-BDW-cdclk-fix-for-DP-audio.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-i915-dp-Extend-BDW-DP-audio-workaround-to-GEN9-p.patch</Patch>           
             <Patch level="1">patches/mageia/input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch</Patch>
             <Patch level="1">patches/mageia/net-sis190-fix-list-usage.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-IFWLOG.patch</Patch>
@@ -91,7 +92,6 @@
             <Patch level="1">patches/mageia/net-netfilter-psd-mdv.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-psd-2.6.35-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/net-wireless-rtlwifi-Fix-regression-caused-by-commit-d86e64768859.patch</Patch>
-            <Patch level="1">patches/mageia/net-add-recursion-limit-to-GRO.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
@@ -155,6 +155,13 @@
         </Provides>-->
     </Package>
     <History>
+        <Update release="7">
+            <Date>2016-11-18</Date>
+            <Version>4.8.8</Version>
+            <Comment>Release bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="6">
             <Date>2016-08-24</Date>
             <Version>4.7.2</Version>

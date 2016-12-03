@@ -1,0 +1,56 @@
+From 61e0c5438866d0e737937fc35d752538960e1e9f Mon Sep 17 00:00:00 2001
+From: Dhinakaran Pandiyan <dhinakaran.pandiyan@intel.com>
+Date: Wed, 2 Nov 2016 13:13:21 -0700
+Subject: [PATCH] drm/i915/dp: Extend BDW DP audio workaround to GEN9 platforms
+
+According to BSpec, cdclk for BDW has to be not less than 432 MHz with DP
+audio enabled, port width x4, and link rate HBR2 (5.4 GHz). With cdclk less
+than 432 MHz, enabling audio leads to pipe FIFO underruns and displays
+cycling on/off.
+
+Let's apply this work around to GEN9 platforms too, as it fixes the same
+issue.
+
+v2: Move drm_device to drm_i915_private conversion
+
+Bugzilla: https://bugs.freedesktop.org/show_bug.cgi?id=97907
+Cc: stable@vger.kernel.org
+Cc: Libin Yang <libin.yang@linux.intel.com>
+Signed-off-by: Dhinakaran Pandiyan <dhinakaran.pandiyan@intel.com>
+Reviewed-by: Jani Nikula <jani.nikula@intel.com>
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/1478117601-19122-1-git-send-email-dhinakaran.pandiyan@intel.com
+(cherry picked from commit 9c7540241885838cfc7fa58c4a8bd75be0303ed1)
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+---
+ drivers/gpu/drm/i915/intel_display.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/i915/intel_display.c b/drivers/gpu/drm/i915/intel_display.c
+index 4f57f8c..81c1149 100644
+--- a/drivers/gpu/drm/i915/intel_display.c
++++ b/drivers/gpu/drm/i915/intel_display.c
+@@ -10246,8 +10246,10 @@ static void bxt_modeset_commit_cdclk(struct drm_atomic_state *old_state)
+ static int bdw_adjust_min_pipe_pixel_rate(struct intel_crtc_state *crtc_state,
+ 					  int pixel_rate)
+ {
++	struct drm_i915_private *dev_priv = to_i915(crtc_state->base.crtc->dev);
++
+ 	/* pixel rate mustn't exceed 95% of cdclk with IPS on BDW */
+-	if (crtc_state->ips_enabled)
++	if (IS_BROADWELL(dev_priv) && crtc_state->ips_enabled)
+ 		pixel_rate = DIV_ROUND_UP(pixel_rate * 100, 95);
+ 
+ 	/* BSpec says "Do not use DisplayPort with CDCLK less than
+@@ -10289,7 +10291,7 @@ static int ilk_max_pixel_rate(struct drm_atomic_state *state)
+ 
+ 		pixel_rate = ilk_pipe_pixel_rate(crtc_state);
+ 
+-		if (IS_BROADWELL(dev_priv))
++		if (IS_BROADWELL(dev_priv) || IS_GEN9(dev_priv))
+ 			pixel_rate = bdw_adjust_min_pipe_pixel_rate(crtc_state,
+ 								    pixel_rate);
+ 
+-- 
+2.10.2
+
