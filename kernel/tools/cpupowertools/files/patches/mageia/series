@@ -14,6 +14,7 @@
 ###
 ### Stable Queue
 ###
+patch-4.8.10-rc1.patch
 
 ###
 ### Arch x86
@@ -46,11 +47,6 @@ Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch
 ###
 base-cacheinfo-silence-DT-warnings.patch
 
-# Patch for having the cpupower setting the governor
-# (from https://bugzilla.kernel.org/show_bug.cgi?id=135391, same as
-# https://bugzilla.redhat.com/show_bug.cgi?id=1374212)
-kernel-governor-cpupower-Correct-return-type-of-cpu_power_is_cpu_onl.patch
-
 ###
 ### i2c
 ###
@@ -64,9 +60,6 @@ kernel-governor-cpupower-Correct-return-type-of-cpu_power_is_cpu_onl.patch
 # http://lkml.org/lkml/2008/9/12/52
 pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch
 pci-quirks-drop-devinit-exit.patch
-
-# fix video detection failure on Amd Turks
-PCI-Don-t-attempt-to-claim-shadow-copies-of-ROM.patch
 
 ###
 ### PNP core
@@ -186,13 +179,6 @@ gpu-drm-mach64-restore-mach64_PCI_IDS.patch
 gpu-drm-mach64-linux-3.14-buildfix.patch
 gpu-drm-mach64-3.17-buildfix.patch
 gpu-drm-mach64-3.18-buildfix.patch
-
-# amdgpu crash
-gpu-drm-amdgpu-fix-crash-in-acp_hw_fini.patch
-
-# i915 dp fix
-gpu-drm-i915-dp-BDW-cdclk-fix-for-DP-audio.patch
-gpu-drm-i915-dp-Extend-BDW-DP-audio-workaround-to-GEN9-p.patch
 
 ###
 ### Hardware Monitoring
@@ -385,5 +371,3 @@ tools-testing-selftest-Makefile-remove-powerpc-reference.patch
 ###
 ### UAPI
 ###
-# breaks linux-arm build
-Revert-include-uapi-linux-atm_zatm.h-include-linux-t.patch
