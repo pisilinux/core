@@ -14,6 +14,7 @@
 ###
 ### Stable Queue
 ###
+patch-4.8.10-rc1.patch
 
 ###
 ### Arch x86
@@ -41,18 +42,10 @@ Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch
 # breaks nvidia304
 Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch
 
-# fix non-booting systems
-x86-smpboot-Init-apic-mapping-before-usage.patch
-
 ###
 ### Core
 ###
 base-cacheinfo-silence-DT-warnings.patch
-
-# Patch for having the cpupower setting the governor
-# (from https://bugzilla.kernel.org/show_bug.cgi?id=135391, same as
-# https://bugzilla.redhat.com/show_bug.cgi?id=1374212)
-kernel-governor-cpupower-Correct-return-type-of-cpu_power_is_cpu_onl.patch
 
 ###
 ### i2c
@@ -139,9 +132,6 @@ nvmepatch1-V4.patch
 nvmepatch2-V4.patch
 nvmepatch3-V4.patch
 
-# fix feature check, reported on dev@ ml
-dm-raid-fix-compat_features-validation.patch
-
 ###
 ### Char
 ###
@@ -189,14 +179,6 @@ gpu-drm-mach64-restore-mach64_PCI_IDS.patch
 gpu-drm-mach64-linux-3.14-buildfix.patch
 gpu-drm-mach64-3.17-buildfix.patch
 gpu-drm-mach64-3.18-buildfix.patch
-
-# Attempt to fix FIFO underrun problems:
-# (from https://patchwork.freedesktop.org/patch/113642/ and 
-# also from https://bugs.freedesktop.org/attachment.cgi?id=127264, first reference from
-# https://bugs.freedesktop.org/show_bug.cgi?id=97450). Does not completely resolve the
-# issues but reduce.
-# now in drm-next: https://cgit.freedesktop.org/~airlied/linux/commit?h=drm-next&id=5a920b85f2c6e3fd7d9dd9bb3f3345e9085e2360
-gpu-drm-i915-gen9-fix-DDB-partitioning-for-multi-screen-cases.patch
 
 ###
 ### Hardware Monitoring
@@ -251,9 +233,6 @@ net-netfilter-psd-2.6.35-buildfix.patch
 
 # rtlwifi regression
 net-wireless-rtlwifi-Fix-regression-caused-by-commit-d86e64768859.patch
-
-# CVE-2016-7039
-net-add-recursion-limit-to-GRO.patch
 
 ###
 ### Platform drivers
@@ -392,5 +371,3 @@ tools-testing-selftest-Makefile-remove-powerpc-reference.patch
 ###
 ### UAPI
 ###
-# breaks linux-arm build
-Revert-include-uapi-linux-atm_zatm.h-include-linux-t.patch
