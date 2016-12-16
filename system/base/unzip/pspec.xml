@@ -14,6 +14,10 @@
         <Summary>Unzipper for pkzip-compressed files</Summary>
         <Description>UnZip enables us to extract archives compressed in .zip format (also called "zipfiles").</Description>
         <Archive sha1sum="7736e6306f1bb8e51f894ca4670e94181a0f6de3" type="zip">mirrors://sourceforge/infozip/unzip60.zip</Archive>
+        <BuildDependencies>
+            <Dependency>bzip2</Dependency>
+            <Dependency>bash</Dependency>
+        </BuildDependencies>
         <Patches>
             <Patch level="1">overflow-fsize.patch</Patch>
             <Patch level="1">cve20149636.patch</Patch>
@@ -28,6 +32,10 @@
 
     <Package>
         <Name>unzip</Name>
+        <RuntimeDependencies>
+            <Dependency>bzip2</Dependency>
+            <Dependency>bash</Dependency>
+        </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="doc">/usr/share/doc</Path>
