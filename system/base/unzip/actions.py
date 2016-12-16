@@ -7,17 +7,31 @@
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
+from pisi.actionsapi import shelltools
 
-WorkDir="%s%s" % (get.srcNAME(), get.srcVERSION().replace(".",""))
 
 def build():
-    autotools.make('-f unix/Makefile LF2="" CC="%s" CF="%s -I. -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64" unzips' % (get.CC(),get.CFLAGS()))
+
+    shelltools.system('sed -i "/MANDIR =/s#)/#)/share/#" unix/Makefile')
+
+    opt='-DACORN_FTYPE_NFS \
+         -DWILD_STOP_AT_DIR \
+         -DLARGE_FILE_SUPPORT \
+         -DUNICODE_SUPPORT \
+         -DUNICODE_WCHAR \
+         -DUTF8_MAYBE_NATIVE \
+         -DNO_LCHMOD \
+         -DDATE_FORMAT=DF_YMD \
+         -DUSE_BZIP2 -DNOMEMCPY \
+         -DNO_WORKING_ISPRINT'
+
+
+    autotools.make('-f unix/Makefile prefix=/usr D_USE_BZ2=-DUSE_BZIP2 L_BZ2=-lbz2 LF2="%s" CF="%s -I. %s" unzips'% (get.LDFLAGS(),get.CFLAGS(),opt))
+
 
 def install():
-    for bin in ["unzip", "funzip", "unzipsfx", "unix/zipgrep"]:
-        pisitools.dobin(bin)
+    autotools.make("-f unix/Makefile prefix=%s/usr install" % get.installDIR())
 
-    pisitools.dosym("/usr/bin/unzip", "/usr/bin/zipinfo")
 
     pisitools.doman("man/*.1")
-    pisitools.dodoc("BUGS", "History*", "README", "ToDo", "WHERE")
+    pisitools.dodoc("BUGS", "History*", "README", "ToDo", "WHERE" , "LICENSE")

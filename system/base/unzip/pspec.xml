@@ -1,3 +1,4 @@
+
 <?xml version="1.0" ?>
 <!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
@@ -5,19 +6,24 @@
         <Name>unzip</Name>
         <Homepage>ftp://ftp.info-zip.org/pub/infozip/UnZip.html</Homepage>
         <Packager>
-            <Name>PisiLinux Community</Name>
-            <Email>admins@pisilinux.org</Email>
+            <Name>Pisi Gnu/Linux Community</Name>
+            <Email>cpisimail@yandex.com</Email>
         </Packager>
         <License>Info-ZIP</License>
         <IsA>app:console</IsA>
         <Summary>Unzipper for pkzip-compressed files</Summary>
         <Description>UnZip enables us to extract archives compressed in .zip format (also called "zipfiles").</Description>
-        <Archive sha1sum="849aae577f4f94ef88c47b127f20265913750921" type="zip">mirrors://sourceforge/infozip/unzip610b.zip</Archive>
+        <Archive sha1sum="7736e6306f1bb8e51f894ca4670e94181a0f6de3" type="zip">mirrors://sourceforge/infozip/unzip60.zip</Archive>
         <Patches>
-            <Patch level="1">unzip-6.0-attribs-overflow.patch</Patch>
-            <Patch level="1">unzip-6.0-exec-shield.patch</Patch>
-            <Patch level="1">unzip-6.0-close.patch</Patch>
-        </Patches>
+            <Patch level="1">overflow-fsize.patch</Patch>
+            <Patch level="1">cve20149636.patch</Patch>
+            <Patch>test_compr_eb.patch</Patch>
+            <Patch>getZip64Data.patch</Patch>
+            <Patch level="1">crc32.patch</Patch>
+            <Patch level="1">empty-input.patch</Patch>
+            <Patch level="1">csiz-underflow.patch</Patch>
+            <Patch level="1">nextbyte-overflow.patch</Patch>
+            </Patches>
     </Source>
 
     <Package>
@@ -31,18 +37,18 @@
 
     <History>
         <Update release="2">
-            <Date>2016-04-27</Date>
-            <Version>610b</Version>
-            <Comment>Release Bump</Comment>
-            <Name>PisiLinux Community</Name>
-            <Email>admin@pisilinux.org</Email>
+            <Date>2016-07-26</Date>
+            <Version>60b</Version>
+            <Comment>First Release</Comment>
+            <Name>Pisi Gnu/Linux Community</Name>
+            <Email>cpisimail@yandex.com</Email>
         </Update>
         <Update release="1">
-            <Date>2016-03-05</Date>
+            <Date>2016-07-26</Date>
             <Version>610b</Version>
-            <Comment>First release</Comment>
-            <Name>Ertuğrul Erata</Name>
-            <Email>ertugrulerata@gmail.com</Email>
+            <Comment>First Release</Comment>
+            <Name>Pisi Gnu/Linux Community</Name>
+            <Email>cpisimail@yandex.com</Email>
         </Update>
     </History>
 </PISI>
