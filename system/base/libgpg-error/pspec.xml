@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>Library for error values used by GnuPG components</Summary>
         <Description>libgpg-error is a library that defines common error values for all GnuPG components.</Description>
-        <Archive sha1sum="ef1dfb2f8761f019091180596e9e638d8cc37513" type="tarbz2">ftp://ftp.gnupg.org/gcrypt/libgpg-error/libgpg-error-1.21.tar.bz2</Archive>
+        <Archive sha1sum="9a926e7ee6309e539313443555535d49a2a5c9f1" type="tarbz2">http://gd.tuwien.ac.at/pub/gnupg/libgpg-error/libgpg-error-1.26.tar.bz2</Archive>
     </Source>
 
     <Package>
@@ -24,6 +24,7 @@
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="doc">/usr/share/info</Path>
             <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/libgpg-error/</Path>
             <Path fileType="localedata">/usr/share/locale</Path>
         </Files>
     </Package>
@@ -62,6 +63,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2016-12-24</Date>
+            <Version>1.26</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Stefan Gronewold</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>1.21</Version>
