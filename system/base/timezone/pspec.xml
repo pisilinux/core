@@ -14,7 +14,7 @@
         <IsA>data</IsA>
         <Summary>Timezone data files and tools</Summary>
         <Description>timezone includes timezone data files and tools to use them. Package contents are synchronized with glibc tree.</Description>
-        <Archive sha1sum="9ba86f3bfc1c7c3470eeb6963dd6ac84c9195d69" type="targz">http://www.iana.org/time-zones/repository/releases/tzdata2016a.tar.gz</Archive>
+        <Archive sha1sum="804de038973c1ffb887117e27b5dbedce8fff541" type="targz">http://www.iana.org/time-zones/repository/releases/tzdata2016j.tar.gz</Archive>
 	<!--<Archive sha1sum="807cf10ef545314989175096aba605bee4062b61" type="targz">http://www.iana.org/time-zones/repository/releases/tzcode2015d.tar.gz</Archive>-->
         <BuildDependencies>
             <Dependency>perl</Dependency>
@@ -37,6 +37,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2017-01-01</Date>
+            <Version>2016j</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>2016a</Version>
