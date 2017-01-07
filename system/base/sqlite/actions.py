@@ -22,6 +22,7 @@ def setup():
                          "-DSQLITE_ENABLE_FTS5",
                          "-DSQLITE_ENABLE_DBSTAT_VTAB=1",
                          "-DSQLITE_ENABLE_FTS3_PARENTHESIS",
+                         "-DSQLITE_ENABLE_FTS3_TOKENIZER=1",
                          "-DSQLITE_ENABLE_STMT_SCANSTATUS",
                          "-DSQLITE_SOUNDEX",
                          "-DSQLITE_ENABLE_RTREE",
@@ -30,11 +31,8 @@ def setup():
     pisitools.cflags.sub("-O[s\d]", "-O3")
 
     autotools.configure("--disable-static \
-                         --enable-readline \
-                         --enable-fts3 \
-                         --enable-fts4 \
+                         --disable-editline \
                          --enable-fts5 \
-                         --enable-rtree \
                          --enable-json1 \
                          --enable-threadsafe")
 
@@ -60,10 +58,10 @@ def install():
 
     pisitools.dodoc("README*")
 
-    shelltools.cd("%s/sqlite-doc-3110000" % get.workDIR())
+    shelltools.cd("%s/sqlite-doc-3110100" % get.workDIR())
     shelltools.system("pwd")
 
-    pisitools.insinto("/usr/share/doc/sqlite", "../sqlite-doc-3110000/*")
+    pisitools.insinto("/usr/share/doc/sqlite", "../sqlite-doc-3110100/*")
 
     # fix permissions and remove obsolete files; https://bugs.archlinux.org/task/24605
     shelltools.system("find %s -type f -perm 755 -exec ls -lha {} \;" % get.installDIR())
