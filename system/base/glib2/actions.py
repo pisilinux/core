@@ -15,6 +15,7 @@ def setup():
                --disable-fam \
                --disable-libelf \
                --enable-gtk-doc=no \
+               --disable-libmount \
                --disable-static \
                --enable-shared \
                --disable-man \
