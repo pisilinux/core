@@ -12,8 +12,8 @@
         <IsA>driver</IsA>
         <Summary>Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver for use with Broadcom's BCM4311, BCM4312, BCM4321, and BCM4322 based hardware</Summary>
         <Description>This package contains Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver for use with Broadcom's BCM4311, BCM4312, BCM4321, and BCM4322 based hardware. You must read the LICENSE.txt file in the docs directory before using this software.</Description>
-        <Archive sha1sum="8acbdbb4ab4ab4123d1773b616904798fbef9277" type="targz" target="i686">http://www.broadcom.com/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
-        <Archive sha1sum="1f568bb989d175813c5631c6629d9479eae6f3be" type="targz" target="x86_64">http://www.broadcom.com/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
+        <Archive sha1sum="8acbdbb4ab4ab4123d1773b616904798fbef9277" type="targz" target="i686">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
+        <Archive sha1sum="1f568bb989d175813c5631c6629d9479eae6f3be" type="targz" target="x86_64">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
         <BuildDependencies>
             <Dependency version="4.8.13">kernel-module-headers</Dependency>
         </BuildDependencies>
@@ -21,6 +21,7 @@
             <Patch level="1">patch/license.patch</Patch>
             <Patch level="1">patch/wl_linux.c.patch</Patch>
             <Patch level="1">patch/linux47.patch</Patch>
+            <Patch level="1">patch/linux48.patch</Patch>
         </Patches>
     </Source>
 
@@ -56,6 +57,13 @@
     </Package>
 
     <History>
+        <Update release="7">
+            <Date>2017-01-08</Date>
+            <Version>6.30.223.271</Version>
+            <Comment>Fix url and add patch.</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="6">
             <Date>2016-12-10</Date>
             <Version>6.30.223.271</Version>
