@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Standard GNU database libraries included for compatibility with Perl</Summary>
         <Description>GNU dbm is a set of database routines that use extensible hashing. It works similar to the standard UNIX dbm routines.</Description>
-        <Archive sha1sum="ce433d0f192c21d41089458ca5c8294efe9806b4" type="targz">mirrors://gnu/gdbm/gdbm-1.11.tar.gz</Archive>
+        <Archive sha1sum="86513e8871bb376bc014e9e5a2d18a8e0a8ea2f5" type="targz">mirrors://gnu/gdbm/gdbm-1.12.tar.gz</Archive>
         <Patches>
             <Patch level="1">gdbm-1.10-zeroheaders.patch</Patch>
         </Patches>
@@ -43,6 +43,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2017-01-07</Date>
+            <Version>1.12</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>1.11</Version>
