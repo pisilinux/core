@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Standard (de)compression library</Summary>
         <Description>Zlib is a general-purpose, patent-free, lossless data compression library which is used by many different programs.</Description>
-        <Archive sha1sum="b598beb7acc96347cbd1020b71aef7871d374677" type="tarxz">mirrors://sourceforge/libpng/zlib-1.2.8.tar.xz</Archive>
+        <Archive sha1sum="d99454aeae0ef35c653537eac7b0013750c2b83f" type="tarxz">mirrors://sourceforge/libpng/zlib-1.2.10.tar.xz</Archive>
         <Patches>
 <!--             <Patch level="1">zlib-1.2.5-minizip-fixuncrypt.patch</Patch> -->
             <Patch level="1">dont-call-ldconfig.patch</Patch>
@@ -90,6 +90,13 @@
     </Package>
 
     <History>
+        <Update release="4">
+            <Date>2017-01-21</Date>
+            <Version>1.2.10</Version>
+            <Comment>version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="3">
             <Date>2017-01-02</Date>
             <Version>1.2.8</Version>
