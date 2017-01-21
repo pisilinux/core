@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Oracle Berkeley DB</Summary>
         <Description>The Berkeley Database (Berkeley DB) is a programmatic toolkit that provides embedded database support for both traditional and client/server applications. The Berkeley DB includes B+tree, Extended Linear Hashing, Fixed and Variable-length record access methods, transactions, locking, logging, shared memory caching, and database recovery. The Berkeley DB supports C, C++, Java, and Perl APIs. It is used by many applications, including Python and Perl, so this should be installed on all systems.</Description>
-        <Archive sha1sum="5ae05c6c4a1766270fd5cfb28539e2b7a19c33b2" type="targz">http://download.oracle.com/berkeley-db/db-6.1.26.tar.gz</Archive>
+        <Archive sha1sum="646c57b99799dc300207976e2270cdaca1a2f198" type="targz">http://download.oracle.com/berkeley-db/db-6.2.23.tar.gz</Archive>
     </Source>
 
     <Package>
@@ -60,6 +60,13 @@
     </Package>
 
     <History>
+	<Update release="3">
+            <Date>2017-01-21</Date>
+            <Version>6.2.23</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>6.1.26</Version>
