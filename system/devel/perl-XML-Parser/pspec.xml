@@ -15,7 +15,7 @@
         <Archive sha1sum="0ab6b932713ec1f9927a1b1c619b6889a5c12849" type="targz">mirrors://cpan/authors/id/T/TO/TODDR/XML-Parser-2.44.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>expat-devel</Dependency>
-            <Dependency>perl</Dependency>
+            <Dependency versionFrom="5.24.0">perl</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -23,7 +23,7 @@
         <Name>perl-XML-Parser</Name>
         <RuntimeDependencies>
             <Dependency>expat</Dependency>
-            <Dependency>perl</Dependency>
+            <Dependency versionFrom="5.24.0">perl</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="doc">/usr/share/doc</Path>
@@ -33,6 +33,13 @@
     </Package>
 
     <History>
+	<Update release="3">
+            <Date>2017-01-21</Date>
+            <Version>2.44</Version>
+            <Comment>Rebuild for perl-5.24.0</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>2.44</Version>
