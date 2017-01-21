@@ -13,15 +13,15 @@
         <IsA>app:console</IsA>
         <Summary>Larry Wall's Practical Extraction and Reporting Language</Summary>
         <Description>Perl is a high-level programming language with roots in C, sed, awk and shell scripting. Perl is good at handling processes and files, and is especially good at handling text. Perl's hallmarks are practicality and efficiency. While it is used to do a lot of different things, Perl's most common applications are system administration utilities and web programming. A large proportion of the CGI scripts on the web are written in Perl. You need the perl package installed on your system so that your system can handle Perl scripts.</Description>
-        <Archive sha1sum="29f9b320b0299577a3e1d02e9e8ef8f26f160332" type="tarbz2">http://www.cpan.org/src/5.0/perl-5.22.1.tar.bz2</Archive>
+        <Archive sha1sum="298fa605138c1a00dab95643130ae0edab369b4d" type="tarbz2">http://www.cpan.org/src/5.0/perl-5.24.0.tar.bz2</Archive>
         <BuildDependencies>
-            <Dependency>db-devel</Dependency>
+            <Dependency versionFrom="6.2.23">db-devel</Dependency>
             <Dependency>gdbm-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch>perl-5.10.0-x86_64-io-test-failure.patch</Patch>
-            <Patch>perl-5.14.1-offtest.patch</Patch>
+            <!--<Patch>perl-5.10.0-x86_64-io-test-failure.patch</Patch>
+            <Patch>perl-5.14.1-offtest.patch</Patch>-->
         </Patches>
     </Source>
 
@@ -39,7 +39,7 @@
     <Package>
         <Name>perl</Name>
         <RuntimeDependencies>
-            <Dependency>db</Dependency>
+            <Dependency versionFrom="6.2.23">db</Dependency>
             <Dependency>gdbm</Dependency>
             <Dependency>zlib</Dependency>
         </RuntimeDependencies>
@@ -50,11 +50,18 @@
         </Files>
         <AdditionalFiles>
             <!-- FIXME: Update perl version in target path  when Perl version changes! -->
-            <AdditionalFile owner="root" permission="0644" target="/usr/lib/perl5/vendor_perl/5.22.1/Turkish.pm">Turkish.pm</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/perl5/vendor_perl/5.24.0/Turkish.pm">Turkish.pm</AdditionalFile>
         </AdditionalFiles>
     </Package>
 
     <History>
+	<Update release="3">
+            <Date>2017-01-21</Date>
+            <Version>5.24.0</Version>
+            <Comment>Vesion Bump</Comment>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>5.22.1</Version>
