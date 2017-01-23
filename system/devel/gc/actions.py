@@ -10,13 +10,15 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    pisitools.flags.add("-DUSE_GET_STACKBASE_FOR_MAIN")
-    shelltools.system ("rm -rf libtool libtool.m4")
     autotools.autoreconf("-fi")
+    
+    pisitools.flags.add("-std=gnu++98")
+    #shelltools.system ("rm -rf libtool libtool.m4")
+    
     autotools.configure("--disable-static \
-                         --enable-cplusplus \
-                         --enable-large-config \
-                         --enable-threads=posix")
+                         --enable-cplusplus")
+    
+    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
 def build():
     autotools.make()
