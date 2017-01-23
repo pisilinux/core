@@ -12,9 +12,11 @@
         <IsA>app:console</IsA>
         <Summary>GNU Stream Editor</Summary>
         <Description>Sed is a stream editor. A stream editor is used to perform basic text transformations on an input stream (a file or input from a pipeline).</Description>
-        <Archive sha1sum="2f24b4624d1a3080626b11610053996ec30ba0f1" type="targz">mirrors://gnu/sed/sed-4.2.2.tar.gz</Archive>
+        <Archive sha1sum="8f9f142bf836caa8b167898d5f0f7f4d96d29d28" type="tarxz">mirrors://gnu/sed/sed-4.3.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>gettext-devel</Dependency>
+            <Dependency>gettext</Dependency>
+            <Dependency>attr-devel</Dependency>
+            <Dependency>acl-devel</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -34,6 +36,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2017-01-23</Date>
+            <Version>4.3</Version>
+            <Comment>Version Bump.</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>4.2.2</Version>
