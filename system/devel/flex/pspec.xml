@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>GNU lexical analyser generator</Summary>
         <Description>Flex is a tool for generating scanners. A scanner, sometimes called a tokenizer, is a program which recognizes lexical patterns in text</Description>
-        <Archive sha1sum="f344d892aee6eb512c9b613a6b7feab2dbcc1200" type="tarxz">https://github.com/westes/flex/releases/download/v2.6.1/flex-2.6.1.tar.xz</Archive>
+        <Archive sha1sum="8008eb0e4ccc634c334ac1d9e04716be2ba527a9" type="targz">https://github.com/westes/flex/releases/download/v2.6.3/flex-2.6.3.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>patch</Dependency>
             <Dependency>texinfo</Dependency>
@@ -36,6 +36,13 @@
     </Package>
 
     <History>
+        <Update release="4">
+            <Date>2017-01-24</Date>
+            <Version>2.6.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="3">
             <Date>2016-10-05</Date>
             <Version>2.6.1</Version>
