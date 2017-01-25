@@ -41,7 +41,6 @@ def setup():
         # Build only libdbus
         pisitools.dosed("Makefile.am", "(.*SUBDIRS=dbus) .*", "\\1")
 
-    
     autotools.autoreconf("-vif")
     autotools.configure(options)
 
