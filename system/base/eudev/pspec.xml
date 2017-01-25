@@ -57,7 +57,7 @@
             <COMAR script="package.py">System.Package</COMAR>
         </Provides>
     </Package>
-    
+
     <Package>
         <Name>eudev-devel</Name>
         <PartOf>system.devel</PartOf>
@@ -71,18 +71,16 @@
             <Path fileType="data">/usr/share/pkgconfig</Path> <!-- check this path usr/share/pkgconfig -->
         </Files>
     </Package>
-    
-        <Package>
+
+    <Package>
         <Name>eudev-32bit</Name>
         <PartOf>emul32</PartOf>
         <Summary>32-bit shared libraries for eudev</Summary>
         <BuildType>emul32</BuildType>
-        
         <BuildDependencies>
             <Dependency>libkmod-32bit</Dependency>
             <Dependency>libutil-linux-32bit</Dependency>
         </BuildDependencies>
-
         <Files>
             <Path fileType="library">/lib32</Path>
             <Path fileType="library">/usr/lib32</Path>
@@ -90,6 +88,13 @@
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2017-01-26</Date>
+            <Version>3.2.1</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="5">
             <Date>2016-12-30</Date>
             <Version>3.2.1</Version>
