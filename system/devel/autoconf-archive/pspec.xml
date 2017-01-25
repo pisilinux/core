@@ -1,0 +1,39 @@
+<PISI>
+    <Source>
+        <Name>autoconf-archive</Name>
+        <Homepage>http://www.gnu.org/software/autoconf-archive/</Homepage>
+        <Packager>
+            <Name>Stefan Gronewold</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Packager>
+        <License>GPL</License>
+        <Summary>A collection of freely re-usable Autoconf macros</Summary>
+        <Description>The GNU Autoconf Archive is a collection of more than 500 macros for GNU Autoconf that have been contributed as free software by friendly supporters of the cause from all over the Internet.</Description>
+        <BuildDependencies>
+            <Dependency>autoconf</Dependency>
+            <Dependency>automake</Dependency>
+        </BuildDependencies>
+        <Archive sha1sum="400d1f68a2c19cccb0602e188612bcec49fb4dee" type="tarxz">ftp://ftp.gnu.org/pub/gnu/autoconf-archive/autoconf-archive-2016.09.16.tar.xz</Archive>
+    </Source>
+    <Package>
+        <Name>autoconf-archive</Name>
+        <Summary>A collection of freely re-usable Autoconf macros</Summary>
+        <RuntimeDependencies>
+            <Dependency>autoconf</Dependency>
+            <Dependency>automake</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/share/aclocal</Path>
+            <Path fileType="doc">/</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2017-01-25</Date>
+            <Version>2016.09.16</Version>
+            <Comment>First Release</Comment>
+            <Name>Stefan Gronewold</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
