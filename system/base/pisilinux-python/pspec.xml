@@ -15,7 +15,7 @@
         <Archive sha1sum="d5615ef8f2beb69929a3588fd5a96832a8c66a40" type="targz">http://source.pisilinux.org/1.0/pisilinux-python-0.4.8.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>python-devel</Dependency>
-	    <Dependency>libX11-devel</Dependency>
+            <Dependency>libX11-devel</Dependency>
         </BuildDependencies>
        <Patches>
             <!--Patch level="1">remove_libX11_dep.patch</Patch-->
@@ -26,7 +26,7 @@
         <Name>pisilinux-python</Name>
         <RuntimeDependencies>
             <Dependency>python</Dependency>
-	    <!--<Dependency>libX11</Dependency>-->
+             <!--<Dependency>libX11</Dependency>-->
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib</Path>
@@ -34,8 +34,8 @@
             <Path fileType="localedata">/usr/share/locale</Path>
         </Files>
     </Package>
-    
-        <Package>
+
+    <Package>
         <Name>pisilinux-python-xorg</Name>
         <PartOf>x11.library</PartOf>
         <RuntimeDependencies>
@@ -48,6 +48,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2017-01-24</Date>
+            <Version>0.4.8</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>0.4.8</Version>
