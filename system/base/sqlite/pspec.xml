@@ -12,8 +12,8 @@
         <IsA>library</IsA>
         <Summary>An SQL Database Engine in a C Library</Summary>
         <Description>SQLite is a small C library that implements a self-contained, embeddable, zero-configuration SQL database engine. Supports databases up to 2 terabytes in size.</Description>
-        <Archive sha1sum="c4b4dcd735a4daf5a2e2bb90f374484c8d4dad29" type="targz">http://www.sqlite.org/2016/sqlite-autoconf-3110100.tar.gz</Archive>
-        <Archive sha1sum="79a24f86bbfc77371fb528ac396d3ad1c266ffa4" type="zip">http://www.sqlite.org/2016/sqlite-doc-3110100.zip</Archive>
+        <Archive sha1sum="64ca578ad44a94115b1db0406740e14288f74bb8" type="targz">http://sqlite.org/2017/sqlite-autoconf-3160200.tar.gz</Archive>
+        <Archive sha1sum="c3424040e2368dd78cf9aac801de8d8988549439" type="zip">http://sqlite.org/2017/sqlite-doc-3160200.zip</Archive>
         <BuildDependencies>
             <Dependency>readline-devel</Dependency>
         </BuildDependencies>
@@ -108,7 +108,14 @@
     </Package>
 
     <History>
-        <Update release="3">
+        <Update release="5">
+            <Date>2017-01-26</Date>
+            <Version>3.16.2</Version>
+            <Comment>Verison Bump.</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
             <Date>2017-01-07</Date>
             <Version>3.11.1</Version>
             <Comment>Rebuildwith new toolchain.</Comment>
