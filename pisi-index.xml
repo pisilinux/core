@@ -12012,57 +12012,6 @@
     </SpecFile>
     <SpecFile>
         <Source>
-            <Name>libunistring</Name>
-            <Homepage>http://www.gnu.org/software/libunistring/</Homepage>
-            <Packager>
-                <Name>Stefan Gronewold</Name>
-                <Email>groni@pisilinux.org</Email>
-            </Packager>
-            <License>GPL</License>
-            <PartOf>system.devel</PartOf>
-            <Summary xml:lang="en">Library for manipulating Unicode strings and C strings</Summary>
-            <Description xml:lang="en">Library for manipulating Unicode strings and C strings</Description>
-            <Archive type="tarxz" sha1sum="7d92687a50fea7702e8052486dfa25ffc361c9f3">https://ftp.gnu.org/gnu/libunistring/libunistring-0.9.7.tar.xz</Archive>
-            <BuildDependencies>
-                <Dependency>glibc-devel</Dependency>
-            </BuildDependencies>
-            <SourceURI>system/devel/libunistring/pspec.xml</SourceURI>
-        </Source>
-        <Package>
-            <Name>libunistring</Name>
-            <Summary xml:lang="en">Library for manipulating Unicode strings and C strings</Summary>
-            <RuntimeDependencies>
-                <Dependency>glibc</Dependency>
-                <Dependency>libgcc</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="library">/usr/lib</Path>
-                <Path fileType="doc">/usr/share/info</Path>
-                <Path fileType="doc">/usr/share/doc</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>libunistring-devel</Name>
-            <Summary xml:lang="en">Development files for libunistring</Summary>
-            <RuntimeDependencies>
-                <Dependency release="1">libunistring</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="header">/usr/include</Path>
-            </Files>
-        </Package>
-        <History>
-            <Update release="1">
-                <Date>2017-01-26</Date>
-                <Version>0.9.7</Version>
-                <Comment>First Release</Comment>
-                <Name>Stefan Gronewold</Name>
-                <Email>groni@pisilinux.org</Email>
-            </Update>
-        </History>
-    </SpecFile>
-    <SpecFile>
-        <Source>
             <Name>libarchive</Name>
             <Homepage>http://code.google.com/p/libarchive/</Homepage>
             <Packager>
