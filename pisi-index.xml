@@ -570,6 +570,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-24</Date>
+                <Version>0.0.28</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>0.0.28</Version>
@@ -2425,7 +2432,7 @@
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
                 <Dependency>dbus-devel</Dependency>
-                <Dependency release="2">dbus-python</Dependency>
+                <Dependency release="3">dbus-python</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -2446,6 +2453,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-26</Date>
+                <Version>1.2.4</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>1.2.4</Version>
@@ -4453,7 +4467,7 @@
             <Summary xml:lang="tr">Çeşitli kullanışlı Linux araçları</Summary>
             <Description xml:lang="en">The util-linux package contains a large variety of low-level system utilities that are necessary for a Linux system to function.</Description>
             <Description xml:lang="tr">util-linux paketi, bir Linux sisteminin işlevsel olması için gerekli olan birçok düşük seviye sistem uygulamasını içerir.</Description>
-            <Archive type="tarxz" sha1sum="462bca6320535d39b62216d8609da5531bfef0bb">https://www.kernel.org/pub/linux/utils/util-linux/v2.27/util-linux-2.27.1.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="ed267cb80af92d327c53a45360addf1a19a1a0b6">https://www.kernel.org/pub/linux/utils/util-linux/v2.29/util-linux-2.29.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>eudev-devel</Dependency>
@@ -4472,8 +4486,9 @@
         <Package>
             <Name>util-linux</Name>
             <RuntimeDependencies>
-                <Dependency version="2.27.1">libutil-linux</Dependency>
+                <Dependency version="2.29">libutil-linux</Dependency>
                 <Dependency>zlib</Dependency>
+                <Dependency>pam</Dependency>
                 <Dependency>perl</Dependency>
                 <Dependency>ncurses</Dependency>
                 <Dependency>readline</Dependency>
@@ -4543,7 +4558,7 @@
             <IsA>header</IsA>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="4">libutil-linux</Dependency>
+                <Dependency release="5">libutil-linux</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/</Path>
@@ -4560,6 +4575,9 @@
             <Summary xml:lang="tr">util-linux için 32-bit paylaşımlı kitaplıklar</Summary>
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
+            <BuildDependencies>
+                <Dependency>ncurses-32bit</Dependency>
+            </BuildDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32/</Path>
             </Files>
@@ -4569,6 +4587,13 @@
             </Replaces>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2017-01-26</Date>
+                <Version>2.29</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2016-09-10</Date>
                 <Version>2.27.1</Version>
@@ -6943,7 +6968,7 @@
             <Summary xml:lang="tr">D-Bus için GLib bağlayıcıları</Summary>
             <Description xml:lang="en">dbus-glib is an add-on library to integrate the standard D-Bus library with the GLib thread abstraction and main loop.</Description>
             <Description xml:lang="tr">dbus-glib, standart D-Bus kitaplığını GLib ana döngüsüyle bütünleştirmek için kullanılan bir kitaplıktır.</Description>
-            <Archive type="targz" sha1sum="776a0e843f5c04cb58225962d623e82f283aed68">http://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.104.tar.gz</Archive>
+            <Archive type="targz" sha1sum="5c851f3d457b46d5fa7f1e647d1141592d38cc53">http://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.108.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>dbus-devel</Dependency>
                 <Dependency>glib2-devel</Dependency>
@@ -6978,7 +7003,7 @@
             <Summary xml:lang="tr">dbus-glib için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="2">dbus-glib</Dependency>
+                <Dependency release="3">dbus-glib</Dependency>
                 <Dependency>dbus-devel</Dependency>
                 <Dependency>glib2-devel</Dependency>
             </RuntimeDependencies>
@@ -6989,6 +7014,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-26</Date>
+                <Version>0.108</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>0.104</Version>
@@ -9400,7 +9432,7 @@
             <Summary xml:lang="tr">Alternatif bir POSIX yetenekleri kütüphanesi</Summary>
             <Description xml:lang="en">libcap-ng is a library that makes using POSIX capabilities easier.</Description>
             <Description xml:lang="tr">libcap-ng POSIX yeteneklerinin yönetimini kolaylaştıran bir kütüphanedir.</Description>
-            <Archive type="tar" sha1sum="3ee67570efed3ea8bbe0ace7a4aacfedff2440ac">http://people.redhat.com/sgrubb/libcap-ng/libcap-ng-0.7.8.tar.gz</Archive>
+            <Archive type="targz" sha1sum="59a85129dd0d062c14320f6c611696669a1cc0c0">http://people.redhat.com/sgrubb/libcap-ng/libcap-ng-0.7.8.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>attr-devel</Dependency>
                 <Dependency>python-devel</Dependency>
@@ -10389,6 +10421,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-26</Date>
+                <Version>4.2.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>4.2.1</Version>
@@ -10563,11 +10602,12 @@
             <Description xml:lang="fr">D-Bus fourni à la fois un daemon système (pour les événements els que l&apos;&quot;ajout d&apos;un nouveau périphérique&quot; ou &quot;file d&apos;impression changée&quot;) et un daemon propre à chaque session utilisateur (pour les besoins généraux de communication entre processus utilisateurs). De plus, le bus de message est construit en se basant sur un framework (cadre de développement) de passage de message de un-vers-un pouvant être utilisé par n&apos;importe quelles applications pour communiquer directement (sans passer par le daemon de bus de message). Pour l&apos;instant les applications pouvant communiquer doivent être situées sur le même ordinateur, mais l&apos;option TCP/IP est disponible et le support de processus distant est prévu.</Description>
             <Description xml:lang="en">D-Bus supplies both a system daemon (for events such as &quot;new hardware device added&quot; or &quot;printer queue changed&quot;) and a per-user-login-session daemon (for general IPC needs among user applications). Also, the message bus is built on top of a general one-to-one message passing framework, which can be used by any two apps to communicate directly (without going through the message bus daemon). Currently the communicating applications are on one computer, but TCP/IP option is available and remote support planned.</Description>
             <Description xml:lang="tr">D-Bus, sistem ve kullanıcılar için olmak üzere iki tane artalan süreci (daemon) sunar. Mesaj yolu, bire bir mesaj geçiş araçları üzerine inşa edilmiştir. Bu sayede iki program birbiriyle bir mesaj yolu artalan süreci kullanmadan, direkt olarak haberleşebilir. Şu an için haberleşme araçları aynı bilgisayar üzerinde çalışabilmektedir, fakat TCP/IP ile uzaktan haberleşme de planlanmaktadır.</Description>
-            <Archive type="targz" sha1sum="b53ba143b3bc1808eabd4628379f59ea6836694c">https://dbus.freedesktop.org/releases/dbus/dbus-1.11.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="3f90a3d2ae6c67d2d1637039be9125c295c85a1a">https://dbus.freedesktop.org/releases/dbus/dbus-1.11.8.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>expat-devel</Dependency>
                 <Dependency>libX11-devel</Dependency>
                 <Dependency>libcap-ng-devel</Dependency>
+                <Dependency>autoconf-archive</Dependency>
             </BuildDependencies>
             <SourceURI>system/base/dbus/pspec.xml</SourceURI>
         </Source>
@@ -10586,6 +10626,7 @@
                 <Path fileType="data">/usr/share/dbus-1</Path>
                 <Path fileType="doc">/usr/share/doc</Path>
                 <Path fileType="man">/usr/share/man</Path>
+                <Path fileType="data">/usr/share/xml</Path>
                 <Path fileType="data">/run/dbus</Path>
                 <Path fileType="data">/var/lib/dbus</Path>
                 <Path fileType="data">/lib/systemd/system</Path>
@@ -10614,7 +10655,7 @@
             <Summary xml:lang="tr">dbus için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="4">dbus</Dependency>
+                <Dependency release="5">dbus</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -10638,6 +10679,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2017-01-25</Date>
+                <Version>1.11.8</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2016-09-14</Date>
                 <Version>1.11.0</Version>
@@ -10732,7 +10780,7 @@
             <Summary xml:lang="en">Development files for eudev</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="5">eudev</Dependency>
+                <Dependency release="6">eudev</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/</Path>
@@ -10755,6 +10803,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2017-01-26</Date>
+                <Version>3.2.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2016-12-30</Date>
                 <Version>3.2.1</Version>
@@ -11018,8 +11073,8 @@
             <Description xml:lang="fr">SQLite est une petite librairie C implémentant un moteur de base de données SQL auto-configurée, auto-suffisante, pouvant être embarquée. Gère des bases de données de tailles allant jusqu&apos;à 2 téraOctets.</Description>
             <Description xml:lang="en">SQLite is a small C library that implements a self-contained, embeddable, zero-configuration SQL database engine. Supports databases up to 2 terabytes in size.</Description>
             <Description xml:lang="tr">SQLite hiçbir ayar gerektirmeyen, başka programların içine gömülebilir bir SQL veritabanı motorudur. 2 terabayta kadar büyüklükteki veritabanlarını tutabilir.</Description>
-            <Archive type="targz" sha1sum="c4b4dcd735a4daf5a2e2bb90f374484c8d4dad29">http://www.sqlite.org/2016/sqlite-autoconf-3110100.tar.gz</Archive>
-            <Archive type="zip" sha1sum="79a24f86bbfc77371fb528ac396d3ad1c266ffa4">http://www.sqlite.org/2016/sqlite-doc-3110100.zip</Archive>
+            <Archive type="targz" sha1sum="64ca578ad44a94115b1db0406740e14288f74bb8">http://sqlite.org/2017/sqlite-autoconf-3160200.tar.gz</Archive>
+            <Archive type="zip" sha1sum="c3424040e2368dd78cf9aac801de8d8988549439">http://sqlite.org/2017/sqlite-doc-3160200.zip</Archive>
             <BuildDependencies>
                 <Dependency>readline-devel</Dependency>
             </BuildDependencies>
@@ -11043,7 +11098,7 @@
             <Summary xml:lang="tr">sqlite için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="3">sqlite</Dependency>
+                <Dependency release="5">sqlite</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -11057,7 +11112,7 @@
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="3">sqlite</Dependency>
+                <Dependency release="5">sqlite</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
@@ -11074,7 +11129,14 @@
             </Files>
         </Package>
         <History>
-            <Update release="3">
+            <Update release="5">
+                <Date>2017-01-26</Date>
+                <Version>3.16.2</Version>
+                <Comment>Verison Bump.</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
                 <Date>2017-01-07</Date>
                 <Version>3.11.1</Version>
                 <Comment>Rebuildwith new toolchain.</Comment>
@@ -11749,6 +11811,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-24</Date>
+                <Version>0.4.8</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>0.4.8</Version>
@@ -11943,6 +12012,57 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>libunistring</Name>
+            <Homepage>http://www.gnu.org/software/libunistring/</Homepage>
+            <Packager>
+                <Name>Stefan Gronewold</Name>
+                <Email>groni@pisilinux.org</Email>
+            </Packager>
+            <License>GPL</License>
+            <PartOf>system.devel</PartOf>
+            <Summary xml:lang="en">Library for manipulating Unicode strings and C strings</Summary>
+            <Description xml:lang="en">Library for manipulating Unicode strings and C strings</Description>
+            <Archive type="tarxz" sha1sum="7d92687a50fea7702e8052486dfa25ffc361c9f3">https://ftp.gnu.org/gnu/libunistring/libunistring-0.9.7.tar.xz</Archive>
+            <BuildDependencies>
+                <Dependency>glibc-devel</Dependency>
+            </BuildDependencies>
+            <SourceURI>system/devel/libunistring/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>libunistring</Name>
+            <Summary xml:lang="en">Library for manipulating Unicode strings and C strings</Summary>
+            <RuntimeDependencies>
+                <Dependency>glibc</Dependency>
+                <Dependency>libgcc</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="doc">/usr/share/info</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libunistring-devel</Name>
+            <Summary xml:lang="en">Development files for libunistring</Summary>
+            <RuntimeDependencies>
+                <Dependency release="1">libunistring</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="header">/usr/include</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="1">
+                <Date>2017-01-26</Date>
+                <Version>0.9.7</Version>
+                <Comment>First Release</Comment>
+                <Name>Stefan Gronewold</Name>
+                <Email>groni@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>libarchive</Name>
             <Homepage>http://code.google.com/p/libarchive/</Homepage>
             <Packager>
@@ -12046,6 +12166,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-26</Date>
+                <Version>20141105</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>20141105</Version>
@@ -13318,7 +13445,7 @@
             <Summary xml:lang="es">Herramienta para simplificar creación y mantenimiento de programas que contienen muchos textos repetitivos</Summary>
             <Description xml:lang="en">autogen is a tool designed to simplify the creation and maintenance of programs that contain large amounts of repetitious text.</Description>
             <Description xml:lang="tr">autogen büyük miktarda tekrarlı metin içeren uygulamaların otomatik üretilmesini sağlayan bir araçtır.</Description>
-            <Archive type="tarxz" sha1sum="0fe4466094d4b583c3a45b234987f9850fd84f83">ftp://ftp.gnu.org/gnu/autogen/autogen-5.18.7.tar.xz</Archive>
+            <Archive type="targz" sha1sum="68e83f451ec699116577b0e0042b47393236c115">https://ftp.gnu.org/gnu/autogen/rel5.18.10/autogen-5.18.10.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>gc-devel</Dependency>
                 <Dependency>gmp-devel</Dependency>
@@ -13348,7 +13475,7 @@
             <Summary xml:lang="en">Development files for autogen</Summary>
             <Summary xml:lang="tr">autogen için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="2">autogen</Dependency>
+                <Dependency release="3">autogen</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13360,6 +13487,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-26</Date>
+                <Version>5.18.10</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>5.18.7</Version>
@@ -14186,13 +14320,20 @@
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="2">libtool-ltdl</Dependency>
+                <Dependency release="3">libtool-ltdl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-26</Date>
+                <Version>2.4.6</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>2.4.6</Version>
@@ -14242,6 +14383,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-26</Date>
+                <Version>1.9.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>1.9.1</Version>
@@ -15067,6 +15215,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-26</Date>
+                <Version>3.0.4</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>3.0.4</Version>
@@ -15123,6 +15278,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-26</Date>
+                <Version>0.29.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>0.29.1</Version>
