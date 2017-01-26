@@ -13,11 +13,11 @@ from pisi.actionsapi import get
     # but cannot be seen with sqlite query. However, it can be seen by opening the file with a text editor.
     # SQLITE_SECURE_DELETE overwrites written data with zeros.
 def setup():
-    pisitools.cflags.add("-DSQLITE_SECURE_DELETE",
-                         "-DSQLITE_ENABLE_UNLOCK_NOTIFY",
-                         "-DSQLITE_ENABLE_COLUMN_METADATA",
+    pisitools.cflags.add("-DSQLITE_SECURE_DELETE=1",
+                         "-DSQLITE_ENABLE_UNLOCK_NOTIFY=1",
+                         "-DSQLITE_ENABLE_COLUMN_METADATA=1",
                          "-DSQLITE_DISABLE_DIRSYNC",
-                         "-DSQLITE_ENABLE_FTS3",
+                         "-DSQLITE_ENABLE_FTS3=1",
                          "-DSQLITE_ENABLE_FTS4",
                          "-DSQLITE_ENABLE_FTS5",
                          "-DSQLITE_ENABLE_DBSTAT_VTAB=1",
@@ -32,7 +32,10 @@ def setup():
 
     autotools.configure("--disable-static \
                          --disable-editline \
+                         --enable-fts3 \
+                         --enable-fts4 \
                          --enable-fts5 \
+                         --enable-rtree \
                          --enable-json1 \
                          --enable-threadsafe")
 
@@ -58,10 +61,10 @@ def install():
 
     pisitools.dodoc("README*")
 
-    shelltools.cd("%s/sqlite-doc-3110100" % get.workDIR())
+    shelltools.cd("%s/sqlite-doc-3160200" % get.workDIR())
     shelltools.system("pwd")
 
-    pisitools.insinto("/usr/share/doc/sqlite", "../sqlite-doc-3110100/*")
+    pisitools.insinto("/usr/share/doc/sqlite", "../sqlite-doc-3160200/*")
 
     # fix permissions and remove obsolete files; https://bugs.archlinux.org/task/24605
     shelltools.system("find %s -type f -perm 755 -exec ls -lha {} \;" % get.installDIR())
