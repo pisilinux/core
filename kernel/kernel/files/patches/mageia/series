@@ -14,7 +14,14 @@
 ###
 ### Stable Queue
 ###
-patch-4.8.10-rc1.patch
+
+# CVE-2016-8405
+stable-fbdev-color-map-copying-bounds-checking.patch
+
+stable-tile-ptrace-preserve-previous-registers-for-short-regset-write.patch
+stable-drm-schedule-the-output_poll_work-with-1s-delay-if-we-have-delayed-event.patch
+stable-drm-fix-broken-vt-switch-with-video-1366x768-option.patch
+stable-drm-i915-ignore-bogus-plane-coordinates-on-skl-when-the-plane-is-not-visible.patch
 
 ###
 ### Arch x86
@@ -78,6 +85,9 @@ acpi-processor-M720SR-limit-to-C2.patch
 # backlight fixes
 ACPI-video-Add-a-quirk-to-force-acpi-video-backlight.patch
 
+# drop obsolete warn
+acpi-do-not-warn-if-_BQC-does-not-exist.patch
+
 ###
 ### Block
 ###
@@ -122,15 +132,10 @@ block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch
 
 # Include new BFQ I/O scheduler
 # (See http://algo.ing.unimo.it/people/paolo/disk_sched)
-# 
-# Release of BFQ I/O scheduler v8r4 (rediffed from git https://github.com/linusw/linux-bfq)
-linux-BFQ-v8r4.patch
-
-# Let NVME drives enter in power state
-# (see https://github.com/damige/linux-nvme/tree/master/src)
-nvmepatch1-V4.patch
-nvmepatch2-V4.patch
-nvmepatch3-V4.patch
+block-cgroups-kconfig-build-bits-for-BFQ-v7r11-4.5.0.patch
+block-introduce-the-BFQ-v7r11-I-O-sched-for-4.5.0.patch
+block-bfq-add-Early-Queue-Merge-EQM-to-BFQ-v7r11-for.patch
+block-Turn-into-BFQ-v8r6-for-4.9.0.patch
 
 ###
 ### Char
@@ -139,13 +144,22 @@ nvmepatch3-V4.patch
 # hard locks Dell R720xd
 Revert-ipmi-Start-the-timer-and-thread-on-internal-m.patch
 
+# tpm_crb fixes for SkyLake
+char-tpm-tpm_crb-implement-tpm-crb-idle-state.patch
+char-tmp-tpm_crb-fix-Intel-PTT-hw-bug-during-idle-state.patch
+char-tpm-tpm_crb-open-code-the-crb_init-into-acpi_add.patch
+char-tmp-tpm_crb-implement-runtime-pm-for-tpm_crb.patch
+
 ###
 ### File-system
 ###
 
 # aufs from: http://aufs.sourceforge.net/ (mga#8314)
-fs-aufs-4.8.patch
-fs-aufs-4.8-modular.patch
+fs-aufs-4.9.patch
+fs-aufs-4.9-modular.patch
+
+# needed for mdadm: imsm: enable bad block support for imsm metadata
+fs-seq_file-reset-iterator-to-first-record-for-zero-off.patch
 
 ###
 ### FireWire
@@ -179,6 +193,12 @@ gpu-drm-mach64-restore-mach64_PCI_IDS.patch
 gpu-drm-mach64-linux-3.14-buildfix.patch
 gpu-drm-mach64-3.17-buildfix.patch
 gpu-drm-mach64-3.18-buildfix.patch
+
+# i915 skl/kbl speedup
+gpu-drm-i915-skl-drop-workarounds-for-A0-and-B0-revisions.patch
+gpu-drm-i915-skl-drop-workarounds-for-D0-revision.patch
+gpu-drm-i915-skl-drop-workarounds-for-E0-revision.patch
+gpu-drm-i915-Remove-WaDisableLSQCROPERFforOCL-KBL-workaround.patch
 
 ###
 ### Hardware Monitoring
@@ -230,9 +250,14 @@ net-netfilter-IFWLOG-remove-unused-label.patch
 net-netfilter-psd.patch
 net-netfilter-psd-mdv.patch
 net-netfilter-psd-2.6.35-buildfix.patch
+net-netfilter-psd-fix-redefines.patch
 
-# rtlwifi regression
-net-wireless-rtlwifi-Fix-regression-caused-by-commit-d86e64768859.patch
+# rtlwifi fixes
+net-wireless-rtlwifi-Use-dev_kfree_skb_irq-instead-of-kfree_skb.patch
+net-wireless-rtlwifi-Fix-kernel-oops-introduced-with-commit-e4965.patch
+
+# fix speed regression
+net-wireless-brcmfmac-fix-incorrect-event-channel-deduction.patch
 
 ###
 ### Platform drivers
@@ -338,8 +363,6 @@ video-mageia-logo.patch
 
 # add rtl8723bs support (mga#15874)
 3rd-rtl8723bs.patch
-3rd-rtl8723bs-4.7-buildfix.patch
-3rd-rtl8723bs-4.8-buildfix.patch
 
 ###
 ### Security
@@ -367,6 +390,11 @@ video-mageia-logo.patch
 
 # wipe powerpc refrence so we can nuke dangling symlinks (mga#17676)
 tools-testing-selftest-Makefile-remove-powerpc-reference.patch
+
+# perf build fixes
+tools-build-Make-fixdep-parsing-wait-for-last-target.patch
+tools-perf-tools-Force-fixdep-compilation-at-the-start-of-.patch
+tools-perf-tools-Move-perf-build-related-variables-under-n.patch
 
 ###
 ### UAPI

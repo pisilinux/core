@@ -1,0 +1,32 @@
+From fd7c99142d77dc4a851879a66715abf12a3193fb Mon Sep 17 00:00:00 2001
+From: Dave Martin <Dave.Martin@arm.com>
+Date: Fri, 6 Jan 2017 17:54:51 +0000
+Subject: tile/ptrace: Preserve previous registers for short regset write
+
+From: Dave Martin <Dave.Martin@arm.com>
+
+commit fd7c99142d77dc4a851879a66715abf12a3193fb upstream.
+
+Ensure that if userspace supplies insufficient data to
+PTRACE_SETREGSET to fill all the registers, the thread's old
+registers are preserved.
+
+Signed-off-by: Dave Martin <Dave.Martin@arm.com>
+Signed-off-by: Chris Metcalf <cmetcalf@mellanox.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ arch/tile/kernel/ptrace.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/arch/tile/kernel/ptrace.c
++++ b/arch/tile/kernel/ptrace.c
+@@ -111,7 +111,7 @@ static int tile_gpr_set(struct task_stru
+ 			  const void *kbuf, const void __user *ubuf)
+ {
+ 	int ret;
+-	struct pt_regs regs;
++	struct pt_regs regs = *task_pt_regs(target);
+ 
+ 	ret = user_regset_copyin(&pos, &count, &kbuf, &ubuf, &regs, 0,
+ 				 sizeof(regs));

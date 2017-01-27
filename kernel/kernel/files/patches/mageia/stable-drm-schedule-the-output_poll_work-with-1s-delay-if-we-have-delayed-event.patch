@@ -1,0 +1,55 @@
+From 68f458eec7069d618a6c884ca007426e0cea411b Mon Sep 17 00:00:00 2001
+From: Peter Ujfalusi <peter.ujfalusi@ti.com>
+Date: Mon, 9 Jan 2017 16:31:58 +0200
+Subject: drm: Schedule the output_poll_work with 1s delay if we have delayed event
+
+From: Peter Ujfalusi <peter.ujfalusi@ti.com>
+
+commit 68f458eec7069d618a6c884ca007426e0cea411b upstream.
+
+Instead of scheduling the work to handle the initial delayed event, use 1s
+delay.
+
+This delay should not be needed, but Optimus/nouveau will fail in a
+mysterious way if the delayed event is handled as soon as possible like it
+is done in drm_helper_probe_single_connector_modes() in case the poll
+was enabled before.
+
+Reverting 339fd36238dd would give back the 10 sec (!) delay to handle the
+delayed event. Adding 1sec delay to the poll_work is enough to work around
+the issue in Optimus setups and gives shorter response on handling the
+initial delayed event.
+
+Fixes: 339fd36238dd ("drm: drm_probe_helper: Fix output_poll_work scheduling")
+Signed-off-by: Peter Ujfalusi <peter.ujfalusi@ti.com>
+[danvet: Add FIXME to the comment to make it stick out more.]
+Signed-off-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+Link: http://patchwork.freedesktop.org/patch/msgid/20170109143158.21917-1-peter.ujfalusi@ti.com
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/drm_probe_helper.c |   12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+--- a/drivers/gpu/drm/drm_probe_helper.c
++++ b/drivers/gpu/drm/drm_probe_helper.c
+@@ -143,8 +143,18 @@ void drm_kms_helper_poll_enable_locked(s
+ 	}
+ 
+ 	if (dev->mode_config.delayed_event) {
++		/*
++		 * FIXME:
++		 *
++		 * Use short (1s) delay to handle the initial delayed event.
++		 * This delay should not be needed, but Optimus/nouveau will
++		 * fail in a mysterious way if the delayed event is handled as
++		 * soon as possible like it is done in
++		 * drm_helper_probe_single_connector_modes() in case the poll
++		 * was enabled before.
++		 */
+ 		poll = true;
+-		delay = 0;
++		delay = HZ;
+ 	}
+ 
+ 	if (poll)
