@@ -1,0 +1,59 @@
+From 3be192e92ddcad15f7bf6b4b9e3f195eb8c1fe76 Mon Sep 17 00:00:00 2001
+From: Jani Nikula <jani.nikula@intel.com>
+Date: Fri, 16 Sep 2016 16:59:47 +0300
+Subject: drm/i915/skl: drop workarounds for E0 revision
+
+Pre-production hardware is not supported.
+
+Reviewed-by: Paulo Zanoni <paulo.r.zanoni@intel.com>
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/0633a02177195703502ef2396aab03efc0314334.1474034059.git.jani.nikula@intel.com
+
+diff --git a/drivers/gpu/drm/i915/intel_lrc.c b/drivers/gpu/drm/i915/intel_lrc.c
+index ca649cc..2d8eb2e 100644
+--- a/drivers/gpu/drm/i915/intel_lrc.c
++++ b/drivers/gpu/drm/i915/intel_lrc.c
+@@ -845,13 +845,12 @@ static inline int gen8_emit_flush_coherentl3_wa(struct intel_engine_cs *engine,
+ 	uint32_t l3sqc4_flush = (0x40400000 | GEN8_LQSC_FLUSH_COHERENT_LINES);
+ 
+ 	/*
+-	 * WaDisableLSQCROPERFforOCL:skl,kbl
++	 * WaDisableLSQCROPERFforOCL:kbl
+ 	 * This WA is implemented in skl_init_clock_gating() but since
+ 	 * this batch updates GEN8_L3SQCREG4 with default value we need to
+ 	 * set this bit here to retain the WA during flush.
+ 	 */
+-	if (IS_SKL_REVID(dev_priv, 0, SKL_REVID_E0) ||
+-	    IS_KBL_REVID(dev_priv, 0, KBL_REVID_E0))
++	if (IS_KBL_REVID(dev_priv, 0, KBL_REVID_E0))
+ 		l3sqc4_flush |= GEN8_LQSC_RO_PERF_DIS;
+ 
+ 	wa_ctx_emit(batch, index, (MI_STORE_REGISTER_MEM_GEN8 |
+diff --git a/drivers/gpu/drm/i915/intel_ringbuffer.c b/drivers/gpu/drm/i915/intel_ringbuffer.c
+index 6880082..68dc27f 100644
+--- a/drivers/gpu/drm/i915/intel_ringbuffer.c
++++ b/drivers/gpu/drm/i915/intel_ringbuffer.c
+@@ -1003,20 +1003,6 @@ static int skl_init_workarounds(struct intel_engine_cs *engine)
+ 	I915_WRITE(GEN7_FF_SLICE_CS_CHICKEN1,
+ 		   _MASKED_BIT_ENABLE(GEN9_FFSC_PERCTX_PREEMPT_CTRL));
+ 
+-	if (IS_SKL_REVID(dev_priv, 0, SKL_REVID_E0)) {
+-		/* WaDisableChickenBitTSGBarrierAckForFFSliceCS:skl */
+-		I915_WRITE(FF_SLICE_CS_CHICKEN2,
+-			   _MASKED_BIT_ENABLE(GEN9_TSG_BARRIER_ACK_DISABLE));
+-	}
+-
+-	/* GEN8_L3SQCREG4 has a dependency with WA batch so any new changes
+-	 * involving this register should also be added to WA batch as required.
+-	 */
+-	if (IS_SKL_REVID(dev_priv, 0, SKL_REVID_E0))
+-		/* WaDisableLSQCROPERFforOCL:skl */
+-		I915_WRITE(GEN8_L3SQCREG4, I915_READ(GEN8_L3SQCREG4) |
+-			   GEN8_LQSC_RO_PERF_DIS);
+-
+ 	/* WaEnableGapsTsvCreditFix:skl */
+ 	I915_WRITE(GEN8_GARBCNTL, (I915_READ(GEN8_GARBCNTL) |
+ 				   GEN9_GAPS_TSV_CREDIT_DISABLE));
+-- 
+cgit v0.10.2
+

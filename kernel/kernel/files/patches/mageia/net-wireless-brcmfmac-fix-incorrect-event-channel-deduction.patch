@@ -1,0 +1,29 @@
+
+From: Gavin Li <git@thegavinli.com>
+
+brcmf_sdio_fromevntchan() was being called on the the data frame
+rather than the software header, causing some frames to be
+mischaracterized as on the event channel rather than the data channel.
+
+This fixes a major performance regression (due to dropped packets).
+
+Fixes: c56caa9db8ab ("brcmfmac: screening firmware event packet")
+Signed-off-by: Gavin Li <git@thegavinli.com>
+Cc: <stable@vger.kernel.org> [4.7+]
+---
+ drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c
+index dfb0658713d9..d2219885071f 100644
+--- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c
++++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c
+@@ -1661,7 +1661,7 @@ static u8 brcmf_sdio_rxglom(struct brcmf_sdio *bus, u8 rxseq)
+ 					   pfirst->len, pfirst->next,
+ 					   pfirst->prev);
+ 			skb_unlink(pfirst, &bus->glom);
+-			if (brcmf_sdio_fromevntchan(pfirst->data))
++			if (brcmf_sdio_fromevntchan(&dptr[SDPCM_HWHDR_LEN]))
+ 				brcmf_rx_event(bus->sdiodev->dev, pfirst);
+ 			else
+ 				brcmf_rx_frame(bus->sdiodev->dev, pfirst,
