@@ -1,0 +1,50 @@
+From 44bfefc553993613c0aff992bc4f3078d738ee1d Mon Sep 17 00:00:00 2001
+From: Chet Ramey <chet.ramey@case.edu>
+Date: Fri, 20 Jan 2017 11:47:31 -0500
+Subject: [PATCH] Bash-4.4 patch 6
+
+---
+ builtins/pushd.def | 7 ++++++-
+ patchlevel.h       | 2 +-
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/builtins/pushd.def b/builtins/pushd.def
+index 82653c4..6579e4c 100644
+--- a/builtins/pushd.def
++++ b/builtins/pushd.def
+@@ -365,7 +365,7 @@ popd_builtin (list)
+ 	break;
+     }
+ 
+-  if (which > directory_list_offset || (directory_list_offset == 0 && which == 0))
++  if (which > directory_list_offset || (which < -directory_list_offset) || (directory_list_offset == 0 && which == 0))
+     {
+       pushd_error (directory_list_offset, which_word ? which_word : "");
+       return (EXECUTION_FAILURE);
+@@ -387,6 +387,11 @@ popd_builtin (list)
+ 	 remove that directory from the list and shift the remainder
+ 	 of the list into place. */
+       i = (direction == '+') ? directory_list_offset - which : which;
++      if (i < 0 || i > directory_list_offset)
++	{
++	  pushd_error (directory_list_offset, which_word ? which_word : "");
++	  return (EXECUTION_FAILURE);
++	}
+       free (pushd_directory_list[i]);
+       directory_list_offset--;
+ 
+diff --git a/patchlevel.h b/patchlevel.h
+index 1bc098b..14bff9f 100644
+--- a/patchlevel.h
++++ b/patchlevel.h
+@@ -25,6 +25,6 @@
+    regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
+    looks for to find the patch level (for the sccs version string). */
+ 
+-#define PATCHLEVEL 5
++#define PATCHLEVEL 6
+ 
+ #endif /* _PATCHLEVEL_H_ */
+-- 
+2.9.3
+
