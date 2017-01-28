@@ -1,0 +1,81 @@
+From 2965eca924466a48c5597ac5c6c86d470e718908 Mon Sep 17 00:00:00 2001
+From: Chet Ramey <chet.ramey@case.edu>
+Date: Mon, 14 Nov 2016 14:27:35 -0500
+Subject: [PATCH] Bash-4.4 patch 4
+
+---
+ jobs.c       | 15 +++++++++++++++
+ jobs.h       |  1 +
+ patchlevel.h |  2 +-
+ subst.c      |  5 +----
+ 4 files changed, 18 insertions(+), 5 deletions(-)
+
+diff --git a/jobs.c b/jobs.c
+index cef3c79..fc96603 100644
+--- a/jobs.c
++++ b/jobs.c
+@@ -453,6 +453,21 @@ cleanup_the_pipeline ()
+     discard_pipeline (disposer);
+ }
+ 
++void
++discard_last_procsub_child ()
++{
++  PROCESS *disposer;
++  sigset_t set, oset;
++
++  BLOCK_CHILD (set, oset);
++  disposer = last_procsub_child;
++  last_procsub_child = (PROCESS *)NULL;
++  UNBLOCK_CHILD (oset);
++
++  if (disposer)
++    discard_pipeline (disposer);
++}
++
+ struct pipeline_saver *
+ alloc_pipeline_saver ()
+ {
+diff --git a/jobs.h b/jobs.h
+index 4ba3513..6df0607 100644
+--- a/jobs.h
++++ b/jobs.h
+@@ -190,6 +190,7 @@ extern JOB **jobs;
+ extern void making_children __P((void));
+ extern void stop_making_children __P((void));
+ extern void cleanup_the_pipeline __P((void));
++extern void discard_last_procsub_child __P((void));
+ extern void save_pipeline __P((int));
+ extern PROCESS *restore_pipeline __P((int));
+ extern void start_pipeline __P((void));
+diff --git a/patchlevel.h b/patchlevel.h
+index e7e960c..c059f0b 100644
+--- a/patchlevel.h
++++ b/patchlevel.h
+@@ -25,6 +25,6 @@
+    regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
+    looks for to find the patch level (for the sccs version string). */
+ 
+-#define PATCHLEVEL 3
++#define PATCHLEVEL 4
+ 
+ #endif /* _PATCHLEVEL_H_ */
+diff --git a/subst.c b/subst.c
+index 4d498ef..298187d 100644
+--- a/subst.c
++++ b/subst.c
+@@ -5808,10 +5808,7 @@ process_substitute (string, open_for_read_in_child)
+     {
+ #if defined (JOB_CONTROL)
+       if (last_procsub_child)
+-	{
+-	  discard_pipeline (last_procsub_child);
+-	  last_procsub_child = (PROCESS *)NULL;
+-	}
++	discard_last_procsub_child ();
+       last_procsub_child = restore_pipeline (0);
+ #endif
+ 
+-- 
+2.9.3
+

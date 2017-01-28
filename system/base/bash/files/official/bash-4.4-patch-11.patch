@@ -1,0 +1,39 @@
+From 76bb456d8fcd870cd31b7bf9d90798cd97cee2ab Mon Sep 17 00:00:00 2001
+From: Chet Ramey <chet.ramey@case.edu>
+Date: Fri, 20 Jan 2017 15:38:49 -0500
+Subject: [PATCH] Bash-4.4 patch 11
+
+---
+ patchlevel.h | 2 +-
+ sig.c        | 3 ++-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/patchlevel.h b/patchlevel.h
+index 8002af7..772676c 100644
+--- a/patchlevel.h
++++ b/patchlevel.h
+@@ -25,6 +25,6 @@
+    regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
+    looks for to find the patch level (for the sccs version string). */
+ 
+-#define PATCHLEVEL 10
++#define PATCHLEVEL 11
+ 
+ #endif /* _PATCHLEVEL_H_ */
+diff --git a/sig.c b/sig.c
+index ad01631..e5bb739 100644
+--- a/sig.c
++++ b/sig.c
+@@ -585,7 +585,8 @@ termsig_handler (sig)
+ #if defined (JOB_CONTROL)
+   if (sig == SIGHUP && (interactive || (subshell_environment & (SUBSHELL_COMSUB|SUBSHELL_PROCSUB))))
+     hangup_all_jobs ();
+-  end_job_control ();
++  if ((subshell_environment & (SUBSHELL_COMSUB|SUBSHELL_PROCSUB)) == 0)
++    end_job_control ();
+ #endif /* JOB_CONTROL */
+ 
+ #if defined (PROCESS_SUBSTITUTION)
+-- 
+2.9.3
+

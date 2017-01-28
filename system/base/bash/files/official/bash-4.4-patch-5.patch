@@ -1,0 +1,42 @@
+From f459cbd8be37b28be1dc90315e0ab51d7f211301 Mon Sep 17 00:00:00 2001
+From: Chet Ramey <chet.ramey@case.edu>
+Date: Mon, 14 Nov 2016 14:27:55 -0500
+Subject: [PATCH] Bash-4.4 patch 5
+
+---
+ builtins/evalstring.c | 3 ---
+ patchlevel.h          | 2 +-
+ 2 files changed, 1 insertion(+), 4 deletions(-)
+
+diff --git a/builtins/evalstring.c b/builtins/evalstring.c
+index e221591..6dc756c 100644
+--- a/builtins/evalstring.c
++++ b/builtins/evalstring.c
+@@ -104,12 +104,9 @@ should_suppress_fork (command)
+ 	  running_trap == 0 &&
+ 	  *bash_input.location.string == '\0' &&
+ 	  command->type == cm_simple &&
+-#if 0
+ 	  signal_is_trapped (EXIT_TRAP) == 0 &&
+ 	  signal_is_trapped (ERROR_TRAP) == 0 &&
+-#else
+ 	  any_signals_trapped () < 0 &&
+-#endif
+ 	  command->redirects == 0 && command->value.Simple->redirects == 0 &&
+ 	  ((command->flags & CMD_TIME_PIPELINE) == 0) &&
+ 	  ((command->flags & CMD_INVERT_RETURN) == 0));
+diff --git a/patchlevel.h b/patchlevel.h
+index c059f0b..1bc098b 100644
+--- a/patchlevel.h
++++ b/patchlevel.h
+@@ -25,6 +25,6 @@
+    regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
+    looks for to find the patch level (for the sccs version string). */
+ 
+-#define PATCHLEVEL 4
++#define PATCHLEVEL 5
+ 
+ #endif /* _PATCHLEVEL_H_ */
+-- 
+2.9.3
+

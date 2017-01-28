@@ -1,0 +1,71 @@
+From b9f81c2977b82490cd4dc70b0bb292bfbf86bd2c Mon Sep 17 00:00:00 2001
+From: Chet Ramey <chet.ramey@case.edu>
+Date: Fri, 20 Jan 2017 15:38:10 -0500
+Subject: [PATCH] Bash-4.4 patch 8
+
+---
+ expr.c       | 15 +++++++++------
+ patchlevel.h |  2 +-
+ 2 files changed, 10 insertions(+), 7 deletions(-)
+
+diff --git a/expr.c b/expr.c
+index 1ddb693..172964a 100644
+--- a/expr.c
++++ b/expr.c
+@@ -578,24 +578,23 @@ expcond ()
+   rval = cval = explor ();
+   if (curtok == QUES)		/* found conditional expr */
+     {
+-      readtok ();
+-      if (curtok == 0 || curtok == COL)
+-	evalerror (_("expression expected"));
+       if (cval == 0)
+ 	{
+ 	  set_noeval = 1;
+ 	  noeval++;
+ 	}
+ 
++      readtok ();
++      if (curtok == 0 || curtok == COL)
++	evalerror (_("expression expected"));
++
+       val1 = EXP_HIGHEST ();
+ 
+       if (set_noeval)
+ 	noeval--;
+       if (curtok != COL)
+ 	evalerror (_("`:' expected for conditional expression"));
+-      readtok ();
+-      if (curtok == 0)
+-	evalerror (_("expression expected"));
++
+       set_noeval = 0;
+       if (cval)
+  	{
+@@ -603,7 +602,11 @@ expcond ()
+ 	  noeval++;
+  	}
+ 
++      readtok ();
++      if (curtok == 0)
++	evalerror (_("expression expected"));
+       val2 = expcond ();
++
+       if (set_noeval)
+ 	noeval--;
+       rval = cval ? val1 : val2;
+diff --git a/patchlevel.h b/patchlevel.h
+index deb9c5b..16c8740 100644
+--- a/patchlevel.h
++++ b/patchlevel.h
+@@ -25,6 +25,6 @@
+    regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
+    looks for to find the patch level (for the sccs version string). */
+ 
+-#define PATCHLEVEL 7
++#define PATCHLEVEL 8
+ 
+ #endif /* _PATCHLEVEL_H_ */
+-- 
+2.9.3
+
