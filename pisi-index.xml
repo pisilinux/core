@@ -963,7 +963,7 @@
             <Description xml:lang="fr">Un client daemon DHCP conforme aux RFC2131 et RFC1541. dhcpcd obtient une adresse IP ainsi que d&apos;autres informations depuis le serveur DHCP correspondant, configure l&apos;interface réseau automatiquement et essaie de renouveler le bail selont les RFC2131 et EFC1541 en fonction des options de la ligne de commande.</Description>
             <Description xml:lang="en">An RFC2131 and RFC1541 compliant DHCP client daemon. dhcpcd gets an IP address and other information from a corresponding DHCP server, configures the network interface automatically, and tries to renew the lease time according to RFC2131 or RFC1541 depending on the command line option.</Description>
             <Description xml:lang="tr">RFC2131 ve RFC1541 uyumlu bir DHCP istemci servisi.dhcpcd ilgili bir DHCP sunucusundan bir IP adresi ve gerekli diğer bilgileri alır, ağ arayüzünü otomatik olarak yapılandırır ve RFC2131 veya RFC1541 komut satırı özelliğine bağlı olarak kiralama zamanını yenilemeyi dener.</Description>
-            <Archive type="tarxz" sha1sum="bb37e0211858df8a919c494e14a6bbfb67b1f72c">http://ftp.osuosl.org/pub/blfs/conglomeration/dhcpcd/dhcpcd-6.10.1.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="aa0a97682cb7dad3ea0acfe623a67da42614a2d8">http://ftp.osuosl.org/pub/blfs/conglomeration/dhcpcd/dhcpcd-6.11.5.tar.xz</Archive>
             <SourceURI>system/base/dhcpcd/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -980,6 +980,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-29</Date>
+                <Version>6.11.5</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>6.10.1</Version>
@@ -4044,7 +4051,7 @@
             <Description xml:lang="en">gperf is a perfect hash function generator. For a given list of strings, it produces a hash function and hash table, in form of C or C++ code, for looking up a value depending on the input string. The hash function is perfect, which means that the hash table has no collisions, and the hash table lookup needs a single string comparison only.</Description>
             <Description xml:lang="tr">gperf mükemmel hash fonksiyonu üretecidir. Verilen bir katar listesi için C ve C++ kodu biçiminde bir hash fonksiyonu ve hash tablosu üretir.</Description>
             <Description xml:lang="es">GNU gperf es un generador de perfect hash. Produce una función hash y una tabla hash a base de una lista de cadenas, en forma de código C o C++ , para revisar valores dependiendo de una cadena de entrada. La función de hash es perfecta, lo que quiere decir que no hay colisiones en la tabla de hash, y para la búsqueda en la tabla hash se necesita solamente una comparación.</Description>
-            <Archive type="targz" sha1sum="e32d4aff8f0c730c9a56554377b2c6d82d0951b8">mirrors://gnu/gperf/gperf-3.0.4.tar.gz</Archive>
+            <Archive type="targz" sha1sum="e3c0618c2d2e5586eda9498c867d5e4858a3b0e2">mirrors://gnu/gperf/gperf-3.1.tar.gz</Archive>
             <SourceURI>system/base/gperf/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -4060,6 +4067,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-29</Date>
+                <Version>3.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>3.0.4</Version>
@@ -4943,7 +4957,7 @@
             <Summary xml:lang="es">Una interfaz para sistemas de archivos implementados en el espacio de usuario</Summary>
             <Description xml:lang="en">fuse is a backend allowing regular users to (un)mount filesystems for their own use.</Description>
             <Description xml:lang="tr">FUSE, kullanıcıların kendileri için dosya sistemleri oluşturmasına, bağlamasına ve bağı koparmasına imkân veren bir arkauç kitaplıktır.</Description>
-            <Archive type="targz" sha1sum="bf71181cdc25f65e5757a8a14d352296722de2e3">https://github.com/libfuse/libfuse/releases/download/fuse_2_9_5/fuse-2.9.5.tar.gz</Archive>
+            <Archive type="targz" sha1sum="fcb3641d5297938f4e183296eccaf0ccc1a0f892">https://github.com/libfuse/libfuse/archive/fuse-2.9.7.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>gettext-devel</Dependency>
             </BuildDependencies>
@@ -4972,7 +4986,7 @@
             <Summary xml:lang="tr">fuse için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="2">fuse</Dependency>
+                <Dependency release="3">fuse</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -4980,6 +4994,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-29</Date>
+                <Version>2.9.7</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>2.9.5</Version>
@@ -5487,9 +5508,9 @@
             <PartOf>system.base</PartOf>
             <Summary xml:lang="en">Biosdevname is a udev helper utility developed</Summary>
             <Description xml:lang="en">Biosdevname is a udev helper utility developed by Dell and released under the GNU General Public License (GPL). It provides a consistent naming mechanism for network devices based on their physical location as suggested by the system BIOS.</Description>
-            <Archive type="targz" sha1sum="972dc94c81cdbe12216fcf379453587ae505054f">http://linux.dell.com/biosdevname/biosdevname-0.7.1/biosdevname-0.7.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="5d3b758317b79f28003ca8ffb8a4614ca6b4fe2a">http://linux.dell.com/biosdevname/biosdevname-0.7.2/biosdevname-0.7.2.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency>pciutils-devel</Dependency>
+                <Dependency versionFrom="3.5.2">pciutils-devel</Dependency>
                 <Dependency>glibc-devel</Dependency>
                 <Dependency>zlib-devel</Dependency>
             </BuildDependencies>
@@ -5509,6 +5530,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-29</Date>
+                <Version>0.7.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>0.7.1</Version>
@@ -7714,7 +7742,7 @@
             <Description xml:lang="en">Userspace setup tool for transparent encryption of block devices using dm-crypt</Description>
             <Description xml:lang="tr">cryptsetup device mapper kullanarak şifrelenmiş dosya sistemleri yaratmak için gerekli bir araçtır.</Description>
             <Icon>cryptsetup</Icon>
-            <Archive type="tarxz" sha1sum="0299b944441bc6665bce5f1dce6b9d6daf529bec">https://www.kernel.org/pub/linux/utils/cryptsetup/v1.7/cryptsetup-1.7.1.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="eaf688f2ae74c562bc341573b8c0dca63727e9c8">https://www.kernel.org/pub/linux/utils/cryptsetup/v1.7/cryptsetup-1.7.3.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency versionFrom="2.02.118">device-mapper-devel</Dependency>
                 <Dependency>libgpg-error-devel</Dependency>
@@ -7730,7 +7758,7 @@
             <Name>cryptsetup</Name>
             <PartOf>util.crypt</PartOf>
             <RuntimeDependencies>
-                <Dependency version="1.7.1">libcryptsetup</Dependency>
+                <Dependency version="1.7.3">libcryptsetup</Dependency>
                 <Dependency>popt</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -7761,7 +7789,7 @@
             <Summary xml:lang="tr">libcryptsetup için geliştirme dosyaları</Summary>
             <PartOf>programming.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency version="1.7.1">libcryptsetup</Dependency>
+                <Dependency version="1.7.3">libcryptsetup</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -7775,13 +7803,20 @@
             <PartOf>programming.language.python</PartOf>
             <RuntimeDependencies>
                 <Dependency>python</Dependency>
-                <Dependency version="1.7.1">libcryptsetup</Dependency>
+                <Dependency version="1.7.3">libcryptsetup</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib/python2.7/site-packages/pycryptsetup.so</Path>
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-29</Date>
+                <Version>1.7.3</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>1.7.1</Version>
@@ -10900,10 +10935,14 @@
             <Description xml:lang="fr">Les utilitaires PCI sont une collection de programmes d&apos;inspection et de manipulation de la configuration des périphériques PCI.</Description>
             <Description xml:lang="en">The PCI Utilities are a collection of programs for inspecting and manipulating configuration of PCI devices.</Description>
             <Description xml:lang="tr">Pakette bulunan PCI araçları, PCI veriyolunu kullanan donanımlarınızın görüntülenmesi ve ayarlanması işlevini yürütür.</Description>
-            <Archive type="tarxz" sha1sum="c4582e05ef7113ae9fc9b0502e7b2f4285b1a1b2">ftp://ftp.kernel.org/pub/software/utils/pciutils/pciutils-3.4.1.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="29d9a75ce2a2d92721b6e92c7c89236b4c91041f">ftp://ftp.kernel.org/pub/software/utils/pciutils/pciutils-3.5.2.tar.xz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="pci.ids">pci.ids</AdditionalFile>
             </AdditionalFiles>
+            <BuildDependencies>
+                <Dependency>eudev-devel</Dependency>
+                <Dependency>libkmod-devel</Dependency>
+            </BuildDependencies>
             <Patches>
                 <Patch level="1">pciutils-nogz.patch</Patch>
                 <Patch level="1">pciutils-remove-update-pciids.patch</Patch>
@@ -10931,7 +10970,7 @@
             <Summary xml:lang="tr">pciutils için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="2">pciutils</Dependency>
+                <Dependency release="3">pciutils</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/lib/pkgconfig</Path>
@@ -10939,6 +10978,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-29</Date>
+                <Version>3.5.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>3.4.1</Version>
@@ -12936,6 +12982,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-29</Date>
+                <Version>0.33.20120825</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>0.33.20120825</Version>
@@ -16698,6 +16751,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-29</Date>
+                <Version>4.0.18</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>4.0.18</Version>
@@ -16730,6 +16790,9 @@
             <Description xml:lang="en">mdadm is used to create, manage, and monitor Linux MD (software RAID) devices.</Description>
             <Description xml:lang="tr">mdadm Linux MD (yazılımsal RAID) aygıtları yaratmak, yönetmek ve izlemek için kullanılan bir araçtır.</Description>
             <Archive type="tarxz" sha1sum="0b6c284970567bfa30dbc14ea5c0e2320582b80c">https://www.kernel.org/pub/linux/utils/raid/mdadm/mdadm-3.4.tar.xz</Archive>
+            <BuildDependencies>
+                <Dependency>dietlibc</Dependency>
+            </BuildDependencies>
             <SourceURI>hardware/disk/mdadm/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -16764,6 +16827,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-29</Date>
+                <Version>3.4</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>3.4</Version>
@@ -16847,10 +16917,11 @@
             <Summary xml:lang="tr">Mantıksal Hacim Yönetimi aracı</Summary>
             <Description xml:lang="en">LVM2 includes all of the support for handling read/write operations physical and logical volumes.</Description>
             <Description xml:lang="tr">LVM fiziksel ve mantıksal hacimler üzerinde gerçekleştirilen bütün okuma/yazma işlemlerini destekleyen araçları içerir.</Description>
-            <Archive type="targz" sha1sum="2a7cce6407d91847731d8f2ca2b4ba7dee03225a">ftp://sources.redhat.com/pub/lvm2/LVM2.2.02.142.tgz</Archive>
+            <Archive type="targz" sha1sum="35b7358ebefefbf1fceb50bf282c328203248bdb">ftp://sources.redhat.com/pub/lvm2/LVM2.2.02.167.tgz</Archive>
             <BuildDependencies>
                 <Dependency>libutil-linux-devel</Dependency>
                 <Dependency>eudev-devel</Dependency>
+                <Dependency>autoconf-archive</Dependency>
             </BuildDependencies>
             <SourceURI>hardware/disk/lvm2/pspec.xml</SourceURI>
         </Source>
@@ -16883,7 +16954,7 @@
             <Summary xml:lang="tr">device-mapper için geliştirme dosyaları</Summary>
             <Description xml:lang="en">Device-mapper-devel contains files needed to develop applications that use the device-mapper libraries.</Description>
             <RuntimeDependencies>
-                <Dependency release="2">device-mapper</Dependency>
+                <Dependency release="3">device-mapper</Dependency>
                 <Dependency>eudev-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -16897,7 +16968,7 @@
             <Summary xml:lang="tr">Device mapper durum servisi</Summary>
             <Description xml:lang="en">This package contains the dmeventd daemon for monitoring the state of device-mapper devices.</Description>
             <RuntimeDependencies>
-                <Dependency release="2">device-mapper</Dependency>
+                <Dependency release="3">device-mapper</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/sbin/dmeventd</Path>
@@ -16914,7 +16985,7 @@
             <Summary xml:lang="tr">device-mapper-event için geliştirme dosyaları</Summary>
             <Description xml:lang="en">This contains contains files needed to develop applications that use the device-mapper event library.</Description>
             <RuntimeDependencies>
-                <Dependency release="2">device-mapper-event</Dependency>
+                <Dependency release="3">device-mapper-event</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/libdevmapper-event.h</Path>
@@ -16926,8 +16997,8 @@
             <Summary xml:lang="en">Userland logical volume management tools</Summary>
             <Description xml:lang="en">LVM2 includes all of the support for handling read/write operations on physical volumes,creating volume groups from one or more physical volumes and creating one or more logical volumes in volume groups.</Description>
             <RuntimeDependencies>
-                <Dependency release="2">device-mapper</Dependency>
-                <Dependency release="2">device-mapper-event</Dependency>
+                <Dependency release="3">device-mapper</Dependency>
+                <Dependency release="3">device-mapper-event</Dependency>
                 <Dependency>libutil-linux</Dependency>
                 <Dependency>eudev</Dependency>
             </RuntimeDependencies>
@@ -16977,9 +17048,9 @@
             <Description xml:lang="en">This package contains files needed to develop applications that use the lvm2 libraries.</Description>
             <RuntimeDependencies>
                 <Dependency>libutil-linux-devel</Dependency>
-                <Dependency release="2">lvm2</Dependency>
-                <Dependency release="2">device-mapper-devel</Dependency>
-                <Dependency release="2">device-mapper-event-devel</Dependency>
+                <Dependency release="3">lvm2</Dependency>
+                <Dependency release="3">device-mapper-devel</Dependency>
+                <Dependency release="3">device-mapper-event-devel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/lvm2cmd.h</Path>
@@ -17020,6 +17091,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-01-29</Date>
+                <Version>2.02.167</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>2.02.142</Version>
