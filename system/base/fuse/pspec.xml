@@ -14,7 +14,7 @@
         <Description>fuse is a backend allowing regular users to (un)mount filesystems for their own use.</Description>
         <Archive sha1sum="fcb3641d5297938f4e183296eccaf0ccc1a0f892" type="targz">https://github.com/libfuse/libfuse/archive/fuse-2.9.7.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>gettext</Dependency>
+            <Dependency>gettext-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch>skip_umount_test.patch</Patch>
