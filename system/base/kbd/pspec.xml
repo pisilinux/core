@@ -12,10 +12,10 @@
         <IsA>app:console</IsA>
         <Summary>Keyboard and console utilities</Summary>
         <Description>The kbd package contains keytable files and keyboard utilities compatible with kernel version 1.1.54 and later.</Description>
-        <Archive sha1sum="0a58dc928386f0f9c981fbefd24f05fc0b8226d7" type="tarxz">https://www.kernel.org/pub/linux/utils/kbd/kbd-2.0.3.tar.xz</Archive>
-        <Archive sha1sum="17625849ecf4dedf755aefa06d78406b92c31743" type="tarbz2" target="kbd-2.0.3">http://source.pisilinux.org/1.0/kbd-latarcyrheb-16-fixed.tar.bz2</Archive>
-        <Archive sha1sum="a5f6d9dff7a8a484cd5014ec7ffdf1eaed27084a" type="tarbz2" target="kbd-2.0.3">http://source.pisilinux.org/1.0/kbd-latsun-fonts.tar.bz2</Archive>
-        <Archive sha1sum="d52f95fdc761cead041d23992f8802be5ac4bc12" type="tarbz2" target="kbd-2.0.3">http://source.pisilinux.org/1.0/ro_maps.tar.bz2</Archive>
+        <Archive sha1sum="9aeac5556b827a9f13ccdb25257a1ac4b0243387" type="tarxz">https://www.kernel.org/pub/linux/utils/kbd/kbd-2.0.4.tar.xz</Archive>
+        <Archive sha1sum="17625849ecf4dedf755aefa06d78406b92c31743" type="tarbz2" target="kbd-2.0.4">http://source.pisilinux.org/1.0/kbd-latarcyrheb-16-fixed.tar.bz2</Archive>
+        <Archive sha1sum="a5f6d9dff7a8a484cd5014ec7ffdf1eaed27084a" type="tarbz2" target="kbd-2.0.4">http://source.pisilinux.org/1.0/kbd-latsun-fonts.tar.bz2</Archive>
+        <Archive sha1sum="d52f95fdc761cead041d23992f8802be5ac4bc12" type="tarbz2" target="kbd-2.0.4">http://source.pisilinux.org/1.0/ro_maps.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>gettext</Dependency>
             <Dependency>gzip</Dependency>
@@ -72,6 +72,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2017-01-29</Date>
+            <Version>2.0.4</Version>
+            <Comment>Release Bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>2.0.3</Version>
