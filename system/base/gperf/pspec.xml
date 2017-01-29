@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>A perfect hash function generator</Summary>
         <Description>gperf is a perfect hash function generator. For a given list of strings, it produces a hash function and hash table, in form of C or C++ code, for looking up a value depending on the input string. The hash function is perfect, which means that the hash table has no collisions, and the hash table lookup needs a single string comparison only.</Description>
-        <Archive sha1sum="e32d4aff8f0c730c9a56554377b2c6d82d0951b8" type="targz">mirrors://gnu/gperf/gperf-3.0.4.tar.gz</Archive>
+        <Archive sha1sum="e3c0618c2d2e5586eda9498c867d5e4858a3b0e2" type="targz">mirrors://gnu/gperf/gperf-3.1.tar.gz</Archive>
     </Source>
 
     <Package>
@@ -29,6 +29,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2017-01-29</Date>
+            <Version>3.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>3.0.4</Version>
