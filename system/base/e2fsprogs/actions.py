@@ -38,4 +38,4 @@ def install():
     # Unneeded stuff
     pisitools.remove("/usr/lib/*.a")
 
-    pisitools.dodoc("COPYING", "README", "RELEASE-NOTES")
+    pisitools.dodoc("README", "RELEASE-NOTES")
