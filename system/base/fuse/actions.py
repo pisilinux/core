@@ -6,12 +6,14 @@
 from pisi.actionsapi import get
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import shelltools
 
 def setup():
-    autotools.autoreconf("-vif")
-
+    shelltools.system("sh makeconf.sh")
+    
     # Disable device node creation during build/install
     pisitools.dosed("util/Makefile.in", "mknod", "echo Disabled: mknod ")
+
 
     autotools.configure("--disable-static \
                          --disable-rpath \
