@@ -17,14 +17,15 @@
             <Dependency>gettext</Dependency>
         </BuildDependencies>
         <Patches>
-            <!--<Patch level="1">gettext.patch</Patch>-->
+            <!--Patch level="1">gettext.patch</Patch-->
             <Patch>tr.patch</Patch>
             <Patch level="1">mingetty-utf8.patch</Patch>
-            <!-- Fixes the translation issues mentioned in # 5856 -->
-            <!--<Patch level="1">login-locale.patch</Patch>-->
-
-            <!-- Grab last modifications from openSUSE -->
-            <!--<Patch>mingetty-1.0.7s-suse.patch</Patch>-->
+            <!--fedora patches-->
+            <Patch level="1">fedora/mingetty-1.08-check_chroot_chdir_nice.patch</Patch>
+            <Patch level="1">fedora/mingetty-1.08-openlog_authpriv.patch</Patch>
+            <Patch level="1">fedora/mingetty-1.08-limit_tty_length.patch</Patch>
+            <!--Patch level="1">fedora/mingetty-1.08-Clear-scroll-back-buffer-on-clear-screen.patch</Patch>
+            <Patch>fedora/mingetty-1.08-Allow-login-name-up-to-LOGIN_NAME_MAX-length.patch</Patch-->
         </Patches>
     </Source>
 
@@ -42,6 +43,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2017-01-30</Date>
+            <Version>1.08</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>1.0.8</Version>
