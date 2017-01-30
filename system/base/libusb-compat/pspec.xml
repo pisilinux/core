@@ -53,12 +53,10 @@
         <BuildType>emul32</BuildType>
         <BuildDependencies>
             <Dependency>libusb-32bit</Dependency>
-            
         </BuildDependencies>
         <RuntimeDependencies>
             <Dependency>libusb-32bit</Dependency>
             <Dependency>libusb</Dependency>
-            
             <Dependency release="current">libusb-compat</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -67,6 +65,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2017-01-30</Date>
+            <Version>0.1.5</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>0.1.5</Version>
