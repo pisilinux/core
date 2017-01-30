@@ -16,6 +16,6 @@ def build():
 def install():
     pisitools.dosbin("mingetty", "/sbin")
     pisitools.doman("mingetty.8")
-    #pisitools.insinto("/usr/share/locale/tr/LC_MESSAGES", "tr.mo")
+    pisitools.domo("tr.po", "tr", "mingetty.mo")
 
     pisitools.dodoc("COPYING")
