@@ -13,9 +13,9 @@
         <IsA>app:gui</IsA>
         <Summary>Biosdevname is a udev helper utility developed</Summary>
         <Description>Biosdevname is a udev helper utility developed by Dell and released under the GNU General Public License (GPL). It provides a consistent naming mechanism for network devices based on their physical location as suggested by the system BIOS.</Description>
-        <Archive sha1sum="972dc94c81cdbe12216fcf379453587ae505054f" type="targz">http://linux.dell.com/biosdevname/biosdevname-0.7.1/biosdevname-0.7.1.tar.gz</Archive>
+        <Archive sha1sum="5d3b758317b79f28003ca8ffb8a4614ca6b4fe2a" type="targz">http://linux.dell.com/biosdevname/biosdevname-0.7.2/biosdevname-0.7.2.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>pciutils-devel</Dependency>
+            <Dependency versionFrom="3.5.2">pciutils-devel</Dependency>
             <Dependency>glibc-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
         </BuildDependencies>
@@ -36,6 +36,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2017-01-29</Date>
+            <Version>0.7.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>0.7.1</Version>

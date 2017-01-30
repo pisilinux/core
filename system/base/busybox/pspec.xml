@@ -12,14 +12,14 @@
         <IsA>app:console</IsA>
         <Summary>Statically linked binary providing simplified versions of system commands</Summary>
         <Description>busybox is a single binary which includes versions of a large number of system commands, including a shell.</Description>
-        <Archive sha1sum="157d14d24748b4505b1a418535688706a2b81680" type="tarbz2">http://busybox.net/downloads/busybox-1.24.1.tar.bz2</Archive>
+        <Archive sha1sum="8b227b3efdb4c4aa94750f80cc63429aec6daa0b" type="tarbz2">https://busybox.net/downloads/busybox-1.25.1.tar.bz2</Archive>
         <AdditionalFiles>
             <AdditionalFile target=".config">config</AdditionalFile>
         </AdditionalFiles>
         <Patches>
             <!-- This patch is essential for udhcp to request root-path from dhcpd and required by ptsp -->
-            <!--Patch level="1">udhcp-rootpath-rq.patch</Patch>
-            <Patch level="1">suppress-job-control-warning.patch</Patch>
+            <!--Patch level="1">busybox-1.25.1-setfiles.patch</Patch>-->
+            <!--Patch level="1">suppress-job-control-warning.patch</Patch>
             <Patch level="1">fix-include.patch</Patch-->
             <!--Patch>ifplugd.patch</Patch-->
         </Patches>
@@ -33,6 +33,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2017-01-28</Date>
+            <Version>1.25.1</Version>
+            <Comment>Release Bump.</Comment>
+            <Name>Stefan Gronewold(groni)</Name>
+            <Email>groni@pisilinux.org</Email>
+        </Update>        
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>1.24.1</Version>

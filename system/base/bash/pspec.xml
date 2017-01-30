@@ -12,30 +12,23 @@
         <IsA>app:console</IsA>
         <Summary>The standard GNU Bourne again shell</Summary>
         <Description>Bash is the GNU Project's Bourne Again SHell, a complete implementation of the IEEE POSIX and Open Group shell specification with interactive command line editing, csh-like features such as history substitution.</Description>
-        <Archive sha1sum="33b1bcc5dca1b72f28b2baeca6efa0d422097964" type="targz">mirrors://gnu/bash/bash-4.3.30.tar.gz</Archive>
+        <Archive sha1sum="8de012df1e4f3e91f571c3eb8ec45b43d7c747eb" type="targz">mirrors://gnu/bash/bash-4.4.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>ncurses-devel</Dependency>
         </BuildDependencies>
         <Patches>
-        <!-- Official Patches ftp://ftp.cwru.edu/pub/bash/bash-4.3-patches/ -->
-            <Patch level="0" compressionType="gzip">official/bash43-031.tar.gz</Patch>
-            <Patch level="0" compressionType="gzip">official/bash43-032.tar.gz</Patch>
-            <Patch level="0" compressionType="gzip">official/bash43-033.tar.gz</Patch>
-            <Patch level="0" compressionType="gzip">official/bash43-034.tar.gz</Patch>
-            <Patch level="0" compressionType="gzip">official/bash43-035.tar.gz</Patch>
-            <Patch level="0" compressionType="gzip">official/bash43-036.tar.gz</Patch>
-            <Patch level="0" compressionType="gzip">official/bash43-037.tar.gz</Patch>
-            <Patch level="0" compressionType="gzip">official/bash43-038.tar.gz</Patch>
-            <Patch level="0" compressionType="gzip">official/bash43-039.tar.gz</Patch>
-            <Patch level="0" compressionType="gzip">official/bash43-040.tar.gz</Patch>
-            <Patch level="0" compressionType="gzip">official/bash43-041.tar.gz</Patch>
-            <Patch level="0" compressionType="gzip">official/bash43-042.tar.gz</Patch>
-            <Patch level="0" compressionType="gzip">official/bash43-043.tar.gz</Patch>
-            <Patch level="0" compressionType="gzip">official/bash43-044.tar.gz</Patch>
-            <Patch level="0" compressionType="gzip">official/bash43-045.tar.gz</Patch>
-            <Patch level="0" compressionType="gzip">official/bash43-046.tar.gz</Patch>
-            <Patch level="0" compressionType="gzip">official/bash43-047.tar.gz</Patch>
-            <Patch level="0" compressionType="gzip">official/bash43-048.tar.gz</Patch>
+            <!-- Official Patches -->
+            <Patch level="1">official/bash-4.4-patch-1.patch</Patch>
+            <Patch level="1">official/bash-4.4-patch-2.patch</Patch>
+            <Patch level="1">official/bash-4.4-patch-3.patch</Patch>
+            <Patch level="1">official/bash-4.4-patch-4.patch</Patch>
+            <Patch level="1">official/bash-4.4-patch-5.patch</Patch>
+            <Patch level="1">official/bash-4.4-patch-6.patch</Patch>
+            <Patch level="1">official/bash-4.4-patch-7.patch</Patch>
+            <Patch level="1">official/bash-4.4-patch-8.patch</Patch>
+            <Patch level="1">official/bash-4.4-patch-9.patch</Patch>
+            <Patch level="1">official/bash-4.4-patch-10.patch</Patch>
+            <Patch level="1">official/bash-4.4-patch-11.patch</Patch>           
 
         <!-- Fedora patches -->
             <Patch level="1">fedora/bash-2.02-security.patch</Patch>
@@ -45,24 +38,26 @@
             <Patch level="1">fedora/bash-2.05b-debuginfo.patch</Patch>
             <Patch level="1">fedora/bash-2.05b-manso.patch</Patch>
             <Patch level="1">fedora/bash-2.05b-pgrp_sync.patch</Patch>
-            <Patch level="1">fedora/bash-2.05b-readline-oom.patch</Patch>
             <Patch level="1">fedora/bash-2.05b-xcc.patch</Patch>
             <Patch level="1">fedora/bash-3.2-audit.patch</Patch>
             <Patch level="1">fedora/bash-3.2-ssh_source_bash.patch</Patch>
-            <Patch level="1">fedora/bash-4.0-nobits.patch</Patch>
-            <Patch level="1">fedora/bash-4.1-broken_pipe.patch</Patch>
-            <Patch level="1">fedora/bash-4.1-defer-sigchld-trap.patch</Patch>
-            <Patch level="1">fedora/bash-4.1-examples.patch</Patch>
-            <Patch level="1">fedora/bash-4.2-coverity.patch</Patch>
-            <Patch level="1">fedora/bash-4.2-manpage_trap.patch</Patch>
-            <Patch level="1">fedora/bash-4.2-rc2-logout.patch</Patch>
-            <Patch level="1">fedora/bash-4.2-size_type.patch</Patch>
-            <Patch level="1">fedora/bash-bashbug.patch</Patch>
+            <!--Patch level="1">fedora/bash-bashbug.patch</Patch>
             <Patch level="1">fedora/bash-infotags.patch</Patch>
-            <Patch level="1">fedora/bash-requires.patch</Patch>
+            <Patch level="1">fedora/bash-requires.patch</Patch-->
             <Patch level="1">fedora/bash-setlocale.patch</Patch>
-            <Patch level="1">fedora/bash-tty-tests.patch</Patch>
-      <!--  <Patch level="1">fedora/bash-4.2-trap.patch</Patch> -->
+            <Patch level="1">fedora/bash-tty-tests.patch</Patch>            
+            <Patch level="1">fedora/bash-4.0-nobits.patch</Patch>
+            <Patch level="1">fedora/bash-4.1-examples.patch</Patch>            
+            <Patch level="1">fedora/bash-4.1-broken_pipe.patch</Patch>
+            <Patch level="1">fedora/bash-4.2-rc2-logout.patch</Patch>
+            <Patch level="1">fedora/bash-4.2-coverity.patch</Patch>
+            <Patch level="1">fedora/bash-4.1-defer-sigchld-trap.patch</Patch>
+            <Patch level="1">fedora/bash-4.2-manpage_trap.patch</Patch>
+            <Patch level="1">fedora/bash-4.2-size_type.patch</Patch>
+            <Patch level="1">fedora/bash-4.3-man-ulimit.patch</Patch>
+            <Patch level="1">fedora/bash-4.3-noecho.patch</Patch>
+            <Patch level="1">fedora/bash-4.3-memleak-lc_all.patch</Patch>
+            <Patch level="1">fedora/bash-4.4-no-loadable-builtins.patch</Patch>
         </Patches>
     </Source>
 
@@ -87,6 +82,13 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2017-01-29</Date>
+            <Version>4.4.11</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2017-01-06</Date>
             <Version>4.3_p48</Version>
