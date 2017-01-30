@@ -1,0 +1,39 @@
+From 5b9762d6f0cd36ff1b88bde22efa30ad0ed27ec6 Mon Sep 17 00:00:00 2001
+From: Chet Ramey <chet.ramey@case.edu>
+Date: Fri, 20 Jan 2017 15:38:38 -0500
+Subject: [PATCH] Bash-4.4 patch 10
+
+---
+ builtins/read.def | 3 ++-
+ patchlevel.h      | 2 +-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/builtins/read.def b/builtins/read.def
+index 48fda33..33821f3 100644
+--- a/builtins/read.def
++++ b/builtins/read.def
+@@ -181,7 +181,8 @@ read_builtin (list)
+      WORD_LIST *list;
+ {
+   register char *varname;
+-  int size, i, nr, pass_next, saw_escape, eof, opt, retval, code, print_ps2;
++  int size, nr, pass_next, saw_escape, eof, opt, retval, code, print_ps2;
++  volatile int i;
+   int input_is_tty, input_is_pipe, unbuffered_read, skip_ctlesc, skip_ctlnul;
+   int raw, edit, nchars, silent, have_timeout, ignore_delim, fd, lastsig, t_errno;
+   unsigned int tmsec, tmusec;
+diff --git a/patchlevel.h b/patchlevel.h
+index 02f1d60..8002af7 100644
+--- a/patchlevel.h
++++ b/patchlevel.h
+@@ -25,6 +25,6 @@
+    regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
+    looks for to find the patch level (for the sccs version string). */
+ 
+-#define PATCHLEVEL 9
++#define PATCHLEVEL 10
+ 
+ #endif /* _PATCHLEVEL_H_ */
+-- 
+2.9.3
+

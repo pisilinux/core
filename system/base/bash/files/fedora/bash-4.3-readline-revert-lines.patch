@@ -1,0 +1,18 @@
+*** ../bash-4.3-patched/lib/readline/misc.c	2012-09-01 18:03:11.000000000 -0400
+--- lib/readline/misc.c	2014-06-30 13:41:19.000000000 -0400
+***************
+*** 462,465 ****
+--- 462,466 ----
+  	  /* Set up rl_line_buffer and other variables from history entry */
+  	  rl_replace_from_history (entry, 0);	/* entry->line is now current */
++ 	  entry->data = 0;			/* entry->data is now current undo list */
+  	  /* Undo all changes to this history entry */
+  	  while (rl_undo_list)
+***************
+*** 469,473 ****
+  	  FREE (entry->line);
+  	  entry->line = savestring (rl_line_buffer);
+- 	  entry->data = 0;
+  	}
+        entry = previous_history ();
+--- 470,473 ----

@@ -1,0 +1,49 @@
+From 3bfdfdcbce2796ce75bf2d85fd8471858d702e5d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>
+Date: Mon, 7 Nov 2016 22:20:54 +0200
+Subject: drm/i915: Ignore bogus plane coordinates on SKL when the plane is not visible
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+From: Ville Syrjälä <ville.syrjala@linux.intel.com>
+
+commit 3bfdfdcbce2796ce75bf2d85fd8471858d702e5d upstream.
+
+When the plane is invisible we may have all sorts of bogus stuff
+in the coordinates, which we must ignore or else we might fail the
+plane update. This started to happen on SKL when I moved the plane
+offset computation to happen in the check phase. Previously we
+happily ignored it all since we never called the update_plane hook
+with an invisible plane.
+
+Cc: Sivakumar Thulasimani <sivakumar.thulasimani@intel.com>
+Cc: drm-intel-fixes@lists.freedesktop.org
+Fixes: b63a16f6cd89 ("drm/i915: Compute display surface offset in the plane check hook for SKL+")
+Signed-off-by: Ville Syrjälä <ville.syrjala@linux.intel.com>
+Bugzilla: https://bugs.freedesktop.org/show_bug.cgi?id=98258
+Testcase: igt/pm_rpm/legacy-planes
+Testcase: igt/pm_rpm/universal-planes
+Reviewed-by: Matt Roper <matthew.d.roper@intel.com>
+Signed-off-by: Matt Roper <matthew.d.roper@intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/1478550057-24864-3-git-send-email-ville.syrjala@linux.intel.com
+(cherry picked from commit a5e4c7d0aa6784d8abe95c3ceef0da9656d17468)
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/i915/intel_display.c |    3 +++
+ 1 file changed, 3 insertions(+)
+
+--- a/drivers/gpu/drm/i915/intel_display.c
++++ b/drivers/gpu/drm/i915/intel_display.c
+@@ -2975,6 +2975,9 @@ int skl_check_plane_surface(struct intel
+ 	unsigned int rotation = plane_state->base.rotation;
+ 	int ret;
+ 
++	if (!plane_state->base.visible)
++		return 0;
++
+ 	/* Rotate src coordinates to match rotated GTT view */
+ 	if (intel_rotation_90_or_270(rotation))
+ 		drm_rect_rotate(&plane_state->base.src,
