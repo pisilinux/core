@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libfastjson</Name>
+        <Homepage>https://github.com/rsyslog/libfastjson</Homepage>
+        <Packager>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>library</IsA>
+        <Summary>A performance-focused json library for C</Summary>
+        <Description>A performance-focused json library for C</Description>
+        <Archive sha1sum="0c10dde7f29d112fc7fc7b78583719f839bd2f16" type="targz">https://github.com/rsyslog/libfastjson/archive/v0.99.4.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>libfastjson</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>libfastjson-devel</Name>
+        <PartOf>system.devel</PartOf>
+        <Summary>Development files for libfastjson</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">libfastjson</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2017-01-30</Date>
+            <Version>0.99.4</Version>
+            <Comment>First release</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>
