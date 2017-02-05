@@ -14,13 +14,13 @@
         <IsA>app:console</IsA>
         <Summary>Introspection system for GObject-based libraries</Summary>
         <Description>gobject-introspection can scan C header and source files in order to generate introspection typelib files. It also provides an API to examine typelib files, useful for creating language bindings among other things.</Description>
-        <Archive sha1sum="ca4842479b119da1c8d3fbf5006adcc46920ce72" type="tarxz">mirrors://gnome/gobject-introspection/1.46/gobject-introspection-1.46.0.tar.xz</Archive>
+        <Archive sha1sum="5907f70bd275dceb4d3cb825ddce82cb1fdb4242" type="tarxz">mirrors://gnome/gobject-introspection/1.46/gobject-introspection-1.50.0.tar.xz</Archive>
         <BuildDependencies>
             <!--<Dependency>cairo-devel</Dependency>-->
             <Dependency>libffi-devel</Dependency>
             <Dependency>python-devel</Dependency>
             <!--<Dependency>python-mako</Dependency>--><!--for enable-doctool-->
-            <Dependency versionFrom="2.46.2">glib2-devel</Dependency>
+            <Dependency versionFrom="2.50.2">glib2-devel</Dependency>
             <Dependency>chrpath</Dependency>
         </BuildDependencies>
     </Source>
@@ -63,6 +63,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2017-02-05</Date>
+            <Version>1.50.0</Version>
+            <Comment>Version Bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>1.46.0</Version>
