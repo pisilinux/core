@@ -12,13 +12,13 @@
         <IsA>app:console</IsA>
         <Summary>Pisi Linux boot and initialization system</Summary>
         <Description>mudur handles mounting of the filesystems, loading of the device drivers, starting of the system services, and other jobs during the Pisi Linux boot and shutdown sequences.</Description>
-        <Archive sha1sum="42c9163b5fe3d9682caa20f639fbec1d0be784cd" type="tarxz">http://source.pisilinux.org/1.0/mudur-4.4.0.tar.xz</Archive>
+        <Archive sha1sum="8808b017cd09597bf32c3e81a1b602eca1afb7e0" type="targz">https://github.com/PisiLinuxNew/mudur/archive/v4.4.0.tar.gz</Archive>
         <Patches>
-            <Patch>set_file_mode.patch</Patch>
+            <!--Patch>set_file_mode.patch</Patch>
             <Patch>no_err-no_msg.patch</Patch>
             <Patch>recreate_dir_if_new_uid_or_gid.patch</Patch>
             <Patch>boot_option.patch</Patch>
-            <Patch level="1">mount_cgroupfs.patch</Patch>
+            <Patch level="1">mount_cgroupfs.patch</Patch-->
         </Patches>
     </Source>
 
@@ -61,6 +61,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2017-02-05</Date>
+            <Version>4.4.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>4.4.0</Version>

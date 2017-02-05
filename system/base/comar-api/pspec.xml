@@ -12,15 +12,15 @@
         <IsA>library</IsA>
         <Summary>Utility functions for Comar scripts</Summary>
         <Description>Generic utility library for common Comar script operations.</Description>
-        <Archive sha1sum="80afa9f07cd15b9042cce9c1b8f1c4dcd457c552" type="targz">http://source.pisilinux.org/1.0/comar-api-2.4.9.tar.gz</Archive>
+        <Archive sha1sum="80d3ebca0e57e1c5c5d649e92342676452da65d7" type="targz">https://github.com/PisiLinuxNew/comar-api/archive/v2.4.9.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>python</Dependency>
         </BuildDependencies>
-        <Patches>
+        <!--Patches>
             <Patch level="1">run_dir.patch</Patch>
             <Patch level="1">pisilinux.patch</Patch>
             <Patch level="1">add-stopdependencies.patch</Patch>
-        </Patches>
+        </Patches-->
     </Source>
 
     <Package>
@@ -36,6 +36,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2017-02-05</Date>
+            <Version>2.4.9</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>2.4.9</Version>
