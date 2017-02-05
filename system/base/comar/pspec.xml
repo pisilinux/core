@@ -12,17 +12,17 @@
         <IsA>service</IsA>
         <Summary>Manages system configuration</Summary>
         <Description>Pisi Linux programs are packaged with small scripts which configures them to entegrate with system and each other. Çomar is the tool which manages and executes these scripts.</Description>
-        <Archive sha1sum="a0894a20d3c2bb5843de7e25fc98707baf554df1" type="tarbz2">http://source.pisilinux.org/1.0/comar-3.0.3.tar.bz2</Archive>
+        <Archive sha1sum="27f01ddd80919067b295eb64de3cabb235f30d4f" type="targz">https://github.com/PisiLinuxNew/comar/archive/v3.0.3.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>dbus-devel</Dependency>
             <Dependency>python-devel</Dependency>
             <Dependency>cmake</Dependency>
         </BuildDependencies>
-        <Patches>
+        <!--Patches>
             <Patch level="1">run_dir.patch</Patch>
             <Patch level="1">fix-flags.patch</Patch>
             <Patch level="1">update-system-manager-model.patch</Patch>
-        </Patches>
+        </Patches-->
     </Source>
 
     <Package>
@@ -48,6 +48,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2017-02-05</Date>
+            <Version>3.0.3</Version>
+            <Comment>Rebuild, use pisilinuxnew source url.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>3.0.3</Version>
