@@ -668,12 +668,12 @@
             <Description xml:lang="fr">Le format de Graphique Réseau Portable (Portable Network Graphics - PNG) a été conçu pour remplacer le format GIF plus simple et vieillissant ainsi que, d&apos;une certaine manière, le format TIFF beaucoup plus complexe. L&apos;objectif principal du projet est de se concentrer sur deux aspects majeurs : La toile mondiale (World Wide Web - WWW) et l&apos;édition d&apos;image.</Description>
             <Description xml:lang="en">The Portable Network Graphics (PNG) format was designed to replace the older and simpler GIF format and, to some extent, the much more complex TIFF format. Project&apos;s main aim is to concentrate on two major uses: the World Wide Web (WWW) and image-editing.</Description>
             <Description xml:lang="tr">Taşınabilir Ağ Grafikleri (PNG) formatı eski ve daha basit GIF formatının yerine geçmek ve daha karmaşık yapıdaki TIFF formatını biraz daha genişletmek için tasarlanmıştır. Projenin ana hedefi iki önemli parça üzerine konsantre olmaktır: World Wide Web (WWW) ve resim düzenleme.</Description>
-            <Archive type="tarxz" sha1sum="978b2f4e007eda56032001493ddb97d20f0ab291">mirrors://sourceforge/libpng/libpng-1.6.21.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="ff4dceadb15e2c929ad26283118d56f66f4a6cff">mirrors://sourceforge/libpng/libpng-1.6.28.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>zlib-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="gz" level="1">libpng-1.6.21-apng.patch.gz</Patch>
+                <Patch compressionType="gz" level="1">libpng-1.6.28-apng.patch.gz</Patch>
                 <Patch level="1">libpng-multilib.patch</Patch>
             </Patches>
             <SourceURI>multimedia/graphics/libpng/pspec.xml</SourceURI>
@@ -693,7 +693,7 @@
             <Summary xml:lang="en">Development files for libpng</Summary>
             <Summary xml:lang="tr">libpng için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="2">libpng</Dependency>
+                <Dependency release="3">libpng</Dependency>
                 <Dependency>zlib-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -714,7 +714,7 @@
                 <Dependency>zlib-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="2">libpng</Dependency>
+                <Dependency release="3">libpng</Dependency>
                 <Dependency>zlib-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -722,6 +722,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-01</Date>
+                <Version>1.6.28</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>1.6.21</Version>
@@ -755,7 +762,7 @@
             <Description xml:lang="fr">S-Lang est une librarie de programmation multi-plateforme conçue pour permettre aux développeur de développer des logiciels robustes et portables. Elle fournit les mécanismes requis pour développer une application interactive telle que la gestion d&apos;affichages/écrans, entrées clavier, disposition de touches et ainsi de suite. La fonctionnalité la plus attractive de cette librairie reste l&apos;interpréteur slang qui peut être embarqué au sein même d&apos;un programme pour le rendre extensible.</Description>
             <Description xml:lang="en">S-Lang is a multi-platform programmer&apos;s library designed to allow a developer to create robust multi-platform software. It provides facilities required by interactive applications such as display/screen management, keyboard input, keymaps, and so on. The most exciting feature of the library is the slang interpreter that may be easily embedded into a program to make it extensible.</Description>
             <Description xml:lang="tr">S-lang, yazılım geliştiricilerin bütün işletim sistemlerinde çalışabilen güçlü uygulamalar geliştirmesine yardımcı olan bir uygulama kitaplığıdır. İnteraktif uygulamalar için ekran yönetimi ve klavye girişi gibi araçlar sunar. Kitaplığın en ilginç özelliği programların içine kolayca gömülebilen ve programı genişletilebilir kılan slang yorumlayıcısıdır.</Description>
-            <Archive type="tarbz2" sha1sum="34e68a993888d0ae2ebc7bc31b40bc894813a7e2">ftp://ftp.ntua.gr/pub/lang/slang/slang/v2.2/slang-2.2.4.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="a8ea7f1b5736160a94efb67b137a0f5b9916bdf2">http://www.jedsoft.org/releases/slang/slang-2.3.1a.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>libpng-devel</Dependency>
                 <Dependency>libpcre-devel</Dependency>
@@ -787,7 +794,7 @@
             <Summary xml:lang="tr">slang için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="2">slang</Dependency>
+                <Dependency release="3">slang</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -797,6 +804,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-06</Date>
+                <Version>2.3.1a</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>2.2.4</Version>
@@ -2518,6 +2532,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2017-02-07</Date>
+                <Version>008</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="3">
                 <Date>2016-06-16</Date>
                 <Version>008</Version>
@@ -3075,15 +3096,10 @@
             <Description xml:lang="fr">Librairie utilitaire générique pour les opérations communes de scripts Comar.</Description>
             <Description xml:lang="en">Generic utility library for common Comar script operations.</Description>
             <Description xml:lang="tr">Çomar betiklerinde sıkça yapılan ortak işlemler için yardımcı fonksiyonlar kitaplığı.</Description>
-            <Archive type="targz" sha1sum="80afa9f07cd15b9042cce9c1b8f1c4dcd457c552">http://source.pisilinux.org/1.0/comar-api-2.4.9.tar.gz</Archive>
+            <Archive type="targz" sha1sum="80d3ebca0e57e1c5c5d649e92342676452da65d7">https://github.com/PisiLinuxNew/comar-api/archive/v2.4.9.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>python</Dependency>
             </BuildDependencies>
-            <Patches>
-                <Patch level="1">run_dir.patch</Patch>
-                <Patch level="1">pisilinux.patch</Patch>
-                <Patch level="1">add-stopdependencies.patch</Patch>
-            </Patches>
             <SourceURI>system/base/comar-api/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -3098,6 +3114,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-05</Date>
+                <Version>2.4.9</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>2.4.9</Version>
@@ -3131,17 +3154,12 @@
             <Description xml:lang="en">Pisi Linux programs are packaged with small scripts which configures them to entegrate with system and each other. Çomar is the tool which manages and executes these scripts.</Description>
             <Description xml:lang="tr">Pisi Linux yazılımları, birbirleri ve sistemle otomatik olarak uyum sağlayabilmek için yanlarında ufak programcıklar ile paketlenmektedir. Bu programcıkların yönetimi ve işletilmesi Çomar aracı tarafından yapılmaktadır.</Description>
             <Description xml:lang="de">Pisi Linux Programme werden mit einem kleinen Skript paketiert, welches sie konfiguriert, um die Integrität mit dem System und anderen Programmen sicherzustellen. Comar ist das Werkzeug, das diese Skripte verwaltet und ausführt.</Description>
-            <Archive type="tarbz2" sha1sum="a0894a20d3c2bb5843de7e25fc98707baf554df1">http://source.pisilinux.org/1.0/comar-3.0.3.tar.bz2</Archive>
+            <Archive type="targz" sha1sum="27f01ddd80919067b295eb64de3cabb235f30d4f">https://github.com/PisiLinuxNew/comar/archive/v3.0.3.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>dbus-devel</Dependency>
                 <Dependency>python-devel</Dependency>
                 <Dependency>cmake</Dependency>
             </BuildDependencies>
-            <Patches>
-                <Patch level="1">run_dir.patch</Patch>
-                <Patch level="1">fix-flags.patch</Patch>
-                <Patch level="1">update-system-manager-model.patch</Patch>
-            </Patches>
             <SourceURI>system/base/comar/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -3166,6 +3184,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-05</Date>
+                <Version>3.0.3</Version>
+                <Comment>Rebuild, use pisilinuxnew source url.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>3.0.3</Version>
@@ -8366,7 +8391,7 @@
             <Summary xml:lang="tr">wireless-tools için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="2">wireless-tools</Dependency>
+                <Dependency release="3">wireless-tools</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -8374,6 +8399,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-07</Date>
+                <Version>30</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>30</Version>
@@ -8444,7 +8476,7 @@
         </Package>
         <History>
             <Update release="3">
-                <Date>2016-04-27</Date>
+                <Date>2017-02-06</Date>
                 <Version>8.26</Version>
                 <Comment>Version Bump.</Comment>
                 <Name>PisiLinux Community</Name>
@@ -9231,7 +9263,7 @@
         </Package>
         <History>
             <Update release="3">
-                <Date>2016-04-27</Date>
+                <Date>2017-02-06</Date>
                 <Version>2.88</Version>
                 <Comment>Rebuild.</Comment>
                 <Name>PisiLinux Community</Name>
@@ -10795,14 +10827,7 @@
             <Description xml:lang="fr">Gère le montage de systèmes de fichier, le chargement de pilotes de périphérique, le démarrage des services système et d&apos;autres tâches pendant les séquences de démarrage et d&apos;arrêt de Pisi Linux.</Description>
             <Description xml:lang="en">mudur handles mounting of the filesystems, loading of the device drivers, starting of the system services, and other jobs during the Pisi Linux boot and shutdown sequences.</Description>
             <Description xml:lang="tr">Pisi Linux açılış ve kapanışı sırasında, dosya sistemlerinin bağlanması, donanım sürücülerinin yüklenmesi, servislerin başlatılması gibi işleri yürütür.</Description>
-            <Archive type="tarxz" sha1sum="42c9163b5fe3d9682caa20f639fbec1d0be784cd">http://source.pisilinux.org/1.0/mudur-4.4.0.tar.xz</Archive>
-            <Patches>
-                <Patch>set_file_mode.patch</Patch>
-                <Patch>no_err-no_msg.patch</Patch>
-                <Patch>recreate_dir_if_new_uid_or_gid.patch</Patch>
-                <Patch>boot_option.patch</Patch>
-                <Patch level="1">mount_cgroupfs.patch</Patch>
-            </Patches>
+            <Archive type="targz" sha1sum="8808b017cd09597bf32c3e81a1b602eca1afb7e0">https://github.com/PisiLinuxNew/mudur/archive/v4.4.0.tar.gz</Archive>
             <SourceURI>system/base/mudur/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -10843,6 +10868,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-05</Date>
+                <Version>4.4.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>4.4.0</Version>
@@ -12004,7 +12036,7 @@
             <Description xml:lang="fr">CMake, système make open-source et multi-plateforme. CMake est utilisé pour contrôler le processus de compilation de logiciel en utilisant une plate-forme de fichiers de configuration simple et indépendante de compilateur. CMake génère des makefiles et un environnement de travail natifs pouvant être utilisés dans l&apos;environnement du compilateur de votre choix.</Description>
             <Description xml:lang="en">CMake, the cross-platform, open-source make system. CMake is used to control the software compilation process using simple platform and compiler independent configuration files. CMake generates native makefiles and workspaces that can be used in the compiler environment of your choice.</Description>
             <Description xml:lang="tr">Cmake, açık kaynak kodlu ve birden fazla platformda çalışan bir &apos;make&apos; sistemidir. Yazılım derleme sürecini kontrol etmek için kullanılan CMake, derleyici bağımsız yapılandırma dosyalarının oluşturulmasını sağlar.</Description>
-            <Archive type="targz" sha1sum="d00c720847c0a2aff817c36377569efbb677fb08">https://cmake.org/files/v3.7/cmake-3.7.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="ea73af0c3c832e586bf2f82a13a708ea509d5a88">https://cmake.org/files/v3.7/cmake-3.7.2.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>curl-devel</Dependency>
                 <Dependency>expat-devel</Dependency>
@@ -12036,6 +12068,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2017-02-09</Date>
+                <Version>3.7.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2016-12-01</Date>
                 <Version>3.7.1</Version>
@@ -12360,7 +12399,7 @@
             <Description xml:lang="fr">Utilitaire extensible écrit en python. On peut considérer SCons comme un substitut amélioré multi-plateforme de Make intégrant des fonctionnalités similaires à celles d&apos;autoconf/automake et un gestionnaire de cache de compilateur tel ccache.</Description>
             <Description xml:lang="en">Think of SCons as an improved, cross-platform substitute for the classic Make utility with integrated functionality similar to autoconf/automake and compiler caches such as ccache.</Description>
             <Description xml:lang="tr">Python temelli, esnek, geliştirilebilir inşa aracı. SCons, klasik &quot;make&quot; aracına &quot;autconf/automake&quot; özellikleri ve &quot;ccache&quot; gibi derleyici önbelleği eklenmiş, gelişmiş bir araç olarak düşünülebilir.</Description>
-            <Archive type="targz" sha1sum="f0bfbe81aa1c1571e8de74e30a0ae1015516a9e8">mirrors://sourceforge/scons/scons-2.4.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="f742350251734df75355e51c70f291e119ef927a">mirrors://sourceforge/scons/scons-2.5.1.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>python</Dependency>
             </BuildDependencies>
@@ -12379,6 +12418,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-09</Date>
+                <Version>2.5.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>2.4.1</Version>
@@ -12466,7 +12512,7 @@
             <Summary xml:lang="de">X.Org Makros zum Kompilieren von X.Org</Summary>
             <Description xml:lang="en">X.Org X11 autotools macros are required for building the various packages that comprise the X Window System.</Description>
             <Description xml:lang="tr">X.Org X11 Autotools makroları, X pencere sistemini oluşturan çeşitli paketleri derlemek için gereklidir.</Description>
-            <Archive type="tarbz2" sha1sum="00cfc636694000112924198e6b9e4d72f1601338">http://xorg.freedesktop.org/releases/individual/util/util-macros-1.19.0.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="386e993ba339e561aa6d93073a4dcbab24e30bad">http://xorg.freedesktop.org/releases/individual/util/util-macros-1.19.1.tar.bz2</Archive>
             <Patches>
                 <Patch level="1">doc.patch</Patch>
             </Patches>
@@ -12481,6 +12527,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-09</Date>
+                <Version>1.19.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>1.19.0</Version>
@@ -12686,6 +12739,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-07</Date>
+                <Version>1.3.2</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>1.3.2</Version>
@@ -12785,6 +12845,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-05</Date>
+                <Version>1.6.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>1.6.1</Version>
@@ -12900,6 +12967,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-09</Date>
+                <Version>7.6</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>7.6</Version>
@@ -12950,7 +13024,7 @@
             <Summary xml:lang="en">Development files for numactl</Summary>
             <Summary xml:lang="tr">numactl için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="2">numactl</Dependency>
+                <Dependency release="3">numactl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -12958,6 +13032,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-09</Date>
+                <Version>2.0.11</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>2.0.11</Version>
@@ -13109,6 +13190,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-07</Date>
+                <Version>2.0.4</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>2.0.4</Version>
@@ -13138,9 +13226,8 @@
             <PartOf>system.devel</PartOf>
             <Summary xml:lang="en">Multi-platform support library with a focus on asynchronous I/O</Summary>
             <Description xml:lang="en">libuv is a multi-platform support library with a focus on asynchronous I/O. It was primarily developed for use by Node.js, but it&apos;s also used by Luvit, Julia, pyuv, and others.</Description>
-            <Archive type="targz" sha1sum="994d0f8ea2eda5c31530811680940b12025643ae">https://github.com/libuv/libuv/archive/v1.10.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="54f0972aa0d3f6a6036d477b381c01f030f9a2b5">https://github.com/libuv/libuv/archive/v1.11.0.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency>glibc-devel</Dependency>
                 <Dependency>python-sphinx</Dependency>
             </BuildDependencies>
             <SourceURI>system/devel/libuv/pspec.xml</SourceURI>
@@ -13156,7 +13243,7 @@
             <Name>libuv-devel</Name>
             <Summary xml:lang="en">Development files for libuv</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">libuv</Dependency>
+                <Dependency release="2">libuv</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13164,6 +13251,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2017-02-08</Date>
+                <Version>1.11.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="1">
                 <Date>2016-12-02</Date>
                 <Version>1.10.1</Version>
@@ -13444,7 +13538,7 @@
             <Summary xml:lang="tr">Birçok farklı akış arşiv formatını yaratan ve okuyan programlama kitaplığı</Summary>
             <Description xml:lang="en">libarchive includes a library and command-line tools for reading and writing tar, cpio, zip, ISO, and other archive formats.</Description>
             <Description xml:lang="tr">libarchive, tar, cpio, zip, ISO ve diğer arşiv biçimlerini okumak ve yazmak için bir kitaplık ve komut satırı araçları içerir.</Description>
-            <Archive type="targz" sha1sum="6a991777ecb0f890be931cec4aec856d1a195489">http://www.libarchive.org/downloads/libarchive-3.1.2.tar.gz</Archive>
+            <Archive type="targz" sha1sum="ccf14e3b4ec7c6b242cf07062dd40e82a17485a5">http://www.libarchive.org/downloads/libarchive-3.2.2.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>acl-devel</Dependency>
                 <Dependency>nettle-devel</Dependency>
@@ -13482,7 +13576,7 @@
             <Summary xml:lang="en">Development files for libarchive</Summary>
             <Summary xml:lang="tr">libarchive için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="2">libarchive</Dependency>
+                <Dependency release="3">libarchive</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13491,6 +13585,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-09</Date>
+                <Version>3.2.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>3.1.2</Version>
@@ -13522,7 +13623,7 @@
             <Summary xml:lang="tr">GNU Doğrusal Programlama Kiti</Summary>
             <Description xml:lang="fr">Le paquet GLPK (GNU Linear Programming Kit - Kit de Programmation Linéaire) a pour objectif de résoudre le problème de programmation linéaire (LP) de grande envergure, la programmation d&apos;entiers mixés (MIP), et autres problèmes de la sorte. Il s&apos;agit d&apos;un ensemble de routines écrites en C ANSI et organisées de manière à former une librairie que l&apos;on peut appeler.</Description>
             <Description xml:lang="en">The GLPK (GNU Linear Programming Kit) package is intended for solving large-scale linear programming (LP), mixed integer programming (MIP), and other related problems. It is a set of routines written in ANSI C and organized in the form of a callable library.</Description>
-            <Archive type="targz" sha1sum="b91d9f212286ea3eebf90c46827306497161237b">mirrors://gnu/glpk/glpk-4.59.tar.gz</Archive>
+            <Archive type="targz" sha1sum="5d260d2dd3143f7b8446fb007c6ce8c4272cafa2">mirrors://gnu/glpk/glpk-4.61.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>gmp-devel</Dependency>
             </BuildDependencies>
@@ -13544,13 +13645,20 @@
             <Summary xml:lang="en">Development files for glpk</Summary>
             <Summary xml:lang="tr">glpk için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="2">glpk</Dependency>
+                <Dependency release="3">glpk</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-09</Date>
+                <Version>4.61</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>4.59</Version>
@@ -13905,7 +14013,7 @@
             <Name>cloog-devel</Name>
             <Summary xml:lang="en">Development files for cloog</Summary>
             <RuntimeDependencies>
-                <Dependency release="2">cloog</Dependency>
+                <Dependency release="3">cloog</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13913,6 +14021,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-09</Date>
+                <Version>0.18.4</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>0.18.4</Version>
@@ -14014,6 +14129,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-09</Date>
+                <Version>2.11</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>2.11</Version>
@@ -14167,7 +14289,7 @@
             <Name>libseccomp-devel</Name>
             <Summary xml:lang="en">Development files for libseccomp</Summary>
             <RuntimeDependencies>
-                <Dependency release="3">libseccomp</Dependency>
+                <Dependency release="4">libseccomp</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -14175,6 +14297,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2017-02-09</Date>
+                <Version>2.3.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="3">
                 <Date>2016-07-19</Date>
                 <Version>2.3.1</Version>
@@ -14748,7 +14877,7 @@
             <Summary xml:lang="en">Development files for ppl</Summary>
             <Summary xml:lang="tr">ppl için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="2">ppl</Dependency>
+                <Dependency release="3">ppl</Dependency>
                 <Dependency>gmp-devel</Dependency>
                 <Dependency>libgcc</Dependency>
             </RuntimeDependencies>
@@ -14760,6 +14889,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-09</Date>
+                <Version>1.2</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>1.2</Version>
@@ -15016,11 +15152,11 @@
             <PartOf>system.devel</PartOf>
             <Summary xml:lang="en">Introspection system for GObject-based libraries</Summary>
             <Description xml:lang="en">gobject-introspection can scan C header and source files in order to generate introspection typelib files. It also provides an API to examine typelib files, useful for creating language bindings among other things.</Description>
-            <Archive type="tarxz" sha1sum="ca4842479b119da1c8d3fbf5006adcc46920ce72">mirrors://gnome/gobject-introspection/1.46/gobject-introspection-1.46.0.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="5907f70bd275dceb4d3cb825ddce82cb1fdb4242">mirrors://gnome/gobject-introspection/1.50/gobject-introspection-1.50.0.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>libffi-devel</Dependency>
                 <Dependency>python-devel</Dependency>
-                <Dependency versionFrom="2.46.2">glib2-devel</Dependency>
+                <Dependency versionFrom="2.50.2">glib2-devel</Dependency>
                 <Dependency>chrpath</Dependency>
             </BuildDependencies>
             <SourceURI>system/devel/gobject-introspection/pspec.xml</SourceURI>
@@ -15042,7 +15178,7 @@
             <Name>gobject-introspection-devel</Name>
             <Summary xml:lang="en">Development files for gobject-introspection</Summary>
             <RuntimeDependencies>
-                <Dependency release="2">gobject-introspection</Dependency>
+                <Dependency release="3">gobject-introspection</Dependency>
                 <Dependency>libffi</Dependency>
                 <Dependency>glib2</Dependency>
                 <Dependency>libffi-devel</Dependency>
@@ -15060,6 +15196,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-06</Date>
+                <Version>1.50.0</Version>
+                <Comment>Version Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>1.46.0</Version>
@@ -15176,7 +15319,7 @@
             <Summary xml:lang="en">Development files for yasm</Summary>
             <Summary xml:lang="tr">yasm için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="2">yasm</Dependency>
+                <Dependency release="3">yasm</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -15184,6 +15327,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-05</Date>
+                <Version>1.3.0</Version>
+                <Comment>Rebuild for new toolchain</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>1.3.0</Version>
@@ -15648,9 +15798,9 @@
             <Summary xml:lang="tr">VirtualBox için çekirdek modülleri</Summary>
             <Description xml:lang="en">This package provides the kernel support for VirtualBox.</Description>
             <Description xml:lang="tr">Bu paket VirtualBox için çekirdek desteği sunar.</Description>
-            <Archive type="tarxz" sha1sum="1a7eb2152ea457ac5263368df03b1db2cae62776">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-5.1.12.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="7489ae3b501407d5ca2826e6ef1d5b2000e06154">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-5.1.14.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.8.13">kernel-module-headers</Dependency>
+                <Dependency version="4.9.6">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -15660,8 +15810,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.8.13">kernel</Dependency>
-                <Dependency version="5.1.12">module-virtualbox-userspace</Dependency>
+                <Dependency version="4.9.6">kernel</Dependency>
+                <Dependency version="5.1.14">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -15682,6 +15832,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="14">
+                <Date>2017-02-01</Date>
+                <Version>5.1.14</Version>
+                <Comment>Version bump</Comment>
+                <Name>Kamil Atlı</Name>
+                <Email>suvari@pisilinux.org</Email>
+            </Update>
             <Update release="13">
                 <Date>2017-01-15</Date>
                 <Version>5.1.12</Version>
@@ -15790,9 +15947,9 @@
             <Summary xml:lang="tr">VirtualBox misafir makineleri için çekirdek modülleri</Summary>
             <Description xml:lang="en">This package provides the kernel modules needed for mouse integration and shared folder support between VirtualBox host and guest systems.</Description>
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
-            <Archive type="tarxz" sha1sum="ba60e839f369e5d281c7a29d0316fa8d0344ee71">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-5.1.12.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="87b355193a306ed5516e8d348f7eb83854e08ac1">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-5.1.14.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.8.13">kernel-module-headers</Dependency>
+                <Dependency version="4.9.6">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -15802,9 +15959,9 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.8.13">kernel</Dependency>
+                <Dependency version="4.9.6">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
-                <Dependency version="5.1.12">module-virtualbox-guest-userspace</Dependency>
+                <Dependency version="5.1.14">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -15829,6 +15986,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="14">
+                <Date>2017-02-01</Date>
+                <Version>5.1.14</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Kamil Atlı</Name>
+                <Email>suvari@pisilinux.org</Email>
+            </Update>
             <Update release="13">
                 <Date>2017-01-15</Date>
                 <Version>5.1.12</Version>
@@ -15943,7 +16107,7 @@
             <Description xml:lang="es">ndiswrapper permite usar controladores de windows XP para tarjetas WLAN que no tienen controladores propios para Linux.</Description>
             <Archive type="targz" sha1sum="20998237cf6d37b86391dc8736c10031110db578">http://download.sourceforge.net/ndiswrapper/ndiswrapper-1.60.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.8.13">kernel-module-headers</Dependency>
+                <Dependency version="4.9.6">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch>upstream.patch</Patch>
@@ -15956,7 +16120,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.8.13">kernel</Dependency>
+                <Dependency version="4.9.6">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -15968,6 +16132,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2017-02-07</Date>
+                <Version>1.60</Version>
+                <Comment>Rebuild for new kernel.</Comment>
+                <Name>Kamil Atlı</Name>
+                <Email>suvari@pisilinux.org</Email>
+            </Update>
             <Update release="6">
                 <Date>2016-12-10</Date>
                 <Version>1.60</Version>
@@ -16030,7 +16201,7 @@
             <Archive type="targz" sha1sum="8acbdbb4ab4ab4123d1773b616904798fbef9277" target="i686">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <Archive type="targz" sha1sum="1f568bb989d175813c5631c6629d9479eae6f3be" target="x86_64">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.8.13">kernel-module-headers</Dependency>
+                <Dependency version="4.9.6">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">patch/license.patch</Patch>
@@ -16047,7 +16218,7 @@
             </BuildFlags>
             <RuntimeDependencies>
                 <Dependency version="4.8.13">kernel</Dependency>
-                <Dependency release="7">module-broadcom-wl-userspace</Dependency>
+                <Dependency release="8">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -16071,6 +16242,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2017-02-01</Date>
+                <Version>6.30.223.271</Version>
+                <Comment>Rebuild for kernel 4.9.6.</Comment>
+                <Name>Kamil Atlı</Name>
+                <Email>suvari@pisilinux.org</Email>
+            </Update>
             <Update release="7">
                 <Date>2017-01-08</Date>
                 <Version>6.30.223.271</Version>
@@ -16139,14 +16317,14 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.8.13">kernel-module-headers</Dependency>
+                <Dependency version="4.9.6">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-bbswitch/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="4.8.13">kernel</Dependency>
+                <Dependency version="4.9.6">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -16159,6 +16337,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2017-02-01</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for new kernel.</Comment>
+                <Name>Kamil Atlı</Name>
+                <Email>suvari@pisilinux.org</Email>
+            </Update>
             <Update release="7">
                 <Date>2016-12-10</Date>
                 <Version>0.8</Version>
@@ -16809,7 +16994,7 @@
             <Description xml:lang="fr">FreeType2 est un moteur logiciel de fontes conçu pour être petit, efficace, très flexible et portable tout en étant capable de produire une sortie de très haute qualité. Il peut être utilisé dans les librairies graphiques, les serveurs d&apos;affichage, les outils de conversion, les outils de génération d&apos;images textuelles, ainsi que beaucoup d&apos;autres produits.</Description>
             <Description xml:lang="en">FreeType 2 is a software font engine that is designed to be small, efficient, highly customizable, and portable while capable of producing high-quality output. It can be used in graphics libraries, display servers, font conversion tools, text image generation tools, and many other products as well.</Description>
             <Description xml:lang="tr">FreeType 2; küçük, verimli, özelleştirilebilir, taşınabilir ve yüksek kaliteli çıktı oluşturan bir yazıtipi düzeneğidir. Grafik kütüphaneleri, görüntü sunucuları ve yazıtipi değiştirme araçları gibi birçok üründe kullanılabilir.</Description>
-            <Archive type="tarbz2" sha1sum="6c98bd5d0be313207c37ca23d25faf983486aee5">mirrors://sourceforge/freetype/freetype-2.6.3.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="4d08a9a6567c6332d58e9a5f9a7e9e3fbce66789">mirrors://sourceforge/freetype/freetype-2.7.1.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>bzip2</Dependency>
@@ -16835,7 +17020,7 @@
             <Summary xml:lang="en">Development files for freetype</Summary>
             <Summary xml:lang="tr">freetype için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="2">freetype</Dependency>
+                <Dependency release="3">freetype</Dependency>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>libpng-devel</Dependency>
             </RuntimeDependencies>
@@ -16866,6 +17051,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-02</Date>
+                <Version>2.7.1</Version>
+                <Comment>Version Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>2.6.3</Version>
@@ -17118,6 +17310,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-07</Date>
+                <Version>9</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>9</Version>
