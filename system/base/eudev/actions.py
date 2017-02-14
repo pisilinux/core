@@ -13,7 +13,7 @@ from pisi.actionsapi import get
 suffix = "32" if get.buildTYPE() == "emul32" else ""
 
 def setup():
-    autotools.autoreconf("-if")
+    shelltools.system("./autogen.sh")
 
     autotools.configure("--prefix=/usr           \
                          --bindir=/sbin          \
@@ -24,11 +24,8 @@ def setup():
                          --with-rootprefix=      \
                          --with-rootlibdir=/lib  \
                          --enable-split-usr      \
-                         --enable-gudev         \
                          --enable-static        \
-                         --disable-manpages \
-                         --disable-gtk-doc \
-                         --disable-gtk-doc-html")
+                         --disable-manpages ")
 
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
