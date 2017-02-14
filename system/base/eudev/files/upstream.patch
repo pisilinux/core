@@ -1,0 +1,139 @@
+diff -Nuar eudev-3.2.1.orig/configure.ac eudev-3.2.1/configure.ac
+--- eudev-3.2.1.orig/configure.ac	2016-12-11 19:50:20.000000000 +0300
++++ eudev-3.2.1/configure.ac	2017-02-14 21:41:04.233477632 +0300
+@@ -197,6 +197,12 @@
+ AM_CONDITIONAL([HAVE_INTROSPECTION], [test "$enable_introspection" = "yes"])
+ 
+ # ------------------------------------------------------------------------------
++AC_ARG_ENABLE([programs],
++        AS_HELP_STRING([--disable-programs], [disable programs (udevd, udevadm and helpers)]),
++        [], [enable_programs="yes"])
++AM_CONDITIONAL([ENABLE_PROGRAMS], [test "x$enable_programs" = "xyes"])
++
++# ------------------------------------------------------------------------------
+ have_blkid=no
+ AC_ARG_ENABLE(blkid, AS_HELP_STRING([--disable-blkid], [Disable optional blkid support]))
+ if test "x$enable_blkid" != "xno"; then
+@@ -284,6 +290,14 @@
+ AM_CONDITIONAL([ENABLE_RULE_GENERATOR], [test "x$enable_rule_generator" = xyes])
+ 
+ # ------------------------------------------------------------------------------
++# mtd_probe - autoloads FTL module for mtd devices
++# ------------------------------------------------------------------------------
++AC_ARG_ENABLE([mtd_probe],
++	AS_HELP_STRING([--disable-mtd_probe], [disable MTD support]),
++	[], [enable_mtd_probe=yes])
++AM_CONDITIONAL([ENABLE_MTD_PROBE], [test "x$enable_mtd_probe" = xyes])
++
++# ------------------------------------------------------------------------------
+ 
+ AC_CONFIG_FILES([Makefile
+                  hwdb/Makefile
+diff -Nuar eudev-3.2.1.orig/Makefile.am eudev-3.2.1/Makefile.am
+--- eudev-3.2.1.orig/Makefile.am	2016-12-11 19:50:20.000000000 +0300
++++ eudev-3.2.1/Makefile.am	2017-02-14 21:41:04.232477632 +0300
+@@ -1,9 +1,13 @@
+ ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
+ 
+ SUBDIRS = \
+-	src \
++	src
++
++if ENABLE_PROGRAMS
++SUBDIRS += \
+ 	rules \
+ 	test
++endif
+ 
+ if ENABLE_MANPAGES
+ SUBDIRS += \
+diff -Nuar eudev-3.2.1.orig/rules/Makefile.am eudev-3.2.1/rules/Makefile.am
+--- eudev-3.2.1.orig/rules/Makefile.am	2016-12-11 19:50:20.000000000 +0300
++++ eudev-3.2.1/rules/Makefile.am	2017-02-14 21:41:04.297477633 +0300
+@@ -16,7 +16,6 @@
+ 	70-mouse.rules \
+ 	70-touchpad.rules \
+ 	75-net-description.rules \
+-	75-probe_mtd.rules \
+ 	78-sound-card.rules
+ 
+ if !ENABLE_RULE_GENERATOR
+@@ -34,5 +33,10 @@
+ 	80-drivers.rules
+ endif
+ 
++if ENABLE_MTD_PROBE
++dist_udevrules_DATA += \
++	75-probe_mtd.rules
++endif
++
+ install-data-local:
+ 	$(MKDIR_P) $(DESTDIR)$(udevconfdir)/rules.d
+diff -Nuar eudev-3.2.1.orig/src/Makefile.am eudev-3.2.1/src/Makefile.am
+--- eudev-3.2.1.orig/src/Makefile.am	2016-12-11 19:50:20.000000000 +0300
++++ eudev-3.2.1/src/Makefile.am	2017-02-14 21:41:04.297477633 +0300
+@@ -2,14 +2,24 @@
+ 
+ SUBDIRS = \
+ 	shared \
+-	libudev \
++	libudev
++
++PROGRAMS_SUBDIRS = \
+ 	udev
+ 
+ # Helper programs
+-SUBDIRS += \
++PROGRAMS_SUBDIRS += \
+ 	ata_id \
+ 	cdrom_id \
+ 	collect \
+-	mtd_probe \
+ 	scsi_id \
+ 	v4l_id
++
++if ENABLE_MTD_PROBE
++PROGRAMS_SUBDIRS += \
++	mtd_probe
++endif
++
++if ENABLE_PROGRAMS
++SUBDIRS += $(PROGRAMS_SUBDIRS)
++endif
+diff -Nuar eudev-3.2.1.orig/src/shared/missing.h eudev-3.2.1/src/shared/missing.h
+--- eudev-3.2.1.orig/src/shared/missing.h	2016-12-11 19:50:20.000000000 +0300
++++ eudev-3.2.1/src/shared/missing.h	2017-02-14 21:41:04.303477634 +0300
+@@ -171,3 +171,11 @@
+     (char *)memcpy(__new, __old, __len); \
+   })
+ #endif
++
++#ifndef BTN_TRIGGER_HAPPY
++#define BTN_TRIGGER_HAPPY 0x2c0
++#endif
++
++#ifndef INPUT_PROP_MAX
++#define INPUT_PROP_MAX 0x1f
++#endif
+diff -Nuar eudev-3.2.1.orig/src/udev/udev-builtin-input_id.c eudev-3.2.1/src/udev/udev-builtin-input_id.c
+--- eudev-3.2.1.orig/src/udev/udev-builtin-input_id.c	2016-12-11 19:50:20.000000000 +0300
++++ eudev-3.2.1/src/udev/udev-builtin-input_id.c	2017-02-14 21:41:04.306477634 +0300
+@@ -32,6 +32,7 @@
+ 
+ #include "udev.h"
+ #include "util.h"
++#include "missing.h"
+ 
+ /* we must use this kernel-compatible implementation */
+ #define BITS_PER_LONG (sizeof(unsigned long) * 8)
+diff -Nuar eudev-3.2.1.orig/src/udev/udev-builtin-keyboard.c eudev-3.2.1/src/udev/udev-builtin-keyboard.c
+--- eudev-3.2.1.orig/src/udev/udev-builtin-keyboard.c	2016-12-11 19:50:20.000000000 +0300
++++ eudev-3.2.1/src/udev/udev-builtin-keyboard.c	2017-02-14 21:41:04.307477634 +0300
+@@ -28,7 +28,6 @@
+ 
+ #include "udev.h"
+ 
+-static const struct key *keyboard_lookup_key(const char *str, unsigned len);
+ #include "keyboard-keys-from-name.h"
+ #include "keyboard-keys-to-name.h"
+ 
