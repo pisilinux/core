@@ -1,6 +1,6 @@
 
  fs/aufs/Kconfig          |    2 +-
- fs/dcache.c              |    1 +
+ fs/dcache.c              |    2 ++
  fs/exec.c                |    1 +
  fs/fcntl.c               |    1 +
  fs/file_table.c          |    4 ++++
@@ -16,11 +16,11 @@
  security/commoncap.c     |    2 ++
  security/device_cgroup.c |    2 ++
  security/security.c      |   10 ++++++++++
- 17 files changed, 41 insertions(+), 1 deletion(-)
+ 17 files changed, 42 insertions(+), 1 deletion(-)
 
-diff -Nurp linux-4.8-aufs/fs/aufs/Kconfig linux-4.8-aufs-mod/fs/aufs/Kconfig
---- linux-4.8-aufs/fs/aufs/Kconfig	2016-07-04 19:02:29.246286120 +0300
-+++ linux-4.8-aufs-mod/fs/aufs/Kconfig	2016-07-04 19:03:53.653714965 +0300
+diff -Nurp linux-4.9-aufs/fs/aufs/Kconfig linux-4.9-aufs-mod/fs/aufs/Kconfig
+--- linux-4.9-aufs/fs/aufs/Kconfig	2016-12-31 00:31:52.367789380 +0200
++++ linux-4.9-aufs-mod/fs/aufs/Kconfig	2016-12-31 00:32:35.153785422 +0200
 @@ -1,5 +1,5 @@
  config AUFS_FS
 -	bool "Aufs (Advanced multi layered unification filesystem) support"
@@ -28,10 +28,10 @@ diff -Nurp linux-4.8-aufs/fs/aufs/Kconfig linux-4.8-aufs-mod/fs/aufs/Kconfig
  	help
  	Aufs is a stackable unification filesystem such as Unionfs,
  	which unifies several directories and provides a merged single
-diff -Nurp linux-4.8-aufs/fs/dcache.c linux-4.8-aufs-mod/fs/dcache.c
---- linux-4.8-aufs/fs/dcache.c	2016-07-04 19:02:29.260286196 +0300
-+++ linux-4.8-aufs-mod/fs/dcache.c	2016-07-04 19:03:53.653714965 +0300
-@@ -1310,6 +1310,7 @@ rename_retry:
+diff -Nurp linux-4.9-aufs/fs/dcache.c linux-4.9-aufs-mod/fs/dcache.c
+--- linux-4.9-aufs/fs/dcache.c	2016-12-31 00:31:52.379789379 +0200
++++ linux-4.9-aufs-mod/fs/dcache.c	2016-12-31 01:49:12.324360147 +0200
+@@ -1272,6 +1272,7 @@ rename_retry:
  	seq = 1;
  	goto again;
  }
@@ -39,9 +39,17 @@ diff -Nurp linux-4.8-aufs/fs/dcache.c linux-4.8-aufs-mod/fs/dcache.c
  
  /*
   * Search for at least 1 mount point in the dentry's subdirs.
-diff -Nurp linux-4.8-aufs/fs/exec.c linux-4.8-aufs-mod/fs/exec.c
---- linux-4.8-aufs/fs/exec.c	2016-07-04 17:58:15.707773651 +0300
-+++ linux-4.8-aufs-mod/fs/exec.c	2016-07-04 19:03:53.654714970 +0300
+@@ -2855,6 +2856,7 @@ void d_exchange(struct dentry *dentry1,
+ 
+ 	write_sequnlock(&rename_lock);
+ }
++EXPORT_SYMBOL_GPL(d_exchange);
+ 
+ /**
+  * d_ancestor - search for an ancestor
+diff -Nurp linux-4.9-aufs/fs/exec.c linux-4.9-aufs-mod/fs/exec.c
+--- linux-4.9-aufs/fs/exec.c	2016-12-11 21:17:54.000000000 +0200
++++ linux-4.9-aufs-mod/fs/exec.c	2016-12-31 00:32:35.153785422 +0200
 @@ -104,6 +104,7 @@ bool path_noexec(const struct path *path
  	return (path->mnt->mnt_flags & MNT_NOEXEC) ||
  	       (path->mnt->mnt_sb->s_iflags & SB_I_NOEXEC);
@@ -50,9 +58,9 @@ diff -Nurp linux-4.8-aufs/fs/exec.c linux-4.8-aufs-mod/fs/exec.c
  
  #ifdef CONFIG_USELIB
  /*
-diff -Nurp linux-4.8-aufs/fs/fcntl.c linux-4.8-aufs-mod/fs/fcntl.c
---- linux-4.8-aufs/fs/fcntl.c	2016-07-04 19:02:29.260286196 +0300
-+++ linux-4.8-aufs-mod/fs/fcntl.c	2016-07-04 19:03:53.654714970 +0300
+diff -Nurp linux-4.9-aufs/fs/fcntl.c linux-4.9-aufs-mod/fs/fcntl.c
+--- linux-4.9-aufs/fs/fcntl.c	2016-12-31 00:31:52.379789379 +0200
++++ linux-4.9-aufs-mod/fs/fcntl.c	2016-12-31 00:32:35.154785422 +0200
 @@ -82,6 +82,7 @@ int setfl(int fd, struct file * filp, un
   out:
  	return error;
@@ -61,9 +69,9 @@ diff -Nurp linux-4.8-aufs/fs/fcntl.c linux-4.8-aufs-mod/fs/fcntl.c
  
  static void f_modown(struct file *filp, struct pid *pid, enum pid_type type,
                       int force)
-diff -Nurp linux-4.8-aufs/fs/file_table.c linux-4.8-aufs-mod/fs/file_table.c
---- linux-4.8-aufs/fs/file_table.c	2016-05-16 01:43:13.000000000 +0300
-+++ linux-4.8-aufs-mod/fs/file_table.c	2016-07-04 19:03:53.654714970 +0300
+diff -Nurp linux-4.9-aufs/fs/file_table.c linux-4.9-aufs-mod/fs/file_table.c
+--- linux-4.9-aufs/fs/file_table.c	2016-12-11 21:17:54.000000000 +0200
++++ linux-4.9-aufs-mod/fs/file_table.c	2016-12-31 00:32:35.154785422 +0200
 @@ -147,6 +147,7 @@ over:
  	}
  	return ERR_PTR(-ENFILE);
@@ -96,10 +104,10 @@ diff -Nurp linux-4.8-aufs/fs/file_table.c linux-4.8-aufs-mod/fs/file_table.c
  
  void __init files_init(void)
  { 
-diff -Nurp linux-4.8-aufs/fs/inode.c linux-4.8-aufs-mod/fs/inode.c
---- linux-4.8-aufs/fs/inode.c	2016-07-04 19:02:29.261286202 +0300
-+++ linux-4.8-aufs-mod/fs/inode.c	2016-07-04 20:51:39.805168596 +0300
-@@ -1600,6 +1600,7 @@ int update_time(struct inode *inode, str
+diff -Nurp linux-4.9-aufs/fs/inode.c linux-4.9-aufs-mod/fs/inode.c
+--- linux-4.9-aufs/fs/inode.c	2016-12-31 00:31:52.379789379 +0200
++++ linux-4.9-aufs-mod/fs/inode.c	2016-12-31 00:32:35.154785422 +0200
+@@ -1651,6 +1651,7 @@ int update_time(struct inode *inode, str
  
  	return update_time(inode, time, flags);
  }
@@ -107,10 +115,10 @@ diff -Nurp linux-4.8-aufs/fs/inode.c linux-4.8-aufs-mod/fs/inode.c
  
  /**
   *	touch_atime	-	update the access time
-diff -Nurp linux-4.8-aufs/fs/namespace.c linux-4.8-aufs-mod/fs/namespace.c
---- linux-4.8-aufs/fs/namespace.c	2016-07-04 17:58:15.729773645 +0300
-+++ linux-4.8-aufs-mod/fs/namespace.c	2016-07-04 19:03:53.654714970 +0300
-@@ -463,6 +463,7 @@ void __mnt_drop_write(struct vfsmount *m
+diff -Nurp linux-4.9-aufs/fs/namespace.c linux-4.9-aufs-mod/fs/namespace.c
+--- linux-4.9-aufs/fs/namespace.c	2016-12-11 21:17:54.000000000 +0200
++++ linux-4.9-aufs-mod/fs/namespace.c	2016-12-31 00:32:35.154785422 +0200
+@@ -466,6 +466,7 @@ void __mnt_drop_write(struct vfsmount *m
  	mnt_dec_writers(real_mount(mnt));
  	preempt_enable();
  }
@@ -118,7 +126,7 @@ diff -Nurp linux-4.8-aufs/fs/namespace.c linux-4.8-aufs-mod/fs/namespace.c
  
  /**
   * mnt_drop_write - give up write access to a mount
-@@ -1812,6 +1813,7 @@ int iterate_mounts(int (*f)(struct vfsmo
+@@ -1823,6 +1824,7 @@ int iterate_mounts(int (*f)(struct vfsmo
  	}
  	return 0;
  }
@@ -126,9 +134,9 @@ diff -Nurp linux-4.8-aufs/fs/namespace.c linux-4.8-aufs-mod/fs/namespace.c
  
  static void cleanup_group_ids(struct mount *mnt, struct mount *end)
  {
-diff -Nurp linux-4.8-aufs/fs/notify/group.c linux-4.8-aufs-mod/fs/notify/group.c
---- linux-4.8-aufs/fs/notify/group.c	2016-07-04 17:58:15.742773641 +0300
-+++ linux-4.8-aufs-mod/fs/notify/group.c	2016-07-04 19:03:53.655714975 +0300
+diff -Nurp linux-4.9-aufs/fs/notify/group.c linux-4.9-aufs-mod/fs/notify/group.c
+--- linux-4.9-aufs/fs/notify/group.c	2016-12-11 21:17:54.000000000 +0200
++++ linux-4.9-aufs-mod/fs/notify/group.c	2016-12-31 00:32:35.155785422 +0200
 @@ -22,6 +22,7 @@
  #include <linux/srcu.h>
  #include <linux/rculist.h>
@@ -137,7 +145,7 @@ diff -Nurp linux-4.8-aufs/fs/notify/group.c linux-4.8-aufs-mod/fs/notify/group.c
  
  #include <linux/fsnotify_backend.h>
  #include "fsnotify.h"
-@@ -81,6 +82,7 @@ void fsnotify_get_group(struct fsnotify_
+@@ -100,6 +101,7 @@ void fsnotify_get_group(struct fsnotify_
  {
  	atomic_inc(&group->refcnt);
  }
@@ -145,7 +153,7 @@ diff -Nurp linux-4.8-aufs/fs/notify/group.c linux-4.8-aufs-mod/fs/notify/group.c
  
  /*
   * Drop a reference to a group.  Free it if it's through.
-@@ -90,6 +92,7 @@ void fsnotify_put_group(struct fsnotify_
+@@ -109,6 +111,7 @@ void fsnotify_put_group(struct fsnotify_
  	if (atomic_dec_and_test(&group->refcnt))
  		fsnotify_final_destroy_group(group);
  }
@@ -153,7 +161,7 @@ diff -Nurp linux-4.8-aufs/fs/notify/group.c linux-4.8-aufs-mod/fs/notify/group.c
  
  /*
   * Create a new fsnotify_group and hold a reference for the group returned.
-@@ -118,6 +121,7 @@ struct fsnotify_group *fsnotify_alloc_gr
+@@ -137,6 +140,7 @@ struct fsnotify_group *fsnotify_alloc_gr
  
  	return group;
  }
@@ -161,9 +169,9 @@ diff -Nurp linux-4.8-aufs/fs/notify/group.c linux-4.8-aufs-mod/fs/notify/group.c
  
  int fsnotify_fasync(int fd, struct file *file, int on)
  {
-diff -Nurp linux-4.8-aufs/fs/notify/mark.c linux-4.8-aufs-mod/fs/notify/mark.c
---- linux-4.8-aufs/fs/notify/mark.c	2016-07-04 17:58:15.742773641 +0300
-+++ linux-4.8-aufs-mod/fs/notify/mark.c	2016-07-04 19:03:53.655714975 +0300
+diff -Nurp linux-4.9-aufs/fs/notify/mark.c linux-4.9-aufs-mod/fs/notify/mark.c
+--- linux-4.9-aufs/fs/notify/mark.c	2016-12-11 21:17:54.000000000 +0200
++++ linux-4.9-aufs-mod/fs/notify/mark.c	2016-12-31 00:32:35.155785422 +0200
 @@ -113,6 +113,7 @@ void fsnotify_put_mark(struct fsnotify_m
  		mark->free_mark(mark);
  	}
@@ -196,9 +204,9 @@ diff -Nurp linux-4.8-aufs/fs/notify/mark.c linux-4.8-aufs-mod/fs/notify/mark.c
  
  /*
   * Nothing fancy, just initialize lists and locks and counters.
-diff -Nurp linux-4.8-aufs/fs/open.c linux-4.8-aufs-mod/fs/open.c
---- linux-4.8-aufs/fs/open.c	2016-07-04 17:58:15.746773640 +0300
-+++ linux-4.8-aufs-mod/fs/open.c	2016-07-04 19:03:53.655714975 +0300
+diff -Nurp linux-4.9-aufs/fs/open.c linux-4.9-aufs-mod/fs/open.c
+--- linux-4.9-aufs/fs/open.c	2016-12-11 21:17:54.000000000 +0200
++++ linux-4.9-aufs-mod/fs/open.c	2016-12-31 00:32:35.155785422 +0200
 @@ -64,6 +64,7 @@ int do_truncate(struct dentry *dentry, l
  	inode_unlock(dentry->d_inode);
  	return ret;
@@ -207,7 +215,7 @@ diff -Nurp linux-4.8-aufs/fs/open.c linux-4.8-aufs-mod/fs/open.c
  
  long vfs_truncate(const struct path *path, loff_t length)
  {
-@@ -678,6 +679,7 @@ int open_check_o_direct(struct file *f)
+@@ -695,6 +696,7 @@ int open_check_o_direct(struct file *f)
  	}
  	return 0;
  }
@@ -215,9 +223,9 @@ diff -Nurp linux-4.8-aufs/fs/open.c linux-4.8-aufs-mod/fs/open.c
  
  static int do_dentry_open(struct file *f,
  			  struct inode *inode,
-diff -Nurp linux-4.8-aufs/fs/read_write.c linux-4.8-aufs-mod/fs/read_write.c
---- linux-4.8-aufs/fs/read_write.c	2016-07-04 19:02:29.262286207 +0300
-+++ linux-4.8-aufs-mod/fs/read_write.c	2016-07-04 19:03:53.655714975 +0300
+diff -Nurp linux-4.9-aufs/fs/read_write.c linux-4.9-aufs-mod/fs/read_write.c
+--- linux-4.9-aufs/fs/read_write.c	2016-12-31 00:31:52.380789379 +0200
++++ linux-4.9-aufs-mod/fs/read_write.c	2016-12-31 00:32:35.155785422 +0200
 @@ -525,6 +525,7 @@ vfs_readf_t vfs_readf(struct file *file)
  		return new_sync_read;
  	return ERR_PTR(-ENOSYS);
@@ -234,10 +242,10 @@ diff -Nurp linux-4.8-aufs/fs/read_write.c linux-4.8-aufs-mod/fs/read_write.c
  
  ssize_t __kernel_write(struct file *file, const char *buf, size_t count, loff_t *pos)
  {
-diff -Nurp linux-4.8-aufs/fs/splice.c linux-4.8-aufs-mod/fs/splice.c
---- linux-4.8-aufs/fs/splice.c	2016-07-04 19:02:29.262286207 +0300
-+++ linux-4.8-aufs-mod/fs/splice.c	2016-07-04 19:03:53.656714979 +0300
-@@ -1124,6 +1124,7 @@ long do_splice_from(struct pipe_inode_in
+diff -Nurp linux-4.9-aufs/fs/splice.c linux-4.9-aufs-mod/fs/splice.c
+--- linux-4.9-aufs/fs/splice.c	2016-12-31 00:31:52.380789379 +0200
++++ linux-4.9-aufs-mod/fs/splice.c	2016-12-31 00:32:35.156785422 +0200
+@@ -868,6 +868,7 @@ long do_splice_from(struct pipe_inode_in
  
  	return splice_write(pipe, out, ppos, len, flags);
  }
@@ -245,7 +253,7 @@ diff -Nurp linux-4.8-aufs/fs/splice.c linux-4.8-aufs-mod/fs/splice.c
  
  /*
   * Attempt to initiate a splice from a file to a pipe.
-@@ -1153,6 +1154,7 @@ long do_splice_to(struct file *in, loff_
+@@ -897,6 +898,7 @@ long do_splice_to(struct file *in, loff_
  
  	return splice_read(in, ppos, pipe, len, flags);
  }
@@ -253,29 +261,29 @@ diff -Nurp linux-4.8-aufs/fs/splice.c linux-4.8-aufs-mod/fs/splice.c
  
  /**
   * splice_direct_to_actor - splices data directly between two non-pipes
-diff -Nurp linux-4.8-aufs/fs/xattr.c linux-4.8-aufs-mod/fs/xattr.c
---- linux-4.8-aufs/fs/xattr.c	2016-07-04 17:58:15.754773638 +0300
-+++ linux-4.8-aufs-mod/fs/xattr.c	2016-07-04 19:03:53.656714979 +0300
-@@ -207,6 +207,7 @@ vfs_getxattr_alloc(struct dentry *dentry
+diff -Nurp linux-4.9-aufs/fs/xattr.c linux-4.9-aufs-mod/fs/xattr.c
+--- linux-4.9-aufs/fs/xattr.c	2016-12-11 21:17:54.000000000 +0200
++++ linux-4.9-aufs-mod/fs/xattr.c	2016-12-31 00:32:35.156785422 +0200
+@@ -296,6 +296,7 @@ vfs_getxattr_alloc(struct dentry *dentry
  	*xattr_value = value;
  	return error;
  }
 +EXPORT_SYMBOL_GPL(vfs_getxattr_alloc);
  
  ssize_t
- vfs_getxattr(struct dentry *dentry, const char *name, void *value, size_t size)
-diff -Nurp linux-4.8-aufs/kernel/task_work.c linux-4.8-aufs-mod/kernel/task_work.c
---- linux-4.8-aufs/kernel/task_work.c	2016-05-16 01:43:13.000000000 +0300
-+++ linux-4.8-aufs-mod/kernel/task_work.c	2016-07-04 19:03:53.656714979 +0300
-@@ -118,3 +118,4 @@ void task_work_run(void)
+ __vfs_getxattr(struct dentry *dentry, struct inode *inode, const char *name,
+diff -Nurp linux-4.9-aufs/kernel/task_work.c linux-4.9-aufs-mod/kernel/task_work.c
+--- linux-4.9-aufs/kernel/task_work.c	2016-12-11 21:17:54.000000000 +0200
++++ linux-4.9-aufs-mod/kernel/task_work.c	2016-12-31 00:32:35.156785422 +0200
+@@ -119,3 +119,4 @@ void task_work_run(void)
  		} while (work);
  	}
  }
 +EXPORT_SYMBOL_GPL(task_work_run);
-diff -Nurp linux-4.8-aufs/security/commoncap.c linux-4.8-aufs-mod/security/commoncap.c
---- linux-4.8-aufs/security/commoncap.c	2016-07-04 17:58:15.945773585 +0300
-+++ linux-4.8-aufs-mod/security/commoncap.c	2016-07-04 19:03:53.656714979 +0300
-@@ -1058,12 +1058,14 @@ int cap_mmap_addr(unsigned long addr)
+diff -Nurp linux-4.9-aufs/security/commoncap.c linux-4.9-aufs-mod/security/commoncap.c
+--- linux-4.9-aufs/security/commoncap.c	2016-12-11 21:17:54.000000000 +0200
++++ linux-4.9-aufs-mod/security/commoncap.c	2016-12-31 00:32:35.156785422 +0200
+@@ -1061,12 +1061,14 @@ int cap_mmap_addr(unsigned long addr)
  	}
  	return ret;
  }
@@ -290,9 +298,9 @@ diff -Nurp linux-4.8-aufs/security/commoncap.c linux-4.8-aufs-mod/security/commo
  
  #ifdef CONFIG_SECURITY
  
-diff -Nurp linux-4.8-aufs/security/device_cgroup.c linux-4.8-aufs-mod/security/device_cgroup.c
---- linux-4.8-aufs/security/device_cgroup.c	2016-05-16 01:43:13.000000000 +0300
-+++ linux-4.8-aufs-mod/security/device_cgroup.c	2016-07-04 19:03:53.656714979 +0300
+diff -Nurp linux-4.9-aufs/security/device_cgroup.c linux-4.9-aufs-mod/security/device_cgroup.c
+--- linux-4.9-aufs/security/device_cgroup.c	2016-12-11 21:17:54.000000000 +0200
++++ linux-4.9-aufs-mod/security/device_cgroup.c	2016-12-31 00:32:35.156785422 +0200
 @@ -7,6 +7,7 @@
  #include <linux/device_cgroup.h>
  #include <linux/cgroup.h>
@@ -309,10 +317,10 @@ diff -Nurp linux-4.8-aufs/security/device_cgroup.c linux-4.8-aufs-mod/security/d
  
  int devcgroup_inode_mknod(int mode, dev_t dev)
  {
-diff -Nurp linux-4.8-aufs/security/security.c linux-4.8-aufs-mod/security/security.c
---- linux-4.8-aufs/security/security.c	2016-07-04 17:58:15.948773584 +0300
-+++ linux-4.8-aufs-mod/security/security.c	2016-07-04 19:03:53.657714984 +0300
-@@ -434,6 +434,7 @@ int security_path_rmdir(const struct pat
+diff -Nurp linux-4.9-aufs/security/security.c linux-4.9-aufs-mod/security/security.c
+--- linux-4.9-aufs/security/security.c	2016-12-11 21:17:54.000000000 +0200
++++ linux-4.9-aufs-mod/security/security.c	2016-12-31 00:32:35.157785422 +0200
+@@ -443,6 +443,7 @@ int security_path_rmdir(const struct pat
  		return 0;
  	return call_int_hook(path_rmdir, 0, dir, dentry);
  }
@@ -320,7 +328,7 @@ diff -Nurp linux-4.8-aufs/security/security.c linux-4.8-aufs-mod/security/securi
  
  int security_path_unlink(const struct path *dir, struct dentry *dentry)
  {
-@@ -450,6 +451,7 @@ int security_path_symlink(const struct p
+@@ -459,6 +460,7 @@ int security_path_symlink(const struct p
  		return 0;
  	return call_int_hook(path_symlink, 0, dir, dentry, old_name);
  }
@@ -328,7 +336,7 @@ diff -Nurp linux-4.8-aufs/security/security.c linux-4.8-aufs-mod/security/securi
  
  int security_path_link(struct dentry *old_dentry, const struct path *new_dir,
  		       struct dentry *new_dentry)
-@@ -458,6 +460,7 @@ int security_path_link(struct dentry *ol
+@@ -467,6 +469,7 @@ int security_path_link(struct dentry *ol
  		return 0;
  	return call_int_hook(path_link, 0, old_dentry, new_dir, new_dentry);
  }
@@ -336,7 +344,7 @@ diff -Nurp linux-4.8-aufs/security/security.c linux-4.8-aufs-mod/security/securi
  
  int security_path_rename(const struct path *old_dir, struct dentry *old_dentry,
  			 const struct path *new_dir, struct dentry *new_dentry,
-@@ -485,6 +488,7 @@ int security_path_truncate(const struct
+@@ -494,6 +497,7 @@ int security_path_truncate(const struct
  		return 0;
  	return call_int_hook(path_truncate, 0, path);
  }
@@ -344,7 +352,7 @@ diff -Nurp linux-4.8-aufs/security/security.c linux-4.8-aufs-mod/security/securi
  
  int security_path_chmod(const struct path *path, umode_t mode)
  {
-@@ -492,6 +496,7 @@ int security_path_chmod(const struct pat
+@@ -501,6 +505,7 @@ int security_path_chmod(const struct pat
  		return 0;
  	return call_int_hook(path_chmod, 0, path, mode);
  }
@@ -352,7 +360,7 @@ diff -Nurp linux-4.8-aufs/security/security.c linux-4.8-aufs-mod/security/securi
  
  int security_path_chown(const struct path *path, kuid_t uid, kgid_t gid)
  {
-@@ -499,6 +504,7 @@ int security_path_chown(const struct pat
+@@ -508,6 +513,7 @@ int security_path_chown(const struct pat
  		return 0;
  	return call_int_hook(path_chown, 0, path, uid, gid);
  }
@@ -360,7 +368,7 @@ diff -Nurp linux-4.8-aufs/security/security.c linux-4.8-aufs-mod/security/securi
  
  int security_path_chroot(const struct path *path)
  {
-@@ -584,6 +590,7 @@ int security_inode_readlink(struct dentr
+@@ -593,6 +599,7 @@ int security_inode_readlink(struct dentr
  		return 0;
  	return call_int_hook(inode_readlink, 0, dentry);
  }
@@ -368,7 +376,7 @@ diff -Nurp linux-4.8-aufs/security/security.c linux-4.8-aufs-mod/security/securi
  
  int security_inode_follow_link(struct dentry *dentry, struct inode *inode,
  			       bool rcu)
-@@ -599,6 +606,7 @@ int security_inode_permission(struct ino
+@@ -608,6 +615,7 @@ int security_inode_permission(struct ino
  		return 0;
  	return call_int_hook(inode_permission, 0, inode, mask);
  }
@@ -376,7 +384,7 @@ diff -Nurp linux-4.8-aufs/security/security.c linux-4.8-aufs-mod/security/securi
  
  int security_inode_setattr(struct dentry *dentry, struct iattr *attr)
  {
-@@ -737,6 +745,7 @@ int security_file_permission(struct file
+@@ -779,6 +787,7 @@ int security_file_permission(struct file
  
  	return fsnotify_perm(file, mask);
  }
@@ -384,7 +392,7 @@ diff -Nurp linux-4.8-aufs/security/security.c linux-4.8-aufs-mod/security/securi
  
  int security_file_alloc(struct file *file)
  {
-@@ -796,6 +805,7 @@ int security_mmap_file(struct file *file
+@@ -838,6 +847,7 @@ int security_mmap_file(struct file *file
  		return ret;
  	return ima_file_mmap(file, prot);
  }
