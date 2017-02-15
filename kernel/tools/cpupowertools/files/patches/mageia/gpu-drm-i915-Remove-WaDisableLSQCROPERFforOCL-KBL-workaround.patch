@@ -1,0 +1,97 @@
+From 8726f2faa371514fba2f594d799db95203dfeee0 Mon Sep 17 00:00:00 2001
+From: Francisco Jerez <currojerez@riseup.net>
+Date: Thu, 12 Jan 2017 12:44:54 +0200
+Subject: drm/i915: Remove WaDisableLSQCROPERFforOCL KBL workaround.
+
+The WaDisableLSQCROPERFforOCL workaround has the side effect of
+disabling an L3SQ optimization that has huge performance implications
+and is unlikely to be necessary for the correct functioning of usual
+graphic workloads.  Userspace is free to re-enable the workaround on
+demand, and is generally in a better position to determine whether the
+workaround is necessary than the DRM is (e.g. only during the
+execution of compute kernels that rely on both L3 fences and HDC R/W
+requests).
+
+The same workaround seems to apply to BDW (at least to production
+stepping G1) and SKL as well (the internal workaround database claims
+that it does for all steppings, while the BSpec workaround table only
+mentions pre-production steppings), but the DRM doesn't do anything
+beyond whitelisting the L3SQCREG4 register so userspace can enable it
+when it sees fit.  Do the same on KBL platforms.
+
+Improves performance of the GFXBench4 gl_manhattan31 benchmark by 60%,
+and gl_4 (AKA car chase) by 14% on a KBL GT2 running Mesa master --
+This is followed by a regression of 35% and 10% respectively for the
+same benchmarks and platform caused by my recent patch series
+switching userspace to use the dataport constant cache instead of the
+sampler to implement uniform pull constant loads, which caused us to
+hit more heavily the L3 cache (and on platforms other than KBL had the
+opposite effect of improving performance of the same two benchmarks).
+The overall effect on KBL of this change combined with the recent
+userspace change is respectively 4.6% and 2.6%.  SynMark2 OglShMapPcf
+was affected by the constant cache changes (though it improved as it
+did on other platforms rather than regressing), but is not
+significantly affected by this patch (with statistical significance of
+5% and sample size 20).
+
+v2: Drop some more code to avoid unused variable warning.
+
+Fixes: 738fa1b3123f ("drm/i915/kbl: Add WaDisableLSQCROPERFforOCL")
+Bugzilla: https://bugs.freedesktop.org/show_bug.cgi?id=99256
+Signed-off-by: Francisco Jerez <currojerez@riseup.net>
+Cc: Matthew Auld <matthew.william.auld@gmail.com>
+Cc: Eero Tamminen <eero.t.tamminen@intel.com>
+Cc: Jani Nikula <jani.nikula@intel.com>
+Cc: Mika Kuoppala <mika.kuoppala@intel.com>
+Cc: beignet@lists.freedesktop.org
+Cc: <stable@vger.kernel.org> # v4.7+
+Reviewed-by: Mika Kuoppala <mika.kuoppala@intel.com>
+[Removed double Fixes tag]
+Signed-off-by: Mika Kuoppala <mika.kuoppala@intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/1484217894-20505-1-git-send-email-mika.kuoppala@intel.com
+
+diff --git a/drivers/gpu/drm/i915/intel_lrc.c b/drivers/gpu/drm/i915/intel_lrc.c
+index db714dc..8acab87 100644
+--- a/drivers/gpu/drm/i915/intel_lrc.c
++++ b/drivers/gpu/drm/i915/intel_lrc.c
+@@ -970,18 +970,8 @@ static inline int gen8_emit_flush_coherentl3_wa(struct intel_engine_cs *engine,
+ 						uint32_t *batch,
+ 						uint32_t index)
+ {
+-	struct drm_i915_private *dev_priv = engine->i915;
+ 	uint32_t l3sqc4_flush = (0x40400000 | GEN8_LQSC_FLUSH_COHERENT_LINES);
+ 
+-	/*
+-	 * WaDisableLSQCROPERFforOCL:kbl
+-	 * This WA is implemented in skl_init_clock_gating() but since
+-	 * this batch updates GEN8_L3SQCREG4 with default value we need to
+-	 * set this bit here to retain the WA during flush.
+-	 */
+-	if (IS_KBL_REVID(dev_priv, 0, KBL_REVID_E0))
+-		l3sqc4_flush |= GEN8_LQSC_RO_PERF_DIS;
+-
+ 	wa_ctx_emit(batch, index, (MI_STORE_REGISTER_MEM_GEN8 |
+ 				   MI_SRM_LRM_GLOBAL_GTT));
+ 	wa_ctx_emit_reg(batch, index, GEN8_L3SQCREG4);
+diff --git a/drivers/gpu/drm/i915/intel_ringbuffer.c b/drivers/gpu/drm/i915/intel_ringbuffer.c
+index ab83fc2..49fa800 100644
+--- a/drivers/gpu/drm/i915/intel_ringbuffer.c
++++ b/drivers/gpu/drm/i915/intel_ringbuffer.c
+@@ -1095,14 +1095,6 @@ static int kbl_init_workarounds(struct intel_engine_cs *engine)
+ 		WA_SET_BIT_MASKED(HDC_CHICKEN0,
+ 				  HDC_FENCE_DEST_SLM_DISABLE);
+ 
+-	/* GEN8_L3SQCREG4 has a dependency with WA batch so any new changes
+-	 * involving this register should also be added to WA batch as required.
+-	 */
+-	if (IS_KBL_REVID(dev_priv, 0, KBL_REVID_E0))
+-		/* WaDisableLSQCROPERFforOCL:kbl */
+-		I915_WRITE(GEN8_L3SQCREG4, I915_READ(GEN8_L3SQCREG4) |
+-			   GEN8_LQSC_RO_PERF_DIS);
+-
+ 	/* WaToEnableHwFixForPushConstHWBug:kbl */
+ 	if (IS_KBL_REVID(dev_priv, KBL_REVID_C0, REVID_FOREVER))
+ 		WA_SET_BIT_MASKED(COMMON_SLICE_CHICKEN2,
+-- 
+cgit v0.10.2
+

@@ -1,0 +1,86 @@
+From 9fc736e833d226853fd53843e35d6a1d542394ed Mon Sep 17 00:00:00 2001
+From: Jani Nikula <jani.nikula@intel.com>
+Date: Fri, 16 Sep 2016 16:59:46 +0300
+Subject: drm/i915/skl: drop workarounds for D0 revision
+
+Pre-production hardware is not supported.
+
+Reviewed-by: Paulo Zanoni <paulo.r.zanoni@intel.com>
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/d28d21ceddeec226b5d1a20a7382bee9a72709a4.1474034059.git.jani.nikula@intel.com
+
+diff --git a/drivers/gpu/drm/i915/intel_lrc.c b/drivers/gpu/drm/i915/intel_lrc.c
+index 47f7afa..ca649cc 100644
+--- a/drivers/gpu/drm/i915/intel_lrc.c
++++ b/drivers/gpu/drm/i915/intel_lrc.c
+@@ -994,9 +994,8 @@ static int gen9_init_indirectctx_bb(struct intel_engine_cs *engine,
+ 	struct drm_i915_private *dev_priv = engine->i915;
+ 	uint32_t index = wa_ctx_start(wa_ctx, *offset, CACHELINE_DWORDS);
+ 
+-	/* WaDisableCtxRestoreArbitration:skl,bxt */
+-	if (IS_SKL_REVID(dev_priv, 0, SKL_REVID_D0) ||
+-	    IS_BXT_REVID(dev_priv, 0, BXT_REVID_A1))
++	/* WaDisableCtxRestoreArbitration:bxt */
++	if (IS_BXT_REVID(dev_priv, 0, BXT_REVID_A1))
+ 		wa_ctx_emit(batch, index, MI_ARB_ON_OFF | MI_ARB_DISABLE);
+ 
+ 	/* WaFlushCoherentL3CacheLinesAtContextSwitch:skl,bxt */
+@@ -1095,9 +1094,8 @@ static int gen9_init_perctx_bb(struct intel_engine_cs *engine,
+ 		wa_ctx_emit(batch, index, MI_NOOP);
+ 	}
+ 
+-	/* WaDisableCtxRestoreArbitration:skl,bxt */
+-	if (IS_SKL_REVID(engine->i915, 0, SKL_REVID_D0) ||
+-	    IS_BXT_REVID(engine->i915, 0, BXT_REVID_A1))
++	/* WaDisableCtxRestoreArbitration:bxt */
++	if (IS_BXT_REVID(engine->i915, 0, BXT_REVID_A1))
+ 		wa_ctx_emit(batch, index, MI_ARB_ON_OFF | MI_ARB_ENABLE);
+ 
+ 	wa_ctx_emit(batch, index, MI_BATCH_BUFFER_END);
+diff --git a/drivers/gpu/drm/i915/intel_pm.c b/drivers/gpu/drm/i915/intel_pm.c
+index 2df06b7..a860c40 100644
+--- a/drivers/gpu/drm/i915/intel_pm.c
++++ b/drivers/gpu/drm/i915/intel_pm.c
+@@ -5335,8 +5335,7 @@ static void gen9_enable_rc6(struct drm_i915_private *dev_priv)
+ 		rc6_mask = GEN6_RC_CTL_RC6_ENABLE;
+ 	DRM_INFO("RC6 %s\n", onoff(rc6_mask & GEN6_RC_CTL_RC6_ENABLE));
+ 	/* WaRsUseTimeoutMode */
+-	if (IS_SKL_REVID(dev_priv, 0, SKL_REVID_D0) ||
+-	    IS_BXT_REVID(dev_priv, 0, BXT_REVID_A1)) {
++	if (IS_BXT_REVID(dev_priv, 0, BXT_REVID_A1)) {
+ 		I915_WRITE(GEN6_RC6_THRESHOLD, 625); /* 800us */
+ 		I915_WRITE(GEN6_RC_CONTROL, GEN6_RC_CTL_HW_ENABLE |
+ 			   GEN7_RC_CTL_TO_MODE |
+diff --git a/drivers/gpu/drm/i915/intel_ringbuffer.c b/drivers/gpu/drm/i915/intel_ringbuffer.c
+index 474ce84..6880082 100644
+--- a/drivers/gpu/drm/i915/intel_ringbuffer.c
++++ b/drivers/gpu/drm/i915/intel_ringbuffer.c
+@@ -1000,10 +1000,8 @@ static int skl_init_workarounds(struct intel_engine_cs *engine)
+ 	 * until D0 which is the default case so this is equivalent to
+ 	 * !WaDisablePerCtxtPreemptionGranularityControl:skl
+ 	 */
+-	if (IS_SKL_REVID(dev_priv, SKL_REVID_E0, REVID_FOREVER)) {
+-		I915_WRITE(GEN7_FF_SLICE_CS_CHICKEN1,
+-			   _MASKED_BIT_ENABLE(GEN9_FFSC_PERCTX_PREEMPT_CTRL));
+-	}
++	I915_WRITE(GEN7_FF_SLICE_CS_CHICKEN1,
++		   _MASKED_BIT_ENABLE(GEN9_FFSC_PERCTX_PREEMPT_CTRL));
+ 
+ 	if (IS_SKL_REVID(dev_priv, 0, SKL_REVID_E0)) {
+ 		/* WaDisableChickenBitTSGBarrierAckForFFSliceCS:skl */
+@@ -1023,12 +1021,6 @@ static int skl_init_workarounds(struct intel_engine_cs *engine)
+ 	I915_WRITE(GEN8_GARBCNTL, (I915_READ(GEN8_GARBCNTL) |
+ 				   GEN9_GAPS_TSV_CREDIT_DISABLE));
+ 
+-	/* WaBarrierPerformanceFixDisable:skl */
+-	if (IS_SKL_REVID(dev_priv, SKL_REVID_C0, SKL_REVID_D0))
+-		WA_SET_BIT_MASKED(HDC_CHICKEN0,
+-				  HDC_FENCE_DEST_SLM_DISABLE |
+-				  HDC_BARRIER_PERFORMANCE_DISABLE);
+-
+ 	/* WaDisableSbeCacheDispatchPortSharing:skl */
+ 	if (IS_SKL_REVID(dev_priv, 0, SKL_REVID_F0))
+ 		WA_SET_BIT_MASKED(
+-- 
+cgit v0.10.2
+
