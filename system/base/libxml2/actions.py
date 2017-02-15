@@ -37,7 +37,7 @@ def check():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    if get.buildTYPE() == "emul32":
+    if get.buildTYPE() == "emul32" or "i686":
         pisitools.removeDir("/usr/share/gtk-doc")
         return
 
