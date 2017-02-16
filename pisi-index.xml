@@ -1218,6 +1218,13 @@
         </Package>
         <History>
             <Update release="4">
+                <Date>2017-02-15</Date>
+                <Version>1.4</Version>
+                <Comment>Beta 2.1</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
                 <Date>2016-08-17</Date>
                 <Version>1.4</Version>
                 <Comment>Beta 2</Comment>
@@ -16129,17 +16136,17 @@
             <Summary xml:lang="tr">CPU güç/frekans yönetim araçları</Summary>
             <Description xml:lang="en">cpupowertools contains utilities to manage power management and frequency scaling policies of modern CPUs.</Description>
             <Description xml:lang="tr">cpupowertools, işlemcinin çeşitli güç ve frekans parametrelerinin yönetilmesini sağlayan çeşitli araçları içeren bir pakettir.</Description>
-            <Archive type="targz" sha1sum="a85e6ca968b10ec0eace2daaaa59fc8734d0db74">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.8.tar.gz</Archive>
+            <Archive type="targz" sha1sum="60a47e858fce153c5bedd7e293a1b45e8d2db054">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.9.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.8.13.xz</Patch>
-                <Patch level="1">patches/mageia/Revert-ipmi-Start-the-timer-and-thread-on-internal-m.patch</Patch>
-                <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
-                <Patch level="1">patches/mageia/x86-boot-video-80x25-if-break.patch</Patch>
-                <Patch level="1">patches/mageia/x86-default_poweroff_up_machines.patch</Patch>
-                <Patch level="1">patches/mageia/x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.9.6.xz</Patch>
+                <Patch level="1">patches/mageia/stable-fbdev-color-map-copying-bounds-checking.patch</Patch>
+                <Patch level="1">patches/mageia/stable-tile-ptrace-preserve-previous-registers-for-short-regset-write.patch</Patch>
+                <Patch level="1">patches/mageia/stable-drm-schedule-the-output_poll_work-with-1s-delay-if-we-have-delayed-event.patch</Patch>
+                <Patch level="1">patches/mageia/stable-drm-fix-broken-vt-switch-with-video-1366x768-option.patch</Patch>
+                <Patch level="1">patches/mageia/stable-drm-i915-ignore-bogus-plane-coordinates-on-skl-when-the-plane-is-not-visible.patch</Patch>
                 <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
                 <Patch level="1">patches/mageia/Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch</Patch>
                 <Patch level="1">patches/mageia/base-cacheinfo-silence-DT-warnings.patch</Patch>
@@ -16148,6 +16155,7 @@
                 <Patch level="1">patches/mageia/acpi-CLEVO-M360S-disable_acpi_irq.patch</Patch>
                 <Patch level="1">patches/mageia/acpi-processor-M720SR-limit-to-C2.patch</Patch>
                 <Patch level="1">patches/mageia/ACPI-video-Add-a-quirk-to-force-acpi-video-backlight.patch</Patch>
+                <Patch level="1">patches/mageia/acpi-do-not-warn-if-_BQC-does-not-exist.patch</Patch>
                 <Patch level="1">patches/mageia/scsi-megaraid-new-sysfs-name.patch</Patch>
                 <Patch level="1">patches/mageia/ide-pci-sis5513-965.patch</Patch>
                 <Patch level="1">patches/mageia/mpt-vmware-fix.patch</Patch>
@@ -16155,14 +16163,19 @@
                 <Patch level="1">patches/mageia/block-floppy-disable-pnp-modalias.patch</Patch>
                 <Patch level="1">patches/mageia/ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch</Patch>
                 <Patch level="1">patches/mageia/block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch</Patch>
-                <Patch level="1">patches/mageia/linux-BFQ-v8r4.patch</Patch>
-                <Patch level="1">patches/mageia/nvmepatch1-V4.patch</Patch>
-                <Patch level="1">patches/mageia/nvmepatch2-V4.patch</Patch>
-                <Patch level="1">patches/mageia/nvmepatch3-V4.patch</Patch>
-                <Patch level="1">patches/mageia/fs-aufs-4.8.patch</Patch>
-                <Patch level="1">patches/mageia/fs-aufs-4.8-modular.patch</Patch>
+                <Patch level="1">patches/mageia/char-tpm-tpm_crb-implement-tpm-crb-idle-state.patch</Patch>
+                <Patch level="1">patches/mageia/char-tmp-tpm_crb-fix-Intel-PTT-hw-bug-during-idle-state.patch</Patch>
+                <Patch level="1">patches/mageia/char-tpm-tpm_crb-open-code-the-crb_init-into-acpi_add.patch</Patch>
+                <Patch level="1">patches/mageia/char-tmp-tpm_crb-implement-runtime-pm-for-tpm_crb.patch</Patch>
+                <Patch level="1">patches/mageia/fs-aufs-4.9.patch</Patch>
+                <Patch level="1">patches/mageia/fs-aufs-4.9-modular.patch</Patch>
+                <Patch level="1">patches/mageia/fs-seq_file-reset-iterator-to-first-record-for-zero-off.patch</Patch>
                 <Patch level="1">patches/mageia/firewire-ieee1394-module-aliases.patch</Patch>
                 <Patch level="1">patches/mageia/char-agp-intel-new-Q57-id.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-i915-skl-drop-workarounds-for-A0-and-B0-revisions.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-i915-skl-drop-workarounds-for-D0-revision.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-i915-skl-drop-workarounds-for-E0-revision.patch</Patch>
+                <Patch level="1">patches/mageia/gpu-drm-i915-Remove-WaDisableLSQCROPERFforOCL-KBL-workaround.patch</Patch>
                 <Patch level="1">patches/mageia/input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch</Patch>
                 <Patch level="1">patches/mageia/net-sis190-fix-list-usage.patch</Patch>
                 <Patch level="1">patches/mageia/net-netfilter-IFWLOG.patch</Patch>
@@ -16175,7 +16188,10 @@
                 <Patch level="1">patches/mageia/net-netfilter-psd.patch</Patch>
                 <Patch level="1">patches/mageia/net-netfilter-psd-mdv.patch</Patch>
                 <Patch level="1">patches/mageia/net-netfilter-psd-2.6.35-buildfix.patch</Patch>
-                <Patch level="1">patches/mageia/net-wireless-rtlwifi-Fix-regression-caused-by-commit-d86e64768859.patch</Patch>
+                <Patch level="1">patches/mageia/net-netfilter-psd-fix-redefines.patch</Patch>
+                <Patch level="1">patches/mageia/net-wireless-rtlwifi-Use-dev_kfree_skb_irq-instead-of-kfree_skb.patch</Patch>
+                <Patch level="1">patches/mageia/net-wireless-rtlwifi-Fix-kernel-oops-introduced-with-commit-e4965.patch</Patch>
+                <Patch level="1">patches/mageia/net-wireless-brcmfmac-fix-incorrect-event-channel-deduction.patch</Patch>
                 <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
                 <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
                 <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
@@ -16206,9 +16222,10 @@
                 <Patch level="1">patches/mageia/3rd-viahss-2.6.35-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/3rd-viahss-3.0-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/3rd-rtl8723bs.patch</Patch>
-                <Patch level="1">patches/mageia/3rd-rtl8723bs-4.7-buildfix.patch</Patch>
-                <Patch level="1">patches/mageia/3rd-rtl8723bs-4.8-buildfix.patch</Patch>
                 <Patch level="1">patches/mageia/tools-testing-selftest-Makefile-remove-powerpc-reference.patch</Patch>
+                <Patch level="1">patches/mageia/tools-build-Make-fixdep-parsing-wait-for-last-target.patch</Patch>
+                <Patch level="1">patches/mageia/tools-perf-tools-Force-fixdep-compilation-at-the-start-of-.patch</Patch>
+                <Patch level="1">patches/mageia/tools-perf-tools-Move-perf-build-related-variables-under-n.patch</Patch>
             </Patches>
             <SourceURI>kernel/tools/cpupowertools/pspec.xml</SourceURI>
         </Source>
@@ -16231,6 +16248,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2017-02-15</Date>
+                <Version>4.9.6</Version>
+                <Comment>Release bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="7">
                 <Date>2016-12-10</Date>
                 <Version>4.8.13</Version>
@@ -16329,6 +16353,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-15</Date>
+                <Version>1.0.7</Version>
+                <Comment>Release Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>1.0.7</Version>
