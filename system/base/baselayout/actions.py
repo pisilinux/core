@@ -19,7 +19,7 @@ def install():
 
     # Install everything
     pisitools.insinto("/", "root/*")
-
+    
     # Install baselayout utilities
     shelltools.cd("src/")
     autotools.rawInstall('DESTDIR="%s"' % get.installDIR())
