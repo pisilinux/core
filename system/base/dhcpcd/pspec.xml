@@ -20,6 +20,9 @@
 
     <Package>
         <Name>dhcpcd</Name>
+        <RuntimeDependencies>
+            <Dependency>eudev</Dependency>
+        </RuntimeDependencies>
         <Files>
             <Path fileType="config">/etc</Path>
             <Path fileType="data">/lib/dhcpcd</Path>
