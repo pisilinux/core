@@ -10,9 +10,10 @@ from pisi.actionsapi import get
 from pisi.actionsapi import shelltools
 
 def setup():
-    autotools.configure("--libexecdir=/lib/dhcpcd \
+    autotools.configure("--libexecdir=/usr/lib/dhcpcd \
                          --dbdir=/var/lib/dhcpcd \
                          --localstatedir=/var \
+                         --sbindir=/usr/bin \
                          --rundir=/run")
 
 def build():
