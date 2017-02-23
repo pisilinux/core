@@ -10,20 +10,22 @@ from pisi.actionsapi import get
 from pisi.actionsapi import shelltools
 
 def setup():
-    autotools.configure("--libexecdir=/lib/dhcpcd \
+    autotools.configure("--libexecdir=/usr/lib/dhcpcd \
                          --dbdir=/var/lib/dhcpcd \
                          --localstatedir=/var \
+                         --sbindir=/usr/bin \
                          --rundir=/run")
 
 def build():
     autotools.make()
 
 def install():
-    autotools.rawInstall("DBDIR=/var/lib/dhcpcd LIBEXECDIR=/lib/dhcpcd DESTDIR=%s" % get.installDIR())
+    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
     # Set Options in /etc/dhcpcd.conf Disable ip4vall
     shelltools.echo("%s/etc/dhcpcd.conf" % get.installDIR(), "noipv4ll")
     # Remove hooks install the compat one
-    pisitools.remove("/lib/dhcpcd/dhcpcd-hooks/*")
-    pisitools.insinto("/lib/dhcpcd/dhcpcd-hooks", "dhcpcd-hooks/50-dhcpcd-compat")
+    pisitools.remove("/usr/lib/dhcpcd/dhcpcd-hooks/*")
+    pisitools.insinto("/usr/lib/dhcpcd/dhcpcd-hooks", "dhcpcd-hooks/50-dhcpcd-compat")
 
     pisitools.dodoc("README")
+#DBDIR=/var/lib/dhcpcd LIBEXECDIR=/usr/lib/dhcpcd
