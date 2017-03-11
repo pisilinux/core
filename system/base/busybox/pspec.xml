@@ -12,14 +12,14 @@
         <IsA>app:console</IsA>
         <Summary>Statically linked binary providing simplified versions of system commands</Summary>
         <Description>busybox is a single binary which includes versions of a large number of system commands, including a shell.</Description>
-        <Archive sha1sum="0b3e3cd49d6d9e30f66e364bf842663348b23dc9" type="tarbz2">https://busybox.net/downloads/busybox-1.26.2.tar.bz2</Archive>
+        <Archive sha1sum="157d14d24748b4505b1a418535688706a2b81680" type="tarbz2">http://busybox.net/downloads/busybox-1.24.1.tar.bz2</Archive>
         <AdditionalFiles>
             <AdditionalFile target=".config">config</AdditionalFile>
         </AdditionalFiles>
         <Patches>
             <!-- This patch is essential for udhcp to request root-path from dhcpd and required by ptsp -->
-            <!--Patch level="1">busybox-1.25.1-setfiles.patch</Patch>-->
-            <!--Patch level="1">suppress-job-control-warning.patch</Patch>
+            <!--Patch level="1">udhcp-rootpath-rq.patch</Patch>
+            <Patch level="1">suppress-job-control-warning.patch</Patch>
             <Patch level="1">fix-include.patch</Patch-->
             <!--Patch>ifplugd.patch</Patch-->
         </Patches>
@@ -33,33 +33,26 @@
     </Package>
 
     <History>
-        <Update release="4">
-            <Date>2017-02-20</Date>
-            <Version>1.26.2</Version>
-            <Comment>Version bump.</Comment>
-            <Name>Ertuğrul Erata</Name>
-            <Email>ertugrulerata@gmail.com</Email>
-        </Update>
         <Update release="3">
-            <Date>2017-01-28</Date>
-            <Version>1.25.1</Version>
-            <Comment>Release Bump.</Comment>
-            <Name>Stefan Gronewold(groni)</Name>
-            <Email>groni@pisilinux.org</Email>
+            <Date>2017-03-11</Date>
+            <Version>1.24.1</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Serdar Soytetir</Name>
+            <Email>kaptan@pisilinux.org</Email>
         </Update>
         <Update release="2">
             <Date>2016-04-27</Date>
             <Version>1.24.1</Version>
-            <Comment>Release Bump</Comment>
+            <Comment>New release</Comment>
             <Name>PisiLinux Community</Name>
-            <Email>admin@pisilinux.org</Email>
+            <Email>admins@pisilinux.org</Email>
         </Update>
         <Update release="1">
-            <Date>2016-03-07</Date>
+            <Date>2016-03-18</Date>
             <Version>1.24.1</Version>
             <Comment>First release</Comment>
-            <Name>Ertuğrul Erata</Name>
-            <Email>ertugrulerata@gmail.com</Email>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
         </Update>
     </History>
 </PISI>
