@@ -557,8 +557,8 @@
         </Package>
         <History>
             <Update release="3">
-                <Date>2017-01-08</Date>
-                <Version>20160130</Version>
+                <Date>2017-02-25</Date>
+                <Version>20161130</Version>
                 <Comment>Version Bump</Comment>
                 <Name>PisiLinux Community</Name>
                 <Email>admin@pisilinux.org</Email>
@@ -596,24 +596,34 @@
             <Description xml:lang="en">An RFC2131 and RFC1541 compliant DHCP client daemon. dhcpcd gets an IP address and other information from a corresponding DHCP server, configures the network interface automatically, and tries to renew the lease time according to RFC2131 or RFC1541 depending on the command line option.</Description>
             <Description xml:lang="tr">RFC2131 ve RFC1541 uyumlu bir DHCP istemci servisi.dhcpcd ilgili bir DHCP sunucusundan bir IP adresi ve gerekli diğer bilgileri alır, ağ arayüzünü otomatik olarak yapılandırır ve RFC2131 veya RFC1541 komut satırı özelliğine bağlı olarak kiralama zamanını yenilemeyi dener.</Description>
             <Archive type="tarxz" sha1sum="aa0a97682cb7dad3ea0acfe623a67da42614a2d8">http://ftp.osuosl.org/pub/blfs/conglomeration/dhcpcd/dhcpcd-6.11.5.tar.xz</Archive>
+            <BuildDependencies>
+                <Dependency>eudev-devel</Dependency>
+            </BuildDependencies>
             <SourceURI>system/base/dhcpcd/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>dhcpcd</Name>
+            <RuntimeDependencies>
+                <Dependency>eudev</Dependency>
+            </RuntimeDependencies>
             <Files>
                 <Path fileType="config">/etc</Path>
                 <Path fileType="data">/lib/dhcpcd</Path>
-                <Path fileType="library">/usr/lib/dhcpcd/dev/udev.so</Path>
-                <Path fileType="executable">/sbin</Path>
+                <Path fileType="library">/usr/lib/dhcpcd</Path>
+                <Path fileType="executable">/usr/bin</Path>
                 <Path fileType="doc">/usr/share/doc</Path>
                 <Path fileType="man">/usr/share/man</Path>
                 <Path fileType="man">/usr/share/dhcpcd</Path>
                 <Path fileType="data">/var/lib/dhcpcd</Path>
+                <Path fileType="data">/run/dhcp</Path>
             </Files>
+            <Provides>
+                <COMAR script="service.py">System.Service</COMAR>
+            </Provides>
         </Package>
         <History>
             <Update release="3">
-                <Date>2017-01-29</Date>
+                <Date>2017-02-23</Date>
                 <Version>6.11.5</Version>
                 <Comment>Version bump.</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -1340,7 +1350,7 @@
         </Package>
         <History>
             <Update release="4">
-                <Date>2017-01-07</Date>
+                <Date>2017-02-17</Date>
                 <Version>2016j</Version>
                 <Comment>Rebuild with new toolchain.</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -3668,7 +3678,7 @@
             <Description xml:lang="fr">Ce paquet crée la hiérarchie du système de fichier principal de Pisi Linux.</Description>
             <Description xml:lang="en">baselayout creates the Pisi Linux Linux main filesystem hierarchy.</Description>
             <Description xml:lang="tr">Bu paket, Pisi Linux dosya sisteminin temelini oluşturur.</Description>
-            <Archive type="targz" sha1sum="89cb1dc3c3a2fc47c299ae6c002cad212b7fc56e">http://source.pisilinux.org/1.0/baselayout-3.10.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="01938089490008e73aae63cf8917a848736e2f7c">https://github.com/ertugerata/baselayout/releases/download/v3.10.1/baselayout-3.10.1.tar.gz</Archive>
             <SourceURI>system/base/baselayout/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -3713,6 +3723,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="3">
+                <Date>2017-02-19</Date>
+                <Version>3.10.1</Version>
+                <Comment>Version Bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>3.10.0</Version>
@@ -5003,6 +5020,7 @@
             <Files>
                 <Path fileType="executable">/usr/bin</Path>
                 <Path fileType="library">/usr/lib</Path>
+                <Path fileType="data">/usr/share/gettext-0.19.8</Path>
                 <Path fileType="data">/usr/share/gettext</Path>
                 <Path fileType="localedata">/usr/share/locale</Path>
                 <Path fileType="info">/usr/share/info</Path>
@@ -5026,7 +5044,7 @@
         </Package>
         <History>
             <Update release="3">
-                <Date>2017-01-08</Date>
+                <Date>2017-02-16</Date>
                 <Version>0.19.8.1</Version>
                 <Comment>Version bump.</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -7435,7 +7453,7 @@
         </Package>
         <History>
             <Update release="3">
-                <Date>2017-01-30</Date>
+                <Date>2017-02-17</Date>
                 <Version>018</Version>
                 <Comment>Rebuild.</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -10069,7 +10087,7 @@
         </Package>
         <History>
             <Update release="3">
-                <Date>2017-01-30</Date>
+                <Date>2017-02-17</Date>
                 <Version>2.1.0</Version>
                 <Comment>Rebuild.</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -10944,7 +10962,7 @@
             <Summary xml:lang="tr">Statik bağlanmış sistem komutları bütünü</Summary>
             <Description xml:lang="en">busybox is a single binary which includes versions of a large number of system commands, including a shell.</Description>
             <Description xml:lang="tr">busybox, kabuk da dahil olmak üzere çeşitli sistem komutlarını içeren tek bir çalıştırılabilir dosyadır.</Description>
-            <Archive type="tarbz2" sha1sum="0b3e3cd49d6d9e30f66e364bf842663348b23dc9">https://busybox.net/downloads/busybox-1.26.2.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="157d14d24748b4505b1a418535688706a2b81680">http://busybox.net/downloads/busybox-1.24.1.tar.bz2</Archive>
             <AdditionalFiles>
                 <AdditionalFile target=".config">config</AdditionalFile>
             </AdditionalFiles>
@@ -10957,33 +10975,26 @@
             </Files>
         </Package>
         <History>
-            <Update release="4">
-                <Date>2017-02-14</Date>
-                <Version>1.26.2</Version>
-                <Comment>Version bump.</Comment>
-                <Name>Ertuğrul Erata</Name>
-                <Email>ertugrulerata@gmail.com</Email>
-            </Update>
             <Update release="3">
-                <Date>2017-01-28</Date>
-                <Version>1.25.1</Version>
-                <Comment>Release Bump.</Comment>
-                <Name>Stefan Gronewold(groni)</Name>
-                <Email>groni@pisilinux.org</Email>
+                <Date>2017-03-11</Date>
+                <Version>1.24.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Serdar Soytetir</Name>
+                <Email>kaptan@pisilinux.org</Email>
             </Update>
             <Update release="2">
                 <Date>2016-04-27</Date>
                 <Version>1.24.1</Version>
-                <Comment>Release Bump</Comment>
+                <Comment>New release</Comment>
                 <Name>PisiLinux Community</Name>
-                <Email>admin@pisilinux.org</Email>
+                <Email>admins@pisilinux.org</Email>
             </Update>
             <Update release="1">
-                <Date>2016-03-07</Date>
+                <Date>2016-03-18</Date>
                 <Version>1.24.1</Version>
                 <Comment>First release</Comment>
-                <Name>Ertuğrul Erata</Name>
-                <Email>ertugrulerata@gmail.com</Email>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
             </Update>
         </History>
     </SpecFile>
@@ -15009,7 +15020,7 @@
             <Description xml:lang="fr">Flex est un outil de génération d&apos;analyseur (scanner). Un analyseur (également appelé tokenizer en anglais) est un programme qui repère les motifs lexicaux (ou lexème) dans du texte. </Description>
             <Description xml:lang="en">Flex is a tool for generating scanners. A scanner, sometimes called a tokenizer, is a program which recognizes lexical patterns in text</Description>
             <Description xml:lang="tr">Flex, metin içindeki sözcüksel kalıpları tanıyan, analiz aracı üretecidir.</Description>
-            <Archive type="targz" sha1sum="8008eb0e4ccc634c334ac1d9e04716be2ba527a9">https://github.com/westes/flex/releases/download/v2.6.3/flex-2.6.3.tar.gz</Archive>
+            <Archive type="tarxz" sha1sum="f344d892aee6eb512c9b613a6b7feab2dbcc1200">https://github.com/westes/flex/releases/download/v2.6.1/flex-2.6.1.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>patch</Dependency>
                 <Dependency>texinfo</Dependency>
@@ -15029,6 +15040,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2017-02-17</Date>
+                <Version>2.6.1</Version>
+                <Comment>Version down.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2017-01-24</Date>
                 <Version>2.6.3</Version>
@@ -15389,6 +15407,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2017-02-16</Date>
+                <Version>2.02_beta2</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="6">
                 <Date>2016-08-21</Date>
                 <Version>2.02_beta2</Version>
