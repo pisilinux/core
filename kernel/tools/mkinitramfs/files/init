@@ -105,7 +105,7 @@ probe_pci_devices() {
         [ -f $module ] || continue
         MODULES="$MODULES $(cat $module)"
     done
-    modprobe -bqa $MODULES
+    modprobe -bq $MODULES
 }
 
 probe_usb_devices() {
@@ -115,12 +115,12 @@ probe_usb_devices() {
         [ -f $module ] || continue
         MODULES="$MODULES $(cat $module)"
     done
-    modprobe -bqa $MODULES
+    modprobe -bq $MODULES
 }
 
 probe_raid() {
     info "Probing RAID devices"
-    modprobe -bqa dm-mod raid0 raid1 raid10 raid456
+    modprobe -bq dm-mod raid0 raid1 raid10 raid456
     if [ -x /sbin/mdadm ]
     then
         /sbin/mdadm --examine --scan > /etc/mdadm.conf
@@ -130,7 +130,7 @@ probe_raid() {
 
 probe_lvm() {
     info "Probing LVM devices"
-    modprobe -qa dm-mod
+    modprobe -q dm-mod
     if [ -x /sbin/lvm ]
     then
         /sbin/lvm vgscan --ignorelockingfailure &> /dev/null
@@ -144,7 +144,7 @@ probe_virtio_devices() {
         [ -f $module ] || continue
         MODULES="$MODULES $(cat $module)"
     done
-    modprobe -bqa $MODULES
+    modprobe -bq $MODULES
 }
 
 #################################
@@ -518,7 +518,7 @@ then
     manage_tmpfs
 
     # modprobe filesystems that are not in kernel, for live disks
-    modprobe -qa nls_cp857 nls_utf8 vfat
+    modprobe -q nls_cp857 nls_utf8 vfat
 
     for i in `seq 50`
     do
