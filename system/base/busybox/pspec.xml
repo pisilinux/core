@@ -18,9 +18,9 @@
         </AdditionalFiles>
         <Patches>
             <!-- This patch is essential for udhcp to request root-path from dhcpd and required by ptsp -->
-            <!--Patch level="1">udhcp-rootpath-rq.patch</Patch>
+            <Patch level="1">udhcp-rootpath-rq.patch</Patch>
             <Patch level="1">suppress-job-control-warning.patch</Patch>
-            <Patch level="1">fix-include.patch</Patch-->
+            <Patch level="1">fix-include.patch</Patch>
             <!--Patch>ifplugd.patch</Patch-->
         </Patches>
     </Source>
@@ -34,7 +34,7 @@
 
     <History>
         <Update release="3">
-            <Date>2017-03-11</Date>
+            <Date>2017-03-19</Date>
             <Version>1.24.1</Version>
             <Comment>Rebuild.</Comment>
             <Name>Serdar Soytetir</Name>
