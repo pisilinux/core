@@ -120,7 +120,8 @@ probe_usb_devices() {
 
 probe_raid() {
     info "Probing RAID devices"
-    modprobe -bq dm-mod raid0 raid1 raid10 raid456
+    #modprobe -bq dm-mod raid0 raid1 raid10 raid456
+    modprobe -bq raid0 raid1 raid10 raid456
     if [ -x /sbin/mdadm ]
     then
         /sbin/mdadm --examine --scan > /etc/mdadm.conf
@@ -130,7 +131,7 @@ probe_raid() {
 
 probe_lvm() {
     info "Probing LVM devices"
-    modprobe -q dm-mod
+    # modprobe -q dm-mod
     if [ -x /sbin/lvm ]
     then
         /sbin/lvm vgscan --ignorelockingfailure &> /dev/null
