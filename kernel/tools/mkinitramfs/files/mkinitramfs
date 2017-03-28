@@ -251,7 +251,7 @@ class KernelModule:
         self.i2oModules = ["i2o_block"]
         self.usbModules = ["usb-storage", "sd_mod", "usbcore", "ehci-hcd", "ohci-hcd", "uhci-hcd"]
 
-        self.filesystemModules = ["ext2", "ext3", "ext4", "reiser4", "jfs", "reiserfs", "xfs", "vfat", "fat", "ntfs", "unionfs", "cramfs", "nfs", "nls_utf8", "nls_iso8859_9", "nls_cp857", "nls_iso8859-1", "nls_ascii", "nls_cp850", "squashfs", "aufs"]
+        self.filesystemModules = ["ext2", "ext3", "ext4", "reiser4", "jfs", "reiserfs", "xfs", "vfat", "fat", "ntfs", "unionfs", "cramfs", "nfs", "nls_utf8", "nls_iso8859_9", "nls_cp857", "nls_iso8859-1", "nls_ascii", "nls_cp850", "squashfs", "aufs", "udf"]
 
         self.networkBaseModules = ["af_packet", "mii", "8390", "via-rhine", "8139too", "ne2k-pci", "e100", "sky2", "tg3", "skge"]
         self.networkDirs = ["kernel/drivers/net"]
