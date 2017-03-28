@@ -90,11 +90,11 @@ probe_kms() {
     for device in /sys/bus/pci/devices/*/boot_vga; do
         [ -f $device ] || continue
         info "Loading KMS driver"
-        grep -q 1 $device && modprobe -bq `cat ${device%boot_vga}modalias`
+        grep -q 1 $device && modprobe -q `cat ${device%boot_vga}modalias`
     done
     if [ ! -c /dev/fb0 ]; then
         echo "options uvesafb scroll=ywrap mtrr=0 nocrtc=1 mode_option=1024x768-32" > /etc/modprobe.d/uvesafb.conf
-        modprobe -bq uvesafb
+        modprobe -q uvesafb
     fi
 }
 
@@ -105,7 +105,7 @@ probe_pci_devices() {
         [ -f $module ] || continue
         MODULES="$MODULES $(cat $module)"
     done
-    modprobe -bq $MODULES
+    modprobe -q $MODULES
 }
 
 probe_usb_devices() {
@@ -115,13 +115,13 @@ probe_usb_devices() {
         [ -f $module ] || continue
         MODULES="$MODULES $(cat $module)"
     done
-    modprobe -bq $MODULES
+    modprobe -q $MODULES
 }
 
 probe_raid() {
     info "Probing RAID devices"
     #modprobe -bq dm-mod raid0 raid1 raid10 raid456
-    modprobe -bq raid0 raid1 raid10 raid456
+    modprobe -q raid0 raid1 raid10 raid456
     if [ -x /sbin/mdadm ]
     then
         /sbin/mdadm --examine --scan > /etc/mdadm.conf
@@ -145,7 +145,7 @@ probe_virtio_devices() {
         [ -f $module ] || continue
         MODULES="$MODULES $(cat $module)"
     done
-    modprobe -bq $MODULES
+    modprobe -q $MODULES
 }
 
 #################################
