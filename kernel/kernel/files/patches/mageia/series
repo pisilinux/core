@@ -14,14 +14,7 @@
 ###
 ### Stable Queue
 ###
-
-# CVE-2016-8405
-stable-fbdev-color-map-copying-bounds-checking.patch
-
-stable-tile-ptrace-preserve-previous-registers-for-short-regset-write.patch
-stable-drm-schedule-the-output_poll_work-with-1s-delay-if-we-have-delayed-event.patch
-stable-drm-fix-broken-vt-switch-with-video-1366x768-option.patch
-stable-drm-i915-ignore-bogus-plane-coordinates-on-skl-when-the-plane-is-not-visible.patch
+patch-4.9.19-rc1.patch
 
 ###
 ### Arch x86
@@ -46,9 +39,6 @@ x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch
 # slows down boot
 Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch
 
-# breaks nvidia304
-Revert-x86-mm-mtrr-Remove-kernel-internal-MTRR-inter.patch
-
 ###
 ### Core
 ###
@@ -67,6 +57,9 @@ base-cacheinfo-silence-DT-warnings.patch
 # http://lkml.org/lkml/2008/9/12/52
 pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch
 pci-quirks-drop-devinit-exit.patch
+
+# Stoney iommu hang
+pci-Blacklist-AMD-Stoney-GPU-devices-for-ATS.patch
 
 ###
 ### PNP core
@@ -87,6 +80,9 @@ ACPI-video-Add-a-quirk-to-force-acpi-video-backlight.patch
 
 # drop obsolete warn
 acpi-do-not-warn-if-_BQC-does-not-exist.patch
+
+# silence useless acpi warnings
+acpi-ACPICA-Events-Fix-acpi_ev_initialize_region-return-v.patch
 
 ###
 ### Block
@@ -136,6 +132,9 @@ block-cgroups-kconfig-build-bits-for-BFQ-v7r11-4.5.0.patch
 block-introduce-the-BFQ-v7r11-I-O-sched-for-4.5.0.patch
 block-bfq-add-Early-Queue-Merge-EQM-to-BFQ-v7r11-for.patch
 block-Turn-into-BFQ-v8r6-for-4.9.0.patch
+
+# new macbooks
+block-nvme-detect-NVMe-controller-in-recent-MacBooks.patch
 
 ###
 ### Char
@@ -194,11 +193,16 @@ gpu-drm-mach64-linux-3.14-buildfix.patch
 gpu-drm-mach64-3.17-buildfix.patch
 gpu-drm-mach64-3.18-buildfix.patch
 
-# i915 skl/kbl speedup
-gpu-drm-i915-skl-drop-workarounds-for-A0-and-B0-revisions.patch
-gpu-drm-i915-skl-drop-workarounds-for-D0-revision.patch
-gpu-drm-i915-skl-drop-workarounds-for-E0-revision.patch
-gpu-drm-i915-Remove-WaDisableLSQCROPERFforOCL-KBL-workaround.patch
+#
+gpu-drm-i915-don-t-warn-about-Skylake-CPU-KabyPoint-PCH-.patch
+
+# Amd polaris12 support
+gpu-drm-amd-amdgpu-add-Polaris12-PCI-ID.patch
+gpu-drm-amd-amdgpu-add-Polaris12-support-v3.patch
+gpu-drm-amdgpu-powerplay-add-Polaris12-support.patch
+
+# fix crash
+gpu-drm-amdgpu-pm-check-for-headless-before-calling-comp.patch
 
 ###
 ### Hardware Monitoring
@@ -256,8 +260,11 @@ net-netfilter-psd-fix-redefines.patch
 net-wireless-rtlwifi-Use-dev_kfree_skb_irq-instead-of-kfree_skb.patch
 net-wireless-rtlwifi-Fix-kernel-oops-introduced-with-commit-e4965.patch
 
-# fix speed regression
-net-wireless-brcmfmac-fix-incorrect-event-channel-deduction.patch
+# update rtl8xxxu for mga#20508
+net-wireless-realtek-rtl8xxxu-linux-4.11-rc.patch
+
+# WireGuard support
+net-wireguard.patch
 
 ###
 ### Platform drivers
@@ -283,6 +290,10 @@ include-kbuild-export-pci_ids.patch
 ###
 ### Sound
 ###
+
+# new codecs
+sound-ALSA-hda-realtek-Add-new-codec-ID-ALC299.patch
+sound-ALSA-hda-realtek-New-codec-support-of-ALC1220.patch
 
 ###
 ### Staging
