@@ -28,8 +28,8 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.9.18.xz</Patch>
-            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.9.18/1.mga6/PATCHES/patches/series-->
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.9.21.xz</Patch>
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.9.20/1.mga6/PATCHES/patches/series-->
             <!--stable patches-->
             <!--CVE-2016-8405-->
             <!--other patches-->
@@ -92,6 +92,7 @@
             <Patch level="1">patches/mageia/gpu-drm-amd-amdgpu-add-Polaris12-PCI-ID.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-amd-amdgpu-add-Polaris12-support-v3.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-amdgpu-powerplay-add-Polaris12-support.patch</Patch>
+            <Patch level="1">patches/mageia/gpu-drm-amd-amdgpu-add-POLARIS12-PCI-ID.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-amdgpu-pm-check-for-headless-before-calling-comp.patch</Patch>
             <Patch level="1">patches/mageia/input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch</Patch>
             <Patch level="1">patches/mageia/net-sis190-fix-list-usage.patch</Patch>
@@ -106,9 +107,11 @@
             <Patch level="1">patches/mageia/net-netfilter-psd-mdv.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-psd-2.6.35-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-psd-fix-redefines.patch</Patch>
+            <Patch level="1">patches/mageia/net-wireless-iwlwifi-fix-MODULE_FIRMWARE-for-6030.patch</Patch>
             <Patch level="1">patches/mageia/net-wireless-rtlwifi-Use-dev_kfree_skb_irq-instead-of-kfree_skb.patch</Patch>
             <Patch level="1">patches/mageia/net-wireless-rtlwifi-Fix-kernel-oops-introduced-with-commit-e4965.patch</Patch>
             <Patch level="1">patches/mageia/net-wireless-realtek-rtl8xxxu-linux-4.11-rc.patch</Patch>
+            <!--Patch level="1">patches/mageia/net-libceph-force-gfp_noio-for-socket-allocations.patch</Patch-->
             <Patch level="1">patches/mageia/net-wireguard.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
@@ -206,7 +209,7 @@
     <History>
         <Update release="9">
             <Date>2017-03-30</Date>
-            <Version>4.9.18</Version>
+            <Version>4.9.21</Version>
             <Comment>Version Bump.</Comment>
             <Type package="kernel">security</Type>
             <Requires>

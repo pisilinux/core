@@ -14,7 +14,6 @@
 ###
 ### Stable Queue
 ###
-patch-4.9.19-rc1.patch
 
 ###
 ### Arch x86
@@ -200,6 +199,7 @@ gpu-drm-i915-don-t-warn-about-Skylake-CPU-KabyPoint-PCH-.patch
 gpu-drm-amd-amdgpu-add-Polaris12-PCI-ID.patch
 gpu-drm-amd-amdgpu-add-Polaris12-support-v3.patch
 gpu-drm-amdgpu-powerplay-add-Polaris12-support.patch
+gpu-drm-amd-amdgpu-add-POLARIS12-PCI-ID.patch
 
 # fix crash
 gpu-drm-amdgpu-pm-check-for-headless-before-calling-comp.patch
@@ -256,12 +256,18 @@ net-netfilter-psd-mdv.patch
 net-netfilter-psd-2.6.35-buildfix.patch
 net-netfilter-psd-fix-redefines.patch
 
+# iwlwifi fixes
+net-wireless-iwlwifi-fix-MODULE_FIRMWARE-for-6030.patch
+
 # rtlwifi fixes
 net-wireless-rtlwifi-Use-dev_kfree_skb_irq-instead-of-kfree_skb.patch
 net-wireless-rtlwifi-Fix-kernel-oops-introduced-with-commit-e4965.patch
 
 # update rtl8xxxu for mga#20508
 net-wireless-realtek-rtl8xxxu-linux-4.11-rc.patch
+
+# ceph
+net-libceph-force-gfp_noio-for-socket-allocations.patch
 
 # WireGuard support
 net-wireguard.patch
