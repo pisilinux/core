@@ -28,8 +28,8 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.9.21.xz</Patch>
-            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.9.20/1.mga6/PATCHES/patches/series-->
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.9.27.xz</Patch>
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.9.27/1.mga6/PATCHES/patches/series-->
             <!--stable patches-->
             <!--CVE-2016-8405-->
             <!--other patches-->
@@ -59,7 +59,8 @@
             <!--Patch level="1">patches/mageia/block-cgroups-kconfig-build-bits-for-BFQ-v7r11-4.5.0.patch</Patch>
             <Patch level="1">patches/mageia/block-introduce-the-BFQ-v7r11-I-O-sched-for-4.5.0.patch</Patch>
             <Patch level="1">patches/mageia/block-bfq-add-Early-Queue-Merge-EQM-to-BFQ-v7r11-for.patch</Patch>
-            <Patch level="1">patches/mageia/block-Turn-into-BFQ-v8r6-for-4.9.0.patch</Patch>--><!--2-->
+            <Patch level="1">patches/mageia/block-Turn-into-BFQ-v8r7-for-4.9.0.patch</Patch>
+            <Patch level="1">patches/mageia/block-update-bfq-from-v8r7-to-v8r10.patch</Patch><2-->
             <Patch level="1">patches/mageia/block-nvme-detect-NVMe-controller-in-recent-MacBooks.patch</Patch>
             <Patch level="1">patches/mageia/char-tpm-tpm_crb-implement-tpm-crb-idle-state.patch</Patch>
             <Patch level="1">patches/mageia/char-tmp-tpm_crb-fix-Intel-PTT-hw-bug-during-idle-state.patch</Patch>
@@ -69,6 +70,7 @@
             <Patch level="1">patches/fs-aufs-4.9-posix_acl.patch</Patch>
             <Patch level="1">patches/mageia/fs-aufs-4.9-modular.patch</Patch>
             <Patch level="1">patches/mageia/fs-seq_file-reset-iterator-to-first-record-for-zero-off.patch</Patch>
+            <Patch level="1">patches/mageia/fs-jbd2-Fix-dbench4-performance-regression-for-nobarrier-mounts.patch</Patch>
             <Patch level="1">patches/mageia/firewire-ieee1394-module-aliases.patch</Patch>
             <Patch level="1">patches/mageia/char-agp-intel-new-Q57-id.patch</Patch>
             <!--remove external mach64 support for buildfix-->
@@ -112,14 +114,18 @@
             <Patch level="1">patches/mageia/net-wireless-rtlwifi-Use-dev_kfree_skb_irq-instead-of-kfree_skb.patch</Patch>
             <Patch level="1">patches/mageia/net-wireless-rtlwifi-Fix-kernel-oops-introduced-with-commit-e4965.patch</Patch>
             <Patch level="1">patches/mageia/net-wireless-realtek-rtl8xxxu-linux-4.11-rc.patch</Patch>
-            <!--Patch level="1">patches/mageia/net-libceph-force-gfp_noio-for-socket-allocations.patch</Patch-->
             <Patch level="1">patches/mageia/net-wireguard.patch</Patch>
+            <Patch level="1">patches/mageia/net-macsec-dynamically-allocate-space-for-sglist.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/include-kbuild-export-pci_ids.patch</Patch>
             <Patch level="1">patches/mageia/sound-ALSA-hda-realtek-Add-new-codec-ID-ALC299.patch</Patch>
             <Patch level="1">patches/mageia/sound-ALSA-hda-realtek-New-codec-support-of-ALC1220.patch</Patch>
+            <Patch level="1">patches/mageia/sound-ALSA-hda-A-new-flag-to-enforce-prefix-to-each-pin.patch</Patch>
+            <Patch level="1">patches/mageia/sound-ALSA-hda-Allow-to-enable-disable-vmaster-build-expli.patch</Patch>
+            <Patch level="1">patches/mageia/sound-ALSA-hda-Support-Gigabyte-Gaming-board-with-dual-Rea.patch</Patch>
+            <Patch level="1">patches/mageia/sound-ALSA-hda-Use-a-helper-function-for-renaming-kctl-nam.patch</Patch>
             <Patch level="1">patches/mageia/hid-usbhid-IBM-BladeCenterHS20-quirk.patch</Patch>
             <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id.patch</Patch>
             <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch</Patch>
@@ -208,8 +214,8 @@
 
     <History>
         <Update release="9">
-            <Date>2017-03-30</Date>
-            <Version>4.9.21</Version>
+            <Date>2017-05-09</Date>
+            <Version>4.9.27</Version>
             <Comment>Version Bump.</Comment>
             <Type package="kernel">security</Type>
             <Requires>

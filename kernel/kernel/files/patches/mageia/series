@@ -130,7 +130,8 @@ block-Make-CFQ-default-to-IOPS-mode-on-SSDs.patch
 block-cgroups-kconfig-build-bits-for-BFQ-v7r11-4.5.0.patch
 block-introduce-the-BFQ-v7r11-I-O-sched-for-4.5.0.patch
 block-bfq-add-Early-Queue-Merge-EQM-to-BFQ-v7r11-for.patch
-block-Turn-into-BFQ-v8r6-for-4.9.0.patch
+block-Turn-into-BFQ-v8r7-for-4.9.0.patch
+block-update-bfq-from-v8r7-to-v8r10.patch
 
 # new macbooks
 block-nvme-detect-NVMe-controller-in-recent-MacBooks.patch
@@ -158,6 +159,9 @@ fs-aufs-4.9-modular.patch
 
 # needed for mdadm: imsm: enable bad block support for imsm metadata
 fs-seq_file-reset-iterator-to-first-record-for-zero-off.patch
+
+# performance regression fix
+fs-jbd2-Fix-dbench4-performance-regression-for-nobarrier-mounts.patch
 
 ###
 ### FireWire
@@ -266,11 +270,11 @@ net-wireless-rtlwifi-Fix-kernel-oops-introduced-with-commit-e4965.patch
 # update rtl8xxxu for mga#20508
 net-wireless-realtek-rtl8xxxu-linux-4.11-rc.patch
 
-# ceph
-net-libceph-force-gfp_noio-for-socket-allocations.patch
-
 # WireGuard support
 net-wireguard.patch
+
+# CVE-2017-7477
+net-macsec-dynamically-allocate-space-for-sglist.patch
 
 ###
 ### Platform drivers
@@ -300,6 +304,12 @@ include-kbuild-export-pci_ids.patch
 # new codecs
 sound-ALSA-hda-realtek-Add-new-codec-ID-ALC299.patch
 sound-ALSA-hda-realtek-New-codec-support-of-ALC1220.patch
+
+# add support for Gigabyte GA-AX370 Gaming 5 with dual codecs (TTL: 4.12)
+sound-ALSA-hda-A-new-flag-to-enforce-prefix-to-each-pin.patch
+sound-ALSA-hda-Allow-to-enable-disable-vmaster-build-expli.patch
+sound-ALSA-hda-Support-Gigabyte-Gaming-board-with-dual-Rea.patch
+sound-ALSA-hda-Use-a-helper-function-for-renaming-kctl-nam.patch
 
 ###
 ### Staging
