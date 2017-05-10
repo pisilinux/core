@@ -1,9 +1,13 @@
-From 3e3791c0b4ef3b2067f8454e58001af8e3da3840 Mon Sep 17 00:00:00 2001
+From 0432a5c7bfc4a11531c1e58f574c733a2552f149 Mon Sep 17 00:00:00 2001
 From: Paolo Valente <paolo.valente@linaro.org>
 Date: Tue, 17 May 2016 08:28:04 +0200
-Subject: [PATCH 4/4] Turn into BFQ-v8r6 for 4.9.0
+Subject: [PATCH 4/4] Turn into BFQ-v8r7 for 4.9.0
 
-CHANGELOG from v8r4 to v8r6
+CHANGELOG from v8r4 to v8r7
+
+BFQ v8r7
+
+BUGFIX: make BFQ compile also without hierarchical support
 
 BFQ v8r6
 
@@ -125,9 +129,9 @@ Signed-off-by: Paolo Valente <paolo.valente@linaro.org>
  block/Kconfig.iosched               |   18 +-
  block/bfq-cgroup.c                  |  501 +++---
  block/bfq-iosched.c                 | 3278 ++++++++++++++++++++++-------------
- block/bfq-sched.c                   | 1270 +++++++++++---
+ block/bfq-sched.c                   | 1288 +++++++++++---
  block/bfq.h                         |  800 +++++----
- 7 files changed, 4310 insertions(+), 2089 deletions(-)
+ 7 files changed, 4320 insertions(+), 2097 deletions(-)
  create mode 100644 Documentation/block/bfq-iosched.txt
 
 diff --git a/Documentation/block/00-INDEX b/Documentation/block/00-INDEX
@@ -1601,7 +1605,7 @@ index 0367996..bbaecd0 100644
  
  static struct bfq_group *
 diff --git a/block/bfq-iosched.c b/block/bfq-iosched.c
-index cf3e9b1..0f9cd53 100644
+index cf3e9b1..2a2c130 100644
 --- a/block/bfq-iosched.c
 +++ b/block/bfq-iosched.c
 @@ -1,5 +1,5 @@
@@ -6201,7 +6205,7 @@ index cf3e9b1..0f9cd53 100644
 -
 -	if (bfq_timeout_async == 0)
 -		bfq_timeout_async = 1;
-+	char msg[60] = "BFQ I/O-scheduler: v8r6";
++	char msg[60] = "BFQ I/O-scheduler: v8r7";
  
  #ifdef CONFIG_BFQ_GROUP_IOSCHED
  	ret = blkcg_policy_register(&blkcg_policy_bfq);
@@ -6265,10 +6269,10 @@ index cf3e9b1..0f9cd53 100644
  	return 0;
  
 diff --git a/block/bfq-sched.c b/block/bfq-sched.c
-index a5ed694..4af77f4 100644
+index a5ed694..797bce7 100644
 --- a/block/bfq-sched.c
 +++ b/block/bfq-sched.c
-@@ -7,28 +7,46 @@
+@@ -7,28 +7,166 @@
   * Copyright (C) 2008 Fabio Checconi <fabio@gandalf.sssup.it>
   *		      Paolo Valente <paolo.valente@unimore.it>
   *
@@ -6276,8 +6280,8 @@ index a5ed694..4af77f4 100644
 + * Copyright (C) 2015 Paolo Valente <paolo.valente@unimore.it>
 + *
 + * Copyright (C) 2016 Paolo Valente <paolo.valente@linaro.org>
-  */
- 
++ */
++
 +static struct bfq_group *bfqq_group(struct bfq_queue *bfqq);
 +
 +/**
@@ -6292,62 +6296,16 @@ index a5ed694..4af77f4 100644
 +	return (s64)(a - b) > 0;
 +}
 +
- #ifdef CONFIG_BFQ_GROUP_IOSCHED
--#define for_each_entity(entity)	\
-+/* both next loops stop at one of the child entities of the root group */
-+#define for_each_entity(entity)				\
- 	for (; entity ; entity = entity->parent)
- 
- #define for_each_entity_safe(entity, parent) \
- 	for (; entity && ({ parent = entity->parent; 1; }); entity = parent)
- 
- 
--static struct bfq_entity *bfq_lookup_next_entity(struct bfq_sched_data *sd,
--						 int extract,
--						 struct bfq_data *bfqd);
--
--static struct bfq_group *bfqq_group(struct bfq_queue *bfqq);
-+static struct bfq_entity *bfq_lookup_next_entity(struct bfq_sched_data *sd);
- 
--static void bfq_update_budget(struct bfq_entity *next_in_service)
-+/*
-+ * Returns true if this budget changes may let next_in_service->parent
-+ * become the next_in_service entity for its parent entity.
-+ */
-+static bool bfq_update_parent_budget(struct bfq_entity *next_in_service)
- {
- 	struct bfq_entity *bfqg_entity;
- 	struct bfq_group *bfqg;
- 	struct bfq_sched_data *group_sd;
-+	bool ret = false;
- 
- 	BUG_ON(!next_in_service);
- 
-@@ -41,39 +59,134 @@ static void bfq_update_budget(struct bfq_entity *next_in_service)
- 	 * as it must never become an in-service entity.
- 	 */
- 	bfqg_entity = bfqg->my_entity;
--	if (bfqg_entity)
-+	if (bfqg_entity) {
-+		if (bfqg_entity->budget > next_in_service->budget)
-+			ret = true;
- 		bfqg_entity->budget = next_in_service->budget;
-+	}
-+
-+	return ret;
- }
- 
--static int bfq_update_next_in_service(struct bfq_sched_data *sd)
 +static struct bfq_entity *bfq_root_active_entity(struct rb_root *tree)
- {
--	struct bfq_entity *next_in_service;
++{
 +	struct rb_node *node = tree->rb_node;
- 
--	if (sd->in_service_entity)
--		/* will update/requeue at the end of service */
--		return 0;
++
 +	return rb_entry(node, struct bfq_entity, rb_node);
 +}
++
++static struct bfq_entity *bfq_lookup_next_entity(struct bfq_sched_data *sd);
++
++static bool bfq_update_parent_budget(struct bfq_entity *next_in_service);
 +
 +/**
 + * bfq_update_next_in_service - update sd->next_in_service
@@ -6371,20 +6329,15 @@ index a5ed694..4af77f4 100644
 + * Returns true if sd->next_in_service changes in such a way that
 + * entity->parent may become the next_in_service for its parent
 + * entity.
-+ */
+  */
 +static bool bfq_update_next_in_service(struct bfq_sched_data *sd,
 +				       struct bfq_entity *new_entity)
 +{
 +	struct bfq_entity *next_in_service = sd->next_in_service;
 +	struct bfq_queue *bfqq;
 +	bool parent_sched_may_change = false;
- 
- 	/*
--	 * NOTE: this can be improved in many ways, such as returning
--	 * 1 (and thus propagating upwards the update) only when the
--	 * budget changes, or caching the bfqq that will be scheduled
--	 * next from this subtree.  By now we worry more about
--	 * correctness than about performance...
++
++	/*
 +	 * If this update is triggered by the activation, requeueing
 +	 * or repositiong of an entity that does not coincide with
 +	 * sd->next_in_service, then a full lookup in the active tree
@@ -6395,8 +6348,7 @@ index a5ed694..4af77f4 100644
 +	 * finish time than sd->next_in_service. If this compound
 +	 * condition holds, then the new entity becomes the new
 +	 * next_in_service. Otherwise no change is needed.
- 	 */
--	next_in_service = bfq_lookup_next_entity(sd, 0, NULL);
++	 */
 +	if (new_entity && new_entity != sd->next_in_service) {
 +		/*
 +		 * Flag used to decide whether to replace
@@ -6445,54 +6397,160 @@ index a5ed694..4af77f4 100644
 +			bfq_update_parent_budget(next_in_service);
 +	}
 +
- 	sd->next_in_service = next_in_service;
- 
--	if (next_in_service)
--		bfq_update_budget(next_in_service);
++	sd->next_in_service = next_in_service;
++
 +	if (!next_in_service)
 +		return parent_sched_may_change;
  
--	return 1;
--}
 +	bfqq = bfq_entity_to_bfqq(next_in_service);
 +	if (bfqq)
 +		bfq_log_bfqq(bfqq->bfqd, bfqq,
 +			     "update_next_in_service: chosen this queue");
-+#ifdef CONFIG_BFQ_GROUP_IOSCHED
+ #ifdef CONFIG_BFQ_GROUP_IOSCHED
+-#define for_each_entity(entity)	\
 +	else {
 +		struct bfq_group *bfqg =
 +			container_of(next_in_service,
 +				     struct bfq_group, entity);
- 
--static void bfq_check_next_in_service(struct bfq_sched_data *sd,
--				      struct bfq_entity *entity)
--{
--	BUG_ON(sd->next_in_service != entity);
++
 +		bfq_log_bfqg((struct bfq_data *)bfqg->bfqd, bfqg,
 +			     "update_next_in_service: chosen this entity");
 +	}
 +#endif
 +	return parent_sched_may_change;
- }
++}
 +
- #else
- #define for_each_entity(entity)	\
- 	for (; entity ; entity = NULL)
-@@ -86,12 +199,7 @@ static int bfq_update_next_in_service(struct bfq_sched_data *sd)
- 	return 0;
++#ifdef CONFIG_BFQ_GROUP_IOSCHED
++/* both next loops stop at one of the child entities of the root group */
++#define for_each_entity(entity)				\
+ 	for (; entity ; entity = entity->parent)
+ 
+ #define for_each_entity_safe(entity, parent) \
+ 	for (; entity && ({ parent = entity->parent; 1; }); entity = parent)
+ 
+-
+-static struct bfq_entity *bfq_lookup_next_entity(struct bfq_sched_data *sd,
+-						 int extract,
+-						 struct bfq_data *bfqd);
+-
+-static struct bfq_group *bfqq_group(struct bfq_queue *bfqq);
+-
+-static void bfq_update_budget(struct bfq_entity *next_in_service)
++/*
++ * Returns true if this budget changes may let next_in_service->parent
++ * become the next_in_service entity for its parent entity.
++ */
++static bool bfq_update_parent_budget(struct bfq_entity *next_in_service)
+ {
+ 	struct bfq_entity *bfqg_entity;
+ 	struct bfq_group *bfqg;
+ 	struct bfq_sched_data *group_sd;
++	bool ret = false;
+ 
+ 	BUG_ON(!next_in_service);
+ 
+@@ -41,60 +179,68 @@ static void bfq_update_budget(struct bfq_entity *next_in_service)
+ 	 * as it must never become an in-service entity.
+ 	 */
+ 	bfqg_entity = bfqg->my_entity;
+-	if (bfqg_entity)
++	if (bfqg_entity) {
++		if (bfqg_entity->budget > next_in_service->budget)
++			ret = true;
+ 		bfqg_entity->budget = next_in_service->budget;
++	}
++
++	return ret;
+ }
+ 
+-static int bfq_update_next_in_service(struct bfq_sched_data *sd)
++/*
++ * This function tells whether entity stops being a candidate for next
++ * service, according to the following logic.
++ *
++ * This function is invoked for an entity that is about to be set in
++ * service. If such an entity is a queue, then the entity is no longer
++ * a candidate for next service (i.e, a candidate entity to serve
++ * after the in-service entity is expired). The function then returns
++ * true.
++ *
++ * In contrast, the entity could stil be a candidate for next service
++ * if it is not a queue, and has more than one child. In fact, even if
++ * one of its children is about to be set in service, other children
++ * may still be the next to serve. As a consequence, a non-queue
++ * entity is not a candidate for next-service only if it has only one
++ * child. And only if this condition holds, then the function returns
++ * true for a non-queue entity.
++ */
++static bool bfq_no_longer_next_in_service(struct bfq_entity *entity)
+ {
+-	struct bfq_entity *next_in_service;
++	struct bfq_group *bfqg;
+ 
+-	if (sd->in_service_entity)
+-		/* will update/requeue at the end of service */
+-		return 0;
++	if (bfq_entity_to_bfqq(entity))
++		return true;
+ 
+-	/*
+-	 * NOTE: this can be improved in many ways, such as returning
+-	 * 1 (and thus propagating upwards the update) only when the
+-	 * budget changes, or caching the bfqq that will be scheduled
+-	 * next from this subtree.  By now we worry more about
+-	 * correctness than about performance...
+-	 */
+-	next_in_service = bfq_lookup_next_entity(sd, 0, NULL);
+-	sd->next_in_service = next_in_service;
++	bfqg = container_of(entity, struct bfq_group, entity);
+ 
+-	if (next_in_service)
+-		bfq_update_budget(next_in_service);
++	BUG_ON(bfqg == ((struct bfq_data *)(bfqg->bfqd))->root_group);
++	BUG_ON(bfqg->active_entities == 0);
++	if (bfqg->active_entities == 1)
++		return true;
+ 
+-	return 1;
++	return false;
  }
  
 -static void bfq_check_next_in_service(struct bfq_sched_data *sd,
 -				      struct bfq_entity *entity)
 -{
+-	BUG_ON(sd->next_in_service != entity);
 -}
--
--static void bfq_update_budget(struct bfq_entity *next_in_service)
-+static void bfq_update_parent_budget(struct bfq_entity *next_in_service)
+-#else
++#else /* CONFIG_BFQ_GROUP_IOSCHED */
+ #define for_each_entity(entity)	\
+ 	for (; entity ; entity = NULL)
+ 
+ #define for_each_entity_safe(entity, parent) \
+ 	for (parent = NULL; entity ; entity = parent)
+ 
+-static int bfq_update_next_in_service(struct bfq_sched_data *sd)
++static bool bfq_update_parent_budget(struct bfq_entity *next_in_service)
  {
+-	return 0;
++	return false;
  }
- #endif
-@@ -105,18 +213,6 @@ static void bfq_update_budget(struct bfq_entity *next_in_service)
+ 
+-static void bfq_check_next_in_service(struct bfq_sched_data *sd,
+-				      struct bfq_entity *entity)
++static bool bfq_no_longer_next_in_service(struct bfq_entity *entity)
+ {
++	return true;
+ }
+ 
+-static void bfq_update_budget(struct bfq_entity *next_in_service)
+-{
+-}
+-#endif
++#endif /* CONFIG_BFQ_GROUP_IOSCHED */
+ 
+ /*
+  * Shift for timestamp calculations.  This actually limits the maximum
+@@ -105,18 +251,6 @@ static void bfq_update_budget(struct bfq_entity *next_in_service)
   */
  #define WFQ_SERVICE_SHIFT	22
  
@@ -6511,7 +6569,7 @@ index a5ed694..4af77f4 100644
  static struct bfq_queue *bfq_entity_to_bfqq(struct bfq_entity *entity)
  {
  	struct bfq_queue *bfqq = NULL;
-@@ -151,20 +247,36 @@ static u64 bfq_delta(unsigned long service, unsigned long weight)
+@@ -151,20 +285,36 @@ static u64 bfq_delta(unsigned long service, unsigned long weight)
  static void bfq_calc_finish(struct bfq_entity *entity, unsigned long service)
  {
  	struct bfq_queue *bfqq = bfq_entity_to_bfqq(entity);
@@ -6550,7 +6608,7 @@ index a5ed694..4af77f4 100644
  	}
  }
  
-@@ -293,10 +405,26 @@ static void bfq_update_min(struct bfq_entity *entity, struct rb_node *node)
+@@ -293,10 +443,26 @@ static void bfq_update_min(struct bfq_entity *entity, struct rb_node *node)
  static void bfq_update_active_node(struct rb_node *node)
  {
  	struct bfq_entity *entity = rb_entry(node, struct bfq_entity, rb_node);
@@ -6577,7 +6635,7 @@ index a5ed694..4af77f4 100644
  }
  
  /**
-@@ -386,8 +514,6 @@ static void bfq_active_insert(struct bfq_service_tree *st,
+@@ -386,8 +552,6 @@ static void bfq_active_insert(struct bfq_service_tree *st,
  		BUG_ON(!bfqg);
  		BUG_ON(!bfqd);
  		bfqg->active_entities++;
@@ -6586,7 +6644,7 @@ index a5ed694..4af77f4 100644
  	}
  #endif
  }
-@@ -399,7 +525,7 @@ static void bfq_active_insert(struct bfq_service_tree *st,
+@@ -399,7 +563,7 @@ static void bfq_active_insert(struct bfq_service_tree *st,
  static unsigned short bfq_ioprio_to_weight(int ioprio)
  {
  	BUG_ON(ioprio < 0 || ioprio >= IOPRIO_BE_NR);
@@ -6595,7 +6653,7 @@ index a5ed694..4af77f4 100644
  }
  
  /**
-@@ -422,9 +548,9 @@ static void bfq_get_entity(struct bfq_entity *entity)
+@@ -422,9 +586,9 @@ static void bfq_get_entity(struct bfq_entity *entity)
  	struct bfq_queue *bfqq = bfq_entity_to_bfqq(entity);
  
  	if (bfqq) {
@@ -6607,7 +6665,7 @@ index a5ed694..4af77f4 100644
  	}
  }
  
-@@ -499,10 +625,6 @@ static void bfq_active_extract(struct bfq_service_tree *st,
+@@ -499,10 +663,6 @@ static void bfq_active_extract(struct bfq_service_tree *st,
  		BUG_ON(!bfqd);
  		BUG_ON(!bfqg->active_entities);
  		bfqg->active_entities--;
@@ -6618,7 +6676,7 @@ index a5ed694..4af77f4 100644
  	}
  #endif
  }
-@@ -547,12 +669,12 @@ static void bfq_forget_entity(struct bfq_service_tree *st,
+@@ -547,12 +707,12 @@ static void bfq_forget_entity(struct bfq_service_tree *st,
  
  	BUG_ON(!entity->on_st);
  
@@ -6633,7 +6691,7 @@ index a5ed694..4af77f4 100644
  		bfq_put_queue(bfqq);
  	}
  }
-@@ -602,7 +724,7 @@ __bfq_entity_update_weight_prio(struct bfq_service_tree *old_st,
+@@ -602,7 +762,7 @@ __bfq_entity_update_weight_prio(struct bfq_service_tree *old_st,
  
  	if (entity->prio_changed) {
  		struct bfq_queue *bfqq = bfq_entity_to_bfqq(entity);
@@ -6642,7 +6700,7 @@ index a5ed694..4af77f4 100644
  		struct bfq_data *bfqd = NULL;
  		struct rb_root *root;
  #ifdef CONFIG_BFQ_GROUP_IOSCHED
-@@ -630,7 +752,10 @@ __bfq_entity_update_weight_prio(struct bfq_service_tree *old_st,
+@@ -630,7 +790,10 @@ __bfq_entity_update_weight_prio(struct bfq_service_tree *old_st,
  			    entity->new_weight > BFQ_MAX_WEIGHT) {
  				pr_crit("update_weight_prio: new_weight %d\n",
  					entity->new_weight);
@@ -6654,7 +6712,7 @@ index a5ed694..4af77f4 100644
  			}
  			entity->orig_weight = entity->new_weight;
  			if (bfqq)
-@@ -661,6 +786,13 @@ __bfq_entity_update_weight_prio(struct bfq_service_tree *old_st,
+@@ -661,6 +824,13 @@ __bfq_entity_update_weight_prio(struct bfq_service_tree *old_st,
  		 * associated with its new weight.
  		 */
  		if (prev_weight != new_weight) {
@@ -6668,7 +6726,7 @@ index a5ed694..4af77f4 100644
  			root = bfqq ? &bfqd->queue_weights_tree :
  				      &bfqd->group_weights_tree;
  			bfq_weights_tree_remove(bfqd, entity, root);
-@@ -707,7 +839,7 @@ static void bfq_bfqq_served(struct bfq_queue *bfqq, int served)
+@@ -707,7 +877,7 @@ static void bfq_bfqq_served(struct bfq_queue *bfqq, int served)
  		st = bfq_entity_service_tree(entity);
  
  		entity->service += served;
@@ -6677,7 +6735,7 @@ index a5ed694..4af77f4 100644
  		BUG_ON(st->wsum == 0);
  
  		st->vtime += bfq_delta(served, st->wsum);
-@@ -716,170 +848,419 @@ static void bfq_bfqq_served(struct bfq_queue *bfqq, int served)
+@@ -716,170 +886,419 @@ static void bfq_bfqq_served(struct bfq_queue *bfqq, int served)
  #ifdef CONFIG_BFQ_GROUP_IOSCHED
  	bfqg_stats_set_start_empty_time(bfqq_group(bfqq));
  #endif
@@ -6731,17 +6789,17 @@ index a5ed694..4af77f4 100644
 +	if (time_ms > 0 && time_ms < timeout_ms)
 +		tot_serv_to_charge =
 +			(bfqd->bfq_max_budget * time_ms) / timeout_ms;
-+
+ 
+-	bfq_log_bfqq(bfqq->bfqd, bfqq, "charge_full_budget");
 +	if (tot_serv_to_charge < entity->service)
 +		tot_serv_to_charge = entity->service;
  
--	bfq_log_bfqq(bfqq->bfqd, bfqq, "charge_full_budget");
+-	bfq_bfqq_served(bfqq, entity->budget - entity->service);
 +	bfq_log_bfqq(bfqq->bfqd, bfqq,
 +		     "charge_time: %lu/%u ms, %d/%d/%d sectors",
 +		     time_ms, timeout_ms, entity->service,
 +		     tot_serv_to_charge, entity->budget);
- 
--	bfq_bfqq_served(bfqq, entity->budget - entity->service);
++
 +	/* Increase budget to avoid inconsistencies */
 +	if (tot_serv_to_charge > entity->budget)
 +		entity->budget = tot_serv_to_charge;
@@ -6948,19 +7006,20 @@ index a5ed694..4af77f4 100644
 - * @entity: the entity to activate.
 + * __bfq_requeue_entity - handle requeueing or repositioning of an entity.
 + * @entity: the entity being requeued or repositioned.
-  *
-- * Activate @entity and all the entities on the path from it to the root.
++ *
 + * Requeueing is needed if this entity stops being served, which
 + * happens if a leaf descendant entity has expired. On the other hand,
 + * repositioning is needed if the next_inservice_entity for the child
 + * entity has changed. See the comments inside the function for
 + * details.
-+ *
+  *
+- * Activate @entity and all the entities on the path from it to the root.
 + * Basically, this function: 1) removes entity from its active tree if
 + * present there, 2) updates the timestamps of entity and 3) inserts
 + * entity back into its active tree (in the new, right position for
 + * the new values of the timestamps).
-+ */
+  */
+-static void bfq_activate_entity(struct bfq_entity *entity)
 +static void __bfq_requeue_entity(struct bfq_entity *entity)
 +{
 +	struct bfq_sched_data *sd = entity->sched_data;
@@ -7065,8 +7124,7 @@ index a5ed694..4af77f4 100644
 + * @requeue: true if this is a requeue, which implies that bfqq is
 + *	     being expired; thus ALL its ancestors stop being served and must
 + *	     therefore be requeued
-  */
--static void bfq_activate_entity(struct bfq_entity *entity)
++ */
 +static void bfq_activate_requeue_entity(struct bfq_entity *entity,
 +					bool non_blocking_wait_rq,
 +					bool requeue)
@@ -7186,7 +7244,7 @@ index a5ed694..4af77f4 100644
  {
  	struct bfq_sched_data *sd;
  	struct bfq_entity *parent;
-@@ -887,63 +1268,153 @@ static void bfq_deactivate_entity(struct bfq_entity *entity, int requeue)
+@@ -887,63 +1306,154 @@ static void bfq_deactivate_entity(struct bfq_entity *entity, int requeue)
  	for_each_entity_safe(entity, parent) {
  		sd = entity->sched_data;
  
@@ -7309,7 +7367,8 @@ index a5ed694..4af77f4 100644
 +		if (!bfq_update_next_in_service(sd, entity) &&
 +		    !expiration)
 +			/*
-+			 * next_in_service unchanged, and no
++			 * next_in_service unchanged or not causing
++			 * any change in entity->parent->sd, and no
 +			 * requeueing needed for expiration: stop
 +			 * here.
 +			 */
@@ -7339,13 +7398,13 @@ index a5ed694..4af77f4 100644
 -	struct bfq_entity *entry;
 -	struct rb_node *node = st->active.rb_node;
 +	struct bfq_entity *root_entity = bfq_root_active_entity(&st->active);
++
++	if (bfq_gt(root_entity->min_start, st->vtime)) {
++		struct bfq_queue *bfqq = bfq_entity_to_bfqq(root_entity);
  
 -	entry = rb_entry(node, struct bfq_entity, rb_node);
 -	if (bfq_gt(entry->min_start, st->vtime)) {
 -		st->vtime = entry->min_start;
-+	if (bfq_gt(root_entity->min_start, st->vtime)) {
-+		struct bfq_queue *bfqq = bfq_entity_to_bfqq(root_entity);
-+
 +		if (bfqq)
 +			bfq_log_bfqq(bfqq->bfqd, bfqq,
 +				     "calc_vtime_jump: new value %llu",
@@ -7373,7 +7432,7 @@ index a5ed694..4af77f4 100644
  		bfq_forget_idle(st);
  	}
  }
-@@ -952,6 +1423,7 @@ static void bfq_update_vtime(struct bfq_service_tree *st)
+@@ -952,6 +1462,7 @@ static void bfq_update_vtime(struct bfq_service_tree *st)
   * bfq_first_active_entity - find the eligible entity with
   *                           the smallest finish time
   * @st: the service tree to select from.
@@ -7381,7 +7440,7 @@ index a5ed694..4af77f4 100644
   *
   * This function searches the first schedulable entity, starting from the
   * root of the tree and going on the left every time on this side there is
-@@ -959,7 +1431,8 @@ static void bfq_update_vtime(struct bfq_service_tree *st)
+@@ -959,7 +1470,8 @@ static void bfq_update_vtime(struct bfq_service_tree *st)
   * the right is followed only if a) the left subtree contains no eligible
   * entities and b) no eligible entity has been found yet.
   */
@@ -7391,7 +7450,7 @@ index a5ed694..4af77f4 100644
  {
  	struct bfq_entity *entry, *first = NULL;
  	struct rb_node *node = st->active.rb_node;
-@@ -967,15 +1440,15 @@ static struct bfq_entity *bfq_first_active_entity(struct bfq_service_tree *st)
+@@ -967,15 +1479,15 @@ static struct bfq_entity *bfq_first_active_entity(struct bfq_service_tree *st)
  	while (node) {
  		entry = rb_entry(node, struct bfq_entity, rb_node);
  left:
@@ -7410,7 +7469,7 @@ index a5ed694..4af77f4 100644
  				node = node->rb_left;
  				goto left;
  			}
-@@ -993,31 +1466,84 @@ static struct bfq_entity *bfq_first_active_entity(struct bfq_service_tree *st)
+@@ -993,31 +1505,84 @@ static struct bfq_entity *bfq_first_active_entity(struct bfq_service_tree *st)
   * __bfq_lookup_next_entity - return the first eligible entity in @st.
   * @st: the service tree.
   *
@@ -7510,7 +7569,7 @@ index a5ed694..4af77f4 100644
  
  	return entity;
  }
-@@ -1025,50 +1551,118 @@ static struct bfq_entity *__bfq_lookup_next_entity(struct bfq_service_tree *st,
+@@ -1025,50 +1590,81 @@ static struct bfq_entity *__bfq_lookup_next_entity(struct bfq_service_tree *st,
  /**
   * bfq_lookup_next_entity - return the first eligible entity in @sd.
   * @sd: the sched_data.
@@ -7621,47 +7680,10 @@ index a5ed694..4af77f4 100644
 +	return sd->next_in_service != sd->in_service_entity;
 +}
 +
-+/*
-+ * This function tells whether entity stops being a candidate for next
-+ * service, according to the following logic.
-+ *
-+ * This function is invoked for an entity that is about to be set in
-+ * service. If such an entity is a queue, then the entity is no longer
-+ * a candidate for next service (i.e, a candidate entity to serve
-+ * after the in-service entity is expired). The function then returns
-+ * true.
-+ *
-+ * In contrast, the entity could stil be a candidate for next service
-+ * if it is not a queue, and has more than one child. In fact, even if
-+ * one of its children is about to be set in service, other children
-+ * may still be the next to serve. As a consequence, a non-queue
-+ * entity is not a candidate for next-service only if it has only one
-+ * child. And only if this condition holds, then the function returns
-+ * true for a non-queue entity.
-+ */
-+static bool bfq_no_longer_next_in_service(struct bfq_entity *entity)
-+{
-+	struct bfq_group *bfqg;
-+
-+	if (bfq_entity_to_bfqq(entity))
-+		return true;
-+
-+#ifdef CONFIG_BFQ_GROUP_IOSCHED
-+	bfqg = container_of(entity, struct bfq_group, entity);
-+
-+	BUG_ON(bfqg == ((struct bfq_data *)(bfqg->bfqd))->root_group);
-+	BUG_ON(bfqg->active_entities == 0);
-+	if (bfqg->active_entities == 1)
-+		return true;
-+#endif
-+
-+	return false;
-+}
-+
  /*
   * Get next queue for service.
   */
-@@ -1083,58 +1677,208 @@ static struct bfq_queue *bfq_get_next_queue(struct bfq_data *bfqd)
+@@ -1083,58 +1679,208 @@ static struct bfq_queue *bfq_get_next_queue(struct bfq_data *bfqd)
  	if (bfqd->busy_queues == 0)
  		return NULL;
  
@@ -7883,7 +7905,7 @@ index a5ed694..4af77f4 100644
  {
  	BUG_ON(!bfq_bfqq_busy(bfqq));
  	BUG_ON(!RB_EMPTY_ROOT(&bfqq->sort_list));
-@@ -1146,27 +1890,20 @@ static void bfq_del_bfqq_busy(struct bfq_data *bfqd, struct bfq_queue *bfqq,
+@@ -1146,27 +1892,20 @@ static void bfq_del_bfqq_busy(struct bfq_data *bfqd, struct bfq_queue *bfqq,
  	BUG_ON(bfqd->busy_queues == 0);
  	bfqd->busy_queues--;
  
@@ -7918,7 +7940,7 @@ index a5ed694..4af77f4 100644
  }
  
  /*
-@@ -1184,16 +1921,11 @@ static void bfq_add_bfqq_busy(struct bfq_data *bfqd, struct bfq_queue *bfqq)
+@@ -1184,16 +1923,11 @@ static void bfq_add_bfqq_busy(struct bfq_data *bfqd, struct bfq_queue *bfqq)
  	bfq_mark_bfqq_busy(bfqq);
  	bfqd->busy_queues++;
  
@@ -7938,13 +7960,13 @@ index a5ed694..4af77f4 100644
  		bfqd->wr_busy_queues++;
  }
 diff --git a/block/bfq.h b/block/bfq.h
-index fcce855..57ab51d 100644
+index fcce855..bef8244 100644
 --- a/block/bfq.h
 +++ b/block/bfq.h
 @@ -1,5 +1,5 @@
  /*
 - * BFQ-v7r11 for 4.5.0: data structures and common functions prototypes.
-+ * BFQ v8r6 for 4.9.0: data structures and common functions prototypes.
++ * BFQ v8r7 for 4.9.0: data structures and common functions prototypes.
   *
   * Based on ideas and code from CFQ:
   * Copyright (C) 2003 Jens Axboe <axboe@kernel.dk>

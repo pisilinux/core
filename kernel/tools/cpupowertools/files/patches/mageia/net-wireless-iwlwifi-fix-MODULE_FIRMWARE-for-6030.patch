@@ -1,0 +1,32 @@
+From d8320d75b59ecdc1b8e60ac793d3a54d84333a18 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?J=C3=BCrg=20Billeter?= <j@bitron.ch>
+Date: Mon, 10 Oct 2016 18:30:00 +0200
+Subject: [PATCH] iwlwifi: fix MODULE_FIRMWARE for 6030
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+IWL6000G2B_UCODE_API_MAX is not defined. ucode_api_max of
+IWL_DEVICE_6030 uses IWL6000G2_UCODE_API_MAX. Use this also for
+MODULE_FIRMWARE.
+
+Fixes: 9d9b21d1b616 ("iwlwifi: remove IWL_*_UCODE_API_OK")
+Signed-off-by: Jürg Billeter <j@bitron.ch>
+Signed-off-by: Luca Coelho <luciano.coelho@intel.com>
+---
+ drivers/net/wireless/intel/iwlwifi/iwl-6000.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/net/wireless/intel/iwlwifi/iwl-6000.c b/drivers/net/wireless/intel/iwlwifi/iwl-6000.c
+index 0b9f6a7..39335b7 100644
+--- a/drivers/net/wireless/intel/iwlwifi/iwl-6000.c
++++ b/drivers/net/wireless/intel/iwlwifi/iwl-6000.c
+@@ -371,4 +371,4 @@ const struct iwl_cfg iwl6000_3agn_cfg = {
+ MODULE_FIRMWARE(IWL6000_MODULE_FIRMWARE(IWL6000_UCODE_API_MAX));
+ MODULE_FIRMWARE(IWL6050_MODULE_FIRMWARE(IWL6050_UCODE_API_MAX));
+ MODULE_FIRMWARE(IWL6005_MODULE_FIRMWARE(IWL6000G2_UCODE_API_MAX));
+-MODULE_FIRMWARE(IWL6030_MODULE_FIRMWARE(IWL6000G2B_UCODE_API_MAX));
++MODULE_FIRMWARE(IWL6030_MODULE_FIRMWARE(IWL6000G2_UCODE_API_MAX));
+-- 
+2.10.2
+
