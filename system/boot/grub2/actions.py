@@ -48,7 +48,7 @@ def setup():
     
 def build():
     #make-dist for creating all updated translation files
-    autotools.make("dist")
+    #autotools.make("dist")
     autotools.make()
     shelltools.cd("../grub-%s-efi" % get.srcVERSION())
     autotools.make()
