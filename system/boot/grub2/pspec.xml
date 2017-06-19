@@ -12,10 +12,10 @@
         <IsA>app:gui</IsA>
         <Summary>GNU GRUB is a Multiboot boot loader.</Summary>
         <Description>GNU GRUB (short for GNU GRand Unified Bootloader) is a boot loader package from the GNU Project.</Description>
-        <Archive sha1sum="14a1f9239a9c974957e835dc706fc6a1e4819c83" type="tarxz">ftp://alpha.gnu.org/gnu/grub/grub-2.02~beta3.tar.xz</Archive>
-        <Archive sha1sum="4ec712aced1c2b4cb6cd1cbd83fc2154249d6977" type="tarxz" target="grub-2.02~beta3/grub-extras">http://source.pisilinux.org/1.0/grub2_extras_915resolution_r10.tar.xz</Archive>
+        <Archive sha1sum="4f6f3719fd7dbb0449a58547c1b08c9801337663" type="tarxz">ftp://alpha.gnu.org/gnu/grub/grub-2.02~rc2.tar.xz</Archive>
+        <Archive sha1sum="4ec712aced1c2b4cb6cd1cbd83fc2154249d6977" type="tarxz" target="grub-2.02~rc2/grub-extras">http://source.pisilinux.org/1.0/grub2_extras_915resolution_r10.tar.xz</Archive>
         <Archive sha1sum="30797ba7a86fc32213b9ae994c9fa45f37d01170" type="gz">http://ftp.gnu.org/gnu/unifont/unifont-6.3.20131217/unifont-6.3.20131217.bdf.gz</Archive>
-        <Archive sha1sum="bc062965689314bcee544c34fe0b0afef847448d" type="tarxz" target="grub-2.02~beta3/themes">https://sourceforge.net/projects/pisilinux/files/source/grub2-theme-pisilinux-0.4.tar.xz</Archive>
+        <Archive sha1sum="bc062965689314bcee544c34fe0b0afef847448d" type="tarxz" target="grub-2.02~rc2/themes">https://sourceforge.net/projects/pisilinux/files/source/grub2-theme-pisilinux-0.4.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>autogen</Dependency>
             <Dependency>binutils</Dependency>
@@ -79,6 +79,13 @@
     </Package>
 
     <History>
+         <Update release="8">
+            <Date>2017-06-19</Date>
+            <Version>2.02_rc2</Version>
+            <Comment>version B.</Comment>
+            <Name>Ali Algul</Name>
+            <Email>aligulle3801@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2017-03-04</Date>
             <Version>2.02_beta3</Version>
