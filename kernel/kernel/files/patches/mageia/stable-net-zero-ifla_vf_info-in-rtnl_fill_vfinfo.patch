@@ -1,0 +1,42 @@
+From foo@baz Thu Jun 29 18:57:46 CEST 2017
+From: "Mintz, Yuval" <Yuval.Mintz@cavium.com>
+Date: Wed, 7 Jun 2017 21:00:33 +0300
+Subject: net: Zero ifla_vf_info in rtnl_fill_vfinfo()
+
+From: "Mintz, Yuval" <Yuval.Mintz@cavium.com>
+
+
+[ Upstream commit 0eed9cf58446b28b233388b7f224cbca268b6986 ]
+
+Some of the structure's fields are not initialized by the
+rtnetlink. If driver doesn't set those in ndo_get_vf_config(),
+they'd leak memory to user.
+
+Signed-off-by: Yuval Mintz <Yuval.Mintz@cavium.com>
+CC: Michal Schmidt <mschmidt@redhat.com>
+Reviewed-by: Greg Rose <gvrose8192@gmail.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ net/core/rtnetlink.c |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+--- a/net/core/rtnetlink.c
++++ b/net/core/rtnetlink.c
+@@ -1130,6 +1130,8 @@ static noinline_for_stack int rtnl_fill_
+ 	struct ifla_vf_mac vf_mac;
+ 	struct ifla_vf_info ivi;
+ 
++	memset(&ivi, 0, sizeof(ivi));
++
+ 	/* Not all SR-IOV capable drivers support the
+ 	 * spoofcheck and "RSS query enable" query.  Preset to
+ 	 * -1 so the user space tool can detect that the driver
+@@ -1138,7 +1140,6 @@ static noinline_for_stack int rtnl_fill_
+ 	ivi.spoofchk = -1;
+ 	ivi.rss_query_en = -1;
+ 	ivi.trusted = -1;
+-	memset(ivi.mac, 0, sizeof(ivi.mac));
+ 	/* The default value for VF link state is "auto"
+ 	 * IFLA_VF_LINK_STATE_AUTO which equals zero
+ 	 */

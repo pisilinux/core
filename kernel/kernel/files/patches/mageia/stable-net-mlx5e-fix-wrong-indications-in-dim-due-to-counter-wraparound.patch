@@ -1,0 +1,87 @@
+From foo@baz Thu Jun 29 18:57:46 CEST 2017
+From: Tal Gilboa <talgi@mellanox.com>
+Date: Mon, 29 May 2017 17:02:55 +0300
+Subject: net/mlx5e: Fix wrong indications in DIM due to counter wraparound
+
+From: Tal Gilboa <talgi@mellanox.com>
+
+
+[ Upstream commit 53acd76ce571e3b71f9205f2d49ab285a9f1aad8 ]
+
+DIM (Dynamically-tuned Interrupt Moderation) is a mechanism designed for
+changing the channel interrupt moderation values in order to reduce CPU
+overhead for all traffic types.
+Each iteration of the algorithm, DIM calculates the difference in
+throughput, packet rate and interrupt rate from last iteration in order
+to make a decision. DIM relies on counters for each metric. When these
+counters get to their type's max value they wraparound. In this case
+the delta between 'end' and 'start' samples is negative and when
+translated to unsigned integers - very high. This results in a false
+indication to the algorithm and might result in a wrong decision.
+
+The fix calculates the 'distance' between 'end' and 'start' samples in a
+cyclic way around the relevant type's max value. It can also be viewed as
+an absolute value around the type's max value instead of around 0.
+
+Testing show higher stability in DIM profile selection and no wraparound
+issues.
+
+Fixes: cb3c7fd4f839 ("net/mlx5e: Support adaptive RX coalescing")
+Signed-off-by: Tal Gilboa <talgi@mellanox.com>
+Signed-off-by: Saeed Mahameed <saeedm@mellanox.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ drivers/net/ethernet/mellanox/mlx5/core/en.h       |    8 ++++----
+ drivers/net/ethernet/mellanox/mlx5/core/en_rx_am.c |   10 +++++++---
+ 2 files changed, 11 insertions(+), 7 deletions(-)
+
+--- a/drivers/net/ethernet/mellanox/mlx5/core/en.h
++++ b/drivers/net/ethernet/mellanox/mlx5/core/en.h
+@@ -288,10 +288,10 @@ struct mlx5e_rx_am_stats {
+ };
+ 
+ struct mlx5e_rx_am_sample {
+-	ktime_t		time;
+-	unsigned int	pkt_ctr;
+-	unsigned int    byte_ctr;
+-	u16		event_ctr;
++	ktime_t	time;
++	u32	pkt_ctr;
++	u32	byte_ctr;
++	u16	event_ctr;
+ };
+ 
+ struct mlx5e_rx_am { /* Adaptive Moderation */
+--- a/drivers/net/ethernet/mellanox/mlx5/core/en_rx_am.c
++++ b/drivers/net/ethernet/mellanox/mlx5/core/en_rx_am.c
+@@ -270,6 +270,8 @@ static void mlx5e_am_sample(struct mlx5e
+ }
+ 
+ #define MLX5E_AM_NEVENTS 64
++#define BITS_PER_TYPE(type) (sizeof(type) * BITS_PER_BYTE)
++#define BIT_GAP(bits, end, start) ((((end) - (start)) + BIT_ULL(bits)) & (BIT_ULL(bits) - 1))
+ 
+ static void mlx5e_am_calc_stats(struct mlx5e_rx_am_sample *start,
+ 				struct mlx5e_rx_am_sample *end,
+@@ -277,8 +279,9 @@ static void mlx5e_am_calc_stats(struct m
+ {
+ 	/* u32 holds up to 71 minutes, should be enough */
+ 	u32 delta_us = ktime_us_delta(end->time, start->time);
+-	unsigned int npkts = end->pkt_ctr - start->pkt_ctr;
+-	unsigned int nbytes = end->byte_ctr - start->byte_ctr;
++	u32 npkts = BIT_GAP(BITS_PER_TYPE(u32), end->pkt_ctr, start->pkt_ctr);
++	u32 nbytes = BIT_GAP(BITS_PER_TYPE(u32), end->byte_ctr,
++			     start->byte_ctr);
+ 
+ 	if (!delta_us)
+ 		return;
+@@ -311,7 +314,8 @@ void mlx5e_rx_am(struct mlx5e_rq *rq)
+ 
+ 	switch (am->state) {
+ 	case MLX5E_AM_MEASURE_IN_PROGRESS:
+-		nevents = rq->cq.event_ctr - am->start_sample.event_ctr;
++		nevents = BIT_GAP(BITS_PER_TYPE(u16), rq->cq.event_ctr,
++				  am->start_sample.event_ctr);
+ 		if (nevents < MLX5E_AM_NEVENTS)
+ 			break;
+ 		mlx5e_am_sample(rq, &end_sample);

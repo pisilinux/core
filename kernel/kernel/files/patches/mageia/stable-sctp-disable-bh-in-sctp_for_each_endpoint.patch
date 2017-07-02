@@ -1,0 +1,49 @@
+From foo@baz Thu Jun 29 18:57:46 CEST 2017
+From: Xin Long <lucien.xin@gmail.com>
+Date: Sat, 10 Jun 2017 14:48:14 +0800
+Subject: sctp: disable BH in sctp_for_each_endpoint
+
+From: Xin Long <lucien.xin@gmail.com>
+
+
+[ Upstream commit 581409dacc9176b0de1f6c4ca8d66e13aa8e1b29 ]
+
+Now sctp holds read_lock when foreach sctp_ep_hashtable without disabling
+BH. If CPU schedules to another thread A at this moment, the thread A may
+be trying to hold the write_lock with disabling BH.
+
+As BH is disabled and CPU cannot schedule back to the thread holding the
+read_lock, while the thread A keeps waiting for the read_lock. A dead
+lock would be triggered by this.
+
+This patch is to fix this dead lock by calling read_lock_bh instead to
+disable BH when holding the read_lock in sctp_for_each_endpoint.
+
+Fixes: 626d16f50f39 ("sctp: export some apis or variables for sctp_diag and reuse some for proc")
+Reported-by: Xiumei Mu <xmu@redhat.com>
+Signed-off-by: Xin Long <lucien.xin@gmail.com>
+Acked-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ net/sctp/socket.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+--- a/net/sctp/socket.c
++++ b/net/sctp/socket.c
+@@ -4460,13 +4460,13 @@ int sctp_for_each_endpoint(int (*cb)(str
+ 
+ 	for (head = sctp_ep_hashtable; hash < sctp_ep_hashsize;
+ 	     hash++, head++) {
+-		read_lock(&head->lock);
++		read_lock_bh(&head->lock);
+ 		sctp_for_each_hentry(epb, &head->chain) {
+ 			err = cb(sctp_ep(epb), p);
+ 			if (err)
+ 				break;
+ 		}
+-		read_unlock(&head->lock);
++		read_unlock_bh(&head->lock);
+ 	}
+ 
+ 	return err;

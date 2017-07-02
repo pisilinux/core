@@ -1,0 +1,32 @@
+From foo@baz Thu Jun 29 18:57:46 CEST 2017
+From: Christian Perle <christian.perle@secunet.com>
+Date: Mon, 12 Jun 2017 10:06:57 +0200
+Subject: proc: snmp6: Use correct type in memset
+
+From: Christian Perle <christian.perle@secunet.com>
+
+
+[ Upstream commit 3500cd73dff48f28f4ba80c171c4c80034d40f76 ]
+
+Reading /proc/net/snmp6 yields bogus values on 32 bit kernels.
+Use "u64" instead of "unsigned long" in sizeof().
+
+Fixes: 4a4857b1c81e ("proc: Reduce cache miss in snmp6_seq_show")
+Signed-off-by: Christian Perle <christian.perle@secunet.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ net/ipv6/proc.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/net/ipv6/proc.c
++++ b/net/ipv6/proc.c
+@@ -219,7 +219,7 @@ static void snmp6_seq_show_item64(struct
+ 	u64 buff64[SNMP_MIB_MAX];
+ 	int i;
+ 
+-	memset(buff64, 0, sizeof(unsigned long) * SNMP_MIB_MAX);
++	memset(buff64, 0, sizeof(u64) * SNMP_MIB_MAX);
+ 
+ 	snmp_get_cpu_field64_batch(buff64, itemlist, mib, syncpoff);
+ 	for (i = 0; itemlist[i].name; i++)

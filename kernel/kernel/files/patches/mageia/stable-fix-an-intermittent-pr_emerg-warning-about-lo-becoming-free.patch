@@ -1,0 +1,76 @@
+From foo@baz Thu Jun 29 18:57:46 CEST 2017
+From: Krister Johansen <kjlx@templeofstupid.com>
+Date: Thu, 8 Jun 2017 13:12:38 -0700
+Subject: Fix an intermittent pr_emerg warning about lo becoming free.
+
+From: Krister Johansen <kjlx@templeofstupid.com>
+
+
+[ Upstream commit f186ce61bb8235d80068c390dc2aad7ca427a4c2 ]
+
+It looks like this:
+
+Message from syslogd@flamingo at Apr 26 00:45:00 ...
+ kernel:unregister_netdevice: waiting for lo to become free. Usage count = 4
+
+They seem to coincide with net namespace teardown.
+
+The message is emitted by netdev_wait_allrefs().
+
+Forced a kdump in netdev_run_todo, but found that the refcount on the lo
+device was already 0 at the time we got to the panic.
+
+Used bcc to check the blocking in netdev_run_todo.  The only places
+where we're off cpu there are in the rcu_barrier() and msleep() calls.
+That behavior is expected.  The msleep time coincides with the amount of
+time we spend waiting for the refcount to reach zero; the rcu_barrier()
+wait times are not excessive.
+
+After looking through the list of callbacks that the netdevice notifiers
+invoke in this path, it appears that the dst_dev_event is the most
+interesting.  The dst_ifdown path places a hold on the loopback_dev as
+part of releasing the dev associated with the original dst cache entry.
+Most of our notifier callbacks are straight-forward, but this one a)
+looks complex, and b) places a hold on the network interface in
+question.
+
+I constructed a new bcc script that watches various events in the
+liftime of a dst cache entry.  Note that dst_ifdown will take a hold on
+the loopback device until the invalidated dst entry gets freed.
+
+[      __dst_free] on DST: ffff883ccabb7900 IF tap1008300eth0 invoked at 1282115677036183
+    __dst_free
+    rcu_nocb_kthread
+    kthread
+    ret_from_fork
+Acked-by: Eric Dumazet <edumazet@google.com>
+
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ net/core/dst.c |   14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+--- a/net/core/dst.c
++++ b/net/core/dst.c
+@@ -470,6 +470,20 @@ static int dst_dev_event(struct notifier
+ 		spin_lock_bh(&dst_garbage.lock);
+ 		dst = dst_garbage.list;
+ 		dst_garbage.list = NULL;
++		/* The code in dst_ifdown places a hold on the loopback device.
++		 * If the gc entry processing is set to expire after a lengthy
++		 * interval, this hold can cause netdev_wait_allrefs() to hang
++		 * out and wait for a long time -- until the the loopback
++		 * interface is released.  If we're really unlucky, it'll emit
++		 * pr_emerg messages to console too.  Reset the interval here,
++		 * so dst cleanups occur in a more timely fashion.
++		 */
++		if (dst_garbage.timer_inc > DST_GC_INC) {
++			dst_garbage.timer_inc = DST_GC_INC;
++			dst_garbage.timer_expires = DST_GC_MIN;
++			mod_delayed_work(system_wq, &dst_gc_work,
++					 dst_garbage.timer_expires);
++		}
+ 		spin_unlock_bh(&dst_garbage.lock);
+ 
+ 		if (last)
