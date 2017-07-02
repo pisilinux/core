@@ -1,0 +1,50 @@
+From foo@baz Thu Jun 29 18:57:46 CEST 2017
+From: Jia-Ju Bai <baijiaju1990@163.com>
+Date: Sat, 10 Jun 2017 16:49:39 +0800
+Subject: net: caif: Fix a sleep-in-atomic bug in cfpkt_create_pfx
+
+From: Jia-Ju Bai <baijiaju1990@163.com>
+
+
+[ Upstream commit f146e872eb12ebbe92d8e583b2637e0741440db3 ]
+
+The kernel may sleep under a rcu read lock in cfpkt_create_pfx, and the
+function call path is:
+cfcnfg_linkup_rsp (acquire the lock by rcu_read_lock)
+  cfctrl_linkdown_req
+    cfpkt_create
+      cfpkt_create_pfx
+        alloc_skb(GFP_KERNEL) --> may sleep
+cfserl_receive (acquire the lock by rcu_read_lock)
+  cfpkt_split
+    cfpkt_create_pfx
+      alloc_skb(GFP_KERNEL) --> may sleep
+
+There is "in_interrupt" in cfpkt_create_pfx to decide use "GFP_KERNEL" or
+"GFP_ATOMIC". In this situation, "GFP_KERNEL" is used because the function
+is called under a rcu read lock, instead in interrupt.
+
+To fix it, only "GFP_ATOMIC" is used in cfpkt_create_pfx.
+
+Signed-off-by: Jia-Ju Bai <baijiaju1990@163.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ net/caif/cfpkt_skbuff.c |    6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+--- a/net/caif/cfpkt_skbuff.c
++++ b/net/caif/cfpkt_skbuff.c
+@@ -81,11 +81,7 @@ static struct cfpkt *cfpkt_create_pfx(u1
+ {
+ 	struct sk_buff *skb;
+ 
+-	if (likely(in_interrupt()))
+-		skb = alloc_skb(len + pfx, GFP_ATOMIC);
+-	else
+-		skb = alloc_skb(len + pfx, GFP_KERNEL);
+-
++	skb = alloc_skb(len + pfx, GFP_ATOMIC);
+ 	if (unlikely(skb == NULL))
+ 		return NULL;
+ 

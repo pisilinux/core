@@ -1,0 +1,44 @@
+From foo@baz Thu Jun 29 18:57:46 CEST 2017
+From: Jia-Ju Bai <baijiaju1990@163.com>
+Date: Sat, 10 Jun 2017 17:03:35 +0800
+Subject: net: tipc: Fix a sleep-in-atomic bug in tipc_msg_reverse
+
+From: Jia-Ju Bai <baijiaju1990@163.com>
+
+
+[ Upstream commit 343eba69c6968190d8654b857aea952fed9a6749 ]
+
+The kernel may sleep under a rcu read lock in tipc_msg_reverse, and the
+function call path is:
+tipc_l2_rcv_msg (acquire the lock by rcu_read_lock)
+  tipc_rcv
+    tipc_sk_rcv
+      tipc_msg_reverse
+        pskb_expand_head(GFP_KERNEL) --> may sleep
+tipc_node_broadcast
+  tipc_node_xmit_skb
+    tipc_node_xmit
+      tipc_sk_rcv
+        tipc_msg_reverse
+          pskb_expand_head(GFP_KERNEL) --> may sleep
+
+To fix it, "GFP_KERNEL" is replaced with "GFP_ATOMIC".
+
+Signed-off-by: Jia-Ju Bai <baijiaju1990@163.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ net/tipc/msg.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/net/tipc/msg.c
++++ b/net/tipc/msg.c
+@@ -508,7 +508,7 @@ bool tipc_msg_reverse(u32 own_node,  str
+ 	}
+ 
+ 	if (skb_cloned(_skb) &&
+-	    pskb_expand_head(_skb, BUF_HEADROOM, BUF_TAILROOM, GFP_KERNEL))
++	    pskb_expand_head(_skb, BUF_HEADROOM, BUF_TAILROOM, GFP_ATOMIC))
+ 		goto exit;
+ 
+ 	/* Now reverse the concerned fields */

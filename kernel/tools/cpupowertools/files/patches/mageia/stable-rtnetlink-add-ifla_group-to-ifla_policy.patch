@@ -1,0 +1,42 @@
+From foo@baz Thu Jun 29 18:57:46 CEST 2017
+From: Serhey Popovych <serhe.popovych@gmail.com>
+Date: Tue, 20 Jun 2017 14:35:23 +0300
+Subject: rtnetlink: add IFLA_GROUP to ifla_policy
+
+From: Serhey Popovych <serhe.popovych@gmail.com>
+
+
+[ Upstream commit db833d40ad3263b2ee3b59a1ba168bb3cfed8137 ]
+
+Network interface groups support added while ago, however
+there is no IFLA_GROUP attribute description in policy
+and netlink message size calculations until now.
+
+Add IFLA_GROUP attribute to the policy.
+
+Fixes: cbda10fa97d7 ("net_device: add support for network device groups")
+Signed-off-by: Serhey Popovych <serhe.popovych@gmail.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ net/core/rtnetlink.c |    2 ++
+ 1 file changed, 2 insertions(+)
+
+--- a/net/core/rtnetlink.c
++++ b/net/core/rtnetlink.c
+@@ -937,6 +937,7 @@ static noinline size_t if_nlmsg_size(con
+ 	       + nla_total_size(1) /* IFLA_LINKMODE */
+ 	       + nla_total_size(4) /* IFLA_CARRIER_CHANGES */
+ 	       + nla_total_size(4) /* IFLA_LINK_NETNSID */
++	       + nla_total_size(4) /* IFLA_GROUP */
+ 	       + nla_total_size(ext_filter_mask
+ 			        & RTEXT_FILTER_VF ? 4 : 0) /* IFLA_NUM_VF */
+ 	       + rtnl_vfinfo_size(dev, ext_filter_mask) /* IFLA_VFINFO_LIST */
+@@ -1465,6 +1466,7 @@ static const struct nla_policy ifla_poli
+ 	[IFLA_LINK_NETNSID]	= { .type = NLA_S32 },
+ 	[IFLA_PROTO_DOWN]	= { .type = NLA_U8 },
+ 	[IFLA_XDP]		= { .type = NLA_NESTED },
++	[IFLA_GROUP]		= { .type = NLA_U32 },
+ };
+ 
+ static const struct nla_policy ifla_info_policy[IFLA_INFO_MAX+1] = {

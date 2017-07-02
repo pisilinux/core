@@ -1,0 +1,56 @@
+From foo@baz Thu Jun 29 18:57:46 CEST 2017
+From: Eli Cohen <eli@mellanox.com>
+Date: Thu, 8 Jun 2017 11:33:16 -0500
+Subject: net/mlx5: Wait for FW readiness before initializing command interface
+
+From: Eli Cohen <eli@mellanox.com>
+
+
+[ Upstream commit 6c780a0267b8a1075f40b39851132eeaefefcff5 ]
+
+Before attempting to initialize the command interface we must wait till
+the fw_initializing bit is clear.
+
+If we fail to meet this condition the hardware will drop our
+configuration, specifically the descriptors page address.  This scenario
+can happen when the firmware is still executing an FLR flow and did not
+finish yet so the driver needs to wait for that to finish.
+
+Fixes: e3297246c2c8 ('net/mlx5_core: Wait for FW readiness on startup')
+Signed-off-by: Eli Cohen <eli@mellanox.com>
+Signed-off-by: Saeed Mahameed <saeedm@mellanox.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ drivers/net/ethernet/mellanox/mlx5/core/main.c |   14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
+
+--- a/drivers/net/ethernet/mellanox/mlx5/core/main.c
++++ b/drivers/net/ethernet/mellanox/mlx5/core/main.c
+@@ -155,8 +155,9 @@ static struct mlx5_profile profile[] = {
+ 	},
+ };
+ 
+-#define FW_INIT_TIMEOUT_MILI	2000
+-#define FW_INIT_WAIT_MS		2
++#define FW_INIT_TIMEOUT_MILI		2000
++#define FW_INIT_WAIT_MS			2
++#define FW_PRE_INIT_TIMEOUT_MILI	10000
+ 
+ static int wait_fw_init(struct mlx5_core_dev *dev, u32 max_wait_mili)
+ {
+@@ -956,6 +957,15 @@ static int mlx5_load_one(struct mlx5_cor
+ 	 */
+ 	dev->state = MLX5_DEVICE_STATE_UP;
+ 
++	/* wait for firmware to accept initialization segments configurations
++	 */
++	err = wait_fw_init(dev, FW_PRE_INIT_TIMEOUT_MILI);
++	if (err) {
++		dev_err(&dev->pdev->dev, "Firmware over %d MS in pre-initializing state, aborting\n",
++			FW_PRE_INIT_TIMEOUT_MILI);
++		goto out;
++	}
++
+ 	err = mlx5_cmd_init(dev);
+ 	if (err) {
+ 		dev_err(&pdev->dev, "Failed initializing command interface, aborting\n");
