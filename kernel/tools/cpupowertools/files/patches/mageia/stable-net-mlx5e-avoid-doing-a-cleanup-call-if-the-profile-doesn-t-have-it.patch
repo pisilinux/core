@@ -1,0 +1,38 @@
+From foo@baz Thu Jun 29 18:57:46 CEST 2017
+From: Or Gerlitz <ogerlitz@mellanox.com>
+Date: Thu, 15 Jun 2017 20:08:32 +0300
+Subject: net/mlx5e: Avoid doing a cleanup call if the profile doesn't have it
+
+From: Or Gerlitz <ogerlitz@mellanox.com>
+
+
+[ Upstream commit 31ac93386d135a6c96de9c8bab406f5ccabf5a4d ]
+
+The error flow of mlx5e_create_netdev calls the cleanup call
+of the given profile without checking if it exists, fix that.
+
+Currently the VF reps don't register that callback and we crash
+if getting into error -- can be reproduced by the user doing ctrl^C
+while attempting to change the sriov mode from legacy to switchdev.
+
+Fixes: 26e59d8077a3 '(net/mlx5e: Implement mlx5e interface attach/detach callbacks')
+Signed-off-by: Or Gerlitz <ogerlitz@mellanox.com>
+Reported-by: Sabrina Dubroca <sdubroca@redhat.com>
+Signed-off-by: Saeed Mahameed <saeedm@mellanox.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ drivers/net/ethernet/mellanox/mlx5/core/en_main.c |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+--- a/drivers/net/ethernet/mellanox/mlx5/core/en_main.c
++++ b/drivers/net/ethernet/mellanox/mlx5/core/en_main.c
+@@ -3846,7 +3846,8 @@ struct net_device *mlx5e_create_netdev(s
+ 	return netdev;
+ 
+ err_cleanup_nic:
+-	profile->cleanup(priv);
++	if (profile->cleanup)
++		profile->cleanup(priv);
+ 	free_netdev(netdev);
+ 
+ 	return NULL;

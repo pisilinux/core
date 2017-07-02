@@ -1,0 +1,95 @@
+From foo@baz Thu Jun 29 18:57:46 CEST 2017
+From: Serhey Popovych <serhe.popovych@gmail.com>
+Date: Tue, 20 Jun 2017 13:29:25 +0300
+Subject: ipv6: Do not leak throw route references
+
+From: Serhey Popovych <serhe.popovych@gmail.com>
+
+
+[ Upstream commit 07f615574f8ac499875b21c1142f26308234a92c ]
+
+While commit 73ba57bfae4a ("ipv6: fix backtracking for throw routes")
+does good job on error propagation to the fib_rules_lookup()
+in fib rules core framework that also corrects throw routes
+handling, it does not solve route reference leakage problem
+happened when we return -EAGAIN to the fib_rules_lookup()
+and leave routing table entry referenced in arg->result.
+
+If rule with matched throw route isn't last matched in the
+list we overwrite arg->result losing reference on throw
+route stored previously forever.
+
+We also partially revert commit ab997ad40839 ("ipv6: fix the
+incorrect return value of throw route") since we never return
+routing table entry with dst.error == -EAGAIN when
+CONFIG_IPV6_MULTIPLE_TABLES is on. Also there is no point
+to check for RTF_REJECT flag since it is always set throw
+route.
+
+Fixes: 73ba57bfae4a ("ipv6: fix backtracking for throw routes")
+Signed-off-by: Serhey Popovych <serhe.popovych@gmail.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ net/ipv6/fib6_rules.c |   22 ++++++----------------
+ net/ipv6/ip6_fib.c    |    3 +--
+ 2 files changed, 7 insertions(+), 18 deletions(-)
+
+--- a/net/ipv6/fib6_rules.c
++++ b/net/ipv6/fib6_rules.c
+@@ -32,7 +32,6 @@ struct fib6_rule {
+ struct dst_entry *fib6_rule_lookup(struct net *net, struct flowi6 *fl6,
+ 				   int flags, pol_lookup_t lookup)
+ {
+-	struct rt6_info *rt;
+ 	struct fib_lookup_arg arg = {
+ 		.lookup_ptr = lookup,
+ 		.flags = FIB_LOOKUP_NOREF,
+@@ -44,21 +43,11 @@ struct dst_entry *fib6_rule_lookup(struc
+ 	fib_rules_lookup(net->ipv6.fib6_rules_ops,
+ 			 flowi6_to_flowi(fl6), flags, &arg);
+ 
+-	rt = arg.result;
++	if (arg.result)
++		return arg.result;
+ 
+-	if (!rt) {
+-		dst_hold(&net->ipv6.ip6_null_entry->dst);
+-		return &net->ipv6.ip6_null_entry->dst;
+-	}
+-
+-	if (rt->rt6i_flags & RTF_REJECT &&
+-	    rt->dst.error == -EAGAIN) {
+-		ip6_rt_put(rt);
+-		rt = net->ipv6.ip6_null_entry;
+-		dst_hold(&rt->dst);
+-	}
+-
+-	return &rt->dst;
++	dst_hold(&net->ipv6.ip6_null_entry->dst);
++	return &net->ipv6.ip6_null_entry->dst;
+ }
+ 
+ static int fib6_rule_action(struct fib_rule *rule, struct flowi *flp,
+@@ -121,7 +110,8 @@ static int fib6_rule_action(struct fib_r
+ 			flp6->saddr = saddr;
+ 		}
+ 		err = rt->dst.error;
+-		goto out;
++		if (err != -EAGAIN)
++			goto out;
+ 	}
+ again:
+ 	ip6_rt_put(rt);
+--- a/net/ipv6/ip6_fib.c
++++ b/net/ipv6/ip6_fib.c
+@@ -289,8 +289,7 @@ struct dst_entry *fib6_rule_lookup(struc
+ 	struct rt6_info *rt;
+ 
+ 	rt = lookup(net, net->ipv6.fib6_main_tbl, fl6, flags);
+-	if (rt->rt6i_flags & RTF_REJECT &&
+-	    rt->dst.error == -EAGAIN) {
++	if (rt->dst.error == -EAGAIN) {
+ 		ip6_rt_put(rt);
+ 		rt = net->ipv6.ip6_null_entry;
+ 		dst_hold(&rt->dst);

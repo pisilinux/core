@@ -1,0 +1,82 @@
+From foo@baz Thu Jun 29 18:57:46 CEST 2017
+From: WANG Cong <xiyou.wangcong@gmail.com>
+Date: Mon, 12 Jun 2017 09:52:26 -0700
+Subject: igmp: acquire pmc lock for ip_mc_clear_src()
+
+From: WANG Cong <xiyou.wangcong@gmail.com>
+
+
+[ Upstream commit c38b7d327aafd1e3ad7ff53eefac990673b65667 ]
+
+Andrey reported a use-after-free in add_grec():
+
+        for (psf = *psf_list; psf; psf = psf_next) {
+		...
+                psf_next = psf->sf_next;
+
+where the struct ip_sf_list's were already freed by:
+
+ kfree+0xe8/0x2b0 mm/slub.c:3882
+ ip_mc_clear_src+0x69/0x1c0 net/ipv4/igmp.c:2078
+ ip_mc_dec_group+0x19a/0x470 net/ipv4/igmp.c:1618
+ ip_mc_drop_socket+0x145/0x230 net/ipv4/igmp.c:2609
+ inet_release+0x4e/0x1c0 net/ipv4/af_inet.c:411
+ sock_release+0x8d/0x1e0 net/socket.c:597
+ sock_close+0x16/0x20 net/socket.c:1072
+
+This happens because we don't hold pmc->lock in ip_mc_clear_src()
+and a parallel mr_ifc_timer timer could jump in and access them.
+
+The RCU lock is there but it is merely for pmc itself, this
+spinlock could actually ensure we don't access them in parallel.
+
+Thanks to Eric and Long for discussion on this bug.
+
+Reported-by: Andrey Konovalov <andreyknvl@google.com>
+Cc: Eric Dumazet <edumazet@google.com>
+Cc: Xin Long <lucien.xin@gmail.com>
+Signed-off-by: Cong Wang <xiyou.wangcong@gmail.com>
+Reviewed-by: Xin Long <lucien.xin@gmail.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ net/ipv4/igmp.c |   21 +++++++++++++--------
+ 1 file changed, 13 insertions(+), 8 deletions(-)
+
+--- a/net/ipv4/igmp.c
++++ b/net/ipv4/igmp.c
+@@ -2071,21 +2071,26 @@ static int ip_mc_add_src(struct in_devic
+ 
+ static void ip_mc_clear_src(struct ip_mc_list *pmc)
+ {
+-	struct ip_sf_list *psf, *nextpsf;
++	struct ip_sf_list *psf, *nextpsf, *tomb, *sources;
+ 
+-	for (psf = pmc->tomb; psf; psf = nextpsf) {
++	spin_lock_bh(&pmc->lock);
++	tomb = pmc->tomb;
++	pmc->tomb = NULL;
++	sources = pmc->sources;
++	pmc->sources = NULL;
++	pmc->sfmode = MCAST_EXCLUDE;
++	pmc->sfcount[MCAST_INCLUDE] = 0;
++	pmc->sfcount[MCAST_EXCLUDE] = 1;
++	spin_unlock_bh(&pmc->lock);
++
++	for (psf = tomb; psf; psf = nextpsf) {
+ 		nextpsf = psf->sf_next;
+ 		kfree(psf);
+ 	}
+-	pmc->tomb = NULL;
+-	for (psf = pmc->sources; psf; psf = nextpsf) {
++	for (psf = sources; psf; psf = nextpsf) {
+ 		nextpsf = psf->sf_next;
+ 		kfree(psf);
+ 	}
+-	pmc->sources = NULL;
+-	pmc->sfmode = MCAST_EXCLUDE;
+-	pmc->sfcount[MCAST_INCLUDE] = 0;
+-	pmc->sfcount[MCAST_EXCLUDE] = 1;
+ }
+ 
+ /* Join a multicast group
