@@ -14,6 +14,31 @@
 ###
 ### Stable Queue
 ###
+stable-ipv6-release-dst-on-error-in-ip6_dst_lookup_tail.patch
+stable-net-don-t-call-strlen-on-non-terminated-string-in-dev_set_alias.patch
+stable-decnet-dn_rtmsg-improve-input-length-sanitization-in-dnrmg_receive_user_skb.patch
+stable-net-zero-ifla_vf_info-in-rtnl_fill_vfinfo.patch
+stable-net-vrf-make-add_fib_rules-per-network-namespace-flag.patch
+stable-af_unix-add-sockaddr-length-checks-before-accessing-sa_family-in-bind-and-connect-handlers.patch
+stable-fix-an-intermittent-pr_emerg-warning-about-lo-becoming-free.patch
+stable-sctp-disable-bh-in-sctp_for_each_endpoint.patch
+stable-net-caif-fix-a-sleep-in-atomic-bug-in-cfpkt_create_pfx.patch
+stable-net-tipc-fix-a-sleep-in-atomic-bug-in-tipc_msg_reverse.patch
+stable-net-mlx5e-added-bw-check-for-dim-decision-mechanism.patch
+stable-net-mlx5e-fix-wrong-indications-in-dim-due-to-counter-wraparound.patch
+stable-proc-snmp6-use-correct-type-in-memset.patch
+stable-igmp-acquire-pmc-lock-for-ip_mc_clear_src.patch
+stable-igmp-add-a-missing-spin_lock_init.patch
+stable-ipv6-fix-calling-in6_ifa_hold-incorrectly-for-dad-work.patch
+stable-sctp-return-next-obj-by-passing-pos-1-into-sctp_transport_get_idx.patch
+stable-net-mlx5e-avoid-doing-a-cleanup-call-if-the-profile-doesn-t-have-it.patch
+stable-net-mlx5-wait-for-fw-readiness-before-initializing-command-interface.patch
+stable-net-mlx5e-fix-timestamping-capabilities-reporting.patch
+stable-decnet-always-not-take-dst-__refcnt-when-inserting-dst-into-hash-table.patch
+stable-net-8021q-fix-one-possible-panic-caused-by-bug_on-in-free_netdev.patch
+stable-sfc-provide-dummy-definitions-of-vswitch-functions.patch
+stable-ipv6-do-not-leak-throw-route-references.patch
+stable-rtnetlink-add-ifla_group-to-ifla_policy.patch
 
 ###
 ### Arch x86
@@ -42,6 +67,9 @@ Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch
 ### Core
 ###
 base-cacheinfo-silence-DT-warnings.patch
+
+# fixes crash on boot on some Amd systems
+iommu-amd-flush-IOTLB-for-specific-domains-only-v3.patch
 
 ###
 ### i2c
@@ -205,6 +233,7 @@ gpu-drm-amd-amdgpu-add-Polaris12-PCI-ID.patch
 gpu-drm-amd-amdgpu-add-Polaris12-support-v3.patch
 gpu-drm-amdgpu-powerplay-add-Polaris12-support.patch
 gpu-drm-amd-amdgpu-add-POLARIS12-PCI-ID.patch
+gpu-drm-amdgpu-add-Polaris12-DID.patch
 
 # fix crash
 gpu-drm-amdgpu-pm-check-for-headless-before-calling-comp.patch
@@ -268,8 +297,15 @@ net-wireless-rtlwifi-Fix-kernel-oops-introduced-with-commit-e4965.patch
 # update rtl8xxxu for mga#20508
 net-wireless-realtek-rtl8xxxu-linux-4.11-rc.patch
 
-# WireGuard support
-net-wireguard.patch
+# fixes issue triggable by remote peers
+net-netfilter-xt_TCPMSS-add-more-sanity-tests-on-tcph-do.patch
+
+###
+### pinctrl
+###
+
+# fix non-booting Ryzen+ due to interrupt storm
+pinctrl_amd-Use-regular-interrupt-instead-of-chained.patch
 
 ###
 ### Platform drivers
@@ -305,6 +341,14 @@ sound-ALSA-hda-A-new-flag-to-enforce-prefix-to-each-pin.patch
 sound-ALSA-hda-Allow-to-enable-disable-vmaster-build-expli.patch
 sound-ALSA-hda-Support-Gigabyte-Gaming-board-with-dual-Rea.patch
 sound-ALSA-hda-Use-a-helper-function-for-renaming-kctl-nam.patch
+# another dual codec system
+sound-ALSA-hda-Apply-dual-codec-quirk-for-MSI-Z270-Gaming-.patch
+sound-ALSA-hda-Fix-applying-MSI-dual-codec-mobo-quirk.patch
+
+# intel
+sound-ALSA-hda-Add-Geminilake-id-to-SKL_PLUS.patch
+sound-ALSA-hda-Add-Coffelake-PCI-ID.patch
+sound-ALSA-hda-Apply-quirks-to-Broxton-T-too.patch
 
 ###
 ### Staging
@@ -327,6 +371,9 @@ hid-usbhid-IBM-BladeCenterHS20-quirk.patch
 
 usb-storage-unusual_devs-add-id.patch
 usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch
+
+# amd xhci fix
+usb-xhci-Limit-USB2-port-wake-support-for-AMD-Promontory-hosts.patch
 
 ###
 ### V4L
@@ -385,6 +432,9 @@ video-mageia-logo.patch
 
 # add rtl8723bs support (mga#15874)
 3rd-rtl8723bs.patch
+
+# add rtl8812 support (mga#21043)
+3rd-rtl8812au.patch
 
 ###
 ### Security
