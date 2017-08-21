@@ -15,7 +15,7 @@
         <Description>module-ndiswrapper allows you to use Windows XP drivers for WLAN cards without proper Linux drivers.</Description>
         <Archive sha1sum="20998237cf6d37b86391dc8736c10031110db578" type="targz">http://download.sourceforge.net/ndiswrapper/ndiswrapper-1.60.tar.gz</Archive>
         <BuildDependencies>
-             <Dependency version="4.9.35">kernel-module-headers</Dependency>
+             <Dependency version="4.9.44">kernel-module-headers</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch>upstream.patch</Patch>
@@ -25,7 +25,7 @@
     <Package>
         <Name>ndiswrapper</Name>
         <RuntimeDependencies>
-            <Dependency version="4.9.35">kernel</Dependency>
+            <Dependency version="4.9.44">kernel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -41,6 +41,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2017-08-21</Date>
+            <Version>1.60</Version>
+            <Comment>Rebuild for new kernel.</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="8">
             <Date>2017-07-02</Date>
             <Version>1.60</Version>
