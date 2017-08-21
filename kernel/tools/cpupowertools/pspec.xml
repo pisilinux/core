@@ -18,35 +18,9 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.9.35.xz</Patch>
-            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.9.35/1.mga6/PATCHES/patches/series-->
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.9.44.xz</Patch>
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.9.40/1.mga7/PATCHES/patches/series-->
             <!--stable patches-->
-            <Patch level="1">patches/mageia/stable-ipv6-release-dst-on-error-in-ip6_dst_lookup_tail.patch</Patch>
-            <Patch level="1">patches/mageia/stable-net-don-t-call-strlen-on-non-terminated-string-in-dev_set_alias.patch</Patch>
-            <Patch level="1">patches/mageia/stable-decnet-dn_rtmsg-improve-input-length-sanitization-in-dnrmg_receive_user_skb.patch</Patch>
-            <Patch level="1">patches/mageia/stable-net-zero-ifla_vf_info-in-rtnl_fill_vfinfo.patch</Patch>
-            <Patch level="1">patches/mageia/stable-net-vrf-make-add_fib_rules-per-network-namespace-flag.patch</Patch>
-            <Patch level="1">patches/mageia/stable-af_unix-add-sockaddr-length-checks-before-accessing-sa_family-in-bind-and-connect-handlers.patch</Patch>
-            <Patch level="1">patches/mageia/stable-fix-an-intermittent-pr_emerg-warning-about-lo-becoming-free.patch</Patch>
-            <Patch level="1">patches/mageia/stable-sctp-disable-bh-in-sctp_for_each_endpoint.patch</Patch>
-            <Patch level="1">patches/mageia/stable-net-caif-fix-a-sleep-in-atomic-bug-in-cfpkt_create_pfx.patch</Patch>
-            <Patch level="1">patches/mageia/stable-net-tipc-fix-a-sleep-in-atomic-bug-in-tipc_msg_reverse.patch</Patch>
-            <Patch level="1">patches/mageia/stable-net-mlx5e-added-bw-check-for-dim-decision-mechanism.patch</Patch>
-            <Patch level="1">patches/mageia/stable-net-mlx5e-fix-wrong-indications-in-dim-due-to-counter-wraparound.patch</Patch>
-            <Patch level="1">patches/mageia/stable-proc-snmp6-use-correct-type-in-memset.patch</Patch>
-            <Patch level="1">patches/mageia/stable-igmp-acquire-pmc-lock-for-ip_mc_clear_src.patch</Patch>
-            <Patch level="1">patches/mageia/stable-igmp-add-a-missing-spin_lock_init.patch</Patch>
-            <Patch level="1">patches/mageia/stable-ipv6-fix-calling-in6_ifa_hold-incorrectly-for-dad-work.patch</Patch>
-            <Patch level="1">patches/mageia/stable-sctp-return-next-obj-by-passing-pos-1-into-sctp_transport_get_idx.patch</Patch>
-            <Patch level="1">patches/mageia/stable-net-mlx5e-avoid-doing-a-cleanup-call-if-the-profile-doesn-t-have-it.patch</Patch>
-            <Patch level="1">patches/mageia/stable-net-mlx5-wait-for-fw-readiness-before-initializing-command-interface.patch</Patch>
-            <Patch level="1">patches/mageia/stable-net-mlx5e-fix-timestamping-capabilities-reporting.patch</Patch>
-            <Patch level="1">patches/mageia/stable-decnet-always-not-take-dst-__refcnt-when-inserting-dst-into-hash-table.patch</Patch>
-            <Patch level="1">patches/mageia/stable-net-8021q-fix-one-possible-panic-caused-by-bug_on-in-free_netdev.patch</Patch>
-            <Patch level="1">patches/mageia/stable-sfc-provide-dummy-definitions-of-vswitch-functions.patch</Patch>
-            <Patch level="1">patches/mageia/stable-ipv6-do-not-leak-throw-route-references.patch</Patch>
-            <Patch level="1">patches/mageia/stable-rtnetlink-add-ifla_group-to-ifla_policy.patch</Patch>
-
             <!--CVE-2016-8405-->
             <!--other patches-->
             <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
@@ -133,14 +107,17 @@
             <Patch level="1">patches/mageia/net-wireless-rtlwifi-Use-dev_kfree_skb_irq-instead-of-kfree_skb.patch</Patch>
             <Patch level="1">patches/mageia/net-wireless-rtlwifi-Fix-kernel-oops-introduced-with-commit-e4965.patch</Patch>
             <Patch level="1">patches/mageia/net-wireless-realtek-rtl8xxxu-linux-4.11-rc.patch</Patch>
-            <Patch level="1">patches/mageia/net-netfilter-xt_TCPMSS-add-more-sanity-tests-on-tcph-do.patch</Patch>
             <Patch level="1">patches/mageia/pinctrl_amd-Use-regular-interrupt-instead-of-chained.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/platform-x86-asus-nb-wmi-Add-wapf4-quirk-for-the-X30.patch</Patch>
             <Patch level="1">patches/mageia/include-kbuild-export-pci_ids.patch</Patch>
             <Patch level="1">patches/mageia/sound-ALSA-hda-realtek-Add-new-codec-ID-ALC299.patch</Patch>
             <Patch level="1">patches/mageia/sound-ALSA-hda-realtek-New-codec-support-of-ALC1220.patch</Patch>
+            <Patch level="1">patches/mageia/sound-ALSA-hda-realtek-new-id-for-alc1220.patch</Patch>
+            <Patch level="1">patches/mageia/sound-ALSA-hda-realtek-Remove-ALC285-device-ID.patch</Patch>
+            <Patch level="1">patches/mageia/sound-ALSA-hda-realtek-New-codecs-support-for-ALC215-ALC28.patch</Patch>
             <Patch level="1">patches/mageia/sound-ALSA-hda-A-new-flag-to-enforce-prefix-to-each-pin.patch</Patch>
             <Patch level="1">patches/mageia/sound-ALSA-hda-Allow-to-enable-disable-vmaster-build-expli.patch</Patch>
             <Patch level="1">patches/mageia/sound-ALSA-hda-Support-Gigabyte-Gaming-board-with-dual-Rea.patch</Patch>
@@ -153,7 +130,6 @@
             <Patch level="1">patches/mageia/hid-usbhid-IBM-BladeCenterHS20-quirk.patch</Patch>
             <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id.patch</Patch>
             <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch</Patch>
-            <Patch level="1">patches/mageia/usb-xhci-Limit-USB2-port-wake-support-for-AMD-Promontory-hosts.patch</Patch>
             <Patch level="1">patches/mageia/media-usb-pwc-lie-in-proc-usb-devices.patch</Patch>
             <Patch level="1">patches/mageia/3rd-3rdparty-1.0-tree.patch</Patch>
             <Patch level="1">patches/mageia/3rd-3rdparty-merge.patch</Patch>
@@ -211,6 +187,13 @@
         </Provides>-->
     </Package>
     <History>
+        <Update release="11">
+            <Date>2017-08-21</Date>
+            <Version>4.9.44</Version>
+            <Comment>Release bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="10">
             <Date>2017-07-02</Date>
             <Version>4.9.35</Version>
