@@ -14,7 +14,7 @@
         <Description>This package provides the kernel support for VirtualBox.</Description>
         <Archive sha1sum="7489ae3b501407d5ca2826e6ef1d5b2000e06154" type="tarxz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-5.1.14.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency version="4.9.35">kernel-module-headers</Dependency>
+            <Dependency version="4.9.44">kernel-module-headers</Dependency>
         </BuildDependencies>
         <!--Patches>
             <Patch>vbox_linux-4.3.diff</Patch>
@@ -24,7 +24,7 @@
     <Package>
         <Name>module-virtualbox</Name>
         <RuntimeDependencies>
-            <Dependency version="4.9.35">kernel</Dependency>
+            <Dependency version="4.9.44">kernel</Dependency>
             <Dependency version="current">module-virtualbox-userspace</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -50,6 +50,13 @@
     </Package>
 
     <History>
+        <Update release="16">
+            <Date>2017-08-21</Date>
+            <Version>5.1.14</Version>
+            <Comment>Rebuild for new kernel.</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
         <Update release="15">
             <Date>2017-07-04</Date>
             <Version>5.1.14</Version>

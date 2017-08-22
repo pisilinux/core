@@ -14,31 +14,6 @@
 ###
 ### Stable Queue
 ###
-stable-ipv6-release-dst-on-error-in-ip6_dst_lookup_tail.patch
-stable-net-don-t-call-strlen-on-non-terminated-string-in-dev_set_alias.patch
-stable-decnet-dn_rtmsg-improve-input-length-sanitization-in-dnrmg_receive_user_skb.patch
-stable-net-zero-ifla_vf_info-in-rtnl_fill_vfinfo.patch
-stable-net-vrf-make-add_fib_rules-per-network-namespace-flag.patch
-stable-af_unix-add-sockaddr-length-checks-before-accessing-sa_family-in-bind-and-connect-handlers.patch
-stable-fix-an-intermittent-pr_emerg-warning-about-lo-becoming-free.patch
-stable-sctp-disable-bh-in-sctp_for_each_endpoint.patch
-stable-net-caif-fix-a-sleep-in-atomic-bug-in-cfpkt_create_pfx.patch
-stable-net-tipc-fix-a-sleep-in-atomic-bug-in-tipc_msg_reverse.patch
-stable-net-mlx5e-added-bw-check-for-dim-decision-mechanism.patch
-stable-net-mlx5e-fix-wrong-indications-in-dim-due-to-counter-wraparound.patch
-stable-proc-snmp6-use-correct-type-in-memset.patch
-stable-igmp-acquire-pmc-lock-for-ip_mc_clear_src.patch
-stable-igmp-add-a-missing-spin_lock_init.patch
-stable-ipv6-fix-calling-in6_ifa_hold-incorrectly-for-dad-work.patch
-stable-sctp-return-next-obj-by-passing-pos-1-into-sctp_transport_get_idx.patch
-stable-net-mlx5e-avoid-doing-a-cleanup-call-if-the-profile-doesn-t-have-it.patch
-stable-net-mlx5-wait-for-fw-readiness-before-initializing-command-interface.patch
-stable-net-mlx5e-fix-timestamping-capabilities-reporting.patch
-stable-decnet-always-not-take-dst-__refcnt-when-inserting-dst-into-hash-table.patch
-stable-net-8021q-fix-one-possible-panic-caused-by-bug_on-in-free_netdev.patch
-stable-sfc-provide-dummy-definitions-of-vswitch-functions.patch
-stable-ipv6-do-not-leak-throw-route-references.patch
-stable-rtnetlink-add-ifla_group-to-ifla_policy.patch
 
 ###
 ### Arch x86
@@ -297,9 +272,6 @@ net-wireless-rtlwifi-Fix-kernel-oops-introduced-with-commit-e4965.patch
 # update rtl8xxxu for mga#20508
 net-wireless-realtek-rtl8xxxu-linux-4.11-rc.patch
 
-# fixes issue triggable by remote peers
-net-netfilter-xt_TCPMSS-add-more-sanity-tests-on-tcph-do.patch
-
 ###
 ### pinctrl
 ###
@@ -316,6 +288,9 @@ pinctrl_amd-Use-regular-interrupt-instead-of-chained.patch
 platform-x86-add-shuttle-wmi-driver.patch
 platform-x86-shuttle-wmi-drop-devinit-exit.patch
 platform-x86-shuttle-wmi-4.2-buildfix.patch
+
+# X302UA no wifi
+platform-x86-asus-nb-wmi-Add-wapf4-quirk-for-the-X30.patch
 
 ###
 ### RTC
@@ -335,6 +310,9 @@ include-kbuild-export-pci_ids.patch
 # new codecs
 sound-ALSA-hda-realtek-Add-new-codec-ID-ALC299.patch
 sound-ALSA-hda-realtek-New-codec-support-of-ALC1220.patch
+sound-ALSA-hda-realtek-new-id-for-alc1220.patch
+sound-ALSA-hda-realtek-Remove-ALC285-device-ID.patch
+sound-ALSA-hda-realtek-New-codecs-support-for-ALC215-ALC28.patch
 
 # add support for Gigabyte GA-AX370 Gaming 5 with dual codecs (TTL: 4.12)
 sound-ALSA-hda-A-new-flag-to-enforce-prefix-to-each-pin.patch
@@ -371,9 +349,6 @@ hid-usbhid-IBM-BladeCenterHS20-quirk.patch
 
 usb-storage-unusual_devs-add-id.patch
 usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch
-
-# amd xhci fix
-usb-xhci-Limit-USB2-port-wake-support-for-AMD-Promontory-hosts.patch
 
 ###
 ### V4L
