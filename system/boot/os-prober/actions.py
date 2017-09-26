@@ -29,4 +29,4 @@ def install():
 
     shelltools.touch("labels")
     pisitools.insinto("/var/lib/os-prober", "labels")
-    pisitools.dodir("/var/lib/os-prober")
+    #pisitools.dodir("/var/lib/os-prober")
