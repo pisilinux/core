@@ -2610,7 +2610,7 @@
             <Description xml:lang="en">Netscape Portable Runtime (NSPR) provides a platform-neutral API for system level and libc like functions. The API is used in the Mozilla client, many of Netscape/AOL/iPlanet&apos;s and other software offerings.</Description>
             <Description xml:lang="tr">Netscape Taşınabilir çalışma Zamanı (NSPR) sistem seviyesindeki libc ve benzeri fonksiyonlar için platform bağımsız bir programlama arayüzü sunar. Bu arayüz, Mozilla istemcilerinde, Netscape/AOL/iPlanet&apos;in diğer yazılımlarında kullanılmaktadır.</Description>
             <Description xml:lang="es">Netscape Portable Runtime (NSPR) provee un API independiente de la plataforma a nivel de sistema y funciones como libc. El API está usado en el cliente Mozilla, y muchos otros software de Netscape/AOL/iPlanet.</Description>
-            <Archive type="targz" sha1sum="ec6660257d41267a0e6ee25812e9012cb9ddd274">https://ftp.mozilla.org/pub/nspr/releases/v4.13.1/src/nspr-4.13.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="5262abb243191d5fa3dcd72857d7d7f8ec47ad01">https://ftp.mozilla.org/pub/nspr/releases/v4.17/src/nspr-4.17.tar.gz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="nspr/config/nspr.pc.in">nspr.pc.in</AdditionalFile>
                 <AdditionalFile target="generate-pc-config.sh" permission="0755">generate-pc-config.sh</AdditionalFile>
@@ -2629,7 +2629,7 @@
             <Summary xml:lang="tr">nspr için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="4">nspr</Dependency>
+                <Dependency release="5">nspr</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -2638,6 +2638,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2017-09-26</Date>
+                <Version>4.17.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2017-02-11</Date>
                 <Version>4.13.1</Version>
@@ -8868,11 +8875,12 @@
                 <Path fileType="man">/usr/share/man</Path>
                 <Path fileType="locale">/usr/share/locale</Path>
                 <Path fileType="header">/usr/include</Path>
+                <Path fileType="library">/usr/lib/pkgconfig</Path>
             </Files>
         </Package>
         <History>
             <Update release="3">
-                <Date>2017-01-07</Date>
+                <Date>2017-09-20</Date>
                 <Version>3.3.12</Version>
                 <Comment>Version bump.</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -9206,8 +9214,8 @@
             <Description xml:lang="fr">SQLite est une petite librairie C implémentant un moteur de base de données SQL auto-configurée, auto-suffisante, pouvant être embarquée. Gère des bases de données de tailles allant jusqu&apos;à 2 téraOctets.</Description>
             <Description xml:lang="en">SQLite is a small C library that implements a self-contained, embeddable, zero-configuration SQL database engine. Supports databases up to 2 terabytes in size.</Description>
             <Description xml:lang="tr">SQLite hiçbir ayar gerektirmeyen, başka programların içine gömülebilir bir SQL veritabanı motorudur. 2 terabayta kadar büyüklükteki veritabanlarını tutabilir.</Description>
-            <Archive type="targz" sha1sum="7bcff1c158ed9e2c0e159c1b4b6c36d4d65dff8c">https://sqlite.org/2017/sqlite-autoconf-3170000.tar.gz</Archive>
-            <Archive type="zip" sha1sum="bf3b479067d6eb36c8230b668a45994c9212d6cc">https://www.sqlite.org/2017/sqlite-doc-3170000.zip</Archive>
+            <Archive type="targz" sha1sum="48593dcd19473f25fe6fcd08048e13ddbff4c983">https://sqlite.org/2017/sqlite-autoconf-3200100.tar.gz</Archive>
+            <Archive type="zip" sha1sum="5c674754629392003fa5f7f4d2bc533d571040b1">https://sqlite.org/2017/sqlite-doc-3200100.zip</Archive>
             <BuildDependencies>
                 <Dependency>readline-devel</Dependency>
             </BuildDependencies>
@@ -9231,7 +9239,7 @@
             <Summary xml:lang="tr">sqlite için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="6">sqlite</Dependency>
+                <Dependency release="7">sqlite</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -9245,7 +9253,7 @@
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="6">sqlite</Dependency>
+                <Dependency release="7">sqlite</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
@@ -9262,6 +9270,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2017-09-26</Date>
+                <Version>3.20.1</Version>
+                <Comment>Verison Bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2017-03-22</Date>
                 <Version>3.17.0</Version>
@@ -9637,6 +9652,7 @@
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
+                <Path fileType="library">/usr/lib/pkgconfig</Path>
                 <Path fileType="man">/usr/share/man/man3</Path>
             </Files>
         </Package>
@@ -9658,7 +9674,7 @@
         </Package>
         <History>
             <Update release="3">
-                <Date>2017-01-25</Date>
+                <Date>2017-09-20</Date>
                 <Version>2.25</Version>
                 <Comment>Rebuild.</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -13736,14 +13752,14 @@
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
-                <Path fileType="header">/usr/lib/pkgconfig/cloog.pc</Path>
+                <Path fileType="library">/usr/lib/pkgconfig</Path>
             </Files>
         </Package>
         <History>
             <Update release="3">
-                <Date>2017-02-09</Date>
+                <Date>2017-09-20</Date>
                 <Version>0.18.4</Version>
-                <Comment>Release Bump</Comment>
+                <Comment>Release Bump.</Comment>
                 <Name>PisiLinux Community</Name>
                 <Email>admin@pisilinux.org</Email>
             </Update>
@@ -15370,7 +15386,7 @@
             <Summary xml:lang="pl">Narzędzie do wykrywania innych systemów operacyjnych na dyskach</Summary>
             <Description xml:lang="en">os-probe detects other OSes available on a system and outputs the results in a generic machine-readable format. Support for new OSes and Linux distributions can be added easily.</Description>
             <Description xml:lang="pl">os-prober wykrywa inne systemy operacyjne dostępne na komputerze i przekazuje rezultaty w standardowym, odczytywalnym maszynowo, formacie. </Description>
-            <Archive type="tarxz" sha1sum="f7008494924ee60468bb27df8d926d7e0234edab">http://http.debian.net/debian/pool/main/o/os-prober/os-prober_1.74.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="7434eef47887d820f8f4cc2f0f99afe50b22adbd">http://http.debian.net/debian/pool/main/o/os-prober/os-prober_1.76.tar.xz</Archive>
             <SourceURI>system/boot/os-prober/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -15384,6 +15400,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2017-09-26</Date>
+                <Version>1.76</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="3">
                 <Date>2017-02-11</Date>
                 <Version>1.74</Version>
