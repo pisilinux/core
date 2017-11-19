@@ -16,9 +16,9 @@
         <BuildDependencies>
             <Dependency>pciutils-devel</Dependency>
         </BuildDependencies>
-        <Patches>
+                <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.9.44.xz</Patch>
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.9.63.xz</Patch>
             <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.9.40/1.mga7/PATCHES/patches/series-->
             <!--stable patches-->
             <!--CVE-2016-8405-->
@@ -106,7 +106,7 @@
             <Patch level="1">patches/mageia/net-netfilter-psd-fix-redefines.patch</Patch>
             <Patch level="1">patches/mageia/net-wireless-rtlwifi-Use-dev_kfree_skb_irq-instead-of-kfree_skb.patch</Patch>
             <Patch level="1">patches/mageia/net-wireless-rtlwifi-Fix-kernel-oops-introduced-with-commit-e4965.patch</Patch>
-            <Patch level="1">patches/mageia/net-wireless-realtek-rtl8xxxu-linux-4.11-rc.patch</Patch>
+
             <Patch level="1">patches/mageia/pinctrl_amd-Use-regular-interrupt-instead-of-chained.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
@@ -188,6 +188,13 @@
     </Package>
    
     <History>
+        <Update release="12">
+            <Date>2017-11-19</Date>
+            <Version>4.9.63</Version>
+            <Comment>Release bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="11">
             <Date>2017-08-21</Date>
             <Version>4.9.44</Version>

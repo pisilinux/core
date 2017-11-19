@@ -14,14 +14,14 @@
         <Description>This package provides the kernel modules needed for mouse integration and shared folder support between VirtualBox host and guest systems.</Description>
         <Archive sha1sum="87b355193a306ed5516e8d348f7eb83854e08ac1" type="tarxz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-5.1.14.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency version="4.9.44">kernel-module-headers</Dependency>
+            <Dependency version="4.9.63">kernel-module-headers</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>module-virtualbox-guest</Name>
         <RuntimeDependencies>
-            <Dependency version="4.9.44">kernel</Dependency>
+            <Dependency version="4.9.63">kernel</Dependency>
             <Dependency>baselayout</Dependency>
             <Dependency version="current">module-virtualbox-guest-userspace</Dependency>
         </RuntimeDependencies>
@@ -52,6 +52,13 @@
     </Package>
 
     <History>
+        <Update release="17">
+            <Date>2017-11-19</Date>
+            <Version>5.1.14</Version>
+            <Comment>Rebuild for new kernel.</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
         <Update release="16">
             <Date>2017-08-21</Date>
             <Version>5.1.14</Version>
