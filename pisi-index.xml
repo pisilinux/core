@@ -15595,7 +15595,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox için çekirdek desteği sunar.</Description>
             <Archive type="tarxz" sha1sum="7489ae3b501407d5ca2826e6ef1d5b2000e06154">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-5.1.14.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.9.44">kernel-module-headers</Dependency>
+                <Dependency version="4.9.63">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -15605,7 +15605,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.9.44">kernel</Dependency>
+                <Dependency version="4.9.63">kernel</Dependency>
                 <Dependency version="5.1.14">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -15627,6 +15627,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="17">
+                <Date>2017-11-19</Date>
+                <Version>5.1.14</Version>
+                <Comment>Rebuild for new kernel.</Comment>
+                <Name>Kamil Atlı</Name>
+                <Email>suvari@pisilinux.org</Email>
+            </Update>
             <Update release="16">
                 <Date>2017-08-21</Date>
                 <Version>5.1.14</Version>
@@ -15758,7 +15765,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
             <Archive type="tarxz" sha1sum="87b355193a306ed5516e8d348f7eb83854e08ac1">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-5.1.14.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.9.44">kernel-module-headers</Dependency>
+                <Dependency version="4.9.63">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -15768,7 +15775,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.9.44">kernel</Dependency>
+                <Dependency version="4.9.63">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
                 <Dependency version="5.1.14">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
@@ -15795,6 +15802,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="17">
+                <Date>2017-11-19</Date>
+                <Version>5.1.14</Version>
+                <Comment>Rebuild for new kernel.</Comment>
+                <Name>Kamil Atlı</Name>
+                <Email>suvari@pisilinux.org</Email>
+            </Update>
             <Update release="16">
                 <Date>2017-08-21</Date>
                 <Version>5.1.14</Version>
@@ -15930,7 +15944,7 @@
             <Description xml:lang="es">ndiswrapper permite usar controladores de windows XP para tarjetas WLAN que no tienen controladores propios para Linux.</Description>
             <Archive type="targz" sha1sum="20998237cf6d37b86391dc8736c10031110db578">http://download.sourceforge.net/ndiswrapper/ndiswrapper-1.60.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.9.44">kernel-module-headers</Dependency>
+                <Dependency version="4.9.63">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch>upstream.patch</Patch>
@@ -15943,7 +15957,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.9.44">kernel</Dependency>
+                <Dependency version="4.9.63">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -15955,6 +15969,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2017-11-19</Date>
+                <Version>1.60</Version>
+                <Comment>Rebuild for new kernel.</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="9">
                 <Date>2017-08-21</Date>
                 <Version>1.60</Version>
@@ -16038,7 +16059,7 @@
             <Archive type="targz" sha1sum="8acbdbb4ab4ab4123d1773b616904798fbef9277" target="i686">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <Archive type="targz" sha1sum="1f568bb989d175813c5631c6629d9479eae6f3be" target="x86_64">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.9.44">kernel-module-headers</Dependency>
+                <Dependency version="4.9.63">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">patch/license.patch</Patch>
@@ -16054,8 +16075,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.9.44">kernel</Dependency>
-                <Dependency release="10">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="4.9.63">kernel</Dependency>
+                <Dependency release="11">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -16079,6 +16100,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2017-11-19</Date>
+                <Version>6.30.223.271</Version>
+                <Comment>Rebuild for new kernel.</Comment>
+                <Name>Kamil Atlı</Name>
+                <Email>suvari@pisilinux.org</Email>
+            </Update>
             <Update release="10">
                 <Date>2017-08-21</Date>
                 <Version>6.30.223.271</Version>
@@ -16168,14 +16196,14 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.9.44">kernel-module-headers</Dependency>
+                <Dependency version="4.9.63">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-bbswitch/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="4.9.44">kernel</Dependency>
+                <Dependency version="4.9.63">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -16188,6 +16216,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2017-11-19</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild for new kernel.</Comment>
+                <Name>Kamil Atlı</Name>
+                <Email>suvari@pisilinux.org</Email>
+            </Update>
             <Update release="10">
                 <Date>2017-08-21</Date>
                 <Version>0.8</Version>
@@ -16360,7 +16395,7 @@
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.9.44.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.9.63.xz</Patch>
                 <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
                 <Patch level="1">patches/mageia/base-cacheinfo-silence-DT-warnings.patch</Patch>
                 <Patch level="1">patches/mageia/iommu-amd-flush-IOTLB-for-specific-domains-only-v3.patch</Patch>
@@ -16419,7 +16454,6 @@
                 <Patch level="1">patches/mageia/net-netfilter-psd-fix-redefines.patch</Patch>
                 <Patch level="1">patches/mageia/net-wireless-rtlwifi-Use-dev_kfree_skb_irq-instead-of-kfree_skb.patch</Patch>
                 <Patch level="1">patches/mageia/net-wireless-rtlwifi-Fix-kernel-oops-introduced-with-commit-e4965.patch</Patch>
-                <Patch level="1">patches/mageia/net-wireless-realtek-rtl8xxxu-linux-4.11-rc.patch</Patch>
                 <Patch level="1">patches/mageia/pinctrl_amd-Use-regular-interrupt-instead-of-chained.patch</Patch>
                 <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
                 <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
@@ -16493,6 +16527,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="12">
+                <Date>2017-11-19</Date>
+                <Version>4.9.63</Version>
+                <Comment>Release bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="11">
                 <Date>2017-08-21</Date>
                 <Version>4.9.44</Version>
@@ -16691,7 +16732,7 @@
                 <Dependency>xmlto</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.9.44.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.9.63.xz</Patch>
                 <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
                 <Patch level="1">patches/mageia/base-cacheinfo-silence-DT-warnings.patch</Patch>
                 <Patch level="1">patches/mageia/iommu-amd-flush-IOTLB-for-specific-domains-only-v3.patch</Patch>
@@ -16750,7 +16791,6 @@
                 <Patch level="1">patches/mageia/net-netfilter-psd-fix-redefines.patch</Patch>
                 <Patch level="1">patches/mageia/net-wireless-rtlwifi-Use-dev_kfree_skb_irq-instead-of-kfree_skb.patch</Patch>
                 <Patch level="1">patches/mageia/net-wireless-rtlwifi-Fix-kernel-oops-introduced-with-commit-e4965.patch</Patch>
-                <Patch level="1">patches/mageia/net-wireless-realtek-rtl8xxxu-linux-4.11-rc.patch</Patch>
                 <Patch level="1">patches/mageia/pinctrl_amd-Use-regular-interrupt-instead-of-chained.patch</Patch>
                 <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
                 <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
@@ -16859,6 +16899,17 @@
             </Files>
         </Package>
         <History>
+            <Update release="12">
+                <Type package="kernel">security</Type>
+                <Date>2017-11-19</Date>
+                <Version>4.9.63</Version>
+                <Comment>Version Bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
             <Update release="11">
                 <Type package="kernel">security</Type>
                 <Date>2017-08-21</Date>
