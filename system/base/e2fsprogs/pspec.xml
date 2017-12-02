@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Standard ext2/3/4 filesystem utilities</Summary>
         <Description>e2fsprogs provides the filesystem utilities for use with the ext2 filesystem. It also supports the ext3/4 filesystem with journaling support.</Description>
-        <Archive sha1sum="927cb79c6399c559a83b4fa528ec8912a82d122f" type="targz">mirrors://sourceforge/e2fsprogs/e2fsprogs-1.43.3.tar.gz</Archive>
+        <Archive sha1sum="dcf98fcb96f8a57c7083d54caee6af050f0025cf" type="targz">mirrors://sourceforge/e2fsprogs/e2fsprogs-1.43.5.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>libutil-linux-devel</Dependency>
             <!-- The first release shipped within util-linux -->
@@ -65,6 +65,13 @@
     </Package>
 
     <History>
+        <Update release="4">
+            <Date>2017-12-03</Date>
+            <Version>1.43.5</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="3">
             <Date>2017-03-26</Date>
             <Version>1.43.3</Version>
