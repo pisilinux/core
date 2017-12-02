@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>GNU Stream Editor</Summary>
         <Description>Sed is a stream editor. A stream editor is used to perform basic text transformations on an input stream (a file or input from a pipeline).</Description>
-        <Archive sha1sum="8f9f142bf836caa8b167898d5f0f7f4d96d29d28" type="tarxz">mirrors://gnu/sed/sed-4.3.tar.xz</Archive>
+        <Archive sha1sum="a196cd036efd52a8e349cfe88ab4baa555fb29d5" type="tarxz">mirrors://gnu/sed/sed-4.4.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>gettext</Dependency>
             <Dependency>attr-devel</Dependency>
@@ -36,6 +36,13 @@
     </Package>
 
     <History>
+        <Update release="4">
+            <Date>2017-12-03</Date>
+            <Version>4.4</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="3">
             <Date>2017-01-23</Date>
             <Version>4.3</Version>
