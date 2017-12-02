@@ -1,0 +1,22 @@
+diff -Nuar bc-1.07.1.orig/bc/fix-libmath_h bc-1.07.1/bc/fix-libmath_h
+--- bc-1.07.1.orig/bc/fix-libmath_h	2017-04-08 01:20:02.000000000 +0300
++++ bc-1.07.1/bc/fix-libmath_h	2017-12-03 01:52:01.125065740 +0300
+@@ -1,9 +1,9 @@
+-ed libmath.h <<EOS-EOS
+-1,1s/^/{"/
+-1,\$s/\$/",/
+-2,\$s/^/"/
+-\$,\$d
+-\$,\$s/,\$/,0}/
+-w
+-q
+-EOS-EOS
++#! /bin/bash
++sed -e '1   s/^/{"/' \
++    -e     's/$/",/' \
++    -e '2,$ s/^/"/'  \
++    -e   '$ d'       \
++    -i libmath.h
++
++sed -e '$ s/$/0}/' \
++    -i libmath.h
