@@ -26,4 +26,4 @@ def install():
     autotools.rawInstall('DESTDIR=%s man1dir=/usr/share/man/man1' % get.installDIR())
 
     pisitools.dohtml("doc/*")
-    pisitools.dodoc("Changes", "README")
+    pisitools.dodoc("Changes", "README.md")
