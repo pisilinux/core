@@ -9,8 +9,7 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.configure("--with-readline \
-                         --without-libedit")
+    autotools.configure("--with-readline")
 
 def build():
     autotools.make()

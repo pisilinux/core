@@ -12,17 +12,18 @@
         <IsA>app:console</IsA>
         <Summary>Console-based calculator utility</Summary>
         <Description>bc is an arbitrary precision numeric processing language and can be used as a calculator. Syntax is similar to C, but differs in many substantial areas. For example, it supports interactive execution of statements.</Description>
-        <Archive sha1sum="18717e0543b1dda779a71e6a812f11b8261a705a" type="tarbz2">ftp://alpha.gnu.org/gnu/bc/bc-1.06.95.tar.bz2</Archive>
+        <Archive sha1sum="b4475c6d66590a5911d30f9747361db47231640a" type="targz">https://ftp.gnu.org/gnu/bc/bc-1.07.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>flex</Dependency>
             <Dependency>texinfo</Dependency>
             <Dependency>readline-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">fedora/bc-1.06.95-memleak.patch</Patch>
-            <Patch level="1">fedora/bc-1.06-dc_ibase.patch</Patch>
+            <!--Patch level="1">fedora/bc-1.06.95-memleak.patch</Patch>
             <Patch level="1">fedora/bc-1.06.95-matlib.patch</Patch>
-            <Patch level="1">fedora/bc-1.06.95-sigintmasking.patch</Patch>
+            <Patch level="1">fedora/bc-1.06.95-sigintmasking.patch</Patch-->
+            <Patch level="1">fix_libmath_use_sed.patch</Patch>
+            <Patch level="1">fedora/bc-1.06-dc_ibase.patch</Patch>
             <Patch level="1">fedora/bc-1.06.95-doc.patch</Patch>
         </Patches>
     </Source>
@@ -41,6 +42,13 @@
     </Package>
 
     <History>
+        <Update release="4">
+            <Date>2017-12-03</Date>
+            <Version>1.07.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="3">
             <Date>2017-01-27</Date>
             <Version>1.06.95</Version>
