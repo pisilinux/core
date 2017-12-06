@@ -9,19 +9,19 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 
-WorkDir="grub-%s" % (get.srcVERSION().replace("_", "~"))
+#WorkDir="grub-%s" % (get.srcVERSION().replace("_", "~"))
 
 
 def setup():
     
     shelltools.copy("../unifont*.bdf", "./unifont.bdf")
-    shelltools.export("GRUB_CONTRIB", "%s/grub-%s/grub-extras" % (get.workDIR(), get.srcVERSION()))
+    shelltools.export("GRUB_CONTRIB", "%s/grub-2.02/grub-extras" % (get.workDIR()))
 
     pisitools.cflags.remove("-fstack-protector", "-fasynchronous-unwind-tables", "-fexceptions", "-fPIC")
     pisitools.cflags.sub("\s?(-O[\ds]|-D_FORTIFY_SOURCE=\d)\s?", " ")
 
     #shelltools.system("./linguas.sh")
-    shelltools.system("./autogen.sh")
+    #shelltools.system("./autogen.sh")
     autotools.configure("--disable-werror \
                          --with-grubdir=grub2 \
                          --program-transform-name='s,grub,grub2,'\
@@ -33,7 +33,7 @@ def setup():
     
     shelltools.copytree("../grub-%s" % (get.srcVERSION().replace("_", "~")), "../grub-%s-efi" % get.srcVERSION())
     shelltools.cd("../grub-%s-efi" % get.srcVERSION())
-    shelltools.system("./autogen.sh")
+    #shelltools.system("./autogen.sh")
     autotools.configure("--disable-werror \
                          --with-grubdir=grub2 \
                          --program-transform-name='s,grub,grub2,'\
@@ -50,6 +50,7 @@ def build():
     #make-dist for creating all updated translation files
     #autotools.make("dist")
     autotools.make()
+    
     shelltools.cd("../grub-%s-efi" % get.srcVERSION())
     autotools.make()
     shelltools.cd("..")
