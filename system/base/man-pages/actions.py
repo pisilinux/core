@@ -33,5 +33,9 @@ def install():
 
     # Comes from xorg-input
     pisitools.remove("/usr/share/man/man4/mouse.4")
+    
+    # Comes from keyutils
+    pisitools.remove("/usr/share/man/man7/*-keyring.7")
+    pisitools.remove("/usr/share/man/man7/keyrings.7")
 
     pisitools.dodoc("man-pages-*.Announce", "README")
