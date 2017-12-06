@@ -17,6 +17,9 @@ def setup():
     # do not enable nls http://bugs.gentoo.org/121408
     autotools.configure("--disable-nls \
                          --disable-dependency-tracking")
+    
+    
+    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
 def build():
     autotools.make("-j1")
@@ -26,4 +29,4 @@ def install():
 
     pisitools.dosym("flex", "/usr/bin/lex")
 
-    pisitools.dodoc("NEWS", "README")
+    pisitools.dodoc("NEWS", "README.md")
