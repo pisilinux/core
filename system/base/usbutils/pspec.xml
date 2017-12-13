@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Linux USB utilities</Summary>
         <Description>usbutils provides utilities for inspecting devices connected to a USB bus.</Description>
-        <Archive sha1sum="233dee6cd6829476be778554984045663b568b18" type="tarxz">https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-008.tar.xz</Archive>
+        <Archive sha1sum="ae9caab499d76c0e9eb323f333d5ec92a25697a3" type="tarxz">https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-009.tar.xz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="usb.ids">usb.ids</AdditionalFile>
         </AdditionalFiles>
@@ -34,7 +34,7 @@
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="data">/usr/share/misc</Path>
-            <Path fileType="data">/usr/share/pkgconfig</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
         </Files>
         <AdditionalFiles>
              <AdditionalFile owner="root" permission="0644" target="/usr/share/misc/usb.ids">usb.ids</AdditionalFile>
@@ -42,6 +42,13 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2017-12-13</Date>
+            <Version>009</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2017-02-07</Date>
             <Version>008</Version>
