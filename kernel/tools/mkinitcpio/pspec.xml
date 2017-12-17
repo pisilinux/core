@@ -11,7 +11,7 @@
         <License>GPL</License>
         <Summary>Modular initramfs image creation utility</Summary>
         <Description>mkinitcpio is a generic, modular, cross-distribution initramfs generation tool.</Description>
-        <Archive sha1sum="678efaad52901aeb66f84e99f2ea86b24d2eea22" type="targz">https://github.com/bferturk/mkinitcpio/archive/19.1.tar.gz</Archive>
+        <Archive sha1sum="aeec94b0693fb988370640f9a9e9e5cbe2fd92ed" type="targz">https://sources.archlinux.org/other/mkinitcpio/mkinitcpio-23.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>libkmod-devel</Dependency>
             <Dependency>kmod</Dependency>
@@ -20,6 +20,10 @@
             <Dependency>man-pages</Dependency>
             <Dependency>man-db</Dependency>
         </BuildDependencies>
+        <Patches>
+            <Patch level="1">0001-make-ldd-parsing-compatible-with-upstream-glibc-chan.patch</Patch>
+            <Patch level="1">remove-systemd.patch</Patch>
+        </Patches>
     </Source>
     
     <Package>
@@ -48,9 +52,19 @@
         <Provides>
             <COMAR script="pakhandler.py">System.PackageHandler</COMAR>
         </Provides>
+        <AdditionalFiles>
+            <AdditionalFile target="/etc/mkinitcpio.d/linux.preset" permission="0755" owner="root">linux.preset</AdditionalFile>
+        </AdditionalFiles>
     </Package>
     
     <History>
+        <Update release="5">
+            <Date>2017-12-17</Date>
+            <Version>23</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2017-11-04</Date>
             <Version>19.1</Version>
