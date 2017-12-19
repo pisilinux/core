@@ -184,6 +184,7 @@
             <Path fileType="executable" permanent="true">/boot</Path>
             <Path fileType="library" permanent="true">/lib/modules</Path>
             <Path fileType="data">/etc/kernel</Path>
+            <Path fileType="config" permanent="true">/etc/mkinitcpio.d</Path>
         </Files>
         <Provides>
             <COMAR script="package.py">System.Package</COMAR>
