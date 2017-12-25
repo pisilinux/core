@@ -55,12 +55,12 @@ WINDOWS_EFI=$(/usr/sbin/efibootmgr -v | grep -E -m 1 '(WINDOWS|Windows Boot Mana
 if [ -z "$WINDOWS_EFI" ]; then
         exit 0
 fi
-WIN_EFI_PATH_LINUX=/EFI/Microsoft/Boot/bootmgfw.efi
+WIN_EFI_PATH_LINUX=/EFI/Microsoft/Boot/bkpbootmgfw.efi
 
 #Determine EFI UUID
-WIN_EFI_UUID=$(grub2-probe --target=fs_uuid /boot/efi/EFI/Microsoft/Boot/bootmgfw.efi)
+WIN_EFI_UUID=$(grub2-probe --target=fs_uuid /boot/efi/EFI/Microsoft/Boot/bkpbootmgfw.efi)
 
-ESP_SEARCH_HINTS=$(grub2-probe --target=hints_string /boot/efi/EFI/Microsoft/Boot/bootmgfw.efi)
+ESP_SEARCH_HINTS=$(grub2-probe --target=hints_string /boot/efi/EFI/Microsoft/Boot/bkpbootmgfw.efi)
 
 cat << EOF
 menuentry "Windows Boot Manager" {
@@ -71,7 +71,7 @@ cat << EOF
   insmod fat
   insmod search_fs_uuid
   insmod chain
-  search --fs-uuid --set=root ${ESP_SEARCH_HINTS} ${WIN_EFI_UUID}
+  search --fs-uuid --set=root --hint-bios --hint-efi --hint-baremetal ${ESP_SEARCH_HINTS} ${WIN_EFI_UUID}
   chainloader $WIN_EFI_PATH_LINUX
 }
 EOF
