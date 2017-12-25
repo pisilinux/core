@@ -46,6 +46,9 @@
             <Patch level="1">grub-2.02_beta2-KERNEL_GLOBS.patch</Patch>
             <Patch level="1">mkconfig-fix.patch</Patch>
             <Patch level="1">pisi_name_and_initramfs.patch</Patch>
+            <Patch level="1">Allow_GRUB_to_mount_ext234_filesystems_that_have_the_encryption_feature.patch</Patch>
+            <Patch level="1">tsc-Change-default-tsc-calibration-method-to-pmtimer-on-EFI-systems.patch</Patch>
+            <Patch level="1">intel-ucode.patch</Patch>
         </Patches>
     </Source>
 
@@ -85,6 +88,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2017-12-25</Date>
+            <Version>2.02</Version>
+            <Comment>Patch for ext234.</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2017-12-06</Date>
             <Version>2.02</Version>
