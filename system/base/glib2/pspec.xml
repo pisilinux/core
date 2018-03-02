@@ -23,6 +23,8 @@
         </BuildDependencies>
         <Patches>
             <Patch level="1">revert-warn-glib-compile-schemas.patch</Patch>
+            <Patch level="1">0001-glib-compile-resources-Add-generate-phony-targets-fl.patch</Patch>
+            <Patch>0001-glib-compile-resources-Escape-file-names-in-dependen.patch</Patch>
         </Patches>
     </Source>
 
@@ -130,6 +132,13 @@
     </Package>
 
     <History>
+        <Update release="4">
+            <Date>2018-02-25</Date>
+            <Version>2.50.2</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="3">
             <Date>2017-01-08</Date>
             <Version>2.50.2</Version>
