@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libidn2</Name>
+        <Homepage>http://www.gnu.org/software/libidn</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2.1</License>
+        <License>GPLv3</License>
+        <IsA>app:console</IsA>
+        <IsA>library</IsA>
+        <Summary>Internationalized Domain Names (IDN) implementation</Summary>
+        <Description>GNU Libidn is an implementation of the Stringprep, Punycode and IDNA specifications defined by the IETF Internationalized Domain Names (IDN) working group, used for internationalized domain names. The C library is available under the GNU Lesser General Public License.</Description>
+        <Archive sha1sum="b00490f2251f218b130628eccacc170a4bb49db5" type="targz">http://ftp.gnu.org/gnu/libidn/libidn2-2.0.4.tar.gz</Archive>
+    </Source>
+
+    <Package>
+        <Name>libidn2</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/libidn2*</Path>
+            <Path fileType="data">/usr/share/emacs</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man/man1</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="doc">/usr/share/gtk-doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>libidn2-devel</Name>
+        <PartOf>system.devel</PartOf>
+        <Summary>Development files for libidn2</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">libidn2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/lib32/pkgconfig</Path>
+            <Path fileType="man">/usr/share/man/man3</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>libidn2-32bit</Name>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for libidn2</Summary>
+        <BuildType>emul32</BuildType>
+        <BuildDependencies>
+            
+        </BuildDependencies>
+        <RuntimeDependencies>
+            
+            <Dependency release="current">libidn2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib32/libidn2*</Path>
+        </Files>
+    </Package>
+
+    <History>
+         <Update release="1">
+            <Date>2018-02-22</Date>
+            <Version>2.0.4</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
