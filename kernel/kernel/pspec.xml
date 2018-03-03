@@ -28,8 +28,8 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.14.18.xz</Patch>
-            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.14.18/2.mga7/PATCHES/patches/series-->
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.14.23.xz</Patch>
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.14.22/1.mga7/PATCHES/patches/series-->
             <!--stable patches-->
             <!--CVE-2016-8405-->
             <!--other patches-->
@@ -38,9 +38,6 @@
             <Patch level="1">patches/mageia/x86-default_poweroff_up_machines.patch</Patch>
             <Patch level="1">patches/mageia/x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch</Patch>
             <Patch level="1">patches/mageia/Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch</Patch>
-            <Patch level="1">patches/mageia/x86-entry-64-Clear-extra-registers-beyond-syscall-ar.patch</Patch>
-            <Patch level="1">patches/mageia/x86-entry-64-Clear-registers-for-exceptions-interrup.patch</Patch>
-            <Patch level="1">patches/mageia/x86-entry-64-compat-Clear-registers-for-compat-sysca.patch</Patch>
             <Patch level="1">patches/mageia/pti32bit-0001-x86-asm-offsets-Move-TSS_sp0-and-TSS_sp1-to-asm-offs.patch</Patch>
             <Patch level="1">patches/mageia/pti32bit-0002-x86-entry-32-Rename-TSS_sysenter_sp0-to-TSS_entry_st.patch</Patch>
             <Patch level="1">patches/mageia/pti32bit-0003-x86-entry-32-Load-task-stack-from-x86_tss.sp1-in-SYS.patch</Patch>
@@ -72,12 +69,21 @@
             <Patch level="1">patches/mageia/pti32bit-0029-x86-ldt-Split-out-sanity-check-in-map_ldt_struct.patch</Patch>
             <Patch level="1">patches/mageia/pti32bit-0030-x86-ldt-Enable-LDT-user-mapping-for-PAE.patch</Patch>
             <Patch level="1">patches/mageia/pti32bit-0031-x86-pti-Allow-CONFIG_PAGE_TABLE_ISOLATION-for-x86_32.patch</Patch>
+            <Patch level="1">patches/mageia/x86-pti-0070-nospec-Kill-array_index_nospec_mask_check.patch</Patch>
+            <Patch level="1">patches/mageia/x86-pti-0071-nospec-Allow-index-argument-to-have-const-qualified-.patch</Patch>
+            <Patch level="1">patches/mageia/x86-pti-0072-nospec-Include-asm-barrier.h-dependency.patch</Patch>
+            <Patch level="1">patches/mageia/x86-pti-0073-x86-microcode-Propagate-return-value-from-updating-f.patch</Patch>
+            <Patch level="1">patches/mageia/x86-pti-0074-x86-CPU-Add-a-microcode-loader-callback.patch</Patch>
+            <Patch level="1">patches/mageia/x86-pti-0075-x86-CPU-Check-CPU-feature-bits-after-microcode-upgra.patch</Patch>
+            <Patch level="1">patches/mageia/x86-pti-0076-x86-entry-Reduce-the-code-footprint-of-the-idtentry-.patch</Patch>
+            <Patch level="1">patches/mageia/x86-pti-0077-x86-entry-64-Use-xorl-for-faster-register-clearing.patch</Patch>
             <Patch level="1">patches/mageia/sched-topology-Introduce-NUMA-identity-node-sched-domain.patch</Patch>
             <Patch level="1">patches/mageia/pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch</Patch>
             <Patch level="1">patches/mageia/pci-quirks-drop-devinit-exit.patch</Patch>
             <Patch level="1">patches/mageia/acpi-CLEVO-M360S-disable_acpi_irq.patch</Patch>
             <Patch level="1">patches/mageia/acpi-processor-M720SR-limit-to-C2.patch</Patch>
             <Patch level="1">patches/mageia/ACPI-video-Add-a-quirk-to-force-acpi-video-backlight.patch</Patch>
+            <Patch level="1">patches/mageia/acpi-ec-restore-polling-during-noirq-suspend_resume-phases.patch</Patch>
             <!--Patch level="1">patches/mageia/scsi-ppscsi-2.6.2.patch</Patch>
             <Patch level="1">patches/mageia/scsi-ppscsi_fixes.patch</Patch>
             <Patch level="1">patches/mageia/scsi-ppscsi-sg-helper-update.patch</Patch>
@@ -111,6 +117,8 @@
             <Patch level="1">patches/mageia/block-bfq-fix-occurrences-of-request-finish-method-s.patch</Patch>
             <Patch level="1">patches/mageia/block-bfq-limit-tags-for-writes-and-async-I-O.patch</Patch>
             <Patch level="1">patches/mageia/block-bfq-limit-sectors-served-with-interactive-weig.patch</Patch>
+            <Patch level="1">patches/mageia/block-bfq-add-requeue-request-hook.patch</Patch>
+            <Patch level="1">patches/mageia/block-bfq-put-async-queues-for-root-bfq-groups-too.patch</Patch>
             <Patch level="1">patches/mageia/fs-aufs-4.14.patch</Patch>
             <Patch level="1">patches/mageia/fs-aufs-4.14-modular.patch</Patch>
             <Patch level="1">patches/mageia/fs-aufs-include-vmalloc.patch</Patch>
@@ -133,7 +141,6 @@
             <Patch level="1">patches/mageia/gpu-drm-mach64-linux-3.14-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.17-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/gpu-drm-mach64-3.18-buildfix.patch</Patch>
-            <Patch level="1">patches/mageia/gpu-drm-i915-Avoid-PPS-HW_SW-state-mismatch-due-to-rounding.patch</Patch>
             <Patch level="1">patches/mageia/hwmon-k10temp-Move-chip-specific-code-into-probe-function.patch</Patch>
             <Patch level="1">patches/mageia/hwmon-k10temp-Add-support-for-family-17h.patch</Patch>
             <Patch level="1">patches/mageia/hwmon-k10temp-Add-support-for-temperature-offsets.patch</Patch>
@@ -154,13 +161,13 @@
             <Patch level="1">patches/mageia/net-netfilter-psd-fix-redefines.patch</Patch>
             <Patch level="1">patches/mageia/net-WireGuard.patch</Patch>
             <Patch level="1">patches/mageia/net-tls-Correct-length-of-scatterlist-in-tls_sw_sendpage.patch</Patch>
-            <Patch level="1">patches/mageia/net-dccp-CVE-2017-8824-use-after-free-in-DCCP-code.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-xt_addrtype-silence-BROADCAST-message.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.13-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-ideapad-Add-IdeaPad-320-15IKB-to-no_hw_rfkill_list.patch</Patch>
+            <Patch level="1">patches/mageia/platform-x86-ideapad-laptop-Increase-timeout-to-wait-for-ec-answer.patch</Patch>
             <Patch level="1">patches/mageia/hid-usbhid-IBM-BladeCenterHS20-quirk.patch</Patch>
             <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id.patch</Patch>
             <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch</Patch>
@@ -191,8 +198,8 @@
             <Patch level="1">patches/mageia/3rd-viahss-2.6.35-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-viahss-3.0-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8812au.patch</Patch>
-            <Patch level="1">patches/mageia/tools-testing-selftest-Makefile-remove-powerpc-reference.patch</Patch>            
-            
+            <Patch level="1">patches/mageia/3rd-rtl8723de.patch</Patch>
+            <Patch level="1">patches/mageia/tools-testing-selftest-Makefile-remove-powerpc-reference.patch</Patch>
         </Patches>
     </Source>
 
@@ -247,9 +254,20 @@
     </Package>
 
     <History>
+        <Update release="17">
+            <Date>2018-03-03</Date>
+            <Version>4.14.23</Version>
+            <Comment>Version Bump.</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="16">
-            <Date>2018-02-11</Date>
-            <Version>4.14.18</Version>
+            <Date>2018-03-02</Date>
+            <Version>4.9.80</Version>
             <Comment>Version Bump.</Comment>
             <Type package="kernel">security</Type>
             <Requires>

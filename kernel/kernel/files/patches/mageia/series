@@ -14,7 +14,6 @@
 ###
 ### Stable Queue
 ###
-patch-4.14.19-rc1.patch
 
 ###
 ### Arch x86
@@ -38,11 +37,6 @@ x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch
 
 # slows down boot
 Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch
-
-# Spectre mitigations
-x86-entry-64-Clear-extra-registers-beyond-syscall-ar.patch
-x86-entry-64-Clear-registers-for-exceptions-interrup.patch
-x86-entry-64-compat-Clear-registers-for-compat-sysca.patch
 
 # Meltdown 32bit
 pti32bit-0001-x86-asm-offsets-Move-TSS_sp0-and-TSS_sp1-to-asm-offs.patch
@@ -76,6 +70,16 @@ pti32bit-0028-x86-ldt-Define-LDT_END_ADDR.patch
 pti32bit-0029-x86-ldt-Split-out-sanity-check-in-map_ldt_struct.patch
 pti32bit-0030-x86-ldt-Enable-LDT-user-mapping-for-PAE.patch
 pti32bit-0031-x86-pti-Allow-CONFIG_PAGE_TABLE_ISOLATION-for-x86_32.patch
+
+# selected fixes from x86/pti
+x86-pti-0070-nospec-Kill-array_index_nospec_mask_check.patch
+x86-pti-0071-nospec-Allow-index-argument-to-have-const-qualified-.patch
+x86-pti-0072-nospec-Include-asm-barrier.h-dependency.patch
+x86-pti-0073-x86-microcode-Propagate-return-value-from-updating-f.patch
+x86-pti-0074-x86-CPU-Add-a-microcode-loader-callback.patch
+x86-pti-0075-x86-CPU-Check-CPU-feature-bits-after-microcode-upgra.patch
+x86-pti-0076-x86-entry-Reduce-the-code-footprint-of-the-idtentry-.patch
+x86-pti-0077-x86-entry-64-Use-xorl-for-faster-register-clearing.patch
 
 ###
 ### Core
@@ -114,6 +118,9 @@ acpi-processor-M720SR-limit-to-C2.patch
 
 # backlight fixes
 ACPI-video-Add-a-quirk-to-force-acpi-video-backlight.patch
+
+# fixes resume on atleast Thinkpad X240
+acpi-ec-restore-polling-during-noirq-suspend_resume-phases.patch
 
 ###
 ### Block
@@ -176,6 +183,8 @@ block-bfq-iosched-don-t-call-bfqg_and_blkg_put-for-CONFIG_.patch
 block-bfq-fix-occurrences-of-request-finish-method-s.patch
 block-bfq-limit-tags-for-writes-and-async-I-O.patch
 block-bfq-limit-sectors-served-with-interactive-weig.patch
+block-bfq-put-async-queues-for-root-bfq-groups-too.patch
+block-bfq-add-requeue-request-hook.patch
 
 ###
 ### Char
@@ -226,9 +235,6 @@ gpu-drm-mach64-restore-mach64_PCI_IDS.patch
 gpu-drm-mach64-linux-3.14-buildfix.patch
 gpu-drm-mach64-3.17-buildfix.patch
 gpu-drm-mach64-3.18-buildfix.patch
-
-# i915
-gpu-drm-i915-Avoid-PPS-HW_SW-state-mismatch-due-to-rounding.patch
 
 ###
 ### Hardware Monitoring
@@ -300,9 +306,6 @@ net-WireGuard.patch
 # net fixes
 net-tls-Correct-length-of-scatterlist-in-tls_sw_sendpage.patch
 
-# CVE
-net-dccp-CVE-2017-8824-use-after-free-in-DCCP-code.patch
-
 # silence message that gets reported as a bug
 net-netfilter-xt_addrtype-silence-BROADCAST-message.patch
 
@@ -323,6 +326,7 @@ platform-x86-shuttle-wmi-4.13-buildfix.patch
 
 # ideapad-laptop
 platform-x86-ideapad-Add-IdeaPad-320-15IKB-to-no_hw_rfkill_list.patch
+platform-x86-ideapad-laptop-Increase-timeout-to-wait-for-ec-answer.patch
 
 ###
 ### RTC
@@ -364,6 +368,10 @@ usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch
 
 # pwc driver name in /proc/bus/devices, /sys fix and "advertisement" removal
 media-usb-pwc-lie-in-proc-usb-devices.patch
+
+###
+### Watchdog
+###
 
 ###
 ### Video
@@ -420,6 +428,9 @@ video-mageia-logo.patch
 
 # add rtl8812 support (mga#21043)
 3rd-rtl8812au.patch
+
+# add rtl8723de support (mga#22559)
+3rd-rtl8723de.patch
 
 ###
 ### Security
