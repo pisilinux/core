@@ -1,0 +1,87 @@
+From f67ff1f40f7b888b222c0cff12baa1034ffef49f Mon Sep 17 00:00:00 2001
+From: Patrick Griffis <tingping@tingping.se>
+Date: Tue, 15 Nov 2016 08:34:31 -0500
+Subject: [PATCH] glib-compile-resources: Add --generate-phony-targets flag
+
+This includes phony targets for each dependency in the the generated
+dependency file which allows building with `ninja` which doesn't like
+the phony targets[1] but also allows silencing `make` errors similar to
+gcc's -MP option.
+
+[1] - https://github.com/ninja-build/ninja/issues/1184
+
+https://bugzilla.gnome.org/show_bug.cgi?id=774368
+---
+ docs/reference/gio/glib-compile-resources.xml |  9 +++++++++
+ gio/glib-compile-resources.c                  | 20 ++++++++++++++------
+ 2 files changed, 23 insertions(+), 6 deletions(-)
+
+diff --git a/docs/reference/gio/glib-compile-resources.xml b/docs/reference/gio/glib-compile-resources.xml
+index f5a1e62..1ab0a44 100644
+--- a/docs/reference/gio/glib-compile-resources.xml
++++ b/docs/reference/gio/glib-compile-resources.xml
+@@ -181,6 +181,15 @@ as a side-effect of generating sources.
+ </para></listitem>
+ </varlistentry>
+ 
++<varlistentry>
++<term><option>--generate-phony-targets</option></term>
++<listitem><para>
++When creating a dependency file with <option>--dependency-file</option>
++include phony targets in the same style as gcc -MP. This would typically
++be used with <literal>make</literal>.
++</para></listitem>
++</varlistentry>
++
+ </variablelist>
+ </refsect1>
+ 
+diff --git a/gio/glib-compile-resources.c b/gio/glib-compile-resources.c
+index 3d13b12..de95a33 100644
+--- a/gio/glib-compile-resources.c
++++ b/gio/glib-compile-resources.c
+@@ -612,6 +612,7 @@ main (int argc, char **argv)
+   gboolean manual_register = FALSE;
+   gboolean internal = FALSE;
+   gboolean generate_dependencies = FALSE;
++  gboolean generate_phony_targets = FALSE;
+   char *dependency_file = NULL;
+   char *c_name = NULL;
+   char *c_name_no_underscores;
+@@ -626,6 +627,7 @@ main (int argc, char **argv)
+     { "generate-source", 0, 0, G_OPTION_ARG_NONE, &generate_source, N_("Generate sourcecode used to link in the resource file into your code"), NULL },
+     { "generate-dependencies", 0, 0, G_OPTION_ARG_NONE, &generate_dependencies, N_("Generate dependency list"), NULL },
+     { "dependency-file", 0, 0, G_OPTION_ARG_FILENAME, &dependency_file, N_("name of the dependency file to generate"), N_("FILE") },
++    { "generate-phony-targets", 0, 0, G_OPTION_ARG_NONE, &generate_phony_targets, N_("Include phony targets in the generated dependency file"), NULL },
+     { "manual-register", 0, 0, G_OPTION_ARG_NONE, &manual_register, N_("Don't automatically create and register resource"), NULL },
+     { "internal", 0, 0, G_OPTION_ARG_NONE, &internal, N_("Don’t export functions; declare them G_GNUC_INTERNAL"), NULL },
+     { "c-name", 0, 0, G_OPTION_ARG_STRING, &c_name, N_("C identifier name used for the generated source code"), NULL },
+@@ -774,13 +776,19 @@ main (int argc, char **argv)
+ 
+       g_string_append (dep_string, "\n\n");
+ 
+-      /* One rule for every resource: resourceN: */
+-      g_hash_table_iter_init (&iter, files);
+-      while (g_hash_table_iter_next (&iter, &key, &data))
++      /* Optionally include phony targets as it silences `make` but
++       * isn't supported on `ninja` at the moment. See also: `gcc -MP`
++       */
++      if (generate_phony_targets)
+         {
+-          file_data = data;
+-          if (!g_str_equal (file_data->filename, srcfile))
+-            g_string_append_printf (dep_string, "%s:\n\n", file_data->filename);
++          /* One rule for every resource: resourceN: */
++          g_hash_table_iter_init (&iter, files);
++          while (g_hash_table_iter_next (&iter, &key, &data))
++            {
++              file_data = data;
++              if (!g_str_equal (file_data->filename, srcfile))
++                g_string_append_printf (dep_string, "%s:\n\n", file_data->filename);
++            }
+         }
+ 
+       if (g_str_equal (dependency_file, "-"))
+-- 
+2.10.2
+

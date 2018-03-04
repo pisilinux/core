@@ -10,7 +10,7 @@ Paketleme Kuralları;
 
 1. Core kaynak deposunda minimum X bağımlılığı hedeflenmiştir.
 
-1. configure seçeneklerinde belge oluşturmaya yönelik seçenekler açılmamalı, bağımlılıklar yazılamalıdır.
+1. configure seçeneklerinde belge oluşturmaya yönelik seçenekler açılmamalı, bağımlılıklar yazılmalıdır.
 
 1. configure seçeneklerinde pakete yeni bağımlılık getirecek değişiklikler için mutlaka issue açılmalı, tartışılmadan pull request istenmemelidir.
 
