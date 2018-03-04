@@ -1,0 +1,55 @@
+From 916e5e906873de859d8a87c1ffb0323e167d1a44 Mon Sep 17 00:00:00 2001
+From: Joerg Roedel <jroedel@suse.de>
+Date: Wed, 31 Jan 2018 11:07:32 +0100
+Subject: [PATCH 06/31] x86/entry/32: Split off return-to-kernel path
+
+Use a separate return path when we know we are returning to
+the kernel. This allows us to put the PTI cr3-switch and the
+switch to the entry-stack into the return-to-user path
+without further checking.
+
+Signed-off-by: Joerg Roedel <jroedel@suse.de>
+---
+ arch/x86/entry/entry_32.S | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/arch/x86/entry/entry_32.S b/arch/x86/entry/entry_32.S
+index 00ae759a7c44..9bd77183965f 100644
+--- a/arch/x86/entry/entry_32.S
++++ b/arch/x86/entry/entry_32.S
+@@ -65,7 +65,7 @@
+ # define preempt_stop(clobbers)	DISABLE_INTERRUPTS(clobbers); TRACE_IRQS_OFF
+ #else
+ # define preempt_stop(clobbers)
+-# define resume_kernel		restore_all
++# define resume_kernel		restore_all_kernel
+ #endif
+ 
+ .macro TRACE_IRQS_IRET
+@@ -400,9 +400,9 @@ ENTRY(resume_kernel)
+ 	DISABLE_INTERRUPTS(CLBR_ANY)
+ .Lneed_resched:
+ 	cmpl	$0, PER_CPU_VAR(__preempt_count)
+-	jnz	restore_all
++	jnz	restore_all_kernel
+ 	testl	$X86_EFLAGS_IF, PT_EFLAGS(%esp)	# interrupts off (exception path) ?
+-	jz	restore_all
++	jz	restore_all_kernel
+ 	call	preempt_schedule_irq
+ 	jmp	.Lneed_resched
+ END(resume_kernel)
+@@ -602,6 +602,11 @@ restore_all:
+ .Lirq_return:
+ 	INTERRUPT_RETURN
+ 
++restore_all_kernel:
++	TRACE_IRQS_IRET
++	RESTORE_REGS 4
++	jmp	.Lirq_return
++
+ .section .fixup, "ax"
+ ENTRY(iret_exc	)
+ 	pushl	$0				# no error code
+-- 
+2.13.6
+

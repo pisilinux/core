@@ -1,0 +1,43 @@
+
+last_rx is gone, most drivers does not really need/use it anyway.
+
+Also, include signal.h to fix  implicit deklaration of function ”signal_pending”
+
+Signed-off-by: Thomas Backlund <tmb@mageia.org>
+
+--- linux/3rdparty/ndiswrapper/ndis.c.orig	2016-10-09 18:45:08.027226096 +0300
++++ linux/3rdparty/ndiswrapper/ndis.c	2017-08-04 00:09:49.264110609 +0300
+@@ -2258,7 +2258,6 @@ wstdcall void NdisMIndicateReceivePacket
+ 			WARNING("empty packet ignored");
+ 			continue;
+ 		}
+-		wnd->net_dev->last_rx = jiffies;
+ 		/* get total number of bytes in packet */
+ 		NdisGetFirstBufferFromPacketSafe(packet, &buffer, &virt,
+ 						 &length, &total_length,
+@@ -2346,7 +2345,6 @@ wstdcall void EthRxIndicateHandler(struc
+ 		ERROR("nmb is NULL");
+ 		EXIT3(return);
+ 	}
+-	wnd->net_dev->last_rx = jiffies;
+ 
+ 	if (look_ahead_size < packet_size) {
+ 		struct ndis_packet *packet;
+@@ -2461,7 +2459,6 @@ wstdcall void NdisMTransferDataComplete(
+ 		WARNING("illegal packet");
+ 		EXIT3(return);
+ 	}
+-	wnd->net_dev->last_rx = jiffies;
+ 	oob_data = NDIS_PACKET_OOB_DATA(packet);
+ 	skb_size = sizeof(oob_data->header) + oob_data->look_ahead_size +
+ 		bytes_txed;
+--- linux/3rdparty/ndiswrapper/ntoskernel.h.orig	2017-08-03 23:52:29.015367906 +0300
++++ linux/3rdparty/ndiswrapper/ntoskernel.h	2017-08-04 00:17:41.334914691 +0300
+@@ -33,6 +33,7 @@
+ #include <linux/ctype.h>
+ #include <linux/list.h>
+ #include <linux/sched.h>
++#include <linux/sched/signal.h>
+ #include <linux/usb.h>
+ #include <linux/spinlock.h>
+ #include <asm/mman.h>
