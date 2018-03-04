@@ -11504,9 +11504,9 @@
         </Package>
         <History>
             <Update release="1">
-                <Date>2018-02-22</Date>
+                <Date>2018-03-03</Date>
                 <Version>2.0.4</Version>
-                <Comment>First release</Comment>
+                <Comment>First release.</Comment>
                 <Name>Alihan Öztürk</Name>
                 <Email>alihan@pisilinux.org</Email>
             </Update>
@@ -15657,6 +15657,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2018-03-03</Date>
+                <Version>19.1</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2017-11-04</Date>
                 <Version>19.1</Version>
@@ -15738,6 +15745,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2018-03-03</Date>
+                <Version>1.0.7</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2017-11-04</Date>
                 <Version>1.0.7</Version>
@@ -17846,6 +17860,68 @@
                 <Comment>First release</Comment>
                 <Name>Marcin Bojara</Name>
                 <Email>marcin@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>libpsl</Name>
+            <Homepage>https://github.com/rockdaboot/libpsl</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>MIT</License>
+            <IsA>library</IsA>
+            <PartOf>programming.library</PartOf>
+            <Summary xml:lang="en">Public Suffix List library</Summary>
+            <Summary xml:lang="tr">Public Suffix List library</Summary>
+            <Description xml:lang="en">Genel Ek Listesi kitaplığı</Description>
+            <Description xml:lang="tr">Genel Ek Listesi kitaplığı</Description>
+            <Archive type="targz" sha1sum="5e9b7087171f507a1347ff3da982bbff1c68c648">https://github.com/rockdaboot/libpsl/releases/download/libpsl-0.20.1/libpsl-0.20.1.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>gtk-doc</Dependency>
+                <Dependency>glib2-devel</Dependency>
+                <Dependency>icu4c-devel</Dependency>
+                <Dependency>python-six</Dependency>
+                <Dependency>gettext-devel</Dependency>
+                <Dependency>libidn2-devel</Dependency>
+                <Dependency>libxslt-devel</Dependency>
+                <Dependency>libunistring-devel</Dependency>
+            </BuildDependencies>
+            <SourceURI>programming/library/libpsl/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>libpsl</Name>
+            <RuntimeDependencies>
+                <Dependency>libidn2</Dependency>
+                <Dependency>libunistring</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="man">/usr/share/man</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libpsl-devel</Name>
+            <Summary xml:lang="en">Development files for libpsl</Summary>
+            <RuntimeDependencies>
+                <Dependency release="1">libpsl</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="header">/usr/include</Path>
+                <Path fileType="library">/usr/lib/pkgconfig</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="1">
+                <Date>2018-03-04</Date>
+                <Version>0.20.1</Version>
+                <Comment>First release</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
             </Update>
         </History>
     </SpecFile>
