@@ -27,6 +27,6 @@ def install():
         if shelltools.isDirectory("%s/x86" % d):
             pisitools.insinto("/usr/lib/%s" % d, "%s/x86/*" % d)
 
-    shelltools.touch("labels")
-    pisitools.insinto("/var/lib/os-prober", "labels")
-    #pisitools.dodir("/var/lib/os-prober")
+    #shelltools.touch("labels")
+    #pisitools.insinto("/var/lib/os-prober", "labels")
+    pisitools.dodir("/var/lib/os-prober")
