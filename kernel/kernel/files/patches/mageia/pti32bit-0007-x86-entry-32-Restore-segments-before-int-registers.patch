@@ -1,7 +1,7 @@
 From c19ad15b16ec8908794459f28b44eca889a925f7 Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Wed, 31 Jan 2018 11:29:59 +0100
-Subject: [PATCH 07/31] x86/entry/32: Restore segments before int registers
+Subject: [PATCH 07/34] x86/entry/32: Restore segments before int registers
 
 Restoring the segments can cause exceptions that need to be
 handled. With PTI enabled, we still need to be on kernel cr3
@@ -27,18 +27,18 @@ diff --git a/arch/x86/entry/entry_32.S b/arch/x86/entry/entry_32.S
 index 9bd77183965f..b39c5e210b43 100644
 --- a/arch/x86/entry/entry_32.S
 +++ b/arch/x86/entry/entry_32.S
-@@ -92,11 +92,6 @@
+@@ -91,11 +91,6 @@
+  /* unfortunately push/pop can't be no-op */
  .macro PUSH_GS
  	pushl	$0
- .endm
+-.endm
 -.macro POP_GS pop=0
 -	addl	$(4 + \pop), %esp
 -.endm
 -.macro POP_GS_EX
--.endm
+ .endm
  
   /* all the rest are no-op */
- .macro PTGS_TO_GS
 @@ -116,20 +111,6 @@
  	pushl	%gs
  .endm
@@ -107,5 +107,5 @@ index 9bd77183965f..b39c5e210b43 100644
  
  .macro CHECK_AND_APPLY_ESPFIX
 -- 
-2.13.6
+2.16.2
 

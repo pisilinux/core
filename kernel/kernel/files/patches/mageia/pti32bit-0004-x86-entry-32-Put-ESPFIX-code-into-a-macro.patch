@@ -1,7 +1,7 @@
 From 7c97243c7694dc1c0e0ad73bc17bdc2c553225ac Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Wed, 31 Jan 2018 10:50:02 +0100
-Subject: [PATCH 04/31] x86/entry/32: Put ESPFIX code into a macro
+Subject: [PATCH 04/34] x86/entry/32: Put ESPFIX code into a macro
 
 This makes it easier to split up the shared iret code path.
 
@@ -133,5 +133,5 @@ index e65977615616..0289bde37a08 100644
  
  .macro FIXUP_ESPFIX_STACK
 -- 
-2.13.6
+2.16.2
 

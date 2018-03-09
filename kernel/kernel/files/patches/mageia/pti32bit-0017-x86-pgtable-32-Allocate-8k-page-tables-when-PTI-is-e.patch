@@ -1,7 +1,7 @@
-From 5ea0338f46add135a70678a6eba2e402310e7b26 Mon Sep 17 00:00:00 2001
+From 35cdf0541e9d5c7a47b59530fc8a42ac9ab767f8 Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Tue, 16 Jan 2018 13:10:57 +0100
-Subject: [PATCH 15/31] x86/pgtable/32: Allocate 8k page-tables when PTI is
+Subject: [PATCH 17/34] x86/pgtable/32: Allocate 8k page-tables when PTI is
  enabled
 
 Allocate a kernel and a user page-table root when PTI is
@@ -94,5 +94,5 @@ index 004abf9ebf12..a81d42e48922 100644
  		kmem_cache_free(pgd_cache, pgd);
  }
 -- 
-2.13.6
+2.16.2
 

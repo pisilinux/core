@@ -1,7 +1,7 @@
-From d7f5719fe456d24dd01fdcc281aac44dacfa57b2 Mon Sep 17 00:00:00 2001
+From 41bc2c77864b5464134c3ec722225a9ae4701968 Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Wed, 31 Jan 2018 16:58:57 +0100
-Subject: [PATCH 11/31] x86/entry/32: Add PTI cr3 switches to NMI handler code
+Subject: [PATCH 13/34] x86/entry/32: Add PTI cr3 switches to NMI handler code
 
 The NMI handler is special, as it needs to leave with the
 same cr3 as it was entered with. We need to do this because
@@ -14,7 +14,7 @@ Signed-off-by: Joerg Roedel <jroedel@suse.de>
  1 file changed, 46 insertions(+), 6 deletions(-)
 
 diff --git a/arch/x86/entry/entry_32.S b/arch/x86/entry/entry_32.S
-index be1d814bd056..9693485c901a 100644
+index b1a5f34eeb27..35379e5f60c6 100644
 --- a/arch/x86/entry/entry_32.S
 +++ b/arch/x86/entry/entry_32.S
 @@ -77,6 +77,8 @@
@@ -89,7 +89,7 @@ index be1d814bd056..9693485c901a 100644
  	/* Restore integer registers and unwind stack to iret frame */
  	RESTORE_INT_REGS
  	RESTORE_SKIP_SEGMENTS \pop
-@@ -1142,7 +1182,7 @@ ENTRY(nmi)
+@@ -1242,7 +1282,7 @@ ENTRY(nmi)
  #endif
  
  	pushl	%eax				# pt_regs->orig_ax
@@ -98,7 +98,7 @@ index be1d814bd056..9693485c901a 100644
  	ENCODE_FRAME_POINTER
  	xorl	%edx, %edx			# zero error code
  	movl	%esp, %eax			# pt_regs pointer
-@@ -1170,7 +1210,7 @@ ENTRY(nmi)
+@@ -1270,7 +1310,7 @@ ENTRY(nmi)
  
  .Lnmi_return:
  	CHECK_AND_APPLY_ESPFIX
@@ -107,7 +107,7 @@ index be1d814bd056..9693485c901a 100644
  	jmp	.Lirq_return
  
  #ifdef CONFIG_X86_ESPFIX32
-@@ -1186,12 +1226,12 @@ ENTRY(nmi)
+@@ -1286,12 +1326,12 @@ ENTRY(nmi)
  	pushl	16(%esp)
  	.endr
  	pushl	%eax
@@ -123,5 +123,5 @@ index be1d814bd056..9693485c901a 100644
  	jmp	.Lirq_return
  #endif
 -- 
-2.13.6
+2.16.2
 

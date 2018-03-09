@@ -1,7 +1,7 @@
-From 9a4c777654ebe02d30461d2a8a05de6fe4b987f0 Mon Sep 17 00:00:00 2001
+From 126ef631acff4fe06d76992f40e04237d7d57344 Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Wed, 7 Feb 2018 18:02:18 +0100
-Subject: [PATCH 29/31] x86/ldt: Split out sanity check in map_ldt_struct()
+Subject: [PATCH 31/34] x86/ldt: Split out sanity check in map_ldt_struct()
 
 This splits out the mapping sanity check and the actual
 mapping of the LDT to user-space from the map_ldt_struct()
@@ -142,5 +142,5 @@ index f3c2fbf3c458..8ab7df99c868 100644
  {
  #ifdef CONFIG_PAGE_TABLE_ISOLATION
 -- 
-2.13.6
+2.16.2
 

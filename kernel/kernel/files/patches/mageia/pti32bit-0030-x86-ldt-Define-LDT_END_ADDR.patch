@@ -1,7 +1,7 @@
-From 2b4c93fdb404c6155b1f7098895b93cde7b79550 Mon Sep 17 00:00:00 2001
+From e00857066a9f75a64a00528d451be9899ec7328f Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Wed, 7 Feb 2018 17:44:44 +0100
-Subject: [PATCH 28/31] x86/ldt: Define LDT_END_ADDR
+Subject: [PATCH 30/34] x86/ldt: Define LDT_END_ADDR
 
 It marks the end of the address-space range reserved for the
 LDT. The LDT-code will use it when unmapping the LDT for
@@ -60,5 +60,5 @@ index 26d713ecad34..f3c2fbf3c458 100644
  	if (!static_cpu_has(X86_FEATURE_PTI))
  		return;
 -- 
-2.13.6
+2.16.2
 

@@ -28,8 +28,8 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.14.23.xz</Patch>
-            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.14.22/1.mga7/PATCHES/patches/series-->
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.14.24.xz</Patch>
+            <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.14.24/1.mga7/PATCHES/patches/series-->
             <!--stable patches-->
             <!--CVE-2016-8405-->
             <!--other patches-->
@@ -48,29 +48,31 @@
             <Patch level="1">patches/mageia/pti32bit-0008-x86-entry-32-Enter-the-kernel-via-trampoline-stack.patch</Patch>
             <Patch level="1">patches/mageia/pti32bit-0009-x86-entry-32-Leave-the-kernel-via-trampoline-stack.patch</Patch>
             <Patch level="1">patches/mageia/pti32bit-0010-x86-entry-32-Introduce-SAVE_ALL_NMI-and-RESTORE_ALL_.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0011-x86-entry-32-Add-PTI-cr3-switches-to-NMI-handler-cod.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0012-x86-entry-32-Add-PTI-cr3-switch-to-non-NMI-entry-exi.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0013-x86-entry-32-Handle-Entry-from-Kernel-Mode-on-Entry-.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0014-x86-pgtable-pae-Unshare-kernel-PMDs-when-PTI-is-enab.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0015-x86-pgtable-32-Allocate-8k-page-tables-when-PTI-is-e.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0016-x86-pgtable-Move-pgdp-kernel-user-conversion-functio.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0017-x86-pgtable-Move-pti_set_user_pgd-to-pgtable.h.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0018-x86-pgtable-Move-two-more-functions-from-pgtable_64..patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0019-x86-mm-pae-Populate-valid-user-PGD-entries.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0020-x86-mm-pae-Populate-the-user-page-table-with-user-pg.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0021-x86-mm-legacy-Populate-the-user-page-table-with-user.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0022-x86-mm-pti-Add-an-overflow-check-to-pti_clone_pmds.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0023-x86-mm-pti-Define-X86_CR3_PTI_PCID_USER_BIT-on-x86_3.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0024-x86-mm-pti-Clone-CPU_ENTRY_AREA-on-PMD-level-on-x86_.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0025-x86-mm-dump_pagetables-Define-INIT_PGD.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0026-x86-pgtable-pae-Use-separate-kernel-PMDs-for-user-pa.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0027-x86-ldt-Reserve-address-space-range-on-32-bit-for-th.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0028-x86-ldt-Define-LDT_END_ADDR.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0029-x86-ldt-Split-out-sanity-check-in-map_ldt_struct.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0030-x86-ldt-Enable-LDT-user-mapping-for-PAE.patch</Patch>
-            <Patch level="1">patches/mageia/pti32bit-0031-x86-pti-Allow-CONFIG_PAGE_TABLE_ISOLATION-for-x86_32.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0011-x86-entry-32-Handle-Entry-from-Kernel-Mode-on-Entry-.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0012-x86-entry-32-Simplify-debug-entry-point.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0013-x86-entry-32-Add-PTI-cr3-switches-to-NMI-handler-cod.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0014-x86-entry-32-Add-PTI-cr3-switch-to-non-NMI-entry-exi.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0015-x86-pgtable-Rename-pti_set_user_pgd-to-pti_set_user_.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0016-x86-pgtable-pae-Unshare-kernel-PMDs-when-PTI-is-enab.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0017-x86-pgtable-32-Allocate-8k-page-tables-when-PTI-is-e.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0018-x86-pgtable-Move-pgdp-kernel-user-conversion-functio.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0019-x86-pgtable-Move-pti_set_user_pgtbl-to-pgtable.h.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0020-x86-pgtable-Move-two-more-functions-from-pgtable_64..patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0021-x86-mm-pae-Populate-valid-user-PGD-entries.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0022-x86-mm-pae-Populate-the-user-page-table-with-user-pg.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0023-x86-mm-legacy-Populate-the-user-page-table-with-user.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0024-x86-mm-pti-Add-an-overflow-check-to-pti_clone_pmds.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0025-x86-mm-pti-Define-X86_CR3_PTI_PCID_USER_BIT-on-x86_3.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0026-x86-mm-pti-Clone-CPU_ENTRY_AREA-on-PMD-level-on-x86_.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0027-x86-mm-dump_pagetables-Define-INIT_PGD.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0028-x86-pgtable-pae-Use-separate-kernel-PMDs-for-user-pa.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0029-x86-ldt-Reserve-address-space-range-on-32-bit-for-th.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0030-x86-ldt-Define-LDT_END_ADDR.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0031-x86-ldt-Split-out-sanity-check-in-map_ldt_struct.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0032-x86-ldt-Enable-LDT-user-mapping-for-PAE.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0033-x86-pti-Allow-CONFIG_PAGE_TABLE_ISOLATION-for-x86_32.patch</Patch>
+            <Patch level="1">patches/mageia/pti32bit-0034-x86-mm-pti-Add-Warning-when-booting-on-a-PCID-capabl.patch</Patch>
             <Patch level="1">patches/mageia/x86-pti-0070-nospec-Kill-array_index_nospec_mask_check.patch</Patch>
-            <Patch level="1">patches/mageia/x86-pti-0071-nospec-Allow-index-argument-to-have-const-qualified-.patch</Patch>
             <Patch level="1">patches/mageia/x86-pti-0072-nospec-Include-asm-barrier.h-dependency.patch</Patch>
             <Patch level="1">patches/mageia/x86-pti-0073-x86-microcode-Propagate-return-value-from-updating-f.patch</Patch>
             <Patch level="1">patches/mageia/x86-pti-0074-x86-CPU-Add-a-microcode-loader-callback.patch</Patch>
@@ -84,12 +86,12 @@
             <Patch level="1">patches/mageia/acpi-processor-M720SR-limit-to-C2.patch</Patch>
             <Patch level="1">patches/mageia/ACPI-video-Add-a-quirk-to-force-acpi-video-backlight.patch</Patch>
             <Patch level="1">patches/mageia/acpi-ec-restore-polling-during-noirq-suspend_resume-phases.patch</Patch>
-            <!--Patch level="1">patches/mageia/scsi-ppscsi-2.6.2.patch</Patch>
+            <!--1--><Patch level="1">patches/mageia/scsi-ppscsi-2.6.2.patch</Patch>
             <Patch level="1">patches/mageia/scsi-ppscsi_fixes.patch</Patch>
             <Patch level="1">patches/mageia/scsi-ppscsi-sg-helper-update.patch</Patch>
             <Patch level="1">patches/mageia/scsi-ppscsi-update-for-scsi_data_buffer.patch</Patch>
             <Patch level="1">patches/mageia/scsi-ppscsi-mdvbz45393.patch</Patch>
-            <Patch level="1">patches/mageia/scsi-ppscsi-3.0-buildfix.patch</Patch-->
+            <Patch level="1">patches/mageia/scsi-ppscsi-3.0-buildfix.patch</Patch><!--1-->
             <Patch level="1">patches/mageia/scsi-megaraid-new-sysfs-name.patch</Patch>
             <Patch level="1">patches/mageia/ide-pci-sis5513-965.patch</Patch>
             <Patch level="1">patches/mageia/mpt-vmware-fix.patch</Patch>
@@ -119,6 +121,11 @@
             <Patch level="1">patches/mageia/block-bfq-limit-sectors-served-with-interactive-weig.patch</Patch>
             <Patch level="1">patches/mageia/block-bfq-add-requeue-request-hook.patch</Patch>
             <Patch level="1">patches/mageia/block-bfq-put-async-queues-for-root-bfq-groups-too.patch</Patch>
+            <Patch level="1">patches/mageia/ata-ahci-Add-PCI-id-for-the-Highpoint-Rocketraid-644L-card.patch</Patch>
+            <Patch level="1">patches/mageia/PCI-Add-function-1-DMA-alias-quirk-for-Highpoint-RocketRAID-644L.patch</Patch>
+            <Patch level="1">patches/mageia/scsi-core-Avoid-that-ATA-error-handling-can-trigger-a-kernel-hang-or-oops.patch</Patch>
+            <Patch level="1">patches/mageia/scsi-core-return-BLK_STS_OK-for-DID_OK-in-__scsi_error_from_host_byte.patch</Patch>
+            <Patch level="1">patches/mageia/scsi-qla2xxx-Fix-NULL-pointer-crash-due-to-active-timer-for-ABTS.patch</Patch>
             <Patch level="1">patches/mageia/fs-aufs-4.14.patch</Patch>
             <Patch level="1">patches/mageia/fs-aufs-4.14-modular.patch</Patch>
             <Patch level="1">patches/mageia/fs-aufs-include-vmalloc.patch</Patch>
@@ -145,6 +152,8 @@
             <Patch level="1">patches/mageia/hwmon-k10temp-Add-support-for-family-17h.patch</Patch>
             <Patch level="1">patches/mageia/hwmon-k10temp-Add-support-for-temperature-offsets.patch</Patch>
             <Patch level="1">patches/mageia/input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch</Patch>
+            <Patch level="1">patches/mageia/input-goodix-disable-IRQs-while-suspended.patch</Patch>
+            <Patch level="1">patches/mageia/input-goodix-add-support-for-GDIX1002.patch</Patch>
             <Patch level="1">patches/mageia/mm-page_vma_mapped-Introduce-pfn_in_hpage.patch</Patch>
             <Patch level="1">patches/mageia/net-sis190-fix-list-usage.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-IFWLOG.patch</Patch>
@@ -162,17 +171,21 @@
             <Patch level="1">patches/mageia/net-WireGuard.patch</Patch>
             <Patch level="1">patches/mageia/net-tls-Correct-length-of-scatterlist-in-tls_sw_sendpage.patch</Patch>
             <Patch level="1">patches/mageia/net-netfilter-xt_addrtype-silence-BROADCAST-message.patch</Patch>
+            <Patch level="1">patches/mageia/net-netfilter-add-back-stackpointer-size-checks.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.13-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-ideapad-Add-IdeaPad-320-15IKB-to-no_hw_rfkill_list.patch</Patch>
-            <Patch level="1">patches/mageia/platform-x86-ideapad-laptop-Increase-timeout-to-wait-for-ec-answer.patch</Patch>
+            <Patch level="1">patches/mageia/platform-x86-ideapad-laptop-Increase-timeout-to-wait-for-ec-answer.patch</Patch>        
+            <Patch level="1">patches/mageia/sound-ALSA-hda-Fix-a-wrong-FIXUP-for-alc289-on-Dell-machines.patch</Patch>
+            <Patch level="1">patches/mageia/sound-ASoC-Intel-Skylake-Fix-jack-name-format-substitution.patch</Patch>
+            <Patch level="1">patches/mageia/sound-ASoC-Intel-kbl-fix-jack-name.patch</Patch>
             <Patch level="1">patches/mageia/hid-usbhid-IBM-BladeCenterHS20-quirk.patch</Patch>
             <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id.patch</Patch>
             <Patch level="1">patches/mageia/usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/media-usb-pwc-lie-in-proc-usb-devices.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-3rdparty-1.0-tree.patch</Patch>
+            <!--Patch level="1">patches/mageia/3rd-3rdparty-1.0-tree.patch</Patch><disable 3Rd module build support>
             <Patch level="1">patches/mageia/3rd-3rdparty-merge.patch</Patch>
             <Patch level="1">patches/mageia/3rd-acerhk-0.5.35.patch</Patch>
             <Patch level="1">patches/mageia/3rd-acerhk-kbuild.patch</Patch>
@@ -181,9 +194,9 @@
             <Patch level="1">patches/mageia/3rd-acerhk-fix-build-with-function-tracer.patch</Patch>
             <Patch level="1">patches/mageia/3rd-acerhk-2.6.36-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-acerhk-fix-include.patch</Patch>
-            <!--Patch level="1">patches/mageia/3rd-aes2501-r19.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-aes2501-r19.patch</Patch>
             <Patch level="1">patches/mageia/3rd-aes2501-kbuild.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-aes2501-rmmod-oops-fix.patch</Patch--><!--aes2501 build error-->
+            <Patch level="1">patches/mageia/3rd-aes2501-rmmod-oops-fix.patch</Patch><aes2501 build error>
             <Patch level="1">patches/mageia/3rd-ndiswrapper-1.61.patch</Patch>
             <Patch level="1">patches/mageia/3rd-ndiswrapper-Kconfig.patch</Patch>
             <Patch level="1">patches/mageia/3rd-ndiswrapper-Makefile-build-fix.patch</Patch>
@@ -198,8 +211,9 @@
             <Patch level="1">patches/mageia/3rd-viahss-2.6.35-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-viahss-3.0-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8812au.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8723de.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-rtl8723de.patch</Patch-->
             <Patch level="1">patches/mageia/tools-testing-selftest-Makefile-remove-powerpc-reference.patch</Patch>
+            <Patch level="1">patches/mageia/arch-ARM-omap2-hide-omap3_save_secure_ram-on-non-OMAP3-bu.patch</Patch>
         </Patches>
     </Source>
 
@@ -255,8 +269,8 @@
 
     <History>
         <Update release="17">
-            <Date>2018-03-03</Date>
-            <Version>4.14.23</Version>
+            <Date>2018-03-09</Date>
+            <Version>4.14.24</Version>
             <Comment>Version Bump.</Comment>
             <Type package="kernel">security</Type>
             <Requires>

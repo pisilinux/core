@@ -14,6 +14,7 @@
 ###
 ### Stable Queue
 ###
+patch-4.14.25-rc1.patch
 
 ###
 ### Arch x86
@@ -45,35 +46,40 @@ pti32bit-0003-x86-entry-32-Load-task-stack-from-x86_tss.sp1-in-SYS.patch
 pti32bit-0004-x86-entry-32-Put-ESPFIX-code-into-a-macro.patch
 pti32bit-0005-x86-entry-32-Unshare-NMI-return-path.patch
 pti32bit-0006-x86-entry-32-Split-off-return-to-kernel-path.patch
+# could be disabled as not needed according to Linus @ LKML
 pti32bit-0007-x86-entry-32-Restore-segments-before-int-registers.patch
 pti32bit-0008-x86-entry-32-Enter-the-kernel-via-trampoline-stack.patch
 pti32bit-0009-x86-entry-32-Leave-the-kernel-via-trampoline-stack.patch
 pti32bit-0010-x86-entry-32-Introduce-SAVE_ALL_NMI-and-RESTORE_ALL_.patch
-pti32bit-0011-x86-entry-32-Add-PTI-cr3-switches-to-NMI-handler-cod.patch
-pti32bit-0012-x86-entry-32-Add-PTI-cr3-switch-to-non-NMI-entry-exi.patch
-pti32bit-0013-x86-entry-32-Handle-Entry-from-Kernel-Mode-on-Entry-.patch
-pti32bit-0014-x86-pgtable-pae-Unshare-kernel-PMDs-when-PTI-is-enab.patch
-pti32bit-0015-x86-pgtable-32-Allocate-8k-page-tables-when-PTI-is-e.patch
-pti32bit-0016-x86-pgtable-Move-pgdp-kernel-user-conversion-functio.patch
-pti32bit-0017-x86-pgtable-Move-pti_set_user_pgd-to-pgtable.h.patch
-pti32bit-0018-x86-pgtable-Move-two-more-functions-from-pgtable_64..patch
-pti32bit-0019-x86-mm-pae-Populate-valid-user-PGD-entries.patch
-pti32bit-0020-x86-mm-pae-Populate-the-user-page-table-with-user-pg.patch
-pti32bit-0021-x86-mm-legacy-Populate-the-user-page-table-with-user.patch
-pti32bit-0022-x86-mm-pti-Add-an-overflow-check-to-pti_clone_pmds.patch
-pti32bit-0023-x86-mm-pti-Define-X86_CR3_PTI_PCID_USER_BIT-on-x86_3.patch
-pti32bit-0024-x86-mm-pti-Clone-CPU_ENTRY_AREA-on-PMD-level-on-x86_.patch
-pti32bit-0025-x86-mm-dump_pagetables-Define-INIT_PGD.patch
-pti32bit-0026-x86-pgtable-pae-Use-separate-kernel-PMDs-for-user-pa.patch
-pti32bit-0027-x86-ldt-Reserve-address-space-range-on-32-bit-for-th.patch
-pti32bit-0028-x86-ldt-Define-LDT_END_ADDR.patch
-pti32bit-0029-x86-ldt-Split-out-sanity-check-in-map_ldt_struct.patch
-pti32bit-0030-x86-ldt-Enable-LDT-user-mapping-for-PAE.patch
-pti32bit-0031-x86-pti-Allow-CONFIG_PAGE_TABLE_ISOLATION-for-x86_32.patch
+pti32bit-0011-x86-entry-32-Handle-Entry-from-Kernel-Mode-on-Entry-.patch
+pti32bit-0012-x86-entry-32-Simplify-debug-entry-point.patch
+pti32bit-0013-x86-entry-32-Add-PTI-cr3-switches-to-NMI-handler-cod.patch
+pti32bit-0014-x86-entry-32-Add-PTI-cr3-switch-to-non-NMI-entry-exi.patch
+pti32bit-0015-x86-pgtable-Rename-pti_set_user_pgd-to-pti_set_user_.patch
+pti32bit-0016-x86-pgtable-pae-Unshare-kernel-PMDs-when-PTI-is-enab.patch
+pti32bit-0017-x86-pgtable-32-Allocate-8k-page-tables-when-PTI-is-e.patch
+pti32bit-0018-x86-pgtable-Move-pgdp-kernel-user-conversion-functio.patch
+pti32bit-0019-x86-pgtable-Move-pti_set_user_pgtbl-to-pgtable.h.patch
+pti32bit-0020-x86-pgtable-Move-two-more-functions-from-pgtable_64..patch
+pti32bit-0021-x86-mm-pae-Populate-valid-user-PGD-entries.patch
+pti32bit-0022-x86-mm-pae-Populate-the-user-page-table-with-user-pg.patch
+pti32bit-0023-x86-mm-legacy-Populate-the-user-page-table-with-user.patch
+pti32bit-0024-x86-mm-pti-Add-an-overflow-check-to-pti_clone_pmds.patch
+pti32bit-0025-x86-mm-pti-Define-X86_CR3_PTI_PCID_USER_BIT-on-x86_3.patch
+pti32bit-0026-x86-mm-pti-Clone-CPU_ENTRY_AREA-on-PMD-level-on-x86_.patch
+pti32bit-0027-x86-mm-dump_pagetables-Define-INIT_PGD.patch
+pti32bit-0028-x86-pgtable-pae-Use-separate-kernel-PMDs-for-user-pa.patch
+pti32bit-0029-x86-ldt-Reserve-address-space-range-on-32-bit-for-th.patch
+pti32bit-0030-x86-ldt-Define-LDT_END_ADDR.patch
+pti32bit-0031-x86-ldt-Split-out-sanity-check-in-map_ldt_struct.patch
+pti32bit-0032-x86-ldt-Enable-LDT-user-mapping-for-PAE.patch
+pti32bit-0033-x86-pti-Allow-CONFIG_PAGE_TABLE_ISOLATION-for-x86_32.patch
+pti32bit-0034-x86-mm-pti-Add-Warning-when-booting-on-a-PCID-capabl.patch
+# tone down warning about PCID on 32bit
+pti32bit-0100-tone-down-PCID-on-32bit-message.patch
 
 # selected fixes from x86/pti
 x86-pti-0070-nospec-Kill-array_index_nospec_mask_check.patch
-x86-pti-0071-nospec-Allow-index-argument-to-have-const-qualified-.patch
 x86-pti-0072-nospec-Include-asm-barrier.h-dependency.patch
 x86-pti-0073-x86-microcode-Propagate-return-value-from-updating-f.patch
 x86-pti-0074-x86-CPU-Add-a-microcode-loader-callback.patch
@@ -186,6 +192,15 @@ block-bfq-limit-sectors-served-with-interactive-weig.patch
 block-bfq-put-async-queues-for-root-bfq-groups-too.patch
 block-bfq-add-requeue-request-hook.patch
 
+# HPT RR 644L
+ata-ahci-Add-PCI-id-for-the-Highpoint-Rocketraid-644L-card.patch
+PCI-Add-function-1-DMA-alias-quirk-for-Highpoint-RocketRAID-644L.patch
+
+# scsi
+scsi-core-Avoid-that-ATA-error-handling-can-trigger-a-kernel-hang-or-oops.patch
+scsi-core-return-BLK_STS_OK-for-DID_OK-in-__scsi_error_from_host_byte.patch
+scsi-qla2xxx-Fix-NULL-pointer-crash-due-to-active-timer-for-ABTS.patch
+
 ###
 ### Char
 ###
@@ -251,6 +266,10 @@ hwmon-k10temp-Add-support-for-temperature-offsets.patch
 
 input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch
 
+# mga #22703
+input-goodix-disable-IRQs-while-suspended.patch
+input-goodix-add-support-for-GDIX1002.patch
+
 ###
 ### idle
 ###
@@ -309,6 +328,9 @@ net-tls-Correct-length-of-scatterlist-in-tls_sw_sendpage.patch
 # silence message that gets reported as a bug
 net-netfilter-xt_addrtype-silence-BROADCAST-message.patch
 
+# CVE-2018-1065
+net-netfilter-add-back-stackpointer-size-checks.patch
+
 ###
 ### pinctrl
 ###
@@ -339,6 +361,12 @@ platform-x86-ideapad-laptop-Increase-timeout-to-wait-for-ec-answer.patch
 ###
 ### Sound
 ###
+
+sound-ALSA-hda-Fix-a-wrong-FIXUP-for-alc289-on-Dell-machines.patch
+
+# skl/kbl fixes
+sound-ASoC-Intel-Skylake-Fix-jack-name-format-substitution.patch
+sound-ASoC-Intel-kbl-fix-jack-name.patch
 
 ###
 ### Staging
@@ -447,6 +475,8 @@ video-mageia-logo.patch
 ###
 ### ARM
 ###
+
+arch-ARM-omap2-hide-omap3_save_secure_ram-on-non-OMAP3-bu.patch
 
 ###
 ### IA64

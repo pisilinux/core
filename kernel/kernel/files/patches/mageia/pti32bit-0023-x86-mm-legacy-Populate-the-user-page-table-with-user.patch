@@ -1,7 +1,7 @@
-From c7eb77959596dc4e78ef164f572520767df21fa3 Mon Sep 17 00:00:00 2001
+From 08a22d9c7b62e9c9e08eaf9508f3ef881768a636 Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Tue, 16 Jan 2018 16:29:13 +0100
-Subject: [PATCH 21/31] x86/mm/legacy: Populate the user page-table with user
+Subject: [PATCH 23/34] x86/mm/legacy: Populate the user page-table with user
  pgd's
 
 Also populate the user-spage pgd's in the user page-table.
@@ -12,7 +12,7 @@ Signed-off-by: Joerg Roedel <jroedel@suse.de>
  1 file changed, 9 insertions(+)
 
 diff --git a/arch/x86/include/asm/pgtable-2level.h b/arch/x86/include/asm/pgtable-2level.h
-index 685ffe8a0eaf..d77255451d7a 100644
+index 685ffe8a0eaf..c399ea5eea41 100644
 --- a/arch/x86/include/asm/pgtable-2level.h
 +++ b/arch/x86/include/asm/pgtable-2level.h
 @@ -19,6 +19,9 @@ static inline void native_set_pte(pte_t *ptep , pte_t pte)
@@ -20,7 +20,7 @@ index 685ffe8a0eaf..d77255451d7a 100644
  static inline void native_set_pmd(pmd_t *pmdp, pmd_t pmd)
  {
 +#ifdef CONFIG_PAGE_TABLE_ISOLATION
-+	pmd.pud.p4d.pgd = pti_set_user_pgd(&pmdp->pud.p4d.pgd, pmd.pud.p4d.pgd);
++	pmd.pud.p4d.pgd = pti_set_user_pgtbl(&pmdp->pud.p4d.pgd, pmd.pud.p4d.pgd);
 +#endif
  	*pmdp = pmd;
  }
@@ -30,7 +30,7 @@ index 685ffe8a0eaf..d77255451d7a 100644
  static inline pmd_t native_pmdp_get_and_clear(pmd_t *xp)
  {
 +#ifdef CONFIG_PAGE_TABLE_ISOLATION
-+	pti_set_user_pgd(&xp->pud.p4d.pgd, __pgd(0));
++	pti_set_user_pgtbl(&xp->pud.p4d.pgd, __pgd(0));
 +#endif
  	return __pmd(xchg((pmdval_t *)xp, 0));
  }
@@ -40,11 +40,11 @@ index 685ffe8a0eaf..d77255451d7a 100644
  static inline pud_t native_pudp_get_and_clear(pud_t *xp)
  {
 +#ifdef CONFIG_PAGE_TABLE_ISOLATION
-+	pti_set_user_pgd(&xp->p4d.pgd, __pgd(0));
++	pti_set_user_pgtbl(&xp->p4d.pgd, __pgd(0));
 +#endif
  	return __pud(xchg((pudval_t *)xp, 0));
  }
  #else
 -- 
-2.13.6
+2.16.2
 

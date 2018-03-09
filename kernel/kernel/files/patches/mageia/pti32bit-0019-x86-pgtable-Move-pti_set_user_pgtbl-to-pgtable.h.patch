@@ -1,7 +1,7 @@
-From 82dd2440260533d518a810905c5492ba4f422a6f Mon Sep 17 00:00:00 2001
+From 88eb961770b7b265bf4725f0d687af8c9cf33467 Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Tue, 16 Jan 2018 15:50:39 +0100
-Subject: [PATCH 17/31] x86/pgtable: Move pti_set_user_pgd() to pgtable.h
+Subject: [PATCH 19/34] x86/pgtable: Move pti_set_user_pgtbl() to pgtable.h
 
 There it is also usable from 32 bit code.
 
@@ -12,7 +12,7 @@ Signed-off-by: Joerg Roedel <jroedel@suse.de>
  2 files changed, 23 insertions(+), 21 deletions(-)
 
 diff --git a/arch/x86/include/asm/pgtable.h b/arch/x86/include/asm/pgtable.h
-index 0a9f746cbdc1..c9d3cf9ce831 100644
+index 0a9f746cbdc1..1e900c1f8ab1 100644
 --- a/arch/x86/include/asm/pgtable.h
 +++ b/arch/x86/include/asm/pgtable.h
 @@ -618,8 +618,31 @@ static inline int is_new_memtype_allowed(u64 paddr, unsigned long size,
@@ -21,21 +21,21 @@ index 0a9f746cbdc1..c9d3cf9ce831 100644
  pte_t *populate_extra_pte(unsigned long vaddr);
 +
 +#ifdef CONFIG_PAGE_TABLE_ISOLATION
-+pgd_t __pti_set_user_pgd(pgd_t *pgdp, pgd_t pgd);
++pgd_t __pti_set_user_pgtbl(pgd_t *pgdp, pgd_t pgd);
 +
 +/*
 + * Take a PGD location (pgdp) and a pgd value that needs to be set there.
 + * Populates the user and returns the resulting PGD that must be set in
 + * the kernel copy of the page tables.
 + */
-+static inline pgd_t pti_set_user_pgd(pgd_t *pgdp, pgd_t pgd)
++static inline pgd_t pti_set_user_pgtbl(pgd_t *pgdp, pgd_t pgd)
 +{
 +	if (!static_cpu_has(X86_FEATURE_PTI))
 +		return pgd;
-+	return __pti_set_user_pgd(pgdp, pgd);
++	return __pti_set_user_pgtbl(pgdp, pgd);
 +}
 +#else   /* CONFIG_PAGE_TABLE_ISOLATION */
-+static inline pgd_t pti_set_user_pgd(pgd_t *pgdp, pgd_t pgd)
++static inline pgd_t pti_set_user_pgtbl(pgd_t *pgdp, pgd_t pgd)
 +{
 +	return pgd;
 +}
@@ -48,7 +48,7 @@ index 0a9f746cbdc1..c9d3cf9ce831 100644
  # include <asm/pgtable_32.h>
  #else
 diff --git a/arch/x86/include/asm/pgtable_64.h b/arch/x86/include/asm/pgtable_64.h
-index 58d7f10e937d..396664d95ac9 100644
+index 5e680838761d..4cbf5173dd76 100644
 --- a/arch/x86/include/asm/pgtable_64.h
 +++ b/arch/x86/include/asm/pgtable_64.h
 @@ -145,27 +145,6 @@ static inline bool pgdp_maps_userspace(void *__ptr)
@@ -56,21 +56,21 @@ index 58d7f10e937d..396664d95ac9 100644
  }
  
 -#ifdef CONFIG_PAGE_TABLE_ISOLATION
--pgd_t __pti_set_user_pgd(pgd_t *pgdp, pgd_t pgd);
+-pgd_t __pti_set_user_pgtbl(pgd_t *pgdp, pgd_t pgd);
 -
 -/*
 - * Take a PGD location (pgdp) and a pgd value that needs to be set there.
 - * Populates the user and returns the resulting PGD that must be set in
 - * the kernel copy of the page tables.
 - */
--static inline pgd_t pti_set_user_pgd(pgd_t *pgdp, pgd_t pgd)
+-static inline pgd_t pti_set_user_pgtbl(pgd_t *pgdp, pgd_t pgd)
 -{
 -	if (!static_cpu_has(X86_FEATURE_PTI))
 -		return pgd;
--	return __pti_set_user_pgd(pgdp, pgd);
+-	return __pti_set_user_pgtbl(pgdp, pgd);
 -}
 -#else
--static inline pgd_t pti_set_user_pgd(pgd_t *pgdp, pgd_t pgd)
+-static inline pgd_t pti_set_user_pgtbl(pgd_t *pgdp, pgd_t pgd)
 -{
 -	return pgd;
 -}
@@ -80,5 +80,5 @@ index 58d7f10e937d..396664d95ac9 100644
  {
  #if defined(CONFIG_PAGE_TABLE_ISOLATION) && !defined(CONFIG_X86_5LEVEL)
 -- 
-2.13.6
+2.16.2
 

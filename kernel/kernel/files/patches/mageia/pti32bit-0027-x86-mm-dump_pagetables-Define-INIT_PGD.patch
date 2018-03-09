@@ -1,7 +1,7 @@
-From 2d0143773e3f3e021b75fcdb886efd7cf2a4e8ce Mon Sep 17 00:00:00 2001
+From 35f7b44b3ce2d5b4c4fe2fabb8905bfff44559d4 Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Thu, 8 Feb 2018 09:11:57 +0100
-Subject: [PATCH 25/31] x86/mm/dump_pagetables: Define INIT_PGD
+Subject: [PATCH 27/34] x86/mm/dump_pagetables: Define INIT_PGD
 
 Define INIT_PGD to point to the correct initial page-table
 for 32 and 64 bit and use it where needed. This fixes the
@@ -57,5 +57,5 @@ index 2a4849e92831..2151ebb6a282 100644
  	if (!static_cpu_has(X86_FEATURE_PTI))
  		return;
 -- 
-2.13.6
+2.16.2
 

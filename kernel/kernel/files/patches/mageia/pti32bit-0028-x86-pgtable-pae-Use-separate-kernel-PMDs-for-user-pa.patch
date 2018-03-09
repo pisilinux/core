@@ -1,7 +1,7 @@
-From eccc6c5333bb7f33f88e7ec9a87f561bc5d63ccd Mon Sep 17 00:00:00 2001
+From c15cbcd9bc3d2e8aaecffc5053dbcf382fe6e56d Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Wed, 7 Feb 2018 15:37:52 +0100
-Subject: [PATCH 26/31] x86/pgtable/pae: Use separate kernel PMDs for user
+Subject: [PATCH 28/34] x86/pgtable/pae: Use separate kernel PMDs for user
  page-table
 
 We need separate kernel PMDs in the user page-table when PTI
@@ -209,5 +209,5 @@ index a81d42e48922..d95bc7b1ffb4 100644
  	_pgd_free(pgd);
  out:
 -- 
-2.13.6
+2.16.2
 

@@ -1,7 +1,7 @@
-From 56d5b738711fe0179293e1364d78763edfad55f3 Mon Sep 17 00:00:00 2001
+From c3b8f5b6bbb097409895ea8e00042034408cac54 Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Tue, 16 Jan 2018 14:13:04 +0100
-Subject: [PATCH 24/31] x86/mm/pti: Clone CPU_ENTRY_AREA on PMD level on x86_32
+Subject: [PATCH 26/34] x86/mm/pti: Clone CPU_ENTRY_AREA on PMD level on x86_32
 
 Cloning on the P4D level would clone the complete kernel
 address space into the user-space page-tables for PAE
@@ -14,7 +14,7 @@ Signed-off-by: Joerg Roedel <jroedel@suse.de>
  1 file changed, 20 insertions(+)
 
 diff --git a/arch/x86/mm/pti.c b/arch/x86/mm/pti.c
-index 7f5e698d127c..ec9852abc357 100644
+index 96a690e6c9b1..3ffd92309aca 100644
 --- a/arch/x86/mm/pti.c
 +++ b/arch/x86/mm/pti.c
 @@ -312,6 +312,7 @@ pti_clone_pmds(unsigned long start, unsigned long end, pmdval_t clear)
@@ -52,5 +52,5 @@ index 7f5e698d127c..ec9852abc357 100644
   * Clone the ESPFIX P4D into the user space visinble page table
   */
 -- 
-2.13.6
+2.16.2
 

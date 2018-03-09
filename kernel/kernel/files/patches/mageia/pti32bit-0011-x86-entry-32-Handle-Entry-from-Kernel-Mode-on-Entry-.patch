@@ -1,7 +1,7 @@
-From a98c3fa3166e37c6f66f5b7e221b9c0cf1455806 Mon Sep 17 00:00:00 2001
+From bbad1145165d4ed4452913df109ee3429a10dd90 Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Wed, 31 Jan 2018 20:48:02 +0100
-Subject: [PATCH 13/31] x86/entry/32: Handle Entry from Kernel-Mode on
+Subject: [PATCH 11/34] x86/entry/32: Handle Entry from Kernel-Mode on
  Entry-Stack
 
 It can happen that we enter the kernel from kernel-mode and
@@ -33,14 +33,14 @@ to it.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/entry/entry_32.S | 109 +++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 108 insertions(+), 1 deletion(-)
+ arch/x86/entry/entry_32.S | 110 +++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 109 insertions(+), 1 deletion(-)
 
 diff --git a/arch/x86/entry/entry_32.S b/arch/x86/entry/entry_32.S
-index b5ef00302316..d94dab68b526 100644
+index bb0bd896c74b..3a84945fa3b6 100644
 --- a/arch/x86/entry/entry_32.S
 +++ b/arch/x86/entry/entry_32.S
-@@ -358,6 +358,9 @@
+@@ -299,6 +299,9 @@
   * copied there. So allocate the stack-frame on the task-stack and
   * switch to it before we do any copying.
   */
@@ -50,7 +50,7 @@ index b5ef00302316..d94dab68b526 100644
  .macro SWITCH_TO_KERNEL_STACK
  
  	ALTERNATIVE     "", "jmp .Lend_\@", X86_FEATURE_XENPV
-@@ -381,6 +384,10 @@
+@@ -320,6 +323,10 @@
  	/* Load top of task-stack into %edi */
  	movl	TSS_entry_stack(%edi), %edi
  
@@ -61,7 +61,7 @@ index b5ef00302316..d94dab68b526 100644
  	/* Bytes to copy */
  	movl	$PTREGS_SIZE, %ecx
  
-@@ -394,8 +401,8 @@
+@@ -333,8 +340,8 @@
  	 */
  	addl	$(4 * 4), %ecx
  
@@ -71,9 +71,9 @@ index b5ef00302316..d94dab68b526 100644
  
  	/* Allocate frame on task-stack */
  	subl	%ecx, %edi
-@@ -410,6 +417,56 @@
+@@ -350,6 +357,56 @@
  	cld
- 	rep movsb
+ 	rep movsl
  
 +	jmp .Lend_\@
 +
@@ -128,10 +128,11 @@ index b5ef00302316..d94dab68b526 100644
  .Lend_\@:
  .endm
  
-@@ -467,6 +524,55 @@
+@@ -407,6 +464,56 @@
+ .Lend_\@:
  .endm
  
- /*
++/*
 + * This macro handles the case when we return to kernel-mode on the iret
 + * path and have to switch back to the entry stack.
 + *
@@ -172,19 +173,19 @@ index b5ef00302316..d94dab68b526 100644
 +	movl	%edi, %ebx
 +
 +	/* Do the copy */
++	shrl	$2, %ecx
 +	cld
-+	rep movsb
++	rep movsl
 +
 +	/* Safe to switch to entry-stack now */
 +	movl	%ebx, %esp
 +
 +.Lend_\@:
 +.endm
-+/*
+ /*
   * %eax: prev task
   * %edx: next task
-  */
-@@ -837,6 +943,7 @@ restore_all:
+@@ -765,6 +872,7 @@ restore_all:
  
  restore_all_kernel:
  	TRACE_IRQS_IRET
@@ -193,5 +194,5 @@ index b5ef00302316..d94dab68b526 100644
  	jmp	.Lirq_return
  
 -- 
-2.13.6
+2.16.2
 

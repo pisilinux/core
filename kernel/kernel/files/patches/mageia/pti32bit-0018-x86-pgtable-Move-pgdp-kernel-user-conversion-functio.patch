@@ -1,7 +1,7 @@
-From eaacd465ad0f08807b151d2d27b0cad27b9de076 Mon Sep 17 00:00:00 2001
+From 69dfcb6ee23f6841982e059f58cc9be921b669dc Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Tue, 16 Jan 2018 11:53:38 +0100
-Subject: [PATCH 16/31] x86/pgtable: Move pgdp kernel/user conversion functions
+Subject: [PATCH 18/34] x86/pgtable: Move pgdp kernel/user conversion functions
  to pgtable.h
 
 Make them available on 32 bit and clone_pgd_range() happy.
@@ -73,7 +73,7 @@ index e42b8943cb1a..0a9f746cbdc1 100644
   * clone_pgd_range(pgd_t *dst, pgd_t *src, int count);
   *
 diff --git a/arch/x86/include/asm/pgtable_64.h b/arch/x86/include/asm/pgtable_64.h
-index 81462e9a34f6..58d7f10e937d 100644
+index b68bda56db67..5e680838761d 100644
 --- a/arch/x86/include/asm/pgtable_64.h
 +++ b/arch/x86/include/asm/pgtable_64.h
 @@ -131,55 +131,6 @@ static inline pud_t native_pudp_get_and_clear(pud_t *xp)
@@ -133,5 +133,5 @@ index 81462e9a34f6..58d7f10e937d 100644
   * Page table pages are page-aligned.  The lower half of the top
   * level is used for userspace and the top half for the kernel.
 -- 
-2.13.6
+2.16.2
 

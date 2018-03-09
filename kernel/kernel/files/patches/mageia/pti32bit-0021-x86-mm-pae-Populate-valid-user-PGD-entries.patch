@@ -1,7 +1,7 @@
-From fbd7d587621cdf5c45fc32ae35e8cbec26387ed6 Mon Sep 17 00:00:00 2001
+From 85228cdba0d4634d6a1a162be0d755bd8ed3bdfa Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Tue, 16 Jan 2018 15:28:57 +0100
-Subject: [PATCH 19/31] x86/mm/pae: Populate valid user PGD entries
+Subject: [PATCH 21/34] x86/mm/pae: Populate valid user PGD entries
 
 Generic page-table code populates all non-leaf entries with
 _KERNPG_TABLE bits set. This is fine for all paging modes
@@ -13,11 +13,11 @@ reserved bits.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/include/asm/pgtable_types.h | 26 ++++++++++++++++++++++++--
- 1 file changed, 24 insertions(+), 2 deletions(-)
+ arch/x86/include/asm/pgtable_types.h | 28 ++++++++++++++++++++++++++--
+ 1 file changed, 26 insertions(+), 2 deletions(-)
 
 diff --git a/arch/x86/include/asm/pgtable_types.h b/arch/x86/include/asm/pgtable_types.h
-index 3696398a9475..5027470f4f1c 100644
+index 3696398a9475..48fc70b2d044 100644
 --- a/arch/x86/include/asm/pgtable_types.h
 +++ b/arch/x86/include/asm/pgtable_types.h
 @@ -50,6 +50,7 @@
@@ -28,7 +28,7 @@ index 3696398a9475..5027470f4f1c 100644
  #define _PAGE_PAT	(_AT(pteval_t, 1) << _PAGE_BIT_PAT)
  #define _PAGE_PAT_LARGE (_AT(pteval_t, 1) << _PAGE_BIT_PAT_LARGE)
  #define _PAGE_SPECIAL	(_AT(pteval_t, 1) << _PAGE_BIT_SPECIAL)
-@@ -267,14 +268,35 @@ typedef struct pgprot { pgprotval_t pgprot; } pgprot_t;
+@@ -267,14 +268,37 @@ typedef struct pgprot { pgprotval_t pgprot; } pgprot_t;
  
  typedef struct { pgdval_t pgd; } pgd_t;
  
@@ -38,7 +38,9 @@ index 3696398a9475..5027470f4f1c 100644
 + * PHYSICAL_PAGE_MASK might be non-constant when SME is compiled in, so we can't
 + * use it here.
 + */
-+#define PGD_PAE_PHYS_MASK	(((1ULL << __PHYSICAL_MASK_SHIFT)-1) & PAGE_MASK)
++
++#define PGD_PAE_PAGE_MASK	((signed long)PAGE_MASK)
++#define PGD_PAE_PHYS_MASK	(((1ULL << __PHYSICAL_MASK_SHIFT)-1) & PGD_PAE_PAGE_MASK)
 +
 +/*
 + * PAE allows Base Address, P, PWT, PCD and AVL bits to be set in PGD entries.
@@ -67,5 +69,5 @@ index 3696398a9475..5027470f4f1c 100644
  
  static inline pgdval_t pgd_flags(pgd_t pgd)
 -- 
-2.13.6
+2.16.2
 

@@ -1,7 +1,7 @@
-From d20f4e476110d1af543b471f317dfc97bec54d7c Mon Sep 17 00:00:00 2001
+From f05eb123abd9d8696ef340e62a37348381ff95fa Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Tue, 16 Jan 2018 15:55:17 +0100
-Subject: [PATCH 20/31] x86/mm/pae: Populate the user page-table with user
+Subject: [PATCH 22/34] x86/mm/pae: Populate the user page-table with user
  pgd's
 
 When we populate a PGD entry, make sure we populate it in
@@ -13,7 +13,7 @@ Signed-off-by: Joerg Roedel <jroedel@suse.de>
  1 file changed, 7 insertions(+)
 
 diff --git a/arch/x86/include/asm/pgtable-3level.h b/arch/x86/include/asm/pgtable-3level.h
-index bc4af5453802..1a0661be1861 100644
+index bc4af5453802..ab2aa4468293 100644
 --- a/arch/x86/include/asm/pgtable-3level.h
 +++ b/arch/x86/include/asm/pgtable-3level.h
 @@ -98,6 +98,9 @@ static inline void native_set_pmd(pmd_t *pmdp, pmd_t pmd)
@@ -21,7 +21,7 @@ index bc4af5453802..1a0661be1861 100644
  static inline void native_set_pud(pud_t *pudp, pud_t pud)
  {
 +#ifdef CONFIG_PAGE_TABLE_ISOLATION
-+	pud.p4d.pgd = pti_set_user_pgd(&pudp->p4d.pgd, pud.p4d.pgd);
++	pud.p4d.pgd = pti_set_user_pgtbl(&pudp->p4d.pgd, pud.p4d.pgd);
 +#endif
  	set_64bit((unsigned long long *)(pudp), native_pud_val(pud));
  }
@@ -31,12 +31,12 @@ index bc4af5453802..1a0661be1861 100644
  	union split_pud res, *orig = (union split_pud *)pudp;
  
 +#ifdef CONFIG_PAGE_TABLE_ISOLATION
-+	pti_set_user_pgd(&pudp->p4d.pgd, __pgd(0));
++	pti_set_user_pgtbl(&pudp->p4d.pgd, __pgd(0));
 +#endif
 +
  	/* xchg acts as a barrier before setting of the high bits */
  	res.pud_low = xchg(&orig->pud_low, 0);
  	res.pud_high = orig->pud_high;
 -- 
-2.13.6
+2.16.2
 

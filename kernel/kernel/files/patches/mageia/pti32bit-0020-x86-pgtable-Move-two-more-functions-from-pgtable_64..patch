@@ -1,7 +1,7 @@
-From 29023f0a7d98a96f2928c80ace36beffe5d28d41 Mon Sep 17 00:00:00 2001
+From 2bcb4034a5d3e49213d4b7e72187b106a50d53f3 Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Tue, 16 Jan 2018 12:48:14 +0100
-Subject: [PATCH 18/31] x86/pgtable: Move two more functions from pgtable_64.h
+Subject: [PATCH 20/34] x86/pgtable: Move two more functions from pgtable_64.h
  to pgtable.h
 
 These two functions are required for PTI on 32 bit:
@@ -45,7 +45,7 @@ index ed8a200ecdaf..925ac1bc45cb 100644
  
  #endif /* _ASM_X86_PGTABLE_3LEVEL_DEFS_H */
 diff --git a/arch/x86/include/asm/pgtable.h b/arch/x86/include/asm/pgtable.h
-index c9d3cf9ce831..82151f602174 100644
+index 1e900c1f8ab1..981e49a8cdb2 100644
 --- a/arch/x86/include/asm/pgtable.h
 +++ b/arch/x86/include/asm/pgtable.h
 @@ -1132,6 +1132,22 @@ static inline int pud_write(pud_t pud)
@@ -72,7 +72,7 @@ index c9d3cf9ce831..82151f602174 100644
  /*
   * All top-level PAGE_TABLE_ISOLATION page tables are order-1 pages
 diff --git a/arch/x86/include/asm/pgtable_64.h b/arch/x86/include/asm/pgtable_64.h
-index 396664d95ac9..50a02a32a0b3 100644
+index 4cbf5173dd76..e11b92585de4 100644
 --- a/arch/x86/include/asm/pgtable_64.h
 +++ b/arch/x86/include/asm/pgtable_64.h
 @@ -131,20 +131,6 @@ static inline pud_t native_pudp_get_and_clear(pud_t *xp)
@@ -116,5 +116,5 @@ index 6b8f73dcbc2c..e57003a3f58a 100644
 +
  #endif /* _ASM_X86_PGTABLE_64_DEFS_H */
 -- 
-2.13.6
+2.16.2
 

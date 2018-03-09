@@ -1,7 +1,7 @@
-From cc4fcd3fae72f6a72d9f275366b7165fa4ac3f71 Mon Sep 17 00:00:00 2001
+From 5439accd9f31dacdfbf67a18440d5805e8a0bfad Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Fri, 2 Feb 2018 10:41:36 +0100
-Subject: [PATCH 14/31] x86/pgtable/pae: Unshare kernel PMDs when PTI is
+Subject: [PATCH 16/34] x86/pgtable/pae: Unshare kernel PMDs when PTI is
  enabled
 
 With PTI we need to map the per-process LDT into the kernel
@@ -31,5 +31,5 @@ index 876b4c77d983..ed8a200ecdaf 100644
  
  /*
 -- 
-2.13.6
+2.16.2
 

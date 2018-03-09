@@ -1,7 +1,7 @@
 From c66ec22d03296d1311197aaef753c1c320eed225 Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Wed, 31 Jan 2018 10:58:38 +0100
-Subject: [PATCH 05/31] x86/entry/32: Unshare NMI return path
+Subject: [PATCH 05/34] x86/entry/32: Unshare NMI return path
 
 NMI will no longer use most of the shared return path,
 because NMI needs special handling when the CR3 switches for
@@ -39,5 +39,5 @@ index 0289bde37a08..00ae759a7c44 100644
  #ifdef CONFIG_X86_ESPFIX32
  .Lnmi_espfix_stack:
 -- 
-2.13.6
+2.16.2
 

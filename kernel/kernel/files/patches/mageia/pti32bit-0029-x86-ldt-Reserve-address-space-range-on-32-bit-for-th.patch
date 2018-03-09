@@ -1,7 +1,7 @@
-From c07a31bb57363adb6f9d0def1d6b7a16b4a5c72c Mon Sep 17 00:00:00 2001
+From dd247e8ec4d2eeefdcb6ad173f1eef8007f54101 Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Tue, 16 Jan 2018 12:40:07 +0100
-Subject: [PATCH 27/31] x86/ldt: Reserve address-space range on 32 bit for the
+Subject: [PATCH 29/34] x86/ldt: Reserve address-space range on 32 bit for the
  LDT
 
 Reserve 2MB/4MB of address-space for mapping the LDT to
@@ -40,26 +40,26 @@ diff --git a/arch/x86/mm/dump_pagetables.c b/arch/x86/mm/dump_pagetables.c
 index 2151ebb6a282..fdefdf05739c 100644
 --- a/arch/x86/mm/dump_pagetables.c
 +++ b/arch/x86/mm/dump_pagetables.c
-@@ -117,6 +117,9 @@ enum address_markers_idx {
+@@ -116,6 +116,9 @@ enum address_markers_idx {
+ 	VMALLOC_END_NR,
  #ifdef CONFIG_HIGHMEM
  	PKMAP_BASE_NR,
- #endif
++#endif
 +#ifdef CONFIG_MODIFY_LDT_SYSCALL
 +	LDT_NR,
-+#endif
+ #endif
  	CPU_ENTRY_AREA_NR,
  	FIXADDR_START_NR,
- 	END_OF_SPACE_NR,
-@@ -130,6 +133,9 @@ static struct addr_marker address_markers[] = {
+@@ -129,6 +132,9 @@ static struct addr_marker address_markers[] = {
+ 	[VMALLOC_END_NR]	= { 0UL,		"vmalloc() End" },
  #ifdef CONFIG_HIGHMEM
  	[PKMAP_BASE_NR]		= { 0UL,		"Persistent kmap() Area" },
- #endif
++#endif
 +#ifdef CONFIG_MODIFY_LDT_SYSCALL
 +	[LDT_NR]		= { 0UL,		"LDT remap" },
-+#endif
+ #endif
  	[CPU_ENTRY_AREA_NR]	= { 0UL,		"CPU entry area" },
  	[FIXADDR_START_NR]	= { 0UL,		"Fixmap area" },
- 	[END_OF_SPACE_NR]	= { -1,			NULL }
 @@ -579,6 +585,9 @@ static int __init pt_dump_init(void)
  # endif
  	address_markers[FIXADDR_START_NR].start_address = FIXADDR_START;
@@ -71,5 +71,5 @@ index 2151ebb6a282..fdefdf05739c 100644
  	return 0;
  }
 -- 
-2.13.6
+2.16.2
 
