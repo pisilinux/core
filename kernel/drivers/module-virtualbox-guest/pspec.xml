@@ -14,14 +14,14 @@
         <Description>This package provides the kernel modules needed for mouse integration and shared folder support between VirtualBox host and guest systems.</Description>
         <Archive sha1sum="62e7db2f55f1564d1e367ccd4ea7f850c4aea805" type="tarxz">https://github.com/Rmys/Sources/raw/master/module-virtualbox-guest-5.2.8.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency version="4.9.80">kernel-module-headers</Dependency>
+            <Dependency version="4.9.86">kernel-module-headers</Dependency>
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>module-virtualbox-guest</Name>
         <RuntimeDependencies>
-            <Dependency version="4.9.80">kernel</Dependency>
+            <Dependency version="4.9.86">kernel</Dependency>
             <Dependency>baselayout</Dependency>
             <Dependency version="current">module-virtualbox-guest-userspace</Dependency>
         </RuntimeDependencies>
@@ -52,6 +52,13 @@
     </Package>
 
     <History>
+        <Update release="23">
+            <Date>2018-03-11</Date>
+            <Version>5.2.8</Version>
+            <Comment>Rebuild for new kernel.</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
         <Update release="22">
             <Date>2018-03-03</Date>
             <Version>5.2.8</Version>
