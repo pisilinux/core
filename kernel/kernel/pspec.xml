@@ -12,7 +12,7 @@
         <IsA>kernel</IsA>
         <Summary>The Linux kernel (the core of the Linux operating system) for Pisi Linux</Summary>
         <Description>kernel contains the Linux kernel, the core of any Linux operating system. The kernel handles the basic functions of the operating system: memory allocation, process allocation, device input and output, etc.</Description>
-        <Archive sha1sum="60a47e858fce153c5bedd7e293a1b45e8d2db054" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.9.tar.gz</Archive>
+        <Archive sha1sum="dfbfc35cf99dbcf6c318ddc1e7d6788fa8a756da" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.9.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -226,7 +226,7 @@
         <Update release="17">
             <Date>2018-03-10</Date>
             <Version>4.9.86</Version>
-            <Comment>Version Bump.</Comment>
+            <Comment>Version Bump</Comment>
             <Type package="kernel">security</Type>
             <Requires>
                 <Action package="kernel">systemRestart</Action>
