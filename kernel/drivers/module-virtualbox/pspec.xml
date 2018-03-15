@@ -12,7 +12,7 @@
         <IsA>driver</IsA>
         <Summary>Kernel modules for VirtualBox</Summary>
         <Description>This package provides the kernel support for VirtualBox.</Description>
-        <Archive sha1sum="7ddf49746576e3a49398d1bb1020686848c30b5a" type="tarxz">https://github.com/Rmys/Sources/raw/master/module-virtualbox-5.2.8.tar.xz</Archive>
+        <Archive sha1sum="51374d6dce1c67c60b5f3c36394638374fc20680" type="tarxz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-5.2.8.tar.xz</Archive>
         <BuildDependencies>
             <Dependency version="4.9.86">kernel-module-headers</Dependency>
         </BuildDependencies>
@@ -50,6 +50,13 @@
     </Package>
 
     <History>
+        <Update release="24">
+            <Date>2018-03-15</Date>
+            <Version>5.2.8</Version>
+            <Comment>Rebuild for new kernel</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="23">
             <Date>2018-03-11</Date>
             <Version>5.2.8</Version>
