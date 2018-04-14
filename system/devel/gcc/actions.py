@@ -120,6 +120,8 @@ def install():
 
     # /lib/cpp symlink for legacy X11 stuff
     pisitools.dosym("/usr/bin/cpp", "/lib/cpp")
+    
+    pisitools.dosym("/usr/bin/x86_64-pc-linux-gnu-gcc-ar", "/usr/bin/x86_64-pc-linux-gnu-ar")
 
     # Remove our options section from crt stuff
     removePisiLinuxSection("%s/usr/lib/" % get.installDIR())
