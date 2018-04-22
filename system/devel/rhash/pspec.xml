@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>rhash</Name>
+        <Homepage>https://github.com/rhash/RHash/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2.1</License>
+        <IsA>library</IsA>
+        <Summary>Hash sums are used to  ensure and verify integrity  of large volumes of data for a long-term storing or transferring.</Summary>
+        <Description>RHash is a console utility for calculation  and verification of magnet links and a wide range of hash sums like  CRC32,  MD4, MD5,  SHA1, SHA256, SHA512, SHA3,   AICH,  ED2K,  Tiger,  DC++ TTH,  BitTorrent BTIH,   GOST R 34.11-94,RIPEMD-160, HAS-160, EDON-R, Whirlpool and Snefru.</Description>
+        <Archive sha1sum="62a89fcf39cc8e243d82a860e3ec53dab4e8af69" type="targz">https://github.com/rhash/RHash/archive/v1.3.6.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>glibc</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>rhash</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin/</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc/</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+    
+    <Package>
+        <Name>rhash-devel</Name>
+        <Summary>Development files for rhash</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">rhash</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2018-04-21</Date>
+            <Version>1.3.6</Version>
+            <Comment>Release Bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
