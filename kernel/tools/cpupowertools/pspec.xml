@@ -12,13 +12,13 @@
         <IsA>app:console</IsA>
         <Summary>CPU power management tools</Summary>
         <Description>cpupowertools contains utilities to manage power management and frequency scaling policies of modern CPUs.</Description>
-        <Archive sha1sum="dfbfc35cf99dbcf6c318ddc1e7d6788fa8a756da" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.9.tar.gz</Archive>
+        <Archive sha1sum="60a47e858fce153c5bedd7e293a1b45e8d2db054" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.9.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>pciutils-devel</Dependency>
         </BuildDependencies>
-                <Patches>
+        <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-4.9.86.xz</Patch>
+            <Patch level="1" compressionType="xz">patches/linux/patch-4.9.96.xz</Patch>
             <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.9.40/1.mga7/PATCHES/patches/series-->
             <!--stable patches-->
             <!--CVE-2016-8405-->
@@ -122,7 +122,7 @@
             <Patch level="1">patches/mageia/sound-ALSA-hda-Use-a-helper-function-for-renaming-kctl-nam.patch</Patch>
             <Patch level="1">patches/mageia/sound-ALSA-hda-Apply-dual-codec-quirk-for-MSI-Z270-Gaming-.patch</Patch>
             <Patch level="1">patches/mageia/sound-ALSA-hda-Fix-applying-MSI-dual-codec-mobo-quirk.patch</Patch>
-            <Patch level="1">patches/mageia/sound-ALSA-hda-Add-Geminilake-id-to-SKL_PLUS.patch</Patch>
+            
             <Patch level="1">patches/mageia/sound-ALSA-hda-Add-Coffelake-PCI-ID.patch</Patch>
             <Patch level="1">patches/mageia/sound-ALSA-hda-Apply-quirks-to-Broxton-T-too.patch</Patch>
             <Patch level="1">patches/mageia/hid-usbhid-IBM-BladeCenterHS20-quirk.patch</Patch>
