@@ -15,17 +15,16 @@
         <Description>module-ndiswrapper allows you to use Windows XP drivers for WLAN cards without proper Linux drivers.</Description>
         <Archive sha1sum="213854ca8a83f9b5972db8fa873d346124e4bcb5" type="targz">http://download.sourceforge.net/ndiswrapper/ndiswrapper-1.61.tar.gz</Archive>
         <BuildDependencies>
-             <Dependency version="4.9.86">kernel-module-headers</Dependency>
+             <Dependency version="4.9.96">kernel-module-headers</Dependency>
         </BuildDependencies>
         <Patches>
-<!--             <Patch>upstream.patch</Patch> -->
         </Patches>
     </Source>
 
     <Package>
         <Name>ndiswrapper</Name>
         <RuntimeDependencies>
-            <Dependency version="4.9.86">kernel</Dependency>
+            <Dependency version="4.9.96">kernel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -41,6 +40,13 @@
     </Package>
 
     <History>
+        <Update release="16">
+            <Date>2018-04-28</Date>
+            <Version>1.61</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="15">
             <Date>2018-03-11</Date>
             <Version>1.61</Version>
