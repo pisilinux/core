@@ -1,0 +1,61 @@
+From 2d0143773e3f3e021b75fcdb886efd7cf2a4e8ce Mon Sep 17 00:00:00 2001
+From: Joerg Roedel <jroedel@suse.de>
+Date: Thu, 8 Feb 2018 09:11:57 +0100
+Subject: [PATCH 25/31] x86/mm/dump_pagetables: Define INIT_PGD
+
+Define INIT_PGD to point to the correct initial page-table
+for 32 and 64 bit and use it where needed. This fixes the
+build on 32 bit with CONFIG_PAGE_TABLE_ISOLATION enabled.
+
+Signed-off-by: Joerg Roedel <jroedel@suse.de>
+---
+ arch/x86/mm/dump_pagetables.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/arch/x86/mm/dump_pagetables.c b/arch/x86/mm/dump_pagetables.c
+index 2a4849e92831..2151ebb6a282 100644
+--- a/arch/x86/mm/dump_pagetables.c
++++ b/arch/x86/mm/dump_pagetables.c
+@@ -105,6 +105,8 @@ static struct addr_marker address_markers[] = {
+ 	[END_OF_SPACE_NR]	= { -1,			NULL }
+ };
+ 
++#define INIT_PGD	((pgd_t *) &init_top_pgt)
++
+ #else /* CONFIG_X86_64 */
+ 
+ enum address_markers_idx {
+@@ -133,6 +135,8 @@ static struct addr_marker address_markers[] = {
+ 	[END_OF_SPACE_NR]	= { -1,			NULL }
+ };
+ 
++#define INIT_PGD	(swapper_pg_dir)
++
+ #endif /* !CONFIG_X86_64 */
+ 
+ /* Multipliers for offsets within the PTEs */
+@@ -478,11 +482,7 @@ static inline bool is_hypervisor_range(int idx)
+ static void ptdump_walk_pgd_level_core(struct seq_file *m, pgd_t *pgd,
+ 				       bool checkwx, bool dmesg)
+ {
+-#ifdef CONFIG_X86_64
+-	pgd_t *start = (pgd_t *) &init_top_pgt;
+-#else
+-	pgd_t *start = swapper_pg_dir;
+-#endif
++	pgd_t *start = INIT_PGD;
+ 	pgprotval_t prot;
+ 	int i;
+ 	struct pg_state st = {};
+@@ -543,7 +543,7 @@ EXPORT_SYMBOL_GPL(ptdump_walk_pgd_level_debugfs);
+ static void ptdump_walk_user_pgd_level_checkwx(void)
+ {
+ #ifdef CONFIG_PAGE_TABLE_ISOLATION
+-	pgd_t *pgd = (pgd_t *) &init_top_pgt;
++	pgd_t *pgd = INIT_PGD;
+ 
+ 	if (!static_cpu_has(X86_FEATURE_PTI))
+ 		return;
+-- 
+2.13.6
+

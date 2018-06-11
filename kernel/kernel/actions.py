@@ -24,6 +24,7 @@ def setup():
 def build():
     kerneltools.build(debugSymbols=False)
 
+    
 def install():
     kerneltools.install()
 
@@ -35,11 +36,12 @@ def install():
     # Generate some module lists to use within mkinitramfs
     shelltools.system("./generate-module-list %s/lib/modules/%s" % (get.installDIR(), kerneltools.__getSuffix()))
     
+    objtool()
+    
     #mkinitcpio default config
     pisitools.dodir("/etc/mkinitcpio.d")
     shelltools.touch("linux.preset")
-    
-
+        
     shelltools.echo("linux.preset", "# mkinitcpio preset file for the 'linux' package\n" +
                     
                     'ALL_config="/etc/mkinitcpio.conf"\n'+
@@ -55,3 +57,10 @@ def install():
                     'fallback_options="-S autodetect"\n')
     
     pisitools.insinto("/etc/mkinitcpio.d", "linux.preset")
+
+def objtool():
+    # add objtool for external module building and enabled VALIDATION_STACK option
+    shelltools.cd("tools/objtool")
+    autotools.make("objtool")
+    
+    pisitools.insinto("/usr/src/linux-headers-4.14.48/tools/objtool","%s/objtool" % get.curDIR())

@@ -8,16 +8,16 @@ and Luiz Fernando N. Capitulino.
 
 Signed-off-by: Luiz Fernando N. Capitulino <lcapitulino@mandriva.com.br>
 Signed-off-by: Herton Ronaldo Krzesinski <herton@mandriva.com.br>
-
+[moved header to uapi for kernel-4.12.4 / tmb]
+Signed-off-by Thomas Backlund <tmb@mageia.org>
 ---
- include/linux/netfilter_ipv4/Kbuild       |    1
  include/linux/netfilter_ipv4/ipt_IFWLOG.h |   23 +++++-
  net/ipv4/netfilter/ipt_IFWLOG.c           |  108 +++++++++++++++---------------
- 3 files changed, 77 insertions(+), 55 deletions(-)
+ 2 files changed, 77 insertions(+), 55 deletions(-)
 
-diff -p -up linux-2.6.28/include/linux/netfilter_ipv4/ipt_IFWLOG.h.orig linux-2.6.28/include/linux/netfilter_ipv4/ipt_IFWLOG.h
---- linux-2.6.28/include/linux/netfilter_ipv4/ipt_IFWLOG.h.orig	2008-12-12 10:55:07.000000000 -0500
-+++ linux-2.6.28/include/linux/netfilter_ipv4/ipt_IFWLOG.h	2008-12-12 10:56:30.000000000 -0500
+diff -p -up linux/include/uapi/linux/netfilter_ipv4/ipt_IFWLOG.h.orig linux/include/uapi/linux/netfilter_ipv4/ipt_IFWLOG.h
+--- linux-2.6.28/include/uapi/linux/netfilter_ipv4/ipt_IFWLOG.h.orig
++++ linux-2.6.28/include/uapi/linux/netfilter_ipv4/ipt_IFWLOG.h
 @@ -1,10 +1,25 @@
 -#ifndef _IPT_IFWLOG_H
 -#define _IPT_IFWLOG_H
@@ -252,13 +252,3 @@ diff -p -up linux-2.6.28/net/ipv4/netfilter/ipt_IFWLOG.c.orig linux-2.6.28/net/i
 +MODULE_AUTHOR("Luiz Capitulino <lcapitulino@mandriva.com.br>");
 +MODULE_DESCRIPTION("Interactive firewall logging and module");
 +MODULE_VERSION("v1.1");
---- linux/include/uapi/linux/netfilter_ipv4/Kbuild.net-netfilter-IFWLOG-mdv.orig
-+++ linux/include/uapi/linux/netfilter_ipv4/Kbuild
-@@ -2,6 +2,7 @@ header-y += ip_queue.h
- header-y += ip_tables.h
- header-y += ipt_CLUSTERIP.h
- header-y += ipt_ECN.h
-+header-y += ipt_IFWLOG.h
- header-y += ipt_LOG.h
- header-y += ipt_REJECT.h
- header-y += ipt_TTL.h

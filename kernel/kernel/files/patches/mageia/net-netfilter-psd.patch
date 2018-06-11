@@ -1,5 +1,9 @@
+
+[moved header to uapi for kernel-4.12.4 / tmb]
+Signed-off-by Thomas Backlund <tmb@mageia.org>
+
 ---
- include/linux/netfilter_ipv4/ipt_psd.h |   40 +++
+ include/uapi/linux/netfilter_ipv4/ipt_psd.h |   40 +++
  net/ipv4/netfilter/Makefile            |    1 
  net/ipv4/netfilter/ipt_psd.c           |  358 +++++++++++++++++++++++++++++++++
  3 files changed, 399 insertions(+)
@@ -366,7 +370,7 @@
 +module_init(init);
 +module_exit(fini);
 --- /dev/null
-+++ b/include/linux/netfilter_ipv4/ipt_psd.h
++++ b/include/uapi/linux/netfilter_ipv4/ipt_psd.h
 @@ -0,0 +1,40 @@
 +#ifndef _IPT_PSD_H
 +#define _IPT_PSD_H
