@@ -27,6 +27,9 @@ def build():
     
 def install():
     kerneltools.install()
+    
+    # add objtool for external module building and enabled VALIDATION_STACK option
+    pisitools.insinto("/usr/src/linux-headers-4.14.49/tools/objtool","%s/tools/objtool/objtool" % get.curDIR())
 
     # Install kernel headers needed for out-of-tree module compilation
     kerneltools.installHeaders()
@@ -35,8 +38,6 @@ def install():
 
     # Generate some module lists to use within mkinitramfs
     shelltools.system("./generate-module-list %s/lib/modules/%s" % (get.installDIR(), kerneltools.__getSuffix()))
-    
-    objtool()
     
     #mkinitcpio default config
     pisitools.dodir("/etc/mkinitcpio.d")
@@ -57,10 +58,3 @@ def install():
                     'fallback_options="-S autodetect"\n')
     
     pisitools.insinto("/etc/mkinitcpio.d", "linux.preset")
-
-def objtool():
-    # add objtool for external module building and enabled VALIDATION_STACK option
-    shelltools.cd("tools/objtool")
-    autotools.make("objtool")
-    
-    pisitools.insinto("/usr/src/linux-headers-4.14.48/tools/objtool","%s/objtool" % get.curDIR())
