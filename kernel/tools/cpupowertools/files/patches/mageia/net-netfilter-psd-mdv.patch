@@ -13,10 +13,9 @@ Signed-off-by: Luiz Fernando N. Capitulino <lcapitulino@mandriva.com.br>
 Signed-off-by: Herton Ronaldo Krzesinski <herton@mandriva.com.br>
 
 ---
- include/linux/netfilter_ipv4/Kbuild |    1
  net/ipv4/netfilter/Kconfig          |    8 ++
  net/ipv4/netfilter/ipt_psd.c        |  113 ++++++++++++++----------------------
- 3 files changed, 55 insertions(+), 67 deletions(-)
+ 2 files changed, 55 insertions(+), 67 deletions(-)
 
 diff -p -up linux-2.6.28/net/ipv4/netfilter/ipt_psd.c.orig linux-2.6.28/net/ipv4/netfilter/ipt_psd.c
 --- linux-2.6.28/net/ipv4/netfilter/ipt_psd.c.orig	2008-12-12 11:03:05.000000000 -0500
@@ -223,11 +222,3 @@ diff -p -up linux-2.6.28/net/ipv4/netfilter/ipt_psd.c.orig linux-2.6.28/net/ipv4
  config IP_NF_MATCH_RPFILTER
  	tristate '"rpfilter" reverse path filter match support'
  	depends on NETFILTER_ADVANCED
---- linux/include/uapi/linux/netfilter_ipv4/Kbuild.orig
-+++ linux/include/uapi/linux/netfilter_ipv4/Kbuild
-@@ -8,4 +8,5 @@ header-y += ipt_REJECT.h
- header-y += ipt_TTL.h
- header-y += ipt_ah.h
- header-y += ipt_ecn.h
-+header-y += ipt_psd.h
- header-y += ipt_ttl.h

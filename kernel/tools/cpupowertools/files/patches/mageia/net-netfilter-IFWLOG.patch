@@ -1,5 +1,9 @@
+
+[moved header to uapi for kernel-4.12.4 / tmb]
+Signed-off-by Thomas Backlund <tmb@mageia.org>
+
 ---
- include/linux/netfilter_ipv4/ipt_IFWLOG.h |   26 +++
+ include/uapi/linux/netfilter_ipv4/ipt_IFWLOG.h |   26 +++
  net/ipv4/netfilter/Kconfig                |   11 +
  net/ipv4/netfilter/Makefile               |    1 
  net/ipv4/netfilter/ipt_IFWLOG.c           |  200 ++++++++++++++++++++++++++++++
@@ -229,7 +233,7 @@
  config IP_NF_RAW
  	tristate  'raw table support (required for NOTRACK/TRACE)'
 --- /dev/null
-+++ b/include/linux/netfilter_ipv4/ipt_IFWLOG.h
++++ b/include/uapi/linux/netfilter_ipv4/ipt_IFWLOG.h
 @@ -0,0 +1,26 @@
 +#ifndef _IPT_IFWLOG_H
 +#define _IPT_IFWLOG_H

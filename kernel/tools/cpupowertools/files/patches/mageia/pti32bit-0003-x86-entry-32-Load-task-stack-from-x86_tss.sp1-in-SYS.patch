@@ -1,0 +1,49 @@
+From b696a2c46d9b9937b816b11ff2ec72aa0b65f204 Mon Sep 17 00:00:00 2001
+From: Joerg Roedel <jroedel@suse.de>
+Date: Fri, 19 Jan 2018 13:33:37 +0100
+Subject: [PATCH 03/31] x86/entry/32: Load task stack from x86_tss.sp1 in
+ SYSENTER handler
+
+We want x86_tss.sp0 point to the entry stack later to use
+it as a trampoline stack for other kernel entry points
+besides SYSENTER.
+
+So store the task stack pointer in x86_tss.sp1, which is
+otherwise unused by the hardware, as Linux doesn't make use
+of Ring 1.
+
+Signed-off-by: Joerg Roedel <jroedel@suse.de>
+---
+ arch/x86/kernel/asm-offsets_32.c | 2 +-
+ arch/x86/kernel/process_32.c     | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/arch/x86/kernel/asm-offsets_32.c b/arch/x86/kernel/asm-offsets_32.c
+index f452bfdc485a..b97e48c87e80 100644
+--- a/arch/x86/kernel/asm-offsets_32.c
++++ b/arch/x86/kernel/asm-offsets_32.c
+@@ -47,7 +47,7 @@ void foo(void)
+ 	BLANK();
+ 
+ 	/* Offset from the sysenter stack to tss.sp0 */
+-	DEFINE(TSS_entry_stack, offsetof(struct cpu_entry_area, tss.x86_tss.sp0) -
++	DEFINE(TSS_entry_stack, offsetof(struct cpu_entry_area, tss.x86_tss.sp1) -
+ 	       offsetofend(struct cpu_entry_area, entry_stack_page.stack));
+ 
+ #ifdef CONFIG_CC_STACKPROTECTOR
+diff --git a/arch/x86/kernel/process_32.c b/arch/x86/kernel/process_32.c
+index 5224c6099184..097d36a64889 100644
+--- a/arch/x86/kernel/process_32.c
++++ b/arch/x86/kernel/process_32.c
+@@ -292,6 +292,8 @@ __switch_to(struct task_struct *prev_p, struct task_struct *next_p)
+ 	this_cpu_write(cpu_current_top_of_stack,
+ 		       (unsigned long)task_stack_page(next_p) +
+ 		       THREAD_SIZE);
++	/* SYSENTER reads the task-stack from tss.sp1 */
++	this_cpu_write(cpu_tss_rw.x86_tss.sp1, next_p->thread.sp0);
+ 
+ 	/*
+ 	 * Restore %gs if needed (which is common)
+-- 
+2.13.6
+
