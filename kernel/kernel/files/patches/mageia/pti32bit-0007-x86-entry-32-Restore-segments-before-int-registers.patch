@@ -1,0 +1,111 @@
+From c19ad15b16ec8908794459f28b44eca889a925f7 Mon Sep 17 00:00:00 2001
+From: Joerg Roedel <jroedel@suse.de>
+Date: Wed, 31 Jan 2018 11:29:59 +0100
+Subject: [PATCH 07/34] x86/entry/32: Restore segments before int registers
+
+Restoring the segments can cause exceptions that need to be
+handled. With PTI enabled, we still need to be on kernel cr3
+when the exception happens. For the cr3-switch we need
+at least one integer scratch register, so we can't switch
+with the user integer registers already loaded.
+
+Avoid a push/pop cycle to free a register for the cr3 switch
+by restoring the segments first. That way the integer
+registers are not live yet and we can use them for the cr3
+switch.
+
+This also helps in the NMI path, where we need to leave with
+the same cr3 as we entered. There we still have the
+callee-saved registers live when switching cr3s.
+
+Signed-off-by: Joerg Roedel <jroedel@suse.de>
+---
+ arch/x86/entry/entry_32.S | 50 ++++++++++++++++++++---------------------------
+ 1 file changed, 21 insertions(+), 29 deletions(-)
+
+diff --git a/arch/x86/entry/entry_32.S b/arch/x86/entry/entry_32.S
+index 9bd77183965f..b39c5e210b43 100644
+--- a/arch/x86/entry/entry_32.S
++++ b/arch/x86/entry/entry_32.S
+@@ -91,11 +91,6 @@
+  /* unfortunately push/pop can't be no-op */
+ .macro PUSH_GS
+ 	pushl	$0
+-.endm
+-.macro POP_GS pop=0
+-	addl	$(4 + \pop), %esp
+-.endm
+-.macro POP_GS_EX
+ .endm
+ 
+  /* all the rest are no-op */
+@@ -116,20 +111,6 @@
+ 	pushl	%gs
+ .endm
+ 
+-.macro POP_GS pop=0
+-98:	popl	%gs
+-  .if \pop <> 0
+-	add	$\pop, %esp
+-  .endif
+-.endm
+-.macro POP_GS_EX
+-.pushsection .fixup, "ax"
+-99:	movl	$0, (%esp)
+-	jmp	98b
+-.popsection
+-	_ASM_EXTABLE(98b, 99b)
+-.endm
+-
+ .macro PTGS_TO_GS
+ 98:	mov	PT_GS(%esp), %gs
+ .endm
+@@ -201,24 +182,35 @@
+ 	popl	%eax
+ .endm
+ 
+-.macro RESTORE_REGS pop=0
+-	RESTORE_INT_REGS
+-1:	popl	%ds
+-2:	popl	%es
+-3:	popl	%fs
+-	POP_GS \pop
++.macro RESTORE_SEGMENTS
++1:	mov	PT_DS(%esp), %ds
++2:	mov	PT_ES(%esp), %es
++3:	mov	PT_FS(%esp), %fs
++	PTGS_TO_GS
+ .pushsection .fixup, "ax"
+-4:	movl	$0, (%esp)
++4:	movl	$0, PT_DS(%esp)
+ 	jmp	1b
+-5:	movl	$0, (%esp)
++5:	movl	$0, PT_ES(%esp)
+ 	jmp	2b
+-6:	movl	$0, (%esp)
++6:	movl	$0, PT_FS(%esp)
+ 	jmp	3b
+ .popsection
+ 	_ASM_EXTABLE(1b, 4b)
+ 	_ASM_EXTABLE(2b, 5b)
+ 	_ASM_EXTABLE(3b, 6b)
+-	POP_GS_EX
++	PTGS_TO_GS_EX
++.endm
++
++.macro RESTORE_SKIP_SEGMENTS pop=0
++	/* Jump over the segments stored on stack */
++	addl	$((4 * 4) + \pop), %esp
++.endm
++
++.macro RESTORE_REGS pop=0
++	RESTORE_SEGMENTS
++	RESTORE_INT_REGS
++	/* Skip over already restored segment registers */
++	RESTORE_SKIP_SEGMENTS \pop
+ .endm
+ 
+ .macro CHECK_AND_APPLY_ESPFIX
+-- 
+2.16.2
+

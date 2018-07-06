@@ -1,0 +1,43 @@
+From c66ec22d03296d1311197aaef753c1c320eed225 Mon Sep 17 00:00:00 2001
+From: Joerg Roedel <jroedel@suse.de>
+Date: Wed, 31 Jan 2018 10:58:38 +0100
+Subject: [PATCH 05/34] x86/entry/32: Unshare NMI return path
+
+NMI will no longer use most of the shared return path,
+because NMI needs special handling when the CR3 switches for
+PTI are added. This patch prepares for that.
+
+Signed-off-by: Joerg Roedel <jroedel@suse.de>
+---
+ arch/x86/entry/entry_32.S | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/arch/x86/entry/entry_32.S b/arch/x86/entry/entry_32.S
+index 0289bde37a08..00ae759a7c44 100644
+--- a/arch/x86/entry/entry_32.S
++++ b/arch/x86/entry/entry_32.S
+@@ -1007,7 +1007,7 @@ ENTRY(nmi)
+ 
+ 	/* Not on SYSENTER stack. */
+ 	call	do_nmi
+-	jmp	.Lrestore_all_notrace
++	jmp	.Lnmi_return
+ 
+ .Lnmi_from_sysenter_stack:
+ 	/*
+@@ -1018,7 +1018,11 @@ ENTRY(nmi)
+ 	movl	PER_CPU_VAR(cpu_current_top_of_stack), %esp
+ 	call	do_nmi
+ 	movl	%ebx, %esp
+-	jmp	.Lrestore_all_notrace
++
++.Lnmi_return:
++	CHECK_AND_APPLY_ESPFIX
++	RESTORE_REGS 4
++	jmp	.Lirq_return
+ 
+ #ifdef CONFIG_X86_ESPFIX32
+ .Lnmi_espfix_stack:
+-- 
+2.16.2
+
