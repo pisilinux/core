@@ -13,7 +13,7 @@
         <Summary>Kernel module allowing to switch dedicated graphics card on Optimus laptops</Summary>
         <Description>kernel module allowing to switch dedicated graphics card on Optimus laptops</Description>
         <BuildDependencies>
-            <Dependency version="4.14.49">kernel-module-headers</Dependency>
+            <Dependency version="4.14.55">kernel-module-headers</Dependency>
         </BuildDependencies>
         <Archive sha1sum="e282ee682d794e3962baa4dead01917c42571e78" type="targz">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
         <Patches>
@@ -22,7 +22,7 @@
     <Package>
         <Name>module-bbswitch</Name>
         <RuntimeDependencies>
-            <Dependency version="4.14.49">kernel</Dependency>
+            <Dependency version="4.14.55">kernel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -37,7 +37,7 @@
 
     <History>
         <Update release="18">
-            <Date>2018-06-13</Date>
+            <Date>2018-07-12</Date>
             <Version>0.8</Version>
             <Comment>Version bump</Comment>
             <Name>Ertuğrul Erata</Name>
