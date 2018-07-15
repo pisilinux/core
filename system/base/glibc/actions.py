@@ -11,7 +11,7 @@ from pisi.actionsapi import get
 
 import os
 
-WorkDir = "glibc-2.24"
+WorkDir = "glibc-2.27"
 
 arch = "x86-64" if get.ARCH() == "x86_64" and not get.buildTYPE() == "emul32" else "i686"
 defaultflags = "-O3 -g -fasynchronous-unwind-tables -mtune=generic -march=%s" % arch
@@ -111,7 +111,7 @@ def install():
         autotools.rawInstall("install_root=%s localedata/install-locales" % get.installDIR())
 
         # Remove our options section from crt stuff
-        removePisiLinuxSection("%s/usr/lib/" % get.installDIR())
+        #removePisiLinuxSection("%s/usr/lib/" % get.installDIR())
 
 
     if get.buildTYPE() == "emul32":
@@ -120,7 +120,7 @@ def install():
         shelltools.echo("%s/etc/ld.so.conf.d/60-glibc-32bit.conf" % get.installDIR(), ldconf32bit)
 
         # Remove our options section from crt stuff
-        removePisiLinuxSection("%s/usr/lib32/" % get.installDIR())
+        #removePisiLinuxSection("%s/usr/lib32/" % get.installDIR())
 
         pisitools.removeDir("/tmp32")
 
@@ -148,5 +148,5 @@ def install():
             #pisitools.remove("/usr/sbin/%s" % i)
 
     shelltools.cd("..")
-    pisitools.dodoc("BUGS", "ChangeLog*", "CONFORMANCE", "NAMESPACE", "NEWS", "PROJECTS", "README*", "LICENSES")
+    pisitools.dodoc("ChangeLog", "NEWS", "README*", "LICENSES")
 
