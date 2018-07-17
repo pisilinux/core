@@ -21,4 +21,4 @@ def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     # move docs into proper place
-    pisitools.domove("/usr/share/libatomic_ops/", "/usr/share/doc/%s" % get.srcNAME())
+    #pisitools.domove("/usr/share/libatomic_ops/", "/usr/share/doc/%s" % get.srcNAME())

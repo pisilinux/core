@@ -31,4 +31,4 @@ def install():
 
     pisitools.dodoc("ChangeLog", "doc/README.linux", "doc/*.html")
     
-    pisitools.removeDir("/usr/share/gc")
+    #pisitools.removeDir("/usr/share/gc")
