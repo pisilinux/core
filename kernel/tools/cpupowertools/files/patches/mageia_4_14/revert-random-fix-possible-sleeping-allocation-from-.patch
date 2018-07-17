@@ -1,0 +1,41 @@
+From 555c416db8cd808805d534430df3d470bff9a775 Mon Sep 17 00:00:00 2001
+From: Thomas Backlund <tmb@mageia.org>
+Date: Fri, 25 May 2018 20:34:34 +0300
+Subject: [PATCH 2/8] revert: random: fix possible sleeping allocation from irq
+ context
+
+Signed-off-by: Thomas Backlund <tmb@mageia.org>
+---
+ drivers/char/random.c | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
+
+diff --git a/drivers/char/random.c b/drivers/char/random.c
+index fb7502b0f8cb..4fb73009698c 100644
+--- a/drivers/char/random.c
++++ b/drivers/char/random.c
+@@ -788,7 +788,7 @@ static void crng_initialize(struct crng_state *crng)
+ }
+ 
+ #ifdef CONFIG_NUMA
+-static void do_numa_crng_init(struct work_struct *work)
++static void numa_crng_init(void)
+ {
+ 	int i;
+ 	struct crng_state *crng;
+@@ -809,13 +809,6 @@ static void do_numa_crng_init(struct work_struct *work)
+ 		kfree(pool);
+ 	}
+ }
+-
+-static DECLARE_WORK(numa_crng_init_work, do_numa_crng_init);
+-
+-static void numa_crng_init(void)
+-{
+-	schedule_work(&numa_crng_init_work);
+-}
+ #else
+ static void numa_crng_init(void) {}
+ #endif
+-- 
+2.13.6
+

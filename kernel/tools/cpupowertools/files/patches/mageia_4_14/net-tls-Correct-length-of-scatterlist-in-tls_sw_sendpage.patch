@@ -1,0 +1,37 @@
+From 7a8c4dd9be91a7e8f8f0e0419a560663adc694a3 Mon Sep 17 00:00:00 2001
+From: Dave Watson <davejwatson@fb.com>
+Date: Fri, 19 Jan 2018 12:30:13 -0800
+Subject: [PATCH] tls: Correct length of scatterlist in tls_sw_sendpage
+
+The scatterlist is reused by both sendmsg and sendfile.
+If a sendmsg of smaller number of pages is followed by a sendfile
+of larger number of pages, the scatterlist may be too short, resulting
+in a crash in gcm_encrypt.
+
+Add sg_unmark_end to make the list the correct length.
+
+tls_sw_sendmsg already calls sg_unmark_end correctly when it allocates
+memory in alloc_sg, or in zerocopy_from_iter.
+
+Signed-off-by: Dave Watson <davejwatson@fb.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+---
+ net/tls/tls_sw.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/net/tls/tls_sw.c b/net/tls/tls_sw.c
+index 61f394d369bf..0a9b72fbd761 100644
+--- a/net/tls/tls_sw.c
++++ b/net/tls/tls_sw.c
+@@ -577,6 +577,8 @@ int tls_sw_sendpage(struct sock *sk, struct page *page,
+ 		get_page(page);
+ 		sg = ctx->sg_plaintext_data + ctx->sg_plaintext_num_elem;
+ 		sg_set_page(sg, page, copy, offset);
++		sg_unmark_end(sg);
++
+ 		ctx->sg_plaintext_num_elem++;
+ 
+ 		sk_mem_charge(sk, copy);
+-- 
+2.16.1
+

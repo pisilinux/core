@@ -1,0 +1,48 @@
+From 52806123bdb0b558a5b4fbfa132bae32e53b008a Mon Sep 17 00:00:00 2001
+From: Joerg Roedel <jroedel@suse.de>
+Date: Mon, 15 Jan 2018 18:20:15 +0100
+Subject: [PATCH 02/35] x86/entry/32: Rename TSS_sysenter_sp0 to
+ TSS_entry_stack
+
+The stack address doesn't need to be stored in tss.sp0 if
+we switch manually like on sysenter. Rename the offset so
+that it still makes sense when we change its location.
+
+We will also use this stack for all kernel-entry points, not
+just sysenter. Reflect that in the name as well.
+
+Signed-off-by: Joerg Roedel <jroedel@suse.de>
+---
+ arch/x86/entry/entry_32.S        | 2 +-
+ arch/x86/kernel/asm-offsets_32.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/x86/entry/entry_32.S b/arch/x86/entry/entry_32.S
+index 2a35b1e0fb90..e65977615616 100644
+--- a/arch/x86/entry/entry_32.S
++++ b/arch/x86/entry/entry_32.S
+@@ -413,7 +413,7 @@ ENTRY(xen_sysenter_target)
+  * 0(%ebp) arg6
+  */
+ ENTRY(entry_SYSENTER_32)
+-	movl	TSS_sysenter_sp0(%esp), %esp
++	movl	TSS_entry_stack(%esp), %esp
+ .Lsysenter_past_esp:
+ 	pushl	$__USER_DS		/* pt_regs->ss */
+ 	pushl	%ebp			/* pt_regs->sp (stashed in bp) */
+diff --git a/arch/x86/kernel/asm-offsets_32.c b/arch/x86/kernel/asm-offsets_32.c
+index fa1261eefa16..f452bfdc485a 100644
+--- a/arch/x86/kernel/asm-offsets_32.c
++++ b/arch/x86/kernel/asm-offsets_32.c
+@@ -47,7 +47,7 @@ void foo(void)
+ 	BLANK();
+ 
+ 	/* Offset from the sysenter stack to tss.sp0 */
+-	DEFINE(TSS_sysenter_sp0, offsetof(struct cpu_entry_area, tss.x86_tss.sp0) -
++	DEFINE(TSS_entry_stack, offsetof(struct cpu_entry_area, tss.x86_tss.sp0) -
+ 	       offsetofend(struct cpu_entry_area, entry_stack_page.stack));
+ 
+ #ifdef CONFIG_CC_STACKPROTECTOR
+-- 
+2.16.2
+

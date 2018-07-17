@@ -1,0 +1,58 @@
+From 7222708e823afc98dfb769d36bf2f26b6420b7ce Mon Sep 17 00:00:00 2001
+From: "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
+Date: Mon, 22 Jan 2018 12:22:30 +0300
+Subject: [PATCH] mm, page_vma_mapped: Introduce pfn_in_hpage()
+
+The new helper would check if the pfn belongs to the page. For huge
+pages it checks if the PFN is within range covered by the huge page.
+
+The helper is used in check_pte(). The original code the helper replaces
+had two call to page_to_pfn(). page_to_pfn() is relatively costly.
+
+Although current GCC is able to optimize code to have one call, it's
+better to do this explicitly.
+
+Signed-off-by: Kirill A. Shutemov <kirill.shutemov@linux.intel.com>
+Signed-off-by: Linus Torvalds <torvalds@linux-foundation.org>
+---
+ mm/page_vma_mapped.c | 17 +++++++++--------
+ 1 file changed, 9 insertions(+), 8 deletions(-)
+
+diff --git a/mm/page_vma_mapped.c b/mm/page_vma_mapped.c
+index 956015614395..ae3c2a35d61b 100644
+--- a/mm/page_vma_mapped.c
++++ b/mm/page_vma_mapped.c
+@@ -30,6 +30,14 @@ static bool map_pte(struct page_vma_mapped_walk *pvmw)
+ 	return true;
+ }
+ 
++static inline bool pfn_in_hpage(struct page *hpage, unsigned long pfn)
++{
++	unsigned long hpage_pfn = page_to_pfn(hpage);
++
++	/* THP can be referenced by any subpage */
++	return pfn >= hpage_pfn && pfn - hpage_pfn < hpage_nr_pages(hpage);
++}
++
+ /**
+  * check_pte - check if @pvmw->page is mapped at the @pvmw->pte
+  *
+@@ -78,14 +86,7 @@ static bool check_pte(struct page_vma_mapped_walk *pvmw)
+ 		pfn = pte_pfn(*pvmw->pte);
+ 	}
+ 
+-	if (pfn < page_to_pfn(pvmw->page))
+-		return false;
+-
+-	/* THP can be referenced by any subpage */
+-	if (pfn - page_to_pfn(pvmw->page) >= hpage_nr_pages(pvmw->page))
+-		return false;
+-
+-	return true;
++	return pfn_in_hpage(pvmw->page, pfn);
+ }
+ 
+ /**
+-- 
+2.16.1
+
