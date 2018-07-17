@@ -10,6 +10,7 @@ from pisi.actionsapi import get
 from pisi.actionsapi import pisitools
 
 def setup():
+    autotools.autoreconf("-fi")
     autotools.configure("--enable-nls \
                          --program-prefix=g")
 
