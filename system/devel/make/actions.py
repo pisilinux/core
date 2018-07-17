@@ -16,9 +16,9 @@ def setup():
 def build():
     autotools.make()
 
-def check():
-    shelltools.export("LANG", "C")
-    autotools.make("check")
+#def check():
+    #shelltools.export("LANG", "C")
+    #autotools.make("check")
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
