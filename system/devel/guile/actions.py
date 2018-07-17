@@ -38,6 +38,6 @@ def install():
     pisitools.dodir("/etc/env.d")
     shelltools.echo("%s/etc/env.d/50guile" % get.installDIR(), 'GUILE_LOAD_PATH="/usr/share/guile/%s"' % major)
     
-    pisitools.domove("/usr/lib/libguile-2.0.so.22.*.scm", "/usr/share/gdb/auto-load")
+    pisitools.domove("/usr/lib/libguile-2.2.so.1.3.1-gdb.scm", "/usr/share/gdb/auto-load")
 
     pisitools.dodoc("AUTHORS", "ChangeLog", "HACKING", "NEWS", "README", "THANKS")
