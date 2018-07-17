@@ -9,7 +9,7 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
-    perlmodules.configure()
+    perlmodules.configure("perl Makefile.PL EXPATLIBPATH=/usr/lib EXPATINCPATH=/usr/include")
 
 def build():
     perlmodules.make()
