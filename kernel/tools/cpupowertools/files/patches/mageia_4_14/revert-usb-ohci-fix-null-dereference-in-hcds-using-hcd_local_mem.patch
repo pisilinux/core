@@ -1,0 +1,31 @@
+
+This patch reverts:
+
+From foo@baz Thu May 24 11:09:34 CEST 2018
+From: Fredrik Noring <noring@nocrew.org>
+Date: Fri, 9 Mar 2018 18:34:34 +0100
+Subject: USB: OHCI: Fix NULL dereference in HCDs using HCD_LOCAL_MEM
+
+From: Fredrik Noring <noring@nocrew.org>
+
+
+as it causes a crash on boot
+
+Signed-off-by: Thomas Backlund <tmb@mageia.org>
+
+---
+ drivers/usb/host/ohci-hcd.c |    3 +--
+ 1 file changed, 1 insertions(+), 2 deletion(-)
+
+--- a/drivers/usb/host/ohci-hcd.c
++++ b/drivers/usb/host/ohci-hcd.c
+@@ -446,8 +446,7 @@ static int ohci_init (struct ohci_hcd *o
+ 	struct usb_hcd *hcd = ohci_to_hcd(ohci);
+ 
+ 	/* Accept arbitrarily long scatter-gather lists */
+-	if (!(hcd->driver->flags & HCD_LOCAL_MEM))
+-		hcd->self.sg_tablesize = ~0;
++	hcd->self.sg_tablesize = ~0;
+ 
+ 	if (distrust_firmware)
+ 		ohci->flags |= OHCI_QUIRK_HUB_POWER;

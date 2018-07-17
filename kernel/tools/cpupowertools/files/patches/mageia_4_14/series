@@ -1,0 +1,517 @@
+#
+# Mageia kernel series file
+#
+# This file describes the order in which patches should be applied
+# in the kernel and why the patch is needed.
+#
+# Luiz Fernando N. Capitulino
+# <lcapitulino@mandriva.com.br>
+
+###
+### Upstream git
+###
+
+###
+### Stable Queue
+###
+
+###
+### Arch x86
+###
+
+# laptop needing pci=assign-busses (#18989, needs to be submitted upstream)
+x86-pci-toshiba-equium-a60-assign-busses.patch
+
+# If users choose a bad video mode, allow to jump to
+# a working one (TTL: forever)
+x86-boot-video-80x25-if-break.patch
+
+# Allow poweroff on UP machines running SMP kernels
+x86-default_poweroff_up_machines.patch
+
+# Fix #38760, need to be revised and submitted upstream
+# BROKEN: x86-cpufreq-speedstep-dothan-3.patch
+
+# raise vmalloc to fix https://bugs.mageia.org/show_bug.cgi?id=904
+x86-increase-default-minimum-vmalloc-area-by-64MB-to-192MB.patch
+
+# slows down boot
+Revert-cpufreq-pcc-Enable-autoload-of-pcc-cpufreq-fo.patch
+
+# Meltdown mitigation / PTI for x32
+# git://git.kernel.org/pub/scm/linux/kernel/git/joro/linux.git pti-x32-v4
+#
+pti32bit-0001-x86-asm-offsets-Move-TSS_sp0-and-TSS_sp1-to-asm-offs.patch
+pti32bit-0002-x86-entry-32-Rename-TSS_sysenter_sp0-to-TSS_entry_st.patch
+pti32bit-0003-x86-entry-32-Load-task-stack-from-x86_tss.sp1-in-SYS.patch
+pti32bit-0004-x86-entry-32-Put-ESPFIX-code-into-a-macro.patch
+pti32bit-0005-x86-entry-32-Unshare-NMI-return-path.patch
+pti32bit-0006-x86-entry-32-Split-off-return-to-kernel-path.patch
+pti32bit-0007-x86-entry-32-Enter-the-kernel-via-trampoline-stack.patch
+pti32bit-0008-x86-entry-32-Leave-the-kernel-via-trampoline-stack.patch
+pti32bit-0009-x86-entry-32-Introduce-SAVE_ALL_NMI-and-RESTORE_ALL_.patch
+pti32bit-0010-x86-entry-32-Handle-Entry-from-Kernel-Mode-on-Entry-.patch
+pti32bit-0011-x86-entry-32-Simplify-debug-entry-point.patch
+pti32bit-0012-x86-32-Use-tss.sp1-as-cpu_current_top_of_stack.patch
+pti32bit-0013-x86-entry-32-Add-PTI-cr3-switch-to-non-NMI-entry-exi.patch
+pti32bit-0014-x86-entry-32-Add-PTI-cr3-switches-to-NMI-handler-cod.patch
+pti32bit-0015-x86-pgtable-Rename-pti_set_user_pgd-to-pti_set_user_.patch
+pti32bit-0016-x86-pgtable-pae-Unshare-kernel-PMDs-when-PTI-is-enab.patch
+pti32bit-0017-x86-pgtable-32-Allocate-8k-page-tables-when-PTI-is-e.patch
+pti32bit-0018-x86-pgtable-Move-pgdp-kernel-user-conversion-functio.patch
+pti32bit-0019-x86-pgtable-Move-pti_set_user_pgtbl-to-pgtable.h.patch
+pti32bit-0020-x86-pgtable-Move-two-more-functions-from-pgtable_64..patch
+pti32bit-0021-x86-mm-pae-Populate-valid-user-PGD-entries.patch
+pti32bit-0022-x86-mm-pae-Populate-the-user-page-table-with-user-pg.patch
+pti32bit-0023-x86-mm-legacy-Populate-the-user-page-table-with-user.patch
+pti32bit-0024-x86-mm-pti-Add-an-overflow-check-to-pti_clone_pmds.patch
+pti32bit-0025-x86-mm-pti-Define-X86_CR3_PTI_PCID_USER_BIT-on-x86_3.patch
+pti32bit-0026-x86-mm-pti-Clone-CPU_ENTRY_AREA-on-PMD-level-on-x86_.patch
+pti32bit-0027-x86-mm-dump_pagetables-Define-INIT_PGD.patch
+pti32bit-0028-x86-pgtable-pae-Use-separate-kernel-PMDs-for-user-pa.patch
+pti32bit-0029-x86-ldt-Reserve-address-space-range-on-32-bit-for-th.patch
+pti32bit-0030-x86-ldt-Define-LDT_END_ADDR.patch
+pti32bit-0031-x86-ldt-Split-out-sanity-check-in-map_ldt_struct.patch
+pti32bit-0032-x86-ldt-Enable-LDT-user-mapping-for-PAE.patch
+pti32bit-0033-x86-pti-Allow-CONFIG_PAGE_TABLE_ISOLATION-for-x86_32.patch
+pti32bit-0034-x86-mm-pti-Add-Warning-when-booting-on-a-PCID-capabl.patch
+pti32bit-0035-x86-entry-32-Add-debug-code-to-check-entry-exit-cr3.patch
+pti32bit-0036-x86-pgtable-Dont-set-huge-PUD_PMD-on-non-leaf-entries.patch
+# tone down warning about PCID on 32bit
+pti32bit-0100-tone-down-PCID-on-32bit-message.patch
+
+# kvm ssbd fix
+kvm-vmx-expose-ssbd-properly-to-guests.patch
+
+###
+### Core
+###
+
+# Improved NUMA scheduling on AMD EPYC
+sched-topology-Introduce-NUMA-identity-node-sched-domain.patch
+
+# Revert fix for CVE-2018-1108 for now as it prevents normal
+# operation on several systems (mga#23060)
+revert-random-rate-limit-unseeded-randomness-warning.patch
+revert-random-fix-possible-sleeping-allocation-from-.patch
+revert-random-set-up-the-NUMA-crng-instances-after-t.patch
+revert-random-add-new-ioctl-RNDRESEEDCRNG.patch
+revert-random-crng_reseed-should-lock-the-crng-insta.patch
+revert-random-use-a-different-mixing-algorithm-for-a.patch
+revert-random-fix-crng_ready-test.patch
+revert-random-use-a-tighter-cap-in-credit_entropy_bi.patch
+
+# ipc regression fix
+revert-ipc-shm-fix-shmat-mmap-nil-page-protection.patch
+ipc-shm-fix-shmat-nil-address-after-round-down-when-remapping.patch
+
+###
+### i2c
+###
+
+###
+### PCI core
+###
+
+# BROKEN: pci-pciprobe-CardBusNo.patch
+
+# http://lkml.org/lkml/2008/9/12/52
+pci-add-ALI-M5229-ide-compatibility-mode-quirk.patch
+pci-quirks-drop-devinit-exit.patch
+
+# ACS updates
+pci-Add-ACS-quirk-for-Intel-7th_8th-Gen-mobile.patch
+pci-Add-ACS-quirk-for-Intel-300-series.patch
+
+# fix marvell 9220
+pci-add-function-1-dma-alias-quirk-for-marvell-88se9220.patch
+
+###
+### PNP core
+###
+
+###
+### ACPI
+###
+
+# CLEVO M360S acpi irq workaround
+acpi-CLEVO-M360S-disable_acpi_irq.patch
+
+# Clevo M720SR freezes with C3
+acpi-processor-M720SR-limit-to-C2.patch
+
+# backlight fixes
+ACPI-video-Add-a-quirk-to-force-acpi-video-backlight.patch
+
+###
+### Block
+###
+
+# epsa2 SCSI driver, don't know from where it came
+scsi-ppscsi-2.6.2.patch
+
+# epsa2 is far behind
+scsi-ppscsi_fixes.patch
+
+# Fix build of ppscsi on 2.6.24
+scsi-ppscsi-sg-helper-update.patch
+
+# Update/fix for ppscsi on 2.6.25
+scsi-ppscsi-update-for-scsi_data_buffer.patch
+
+# https://qa.mandriva.com/show_bug.cgi?id=45393
+scsi-ppscsi-mdvbz45393.patch
+
+# epsa2 3.0 buildfix
+scsi-ppscsi-3.0-buildfix.patch
+
+# Don't know know why this is needed
+scsi-megaraid-new-sysfs-name.patch
+
+# Looks like fixes from Arnaud, not sure why they're needed
+ide-pci-sis5513-965.patch
+
+mpt-vmware-fix.patch
+
+# adds aliases to support upgrade from old dm-raid45 patch
+dm-raid-aliases.patch
+
+# disable floppy autoloading (mga #4696)
+block-floppy-disable-pnp-modalias.patch
+
+# prefer ata over ide drivers
+ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch
+
+# bfq performance updates
+doc-block-bfq-update-max-IOPS-sustainable-with-BFQ.patch
+block-bfq-fix-wrong-init-of-saved-start-time-for-wei.patch
+block-bfq-check-and-switch-back-to-interactive-wr-al.patch
+block-bfq-let-early-merged-queues-be-weight-raised-o.patch
+block-bfq-decrease-burst-size-when-queues-in-burst-e.patch
+block-bfq-fix-unbalanced-decrements-of-burst-size.patch
+block-bfq-add-missing-invocations-of-bfqg_stats_upda.patch
+block-bfq-update-blkio-stats-outside-the-scheduler-l.patch
+block-bfq-move-debug-blkio-stats-behind-CONFIG_DEBUG.patch
+block-bfq-increase-threshold-to-deem-I-O-as-random.patch
+block-bfq-add-missing-rq_pos_tree-update-on-rq-remov.patch
+block-bfq-check-low_latency-flag-in-bfq_bfqq_save_st.patch
+block-bfq-let-a-queue-be-merged-only-shortly-after-s.patch
+block-bfq-remove-superfluous-check-in-queue-merging-.patch
+block-bfq-consider-also-past-I-O-in-soft-real-time-d.patch
+block-bfq-remove-batches-of-confusing-ifdefs.patch
+block-bfq-release-oom-queue-ref-to-root-group-on-exi.patch
+block-bfq-iosched-don-t-call-bfqg_and_blkg_put-for-CONFIG_.patch
+block-bfq-fix-occurrences-of-request-finish-method-s.patch
+block-bfq-limit-tags-for-writes-and-async-I-O.patch
+block-bfq-limit-sectors-served-with-interactive-weig.patch
+block-bfq-add-requeue-request-hook.patch
+
+# scsi
+scsi-core-return-BLK_STS_OK-for-DID_OK-in-__scsi_error_from_host_byte.patch
+
+# Micron SSD data corruption fix
+ata-libata-blacklist-Micron-500IT-SSD-with-MU01-firmware.patch
+
+###
+### Char
+###
+
+###
+### Crypto
+###
+
+###
+### File-system
+###
+
+# aufs from: http://aufs.sourceforge.net/ (mga#8314)
+fs-aufs-4.14.patch
+fs-aufs-4.14-modular.patch
+fs-aufs-include-vmalloc.patch
+
+#
+fs-ext4-force-revalidation-of-directory-pointer-after-seekdir.patch
+
+###
+### FireWire
+###
+
+# adding module aliases to ease upgrade from ieee1394
+firewire-ieee1394-module-aliases.patch
+
+###
+### GPU/DRM
+###
+
+# new Q57 Host Bridge id
+char-agp-intel-new-Q57-id.patch
+
+# External mach64 drm support from git://anongit.freedesktop.org/git/mesa/drm
+gpu-drm-mach64.patch
+gpu-drm-mach64-fixes.patch
+gpu-drm-mach64-2.6.31.patch
+gpu-drm-mach64-fix-for-changed-drm_pci_alloc.patch
+gpu-drm-mach64-fix-for-changed-drm_ioctl.patch
+gpu-drm-mach64-2.6.36-buildfix.patch
+gpu-drm-mach64-2.6.37-buildfix.patch
+gpu-drm-mach64-3.0-buildfix.patch
+gpu-drm-mach64-include-module.h.patch
+gpu-drm-mach64-3.3-buildfix.patch
+gpu-drm-mach64-3.6-buildfix.patch
+gpu-drm-mach64-3.7-buildfix.patch
+gpu-drm-mach64-3.12-buildfix.patch
+gpu-drm-mach64-restore-mach64_PCI_IDS.patch
+gpu-drm-mach64-linux-3.14-buildfix.patch
+gpu-drm-mach64-3.17-buildfix.patch
+gpu-drm-mach64-3.18-buildfix.patch
+
+# nouveau backlight regression (mga#23015)
+gpu-drm-nouveau-bl-fix-backlight-regression.patch
+
+###
+### Hardware Monitoring
+###
+
+# Ryzen support
+hwmon-k10temp-Move-chip-specific-code-into-probe-fun.patch
+hwmon-k10temp-Add-support-for-family-17h.patch
+hwmon-k10temp-Add-support-for-temperature-offsets.patch
+hwmon-k10temp-Correct-model-name-for-Ryzen-1600X.patch
+hwmon-k10temp-Add-temperature-offset-for-Ryzen-1900X.patch
+hwmon-k10temp-Only-apply-temperature-offset-if-resul.patch
+hwmon-k10temp-Add-temperature-offset-for-Ryzen-2700X.patch
+hwmon-k10temp-Add-support-for-AMD-Ryzen-with-Vega-graphic.patch
+
+###
+### Input
+###
+
+input-i8042-quirks-for-Fujitsu-Lifebook-A544-and-Lif.patch
+
+# mga #22703
+input-goodix-add-support-for-GDIX1002.patch
+
+###
+### idle
+###
+
+###
+### Kbuild
+###
+
+###
+### Media
+###
+
+###
+### MFD
+###
+
+###
+### Misc
+###
+
+###
+### MM
+###
+
+mm-page_vma_mapped-Introduce-pfn_in_hpage.patch
+
+###
+### Network
+###
+
+# SiS 190 fixes
+net-sis190-fix-list-usage.patch
+
+# netfilter IFWLOG support
+net-netfilter-IFWLOG.patch
+net-netfilter-IFWLOG-mdv.patch
+net-netfilter-IFWLOG-2.6.35-buildfix.patch
+net-netfilter-IFWLOG-2.6.37-buildfix.patch
+net-ipv4-netfilter-ipt_IFWLOG-3.6-buildfix.patch
+net-netfilter-IFWLOG-3.7-buildfix.patch
+net-netfilter-IFWLOG-remove-unused-label.patch
+net-netfilter-ipt_IFWLOG-4.12-buildfix.patch
+
+# netfilter psd support
+net-netfilter-psd.patch
+net-netfilter-psd-mdv.patch
+net-netfilter-psd-2.6.35-buildfix.patch
+net-netfilter-psd-fix-redefines.patch
+
+# WireGuard VPN
+net-WireGuard.patch
+
+# net fixes
+net-tls-Correct-length-of-scatterlist-in-tls_sw_sendpage.patch
+
+# silence message that gets reported as a bug
+net-netfilter-xt_addrtype-silence-BROADCAST-message.patch
+
+# brcmfmac fixes
+net-wireless-brcmfmac-fix-check-for-iso3166-code.patch
+net-wireless-brcmfmac-reject-too-long-PSK.patch
+
+# r8152
+net-usb-r8152-fix-tx-packets-accounting.patch
+
+###
+### pinctrl
+###
+
+###
+### Platform drivers
+###
+
+# Allow access to Shuttle WMI interface controls
+# (Mainly allow turning on/off webcam and wireless on Shuttle DA18IE and DA18IM)
+platform-x86-add-shuttle-wmi-driver.patch
+platform-x86-shuttle-wmi-drop-devinit-exit.patch
+platform-x86-shuttle-wmi-4.2-buildfix.patch
+platform-x86-shuttle-wmi-4.13-buildfix.patch
+
+# ideapad-laptop
+platform-x86-ideapad-Add-IdeaPad-320-15IKB-to-no_hw_rfkill_list.patch
+platform-x86-ideapad-laptop-Increase-timeout-to-wait-for-ec-answer.patch
+
+###
+### RTC
+###
+
+###
+### Serial
+###
+
+###
+### Sound
+###
+
+###
+### Staging
+###
+
+
+###
+### TTY
+###
+
+###
+###
+###
+
+###
+### USB
+###
+
+hid-usbhid-IBM-BladeCenterHS20-quirk.patch
+
+usb-storage-unusual_devs-add-id.patch
+usb-storage-unusual_devs-add-id-2.6.37-buildfix.patch
+
+# revert regression in 4.14.44
+revert-usb-ohci-fix-null-dereference-in-hcds-using-hcd_local_mem.patch
+
+###
+### V4L
+###
+
+# pwc driver name in /proc/bus/devices, /sys fix and "advertisement" removal
+media-usb-pwc-lie-in-proc-usb-devices.patch
+
+###
+### Watchdog
+###
+
+###
+### Video
+###
+
+# Mageia framebuffer boot logo
+video-mageia-logo.patch
+
+###
+### Virtualization
+###
+
+###
+### 3rdparty
+###
+
+3rd-3rdparty-1.0-tree.patch
+
+# TODO: fix up patch below to include all archs?
+3rd-3rdparty-merge.patch
+
+# acerhk
+3rd-acerhk-0.5.35.patch
+3rd-acerhk-kbuild.patch
+3rd-acerhk-extra-cflags.patch
+3rd-acerhk-proc_dir_entry-owner.patch
+3rd-acerhk-fix-build-with-function-tracer.patch
+3rd-acerhk-2.6.36-buildfix.patch
+3rd-acerhk-fix-include.patch
+
+# aes2501
+3rd-aes2501-r19.patch
+3rd-aes2501-kbuild.patch
+3rd-aes2501-rmmod-oops-fix.patch
+
+# ndiswrapper
+3rd-ndiswrapper-1.61.patch
+3rd-ndiswrapper-Kconfig.patch
+3rd-ndiswrapper-Makefile-build-fix.patch
+3rd-ndiswrapper-4.10-buildfix.patch
+3rd-ndiswrapper-4.13-buildfix.patch
+
+# rfswitch
+3rd-rfswitch-1.3.patch
+3rd-rfswitch-build-fix.patch
+3rd-rfswitch-3.0-buildfix.patch
+
+# viahss
+3rd-viahss-0.92.patch
+3rd-viahss-config.patch
+3rd-viahss-module-license.patch
+3rd-viahss-2.6.35-buildfix.patch
+3rd-viahss-3.0-buildfix.patch
+
+
+
+# add rtl8812 support (mga#21043)
+# from https://github.com/lwfinger/rtl8812au
+3rd-rtl8812au.patch
+
+# add rtl8723de support (mga#22559)
+3rd-rtl8723de.patch
+
+###
+### Security
+###
+
+###
+### Smack fixes
+###
+
+###
+### XEN
+###
+
+###
+### ARM
+###
+
+###
+### IA64
+###
+
+###
+### Tools
+###
+
+# wipe powerpc refrence so we can nuke dangling symlinks (mga#17676)
+tools-testing-selftest-Makefile-remove-powerpc-reference.patch
+
+###
+### UAPI
+###

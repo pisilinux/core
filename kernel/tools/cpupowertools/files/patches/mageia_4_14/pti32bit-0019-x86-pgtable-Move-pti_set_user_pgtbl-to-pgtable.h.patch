@@ -1,0 +1,84 @@
+From 426ff3975d6436284cca7dacad2c578cec8973cc Mon Sep 17 00:00:00 2001
+From: Joerg Roedel <jroedel@suse.de>
+Date: Tue, 16 Jan 2018 15:50:39 +0100
+Subject: [PATCH 19/35] x86/pgtable: Move pti_set_user_pgtbl() to pgtable.h
+
+There it is also usable from 32 bit code.
+
+Signed-off-by: Joerg Roedel <jroedel@suse.de>
+---
+ arch/x86/include/asm/pgtable.h    | 23 +++++++++++++++++++++++
+ arch/x86/include/asm/pgtable_64.h | 21 ---------------------
+ 2 files changed, 23 insertions(+), 21 deletions(-)
+
+diff --git a/arch/x86/include/asm/pgtable.h b/arch/x86/include/asm/pgtable.h
+index 0a9f746cbdc1..1e900c1f8ab1 100644
+--- a/arch/x86/include/asm/pgtable.h
++++ b/arch/x86/include/asm/pgtable.h
+@@ -618,8 +618,31 @@ static inline int is_new_memtype_allowed(u64 paddr, unsigned long size,
+ 
+ pmd_t *populate_extra_pmd(unsigned long vaddr);
+ pte_t *populate_extra_pte(unsigned long vaddr);
++
++#ifdef CONFIG_PAGE_TABLE_ISOLATION
++pgd_t __pti_set_user_pgtbl(pgd_t *pgdp, pgd_t pgd);
++
++/*
++ * Take a PGD location (pgdp) and a pgd value that needs to be set there.
++ * Populates the user and returns the resulting PGD that must be set in
++ * the kernel copy of the page tables.
++ */
++static inline pgd_t pti_set_user_pgtbl(pgd_t *pgdp, pgd_t pgd)
++{
++	if (!static_cpu_has(X86_FEATURE_PTI))
++		return pgd;
++	return __pti_set_user_pgtbl(pgdp, pgd);
++}
++#else   /* CONFIG_PAGE_TABLE_ISOLATION */
++static inline pgd_t pti_set_user_pgtbl(pgd_t *pgdp, pgd_t pgd)
++{
++	return pgd;
++}
++#endif  /* CONFIG_PAGE_TABLE_ISOLATION */
++
+ #endif	/* __ASSEMBLY__ */
+ 
++
+ #ifdef CONFIG_X86_32
+ # include <asm/pgtable_32.h>
+ #else
+diff --git a/arch/x86/include/asm/pgtable_64.h b/arch/x86/include/asm/pgtable_64.h
+index 5e680838761d..4cbf5173dd76 100644
+--- a/arch/x86/include/asm/pgtable_64.h
++++ b/arch/x86/include/asm/pgtable_64.h
+@@ -145,27 +145,6 @@ static inline bool pgdp_maps_userspace(void *__ptr)
+ 	return (ptr & ~PAGE_MASK) < (PAGE_SIZE / 2);
+ }
+ 
+-#ifdef CONFIG_PAGE_TABLE_ISOLATION
+-pgd_t __pti_set_user_pgtbl(pgd_t *pgdp, pgd_t pgd);
+-
+-/*
+- * Take a PGD location (pgdp) and a pgd value that needs to be set there.
+- * Populates the user and returns the resulting PGD that must be set in
+- * the kernel copy of the page tables.
+- */
+-static inline pgd_t pti_set_user_pgtbl(pgd_t *pgdp, pgd_t pgd)
+-{
+-	if (!static_cpu_has(X86_FEATURE_PTI))
+-		return pgd;
+-	return __pti_set_user_pgtbl(pgdp, pgd);
+-}
+-#else
+-static inline pgd_t pti_set_user_pgtbl(pgd_t *pgdp, pgd_t pgd)
+-{
+-	return pgd;
+-}
+-#endif
+-
+ static inline void native_set_p4d(p4d_t *p4dp, p4d_t p4d)
+ {
+ #if defined(CONFIG_PAGE_TABLE_ISOLATION) && !defined(CONFIG_X86_5LEVEL)
+-- 
+2.16.2
+
