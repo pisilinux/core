@@ -14,14 +14,16 @@
         <Description>Standard tool to compile source trees. Make gets its knowledge of how to build your program from a file called the makefile. When you write a program, you should write a makefile for it, so that it is possible to use Make to build and install the program</Description>
         <Archive sha1sum="7d9d11eb36cfb752da1fb11bb3e521d2a3cc8830" type="tarbz2">mirrors://gnu/make/make-4.2.1.tar.bz2</Archive>
         <BuildDependencies>
+            <Dependency>texinfo</Dependency>
             <Dependency>gettext</Dependency>
             <Dependency>gnuconfig</Dependency>
             <Dependency>patch</Dependency>
             <Dependency>gc-devel</Dependency>
-            <!--Dependency>guile-devel</Dependency-->
+            <Dependency>guile-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch>glibc_2_27.patch</Patch>
+            <!--Patch>guile-2.2.patch</Patch-->
         </Patches>
     </Source>
 
@@ -42,7 +44,7 @@
 
     <History>
         <Update release="4">
-            <Date>2018-07-15</Date>
+            <Date>2018-07-18</Date>
             <Version>4.2.1</Version>
             <Comment>Rebuild</Comment>
             <Name>Ertuğrul Erata</Name>
