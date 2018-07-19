@@ -1,7 +1,11 @@
-diff -ruN openssl-1.0.2a.orig/Configure openssl-1.0.2a/Configure
---- openssl-1.0.2a.orig/Configure	2015-03-19 14:30:36.000000000 +0100
-+++ openssl-1.0.2a/Configure	2015-03-20 14:52:48.785578415 +0100
-@@ -168,8 +168,8 @@
+Remove -f/-m/-O flags which would conflict with RPM_OPT_FLAGS or cause code
+built on a i686/ev6/sparcv9 to not run on a i386/ev5/sparcv7 and so on.
+
+...add $ENV{OPTFLAGS} instead
+
+--- openssl-1.0.2b/Configure.orig	2015-06-12 16:21:24.540170216 +0200
++++ openssl-1.0.2b/Configure	2015-06-12 18:45:01.027153237 +0200
+@@ -185,8 +185,8 @@
  #"b2-is-ri-dp",	"${tcc}:${tflags}::${tlib}:${bits2}IDEA_SHORT RC4_INDEX DES_PTR:${tbn_mul}::",
  
  # Our development configs
@@ -12,7 +16,7 @@ diff -ruN openssl-1.0.2a.orig/Configure openssl-1.0.2a/Configure
  "debug-ben",	"gcc:$gcc_devteam_warn -DBN_DEBUG -DREF_CHECK -DCONF_DEBUG -DBN_CTX_DEBUG -DCRYPTO_MDEBUG -DDEBUG_SAFESTACK -O2 -pipe::(unknown):::::",
  "debug-ben-openbsd","gcc:-DBN_DEBUG -DREF_CHECK -DCONF_DEBUG -DBN_CTX_DEBUG -DCRYPTO_MDEBUG -DPEDANTIC -DDEBUG_SAFESTACK -DOPENSSL_OPENBSD_DEV_CRYPTO -DOPENSSL_NO_ASM -O2 -pedantic -Wall -Wshadow -Werror -pipe::(unknown)::::",
  "debug-ben-openbsd-debug","gcc:-DBN_DEBUG -DREF_CHECK -DCONF_DEBUG -DBN_CTX_DEBUG -DCRYPTO_MDEBUG -DPEDANTIC -DDEBUG_SAFESTACK -DOPENSSL_OPENBSD_DEV_CRYPTO -DOPENSSL_NO_ASM -g3 -O2 -pedantic -Wall -Wshadow -Werror -pipe::(unknown)::::",
-@@ -192,14 +192,14 @@
+@@ -209,14 +209,14 @@
  "debug-levitte-linux-noasm-extreme","gcc:-DLEVITTE_DEBUG -DREF_CHECK -DCONF_DEBUG -DBN_DEBUG -DBN_DEBUG_RAND -DCRYPTO_MDEBUG -DENGINE_CONF_DEBUG -DOPENSSL_NO_ASM -DL_ENDIAN -DPEDANTIC -ggdb -g3 -pedantic -ansi -Wall -W -Wundef -Wshadow -Wcast-align -Wstrict-prototypes -Wmissing-prototypes -Wno-long-long -Wundef -Wconversion -pipe::-D_REENTRANT::-ldl:BN_LLONG ${x86_gcc_des} ${x86_gcc_opts}:${no_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
  "debug-geoff32","gcc:-DBN_DEBUG -DBN_DEBUG_RAND -DBN_STRICT -DPURIFY -DOPENSSL_NO_DEPRECATED -DOPENSSL_NO_ASM -DOPENSSL_NO_INLINE_ASM -DL_ENDIAN -DTERMIO -DPEDANTIC -O1 -ggdb2 -Wall -Werror -Wundef -pedantic -Wshadow -Wpointer-arith -Wbad-function-cast -Wcast-align -Wsign-compare -Wmissing-prototypes -Wmissing-declarations -Wno-long-long::-D_REENTRANT::-ldl:BN_LLONG:${no_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
  "debug-geoff64","gcc:-DBN_DEBUG -DBN_DEBUG_RAND -DBN_STRICT -DPURIFY -DOPENSSL_NO_DEPRECATED -DOPENSSL_NO_ASM -DOPENSSL_NO_INLINE_ASM -DL_ENDIAN -DTERMIO -DPEDANTIC -O1 -ggdb2 -Wall -Werror -Wundef -pedantic -Wshadow -Wpointer-arith -Wbad-function-cast -Wcast-align -Wsign-compare -Wmissing-prototypes -Wmissing-declarations -Wno-long-long::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHAR RC4_CHUNK DES_INT DES_UNROLL BF_PTR:${no_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
@@ -35,7 +39,7 @@ diff -ruN openssl-1.0.2a.orig/Configure openssl-1.0.2a/Configure
  "dist",		"cc:-O::(unknown)::::::",
  
  # Basic configs that should work on any (32 and less bit) box
-@@ -348,8 +348,8 @@
+@@ -365,8 +365,8 @@
  ####
  # *-generic* is endian-neutral target, but ./config is free to
  # throw in -D[BL]_ENDIAN, whichever appropriate...
@@ -46,7 +50,7 @@ diff -ruN openssl-1.0.2a.orig/Configure openssl-1.0.2a/Configure
  
  #######################################################################
  # Note that -march is not among compiler options in below linux-armv4
-@@ -378,8 +378,8 @@
+@@ -395,31 +395,31 @@
  #
  #       ./Configure linux-armv4 -march=armv6 -D__ARM_MAX_ARCH__=8
  #
@@ -57,16 +61,20 @@ diff -ruN openssl-1.0.2a.orig/Configure openssl-1.0.2a/Configure
  # Configure script adds minimally required -march for assembly support,
  # if no -march was specified at command line. mips32 and mips64 below
  # refer to contemporary MIPS Architecture specifications, MIPS32 and
-@@ -388,20 +388,20 @@
- "linux-mips64",   "gcc:-mabi=n32 -O3 -Wall -DBN_DIV3W::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT RC4_CHAR RC4_CHUNK DES_INT DES_UNROLL BF_PTR:${mips64_asm}:n32:dlfcn:linux-shared:-fPIC:-mabi=n32:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::32",
- "linux64-mips64",   "gcc:-mabi=64 -O3 -Wall -DBN_DIV3W::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHAR RC4_CHUNK DES_INT DES_UNROLL BF_PTR:${mips64_asm}:64:dlfcn:linux-shared:-fPIC:-mabi=64:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
+ # MIPS64, rather than to kernel bitness.
+-"linux-mips32",	"gcc:-mabi=32 -O3 -Wall -DBN_DIV3W::-D_REENTRANT::-ldl:BN_LLONG RC4_CHAR RC4_CHUNK DES_INT DES_UNROLL BF_PTR:${mips32_asm}:o32:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
+-"linux-mips64",   "gcc:-mabi=n32 -O3 -Wall -DBN_DIV3W::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT RC4_CHAR RC4_CHUNK DES_INT DES_UNROLL BF_PTR:${mips64_asm}:n32:dlfcn:linux-shared:-fPIC:-mabi=n32:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::32",
+-"linux64-mips64",   "gcc:-mabi=64 -O3 -Wall -DBN_DIV3W::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHAR RC4_CHUNK DES_INT DES_UNROLL BF_PTR:${mips64_asm}:64:dlfcn:linux-shared:-fPIC:-mabi=64:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
++"linux-mips32",	"gcc:-mabi=32 $ENV{OPTFLAGS} -Wall -DBN_DIV3W::-D_REENTRANT::-ldl:BN_LLONG RC4_CHAR RC4_CHUNK DES_INT DES_UNROLL BF_PTR:${mips32_asm}:o32:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
++"linux-mips64",   "gcc:-mabi=n32 $ENV{OPTFLAGS} -Wall -DBN_DIV3W::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT RC4_CHAR RC4_CHUNK DES_INT DES_UNROLL BF_PTR:${mips64_asm}:n32:dlfcn:linux-shared:-fPIC:-mabi=n32:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::32",
++"linux64-mips64",   "gcc:-mabi=64 $ENV{OPTFLAGS} -Wall -DBN_DIV3W::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHAR RC4_CHUNK DES_INT DES_UNROLL BF_PTR:${mips64_asm}:64:dlfcn:linux-shared:-fPIC:-mabi=64:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
  #### IA-32 targets...
 -"linux-ia32-icc",	"icc:-DL_ENDIAN -O2::-D_REENTRANT::-ldl -no_cpprt:BN_LLONG ${x86_gcc_des} ${x86_gcc_opts}:${x86_elf_asm}:dlfcn:linux-shared:-KPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
 -"linux-elf",	"gcc:-DL_ENDIAN -O3 -fomit-frame-pointer -Wall::-D_REENTRANT::-ldl:BN_LLONG ${x86_gcc_des} ${x86_gcc_opts}:${x86_elf_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
 -"linux-aout",	"gcc:-DL_ENDIAN -O3 -fomit-frame-pointer -march=i486 -Wall::(unknown):::BN_LLONG ${x86_gcc_des} ${x86_gcc_opts}:${x86_asm}:a.out",
 +"linux-ia32-icc",	"icc:-DL_ENDIAN $ENV{OPTFLAGS}::-D_REENTRANT::-ldl -no_cpprt:BN_LLONG ${x86_gcc_des} ${x86_gcc_opts}:${x86_elf_asm}:dlfcn:linux-shared:-KPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
-+"linux-elf",	"gcc:-DL_ENDIAN $ENV{OPTFLAGS} -fomit-frame-pointer -Wall::-D_REENTRANT::-ldl:BN_LLONG ${x86_gcc_des} ${x86_gcc_opts}:${x86_elf_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
-+"linux-aout",	"gcc:-DL_ENDIAN $ENV{OPTFLAGS} -fomit-frame-pointer -Wall::(unknown):::BN_LLONG ${x86_gcc_des} ${x86_gcc_opts}:${x86_asm}:a.out",
++"linux-elf",	"gcc:-DL_ENDIAN $ENV{OPTFLAGS} -Wall::-D_REENTRANT::-ldl:BN_LLONG ${x86_gcc_des} ${x86_gcc_opts}:${x86_elf_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
++"linux-aout",	"gcc:-DL_ENDIAN $ENV{OPTFLAGS} -Wall::(unknown):::BN_LLONG ${x86_gcc_des} ${x86_gcc_opts}:${x86_asm}:a.out",
  ####
 -"linux-generic64","gcc:-O3 -Wall::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHAR RC4_CHUNK DES_INT DES_UNROLL BF_PTR:${no_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
 -"linux-ppc64",	"gcc:-m64 -DB_ENDIAN -O3 -Wall::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHAR RC4_CHUNK DES_RISC1 DES_UNROLL:${ppc64_asm}:linux64:dlfcn:linux-shared:-fPIC:-m64:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
@@ -74,7 +82,8 @@ diff -ruN openssl-1.0.2a.orig/Configure openssl-1.0.2a/Configure
 -"linux-ia64",	"gcc:-DL_ENDIAN -DTERMIO -O3 -Wall::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHUNK DES_UNROLL DES_INT:${ia64_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
 -"linux-ia64-icc","icc:-DL_ENDIAN -O2 -Wall::-D_REENTRANT::-ldl -no_cpprt:SIXTY_FOUR_BIT_LONG RC4_CHUNK DES_RISC1 DES_INT:${ia64_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
 -"linux-x86_64",	"gcc:-m64 -DL_ENDIAN -O3 -Wall::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHUNK DES_INT DES_UNROLL:${x86_64_asm}:elf:dlfcn:linux-shared:-fPIC:-m64:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
--"linux-x86_64-clang",	"clang: -m64 -DL_ENDIAN -O3 -Weverything $clang_disabled_warnings -Qunused-arguments::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHUNK DES_INT DES_UNROLL:${x86_64_asm}:elf:dlfcn:linux-shared:-fPIC:-m64:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
+-"linux-x86_64-clang",	"clang: -m64 -DL_ENDIAN -O3 -Wall -Wextra $clang_disabled_warnings -Qunused-arguments::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHUNK DES_INT DES_UNROLL:${x86_64_asm}:elf:dlfcn:linux-shared:-fPIC:-m64:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
+-"debug-linux-x86_64-clang",	"clang: -DBN_DEBUG -DREF_CHECK -DCONF_DEBUG -DCRYPTO_MDEBUG -m64 -DL_ENDIAN -g -Wall -Wextra $clang_disabled_warnings -Qunused-arguments::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHUNK DES_INT DES_UNROLL:${x86_64_asm}:elf:dlfcn:linux-shared:-fPIC:-m64:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
 -"linux-x86_64-icc", "icc:-DL_ENDIAN -O2::-D_REENTRANT::-ldl -no_cpprt:SIXTY_FOUR_BIT_LONG RC4_CHUNK DES_INT DES_UNROLL:${x86_64_asm}:elf:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
 -"linux-x32",	"gcc:-mx32 -DL_ENDIAN -O3 -Wall::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT RC4_CHUNK_LL DES_INT DES_UNROLL:${x86_64_asm}:elf:dlfcn:linux-shared:-fPIC:-mx32:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::x32",
 -"linux64-s390x",	"gcc:-m64 -DB_ENDIAN -O3 -Wall::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHAR RC4_CHUNK DES_INT DES_UNROLL:${s390x_asm}:64:dlfcn:linux-shared:-fPIC:-m64:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
@@ -84,14 +93,15 @@ diff -ruN openssl-1.0.2a.orig/Configure openssl-1.0.2a/Configure
 +"linux-ia64",	"gcc:-DL_ENDIAN -DTERMIO $ENV{OPTFLAGS} -Wall::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHUNK DES_UNROLL DES_INT:${ia64_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
 +"linux-ia64-icc","icc:-DL_ENDIAN $ENV{OPTFLAGS} -Wall::-D_REENTRANT::-ldl -no_cpprt:SIXTY_FOUR_BIT_LONG RC4_CHUNK DES_RISC1 DES_INT:${ia64_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
 +"linux-x86_64",	"gcc:-m64 -DL_ENDIAN $ENV{OPTFLAGS} -Wall::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHUNK DES_INT DES_UNROLL:${x86_64_asm}:elf:dlfcn:linux-shared:-fPIC:-m64:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
-+"linux-x86_64-clang",	"clang: -m64 -DL_ENDIAN $ENV{OPTFLAGS} -Weverything $clang_disabled_warnings -Qunused-arguments::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHUNK DES_INT DES_UNROLL:${x86_64_asm}:elf:dlfcn:linux-shared:-fPIC:-m64:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
++"linux-x86_64-clang",	"clang: -m64 -DL_ENDIAN $ENV{OPTFLAGS} -Wall -Wextra $clang_disabled_warnings -Qunused-arguments::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHUNK DES_INT DES_UNROLL:${x86_64_asm}:elf:dlfcn:linux-shared:-fPIC:-m64:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
++"debug-linux-x86_64-clang",	"clang: -DBN_DEBUG -DREF_CHECK -DCONF_DEBUG -DCRYPTO_MDEBUG -m64 -DL_ENDIAN $ENV{OPTFLAGS} -Wall -Wextra $clang_disabled_warnings -Qunused-arguments::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHUNK DES_INT DES_UNROLL:${x86_64_asm}:elf:dlfcn:linux-shared:-fPIC:-m64:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
 +"linux-x86_64-icc", "icc:-DL_ENDIAN $ENV{OPTFLAGS}::-D_REENTRANT::-ldl -no_cpprt:SIXTY_FOUR_BIT_LONG RC4_CHUNK DES_INT DES_UNROLL:${x86_64_asm}:elf:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
 +"linux-x32",	"gcc:-mx32 -DL_ENDIAN $ENV{OPTFLAGS} -Wall::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT RC4_CHUNK_LL DES_INT DES_UNROLL:${x86_64_asm}:elf:dlfcn:linux-shared:-fPIC:-mx32:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::x32",
 +"linux64-s390x",	"gcc:-m64 -DB_ENDIAN $ENV{OPTFLAGS} -Wall::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHAR RC4_CHUNK DES_INT DES_UNROLL:${s390x_asm}:64:dlfcn:linux-shared:-fPIC:-m64:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
  #### So called "highgprs" target for z/Architecture CPUs
  # "Highgprs" is kernel feature first implemented in Linux 2.6.32, see
  # /proc/cpuinfo. The idea is to preserve most significant bits of
-@@ -415,16 +415,16 @@
+@@ -432,16 +432,16 @@
  # ldconfig and run-time linker to autodiscover. Unfortunately it
  # doesn't work just yet, because of couple of bugs in glibc
  # sysdeps/s390/dl-procinfo.c affecting ldconfig and ld.so.1...
@@ -100,19 +110,19 @@ diff -ruN openssl-1.0.2a.orig/Configure openssl-1.0.2a/Configure
  #### SPARC Linux setups
  # Ray Miller <ray.miller@computing-services.oxford.ac.uk> has patiently
  # assisted with debugging of following two configs.
--"linux-sparcv8","gcc:-mv8 -DB_ENDIAN -O3 -fomit-frame-pointer -Wall -DBN_DIV2W::-D_REENTRANT::-ldl:BN_LLONG RC4_CHAR RC4_CHUNK DES_UNROLL BF_PTR:${sparcv8_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
-+"linux-sparcv8","gcc:-mv8 -DB_ENDIAN -fomit-frame-pointer $ENV{OPTFLAGS} -Wall -DBN_DIV2W::-D_REENTRANT::-ldl:BN_LLONG RC4_CHAR RC4_CHUNK DES_UNROLL BF_PTR:${sparcv8_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
+-"linux-sparcv8","gcc:-mcpu=v8 -DB_ENDIAN -O3 -fomit-frame-pointer -Wall -DBN_DIV2W::-D_REENTRANT::-ldl:BN_LLONG RC4_CHAR RC4_CHUNK DES_UNROLL BF_PTR:${sparcv8_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
++"linux-sparcv8","gcc:-mcpu=v8 -DB_ENDIAN $ENV{OPTFLAGS} -Wall -DBN_DIV2W::-D_REENTRANT::-ldl:BN_LLONG RC4_CHAR RC4_CHUNK DES_UNROLL BF_PTR:${sparcv8_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
  # it's a real mess with -mcpu=ultrasparc option under Linux, but
  # -Wa,-Av8plus should do the trick no matter what.
 -"linux-sparcv9","gcc:-m32 -mcpu=ultrasparc -DB_ENDIAN -O3 -fomit-frame-pointer -Wall -Wa,-Av8plus -DBN_DIV2W::-D_REENTRANT:ULTRASPARC:-ldl:BN_LLONG RC4_CHAR RC4_CHUNK DES_UNROLL BF_PTR:${sparcv9_asm}:dlfcn:linux-shared:-fPIC:-m32:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
-+"linux-sparcv9","gcc:-m32 -mcpu=ultrasparc -DB_ENDIAN -fomit-frame-pointer $ENV{OPTFLAGS} -Wall -Wa,-Av8plus -DBN_DIV2W::-D_REENTRANT:ULTRASPARC:-ldl:BN_LLONG RC4_CHAR RC4_CHUNK DES_UNROLL BF_PTR:${sparcv9_asm}:dlfcn:linux-shared:-fPIC:-m32:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
++"linux-sparcv9","gcc:-m32 -mcpu=ultrasparc -DB_ENDIAN $ENV{OPTFLAGS} -Wall -Wa,-Av8plus -DBN_DIV2W::-D_REENTRANT:ULTRASPARC:-ldl:BN_LLONG RC4_CHAR RC4_CHUNK DES_UNROLL BF_PTR:${sparcv9_asm}:dlfcn:linux-shared:-fPIC:-m32:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
  # GCC 3.1 is a requirement
 -"linux64-sparcv9","gcc:-m64 -mcpu=ultrasparc -DB_ENDIAN -O3 -fomit-frame-pointer -Wall::-D_REENTRANT:ULTRASPARC:-ldl:BN_LLONG RC4_CHAR RC4_CHUNK DES_INT DES_PTR DES_RISC1 DES_UNROLL BF_PTR:${sparcv9_asm}:dlfcn:linux-shared:-fPIC:-m64:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
-+"linux64-sparcv9","gcc:-m64 -mcpu=ultrasparc -DB_ENDIAN -fomit-frame-pointer $ENV{OPTFLAGS} -Wall::-D_REENTRANT:ULTRASPARC:-ldl:BN_LLONG RC4_CHAR RC4_CHUNK DES_INT DES_PTR DES_RISC1 DES_UNROLL BF_PTR:${sparcv9_asm}:dlfcn:linux-shared:-fPIC:-m64:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
++"linux64-sparcv9","gcc:-m64 -mcpu=ultrasparc -DB_ENDIAN $ENV{OPTFLAGS} -Wall::-D_REENTRANT:ULTRASPARC:-ldl:BN_LLONG RC4_CHAR RC4_CHUNK DES_INT DES_PTR DES_RISC1 DES_UNROLL BF_PTR:${sparcv9_asm}:dlfcn:linux-shared:-fPIC:-m64:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):::64",
  #### Alpha Linux with GNU C and Compaq C setups
  # Special notes:
  # - linux-alpha+bwx-gcc is ment to be used from ./config only. If you
-@@ -438,8 +438,8 @@
+@@ -455,8 +455,8 @@
  #
  #					<appro@fy.chalmers.se>
  #
@@ -122,8 +132,8 @@ diff -ruN openssl-1.0.2a.orig/Configure openssl-1.0.2a/Configure
 +"linux-alpha+bwx-gcc","gcc:$ENV{OPTFLAGS} -DL_ENDIAN::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHAR RC4_CHUNK DES_RISC1 DES_UNROLL:${alpha_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
  "linux-alpha-ccc","ccc:-fast -readonly_strings -DL_ENDIAN::-D_REENTRANT:::SIXTY_FOUR_BIT_LONG RC4_CHUNK DES_INT DES_PTR DES_RISC1 DES_UNROLL:${alpha_asm}",
  "linux-alpha+bwx-ccc","ccc:-fast -readonly_strings -DL_ENDIAN::-D_REENTRANT:::SIXTY_FOUR_BIT_LONG RC4_CHAR RC4_CHUNK DES_INT DES_PTR DES_RISC1 DES_UNROLL:${alpha_asm}",
- 
-@@ -1737,7 +1737,7 @@
+ "linux-alpha+bwx-ccc-generic","ccc:-fast -generic -readonly_strings -DL_ENDIAN -DTERMIO::-D_REENTRANT:::SIXTY_FOUR_BIT_LONG RC4_CHAR RC4_CHUNK DES_INT DES_PTR DES_RISC1 DES_UNROLL:${alpha_asm}",
+@@ -1765,7 +1765,7 @@
  	elsif ($shared_extension ne "" && $shared_extension =~ /^\.s([ol])\.[^\.]*\.[^\.]*$/)
  		{
  		my $sotmp = $1;

@@ -16,7 +16,7 @@
         <Archive sha1sum="a47faaca57b47a0d9d5fb085545857cc92062691" type="targz">https://www.openssl.org/source/openssl-1.0.2o.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="openssl-1.0.0-beta4-ca-dir.patch">openssl-1.0.0-beta4-ca-dir.patch</AdditionalFile>
-<!--             <AdditionalFile target="ca-dir.patch">ca-dir.patch</AdditionalFile> -->
+            <!--AdditionalFile target="ca-dir.patch">ca-dir.patch</AdditionalFile-->
         </AdditionalFiles>
         <BuildDependencies>
             <Dependency>zlib-devel</Dependency>
@@ -25,22 +25,16 @@
             <Dependency>sed</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">openssl-1.0.0a-ldflags-norpath.patch</Patch>
-            <Patch level="1">openssl-1.0.0-beta4-ca-dir.patch</Patch>
-<!--             <Patch level="1">no-rpath.patch</Patch> -->
-<!--             <Patch level="1">ca-dir.patch</Patch> -->
-            <Patch level="1">openssl-1.0.0-beta5-enginesdir.patch</Patch>
-            <!--Patch>openssl-1.0.2-ipv6.patch</Patch-->
-            <!--<Patch>openssl-1.0.2-s_client-verify.patch</Patch>-->
-<!--             <Patch>openssl-include.patch</Patch> -->
-            <!--Patch>openssl_fix_for_x32.patch</Patch-->
-            <Patch>openssl_fix_for_x32_2.patch</Patch>
+            <Patch>openssl-alpha-ccc.patch</Patch>
+            <Patch>openssl-optflags.patch</Patch>
+            <Patch>openssl-include.patch</Patch>
+            <Patch>openssl-man-namespace.patch</Patch>
+            <Patch>openssl-asflag.patch</Patch>
             <Patch>openssl-ca-certificates.patch</Patch>
-            <Patch>CVE-2014-0198.patch</Patch>
-            <!--<Patch>openssl-1.0.2a-malloc-typo.patch</Patch>-->
-            <!--Patch>openssl-1.0.2a-parallel-build.patch</Patch-->
-            <Patch>openssl-1.0.2a-x32-asm.patch</Patch>
-            <!--<Patch>openssl-optflags.patch</Patch>-->
+            <Patch>openssl-ldflags.patch</Patch>
+            <Patch>openssl-find.patch</Patch>
+            <Patch>pic.patch</Patch>
+            <Patch>openssl_fix_for_x32.patch</Patch>
         </Patches>
     </Source>
 
@@ -59,6 +53,10 @@
         <Provides>
             <COMAR script="package.py">System.Package</COMAR>
         </Provides>
+        <AdditionalFiles>
+            <AdditionalFile  owner="root" permission="0755" target="/usr/bin/ssl-certificate">openssl-ssl-certificate.sh</AdditionalFile>
+            <AdditionalFile  owner="root" permission="0755" target="/usr/bin/c_rehash.sh">openssl-c_rehash.sh</AdditionalFile>
+        </AdditionalFiles>
     </Package>
 
     <Package>
