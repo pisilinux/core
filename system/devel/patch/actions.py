@@ -9,11 +9,12 @@ from pisi.actionsapi import get
 
 def setup():
     #autotools.autoreconf("-vfi")
-    autotools.configure()
+    autotools.configure("--prefix=/usr")
 
 def build():
-    autotools.make('LDFLAGS="%s"' % get.LDFLAGS())
-
+    #autotools.make('LDFLAGS="%s"' % get.LDFLAGS())
+    autotools.make()
+    
 def check():
     autotools.make("check")
 
