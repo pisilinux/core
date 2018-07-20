@@ -12,19 +12,15 @@
         <IsA>library</IsA>
         <Summary>A library of handy utility functions</Summary>
         <Description>glib2 is the low-level core library that forms the basis for projects such as GTK+ and GNOME. It provides data structure handling for C, portability wrappers, and interfaces for such runtime functionality as an event loop, threads, dynamic loading, and an object system.</Description>
-        <Archive sha1sum="948a768931ca321a35e16556a1c8adcae04babf2" type="tarxz">mirrors://gnome/glib/2.50/glib-2.50.2.tar.xz</Archive>
+        <Archive sha1sum="12d7466550156ac8a765f603b0df7604cdf34cfd" type="tarxz">mirrors://gnome/glib/2.54/glib-2.54.3.tar.xz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="8.36">libpcre-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
             <Dependency>libffi-devel</Dependency>
-            <!--<Dependency>libxslt</Dependency>-->
-            <!--<Dependency versionFrom="0.161">elfutils</Dependency>-->
-            <!--<Dependency>docbook-xml</Dependency>-->
         </BuildDependencies>
         <Patches>
             <Patch level="1">revert-warn-glib-compile-schemas.patch</Patch>
-            <Patch level="1">0001-glib-compile-resources-Add-generate-phony-targets-fl.patch</Patch>
-            <Patch>0001-glib-compile-resources-Escape-file-names-in-dependen.patch</Patch>
+            <Patch>glib-2.54.3-skip_warnings-1.patch</Patch>
         </Patches>
     </Source>
 
@@ -130,6 +126,13 @@
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2018-07-20</Date>
+            <Version>2.54.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="5">
             <Date>2018-07-15</Date>
             <Version>2.50.2</Version>
