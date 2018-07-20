@@ -1,0 +1,33 @@
+--- a/sbin/update-ca-certificates~	2015-06-29 14:06:06.000000000 +0200
++++ b/sbin/update-ca-certificates	2015-06-29 14:09:30.591543265 +0200
+@@ -24,6 +24,7 @@
+ verbose=0
+ fresh=0
+ default=0
++DESTDIR=
+ CERTSCONF=/etc/ca-certificates.conf
+ CERTSDIR=/usr/share/ca-certificates
+ LOCALCERTSDIR=/etc/certs
+@@ -41,6 +42,8 @@ do
+     --default|-d)
+       default=1
+       fresh=1;;
++    --destdir)
++      DESTDIR=$2; shift;;
+     --certsconf)
+       shift
+       CERTSCONF="$1";;
+@@ -66,6 +69,13 @@ do
+   shift
+ done
+ 
++CERTSCONF=${DESTDIR}${CERTSCONF}
++CERTSDIR=${DESTDIR}${CERTSDIR}
++LOCALCERTSDIR=${DESTDIR}${LOCALCERTSDIR}
++CERTBUNDLE=${DESTDIR}${CERTBUNDLE}
++ETCCERTSDIR=${DESTDIR}${ETCCERTSDIR}
++HOOKSDIR=${DESTDIR}${HOOKSDIR}
++
+ if [ ! -s "$CERTSCONF" ]
+ then
+   fresh=1

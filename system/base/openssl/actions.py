@@ -10,10 +10,11 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
+    pisitools.dosed("Configure", " $prefix/$libdir/engines ", " /%{_lib}/engines ")
+    
     options = " --prefix=/usr \
                 --libdir=lib \
                 --openssldir=/etc/ssl \
-                --enginesdir=/usr/lib/openssl/engines \
                 shared -Wa,--noexecstack \
                 zlib enable-camellia enable-idea \
                 enable-seed enable-tlsext enable-rfc3779 enable-rc5 \

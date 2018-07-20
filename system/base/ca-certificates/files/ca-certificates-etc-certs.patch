@@ -1,0 +1,71 @@
+--- ca-certificates-20140223/sbin/update-ca-certificates~	2014-03-14 12:55:24.000000000 +0200
++++ ca-certificates-20140223/sbin/update-ca-certificates	2014-03-14 14:38:31.587876211 +0200
+@@ -37,7 +37,7 @@
+ 
+ CERTSCONF=/etc/ca-certificates.conf
+ CERTSDIR=/usr/share/ca-certificates
+-LOCALCERTSDIR=/usr/local/share/ca-certificates
+-CERTBUNDLE=ca-certificates.crt
++LOCALCERTSDIR=/etc/certs
++CERTBUNDLE=/etc/certs/ca-certificates.crt
+ ETCCERTSDIR=@openssldir@
+ cd $ETCCERTSDIR
+@@ -52,7 +52,7 @@
+ 
+ # Helper files.  (Some of them are not simple arrays because we spawn
+ # subshells later on.)
+-TEMPBUNDLE="$(mktemp -t "${CERTBUNDLE}.tmp.XXXXXX")"
++TEMPBUNDLE="$(mktemp "${CERTBUNDLE}.tmp.XXXXXX")"
+ ADDED="$(mktemp -t "ca-certificates.tmp.XXXXXX")"
+ REMOVED="$(mktemp -t "ca-certificates.tmp.XXXXXX")"
+ 
+@@ -62,7 +62,7 @@
+ # bundle.
+ add() {
+   CERT="$1"
+-  PEM="$ETCCERTSDIR/$(basename "$CERT" .crt | sed -e 's/ /_/g' \
++  PEM="$ETCCERTSDIR/$(basename "$CERT" .pem | sed -e 's/.crt$//' -e 's/ /_/g' \
+                                                   -e 's/[()]/=/g' \
+                                                   -e 's/,/_/g').pem"
+   if ! test -e "$PEM" || [ "$(readlink "$PEM")" != "$CERT" ]
+@@ -74,7 +74,7 @@
+ 
+ remove() {
+   CERT="$1"
+-  PEM="$ETCCERTSDIR/$(basename "$CERT" .crt).pem"
++  PEM="$ETCCERTSDIR/$(basename "$CERT" .pem | sed 's/.crt$//').pem"
+   if test -L "$PEM"
+   then
+     rm -f "$PEM"
+@@ -111,24 +111,18 @@
+ 
+ sed -e '/^$/d' -e '/^#/d' -e '/^!/d' $CERTSCONF | while read crt
+ do
+-  if ! test -f "$CERTSDIR/$crt"
++  if test -f "$CERTSDIR/$crt"
++   then
++    add "$CERTSDIR/$crt"
++  elif test -f "$LOCALCERTSDIR/$crt"
+   then
+-    echo "W: $CERTSDIR/$crt not found, but listed in $CERTSCONF." >&2
++    add "$LOCALCERTSDIR/$crt"
++  else
++    echo "W: $CERTSDIR/$crt or $LOCALCERTSDIR/$crt not found, but listed in $CERTSCONF." >&2
+     continue
+   fi
+-  add "$CERTSDIR/$crt"
+ done
+ 
+-# Now process certificate authorities installed by the local system
+-# administrator.
+-if [ -d "$LOCALCERTSDIR" ]
+-then
+-  find -L "$LOCALCERTSDIR" -type f -name '*.crt' | sort | while read crt
+-  do
+-    add "$crt"
+-  done
+-fi
+-
+ rm -f "$CERTBUNDLE"
+ 
+ ADDED_CNT=$(wc -l < "$ADDED")

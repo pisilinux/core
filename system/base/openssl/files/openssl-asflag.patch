@@ -1,0 +1,11 @@
+--- openssl-1.0.0/Makefile.org.orig	2010-04-10 11:17:55.964995600 +0200
++++ openssl-1.0.0/Makefile.org	2010-04-10 11:19:41.144993924 +0200
+@@ -178,7 +178,7 @@
+ 
+ BUILDENV=	PLATFORM='$(PLATFORM)' PROCESSOR='$(PROCESSOR)' \
+ 		CC='$(CC)' CFLAG='$(CFLAG)' 			\
+-		AS='$(CC)' ASFLAG='$(CFLAG) -c'			\
++		AS='$(AS)' ASFLAG='$(ASFLAG)'			\
+ 		AR='$(AR)' NM='$(NM)' RANLIB='$(RANLIB)'	\
+ 		CROSS_COMPILE='$(CROSS_COMPILE)'	\
+ 		PERL='$(PERL)' ENGDIRS='$(ENGDIRS)'		\

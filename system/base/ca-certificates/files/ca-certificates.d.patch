@@ -1,0 +1,67 @@
+--- ca-certificates-20140223/sbin/update-ca-certificates	2014-03-14 14:42:21.171246343 +0200
++++ ca-certificates-20140223/sbin/update-ca-certificates	2014-03-14 14:46:50.556014888 +0200
+@@ -26,6 +26,7 @@ fresh=0
+ default=0
+ DESTDIR=
+ CERTSCONF=/etc/ca-certificates.conf
++CERTSCONFD=/etc/ca-certificates.d
+ CERTSDIR=/usr/share/ca-certificates
+ LOCALCERTSDIR=/etc/certs
+ CERTBUNDLE=/etc/certs/ca-certificates.crt
+@@ -70,6 +71,7 @@ do
+ done
+ 
+ CERTSCONF=${DESTDIR}${CERTSCONF}
++CERTSCONFD=${DESTDIR}${CERTSCONFD}
+ CERTSDIR=${DESTDIR}${CERTSDIR}
+ LOCALCERTSDIR=${DESTDIR}${LOCALCERTSDIR}
+ CERTBUNDLE=${DESTDIR}${CERTBUNDLE}
+@@ -105,25 +106,30 @@
+ 
+ echo -n "Updating certificates in $ETCCERTSDIR... "
+ 
+-# Handle certificates that should be removed.  This is an explicit act
+-# by prefixing lines in the configuration files with exclamation marks (!).
+-sed -n -e '/^$/d' -e 's/^!//p' "$CERTSCONF" | while read crt
+-do
+-  remove "$CERTSDIR/$crt"
+-done
++for conf in $CERTSCONF $CERTSCONFD/*.conf; do
++  # skip inexistent files (matched by glob)
++  [ -f $conf ] || continue
++
++  # Handle certificates that should be removed.  This is an explicit act
++  # by prefixing lines in the configuration files with exclamation marks (!).
++  sed -n -e '/^$/d' -e 's/^!//p' $conf | while read crt
++  do
++    remove "$CERTSDIR/$crt"
++  done
+ 
+-sed -e '/^$/d' -e '/^#/d' -e '/^!/d' "$CERTSCONF" | while read crt
+-do
+-  if test -f "$CERTSDIR/$crt"
+-   then
+-    add "$CERTSDIR/$crt"
+-  elif test -f "$LOCALCERTSDIR/$crt"
+-  then
+-    add "$LOCALCERTSDIR/$crt"
+-  else
+-    echo "W: $CERTSDIR/$crt or $LOCALCERTSDIR/$crt not found, but listed in $CERTSCONF." >&2
+-    continue
+-  fi
++  sed -e '/^$/d' -e '/^#/d' -e '/^!/d' $conf | while read crt
++  do
++    if test -f "$CERTSDIR/$crt"
++    then
++      add "$CERTSDIR/$crt"
++    elif test -f "$LOCALCERTSDIR/$crt"
++    then
++      add "$LOCALCERTSDIR/$crt"
++    else
++      echo "W: $CERTSDIR/$crt or $LOCALCERTSDIR/$crt not found, but listed in $conf." >&2
++      continue
++    fi
++  done
+ done
+ 
+ rm -f "$CERTBUNDLE"
