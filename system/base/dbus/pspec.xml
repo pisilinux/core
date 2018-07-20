@@ -13,7 +13,7 @@
         <IsA>service</IsA>
         <Summary>A message bus system, a simple way for applications to talk to each other</Summary>
         <Description>D-Bus supplies both a system daemon (for events such as "new hardware device added" or "printer queue changed") and a per-user-login-session daemon (for general IPC needs among user applications). Also, the message bus is built on top of a general one-to-one message passing framework, which can be used by any two apps to communicate directly (without going through the message bus daemon). Currently the communicating applications are on one computer, but TCP/IP option is available and remote support planned.</Description>
-        <Archive sha1sum="3f90a3d2ae6c67d2d1637039be9125c295c85a1a" type="targz">https://dbus.freedesktop.org/releases/dbus/dbus-1.11.8.tar.gz</Archive>
+        <Archive sha1sum="8e50e46796e8297eaa633da3a61cdc79a500e34a" type="targz">https://dbus.freedesktop.org/releases/dbus/dbus-1.12.8.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>expat-devel</Dependency>
             <Dependency>libX11-devel</Dependency>
@@ -98,6 +98,13 @@
     </Package>
 
     <History>
+        <Update release="7">
+            <Date>2018-07-20</Date>
+            <Version>1.12.8</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="6">
             <Date>2018-07-15</Date>
             <Version>1.11.8</Version>
