@@ -17,6 +17,11 @@
             <Dependency>perl</Dependency>
             <Dependency>perl-XML-Parser</Dependency>
         </BuildDependencies>
+        <Patches>
+            <Patch level="1">intltool-0.51.0-perl-5.26.patch</Patch>
+            <Patch level="1">intltool-merge-Create-cache-file-atomically.patch</Patch>
+            <Patch level="1">intltool_distcheck-fix.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
@@ -35,7 +40,7 @@
 
     <History>
         <Update release="4">
-            <Date>2018-07-19</Date>
+            <Date>2018-07-20</Date>
             <Version>0.51.0</Version>
             <Comment>Rebuild</Comment>
             <Name>Ertuğrul Erata</Name>
