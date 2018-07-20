@@ -12,6 +12,14 @@
         <Summary>Common CA certificates</Summary>
         <Description>Common CA certificates</Description>
         <Archive sha1sum="edf0ec04b02fcbc90cc65906ff83fb042894a3b7" type="tarxz">http://ftp.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20180409.tar.xz</Archive>
+        <Patches>
+            <Patch>ca-certificates-undebianize.patch</Patch>
+            <!--Patch>ca-certificates-more-certs.patch</Patch-->
+            <Patch>ca-certificates-etc-certs.patch</Patch>
+            <Patch>ca-certificates-DESTDIR.patch</Patch>
+            <Patch>ca-certificates.d.patch</Patch>
+            <Patch>no-openssl-rehash.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
@@ -32,7 +40,7 @@
 
     <History>
         <Update release="4">
-            <Date>2018-07-15</Date>
+            <Date>2018-07-20</Date>
             <Version>20180409</Version>
             <Comment>Version Bump</Comment>
             <Name>Ertuğrul Erata</Name>

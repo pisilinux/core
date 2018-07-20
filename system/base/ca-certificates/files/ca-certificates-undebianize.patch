@@ -1,0 +1,79 @@
+--- ca-certificates-undebianize/sbin/update-ca-certificates	2008-11-01 12:17:37.000000000 +0100
++++ ca-certificates-20090814/sbin/update-ca-certificates	2010-05-05 14:03:33.683398895 +0300
+@@ -28,7 +28,7 @@ CERTSCONF=/etc/ca-certificates.conf
+ CERTSDIR=/usr/share/ca-certificates
+ LOCALCERTSDIR=/usr/local/share/ca-certificates
+ CERTBUNDLE=ca-certificates.crt
+-ETCCERTSDIR=/etc/ssl/certs
++ETCCERTSDIR=@openssldir@
+ HOOKSDIR=/etc/ca-certificates/update.d
+ 
+ while [ $# -gt 0 ];
+@@ -187,19 +187,4 @@ mv -f "$TEMPBUNDLE" "$CERTBUNDLE"
+ 
+ echo "$ADDED_CNT added, $REMOVED_CNT removed; done."
+ 
+-if [ -d "$HOOKSDIR" ]
+-then
+-
+-  echo "Running hooks in $HOOKSDIR..."
+-  VERBOSE_ARG=
+-  [ "$verbose" = 0 ] || VERBOSE_ARG="--verbose"
+-  eval run-parts "$VERBOSE_ARG" --test -- "$HOOKSDIR" | while read hook
+-  do
+-    ( cat "$ADDED"
+-      cat "$REMOVED" ) | "$hook" || echo "E: $hook exited with code $?."
+-  done
+-  echo "done."
+-
+-fi
+-
+ # vim:set et sw=2:
+--- ca-certificates-20130610/sbin/update-ca-certificates.8~	2013-06-11 11:32:35.000000000 +0300
++++ ca-certificates-20130610/sbin/update-ca-certificates.8	2013-06-11 11:54:40.662201388 +0300
+@@ -16,7 +16,7 @@
+ .\" .sp <n>    insert n+1 empty lines
+ .\" for manpage-specific macros, see man(7)
+ .SH NAME
+-update-ca-certificates \- update /etc/ssl/certs and ca-certificates.crt
++update-ca-certificates \- update @openssldir@ and ca-certificates.crt
+ .SH SYNOPSIS
+ .B update-ca-certificates
+ .RI [ options ]
+@@ -26,7 +26,7 @@ This manual page documents briefly the
+ command.
+ .PP
+ \fBupdate-ca-certificates\fP is a program that updates the directory
+-/etc/ssl/certs to hold SSL certificates and generates ca-certificates.crt,
++@openssldir@ to hold SSL certificates and generates ca-certificates.crt,
+ a concatenated single-file list of certificates.
+ .PP
+ It reads the file /etc/ca-certificates.conf. Each line gives a pathname of
+@@ -38,11 +38,6 @@
+ .PP
+ Furthermore all certificates with a .crt extension found below
+ /usr/local/share/ca-certificates are also included as implicitly trusted.
+-.PP
+-Before terminating, \fBupdate-ca-certificates\fP invokes
+-\fBrun-parts\fP on /etc/ca-certificates/update.d and calls each hook with
+-a list of certificates: those added are prefixed with a +, those removed are
+-prefixed with a -.
+ .SH OPTIONS
+ A summary of options is included below.
+ .TP
+@@ -53,13 +48,13 @@
+ Be verbose. Output \fBc_rehash\fP.
+ .TP
+ .B \-f, \-\-fresh
+-Fresh updates.  Remove symlinks in /etc/ssl/certs directory.
++Fresh updates.  Remove symlinks in @openssldir@ directory.
+ .SH FILES
+ .TP
+ .I /etc/ca-certificates.conf
+ A configuration file.
+ .TP
+-.I /etc/ssl/certs/ca-certificates.crt
++.I /etc/openssl/ca-certificates.crt
+ A single-file version of CA certificates.  This holds
+ all CA certificates that you activated in /etc/ca-certificates.conf.
+ .TP
