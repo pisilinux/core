@@ -10,14 +10,16 @@ from pisi.actionsapi import shelltools
 
 #WorkDir = "mozjs%s/js/src" % get.srcVERSION()
 
+shelltools.export("SHELL","/bin/sh")
+
 def setup():
    shelltools.cd("js/src")
-   shelltools.system("sed -i 's/(defined\((@TEMPLATE_FILE)\))/\1/' config/milestone.pl ")
+   #shelltools.system("sed -i 's/(defined\((@TEMPLATE_FILE)\))/\1/' config/milestone.pl ")
+   
    
    autotools.configure("--prefix=/usr       \
                         --enable-readline   \
                         --enable-threadsafe \
-                        --with-system-ffi   \
                         --with-system-nspr")
 
 def build():
@@ -29,10 +31,10 @@ def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
    
     #for polkit
-    pisitools.rename("/usr/lib/pkgconfig/mozjs-..pc", "mozjs-17.0.pc")
-    pisitools.remove("usr/lib/libmozjs-..a")
+    #pisitools.rename("/usr/lib/pkgconfig/mozjs-..pc", "mozjs-17.0.pc")
+    #pisitools.remove("usr/lib/libmozjs-..a")
     
     pisitools.dodoc("README*")
     
     # add link for polkit
-    pisitools.dosym("libmozjs-..so", "/usr/lib/libmozjs-17.0.so")
+    #pisitools.dosym("libmozjs-..so", "/usr/lib/libmozjs-17.0.so")
