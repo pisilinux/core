@@ -12,12 +12,13 @@
         <IsA>library</IsA>
         <Summary>Stand-alone JavaScript C Library</Summary>
         <Description>Spidermonkey is Mozilla's C implementation of JavaScript.</Description>
-        <Archive type="targz" sha1sum="7805174898c34e5d3c3b256117af9944ba825c89">http://ftp.mozilla.org/pub/mozilla.org/js/mozjs17.0.0.tar.gz</Archive>
+        <Archive type="targz" sha1sum="1ec6399a90c7060908bfc3b96d1f1068ab2bfc78">http://ftp.gnome.org/pub/gnome/teams/releng/tarballs-needing-help/mozjs/mozjs-52.2.1gnome1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>zlib-devel</Dependency>
             <Dependency>nspr-devel</Dependency>
             <Dependency>readline-devel</Dependency>
             <Dependency>libffi-devel</Dependency>
+            <Dependency>autoconf213</Dependency>
         </BuildDependencies>
         <Patches>
         </Patches>
@@ -54,6 +55,20 @@
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2018-07-21</Date>
+            <Version>52.2.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="5">
+            <Date>2018-07-21</Date>
+            <Version>52.2.1</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-19</Date>
             <Version>17.0.0</Version>

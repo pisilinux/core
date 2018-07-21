@@ -19,6 +19,7 @@ def setup():
                          --enable-examples \
                          --enable-introspection \
                          --enable-libsystemd-login=no \
+                         --enable-libelogind=no \
                          --with-systemdsystemunitdir=no \
                          --disable-man-pages \
                          --disable-gtk-doc \

@@ -14,7 +14,7 @@
         <IsA>app:console</IsA>
         <Summary>PolicyKit Authorization Framework</Summary>
         <Description>polkit is a toolkit for defining and handling authorizations. It is used for allowing unprivileged processes to speak to privileged processes.</Description>
-        <Archive sha1sum="ef855c2d04184dceb38e0940dc7bec9cc3da415c" type="targz">http://www.freedesktop.org/software/polkit/releases/polkit-0.113.tar.gz</Archive>
+        <Archive sha1sum="208b7e44fcf0f515d067d37307af9ea1419eb305" type="targz">http://www.freedesktop.org/software/polkit/releases/polkit-0.115.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>dbus-devel</Dependency>
             <Dependency>pam-devel</Dependency>
@@ -49,6 +49,7 @@
         <RuntimeDependencies>
             <Dependency>pam</Dependency>
             <Dependency>glib2</Dependency>
+            <Dependency>libgcc</Dependency>
             <Dependency>expat</Dependency>
             <Dependency>spidermonkey</Dependency>
         </RuntimeDependencies>
@@ -66,6 +67,7 @@
             <Path fileType="data">/lib/systemd</Path>
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="data">/usr/share/gettext</Path>
         </Files>
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/man/man8/pklocalauthority.8">man/pklocalauthority.8</AdditionalFile>
@@ -83,6 +85,13 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2018-07-21</Date>
+            <Version>0.115</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-20</Date>
             <Version>0.113</Version>
