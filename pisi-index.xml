@@ -582,10 +582,6 @@
             <Description xml:lang="en">Common CA certificates</Description>
             <Archive type="tarxz" sha1sum="edf0ec04b02fcbc90cc65906ff83fb042894a3b7">http://ftp.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20180409.tar.xz</Archive>
             <Patches>
-                <Patch>ca-certificates-undebianize.patch</Patch>
-                <Patch>ca-certificates-etc-certs.patch</Patch>
-                <Patch>ca-certificates-DESTDIR.patch</Patch>
-                <Patch>ca-certificates.d.patch</Patch>
                 <Patch>no-openssl-rehash.patch</Patch>
             </Patches>
             <SourceURI>system/base/ca-certificates/pspec.xml</SourceURI>
@@ -6138,7 +6134,7 @@
         </Package>
         <History>
             <Update release="5">
-                <Date>2018-07-15</Date>
+                <Date>2018-07-22</Date>
                 <Version>4.4</Version>
                 <Comment>Rebuild</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -9532,7 +9528,7 @@
             <Summary xml:lang="tr">spidermonkey için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="5">spidermonkey</Dependency>
+                <Dependency release="6">spidermonkey</Dependency>
                 <Dependency>nspr-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -9542,8 +9538,15 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2018-07-23</Date>
+                <Version>52.2.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
-                <Date>2018-07-21</Date>
+                <Date>2018-07-22</Date>
                 <Version>52.2.1</Version>
                 <Comment>Version bump.</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -11374,9 +11377,9 @@
         </Package>
         <History>
             <Update release="4">
-                <Date>2018-07-15</Date>
+                <Date>2018-07-22</Date>
                 <Version>1.0.2</Version>
-                <Comment>Rebuild</Comment>
+                <Comment>Rebuild glib2</Comment>
                 <Name>Ertuğrul Erata</Name>
                 <Email>ertugrulerata@gmail.com</Email>
             </Update>
@@ -11931,7 +11934,7 @@
         </Package>
         <History>
             <Update release="6">
-                <Date>2018-07-19</Date>
+                <Date>2018-07-22</Date>
                 <Version>1.0.2o</Version>
                 <Comment>Rebuild</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -12474,7 +12477,7 @@
                 <Dependency>glib2</Dependency>
                 <Dependency>libgcc</Dependency>
                 <Dependency>expat</Dependency>
-                <Dependency>spidermonkey</Dependency>
+                <Dependency versionFrom="52.2.1">spidermonkey</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="config">/etc</Path>
@@ -12504,7 +12507,7 @@
         </Package>
         <History>
             <Update release="5">
-                <Date>2018-07-21</Date>
+                <Date>2018-07-22</Date>
                 <Version>0.115</Version>
                 <Comment>Version bump.</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -16134,9 +16137,9 @@
         </Package>
         <History>
             <Update release="5">
-                <Date>2018-07-15</Date>
+                <Date>2018-07-22</Date>
                 <Version>0.29.2</Version>
-                <Comment>Rebuild</Comment>
+                <Comment>Rebuild glib2</Comment>
                 <Name>Ertuğrul Erata</Name>
                 <Email>ertugrulerata@gmail.com</Email>
             </Update>
@@ -19356,7 +19359,7 @@
         </Package>
         <History>
             <Update release="5">
-                <Date>2018-07-15</Date>
+                <Date>2018-07-23</Date>
                 <Version>2.9</Version>
                 <Comment>Rebuild</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -19664,7 +19667,7 @@
         </Package>
         <History>
             <Update release="4">
-                <Date>2018-07-15</Date>
+                <Date>2018-07-23</Date>
                 <Version>9</Version>
                 <Comment>Rebuild</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -19883,7 +19886,7 @@
         </Package>
         <History>
             <Update release="4">
-                <Date>2018-07-15</Date>
+                <Date>2018-07-23</Date>
                 <Version>2.02.167</Version>
                 <Comment>Rebuild</Comment>
                 <Name>Ertuğrul Erata</Name>
