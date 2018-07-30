@@ -10,6 +10,7 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
+    shelltools.system("sed -i '/math.h/a #include <malloc.h>' src/flexdef.h")
     pisitools.flags.add("-fPIC")
     shelltools.export("AUTOPOINT", "true")
 
