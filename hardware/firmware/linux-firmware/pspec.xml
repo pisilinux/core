@@ -17,8 +17,8 @@
         <IsA>data</IsA>
         <Summary>Firmware files used by the Linux kernel</Summary>
         <Description>linux-firmware contains different firmware files required for some devices to operate correctly.</Description>
-        <!-- linux-firmware commit: 17e6288135d4500f9fe60224dce2b46d850c346b 2017-11-23 -->
-        <Archive sha1sum="335e412eb7b017e0cb4096717e8ea1f63ebdec85" type="tarbz2">https://sourceforge.net/projects/pisilinux/files/source/linux-firmware-20171123.tar.bz2</Archive>
+        <!-- linux-firmware commit: b01151bc9e4e4238bdf18ab28561e1c05a35e76c 2018-07-22 -->
+        <Archive sha1sum="d15d758009b5f7309af62b2e03d8f74bab0e2753" type="tarxz">https://sourceforge.net/projects/pisilinux/files/source/linux-firmware-20180722.tar.xz</Archive>
         <Archive sha1sum="dd685266f7bc0acb0d455462637d23e3e895bc96" type="tarxz" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/common-fw.tar.xz</Archive>
         <Archive sha1sum="b2bb7fce3ea67d131f543a48134f7a65f2a8d834" type="tarxz" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware-ipw.tar.xz</Archive>
         <Archive sha1sum="a5a616a9f765cf9cbb224deb7ccefdc82a7fe4d9" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/firmware-nonfreebox-2-tar.bz2</Archive>
@@ -49,6 +49,13 @@
     </Package>
 
     <History>
+        <Update release="7">
+            <Date>2018-07-29</Date>
+            <Version>20180722</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="6">
             <Date>2018-07-15</Date>
             <Version>20171123</Version>
