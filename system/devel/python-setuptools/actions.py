@@ -7,7 +7,11 @@ from pisi.actionsapi import pythonmodules
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
-WorkDir="distribute-%s" % get.srcVERSION()
+WorkDir="setuptools-%s" % get.srcVERSION()
+
+def build():
+    pythonmodules.run("bootstrap.py")
+    pythonmodules.compile()
 
 def install():
     pythonmodules.install()
