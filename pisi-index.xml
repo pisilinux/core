@@ -769,7 +769,7 @@
         </Package>
         <History>
             <Update release="5">
-                <Date>2018-07-19</Date>
+                <Date>2018-07-30</Date>
                 <Version>1.07.1</Version>
                 <Comment>Rebuild</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -900,9 +900,9 @@
         </Package>
         <History>
             <Update release="7">
-                <Date>2018-07-20</Date>
+                <Date>2018-07-23</Date>
                 <Version>1.12.8</Version>
-                <Comment>Version bump.</Comment>
+                <Comment>Version bump</Comment>
                 <Name>Mustafa Cinasal</Name>
                 <Email>muscnsl@gmail.com</Email>
             </Update>
@@ -966,7 +966,7 @@
             <Summary xml:lang="tr">Genel amaçlı bir şifreleme kitaplığı</Summary>
             <Description xml:lang="en">Libgcrypt is a general purpose crypto library based on the code used in GNU Privacy Guard.</Description>
             <Description xml:lang="tr">Libgcrypt, GNU Privacy Guard kodunu temel alan genel amaçlı bir şifreleme kitaplığıdır.</Description>
-            <Archive type="tarbz2" sha1sum="d2b9e0f413064cfc67188f80d3cbda887c755a62">https://ftp.osuosl.org/pub/blfs/conglomeration/libgcrypt/libgcrypt-1.7.6.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="ab8aae5d7a68f8e0988f90e11e7f6a4805af5c8d">https://ftp.osuosl.org/pub/blfs/conglomeration/libgcrypt/libgcrypt-1.8.2.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>libgpg-error-devel</Dependency>
             </BuildDependencies>
@@ -992,7 +992,7 @@
             <Summary xml:lang="tr">libgcrypt için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="5">libgcrypt</Dependency>
+                <Dependency release="6">libgcrypt</Dependency>
                 <Dependency>libgpg-error-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -1014,13 +1014,20 @@
             </BuildDependencies>
             <RuntimeDependencies>
                 <Dependency>libgpg-error-32bit</Dependency>
-                <Dependency release="5">libgcrypt</Dependency>
+                <Dependency release="6">libgcrypt</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2018-08-05</Date>
+                <Version>1.8.2</Version>
+                <Comment>Version Bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2018-07-15</Date>
                 <Version>1.7.6</Version>
@@ -2264,7 +2271,7 @@
         </Package>
         <History>
             <Update release="4">
-                <Date>2018-07-15</Date>
+                <Date>2018-08-05</Date>
                 <Version>8.24.0</Version>
                 <Comment>Rebuild</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -3522,7 +3529,7 @@
             <Summary xml:lang="tr">GnuPG bileşenlerinin kullandığı hata değerleri için kitaplık</Summary>
             <Description xml:lang="en">libgpg-error is a library that defines common error values for all GnuPG components.</Description>
             <Description xml:lang="tr">libgpg-error, tüm GnuPG bileşenleri için ortak olan hata değerlerini tanımlayan bir kitaplıktır.</Description>
-            <Archive type="tarbz2" sha1sum="9a926e7ee6309e539313443555535d49a2a5c9f1">https://ftp.osuosl.org/pub/blfs/conglomeration/libgpg-error/libgpg-error-1.26.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="a428758999ff573e62d06892e3d2c0b0f335787c">https://ftp.osuosl.org/pub/blfs/conglomeration/libgpg-error/libgpg-error-1.27.tar.bz2</Archive>
             <SourceURI>system/base/libgpg-error/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -3543,7 +3550,7 @@
             <Summary xml:lang="tr">libgpg-error için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="5">libgpg-error</Dependency>
+                <Dependency release="6">libgpg-error</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin/gpg-error-config</Path>
@@ -3560,13 +3567,20 @@
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="5">libgpg-error</Dependency>
+                <Dependency release="6">libgpg-error</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2018-08-05</Date>
+                <Version>1.27</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2018-07-19</Date>
                 <Version>1.26</Version>
@@ -8459,7 +8473,7 @@
             <Update release="4">
                 <Date>2018-07-15</Date>
                 <Version>1.7.3</Version>
-                <Comment>Rebuild</Comment>
+                <Comment>Rebuild.</Comment>
                 <Name>Ertuğrul Erata</Name>
                 <Email>ertugrulerata@gmail.com</Email>
             </Update>
@@ -11551,7 +11565,7 @@
         </Package>
         <History>
             <Update release="4">
-                <Date>2018-07-15</Date>
+                <Date>2018-07-23</Date>
                 <Version>0.4.8</Version>
                 <Comment>Rebuild</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -13324,7 +13338,7 @@
             <Summary xml:lang="tr">Python kurulum araçları</Summary>
             <Description xml:lang="en">python-setuptools is a collection of enhancements to the Python distutils that allow you to more easily build and distribute Python packages, especially ones that have dependencies on other packages.</Description>
             <Description xml:lang="tr">python-setuptools, Python distutils&apos;e yapılan, özellikle başka paketlere bağımlılığı olan Python paketlerini daha kolay oluşturmaya ve dağıtmaya yarayan iyileştirmeler koleksiyonudur.</Description>
-            <Archive type="targz" sha1sum="a62cfe21bd0e5e2913c5b576f872ca293b9bebca">https://files.pythonhosted.org/packages/f3/2b/e97c01487b7636ba3fcff5e73db995c66c524d54d0907d238311524f67c8/distribute-0.6.49.tar.gz</Archive>
+            <Archive type="targz" sha1sum="b5ea03183a313091083ca322eb68e90dfc290504">https://github.com/pypa/setuptools/archive/v39.2.0.tar.gz</Archive>
             <SourceURI>system/devel/python-setuptools/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -13336,6 +13350,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2018-08-05</Date>
+                <Version>39.2.0</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Mustafa Cinasl</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2018-07-15</Date>
                 <Version>0.6.49</Version>
@@ -14979,9 +15000,9 @@
         </Package>
         <History>
             <Update release="5">
-                <Date>2018-07-15</Date>
+                <Date>2018-07-29</Date>
                 <Version>3.3.2</Version>
-                <Comment>Rebuild</Comment>
+                <Comment>Rebuild.</Comment>
                 <Name>Ertuğrul Erata</Name>
                 <Email>ertugrulerata@gmail.com</Email>
             </Update>
@@ -15174,7 +15195,7 @@
         </Package>
         <History>
             <Update release="4">
-                <Date>2018-07-15</Date>
+                <Date>2018-07-30</Date>
                 <Version>1.4.18</Version>
                 <Comment>Rebuild.</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -15738,7 +15759,7 @@
         </Package>
         <History>
             <Update release="4">
-                <Date>2018-07-15</Date>
+                <Date>2018-08-05</Date>
                 <Version>1.1.29</Version>
                 <Comment>Rebuild</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -17009,6 +17030,7 @@
             <BuildDependencies>
                 <Dependency>patch</Dependency>
                 <Dependency>texinfo</Dependency>
+                <Dependency>help2man</Dependency>
             </BuildDependencies>
             <SourceURI>system/devel/flex/pspec.xml</SourceURI>
         </Source>
@@ -17026,9 +17048,9 @@
         </Package>
         <History>
             <Update release="7">
-                <Date>2018-07-17</Date>
+                <Date>2018-07-30</Date>
                 <Version>2.6.4</Version>
-                <Comment>Rebuild</Comment>
+                <Comment>Rebuild.</Comment>
                 <Name>Ertuğrul Erata</Name>
                 <Email>ertugrulerata@gmail.com</Email>
             </Update>
@@ -17574,7 +17596,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox için çekirdek desteği sunar.</Description>
             <Archive type="tarxz" sha1sum="bf649555cc8845266e3f8d0494f80242e64cae58">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-5.2.12.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.14.55">kernel-module-headers</Dependency>
+                <Dependency version="4.14.61">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -17584,7 +17606,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.14.55">kernel</Dependency>
+                <Dependency version="4.14.61">kernel</Dependency>
                 <Dependency version="5.2.12">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -17606,6 +17628,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="30">
+                <Date>2018-08-06</Date>
+                <Version>5.2.12</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="29">
                 <Date>2018-07-15</Date>
                 <Version>5.2.12</Version>
@@ -17828,7 +17857,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
             <Archive type="tarxz" sha1sum="9c60738291a9697197ed2fc724eed35b6bae955c">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-5.2.12.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.14.55">kernel-module-headers</Dependency>
+                <Dependency version="4.14.61">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -17838,7 +17867,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.14.55">kernel</Dependency>
+                <Dependency version="4.14.61">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
                 <Dependency version="5.2.12">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
@@ -17865,6 +17894,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="30">
+                <Date>2018-08-06</Date>
+                <Version>5.2.12</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="29">
                 <Date>2018-07-15</Date>
                 <Version>5.2.12</Version>
@@ -18091,7 +18127,7 @@
             <Description xml:lang="es">ndiswrapper permite usar controladores de windows XP para tarjetas WLAN que no tienen controladores propios para Linux.</Description>
             <Archive type="targz" sha1sum="213854ca8a83f9b5972db8fa873d346124e4bcb5">http://download.sourceforge.net/ndiswrapper/ndiswrapper-1.61.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.14.55">kernel-module-headers</Dependency>
+                <Dependency version="4.14.61">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch>linux-4.11.patch</Patch>
@@ -18106,7 +18142,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.14.55">kernel</Dependency>
+                <Dependency version="4.14.61">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -18118,6 +18154,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="19">
+                <Date>2018-08-07</Date>
+                <Version>1.61</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="18">
                 <Date>2018-07-15</Date>
                 <Version>1.61</Version>
@@ -18264,7 +18307,7 @@
             <Archive type="targz" sha1sum="8acbdbb4ab4ab4123d1773b616904798fbef9277" target="i686">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <Archive type="targz" sha1sum="1f568bb989d175813c5631c6629d9479eae6f3be" target="x86_64">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.14.55">kernel-module-headers</Dependency>
+                <Dependency version="4.14.61">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">patch/license.patch</Patch>
@@ -18283,8 +18326,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.14.55">kernel</Dependency>
-                <Dependency release="19">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="4.14.61">kernel</Dependency>
+                <Dependency release="20">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -18308,6 +18351,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="20">
+                <Date>2018-08-07</Date>
+                <Version>6.30.223.271</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="19">
                 <Date>2018-07-15</Date>
                 <Version>6.30.223.271</Version>
@@ -18460,14 +18510,14 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.14.55">kernel-module-headers</Dependency>
+                <Dependency version="4.14.61">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-bbswitch/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="4.14.55">kernel</Dependency>
+                <Dependency version="4.14.61">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -18480,6 +18530,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="20">
+                <Date>2018-07-07</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="19">
                 <Date>2018-07-15</Date>
                 <Version>0.8</Version>
@@ -18729,7 +18786,7 @@
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.14.55.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.14.61.xz</Patch>
                 <Patch level="1">patches/mageia_4_14/fs-aufs-4.14.patch</Patch>
                 <Patch level="1">patches/mageia_4_14/fs-aufs-4.14-modular.patch</Patch>
                 <Patch level="1">patches/mageia_4_14/fs-aufs-include-vmalloc.patch</Patch>
@@ -18755,6 +18812,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="20">
+                <Date>2018-08-07</Date>
+                <Version>4.14.61</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="19">
                 <Date>2018-07-15</Date>
                 <Version>4.14.55</Version>
@@ -19025,7 +19089,7 @@
                 <Dependency>xz-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.14.55.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.14.61.xz</Patch>
                 <Patch level="1">patches/mageia_4_14/fs-aufs-4.14.patch</Patch>
                 <Patch level="1">patches/mageia_4_14/fs-aufs-4.14-modular.patch</Patch>
                 <Patch level="1">patches/mageia_4_14/fs-aufs-include-vmalloc.patch</Patch>
@@ -19087,6 +19151,17 @@
             </Files>
         </Package>
         <History>
+            <Update release="21">
+                <Type package="kernel">security</Type>
+                <Date>2018-08-06</Date>
+                <Version>4.14.61</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
             <Update release="20">
                 <Date>2018-07-15</Date>
                 <Version>4.14.55</Version>
@@ -19436,7 +19511,7 @@
             <Summary xml:lang="tr">Linux çekirdeği tarafından kullanılan firmware dosyaları</Summary>
             <Description xml:lang="en">linux-firmware contains different firmware files required for some devices to operate correctly.</Description>
             <Description xml:lang="tr">linux-firmware, bazı aygıtların düzgün çalışabilmesi için gerekli firmware dosyalarını içerir.</Description>
-            <Archive type="tarbz2" sha1sum="335e412eb7b017e0cb4096717e8ea1f63ebdec85">https://sourceforge.net/projects/pisilinux/files/source/linux-firmware-20171123.tar.bz2</Archive>
+            <Archive type="tarxz" sha1sum="d15d758009b5f7309af62b2e03d8f74bab0e2753">https://sourceforge.net/projects/pisilinux/files/source/linux-firmware-20180722.tar.xz</Archive>
             <Archive type="tarxz" sha1sum="dd685266f7bc0acb0d455462637d23e3e895bc96" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/common-fw.tar.xz</Archive>
             <Archive type="tarxz" sha1sum="b2bb7fce3ea67d131f543a48134f7a65f2a8d834" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware-ipw.tar.xz</Archive>
             <Archive type="tarbz2" sha1sum="a5a616a9f765cf9cbb224deb7ccefdc82a7fe4d9" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/firmware-nonfreebox-2-tar.bz2</Archive>
@@ -19465,6 +19540,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2018-07-29</Date>
+                <Version>20180722</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2018-07-15</Date>
                 <Version>20171123</Version>
