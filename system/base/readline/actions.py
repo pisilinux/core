@@ -7,8 +7,11 @@
 from pisi.actionsapi import get
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import shelltools
 
 def setup():
+    shelltools.system("sed -i '/MV.*old/d' Makefile.in")
+    shelltools.system("sed -i '/{OLDSUFF}/c:' support/shlib-install")
     pisitools.cflags.add("-fPIC")
 
     #Force link to ncurses instead of tinfo, which we don't have, will be needed when we use as-needed ;)
