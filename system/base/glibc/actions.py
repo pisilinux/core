@@ -53,7 +53,6 @@ def setup():
                --libexecdir=/usr/lib/misc \
                --with-bugurl=https://bugs.pisilinux.org \
                --enable-add-ons \
-               --enable-obsolete-rpc \
                --enable-kernel=2.6.32 \
                --enable-bind-now --disable-profile \
                --enable-stackguard-randomization \
