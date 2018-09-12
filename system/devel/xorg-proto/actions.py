@@ -8,32 +8,21 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
-WorkDir = "."
-SkipFiles = [".pc", "filelist", "patches", "pisiBuildState"]
-
 def setup():
-    pisitools.dosed("*/Makefile.am", r"/doc/\$\(PACKAGE\)", "/doc/xorg-proto")
-
-    for package in shelltools.ls("."):
-        if package in SkipFiles:
-            continue
-        shelltools.cd(package)
-        autotools.autoreconf("-vif")
-        autotools.configure("--without-xmlto --without-fop")
-        shelltools.cd("../")
-
+    shelltools.system("sed -i 's|$(datadir)/pkgconfig|$(libdir)/pkgconfig|g' Makefile.in")
+    shelltools.system("sed -i 's|$(datadir)/pkgconfig|$(libdir)/pkgconfig|g' Makefile.am")
+    
+    autotools.autoreconf("-vif")
+    autotools.configure("--prefix=/usr \
+                         --docdir=/usr/share/doc/xorg-proto")
+    
 def build():
-    for package in shelltools.ls("."):
-        if package in SkipFiles:
-            continue
-        shelltools.cd(package)
-        autotools.make()
-        shelltools.cd("../")
-
+    autotools.make()
+    
 def install():
-    for package in shelltools.ls("."):
-        if package in SkipFiles:
-            continue
-        shelltools.cd(package)
-        autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-        shelltools.cd("../")
+    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+        
+        
+    pisitools.dodoc("README", "COPYING*", "AUTHORS")
+    pisitools.domove("/usr/share/doc/xorg-proto/COPYING-*o","/usr/share/doc/xorg-proto/COPYING")
+    
