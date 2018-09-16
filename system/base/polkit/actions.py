@@ -25,7 +25,7 @@ def setup():
                          --disable-gtk-doc \
                          --disable-static")
     
-    pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ") 
+    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ") 
 
 def build():
     shelltools.export('HOME', get.workDIR())

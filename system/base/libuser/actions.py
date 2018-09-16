@@ -20,7 +20,7 @@ def setup():
                          --enable-gtk-doc-html=no \
                          --disable-gtk-doc")
     
-    pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
+    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
     
     shelltools.system("sed -i 's/SUBDIRS = po docs/SUBDIRS = po/' Makefile")
 
