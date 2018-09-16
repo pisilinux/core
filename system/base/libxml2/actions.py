@@ -26,7 +26,7 @@ def setup():
     else: options += " --with-python"
 
     autotools.configure(options)
-    pisitools.dosed("libtool"," -shared ", " -Wl,--as-needed -shared ")
+    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
 def build():
     autotools.make()
