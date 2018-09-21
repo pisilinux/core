@@ -17,6 +17,7 @@
             <Patch>no-ldconfig.patch</Patch>
             <Patch level="0">wireless_tools.27-wireless-man-upd.patch</Patch>
             <Patch level="1">wireless-tools-29-makefile.patch</Patch>
+            <Patch>wireless_tools.diff</Patch>
             <!-- Fixes #8583, the problems with non-ASCII char included ESSIDS -->
             <!--<Patch level="1">non-ascii-essid-support.patch</Patch>--> <!--Fixed-->
         </Patches>
@@ -49,6 +50,13 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2018-09-21</Date>
+            <Version>30</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-15</Date>
             <Version>30</Version>
