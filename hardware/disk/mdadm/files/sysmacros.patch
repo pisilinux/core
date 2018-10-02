@@ -1,0 +1,77 @@
+diff -Nuar a/crc32c.c b/crc32c.c
+--- a/crc32c.c	2016-01-28 08:14:56.000000000 +0200
++++ b/crc32c.c	2018-10-01 21:34:33.000000000 +0300
+@@ -27,6 +27,7 @@
+  */
+ 
+ #include <sys/types.h>
++#include <sys/sysmacros.h>
+ #include <asm/types.h>
+ #include <stdlib.h>
+ 
+diff -Nuar a/mdadm.h b/mdadm.h
+--- a/mdadm.h	2016-01-28 08:14:56.000000000 +0200
++++ b/mdadm.h	2018-10-01 21:35:23.000000000 +0300
+@@ -34,6 +34,7 @@
+ #endif
+ 
+ #include	<sys/types.h>
++#include    <sys/sysmacros.h>
+ #include	<sys/stat.h>
+ #include	<stdint.h>
+ #include	<stdlib.h>
+diff -Nuar a/mdmon.c b/mdmon.c
+--- a/mdmon.c	2016-01-28 08:14:56.000000000 +0200
++++ b/mdmon.c	2018-10-01 21:35:42.000000000 +0300
+@@ -46,6 +46,7 @@
+ #include	<unistd.h>
+ #include	<stdlib.h>
+ #include	<sys/types.h>
++#include    <sys/sysmacros.h>
+ #include	<sys/stat.h>
+ #include	<sys/socket.h>
+ #include	<sys/un.h>
+diff -Nuar a/msg.c b/msg.c
+--- a/msg.c	2016-01-28 08:14:56.000000000 +0200
++++ b/msg.c	2018-10-01 21:35:57.000000000 +0300
+@@ -26,6 +26,7 @@
+ #include <errno.h>
+ #include <fcntl.h>
+ #include <sys/types.h>
++#include <sys/sysmacros.h>
+ #include <sys/socket.h>
+ #include <sys/un.h>
+ #include "mdadm.h"
+diff -Nuar a/platform-intel.c b/platform-intel.c
+--- a/platform-intel.c	2016-01-28 08:14:56.000000000 +0200
++++ b/platform-intel.c	2018-10-01 21:36:16.000000000 +0300
+@@ -27,6 +27,7 @@
+ #include <fcntl.h>
+ #include <sys/mman.h>
+ #include <sys/types.h>
++#include <sys/sysmacros.h>
+ #include <sys/stat.h>
+ #include <limits.h>
+ 
+diff -Nuar a/probe_roms.c b/probe_roms.c
+--- a/probe_roms.c	2016-01-28 08:14:56.000000000 +0200
++++ b/probe_roms.c	2018-10-01 21:36:27.000000000 +0300
+@@ -27,6 +27,7 @@
+ #include <sys/mman.h>
+ #include <sys/stat.h>
+ #include <sys/types.h>
++#include <sys/sysmacros.h>
+ #include <asm/types.h>
+ 
+ static void *rom_mem = MAP_FAILED;
+diff -Nuar a/sha1.h b/sha1.h
+--- a/sha1.h	2016-01-28 08:14:56.000000000 +0200
++++ b/sha1.h	2018-10-01 21:36:43.000000000 +0300
+@@ -35,6 +35,7 @@
+ 
+ #ifdef _LIBC
+ # include <sys/types.h>
++#include <sys/sysmacros.h>
+ typedef u_int32_t sha1_uint32;
+ typedef uintptr_t sha1_uintptr;
+ #else
