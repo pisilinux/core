@@ -23,9 +23,10 @@ def setup():
                --disable-modular-tests \
                --disable-doxygen-docs \
                --disable-libaudit \
-               --disable-systemd \
                --disable-silent-rules \
                --enable-inotify \
+               --enable-user-session \
+               --with-xml=expat \
                --with-system-pid-file=/run/dbus/pid \
                --with-system-socket=/run/dbus/system_bus_socket \
                --with-console-auth-dir=/run/console/ \
