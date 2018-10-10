@@ -249,11 +249,10 @@
             <Summary xml:lang="tr">Docbook XML DTD</Summary>
             <Description xml:lang="en">Contains Docbook DTD for XML. A widely used XML scheme for writing documentation and help</Description>
             <Description xml:lang="tr">Docbook XML belirtimi (DTD) sürümlerini içerir.</Description>
-            <Archive type="zip" sha1sum="b9ae7a41056bfaf885581812d60651b7b5531519">https://www.oasis-open.org/docbook/xml/4.1.2/docbkx412.zip</Archive>
-            <Archive type="zip" sha1sum="0b4c6d8228f4526185de51b8afbcfe0ec8939849">https://www.oasis-open.org/docbook/xml/4.1/docbkx41.zip</Archive>
-            <Archive type="zip" sha1sum="5e3a35663cd028c5c5fbb959c3858fec2d7f8b9e">https://www.oasis-open.org/docbook/xml/4.2/docbook-xml-4.2.zip</Archive>
-            <Archive type="zip" sha1sum="e79a59e9164c1013b8cc9f64f96f909a184ca016">https://www.oasis-open.org/docbook/xml/4.3/docbook-xml-4.3.zip</Archive>
-            <Archive type="zip" sha1sum="7c4d91c82ad3747e1b5600c91782758e5d91c22b">https://www.oasis-open.org/docbook/xml/4.4/docbook-xml-4.4.zip</Archive>
+            <Archive type="zip" sha1sum="b9ae7a41056bfaf885581812d60651b7b5531519" target="4.1.2">https://www.oasis-open.org/docbook/xml/4.1.2/docbkx412.zip</Archive>
+            <Archive type="zip" sha1sum="5e3a35663cd028c5c5fbb959c3858fec2d7f8b9e" target="4.2">https://www.oasis-open.org/docbook/xml/4.2/docbook-xml-4.2.zip</Archive>
+            <Archive type="zip" sha1sum="e79a59e9164c1013b8cc9f64f96f909a184ca016" target="4.3">https://www.oasis-open.org/docbook/xml/4.3/docbook-xml-4.3.zip</Archive>
+            <Archive type="zip" sha1sum="7c4d91c82ad3747e1b5600c91782758e5d91c22b" target="4.4">https://www.oasis-open.org/docbook/xml/4.4/docbook-xml-4.4.zip</Archive>
             <Archive type="zip" sha1sum="b9124233b50668fb508773aa2b3ebc631d7c1620">https://www.oasis-open.org/docbook/xml/4.5/docbook-xml-4.5.zip</Archive>
             <Archive type="zip" sha1sum="49f274e67efdee771300cba4da1f3e4bc00be1ec">http://www.docbook.org/xml/5.0/docbook-5.0.zip</Archive>
             <SourceURI>office/docbook/docbook-xml/pspec.xml</SourceURI>
@@ -273,9 +272,17 @@
             <AdditionalFiles>
                 <AdditionalFile target="/etc/xml/docbook" permission="0644" owner="root">docbook</AdditionalFile>
                 <AdditionalFile target="/etc/xml/catalog" permission="0644" owner="root">catalog</AdditionalFile>
+                <AdditionalFile target="/usr/share/xml/docbook/xml-dtd-5.0/catalog.xml" permission="0644" owner="root">5.0-catalog.xml</AdditionalFile>
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2018-09-19</Date>
+                <Version>5.0</Version>
+                <Comment>Rebuild</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="4">
                 <Date>2018-07-23</Date>
                 <Version>5.0</Version>
@@ -875,7 +882,7 @@
             <Summary xml:lang="tr">dbus için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="7">dbus</Dependency>
+                <Dependency release="8">dbus</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -899,6 +906,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2018-10-05</Date>
+                <Version>1.12.8</Version>
+                <Comment>enable user session.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2018-07-23</Date>
                 <Version>1.12.8</Version>
@@ -2694,7 +2708,7 @@
         </Package>
         <History>
             <Update release="6">
-                <Date>2018-07-15</Date>
+                <Date>2018-09-18</Date>
                 <Version>1.43.9</Version>
                 <Comment>Rebuild</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -3913,6 +3927,8 @@
                 <Patch>readline70-001.patch</Patch>
                 <Patch>readline70-002.patch</Patch>
                 <Patch>readline70-003.patch</Patch>
+                <Patch>readline70-004.patch</Patch>
+                <Patch>readline70-005.patch</Patch>
             </Patches>
             <SourceURI>system/base/readline/pspec.xml</SourceURI>
         </Source>
@@ -3962,7 +3978,7 @@
             <Update release="5">
                 <Date>2018-07-18</Date>
                 <Version>7.0</Version>
-                <Comment>Rebuild</Comment>
+                <Comment>Rebuild.</Comment>
                 <Name>Ertuğrul Erata</Name>
                 <Email>ertugrulerata@gmail.com</Email>
             </Update>
@@ -5386,7 +5402,7 @@
             <Update release="5">
                 <Date>2018-07-15</Date>
                 <Version>2.7.15</Version>
-                <Comment>Rebuild</Comment>
+                <Comment>Rebuild.</Comment>
                 <Name>Ertuğrul Erata</Name>
                 <Email>ertugrulerata@gmail.com</Email>
             </Update>
@@ -5475,7 +5491,7 @@
         </Package>
         <History>
             <Update release="4">
-                <Date>2018-07-15</Date>
+                <Date>2018-09-18</Date>
                 <Version>2.9.7</Version>
                 <Comment>Rebuild</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -6290,6 +6306,7 @@
             <BuildDependencies>
                 <Dependency>kernel-headers</Dependency>
                 <Dependency>gettext</Dependency>
+                <Dependency>texinfo</Dependency>
                 <Dependency>binutils</Dependency>
             </BuildDependencies>
             <Patches>
@@ -6344,7 +6361,7 @@
             <Name>glibc-devel</Name>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="4">glibc</Dependency>
+                <Dependency release="5">glibc</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -6360,7 +6377,7 @@
             <PartOf>system.doc</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="4">glibc</Dependency>
+                <Dependency release="5">glibc</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="config">/usr/lib32/glibc32.txt</Path>
@@ -8058,6 +8075,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2018-09-06</Date>
+                <Version>2.27</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2018-07-14</Date>
                 <Version>2.27</Version>
@@ -8923,6 +8947,7 @@
                 <Patch>no-ldconfig.patch</Patch>
                 <Patch level="0">wireless_tools.27-wireless-man-upd.patch</Patch>
                 <Patch level="1">wireless-tools-29-makefile.patch</Patch>
+                <Patch>wireless_tools.diff</Patch>
             </Patches>
             <SourceURI>system/base/wireless-tools/pspec.xml</SourceURI>
         </Source>
@@ -8944,7 +8969,7 @@
             <Summary xml:lang="tr">wireless-tools için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="4">wireless-tools</Dependency>
+                <Dependency release="5">wireless-tools</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -8952,6 +8977,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2018-09-21</Date>
+                <Version>30</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2018-07-15</Date>
                 <Version>30</Version>
@@ -9365,7 +9397,7 @@
         </Package>
         <History>
             <Update release="6">
-                <Date>2018-07-20</Date>
+                <Date>2018-09-16</Date>
                 <Version>2.54.3</Version>
                 <Comment>Version bump.</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -10533,7 +10565,7 @@
         </Package>
         <History>
             <Update release="5">
-                <Date>2018-07-15</Date>
+                <Date>2018-09-16</Date>
                 <Version>2.9.4</Version>
                 <Comment>Rebuild</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -10642,7 +10674,7 @@
         </Package>
         <History>
             <Update release="5">
-                <Date>2018-07-15</Date>
+                <Date>2018-09-16</Date>
                 <Version>8.40</Version>
                 <Comment>Rebuild.</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -10839,7 +10871,7 @@
         </Package>
         <History>
             <Update release="4">
-                <Date>2018-07-20</Date>
+                <Date>2018-09-16</Date>
                 <Version>0.62</Version>
                 <Comment>Rebuild</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -11664,7 +11696,7 @@
             <Update release="5">
                 <Date>2018-07-15</Date>
                 <Version>7.52.1</Version>
-                <Comment>Rebuild</Comment>
+                <Comment>Rebuild.</Comment>
                 <Name>Ertuğrul Erata</Name>
                 <Email>ertugrulerata@gmail.com</Email>
             </Update>
@@ -11969,7 +12001,7 @@
         </Package>
         <History>
             <Update release="6">
-                <Date>2018-07-22</Date>
+                <Date>2018-08-11</Date>
                 <Version>1.0.2o</Version>
                 <Comment>Rebuild</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -12542,7 +12574,7 @@
         </Package>
         <History>
             <Update release="5">
-                <Date>2018-07-22</Date>
+                <Date>2018-09-16</Date>
                 <Version>0.115</Version>
                 <Comment>Version bump.</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -12990,7 +13022,7 @@
             <Update release="5">
                 <Date>2018-07-15</Date>
                 <Version>5.26.1</Version>
-                <Comment>Rebuild</Comment>
+                <Comment>Rebuild.</Comment>
                 <Name>Ertuğrul Erata</Name>
                 <Email>ertugrulerata@gmail.com</Email>
             </Update>
@@ -13111,8 +13143,8 @@
         </Package>
         <Package>
             <Name>libatomic_ops-devel</Name>
-            <Summary>libatomic_ops için geliştirme dosyaları</Summary>
             <Summary xml:lang="en">libatomic_ops için geliştirme dosyaları</Summary>
+            <Summary>libatomic_ops için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
                 <Dependency release="4">libatomic_ops</Dependency>
             </RuntimeDependencies>
@@ -14616,7 +14648,7 @@
             <Update release="3">
                 <Date>2018-07-15</Date>
                 <Version>1.11.0</Version>
-                <Comment>Rebuild</Comment>
+                <Comment>Rebuild.</Comment>
                 <Name>Ertuğrul Erata</Name>
                 <Email>ertugrulerata@gmail.com</Email>
             </Update>
@@ -15759,7 +15791,7 @@
         </Package>
         <History>
             <Update release="4">
-                <Date>2018-08-05</Date>
+                <Date>2018-09-16</Date>
                 <Version>1.1.29</Version>
                 <Comment>Rebuild</Comment>
                 <Name>Ertuğrul Erata</Name>
@@ -16543,42 +16575,11 @@
             <Summary xml:lang="de">X.Org Protokoll Header</Summary>
             <Description xml:lang="en">This package includes the protocol headers needed for X11 development.</Description>
             <Description xml:lang="tr">Bu paket, X11 geliştirme için gerekli protokol başlıklarını içerir.</Description>
-            <Archive type="tarbz2" sha1sum="ef1765eeb5e9e38d080225fe6a64ed7cd2984b46">mirrors://xorg/individual/proto/bigreqsproto-1.1.2.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="432371cdc464881029c3f39f9bf81cc80a484e54">mirrors://xorg/individual/proto/presentproto-1.0.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="aa7b5abcfd5bbfad7cb681ce89dc1d6e381e3044">mirrors://xorg/individual/proto/compositeproto-0.4.2.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="bd0f0f4dc8f37eaabd9279d10fe2889710507358">mirrors://xorg/individual/proto/damageproto-1.2.1.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="3b8b273b8ef3d8dbab998df9ec1dddf99edf4d91">mirrors://xorg/individual/proto/dmxproto-2.3.1.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="2bc4e8f00778b1f3fe58b4c4f93607ac2adafbbf">mirrors://xorg/individual/proto/dri2proto-2.8.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="1007eaa2f83022653a224f7d2e676ea51cba2f2b">mirrors://xorg/individual/proto/dri3proto-1.0.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="ab605af5da8c98c0c2f8b2c578fed7c864ee996a">mirrors://xorg/individual/proto/fixesproto-5.0.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="28c108bd6438c332122c10871c1fc6415591755f">mirrors://xorg/individual/proto/fontsproto-2.1.3.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="20e061c463bed415051f0f89e968e331a2078551">mirrors://xorg/individual/proto/glproto-1.4.17.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="62b29a0c3b4ede9d129a0598cc6becf628a2158a">mirrors://xorg/individual/proto/inputproto-2.3.2.tar.bz2</Archive>
-            <Archive type="targz" sha1sum="29fa217174fcdc9e27cba5663357989ef6e381a0">mirrors://xorg/individual/proto/kbproto-1.0.7.tar.gz</Archive>
-            <Archive type="tarbz2" sha1sum="4ddb7781ebc2418d681a6f5e16d777aed56ea35e">mirrors://xorg/individual/proto/printproto-1.0.5.tar.bz2</Archive>
-            <Archive type="targz" sha1sum="d78ab1532d5381cacce59866ce331c7f806ad215">mirrors://xorg/individual/proto/randrproto-1.5.0.tar.gz</Archive>
-            <Archive type="tarbz2" sha1sum="1f48c4b0004d8b133efd0498e8d88d68d3b9199c">mirrors://xorg/individual/proto/recordproto-1.14.2.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="7ae9868a358859fe539482b02414aa15c2d8b1e4">mirrors://xorg/individual/proto/renderproto-0.11.1.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="9ff9bb9243b0474330959dc3853973523c9dd9ce">mirrors://xorg/individual/proto/resourceproto-1.2.0.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="640a2cbef5893aacda74799e6fa4d973e629b753">mirrors://xorg/individual/proto/scrnsaverproto-1.2.2.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="4556b5c2243a2ca290ea2140dc1a427c4bac8ba2">mirrors://xorg/individual/proto/videoproto-2.3.3.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="59ae9ec6414964440bf654b207618e5dd66a32fb">mirrors://xorg/individual/proto/xcmiscproto-1.2.2.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="b8d736342dcb73b71584d99a1cb9806d93c25ff8">mirrors://xorg/individual/proto/xextproto-7.3.0.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="312a2ea708b257520c1af4393b69d73a393a478f">mirrors://xorg/individual/proto/xf86bigfontproto-1.2.0.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="97a06120e7195c968875e8ba42e82c90ab54948b">mirrors://xorg/individual/proto/xf86dgaproto-2.1.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="23e861f40ba0f0cbbfd7db7ba2ef623762ffca17">mirrors://xorg/individual/proto/xf86driproto-2.1.1.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="11d54c3210887631ea71e8f8030a77692e964fc4">mirrors://xorg/individual/proto/xf86vidmodeproto-2.3.1.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="818bffc16139d6e3de4344c83f00c495d3536753">mirrors://xorg/individual/proto/xineramaproto-1.2.1.tar.bz2</Archive>
-            <Archive type="targz" sha1sum="f496ce16048c0b6b854fd6aefd6efb183eb61822">mirrors://xorg/individual/proto/xproto-7.0.31.tar.gz</Archive>
-            <Archive type="tarbz2" sha1sum="4abb036371670ecc25d32e48b3277fe203ae5203">mirrors://xorg/individual/proto/xproxymanagementprotocol-1.0.3.tar.bz2</Archive>
-            <Archive type="tarbz2" sha1sum="90f8600fb06c0c347551ad7096ef50492d86ba45">https://github.com/bbidulock/vncproto/releases/download/vncproto-1.1/vncproto-1.1.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="2e4a3db312e1ce81e15515dfcac52ba0aa5a920c">mirrors://xorg/individual/proto/xorgproto-2018.4.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>util-macros</Dependency>
                 <Dependency>libxslt</Dependency>
             </BuildDependencies>
-            <Patches>
-                <Patch level="1">docdir.patch</Patch>
-            </Patches>
             <SourceURI>system/devel/xorg-proto/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -16591,6 +16592,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2018-09-11</Date>
+                <Version>2018.4</Version>
+                <Comment>First release</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2018-07-15</Date>
                 <Version>7.6</Version>
@@ -17594,9 +17602,9 @@
             <Summary xml:lang="tr">VirtualBox için çekirdek modülleri</Summary>
             <Description xml:lang="en">This package provides the kernel support for VirtualBox.</Description>
             <Description xml:lang="tr">Bu paket VirtualBox için çekirdek desteği sunar.</Description>
-            <Archive type="tarxz" sha1sum="bf649555cc8845266e3f8d0494f80242e64cae58">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-5.2.12.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="734a9d48a9092610b14e750fd2957a2039fcdb8c">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-5.2.18.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.14.61">kernel-module-headers</Dependency>
+                <Dependency version="4.14.73">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -17606,8 +17614,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.14.61">kernel</Dependency>
-                <Dependency version="5.2.12">module-virtualbox-userspace</Dependency>
+                <Dependency version="4.14.73">kernel</Dependency>
+                <Dependency version="5.2.18">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -17628,6 +17636,27 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="33">
+                <Date>2018-10-05</Date>
+                <Version>5.2.18</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="32">
+                <Date>2018-09-16</Date>
+                <Version>5.2.18</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="31">
+                <Date>2018-08-17</Date>
+                <Version>5.2.16</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="30">
                 <Date>2018-08-06</Date>
                 <Version>5.2.12</Version>
@@ -17855,9 +17884,9 @@
             <Summary xml:lang="tr">VirtualBox misafir makineleri için çekirdek modülleri</Summary>
             <Description xml:lang="en">This package provides the kernel modules needed for mouse integration and shared folder support between VirtualBox host and guest systems.</Description>
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
-            <Archive type="tarxz" sha1sum="9c60738291a9697197ed2fc724eed35b6bae955c">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-5.2.12.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="c81e49394bd5b4f8dc23a89bc866554662ebef45">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-5.2.18.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="4.14.61">kernel-module-headers</Dependency>
+                <Dependency version="4.14.73">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -17867,9 +17896,9 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.14.61">kernel</Dependency>
+                <Dependency version="4.14.73">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
-                <Dependency version="5.2.12">module-virtualbox-guest-userspace</Dependency>
+                <Dependency version="5.2.18">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -17894,6 +17923,27 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="33">
+                <Date>2018-10-05</Date>
+                <Version>5.2.18</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="32">
+                <Date>2018-09-16</Date>
+                <Version>5.2.18</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="31">
+                <Date>2018-08-17</Date>
+                <Version>5.2.16</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="30">
                 <Date>2018-08-06</Date>
                 <Version>5.2.12</Version>
@@ -18127,7 +18177,7 @@
             <Description xml:lang="es">ndiswrapper permite usar controladores de windows XP para tarjetas WLAN que no tienen controladores propios para Linux.</Description>
             <Archive type="targz" sha1sum="213854ca8a83f9b5972db8fa873d346124e4bcb5">http://download.sourceforge.net/ndiswrapper/ndiswrapper-1.61.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.14.61">kernel-module-headers</Dependency>
+                <Dependency version="4.14.73">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch>linux-4.11.patch</Patch>
@@ -18142,7 +18192,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.14.61">kernel</Dependency>
+                <Dependency version="4.14.73">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -18154,6 +18204,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="20">
+                <Date>2018-10-05</Date>
+                <Version>1.61</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="19">
                 <Date>2018-08-07</Date>
                 <Version>1.61</Version>
@@ -18307,7 +18364,7 @@
             <Archive type="targz" sha1sum="8acbdbb4ab4ab4123d1773b616904798fbef9277" target="i686">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <Archive type="targz" sha1sum="1f568bb989d175813c5631c6629d9479eae6f3be" target="x86_64">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.14.61">kernel-module-headers</Dependency>
+                <Dependency version="4.14.73">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">patch/license.patch</Patch>
@@ -18326,8 +18383,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="4.14.61">kernel</Dependency>
-                <Dependency release="20">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="4.14.73">kernel</Dependency>
+                <Dependency release="21">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -18351,6 +18408,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="21">
+                <Date>2018-10-05</Date>
+                <Version>6.30.223.271</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="20">
                 <Date>2018-08-07</Date>
                 <Version>6.30.223.271</Version>
@@ -18510,14 +18574,14 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="4.14.61">kernel-module-headers</Dependency>
+                <Dependency version="4.14.73">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-bbswitch/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="4.14.61">kernel</Dependency>
+                <Dependency version="4.14.73">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -18530,6 +18594,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="21">
+                <Date>2018-10-05</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="20">
                 <Date>2018-07-07</Date>
                 <Version>0.8</Version>
@@ -18786,7 +18857,7 @@
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.14.61.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.14.73.xz</Patch>
                 <Patch level="1">patches/mageia_4_14/fs-aufs-4.14.patch</Patch>
                 <Patch level="1">patches/mageia_4_14/fs-aufs-4.14-modular.patch</Patch>
                 <Patch level="1">patches/mageia_4_14/fs-aufs-include-vmalloc.patch</Patch>
@@ -18812,6 +18883,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="21">
+                <Date>2018-10-05</Date>
+                <Version>4.14.73</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="20">
                 <Date>2018-08-07</Date>
                 <Version>4.14.61</Version>
@@ -19089,7 +19167,7 @@
                 <Dependency>xz-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-4.14.61.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-4.14.73.xz</Patch>
                 <Patch level="1">patches/mageia_4_14/fs-aufs-4.14.patch</Patch>
                 <Patch level="1">patches/mageia_4_14/fs-aufs-4.14-modular.patch</Patch>
                 <Patch level="1">patches/mageia_4_14/fs-aufs-include-vmalloc.patch</Patch>
@@ -19151,11 +19229,22 @@
             </Files>
         </Package>
         <History>
+            <Update release="22">
+                <Type package="kernel">security</Type>
+                <Date>2018-10-03</Date>
+                <Version>4.14.73</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
             <Update release="21">
                 <Type package="kernel">security</Type>
                 <Date>2018-08-06</Date>
                 <Version>4.14.61</Version>
-                <Comment>Rebuild</Comment>
+                <Comment>Rebuild.</Comment>
                 <Name>Ertuğrul Erata</Name>
                 <Email>ertugrulerata@gmail.com</Email>
                 <Requires>
@@ -19669,6 +19758,9 @@
             <BuildDependencies>
                 <Dependency>dietlibc</Dependency>
             </BuildDependencies>
+            <Patches>
+                <Patch level="1">sysmacros.patch</Patch>
+            </Patches>
             <SourceURI>hardware/disk/mdadm/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -19703,6 +19795,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2018-10-02</Date>
+                <Version>3.4</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2018-07-19</Date>
                 <Version>3.4</Version>
