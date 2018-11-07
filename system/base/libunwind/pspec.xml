@@ -40,10 +40,34 @@
         <Files>
             <Path fileType="header">/usr/include</Path>
             <Path fileType="library">/usr/lib/pkgconfig</Path>
+            <Path fileType="library">/usr/lib32/pkgconfig</Path>
         </Files>
     </Package>
-
+    <Package>
+        <Name>libunwind-32bit</Name>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for libunwind</Summary>
+        <BuildType>emul32</BuildType>
+        <BuildDependencies>
+            <Dependency>xz-32bit</Dependency>
+        </BuildDependencies>
+        <RuntimeDependencies>
+            <Dependency release="current">libunwind</Dependency>
+            <Dependency>xz-32bit</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib32</Path>
+        </Files>
+    </Package>
+    
     <History>
+        <Update release="5">
+            <Date>2018-11-06</Date>
+            <Version>1.1</Version>
+            <Comment>Rebuild libunwind-32bit</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-15</Date>
             <Version>1.1</Version>

@@ -1,0 +1,39 @@
+diff -Nuar a/Makefile b/Makefile
+--- a/Makefile	2018-10-15 17:25:07.000000000 +0300
++++ b/Makefile	2018-08-14 14:38:32.000000000 +0300
+@@ -25,7 +25,7 @@
+ 
+ KBUILD_VERBOSE =
+ 
+-vboxguest:
++all:
+ 	@echo "=== Building 'vboxguest' module ==="
+ 	@$(MAKE) KBUILD_VERBOSE=$(KBUILD_VERBOSE) -C vboxguest
+ 	@if [ -f vboxguest/vboxguest.ko ]; then \
+@@ -34,8 +34,6 @@
+ 	    cp vboxguest/vboxguest.o .; \
+ 	 fi
+ 	@echo
+-
+-vboxsf: vboxguest
+ 	@if [ -d vboxsf ]; then \
+ 	    if [ -f vboxguest/Module.symvers ]; then \
+ 	        cp vboxguest/Module.symvers vboxsf; \
+@@ -49,8 +47,6 @@
+ 	    fi; \
+ 	    echo; \
+ 	fi
+-
+-vboxvideo:
+ 	@if [ -d vboxvideo ]; then \
+ 	    if [ -f vboxguest/Module.symvers ]; then \
+ 	        cp vboxguest/Module.symvers vboxvideo; \
+@@ -65,8 +61,6 @@
+ 	    echo; \
+ 	fi
+ 
+-all: vboxguest vboxsf vboxvideo
+-
+ install:
+ 	@$(MAKE) KBUILD_VERBOSE=$(KBUILD_VERBOSE) -C vboxguest install
+ 	@if [ -d vboxsf ]; then \
