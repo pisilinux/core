@@ -1405,6 +1405,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2018-11-14</Date>
+                <Version>1.4</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2018-07-15</Date>
                 <Version>1.4</Version>
@@ -4309,6 +4316,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2018-11-14</Date>
+                <Version>3.10.1</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2018-07-15</Date>
                 <Version>3.10.1</Version>
@@ -9218,7 +9232,7 @@
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
                 <Dependency>dbus-devel</Dependency>
-                <Dependency release="4">dbus-python</Dependency>
+                <Dependency release="5">dbus-python</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -9239,6 +9253,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2018-10-31</Date>
+                <Version>1.2.4</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2018-07-20</Date>
                 <Version>1.2.4</Version>
@@ -10124,7 +10145,7 @@
             <Summary xml:lang="tr">dbus-glib için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="4">dbus-glib</Dependency>
+                <Dependency release="5">dbus-glib</Dependency>
                 <Dependency>dbus-devel</Dependency>
                 <Dependency>glib2-devel</Dependency>
             </RuntimeDependencies>
@@ -10135,6 +10156,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2018-10-31</Date>
+                <Version>0.108</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2018-07-20</Date>
                 <Version>0.108</Version>
@@ -11005,14 +11033,38 @@
             <Summary xml:lang="en">Development files for libunwind</Summary>
             <Summary xml:lang="tr">libunwind için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="4">libunwind</Dependency>
+                <Dependency release="5">libunwind</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
                 <Path fileType="library">/usr/lib/pkgconfig</Path>
+                <Path fileType="library">/usr/lib32/pkgconfig</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>libunwind-32bit</Name>
+            <Summary xml:lang="en">32-bit shared libraries for libunwind</Summary>
+            <PartOf>emul32</PartOf>
+            <BuildType>emul32</BuildType>
+            <BuildDependencies>
+                <Dependency>xz-32bit</Dependency>
+            </BuildDependencies>
+            <RuntimeDependencies>
+                <Dependency release="5">libunwind</Dependency>
+                <Dependency>xz-32bit</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2018-11-06</Date>
+                <Version>1.1</Version>
+                <Comment>Rebuild libunwind-32bit</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2018-07-15</Date>
                 <Version>1.1</Version>
@@ -12529,7 +12581,7 @@
             <Summary xml:lang="tr">polkit geliştirme başlıkları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="5">polkit</Dependency>
+                <Dependency release="6">polkit</Dependency>
                 <Dependency>glib2-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -12573,6 +12625,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2018-10-31</Date>
+                <Version>0.115</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2018-09-16</Date>
                 <Version>0.115</Version>
@@ -16650,7 +16709,7 @@
             <Summary xml:lang="en">XCB protocol descriptions</Summary>
             <Summary xml:lang="tr">XCB protokol tanımlamaları</Summary>
             <Description xml:lang="en">XCB is a project to enable efficient language bindings to the X11 protocol. This package contains the protocol descriptions themselves. Language bindings use these protocol descriptions to generate code for marshalling the protocol.</Description>
-            <Archive type="tarbz2" sha1sum="e93da374ecef9359370edc0160bcb8b2a2f7d9f6">https://xcb.freedesktop.org/dist/xcb-proto-1.12.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="f7fa35ab59af18cecadbe83fe705281dcfd82ffd">https://xcb.freedesktop.org/dist/xcb-proto-1.13.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>libxml2</Dependency>
             </BuildDependencies>
@@ -16666,6 +16725,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2018-11-05</Date>
+                <Version>1.13</Version>
+                <Comment>Version Bump</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
             <Update release="4">
                 <Date>2018-07-15</Date>
                 <Version>1.12</Version>
@@ -17602,7 +17668,7 @@
             <Summary xml:lang="tr">VirtualBox için çekirdek modülleri</Summary>
             <Description xml:lang="en">This package provides the kernel support for VirtualBox.</Description>
             <Description xml:lang="tr">Bu paket VirtualBox için çekirdek desteği sunar.</Description>
-            <Archive type="tarxz" sha1sum="734a9d48a9092610b14e750fd2957a2039fcdb8c">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-5.2.18.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="7a2fdde3d8b7ef72fea632c872cdbd7050287e87">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-5.2.20.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency version="4.14.73">kernel-module-headers</Dependency>
             </BuildDependencies>
@@ -17615,7 +17681,7 @@
             </BuildFlags>
             <RuntimeDependencies>
                 <Dependency version="4.14.73">kernel</Dependency>
-                <Dependency version="5.2.18">module-virtualbox-userspace</Dependency>
+                <Dependency version="5.2.20">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -17636,6 +17702,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="34">
+                <Date>2018-11-06</Date>
+                <Version>5.2.20</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="33">
                 <Date>2018-10-05</Date>
                 <Version>5.2.18</Version>
@@ -17884,7 +17957,7 @@
             <Summary xml:lang="tr">VirtualBox misafir makineleri için çekirdek modülleri</Summary>
             <Description xml:lang="en">This package provides the kernel modules needed for mouse integration and shared folder support between VirtualBox host and guest systems.</Description>
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
-            <Archive type="tarxz" sha1sum="c81e49394bd5b4f8dc23a89bc866554662ebef45">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-5.2.18.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="c9a96e8e3946bc5996d83667c910e017d6a4a6cd">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-5.2.20.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency version="4.14.73">kernel-module-headers</Dependency>
             </BuildDependencies>
@@ -17898,7 +17971,7 @@
             <RuntimeDependencies>
                 <Dependency version="4.14.73">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
-                <Dependency version="5.2.18">module-virtualbox-guest-userspace</Dependency>
+                <Dependency version="5.2.20">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -17923,6 +17996,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="34">
+                <Date>2018-11-06</Date>
+                <Version>5.2.20</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
             <Update release="33">
                 <Date>2018-10-05</Date>
                 <Version>5.2.18</Version>
