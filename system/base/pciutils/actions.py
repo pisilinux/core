@@ -13,13 +13,16 @@ def build():
                     SHARED="yes" \
                     PREFIX=/usr \
                     IDSDIR="/usr/share/misc" \
-                    MANDIR="/usr/share/man" \
                     all' % get.CFLAGS())
 
 def install():
     autotools.rawInstall('DESTDIR="%s" \
+                          PREFIX=/usr \
                           SHARED="yes" \
                           IDSDIR="/usr/share/misc" \
-                          MANDIR="/usr/share/man" \
                           install-lib' % get.installDIR())
+   
+    # remove update-pciids
+    pisitools.remove("/usr/sbin/update-pciids")
+    pisitools.remove("/usr/share/man/man8/update-pciids.8")
 
