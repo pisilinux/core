@@ -11,7 +11,7 @@ KDIR = kerneltools.getKernelVersion()
 
 def build():
     autotools.make("KERN_DIR=/lib/modules/%s/build" % KDIR)
-    autotools.make("-C vboxsf KERN_DIR=/lib/modules/%s/build" % KDIR)
+    #autotools.make("-C vboxsf KERN_DIR=/lib/modules/%s/build" % KDIR)
     autotools.make("-C vboxvideo KERN_DIR=/lib/modules/%s/build" % KDIR)
 
 def install():
