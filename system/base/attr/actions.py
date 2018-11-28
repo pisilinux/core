@@ -13,6 +13,8 @@ bindir = "/tmp"  if get.buildTYPE() == "emul32" else "/bin"
 
 def setup():
     autotools.rawConfigure("--libdir=/lib%s \
+                            --sysconfdir=/etc \
+                            --disable-static  \
                             --mandir=/usr/share/man \
                             --libexecdir=/lib%s \
                             --bindir=%s" % (suffix, suffix, bindir))
@@ -20,7 +22,7 @@ def build():
     autotools.make()
 
 def install():
-    autotools.make("DIST_ROOT=%s install install-lib install-dev" % get.installDIR())
+    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    
     if get.buildTYPE() == "emul32":
         pisitools.removeDir("/tmp")
-    pisitools.remove("/lib%s/libattr.a" % suffix)
