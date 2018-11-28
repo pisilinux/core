@@ -14,16 +14,18 @@ def setup():
     shelltools.export("DEBUG", "-DNDEBUG")
 
     autotools.rawConfigure("--libdir=/lib \
+                            --disable-static  \
                             --mandir=/usr/share/man \
                             --libexecdir=/lib \
                             --bindir=/bin")
+    
+    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
+    
 def build():
     autotools.make()
 
 def install():
-    autotools.make("DESTDIR=%s install install-lib install-dev" % get.installDIR())
-
-    pisitools.remove("/lib/*.a")
+    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     shelltools.chmod("%s/lib/libacl.so.*.*.*" % get.installDIR(), 0755)
 
