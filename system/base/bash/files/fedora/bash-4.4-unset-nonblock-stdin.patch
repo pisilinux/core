@@ -1,0 +1,11 @@
+diff --git a/parse.y b/parse.y
+index 85f1c4f..9d1cdf8 100644
+--- a/parse.y
++++ b/parse.y
+@@ -1453,6 +1453,7 @@ yy_readline_get ()
+ 	  old_sigint = (SigHandler *)set_signal_handler (SIGINT, sigint_sighandler);
+ 	}
+ 
++      sh_unset_nodelay_mode (fileno (rl_instream));	/* just in case */
+       current_readline_line = readline (current_readline_prompt ?
+       					  current_readline_prompt : "");

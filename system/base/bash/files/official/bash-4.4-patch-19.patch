@@ -1,0 +1,40 @@
+From b0776d8c49ab4310fa056ce1033985996c5b9807 Mon Sep 17 00:00:00 2001
+From: Chet Ramey <chet.ramey@case.edu>
+Date: Tue, 6 Feb 2018 16:22:34 -0500
+Subject: [PATCH] Bash-4.4 patch 19
+
+---
+ lib/readline/display.c | 4 +++-
+ patchlevel.h           | 2 +-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/lib/readline/display.c b/lib/readline/display.c
+index 41fb0531..2d2e768a 100644
+--- a/lib/readline/display.c
++++ b/lib/readline/display.c
+@@ -771,7 +771,9 @@ rl_redisplay ()
+ 	 appear in the first and last lines of the prompt */
+       wadjust = (newlines == 0)
+ 		  ? prompt_invis_chars_first_line
+-		  : ((newlines == prompt_lines_estimate) ? wrap_offset : prompt_invis_chars_first_line);
++		  : ((newlines == prompt_lines_estimate)
++		  	? (wrap_offset - prompt_invis_chars_first_line)
++		  	: 0);
+ 
+       /* fix from Darin Johnson <darin@acuson.com> for prompt string with
+          invisible characters that is longer than the screen width.  The
+diff --git a/patchlevel.h b/patchlevel.h
+index f0ee56e4..a711c495 100644
+--- a/patchlevel.h
++++ b/patchlevel.h
+@@ -25,6 +25,6 @@
+    regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
+    looks for to find the patch level (for the sccs version string). */
+ 
+-#define PATCHLEVEL 18
++#define PATCHLEVEL 19
+ 
+ #endif /* _PATCHLEVEL_H_ */
+-- 
+2.13.6
+
