@@ -1,0 +1,38 @@
+From 1aef9c7b55dcef4af239caf93e01419e1c8e04ad Mon Sep 17 00:00:00 2001
+From: Chet Ramey <chet.ramey@case.edu>
+Date: Mon, 29 Jan 2018 16:03:33 -0500
+Subject: [PATCH] Bash-4.4 patch 13
+
+---
+ patchlevel.h | 2 +-
+ redir.c      | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/patchlevel.h b/patchlevel.h
+index 93dbe0db..779671cd 100644
+--- a/patchlevel.h
++++ b/patchlevel.h
+@@ -25,6 +25,6 @@
+    regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
+    looks for to find the patch level (for the sccs version string). */
+ 
+-#define PATCHLEVEL 12
++#define PATCHLEVEL 13
+ 
+ #endif /* _PATCHLEVEL_H_ */
+diff --git a/redir.c b/redir.c
+index 25488eaf..1858b0b0 100644
+--- a/redir.c
++++ b/redir.c
+@@ -469,6 +469,8 @@ here_document_to_fd (redirectee, ri)
+       return (fd);
+     }
+ 
++  SET_CLOSE_ON_EXEC (fd);
++
+   errno = r = 0;		/* XXX */
+   /* write_here_document returns 0 on success, errno on failure. */
+   if (redirectee->word)
+-- 
+2.13.6
+
