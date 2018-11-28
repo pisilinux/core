@@ -24,6 +24,7 @@
             <Dependency>libpcre-devel</Dependency>
             <Dependency>libxslt-devel</Dependency>
             <Dependency>gperf</Dependency>
+            <Dependency>intltool</Dependency>
         </BuildDependencies>
         <!--Patches>
             <Patch>upstream.patch</Patch>
@@ -91,6 +92,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2018-11-28</Date>
+            <Version>3.2.5</Version>
+            <Comment>add intltool builddep.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="9">
             <Date>2018-07-15</Date>
             <Version>3.2.5</Version>
