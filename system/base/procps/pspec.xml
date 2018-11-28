@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Standard informational utilities and process-handling tools</Summary>
         <Description>procps is the package that has a bunch of small useful utilities that give information about processes using the /proc filesystem. The package includes the programs ps, top, vmstat, w, kill, free, slabtop, and skill.</Description>
-        <Archive sha1sum="82c0745f150f1385ca01fe7d24f05f74e31c94c6" type="tarxz">http://downloads.sourceforge.net/project/procps-ng/Production/procps-ng-3.3.12.tar.xz</Archive>
+        <Archive sha1sum="2929bc64f0cf7b2db997eef79b7187658e47230d" type="tarxz">http://downloads.sourceforge.net/project/procps-ng/Production/procps-ng-3.3.15.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>ncurses-devel</Dependency>
         </BuildDependencies>
@@ -38,6 +38,13 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2018-11-28</Date>
+            <Version>3.3.15</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-15</Date>
             <Version>3.3.12</Version>
