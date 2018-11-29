@@ -28,5 +28,7 @@ def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     shelltools.chmod("%s/lib/libacl.so.*.*.*" % get.installDIR(), 0755)
+    shelltools.copytree("%s/lib/pkgconfig" % get.installDIR(), "%s/usr/lib/pkgconfig" % get.installDIR())
+    pisitools.removeDir("/lib/pkgconfig")
 
     pisitools.dodoc("README")
