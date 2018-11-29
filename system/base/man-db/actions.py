@@ -18,7 +18,7 @@ def setup():
                           --enable-mb-groff" % (get.docDIR(), get.srcNAME()))
 
 def build():
-    shelltools.system("sed -i '/gets is a security hole/d' gnulib/lib/stdio.in.h")  
+    #shelltools.system("sed -i '/gets is a security hole/d' gnulib/lib/stdio.in.h")  
     autotools.make("CC='%s %s' V=1 nls=all" % (get.CC(), get.CFLAGS()))
 
 def install():
