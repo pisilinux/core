@@ -1,0 +1,203 @@
+diff --git a/builtins/fc.def b/builtins/fc.def
+index fe16471..98c53db 100644
+--- a/builtins/fc.def
++++ b/builtins/fc.def
+@@ -423,6 +423,7 @@ fc_builtin (list)
+     {
+       sh_wrerror ();
+       fclose (stream);
++      FREE (fn);
+       return (EXECUTION_FAILURE);
+     }
+   fclose (stream);
+diff --git a/execute_cmd.c b/execute_cmd.c
+index 63a332a..15b5e19 100644
+--- a/execute_cmd.c
++++ b/execute_cmd.c
+@@ -2196,8 +2196,10 @@ coproc_setvars (cp)
+   if (v == 0)
+     {
+       v = find_variable_nameref_for_create (cp->c_name, 1);
+-      if (v == INVALID_NAMEREF_VALUE)
+-	return;
++      if (v == INVALID_NAMEREF_VALUE) {
++        free (namevar);
++        return;
++      }
+       if (v && nameref_p (v))
+ 	{
+ 	  free (cp->c_name);
+@@ -2210,6 +2212,7 @@ coproc_setvars (cp)
+     {
+       if (readonly_p (v))
+ 	err_readonly (cp->c_name);
++      free (namevar);
+       return;
+     }
+   if (v == 0)
+@@ -5528,7 +5531,6 @@ shell_execve (command, args, env)
+ 	      char *interp;
+ 	      int ilen;
+ 
+-              close (fd);
+ 	      interp = getinterp (sample, sample_len, (int *)NULL);
+ 	      ilen = strlen (interp);
+ 	      errno = i;
+diff --git a/expr.c b/expr.c
+index 172964a..5dc57c0 100644
+--- a/expr.c
++++ b/expr.c
+@@ -207,7 +207,8 @@ static intmax_t exp5 __P((void));
+ static intmax_t exp4 __P((void));
+ static intmax_t expshift __P((void));
+ static intmax_t exp3 __P((void));
+-static intmax_t exp2 __P((void));
++/* Avoid name clash with standard exp2 */
++static intmax_t bash_exp2 __P((void));
+ static intmax_t	exppower __P((void));
+ static intmax_t exp1 __P((void));
+ static intmax_t exp0 __P((void));
+@@ -809,14 +810,14 @@ exp3 ()
+ {
+   register intmax_t val1, val2;
+ 
+-  val1 = exp2 ();
++  val1 = bash_exp2 ();
+ 
+   while ((curtok == PLUS) || (curtok == MINUS))
+     {
+       int op = curtok;
+ 
+       readtok ();
+-      val2 = exp2 ();
++      val2 = bash_exp2 ();
+ 
+       if (op == PLUS)
+ 	val1 += val2;
+@@ -828,7 +829,7 @@ exp3 ()
+ }
+ 
+ static intmax_t
+-exp2 ()
++bash_exp2 ()
+ {
+   register intmax_t val1, val2;
+ #if defined (HAVE_IMAXDIV)
+diff --git a/lib/glob/glob.c b/lib/glob/glob.c
+index 7f6eafe..c018e29 100644
+--- a/lib/glob/glob.c
++++ b/lib/glob/glob.c
+@@ -576,7 +576,7 @@ glob_vector (pat, dir, flags)
+   register char *nextname, *npat, *subdir;
+   unsigned int count;
+   int lose, skip, ndirs, isdir, sdlen, add_current, patlen;
+-  register char **name_vector;
++  register char **name_vector = NULL;
+   register unsigned int i;
+   int mflags;		/* Flags passed to strmatch (). */
+   int pflags;		/* flags passed to sh_makepath () */
+@@ -894,7 +894,7 @@ glob_vector (pat, dir, flags)
+ 	}
+ 
+       /* Don't call QUIT; here; let higher layers deal with it. */
+-
++      FREE (name_vector);
+       return ((char **)NULL);
+     }
+ 
+diff --git a/lib/sh/pathcanon.c b/lib/sh/pathcanon.c
+index f19bd55..2a565d6 100644
+--- a/lib/sh/pathcanon.c
++++ b/lib/sh/pathcanon.c
+@@ -227,7 +227,7 @@ sh_canonpath (path, flags)
+       if (result[2] == '\0')	/* short-circuit for bare `//' */
+ 	result[1] = '\0';
+       else
+-	strcpy (result, result + 1);
++	memmove(result, result + 1, strlen(result + 1) + 1);
+     }
+ 
+   return (result);
+diff --git a/lib/sh/pathphys.c b/lib/sh/pathphys.c
+index 26016b7..b64c4cd 100644
+--- a/lib/sh/pathphys.c
++++ b/lib/sh/pathphys.c
+@@ -245,7 +245,7 @@ error:
+       if (result[2] == '\0')	/* short-circuit for bare `//' */
+ 	result[1] = '\0';
+       else
+-	strcpy (result, result + 1);
++	memmove(result, result + 1, strlen(result + 1) + 1);
+     }
+ 
+   return (result);
+diff --git a/shell.c b/shell.c
+index b43de50..4aae182 100644
+--- a/shell.c
++++ b/shell.c
+@@ -1948,8 +1948,10 @@ show_shell_usage (fp, extra)
+   fputs (_("\t-ilrsD or -c command or -O shopt_option\t\t(invocation only)\n"), fp);
+ 
+   for (i = 0, set_opts = 0; shell_builtins[i].name; i++)
+-    if (STREQ (shell_builtins[i].name, "set"))
++    if (STREQ (shell_builtins[i].name, "set")) {
+       set_opts = savestring (shell_builtins[i].short_doc);
++      break;
++    }
+   if (set_opts)
+     {
+       s = strchr (set_opts, '[');
+diff --git a/subst.c b/subst.c
+index 5f3e41e..7574617 100644
+--- a/subst.c
++++ b/subst.c
+@@ -5182,8 +5182,11 @@ parameter_list_transform (xc, itype, quoted)
+   list = list_rest_of_args ();
+   if (list == 0)
+     return ((char *)NULL);
+-  if (xc == 'A')
+-    return (pos_params_assignment (list, itype, quoted));
++  if (xc == 'A') {
++      ret = pos_params_assignment (list, itype, quoted);
++      dispose_words (list);
++      return (ret);
++  }
+   ret = list_transform (xc, (SHELL_VAR *)0, list, itype, quoted);
+   dispose_words (list);
+   return (ret);
+@@ -6813,6 +6816,7 @@ parameter_brace_expand_rhs (name, value, c, quoted, pflags, qdollaratp, hasdolla
+ 	{
+ 	  report_error (_("%s: invalid indirect expansion"), name);
+ 	  free (vname);
++      free (t1);
+ 	  dispose_word (w);
+ 	  return &expand_wdesc_error;
+ 	}
+@@ -6820,6 +6824,7 @@ parameter_brace_expand_rhs (name, value, c, quoted, pflags, qdollaratp, hasdolla
+ 	{
+ 	  report_error (_("%s: invalid variable name"), vname);
+ 	  free (vname);
++      free (t1);
+ 	  dispose_word (w);
+ 	  return &expand_wdesc_error;
+ 	}
+diff --git a/support/man2html.c b/support/man2html.c
+index 6ba5061..1d9e376 100644
+--- a/support/man2html.c
++++ b/support/man2html.c
+@@ -522,6 +522,7 @@ read_man_page(char *filename)
+ 			man_buf[buf_size] = '\n';
+ 			man_buf[buf_size + 1] = man_buf[buf_size + 2] = '\0';
+ 		} else {
++            free (man_buf);
+ 			man_buf = NULL;
+ 		}
+ 		fclose(man_stream);
+@@ -2562,7 +2563,6 @@ scan_request(char *c)
+ 					h = name;
+ 				if (stat(h, &stbuf) != -1)
+ 					l = stbuf.st_size;
+-				buf = stralloc(l + 4);
+ #if NOCGI
+ 				if (!out_length) {
+ 					char   *t, *s;

@@ -1,0 +1,68 @@
+From c9f1b04651dae16e33f0aa8974c5122e26b362ae Mon Sep 17 00:00:00 2001
+From: Chet Ramey <chet.ramey@case.edu>
+Date: Mon, 29 Jan 2018 16:04:20 -0500
+Subject: [PATCH] Bash-4.4 patch 16
+
+---
+ lib/sh/zread.c | 23 +++++++++--------------
+ patchlevel.h   |  2 +-
+ 2 files changed, 10 insertions(+), 15 deletions(-)
+
+diff --git a/lib/sh/zread.c b/lib/sh/zread.c
+index 868f9705..496f20b8 100644
+--- a/lib/sh/zread.c
++++ b/lib/sh/zread.c
+@@ -37,7 +37,10 @@ extern int errno;
+ #  define SEEK_CUR 1
+ #endif
+ 
++extern int executing_builtin;
++
+ extern void check_signals_and_traps (void);
++extern void check_signals (void);
+ extern int signal_is_trapped (int);
+ 
+ /* Read LEN bytes from FD into BUF.  Retry the read on EINTR.  Any other
+@@ -50,21 +53,13 @@ zread (fd, buf, len)
+ {
+   ssize_t r;
+ 
+-#if 0
+-#if defined (HAVE_SIGINTERRUPT)
+-  if (signal_is_trapped (SIGCHLD))
+-    siginterrupt (SIGCHLD, 1);
+-#endif
+-#endif
+-
+   while ((r = read (fd, buf, len)) < 0 && errno == EINTR)
+-    check_signals_and_traps ();	/* XXX - should it be check_signals()? */
+-
+-#if 0 
+-#if defined (HAVE_SIGINTERRUPT)
+-  siginterrupt (SIGCHLD, 0);
+-#endif
+-#endif
++    /* XXX - bash-5.0 */
++    /* We check executing_builtin and run traps here for backwards compatibility */
++    if (executing_builtin)
++      check_signals_and_traps ();	/* XXX - should it be check_signals()? */
++    else
++      check_signals ();
+ 
+   return r;
+ }
+diff --git a/patchlevel.h b/patchlevel.h
+index 6e9ed3fc..9074f4dd 100644
+--- a/patchlevel.h
++++ b/patchlevel.h
+@@ -25,6 +25,6 @@
+    regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
+    looks for to find the patch level (for the sccs version string). */
+ 
+-#define PATCHLEVEL 15
++#define PATCHLEVEL 16
+ 
+ #endif /* _PATCHLEVEL_H_ */
+-- 
+2.13.6
+

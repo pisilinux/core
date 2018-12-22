@@ -1,0 +1,38 @@
+From 9cce630e80008e74fa9a1d9408367341caf363f2 Mon Sep 17 00:00:00 2001
+From: Chet Ramey <chet.ramey@case.edu>
+Date: Mon, 29 Jan 2018 16:04:01 -0500
+Subject: [PATCH] Bash-4.4 patch 15
+
+---
+ patchlevel.h | 2 +-
+ subst.c      | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/patchlevel.h b/patchlevel.h
+index 09a3cc84..6e9ed3fc 100644
+--- a/patchlevel.h
++++ b/patchlevel.h
+@@ -25,6 +25,6 @@
+    regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
+    looks for to find the patch level (for the sccs version string). */
+ 
+-#define PATCHLEVEL 14
++#define PATCHLEVEL 15
+ 
+ #endif /* _PATCHLEVEL_H_ */
+diff --git a/subst.c b/subst.c
+index dbf0157e..fc00cab0 100644
+--- a/subst.c
++++ b/subst.c
+@@ -5906,6 +5906,8 @@ process_substitute (string, open_for_read_in_child)
+      parent. */
+   expanding_redir = 0;
+ 
++  remove_quoted_escapes (string);
++
+   subshell_level++;
+   result = parse_and_execute (string, "process substitution", (SEVAL_NONINT|SEVAL_NOHIST));
+   subshell_level--;
+-- 
+2.13.6
+

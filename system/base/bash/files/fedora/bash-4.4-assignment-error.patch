@@ -1,0 +1,31 @@
+diff --git a/execute_cmd.h b/execute_cmd.h
+--- a/execute_cmd.h
++++ b/execute_cmd.h
+@@ -37,6 +37,9 @@ struct func_array_state
+   };
+ #endif
+ 
++/* Variables delared in execute_cmd.c, used by many other files */
++extern int executing_command_builtin;
++
+ extern struct fd_bitmap *new_fd_bitmap __P((int));
+ extern void dispose_fd_bitmap __P((struct fd_bitmap *));
+ extern void close_fd_bitmap __P((struct fd_bitmap *));
+diff --git a/subst.c b/subst.c
+--- a/subst.c
++++ b/subst.c
+@@ -10676,11 +10676,12 @@ expand_word_list_internal (list, eflags)
+ 		  tint = do_word_assignment (temp_list->word, 0);
+ 		  this_command_name = savecmd;
+ 		  /* Variable assignment errors in non-interactive shells
+-		     running in Posix.2 mode cause the shell to exit. */
++		     running in Posix.2 mode cause the shell to exit, unless 
++		     they are being run by the `command' builtin. */
+ 		  if (tint == 0)
+ 		    {
+ 		      last_command_exit_value = EXECUTION_FAILURE;
+-		      if (interactive_shell == 0 && posixly_correct)
++		      if (interactive_shell == 0 && posixly_correct && executing_command_builtin == 0)
+ 			exp_jump_to_top_level (FORCE_EOF);
+ 		      else
+ 			exp_jump_to_top_level (DISCARD);

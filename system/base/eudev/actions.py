@@ -13,8 +13,8 @@ from pisi.actionsapi import get
 suffix = "32" if get.buildTYPE() == "emul32" else ""
 
 def setup():
-    shelltools.system("./autogen.sh")
-
+    autotools.autoreconf("-fis")
+    
     autotools.configure("--prefix=/usr           \
                          --bindir=/sbin          \
                          --sbindir=/sbin         \

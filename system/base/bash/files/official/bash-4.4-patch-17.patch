@@ -1,0 +1,41 @@
+From b3a5ec8dd510a68dc850f3f516c0cf9afd87451f Mon Sep 17 00:00:00 2001
+From: Chet Ramey <chet.ramey@case.edu>
+Date: Mon, 29 Jan 2018 16:04:37 -0500
+Subject: [PATCH] Bash-4.4 patch 17
+
+---
+ builtins/read.def | 5 +++++
+ patchlevel.h      | 2 +-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/builtins/read.def b/builtins/read.def
+index 33821f3f..803bea35 100644
+--- a/builtins/read.def
++++ b/builtins/read.def
+@@ -690,6 +690,11 @@ add_char:
+   input_string[i] = '\0';
+   CHECK_ALRM;
+ 
++#if defined (READLINE)
++  if (edit)
++    free (rlbuf);
++#endif
++
+   if (retval < 0)
+     {
+       t_errno = errno;
+diff --git a/patchlevel.h b/patchlevel.h
+index 9074f4dd..98e714da 100644
+--- a/patchlevel.h
++++ b/patchlevel.h
+@@ -25,6 +25,6 @@
+    regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
+    looks for to find the patch level (for the sccs version string). */
+ 
+-#define PATCHLEVEL 16
++#define PATCHLEVEL 17
+ 
+ #endif /* _PATCHLEVEL_H_ */
+-- 
+2.13.6
+
