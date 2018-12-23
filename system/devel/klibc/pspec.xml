@@ -17,7 +17,8 @@
         <!--Archive sha1sum="18a30cecd740f118013839333d9774e79b6a7510" type="tarxz">http://www.kernel.org/pub/linux/kernel/v3.0/linux-3.7.tar.xz</Archive-->
         <BuildDependencies>
             <Dependency>perl</Dependency>
-            <Dependency>kernel-module-headers</Dependency>
+            <!--Kernel güncellemesi sonrasında klibc rei edilmeli-->
+<!--             <Dependency>kernel-module-headers</Dependency> -->
         </BuildDependencies>
     </Source>
 
@@ -39,6 +40,13 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2018-12-23</Date>
+            <Version>2.0.4</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-15</Date>
             <Version>2.0.4</Version>
