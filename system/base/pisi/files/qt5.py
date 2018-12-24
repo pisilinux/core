@@ -47,7 +47,9 @@ qmldir = "%s/%s/qml" % (libdir, basename)
 testdir = "%s/share/%s" % (prefix, basename)
 translationdir = "%s/translations" % datadir
 
-qmake = "%s/qmake-qt5" % bindir
+#Temporary bindir to avoid qt4 conflicts
+#qmake = "%s/qmake-qt5" % bindir
+qmake = "%s/qmake" % bindir
 
 class ConfigureError(pisi.actionsapi.Error):
     def __init__(self, value=''):
