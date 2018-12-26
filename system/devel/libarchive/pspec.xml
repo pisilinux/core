@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Library for reading and writing streaming archives</Summary>
         <Description>libarchive includes a library and command-line tools for reading and writing tar, cpio, zip, ISO, and other archive formats.</Description>
-        <Archive sha1sum="580064227105e30322caa6c67b59e8c8e6060027" type="targz">http://www.libarchive.org/downloads/libarchive-3.3.2.tar.gz</Archive>
+        <Archive sha1sum="499a8f48a895faff4151d7398b24070d578f0b2e" type="targz">http://www.libarchive.org/downloads/libarchive-3.3.3.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>acl-devel</Dependency>
             <Dependency>nettle-devel</Dependency>
@@ -60,6 +60,13 @@
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2018-12-26</Date>
+            <Version>3.3.3</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="5">
             <Date>2018-07-29</Date>
             <Version>3.3.2</Version>
