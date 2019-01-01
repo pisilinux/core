@@ -12,9 +12,9 @@
         <IsA>library</IsA>
         <Summary>XSLT libraries and tools</Summary>
         <Description>Libxslt is the XSLT C library developed for the GNOME project. XSLT itself is a an XML language to define transformation for XML.</Description>
-        <Archive sha1sum="edcaeabb3555ae44853bdc406ee9521fb65c620d" type="targz">ftp://ftp.xmlsoft.org/libxml2/libxslt-1.1.29.tar.gz</Archive>
+        <Archive sha1sum="c47969f16747a72f9095b6a7a56d3afdd1e6e9ac" type="targz">ftp://ftp.xmlsoft.org/libxml2/libxslt-1.1.32.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>libxml2-devel</Dependency>
+            <Dependency versionFrom="2.9.8">libxml2-devel</Dependency>
             <Dependency>libgcrypt-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -78,6 +78,13 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2018-12-31</Date>
+            <Version>1.1.32</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-09-16</Date>
             <Version>1.1.29</Version>
