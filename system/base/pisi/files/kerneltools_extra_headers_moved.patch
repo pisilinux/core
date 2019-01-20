@@ -1,0 +1,34 @@
+diff -Nuar pisi-2.6.old/pisi/actionsapi/kerneltools.py pisi-2.6/pisi/actionsapi/kerneltools.py
+--- pisi-2.6.old/pisi/actionsapi/kerneltools.py	2014-03-08 00:03:46.000000000 +0200
++++ pisi-2.6/pisi/actionsapi/kerneltools.py	2019-01-14 07:07:34.637002938 +0300
+@@ -187,13 +187,13 @@
+ def installHeaders(extraHeaders=None):
+     """ Install the files needed to build out-of-tree kernel modules. """
+ 
+-    extras = ["drivers/media/dvb-core",
+-              "drivers/media/dvb-frontends",
+-              "drivers/media/tuners",
+-              "drivers/media/platform"]
++    #extras = ["drivers/media/dvb-core",
++    #          "drivers/media/dvb-frontends",
++    #          "drivers/media/tuners",
++    #          "drivers/media/platform"]
+ 
+-    if extraHeaders:
+-        extras.extend(extraHeaders)
++    #if extraHeaders:
++    #    extras.extend(extraHeaders)
+ 
+     pruned = ["include", "scripts", "Documentation"]
+     wanted = ["Makefile*", "Kconfig*", "Kbuild*", "*.sh", "*.pl", "*.lds"]
+@@ -215,8 +215,8 @@
+     shelltools.system(find_cmd)
+ 
+     # Install additional headers
+-    for headers in extras:
+-        shelltools.system("cp -a %s/*.h %s/%s" % (headers, destination, headers))
++    #for headers in extras:
++    #    shelltools.system("cp -a %s/*.h %s/%s" % (headers, destination, headers))
+ 
+     # Install remaining headers
+     shelltools.system("cp -a %s %s" % (" ".join(pruned), destination))
