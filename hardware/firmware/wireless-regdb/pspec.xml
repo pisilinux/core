@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pardus.org.tr/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>wireless-regdb</Name>
+        <Homepage>https://wireless.wiki.kernel.org/en/developers/Regulatory</Homepage>
+        <Packager>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Packager>
+        <License>ISC</License>
+        <Icon>wireless-regdb</Icon>
+        <IsA>app:console</IsA>
+        <Summary>This package contains the wireless regulatory database used by all cfg80211 based Linux wireless drivers</Summary>
+        <Description>This package contains the wireless regulatory database used by all cfg80211 based Linux wireless drivers</Description>
+        <Archive sha1sum="a4a541f4ef81985e919b15477253f16df997e8d9" type="tarxz">https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-2018.10.24.tar.xz</Archive>
+    </Source>
+
+    <Package>
+        <Name>wireless-regdb</Name>
+        <Files>
+            <Path fileType="conf">/etc/wireless-regdb</Path>
+            <Path fileType="data">/usr/lib/crda</Path>
+            <Path fileType="data">/lib/firmware</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2019-01-15</Date>
+            <Version>2018.10.24</Version>
+            <Comment>First release</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

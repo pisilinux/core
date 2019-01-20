@@ -3,7 +3,7 @@
 <PISI>
     <Source>
         <Name>kmod</Name>
-        <Homepage>http://git.kernel.org/?p=utils/kernel/kmod/kmod.git;a=summary</Homepage>
+        <Homepage>https://git.kernel.org/?p=utils/kernel/kmod/kmod.git;a=summary</Homepage>
         <Packager>
             <Name>PisiLinux Community</Name>
             <Email>admins@pisilinux.org</Email>
@@ -30,7 +30,6 @@
         <RuntimeDependencies>
             <Dependency>xz</Dependency>
             <Dependency>zlib</Dependency>
-            <Dependency>glibc</Dependency>
             <Dependency version="current">libkmod</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -107,6 +106,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2019-01-20</Date>
+            <Version>25</Version>
+            <Comment>Fix deps.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2018-07-15</Date>
             <Version>25</Version>
