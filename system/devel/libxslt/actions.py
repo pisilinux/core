@@ -8,6 +8,9 @@ from pisi.actionsapi import get
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 
+
+Libdir = "/usr/lib32" if get.buildTYPE() == "emul32" else "/usr/lib"
+
 def setup():
     python = "--without-python" if get.buildTYPE() == "emul32" else "--with-python=/usr/bin/python2.7 "
     # don't remove --with-debugger as it is needed for reverse dependencies
@@ -15,6 +18,7 @@ def setup():
                          --with-crypto \
                          --with-debugger \
                          --disable-static \
+                         --includedir=/usr/include \
                          --with-xz \
                          --with-zlib \
                          --disable-silent-rules \
