@@ -15,6 +15,7 @@ def setup():
     options = "--with-zlib \
                --with-readline \
                --enable-ipv6 \
+               --includedir=/usr/include \
                --disable-static \
                --with-threads \
                --with-history \
@@ -22,8 +23,10 @@ def setup():
 
     if get.buildTYPE() == "emul32":
         options += " --bindir=/emul32/bin \
+                     --libdir=/usr/lib32 \
                      --without-python"
-    else: options += " --with-python"
+    else: options += " --with-python \
+                       --libdir=/usr/lib"
 
     autotools.configure(options)
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
