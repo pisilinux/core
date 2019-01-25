@@ -45,17 +45,20 @@ def setup():
         pisitools.dosed("%s/misc/gen-pkgconfig.in" % WORKDIR, "^(show_prefix=).*", "\\1'/usr'")
         CONFIGPARAMS += " --prefix=/_emul32 \
                           --libdir=/usr/lib32 \
+                          --includedir=/usr/include \
                           --libexecdir=/_emul32/lib \
                           --bindir=/_emul32/bin \
                           --sbindir=/_emul32/sbin \
-                          --mandir=/_emul32/share/man"
+                          --mandir=/_emul32/share/man \
+                          --with-pkg-config-libdir=/usr/lib32/pkgconfig"
     else:
         CONFIGPARAMS += " --prefix=/usr \
                           --libdir=/usr/lib \
                           --libexecdir=/usr/lib \
                           --bindir=/usr/bin \
                           --sbindir=/usr/sbin \
-                          --mandir=/usr/share/man"
+                          --mandir=/usr/share/man \
+                          --with-pkg-config-libdir=/usr/lib/pkgconfig"
 
     shelltools.system("%s/configure --enable-widec --enable-pc-files %s" % (WORKDIR, CONFIGPARAMS))
 
