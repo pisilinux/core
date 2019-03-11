@@ -18,6 +18,9 @@
             <Dependency>m4</Dependency>
             <Dependency>perl</Dependency>
         </BuildDependencies>
+        <Patches>
+            <Patch>autoconf-2.69-perl-5.22-autoscan.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
@@ -36,6 +39,13 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2019-03-11</Date>
+            <Version>2.69</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-15</Date>
             <Version>2.69</Version>
