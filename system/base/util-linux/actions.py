@@ -84,7 +84,7 @@ def install():
 
     #pisitools.doman("sys-utils/klogconsole.man")
     pisitools.remove("/usr/share/man/man1/kill.1")
-    pisitools.remove("/usr/share/bash-completion/completions/rfkill")
+    #pisitools.remove("/usr/share/bash-completion/completions/rfkill")
 
     if get.buildTYPE() == "emul32": return
 
