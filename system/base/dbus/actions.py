@@ -60,5 +60,5 @@ def install():
     pisitools.dodir("/var/lib/dbus")
     pisitools.dodir("/usr/share/dbus-1/services")
 
-    pisitools.dodoc("AUTHORS", "ChangeLog", "HACKING", "NEWS", "README", "doc/TODO", "doc/*.txt")
+    pisitools.dodoc("AUTHORS", "ChangeLog", "NEWS", "README", "doc/TODO", "doc/*.txt")
     pisitools.dohtml("doc/")
