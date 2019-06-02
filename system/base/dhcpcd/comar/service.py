@@ -21,7 +21,7 @@ def start():
         fail(MSG_BACKEND_WARNING)
 
     startService(command="/usr/bin/dhcpcd",
-                 args="daemon -q -b %s" % pidfile,
+                 args="-q ",
                  donotify=True)
 
 @synchronized
