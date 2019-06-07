@@ -11,7 +11,7 @@
         <IsA>app:console</IsA>
         <Summary>Assembler and linker tools</Summary>
         <Description>Contains commands like as, ld, nm, objdump, ar, ranlib for compiling assembly code to the machine language, and for linking and manipulating the binary object files.</Description>
-        <Archive sha1sum="33d807f7fa680b00439eb5560acd0c2ef645e5f9" type="tarbz2">http://ftp.gnu.org/gnu/binutils/binutils-2.30.tar.bz2</Archive>
+        <Archive sha1sum="ee5ae264f29c0c89fbaa817ee629675acd815d26" type="tarbz2">https://ftp.gnu.org/gnu/binutils/binutils-2.32.tar.bz2</Archive>
         <Patches>
         </Patches>
     </Source>
@@ -31,6 +31,13 @@
     </Package>
 
     <History>
+		<Update release="5">
+            <Date>2019-06-08</Date>
+            <Version>2.32</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-15</Date>
             <Version>2.30</Version>
