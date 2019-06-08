@@ -1,0 +1,39 @@
+From dfd2cc6ac5558e252af0a7cb829a9629bf782e17 Mon Sep 17 00:00:00 2001
+From: Chet Ramey <chet.ramey@case.edu>
+Date: Sat, 20 Apr 2019 14:27:00 -0400
+Subject: [PATCH] Bash-5.0 patch 6: allow building with SYSLOG_HISTORY defined
+ without defining SYSLOG_SHOPT
+
+---
+ builtins/shopt.def | 2 +-
+ patchlevel.h       | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/builtins/shopt.def b/builtins/shopt.def
+index f6dc6f97..1c485361 100644
+--- a/builtins/shopt.def
++++ b/builtins/shopt.def
+@@ -122,7 +122,7 @@ extern int assoc_expand_once;
+ extern int array_expand_once;
+ #endif
+ 
+-#if defined (SYSLOG_HISTORY) && defined (SYSLOG_SHOPT)
++#if defined (SYSLOG_HISTORY)
+ extern int syslog_history;
+ #endif
+ 
+diff --git a/patchlevel.h b/patchlevel.h
+index 1bc098b8..14bff9fc 100644
+--- a/patchlevel.h
++++ b/patchlevel.h
+@@ -25,6 +25,6 @@
+    regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
+    looks for to find the patch level (for the sccs version string). */
+ 
+-#define PATCHLEVEL 5
++#define PATCHLEVEL 6
+ 
+ #endif /* _PATCHLEVEL_H_ */
+-- 
+2.17.2
+

@@ -1,0 +1,202 @@
+From fcf6ae7d069a64741e9484cf219d7fe95de9e796 Mon Sep 17 00:00:00 2001
+From: Chet Ramey <chet.ramey@case.edu>
+Date: Tue, 19 Mar 2019 10:05:39 -0400
+Subject: [PATCH] Bash-5.0 patch 3: improvements when globbing directory names
+ containing backslashes
+
+---
+ bashline.c           |  2 +-
+ lib/glob/glob.c      | 25 +++++++++++++++++++++----
+ lib/glob/glob.h      |  1 +
+ lib/glob/glob_loop.c | 23 ++++++++++++++++-------
+ patchlevel.h         |  2 +-
+ pathexp.c            | 16 ++++++++++++----
+ 6 files changed, 52 insertions(+), 17 deletions(-)
+
+diff --git a/bashline.c b/bashline.c
+index 75e79f1a..824ea9d9 100644
+--- a/bashline.c
++++ b/bashline.c
+@@ -3752,7 +3752,7 @@ completion_glob_pattern (string)
+ 	  continue;
+ 
+ 	case '\\':
+-	  if (*string == 0)
++	  if (*string++ == 0)
+ 	    return (0);	 	  
+ 	}
+ 
+diff --git a/lib/glob/glob.c b/lib/glob/glob.c
+index 22d90a5c..398253b5 100644
+--- a/lib/glob/glob.c
++++ b/lib/glob/glob.c
+@@ -1061,7 +1061,7 @@ glob_filename (pathname, flags)
+   char *directory_name, *filename, *dname, *fn;
+   unsigned int directory_len;
+   int free_dirname;			/* flag */
+-  int dflags;
++  int dflags, hasglob;
+ 
+   result = (char **) malloc (sizeof (char *));
+   result_size = 1;
+@@ -1110,9 +1110,12 @@ glob_filename (pathname, flags)
+       free_dirname = 1;
+     }
+ 
++  hasglob = 0;
+   /* If directory_name contains globbing characters, then we
+-     have to expand the previous levels.  Just recurse. */
+-  if (directory_len > 0 && glob_pattern_p (directory_name))
++     have to expand the previous levels.  Just recurse.
++     If glob_pattern_p returns != [0,1] we have a pattern that has backslash
++     quotes but no unquoted glob pattern characters. We dequote it below. */
++  if (directory_len > 0 && (hasglob = glob_pattern_p (directory_name)) == 1)
+     {
+       char **directories, *d, *p;
+       register unsigned int i;
+@@ -1175,7 +1178,7 @@ glob_filename (pathname, flags)
+       if (d[directory_len - 1] == '/')
+ 	d[directory_len - 1] = '\0';
+ 
+-      directories = glob_filename (d, dflags);
++      directories = glob_filename (d, dflags|GX_RECURSE);
+ 
+       if (free_dirname)
+ 	{
+@@ -1332,6 +1335,20 @@ only_filename:
+ 	    free (directory_name);
+ 	  return (NULL);
+ 	}
++      /* If we have a directory name with quoted characters, and we are
++	 being called recursively to glob the directory portion of a pathname,
++	 we need to dequote the directory name before returning it so the
++	 caller can read the directory */
++      if (directory_len > 0 && hasglob == 2 && (flags & GX_RECURSE) != 0)
++	{
++	  dequote_pathname (directory_name);
++	  directory_len = strlen (directory_name);
++	}
++
++      /* We could check whether or not the dequoted directory_name is a
++	 directory and return it here, returning the original directory_name
++	 if not, but we don't do that yet. I'm not sure it matters. */
++
+       /* Handle GX_MARKDIRS here. */
+       result[0] = (char *) malloc (directory_len + 1);
+       if (result[0] == NULL)
+diff --git a/lib/glob/glob.h b/lib/glob/glob.h
+index b9462333..56ac08ba 100644
+--- a/lib/glob/glob.h
++++ b/lib/glob/glob.h
+@@ -30,6 +30,7 @@
+ #define GX_NULLDIR	0x100	/* internal -- no directory preceding pattern */
+ #define GX_ADDCURDIR	0x200	/* internal -- add passed directory name */
+ #define GX_GLOBSTAR	0x400	/* turn on special handling of ** */
++#define GX_RECURSE	0x800	/* internal -- glob_filename called recursively */
+ 
+ extern int glob_pattern_p __P((const char *));
+ extern char **glob_vector __P((char *, char *, int));
+diff --git a/lib/glob/glob_loop.c b/lib/glob/glob_loop.c
+index 7d6ae211..3a4f4f1e 100644
+--- a/lib/glob/glob_loop.c
++++ b/lib/glob/glob_loop.c
+@@ -26,10 +26,10 @@ INTERNAL_GLOB_PATTERN_P (pattern)
+ {
+   register const GCHAR *p;
+   register GCHAR c;
+-  int bopen;
++  int bopen, bsquote;
+ 
+   p = pattern;
+-  bopen = 0;
++  bopen = bsquote = 0;
+ 
+   while ((c = *p++) != L('\0'))
+     switch (c)
+@@ -55,13 +55,22 @@ INTERNAL_GLOB_PATTERN_P (pattern)
+ 
+       case L('\\'):
+ 	/* Don't let the pattern end in a backslash (GMATCH returns no match
+-	   if the pattern ends in a backslash anyway), but otherwise return 1,
+-	   since the matching engine uses backslash as an escape character
+-	   and it can be removed. */
+-	return (*p != L('\0'));
++	   if the pattern ends in a backslash anyway), but otherwise note that 
++	   we have seen this, since the matching engine uses backslash as an
++	   escape character and it can be removed. We return 2 later if we
++	   have seen only backslash-escaped characters, so interested callers
++	   know they can shortcut and just dequote the pathname. */
++	if (*p != L('\0'))
++	  {
++	    p++;
++	    bsquote = 1;
++	    continue;
++	  }
++	else 	/* (*p == L('\0')) */
++	  return 0;
+       }
+ 
+-  return 0;
++  return bsquote ? 2 : 0;
+ }
+ 
+ #undef INTERNAL_GLOB_PATTERN_P
+diff --git a/patchlevel.h b/patchlevel.h
+index a988d852..e7e960c1 100644
+--- a/patchlevel.h
++++ b/patchlevel.h
+@@ -25,6 +25,6 @@
+    regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
+    looks for to find the patch level (for the sccs version string). */
+ 
+-#define PATCHLEVEL 2
++#define PATCHLEVEL 3
+ 
+ #endif /* _PATCHLEVEL_H_ */
+diff --git a/pathexp.c b/pathexp.c
+index b51729a7..c1bf2d89 100644
+--- a/pathexp.c
++++ b/pathexp.c
+@@ -65,11 +65,11 @@ unquoted_glob_pattern_p (string)
+ {
+   register int c;
+   char *send;
+-  int open;
++  int open, bsquote;
+ 
+   DECLARE_MBSTATE;
+ 
+-  open = 0;
++  open = bsquote = 0;
+   send = string + strlen (string);
+ 
+   while (c = *string++)
+@@ -100,7 +100,14 @@ unquoted_glob_pattern_p (string)
+ 	   can be removed by the matching engine, so we have to run it through
+ 	   globbing. */
+ 	case '\\':
+-	  return (*string != 0);
++	  if (*string != '\0' && *string != '/')
++	    {
++	      bsquote = 1;
++	      string++;
++	      continue;
++	    }
++	  else if (*string == 0)
++	    return (0);
+ 	 	  
+ 	case CTLESC:
+ 	  if (*string++ == '\0')
+@@ -117,7 +124,8 @@ unquoted_glob_pattern_p (string)
+       ADVANCE_CHAR_P (string, send - string);
+ #endif
+     }
+-  return (0);
++
++  return (bsquote ? 2 : 0);
+ }
+ 
+ /* Return 1 if C is a character that is `special' in a POSIX ERE and needs to
+-- 
+2.17.2
+

@@ -1,0 +1,102 @@
+From 41f5420db7a911fb0833be693205f4db41f05434 Mon Sep 17 00:00:00 2001
+From: Chet Ramey <chet.ramey@case.edu>
+Date: Sat, 20 Apr 2019 14:25:52 -0400
+Subject: [PATCH] Bash-5.0 patch 5: prevent optimizing forks away too
+ aggressively
+
+---
+ builtins/evalstring.c | 26 +++++++++++++++++++++++---
+ command.h             |  1 +
+ execute_cmd.c         |  2 ++
+ patchlevel.h          |  2 +-
+ 4 files changed, 27 insertions(+), 4 deletions(-)
+
+diff --git a/builtins/evalstring.c b/builtins/evalstring.c
+index 1496eeec..cadc9bc0 100644
+--- a/builtins/evalstring.c
++++ b/builtins/evalstring.c
+@@ -100,12 +100,22 @@ should_suppress_fork (command)
+ 	  ((command->flags & CMD_INVERT_RETURN) == 0));
+ }
+ 
++int
++can_optimize_connection (command)
++     COMMAND *command;
++{
++  return (*bash_input.location.string == '\0' &&
++	  (command->value.Connection->connector == AND_AND || command->value.Connection->connector == OR_OR || command->value.Connection->connector == ';') &&
++	  command->value.Connection->second->type == cm_simple);
++}
++
+ void
+ optimize_fork (command)
+      COMMAND *command;
+ {
+   if (command->type == cm_connection &&
+-      (command->value.Connection->connector == AND_AND || command->value.Connection->connector == OR_OR) &&
++      (command->value.Connection->connector == AND_AND || command->value.Connection->connector == OR_OR || command->value.Connection->connector == ';') &&
++      (command->value.Connection->second->flags & CMD_TRY_OPTIMIZING) &&
+       should_suppress_fork (command->value.Connection->second))
+     {
+       command->value.Connection->second->flags |= CMD_NO_FORK;
+@@ -412,8 +422,18 @@ parse_and_execute (string, from_file, flags)
+ 		  command->flags |= CMD_NO_FORK;
+ 		  command->value.Simple->flags |= CMD_NO_FORK;
+ 		}
+-	      else if (command->type == cm_connection)
+-		optimize_fork (command);
++
++	      /* Can't optimize forks out here execept for simple commands.
++		 This knows that the parser sets up commands as left-side heavy
++		 (&& and || are left-associative) and after the single parse,
++		 if we are at the end of the command string, the last in a
++		 series of connection commands is
++		 command->value.Connection->second. */
++	      else if (command->type == cm_connection && can_optimize_connection (command))
++		{
++		  command->value.Connection->second->flags |= CMD_TRY_OPTIMIZING;
++		  command->value.Connection->second->value.Simple->flags |= CMD_TRY_OPTIMIZING;
++		}
+ #endif /* ONESHOT */
+ 
+ 	      /* See if this is a candidate for $( <file ). */
+diff --git a/command.h b/command.h
+index 32495162..b9e9b669 100644
+--- a/command.h
++++ b/command.h
+@@ -186,6 +186,7 @@ typedef struct element {
+ #define CMD_COPROC_SUBSHELL 0x1000
+ #define CMD_LASTPIPE	    0x2000
+ #define CMD_STDPATH	    0x4000	/* use standard path for command lookup */
++#define CMD_TRY_OPTIMIZING  0x8000	/* try to optimize this simple command */
+ 
+ /* What a command looks like. */
+ typedef struct command {
+diff --git a/execute_cmd.c b/execute_cmd.c
+index 8b3c83aa..f1d74bfe 100644
+--- a/execute_cmd.c
++++ b/execute_cmd.c
+@@ -2767,6 +2767,8 @@ execute_connection (command, asynchronous, pipe_in, pipe_out, fds_to_close)
+ 	  ((command->value.Connection->connector == OR_OR) &&
+ 	   (exec_result != EXECUTION_SUCCESS)))
+ 	{
++	  optimize_fork (command);
++
+ 	  second = command->value.Connection->second;
+ 	  if (ignore_return && second)
+ 	    second->flags |= CMD_IGNORE_RETURN;
+diff --git a/patchlevel.h b/patchlevel.h
+index c059f0bd..1bc098b8 100644
+--- a/patchlevel.h
++++ b/patchlevel.h
+@@ -25,6 +25,6 @@
+    regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
+    looks for to find the patch level (for the sccs version string). */
+ 
+-#define PATCHLEVEL 4
++#define PATCHLEVEL 5
+ 
+ #endif /* _PATCHLEVEL_H_ */
+-- 
+2.17.2
+

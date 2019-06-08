@@ -1,0 +1,42 @@
+From 16c907aa3bb427618733e5a6f2f4e2fc5a3488d3 Mon Sep 17 00:00:00 2001
+From: Chet Ramey <chet.ramey@case.edu>
+Date: Sat, 20 Apr 2019 14:24:28 -0400
+Subject: [PATCH] Bash-5.0 patch 4: the wait builtin without arguments only
+ waits for known children the shell started
+
+---
+ jobs.c       | 4 +---
+ patchlevel.h | 2 +-
+ 2 files changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/jobs.c b/jobs.c
+index ce2bdf24..ae3c54c6 100644
+--- a/jobs.c
++++ b/jobs.c
+@@ -2488,10 +2488,8 @@ wait_for_background_pids ()
+     r = wait_for (last_procsub_child->pid);
+   wait_procsubs ();
+   reap_procsubs ();
+-#if 1
++#if 0
+   /* We don't want to wait indefinitely if we have stopped children. */
+-  /* XXX - should add a loop that goes through the list of process
+-     substitutions and waits for each proc in turn before this code. */
+   if (any_stopped == 0)
+     {
+       /* Check whether or not we have any unreaped children. */
+diff --git a/patchlevel.h b/patchlevel.h
+index e7e960c1..c059f0bd 100644
+--- a/patchlevel.h
++++ b/patchlevel.h
+@@ -25,6 +25,6 @@
+    regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
+    looks for to find the patch level (for the sccs version string). */
+ 
+-#define PATCHLEVEL 3
++#define PATCHLEVEL 4
+ 
+ #endif /* _PATCHLEVEL_H_ */
+-- 
+2.17.2
+

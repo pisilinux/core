@@ -1,0 +1,51 @@
+From 3ba697465bc74fab513a26dea700cc82e9f4724e Mon Sep 17 00:00:00 2001
+From: Chet Ramey <chet.ramey@case.edu>
+Date: Sat, 20 Apr 2019 14:27:56 -0400
+Subject: [PATCH] Bash-5.0 patch 7: fix exec builtin leaving the terminal in
+ the wrong process group
+
+---
+ jobs.c       | 12 +++++-------
+ patchlevel.h |  2 +-
+ 2 files changed, 6 insertions(+), 8 deletions(-)
+
+diff --git a/jobs.c b/jobs.c
+index ae3c54c6..6bc31dca 100644
+--- a/jobs.c
++++ b/jobs.c
+@@ -4837,15 +4837,13 @@ void
+ end_job_control ()
+ {
+   if (job_control)
+-    {
+-      terminate_stopped_jobs ();
++    terminate_stopped_jobs ();
+ 
+-      if (original_pgrp >= 0)
+-	give_terminal_to (original_pgrp, 1);
+-    }
++  if (original_pgrp >= 0 && terminal_pgrp != original_pgrp)
++    give_terminal_to (original_pgrp, 1);
+ 
+-  if (original_pgrp >= 0)
+-    setpgid (0, original_pgrp);
++  if (original_pgrp >= 0 && setpgid (0, original_pgrp) == 0)
++    shell_pgrp = original_pgrp;
+ }
+ 
+ /* Restart job control by closing shell tty and reinitializing.  This is
+diff --git a/patchlevel.h b/patchlevel.h
+index 14bff9fc..deb9c5b7 100644
+--- a/patchlevel.h
++++ b/patchlevel.h
+@@ -25,6 +25,6 @@
+    regexp `^#define[ 	]*PATCHLEVEL', since that's what support/mkversion.sh
+    looks for to find the patch level (for the sccs version string). */
+ 
+-#define PATCHLEVEL 6
++#define PATCHLEVEL 7
+ 
+ #endif /* _PATCHLEVEL_H_ */
+-- 
+2.17.2
+
