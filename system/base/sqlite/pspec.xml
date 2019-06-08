@@ -12,8 +12,8 @@
         <IsA>library</IsA>
         <Summary>An SQL Database Engine in a C Library</Summary>
         <Description>SQLite is a small C library that implements a self-contained, embeddable, zero-configuration SQL database engine. Supports databases up to 2 terabytes in size.</Description>
-        <Archive sha1sum="5f5750e3f39b7b60394a2fb6ddb2371f848670e6" type="targz">https://sqlite.org/2019/sqlite-autoconf-3270200.tar.gz</Archive>
-        <Archive sha1sum="7b49d59acdfd08be8d098b4fc7e150b3e90e6a9c" type="zip">https://sqlite.org/2019/sqlite-doc-3270200.zip</Archive>
+        <Archive sha1sum="01b9d8fc77085e144dddc87456c9783e53d09a53" type="targz">https://www.sqlite.org/2019/sqlite-autoconf-3280000.tar.gz</Archive>
+        <Archive sha1sum="f3242cf186a4e194e7d1a5e00384dd4aa66ec16b" type="zip">https://www.sqlite.org/2019/sqlite-doc-3280000.zip</Archive>
         <BuildDependencies>
             <Dependency>readline-devel</Dependency>
         </BuildDependencies>
@@ -104,6 +104,13 @@
     </Package>
 
     <History>
+		<Update release="13">
+            <Date>2019-06-08</Date>
+            <Version>3.28.0</Version>
+            <Comment>Version Bump.</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="12">
             <Date>2019-05-27</Date>
             <Version>3.27.2</Version>
