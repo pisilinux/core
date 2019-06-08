@@ -53,6 +53,14 @@ def setup():
     exportFlags()
     # Maintainer mode off, do not force recreation of generated files
     #shelltools.system("contrib/gcc_update --touch")
+    
+    shelltools.system("tar xf %s/isl-0.20.tar.bz2 " %get.workDIR())
+    shelltools.move("isl-0.20", "isl")
+    
+    shelltools.system("tar xf %s/mpfr-4.0.2.tar.xz " %get.workDIR())
+    shelltools.move("mpfr-4.0.2", "mpfr")
+    shelltools.system("cd mpfr && patch -p1 < ../mpfr-4.0.2-p1.patch && cd ..")
+    
     pisitools.dosed("gcc/Makefile.in", "\.\/fixinc\.sh", "-c true")
     pisitools.dosed("gcc/configure", "^(ac_cpp='\$CPP\s\$CPPFLAGS)", r"\1 -O2")
     pisitools.dosed("libiberty/configure", "^(ac_cpp='\$CPP\s\$CPPFLAGS)", r"\1 -O2")
@@ -71,6 +79,9 @@ def setup():
                        --infodir=/usr/share/info \
                        --with-bugurl=http://bugs.pisilinux.org \
                        --enable-languages=c,c++,fortran,lto,objc,obj-c++ \
+                       --enable-libstdcxx-filesystem-ts=yes \
+                       --enable-libstdcxx-time=yes \
+                       --disable-isl-version-check \
                        --disable-libgcj \
                        --enable-shared \
                        --enable-threads=posix \

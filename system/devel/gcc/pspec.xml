@@ -14,9 +14,11 @@
         <IsA>library</IsA>
         <Summary>The GNU Compiler Collection, includes C, C++, Objective-C and Fortran compilers</Summary>
         <Description>The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, as well as libraries for these languages</Description>
-        <Archive sha1sum="9689b9cae7b2886fdaa08449a26701f095c04e48" type="tarxz">http://ftp.gnu.org/gnu/gcc/gcc-7.3.0/gcc-7.3.0.tar.xz</Archive>
+        <Archive sha1sum="c27f4499dd263fe4fb01bcc5565917f3698583b2" type="tarxz">https://ftp.gnu.org/gnu/gcc/gcc-8.3.0/gcc-8.3.0.tar.xz</Archive>
+		<Archive sha1sum="b1d96b7b44c72f86c98d4fbd4caaa7796b27681e" type="binary">http://isl.gforge.inria.fr/isl-0.20.tar.bz2</Archive>
+		<Archive sha1sum="52c1f2a4c9a202f46cf3275a8d46b562aa584208" type="binary">https://ftp.gnu.org/gnu/mpfr/mpfr-4.0.2.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="2.30">binutils</Dependency>
+            <Dependency versionFrom="2.32">binutils</Dependency>
             <Dependency>bison</Dependency>
             <Dependency>gettext</Dependency>
             <Dependency>ncurses</Dependency>
@@ -26,11 +28,11 @@
             <Dependency>sed</Dependency>
             <Dependency>texinfo</Dependency>
             <Dependency>gmp-devel</Dependency>
-            <Dependency>mpfr-devel</Dependency>
+<!--             <Dependency>mpfr-devel</Dependency> -->
             <Dependency>libmpc-devel</Dependency>
             <Dependency>ppl</Dependency>
             <Dependency>zlib-devel</Dependency>
-            <Dependency>isl-devel</Dependency>
+<!--             <Dependency>isl-devel</Dependency> -->
             <Dependency>elfutils</Dependency>
         </BuildDependencies>
         <Patches>
@@ -39,6 +41,9 @@
             <Patch level="1">pisilinux/64.patch</Patch>
             <Patch level="1">pisilinux/gcc_47_based-record_gcc_options.patch</Patch>
         </Patches>
+		<AdditionalFiles>
+			<AdditionalFile permission="0644" target="mpfr-4.0.2-p1.patch">mpfr-4.0.2-p1.patch</AdditionalFile>
+		</AdditionalFiles>
     </Source>
 
     <Package>
@@ -123,11 +128,12 @@
         <Name>gcc</Name>
         <RuntimeDependencies>
             <Dependency>gmp</Dependency>
-            <Dependency>isl</Dependency>
-            <Dependency>mpfr</Dependency>
+<!--             <Dependency>isl</Dependency> -->
+<!--             <Dependency>mpfr</Dependency> -->
             <Dependency>zlib</Dependency>
             <!--Dependency>cloog</Dependency-->
             <Dependency>libmpc</Dependency>
+			<Dependency>libgcc</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/lib</Path>
@@ -146,6 +152,13 @@
     </Package>
 
     <History>
+		<Update release="6">
+            <Date>2019-06-08</Date>
+            <Version>8.3.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="5">
             <Date>2018-07-15</Date>
             <Version>7.3.0</Version>
