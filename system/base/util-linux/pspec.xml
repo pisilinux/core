@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>Various useful Linux utilities</Summary>
         <Description>The util-linux package contains a large variety of low-level system utilities that are necessary for a Linux system to function.</Description>
-        <Archive sha1sum="66e1eaeedfb3137b1e583d038a4a3f404474ded1" type="tarxz">https://www.kernel.org/pub/linux/utils/util-linux/v2.31/util-linux-2.31.1.tar.xz</Archive>
+        <Archive sha1sum="f57232d9594d23e7c20b5728b24bf4e5d977accc" type="tarxz">https://www.kernel.org/pub/linux/utils/util-linux/v2.33/util-linux-2.33.1.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>zlib-devel</Dependency>
             <Dependency>eudev-devel</Dependency>
@@ -140,6 +140,13 @@
     </Package>
 
     <History>
+		<Update release="12">
+            <Date>2019-06-09</Date>
+            <Version>2.33.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="11">
             <Date>2019-03-17</Date>
             <Version>2.31.1</Version>
