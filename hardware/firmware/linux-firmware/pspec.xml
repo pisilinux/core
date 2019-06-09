@@ -17,16 +17,16 @@
         <IsA>data</IsA>
         <Summary>Firmware files used by the Linux kernel</Summary>
         <Description>linux-firmware contains different firmware files required for some devices to operate correctly.</Description>
-        <!-- linux-firmware commit: b01151bc9e4e4238bdf18ab28561e1c05a35e76c 2018-07-22 -->
-        <Archive sha1sum="d15d758009b5f7309af62b2e03d8f74bab0e2753" type="tarxz">https://sourceforge.net/projects/pisilinux/files/source/linux-firmware-20180722.tar.xz</Archive>
-        <Archive sha1sum="dd685266f7bc0acb0d455462637d23e3e895bc96" type="tarxz" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/common-fw.tar.xz</Archive>
-        <Archive sha1sum="b2bb7fce3ea67d131f543a48134f7a65f2a8d834" type="tarxz" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware-ipw.tar.xz</Archive>
-        <Archive sha1sum="a5a616a9f765cf9cbb224deb7ccefdc82a7fe4d9" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/firmware-nonfreebox-2-tar.bz2</Archive>
-        <Archive sha1sum="6c18b28e62637fb809eaff89fff623ae1d470500" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/ar9170.tar.bz2</Archive>
-        <Archive sha1sum="aa3b414c2948be5f226a25fa5f37e56fd659a3bb" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/ipw2x00-firmware.tar.bz2</Archive>
-        <Archive sha1sum="f7ecf5412b7818871fa2798f1b314f8ddddb494e" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/aic94xx-seq.tar.bz2</Archive>
-        <Archive sha1sum="16d5f4dcc90f978732a9a5b3b0347672a6cc4c36" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/accessrunner-firmware.tar.bz2</Archive>
-        <Archive sha1sum="e40729d30ad6d7a6c88b90ee7bc5fbaeb9458cb7" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/erdinc/firmware/rtl8192se-firmware.tar.bz2</Archive>
+        <!-- linux-firmware commit: 711d3297bac870af42088a467459a0634c1970ca  2019-05-14 -->
+        <Archive sha1sum="4711d2c3125580edf46161694439a2eef4fc0cec" type="tarxz">https://sourceforge.net/projects/pisilinux/files/source/linux-firmware-20190514.tar.xz</Archive>
+        <Archive sha1sum="dd685266f7bc0acb0d455462637d23e3e895bc96" type="tarxz" target="linux-firmware/mix">http://source.pisilinux.org/common-fw/common-fw.tar.xz</Archive>
+        <Archive sha1sum="b2bb7fce3ea67d131f543a48134f7a65f2a8d834" type="tarxz" target="linux-firmware/mix">http://source.pisilinux.org/firmware-ipw/firmware-ipw.tar.xz</Archive>
+        <Archive sha1sum="a5a616a9f765cf9cbb224deb7ccefdc82a7fe4d9" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/firmware-nonfreebox/firmware-nonfreebox-2-tar.bz2</Archive>
+        <Archive sha1sum="6c18b28e62637fb809eaff89fff623ae1d470500" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/ar9170/ar9170.tar.bz2</Archive>
+        <Archive sha1sum="aa3b414c2948be5f226a25fa5f37e56fd659a3bb" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/ipw2x00-firmware/ipw2x00-firmware.tar.bz2</Archive>
+        <Archive sha1sum="f7ecf5412b7818871fa2798f1b314f8ddddb494e" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/aic94xx/aic94xx-seq.tar.bz2</Archive>
+        <Archive sha1sum="16d5f4dcc90f978732a9a5b3b0347672a6cc4c36" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/accessrunner/accessrunner-firmware.tar.bz2</Archive>
+        <Archive sha1sum="e40729d30ad6d7a6c88b90ee7bc5fbaeb9458cb7" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/rtl8192se/rtl8192se-firmware.tar.bz2</Archive>
         <Archive sha1sum="ff9e7f4b120476a90cd3fb69d76240166c4ff2a5" type="tarbz2" target="linux-firmware/mix">http://sourceforge.net/projects/pisilinux/files/source/zd12x1.tar.bz2</Archive>
         <Archive sha1sum="3239212ae7c5f60baa749764dcb8f5189e1e2f13" type="tarxz" target="linux-firmware/mix">http://sourceforge.net/projects/pisilinux/files/source/nouveau-340-32.tar.xz</Archive>
         <AdditionalFiles>
@@ -49,6 +49,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2019-06-05</Date>
+            <Version>20190514</Version>
+            <Comment>Update</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2018-07-29</Date>
             <Version>20180722</Version>
