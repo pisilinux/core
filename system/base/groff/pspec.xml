@@ -14,13 +14,13 @@
         <IsA>app:console</IsA>
         <Summary>A document formatting system</Summary>
         <Description>groff is a document formatting system. Groff takes standard text and formatting commands as input and produces formatted output.</Description>
-        <Archive sha1sum="61a6808ea1ef715df9fa8e9b424e1f6b9fa8c091" type="targz">http://ftp.gnu.org/gnu/groff/groff-1.22.3.tar.gz</Archive>
+        <Archive sha1sum="2ce4ab107e3fab1414fef2c5b5312f562a4e4d35" type="targz">http://ftp.gnu.org/gnu/groff/groff-1.22.4.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>texinfo</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch>groff-1.19.2-man-unicode-dashes.patch</Patch>
-            <Patch level="1">groff-1.22.3-parallel-mom.patch</Patch>
+<!--             <Patch level="1">groff-1.22.3-parallel-mom.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -52,6 +52,13 @@
     </Package>
 
     <History>
+		<Update release="5">
+            <Date>2019-06-09</Date>
+            <Version>1.22.4</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-15</Date>
             <Version>1.22.3</Version>
