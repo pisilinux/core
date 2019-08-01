@@ -11,7 +11,8 @@ from pisi.actionsapi import get
 
 def setup():
     autotools.configure("--disable-static \
-                         --with-harfbuzz=no")
+                         --with-harfbuzz=no \
+                         --enable-freetype-config")
 
 def build():
     autotools.make()
