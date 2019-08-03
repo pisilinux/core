@@ -28,8 +28,10 @@ def install():
 
     pisitools.dosym("modprobe.d.5.gz","/usr/share/man/man5/modprobe.conf.5.gz")
     for sym in ["modinfo","insmod","rmmod","depmod","modprobe"]:
-        pisitools.dosym("../usr/bin/kmod","/sbin/%s" % sym)
-    pisitools.dosym("../usr/bin/kmod","/bin/lsmod")
+        pisitools.dosym("/usr/bin/kmod","/sbin/%s" % sym)
+
+    pisitools.dosym("/usr/bin/kmod","/bin/lsmod")
+
     pisitools.makedirs("%s/etc/depmod.d" % get.installDIR())
     pisitools.makedirs("%s/etc/modprobe.d" % get.installDIR())
     pisitools.dodoc("NEWS", "README", "TODO", "COPYING")
