@@ -1,0 +1,52 @@
+From: "Valdis =?utf-8?Q?Kl=c4=93tnieks?=" <valdis.kletnieks@vt.edu>
+Subject: [PATCH] drivers/staging/exfat - by default, prohibit mount of fat/vfat
+Date: Fri, 30 Aug 2019 12:42:39 -0400
+
+Concerns have been raised about the exfat driver accidentally mounting
+fat/vfat file systems.  Add an extra configure option to help prevent that.
+
+Suggested-by: Christoph Hellwig <hch@infradead.org>
+Signed-off-by: Valdis Kletnieks <valdis.kletnieks@vt.edu>
+
+diff --git a/drivers/staging/exfat/Kconfig b/drivers/staging/exfat/Kconfig
+index 78b32aa2ca19..1df177b1dc72 100644
+--- a/drivers/staging/exfat/Kconfig
++++ b/drivers/staging/exfat/Kconfig
+@@ -4,6 +4,14 @@ config EXFAT_FS
+ 	help
+ 	  This adds support for the exFAT file system.
+ 
++config EXFAT_DONT_MOUNT_VFAT
++	bool "Prohibit mounting of fat/vfat filesysems by exFAT"
++	default y
++	help
++	  By default, the exFAT driver will only mount exFAT filesystems, and refuse
++	  to mount fat/vfat filesystems.  Set this to 'n' to allow the exFAT driver
++	  to mount these filesystems.
++
+ config EXFAT_DISCARD
+ 	bool "enable discard support"
+ 	depends on EXFAT_FS
+diff --git a/drivers/staging/exfat/exfat_super.c b/drivers/staging/exfat/exfat_super.c
+index 5b5c2ca8c9aa..7fdb5b8bc928 100644
+--- a/drivers/staging/exfat/exfat_super.c
++++ b/drivers/staging/exfat/exfat_super.c
+@@ -486,10 +486,16 @@ static int ffsMountVol(struct super_block *sb)
+ 			break;
+ 
+ 	if (i < 53) {
++#ifdef CONFIG_EXFAT_DONT_MOUNT_VFAT
++		ret = -EINVAL;
++		printk(KERN_INFO "EXFAT: Attempted to mount VFAT filesystem\n");
++		goto out;
++#else
+ 		if (GET16(p_pbr->bpb + 11)) /* num_fat_sectors */
+ 			ret = fat16_mount(sb, p_pbr);
+ 		else
+ 			ret = fat32_mount(sb, p_pbr);
++#endif
+ 	} else {
+ 		ret = exfat_mount(sb, p_pbr);
+ 	}
+
+
