@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>GNU regular expression matcher</Summary>
         <Description>The grep command searches one or more input files for lines containing a match to a specified pattern. By default, grep prints the matching lines.</Description>
-        <Archive sha1sum="d1d677e959c7d874e18e7e3839f26a0f0c1733d5" type="tarxz">http://ftp.gnu.org/gnu/grep/grep-3.1.tar.xz</Archive>
+        <Archive sha1sum="e0befe21e7d9caa8e5e98385c96355d890f83123" type="tarxz">http://ftp.gnu.org/gnu/grep/grep-3.3.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>gettext</Dependency>
             <Dependency>libpcre-devel</Dependency>
@@ -34,6 +34,13 @@
     </Package>
 
     <History>
+		<Update release="6">
+            <Date>2019-09-30</Date>
+            <Version>3.3</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="5">
             <Date>2018-07-15</Date>
             <Version>3.1</Version>

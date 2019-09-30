@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>The GNU info program and utilities</Summary>
         <Description>Texinfo is a documentation system that can produce both online information and printed output from a single source file. The GNU Project uses the Texinfo file format for most of its documentation.</Description>
-        <Archive sha1sum="0f8e69781e28ec102b6a9487b093c440f5bb8545" type="targz">mirrors://gnu/texinfo/texinfo-6.5.tar.gz</Archive>
+        <Archive sha1sum="f0418f3689b2b1e720027650c033c0fcdb270762" type="targz">mirrors://gnu/texinfo/texinfo-6.6.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>ncurses-devel</Dependency>
             <Dependency>perl</Dependency>
@@ -45,6 +45,13 @@
     </Package>
 
     <History>
+		<Update release="7">
+            <Date>2019-09-30</Date>
+            <Version>6.6</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="6">
             <Date>2018-07-19</Date>
             <Version>6.5</Version>

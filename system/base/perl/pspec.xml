@@ -13,15 +13,14 @@
         <IsA>app:console</IsA>
         <Summary>Larry Wall's Practical Extraction and Reporting Language</Summary>
         <Description>Perl is a high-level programming language with roots in C, sed, awk and shell scripting. Perl is good at handling processes and files, and is especially good at handling text. Perl's hallmarks are practicality and efficiency. While it is used to do a lot of different things, Perl's most common applications are system administration utilities and web programming. A large proportion of the CGI scripts on the web are written in Perl. You need the perl package installed on your system so that your system can handle Perl scripts.</Description>
-        <Archive sha1sum="fadec45b7b48a06b3d2adab91c13f568dce717cd" type="tarbz2">http://www.cpan.org/src/5.0/perl-5.26.1.tar.bz2</Archive>
+        <Archive sha1sum="aa5620fb5a4ca125257ae3f8a7e5d05269388856" type="targz">http://www.cpan.org/src/5.0/perl-5.30.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="6.2.23">db-devel</Dependency>
             <Dependency>gdbm-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <!--<Patch>perl-5.10.0-x86_64-io-test-failure.patch</Patch>
-            <Patch>perl-5.14.1-offtest.patch</Patch>-->
+<!--             <Patch>CVE-2016-2381_duplicate_env.diff</Patch> -->
         </Patches>
     </Source>
 
@@ -55,6 +54,13 @@
     </Package>
 
     <History>
+		 <Update release="6">
+            <Date>2019-09-30</Date>
+            <Version>5.30.0</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="5">
             <Date>2018-07-15</Date>
             <Version>5.26.1</Version>

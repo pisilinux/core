@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>A set of basic GNU tools commonly used in shell scripts</Summary>
         <Description>Standard GNU file utilities (chmod, cp, dd, dir, ls...), text utilities (sort, tr, head, wc..), and shell utilities (whoami, who,...)</Description>
-        <Archive sha1sum="bd5d495c162730873a2774acd1c5091fbf0c55a4" type="tarxz">http://ftp.gnu.org/gnu/coreutils/coreutils-8.30.tar.xz</Archive>
+        <Archive sha1sum="c62b5034a5b65daca33c50a60df87ebc44159faf" type="tarxz">http://ftp.gnu.org/gnu/coreutils/coreutils-8.31.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>acl-devel</Dependency>
             <Dependency>attr-devel</Dependency>
@@ -25,7 +25,7 @@
             <Dependency>texinfo</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">coreutils-8.30-i18n-1.patch</Patch>
+            <Patch level="1">coreutils-8.31-i18n-1.patch</Patch>
             <!-- PisiLinux patches -->
             <Patch level="0">remove_am_silent_rules.patch</Patch>
 <!--             <Patch level="0">add-more-dircolors.patch</Patch> -->
@@ -55,6 +55,13 @@
     </Package>
 
     <History>
+		<Update release="8">
+            <Date>2019-09-30</Date>
+            <Version>8.31</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2018-11-28</Date>
             <Version>8.30</Version>
