@@ -30,6 +30,12 @@ def install():
     if get.buildTYPE() == "emul32": return
 
     pisitools.removeDir("/usr/bin")
+    
+    pisitools.dosym("/usr/lib/libreadline.so.8", "/usr/lib/libreadline.so.7")
+    pisitools.dosym("/usr/lib32/libreadline.so.8", "/usr/lib32/libreadline.so.7")
+    
+    pisitools.dosym("/usr/lib/libhistory.so.8", "/usr/lib/libhistory.so.7")
+    pisitools.dosym("/usr/lib32/libhistory.so.8", "/usr/lib32/libhistory.so.7")
 
     pisitools.dohtml("doc/")
     pisitools.dodoc("CHANGELOG", "CHANGES", "README", "USAGE", "NEWS")
