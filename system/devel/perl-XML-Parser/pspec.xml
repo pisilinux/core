@@ -12,10 +12,10 @@
         <IsA>library</IsA>
         <Summary>A Perl extension interface to James Clark's XML parser, expat</Summary>
         <Description>This module provides an interface to James Clark's XML parser, expat. As in expat, a single instance of the parser can only parse one document. Calls to parsestring after the first for a given instance will die.</Description>
-        <Archive sha1sum="0ab6b932713ec1f9927a1b1c619b6889a5c12849" type="targz">mirrors://cpan/authors/id/T/TO/TODDR/XML-Parser-2.44.tar.gz</Archive>
+        <Archive sha1sum="40cba8a10847b71804684e5c72a410277f47f8ce" type="targz">mirrors://cpan/authors/id/T/TO/TODDR/XML-Parser-2.46.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>expat-devel</Dependency>
-            <Dependency versionFrom="5.24.0">perl</Dependency>
+            <Dependency versionFrom="5.30.0">perl</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -23,7 +23,7 @@
         <Name>perl-XML-Parser</Name>
         <RuntimeDependencies>
             <Dependency>expat</Dependency>
-            <Dependency versionFrom="5.24.0">perl</Dependency>
+            <Dependency versionFrom="5.30.0">perl</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="doc">/usr/share/doc</Path>
@@ -33,6 +33,13 @@
     </Package>
 
     <History>
+		<Update release="5">
+            <Date>20189-10-01</Date>
+            <Version>2.46</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-19</Date>
             <Version>2.44</Version>
