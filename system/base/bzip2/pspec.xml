@@ -12,13 +12,13 @@
         <IsA>app:console</IsA>
         <Summary>A high-quality data compressor</Summary>
         <Description>bzip2 is high-quality data compressor. It typically compresses files to within 10% to 15% of the best available techniques (the PPM family of statistical compressors), whilst being around twice as fast at compression and six times faster at decompression.</Description>
-        <Archive sha1sum="bf7badf7e248e0ecf465d33c2f5aeec774209227" type="targz">https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz</Archive>
+        <Archive sha1sum="3f89f861209ce81a6bab1fd1998c0ef311712002" type="targz">https://sourceware.org/pub/bzip2/bzip2-1.0.6.tar.gz</Archive>
         <Patches>
-<!--            <Patch level="1">bzip2-1.0.2-progress.patch</Patch>
+            <Patch level="1">bzip2-1.0.2-progress.patch</Patch>
             <Patch level="1">bzip2-1.0.4-bzip2recover.patch</Patch>
             <Patch level="1">bzip2-1.0.4-man-links.patch</Patch>
             <Patch>bzip2-1.0.6-saneso.patch</Patch>
-            <Patch level="1">manpath.patch</Patch>-->
+            <Patch level="1">manpath.patch</Patch>
         </Patches>
     </Source>
 
@@ -36,9 +36,9 @@
 
     <History>
 		<Update release="5">
-            <Date>2019-09-30</Date>
-            <Version>1.0.8</Version>
-            <Comment>Version bump</Comment>
+            <Date>2019-10-01</Date>
+            <Version>1.0.6</Version>
+            <Comment>Rebuild</Comment>
             <Name>Idris Kalp</Name>
             <Email>idriskalp@gmail.com</Email>
         </Update>
