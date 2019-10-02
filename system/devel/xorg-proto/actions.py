@@ -25,7 +25,7 @@ def install():
     shelltools.system("DESTDIR=%s ninja install" % get.installDIR())
     
     shelltools.cd("..")
-    pisitools.dodoc("README", "COPYING*", "AUTHORS")
+    pisitools.dodoc("README.md", "COPYING*", "AUTHORS")
     
     pisitools.remove("/usr/include/X11/extensions/apple*")
     pisitools.remove("/usr/include/X11/extensions/windows*")
