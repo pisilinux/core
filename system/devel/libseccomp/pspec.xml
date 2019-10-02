@@ -12,7 +12,7 @@
         <IsA>app:library</IsA>
         <Summary>Enhanced seccomp library</Summary>
         <Description>High level interface to the Linux Kernel's seccomp filter.</Description>
-        <Archive sha1sum="38ba89d3bfe0faecb058727f797cd4f25c94ce73" type="targz">https://github.com/seccomp/libseccomp/archive/v2.3.1.tar.gz</Archive>
+        <Archive sha1sum="bd9932c1f208b6051c89a4253dc05ad0307338ec" type="targz">https://github.com/seccomp/libseccomp/releases/download/v2.4.1/libseccomp-2.4.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>glibc-devel</Dependency>
             <Dependency>libutil-linux-devel</Dependency>
@@ -40,6 +40,13 @@
     </Package>
 
     <History>
+		<Update release="6">
+            <Date>2019-10-02</Date>
+            <Version>2.4.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="5">
             <Date>2018-07-15</Date>
             <Version>2.3.1</Version>
