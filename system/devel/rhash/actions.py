@@ -18,11 +18,15 @@ def setup():
                                    --enable-gettext \
                                    --disable-openssl-runtime \
                                    --enable-openssl")
+	
+def check():
+	autotools.make("test test-lib")
     
 def install():
-    autotools.make("PREFIX=/usr DESTDIR=%s build-shared install-gmo install-lib-shared" % get.installDIR())
-    autotools.make("PREFIX=/usr DESTDIR=%s -C librhash install-so-link install-headers" % get.installDIR())
-    autotools.rawInstall("PREFIX=/usr DESTDIR=%s" % get.installDIR())
+    autotools.make()
+    autotools.rawInstall("PREFIX=/usr DESTDIR=%s install-lib-headers install-lib-shared install" % get.installDIR())
     
-    pisitools.dodoc("ChangeLog", "INSTALL*", "README", "COPYING")
+    pisitools.dosym("usr/lib/librhash.so.0", "/usr/lib/librhash.so")
+    
+    pisitools.dodoc("ChangeLog", "INSTALL*", "README.md")
 
