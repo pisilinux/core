@@ -22,4 +22,4 @@ def install():
     pisitools.remove("/usr/lib/*.a")
     pisitools.removeDir("/usr/share/man/man2")
 
-    pisitools.dodoc("CHANGES", "DESIGN")
+    pisitools.dodoc("LICENSE.GPL2", "README.md")
