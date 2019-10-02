@@ -12,19 +12,19 @@
         <IsA>app:console</IsA>
         <Summary>Programs which control basic system processes</Summary>
         <Description>sysvinit package contains a group of utilities that control the very basic functions of your system. sysvinit contains the init program, the first program started by the Linux kernel when the system boots.</Description>
-        <Archive sha1sum="f2ca149df1314a91f3007cccd7a0aa47d990de26" type="tarbz2">http://download.savannah.gnu.org/releases/sysvinit/sysvinit-2.88dsf.tar.bz2</Archive>
+        <Archive sha1sum="9b8975493cfa17cd9c8bb574b5df0847912466a4" type="tarxz">http://download.savannah.gnu.org/releases/sysvinit/sysvinit-2.95.tar.xz</Archive>
         <Patches>
             <!--<Patch>makefile.patch</Patch>-->
             <!--<Patch>sysvinit-2.86-docs.patch</Patch>-->
-            <Patch level="1">sysvinit-2.86-ctrlc.patch</Patch>
+<!--             <Patch level="1">sysvinit-2.86-ctrlc.patch</Patch> -->
 
-            <Patch level="1">sysvinit-2.78-man.patch</Patch>
+<!--             <Patch level="1">sysvinit-2.78-man.patch</Patch> -->
             <Patch level="1">sysvinit-2.86-loginshell.patch</Patch>
             <Patch level="1">sysvinit-2.86-single.patch</Patch>
             <Patch level="1">sysvinit-2.88-quiet.patch</Patch>
-            <Patch level="1">sysvinit-2.88-ipv6.patch</Patch>
-            <Patch level="1">sysvinit-2.88-omit.patch</Patch>
-            <Patch level="1">sysvinit-2.88-wall-maxlines.patch</Patch>
+<!--             <Patch level="1">sysvinit-2.88-ipv6.patch</Patch> -->
+<!--             <Patch level="1">sysvinit-2.88-omit.patch</Patch> -->
+<!--             <Patch level="1">sysvinit-2.88-wall-maxlines.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -63,6 +63,13 @@
     </Package>
 
     <History>
+		<Update release="5">
+            <Date>2019-10-02</Date>
+            <Version>2.95</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-15</Date>
             <Version>2.88</Version>
