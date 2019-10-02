@@ -27,8 +27,7 @@ MAKE_TEST_FLAGS = "CC=\"%s\" \
 
 def setup():
     shelltools.cd(get.workDIR())
-    for f, l in [("dietlibc-github-c3f1cf67fcc186bb859e64a085bf98aaa6182a82.patch", 1),
-                 ("dietlibc-0.33-biarch.patch", 0)]:
+    for f, l in [("dietlibc-0.34-biarch.patch", 1)]:
         shelltools.move(f, WorkDir)
         shelltools.cd(WorkDir)
         shelltools.system("patch --remove-empty-files --no-backup-if-mismatch -p%d -i %s" % (l, f))
