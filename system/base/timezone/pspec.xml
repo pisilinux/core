@@ -14,7 +14,7 @@
         <IsA>data</IsA>
         <Summary>Timezone data files and tools</Summary>
         <Description>timezone includes timezone data files and tools to use them. Package contents are synchronized with glibc tree.</Description>
-        <Archive sha1sum="9ab1932256674075fb74ff84792582b5ac12c476" type="targz">http://www.iana.org/time-zones/repository/releases/tzdata2018e.tar.gz</Archive>
+        <Archive sha1sum="0a95c8fb31b837e1f1e4a2beff7e0c88d72586a3" type="targz">https://data.iana.org/time-zones/releases/tzdata2019c.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>perl</Dependency>
             <Dependency>gawk</Dependency>
@@ -36,6 +36,13 @@
     </Package>
 
     <History>
+		<Update release="8">
+            <Date>2019-10-03</Date>
+            <Version>2019c</Version>
+            <Comment>Version bump</Comment>
+            <Name>idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2018-11-29</Date>
             <Version>2018e</Version>
