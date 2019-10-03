@@ -11,29 +11,55 @@ from pisi.actionsapi import shelltools
 #WorkDir = "mozjs%s/js/src" % get.srcVERSION()
 
 shelltools.export("SHELL","/bin/sh")
+WorkDir = "firefox-%s" %get.srcVERSION()
 
 def setup():
-   shelltools.cd("js/src")
+   #shelltools.cd("js/src")
    #shelltools.system("sed -i 's/(defined\((@TEMPLATE_FILE)\))/\1/' config/milestone.pl ")
+   shelltools.system("mkdir -p build-js")
+   shelltools.cd("build-js")
    
-   
-   autotools.configure("--prefix=/usr       \
-                        --enable-readline   \
-                        --enable-threadsafe \
-                        --with-system-nspr")
+   shelltools.system("../js/src/configure \
+	                  --prefix=/usr       \
+					  --libdir=/usr/lib   \
+					  --enable-readline   \
+					  --enable-posix-nspr-emulation \
+					  --with-intl-api \
+					  --disable-debug     \
+                      --disable-debug-symbols \
+                      --disable-jemalloc \
+                      --disable-strip  \
+                      --enable-hardening \
+                      --enable-linker=gold \
+                      --enable-optimize \
+                      --enable-readline \
+                      --enable-release \
+                      --enable-shared-js \
+                      --enable-tests \
+                      --with-intl-api \
+                      --with-system-zlib \
+                      --without-system-icu")
 
 def build():
-    shelltools.cd("js/src")
+    shelltools.cd("build-js")
     autotools.make()
+    
+def check():
+    shelltools.cd("build-js")
+	
+    autotools.make("-C js/src check-jstests check-jit-test")
+	
 
 def install():
-    shelltools.cd("js/src")
+    shelltools.cd("build-js")
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    pisitools.remove("/usr/lib/*.ajs")
    
     #for polkit
     #pisitools.rename("/usr/lib/pkgconfig/mozjs-..pc", "mozjs-17.0.pc")
     #pisitools.remove("usr/lib/libmozjs-..a")
     
+    shelltools.cd("..")
     pisitools.dodoc("README*")
     
     # add link for polkit
