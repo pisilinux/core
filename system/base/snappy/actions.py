@@ -7,24 +7,28 @@
 from pisi.actionsapi import shelltools
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import cmaketools
 from pisi.actionsapi import get
 
 def setup():
     pisitools.flags.remove("-DNDEBUG")
-    shelltools.system("./autogen.sh")
-    autotools.configure("--prefix=/usr \
-                         --disable-static \
-                         --enable-shared")
+    #shelltools.system("./autogen.sh")
+    #autotools.configure("--prefix=/usr \
+                         #--disable-static \
+                         #--enable-shared")
 
-    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
+    #pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
+    
+    cmaketools.configure("-DBUILD_SHARED_LIBS=ON \
+		                  -DCMAKE_INSTALL_LIBDIR=lib")
 
 def build():
-    autotools.make()
+    cmaketools.make()
 
-def build():
-    autotools.make("check")
+def check():
+    cmaketools.make("test")
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    pisitools.dodoc("README", "COPYING", "ChangeLog", "NEWS", "AUTHORS")
+    pisitools.dodoc("README.md", "COPYING", "AUTHORS")
