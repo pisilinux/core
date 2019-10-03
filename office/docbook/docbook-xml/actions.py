@@ -49,4 +49,16 @@ def install():
         pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s/xsd" % version, "docbook-5.0/xsd/*.xsd")
         pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s/sch" % version, "docbook-5.0/sch/*.sch")
     
+    for version in ["5.0.1"]:
+        pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s/dtd" % version, "docbook-5.0.1/dtd/*.dtd")
+        pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s/rng" % version, "docbook-5.0.1/rng/*.rng")
+        pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s/rng" % version, "docbook-5.0.1/rng/*.rnc")
+        pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s/xsd" % version, "docbook-5.0.1/xsd/*.xsd")
+        pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s/sch" % version, "docbook-5.0.1/sch/*.sch")
+        
+	for version in ["5.1"]:
+		pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s/rng" % version, "docbook-5.1/schemas/rng/*.rng")
+		pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s/rng" % version, "docbook-5.1/schemas/rng/*.rnc")
+		pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s/sch" % version, "docbook-5.1/schemas/sch/*.sch")
+    
     pisitools.dodoc("ChangeLog", "README")
