@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Statically linked binary providing simplified versions of system commands</Summary>
         <Description>busybox is a single binary which includes versions of a large number of system commands, including a shell.</Description>
-        <Archive sha1sum="157d14d24748b4505b1a418535688706a2b81680" type="tarbz2">http://busybox.net/downloads/busybox-1.24.1.tar.bz2</Archive>
+        <Archive sha1sum="5d9a78fa2789cd22cdac78058296e195e67faf59" type="tarbz2">https://busybox.net/downloads/busybox-1.30.1.tar.bz2</Archive>
         <AdditionalFiles>
             <AdditionalFile target=".config">config</AdditionalFile>
         </AdditionalFiles>
@@ -20,7 +20,7 @@
             <!-- This patch is essential for udhcp to request root-path from dhcpd and required by ptsp -->
             <Patch level="1">udhcp-rootpath-rq.patch</Patch>
             <Patch level="1">suppress-job-control-warning.patch</Patch>
-            <Patch level="1">fix-include.patch</Patch>
+<!--             <Patch level="1">fix-include.patch</Patch> -->
             <!--Patch>ifplugd.patch</Patch-->
         </Patches>
     </Source>
@@ -33,6 +33,13 @@
     </Package>
 
     <History>
+		<Update release="5">
+            <Date>2019-10-03</Date>
+            <Version>1.30.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-15</Date>
             <Version>1.24.1</Version>
