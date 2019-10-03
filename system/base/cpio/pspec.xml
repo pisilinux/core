@@ -17,6 +17,12 @@
             <!--Patch level="1">cpio-2.7-svr4compat.patch</Patch-->
             <Patch level="1">cpio-2.9-exitCode.patch</Patch>
             <Patch level="1">CVE-2010-0624-rpatelib-overflow.patch</Patch>
+			<Patch level="1">cpio-2.12-name-overflow.patch</Patch>
+			<Patch level="1">cpio-2.12-non-gnu-compilers.patch</Patch>
+			<Patch level="1">cpio-2.12-no-overwrite-symlinks.patch</Patch>
+			<Patch level="1">cpio-2.12-svr4compat.patch</Patch>
+			<Patch level="1">CVE-2010-0624-rpatelib-overflow.patch</Patch>
+
         </Patches>
     </Source>
 
@@ -32,6 +38,13 @@
     </Package>
 
     <History>
+		<Update release="5">
+            <Date>2019-10-03</Date>
+            <Version>2.12</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-15</Date>
             <Version>2.12</Version>
