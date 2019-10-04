@@ -26,9 +26,16 @@
 			<Dependency>exfat-utils</Dependency>
 		</RuntimeDependencies>
 		<Files>
+			<Path fileType="config">/etc/modules.d</Path>
 			<Path fileType="data">/lib/modules</Path>
-			<Path fileType="doc">/usr/share/doc/exfat-linux</Path>
+			<Path fileType="doc">/usr/share/doc/module-exfat</Path>
 		</Files>
+		<AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/etc/modules.d/exfat.conf">exfat.conf</AdditionalFile>
+        </AdditionalFiles>
+		<Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
 	</Package>
 
 	<History>
