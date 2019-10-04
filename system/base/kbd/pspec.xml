@@ -20,10 +20,13 @@
             <Dependency>gettext</Dependency>
             <Dependency>gzip</Dependency>
             <Dependency>pam-devel</Dependency>
-	    <Dependency>check-devel</Dependency>
+	        <Dependency>check-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <!-- Mandriva patches -->
+			<!-- BLFS patches -->
+			<Patch level="1">blfs/kbd-2.2.0-backspace-1.patch</Patch>
+            
+			<!-- Mandriva patches -->
             <Patch level="1">mandriva/kbd-1.15-mandriva.patch</Patch>
             <Patch level="1">mandriva/kbd-1.15-tilde_twosuperior_french_kbd.patch</Patch>
             <Patch level="1">mandriva/kbd-1.12-data_thai.patch</Patch>
@@ -41,7 +44,7 @@
             <Patch level="1">pisilinux/trq-capslock-fix.patch</Patch>
             <Patch level="1">pisilinux/currency.patch</Patch>
             <Patch level="1">pisilinux/trf-keymap-fixes.patch</Patch>
-            <Patch level="1">pisilinux/trf-capslock-fix.patch</Patch>
+            <Patch level="1">pisilinux/trf-capslock-fix.patch</Patch>		
 	    
         </Patches>
     </Source>
