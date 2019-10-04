@@ -33,7 +33,7 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-5.3.1.xz</Patch>
+            <Patch level="1" compressionType="xz">patches/linux/patch-5.3.2.xz</Patch>
             <!-- Mageia Linux patches // compatible with http://svnweb.mageia.org/packages/cauldron/kernel/releases/4.14.44/2.mga7/PATCHES/patches/series-->
             <!--stable patches-->
             <!--CVE-2016-8405-->
@@ -42,8 +42,6 @@
             <Patch level="1">patches/mageia/fs-aufs-5.3-modular.patch</Patch>
 			<Patch level="1">patches/mageia/fs-aufs-5.3-version.patch</Patch>
 			<Patch level="1">patches/mageia/fs-vboxsf.patch</Patch>
-			<Patch level="1">patches/mageia/fs-exfat.patch</Patch>
-			<Patch level="1">patches/mageia/fs-exfat-prevent-mounting-fat-vfat.patch</Patch>
 			<Patch level="1">patches/mageia/CVE-2019-12379.patch</Patch>
 
         </Patches>
@@ -102,8 +100,8 @@
 
     <History>
 		<Update release="28">
-            <Date>2019-09-30</Date>
-            <Version>5.3.1</Version>
+            <Date>2019-10-04</Date>
+            <Version>5.3.2</Version>
             <Comment>Version Bump.</Comment>
             <Type package="kernel">security</Type>
             <Requires>
