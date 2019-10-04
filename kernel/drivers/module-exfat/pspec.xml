@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+	<Source>
+		<Name>module-exfat</Name>
+		<Homepage>https://github.com/arter97/exfat-linux</Homepage>
+		<Packager>
+			<Name>fury</Name>
+			<Email>wascheme@tuta.io</Email>
+		</Packager>
+		<License>GPLv2</License>
+		<IsA>driver</IsA>
+		<Summary>exFAT filesystem module for Linux kernel</Summary>
+		<Description>This exFAT filesystem module for Linux kernel is based on sdFAT drivers by Samsung, which is used with their smartphone lineups.</Description>
+		<Archive sha1sum="0e9fc00bf9ab763fc906e9250c98d1f909ccd738" type="targz">https://codeload.github.com/arter97/exfat-linux/tar.gz/2.2.0-1arter97</Archive>
+		<BuildDependencies>
+			<Dependency>linux-firmware</Dependency>
+			<Dependency version="5.3.2">kernel-module-headers</Dependency>
+		</BuildDependencies>
+	</Source>
+
+	<Package>
+		<Name>module-exfat</Name>
+		<RuntimeDependencies>
+			<Dependency version="5.3.2">kernel</Dependency>
+			<Dependency>exfat-utils</Dependency>
+		</RuntimeDependencies>
+		<Files>
+			<Path fileType="data">/lib/modules</Path>
+			<Path fileType="doc">/usr/share/doc/exfat-linux</Path>
+		</Files>
+	</Package>
+
+	<History>
+		<Update release="1">
+			<Date>2019-09-15</Date>
+			<Version>2.2.0</Version>
+			<Comment>First build.</Comment>
+			<Name>fury</Name>
+			<Email>wascheme@tuta.io</Email>
+		</Update>
+	</History>
+</PISI>
