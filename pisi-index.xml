@@ -19340,6 +19340,7 @@
                 <Dependency>check-devel</Dependency>
             </BuildDependencies>
             <Patches>
+                <Patch level="1">blfs/kbd-2.2.0-backspace-1.patch</Patch>
                 <Patch level="1">mandriva/kbd-1.15-mandriva.patch</Patch>
                 <Patch level="1">mandriva/kbd-1.15-tilde_twosuperior_french_kbd.patch</Patch>
                 <Patch level="1">mandriva/kbd-1.12-data_thai.patch</Patch>
@@ -19516,7 +19517,7 @@
             <Summary xml:lang="pl">Narzędzie do wykrywania innych systemów operacyjnych na dyskach</Summary>
             <Description xml:lang="en">os-probe detects other OSes available on a system and outputs the results in a generic machine-readable format. Support for new OSes and Linux distributions can be added easily.</Description>
             <Description xml:lang="pl">os-prober wykrywa inne systemy operacyjne dostępne na komputerze i przekazuje rezultaty w standardowym, odczytywalnym maszynowo, formacie. </Description>
-            <Archive type="tarxz" sha1sum="604118a2c85c019f26429d836053675f76a46063">http://deb.debian.org/debian/pool/main/o/os-prober/os-prober_1.77.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="7d603d603208fe8b065f84da62dcfb6ee965a9eb">https://sourceforge.net/projects/pisilinux/files/source/os-prober_1.71.tar.xz</Archive>
             <SourceURI>system/boot/os-prober/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -19530,13 +19531,6 @@
             </Files>
         </Package>
         <History>
-            <Update release="8">
-                <Date>2019-10-03</Date>
-                <Version>1.77</Version>
-                <Comment>Version bump</Comment>
-                <Name>idris Kalp</Name>
-                <Email>idriskalp@gmail.com</Email>
-            </Update>
             <Update release="7">
                 <Date>2018-07-15</Date>
                 <Version>1.71</Version>
@@ -19601,10 +19595,10 @@
             <PartOf>system.boot</PartOf>
             <Summary xml:lang="en">GNU GRUB is a Multiboot boot loader.</Summary>
             <Description xml:lang="en">GNU GRUB (short for GNU GRand Unified Bootloader) is a boot loader package from the GNU Project.</Description>
-            <Archive type="tarxz" sha1sum="3ed21de7be5970d7638b9f526bca3292af78e0fc">http://ftp.gnu.org/gnu/grub/grub-2.04.tar.xz</Archive>
-            <Archive type="tarxz" sha1sum="4ec712aced1c2b4cb6cd1cbd83fc2154249d6977" target="grub-2.04/grub-extras">http://source.pisilinux.org/1.0/grub2_extras_915resolution_r10.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="3d7eb6eaab28b88cb969ba9ab24af959f4d1b178">http://ftp.gnu.org/gnu/grub/grub-2.02.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="4ec712aced1c2b4cb6cd1cbd83fc2154249d6977" target="grub-2.02/grub-extras">http://source.pisilinux.org/1.0/grub2_extras_915resolution_r10.tar.xz</Archive>
             <Archive type="gz" sha1sum="30797ba7a86fc32213b9ae994c9fa45f37d01170">http://ftp.gnu.org/gnu/unifont/unifont-6.3.20131217/unifont-6.3.20131217.bdf.gz</Archive>
-            <Archive type="tarxz" sha1sum="bc062965689314bcee544c34fe0b0afef847448d" target="grub-2.04/themes">https://sourceforge.net/projects/pisilinux/files/source/grub2-theme-pisilinux-0.4.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="bc062965689314bcee544c34fe0b0afef847448d" target="grub-2.02/themes">https://sourceforge.net/projects/pisilinux/files/source/grub2-theme-pisilinux-0.4.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>autogen</Dependency>
                 <Dependency>binutils</Dependency>
@@ -19632,6 +19626,9 @@
                 <Patch level="1">grub-2.02_beta2-KERNEL_GLOBS.patch</Patch>
                 <Patch level="1">mkconfig-fix.patch</Patch>
                 <Patch level="1">pisi_name_and_initramfs.patch</Patch>
+                <Patch level="1">Allow_GRUB_to_mount_ext234_filesystems_that_have_the_encryption_feature.patch</Patch>
+                <Patch level="1">tsc-Change-default-tsc-calibration-method-to-pmtimer-on-EFI-systems.patch</Patch>
+                <Patch level="1">intel-ucode.patch</Patch>
             </Patches>
             <SourceURI>system/boot/grub2/pspec.xml</SourceURI>
         </Source>
@@ -19670,13 +19667,6 @@
             </AdditionalFiles>
         </Package>
         <History>
-            <Update release="12">
-                <Date>2019-10-02</Date>
-                <Version>2.04</Version>
-                <Comment>Version bump</Comment>
-                <Name>Idris Kalp</Name>
-                <Email>idriskalp@gmail.com</Email>
-            </Update>
             <Update release="11">
                 <Date>2018-07-15</Date>
                 <Version>2.02</Version>
@@ -20594,7 +20584,7 @@
             <Description xml:lang="fr">Un outil pour créer les images initramfs</Description>
             <Description xml:lang="en">mkinitramfs contains a tool to create the initramfs image with busybox.</Description>
             <Description xml:lang="tr">initramfs image dosyası yaratmak için araç</Description>
-            <Archive type="binary" sha1sum="c35fcf085f1bb73b851d7525c135a483c903b13d">http://source.pisilinux.org/1.0/README.mkinitramfs</Archive>
+            <Archive type="binary" sha1sum="c35fcf085f1bb73b851d7525c135a483c903b13d">http://source.pisilinux.org/mkinitramfs/README.mkinitramfs</Archive>
             <SourceURI>kernel/tools/mkinitramfs/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -20724,6 +20714,9 @@
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
             </Files>
+            <Provides>
+                <COMAR script="package.py">System.Package</COMAR>
+            </Provides>
         </Package>
         <Package>
             <Name>module-virtualbox-guest-userspace</Name>
@@ -21112,6 +21105,9 @@
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
             </Files>
+            <Provides>
+                <COMAR script="package.py">System.Package</COMAR>
+            </Provides>
         </Package>
         <Package>
             <Name>module-broadcom-wl-userspace</Name>
@@ -21346,6 +21342,9 @@
                 <Path fileType="config">/etc</Path>
                 <Path fileType="doc">/usr/share/doc</Path>
             </Files>
+            <Provides>
+                <COMAR script="package.py">System.Package</COMAR>
+            </Provides>
             <AdditionalFiles>
                 <AdditionalFile target="/etc/modprobe.d/bbswitch.conf" permission="0644" owner="root">bbswitch.conf</AdditionalFile>
                 <AdditionalFile target="/etc/debmod.d/kmod-bbswitch.conf" permission="0644" owner="root">kmod-bbswitch.conf</AdditionalFile>
@@ -21587,6 +21586,9 @@
                 <Path fileType="executable">/sbin</Path>
                 <Path fileType="doc">/usr/share/doc</Path>
             </Files>
+            <Provides>
+                <COMAR script="package.py">System.Package</COMAR>
+            </Provides>
         </Package>
         <History>
             <Update release="27">
@@ -21807,9 +21809,16 @@
                 <Dependency>exfat-utils</Dependency>
             </RuntimeDependencies>
             <Files>
+                <Path fileType="config">/etc/modprobe.d</Path>
                 <Path fileType="data">/lib/modules</Path>
-                <Path fileType="doc">/usr/share/doc/exfat-linux</Path>
+                <Path fileType="doc">/usr/share/doc/module-exfat</Path>
             </Files>
+            <Provides>
+                <COMAR script="package.py">System.Package</COMAR>
+            </Provides>
+            <AdditionalFiles>
+                <AdditionalFile target="/etc/modprobe.d/exfat.conf" permission="0644" owner="root">exfat.conf</AdditionalFile>
+            </AdditionalFiles>
         </Package>
         <History>
             <Update release="1">
@@ -21857,6 +21866,9 @@
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
             </Files>
+            <Provides>
+                <COMAR script="package.py">System.Package</COMAR>
+            </Provides>
         </Package>
         <Package>
             <Name>module-virtualbox-userspace</Name>
@@ -23527,6 +23539,48 @@
             </Update>
         </History>
     </SpecFile>
+    <Package>
+        <Name>module-exfat</Name>
+        <Summary xml:lang="en">exFAT filesystem module for Linux kernel</Summary>
+        <Description xml:lang="en">This exFAT filesystem module for Linux kernel is based on sdFAT drivers by Samsung, which is used with their smartphone lineups.</Description>
+        <IsA>driver</IsA>
+        <PartOf>kernel.drivers</PartOf>
+        <License>GPLv2</License>
+        <RuntimeDependencies>
+            <Dependency version="5.3.2">kernel</Dependency>
+            <Dependency>exfat-utils</Dependency>
+        </RuntimeDependencies>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+        </Provides>
+        <History>
+            <Update release="1">
+                <Date>2019-09-15</Date>
+                <Version>2.2.0</Version>
+                <Comment>First build.</Comment>
+                <Name>fury</Name>
+                <Email>wascheme@tuta.io</Email>
+            </Update>
+        </History>
+        <BuildHost>localhost</BuildHost>
+        <Distribution>PisiLinux</Distribution>
+        <DistributionRelease>2.0</DistributionRelease>
+        <Architecture>x86_64</Architecture>
+        <InstalledSize>238804</InstalledSize>
+        <PackageSize>58719</PackageSize>
+        <PackageHash>eb46f96103dbb8805e6f5a0f3f382e5b726d7ea1</PackageHash>
+        <InstallTarHash>da39a3ee5e6b4b0d3255bfef95601890afd80709</InstallTarHash>
+        <PackageURI>kernel/drivers/module-exfat/module-exfat-2.2.0-1-p2-x86_64.pisi</PackageURI>
+        <PackageFormat>1.2</PackageFormat>
+        <Source>
+            <Name>module-exfat</Name>
+            <Homepage>https://github.com/arter97/exfat-linux</Homepage>
+            <Packager>
+                <Name>fury</Name>
+                <Email>wascheme@tuta.io</Email>
+            </Packager>
+        </Source>
+    </Package>
     <Package>
         <Name>scons</Name>
         <Summary xml:lang="en">An Open Source software construction tool</Summary>
