@@ -65,7 +65,7 @@ def install():
     pisitools.insinto("/boot/grub2", "unicode.pf2")
 
     # Insall our theme
-    pisitools.insinto("/usr/share/grub/themes/","themes/pisilinux")
+    pisitools.insinto("/usr/share/grub/themes/pisilinux","themes/Pisilinux-Bluez-0.1/*")
 
     #remove -r 0x0-0x7F entries to fix ugly fonts or find a suitable range parameter -r ***
     shelltools.system("./grub-mkfont -o DejaVuSans-10.pf2 -r 0x0-0x7F -s 10 /usr/share/fonts/dejavu/DejaVuSans.ttf")
