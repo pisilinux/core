@@ -23,6 +23,14 @@ def install():
     # Install baselayout utilities
     shelltools.cd("src/")
     autotools.rawInstall('DESTDIR="%s"' % get.installDIR())
+    
+    # create needed directories
+    pisitools.dodir("/lib")
+    pisitools.dodir("/tmp")
+    pisitools.dodir("/var/tmp")
+    pisitools.dodir("/run/shm")
+    pisitools.dodir("/run")
+    pisitools.dodir("/run/lock")
 
     # Adjust permissions
     chmod("/tmp", 01777)
