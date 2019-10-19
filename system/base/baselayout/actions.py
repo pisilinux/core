@@ -25,6 +25,16 @@ def install():
     autotools.rawInstall('DESTDIR="%s"' % get.installDIR())
     
     # create needed directories
+    pisitools.dodir("/bin")
+    pisitools.dodir("/dev")
+    pisitools.dodir("/home")
+    pisitools.dodir("/media")
+    pisitools.dodir("/mnt")
+    pisitools.dodir("/opt")
+    pisitools.dodir("/proc")
+    pisitools.dodir("/srv")
+    pisitools.dodir("/sys")
+    
     pisitools.dodir("/lib")
     pisitools.dodir("/tmp")
     pisitools.dodir("/var/tmp")
