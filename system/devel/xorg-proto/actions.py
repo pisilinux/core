@@ -25,7 +25,7 @@ def install():
     shelltools.system("DESTDIR=%s ninja install" % get.installDIR())
     
     shelltools.cd("..")
-    pisitools.dodoc("README", "COPYING*", "AUTHORS")
+    pisitools.dodoc("README*", "COPYING*", "AUTHORS")
     
     pisitools.remove("/usr/include/X11/extensions/apple*")
     pisitools.remove("/usr/include/X11/extensions/windows*")
@@ -33,3 +33,7 @@ def install():
     pisitools.remove("/usr/share/doc/xorg-proto/COPYING-applewmproto")
     pisitools.remove("/usr/lib/pkgconfig/applewmproto.pc")
     pisitools.remove("/usr/lib/pkgconfig/windowswmproto.pc")
+    
+    #libX11
+    pisitools.remove("/usr/include/X11/extensions/vldXvMC.h")
+    pisitools.remove("/usr/include/X11/extensions/XKBgeom.h")

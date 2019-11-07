@@ -23,7 +23,7 @@ def install():
     # Install baselayout utilities
     shelltools.cd("src/")
     autotools.rawInstall('DESTDIR="%s"' % get.installDIR())
-
+    
     # Adjust permissions
     chmod("/tmp", 01777)
     chmod("/var/tmp", 01777)
