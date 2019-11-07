@@ -219,7 +219,7 @@ def postInstall(fromVersion, fromRelease, toVersion, toRelease):
                 (32,  "rpc", "Rpcbind daemon", "/var/lib/rpcbind", "/sbin/nologin", "", ["rpc"], [], []),
                 (40,  "named", "Bind", "/var/named", "/bin/false", "", ["named"], [], []),
                 (60,  "mysql", "MySQL", "/var/lib/mysql", "/bin/false", "", ["mysql"], [], []),
-                (70,  "postgres", "PostgreSQL", "/var/lib/postgresql", "/bin/false", "", ["postgres"], [], []),
+                (70,  "postgres", "PostgreSQL", "/var/lib/postgresql", "/bin/bash", "", ["postgres"], [], []),
                 (80,  "apache", "Apache", "/dev/null", "/bin/false", "", ["apache", "svn"], [], []),
                 (90,  "dovecot", "Dovecot", "/dev/null", "/bin/false", "", ["dovecot"], [], []),
                 (103, "polkitd", "PolicyKit", "/var/lib/polkit-1", "/bin/false", "", ["polkitd"], [], []),
