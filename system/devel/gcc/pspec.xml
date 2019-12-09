@@ -14,9 +14,13 @@
         <IsA>library</IsA>
         <Summary>The GNU Compiler Collection, includes C, C++, Objective-C and Fortran compilers</Summary>
         <Description>The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, as well as libraries for these languages</Description>
-        <Archive sha1sum="9689b9cae7b2886fdaa08449a26701f095c04e48" type="tarxz">http://ftp.gnu.org/gnu/gcc/gcc-7.3.0/gcc-7.3.0.tar.xz</Archive>
+        <Archive sha1sum="306d27c3465fa36862c206738d06d65fff5c3645" type="tarxz">http://ftp.gnu.org/gnu/gcc/gcc-9.2.0/gcc-9.2.0.tar.xz</Archive>
+        <Archive sha1sum="52c1f2a4c9a202f46cf3275a8d46b562aa584208" target="gcc-9.2.0" type="tarxz">https://ftp.gnu.org/gnu/mpfr/mpfr-4.0.2.tar.xz</Archive>
+        <Archive sha1sum="b019d9e1d27ec5fb99497159d43a3164995de2d0" target="gcc-9.2.0" type="targz">ftp://ftp.gnu.org/gnu/mpc/mpc-1.1.0.tar.gz</Archive>
+        <Archive sha1sum="33e366d59d32330432b5c7f2d0c2fb6664eff224" target="gcc-9.2.0" type="tarbz2">http://isl.gforge.inria.fr/isl-0.21.tar.bz2</Archive>
+		<Archive sha1sum="9dc6981197a7d92f339192eea974f5eca48fcffe" target="gcc-9.2.0" type="tarxz">mirrors://gnu/gmp/gmp-6.1.2.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="2.30">binutils</Dependency>
+            <Dependency versionFrom="2.32">binutils</Dependency>
             <Dependency>bison</Dependency>
             <Dependency>gettext</Dependency>
             <Dependency>ncurses</Dependency>
@@ -26,11 +30,8 @@
             <Dependency>sed</Dependency>
             <Dependency>texinfo</Dependency>
             <Dependency>gmp-devel</Dependency>
-            <Dependency>mpfr-devel</Dependency>
-            <Dependency>libmpc-devel</Dependency>
             <Dependency>ppl</Dependency>
             <Dependency>zlib-devel</Dependency>
-            <Dependency>isl-devel</Dependency>
             <Dependency>elfutils</Dependency>
         </BuildDependencies>
         <Patches>
@@ -123,11 +124,7 @@
         <Name>gcc</Name>
         <RuntimeDependencies>
             <Dependency>gmp</Dependency>
-            <Dependency>isl</Dependency>
-            <Dependency>mpfr</Dependency>
             <Dependency>zlib</Dependency>
-            <!--Dependency>cloog</Dependency-->
-            <Dependency>libmpc</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/lib</Path>
@@ -146,6 +143,13 @@
     </Package>
 
     <History>
+		<Update release="6">
+            <Date>2019-12-10</Date>
+            <Version>9.2.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="5">
             <Date>2018-07-15</Date>
             <Version>7.3.0</Version>
