@@ -15,7 +15,7 @@
         <Archive sha1sum="71fc3595865ea6ea859587cbbb35cbf9aeb39d2d" type="tarxz">http://mirrors.kernel.org/gnu/gawk/gawk-4.2.1.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>gettext</Dependency>
-            <Dependency>readline-devel</Dependency>
+            <Dependency versionFrom="8.0.1">readline-devel</Dependency>
             <Dependency>gmp-devel</Dependency>
             <Dependency>mpfr-devel</Dependency>
         </BuildDependencies>
