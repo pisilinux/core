@@ -13,7 +13,12 @@
         <IsA>library</IsA>
         <Summary>Unicode string library</Summary>
         <Description>This library provides functions for manipulating Unicode strings and for manipulating C strings according to the Unicode standard.</Description>
-        <Archive sha1sum="f362289512c110cc077bee5f9d1de0049f375b47" type="targz">mirrors://gnu/libunistring/libunistring-0.9.8.tar.gz</Archive>
+        <Archive sha1sum="1e7493a3ad8c4a1e514600b768c7229576fe5125" type="targz">mirrors://gnu/libunistring/libunistring-0.9.10.tar.gz</Archive>
+		<Patches>
+			<Patch level="1">0100-float-endian-detection.patch</Patch>
+			<Patch level="1">0700-multiarch-libc.patch</Patch>
+			<Patch level="1">0705-gcc-9.patch</Patch>
+		</Patches>
     </Source>
 
     <Package>
@@ -38,6 +43,13 @@
     </Package>
 
     <History>
+		<Update release="5">
+            <Date>2019-12-11</Date>
+            <Version>0.9.10</Version>
+            <Comment>Version bump</Comment>
+            <Name>idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-15</Date>
             <Version>0.9.8</Version>
