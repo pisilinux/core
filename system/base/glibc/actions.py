@@ -34,7 +34,6 @@ ldconf32bit = """/lib32
 """
 
 def setup():
-	shelltools.system("gcc --version")
     shelltools.export("LANGUAGE","C")
     shelltools.export("LANG","C")
     shelltools.export("LC_ALL","C")
