@@ -17410,6 +17410,113 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>meson</Name>
+            <Homepage>http://mesonbuild.com/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>Apache</License>
+            <IsA>app:console</IsA>
+            <PartOf>system.devel</PartOf>
+            <Summary xml:lang="en">High productivity build system</Summary>
+            <Summary xml:lang="tr">High productivity build system</Summary>
+            <Description xml:lang="en">Yüksek verimli üretme sistemi</Description>
+            <Description xml:lang="tr">Yüksek verimli üretme sistemi</Description>
+            <Archive type="targz" sha1sum="f5b924f5128f53f9eaeffc2e72ac3f757977a809">https://github.com/mesonbuild/meson/releases/download/0.52.1/meson-0.52.1.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>python3-devel</Dependency>
+                <Dependency>python3-setuptools</Dependency>
+            </BuildDependencies>
+            <Patches>
+                <Patch level="1">212a05b8.patch</Patch>
+            </Patches>
+            <SourceURI>system/devel/meson/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>meson</Name>
+            <RuntimeDependencies>
+                <Dependency>python3-setuptools</Dependency>
+                <Dependency>python3</Dependency>
+                <Dependency>ninja</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="data">/usr/share</Path>
+                <Path fileType="man">/usr/share/man</Path>
+                <Path fileType="data">/usr/share/vim</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="9">
+                <Date>2019-12.10</Date>
+                <Version>0.52.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Idris Kalp</Name>
+                <Email>idriskalp@gmail.com</Email>
+            </Update>
+            <Update release="8">
+                <Date>2019-11-17</Date>
+                <Version>0.52.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="7">
+                <Date>2019-10-06</Date>
+                <Version>0.51.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="6">
+                <Date>2018-11-09</Date>
+                <Version>0.48.2</Version>
+                <Comment>Version bump</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="5">
+                <Date>2018-07-31</Date>
+                <Version>0.47.0</Version>
+                <Comment>Version bump</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="4">
+                <Date>2018-05-13</Date>
+                <Version>0.46.0</Version>
+                <Comment>Version bump</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="3">
+                <Date>2018-04-08</Date>
+                <Version>0.45.1</Version>
+                <Comment>Version bump</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="2">
+                <Date>2018-02-22</Date>
+                <Version>0.44.1</Version>
+                <Comment>Version bump</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="1">
+                <Date>2017-12-07</Date>
+                <Version>0.43.0</Version>
+                <Comment>First release.</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>autogen</Name>
             <Homepage>http://www.gnu.org/software/autogen</Homepage>
             <Packager>
@@ -21286,6 +21393,739 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>python-sphinx</Name>
+            <Homepage>http://sphinx.pocoo.org</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>as-is</License>
+            <IsA>app:console</IsA>
+            <PartOf>programming.language.python</PartOf>
+            <Summary xml:lang="en">Python documentation generator. It can generate HTML or Latex outputs</Summary>
+            <Summary xml:lang="tr">Python için döküman üreticisi. HTML, Latex gibi çıktılar üretebiliyor</Summary>
+            <Description xml:lang="en">It&apos;s a very common documentation generator especially using for python based documentation.It can generate HTML or PDF, Ps outputs with Latex output support.</Description>
+            <Description xml:lang="tr">Özellikle python için hazırlanan dökümanları yorumlamak için kullanılan yaygın bir döoküman üreticisi. Başta HTML olmak üzere Latex ile birlikte PDF, Ps gibi doküman çıktıları üretebiliyor.</Description>
+            <Archive type="targz" sha1sum="d374d466a6d6b4fcf1df997ae580d66480134ea8">https://files.pythonhosted.org/packages/8b/7e/b188d9a3b9c938e736e02a74c1363c2888e095d770df2c72b4c312f9fdcb/Sphinx-1.6.5.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>docutils</Dependency>
+                <Dependency>python-six</Dependency>
+                <Dependency>python-requests</Dependency>
+                <Dependency>python-sphinx-alabaster-theme</Dependency>
+                <Dependency>python-Babel</Dependency>
+                <Dependency>python-imagesize</Dependency>
+                <Dependency>python-Pygments</Dependency>
+                <Dependency>python-Jinja2</Dependency>
+                <Dependency>python-MarkupSafe</Dependency>
+            </BuildDependencies>
+            <SourceURI>programming/language/python/python-sphinx/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>python-sphinx</Name>
+            <RuntimeDependencies>
+                <Dependency>docutils</Dependency>
+                <Dependency>python-Pygments</Dependency>
+                <Dependency>python-Jinja2</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="library">/usr/lib/python*</Path>
+                <Path fileType="doc">/usr/share/doc/python-sphinx/LICENSE</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>python-sphinx-docs</Name>
+            <Summary xml:lang="en">Documentation files for python-sphinx</Summary>
+            <Summary xml:lang="tr">python-sphinx için belgelendirme dosyaları</Summary>
+            <Files>
+                <Path fileType="doc">/usr/share/doc/python-sphinx</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="5">
+                <Date>2019-10-03</Date>
+                <Version>1.6.5</Version>
+                <Comment>Rebuild</Comment>
+                <Name>idris Kalp</Name>
+                <Email>idriskalp@gmail.com</Email>
+            </Update>
+            <Update release="4">
+                <Date>2018-09-22</Date>
+                <Version>1.6.5</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2017-01-29</Date>
+                <Version>1.5.2</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2016-06-09</Date>
+                <Version>1.3.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2015-07-27</Date>
+                <Version>1.3.1</Version>
+                <Comment>First release</Comment>
+                <Name>Ayhan Yalçınsoy</Name>
+                <Email>ayhanyalcinsoy@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>python-Pygments</Name>
+            <Homepage>http://pygments.org/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>BSD</License>
+            <IsA>library</IsA>
+            <PartOf>programming.language.python</PartOf>
+            <Summary xml:lang="en">A syntax highlighting package written in Python</Summary>
+            <Summary xml:lang="tr">Python dilinde yazılmış bir sözdizimi belirtme aracı</Summary>
+            <Description xml:lang="en">python-Pygments is a generic syntax highlighter for general use in all kinds of software such as forum systems, wikis or other applications that need to prettify source code.</Description>
+            <Description xml:lang="tr">python-Pygments, kaynak kodunu güzelleştirmek ihtiyacı duyulan forum sistemleri, wikiler ve diğer uygulamalar gibi her çeşit yazılımda kullanılmak için yazılmış olan genel bir sözdizimi belirtme aracıdır.</Description>
+            <Archive type="targz" sha1sum="5296c3b92ef0cbb8f4abede623be4a89e4f0f3c9">https://files.pythonhosted.org/packages/7e/ae/26808275fc76bf2832deb10d3a3ed3107bc4de01b85dcccbe525f2cd6d1e/Pygments-2.4.2.tar.gz</Archive>
+            <SourceURI>programming/language/python/python-Pygments/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>python-Pygments</Name>
+            <RuntimeDependencies>
+                <Dependency>python-setuptools</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="library">/usr/lib/python*</Path>
+                <Path fileType="man">/usr/share/man</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>python-Pygments-docs</Name>
+            <Summary xml:lang="en">Documentation files for python-Pygments</Summary>
+            <Summary xml:lang="tr">python-Pygments için belgelendirme dosyaları</Summary>
+            <Files>
+                <Path fileType="doc">/usr/share/doc/python-Pygments</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="5">
+                <Date>2019-10-03</Date>
+                <Version>2.4.2</Version>
+                <Comment>Version bump</Comment>
+                <Name>idris Kalp</Name>
+                <Email>idriskalp@gmail.com</Email>
+            </Update>
+            <Update release="4">
+                <Date>2018-08-15</Date>
+                <Version>2.2.0</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2017-01-25</Date>
+                <Version>2.2.0</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2016-06-09</Date>
+                <Version>1.6</Version>
+                <Comment>Release Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2013-12-07</Date>
+                <Version>1.6</Version>
+                <Comment>First release</Comment>
+                <Name>Burak Fazıl Ertürk</Name>
+                <Email>burakerturk@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>python-Babel</Name>
+            <Homepage>http://babel.pocoo.org</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>BSD</License>
+            <IsA>library</IsA>
+            <PartOf>programming.language.python</PartOf>
+            <Summary xml:lang="en">A collection of tools for internationalizing Python applications</Summary>
+            <Summary xml:lang="tr">Python uygulamalarını uluslararasılaştırmak için bir takım koleksiyonu</Summary>
+            <Description xml:lang="en">Babel is composed of two major parts: 1) tools to build and work with gettext message catalogs , 2) a Python interface to the CLDR (Common Locale Data Repository), providing access to various locale display names, localized number and date formatting, etc.</Description>
+            <Description xml:lang="tr">Babel temelde iki parçadan oluşur: 1) gettext mesaj kataloglarıyla çalışmak ve onları derlemek için araçlar 2) CLDR(Common Locale Data Repository), Genel Yerel Veri Deposuna, çeşitli yerel gösterim isimlerine ulaşımı sağlamak, yerelleştirilmiş numara ve tarih biçimlerini desteklemek gibi özellikler sağlayan bir python arayüzü.</Description>
+            <Archive type="targz" sha1sum="5605f75353368d32500afb30e60fc8f0edbca506">https://github.com/python-babel/babel/releases/download/v2.7.0/Babel-2.7.0.tar.gz</Archive>
+            <Archive type="binary" sha1sum="f050b458cf5f29c2a3825247fb8a7b5e21471009" target="Babel-2.7.0">https://www.unicode.org/Public/cldr/35.1/core.zip</Archive>
+            <BuildDependencies>
+                <Dependency>python-devel</Dependency>
+                <Dependency>python-pytz</Dependency>
+                <Dependency>python-setuptools</Dependency>
+            </BuildDependencies>
+            <SourceURI>programming/language/python/python-Babel/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>python-Babel</Name>
+            <RuntimeDependencies>
+                <Dependency>python-pytz</Dependency>
+                <Dependency>python-setuptools</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="doc">/usr/share/doc/python-Babel</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="4">
+                <Date>2019-10-03</Date>
+                <Version>2.7.0</Version>
+                <Comment>Version bump</Comment>
+                <Name>idris Kalp</Name>
+                <Email>idriskalp@gmail.com</Email>
+            </Update>
+            <Update release="3">
+                <Date>2018-08-15</Date>
+                <Version>2.6.0</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2018-02-26</Date>
+                <Version>2.5.3</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2017-01-29</Date>
+                <Version>2.3.4</Version>
+                <Comment>First release</Comment>
+                <Name>Pisi Linux Admins</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>python-requests</Name>
+            <Homepage>http://www.python-requests.org/</Homepage>
+            <Packager>
+                <Name>Ergün Salman</Name>
+                <Email>ergunsalman@hotmail.com</Email>
+            </Packager>
+            <License>MIT</License>
+            <PartOf>programming.language.python</PartOf>
+            <Summary xml:lang="en">Requests is an Apache2 Licensed HTTP library, written in Python, for human beings.</Summary>
+            <Description xml:lang="en">Python’s standard urllib2 module provides most of the HTTP capabilities you need</Description>
+            <Archive type="targz" sha1sum="c22ed0a553f8dc37e5c2a965048d81a5ccfaff95">https://files.pythonhosted.org/packages/01/62/ddcf76d1d19885e8579acb1b1df26a852b03472c0e46d2b959a714c90608/requests-2.22.0.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>python-devel</Dependency>
+                <Dependency>python-setuptools</Dependency>
+            </BuildDependencies>
+            <Patches>
+                <Patch level="1">certs.patch</Patch>
+            </Patches>
+            <SourceURI>programming/language/python/python-requests/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>python-requests</Name>
+            <Files>
+                <Path fileType="data">/usr/lib</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="8">
+                <Date>2019-10-03</Date>
+                <Version>2.22.0</Version>
+                <Comment>Version bump</Comment>
+                <Name>idris Kalp</Name>
+                <Email>idriskalp@gmail.com</Email>
+            </Update>
+            <Update release="7">
+                <Date>2018-09-21</Date>
+                <Version>2.19.1</Version>
+                <Comment>Rebuild certifi.</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="6">
+                <Date>2018-08-15</Date>
+                <Version>2.19.1</Version>
+                <Comment>Version Bump.</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="5">
+                <Date>2017-09-04</Date>
+                <Version>2.13.0</Version>
+                <Comment>remove unneeded runtime dep.</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="4">
+                <Date>2017-01-25</Date>
+                <Version>2.13.0</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2016-06-09</Date>
+                <Version>2.9.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2016-06-06</Date>
+                <Version>2.9.1</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ayhan Yalçınsoy</Name>
+                <Email>ayhanyalcinsoy@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2016-05-08</Date>
+                <Version>2.9.1</Version>
+                <Comment>First release</Comment>
+                <Name>Ayhan Yalçınsoy</Name>
+                <Email>ayhanyalcinsoy@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>python-imagesize</Name>
+            <Homepage>https://github.com/shibukawa/imagesize_py</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>BSD</License>
+            <IsA>library</IsA>
+            <PartOf>programming.language.python</PartOf>
+            <Summary xml:lang="en">Getting image size from png/jpeg/jpeg2000/gif file.</Summary>
+            <Summary xml:lang="tr">Png / jpeg / jpeg2000 / gif dosyasından görüntü boyutu elde etme.</Summary>
+            <Description xml:lang="en">This module analyzes jpeg/jpeg2000/png/gif image header and return image size.</Description>
+            <Description xml:lang="tr">Bu modül jpeg / jpeg2000 / png / gif resim başlığını ve dönüş resim boyutunu analiz eder.</Description>
+            <Archive type="targz" sha1sum="48b7277a450654db77dc956812020525f5e478c8">https://files.pythonhosted.org/packages/41/f5/3cf63735d54aa9974e544aa25858d8f9670ac5b4da51020bbfc6aaade741/imagesize-1.1.0.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>python-devel</Dependency>
+                <Dependency>python-setuptools</Dependency>
+            </BuildDependencies>
+            <SourceURI>programming/language/python/python-imagesize/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>python-imagesize</Name>
+            <RuntimeDependencies>
+                <Dependency>python-setuptools</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="3">
+                <Date>2019-10-03</Date>
+                <Version>1.1.0</Version>
+                <Comment>Version bump</Comment>
+                <Name>idris Kalp</Name>
+                <Email>idriskalp@gmail.com</Email>
+            </Update>
+            <Update release="2">
+                <Date>2018-08-15</Date>
+                <Version>1.0.0</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2017-01-29</Date>
+                <Version>0.7.1</Version>
+                <Comment>First release</Comment>
+                <Name>Pisi Linux Admins</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>python-sphinx-alabaster-theme</Name>
+            <Homepage>https://github.com/shibukawa/imagesize_py</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>BSD</License>
+            <IsA>library</IsA>
+            <PartOf>programming.language.python</PartOf>
+            <Summary xml:lang="en">Sphinx default theme.</Summary>
+            <Summary xml:lang="tr">Sphinx varsayılan teması.</Summary>
+            <Description xml:lang="en">Alabaster is a visually (c)lean, responsive, configurable theme for the Sphinx documentation system. It is Python 2+3 compatible.</Description>
+            <Description xml:lang="tr">Alabaster, Sphinx dokümantasyon sistemi için görsel (c) yalın, duyarlı, yapılandırılabilir bir temadır. Python 2 + 3 uyumludur.</Description>
+            <Archive type="targz" sha1sum="be91b40579cd74e8fd1a6e89a5ce66e186204d52">https://github.com/bitprophet/alabaster/archive/0.7.12.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>python-devel</Dependency>
+                <Dependency>python-setuptools</Dependency>
+            </BuildDependencies>
+            <SourceURI>programming/language/python/python-sphinx-alabaster-theme/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>python-sphinx-alabaster-theme</Name>
+            <RuntimeDependencies>
+                <Dependency>python-setuptools</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="6">
+                <Date>2019-10-03</Date>
+                <Version>0.7.12</Version>
+                <Comment>Version bump</Comment>
+                <Name>idris Kalp</Name>
+                <Email>idriskalp@gmail.com</Email>
+            </Update>
+            <Update release="5">
+                <Date>2018-08-15</Date>
+                <Version>0.7.11</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="4">
+                <Date>2018-02-25</Date>
+                <Version>0.7.10</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="1">
+                <Date>2017-01-29</Date>
+                <Version>0.7.9</Version>
+                <Comment>First release</Comment>
+                <Name>Pisi Linux Admins</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>python-six</Name>
+            <Homepage>http://pypi.python.org/pypi/six/</Homepage>
+            <Packager>
+                <Name>Alihan Öztürk</Name>
+                <Email>alihan@pisilinux.org</Email>
+            </Packager>
+            <License>MIT</License>
+            <IsA>app:console</IsA>
+            <PartOf>programming.language.python</PartOf>
+            <Summary xml:lang="en">Python 2 and 3 compatibility utilities.</Summary>
+            <Summary xml:lang="tr">Python2 ve python3 uyumluluk programı.</Summary>
+            <Description xml:lang="en">python-six provides simple utilities for wrapping over differences between Python 2 and Python 3.</Description>
+            <Description xml:lang="tr">python-six, python2 ile python3 arasındaki farklılıkların aşılmasına yardımcı olan basit araçlar sağlar.</Description>
+            <Archive type="targz" sha1sum="1957b44942be21822414f4dde936e6c40b687565">https://pypi.io/packages/source/s/six/six-1.12.0.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>python-devel</Dependency>
+            </BuildDependencies>
+            <SourceURI>programming/language/python/python-six/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>python-six</Name>
+            <RuntimeDependencies>
+                <Dependency>python</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="7">
+                <Date>2019-10-03</Date>
+                <Version>1.12.0</Version>
+                <Comment>Version bump</Comment>
+                <Name>idris Kalp</Name>
+                <Email>idriskalp@gmail.com</Email>
+            </Update>
+            <Update release="6">
+                <Date>2018-07-27</Date>
+                <Version>1.11.0</Version>
+                <Comment>Rebuild with new toolchain.</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="5">
+                <Date>2018-01-29</Date>
+                <Version>1.11.0</Version>
+                <Comment>Version Bump.</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
+                <Date>2017-01-25</Date>
+                <Version>1.10.0</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2016-06-10</Date>
+                <Version>1.9.0</Version>
+                <Comment>Release Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2016-06-06</Date>
+                <Version>1.9.0</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+            <Update release="1">
+                <Date>2016-05-08</Date>
+                <Version>1.9.0</Version>
+                <Comment>First release</Comment>
+                <Name>Ertuğrul Erata</Name>
+                <Email>ertugrulerata@gmail.com</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>python-Jinja2</Name>
+            <Homepage>http://jinja.pocoo.org/2/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>as-is</License>
+            <IsA>app:console</IsA>
+            <PartOf>programming.language.python</PartOf>
+            <Summary xml:lang="en">A small but fast and easy to use stand-alone template engine written in pure python</Summary>
+            <Summary xml:lang="tr">Küçük, hızlı ve kullanımı kolay, sadece python ile yazılmış bir bağımsız şablon üreteci</Summary>
+            <Description xml:lang="en">Jinja2 is the rewritten version of Jinja, sandboxed template engine written in pure Python. It provides a Django like non-XML syntax and compiles templates into executable python code. It&apos;s basically a combination of Django templates and python code.</Description>
+            <Description xml:lang="tr">Jinja2, sadece python ile yazılmış bir şablon üreteci olan Jinja&apos;nın yeniden yazılmış bir versiyonudur. Django benzeri XML-olmayan bir sözdizimi sağlar ve şablonları derleyip çalıştırılabilir python programları haline getirir. Temel olarak Django şablonları ve python kodunun birleşimi bir programdır.</Description>
+            <Archive type="targz" sha1sum="896a71a32336487edf1216d5d73dd3b26c4d7431">https://files.pythonhosted.org/packages/93/ea/d884a06f8c7f9b7afbc8138b762e80479fb17aedbbe2b06515a12de9378d/Jinja2-2.10.1.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>python-setuptools</Dependency>
+                <Dependency>python-MarkupSafe</Dependency>
+            </BuildDependencies>
+            <SourceURI>programming/language/python/python-Jinja2/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>python-Jinja2</Name>
+            <Files>
+                <Path fileType="library">/usr/lib/python*</Path>
+                <Path fileType="doc">/usr/share/doc/python-Jinja2/LICENSE</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>python-Jinja2-docs</Name>
+            <Summary xml:lang="tr">python-Jinja2 için belgelendirme dosyaları</Summary>
+            <Files>
+                <Path fileType="doc">/usr/share/doc/python-Jinja2</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="6">
+                <Date>2019-10-03</Date>
+                <Version>2.10.1</Version>
+                <Comment>Version bump</Comment>
+                <Name>idris Kalp</Name>
+                <Email>idriskalp@gmail.com</Email>
+            </Update>
+            <Update release="5">
+                <Date>2018-08-15</Date>
+                <Version>2.10</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
+                <Date>2018-02-26</Date>
+                <Version>2.10</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2017-01-29</Date>
+                <Version>2.9.5</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2016-06-09</Date>
+                <Version>2.7.2</Version>
+                <Comment>Release Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2014-02-27</Date>
+                <Version>2.7.2</Version>
+                <Comment>First release</Comment>
+                <Name>Yusuf Aydemir</Name>
+                <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>python-MarkupSafe</Name>
+            <Homepage>http://pypi.python.org/pypi/MarkupSafe</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>BSD</License>
+            <IsA>library</IsA>
+            <PartOf>programming.language.python</PartOf>
+            <Summary xml:lang="en">Implements a XML/HTML/XHTML Markup safe string for Python</Summary>
+            <Summary xml:lang="tr">XML/HTML/XHTML markup dilleri için güvenli python karakter dizeleri gerçekleştirimi</Summary>
+            <Description xml:lang="en">python-MarkupSafe, implements a unicode subclass that supports HTML strings.</Description>
+            <Description xml:lang="tr">python-MarkupSafe, HTML karakter dizeleri için unicode bir alt sınıf gerçekleştirimi sağlar.</Description>
+            <Archive type="targz" sha1sum="f70e5fd3c120a1b108d4347ea1115e3962c42026">https://files.pythonhosted.org/packages/b9/2e/64db92e53b86efccfaea71321f597fa2e1b2bd3853d8ce658568f7a13094/MarkupSafe-1.1.1.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>python-setuptools</Dependency>
+            </BuildDependencies>
+            <SourceURI>programming/language/python/python-MarkupSafe/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>python-MarkupSafe</Name>
+            <Files>
+                <Path fileType="library">/usr/lib/python2.*</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="6">
+                <Date>2019-10-03</Date>
+                <Version>1.1.1</Version>
+                <Comment>Version bump</Comment>
+                <Name>idris Kalp</Name>
+                <Email>idriskalp@gmail.com</Email>
+            </Update>
+            <Update release="5">
+                <Date>2018-08-15</Date>
+                <Version>1.0</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
+                <Date>2018-02-26</Date>
+                <Version>1.0</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2017-01-25</Date>
+                <Version>0.23</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2016-06-09</Date>
+                <Version>0.23</Version>
+                <Comment>Release Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2014-05-29</Date>
+                <Version>0.23</Version>
+                <Comment>First release</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>python-pytz</Name>
+            <Homepage>http://pytz.sourceforge.net/</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>MIT</License>
+            <License>ZPL</License>
+            <IsA>library</IsA>
+            <PartOf>programming.language.python</PartOf>
+            <Summary xml:lang="en">World Timezone Definitions for Python</Summary>
+            <Summary xml:lang="tr">Python için Dünya Saat Dilimi(World Time Zone) tanımları</Summary>
+            <Description xml:lang="en">python-pytz brings the Olson tz database into Python. This library allows accurate and cross platform timezone calculations using Python. It also solves the issue of ambiguous times at the end of daylight savings, which you can read more about in the Python Library Reference (datetime.tzinfo).Almost all (over 540) of the Olson timezones are supported.</Description>
+            <Description xml:lang="tr">python-pytz, Olson tz veritabanını Python&apos;a taşımaktadır. Bu kütüphane Python kullanarak doğru ve farklı platformlar üzerinde hesaplamalar yapmayı sağlar. Aynı zamanda gün ışığından kazanmak için saat ayarlama ile ilgili belirsizlikleri de çözmektedir. Bu konuda Python Library Reference (datetime.tzinfo) kısmında ayrıntılı bilgi bulabilirsiniz. 540&apos;a yakın Olson zaman dilimi desteklenmektedir.</Description>
+            <Archive type="targz" sha1sum="07de2c4d82ed97d846bf535a75116dda483733be">https://files.pythonhosted.org/packages/27/c0/fbd352ca76050952a03db776d241959d5a2ee1abddfeb9e2a53fdb489be4/pytz-2019.2.tar.gz</Archive>
+            <SourceURI>programming/language/python/python-pytz/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>python-pytz</Name>
+            <Files>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="doc">/usr/share/doc/python-pytz</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="4">
+                <Date>2019-10-03</Date>
+                <Version>2019.2</Version>
+                <Comment>Version bump</Comment>
+                <Name>idris Kalp</Name>
+                <Email>idriskalp@gmail.com</Email>
+            </Update>
+            <Update release="3">
+                <Date>2018-05-15</Date>
+                <Version>2018.4</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2018-02-26</Date>
+                <Version>2018.3</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2017-01-29</Date>
+                <Version>2016.10</Version>
+                <Comment>First release</Comment>
+                <Name>Erdinç Gültekin</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>mpdecimal</Name>
             <Homepage>http://www.bytereef.org/mpdecimal/index.html</Homepage>
             <Packager>
@@ -21337,6 +22177,167 @@
                 <Comment>First release</Comment>
                 <Name>Kamil Atlı</Name>
                 <Email>suvari@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>python3-packaging</Name>
+            <Homepage>http://pypi.python.org/pypi/six/</Homepage>
+            <Packager>
+                <Name>Ayhan Yalçınsoy</Name>
+                <Email>ayhanyalcinsoy@pisilinux.org</Email>
+            </Packager>
+            <License>Apache</License>
+            <IsA>app:console</IsA>
+            <PartOf>programming.language.python3</PartOf>
+            <Summary xml:lang="en">Core utilities for Python packages</Summary>
+            <Description xml:lang="en">Core utilities for Python packages</Description>
+            <Archive type="targz" sha1sum="fd70f0604b28ccaa4bbc74e9d69b9e2d4cd50aea">https://github.com/pypa/packaging/archive/19.2.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency versionFrom="3.8.0">python3-devel</Dependency>
+            </BuildDependencies>
+            <SourceURI>programming/language/python3/python3-packaging/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>python3-packaging</Name>
+            <RuntimeDependencies>
+                <Dependency versionFrom="3.8.0">python3</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="3">
+                <Date>2019-12-10</Date>
+                <Version>19.2</Version>
+                <Comment>Version bump</Comment>
+                <Name>Idris Kalp</Name>
+                <Email>idriskalp@gmail.com</Email>
+            </Update>
+            <Update release="2">
+                <Date>2018-08-30</Date>
+                <Version>16.8</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="1">
+                <Date>2017-02-01</Date>
+                <Version>16.8</Version>
+                <Comment>First Release</Comment>
+                <Name>Ayhan Yalçınsoy</Name>
+                <Email>ayhanyalcinsoy@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>python3-setuptools</Name>
+            <Homepage>http://pypi.python.org/pypi/setuptools</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>PSF-2.2</License>
+            <IsA>library</IsA>
+            <PartOf>programming.language.python3</PartOf>
+            <Summary xml:lang="en">Python setuptools</Summary>
+            <Description xml:lang="en">python-setuptools is a collection of enhancements to the Python distutils that allow you to more easily build and distribute Python packages, especially ones that have dependencies on other packages.</Description>
+            <Archive type="targz" sha1sum="1460a02840bdab87aa419451819933368d33d810">https://github.com/pypa/setuptools/archive/v42.0.2.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>python3-devel</Dependency>
+                <Dependency>python3-packaging</Dependency>
+            </BuildDependencies>
+            <SourceURI>programming/language/python3/python3-setuptools/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>python3-setuptools</Name>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="library">/usr/lib/python3*</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="11">
+                <Date>2019-12-10</Date>
+                <Version>42.0.2</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Idris Kalp</Name>
+                <Email>idriskalp@gmail.com</Email>
+            </Update>
+            <Update release="10">
+                <Date>2019-04-09</Date>
+                <Version>40.6.3</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Mustafa Cinasl</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="9">
+                <Date>2018-08-05</Date>
+                <Version>39.2.0</Version>
+                <Comment>Version Bump</Comment>
+                <Name>Mustafa Cinasl</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="8">
+                <Date>2018-01-24</Date>
+                <Version>38.2.5</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="7">
+                <Date>2017-02-01</Date>
+                <Version>32.1.3</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Ayhan Yalçınsoy</Name>
+                <Email>ayhanyalcinsoy@pisilinux.org</Email>
+            </Update>
+            <Update release="6">
+                <Date>2016-06-09</Date>
+                <Version>19.6.1</Version>
+                <Comment>Release Bump</Comment>
+                <Name>Pisi Linux Community</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Update>
+            <Update release="5">
+                <Date>2016-06-06</Date>
+                <Version>19.6.1</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Ayhan Yalçınsoy</Name>
+                <Email>ayhanyalcinsoy@pisilinux.org</Email>
+            </Update>
+            <Update release="4">
+                <Date>2016-05-26</Date>
+                <Version>19.6.1</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="3">
+                <Date>2016-05-26</Date>
+                <Version>19.6.1</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="2">
+                <Date>2016-05-26</Date>
+                <Version>19.6.1</Version>
+                <Comment>Release bump.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2016-05-26</Date>
+                <Version>19.6.1</Version>
+                <Comment>First release.</Comment>
+                <Name>Marcin Bojara</Name>
+                <Email>marcin@pisilinux.org</Email>
             </Update>
         </History>
     </SpecFile>
