@@ -1,0 +1,19 @@
+Description: Patch for gcc-9 compat
+Author: based on an patch from Bruno Haible <bruno@clisp.org> 
+Bug-Debian:https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=925762 
+Last-Update: 2019-07-11
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+Index: trunk/tests/glthread/thread.h
+===================================================================
+--- trunk.orig/tests/glthread/thread.h
++++ trunk/tests/glthread/thread.h
+@@ -133,7 +133,7 @@ extern int glthread_in_use (void);
+    call to foo(...) in the same function.  To avoid this, we test the
+    address of a function in libpthread that we don't use.  */
+ 
+-#  pragma weak pthread_create
++/*#  pragma weak pthread_create */
+ 
+ #  ifndef pthread_sigmask /* Do not declare rpl_pthread_sigmask weak.  */
+ #   pragma weak pthread_sigmask
