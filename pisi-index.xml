@@ -21286,6 +21286,62 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>mpdecimal</Name>
+            <Homepage>http://www.bytereef.org/mpdecimal/index.html</Homepage>
+            <Packager>
+                <Name>Kamil Atlı</Name>
+                <Email>suvari@pisilinux.org</Email>
+            </Packager>
+            <License>custom</License>
+            <IsA>app:console</IsA>
+            <PartOf>programming.language.python3</PartOf>
+            <Summary xml:lang="en">Package for correctly-rounded arbitrary precision decimal floating point arithmetic</Summary>
+            <Summary xml:lang="tr">Degiskenler icin karsilaştirma islemini yapan bir modul</Summary>
+            <Description xml:lang="en">mpdecimal is a package for correctly-rounded arbitrary precision decimal floating point arithmetic.</Description>
+            <Archive type="targz" sha1sum="b926360a96fba40f9363abe111e24d776c661adb">http://www.bytereef.org/software/mpdecimal/releases/mpdecimal-2.4.2.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>glibc-devel</Dependency>
+            </BuildDependencies>
+            <SourceURI>programming/language/python3/mpdecimal/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>mpdecimal</Name>
+            <Files>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+        </Package>
+        <Package>
+            <Name>mpdecimal-devel</Name>
+            <Summary xml:lang="en">Development files for mpdecimal</Summary>
+            <Summary xml:lang="tr">mpdecimal için geliştirme dosyaları</Summary>
+            <RuntimeDependencies>
+                <Dependency release="2">mpdecimal</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="data">/usr/lib/pkgconfig</Path>
+                <Path fileType="header">/usr/include</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="2">
+                <Date>2018-07-31</Date>
+                <Version>2.4.2</Version>
+                <Comment>First release</Comment>
+                <Name>Kamil Atlı</Name>
+                <Email>suvari@pisilinux.org</Email>
+            </Update>
+            <Update release="1">
+                <Date>2018-01-31</Date>
+                <Version>2.4.2</Version>
+                <Comment>First release</Comment>
+                <Name>Kamil Atlı</Name>
+                <Email>suvari@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>slang</Name>
             <Homepage>http://www.jedsoft.org/slang/</Homepage>
             <Packager>
