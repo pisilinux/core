@@ -12,16 +12,12 @@
         <IsA>library</IsA>
         <Summary>Another cute console display library</Summary>
         <Description>The GNU Readline library provides a set of functions for use by applications that allow users to edit command lines as they are typed in. Both Emacs and vi editing modes are available. The Readline library includes additional functions to maintain a list of previously-entered command lines, to recall and perhaps reedit those lines, and perform csh-like history expansion on previous commands.</Description>
-        <Archive sha1sum="d9095fa14a812495052357e1d678b3f2ac635463" type="targz">mirrors://gnu/readline/readline-7.0.tar.gz</Archive>
+        <Archive sha1sum="d58041c2143595dc001d2777ae9a200be30198b0" type="targz">mirrors://gnu/readline/readline-8.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>ncurses-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch>readline70-001.patch</Patch>
-            <Patch>readline70-002.patch</Patch>
-            <Patch>readline70-003.patch</Patch>
-            <Patch>readline70-004.patch</Patch>
-            <Patch>readline70-005.patch</Patch>
+            <Patch>readline80-001.patch</Patch>
         </Patches>
     </Source>
 
@@ -70,6 +66,13 @@
         </Files>
     </Package>
     <History>
+		<Update release="6">
+            <Date>2019-10-01</Date>
+            <Version>8.0.1</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="5">
             <Date>2018-07-18</Date>
             <Version>7.0</Version>
