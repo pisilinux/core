@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>python-Babel</Name>
+        <Homepage>http://babel.pocoo.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>library</IsA>
+        <Summary>A collection of tools for internationalizing Python applications</Summary>
+        <Description>Babel is composed of two major parts: 1) tools to build and work with gettext message catalogs , 2) a Python interface to the CLDR (Common Locale Data Repository), providing access to various locale display names, localized number and date formatting, etc.</Description>
+        <Archive sha1sum="5605f75353368d32500afb30e60fc8f0edbca506" type="targz">https://github.com/python-babel/babel/releases/download/v2.7.0/Babel-2.7.0.tar.gz</Archive>
+		<Archive sha1sum="f050b458cf5f29c2a3825247fb8a7b5e21471009" type="binary" target="Babel-2.7.0">https://www.unicode.org/Public/cldr/35.1/core.zip</Archive>
+        <BuildDependencies>
+            <Dependency>python-devel</Dependency>
+            <Dependency>python-pytz</Dependency>
+            <Dependency>python-setuptools</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>python-Babel</Name>
+        <RuntimeDependencies>
+            <Dependency>python-pytz</Dependency>
+            <Dependency>python-setuptools</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc/python-Babel</Path>
+        </Files>
+    </Package>
+
+    <History>
+		<Update release="4">
+            <Date>2019-10-03</Date>
+            <Version>2.7.0</Version>
+            <Comment>Version bump</Comment>
+            <Name>idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
+        <Update release="3">
+            <Date>2018-08-15</Date>
+            <Version>2.6.0</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+        <Update release="2">
+            <Date>2018-02-26</Date>
+            <Version>2.5.3</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2017-01-29</Date>
+            <Version>2.3.4</Version>
+            <Comment>First release</Comment>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
