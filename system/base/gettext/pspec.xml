@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>GNU libraries and utilities for producing multi-lingual messages</Summary>
         <Description>The GNU gettext package provides a set of tools and documentation for producing multi-lingual messages in programs. Tools include a set of conventions about how programs should be written to support message catalogs, a directory and file naming organization for the message catalogs, a runtime library which supports the retrieval of translated messages, and stand-alone programs for handling the translatable and the already translated strings. Gettext provides an easy to use library and tools for creating, using, and modifying natural language catalogs and is a powerful and simple method for internationalizing programs.</Description>
-        <Archive sha1sum="2aa01db95b064d7f5d1a46de34a2cc6a57eadf36" type="targz">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.20.1.tar.gz</Archive>
+        <Archive sha1sum="b5d24ba2958c91fc5cc0058165837c99a0f58784" type="targz">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.19.8.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>acl-devel</Dependency>
             <Dependency>glib2-devel</Dependency>
@@ -21,9 +21,6 @@
             <Dependency>libunistring-devel</Dependency>
             <Dependency>libxml2-devel</Dependency>
         </BuildDependencies>
-		<Patches>
-			<Patch level="1">fix-empty-po.patch</Patch>
-		</Patches>
     </Source>
 
     <Package>
@@ -51,7 +48,7 @@
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="library">/usr/lib</Path>
-            <Path fileType="data">/usr/share/gettext-0.20</Path>
+            <Path fileType="data">/usr/share/gettext-0.19.8</Path>
             <Path fileType="data">/usr/share/gettext</Path>
             <Path fileType="localedata">/usr/share/locale</Path>
             <Path fileType="info">/usr/share/info</Path>
@@ -76,13 +73,6 @@
     </Package>
 
     <History>
-		<Update release="5">
-            <Date>2019-12-11</Date>
-            <Version>0.20.1</Version>
-            <Comment>Version bump</Comment>
-            <Name>Idris Kalp</Name>
-            <Email>idriskalp@gmail.com</Email>
-        </Update>
         <Update release="4">
             <Date>2018-07-20</Date>
             <Version>0.19.8.1</Version>
