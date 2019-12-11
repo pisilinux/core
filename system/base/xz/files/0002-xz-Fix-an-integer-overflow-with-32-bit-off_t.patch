@@ -1,0 +1,38 @@
+From 2402f7873dcae719d0ebddd23bb579074519ac52 Mon Sep 17 00:00:00 2001
+From: Lasse Collin <lasse.collin@tukaani.org>
+Date: Mon, 24 Jun 2019 20:45:49 +0300
+Subject: [PATCH] xz: Fix an integer overflow with 32-bit off_t.
+
+Or any off_t which isn't very big (like signed 64 bit integer
+that most system have). A small off_t could overflow if the
+file being decompressed had long enough run of zero bytes,
+which would result in corrupt output.
+---
+ src/xz/file_io.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/src/xz/file_io.c b/src/xz/file_io.c
+index d86b36e..c48df6e 100644
+--- a/src/xz/file_io.c
++++ b/src/xz/file_io.c
+@@ -1293,8 +1293,15 @@ io_write(file_pair *pair, const io_buf *buf, size_t size)
+ 		// if the file ends with sparse block, we must also return
+ 		// if size == 0 to avoid doing the lseek().
+ 		if (size == IO_BUFFER_SIZE) {
+-			if (is_sparse(buf)) {
+-				pair->dest_pending_sparse += size;
++			// Even if the block was sparse, treat it as non-sparse
++			// if the pending sparse amount is large compared to
++			// the size of off_t. In practice this only matters
++			// on 32-bit systems where off_t isn't always 64 bits.
++			const off_t pending_max
++				= (off_t)(1) << (sizeof(off_t) * CHAR_BIT - 2);
++			if (is_sparse(buf) && pair->dest_pending_sparse
++					< pending_max) {
++				pair->dest_pending_sparse += (off_t)(size);
+ 				return false;
+ 			}
+ 		} else if (size == 0) {
+-- 
+2.23.0
+
