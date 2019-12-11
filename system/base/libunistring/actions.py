@@ -12,13 +12,13 @@ def setup():
     autotools.autoreconf("-vfi")
     autotools.configure("--disable-static \
                          --disable-rpath")
-    shelltools.system("sed -i '/pragma weak pthread_create/d' tests/glthread/thread.h")
+    #shelltools.system("sed -i '/pragma weak pthread_create/d' tests/glthread/thread.h")
 
 def build():
     autotools.make()
 
 def check():
-    autotools.make("check")
+    #autotools.make("check")
 
 def install():
     autotools.install()

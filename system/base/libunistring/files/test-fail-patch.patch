@@ -1,0 +1,46 @@
+From cca32830b57e91f837c01d15b8732f23ff97fc36 Mon Sep 17 00:00:00 2001
+From: Bruno Haible <bruno@clisp.org>
+Date: Thu, 24 Jan 2019 04:10:48 +0100
+Subject: [PATCH] thread: Force linking with -lpthread, even when --as-needed
+ is in use.
+
+Reported by Richard W.M. Jones <rjones@redhat.com> in
+<https://lists.gnu.org/archive/html/bug-gnulib/2019-01/msg00123.html>.
+
+* lib/glthread/thread.h (pthread_create): Don't declare weak.
+---
+ ChangeLog             | 7 +++++++
+ lib/glthread/thread.h | 2 --
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 065dcb9..f2006e5 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,10 @@
++2019-01-23  Bruno Haible  <bruno@clisp.org>
++
++	thread: Force linking with -lpthread, even when --as-needed is in use.
++	Reported by Richard W.M. Jones <rjones@redhat.com> in
++	<https://lists.gnu.org/archive/html/bug-gnulib/2019-01/msg00123.html>.
++	* lib/glthread/thread.h (pthread_create): Don't declare weak.
++
+ 2019-01-23  Akim Demaille  <akim.demaille@gmail.com>
+             Bruno Haible  <bruno@clisp.org>
+ 
+diff --git a/lib/glthread/thread.h b/lib/glthread/thread.h
+index ca40508..1d2a544 100644
+--- a/lib/glthread/thread.h
++++ b/lib/glthread/thread.h
+@@ -133,8 +133,6 @@ extern int glthread_in_use (void);
+    call to foo(...) in the same function.  To avoid this, we test the
+    address of a function in libpthread that we don't use.  */
+ 
+-#  pragma weak pthread_create
+-
+ #  ifndef pthread_sigmask /* Do not declare rpl_pthread_sigmask weak.  */
+ #   pragma weak pthread_sigmask
+ #  endif
+-- 
+1.9.1
+
