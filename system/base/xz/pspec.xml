@@ -19,6 +19,10 @@
         <BuildDependencies>
             <Dependency versionFrom="8.0.1">readline-devel</Dependency>
         </BuildDependencies>
+		<Patches>
+			<Patch level="1">0002-xz-Fix-an-integer-overflow-with-32-bit-off_t.patch</Patch>
+			<Patch level="1">0001-liblzma-Avoid-memcpy-NULL-foo-0-because-it-is-undefi.patch</Patch>
+		</Patches>
     </Source>
 
     <Package>

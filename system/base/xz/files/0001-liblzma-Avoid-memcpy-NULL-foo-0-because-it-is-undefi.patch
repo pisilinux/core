@@ -1,0 +1,101 @@
+From 2a22de439ec63da1927b640eda309296a1e8dce5 Mon Sep 17 00:00:00 2001
+From: Lasse Collin <lasse.collin@tukaani.org>
+Date: Mon, 13 May 2019 20:05:17 +0300
+Subject: [PATCH] liblzma: Avoid memcpy(NULL, foo, 0) because it is undefined
+ behavior.
+
+I should have always known this but I didn't. Here is an example
+as a reminder to myself:
+
+    int mycopy(void *dest, void *src, size_t n)
+    {
+        memcpy(dest, src, n);
+        return dest == NULL;
+    }
+
+In the example, a compiler may assume that dest != NULL because
+passing NULL to memcpy() would be undefined behavior. Testing
+with GCC 8.2.1, mycopy(NULL, NULL, 0) returns 1 with -O0 and -O1.
+With -O2 the return value is 0 because the compiler infers that
+dest cannot be NULL because it was already used with memcpy()
+and thus the test for NULL gets optimized out.
+
+In liblzma, if a null-pointer was passed to memcpy(), there were
+no checks for NULL *after* the memcpy() call, so I cautiously
+suspect that it shouldn't have caused bad behavior in practice,
+but it's hard to be sure, and the problematic cases had to be
+fixed anyway.
+
+Thanks to Jeffrey Walton.
+---
+ src/liblzma/common/common.c       |  6 +++++-
+ src/liblzma/lz/lz_decoder.c       | 12 +++++++++---
+ src/liblzma/simple/simple_coder.c | 10 +++++++++-
+ 3 files changed, 23 insertions(+), 5 deletions(-)
+
+diff --git a/src/liblzma/common/common.c b/src/liblzma/common/common.c
+index 1399b92..18453ae 100644
+--- a/src/liblzma/common/common.c
++++ b/src/liblzma/common/common.c
+@@ -99,7 +99,11 @@ lzma_bufcpy(const uint8_t *restrict in, size_t *restrict in_pos,
+ 	const size_t out_avail = out_size - *out_pos;
+ 	const size_t copy_size = my_min(in_avail, out_avail);
+ 
+-	memcpy(out + *out_pos, in + *in_pos, copy_size);
++	// Call memcpy() only if there is something to copy. If there is
++	// nothing to copy, in or out might be NULL and then the memcpy()
++	// call would trigger undefined behavior.
++	if (copy_size > 0)
++		memcpy(out + *out_pos, in + *in_pos, copy_size);
+ 
+ 	*in_pos += copy_size;
+ 	*out_pos += copy_size;
+diff --git a/src/liblzma/lz/lz_decoder.c b/src/liblzma/lz/lz_decoder.c
+index bb21d0d..6c9024e 100644
+--- a/src/liblzma/lz/lz_decoder.c
++++ b/src/liblzma/lz/lz_decoder.c
+@@ -91,11 +91,17 @@ decode_buffer(lzma_coder *coder,
+ 				in, in_pos, in_size);
+ 
+ 		// Copy the decoded data from the dictionary to the out[]
+-		// buffer.
++		// buffer. Do it conditionally because out can be NULL
++		// (in which case copy_size is always 0). Calling memcpy()
++		// with a null-pointer is undefined even if the third
++		// argument is 0.
+ 		const size_t copy_size = coder->dict.pos - dict_start;
+ 		assert(copy_size <= out_size - *out_pos);
+-		memcpy(out + *out_pos, coder->dict.buf + dict_start,
+-				copy_size);
++
++		if (copy_size > 0)
++			memcpy(out + *out_pos, coder->dict.buf + dict_start,
++					copy_size);
++
+ 		*out_pos += copy_size;
+ 
+ 		// Reset the dictionary if so requested by coder->lz.code().
+diff --git a/src/liblzma/simple/simple_coder.c b/src/liblzma/simple/simple_coder.c
+index 13ebabc..4f499be 100644
+--- a/src/liblzma/simple/simple_coder.c
++++ b/src/liblzma/simple/simple_coder.c
+@@ -118,7 +118,15 @@ simple_code(void *coder_ptr, const lzma_allocator *allocator,
+ 		// coder->pos and coder->size yet. This way the coder can be
+ 		// restarted if the next filter in the chain returns e.g.
+ 		// LZMA_MEM_ERROR.
+-		memcpy(out + *out_pos, coder->buffer + coder->pos, buf_avail);
++		//
++		// Do the memcpy() conditionally because out can be NULL
++		// (in which case buf_avail is always 0). Calling memcpy()
++		// with a null-pointer is undefined even if the third
++		// argument is 0.
++		if (buf_avail > 0)
++			memcpy(out + *out_pos, coder->buffer + coder->pos,
++					buf_avail);
++
+ 		*out_pos += buf_avail;
+ 
+ 		// Copy/Encode/Decode more data to out[].
+-- 
+2.23.0
+
