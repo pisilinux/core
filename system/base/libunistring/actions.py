@@ -6,11 +6,13 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import shelltools
 
 def setup():
     autotools.autoreconf("-vfi")
     autotools.configure("--disable-static \
                          --disable-rpath")
+    shelltools.system("sed -i '/pragma weak pthread_create/d' tests/glthread/thread.h")
 
 def build():
     autotools.make()
