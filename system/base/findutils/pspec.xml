@@ -17,6 +17,13 @@
             <Dependency>gettext</Dependency>
             <Dependency>texinfo</Dependency>
         </BuildDependencies>
+		<Patches>
+			<Patch level="1">findutils-fedora-4.4.2-xautofs.patch</Patch>
+			<Patch level="1">findutils-fedora-4.5.13-warnings.patch</Patch>
+			<Patch level="1">findutils-fedora-4.5.15-no-locate.patch</Patch>
+			<Patch level="1">findutils-fedora-4.6.0-leaf-opt.patch</Patch>
+			<Patch level="1">findutils-fedora-4.6.0-test-lock.patch</Patch>
+		</Patches>
     </Source>
 
     <Package>
