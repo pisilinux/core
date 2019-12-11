@@ -18,6 +18,7 @@
             <Dependency>xz-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
             <Dependency versionFrom="8.0.1">readline-devel</Dependency>
+			<Dependency versionFrom="2.30">glibc-devel</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -38,7 +39,7 @@
             <Dependency>xz</Dependency>
             <Dependency>zlib</Dependency>
             <Dependency>python</Dependency>
-            <Dependency>readline</Dependency>
+            <Dependency versionFrom="8.0.1">readline</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
