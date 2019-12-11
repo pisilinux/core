@@ -1,11 +1,23 @@
---- a/Makefile.in	2018-04-29 19:01:26.000000000 +0300
-+++ b/Makefile.in	2019-12-12 00:22:02.754424198 +0300
-@@ -313,7 +313,7 @@
- INTLLIBS = @INTLLIBS@
- INTL_MACOSX_LIBS = @INTL_MACOSX_LIBS@
- LD = @LD@
--LDFLAGS = @LDFLAGS@
-+LDFLAGS = @LDFLAGS@ -pthread
- LIBICONV = @LIBICONV@
- LIBINTL = @LIBINTL@
- LIBOBJS = @LIBOBJS@
+diff -Nru xz-5.2.4.orig/configure.ac xz-5.2.4/configure.ac
+--- xz-5.2.4.orig/configure.ac	2018-04-29 18:10:38.000000000 +0300
++++ xz-5.2.4/configure.ac	2019-12-12 00:47:48.808460129 +0300
+@@ -551,6 +551,7 @@
+ 		echo
+ 		echo "POSIX threading support:"
+ 		AX_PTHREAD([:]) dnl We don't need the HAVE_PTHREAD macro.
++		PTHREAD_LIBS="$PTHREAD_LIBS -pthread"
+ 		LIBS="$LIBS $PTHREAD_LIBS"
+ 		AM_CFLAGS="$AM_CFLAGS $PTHREAD_CFLAGS"
+ 
+diff -Nru xz-5.2.4.orig/Makefile.in xz-5.2.4/Makefile.in
+--- xz-5.2.4.orig/Makefile.in	2018-04-29 19:01:26.000000000 +0300
++++ xz-5.2.4/Makefile.in	2019-12-12 00:48:19.857460850 +0300
+@@ -351,7 +351,7 @@
+ PREFERABLY_POSIX_SHELL = @PREFERABLY_POSIX_SHELL@
+ PTHREAD_CC = @PTHREAD_CC@
+ PTHREAD_CFLAGS = @PTHREAD_CFLAGS@
+-PTHREAD_LIBS = @PTHREAD_LIBS@
++PTHREAD_LIBS = @PTHREAD_LIBS@ -pthread
+ RANLIB = @RANLIB@
+ RC = @RC@
+ SED = @SED@
