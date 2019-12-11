@@ -5,7 +5,7 @@ diff -Nru xz-5.2.4.orig/configure.ac xz-5.2.4/configure.ac
  		echo
  		echo "POSIX threading support:"
  		AX_PTHREAD([:]) dnl We don't need the HAVE_PTHREAD macro.
-+		PTHREAD_LIBS="$PTHREAD_LIBS -pthread"
++		PTHREAD_LIBS="$PTHREAD_LIBS -lpthread"
  		LIBS="$LIBS $PTHREAD_LIBS"
  		AM_CFLAGS="$AM_CFLAGS $PTHREAD_CFLAGS"
  
@@ -17,7 +17,7 @@ diff -Nru xz-5.2.4.orig/Makefile.in xz-5.2.4/Makefile.in
  PTHREAD_CC = @PTHREAD_CC@
  PTHREAD_CFLAGS = @PTHREAD_CFLAGS@
 -PTHREAD_LIBS = @PTHREAD_LIBS@
-+PTHREAD_LIBS = @PTHREAD_LIBS@ -pthread
++PTHREAD_LIBS = @PTHREAD_LIBS@ -lpthread
  RANLIB = @RANLIB@
  RC = @RC@
  SED = @SED@
