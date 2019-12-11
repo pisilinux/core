@@ -17,6 +17,7 @@
         <Archive sha1sum="6c9e46602adece1c2dae91ed065899d7f810bf01" type="targz">http://download.savannah.gnu.org/releases/acl/acl-2.2.53.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>attr-devel</Dependency>
+            <Dependency versionFrom="8.0.1">readline-devel</Dependency>
         </BuildDependencies>
     </Source>
     <Package>
@@ -41,16 +42,16 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
-             <Path fileType="library">/usr/lib/pkgconfig</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
             <Path fileType="man">/usr/share/man/man3</Path>
         </Files>
     </Package>
 
     <History>
-		<Update release="6">
+        <Update release="6">
             <Date>2019-12-11</Date>
             <Version>2.2.53</Version>
-            <Comment>Rebuild</Comment>
+            <Comment>Rebuild.</Comment>
             <Name>Idris Kalp</Name>
             <Email>idriskalp@gmail.com</Email>
         </Update>
