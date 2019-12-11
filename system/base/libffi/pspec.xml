@@ -13,6 +13,9 @@
         <Summary>A portable foreign function interface library</Summary>
         <Description>The libffi library provides a portable, high level programming interface to various calling conventions.</Description>
         <Archive sha1sum="280c265b789e041c02e5c97815793dfc283fb1e6" type="targz">ftp://sourceware.org/pub/libffi/libffi-3.2.1.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>readline-devel</Dependency>
+        </BuildDependencies>
     </Source>
 
     <Package>
