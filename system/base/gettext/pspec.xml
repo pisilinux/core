@@ -20,10 +20,11 @@
             <Dependency>ncurses-devel</Dependency>
             <Dependency>libunistring-devel</Dependency>
             <Dependency>libxml2-devel</Dependency>
+            <Dependency versionFrom="8.0.1">readline-devel</Dependency>
         </BuildDependencies>
-		<Patches>
-			<Patch level="1">fix-empty-po.patch</Patch>
-		</Patches>
+        <Patches>
+            <Patch level="1">fix-empty-po.patch</Patch>
+	</Patches>
     </Source>
 
     <Package>
@@ -76,8 +77,8 @@
     </Package>
 
     <History>
-		<Update release="5">
-            <Date>2019-09-30</Date>
+        <Update release="5">
+            <Date>2019-12-11</Date>
             <Version>0.20.1</Version>
             <Comment>Version bump</Comment>
             <Name>Idris Kalp</Name>
