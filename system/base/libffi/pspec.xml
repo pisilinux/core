@@ -32,6 +32,8 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/lib/libffi-*</Path>
+            <Path fileType="header">/usr/include/ffitarget.h</Path>
+            <Path fileType="header">/usr/include/ffi.h</Path>
             <Path fileType="data">/usr/lib/pkgconfig</Path>
             <Path fileType="data">/usr/lib32/pkgconfig</Path>
             <Path fileType="info">/usr/share/info</Path>
@@ -56,6 +58,13 @@
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2019-12-20</Date>
+            <Version>3.3</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalps@gmail.com</Email>
+        </Update>
 		<Update release="5">
             <Date>2019-12-12</Date>
             <Version>3.3</Version>

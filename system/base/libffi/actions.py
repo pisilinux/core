@@ -25,10 +25,11 @@ def install():
 
     if get.buildTYPE() == "emul32":
         # Remove duplicated header files
-        pisitools.removeDir("/usr/lib32/%s" % get.srcDIR())
+        #pisitools.removeDir("/usr/lib32/%s" % get.srcDIR())
         # Fix emul32 includedir
-        pisitools.dosym("/usr/lib/%s/include" % get.srcDIR(),
-        "/usr/lib32/%s/include" % get.srcDIR())
+        #pisitools.dosym("/usr/lib/%s/include" % get.srcDIR(),
+        #"/usr/lib32/%s/include" % get.srcDIR())
+        return
 
     pisitools.dodoc("ChangeLog*", "LICENSE", "README*")
 
