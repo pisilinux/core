@@ -34,12 +34,6 @@
             <Dependency>zlib-devel</Dependency>
             <Dependency>elfutils</Dependency>
         </BuildDependencies>
-        <Patches>
-            <!-- Pisilinux Patches -->
-            <!-- Fix paths in 64bit -->
-            <Patch level="1">pisilinux/64.patch</Patch>
-            <Patch level="1">pisilinux/gcc_47_based-record_gcc_options.patch</Patch>
-        </Patches>
     </Source>
 
     <Package>
@@ -137,8 +131,8 @@
             <Path fileType="info">/usr/share/info</Path>
         </Files>
         <AdditionalFiles>
-            <AdditionalFile owner="root" permission="0755" target="/usr/bin/gfilt">gfilt</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/libexec/gSTLFilt.pl">gSTLFilt.pl</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/c89">c89</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/c99">c99</AdditionalFile>
         </AdditionalFiles>
     </Package>
 
