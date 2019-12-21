@@ -10,8 +10,8 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 
-shelltools.export('CFLAGS', get.CFLAGS().replace('-pipe', ''))
-shelltools.export('CXXFLAGS', get.CXXFLAGS().replace('-pipe', ''))
+shelltools.export('CFLAGS', get.CFLAGS().replace('-pipe', '').replace(' -g ', ' -g3 ') + ' -Wall')
+shelltools.export('CXXFLAGS', get.CXXFLAGS().replace('-pipe', '').replace(' -g ', ' -g3 ') + ' -Wall')
 
 
 def setup():
@@ -36,7 +36,7 @@ def setup():
                        --includedir=/usr/include \
                        --mandir=/usr/share/man \
                        --infodir=/usr/share/info \
-                       --with-bugurl=http://bugs.pisilinux.org \
+                       --with-bugurl=https://pisilinux.org/bugs \
                        --enable-languages=c,c++,fortran,lto,objc,obj-c++ \
                        --enable-shared \
                        --enable-threads=posix \
@@ -64,7 +64,7 @@ def setup():
 
 def build():
     shelltools.cd("../build")
-    autotools.make("profiledbootstrap")
+    autotools.make()
 
 
 def check():
