@@ -9,6 +9,7 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 from pisi.actionsapi import shelltools
 
+builddir = "build32" if get.buildTYPE() == 'emul32' else "build"
 
 def setup():
     options = "-Dselinux=disabled \
@@ -17,13 +18,15 @@ def setup():
 
 
     if get.buildTYPE() == "_emul32":
-        options += " --libdir=/usr/lib32 \
+        options += " --libdir=/_emul32/lib32 \
                      --bindir=/_emul32/bin \
                      --sbindir=/_emul32/sbin \
-                     --prefix=/usr"
+                     --prefix=/_emul32 \
+                     -Dlibmount=false"
         shelltools.export("CC", "%s -m32" % get.CC())
         shelltools.export("CXX", "%s -m32" % get.CXX())
         shelltools.export("PKG_CONFIG_PATH", "/usr/lib32/pkgconfig")
+        shelltools.system("patch -p1 < multilib.diff")
     else :
         options += " --libdir=/usr/lib \
                      --bindir=/usr/bin \
@@ -32,28 +35,29 @@ def setup():
                      --prefix=/usr"
 
     #autotools.autoreconf("-vif")
-    shelltools.makedirs("build")
-    shelltools.cd("build")
+    shelltools.makedirs("%s" %builddir)
+    shelltools.cd("%s" %builddir)
     shelltools.system("meson .. %s" % options)
 
     #pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
 def build():
     #autotools.make("-j1")
-    shelltools.cd("build")
+    shelltools.cd("%s" %builddir)
     shelltools.system("ninja")
 
 def install():
-    shelltools.cd("build")
+    shelltools.cd("%s" %builddir)
     #autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    shelltools.system("ninja install")
+    shelltools.system("DESTDIR=%s ninja install" % get.installDIR())
 
     if get.buildTYPE() == "_emul32":
         pisitools.domove("/_emul32/bin/gio-querymodules", "/usr/bin/32/")
+        pisitools.domove("/_emul32/lib32", "/usr")
         pisitools.removeDir("/_emul32")
 
-    #pisitools.removeDir("/usr/share/gdb")
     
     if get.buildTYPE() != "_emul32":
+        pisitools.removeDir("/usr/share/gdb")
         shelltools.cd("..")
         pisitools.dodoc("AUTHORS", "COPYING", "README*")
