@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Perl-compatible regular expression library</Summary>
         <Description>The PCRE (Perl Compatible Regular Expressions) library is a set of functions that implement regular expression pattern matching using the same syntax and semantics as Perl 5.</Description>
-        <Archive sha1sum="26d2fbcc7c7cf633d954a978530ce0b8b9b10472" type="targz">ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre2-10.30.tar.gz</Archive>
+        <Archive sha1sum="ffd8da87b958c44dd9b927e7b39934e2af5fef8b" type="tarbz2">https://ftp.pcre.org/pub/pcre/pcre2-10.34.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>readline-devel</Dependency>
         </BuildDependencies>
@@ -69,6 +69,13 @@
     </Package>
 
     <History>
+		<Update release="2">
+            <Date>2019-12-22</Date>
+            <Version>10.34</Version>
+            <Comment>Version bump</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
         <Update release="1">
             <Date>2019-01-15</Date>
             <Version>10.30</Version>
