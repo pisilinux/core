@@ -22,7 +22,6 @@ def check():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-
     #if get.buildTYPE() == "emul32":
         ## Remove duplicated header files
         #pisitools.removeDir("/usr/lib32/%s" % get.srcDIR())
