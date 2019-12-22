@@ -11,41 +11,49 @@ from pisi.actionsapi import shelltools
 
 
 def setup():
-    options = "--with-pcre=system \
-               --disable-fam \
-               --disable-libelf \
-               --enable-gtk-doc=no \
-               --disable-libmount \
-               --disable-static \
-               --enable-shared \
-               --disable-man \
-               --enable-systemtap"
+    options = "-Dselinux=disabled \
+               -Dman=true \
+               -Dgtk_doc=false"
 
 
     if get.buildTYPE() == "_emul32":
         options += " --libdir=/usr/lib32 \
                      --bindir=/_emul32/bin \
                      --sbindir=/_emul32/sbin \
-                     --disable-dtrace"
+                     --prefix=/usr"
         shelltools.export("CC", "%s -m32" % get.CC())
         shelltools.export("CXX", "%s -m32" % get.CXX())
         shelltools.export("PKG_CONFIG_PATH", "/usr/lib32/pkgconfig")
+    else :
+        options += " --libdir=/usr/lib \
+                     --bindir=/usr/bin \
+                     --sbindir=/usr/sbin \
+                     --datadir=/usr/share \
+                     --prefix=/usr"
 
     #autotools.autoreconf("-vif")
-    autotools.configure(options)
+    shelltools.makedirs("build")
+    shelltools.cd("build")
+    shelltools.system("meson .. %s" % options)
 
-    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
+    #pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
 def build():
-    autotools.make("-j1")
+    #autotools.make("-j1")
+    shelltools.cd("build")
+    shelltools.system("ninja")
 
 def install():
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    shelltools.cd("build")
+    #autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    shelltools.system("ninja install")
 
     if get.buildTYPE() == "_emul32":
         pisitools.domove("/_emul32/bin/gio-querymodules", "/usr/bin/32/")
         pisitools.removeDir("/_emul32")
 
-    pisitools.removeDir("/usr/share/gdb")
-
-    pisitools.dodoc("AUTHORS", "ChangeLog", "README", "NEWS")
+    #pisitools.removeDir("/usr/share/gdb")
+    
+    if get.buildTYPE() != "_emul32":
+        shelltools.cd("..")
+        pisitools.dodoc("AUTHORS", "COPYING", "README*")
