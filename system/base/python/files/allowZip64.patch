@@ -1,0 +1,12 @@
+diff -Nru Python-2.7.17.orig/Lib/zipfile.py Python-2.7.17/Lib/zipfile.py
+--- Python-2.7.17.orig/Lib/zipfile.py	2019-10-19 21:38:44.000000000 +0300
++++ Python-2.7.17/Lib/zipfile.py	2019-11-18 00:43:00.452488503 +0300
+@@ -746,7 +746,7 @@
+ 
+     fp = None                   # Set here since __del__ checks it
+ 
+-    def __init__(self, file, mode="r", compression=ZIP_STORED, allowZip64=False):
++    def __init__(self, file, mode="r", compression=ZIP_STORED, allowZip64=True):
+         """Open the ZIP file with mode read "r", write "w" or append "a"."""
+         if mode not in ("r", "w", "a"):
+             raise RuntimeError('ZipFile() requires mode "r", "w", or "a"')

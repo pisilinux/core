@@ -40,6 +40,7 @@ def install():
 
     pisitools.dosym("libbz2.so.1", "/lib/libbz2.so")
     pisitools.dosym("libbz2.so.%s" % libversion, "/lib/libbz2.so.1")
+    
 
     pisitools.dohtml("manual.html")
     pisitools.dodoc("README", "CHANGES", "bzip2.txt")
