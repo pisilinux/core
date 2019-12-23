@@ -16,18 +16,12 @@ WorkDir = "Python-%s" % get.srcVERSION()
 PythonVersion = "2.7"
 
 def setup():
-    shelltools.system("echo -e '\033[0;36mBuilding OpenSSL\033[0m' ")
-    shelltools.cd("openssl-1.1.1d")
-    shelltools.system("./Configure --prefix=%s/temp --openssldir=%s/temp/etc/ssl --libdir=lib no-shared linux-x86_64 -Wa,--noexecstack" %(get.workDIR(), get.workDIR()))
-    autotools.make()
-    autotools.make("install")
-    shelltools.cd("..")
     shelltools.system("echo -e '\033[0;36mBuilding Bzip2\033[0m' ")
+    shelltools.makedirs("%s/temp/lib" %get.workDIR())
     shelltools.cd("bzip2-1.0.8")
     autotools.make('CC=%s AR=%s RANLIB=%s CFLAGS="%s -D_FILE_OFFSET_BITS=64 -fPIC" libbz2.a' % (get.CC(), get.AR(), get.RANLIB(), get.CFLAGS()))
-    shelltools.system("cp libbz2.a %s/temp/lib" % get.workDIR())
+    shelltools.system("cp libbz2.a %s/temp/lib/libbz2.a" % get.workDIR())
     shelltools.cd("..")
-	
 	
     pisitools.cflags.add("-fwrapv")
 
@@ -41,9 +35,10 @@ def setup():
     for dir in ["expat","zlib","_ctypes/libffi_arm_wince","_ctypes/libffi_msvc",
                 "_ctypes/libffi_osx","_ctypes/libffi","_ctypes/darwin"]:
         shelltools.unlinkDir("Modules/%s" % dir)
-
+        
     shelltools.export("CFLAGS", "-I%s/temp/include -O3" %get.workDIR())
-    shelltools.export("LDFLAGS", "-L%s/temp/lib -lssl -lcrypto -lbz2 -lpthread -ldl" %get.workDIR())
+    shelltools.export("LDFLAGS", "-L%s/temp/lib -lbz2 -lpthread -ldl" %get.workDIR())
+
     autotools.autoreconf("-vif")
 
     # disable bsddb
