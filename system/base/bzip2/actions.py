@@ -10,8 +10,6 @@ from pisi.actionsapi import get
 
 libversion = get.srcVERSION()
 
-NoStrip = ["/"]
-
 def build():
     autotools.make('CC=%s AR=%s RANLIB=%s CFLAGS="%s -D_FILE_OFFSET_BITS=64 -fPIC"' % (get.CC(), get.AR(), get.RANLIB(), get.CFLAGS()))
     autotools.make('CFLAGS="%s -D_FILE_OFFSET_BITS=64 -fPIC" -f Makefile-libbz2_so' % get.CFLAGS())
@@ -42,7 +40,6 @@ def install():
 
     pisitools.dosym("libbz2.so.1", "/lib/libbz2.so")
     pisitools.dosym("libbz2.so.%s" % libversion, "/lib/libbz2.so.1")
-    
 
     pisitools.dohtml("manual.html")
     pisitools.dodoc("README", "CHANGES", "bzip2.txt")
