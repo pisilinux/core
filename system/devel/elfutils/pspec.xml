@@ -28,13 +28,14 @@
             <Dependency>zlib</Dependency>
             <Dependency>bzip2</Dependency>
             <Dependency>libgcc</Dependency>
-            <!--Dependency>xz-devel</Dependency>
-            <Dependency>zlib-devel</Dependency-->
+            <Dependency>xz-devel</Dependency>
+		    <Dependency>zlib-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="library">/usr/lib</Path>
             <Path fileType="doc">/usr/share/doc</Path>
+			<Path fileType="man">/usr/share/man</Path>
             <Path fileType="header">/usr/include</Path>
         </Files>
     </Package>

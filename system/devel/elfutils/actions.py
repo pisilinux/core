@@ -31,7 +31,7 @@ def setup():
                     --enable-thread-safety \
                     --with-bzlib \
                     --with-lzma"
-    
+    #shelltools.export("LDFLAGS", "-L/lib -lbz2")
     autotools.configure(options)
 
 def build():
