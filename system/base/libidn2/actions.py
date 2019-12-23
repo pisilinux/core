@@ -15,7 +15,8 @@ def setup():
                --disable-csharp \
                --disable-rpath \
                --disable-gtk-doc \
-               --disable-static"
+               --disable-static \
+               --without-libunistring-prefix"
 
     if get.buildTYPE() == "emul32":
         options += " --bindir=/emul32/bin"
@@ -28,7 +29,10 @@ def build():
     autotools.make()
 
 def check():
-    autotools.make("-C tests check")
+    if get.buildTYPE() != "emul32":
+       autotools.make("-C tests check")
+    else:
+       shelltools.system("echo 'No test in emul32'")
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
