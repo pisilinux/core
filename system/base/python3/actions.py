@@ -9,6 +9,13 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 
 def setup():
+    shelltools.system("echo -e '\033[0;36mBuilding Bzip2\033[0m' ")
+    shelltools.makedirs("%s/temp/lib" %get.workDIR())
+    shelltools.cd("bzip2-1.0.8")
+    autotools.make('CC=%s AR=%s RANLIB=%s CFLAGS="%s -D_FILE_OFFSET_BITS=64 -fPIC" libbz2.a' % (get.CC(), get.AR(), get.RANLIB(), get.CFLAGS()))
+    shelltools.system("cp libbz2.a %s/temp/lib/libbz2.a" % get.workDIR())
+    shelltools.cd("..")
+	
     pisitools.flags.add("-fwrapv")
 
     pisitools.dosed("Lib/cgi.py","^#.* /usr/local/bin/python","#!/usr/bin/python")
@@ -20,7 +27,10 @@ def setup():
     #shelltools.unlinkDir("Modules/_ctypes/libffi_msvc")
     shelltools.unlinkDir("Modules/_ctypes/libffi_osx")
     #shelltools.unlinkDir("Modules/_decimal/libmpdec")
-
+    
+    shelltools.export("CFLAGS", "-I%s/temp/include -O3" %get.workDIR())
+    shelltools.export("LDFLAGS", "-L%s/temp/lib -lbz2 -lpthread -ldl" %get.workDIR())
+    
     autotools.rawConfigure("\
                             --prefix=/usr \
                             --enable-shared \
