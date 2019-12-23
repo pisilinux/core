@@ -17,7 +17,7 @@ def setup():
                 --openssldir=/etc/ssl \
                 shared -Wa,--noexecstack \
                 zlib enable-camellia enable-idea \
-                enable-seed enable-tlsext enable-rfc3779 enable-rc5 \
+                enable-seed  enable-rfc3779 enable-rc5 \
                 enable-cms enable-md2 enable-mdc2 threads"
 
     if get.buildTYPE() == "_emul32":
@@ -41,7 +41,7 @@ def setup():
 def build():
     autotools.make("depend")
     autotools.make("-j1")
-    autotools.make("rehash")
+    #autotools.make("rehash")
 
 def check():
     #Revert ca-dir patch not to fail test
@@ -56,12 +56,12 @@ def check():
     #shelltools.system("patch -p1 < openssl-1.0.0-beta4-ca-dir.patch")
 
 def install():
-    autotools.rawInstall("INSTALL_PREFIX=%s MANDIR=/usr/share/man" % get.installDIR())
+    autotools.rawInstall("DESTDIR=%s MANDIR=/usr/share/man" % get.installDIR())
 
     # Rename conflicting manpages
     pisitools.rename("/usr/share/man/man1/passwd.1", "ssl-passwd.1")
-    pisitools.rename("/usr/share/man/man3/rand.3", "ssl-rand.3")
-    pisitools.rename("/usr/share/man/man3/err.3", "ssl-err.3")
+    #pisitools.rename("/usr/share/man/man3/rand.3", "ssl-rand.3")
+    #pisitools.rename("/usr/share/man/man3/err.3", "ssl-err.3")
 
     if get.buildTYPE() == "_emul32":
         #from distutils.dir_util import copy_tree
@@ -74,7 +74,7 @@ def install():
 
     # Move engines to /usr/lib/openssl/engines
     pisitools.dodir("/usr/lib/openssl")
-    pisitools.domove("/usr/lib/engines", "/usr/lib/openssl")
+    #pisitools.domove("/usr/lib/engines", "/usr/lib/openssl")
 
     # Certificate stuff
     pisitools.dobin("tools/c_rehash")
