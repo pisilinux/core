@@ -52,6 +52,7 @@ def setup():
                        --enable-plugin \
                        --with-linker-hash-style=gnu \
                        --with-pkgversion="Pisi Linux" \
+                       --with-isl \
                        --disable-werror \
                        --enable-checking=release \
                        --enable-install-libiberty \
