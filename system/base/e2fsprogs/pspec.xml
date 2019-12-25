@@ -18,6 +18,7 @@
             <!-- The first release shipped within util-linux -->
             <Dependency>gettext</Dependency>
             <Dependency>util-linux</Dependency>
+			<Dependency>fuse-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch level="1">ntfs-3g.patch</Patch>
@@ -30,6 +31,7 @@
         <Name>e2fsprogs</Name>
         <RuntimeDependencies>
             <Dependency>libutil-linux</Dependency>
+			<Dependency>fuse</Dependency>
             <!-- The first release shipped within util-linux -->
 	    <!--<Dependency>libuuid</Dependency>-->
         </RuntimeDependencies>
