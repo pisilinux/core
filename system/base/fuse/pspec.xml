@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>An interface for filesystems implemented in userspace</Summary>
         <Description>fuse is a backend allowing regular users to (un)mount filesystems for their own use.</Description>
-        <Archive sha1sum="fcb3641d5297938f4e183296eccaf0ccc1a0f892" type="targz">https://github.com/libfuse/libfuse/archive/fuse-2.9.7.tar.gz</Archive>
+        <Archive sha1sum="4bad8cd2c4d669a7b4f3ad57e4465350b972c94f" type="targz">https://github.com/libfuse/libfuse/archive/fuse-2.9.9.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>gettext-devel</Dependency>
         </BuildDependencies>
@@ -50,6 +50,13 @@
     </Package>
 
     <History>
+		<Update release="5">
+            <Date>2019-12-25</Date>
+            <Version>2.9.9</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-09-18</Date>
             <Version>2.9.7</Version>
