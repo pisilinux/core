@@ -22,6 +22,7 @@
             <Dependency>gdbm-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
             <Dependency>gettext-devel</Dependency>
+			<Dependency>libseccomp-devel</Dependency>
             <Dependency versionFrom="1.5.1">libpipeline-devel</Dependency>
         </BuildDependencies>
         <Patches>
@@ -33,6 +34,7 @@
         <RuntimeDependencies>
             <Dependency>gdbm</Dependency>
             <Dependency>zlib</Dependency>
+			<Dependency>libseccomp</Dependency>
             <Dependency versionFrom="1.5.1">libpipeline</Dependency>
         </RuntimeDependencies>
         <Files>
