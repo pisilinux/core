@@ -16,5 +16,5 @@ def build():
 def install():
     pythonmodules.install()
 
-    pisitools.dohtml("Doc/*.html")
-    pisitools.dodoc("COPYING.txt", "LICENSE.txt", "README.txt", "ToDo.txt", "USAGE.txt")
+    #pisitools.dohtml("Doc/*.html")
+    pisitools.dodoc("COPYING.txt", "LICENSE.txt", "README.rst", "ToDo.txt", "USAGE.txt")
