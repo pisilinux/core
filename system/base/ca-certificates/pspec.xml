@@ -11,14 +11,14 @@
         <IsA>app:web</IsA>
         <Summary>Common CA certificates</Summary>
         <Description>Common CA certificates</Description>
-        <Archive sha1sum="edf0ec04b02fcbc90cc65906ff83fb042894a3b7" type="tarxz">http://ftp.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20180409.tar.xz</Archive>
+        <Archive sha1sum="47d4584eae85fc905e4994766eb3930a8a84e2e1" type="tarxz">http://ftp.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20190110.tar.xz</Archive>
         <Patches>
             <!--Patch>ca-certificates-undebianize.patch</Patch>
             <Patch>ca-certificates-more-certs.patch</Patch>
             <Patch>ca-certificates-etc-certs.patch</Patch>
             <Patch>ca-certificates-DESTDIR.patch</Patch>
             <Patch>ca-certificates.d.patch</Patch-->
-            <Patch>no-openssl-rehash.patch</Patch>
+<!--             <Patch>no-openssl-rehash.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -39,6 +39,13 @@
     </Package>
 
     <History>
+		<Update release="5">
+            <Date>2019-12-23</Date>
+            <Version>20190110</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-20</Date>
             <Version>20180409</Version>
