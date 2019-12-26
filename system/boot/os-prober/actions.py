@@ -9,10 +9,6 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 
 def build():
-    shelltools.system("sed -i -e 's|grub-probe|grub2-probe|g' os-probes/common/50mounted-tests \
-                       linux-boot-probes/common/50mounted-tests")
-    shelltools.system("sed -i -e 's|grub-mount|grub2-mount|g' os-probes/common/50mounted-tests \
-                       linux-boot-probes/common/50mounted-tests common.sh")
     shelltools.unlink("Makefile")
     autotools.make("newns")
 
@@ -20,8 +16,7 @@ def install():
     pisitools.dodoc("debian/copyright", "debian/changelog", "README")
     pisitools.dobin("os-prober")
     pisitools.dobin("linux-boot-prober")
-    #pisitools.insinto("/usr/lib/os-prober", "newns")
-    pisitools.doexe("newns", "/usr/lib/os-prober/")
+    pisitools.insinto("/usr/lib/os-prober", "newns")
     pisitools.insinto("/usr/share/os-prober", "common.sh")
     for d in ("os-probes",
               "os-probes/mounted", 
