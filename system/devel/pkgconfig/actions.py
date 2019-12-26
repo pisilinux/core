@@ -11,7 +11,7 @@ from pisi.actionsapi import get
 #WorkDir = "pkg-config-%s" % get.srcVERSION()
 
 def setup():
-    autotools.configure("--with-pc-path=/usr/lib/pkgconfig:/usr/share/pkgconfig")
+    autotools.configure("--with-pc-path=/usr/lib/pkgconfig:/usr/share/pkgconfig --with-internal-glib")
 
 def check():
     autotools.make("check")
