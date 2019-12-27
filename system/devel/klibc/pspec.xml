@@ -13,13 +13,16 @@
         <IsA>library</IsA>
         <Summary>A minimal libc subset for use with initramfs</Summary>
         <Description>klibc, or "early userspace", is library part of an effort which tries to move as much initialization code in Linux as possible out of the kernel.</Description>
-        <Archive sha1sum="3dd48eaf29be52a01e90544624e9e88a0c70ea30" type="tarxz">https://www.kernel.org/pub/linux/libs/klibc/2.0/klibc-2.0.4.tar.xz</Archive>
+        <Archive sha1sum="f112cb92fadd98e41e7cefa2841005b158d83492" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/libs/klibc/2.0/klibc-2.0.7.tar.xz</Archive>
         <!--Archive sha1sum="18a30cecd740f118013839333d9774e79b6a7510" type="tarxz">http://www.kernel.org/pub/linux/kernel/v3.0/linux-3.7.tar.xz</Archive-->
         <BuildDependencies>
             <Dependency>perl</Dependency>
             <!--Kernel güncellemesi sonrasında klibc rei edilmeli-->
 <!--             <Dependency>kernel-module-headers</Dependency> -->
         </BuildDependencies>
+		<Patches>
+<!-- 			<Patch level="1">fix_missing_include_in_sys_mman_h.patch</Patch> -->
+		</Patches>
     </Source>
 
     <Package>
@@ -40,6 +43,13 @@
     </Package>
 
     <History>
+		<Update release="6">
+            <Date>2019-12-26</Date>
+            <Version>2.0.7</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2019-04-06</Date>
             <Version>2.0.4</Version>

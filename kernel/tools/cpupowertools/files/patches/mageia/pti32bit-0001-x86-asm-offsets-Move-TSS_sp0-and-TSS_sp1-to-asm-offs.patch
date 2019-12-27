@@ -1,7 +1,7 @@
 From 3b7711fd3adb7d6b812a33da4a4639ddce6522b6 Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Fri, 19 Jan 2018 13:46:20 +0100
-Subject: [PATCH 01/31] x86/asm-offsets: Move TSS_sp0 and TSS_sp1 to
+Subject: [PATCH 01/34] x86/asm-offsets: Move TSS_sp0 and TSS_sp1 to
  asm-offsets.c
 
 These offsets will be used in 32 bit assembly code as well,
@@ -40,5 +40,5 @@ index bf51e51d808d..d2eba73a5f8a 100644
  
  #ifdef CONFIG_CC_STACKPROTECTOR
 -- 
-2.13.6
+2.16.2
 

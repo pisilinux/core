@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libaio</Name>
+        <Homepage>http://lse.sourceforge.net/io/aio.html</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>LGPLv2.1</License>
+        <IsA>library</IsA>
+        <Summary>Linux-native asynchronous I/O access library</Summary>
+        <Description>libaio has a richer API and capability set than the simple POSIX async I/O facility.</Description>
+        <Archive sha1sum="17a9b82fe715551f3157591467421406716b8f91" type="tarxz">http://ftp.de.debian.org/debian/pool/main/liba/libaio/libaio_0.3.112.orig.tar.xz</Archive>
+    </Source>
+
+    <Package>
+        <Name>libaio</Name>
+        <Files>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>libaio-32bit</Name>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for libaio</Summary>
+        <BuildType>emul32</BuildType>
+        <RuntimeDependencies>
+            <Dependency release="current">libaio</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib32</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>libaio-devel</Name>
+        <Summary>Development files for libaio</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">libaio</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <!-- FIXME: Remove this if not necessary -->
+            <Path fileType="man">/usr/share/man/man3</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="5">
+            <Date>2019-12-26</Date>
+            <Version>0.3.112</Version>
+            <Comment>Version bump for new lvm2</Comment>
+            <Name>Kamil Atlı</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
+        <Update release="4">
+            <Date>2018-08-06</Date>
+            <Version>0.3.110</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="3">
+            <Date>2017-02-28</Date>
+            <Version>0.3.110</Version>
+            <Comment>Version Bump.</Comment>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
+        </Update>
+        <Update release="2">
+            <Date>2016-06-09</Date>
+            <Version>0.3.109</Version>
+            <Comment>Release Bump</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+        <Update release="1">
+            <Date>2014-05-19</Date>
+            <Version>0.3.109</Version>
+            <Comment>First release</Comment>
+            <Name>Alihan Öztürk</Name>
+            <Email>alihan@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

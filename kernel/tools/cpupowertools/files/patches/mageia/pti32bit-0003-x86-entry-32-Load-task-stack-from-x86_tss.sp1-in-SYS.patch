@@ -1,7 +1,7 @@
 From b696a2c46d9b9937b816b11ff2ec72aa0b65f204 Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Fri, 19 Jan 2018 13:33:37 +0100
-Subject: [PATCH 03/31] x86/entry/32: Load task stack from x86_tss.sp1 in
+Subject: [PATCH 03/34] x86/entry/32: Load task stack from x86_tss.sp1 in
  SYSENTER handler
 
 We want x86_tss.sp0 point to the entry stack later to use
@@ -45,5 +45,5 @@ index 5224c6099184..097d36a64889 100644
  	/*
  	 * Restore %gs if needed (which is common)
 -- 
-2.13.6
+2.16.2
 

@@ -13,6 +13,7 @@ def setup():
                             --no-qt-gui \
                             --no-system-jsoncpp \
                             --prefix=/usr \
+                            --no-system-librhash \
                             --datadir=/share/cmake \
                             --docdir=/share/doc/cmake \
                             --mandir=/share/man" % get.makeJOBS().replace("-j", ""))

@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>POSIX 1003.1e capabilities library</Summary>
         <Description>libcap is a library for getting and setting POSIX.1e (formerly POSIX 6) draft 15 capabilities.</Description>
-        <Archive sha1sum="f0b102e4a68e1bbdcb6b143b63c34a250e473088" type="tarxz">https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.25.tar.xz</Archive>
+        <Archive sha1sum="f2419ebf19b7bf682d346f28c2faf4635450c6fd" type="tarxz">https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.27.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>attr-devel</Dependency>
             <Dependency>pam-devel</Dependency>
@@ -67,6 +67,13 @@
     </Package>
 
     <History>
+		<Update release="5">
+            <Date>2019-2-25</Date>
+            <Version>2.27</Version>
+            <Comment>Version bump</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-15</Date>
             <Version>2.25</Version>

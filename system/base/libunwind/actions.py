@@ -50,6 +50,6 @@ def install():
         return
 
     # FIXME: Fedora removes it, Suse keeps it, breaks samba build, investigate further
-    pisitools.remove("/usr/lib/libunwind*.a")
+    #pisitools.remove("/usr/lib/libunwind*.a")
 
     pisitools.dodoc("AUTHORS", "ChangeLog", "README*", "NEWS", "TODO")

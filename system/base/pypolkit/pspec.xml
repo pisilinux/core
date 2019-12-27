@@ -12,11 +12,11 @@
         <IsA>library</IsA>
         <Summary>Python binding of PolicyKit</Summary>
         <Description>pypolkit is a Python binding for the PolicyKit library.</Description>
-        <Archive sha1sum="1762dc6e6ea2e5b5cbb153c4c20c72604dbe6a2d" type="targz">http://source.pisilinux.org/1.0/pypolkit-1.0.2.tar.gz</Archive>
+        <Archive sha1sum="1762dc6e6ea2e5b5cbb153c4c20c72604dbe6a2d" type="targz">https://sourceforge.net/projects/pisilinux/files/source/pypolkit-1.0.2.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>glib2-devel</Dependency>
             <Dependency>python-devel</Dependency>
-            <Dependency versionFrom="0.112">polkit-devel</Dependency>
+            <Dependency versionFrom="0.116">polkit-devel</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -34,6 +34,13 @@
     </Package>
 
     <History>
+		<Update release="5">
+            <Date>2019-12-26</Date>
+            <Version>1.0.2</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-22</Date>
             <Version>1.0.2</Version>

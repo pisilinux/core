@@ -29,6 +29,6 @@ def check():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    pisitools.dodoc("ChangeLog", "doc/README.linux", "doc/*.html")
+    pisitools.dodoc("ChangeLog", "doc/README.linux")
     
     #pisitools.removeDir("/usr/share/gc")

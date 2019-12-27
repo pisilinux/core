@@ -14,11 +14,11 @@
         <IsA>library</IsA>
         <Summary>The GNU Compiler Collection, includes C, C++, Objective-C and Fortran compilers</Summary>
         <Description>The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, as well as libraries for these languages</Description>
-        <Archive sha1sum="306d27c3465fa36862c206738d06d65fff5c3645" type="tarxz">http://ftp.gnu.org/gnu/gcc/gcc-9.2.0/gcc-9.2.0.tar.xz</Archive>
-        <Archive sha1sum="52c1f2a4c9a202f46cf3275a8d46b562aa584208" target="gcc-9.2.0" type="tarxz">https://ftp.gnu.org/gnu/mpfr/mpfr-4.0.2.tar.xz</Archive>
-        <Archive sha1sum="b019d9e1d27ec5fb99497159d43a3164995de2d0" target="gcc-9.2.0" type="targz">http://ftp.gnu.org/pub/gnu/mpc/mpc-1.1.0.tar.gz</Archive>
-        <Archive sha1sum="33e366d59d32330432b5c7f2d0c2fb6664eff224" target="gcc-9.2.0" type="tarbz2">http://isl.gforge.inria.fr/isl-0.21.tar.bz2</Archive>
-		<Archive sha1sum="9dc6981197a7d92f339192eea974f5eca48fcffe" target="gcc-9.2.0" type="tarxz">mirrors://gnu/gmp/gmp-6.1.2.tar.xz</Archive>
+        <Archive sha1sum="d5f97cd4239dac0f7608f0f3e830a812c6e49fe4" type="tarxz">https://sourceforge.net/projects/pisilinux/files/source/gcc-9.2.1.tar.xz</Archive>
+        <Archive sha1sum="52c1f2a4c9a202f46cf3275a8d46b562aa584208" target="gcc-9.2.1" type="tarxz">https://ftp.gnu.org/gnu/mpfr/mpfr-4.0.2.tar.xz</Archive>
+        <Archive sha1sum="b019d9e1d27ec5fb99497159d43a3164995de2d0" target="gcc-9.2.1" type="targz">ftp://ftp.gnu.org/gnu/mpc/mpc-1.1.0.tar.gz</Archive>
+        <Archive sha1sum="33e366d59d32330432b5c7f2d0c2fb6664eff224" target="gcc-9.2.1" type="tarbz2">http://isl.gforge.inria.fr/isl-0.21.tar.bz2</Archive>
+		<Archive sha1sum="9dc6981197a7d92f339192eea974f5eca48fcffe" target="gcc-9.2.1" type="tarxz">mirrors://gnu/gmp/gmp-6.1.2.tar.xz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="2.33.1">binutils</Dependency>
             <Dependency>bison</Dependency>
@@ -30,10 +30,16 @@
             <Dependency>sed</Dependency>
             <Dependency>texinfo</Dependency>
             <Dependency>gmp-devel</Dependency>
-            <Dependency>ppl</Dependency>
+<!--             <Dependency>ppl</Dependency> -->
             <Dependency>zlib-devel</Dependency>
             <Dependency>elfutils</Dependency>
         </BuildDependencies>
+        <Patches>
+            <!-- Pisilinux Patches -->
+            <!-- Fix paths in 64bit -->
+            <Patch level="1">pisilinux/64.patch</Patch>
+            <Patch level="1">pisilinux/gcc_47_based-record_gcc_options.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
@@ -131,16 +137,16 @@
             <Path fileType="info">/usr/share/info</Path>
         </Files>
         <AdditionalFiles>
-            <AdditionalFile owner="root" permission="0755" target="/usr/bin/c89">c89</AdditionalFile>
-            <AdditionalFile owner="root" permission="0755" target="/usr/bin/c99">c99</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/usr/bin/gfilt">gfilt</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/libexec/gSTLFilt.pl">gSTLFilt.pl</AdditionalFile>
         </AdditionalFiles>
     </Package>
 
     <History>
 		<Update release="6">
-            <Date>2019-12-13</Date>
-            <Version>9.2.0</Version>
-            <Comment>Version bump with new toolchain.</Comment>
+            <Date>2019-12-25</Date>
+            <Version>9.2.1</Version>
+            <Comment>Version bump.</Comment>
             <Name>Idris Kalp</Name>
             <Email>idriskalp@gmail.com</Email>
         </Update>

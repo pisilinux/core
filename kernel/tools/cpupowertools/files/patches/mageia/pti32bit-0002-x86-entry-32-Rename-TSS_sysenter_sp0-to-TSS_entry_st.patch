@@ -1,7 +1,7 @@
 From 52806123bdb0b558a5b4fbfa132bae32e53b008a Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Mon, 15 Jan 2018 18:20:15 +0100
-Subject: [PATCH 02/31] x86/entry/32: Rename TSS_sysenter_sp0 to
+Subject: [PATCH 02/34] x86/entry/32: Rename TSS_sysenter_sp0 to
  TSS_entry_stack
 
 The stack address doesn't need to be stored in tss.sp0 if
@@ -44,5 +44,5 @@ index fa1261eefa16..f452bfdc485a 100644
  
  #ifdef CONFIG_CC_STACKPROTECTOR
 -- 
-2.13.6
+2.16.2
 

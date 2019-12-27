@@ -10,7 +10,7 @@ from pisi.actionsapi import get
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    autotools.rawInstall("DESTDIR=%s -C man-pages-posix-2003-a" % get.installDIR())
+    autotools.rawInstall("DESTDIR=%s -C man-pages-posix-2013-a" % get.installDIR())
 
     # These come from attr
     pisitools.remove("/usr/share/man/man2/flistxattr.2")

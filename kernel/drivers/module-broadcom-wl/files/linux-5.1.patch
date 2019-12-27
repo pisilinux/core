@@ -1,0 +1,15 @@
+diff --git a/src/wl/sys/wl_cfg80211_hybrid.c b/src/wl/sys/wl_cfg80211_hybrid.c
+index cdf8c01..63b5650 100644
+--- a/src/wl/sys/wl_cfg80211_hybrid.c
++++ b/src/wl/sys/wl_cfg80211_hybrid.c
+@@ -52,6 +52,10 @@ u32 wl_dbg_level = WL_DBG_ERR | WL_DBG_INFO;
+ u32 wl_dbg_level = WL_DBG_ERR;
+ #endif
+ 
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 1, 0)
++#define get_ds()	((mm_segment_t) { (-1UL) })
++#endif
++
+ #if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
+ static s32 wl_cfg80211_change_iface(struct wiphy *wiphy, struct net_device *ndev,
+            enum nl80211_iftype type, struct vif_params *params);

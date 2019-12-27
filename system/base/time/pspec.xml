@@ -12,9 +12,9 @@
         <IsA>app:console</IsA>
         <Summary>A GNU utility for monitoring a program's use of system resources</Summary>
         <Description>time utility runs another program, collects information about the resources used by that program while it is running, and displays the results.</Description>
-        <Archive sha1sum="dde0c28c7426960736933f3e763320680356cc6a" type="targz">ftp://prep.ai.mit.edu/pub/gnu/time/time-1.7.tar.gz</Archive>
+        <Archive sha1sum="75068c26abbed3ad3980685bae21d7202d288317" type="targz">https://ftp.gnu.org/gnu/time/time-1.9.tar.gz</Archive>
         <Patches>
-            <Patch level="1">time-1.7-destdir.patch</Patch>
+<!--             <Patch level="1">time-1.7-destdir.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -27,6 +27,13 @@
     </Package>
 
     <History>
+		<Update release="5">
+            <Date>2019-12-27</Date>
+            <Version>1.9</Version>
+            <Comment>Version bump</Comment>
+            <Name>idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-15</Date>
             <Version>1.7</Version>

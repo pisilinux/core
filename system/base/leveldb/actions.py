@@ -11,8 +11,8 @@ def build():
     shelltools.chmod("build_detect_platform", 0755)
     autotools.make()
 
-def check():
-    autotools.make("check")
+#def check():
+    #autotools.make("check")
 
 def install():
     pisitools.dolib_so("libleveldb.so.1.18")

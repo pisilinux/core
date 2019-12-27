@@ -12,16 +12,30 @@ from pisi.actionsapi import get
 
 def setup():
     #autotools.autoreconf("-fiv")
-    autotools.configure("--disable-static \
-                         --disable-doctool")
+    #autotools.configure("--disable-static \
+                         #--disable-doctool")
+                         
+    options = "  --libdir=/usr/lib \
+				 --bindir=/usr/bin \
+                 --sbindir=/usr/sbin \
+                 --datadir=/usr/share \
+                 --prefix=/usr"
+                 
+    shelltools.makedirs("build")
+    shelltools.cd("build")
+    shelltools.system("meson .. %s" % options)
     
-    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
+    #pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
 def build():
-    autotools.make()
+    #autotools.make()
+    shelltools.cd("build")
+    shelltools.system("ninja")
 
 def install():
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    #autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    shelltools.cd("build")
+    shelltools.system("DESTDIR=%s ninja install" % get.installDIR())
 
     
 

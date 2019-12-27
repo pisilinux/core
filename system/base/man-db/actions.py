@@ -25,6 +25,7 @@ def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     pisitools.dodir("/var/cache/man")
+    pisitools.removeDir("/lib")
 
     # These are shipped with groff
     #pisitools.remove("/usr/bin/zsoelim")

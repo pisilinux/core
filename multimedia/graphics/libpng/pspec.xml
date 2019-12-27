@@ -12,12 +12,12 @@
         <IsA>library</IsA>
         <Summary>Portable Network Graphics library</Summary>
         <Description>The Portable Network Graphics (PNG) format was designed to replace the older and simpler GIF format and, to some extent, the much more complex TIFF format. Project's main aim is to concentrate on two major uses: the World Wide Web (WWW) and image-editing.</Description>
-        <Archive sha1sum="45de4ec996ffcc3e18037e7c128abe95f4d0292a" type="tarxz">mirrors://sourceforge/libpng/libpng-1.6.34.tar.xz</Archive>
+        <Archive sha1sum="3ab93fabbf4c27e1c4724371df408d9a1bd3f656" type="tarxz">mirrors://sourceforge/libpng/libpng-1.6.37.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>zlib-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1" compressionType="gz">libpng-1.6.34-apng.patch.gz</Patch>
+            <Patch level="1" compressionType="gz">libpng-1.6.37-apng.patch.gz</Patch>
             <Patch level="1">libpng-multilib.patch</Patch>
         </Patches>
     </Source>
@@ -67,6 +67,13 @@
     </Package>
 
     <History>
+		<Update release="6">
+            <Date>2019-12-27</Date>
+            <Version>1.6.37</Version>
+            <Comment>Version bump</Comment>
+            <Name>idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="5">
             <Date>2018-12-21</Date>
             <Version>1.6.34</Version>
