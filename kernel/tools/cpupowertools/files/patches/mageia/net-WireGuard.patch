@@ -1,6 +1,6 @@
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/allowedips.c	2018-02-18 22:22:31.000000000 +0200
-@@ -0,0 +1,327 @@
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/allowedips.c	2018-03-04 19:51:33.000000000 +0200
+@@ -0,0 +1,328 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
 + * Copyright (C) 2015-2018 Jason A. Donenfeld <Jason@zx2c4.com>. All Rights Reserved.
@@ -142,7 +142,8 @@
 +/* This could be much faster if it actually just compared the common bits properly,
 + * by precomputing a mask bswap(~0 << (32 - cidr)), and the rest, but it turns out that
 + * common_bits is already super fast on modern processors, even taking into account
-+ * the unfortunate bswap. So, we just inline it like this instead. */
++ * the unfortunate bswap. So, we just inline it like this instead.
++ */
 +#define prefix_matches(node, key, bits) (common_bits(node, key, bits) >= node->cidr)
 +
 +static __always_inline struct allowedips_node *find_node(struct allowedips_node *trie, u8 bits, const u8 *key)
@@ -328,8 +329,8 @@
 +}
 +
 +#include "selftest/allowedips.h"
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/cookie.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/cookie.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,195 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -526,8 +527,8 @@
 +out:
 +	peer_put(entry->peer);
 +}
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/device.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/device.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,421 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -950,8 +951,8 @@
 +#endif
 +	rcu_barrier_bh();
 +}
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/hashtables.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/hashtables.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,168 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -1121,8 +1122,8 @@
 +	rcu_read_unlock_bh();
 +	return entry;
 +}
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/main.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/main.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,69 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -1193,8 +1194,8 @@
 +MODULE_VERSION(WIREGUARD_VERSION);
 +MODULE_ALIAS_RTNL_LINK(KBUILD_MODNAME);
 +MODULE_ALIAS_GENL_FAMILY(WG_GENL_NAME);
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/netlink.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/netlink.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,517 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -1713,8 +1714,8 @@
 +{
 +	genl_unregister_family(&genl_family);
 +}
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/noise.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/noise.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,635 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -2351,8 +2352,8 @@
 +	up_write(&handshake->lock);
 +	return false;
 +}
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/peer.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/peer.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,136 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -2490,8 +2491,8 @@
 +	list_for_each_entry_safe(peer, temp, &wg->peer_list, peer_list)
 +		peer_remove(peer);
 +}
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/queueing.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/queueing.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,46 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -2539,8 +2540,8 @@
 +	WARN_ON(!ptr_ring_empty_bh(&queue->ring));
 +	ptr_ring_cleanup(&queue->ring, NULL);
 +}
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/ratelimiter.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/ratelimiter.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,199 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -2741,8 +2742,8 @@
 +}
 +
 +#include "selftest/ratelimiter.h"
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/receive.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/receive.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,490 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -3234,8 +3235,8 @@
 +err:
 +	dev_kfree_skb(skb);
 +}
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/send.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/send.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,348 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -3585,8 +3586,8 @@
 +	 */
 +	packet_send_queued_handshake_initiation(peer, false);
 +}
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/socket.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/socket.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,393 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -3981,8 +3982,8 @@
 +	sock_free(old4);
 +	sock_free(old6);
 +}
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/timers.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/timers.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,199 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -4183,8 +4184,8 @@
 +	del_timer_sync(&peer->timer_persistent_keepalive);
 +	flush_work(&peer->clear_peer_work);
 +}
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/allowedips.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/allowedips.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,44 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -4230,8 +4231,8 @@
 +#endif
 +
 +#endif /* _WG_ALLOWEDIPS_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/cookie.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/cookie.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,52 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -4285,8 +4286,8 @@
 +void cookie_message_consume(struct message_handshake_cookie *src, struct wireguard_device *wg);
 +
 +#endif /* _WG_COOKIE_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/device.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/device.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,64 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -4352,8 +4353,8 @@
 +void device_uninit(void);
 +
 +#endif /* _WG_DEVICE_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/hashtables.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/hashtables.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,52 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -4407,9 +4408,9 @@
 +struct index_hashtable_entry *index_hashtable_lookup(struct index_hashtable *table, const enum index_hashtable_type type_mask, const __le32 index);
 +
 +#endif /* _WG_HASHTABLES_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/messages.h	2018-02-18 22:22:31.000000000 +0200
-@@ -0,0 +1,129 @@
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/messages.h	2018-03-04 19:51:33.000000000 +0200
+@@ -0,0 +1,128 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
 + * Copyright (C) 2015-2018 Jason A. Donenfeld <Jason@zx2c4.com>. All Rights Reserved.
@@ -4472,8 +4473,7 @@
 +	MESSAGE_HANDSHAKE_INITIATION = 1,
 +	MESSAGE_HANDSHAKE_RESPONSE = 2,
 +	MESSAGE_HANDSHAKE_COOKIE = 3,
-+	MESSAGE_DATA = 4,
-+	MESSAGE_TOTAL = 5
++	MESSAGE_DATA = 4
 +};
 +
 +struct message_header {
@@ -4539,8 +4539,8 @@
 +};
 +
 +#endif /* _WG_MESSAGES_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/netlink.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/netlink.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,12 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -4554,8 +4554,8 @@
 +void genetlink_uninit(void);
 +
 +#endif /* _WG_NETLINK_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/noise.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/noise.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,117 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -4613,10 +4613,10 @@
 +};
 +
 +struct noise_static_identity {
-+	bool has_identity;
 +	u8 static_public[NOISE_PUBLIC_KEY_LEN];
 +	u8 static_private[NOISE_PUBLIC_KEY_LEN];
 +	struct rw_semaphore lock;
++	bool has_identity;
 +};
 +
 +enum noise_handshake_state {
@@ -4668,14 +4668,14 @@
 +bool noise_handshake_create_initiation(struct message_handshake_initiation *dst, struct noise_handshake *handshake);
 +struct wireguard_peer *noise_handshake_consume_initiation(struct message_handshake_initiation *src, struct wireguard_device *wg);
 +
-+bool noise_handshake_create_response(struct message_handshake_response *dst, struct noise_handshake *peer);
++bool noise_handshake_create_response(struct message_handshake_response *dst, struct noise_handshake *handshake);
 +struct wireguard_peer *noise_handshake_consume_response(struct message_handshake_response *src, struct wireguard_device *wg);
 +
 +bool noise_handshake_begin_session(struct noise_handshake *handshake, struct noise_keypairs *keypairs);
 +
 +#endif /* _WG_NOISE_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/peer.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/peer.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,73 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -4750,8 +4750,8 @@
 +struct wireguard_peer *peer_lookup_by_index(struct wireguard_device *wg, u32 index);
 +
 +#endif /* _WG_PEER_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/queueing.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/queueing.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,142 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -4818,7 +4818,7 @@
 +
 +static inline void skb_reset(struct sk_buff *skb)
 +{
-+	skb_scrub_packet(skb, false);
++	skb_scrub_packet(skb, true);
 +	memset(&skb->headers_start, 0, offsetof(struct sk_buff, headers_end) - offsetof(struct sk_buff, headers_start));
 +	skb->queue_mapping = 0;
 +	skb->nohdr = 0;
@@ -4895,8 +4895,8 @@
 +#endif
 +
 +#endif /* _WG_QUEUEING_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/ratelimiter.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/ratelimiter.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,19 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -4917,8 +4917,8 @@
 +#endif
 +
 +#endif /* _WG_RATELIMITER_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/socket.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/socket.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,35 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -4955,8 +4955,8 @@
 +#endif
 +
 +#endif /* _WG_SOCKET_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/timers.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/timers.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,21 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -4979,12 +4979,12 @@
 +void timers_any_authenticated_packet_traversal(struct wireguard_peer *peer);
 +
 +#endif /* _WG_TIMERS_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/version.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/version.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1 @@
-+#define WIREGUARD_VERSION "0.0.20180218"
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/uapi/wireguard.h	2018-02-18 22:22:31.000000000 +0200
++#define WIREGUARD_VERSION "0.0.20180304"
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/uapi/wireguard.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,182 @@
 +/* SPDX-License-Identifier: ((GPL-2.0 WITH Linux-syscall-note) OR MIT)
 + *
@@ -5168,8 +5168,8 @@
 +#define WGALLOWEDIP_A_MAX (__WGALLOWEDIP_A_LAST - 1)
 +
 +#endif /* _WG_UAPI_WIREGUARD_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/selftest/allowedips.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/selftest/allowedips.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,514 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -5685,8 +5685,8 @@
 +#undef init_peer
 +
 +#endif
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/selftest/blake2s.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/selftest/blake2s.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,559 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -6247,8 +6247,8 @@
 +	return success;
 +}
 +#endif
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/selftest/chacha20poly1305.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/selftest/chacha20poly1305.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,333 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -6583,8 +6583,8 @@
 +	return success;
 +}
 +#endif
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/selftest/counter.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/selftest/counter.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,92 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -6678,8 +6678,8 @@
 +	return success;
 +}
 +#endif
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/selftest/curve25519.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/selftest/curve25519.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,103 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -6784,8 +6784,8 @@
 +	return success;
 +}
 +#endif
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/selftest/poly1305.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/selftest/poly1305.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,1566 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -8353,8 +8353,8 @@
 +	return success;
 +}
 +#endif
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/selftest/ratelimiter.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/selftest/ratelimiter.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,157 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -8513,8 +8513,8 @@
 +	return ret;
 +}
 +#endif
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/blake2s.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/blake2s.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,294 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -8631,8 +8631,8 @@
 +#include <asm/processor.h>
 +#include <asm/fpu/api.h>
 +#include <asm/simd.h>
-+static bool blake2s_use_avx __read_mostly;
-+static bool blake2s_use_avx512 __read_mostly;
++static bool blake2s_use_avx __ro_after_init;
++static bool blake2s_use_avx512 __ro_after_init;
 +void __init blake2s_fpu_init(void)
 +{
 +#ifndef CONFIG_UML
@@ -8810,8 +8810,8 @@
 +}
 +
 +#include "../selftest/blake2s.h"
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/chacha20poly1305.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/chacha20poly1305.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,852 @@
 +/* SPDX-License-Identifier: OpenSSL OR (BSD-3-Clause OR GPL-2.0)
 + *
@@ -8853,11 +8853,11 @@
 +asmlinkage void poly1305_blocks_avx512(void *ctx, const u8 *inp, size_t len, u32 padbit);
 +#endif
 +
-+static bool chacha20poly1305_use_ssse3 __read_mostly;
-+static bool chacha20poly1305_use_avx __read_mostly;
-+static bool chacha20poly1305_use_avx2 __read_mostly;
-+static bool chacha20poly1305_use_avx512 __read_mostly;
-+static bool chacha20poly1305_use_avx512vl __read_mostly;
++static bool chacha20poly1305_use_ssse3 __ro_after_init;
++static bool chacha20poly1305_use_avx __ro_after_init;
++static bool chacha20poly1305_use_avx2 __ro_after_init;
++static bool chacha20poly1305_use_avx512 __ro_after_init;
++static bool chacha20poly1305_use_avx512vl __ro_after_init;
 +
 +void __init chacha20poly1305_fpu_init(void)
 +{
@@ -8889,7 +8889,7 @@
 +asmlinkage void poly1305_emit_neon(void *ctx, u8 mac[16], const u32 nonce[4]);
 +asmlinkage void chacha20_neon(u8 *out, const u8 *in, size_t len, const u32 key[8], const u32 counter[4]);
 +#endif
-+static bool chacha20poly1305_use_neon __read_mostly;
++static bool chacha20poly1305_use_neon __ro_after_init;
 +void __init chacha20poly1305_fpu_init(void)
 +{
 +#if defined(CONFIG_ARM64)
@@ -9665,8 +9665,8 @@
 +
 +#include "../selftest/chacha20poly1305.h"
 +#include "../selftest/poly1305.h"
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/curve25519.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/curve25519.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,81 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -9749,8 +9749,8 @@
 +}
 +
 +#include "../selftest/curve25519.h"
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/blake2s.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/blake2s.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,94 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -9846,8 +9846,8 @@
 +#endif
 +
 +#endif /* _WG_BLAKE2S_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/chacha20poly1305.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/chacha20poly1305.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,93 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -9942,8 +9942,8 @@
 +#endif
 +
 +#endif /* _WG_CHACHA20POLY1305_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/curve25519-arm.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/curve25519-arm.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,14 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -9954,13 +9954,13 @@
 +#include <asm/neon.h>
 +#include <asm/simd.h>
 +asmlinkage void curve25519_neon(u8 mypublic[CURVE25519_POINT_SIZE], const u8 secret[CURVE25519_POINT_SIZE], const u8 basepoint[CURVE25519_POINT_SIZE]);
-+static bool curve25519_use_neon __read_mostly;
++static bool curve25519_use_neon __ro_after_init;
 +void __init curve25519_fpu_init(void)
 +{
 +	curve25519_use_neon = elf_hwcap & HWCAP_NEON;
 +}
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/curve25519-fiat32.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/curve25519-fiat32.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,838 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -10800,8 +10800,8 @@
 +	memzero_explicit(&tmp1l, sizeof(tmp1l));
 +	memzero_explicit(&e, sizeof(e));
 +}
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/curve25519.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/curve25519.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,25 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -10828,8 +10828,8 @@
 +#endif
 +
 +#endif /* _WG_CURVE25519_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/curve25519-hacl64.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/curve25519-hacl64.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,751 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -11582,9 +11582,9 @@
 +	}
 +	memzero_explicit(buf0, sizeof(buf0));
 +}
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/curve25519-x86_64.h	2018-02-18 22:22:31.000000000 +0200
-@@ -0,0 +1,175 @@
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/curve25519-x86_64.h	2018-03-04 19:51:33.000000000 +0200
+@@ -0,0 +1,176 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
 + * Copyright (C) 2015-2018 Jason A. Donenfeld <Jason@zx2c4.com>. All Rights Reserved.
@@ -11596,7 +11596,8 @@
 +#include <asm/processor.h>
 +#include <asm/fpu/api.h>
 +#include <asm/simd.h>
-+static bool curve25519_use_avx __read_mostly;
++
++static bool curve25519_use_avx __ro_after_init;
 +void __init curve25519_fpu_init(void)
 +{
 +#ifndef CONFIG_UML
@@ -11760,8 +11761,8 @@
 +	memzero_explicit(x_51, sizeof(x_51));
 +	memzero_explicit(z_51, sizeof(z_51));
 +}
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/blake2s-x86_64.S	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/blake2s-x86_64.S	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,685 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -12448,8 +12449,8 @@
 +	retq
 +ENDPROC(blake2s_compress_avx512)
 +#endif /* CONFIG_AS_AVX512 */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/chacha20-arm64.S	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/chacha20-arm64.S	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,1940 @@
 +/* SPDX-License-Identifier: OpenSSL OR (BSD-3-Clause OR GPL-2.0)
 + *
@@ -14391,8 +14392,8 @@
 +.Labort_neon:
 +	ret
 +ENDPROC(chacha20_neon)
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/chacha20-arm.S	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/chacha20-arm.S	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,1471 @@
 +/* SPDX-License-Identifier: OpenSSL OR (BSD-3-Clause OR GPL-2.0)
 + *
@@ -15865,8 +15866,8 @@
 +.Lno_data_arm:
 +	ldmia	sp!,{r4-r11,pc}
 +ENDPROC(chacha20_arm)
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/chacha20-x86_64.S	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/chacha20-x86_64.S	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,2630 @@
 +/* SPDX-License-Identifier: OpenSSL OR (BSD-3-Clause OR GPL-2.0)
 + *
@@ -18498,8 +18499,8 @@
 +ENDPROC(chacha20_avx512vl)
 +
 +#endif /* CONFIG_AS_AVX512 */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/curve25519-arm.S	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/curve25519-arm.S	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,2110 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -20611,8 +20612,8 @@
 +	bx lr
 +ENDPROC(curve25519_neon)
 +#endif
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/curve25519-x86_64.S	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/curve25519-x86_64.S	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,3261 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -23875,8 +23876,8 @@
 +	ret
 +ENDPROC(curve25519_sandy2x_ladder_base)
 +#endif /* CONFIG_AS_AVX */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/poly1305-arm64.S	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/poly1305-arm64.S	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,820 @@
 +/* SPDX-License-Identifier: OpenSSL OR (BSD-3-Clause OR GPL-2.0)
 + *
@@ -24698,8 +24699,8 @@
 +.align	5
 +.Lzeros:
 +.long	0,0,0,0,0,0,0,0
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/poly1305-arm.S	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/poly1305-arm.S	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,1115 @@
 +/* SPDX-License-Identifier: OpenSSL OR (BSD-3-Clause OR GPL-2.0)
 + *
@@ -25816,8 +25817,8 @@
 +.Lzeros:
 +.long	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 +#endif
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/poly1305-mips64.S	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/poly1305-mips64.S	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,357 @@
 +/* SPDX-License-Identifier: OpenSSL OR (BSD-3-Clause OR GPL-2.0)
 + *
@@ -26176,8 +26177,8 @@
 +
 +	jr	$31
 +.end	poly1305_emit_mips
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/crypto/poly1305-x86_64.S	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/crypto/poly1305-x86_64.S	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,2803 @@
 +/* SPDX-License-Identifier: OpenSSL OR (BSD-3-Clause OR GPL-2.0)
 + *
@@ -28982,8 +28983,8 @@
 +
 +ENDPROC(poly1305_blocks_avx512)
 +#endif /* CONFIG_AS_AVX512 */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/Makefile	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/Makefile	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,19 @@
 +# SPDX-License-Identifier: GPL-2.0
 +#
@@ -29004,13 +29005,14 @@
 +include $(src)/compat/Makefile.include
 +
 +obj-$(if $(KBUILD_EXTMOD),m,$(CONFIG_WIREGUARD)) := wireguard.o
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/Kconfig	2018-02-18 22:22:31.000000000 +0200
-@@ -0,0 +1,30 @@
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/Kconfig	2018-03-04 19:51:33.000000000 +0200
+@@ -0,0 +1,31 @@
 +config WIREGUARD
 +	tristate "IP: WireGuard secure network tunnel"
 +	depends on NET && INET
 +	select NET_UDP_TUNNEL
++	select DST_CACHE
 +	select CRYPTO_BLKCIPHER
 +	select VFP
 +	select VFPv3
@@ -29037,12 +29039,12 @@
 +	  only useful for debugging.
 +
 +	  Say N here unless you know what you're doing.
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/compat/simd/include/asm/simd.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/compat/simd/include/asm/simd.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1 @@
 +#include <asm/i387.h>
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/compat/udp_tunnel/udp_tunnel_partial_compat.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/compat/udp_tunnel/udp_tunnel_partial_compat.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,226 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -29270,8 +29272,8 @@
 +#define udp_port_cfg udp_port_cfg_new
 +#define udp_sock_create(a, b, c) udp_sock_create_new(a, b, c)
 +#endif
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/compat/udp_tunnel/include/net/udp_tunnel.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/compat/udp_tunnel/include/net/udp_tunnel.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,94 @@
 +#ifndef _WG_NET_UDP_TUNNEL_H
 +#define _WG_NET_UDP_TUNNEL_H
@@ -29367,8 +29369,8 @@
 +void udp_tunnel_sock_release(struct socket *sock);
 +
 +#endif /* _WG_NET_UDP_TUNNEL_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/compat/udp_tunnel/udp_tunnel.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/compat/udp_tunnel/udp_tunnel.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,385 @@
 +#include <linux/module.h>
 +#include <linux/errno.h>
@@ -29755,12 +29757,12 @@
 +	return 0;
 +}
 +#endif
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/compat/fpu/include/asm/fpu/api.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/compat/fpu/include/asm/fpu/api.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1 @@
 +#include <asm/i387.h>
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/compat/checksum/checksum_partial_compat.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/compat/checksum/checksum_partial_compat.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,208 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -29970,20 +29972,21 @@
 +	}
 +	return err;
 +}
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/compat/Makefile.include	2018-02-18 22:22:31.000000000 +0200
-@@ -0,0 +1,70 @@
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/compat/Makefile.include	2018-03-04 19:51:33.000000000 +0200
+@@ -0,0 +1,71 @@
 +# SPDX-License-Identifier: GPL-2.0
 +#
 +# Copyright (C) 2015-2018 Jason A. Donenfeld <Jason@zx2c4.com>. All Rights Reserved.
 +
 +ifeq ($(wildcard $(src)/compat/compat.h),)
-+ccflags-y += -include $(srctree)/$(src)/compat/compat.h
-+asflags-y += -include $(srctree)/$(src)/compat/compat-asm.h
++cmd_include_path_prefix := $(srctree)/$(src)
 +else
-+ccflags-y += -include $(src)/compat/compat.h
-+asflags-y += -include $(src)/compat/compat-asm.h
++cmd_include_path_prefix := $(src)
 +endif
++
++ccflags-y += -include $(cmd_include_path_prefix)/compat/compat.h
++asflags-y += -include $(cmd_include_path_prefix)/compat/compat-asm.h
 +
 +ifeq ($(wildcard $(srctree)/include/linux/ptr_ring.h),)
 +ccflags-y += -I$(src)/compat/ptr_ring/include
@@ -30017,7 +30020,7 @@
 +endif
 +
 +ifeq ($(shell grep -F "int crypto_memneq" "$(srctree)/include/crypto/algapi.h"),)
-+ccflags-y += -include $(src)/compat/memneq/include.h
++ccflags-y += -include $(cmd_include_path_prefix)/compat/memneq/include.h
 +wireguard-y += compat/memneq/memneq.o
 +endif
 +
@@ -30043,8 +30046,8 @@
 +		asflags-y += $(avx512_instr)
 +	endif
 +endif
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/compat/siphash/siphash.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/compat/siphash/siphash.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,539 @@
 +/* Copyright (C) 2015-2018 Jason A. Donenfeld <Jason@zx2c4.com>. All Rights Reserved.
 + *
@@ -30585,8 +30588,8 @@
 +	HPOSTAMBLE
 +}
 +#endif
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/compat/siphash/include/linux/siphash.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/compat/siphash/include/linux/siphash.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,140 @@
 +/* Copyright (C) 2015-2018 Jason A. Donenfeld <Jason@zx2c4.com>. All Rights Reserved.
 + *
@@ -30728,8 +30731,8 @@
 +}
 +
 +#endif /* _WG_LINUX_SIPHASH_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/compat/intel-family/include/asm/intel-family.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/compat/intel-family/include/asm/intel-family.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,73 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +#ifndef _ASM_X86_INTEL_FAMILY_H
@@ -30804,8 +30807,8 @@
 +#define INTEL_FAM6_XEON_PHI_KNM		0x85 /* Knights Mill */
 +
 +#endif /* _ASM_X86_INTEL_FAMILY_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/compat/compat.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/compat/compat.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,632 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *
@@ -31291,7 +31294,7 @@
 +#else
 +#define ___COMPAT_NETLINK_DUMP_BLOCK return get_device_dump_real(skb, cb);
 +#endif
-+#if (LINUX_VERSION_CODE < KERNEL_VERSION(4, 13, 14) && LINUX_VERSION_CODE >= KERNEL_VERSION(4, 10, 0)) || LINUX_VERSION_CODE < KERNEL_VERSION(4, 9, 63)
++#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 16, 0)
 +#define get_device_dump(a, b) get_device_dump_real(a, b); \
 +static int get_device_dump(a, b) { \
 +	struct wireguard_device *wg = (struct wireguard_device *)cb->args[0]; \
@@ -31439,8 +31442,8 @@
 +#endif
 +
 +#endif /* _WG_COMPAT_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/compat/ptr_ring/include/linux/ptr_ring.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/compat/ptr_ring/include/linux/ptr_ring.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,640 @@
 +/*
 + *	Definitions for the 'struct ptr_ring' datastructure.
@@ -32082,16 +32085,16 @@
 +}
 +
 +#endif /* _LINUX_PTR_RING_H  */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/compat/memneq/include.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/compat/memneq/include.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,5 @@
 +extern noinline unsigned long __crypto_memneq(const void *a, const void *b, size_t size);
 +static inline int crypto_memneq(const void *a, const void *b, size_t size)
 +{
 +	return __crypto_memneq(a, b, size) != 0UL ? 1 : 0;
 +}
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/compat/memneq/memneq.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/compat/memneq/memneq.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,170 @@
 +/*
 + * Constant-time equality testing of memory regions.
@@ -32157,7 +32160,7 @@
 +#include <crypto/algapi.h>
 +
 +/* Make the optimizer believe the variable can be manipulated arbitrarily. */
-+#define COMPILER_OPTIMIZER_HIDE_VAR(var) __asm__ ("" : "=r" (var) : "0" (var))
++#define COMPILER_OPTIMIZER_HIDE_VAR(var) asm("" : "=r" (var) : "0" (var))
 +
 +#ifndef __HAVE_ARCH_CRYPTO_MEMNEQ
 +
@@ -32263,8 +32266,8 @@
 +}
 +
 +#endif /* __HAVE_ARCH_CRYPTO_MEMNEQ */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/compat/dst_cache/dst_cache.c	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/compat/dst_cache/dst_cache.c	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,175 @@
 +/*
 + * net/core/dst_cache.c - dst entry cache
@@ -32441,8 +32444,8 @@
 +
 +	free_percpu(dst_cache->cache);
 +}
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/compat/dst_cache/include/net/dst_cache.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/compat/dst_cache/include/net/dst_cache.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,97 @@
 +#ifndef _WG_NET_DST_CACHE_H
 +#define _WG_NET_DST_CACHE_H
@@ -32541,8 +32544,8 @@
 +void dst_cache_destroy(struct dst_cache *dst_cache);
 +
 +#endif /* _WG_NET_DST_CACHE_H */
---- /dev/null	2018-02-18 13:06:28.903837808 +0200
-+++ b/net/wireguard/compat/compat-asm.h	2018-02-18 22:22:31.000000000 +0200
+--- /dev/null	2018-03-04 21:55:12.891724619 +0200
++++ b/net/wireguard/compat/compat-asm.h	2018-03-04 19:51:33.000000000 +0200
 @@ -0,0 +1,18 @@
 +/* SPDX-License-Identifier: GPL-2.0
 + *

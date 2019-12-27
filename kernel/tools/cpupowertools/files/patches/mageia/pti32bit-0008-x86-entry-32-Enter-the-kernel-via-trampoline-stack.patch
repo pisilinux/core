@@ -1,7 +1,7 @@
-From d9dc2b83bdfc2a9265302cc90b32739ac579f8cc Mon Sep 17 00:00:00 2001
+From 288a2a6b31018ab9172598a39477404582ae29fa Mon Sep 17 00:00:00 2001
 From: Joerg Roedel <jroedel@suse.de>
 Date: Tue, 16 Jan 2018 10:55:52 +0100
-Subject: [PATCH 08/31] x86/entry/32: Enter the kernel via trampoline stack
+Subject: [PATCH 08/34] x86/entry/32: Enter the kernel via trampoline stack
 
 Use the entry-stack as a trampoline to enter the kernel. The
 entry-stack is already in the cpu_entry_area and will be
@@ -9,16 +9,16 @@ mapped to userspace when PTI is enabled.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/entry/entry_32.S        | 135 +++++++++++++++++++++++++++++++--------
+ arch/x86/entry/entry_32.S        | 136 +++++++++++++++++++++++++++++++--------
  arch/x86/include/asm/switch_to.h |   6 +-
  arch/x86/kernel/asm-offsets.c    |   1 +
  arch/x86/kernel/cpu/common.c     |   5 +-
  arch/x86/kernel/process.c        |   2 -
  arch/x86/kernel/process_32.c     |  10 +--
- 6 files changed, 120 insertions(+), 39 deletions(-)
+ 6 files changed, 121 insertions(+), 39 deletions(-)
 
 diff --git a/arch/x86/entry/entry_32.S b/arch/x86/entry/entry_32.S
-index b39c5e210b43..e714b53b1eaa 100644
+index b39c5e210b43..1737da2e4517 100644
 --- a/arch/x86/entry/entry_32.S
 +++ b/arch/x86/entry/entry_32.S
 @@ -135,25 +135,36 @@
@@ -65,7 +65,7 @@ index b39c5e210b43..e714b53b1eaa 100644
  .endm
  
  /*
-@@ -261,6 +272,71 @@
+@@ -261,6 +272,72 @@
  .Lend_\@:
  #endif /* CONFIG_X86_ESPFIX32 */
  .endm
@@ -128,8 +128,9 @@ index b39c5e210b43..e714b53b1eaa 100644
 +	 * We are now on the task-stack and can safely copy over the
 +	 * stack-frame
 +	 */
++	shrl	$2, %ecx
 +	cld
-+	rep movsb
++	rep movsl
 +
 +.Lend_\@:
 +.endm
@@ -137,7 +138,7 @@ index b39c5e210b43..e714b53b1eaa 100644
  /*
   * %eax: prev task
   * %edx: next task
-@@ -454,6 +530,7 @@ ENTRY(xen_sysenter_target)
+@@ -454,6 +531,7 @@ ENTRY(xen_sysenter_target)
   */
  ENTRY(entry_SYSENTER_32)
  	movl	TSS_entry_stack(%esp), %esp
@@ -145,7 +146,7 @@ index b39c5e210b43..e714b53b1eaa 100644
  .Lsysenter_past_esp:
  	pushl	$__USER_DS		/* pt_regs->ss */
  	pushl	%ebp			/* pt_regs->sp (stashed in bp) */
-@@ -462,7 +539,7 @@ ENTRY(entry_SYSENTER_32)
+@@ -462,7 +540,7 @@ ENTRY(entry_SYSENTER_32)
  	pushl	$__USER_CS		/* pt_regs->cs */
  	pushl	$0			/* pt_regs->ip = 0 (placeholder) */
  	pushl	%eax			/* pt_regs->orig_ax */
@@ -154,7 +155,7 @@ index b39c5e210b43..e714b53b1eaa 100644
  
  	/*
  	 * SYSENTER doesn't filter flags, so we need to clear NT, AC
-@@ -573,7 +650,8 @@ ENDPROC(entry_SYSENTER_32)
+@@ -573,7 +651,8 @@ ENDPROC(entry_SYSENTER_32)
  ENTRY(entry_INT80_32)
  	ASM_CLAC
  	pushl	%eax			/* pt_regs->orig_ax */
@@ -164,7 +165,7 @@ index b39c5e210b43..e714b53b1eaa 100644
  
  	/*
  	 * User mode is traced as though IRQs are on, and the interrupt gate
-@@ -665,7 +743,8 @@ END(irq_entries_start)
+@@ -665,7 +744,8 @@ END(irq_entries_start)
  common_interrupt:
  	ASM_CLAC
  	addl	$-0x80, (%esp)			/* Adjust vector into the [-256, -1] range */
@@ -174,7 +175,7 @@ index b39c5e210b43..e714b53b1eaa 100644
  	ENCODE_FRAME_POINTER
  	TRACE_IRQS_OFF
  	movl	%esp, %eax
-@@ -673,16 +752,16 @@ common_interrupt:
+@@ -673,16 +753,16 @@ common_interrupt:
  	jmp	ret_from_intr
  ENDPROC(common_interrupt)
  
@@ -201,7 +202,7 @@ index b39c5e210b43..e714b53b1eaa 100644
  ENDPROC(name)
  
  #define BUILD_INTERRUPT(name, nr)		\
-@@ -908,16 +987,20 @@ common_exception:
+@@ -908,16 +988,20 @@ common_exception:
  	pushl	%es
  	pushl	%ds
  	pushl	%eax
@@ -224,7 +225,7 @@ index b39c5e210b43..e714b53b1eaa 100644
  	UNWIND_ESPFIX_STACK
  	GS_TO_REG %ecx
  	movl	PT_GS(%esp), %edi		# get the function address
-@@ -925,9 +1008,6 @@ common_exception:
+@@ -925,9 +1009,6 @@ common_exception:
  	movl	$-1, PT_ORIG_EAX(%esp)		# no syscall to restart
  	REG_TO_PTGS %ecx
  	SET_KERNEL_GS %ecx
@@ -234,7 +235,7 @@ index b39c5e210b43..e714b53b1eaa 100644
  	TRACE_IRQS_OFF
  	movl	%esp, %eax			# pt_regs pointer
  	CALL_NOSPEC %edi
-@@ -946,6 +1026,7 @@ ENTRY(debug)
+@@ -946,6 +1027,7 @@ ENTRY(debug)
  	 */
  	ASM_CLAC
  	pushl	$-1				# mark this as an int
@@ -242,7 +243,7 @@ index b39c5e210b43..e714b53b1eaa 100644
  	SAVE_ALL
  	ENCODE_FRAME_POINTER
  	xorl	%edx, %edx			# error code 0
-@@ -981,6 +1062,7 @@ END(debug)
+@@ -981,6 +1063,7 @@ END(debug)
   */
  ENTRY(nmi)
  	ASM_CLAC
@@ -250,7 +251,7 @@ index b39c5e210b43..e714b53b1eaa 100644
  #ifdef CONFIG_X86_ESPFIX32
  	pushl	%eax
  	movl	%ss, %eax
-@@ -1048,7 +1130,8 @@ END(nmi)
+@@ -1048,7 +1131,8 @@ END(nmi)
  ENTRY(int3)
  	ASM_CLAC
  	pushl	$-1				# mark this as an int
@@ -351,5 +352,5 @@ index 097d36a64889..3f3a8c620c63 100644
  
  	/*
 -- 
-2.13.6
+2.16.2
 
