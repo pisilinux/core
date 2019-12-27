@@ -12,9 +12,9 @@
         <IsA>library</IsA>
         <Summary>A JSON implementation in C</Summary>
         <Description>json-c implements a reference counting object model that allows you to easily construct JSON objects in C, output them as JSON formatted strings and parse JSON formatted strings back into the C representation of JSON objects.</Description>
-        <Archive sha1sum="e7fcdbe41f1f3307c036f4e9e04b715de533896e" type="targz">https://s3.amazonaws.com/json-c_releases/releases/json-c-0.12.1.tar.gz</Archive>
+        <Archive sha1sum="d4c667ab94e7051b1e78aa727f0d937caba971e9" type="targz">https://github.com/json-c/json-c/archive/json-c-0.13.1-20180305.tar.gz</Archive>
         <Patches>
-            <Patch>wno-werror.patch</Patch>
+<!--             <Patch>wno-werror.patch</Patch> -->
         </Patches>
     </Source>
         
@@ -55,6 +55,13 @@
     </Package>
 
     <History>
+		<Update release="5">
+            <Date>2019-12-27</Date>
+            <Version>0.13.1_20180305</Version>
+            <Comment>Version bump</Comment>
+            <Name>idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-15</Date>
             <Version>0.12.1</Version>
