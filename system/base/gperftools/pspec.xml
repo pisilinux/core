@@ -13,7 +13,7 @@
         <IsA>app:console</IsA>
         <Summary>Google Performance Tools</Summary>
         <Description>Perf Tools is a collection of a high-performance multi-threaded malloc() implementation, plus some pretty nifty performance analysis tools.</Description>
-        <Archive sha1sum="1e7069f23f926df84a541938a8e6078b0aedf218" type="targz">https://github.com/gperftools/gperftools/releases/download/gperftools-2.5/gperftools-2.5.tar.gz</Archive>
+        <Archive sha1sum="89e3e1df674bc4ba1a9e97246b58a26a4e92d0a3" type="targz">https://github.com/gperftools/gperftools/releases/download/gperftools-2.7/gperftools-2.7.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>libunwind-devel</Dependency>
         </BuildDependencies>
@@ -62,6 +62,13 @@
     </Package>
 
     <History>
+		<Update release="5">
+            <Date>2019-12-27</Date>
+            <Version>2.7</Version>
+            <Comment>Version bump</Comment>
+            <Name>idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-15</Date>
             <Version>2.5</Version>
