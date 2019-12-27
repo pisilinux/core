@@ -1,0 +1,22 @@
+--- cpio-2.12/doc/cpio.texi.orig	2015-12-31 15:56:15.606713144 -0500
++++ cpio-2.12/doc/cpio.texi	2015-12-31 16:00:05.186934057 -0500
+@@ -261,7 +261,8 @@ Sets the I/O block size to @var{block-si
+ @item -B
+ Set the I/O block size to 5120 bytes.
+ @item -c
+-Use the old portable (ASCII) archive format.
++Identical to ``-H newc'', use the new (SVR4) portable format.
++If you wish the old portable (ASCII) archive format, use ``-H odc'' instead.
+ @item -C @var{number}
+ @itemx --io-size=@var{number}
+ Set the I/O block size to the given @var{number} of bytes.
+--- cpio-2.12/src/main.c.orig	2015-12-31 15:56:15.606713144 -0500
++++ cpio-2.12/src/main.c	2015-12-31 16:02:24.047067176 -0500
+@@ -329,6 +329,7 @@ parse_opt (int key, char *arg, struct ar
+     case 'c':		/* Use the old portable ASCII format.  */
+       if (archive_format != arf_unknown)
+ 	USAGE_ERROR ((0, 0, _("Archive format multiply defined")));
++#define SVR4_COMPAT
+ #ifdef SVR4_COMPAT
+       archive_format = arf_newascii; /* -H newc.  */
+ #else
