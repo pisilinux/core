@@ -8,9 +8,11 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 
 def setup():
+    autotools.autoreconf("-vfi")
     autotools.configure("--disable-static \
                          --disable-rfc3195 \
-                         --disable-journal")
+                         --disable-journal \
+                         --disable-man-pages")
 
 def build():
     autotools.make()
