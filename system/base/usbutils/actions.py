@@ -6,11 +6,15 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.configure("--datadir=/usr/share/misc \
-                         --disable-zlib")
+    shelltools.system("./autogen.sh \
+					--datadir=/usr/share/misc \
+				    --disable-zlib")
+    #autotools.configure("--datadir=/usr/share/misc \
+                         #--disable-zlib")
 
 def build():
     autotools.make()
@@ -20,4 +24,4 @@ def install():
 
     #pisitools.removeDir("/usr/sbin")
 
-    pisitools.dodoc("AUTHORS", "ChangeLog", "NEWS", "README")
+    pisitools.dodoc("NEWS", "README.md")
