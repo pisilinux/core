@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Info ZIP (encryption support)</Summary>
         <Description>Zip is a compression and file packaging/archive utility. Zip is useful for packaging a set of files for distribution, for archiving files, and for saving disk space by temporarily compressing unused files or directories.</Description>
-        <Archive sha1sum="c9f4099ecf2772b53c2dd4a8e508064ce015d182" type="targz">ftp://ftp.info-zip.org/pub/infozip/src/zip30.tgz</Archive>
+        <Archive sha1sum="c9f4099ecf2772b53c2dd4a8e508064ce015d182" type="targz">https://ftp.osuosl.org/pub/blfs/conglomeration/zip/zip30.tar.gz</Archive>
     </Source>
 
     <Package>
@@ -28,6 +28,13 @@
     </Package>
 
     <History>
+		<Update release="5">
+            <Date>2019-12-27</Date>
+            <Version>3.0</Version>
+            <Comment>Rebuild</Comment>
+            <Name>idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2018-07-15</Date>
             <Version>3.0</Version>
