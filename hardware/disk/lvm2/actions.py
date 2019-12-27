@@ -60,10 +60,14 @@ def builddiet():
 
 def setup():
     # Breaks linking when sandbox is disabled
-    shelltools.export("CLDFLAGS", get.LDFLAGS())
+    shelltools.export("CLDFLAGS", "%s -lpthread" %get.LDFLAGS())
 
     shelltools.export("LIB_PTHREAD", "-lpthread")
     pisitools.dosed("conf/example.conf.in", "use_lvmetad = 0", "use_lvmetad = 1")
+    
+    #shelltools.system(""" sed -i -e "1iAR = $(tc-getAR)" -e "s:CC ?= @CC@:CC = $(tc-getCC):" make.tmpl.in || die """)
+    shelltools.system(""" sed -i -e '/FLAG/s:-O2::' configure || die """)
+    shelltools.system(""" sed -i -e '/FLAG/s:-O2::' configure.ac || die """)
 
     autotools.autoreconf("-fi")
     autotools.configure("--with-thin-check=    \
