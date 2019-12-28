@@ -14,18 +14,19 @@
         <Description>glib2 is the low-level core library that forms the basis for projects such as GTK+ and GNOME. It provides data structure handling for C, portability wrappers, and interfaces for such runtime functionality as an event loop, threads, dynamic loading, and an object system.</Description>
         <Archive sha1sum="f9a493c86f98482f13c6ed742c19487e6fa8f34b" type="tarxz">mirrors://gnome/glib/2.62/glib-2.62.4.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="8.43">libpcre-devel</Dependency>
+            <Dependency>meson</Dependency>
+            <Dependency>ninja</Dependency>
             <Dependency>zlib-devel</Dependency>
+            <Dependency>docbook-xsl</Dependency>
             <Dependency>libffi-devel</Dependency>
-			<Dependency>libutil-linux-devel</Dependency>
-			<Dependency>docbook-xsl</Dependency>
-			<Dependency>meson</Dependency>
-			<Dependency>ninja</Dependency>
+            <Dependency>libxslt-devel</Dependency><!-- for man=true  -->
+            <Dependency>libutil-linux-devel</Dependency>
+            <Dependency versionFrom="8.43">libpcre-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch level="1">noisy-glib-compile-schemas.diff</Patch>
         </Patches>
-		<AdditionalFiles>
+        <AdditionalFiles>
             <AdditionalFile target="multilib.diff" permission="0644">multilib.diff</AdditionalFile>
         </AdditionalFiles>
     </Source>
@@ -33,10 +34,10 @@
     <Package>
         <Name>glib2</Name>
         <RuntimeDependencies>
-            <Dependency>libpcre</Dependency>
             <Dependency>zlib</Dependency>
             <!--<Dependency>elfutils</Dependency>-->
-            <Dependency>libffi</Dependency>			
+            <Dependency>libffi</Dependency>
+            <Dependency>libpcre</Dependency>
             <Dependency>elfutils</Dependency>
             <Dependency>libutil-linux</Dependency>
         </RuntimeDependencies>
@@ -71,7 +72,7 @@
             <Dependency>libpcre-devel</Dependency>			
             <Dependency>zlib-devel</Dependency>
             <Dependency>libffi-devel</Dependency>
-			<Dependency>libutil-linux-devel</Dependency>
+            <Dependency>libutil-linux-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin/gtester</Path>
@@ -137,8 +138,8 @@
     </Package>
 
     <History>
-		<Update release="8">
-            <Date>2019-12-22</Date>
+        <Update release="8">
+            <Date>2019-12-28</Date>
             <Version>2.62.4</Version>
             <Comment>Version bump</Comment>
             <Name>Idris Kalp</Name>
