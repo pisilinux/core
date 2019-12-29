@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>A small but fast and easy to use stand-alone template engine written in pure python</Summary>
         <Description>Jinja2 is the rewritten version of Jinja, sandboxed template engine written in pure Python. It provides a Django like non-XML syntax and compiles templates into executable python code. It's basically a combination of Django templates and python code.</Description>
-        <Archive sha1sum="896a71a32336487edf1216d5d73dd3b26c4d7431" type="targz">https://files.pythonhosted.org/packages/93/ea/d884a06f8c7f9b7afbc8138b762e80479fb17aedbbe2b06515a12de9378d/Jinja2-2.10.1.tar.gz</Archive>
+        <Archive sha1sum="fbb6a03ad01b766d816650147d1fccfc145de9e0" type="targz">https://files.pythonhosted.org/packages/7b/db/1d037ccd626d05a7a47a1b81ea73775614af83c2b3e53d86a0bb41d8d799/Jinja2-2.10.3.tar.gz</Archive>
         <BuildDependencies>
             <!-- For creating documentations-->
             <!--<Dependency>python-sphinx</Dependency>-->
@@ -26,8 +26,12 @@
 
     <Package>
         <Name>python-Jinja2</Name>
+        <Summary>A small but fast and easy to use stand-alone template engine written in pure python</Summary>
+        <RuntimeDependencies>
+            <Dependency>python-MarkupSafe</Dependency>
+        </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/python*</Path>
+            <Path fileType="library">/usr/lib/python2*</Path>
             <Path fileType="doc">/usr/share/doc/python-Jinja2/LICENSE</Path>
         </Files>
     </Package>
@@ -40,6 +44,13 @@
     </Package>
 
     <History>
+        <Update release="7">
+            <Date>2019-12-29</Date>
+            <Version>2.10.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Blue Devil</Name>
+            <Email>bluedevil@sctzine.com</Email>
+        </Update>
 		<Update release="6">
             <Date>2019-10-03</Date>
             <Version>2.10.1</Version>
