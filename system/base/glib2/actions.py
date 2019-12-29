@@ -55,6 +55,9 @@ def install():
         pisitools.domove("/_emul32/bin/gio-querymodules", "/usr/bin/32/")
         pisitools.domove("/_emul32/lib32", "/usr")
         pisitools.removeDir("/_emul32")
+        for f in shelltools.ls("%s/usr/lib32/pkgconfig" % get.installDIR()):
+            pisitools.dosed("%s/usr/lib32/pkgconfig/%s" % (get.installDIR(), f), "_emul32", "usr") 
+        return
 
     
     if get.buildTYPE() != "_emul32":
