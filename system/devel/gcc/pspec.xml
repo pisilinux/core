@@ -18,21 +18,18 @@
         <Archive sha1sum="52c1f2a4c9a202f46cf3275a8d46b562aa584208" target="gcc-9.2.1" type="tarxz">https://ftp.gnu.org/gnu/mpfr/mpfr-4.0.2.tar.xz</Archive>
         <Archive sha1sum="b019d9e1d27ec5fb99497159d43a3164995de2d0" target="gcc-9.2.1" type="targz">ftp://ftp.gnu.org/gnu/mpc/mpc-1.1.0.tar.gz</Archive>
         <Archive sha1sum="33e366d59d32330432b5c7f2d0c2fb6664eff224" target="gcc-9.2.1" type="tarbz2">http://isl.gforge.inria.fr/isl-0.21.tar.bz2</Archive>
-		<Archive sha1sum="9dc6981197a7d92f339192eea974f5eca48fcffe" target="gcc-9.2.1" type="tarxz">mirrors://gnu/gmp/gmp-6.1.2.tar.xz</Archive>
+        <Archive sha1sum="9dc6981197a7d92f339192eea974f5eca48fcffe" target="gcc-9.2.1" type="tarxz">mirrors://gnu/gmp/gmp-6.1.2.tar.xz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="2.33.1">binutils</Dependency>
             <Dependency>bison</Dependency>
             <Dependency>gettext</Dependency>
             <Dependency>ncurses</Dependency>
-            <Dependency>zlib</Dependency>
             <Dependency>gnuconfig</Dependency>
             <Dependency>patch</Dependency>
             <Dependency>sed</Dependency>
             <Dependency>texinfo</Dependency>
-            <Dependency>gmp-devel</Dependency>
-<!--             <Dependency>ppl</Dependency> -->
-            <Dependency>zlib-devel</Dependency>
             <Dependency>elfutils</Dependency>
+            <Dependency>zlib-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <!-- Pisilinux Patches -->
@@ -87,9 +84,6 @@
 
     <Package>
         <Name>libgfortran</Name>
-        <RuntimeDependencies>
-            <Dependency>libquadmath</Dependency>
-        </RuntimeDependencies>
         <IsA>library</IsA>
         <Summary>Contains GCC shared support library for gfortran</Summary>
         <Files>
@@ -122,10 +116,6 @@
 
     <Package>
         <Name>gcc</Name>
-        <RuntimeDependencies>
-            <Dependency>gmp</Dependency>
-            <Dependency>zlib</Dependency>
-        </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/lib</Path>
             <Path fileType="executable">/usr/bin</Path>
@@ -143,7 +133,7 @@
     </Package>
 
     <History>
-		<Update release="6">
+        <Update release="6">
             <Date>2019-12-25</Date>
             <Version>9.2.1</Version>
             <Comment>Version bump.</Comment>
