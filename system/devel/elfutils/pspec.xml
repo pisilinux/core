@@ -28,15 +28,12 @@
             <Dependency>zlib</Dependency>
             <Dependency>bzip2</Dependency>
             <Dependency>libgcc</Dependency>
-            <Dependency>xz-devel</Dependency>
-		    <Dependency>zlib-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="library">/usr/lib</Path>
             <Path fileType="doc">/usr/share/doc</Path>
 			<Path fileType="man">/usr/share/man</Path>
-            <Path fileType="header">/usr/include</Path>
         </Files>
     </Package>
     
@@ -57,10 +54,25 @@
             <Path fileType="library">/usr/lib32</Path>
         </Files>
     </Package>
+    
+    <Package>
+        <Name>elfutils-devel</Name>
+        <Summary>Development files for elfutils</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">elfutils</Dependency>
+            <Dependency>xz-devel</Dependency>
+		    <Dependency>zlib-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+            <Path fileType="library">/usr/lib32/pkgconfig</Path>
+        </Files>
+    </Package>
 
     <History>
 		<Update release="9">
-            <Date>2019-12-23</Date>
+            <Date>2020-01-03</Date>
             <Version>0.178</Version>
             <Comment>Version bump.</Comment>
             <Name>Idris Kalp</Name>
