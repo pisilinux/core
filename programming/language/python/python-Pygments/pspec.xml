@@ -12,17 +12,18 @@
         <IsA>library</IsA>
         <Summary>A syntax highlighting package written in Python</Summary>
         <Description>python-Pygments is a generic syntax highlighter for general use in all kinds of software such as forum systems, wikis or other applications that need to prettify source code.</Description>
-        <Archive sha1sum="5296c3b92ef0cbb8f4abede623be4a89e4f0f3c9" type="targz">https://files.pythonhosted.org/packages/7e/ae/26808275fc76bf2832deb10d3a3ed3107bc4de01b85dcccbe525f2cd6d1e/Pygments-2.4.2.tar.gz</Archive>
+        <Archive sha1sum="6d2dc431070cdfe1bb48b7684aadca56b5c522ed" type="targz">https://files.pythonhosted.org/packages/cb/9f/27d4844ac5bf158a33900dbad7985951e2910397998e85712da03ce125f0/Pygments-2.5.2.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>python-setuptools</Dependency>
+        </BuildDependencies>
     </Source>
 
     <Package>
         <Name>python-Pygments</Name>
-        <RuntimeDependencies>
-            <Dependency>python-setuptools</Dependency>
-        </RuntimeDependencies>
+        <Summary>A syntax highlighting package written in Python</Summary>
         <Files>
-            <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="library">/usr/lib/python*</Path>
+            <Path fileType="executable">/usr/bin/pygmentize-py2</Path>
+            <Path fileType="library">/usr/lib/python2*</Path>
             <Path fileType="man">/usr/share/man</Path>
         </Files>
     </Package>
@@ -30,12 +31,22 @@
     <Package>
         <Name>python-Pygments-docs</Name>
         <Summary>Documentation files for python-Pygments</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">python-Pygments</Dependency>
+        </RuntimeDependencies>
         <Files>
             <Path fileType="doc">/usr/share/doc/python-Pygments</Path>
         </Files>
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2019-12-29</Date>
+            <Version>2.5.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Blue Devil</Name>
+            <Email>bluedevil@sctzine.com</Email>
+        </Update>
 		<Update release="5">
             <Date>2019-10-03</Date>
             <Version>2.4.2</Version>
