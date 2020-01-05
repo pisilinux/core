@@ -36,6 +36,7 @@
             <Patch>emergeup.patch</Patch>
             <Patch>fetch.patch</Patch>
             <Patch>kerneltools_extra_headers_moved.patch</Patch>
+            <Patch>kernel-5.4-kerneltools-headers.patch</Patch>
         </Patches>
     </Source>
 
@@ -80,6 +81,7 @@
             <AdditionalFile target="/usr/lib/tmpfiles.d/pisi.conf" permission="0644" owner="root">tmpfiles.conf</AdditionalFile>
             <AdditionalFile owner="root" permission="0644" target="/usr/lib/pisilinux/pisi/actionsapi/qt5.py">qt5.py</AdditionalFile>
             <AdditionalFile owner="root" permission="0644" target="/usr/lib/pisilinux/pisi/actionsapi/kde5.py">kde5.py</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/pisilinux/pisi/actionsapi/mesontools.py">mesontools.py</AdditionalFile>
         </AdditionalFiles>
         <Provides>
             <COMAR script="package.py">System.Package</COMAR>
@@ -88,6 +90,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2020-01-05</Date>
+            <Version>2.6.1</Version>
+            <Comment>add parameters</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
 		<Update release="10">
             <Date>2019-12-27</Date>
             <Version>2.6</Version>

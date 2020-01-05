@@ -9,8 +9,8 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import pythonmodules
 
 def build():
-    pisitools.dosed("pisi/__init__.py", "2.4", "2.6")
-    pisitools.dosed("pisi/db/lazydb.py", "2.4", "2.6")
+    pisitools.dosed("pisi/__init__.py", "2.4", "2.6.1")
+    pisitools.dosed("pisi/db/lazydb.py", "2.4", "2.6.1")
     pythonmodules.compile()
 
 def install():
