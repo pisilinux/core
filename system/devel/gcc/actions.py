@@ -87,8 +87,9 @@ def setup():
                        --disable-libssp \
                        --enable-gnu-unique-object \
                        --enable-linker-build-id \
-                       --enable-cloog-backend=isl \
-                       --disable-cloog-version-check \
+                       --with-isl \
+                       --enable-gnu-indirect-function \
+                       --disable-isl-version-check \
                        --enable-lto \
                        --enable-plugin \
                        --with-linker-hash-style=gnu \
