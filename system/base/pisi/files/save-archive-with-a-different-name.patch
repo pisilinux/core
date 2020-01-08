@@ -1,0 +1,64 @@
+diff -Nuar a/pisi/comariface.py b/pisi/comariface.py
+--- a/pisi/comariface.py	2011-05-26 20:17:29.000000000 +0300
++++ b/pisi/comariface.py	2020-01-08 18:44:29.795094390 +0300
+@@ -10,16 +10,17 @@
+ # Please read the COPYING file.
+ #
+ 
++import gettext
+ import os
+-import time
+ import string
++import time
++
++import pisi
++import pisi.context as ctx
+ 
+-import gettext
+ __trans = gettext.translation('pisi', fallback=True)
+ _ = __trans.ugettext
+ 
+-import pisi
+-import pisi.context as ctx
+ 
+ class Error(pisi.Error):
+     pass
+@@ -30,10 +31,12 @@
+ except ImportError:
+     raise Error(_("comar-api package is not fully installed"))
+ 
++
+ def is_char_valid(char):
+     """Test if char is valid object path character."""
+     return char in string.ascii_letters + string.digits + "_"
+ 
++
+ def is_method_missing(exception):
+     """Tells if exception is about missing method in COMAR script"""
+     if exception._dbus_error_name in ("tr.org.pardus.comar.python.missing",
+@@ -41,6 +44,7 @@
+         return True
+     return False
+ 
++
+ def safe_script_name(package):
+     """Generates DBus-safe object name for package script names."""
+     object = package
+@@ -51,6 +55,7 @@
+         object = '_%s' % object
+     return object
+ 
++
+ def get_link():
+     """Connect to the COMAR daemon and return the link."""
+ 
+@@ -190,8 +195,7 @@
+     link = get_link()
+ 
+     package_name = safe_script_name(package_name)
+-    scripts = set([safe_script_name(s.name) for s \
+-            in provided_scripts if s.name])
++    scripts = set([safe_script_name(s.name) for s in provided_scripts if s.name])
+     scripts.add(package_name)
+ 
+     if package_name in list(link.System.Package):
