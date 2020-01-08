@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>PISI is the package management system of Pisi Linux</Summary>
         <Description>PISI is a modern package management system implemented in Python. Some of its main features are: package sources are written in XML and python, implements all functions through a simple-to-use API, integrates low-level and high-level package management features.</Description>
-        <Archive sha1sum="071e80356df2dddd7628d63431ea080d8f765a3b" type="targz">https://github.com/PisiLinuxNew/pisi/archive/v2.6.2.tar.gz</Archive>
+        <Archive sha1sum="7f16d1a0e4c8d2df73838a329485b74523fe50ad" type="tarxz">https://sourceforge.net/projects/pisilinux/files/source/pisi-2.6.tar.xz</Archive>
         <AdditionalFiles>
             <AdditionalFile permission="0644" target="pisi.conf-i686">pisi.conf-i686</AdditionalFile>
             <AdditionalFile permission="0644" target="pisi.conf-x86_64">pisi.conf-x86_64</AdditionalFile>
@@ -36,7 +36,7 @@
             <Patch>emergeup.patch</Patch>
             <Patch>fetch.patch</Patch>
             <Patch>kerneltools_extra_headers_moved.patch</Patch>
-            <!--Patch>kernel-5.4-kerneltools-headers.patch</Patch-->
+            <Patch>save-archive-with-a-different-name.patch</Patch>
         </Patches>
     </Source>
 
