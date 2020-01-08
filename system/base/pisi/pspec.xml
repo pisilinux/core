@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>PISI is the package management system of Pisi Linux</Summary>
         <Description>PISI is a modern package management system implemented in Python. Some of its main features are: package sources are written in XML and python, implements all functions through a simple-to-use API, integrates low-level and high-level package management features.</Description>
-        <Archive sha1sum="7f16d1a0e4c8d2df73838a329485b74523fe50ad" type="tarxz">https://sourceforge.net/projects/pisilinux/files/source/pisi-2.6.tar.xz</Archive>
+        <Archive sha1sum="071e80356df2dddd7628d63431ea080d8f765a3b" type="tarxz">https://github.com/PisiLinuxNew/pisi/archive/v2.6.2.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile permission="0644" target="pisi.conf-i686">pisi.conf-i686</AdditionalFile>
             <AdditionalFile permission="0644" target="pisi.conf-x86_64">pisi.conf-x86_64</AdditionalFile>
@@ -90,6 +90,13 @@
     </Package>
 
     <History>
+        <Update release="12">
+            <Date>2020-01-08</Date>
+            <Version>2.6.2</Version>
+            <Comment>Version bump</Comment>
+            <Name>Safa Arıman</Name>
+            <Email>safa@ariman.gen.tr</Email>
+        </Update>
         <Update release="11">
             <Date>2020-01-05</Date>
             <Version>2.6.1</Version>
