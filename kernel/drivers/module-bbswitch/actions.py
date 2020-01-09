@@ -13,10 +13,11 @@ KDIR = kerneltools.getKernelVersion()
 
 def build():
     autotools.make("KDIR=/lib/modules/%s/build" % KDIR)
-    #autotools.make()
 
 def install():
-    #autotools.rawInstall("DESTDIR=%s" % get.installDIR())
     pisitools.insinto("/lib/modules/%s/misc" % KDIR, "bbswitch.ko")
+    pisitools.dosed("dkms/dkms.conf",  "#MODULE_VERSION#", get.srcVERSION())
+    for f in "Makefile bbswitch.c dkms/dkms.conf".split():
+        pisitools.insinto("/usr/src/bbswitch-%s" % get.srcVERSION(), f)
 
     pisitools.dodoc("NEWS", "README*")

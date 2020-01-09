@@ -23,9 +23,19 @@
         <Name>module-bbswitch</Name>
         <RuntimeDependencies>
             <Dependency version="5.4.8">kernel</Dependency>
+            <Dependency release="current">bbswitch-common</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library" permanent="true">/lib/modules</Path>
+            <Path fileType="library">/lib/modules</Path>
+        </Files>
+        <Conflicts>
+            <Package>bbswitch-dkms</Package>
+        </Conflicts>
+    </Package>
+
+    <Package>
+        <Name>bbswitch-common</Name>
+        <Files>
             <Path fileType="config">/etc</Path>
             <Path fileType="doc">/usr/share/doc</Path>
         </Files>
@@ -35,8 +45,29 @@
         </AdditionalFiles>
     </Package>
 
+    <Package>
+        <Name>bbswitch-dkms</Name>
+        <RuntimeDependencies>
+            <Dependency release="current">bbswitch-common</Dependency>
+            <Dependency>dkms</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="data">/usr/src/bbswitch*</Path>
+        </Files>
+        <Conflicts>
+            <Package>module-bbswitch</Package>
+        </Conflicts>
+    </Package>
+
     <History>
-		<Update release="27">
+        <Update release="28">
+            <Date>2020-01-09</Date>
+            <Version>0.8</Version>
+            <Comment>Add dkms support</Comment>
+            <Name>Marcin Bojara</Name>
+            <Email>marcin.bojara@gmail.com</Email>
+        </Update>
+        <Update release="27">
             <Date>2019-12-27</Date>
             <Version>0.8</Version>
             <Comment>Rebuild.</Comment>
