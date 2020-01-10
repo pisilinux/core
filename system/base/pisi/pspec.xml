@@ -12,11 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>PISI is the package management system of Pisi Linux</Summary>
         <Description>PISI is a modern package management system implemented in Python. Some of its main features are: package sources are written in XML and python, implements all functions through a simple-to-use API, integrates low-level and high-level package management features.</Description>
-        <Archive sha1sum="379befb46ec1816f2ea35492bae3e3dda6c3cb93" type="targz">https://github.com/PisiLinuxNew/pisi/archive/v2.7.tar.gz</Archive>
-        <AdditionalFiles>
-            <AdditionalFile permission="0644" target="pisi.conf-i686">pisi.conf-i686</AdditionalFile>
-            <AdditionalFile permission="0644" target="pisi.conf-x86_64">pisi.conf-x86_64</AdditionalFile>
-        </AdditionalFiles>
+        <Archive sha1sum="227a4a01f7686892c0ad44bce5c95cc2e634cc50" type="targz">https://github.com/PisiLinuxNew/pisi/archive/v2.7.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>comar</Dependency>
             <Dependency>plyvel</Dependency>
@@ -26,9 +22,6 @@
             <Dependency>intltool</Dependency>
             <Dependency versionFrom="1.18">leveldb-devel</Dependency>
         </BuildDependencies>
-        <Patches>
-            <Patch>kerneltools_extra_headers_moved.patch</Patch>
-        </Patches>
     </Source>
 
     <Package>
@@ -68,11 +61,8 @@
             <AdditionalFile owner="root" permission="0644" target="/etc/pisi/mirrors.conf">mirrors.conf</AdditionalFile>
             <AdditionalFile owner="root" permission="0644" target="/etc/pisi/sandbox.conf">sandbox.conf</AdditionalFile>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/mime/packages/pisi.xml">pisi.xml</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/lib/pisilinux/pisi/actionsapi/pkgconfig.py">pkgconfig.py</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/pisi/pisi.conf">pisi.conf</AdditionalFile>
             <AdditionalFile target="/usr/lib/tmpfiles.d/pisi.conf" permission="0644" owner="root">tmpfiles.conf</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/lib/pisilinux/pisi/actionsapi/qt5.py">qt5.py</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/lib/pisilinux/pisi/actionsapi/kde5.py">kde5.py</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/lib/pisilinux/pisi/actionsapi/mesontools.py">mesontools.py</AdditionalFile>
         </AdditionalFiles>
         <Provides>
             <COMAR script="package.py">System.Package</COMAR>
@@ -81,6 +71,13 @@
     </Package>
 
     <History>
+        <Update release="13">
+            <Date>2020-01-10</Date>
+            <Version>2.7.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>Safa Arıman</Name>
+            <Email>safa@ariman.gen.tr</Email>
+        </Update>
         <Update release="12">
             <Date>2020-01-08</Date>
             <Version>2.7</Version>
