@@ -12,7 +12,7 @@
         <IsA>kernel</IsA>
         <Summary>The Linux kernel (the core of the Linux operating system) for Pisi Linux</Summary>
         <Description>kernel contains the Linux kernel, the core of any Linux operating system. The kernel handles the basic functions of the operating system: memory allocation, process allocation, device input and output, etc.</Description>
-        <Archive sha1sum="8fd0449a462c77f3e5b35848f4bf3c41411702d6" type="targz">https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.4.tar.gz</Archive>
+        <Archive sha1sum="e8c9744cdf153ddf0b82747a4bbce526cd359976" type="targz">https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.4.10.tar.xz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
             <AdditionalFile permission="0755" target="generate-module-list">scripts/generate-module-list</AdditionalFile>
@@ -33,16 +33,12 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-5.4.8.xz</Patch>
+            <Patch level="1" compressionType="xz">patches/linux/patch-5.4.10.xz</Patch>
             <!-- Mageia Linux patches-->
 			<Patch level="1">patches/mageia/fs-aufs-5.4.patch</Patch>
 			<Patch level="1">patches/mageia/fs-aufs-5.4-modular.patch</Patch>
 			<Patch level="1">patches/mageia/fs-vboxsf.patch</Patch>
 			<Patch level="1">patches/mageia/CVE-2019-12379.patch</Patch>
-<!-- 			<Patch level="1">patches/mageia/disable-mrproper-in-devel-rpms.patch</Patch> -->
-			
-			<!-- Build fix -->
-<!--			<Patch level="1">patches/pisilinux/revert-Makefile.patch</Patch>-->
         </Patches>
     </Source>
 
@@ -98,6 +94,17 @@
     </Package>
 
     <History>
+        <Update release="30">
+            <Date>2020-01-10</Date>
+            <Version>5.4.10</Version>
+            <Comment>Version Bump.</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Safa Arıman</Name>
+            <Email>safa@ariman.gen.tr</Email>
+        </Update>
         <Update release="29">
             <Date>2020-01-05</Date>
             <Version>5.4.8</Version>
