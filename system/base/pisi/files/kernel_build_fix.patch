@@ -1,14 +1,15 @@
-diff --git a/pisi/actionsapi/kerneltools.py b/pisi/actionsapi/kerneltools.py
-index df3de3b..2560b47 100644
---- a/pisi/actionsapi/kerneltools.py
-+++ b/pisi/actionsapi/kerneltools.py
-@@ -253,6 +253,9 @@ def installLibcHeaders(excludes=None):
-     # Create directories
+diff -Nuar a/pisi/actionsapi/kerneltools.py b/pisi/actionsapi/kerneltools.py
+--- a/pisi/actionsapi/kerneltools.py	2020-01-10 04:21:15.000000000 +0300
++++ b/pisi/actionsapi/kerneltools.py	2020-01-12 00:11:45.464966486 +0300
+@@ -254,7 +254,11 @@
      shelltools.makedirs(headers_tmp)
      shelltools.makedirs(headers_dir)
-+
+     
 +    # Clean up the source directory
 +    autotools.make('mrproper')
-     
++    
      # install the headers
++    autotools.make("%s defconfig" % make_cmd)
      autotools.rawInstall(make_cmd, "headers_install")
+ 
+     oldwd = os.getcwd()
