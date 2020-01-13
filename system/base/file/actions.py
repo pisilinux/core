@@ -10,6 +10,7 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 from pisi.actionsapi import pythonmodules
 
+
 def setup():
     pisitools.flags.add("-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_GNU_SOURCE -fPIC")
 
@@ -19,8 +20,10 @@ def setup():
        
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
+
 def build():
     autotools.make()
+
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())

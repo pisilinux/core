@@ -12,17 +12,13 @@
         <IsA>app:console</IsA>
         <Summary>Program to identify a file's format by scanning binary data for patterns</Summary>
         <Description>Program to identify a file's format by scanning binary data for patterns.</Description>
-        <Archive sha1sum="891176efa3006eff222bd364cd96135aad171941" type="targz">ftp://ftp.astron.com/pub/file/file-5.37.tar.gz</Archive>
-        <!-- An update to this package can easily break pisi, pay attention! -->
+        <Archive sha1sum="57cad9341c3f74f8681c2ef931786c420105f35e" type="targz">ftp://ftp.astron.com/pub/file/file-5.38.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>zlib-devel</Dependency>
             <!-- remove python dependencies while bootstrap -->
             <!--Dependency>python-devel</Dependency-->
             <Dependency>python-setuptools</Dependency>
         </BuildDependencies>
-        <!--<Patches>
-            <Patch level="1">git_fixes.patch</Patch>
-        </Patches>-->
     </Source>
 
     <Package>
@@ -42,6 +38,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2020-01-13</Date>
+            <Version>5.38</Version>
+            <Comment>Version bump</Comment>
+            <Name>Safa Arıman</Name>
+            <Email>safa@ariman.gen.tr</Email>
+        </Update>
 		<Update release="7">
             <Date>2019-12-11</Date>
             <Version>5.37</Version>
