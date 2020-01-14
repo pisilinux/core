@@ -28,17 +28,17 @@
             <Dependency>zlib-devel</Dependency>
             <Dependency>xz-devel</Dependency>
             <Dependency>openssl-devel</Dependency>
-			<Dependency>rsync</Dependency>
+            <Dependency>rsync</Dependency>
             <Dependency>elfutils-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
             <Patch level="1" compressionType="xz">patches/linux/patch-5.4.10.xz</Patch>
             <!-- Mageia Linux patches-->
-			<Patch level="1">patches/mageia/fs-aufs-5.4.patch</Patch>
-			<Patch level="1">patches/mageia/fs-aufs-5.4-modular.patch</Patch>
-			<Patch level="1">patches/mageia/fs-vboxsf.patch</Patch>
-			<Patch level="1">patches/mageia/CVE-2019-12379.patch</Patch>
+            <Patch level="1">patches/mageia/fs-aufs-5.4.patch</Patch>
+            <Patch level="1">patches/mageia/fs-aufs-5.4-modular.patch</Patch>
+            <Patch level="1">patches/mageia/fs-vboxsf.patch</Patch>
+            <Patch level="1">patches/mageia/CVE-2019-12379.patch</Patch>
         </Patches>
     </Source>
 
@@ -68,6 +68,9 @@
         <Name>kernel-module-headers</Name>
         <Summary>Kernel header files for external module building</Summary>
         <Description>kernel-module-headers includes the C header files and the necessary Kbuild files for being able to build external kernel modules.</Description>
+        <RuntimeDependencies>
+            <Dependency release="current">kernel</Dependency>
+        </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/src/linux-headers*</Path>
             <Path fileType="header">/tmp-headers*</Path>
@@ -94,8 +97,19 @@
     </Package>
 
     <History>
-        <Update release="29">
-            <Date>2020-01-12</Date>
+        <Update release="31">
+            <Date>2020-01-13</Date>
+            <Version>5.4.10</Version>
+            <Comment>Rebuild</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Safa Arıman</Name>
+            <Email>safa@ariman.gen.tr</Email>
+        </Update>
+        <Update release="30">
+            <Date>2020-01-10</Date>
             <Version>5.4.10</Version>
             <Comment>Version Bump.</Comment>
             <Type package="kernel">security</Type>

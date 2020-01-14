@@ -9,6 +9,8 @@ from pisi.actionsapi import get
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 
+NoStrip = ["/usr/lib"]
+
 def setup():
     # -fno-strict-aliasing workarounds some aliasing violations, see: https://bugzilla.redhat.com/show_bug.cgi?id=487844 -->
     shelltools.system('nspr/configure \
