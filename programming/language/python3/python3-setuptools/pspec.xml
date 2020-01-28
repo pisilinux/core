@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM 'http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd'>
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>python3-setuptools</Name>
@@ -12,16 +12,20 @@
         <IsA>library</IsA>
         <Summary>Python setuptools</Summary>
         <Description>python-setuptools is a collection of enhancements to the Python distutils that allow you to more easily build and distribute Python packages, especially ones that have dependencies on other packages.</Description>
-        <Archive sha1sum="1460a02840bdab87aa419451819933368d33d810" type="targz">https://github.com/pypa/setuptools/archive/v42.0.2.tar.gz</Archive>
+        <Archive sha1sum="036f03b0f82fa69e6bf472a4464b9cc62e6b2a39" type="targz">https://github.com/pypa/setuptools/archive/v45.1.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>python3-devel</Dependency>
-<!--             <Dependency>python3-six</Dependency> -->
-            <Dependency>python3-packaging</Dependency>
+            <!--<Dependency>python3-six</Dependency>-->
+            <!--<Dependency>python3-packaging</Dependency>-->
         </BuildDependencies>
     </Source>
 
     <Package>
         <Name>python3-setuptools</Name>
+        <Summary>Python setuptools</Summary>
+        <RuntimeDependencies>
+            <Dependency>python3</Dependency>
+        </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="library">/usr/lib/python3*</Path>
@@ -30,7 +34,14 @@
     </Package>
 
     <History>
-		<Update release="11">
+        <Update release="12">
+            <Date>2020-01-29</Date>
+            <Version>45.1.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Blue Devil</Name>
+            <Email>bluedevil@sctzine.com</Email>
+        </Update>
+        <Update release="11">
             <Date>2019-12-10</Date>
             <Version>42.0.2</Version>
             <Comment>Version Bump</Comment>
