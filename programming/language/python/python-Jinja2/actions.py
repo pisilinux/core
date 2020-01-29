@@ -5,14 +5,14 @@
 # See the file http://www.gnu.org/licenses/gpl.txt
 
 from pisi.actionsapi import pythonmodules
+from pisi.actionsapi import shelltools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import autotools
-from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 examples = "%s/%s/examples" % (get.docDIR(), get.srcNAME())
 
-WorkDir = "Jinja2-%s" % get.srcVERSION()
+WorkDir = "jinja-%s" % get.srcVERSION()
 
 def build():
     pythonmodules.compile()
