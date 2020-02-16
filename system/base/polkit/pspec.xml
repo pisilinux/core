@@ -16,6 +16,7 @@
         <Description>polkit is a toolkit for defining and handling authorizations. It is used for allowing unprivileged processes to speak to privileged processes.</Description>
         <Archive sha1sum="7fafbf4d2b9a308ad4ad3a174b01970b78c09eea" type="targz">http://www.freedesktop.org/software/polkit/releases/polkit-0.116.tar.gz</Archive>
         <BuildDependencies>
+	    <Dependency>python3</Dependency>	
             <Dependency>dbus-devel</Dependency>
             <Dependency>pam-devel</Dependency>
             <Dependency>glib2-devel</Dependency>
