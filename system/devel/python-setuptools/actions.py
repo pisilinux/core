@@ -15,4 +15,5 @@ def build():
 
 def install():
     pythonmodules.install()
+    pisitools.rename("/usr/bin/easy_install", "py2easy-install")
     pisitools.remove("/usr/lib/%s/site-packages/setuptools/*.exe" % get.curPYTHON())
