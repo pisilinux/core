@@ -1,0 +1,71 @@
+From 57324f74fb8855d4888b1e6b6dbaaec781bb6db9 Mon Sep 17 00:00:00 2001
+From: Kamil Dudka <kdudka@redhat.com>
+Date: Fri, 7 Feb 2020 17:05:06 +0100
+Subject: [PATCH] tests: ensure tests/cp/preserve-gid.sh works with single
+ binary
+
+* tests/cp/preserve-gid.sh: If configured with --enable-single-binary
+copy the coreutils single binary, instead of the cp one-line launcher.
+
+Discussed at https://bugzilla.redhat.com/1800597
+Fixes https://bugs.gnu.org/39485
+
+Upstream-commit: b96b1a47286632fd1cb738cf5a9893cf72a70d30
+Signed-off-by: Kamil Dudka <kdudka@redhat.com>
+---
+ tests/cp/preserve-gid.sh | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/tests/cp/preserve-gid.sh b/tests/cp/preserve-gid.sh
+index e48584c1e..bba09df09 100755
+--- a/tests/cp/preserve-gid.sh
++++ b/tests/cp/preserve-gid.sh
+@@ -110,7 +110,14 @@ cleanup_() { rm -rf "$tmp_path"; }
+ # is not readable by our nameless IDs.
+ test -d /tmp && TMPDIR=/tmp
+ tmp_path=$(mktemp -d) || fail_ "failed to create temporary directory"
+-cp "$abs_path_dir_/cp" "$tmp_path"
++if test -x "$abs_path_dir_/coreutils" &&
++   { test -l "$abs_path_dir_/cp" ||
++     test $(wc -l < "$abs_path_dir_/cp") = 1; } then
++  # if configured with --enable-single-binary we need to use the single binary
++  cp "$abs_path_dir_/coreutils" "$tmp_path/cp" || framework_failure_
++else
++  cp "$abs_path_dir_/cp" "$tmp_path"
++fi
+ chmod -R a+rx "$tmp_path"
+ 
+ t1() {
+-- 
+2.21.1
+
+From 94a47b51e64c21fef4ad8faca1599099c459b2ad Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?P=C3=A1draig=20Brady?= <P@draigBrady.com>
+Date: Mon, 10 Feb 2020 15:05:43 +0000
+Subject: [PATCH] tests: fix test for symlink
+
+* tests/cp/preserve-gid.sh: s/-l/-L/.
+Reported by Kamil Dudka
+
+Upstream-commit: 3150f4a82ef6542c4a8f0bf413815e78766f044f
+Signed-off-by: Kamil Dudka <kdudka@redhat.com>
+---
+ tests/cp/preserve-gid.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/cp/preserve-gid.sh b/tests/cp/preserve-gid.sh
+index bba09df09..547bf66bc 100755
+--- a/tests/cp/preserve-gid.sh
++++ b/tests/cp/preserve-gid.sh
+@@ -111,7 +111,7 @@ cleanup_() { rm -rf "$tmp_path"; }
+ test -d /tmp && TMPDIR=/tmp
+ tmp_path=$(mktemp -d) || fail_ "failed to create temporary directory"
+ if test -x "$abs_path_dir_/coreutils" &&
+-   { test -l "$abs_path_dir_/cp" ||
++   { test -L "$abs_path_dir_/cp" ||
+      test $(wc -l < "$abs_path_dir_/cp") = 1; } then
+   # if configured with --enable-single-binary we need to use the single binary
+   cp "$abs_path_dir_/coreutils" "$tmp_path/cp" || framework_failure_
+-- 
+2.21.1
+

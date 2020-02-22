@@ -1,0 +1,54 @@
+From fb4cb651666adb43e8b332de95616e250b4d16f7 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?P=C3=A1draig=20Brady?= <P@draigBrady.com>
+Date: Tue, 4 Feb 2020 00:37:23 +0000
+Subject: [PATCH] tests: avoid false failure due to varying /proc/kallsyms
+
+* tests/cp/proc-short-read.sh: Switch to using /proc/cpuinfo,
+rather than /proc/kallsyms which was seen to vary in some cases.
+Fixes https://bugs.gnu.org/39357
+
+Upstream-commit: ab108667ba6112efdd42f9618a1920dc9b8f6e51
+Signed-off-by: Kamil Dudka <kdudka@redhat.com>
+---
+ tests/cp/proc-short-read.sh | 22 +++++++++-------------
+ 1 file changed, 9 insertions(+), 13 deletions(-)
+
+diff --git a/tests/cp/proc-short-read.sh b/tests/cp/proc-short-read.sh
+index 6c58881de..dcc8b30d5 100755
+--- a/tests/cp/proc-short-read.sh
++++ b/tests/cp/proc-short-read.sh
+@@ -19,22 +19,18 @@
+ . "${srcdir=.}/tests/init.sh"; path_prepend_ ./src
+ print_ver_ cp
+ 
+-kall=/proc/kallsyms
++proc_large=/proc/cpuinfo  # usually > 4KiB
+ 
+-test -r $kall || skip_ "your system lacks $kall"
++test -r $proc_large || skip_ "your system lacks $proc_large"
+ 
+-# Before coreutils-7.3, cp would copy less than 4KiB of this 1MB+ file.
+-cp $kall 1    || fail=1
+-cat $kall > 2 || fail=1
+-compare 1 2   || fail=1
++# Before coreutils-7.3, cp would copy less than 4KiB of this file.
++cp $proc_large 1    || fail=1
++cat $proc_large > 2 || fail=1
+ 
+-# Also check md5sum, just for good measure.
+-md5sum $kall > 3 || fail=1
+-md5sum 2     > 4 || fail=1
++# adjust varying parts
++sed '/MHz/d; /bogomips/d;' 1 > proc.cp || framework_failure_
++sed '/MHz/d; /bogomips/d;' 2 > proc.cat || framework_failure_
+ 
+-# Remove each file name before comparing checksums.
+-sed 's/ .*//' 3 > sum.proc || fail=1
+-sed 's/ .*//' 4 > sum.2    || fail=1
+-compare sum.proc sum.2 || fail=1
++compare proc.cp proc.cat || fail=1
+ 
+ Exit $fail
+-- 
+2.21.1
+

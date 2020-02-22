@@ -30,6 +30,9 @@
             <Patch level="0">remove_am_silent_rules.patch</Patch>
 <!--             <Patch level="0">add-more-dircolors.patch</Patch> -->
 <!--             <Patch level="1">0001-cp-don-t-reserve-a-device-number.patch</Patch> -->
+            <Patch level="1">coreutils-8.26-test-lock.patch</Patch>
+            <Patch level="1">coreutils-8.31-improve-test-cp-proc-short-read.patch</Patch>
+            <Patch level="1">coreutils-8.31-root-tests.patch</Patch>
         </Patches>
     </Source>
 
@@ -55,6 +58,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2020-02-22</Date>
+            <Version>8.31</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2019-12-23</Date>
             <Version>8.31</Version>
