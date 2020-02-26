@@ -47,10 +47,10 @@
             <Path fileType="data">/lib/systemd/system</Path>
         </Files>
         <AdditionalFiles>
-             <AdditionalFile owner="root" permission="0644" target="/usr/lib/tmpfiles.d/dbus.conf">tmpfiles.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/tmpfiles.d/dbus.conf">tmpfiles.conf</AdditionalFile>
         </AdditionalFiles>
         <Provides>
-             <COMAR script="package.py">System.Package</COMAR>
+            <COMAR script="package.py">System.Package</COMAR>
         </Provides>
     </Package>
 
@@ -98,9 +98,9 @@
     </Package>
 
     <History>
-	<Update release="10">
+        <Update release="10">
             <Date>2019-12-25</Date>
-            <Version>2.12.16</Version>
+            <Version>1.12.16</Version>
             <Comment>Version bump</Comment>
             <Name>idris Kalp</Name>
             <Email>idriskalp@gmail.com</Email>
@@ -169,4 +169,4 @@
             <Email>hknuldz93@gmail.com</Email>
         </Update>
     </History>
-  </PISI>
+</PISI>
