@@ -4,9 +4,9 @@
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/licenses/gpl.txt
 
+from pisi.actionsapi import shelltools
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
-from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 
@@ -30,4 +30,4 @@ def install():
     if get.buildTYPE() == "emul32": return
 
     pisitools.doinfo("doc/*info*")
-    pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING*", "NEWS", "README")
+    pisitools.dodoc("COPYING*", "README")
