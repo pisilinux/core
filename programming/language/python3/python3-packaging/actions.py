@@ -5,13 +5,9 @@
 # See the file http://www.gnu.org/copyleft/gpl.txt
 
 from pisi.actionsapi import pythonmodules
-from pisi.actionsapi import pisitools
 
 def build():
     pythonmodules.compile(pyVer="3")
 
 def install():
     pythonmodules.install(pyVer="3")
-
-    #pisitools.removeDir("/usr/lib/*/site-packages/six-1.9.0*egg-info*")
-    #pisitools.remove("/usr/lib/*/site-packages/*egg-info*")
