@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>Toolkit for SSL v2/v3 and TLS v1</Summary>
         <Description>OpenSSL is a cryptography toolkit implementing the Secure Sockets Layer (SSL v2/v3) and Transport Layer Security (TLS v1) network protocols and related cryptography standards required by them.</Description>
-        <Archive sha1sum="056057782325134b76d1931c48f2c7e6595d7ef4" type="targz">https://www.openssl.org/source/openssl-1.1.1d.tar.gz</Archive>
+        <Archive sha1sum="e7105567d3e7e6353a0110f1adc81f69dbc8f732" type="targz">https://www.openssl.org/source/openssl-1.1.1e.tar.gz</Archive>
         <AdditionalFiles>
             <!--<AdditionalFile target="openssl-1.0.0-beta4-ca-dir.patch">openssl-1.0.0-beta4-ca-dir.patch</AdditionalFile>-->
 <!-- 			<AdditionalFile target="ca-dir.patch">ca-dir.patch</AdditionalFile> -->
@@ -38,9 +38,9 @@
 			
 			<Patch level="1">openssl-1.0.2a-x32-asm.patch</Patch>
 <!-- 			<Patch level="1">openssl-1.1.0l-fix-no-ec2m-in-ec_curve.c.patch</Patch> -->
-			<Patch level="1">openssl-1.1.1d-fix-potential-memleaks-w-BN_to_ASN1_INTEGER.patch</Patch>
-			<Patch level="1">openssl-1.1.1d-fix-zlib.patch</Patch>
-			<Patch level="1">openssl-1.1.1d-reenable-the-stitched-AES-CBC-HMAC-SHA-implementations.patch</Patch>
+<!-- 			<Patch level="1">openssl-1.1.1d-fix-potential-memleaks-w-BN_to_ASN1_INTEGER.patch</Patch> -->
+<!-- 			<Patch level="1">openssl-1.1.1d-fix-zlib.patch</Patch> -->
+<!-- 			<Patch level="1">openssl-1.1.1d-reenable-the-stitched-AES-CBC-HMAC-SHA-implementations.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -99,8 +99,8 @@
 
     <History>
 		<Update release="8">
-            <Date>2019-12-23</Date>
-            <Version>1.1.1d</Version>
+            <Date>2020-03-24</Date>
+            <Version>1.1.1e</Version>
             <Comment>Version bump.</Comment>
             <Name>Idris Kalp</Name>
             <Email>idriskalp@gmail.com</Email>
