@@ -14,113 +14,42 @@ Signed-off-by: Hans de Goede <hdegoede@redhat.com>
 Link: https://lore.kernel.org/r/20191028111744.143863-2-hdegoede@redhat.com
 Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 ---
- MAINTAINERS                              |   6 +
- drivers/staging/Kconfig                  |   2 +
- drivers/staging/Makefile                 |   1 +
- drivers/staging/vboxsf/Kconfig           |  10 +
- drivers/staging/vboxsf/Makefile          |   5 +
- drivers/staging/vboxsf/TODO              |   7 +
- drivers/staging/vboxsf/dir.c             | 418 ++++++++++++++
- drivers/staging/vboxsf/file.c            | 370 +++++++++++++
- drivers/staging/vboxsf/shfl_hostintf.h   | 901 +++++++++++++++++++++++++++++++
- drivers/staging/vboxsf/super.c           | 499 +++++++++++++++++
- drivers/staging/vboxsf/utils.c           | 550 +++++++++++++++++++
- drivers/staging/vboxsf/vboxsf_wrappers.c | 371 +++++++++++++
- drivers/staging/vboxsf/vfsmod.h          | 138 +++++
+ MAINTAINERS                              |    6 +
+ drivers/staging/Kconfig                  |    2 
+ drivers/staging/Makefile                 |    1 
+ drivers/staging/vboxsf/Kconfig           |   10 ++
+ drivers/staging/vboxsf/Makefile          |    5 +
+ drivers/staging/vboxsf/TODO              |    7 +
+ drivers/staging/vboxsf/dir.c             |  418 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ drivers/staging/vboxsf/file.c            |  370 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ drivers/staging/vboxsf/shfl_hostintf.h   |  901 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ drivers/staging/vboxsf/super.c           |  499 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ drivers/staging/vboxsf/utils.c           |  550 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ drivers/staging/vboxsf/vboxsf_wrappers.c |  371 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ drivers/staging/vboxsf/vfsmod.h          |  138 ++++++++++++++++++++++++++++
  13 files changed, 3278 insertions(+)
- create mode 100644 drivers/staging/vboxsf/Kconfig
- create mode 100644 drivers/staging/vboxsf/Makefile
- create mode 100644 drivers/staging/vboxsf/TODO
- create mode 100644 drivers/staging/vboxsf/dir.c
- create mode 100644 drivers/staging/vboxsf/file.c
- create mode 100644 drivers/staging/vboxsf/shfl_hostintf.h
- create mode 100644 drivers/staging/vboxsf/super.c
- create mode 100644 drivers/staging/vboxsf/utils.c
- create mode 100644 drivers/staging/vboxsf/vboxsf_wrappers.c
- create mode 100644 drivers/staging/vboxsf/vfsmod.h
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index c6c34d04ce95..71789e42ed17 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -17335,6 +17335,12 @@ F:	include/linux/vbox_utils.h
- F:	include/uapi/linux/vbox*.h
- F:	drivers/virt/vboxguest/
+diff -Nurp linux-5.5.1/drivers/staging/Kconfig linux-5.5.1-vboxsf/drivers/staging/Kconfig
+--- linux-5.5.1/drivers/staging/Kconfig	2020-01-27 02:23:03.000000000 +0200
++++ linux-5.5.1-vboxsf/drivers/staging/Kconfig	2020-02-03 17:09:14.292974559 +0200
+@@ -129,4 +129,6 @@ source "drivers/staging/hp/Kconfig"
  
-+VIRTUAL BOX SHARED FOLDER VFS DRIVER:
-+M:	Hans de Goede <hdegoede@redhat.com>
-+L:	linux-fsdevel@vger.kernel.org
-+S:	Maintained
-+F:	drivers/staging/vboxsf/*
-+
- VIRTUAL SERIO DEVICE DRIVER
- M:	Stephen Chandler Paul <thatslyude@gmail.com>
- S:	Maintained
-diff --git a/drivers/staging/Kconfig b/drivers/staging/Kconfig
-index 6f1fa4c849a1..927d29eb92c6 100644
---- a/drivers/staging/Kconfig
-+++ b/drivers/staging/Kconfig
-@@ -125,4 +125,6 @@ source "drivers/staging/exfat/Kconfig"
- 
- source "drivers/staging/qlge/Kconfig"
+ source "drivers/staging/wfx/Kconfig"
  
 +source "drivers/staging/vboxsf/Kconfig"
 +
  endif # STAGING
-diff --git a/drivers/staging/Makefile b/drivers/staging/Makefile
-index a90f9b308c8d..f01f04199073 100644
---- a/drivers/staging/Makefile
-+++ b/drivers/staging/Makefile
-@@ -53,3 +53,4 @@ obj-$(CONFIG_UWB)		+= uwb/
- obj-$(CONFIG_USB_WUSB)		+= wusbcore/
- obj-$(CONFIG_EXFAT_FS)		+= exfat/
+diff -Nurp linux-5.5.1/drivers/staging/Makefile linux-5.5.1-vboxsf/drivers/staging/Makefile
+--- linux-5.5.1/drivers/staging/Makefile	2020-01-27 02:23:03.000000000 +0200
++++ linux-5.5.1-vboxsf/drivers/staging/Makefile	2020-02-03 17:10:18.196890679 +0200
+@@ -55,3 +55,4 @@ obj-$(CONFIG_EXFAT_FS)		+= exfat/
  obj-$(CONFIG_QLGE)		+= qlge/
+ obj-$(CONFIG_NET_VENDOR_HP)	+= hp/
+ obj-$(CONFIG_WFX)		+= wfx/
 +obj-$(CONFIG_VBOXSF_FS)		+= vboxsf/
-diff --git a/drivers/staging/vboxsf/Kconfig b/drivers/staging/vboxsf/Kconfig
-new file mode 100644
-index 000000000000..b84586ae08b3
---- /dev/null
-+++ b/drivers/staging/vboxsf/Kconfig
-@@ -0,0 +1,10 @@
-+config VBOXSF_FS
-+	tristate "VirtualBox guest shared folder (vboxsf) support"
-+	depends on X86 && VBOXGUEST
-+	select NLS
-+	help
-+	  VirtualBox hosts can share folders with guests, this driver
-+	  implements the Linux-guest side of this allowing folders exported
-+	  by the host to be mounted under Linux.
-+
-+	  If you want to use shared folders in VirtualBox guests, answer Y or M.
-diff --git a/drivers/staging/vboxsf/Makefile b/drivers/staging/vboxsf/Makefile
-new file mode 100644
-index 000000000000..9e4328e79623
---- /dev/null
-+++ b/drivers/staging/vboxsf/Makefile
-@@ -0,0 +1,5 @@
-+# SPDX-License-Identifier: MIT
-+
-+obj-$(CONFIG_VBOXSF_FS) += vboxsf.o
-+
-+vboxsf-y := dir.o file.o utils.o vboxsf_wrappers.o super.o
-diff --git a/drivers/staging/vboxsf/TODO b/drivers/staging/vboxsf/TODO
-new file mode 100644
-index 000000000000..8b9193d0d4f0
---- /dev/null
-+++ b/drivers/staging/vboxsf/TODO
-@@ -0,0 +1,7 @@
-+TODO:
-+- Find a file-system developer to review this and give their Reviewed-By
-+- Address any items coming up during review
-+- Move to fs/vboxfs
-+
-+Please send any patches to Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-+and Hans de Goede <hdegoede@redhat.com>
-diff --git a/drivers/staging/vboxsf/dir.c b/drivers/staging/vboxsf/dir.c
-new file mode 100644
-index 000000000000..f260b5cc1646
---- /dev/null
-+++ b/drivers/staging/vboxsf/dir.c
+diff -Nurp linux-5.5.1/drivers/staging/vboxsf/dir.c linux-5.5.1-vboxsf/drivers/staging/vboxsf/dir.c
+--- linux-5.5.1/drivers/staging/vboxsf/dir.c	1970-01-01 02:00:00.000000000 +0200
++++ linux-5.5.1-vboxsf/drivers/staging/vboxsf/dir.c	2020-02-03 17:09:14.292974559 +0200
 @@ -0,0 +1,418 @@
 +// SPDX-License-Identifier: MIT
 +/*
@@ -540,11 +469,9 @@ index 000000000000..f260b5cc1646
 +	.getattr = vboxsf_getattr,
 +	.setattr = vboxsf_setattr,
 +};
-diff --git a/drivers/staging/vboxsf/file.c b/drivers/staging/vboxsf/file.c
-new file mode 100644
-index 000000000000..4b61ccf83fca
---- /dev/null
-+++ b/drivers/staging/vboxsf/file.c
+diff -Nurp linux-5.5.1/drivers/staging/vboxsf/file.c linux-5.5.1-vboxsf/drivers/staging/vboxsf/file.c
+--- linux-5.5.1/drivers/staging/vboxsf/file.c	1970-01-01 02:00:00.000000000 +0200
++++ linux-5.5.1-vboxsf/drivers/staging/vboxsf/file.c	2020-02-03 17:09:14.293974605 +0200
 @@ -0,0 +1,370 @@
 +// SPDX-License-Identifier: MIT
 +/*
@@ -916,11 +843,32 @@ index 000000000000..4b61ccf83fca
 +const struct inode_operations vboxsf_lnk_iops = {
 +	.get_link = vboxsf_get_link
 +};
-diff --git a/drivers/staging/vboxsf/shfl_hostintf.h b/drivers/staging/vboxsf/shfl_hostintf.h
-new file mode 100644
-index 000000000000..aca829062c12
---- /dev/null
-+++ b/drivers/staging/vboxsf/shfl_hostintf.h
+diff -Nurp linux-5.5.1/drivers/staging/vboxsf/Kconfig linux-5.5.1-vboxsf/drivers/staging/vboxsf/Kconfig
+--- linux-5.5.1/drivers/staging/vboxsf/Kconfig	1970-01-01 02:00:00.000000000 +0200
++++ linux-5.5.1-vboxsf/drivers/staging/vboxsf/Kconfig	2020-02-03 17:09:14.292974559 +0200
+@@ -0,0 +1,10 @@
++config VBOXSF_FS
++	tristate "VirtualBox guest shared folder (vboxsf) support"
++	depends on X86 && VBOXGUEST
++	select NLS
++	help
++	  VirtualBox hosts can share folders with guests, this driver
++	  implements the Linux-guest side of this allowing folders exported
++	  by the host to be mounted under Linux.
++
++	  If you want to use shared folders in VirtualBox guests, answer Y or M.
+diff -Nurp linux-5.5.1/drivers/staging/vboxsf/Makefile linux-5.5.1-vboxsf/drivers/staging/vboxsf/Makefile
+--- linux-5.5.1/drivers/staging/vboxsf/Makefile	1970-01-01 02:00:00.000000000 +0200
++++ linux-5.5.1-vboxsf/drivers/staging/vboxsf/Makefile	2020-02-03 17:09:14.292974559 +0200
+@@ -0,0 +1,5 @@
++# SPDX-License-Identifier: MIT
++
++obj-$(CONFIG_VBOXSF_FS) += vboxsf.o
++
++vboxsf-y := dir.o file.o utils.o vboxsf_wrappers.o super.o
+diff -Nurp linux-5.5.1/drivers/staging/vboxsf/shfl_hostintf.h linux-5.5.1-vboxsf/drivers/staging/vboxsf/shfl_hostintf.h
+--- linux-5.5.1/drivers/staging/vboxsf/shfl_hostintf.h	1970-01-01 02:00:00.000000000 +0200
++++ linux-5.5.1-vboxsf/drivers/staging/vboxsf/shfl_hostintf.h	2020-02-03 17:09:14.293974605 +0200
 @@ -0,0 +1,901 @@
 +/* SPDX-License-Identifier: MIT */
 +/*
@@ -1823,11 +1771,9 @@ index 000000000000..aca829062c12
 +#define SHFL_CPARMS_SYMLINK  (4)
 +
 +#endif
-diff --git a/drivers/staging/vboxsf/super.c b/drivers/staging/vboxsf/super.c
-new file mode 100644
-index 000000000000..3913ffafa83b
---- /dev/null
-+++ b/drivers/staging/vboxsf/super.c
+diff -Nurp linux-5.5.1/drivers/staging/vboxsf/super.c linux-5.5.1-vboxsf/drivers/staging/vboxsf/super.c
+--- linux-5.5.1/drivers/staging/vboxsf/super.c	1970-01-01 02:00:00.000000000 +0200
++++ linux-5.5.1-vboxsf/drivers/staging/vboxsf/super.c	2020-02-03 17:09:14.293974605 +0200
 @@ -0,0 +1,499 @@
 +// SPDX-License-Identifier: MIT
 +/*
@@ -2328,11 +2274,20 @@ index 000000000000..3913ffafa83b
 +MODULE_AUTHOR("Oracle Corporation");
 +MODULE_LICENSE("GPL v2");
 +MODULE_ALIAS_FS("vboxsf");
-diff --git a/drivers/staging/vboxsf/utils.c b/drivers/staging/vboxsf/utils.c
-new file mode 100644
-index 000000000000..1870b69c824e
---- /dev/null
-+++ b/drivers/staging/vboxsf/utils.c
+diff -Nurp linux-5.5.1/drivers/staging/vboxsf/TODO linux-5.5.1-vboxsf/drivers/staging/vboxsf/TODO
+--- linux-5.5.1/drivers/staging/vboxsf/TODO	1970-01-01 02:00:00.000000000 +0200
++++ linux-5.5.1-vboxsf/drivers/staging/vboxsf/TODO	2020-02-03 17:09:14.292974559 +0200
+@@ -0,0 +1,7 @@
++TODO:
++- Find a file-system developer to review this and give their Reviewed-By
++- Address any items coming up during review
++- Move to fs/vboxfs
++
++Please send any patches to Greg Kroah-Hartman <gregkh@linuxfoundation.org>
++and Hans de Goede <hdegoede@redhat.com>
+diff -Nurp linux-5.5.1/drivers/staging/vboxsf/utils.c linux-5.5.1-vboxsf/drivers/staging/vboxsf/utils.c
+--- linux-5.5.1/drivers/staging/vboxsf/utils.c	1970-01-01 02:00:00.000000000 +0200
++++ linux-5.5.1-vboxsf/drivers/staging/vboxsf/utils.c	2020-02-03 17:09:14.293974605 +0200
 @@ -0,0 +1,550 @@
 +// SPDX-License-Identifier: MIT
 +/*
@@ -2884,11 +2839,9 @@ index 000000000000..1870b69c824e
 +
 +	return err;
 +}
-diff --git a/drivers/staging/vboxsf/vboxsf_wrappers.c b/drivers/staging/vboxsf/vboxsf_wrappers.c
-new file mode 100644
-index 000000000000..bfc78a097dae
---- /dev/null
-+++ b/drivers/staging/vboxsf/vboxsf_wrappers.c
+diff -Nurp linux-5.5.1/drivers/staging/vboxsf/vboxsf_wrappers.c linux-5.5.1-vboxsf/drivers/staging/vboxsf/vboxsf_wrappers.c
+--- linux-5.5.1/drivers/staging/vboxsf/vboxsf_wrappers.c	1970-01-01 02:00:00.000000000 +0200
++++ linux-5.5.1-vboxsf/drivers/staging/vboxsf/vboxsf_wrappers.c	2020-02-03 17:09:14.293974605 +0200
 @@ -0,0 +1,371 @@
 +// SPDX-License-Identifier: MIT
 +/*
@@ -3261,11 +3214,9 @@ index 000000000000..bfc78a097dae
 +{
 +	return vboxsf_call(SHFL_FN_SET_SYMLINKS, NULL, 0, NULL);
 +}
-diff --git a/drivers/staging/vboxsf/vfsmod.h b/drivers/staging/vboxsf/vfsmod.h
-new file mode 100644
-index 000000000000..de650d65fbe4
---- /dev/null
-+++ b/drivers/staging/vboxsf/vfsmod.h
+diff -Nurp linux-5.5.1/drivers/staging/vboxsf/vfsmod.h linux-5.5.1-vboxsf/drivers/staging/vboxsf/vfsmod.h
+--- linux-5.5.1/drivers/staging/vboxsf/vfsmod.h	1970-01-01 02:00:00.000000000 +0200
++++ linux-5.5.1-vboxsf/drivers/staging/vboxsf/vfsmod.h	2020-02-03 17:09:14.293974605 +0200
 @@ -0,0 +1,138 @@
 +/* SPDX-License-Identifier: MIT */
 +/*
@@ -3405,6 +3356,19 @@ index 000000000000..de650d65fbe4
 +int vboxsf_set_symlinks(void);
 +
 +#endif
--- 
-cgit 1.2-0.3.lf.el7
-
+diff -Nurp linux-5.5.1/MAINTAINERS linux-5.5.1-vboxsf/MAINTAINERS
+--- linux-5.5.1/MAINTAINERS	2020-02-03 17:07:34.925446142 +0200
++++ linux-5.5.1-vboxsf/MAINTAINERS	2020-02-03 17:09:14.292974559 +0200
+@@ -17625,6 +17625,12 @@ F:	include/linux/vbox_utils.h
+ F:	include/uapi/linux/vbox*.h
+ F:	drivers/virt/vboxguest/
+ 
++VIRTUAL BOX SHARED FOLDER VFS DRIVER:
++M:	Hans de Goede <hdegoede@redhat.com>
++L:	linux-fsdevel@vger.kernel.org
++S:	Maintained
++F:	drivers/staging/vboxsf/*
++
+ VIRTUAL SERIO DEVICE DRIVER
+ M:	Stephen Chandler Paul <thatslyude@gmail.com>
+ S:	Maintained
