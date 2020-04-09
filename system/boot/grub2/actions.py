@@ -24,6 +24,7 @@ def setup():
     #shelltools.system("./autogen.sh")
     autotools.configure("--disable-werror \
                          --with-grubdir=grub2 \
+                         --with-bootdir='/boot' \
                          --program-transform-name='s,grub,grub2,'\
                          --program-prefix= \
                          --with-platform=pc \
@@ -36,6 +37,7 @@ def setup():
     #shelltools.system("./autogen.sh")
     autotools.configure("--disable-werror \
                          --with-grubdir=grub2 \
+                         --with-bootdir='/boot' \
                          --program-transform-name='s,grub,grub2,'\
                          --program-prefix= \
                          --with-platform=efi \
@@ -57,12 +59,12 @@ def build():
 
 def install():
     # Install unicode.pf2 using downloaded font source. 
-    shelltools.system("./grub-mkfont -o unicode.pf2 unifont.bdf")
+    #shelltools.system("./grub-mkfont -o unicode.pf2 unifont.bdf")
 
     # Create directory for grub.cfg file
-    pisitools.dodir("/boot/grub2")
+    #pisitools.dodir("/boot/grub2")
     
-    pisitools.insinto("/boot/grub2", "unicode.pf2")
+    #pisitools.insinto("/boot/grub2", "unicode.pf2")
 
     # Insall our theme
     pisitools.insinto("/usr/share/grub/themes/pisilinux","themes/Pisilinux-Bluez-0.1/*")
