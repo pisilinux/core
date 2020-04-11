@@ -40,3 +40,6 @@ def install():
         pisitools.dosym("lib", "/lib64")
 
     pisitools.dosym("pisilinux-release", "/etc/system-release")
+    
+    #File conflicts:
+    pisitools.removeDir("/usr/share/man/man4")
