@@ -1,0 +1,18 @@
+Index: VirtualBox-6.1.2/src/VBox/Runtime/r0drv/linux/memobj-r0drv-linux.c
+===================================================================
+--- 6.1.4_OSE/source/vboxdrv/r0drv/linux/memobj-r0drv-linux.c
++++ 6.1.4_OSE/source/vboxdrv/r0drv/linux/memobj-r0drv-linux.c
+@@ -1461,9 +1461,13 @@ DECLHIDDEN(int) rtR0MemObjNativeMapKerne
+              * MMIO / physical memory.
+              */
+             Assert(pMemLnxToMap->Core.enmType == RTR0MEMOBJTYPE_PHYS && !pMemLnxToMap->Core.u.Phys.fAllocated);
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 6, 0)
++	    pMemLnx->Core.pv = ioremap(pMemLnxToMap->Core.u.Phys.PhysBase + offSub, cbSub);
++#else
+             pMemLnx->Core.pv = pMemLnxToMap->Core.u.Phys.uCachePolicy == RTMEM_CACHE_POLICY_MMIO
+                              ? ioremap_nocache(pMemLnxToMap->Core.u.Phys.PhysBase + offSub, cbSub)
+                              : ioremap(pMemLnxToMap->Core.u.Phys.PhysBase + offSub, cbSub);
++#endif
+             if (pMemLnx->Core.pv)
+             {
+                 /** @todo fix protection. */
