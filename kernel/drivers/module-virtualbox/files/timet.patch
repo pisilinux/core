@@ -1,0 +1,155 @@
+diff -Naur a/vboxdrv/include/iprt/time.h b/vboxdrv/include/iprt/time.h
+--- a/vboxdrv/include/iprt/time.h	2020-02-27 08:29:15.598443630 +0300
++++ b/vboxdrv/include/iprt/time.h	2020-02-27 09:11:28.528393987 +0300
+@@ -366,6 +366,7 @@
+  * @param   pTime       The time spec to interpret.
+  * @param   pTimeval    Where to store the time as POSIX timeval.
+  */
++#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 5, 99)
+ DECLINLINE(struct timeval *) RTTimeSpecGetTimeval(PCRTTIMESPEC pTime, struct timeval *pTimeval)
+ {
+     int64_t i64 = RTTimeSpecGetMicro(pTime);
+@@ -392,12 +393,14 @@
+ {
+     return RTTimeSpecAddMicro(RTTimeSpecSetSeconds(pTime, pTimeval->tv_sec), pTimeval->tv_usec);
+ }
++#endif
+ #endif /* various ways of detecting struct timeval */
+ 
+ 
+ /* PORTME: Add struct timespec guard macro here. */
+ #if defined(RTTIME_INCL_TIMESPEC) || defined(_STRUCT_TIMESPEC) || defined(_SYS__TIMESPEC_H_) || defined(TIMEVAL_TO_TIMESPEC) || defined(_TIMESPEC) \
+  || (defined(RT_OS_NETBSD) && defined(_SYS_TIME_H_))
++#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 5, 99)
+ /**
+  * Gets the time as POSIX timespec.
+  *
+@@ -431,16 +434,17 @@
+ {
+     return RTTimeSpecAddNano(RTTimeSpecSetSeconds(pTime, pTimespec->tv_sec), pTimespec->tv_nsec);
+ }
++#endif
+ 
+ 
++#endif /* various ways of detecting struct timespec */
++
+ # ifdef _LINUX_TIME64_H
+ DECLINLINE(PRTTIMESPEC) RTTimeSpecSetTimespec64(PRTTIMESPEC pTime, const struct timespec64 *pTimeval)
+ {
+     return RTTimeSpecAddNano(RTTimeSpecSetSeconds(pTime, pTimeval->tv_sec), pTimeval->tv_nsec);
+ }
+-# endif
+-#endif /* various ways of detecting struct timespec */
+-
++#endif
+ 
+ 
+ /** The offset of the unix epoch and the base for NT time (in 100ns units).
+diff -Naur a/vboxdrv/r0drv/linux/time-r0drv-linux.c b/vboxdrv/r0drv/linux/time-r0drv-linux.c
+--- a/vboxdrv/r0drv/linux/time-r0drv-linux.c	2020-02-27 08:29:15.608443629 +0300
++++ b/vboxdrv/r0drv/linux/time-r0drv-linux.c	2020-02-27 09:00:17.518407138 +0300
+@@ -43,8 +43,8 @@
+      * Use ktime_get_ts, this is also what clock_gettime(CLOCK_MONOTONIC,) is using.
+      */
+     uint64_t u64;
+-    struct timespec Ts;
+-    ktime_get_ts(&Ts);
++    struct timespec64 Ts;
++    ktime_get_ts64(&Ts);
+     u64 = Ts.tv_sec * RT_NS_1SEC_64 + Ts.tv_nsec;
+     return u64;
+ 
+diff -Naur a/vboxnetadp/include/iprt/time.h b/vboxnetadp/include/iprt/time.h
+--- a/vboxnetadp/include/iprt/time.h	2020-02-27 08:29:15.598443630 +0300
++++ b/vboxnetadp/include/iprt/time.h	2020-02-27 09:11:28.528393987 +0300
+@@ -366,6 +366,7 @@
+  * @param   pTime       The time spec to interpret.
+  * @param   pTimeval    Where to store the time as POSIX timeval.
+  */
++#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 5, 99)
+ DECLINLINE(struct timeval *) RTTimeSpecGetTimeval(PCRTTIMESPEC pTime, struct timeval *pTimeval)
+ {
+     int64_t i64 = RTTimeSpecGetMicro(pTime);
+@@ -392,12 +393,14 @@
+ {
+     return RTTimeSpecAddMicro(RTTimeSpecSetSeconds(pTime, pTimeval->tv_sec), pTimeval->tv_usec);
+ }
++#endif
+ #endif /* various ways of detecting struct timeval */
+ 
+ 
+ /* PORTME: Add struct timespec guard macro here. */
+ #if defined(RTTIME_INCL_TIMESPEC) || defined(_STRUCT_TIMESPEC) || defined(_SYS__TIMESPEC_H_) || defined(TIMEVAL_TO_TIMESPEC) || defined(_TIMESPEC) \
+  || (defined(RT_OS_NETBSD) && defined(_SYS_TIME_H_))
++#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 5, 99)
+ /**
+  * Gets the time as POSIX timespec.
+  *
+@@ -431,16 +434,17 @@
+ {
+     return RTTimeSpecAddNano(RTTimeSpecSetSeconds(pTime, pTimespec->tv_sec), pTimespec->tv_nsec);
+ }
++#endif
+ 
+ 
++#endif /* various ways of detecting struct timespec */
++
+ # ifdef _LINUX_TIME64_H
+ DECLINLINE(PRTTIMESPEC) RTTimeSpecSetTimespec64(PRTTIMESPEC pTime, const struct timespec64 *pTimeval)
+ {
+     return RTTimeSpecAddNano(RTTimeSpecSetSeconds(pTime, pTimeval->tv_sec), pTimeval->tv_nsec);
+ }
+-# endif
+-#endif /* various ways of detecting struct timespec */
+-
++#endif
+ 
+ 
+ /** The offset of the unix epoch and the base for NT time (in 100ns units).
+diff -Naur a/vboxnetflt/include/iprt/time.h b/vboxnetflt/include/iprt/time.h
+--- a/vboxnetflt/include/iprt/time.h	2020-02-27 08:29:15.588443630 +0300
++++ b/vboxnetflt/include/iprt/time.h	2020-02-27 09:11:28.528393987 +0300
+@@ -366,6 +366,7 @@
+  * @param   pTime       The time spec to interpret.
+  * @param   pTimeval    Where to store the time as POSIX timeval.
+  */
++#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 5, 99)
+ DECLINLINE(struct timeval *) RTTimeSpecGetTimeval(PCRTTIMESPEC pTime, struct timeval *pTimeval)
+ {
+     int64_t i64 = RTTimeSpecGetMicro(pTime);
+@@ -392,12 +393,14 @@
+ {
+     return RTTimeSpecAddMicro(RTTimeSpecSetSeconds(pTime, pTimeval->tv_sec), pTimeval->tv_usec);
+ }
++#endif
+ #endif /* various ways of detecting struct timeval */
+ 
+ 
+ /* PORTME: Add struct timespec guard macro here. */
+ #if defined(RTTIME_INCL_TIMESPEC) || defined(_STRUCT_TIMESPEC) || defined(_SYS__TIMESPEC_H_) || defined(TIMEVAL_TO_TIMESPEC) || defined(_TIMESPEC) \
+  || (defined(RT_OS_NETBSD) && defined(_SYS_TIME_H_))
++#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 5, 99)
+ /**
+  * Gets the time as POSIX timespec.
+  *
+@@ -431,16 +434,17 @@
+ {
+     return RTTimeSpecAddNano(RTTimeSpecSetSeconds(pTime, pTimespec->tv_sec), pTimespec->tv_nsec);
+ }
++#endif
+ 
+ 
++#endif /* various ways of detecting struct timespec */
++
+ # ifdef _LINUX_TIME64_H
+ DECLINLINE(PRTTIMESPEC) RTTimeSpecSetTimespec64(PRTTIMESPEC pTime, const struct timespec64 *pTimeval)
+ {
+     return RTTimeSpecAddNano(RTTimeSpecSetSeconds(pTime, pTimeval->tv_sec), pTimeval->tv_nsec);
+ }
+-# endif
+-#endif /* various ways of detecting struct timespec */
+-
++#endif
+ 
+ 
+ /** The offset of the unix epoch and the base for NT time (in 100ns units).
