@@ -31,7 +31,7 @@ def setup():
     shelltools.export("CFLAGS", "-I%s/temp/include -O3" %get.workDIR())
     shelltools.export("LDFLAGS", "-L%s/temp/lib -lbz2 -lpthread -ldl" %get.workDIR())
     # fix unused direct dependency analysis
-    shelltools.export("LDSHARED", "x86_64-pc-linux-gnu-gcc -Wl,-O1,--as-needed -shared -lpthread")
+    #shelltools.export("LDSHARED", "x86_64-pc-linux-gnu-gcc -Wl,-O1,--as-needed -shared -lpthread")
     autotools.rawConfigure("\
                             --prefix=/usr \
                             --enable-shared \
