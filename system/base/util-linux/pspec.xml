@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>Various useful Linux utilities</Summary>
         <Description>The util-linux package contains a large variety of low-level system utilities that are necessary for a Linux system to function.</Description>
-        <Archive sha1sum="36757c996c9c7ff4150b8ee26fc51255279de14f" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.35/util-linux-2.35-rc1.tar.xz</Archive>
+        <Archive sha1sum="a3fba2e7fe0ce117525a38498ef4eda9687bf3b3" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.35/util-linux-2.35.1.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>zlib-devel</Dependency>
             <Dependency>eudev-devel</Dependency>
@@ -23,11 +23,13 @@
             <Dependency>ncurses-devel</Dependency>
             <Dependency>libcap-ng-devel</Dependency>
             <Dependency>pam-devel</Dependency>
-			<Dependency>libpcre2-devel</Dependency>
+            <Dependency>libpcre2-devel</Dependency>
             <!-- <Dependency releaseFrom="2">utempter-devel</Dependency>-->
         </BuildDependencies>
         <Patches>
              <Patch level="1">upstream/util-linux-ng-2.21-login-lastlog.patch</Patch>
+             <Patch level="1">0001-libfdisk-script-accept-sector-size-ignore-unknown-he.patch</Patch>
+             <Patch level="1">0003-lsblk-fix-P-regression-from-v2.34.patch</Patch>
 <!-- 			 <Patch level="1">0001-lsblk-force-to-print-PKNAME-for-partition.patch</Patch> -->
              <!--Patch level="1">upstream/0001-sfdisk-support-empty-label-use-case.patch  </Patch-->
          </Patches>
@@ -45,7 +47,7 @@
             <Dependency>eudev</Dependency>
             <!--<Dependency>utempter</Dependency>-->
             <Dependency>libcap-ng</Dependency>
-			<Dependency>libpcre2</Dependency>
+            <Dependency>libpcre2</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="config">/etc</Path>
@@ -148,6 +150,13 @@
     </Package>
 
     <History>
+        <Update release="13">
+            <Date>2020-04-20</Date>
+            <Version>2.35.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
 		<Update release="12">
             <Date>2019-12-25</Date>
             <Version>2.35_rc1</Version>
