@@ -24,7 +24,7 @@ def setup():
     shelltools.cd("..")
     shelltools.system("echo -e '\033[0;36mBuilding OpenSSL\033[0m' ")
     
-    shelltools.cd("openssl-1.1.1e")
+    shelltools.cd("openssl-1.1.1g")
     shelltools.system("./Configure --prefix=%s/temp --openssldir=%s/openssl/etc/ssl --libdir=lib no-shared enable-ec_nistp_64_gcc_128 linux-x86_64 -Wa,--noexecstack" %(get.workDIR(), get.workDIR()))
     autotools.make()
     autotools.make("install")
