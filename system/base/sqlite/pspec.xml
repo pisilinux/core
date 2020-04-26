@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>sqlite</Name>
@@ -8,12 +8,14 @@
             <Name>PisiLinux Community</Name>
             <Email>admins@pisilinux.org</Email>
         </Packager>
-        <License>as-is</License>
+        <PartOf>system.base</PartOf>
+        <License>custom</License>
         <IsA>library</IsA>
+        <IsA>app:console</IsA>
         <Summary>An SQL Database Engine in a C Library</Summary>
         <Description>SQLite is a small C library that implements a self-contained, embeddable, zero-configuration SQL database engine. Supports databases up to 2 terabytes in size.</Description>
-        <Archive sha1sum="8383f29d53fa1d4383e4c8eb3e087f2ed940a9e0" type="targz">https://sqlite.org/2019/sqlite-autoconf-3300100.tar.gz</Archive>
-        <Archive sha1sum="35b89685c2164a3d18ceeb23ab57f0e207894dad" type="zip">https://sqlite.org/2019/sqlite-doc-3300100.zip</Archive>
+        <Archive sha1sum="0c30f5b22152a8166aa3bebb0f4bc1f3e9cc508b" type="targz">https://sqlite.org/2020/sqlite-autoconf-3310100.tar.gz</Archive>
+        <Archive sha1sum="3b6241f788e568b6ae5a20b3630e67729860b2eb" type="zip">https://sqlite.org/2020/sqlite-doc-3310100.zip</Archive>
         <BuildDependencies>
             <Dependency>readline-devel</Dependency>
         </BuildDependencies>
@@ -21,6 +23,7 @@
 
     <Package>
         <Name>sqlite</Name>
+        <Summary>An SQL Database Engine in a C Library</Summary>
         <RuntimeDependencies>
             <Dependency>readline</Dependency>
         </RuntimeDependencies>
@@ -48,7 +51,6 @@
 
     <Package>
         <Name>sqlite-32bit</Name>
-        <Summary>sqlite-32bit için paylaşımlı kitaplıklar</Summary>
         <PartOf>emul32</PartOf>
         <Summary>32-bit shared libraries for sqlite</Summary>
         <BuildType>emul32</BuildType>
@@ -60,6 +62,16 @@
         </Files>
     </Package>
 
+    <Package>
+        <Name>sqlite-doc</Name>
+        <Summary>sqlite-doc, sqlite için doküman belgeleri</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">sqlite</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/share/doc/sqlite/</Path>
+        </Files>
+    </Package>
 
     <!--<Package>
         <Name>sqlite-tcl</Name>
@@ -92,18 +104,14 @@
         </Files>
     </Package>-->
 
-    <Package>
-        <Name>sqlite-doc</Name>
-        <Summary>sqlite-doc, sqlite için doküman belgeleri</Summary>
-        <RuntimeDependencies>
-            <Dependency>sqlite</Dependency>
-        </RuntimeDependencies>
-        <Files>
-            <Path fileType="library">/usr/share/doc/sqlite/</Path>
-        </Files>
-    </Package>
-
     <History>
+        <Update release="14">
+            <Date>2020-04-24</Date>
+            <Version>3.31.1</Version>
+            <Comment>Minor version bump.</Comment>
+            <Name>Blue Devil</Name>
+            <Email>bluedevil@sctzine.com</Email>
+        </Update>
         <Update release="13">
             <Date>2019-12-12</Date>
             <Version>3.30.1</Version>
