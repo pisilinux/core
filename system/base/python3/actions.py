@@ -15,7 +15,7 @@ def setup():
     autotools.make('CC=%s AR=%s RANLIB=%s CFLAGS="%s -D_FILE_OFFSET_BITS=64 -fPIC" libbz2.a' % (get.CC(), get.AR(), get.RANLIB(), get.CFLAGS()))
     shelltools.system("cp libbz2.a %s/temp/lib/libbz2.a" % get.workDIR())
     shelltools.cd("..")
-	
+    
     pisitools.flags.add("-fwrapv")
 
     pisitools.dosed("Lib/cgi.py","^#.* /usr/local/bin/python","#!/usr/bin/python")
@@ -31,8 +31,7 @@ def setup():
     shelltools.export("CFLAGS", "-I%s/temp/include -O3" %get.workDIR())
     shelltools.export("LDFLAGS", "-L%s/temp/lib -lbz2 -lpthread -ldl" %get.workDIR())
     # fix unused direct dependency analysis
-    #shelltools.export("LDSHARED", "x86_64-pc-linux-gnu-gcc -Wl,-O1,--as-needed -shared -lpthread")
-    autotools.rawConfigure("\
+    autotools.rawConfigure("LDSHARED='x86_64-pc-linux-gnu-gcc -Wl,-O1,--as-needed -shared -lpthread'\
                             --prefix=/usr \
                             --enable-shared \
                             --with-threads \

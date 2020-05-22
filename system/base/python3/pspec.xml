@@ -12,16 +12,13 @@
         <License>custom</License>
         <Summary>Next generation of the python high-level scripting language</Summary>
         <Description>Python is an accessible, high-level, dynamically typed, interpreted programming language, designed with an emphasis on code readability. It includes an extensive standard library, and has a vast ecosystem of third-party libraries.</Description>
-        <Archive sha1sum="5ae54baf26628a7ed74206650a31192e6d5c6f93" type="tarxz">https://www.python.org/ftp/python/3.8.2/Python-3.8.2.tar.xz</Archive>
-        <Archive sha1sum="bf7badf7e248e0ecf465d33c2f5aeec774209227" type="targz" target="Python-3.8.2">https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz</Archive>
+        <Archive sha1sum="3bafa40df1cd069c112761c388a9f2e94b5d33dd" type="tarxz">https://www.python.org/ftp/python/3.8.3/Python-3.8.3.tar.xz</Archive>
+        <Archive sha1sum="bf7badf7e248e0ecf465d33c2f5aeec774209227" type="targz" target="Python-3.8.3">https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz</Archive>
         <BuildDependencies>
-            <!--<Dependency>valgrind</Dependency>-->
             <Dependency>bzip2</Dependency>
             <Dependency>xz-devel</Dependency>
-            <!--<Dependency>tcl-devel</Dependency>-->
             <Dependency>gdbm-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
-            <!--<Dependency>tcltk-devel</Dependency>-->
             <Dependency>expat-devel</Dependency>
             <Dependency>libffi-devel</Dependency>
             <Dependency>sqlite-devel</Dependency>
@@ -29,10 +26,15 @@
             <Dependency>openssl-devel</Dependency>
             <Dependency>readline-devel</Dependency>
             <Dependency>mpdecimal-devel</Dependency>
+            <!--<Dependency>valgrind</Dependency>-->
+            <!--<Dependency>tcl-devel</Dependency>-->
+            <!--<Dependency>tcltk-devel</Dependency>-->
         </BuildDependencies>
         <Patches>
-            <!--<Patch level="1">dont-make-libpython-readonly.patch</Patch> -->
+            <!--
+            <Patch level="1">dont-make-libpython-readonly.patch</Patch> 
             <Patch level="1">0001-compileall-Fix-ddir-when-recursing.patch</Patch>
+            -->
         </Patches>
     </Source>
 
@@ -107,7 +109,7 @@
             <Path fileType="library" permanent="0">/usr/lib/python3.8/lib-dynload/z*</Path>
             <Path fileType="library" permanent="0">/usr/lib/python3.8/__pycache__</Path>
             <Path fileType="library" permanent="0">/usr/lib/*.so</Path>
-            <Path fileType="library" permanent="0">/usr/lib/libpython3.8.so.1.0</Path>
+            <Path fileType="library" permanent="0">/usr/lib/libpython3.8.so*</Path>
             <Path fileType="man" permanent="0">/usr/share/man/man1/*</Path>
             <Path fileType="doc" permanent="0">/usr/share/doc</Path>
         </Files>
@@ -126,6 +128,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2020-05-22</Date>
+            <Version>3.8.3</Version>
+            <Comment>Patch version bump</Comment>
+            <Name>Blue Devil</Name>
+            <Email>bluedevil@sctzine.com</Email>
+        </Update>
         <Update release="9">
             <Date>2020-03-28</Date>
             <Version>3.8.2</Version>
