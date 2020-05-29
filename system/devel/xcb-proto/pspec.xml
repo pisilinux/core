@@ -12,7 +12,7 @@
         <IsA>data</IsA>
         <Summary>XCB protocol descriptions</Summary>
         <Description>XCB is a project to enable efficient language bindings to the X11 protocol. This package contains the protocol descriptions themselves. Language bindings use these protocol descriptions to generate code for marshalling the protocol.</Description>
-        <Archive sha1sum="f7fa35ab59af18cecadbe83fe705281dcfd82ffd" type="tarbz2">https://xcb.freedesktop.org/dist/xcb-proto-1.13.tar.bz2</Archive>
+        <Archive sha1sum="170307b3748cf6c9953db2017615821428fca8be" type="tarxz">https://xcb.freedesktop.org/dist/xcb-proto-1.14.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>libxml2</Dependency>
         </BuildDependencies>
@@ -29,6 +29,13 @@
     </Package>
 
     <History>
+        <Update release="7">
+            <Date>2020-05-29</Date>
+            <Version>1.14</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
 		<Update release="6">
             <Date>2019-12-26</Date>
             <Version>1.13</Version>
