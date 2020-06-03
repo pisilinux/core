@@ -16,19 +16,19 @@ WorkDir = "Python-%s" % get.srcVERSION()
 PythonVersion = "2.7"
 
 def setup():
-    shelltools.system("echo -e '\033[0;36mBuilding Bzip2\033[0m' ")
-    shelltools.makedirs("%s/temp/lib" %get.workDIR())
-    shelltools.cd("bzip2-1.0.8")
-    autotools.make('CC=%s AR=%s RANLIB=%s CFLAGS="%s -D_FILE_OFFSET_BITS=64 -fPIC" libbz2.a' % (get.CC(), get.AR(), get.RANLIB(), get.CFLAGS()))
-    shelltools.system("cp libbz2.a %s/temp/lib/libbz2.a" % get.workDIR())
-    shelltools.cd("..")
-    shelltools.system("echo -e '\033[0;36mBuilding OpenSSL\033[0m' ")
+    #shelltools.system("echo -e '\033[0;36mBuilding Bzip2\033[0m' ")
+    #shelltools.makedirs("%s/temp/lib" %get.workDIR())
+    #shelltools.cd("bzip2-1.0.8")
+    #autotools.make('CC=%s AR=%s RANLIB=%s CFLAGS="%s -D_FILE_OFFSET_BITS=64 -fPIC" libbz2.a' % (get.CC(), get.AR(), get.RANLIB(), get.CFLAGS()))
+    #shelltools.system("cp libbz2.a %s/temp/lib/libbz2.a" % get.workDIR())
+    #shelltools.cd("..")
+    #shelltools.system("echo -e '\033[0;36mBuilding OpenSSL\033[0m' ")
     
-    shelltools.cd("openssl-1.1.1g")
-    shelltools.system("./Configure --prefix=%s/temp --openssldir=%s/openssl/etc/ssl --libdir=lib no-shared enable-ec_nistp_64_gcc_128 linux-x86_64 -Wa,--noexecstack" %(get.workDIR(), get.workDIR()))
-    autotools.make()
-    autotools.make("install")
-    shelltools.cd("..")
+    #shelltools.cd("openssl-1.1.1g")
+    #shelltools.system("./Configure --prefix=%s/temp --openssldir=%s/openssl/etc/ssl --libdir=lib no-shared enable-ec_nistp_64_gcc_128 linux-x86_64 -Wa,--noexecstack" %(get.workDIR(), get.workDIR()))
+    #autotools.make()
+    #autotools.make("install")
+    #shelltools.cd("..")
     
     shelltools.system("echo -e '\033[0;36mBuilding Python\033[0m' ")
 	
@@ -45,8 +45,9 @@ def setup():
                 "_ctypes/libffi_osx","_ctypes/libffi","_ctypes/darwin"]:
         shelltools.unlinkDir("Modules/%s" % dir)
         
-    shelltools.export("CFLAGS", "-I%s/temp/include -O3" %get.workDIR())
-    shelltools.export("LDFLAGS", "-L%s/temp/lib -lssl -lcrypto -lbz2 -lpthread -ldl" %get.workDIR())
+    #shelltools.export("CFLAGS", "-I%s/temp/include -O3" %get.workDIR())
+    #shelltools.export("LDFLAGS", "-L%s/temp/lib -lssl -lcrypto -lbz2 -lpthread -ldl" %get.workDIR())
+    #shelltools.export("PKG_CONFIG_PATH", "-$PKG_CONFIG_PATH:%s/temp/lib/pkgconfig" %get.workDIR())
 
     autotools.autoreconf("-vif")
 
