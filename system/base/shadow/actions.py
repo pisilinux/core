@@ -17,6 +17,7 @@ def setup():
                          --with-libpam \
                          --with-sha-crypt \
                          --enable-nls \
+                         --disable-account-tools-setuid \
                          --with-group-name-max-length=32 \
                          --disable-shared")
 def build():
