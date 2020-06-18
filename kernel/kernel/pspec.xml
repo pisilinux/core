@@ -33,7 +33,7 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-5.6.15.xz</Patch>
+            <Patch level="1" compressionType="xz">patches/linux/patch-5.6.19.xz</Patch>
             <!-- Mageia Linux patches-->
             <Patch level="1">patches/mageia/fs-aufs-5.6.patch</Patch>
             <Patch level="1">patches/mageia/fs-aufs-5.6-modular.patch</Patch>
@@ -113,6 +113,17 @@
     </Package>
 
     <History>
+        <Update release="40">
+            <Date>2020-06-17</Date>
+            <Version>5.6.19</Version>
+            <Comment>Version bump.</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="39">
             <Date>2020-05-29</Date>
             <Version>5.6.15</Version>
