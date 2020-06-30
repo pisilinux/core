@@ -39,6 +39,7 @@
         <Summary>Development files for mpfr</Summary>
         <RuntimeDependencies>
             <Dependency release="current">mpfr</Dependency>
+	    <Dependency>gmp-devel</Dependency>	
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
@@ -48,7 +49,7 @@
     </Package>
 
     <History>
-		<Update release="6">
+	<Update release="6">
             <Date>2019-10-01</Date>
             <Version>4.0.2_p1</Version>
             <Comment>Version bump</Comment>
