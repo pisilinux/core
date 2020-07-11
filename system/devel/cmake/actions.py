@@ -5,9 +5,12 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import shelltools
+from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
+    #This command disables applications using cmake from attempting to install files in /usr/lib64/
+    pisitools.dosed('Modules/GNUInstallDirs.cmake', '"lib64"', '"lib"')
     autotools.rawConfigure("--parallel=%s \
                             --system-libs \
                             --no-qt-gui \
