@@ -44,7 +44,7 @@ def install():
         #    pisitools.dosed("%s/usr/lib32/pkgconfig/%s" % (get.installDIR(), f), "emul32", "usr")
         #shelltools.unlinkDir("%s%s" % (get.installDIR(), suffix))
         shelltools.unlink("%s/usr/lib%s/libudev.so" % (get.installDIR(), suffix))
-        pisitools.dosym("/lib%s/libudev.so.1.6.0" % suffix, "/usr/lib%s/libudev.so" % suffix)
+        pisitools.dosym("/lib%s/libudev.so.1.6.3" % suffix, "/usr/lib%s/libudev.so" % suffix)
         shelltools.unlinkDir("%s/usr/lib%s/pkgconfig" % (get.installDIR(), suffix))
         shelltools.unlinkDir("%s/lib%s/udev" % (get.installDIR(), suffix))
         return
