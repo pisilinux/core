@@ -14,7 +14,7 @@ def setup():
     
     autotools.configure("--with-pam-module-dir=/lib/security/ \
                          --with-os-type=pardus \
-                         --with-mozjs=mozjs-17.0 \
+                         --with-mozjs=mozjs-60 \
                          --with-dbus \
                          --enable-examples \
                          --enable-introspection \
