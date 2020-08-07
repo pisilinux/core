@@ -14,7 +14,7 @@
         <Description>This package provides the kernel modules needed for mouse integration and shared folder support between VirtualBox host and guest systems.</Description>
         <Archive sha1sum="2851036f4876f0669788ea1cb71566e1039cda7e" type="tarxz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-6.1.12.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency version="5.7.13">kernel-module-headers</Dependency>
+            <Dependency version="5.7.14">kernel-module-headers</Dependency>
         </BuildDependencies>
         <Patches>
 <!--             <Patch>vboxsf-make.patch</Patch> -->
@@ -24,7 +24,7 @@
     <Package>
         <Name>module-virtualbox-guest</Name>
         <RuntimeDependencies>
-            <Dependency version="5.7.13">kernel</Dependency>
+            <Dependency version="5.7.14">kernel</Dependency>
             <Dependency>baselayout</Dependency>
             <Dependency version="current">module-virtualbox-guest-userspace</Dependency>
         </RuntimeDependencies>
