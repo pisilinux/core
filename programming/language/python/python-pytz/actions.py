@@ -13,4 +13,4 @@ def setup():
 def install():
     pythonmodules.install()
 
-    pisitools.dodoc("LICENSE.txt", "README.txt")
+    pisitools.dodoc("LICENSE*", "README*")

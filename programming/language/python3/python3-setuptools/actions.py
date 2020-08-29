@@ -5,14 +5,13 @@
 
 from pisi.actionsapi import get
 from pisi.actionsapi import pisitools
-from pisi.actionsapi import shelltools
 from pisi.actionsapi import pythonmodules
 
 WorkDir="setuptools-%s" % get.srcVERSION()
 
     
 def install():
-    pisitools.dosed("setuptools/command/easy_install.py", "env python", "env python3")
+    #pisitools.dosed("setuptools/command/easy_install.py", "env python", "env python3")
     
     pythonmodules.run("bootstrap.py", pyVer="3")
     pythonmodules.install(pyVer = "3")
