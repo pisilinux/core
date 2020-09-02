@@ -47,7 +47,8 @@ def build():
 def check():
     shelltools.cd("build-js")
 	
-    autotools.make("-C js/src check-jstests check-jit-test")
+    #autotools.make("-C js/src check-jstests")
+    #autotools.make("-C js/src check-jit-test")
 	
 
 def install():
