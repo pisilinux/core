@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>pisilinux-python</Name>
-        <Homepage>http://www.pisilinux.org</Homepage>
+        <Homepage>https://pisilinux.org</Homepage>
         <Packager>
             <Name>PisiLinux Community</Name>
             <Email>admins@pisilinux.org</Email>
@@ -17,9 +17,9 @@
             <Dependency>python-devel</Dependency>
             <Dependency>libX11-devel</Dependency>
         </BuildDependencies>
-       <Patches>
+        <Patches>
             <!--Patch level="1">remove_libX11_dep.patch</Patch-->
-      </Patches>
+        </Patches>
     </Source>
 
     <Package>
@@ -48,7 +48,7 @@
     </Package>
 
     <History>
-		<Update release="5">
+        <Update release="5">
             <Date>2019-12-27</Date>
             <Version>0.4.8</Version>
             <Comment>Rebuild</Comment>
