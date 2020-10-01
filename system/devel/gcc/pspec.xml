@@ -89,6 +89,9 @@
         <Name>libgfortran</Name>
         <IsA>library</IsA>
         <Summary>Contains GCC shared support library for gfortran</Summary>
+        <RuntimeDependencies>
+            <Dependency>libquadmath</Dependency>
+        </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib/libgfortran.so*</Path>
             <Path fileType="library">/usr/lib32/libgfortran.so*</Path>
@@ -141,7 +144,7 @@
 
     <History>
         <Update release="7">
-            <Date>2020-03-18</Date>
+            <Date>2020-10-01</Date>
             <Version>9.2.1</Version>
             <Comment>Rebuild.</Comment>
             <Name>Mustafa Cinasal</Name>
