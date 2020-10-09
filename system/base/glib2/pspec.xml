@@ -25,6 +25,8 @@
         </BuildDependencies>
         <Patches>
             <Patch level="1">noisy-glib-compile-schemas.diff</Patch>
+            <Patch level="1">CVE-2020-6750.patch</Patch>
+            <Patch level="1">glib-2.62.4-skip_warnings-1.patch</Patch>
         </Patches>
         <AdditionalFiles>
             <AdditionalFile target="multilib.diff" permission="0644">multilib.diff</AdditionalFile>
@@ -138,6 +140,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2020-10-09</Date>
+            <Version>2.62.4</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="10">
             <Date>2020-04-20</Date>
             <Version>2.62.4</Version>
