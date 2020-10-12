@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>glibc</Name>
-        <Homepage>http://www.gnu.org/software/libc</Homepage>
+        <Homepage>https://www.gnu.org/software/libc/</Homepage>
         <Packager>
             <Name>Serdar Soytetir</Name>
             <Email>kaptan@pisilinux.org</Email>
@@ -19,12 +19,12 @@
             <Dependency>gettext</Dependency>
             <Dependency>texinfo</Dependency>
             <Dependency>binutils</Dependency>
-			<Dependency>python3</Dependency>
+            <Dependency>python3</Dependency>
         </BuildDependencies>
         <Patches>
 <!--             <Patch level="1">glibc-2.30-fhs-1.patch</Patch> -->
-			<Patch level="1">bz20338.patch</Patch>
-			<Patch level="1">file-truncated-while-reading-soname-after-patchelf.patch</Patch>
+            <Patch level="1">bz20338.patch</Patch>
+            <Patch level="1">file-truncated-while-reading-soname-after-patchelf.patch</Patch>
         </Patches>
     </Source>
     <Package>
