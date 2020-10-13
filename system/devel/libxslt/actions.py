@@ -19,8 +19,6 @@ def setup():
                          --with-debugger \
                          --disable-static \
                          --includedir=/usr/include \
-                         --with-xz \
-                         --with-zlib \
                          --disable-silent-rules \
                         " % python)
 
