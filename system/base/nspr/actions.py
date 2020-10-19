@@ -12,6 +12,7 @@ from pisi.actionsapi import shelltools
 NoStrip = ["/usr/lib"]
 
 def setup():
+    shelltools.system("sed -i 's#$(LIBRARY) ##' nspr/config/rules.mk")
     # -fno-strict-aliasing workarounds some aliasing violations, see: https://bugzilla.redhat.com/show_bug.cgi?id=487844 -->
     shelltools.system('nspr/configure \
                        --prefix=/usr \
