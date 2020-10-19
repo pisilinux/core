@@ -16,6 +16,9 @@ WorkDir = "firefox-%s" %get.srcVERSION()
 def setup():
    #shelltools.cd("js/src")
    #shelltools.system("sed -i 's/(defined\((@TEMPLATE_FILE)\))/\1/' config/milestone.pl ")
+   shelltools.export("CC", "gcc")
+   shelltools.export("CXX", "g++")
+   
    shelltools.system("mkdir -p build-js")
    shelltools.cd("build-js")
    
