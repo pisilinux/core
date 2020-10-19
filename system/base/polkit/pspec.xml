@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>polkit</Name>
-        <Homepage>http://www.freedesktop.org/wiki/Software/PolicyKit</Homepage>
+        <Homepage>https://www.freedesktop.org/wiki/Software/PolicyKit</Homepage>
         <Packager>
             <Name>PisiLinux Community</Name>
             <Email>admins@pisilinux.org</Email>
@@ -16,12 +16,12 @@
         <Description>polkit is a toolkit for defining and handling authorizations. It is used for allowing unprivileged processes to speak to privileged processes.</Description>
         <Archive sha1sum="0c375fa621bc9f74f2972e00fb517a408f419adf" type="targz">http://www.freedesktop.org/software/polkit/releases/polkit-0.117.tar.gz</Archive>
         <BuildDependencies>
-	    	<Dependency>python3</Dependency>	
+	    <Dependency>python3</Dependency>	
             <Dependency>dbus-devel</Dependency>
             <Dependency>pam-devel</Dependency>
             <Dependency>glib2-devel</Dependency>
             <Dependency>expat-devel</Dependency>
-            <Dependency versionFrom="68.11.0">spidermonkey-devel</Dependency>
+            <Dependency versionFrom="68.12.0">spidermonkey-devel</Dependency>
             <Dependency>gobject-introspection-devel</Dependency>
             <Dependency>intltool</Dependency>
         </BuildDependencies>
@@ -87,7 +87,7 @@
 
     <History>
         <Update release="8">
-            <Date>2020-08-06</Date>
+            <Date>2020-10-19</Date>
             <Version>0.117</Version>
             <Comment>Version bump.</Comment>
             <Name>Mustafa Cinasal</Name>
