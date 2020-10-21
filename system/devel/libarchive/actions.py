@@ -12,7 +12,9 @@ import os
 
 def setup():
     autotools.autoreconf("-fi")
-    autotools.configure("--disable-static")
+    autotools.configure("--disable-static \
+		                 --with-lzo2 \
+		                 ")
     
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")    
 
