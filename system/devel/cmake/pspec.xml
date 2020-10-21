@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Cross-platform, open-source make system</Summary>
         <Description>CMake, the cross-platform, open-source make system. CMake is used to control the software compilation process using simple platform and compiler independent configuration files. CMake generates native makefiles and workspaces that can be used in the compiler environment of your choice.</Description>
-        <Archive sha1sum="b1bf648bc5b98cf99832a80c4721627cce8b4782" type="targz">https://github.com/Kitware/CMake/releases/download/v3.16.8/cmake-3.16.8.tar.gz</Archive>
+        <Archive sha1sum="73ab5348c881f1a53c250b66848b6ee101c9fe1f" type="targz">https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>curl-devel</Dependency>
             <Dependency>expat-devel</Dependency>
@@ -42,12 +42,22 @@
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="data">/usr/share/cmake</Path>
             <Path fileType="data">/usr/share/aclocal/</Path>
+            <Path fileType="data">/usr/share/bash-completion/</Path>
+            <Path fileType="data">/usr/share/emacs</Path>
+            <Path fileType="data">/usr/share/vim</Path>
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="man">/usr/share/man</Path>
         </Files>
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2020-10-22</Date>
+            <Version>3.18.4</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="10">
             <Date>2020-07-11</Date>
             <Version>3.16.8</Version>

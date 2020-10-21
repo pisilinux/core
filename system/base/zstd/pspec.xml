@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>zstd</Name>
+        <Homepage>https://facebook.github.io/zstd/</Homepage>
+        <Packager>
+            <Name>İdris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>library</IsA>
+        <Summary>Zstandard - Fast real-time compression algorithm</Summary>
+        <Description>Zstandard is a fast compression algorithm, providing high compression ratios. It also offers a special mode for small data, called dictionary compression..</Description>
+        <Archive sha1sum="8059ef26c3d7dffa4d6dad64511c0675e46c0da6" type="targz">https://github.com/facebook/zstd/releases/download/v1.4.5/zstd-1.4.5.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>meson</Dependency>
+            <Dependency>ninja</Dependency>
+            <Dependency>lz4-devel</Dependency>
+            <Dependency>zlib-devel</Dependency>
+            <Dependency>xz-devel</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>zstd</Name>
+        <RuntimeDependencies>
+            <Dependency>lz4</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency>xz</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/libzstd*</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>zstd-devel</Name>
+        <Summary>Development files for zstd</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">zstd</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2020-10-22</Date>
+            <Version>1.4.5</Version>
+            <Comment>First release</Comment>
+            <Name>İdris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
+    </History>
+</PISI>

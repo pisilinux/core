@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>A yacc-compatible parser generator</Summary>
         <Description>A yacc-compatible parser generator. Once you are proficient with Bison, you can use it to develop a wide range of language parsers, from those used in simple desk calculators to complex programming languages</Description>
-        <Archive sha1sum="5aa25aad924da6eda6df03a697f59d85081c5551" type="tarxz">mirrors://gnu/bison/bison-3.4.2.tar.xz</Archive>
+        <Archive sha1sum="0ab4a865c4772109c50767013dcbe54e5786bb09" type="tarxz">http://ftp.gnu.org/gnu/bison/bison-3.7.3.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>m4</Dependency>
             <Dependency>gettext</Dependency>
@@ -40,6 +40,13 @@
     </Package>
 
     <History>
+        <Update release="7">
+            <Date>2020-10-21</Date>
+            <Version>3.7.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
 		<Update release="6">
             <Date>2019-12-11</Date>
             <Version>3.4.2</Version>

@@ -9,12 +9,12 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 
 def setup():
-    shelltools.system("echo -e '\033[0;36mBuilding Bzip2\033[0m' ")
-    shelltools.makedirs("%s/temp/lib" %get.workDIR())
-    shelltools.cd("bzip2-1.0.8")
-    autotools.make('CC=%s AR=%s RANLIB=%s CFLAGS="%s -D_FILE_OFFSET_BITS=64 -fPIC" libbz2.a' % (get.CC(), get.AR(), get.RANLIB(), get.CFLAGS()))
-    shelltools.system("cp libbz2.a %s/temp/lib/libbz2.a" % get.workDIR())
-    shelltools.cd("..")
+    #shelltools.system("echo -e '\033[0;36mBuilding Bzip2\033[0m' ")
+    #shelltools.makedirs("%s/temp/lib" %get.workDIR())
+    #shelltools.cd("bzip2-1.0.8")
+    #autotools.make('CC=%s AR=%s RANLIB=%s CFLAGS="%s -D_FILE_OFFSET_BITS=64 -fPIC" libbz2.a' % (get.CC(), get.AR(), get.RANLIB(), get.CFLAGS()))
+    #shelltools.system("cp libbz2.a %s/temp/lib/libbz2.a" % get.workDIR())
+    #shelltools.cd("..")
     
     pisitools.flags.add("-fwrapv")
 
