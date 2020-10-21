@@ -148,5 +148,5 @@ def install():
             #pisitools.remove("/usr/sbin/%s" % i)
 
     shelltools.cd("..")
-    pisitools.dodoc("ChangeLog", "NEWS", "README*", "LICENSES")
+    pisitools.dodoc("NEWS", "README*", "LICENSES", "COPYING")
 
