@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>Various useful Linux utilities</Summary>
         <Description>The util-linux package contains a large variety of low-level system utilities that are necessary for a Linux system to function.</Description>
-        <Archive sha1sum="a3fba2e7fe0ce117525a38498ef4eda9687bf3b3" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.35/util-linux-2.35.1.tar.xz</Archive>
+        <Archive sha1sum="cf99c3df18cf0a13033ec2d3d1a31587eba825d9" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.36/util-linux-2.36.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>zlib-devel</Dependency>
             <Dependency>eudev-devel</Dependency>
@@ -28,8 +28,8 @@
         </BuildDependencies>
         <Patches>
              <Patch level="1">upstream/util-linux-ng-2.21-login-lastlog.patch</Patch>
-             <Patch level="1">0001-libfdisk-script-accept-sector-size-ignore-unknown-he.patch</Patch>
-             <Patch level="1">0003-lsblk-fix-P-regression-from-v2.34.patch</Patch>
+<!--              <Patch level="1">0001-libfdisk-script-accept-sector-size-ignore-unknown-he.patch</Patch> -->
+<!--              <Patch level="1">0003-lsblk-fix-P-regression-from-v2.34.patch</Patch> -->
 <!-- 			 <Patch level="1">0001-lsblk-force-to-print-PKNAME-for-partition.patch</Patch> -->
              <!--Patch level="1">upstream/0001-sfdisk-support-empty-label-use-case.patch  </Patch-->
          </Patches>
@@ -150,6 +150,13 @@
     </Package>
 
     <History>
+        <Update release="14">
+            <Date>2020-10-22</Date>
+            <Version>2.36</Version>
+            <Comment>Version bump</Comment>
+            <Name>İdris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="13">
             <Date>2020-04-20</Date>
             <Version>2.35.1</Version>
