@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>A library of handy utility functions</Summary>
         <Description>glib2 is the low-level core library that forms the basis for projects such as GTK+ and GNOME. It provides data structure handling for C, portability wrappers, and interfaces for such runtime functionality as an event loop, threads, dynamic loading, and an object system.</Description>
-        <Archive sha1sum="f9a493c86f98482f13c6ed742c19487e6fa8f34b" type="tarxz">mirrors://gnome/glib/2.62/glib-2.62.4.tar.xz</Archive>
+        <Archive sha1sum="93fbcb5fd4c602cdd53c934d8d947eb9bc9e6256" type="tarxz">mirrors://gnome/glib/2.66/glib-2.66.2.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>meson</Dependency>
             <Dependency>ninja</Dependency>
@@ -25,7 +25,7 @@
         </BuildDependencies>
         <Patches>
             <Patch level="1">noisy-glib-compile-schemas.diff</Patch>
-            <Patch level="1">CVE-2020-6750.patch</Patch>
+<!--             <Patch level="1">CVE-2020-6750.patch</Patch> -->
             <Patch level="1">glib-2.62.4-skip_warnings-1.patch</Patch>
         </Patches>
         <AdditionalFiles>
@@ -140,6 +140,13 @@
     </Package>
 
     <History>
+        <Update release="12">
+            <Date>2020-10-22</Date>
+            <Version>2.66.2</Version>
+            <Comment>Version bump</Comment>
+            <Name>İdris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="11">
             <Date>2020-10-09</Date>
             <Version>2.62.4</Version>

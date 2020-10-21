@@ -22,7 +22,7 @@ def setup():
                      --bindir=/_emul32/bin \
                      --sbindir=/_emul32/sbin \
                      --prefix=/_emul32 \
-                     -Dlibmount=false"
+                     -Dlibmount=disabled"
         shelltools.export("CC", "%s -m32" % get.CC())
         shelltools.export("CXX", "%s -m32" % get.CXX())
         shelltools.export("PKG_CONFIG_PATH", "/usr/lib32/pkgconfig")
