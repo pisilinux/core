@@ -19,6 +19,9 @@ def setup():
     
     if get.buildTYPE() == "emul32":
         shelltools.export("PKG_CONFIG_PATH","/usr/lib32/pkgconfig")
+        #options += "--disable-libdebuginfod \
+                    #--disable-debuginfod \
+                   #"
     
     elif get.ARCH() == "x86_64":
         pisitools.flags.add("-fexceptions")
