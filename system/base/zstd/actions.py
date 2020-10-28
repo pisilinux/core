@@ -6,24 +6,22 @@
 import os
 from pisi.actionsapi import autotools
 from pisi.actionsapi import shelltools
+from pisi.actionsapi import mesontools
 from pisi.actionsapi import get
 
 def setup():
-    shelltools.makedirs("bld")
-    shelltools.cd("bld")
-    shelltools.system("meson setup \
-		              ../build/meson \
-		              --prefix=/usr \
-					  -Dlegacy-level=7 \
-		              -Dzlib=enabled \
-		              -Dlzma=enabled \
-		              -Dlz4=enabled \
-					  ")
+    shelltools.cd("build/meson")
+    mesontools.configure("-Dlegacy-level=7 \
+                          -Dzlib=enabled \
+                          -Dlzma=enabled \
+                          -Dbin_contrib=true \
+                          -Dlz4=enabled")
+    
 
 def build():
-    shelltools.cd("bld")
-    shelltools.system("ninja")
-
+    shelltools.cd("build/meson")
+    mesontools.build()
+    
 def install():
-    shelltools.cd("bld")
-    shelltools.system("DESTDIR=%s ninja install" % get.installDIR())
+    shelltools.cd("build/meson")
+    mesontools.install()
