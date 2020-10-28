@@ -7,24 +7,19 @@
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
+from pisi.actionsapi import mesontools
 from pisi.actionsapi import get
 
 def setup():
-    shelltools.system("sed -i 's|datadir|libdir|g' meson.build")
-    
-    shelltools.makedirs("build")
-    shelltools.cd("build")
-    shelltools.system("meson .. --prefix=/usr --libdir=lib -Dlegacy=true")
-    
+    #shelltools.system("sed -i 's|datadir|libdir|g' meson.build")
+    mesontools.configure("--datadir=/usr/lib -Dlegacy=true")
+
 def build():
-    shelltools.cd("build")
-    shelltools.system("ninja")
+    mesontools.build()
     
 def install():
-    shelltools.cd("build")
-    shelltools.system("DESTDIR=%s ninja install" % get.installDIR())
+    mesontools.install()
     
-    shelltools.cd("..")
     pisitools.dodoc("README*", "COPYING*", "AUTHORS")
     
     pisitools.remove("/usr/include/X11/extensions/apple*")
