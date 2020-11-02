@@ -53,7 +53,7 @@ def setup():
                --libexecdir=/usr/lib/misc \
                --with-bugurl=https://bugs.pisilinux.org \
                --enable-add-ons \
-               --enable-kernel=3.2.0 \
+               --enable-kernel=3.2 \
                --enable-static-pie \
                --enable-bind-now --disable-profile \
                --enable-stackguard-randomization \
