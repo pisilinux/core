@@ -62,11 +62,12 @@ def setup():
     shelltools.move("mpc-1.2.0", "mpc")
     shelltools.move("gmp-6.2.0", "gmp")
     
-    shelltools.cd("../")
+    #shelltools.cd("../")
     shelltools.makedirs("build")
     shelltools.cd("build")
-
-    shelltools.system('.././gcc-%s/configure \
+    
+    #shelltools.system('.././gcc-%s/configure \
+    shelltools.system('../configure \
                        --prefix=/usr \
                        --bindir=/usr/bin \
                        --libdir=/usr/lib \
@@ -98,16 +99,19 @@ def setup():
                        --enable-checking=release \
                        --build=%s \
                                %s \
-                               %s ' % ( verMajor , get.HOST(), opt_arch, opt_multilib))
+                               %s ' % ( get.HOST(), opt_arch, opt_multilib))
+                       #verMajor 
 
 def build():
     exportFlags()
 
-    shelltools.cd("../build")
+    #shelltools.cd("../build")
+    shelltools.cd("build")
     autotools.make('BOOT_CFLAGS="%s" profiledbootstrap' % cflags)
 
 def install():
-    shelltools.cd("../build")
+    #shelltools.cd("../build")
+    shelltools.cd("build")
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
     #autotools.install()
 
