@@ -23,6 +23,7 @@
             <Dependency>zlib-devel</Dependency>
             <Dependency>xz-devel</Dependency>
             <Dependency>libuv-devel</Dependency>
+            <Dependency versionFrom="2.32">glibc-devel</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -37,6 +38,7 @@
             <Dependency>ncurses</Dependency>
             <Dependency>zlib</Dependency>
             <Dependency>libuv</Dependency>
+            <Dependency versionFrom="2.32">glibc</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
