@@ -122,6 +122,7 @@
         <Files>
             <Path fileType="header">/usr/include/</Path>
             <Path fileType="data">/usr/lib/pkgconfig/*.pc</Path>
+	    <Path fileType="data">/usr/lib32/pkgconfig/*.pc</Path>
         </Files>
     </Package>
 
@@ -138,7 +139,7 @@
         <RuntimeDependencies>
 			<Dependency>ncurses-32bit</Dependency>
 			<Dependency>libpcre2-32bit</Dependency>
-			<Dependency>libutil-linux-devel</Dependency>
+			<Dependency>libutil-linux</Dependency>
         </RuntimeDependencies>
         <Replaces>
             <Package>libblkid-32bit</Package>
