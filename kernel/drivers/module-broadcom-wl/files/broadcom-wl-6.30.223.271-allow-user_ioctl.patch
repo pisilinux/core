@@ -1,0 +1,26 @@
+
+From: Cyril Lacoux <clacoux@easter-eggs.com>
+Date: Mon, 19 Nov 2012 12:02:30 +0000
+Subject: Allow normal users to send ioctl requests
+Origin: https://bugs.debian.org/672677
+
+---
+ src/wl/sys/wl_linux.c |    6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+diff -Nurp broadcom-wl-6.30.223.271.orig/src/wl/sys/wl_linux.c broadcom-wl-6.30.223.271/src/wl/sys/wl_linux.c
+--- broadcom-wl-6.30.223.271.orig/src/wl/sys/wl_linux.c	2020-01-11 01:53:58.507062628 +0200
++++ broadcom-wl-6.30.223.271/src/wl/sys/wl_linux.c	2020-01-11 02:06:15.233672677 +0200
+@@ -1663,11 +1663,7 @@ wl_ioctl(struct net_device *dev, struct
+ 	}
+ 
+ 	WL_LOCK(wl);
+-	if (!capable(CAP_NET_ADMIN)) {
+-		bcmerror = BCME_EPERM;
+-	} else {
+-		bcmerror = wlc_ioctl(wl->wlc, ioc.cmd, buf, ioc.len, wlif->wlcif);
+-	}
++	bcmerror = wlc_ioctl(wl->wlc, ioc.cmd, buf, ioc.len, wlif->wlcif);
+ 	WL_UNLOCK(wl);
+ 
+ done1:

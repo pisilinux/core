@@ -1,15 +1,38 @@
-diff --git a/src/wl/sys/wl_cfg80211_hybrid.c b/src/wl/sys/wl_cfg80211_hybrid.c
-index cdf8c01..63b5650 100644
---- a/src/wl/sys/wl_cfg80211_hybrid.c
-+++ b/src/wl/sys/wl_cfg80211_hybrid.c
-@@ -52,6 +52,10 @@ u32 wl_dbg_level = WL_DBG_ERR | WL_DBG_INFO;
- u32 wl_dbg_level = WL_DBG_ERR;
- #endif
+
+Fix for 5.1
+
+---
+ src/wl/sys/wl_cfg80211_hybrid.c |    4 ++++
+ src/wl/sys/wl_iw.c              |    4 ++++
+ 2 files changed, 8 insertions(+)
+
+diff -Nurp broadcom-wl-6.30.223.271.orig/src/wl/sys/wl_cfg80211_hybrid.c broadcom-wl-6.30.223.271/src/wl/sys/wl_cfg80211_hybrid.c
+--- broadcom-wl-6.30.223.271.orig/src/wl/sys/wl_cfg80211_hybrid.c	2020-01-11 01:34:37.953072128 +0200
++++ broadcom-wl-6.30.223.271/src/wl/sys/wl_cfg80211_hybrid.c	2020-01-11 01:46:06.313501453 +0200
+@@ -458,7 +458,11 @@ wl_dev_ioctl(struct net_device *dev, u32
+ 	ifr.ifr_data = (caddr_t)&ioc;
  
+ 	fs = get_fs();
 +#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 1, 0)
-+#define get_ds()	((mm_segment_t) { (-1UL) })
++	set_fs(KERNEL_DS);
++#else
+ 	set_fs(get_ds());
 +#endif
-+
- #if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
- static s32 wl_cfg80211_change_iface(struct wiphy *wiphy, struct net_device *ndev,
-            enum nl80211_iftype type, struct vif_params *params);
+ #if defined(WL_USE_NETDEV_OPS)
+ 	err = dev->netdev_ops->ndo_do_ioctl(dev, &ifr, SIOCDEVPRIVATE);
+ #else
+diff -Nurp broadcom-wl-6.30.223.271.orig/src/wl/sys/wl_iw.c broadcom-wl-6.30.223.271/src/wl/sys/wl_iw.c
+--- broadcom-wl-6.30.223.271.orig/src/wl/sys/wl_iw.c	2015-09-19 01:47:30.000000000 +0300
++++ broadcom-wl-6.30.223.271/src/wl/sys/wl_iw.c	2020-01-11 01:46:06.314501499 +0200
+@@ -117,7 +117,11 @@ dev_wlc_ioctl(
+ 	ifr.ifr_data = (caddr_t) &ioc;
+ 
+ 	fs = get_fs();
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 1, 0)
++	set_fs(KERNEL_DS);
++#else
+ 	set_fs(get_ds());
++#endif
+ #if defined(WL_USE_NETDEV_OPS)
+ 	ret = dev->netdev_ops->ndo_do_ioctl(dev, &ifr, SIOCDEVPRIVATE);
+ #else

@@ -1,0 +1,21 @@
+
+The GE_49 check fails to detect gcc-10, but we dont care about old gcc
+versions, so simply always apply the -Wno-date-time
+
+Fixes: https://bugs.mageia.org/show_bug.cgi?id=26620
+
+Signed-off-by: Thomas Backlund <tmb@mageia.org>
+
+diff -Nurp broadcom-wl-6.30.223.271.orig/Makefile broadcom-wl-6.30.223.271/Makefile
+--- broadcom-wl-6.30.223.271.orig/Makefile	2015-09-19 01:47:30.000000000 +0300
++++ broadcom-wl-6.30.223.271/Makefile	2020-05-15 16:28:08.586410105 +0300
+@@ -141,9 +141,7 @@ EXTRA_CFLAGS       += -I$(src)/src/inclu
+ EXTRA_CFLAGS       += -I$(src)/src/wl/sys -I$(src)/src/wl/phy -I$(src)/src/wl/ppr/include
+ EXTRA_CFLAGS       += -I$(src)/src/shared/bcmwifi/include
+ #EXTRA_CFLAGS       += -DBCMDBG_ASSERT -DBCMDBG_ERR
+-ifeq "$(GE_49)" "1"
+ EXTRA_CFLAGS       += -Wno-date-time
+-endif
+ 
+ EXTRA_LDFLAGS      := $(src)/lib/wlc_hybrid.o_shipped
+ 

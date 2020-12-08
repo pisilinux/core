@@ -1,46 +1,49 @@
-diff --git a/src/wl/sys/wl_linux.c b/src/wl/sys/wl_linux.c
-index 489c9f5..f8278ad 100644
---- a/src/wl/sys/wl_linux.c
-+++ b/src/wl/sys/wl_linux.c
-@@ -93,7 +93,11 @@
+
+Fix for 4.15
+
+---
+ src/wl/sys/wl_linux.c |   15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff -Nurp broadcom-wl-6.30.223.271.orig/src/wl/sys/wl_linux.c broadcom-wl-6.30.223.271/src/wl/sys/wl_linux.c
+--- broadcom-wl-6.30.223.271.orig/src/wl/sys/wl_linux.c	2020-01-11 01:25:39.086492699 +0200
++++ broadcom-wl-6.30.223.271/src/wl/sys/wl_linux.c	2020-01-11 01:41:15.885238901 +0200
+@@ -93,7 +93,11 @@ struct iw_statistics *wl_get_wireless_st
  
  #include <wlc_wowl.h>
  
-+#ifdef HAVE_TIMER_SETUP
-+static void wl_timer(struct timer_list *list);
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0)
++static void wl_timer(struct timer_list *tl);
 +#else
  static void wl_timer(ulong data);
 +#endif
  static void _wl_timer(wl_timer_t *t);
  static struct net_device *wl_alloc_linux_if(wl_if_t *wlif);
  
-@@ -2296,12 +2300,17 @@
- 
+@@ -2297,10 +2301,17 @@ wl_timer_task(wl_task_t *task)
  	atomic_dec(&t->wl->callbacks);
  }
--
-+#ifdef HAVE_TIMER_SETUP
+ 
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0)
 +static void
-+wl_timer(struct timer_list *list)
++wl_timer(struct timer_list *tl)
 +{
-+	wl_timer_t *t = from_timer(t,list,timer);
++	wl_timer_t *t = (wl_timer_t *)tl;
 +#else
  static void
  wl_timer(ulong data)
  {
  	wl_timer_t *t = (wl_timer_t *)data;
--
 +#endif
+ 
  	if (!WL_ALL_PASSIVE_ENAB(t->wl))
  		_wl_timer(t);
- 	else
-@@ -2351,10 +2360,13 @@
- 	}
+@@ -2352,9 +2363,13 @@ wl_init_timer(wl_info_t *wl, void (*fn)(
  
  	bzero(t, sizeof(wl_timer_t));
--
-+#ifdef HAVE_TIMER_SETUP
-+	timer_setup(&t->timer, wl_timer,0);
+ 
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0)
++	timer_setup(&t->timer, wl_timer, 0);
 +#else
  	init_timer(&t->timer);
  	t->timer.data = (ulong) t;
@@ -49,15 +52,3 @@ index 489c9f5..f8278ad 100644
  	t->wl = wl;
  	t->fn = fn;
  	t->arg = arg;
-diff --git a/src/wl/sys/wl_linux.h b/src/wl/sys/wl_linux.h
-index 489c9f5..f8278ad 100644
---- a/src/wl/sys/wl_linux.h
-+++ b/src/wl/sys/wl_linux.h
-@@ -190,3 +190,7 @@
- extern struct net_device * wl_netdev_get(wl_info_t *wl);
- 
- #endif 
-+
-+#if defined(timer_setup) && defined(from_timer)
-+#define HAVE_TIMER_SETUP
-+#endif
