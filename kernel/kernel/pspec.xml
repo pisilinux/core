@@ -12,7 +12,7 @@
         <IsA>kernel</IsA>
         <Summary>The Linux kernel (the core of the Linux operating system) for Pisi Linux</Summary>
         <Description>kernel contains the Linux kernel, the core of any Linux operating system. The kernel handles the basic functions of the operating system: memory allocation, process allocation, device input and output, etc.</Description>
-        <Archive sha1sum="d32ac0f418ff79321360ac5b63c69dbee0455fe8" type="targz">https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.8.tar.gz</Archive>
+        <Archive sha1sum="f32e356ea8376d9120efe513b1da882540b0d297" type="targz">https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.9.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
             <AdditionalFile permission="0755" target="generate-module-list">scripts/generate-module-list</AdditionalFile>
@@ -33,10 +33,20 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-5.8.12.xz</Patch>
+            <Patch level="1" compressionType="xz">patches/linux/patch-5.9.13.xz</Patch>
             <!-- Mageia Linux patches-->
             <Patch level="1">patches/mageia/aufs5.patch</Patch>
             <Patch level="1">patches/mageia/CVE-2019-12379.patch</Patch>
+            <Patch level="1">patches/mageia/CVE-2020-16119-DCCP-CCID-structure-use-after-free.patch</Patch>
+<!--             <Patch level="1">patches/mageia/3rd-ndiswrapper-1.63.patch</Patch> -->
+<!--             <Patch level="1">patches/mageia/3rd-ndiswrapper-Kconfig.patch</Patch> -->
+<!--             <Patch level="1">patches/mageia/3rd-ndiswrapper-Makefile-build-fix.patch</Patch> -->
+            
+<!--             <Patch level="1">patches/mageia/3rd-niswrapper-Kconfig-Makefile.patch</Patch> -->
+<!--             <Patch level="1">patches/mageia/3rd-rtl8821ce-Kconfig-Makefile.patch</Patch> -->
+<!--             <Patch level="1">patches/mageia/3rd-rtl8812au-Kconfig-Makefile.patch</Patch> -->
+<!--             <Patch level="1">patches/mageia/3rd-rtl8723de-Kconfig-Makefile.patch</Patch> -->
+<!--             <Patch level="1">patches/mageia/3rd-viahss-Kconfig-Makefile.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -95,6 +105,17 @@
     </Package>
 
     <History>
+        <Update release="45">
+            <Date>2020-12-08</Date>
+            <Version>5.9.13</Version>
+            <Comment>Version bump.</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="44">
             <Date>2020-09-27</Date>
             <Version>5.8.12</Version>
