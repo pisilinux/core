@@ -37218,9 +37218,9 @@ index f5abba86107d..0b008da5678d 100644
  /* /sys/fs */
  extern struct kobject *fs_kobj;
 @@ -2633,6 +2642,7 @@ static inline bool sb_is_blkdev_sb(struct super_block *sb)
- 	return false;
  }
- #endif
+ 
+ void emergency_thaw_all(void);
 +extern int __sync_filesystem(struct super_block *, int);
  extern int sync_filesystem(struct super_block *);
  extern const struct file_operations def_blk_fops;
@@ -37916,7 +37916,7 @@ index 8c7ca737a19b..c4e2b1383925 100644
 +	vma_get_file(vma);
 +	file = vma->vm_file;
 +	prfile = vma->vm_prfile;
- 	ret = do_mmap_pgoff(vma->vm_file, start, size,
+ 	ret = do_mmap(vma->vm_file, start, size,
  			prot, flags, pgoff, &populate, NULL);
 +	if (!IS_ERR_VALUE(ret) && file && prfile) {
 +		struct vm_area_struct *new_vma;
