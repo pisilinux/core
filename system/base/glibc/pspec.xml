@@ -30,7 +30,7 @@
         <Name>glibc</Name>
         <RuntimeDependencies>
             <Dependency>gettext</Dependency>
-            <Dependency versionFrom="2016j">timezone</Dependency>
+            <Dependency>timezone</Dependency>
         </RuntimeDependencies>
         <Replaces>
           <Package>glibc-32bit</Package>
@@ -906,7 +906,7 @@
         </Files>
     </Package>
 
-    <Package>
+    <!--Package>
         <Name>glibc-locales-iw</Name>
         <IsA>locale:iw</IsA>
         <PartOf>system.locale</PartOf>
@@ -915,7 +915,7 @@
             <Path fileType="localedata">/usr/share/locale/iw*</Path>
             <Path fileType="localedata">/usr/share/i18n/locales/iw_*</Path>
         </Files>
-    </Package>
+    </Package-->
 
     <Package>
         <Name>glibc-locales-ja</Name>
@@ -1469,7 +1469,7 @@
         </Files>
     </Package>
 
-    <Package>
+    <!--Package>
         <Name>glibc-locales-sa</Name>
         <IsA>locale:sa</IsA>
         <PartOf>system.locale</PartOf>
@@ -1478,7 +1478,7 @@
             <Path fileType="localedata">/usr/share/locale/sa*</Path>
             <Path fileType="localedata">/usr/share/i18n/locales/sg_*</Path>
         </Files>
-    </Package>
+    </Package-->
 
     <Package>
         <Name>glibc-locales-sc</Name>
@@ -1787,7 +1787,7 @@
         </Files>
     </Package>
 
-    <Package>
+    <!--Package>
         <Name>glibc-locales-unm</Name>
         <IsA>locale:unm</IsA>
         <PartOf>system.locale</PartOf>
@@ -1796,7 +1796,7 @@
             <Path fileType="localedata">/usr/share/locale/unm*</Path>
             <Path fileType="localedata">/usr/share/i18n/locales/umn_*</Path>
         </Files>
-    </Package>
+    </Package-->
 
     <Package>
         <Name>glibc-locales-ur</Name>
@@ -1953,6 +1953,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2020-12-03</Date>
+            <Version>2.32</Version>
+            <Comment>Version bump with new toolchain.</Comment>
+            <Name>Idris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2020-10-21</Date>
             <Version>2.32</Version>
