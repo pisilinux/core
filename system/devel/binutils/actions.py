@@ -19,13 +19,14 @@ def setup():
     # Build binutils with LD_SYMBOLIC_FUNCTIONS=1 and reduce PLT relocations in libfd.so by 84%.
     #shelltools.export("LD_SYMBOLIC_FUNCTIONS", "1")
     shelltools.system('sed -i "/ac_cpp=/s/\$CPPFLAGS/\$CPPFLAGS -O2/" libiberty/configure')
-
+    
     autotools.configure('--enable-shared \
                          --build=%s \
                          --enable-threads \
                          --enable-ld=default \
                          --enable-gold \
                          --enable-plugins \
+                         --enable-targets=x86_64-pep \
                          --with-pkgversion="Pisi Linux" \
                          --with-bugurl=http://bugs.pisilinux.org/ \
                          %s \
@@ -40,6 +41,7 @@ def build():
 
 # check fails because of LD_LIBRARY_PATH
 #def check():
+    #autotools.make("-k LDFLAGS="" check || true")
 #    autotools.make("check -j1")
 
 def install():
@@ -77,7 +79,7 @@ def install():
     unneeded_man={"dlltool.1"}
     for i in unneeded_man:
         pisitools.remove("/usr/share/man/man1/%s" %i)
-
+    
     #pisitools.remove("/usr/share/info/configure.info")
     #pisitools.remove("/usr/share/info/standards.info")
 
