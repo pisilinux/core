@@ -50,6 +50,10 @@ def exportFlags():
     shelltools.export("LC_ALL", "en_US.UTF-8")
 
 def setup():
+    shelltools.cd("%s" % get.workDIR())
+    shelltools.move("gcc-*", "gcc-%s" % get.srcVERSION())
+    shelltools.cd("gcc-%s" % get.srcVERSION())
+    
     exportFlags()
     # Maintainer mode off, do not force recreation of generated files
     #shelltools.system("contrib/gcc_update --touch")
@@ -57,16 +61,15 @@ def setup():
     pisitools.dosed("gcc/configure", "^(ac_cpp='\$CPP\s\$CPPFLAGS)", r"\1 -O2")
     pisitools.dosed("libiberty/configure", "^(ac_cpp='\$CPP\s\$CPPFLAGS)", r"\1 -O2")
     
-    shelltools.move("isl-0.21", "isl")
-    shelltools.move("mpfr-4.1.0", "mpfr")
-    shelltools.move("mpc-1.2.0", "mpc")
-    shelltools.move("gmp-6.2.0", "gmp")
+    shelltools.move("../isl-0.21", "isl")
+    #shelltools.move("mpfr-4.1.0", "mpfr")
+    #shelltools.move("mpc-1.2.0", "mpc")
+    #shelltools.move("gmp-6.2.0", "gmp")
     
     #shelltools.cd("../")
     shelltools.makedirs("build")
     shelltools.cd("build")
-    
-    #shelltools.system('.././gcc-%s/configure \
+
     shelltools.system('../configure \
                        --prefix=/usr \
                        --bindir=/usr/bin \
@@ -77,7 +80,7 @@ def setup():
                        --infodir=/usr/share/info \
                        --with-bugurl=http://bugs.pisilinux.org \
                        --enable-languages=c,c++,fortran,lto,objc,obj-c++ \
-                       --disable-libgcj \
+                       --enable-cet=auto \
                        --enable-shared \
                        --enable-threads=posix \
                        --with-system-zlib \
@@ -90,7 +93,6 @@ def setup():
                        --enable-linker-build-id \
                        --with-isl \
                        --enable-gnu-indirect-function \
-                       --disable-isl-version-check \
                        --enable-lto \
                        --enable-plugin \
                        --with-linker-hash-style=gnu \
@@ -100,7 +102,6 @@ def setup():
                        --build=%s \
                                %s \
                                %s ' % ( get.HOST(), opt_arch, opt_multilib))
-                       #verMajor 
 
 def build():
     exportFlags()

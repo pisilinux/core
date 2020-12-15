@@ -14,11 +14,11 @@
         <IsA>library</IsA>
         <Summary>The GNU Compiler Collection, includes C, C++, Objective-C and Fortran compilers</Summary>
         <Description>The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, as well as libraries for these languages</Description>
-        <Archive sha1sum="8de0aecd3a52bb92b43082df8a9256356d1f03be" type="tarxz">http://ftp.gnu.org/gnu/gcc/gcc-10.2.0/gcc-10.2.0.tar.xz</Archive>
-        <Archive sha1sum="159c3a58705662bfde4dc93f2617f3660855ead6" target="gcc-10.2.0" type="tarxz">http://ftp.gnu.org/gnu/mpfr/mpfr-4.1.0.tar.xz</Archive>
-        <Archive sha1sum="0abdc94acab0c9bfdaa391347cdfd7bbdb1cf017" target="gcc-10.2.0" type="targz">http://ftp.gnu.org/gnu/mpc/mpc-1.2.0.tar.gz</Archive>
-        <Archive sha1sum="33e366d59d32330432b5c7f2d0c2fb6664eff224" target="gcc-10.2.0" type="tarbz2">http://isl.gforge.inria.fr/isl-0.21.tar.bz2</Archive>
-        <Archive sha1sum="052a5411dc74054240eec58132d2cf41211d0ff6" target="gcc-10.2.0" type="tarxz">mirrors://gnu/gmp/gmp-6.2.0.tar.xz</Archive>
+        <Archive sha1sum="e4f414f54d0d9df1a72812fe6cbb2648c94752d1" type="tarxz">ftp://gcc.gnu.org/pub/gcc/snapshots/LATEST-10/gcc-10-20201128.tar.xz</Archive>
+<!--         <Archive sha1sum="159c3a58705662bfde4dc93f2617f3660855ead6" target="gcc-10.2.0" type="tarxz">http://ftp.gnu.org/gnu/mpfr/mpfr-4.1.0.tar.xz</Archive> -->
+<!--         <Archive sha1sum="0abdc94acab0c9bfdaa391347cdfd7bbdb1cf017" target="gcc-10.2.0" type="targz">http://ftp.gnu.org/gnu/mpc/mpc-1.2.0.tar.gz</Archive> -->
+        <Archive sha1sum="33e366d59d32330432b5c7f2d0c2fb6664eff224" type="tarbz2">http://isl.gforge.inria.fr/isl-0.21.tar.bz2</Archive>
+<!--         <Archive sha1sum="052a5411dc74054240eec58132d2cf41211d0ff6" target="gcc-10.2.0" type="tarxz">mirrors://gnu/gmp/gmp-6.2.0.tar.xz</Archive> -->
         <BuildDependencies>
             <Dependency versionFrom="2.35.1">binutils</Dependency>
             <Dependency>bison</Dependency>
@@ -27,10 +27,14 @@
             <Dependency>gnuconfig</Dependency>
             <Dependency>patch</Dependency>
             <Dependency>sed</Dependency>
-            <Dependency>texinfo</Dependency>
+<!--             <Dependency>texinfo</Dependency> -->
             <Dependency>elfutils</Dependency>
             <Dependency>zlib-devel</Dependency>
             <Dependency>gmp-devel</Dependency>
+            
+            <Dependency>mpfr-devel</Dependency>
+            <Dependency>libmpc-devel</Dependency>
+<!--             <Dependency>isl-devel</Dependency> -->
         </BuildDependencies>
         <Patches>
             <!-- Pisilinux Patches -->
@@ -39,9 +43,9 @@
             <Patch level="1">pisilinux/gcc_47_based-record_gcc_options.patch</Patch>
 			
             <!-- Arch Linux patches -->
-            <Patch level="1">archlinux/fs64270.patch</Patch>
-            <Patch level="1">archlinux/ipa-fix-bit-CPP-when-combined-with-IPA-bit-CP.patch </Patch>
-            <Patch level="1">archlinux/ipa-fix-ICE-in-get_default_value.patch</Patch>
+<!--             <Patch level="1">archlinux/fs64270.patch</Patch> -->
+<!--             <Patch level="1">archlinux/ipa-fix-bit-CPP-when-combined-with-IPA-bit-CP.patch </Patch> -->
+<!--             <Patch level="1">archlinux/ipa-fix-ICE-in-get_default_value.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -130,6 +134,10 @@
         <RuntimeDependencies>
             <Dependency>gmp</Dependency>
             <Dependency>zlib</Dependency>
+            
+            <Dependency>mpfr</Dependency>
+            <Dependency>libmpc</Dependency>
+<!--             <Dependency>isl</Dependency> -->
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/lib</Path>
@@ -148,6 +156,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2020-12-03</Date>
+            <Version>10.2.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="8">
             <Date>2020-10-21</Date>
             <Version>10.2.0</Version>
