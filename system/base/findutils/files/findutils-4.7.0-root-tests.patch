@@ -1,0 +1,132 @@
+From 498674f70816bb380ce11e62b620e4ece7763fd0 Mon Sep 17 00:00:00 2001
+From: Bernhard Voelker <mail@bernhard-voelker.de>
+Date: Sun, 9 Feb 2020 19:58:07 +0100
+Subject: [PATCH] tests: avoid FP when run as root
+
+Test 'sv-bug-54171' produced a false-positive error as 'find' would
+not fail for an unreadable directory when run as root.
+Migrate the test to the newer shell-based tests, and add the
+'skip_if_root_' guard to avoid a false-positive.
+
+* find/testsuite/find.posix/sv-bug-54171.exp: Remove.
+* find/testsuite/find.posix/sv-bug-54171.xo: Remove.
+* find/testsuite/Makefile.am (EXTRA_DIST_XO, EXTRA_DIST_EXP): Remove the
+above deleted test.
+* tests/find/depth-unreadable-dir.sh: Add test.
+* tests/local.mk (all_tests): Reference it.
+
+Test FP introduced in commit v4.6.0-178-gdf4610d0.
+Fixes https://savannah.gnu.org/bugs/?57762
+and https://bugzilla.redhat.com/1799064
+
+Upstream-commit: 2f9fff9e1f0c0b7a9034d7c46ca197ce693c4736
+Signed-off-by: Kamil Dudka <kdudka@redhat.com>
+---
+ find/testsuite/Makefile.am                 |  2 --
+ find/testsuite/find.posix/sv-bug-54171.exp |  5 ---
+ find/testsuite/find.posix/sv-bug-54171.xo  |  1 -
+ tests/find/depth-unreadable-dir.sh         | 39 ++++++++++++++++++++++
+ tests/local.mk                             |  1 +
+ 5 files changed, 40 insertions(+), 8 deletions(-)
+ delete mode 100644 find/testsuite/find.posix/sv-bug-54171.exp
+ delete mode 100644 find/testsuite/find.posix/sv-bug-54171.xo
+ create mode 100755 tests/find/depth-unreadable-dir.sh
+
+diff --git a/find/testsuite/Makefile.am b/find/testsuite/Makefile.am
+index d252451a..77a2902c 100644
+--- a/find/testsuite/Makefile.am
++++ b/find/testsuite/Makefile.am
+@@ -119,7 +119,6 @@ find.posix/prune-stat.xo \
+ find.posix/sizetype.xo \
+ find.posix/sv-bug-15235.xo \
+ find.posix/sv-bug-19613.xo \
+-find.posix/sv-bug-54171.xo \
+ find.posix/typesize.xo
+ 
+ 
+@@ -246,7 +245,6 @@ find.posix/sv-bug-15235.exp \
+ find.posix/sv-bug-19605.exp \
+ find.posix/sv-bug-19613.exp \
+ find.posix/sv-bug-19617.exp \
+-find.posix/sv-bug-54171.exp \
+ find.posix/typesize.exp \
+ find.posix/user-empty.exp \
+ find.posix/user-missing.exp
+diff --git a/find/testsuite/find.posix/sv-bug-54171.exp b/find/testsuite/find.posix/sv-bug-54171.exp
+deleted file mode 100644
+index 8e5448fb..00000000
+--- a/find/testsuite/find.posix/sv-bug-54171.exp
++++ /dev/null
+@@ -1,5 +0,0 @@
+-exec rm -rf tmp
+-exec mkdir tmp tmp/dir
+-exec chmod 0311 tmp/dir
+-find_start f {tmp -depth -name dir }
+-exec rm -rf tmp
+diff --git a/find/testsuite/find.posix/sv-bug-54171.xo b/find/testsuite/find.posix/sv-bug-54171.xo
+deleted file mode 100644
+index 2dc4706a..00000000
+--- a/find/testsuite/find.posix/sv-bug-54171.xo
++++ /dev/null
+@@ -1 +0,0 @@
+-tmp/dir
+diff --git a/tests/find/depth-unreadable-dir.sh b/tests/find/depth-unreadable-dir.sh
+new file mode 100755
+index 00000000..86e2fd60
+--- /dev/null
++++ b/tests/find/depth-unreadable-dir.sh
+@@ -0,0 +1,39 @@
++#!/bin/sh
++# find -depth: ensure to output an unreadable directory.
++
++# Copyright (C) 2020 Free Software Foundation, Inc.
++
++# This program is free software: you can redistribute it and/or modify
++# it under the terms of the GNU General Public License as published by
++# the Free Software Foundation, either version 3 of the License, or
++# (at your option) any later version.
++
++# This program is distributed in the hope that it will be useful,
++# but WITHOUT ANY WARRANTY; without even the implied warranty of
++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++# GNU General Public License for more details.
++
++# You should have received a copy of the GNU General Public License
++# along with this program.  If not, see <https://www.gnu.org/licenses/>.
++
++. "${srcdir=.}/tests/init.sh"; fu_path_prepend_
++print_ver_ find
++
++# Find run as root would not fail for an unreadable directory.
++skip_if_root_
++
++# Prepare an unreadable directory, and the expected stdout/stderr.
++mkdir tmp tmp/dir \
++  && chmod 0311 tmp/dir \
++  && echo 'tmp/dir' > exp \
++  && echo "find: 'tmp/dir': Permission denied" > experr \
++  || framework_failure_
++
++# Run FTS-based find with -depth; versions < 4.7.0 failed to output
++# an unreadable directory (see #54171).
++returns_ 1 find tmp -depth -name dir > out 2> err || fail=1
++
++compare exp out || fail=1
++compare experr err || fail=1
++
++Exit $fail
+diff --git a/tests/local.mk b/tests/local.mk
+index dccc7342..986df55e 100644
+--- a/tests/local.mk
++++ b/tests/local.mk
+@@ -106,6 +106,7 @@ check-root:
+ 
+ all_tests = \
+   tests/misc/help-version.sh \
++  tests/find/depth-unreadable-dir.sh \
+   tests/find/many-dir-entries-vs-OOM.sh \
+   tests/find/name-lbracket-literal.sh \
+   tests/find/printf_escapechars.sh \
+-- 
+2.21.1
+

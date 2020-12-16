@@ -11,7 +11,7 @@ from pisi.actionsapi import get
 
 def setup():
     shelltools.export("CFLAGS", "%s -D_GNU_SOURCE" % get.CFLAGS())
-
+    autotools.autoreconf("-fiv")
     autotools.configure("--enable-nls \
                          --localstatedir=/var/lib/locate \
                          --without-included-regex \
