@@ -17,6 +17,9 @@
             <Dependency>ncurses-devel</Dependency>
             <Dependency>perl</Dependency>
         </BuildDependencies>
+                <Patches>
+            <Patch level="1">texinfo-6.1-install-info-use-create-tmp-then-rename-pattern.patch</Patch>
+        </Patches>
     </Source>
     <Package>
         <Name>texinfo</Name>
@@ -45,6 +48,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2020-12-09</Date>
+            <Version>6.7</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2019-12-13</Date>
             <Version>6.7</Version>
