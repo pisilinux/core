@@ -28,4 +28,4 @@ def install():
     pisitools.dosym("rdf2bin", "/usr/bin/rdf2com")
 
     pisitools.doman("nasm.1", "ndisasm.1")
-    pisitools.dodoc("AUTHORS", "CHANGES", "ChangeLog", "README", "TODO", "doc/nasmdoc.*")
+    pisitools.dodoc("AUTHORS", "CHANGES", "ChangeLog", "README*", "doc/nasmdoc.*")

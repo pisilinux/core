@@ -8,7 +8,7 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import autotools
 
 def setup():
-    autotools.rawConfigure()
+    autotools.rawConfigure("--disable-silent-rules")
     
 def build():
     autotools.make()

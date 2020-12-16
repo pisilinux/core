@@ -6,10 +6,12 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 
 def setup():
+    shelltools.system("sed -i 's/ -Werror / /' configure")
     #autotools.autoreconf("-vfi")
     autotools.configure("--prefix=/usr \
                          --disable-static")

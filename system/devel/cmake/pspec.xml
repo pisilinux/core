@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Cross-platform, open-source make system</Summary>
         <Description>CMake, the cross-platform, open-source make system. CMake is used to control the software compilation process using simple platform and compiler independent configuration files. CMake generates native makefiles and workspaces that can be used in the compiler environment of your choice.</Description>
-        <Archive sha1sum="73ab5348c881f1a53c250b66848b6ee101c9fe1f" type="targz">https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4.tar.gz</Archive>
+        <Archive sha1sum="7dca0da8bbed84932c62c371ec0912d7d0162d7e" type="targz">https://github.com/Kitware/CMake/releases/download/v3.18.5/cmake-3.18.5.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>curl-devel</Dependency>
             <Dependency>expat-devel</Dependency>
@@ -23,7 +23,6 @@
             <Dependency>zlib-devel</Dependency>
             <Dependency>xz-devel</Dependency>
             <Dependency>libuv-devel</Dependency>
-            <Dependency versionFrom="2.32">glibc-devel</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -38,7 +37,6 @@
             <Dependency>ncurses</Dependency>
             <Dependency>zlib</Dependency>
             <Dependency>libuv</Dependency>
-            <Dependency versionFrom="2.32">glibc</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -53,10 +51,17 @@
     </Package>
 
     <History>
-        <Update release="11">
-            <Date>2020-11-15</Date>
-            <Version>3.18.4</Version>
+        <Update release="12">
+            <Date>2020-12-09</Date>
+            <Version>3.18.5</Version>
             <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="11">
+            <Date>2020-11-07</Date>
+            <Version>3.18.4</Version>
+            <Comment>Version bump</Comment>
             <Name>Idris Kalp</Name>
             <Email>idriskalp@gmail.com</Email>
         </Update>
