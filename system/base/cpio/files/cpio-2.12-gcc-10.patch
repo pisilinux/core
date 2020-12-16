@@ -1,0 +1,13 @@
+diff -Nuar a/global.c b/global.c
+--- a/src/global.c	2020-11-09 15:08:34.291658902 +0300
++++ b/src/global.c	2020-11-09 15:09:50.426653408 +0300
+@@ -184,9 +184,6 @@
+ /* Extract to standard output? */
+ bool to_stdout_option = false;
+ 
+-/* The name this program was run with.  */
+-char *program_name;
+-
+ /* Extract files over symbolic links */
+ bool extract_over_symlinks;
+ 

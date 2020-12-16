@@ -15,6 +15,7 @@ def setup():
 
     if get.buildTYPE() == "emul32":
         shelltools.export("CFLAGS", "%s -m32" % get.CFLAGS())
+        options += " --libdir=/usr/lib32 --bindir=/usr/bin32"
 
         # Use 32-bit assembler, another option is to use --disable-asm option
         pisitools.dosed("mpi/config.links", "path=\"amd64\"", "path=\"i586 i386\"")
@@ -30,7 +31,9 @@ def check():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    if get.buildTYPE() == "emul32": return
+    if get.buildTYPE() == "emul32":
+        pisitools.removeDir("/usr/bin32")
+        return
 
     pisitools.dodir("/etc/gcrypt")
 

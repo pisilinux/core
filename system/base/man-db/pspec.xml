@@ -14,7 +14,7 @@
         <IsA>data:doc</IsA>
         <Summary>Application to read Linux man pages</Summary>
         <Description>Man package consists of programs which is used to read most of the documentation available in linux system. For example, you can write "man nameoftheprogram" into the konsole or "man:nameoftheprogram" into the konqueror to get a detailed usage information for many programs.</Description>
-        <Archive sha1sum="3dca471572e1af3f8ac90740b1721faf9f1245fc" type="tarxz">http://download.savannah.gnu.org/releases/man-db/man-db-2.8.6.1.tar.xz</Archive>
+        <Archive sha1sum="76ec7a9f5222fbd6fc5364929270a4790094a617" type="tarxz">http://download.savannah.gnu.org/releases/man-db/man-db-2.9.3.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>less</Dependency>
             <Dependency>gzip</Dependency>
@@ -55,6 +55,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2020-12-09</Date>
+            <Version>2.9.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
 	<Update release="7">
             <Date>2020-05-12</Date>
             <Version>2.8.6.1</Version>
@@ -62,7 +69,7 @@
             <Name>Idris Kalp</Name>
             <Email>idriskalp@gmail.com</Email>
         </Update>
-	<Update release="6">
+        <Update release="6">
             <Date>2019-12-25</Date>
             <Version>2.8.6.1</Version>
             <Comment>Version bump</Comment>

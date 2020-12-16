@@ -9,22 +9,29 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 
 
+bindir = "/usr/bin32" if get.buildTYPE() == "emul32" else "/usr/bin"
+
 def setup():
-    options = "--enable-shared"
+    options = " --enable-shared \
+                --bindir=%s \
+              " % ( bindir)
 
-    if not get.buildTYPE() == "emul32":
-        options += " --libdir=/usr/lib"
-
+    if get.buildTYPE() == "emul32":
+        options += " --libdir=/usr/lib32 \
+                   "
+    
+    
+    autotools.autoreconf("-fiv")
     autotools.configure(options)
 
 def build():
-    autotools.make()
-
+    autotools.make("-j1")
+    
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     if get.buildTYPE() == "emul32":
-        #pisitools.remove("/usr/lib32/*.a")
+        pisitools.removeDir("/usr/bin32")
         return
 
     #pisitools.remove("/usr/lib/*.a")

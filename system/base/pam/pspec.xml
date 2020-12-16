@@ -12,24 +12,22 @@
         <IsA>library</IsA>
         <Summary>Pluggable Authentication Modules</Summary>
         <Description>PAM (Pluggable Authentication Modules) is a system security tool that allows system administrators to set authentication policy without having to recompile programs that handle authentication.</Description>
-        <Archive sha1sum="e89b6d279c9bf8cb495dfc0b3f3931eb50f818e9" type="tarxz">https://github.com/linux-pam/linux-pam/releases/download/v1.3.1/Linux-PAM-1.3.1.tar.xz</Archive>
+        <Archive sha1sum="c18ddb2adf580484a58420e2c8db2f06fb827e68" type="targz">https://github.com/linux-pam/linux-pam/archive/v1.5.0.tar.gz</Archive>
         <AdditionalFiles>
+            <AdditionalFile target="conf.sh" permission="0755">conf.sh</AdditionalFile>
             <AdditionalFile target="dlopen.sh" permission="0755">dlopen.sh</AdditionalFile>
             <AdditionalFile target="dlopen-test.sh" permission="0755">dlopen-test.sh</AdditionalFile>
         </AdditionalFiles>
         <BuildDependencies>
             <Dependency>perl</Dependency>
-            <Dependency>gettext</Dependency>
+            <Dependency>gettext-devel</Dependency>
             <Dependency>cracklib-devel</Dependency>
             <Dependency>libxslt-devel</Dependency>
             <Dependency>docbook-xsl</Dependency>
         </BuildDependencies>
         <Patches>
 <!--             <Patch level="1">Linux-PAM-1.1.6-destdir.patch</Patch> -->
-<!--             <Patch level="1">no-lib64.patch</Patch> -->
-<!--             <Patch level="1">nosex-libtirpc-underlinking.patch</Patch> -->
-<!--             <Patch level="1">pam-1.1.8-cve-2013-7041.patch</Patch> -->
-<!--             <Patch level="1">pam-1.1.8-cve-2014-2583.patch</Patch> -->
+<!--              <Patch level="1">fedora/pam-1.4.0-full-relro.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -51,6 +49,7 @@
         </Files>
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/etc/limit.d/90-nproc.conf">90-nproc.conf</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/tmpfiles.d/pam.conf">pam.tmpfiles</AdditionalFile>
         </AdditionalFiles>
         <Provides>
             <COMAR script="postInstall.py">System.Package</COMAR>
@@ -71,6 +70,13 @@
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2020-12-09</Date>
+            <Version>1.5.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="5">
             <Date>2019-12-23</Date>
             <Version>1.3.1</Version>

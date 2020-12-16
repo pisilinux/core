@@ -9,9 +9,14 @@ from pisi.actionsapi import libtools
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 
+LIBDIR = "/usr/lib32" if get.buildTYPE() == "emul32" else "/usr/lib"
+bindir = "/usr/bin32" if get.buildTYPE() == "emul32" else "/usr/bin"
+
 def setup():
     autotools.autoreconf("-vif")
     autotools.configure("--enable-jit \
+                         --libdir=%s \
+                         --bindir=%s \
                          --enable-pcretest-libreadline \
                          --enable-pcre32 \
                          --enable-pcre16 \
@@ -19,7 +24,7 @@ def setup():
                          --enable-unicode-properties \
                          --enable-cpp \
                          --docdir=/%s/%s \
-                         --disable-static" % (get.docDIR(), get.srcNAME()))
+                         --disable-static" % (LIBDIR, bindir, get.docDIR(), get.srcNAME()))
     
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
@@ -34,3 +39,8 @@ def check():
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    
+    if get.buildTYPE() == "emul32":
+        pisitools.removeDir("/usr/bin32")
+        return
+    

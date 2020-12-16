@@ -8,9 +8,11 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 
+Libdir = "/usr/lib32" if get.buildTYPE() == "emul32" else "/usr/lib"
+
 def setup():
     autotools.autoreconf("-vif")
-    autotools.configure("--disable-static")
+    autotools.configure("--disable-static libdir=%s" % Libdir)
     
     pisitools.dosed("libtool", "^(hardcode_libdir_flag_spec=).*", '\\1""')
     pisitools.dosed("libtool", "^(runpath_var=)LD_RUN_PATH", "\\1DIE_RPATH_DIE")

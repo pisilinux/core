@@ -8,6 +8,7 @@ from pisi.actionsapi import get
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 
+
 def setup():
     #pisitools.cflags.add('-fpie -DSYSLOGD_PIDNAME=\\"syslogd.pid\\"')
     pisitools.ldflags.add("-pie -Wl,-z,relro -Wl,-z,now")

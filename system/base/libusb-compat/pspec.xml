@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Userspace access to USB devices</Summary>
         <Description>Project's main aim is to create a library for use by user level applications to access USB devices regardless of OS.</Description>
-        <Archive sha1sum="062319276d913c753a4b1341036e6a2e42abccc9" type="tarbz2">mirrors://sourceforge/libusb/libusb-compat-0.1.5.tar.bz2</Archive>
+        <Archive sha1sum="bf6c214e4a64f62d42a03b2516658bc8f8f1bc00" type="targz">https://github.com/libusb/libusb-compat-0.1/archive/v0.1.7.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>libtool</Dependency>
             <Dependency>libusb-devel</Dependency>
@@ -65,7 +65,14 @@
     </Package>
 
     <History>
-		<Update release="5">
+        <Update release="6">
+            <Date>2020-12-09</Date>
+            <Version>0.1.7</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="5">
             <Date>2019-12-27</Date>
             <Version>1.0.5</Version>
             <Comment>Rebuild</Comment>

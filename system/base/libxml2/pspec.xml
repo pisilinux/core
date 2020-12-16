@@ -18,8 +18,16 @@
             <Dependency>xz-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
             <Dependency versionFrom="8.0.1">readline-devel</Dependency>
-			<Dependency versionFrom="2.30">glibc-devel</Dependency>
         </BuildDependencies>
+        <Patches>
+            <Patch level="1">fedora/fix-relaxed-approach-to-nested-documents.patch</Patch>
+            <Patch level="1">fedora/libxml2-2.9.10-CVE-2019-20388.patch</Patch>
+            <Patch level="1">fedora/libxml2-2.9.10-CVE-2020-24977.patch</Patch>
+            <Patch level="1">fedora/libxml2-2.9.10-CVE-2020-7595.patch</Patch>
+            <Patch level="1">fedora/libxml2-2.9.10-fix-integer-overflow.patch</Patch>
+            <Patch level="1">fedora/libxml2-2.9.10-parenthesize-type-checks.patch</Patch>
+            <Patch level="1">fedora/libxml2-2.9.8-python3-unicode-errors.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
@@ -85,6 +93,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2020-12-09</Date>
+            <Version>2.9.10</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
 		<Update release="8">
             <Date>2019-12-11</Date>
             <Version>2.9.10</Version>

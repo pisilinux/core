@@ -12,7 +12,10 @@
         <IsA>library</IsA>
         <Summary>A JSON implementation in C</Summary>
         <Description>json-c implements a reference counting object model that allows you to easily construct JSON objects in C, output them as JSON formatted strings and parse JSON formatted strings back into the C representation of JSON objects.</Description>
-        <Archive sha1sum="d4c667ab94e7051b1e78aa727f0d937caba971e9" type="targz">https://github.com/json-c/json-c/archive/json-c-0.13.1-20180305.tar.gz</Archive>
+        <Archive sha1sum="dd6473818fe66f16e747ae0df626a2e1559343b9" type="targz">https://github.com/json-c/json-c/archive/json-c-0.15-20200726.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>cmake</Dependency>	
+        </BuildDependencies>
         <Patches>
 <!--             <Patch>wno-werror.patch</Patch> -->
         </Patches>
@@ -37,7 +40,9 @@
         <Files>
             <Path fileType="header">/usr/include</Path>
             <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/lib/cmake</Path>
             <Path fileType="data">/usr/lib32/pkgconfig</Path>
+            <Path fileType="data">/usr/lib32/cmake</Path>
         </Files>
     </Package>
 
@@ -55,7 +60,14 @@
     </Package>
 
     <History>
-		<Update release="5">
+        <Update release="6">
+            <Date>2020-12-09</Date>
+            <Version>0.15.20200726</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="5">
             <Date>2019-12-27</Date>
             <Version>0.13.1_20180305</Version>
             <Comment>Version bump</Comment>
