@@ -41,11 +41,13 @@ def setup():
     if get.buildTYPE() == "_emul32":
         pisitools.flags.add("-m32")
         pisitools.ldflags.add("-m32")
+        shelltools.export("CC", "gcc -m32")
+        shelltools.export("CXX", "g++ -m32")
         shelltools.export("PKG_CONFIG_LIBDIR", "/usr/lib32/pkgconfig")
         pisitools.dosed("%s/misc/gen-pkgconfig.in" % WORKDIR, "^(show_prefix=).*", "\\1'/usr'")
         CONFIGPARAMS += " --prefix=/_emul32 \
                           --libdir=/usr/lib32 \
-                          --includedir=/usr/include \
+                          --includedir=/_emul32/include \
                           --libexecdir=/_emul32/lib \
                           --bindir=/_emul32/bin \
                           --sbindir=/_emul32/sbin \
@@ -92,11 +94,11 @@ def install():
     pisitools.dosym("libncurses.a", "%s/libcurses.a" % LIB)
 
     #for fix 
-    pisitools.dosym("libncursesw.so.6.1", "%s/libncursesw.so.5" % LIB)
-    pisitools.dosym("libncurses.so.6.1", "%s/libncurses.so.5" % LIB)
-    pisitools.dosym("libpanelw.so.6.1", "%s/libpanelw.so.5" % LIB)
-    pisitools.dosym("libformw.so.6.1", "%s/libformw.so.5" % LIB)
-    pisitools.dosym("libmenuw.so.6.1", "%s/libmenuw.so.5" % LIB)
+    pisitools.dosym("libncursesw.so.6.2", "%s/libncursesw.so.5" % LIB)
+    pisitools.dosym("libncurses.so.6.2", "%s/libncurses.so.5" % LIB)
+    pisitools.dosym("libpanelw.so.6.2", "%s/libpanelw.so.5" % LIB)
+    pisitools.dosym("libformw.so.6.2", "%s/libformw.so.5" % LIB)
+    pisitools.dosym("libmenuw.so.6.2", "%s/libmenuw.so.5" % LIB)
 
     shelltools.cd("../%s" % NCURSES)
     for lib in ["ncurses", "form", "panel", "menu"]:
