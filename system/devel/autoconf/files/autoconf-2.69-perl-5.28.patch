@@ -1,0 +1,24 @@
+diff --git a/tests/tools.at b/tests/tools.at
+index 4993b3f5..28b96408 100644
+--- a/tests/tools.at
++++ b/tests/tools.at
+@@ -155,8 +155,8 @@ do
+   file=" file $funny"
+   outfile="$file out "
+   dir=`func_sanitize_dir_name " dir $funny"`
+-  cachedir=" cache$dir"
+-  TMPDIR=" tmp$dir"
++  cachedir="./ cache$dir"
++  TMPDIR="./ tmp$dir"
+   export TMPDIR
+
+   # skip if we cannot create such a file or directory
+@@ -1361,7 +1361,7 @@ do
+   funny=`func_sanitize_file_name "$funny"`
+   file=" file $funny"
+   dir=`func_sanitize_dir_name " dir $funny"`
+-  TMPDIR=" tmp$dir"
++  TMPDIR="./ tmp$dir"
+   export TMPDIR
+
+   # skip if we cannot create such a file or directory 

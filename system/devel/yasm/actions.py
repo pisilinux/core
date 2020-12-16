@@ -27,7 +27,7 @@ def build():
 
 # FIXME: python tests fail, others fail in 64bit, gentoo says tests are wrong
 def check():
-    autotools.make("check")
+    autotools.make("-j1 check")
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())

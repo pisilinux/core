@@ -6,17 +6,27 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    pisitools.dosed("Makefile", " -O ", " $(CFLAGS) ")
+    #pisitools.dosed("makefile", " -O ", " $(CFLAGS) ")
+    #shelltools.system("find . -type f -name \*.c -print0 | xargs -0 sed -i 's/YYSTACKSIZE 500/YYSTACKSIZE 10000/g'")
+    autotools.configure("--disable-dependency-tracking")
 
 def build():
-    autotools.make("clean")
-    autotools.make('-j1 CC="%s" CFLAGS="%s"' % (get.CC(), get.CFLAGS()))
+    autotools.make()
+    #autotools.make('-j1 CC="%s" CFLAGS="%s"' % (get.CC(), get.CFLAGS()))
+    
+#def check():
+    #autotools.make("check")
 
 def install():
-    pisitools.dobin("yacc")
+    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    #pisitools.dobin("yacc")
+    
+    pisitools.dosym("/usr/bin/yacc", "/usr/bin/byacc")
+    pisitools.dosym("/usr/share/man/man1/yacc.1", "/usr/share/man/man1/byacc.1")
 
-    pisitools.doman("yacc.1")
+    #pisitools.doman("yacc.1")
     pisitools.dodoc("ACKNOWLEDGEMENTS", "NEW_FEATURES", "NOTES", "README*")

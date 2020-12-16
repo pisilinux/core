@@ -1,0 +1,114 @@
+diff -U3 -r cython-0.29.17.orig/Cython/Compiler/ExprNodes.py cython-0.29.17/Cython/Compiler/ExprNodes.py
+--- cython-0.29.17.orig/Cython/Compiler/ExprNodes.py	2020-04-26 13:48:48.000000000 +0200
++++ cython-0.29.17/Cython/Compiler/ExprNodes.py	2020-05-15 17:44:55.157172257 +0200
+@@ -2295,8 +2295,10 @@
+                 setter = 'PyDict_SetItem'
+                 namespace = Naming.moddict_cname
+             elif entry.is_pyclass_attr:
+-                code.globalstate.use_utility_code(UtilityCode.load_cached("SetNameInClass", "ObjectHandling.c"))
+-                setter = '__Pyx_SetNameInClass'
++                # Special-case setting __new__
++                n = "SetNewInClass" if self.name == "__new__" else "SetNameInClass"
++                code.globalstate.use_utility_code(UtilityCode.load_cached(n, "ObjectHandling.c"))
++                setter = '__Pyx_' + n
+             else:
+                 assert False, repr(entry)
+             code.put_error_if_neg(
+diff -U3 -r cython-0.29.17.orig/Cython/Compiler/Nodes.py cython-0.29.17/Cython/Compiler/Nodes.py
+--- cython-0.29.17.orig/Cython/Compiler/Nodes.py	2020-04-26 13:48:48.000000000 +0200
++++ cython-0.29.17/Cython/Compiler/Nodes.py	2020-05-15 17:44:55.159172253 +0200
+@@ -2872,7 +2872,6 @@
+                 func = decorator.decorator
+                 if func.is_name:
+                     self.is_classmethod |= func.name == 'classmethod'
+-                    self.is_staticmethod |= func.name == 'staticmethod'
+ 
+         if self.is_classmethod and env.lookup_here('classmethod'):
+             # classmethod() was overridden - not much we can do here ...
+diff -U3 -r cython-0.29.17.orig/Cython/Utility/ObjectHandling.c cython-0.29.17/Cython/Utility/ObjectHandling.c
+--- cython-0.29.17.orig/Cython/Utility/ObjectHandling.c	2020-04-26 13:48:48.000000000 +0200
++++ cython-0.29.17/Cython/Utility/ObjectHandling.c	2020-05-15 17:44:55.160172251 +0200
+@@ -1163,6 +1163,30 @@
+ #define __Pyx_SetNameInClass(ns, name, value)  PyObject_SetItem(ns, name, value)
+ #endif
+ 
++/////////////// SetNewInClass.proto ///////////////
++
++static int __Pyx_SetNewInClass(PyObject *ns, PyObject *name, PyObject *value);
++
++/////////////// SetNewInClass ///////////////
++//@requires: SetNameInClass
++
++// Special-case setting __new__: if it's a Cython function, wrap it in a
++// staticmethod. This is similar to what Python does for a Python function
++// called __new__.
++static int __Pyx_SetNewInClass(PyObject *ns, PyObject *name, PyObject *value) {
++#ifdef __Pyx_CyFunction_USED
++    int ret;
++    if (__Pyx_CyFunction_Check(value)) {
++        PyObject *staticnew = PyStaticMethod_New(value);
++        if (unlikely(!staticnew)) return -1;
++        ret = __Pyx_SetNameInClass(ns, name, staticnew);
++        Py_DECREF(staticnew);
++        return ret;
++    }
++#endif
++    return __Pyx_SetNameInClass(ns, name, value);
++}
++
+ 
+ /////////////// GetModuleGlobalName.proto ///////////////
+ //@requires: PyDictVersioning
+Only in cython-0.29.17.orig: cython-0.29.17
+diff -U3 -r cython-0.29.17.orig/tests/run/cyfunction.pyx cython-0.29.17/tests/run/cyfunction.pyx
+--- cython-0.29.17.orig/tests/run/cyfunction.pyx	2020-04-26 13:48:48.000000000 +0200
++++ cython-0.29.17/tests/run/cyfunction.pyx	2020-05-15 17:44:55.160172251 +0200
+@@ -376,6 +376,18 @@
+     def meth(self): pass
+ 
+ 
++class TestStaticmethod(object):
++    """
++    >>> x = TestStaticmethod()
++    >>> x.staticmeth(42)
++    42
++    >>> x.staticmeth.__get__(42)()
++    42
++    """
++    @staticmethod
++    def staticmeth(arg): return arg
++
++
+ cdef class TestOptimisedBuiltinMethod:
+     """
+     >>> obj = TestOptimisedBuiltinMethod()
+diff -U3 -r cython-0.29.17.orig/tests/run/fused_def.pyx cython-0.29.17/tests/run/fused_def.pyx
+--- cython-0.29.17.orig/tests/run/fused_def.pyx	2020-04-26 13:48:48.000000000 +0200
++++ cython-0.29.17/tests/run/fused_def.pyx	2020-05-15 18:03:39.436752174 +0200
+@@ -268,14 +268,6 @@
+ def test_fused_def_super():
+     """
+     >>> test_fused_def_super()
+-    long 10
+-    long 11
+-    long 11
+-    long 12
+-    short 12
+-    long 13
+-    short 13
+-    long 14
+     <class 'fused_def.SubClass'> long 14
+     <class 'fused_def.SubClass'> long 15
+     <class 'fused_def.SubClass'> long 15
+@@ -296,11 +288,6 @@
+     obj = SubClass()
+     cls = SubClass
+ 
+-    obj.mystaticmethod(obj, 10)
+-    cls.mystaticmethod(obj, 11)
+-    obj.mystaticmethod[cy.short](obj, 12)
+-    cls.mystaticmethod[cy.short](obj, 13)
+-
+     obj.myclassmethod(14)
+     cls.myclassmethod(15)
+     obj.myclassmethod[cy.short](16)

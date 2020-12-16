@@ -13,11 +13,14 @@
         <IsA>library</IsA>
         <Summary>C extensions for the Python</Summary>
         <Description>Cython is a language that makes writing C extensions for the Python language as easy as Python itself.</Description>
-        <Archive sha1sum="f86f2dddde3cc7499cb47d48c0ab98026493d5a8" type="targz">https://files.pythonhosted.org/packages/9c/9b/706dac7338c2860cd063a28cdbf5e9670995eaea408abbf2e88ba070d90d/Cython-0.29.14.tar.gz</Archive>
+        <Archive sha1sum="3aafce4489a7bc7a48c843cdfb8dac4677fdac50" type="targz">https://files.pythonhosted.org/packages/6c/9f/f501ba9d178aeb1f5bf7da1ad5619b207c90ac235d9859961c11829d0160/Cython-0.29.21.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>python-devel</Dependency>
 			<Dependency>bzip2</Dependency>
         </BuildDependencies>
+        <Patches>
+            <Patch level="1">class-static-method-workaround.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
@@ -34,6 +37,13 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2020-12-09</Date>
+            <Version>0.29.21</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
 		<Update release="4">
             <Date>2019-12-26</Date>
             <Version>0.29.14</Version>

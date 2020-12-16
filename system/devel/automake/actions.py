@@ -6,11 +6,13 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 #ver = "1.14"
 
 def setup():
+    shelltools.system("""sed -i "s/''/etags/" t/tags-lisp-space.sh""")
     #autotools.autoreconf("-fi")
     autotools.configure()
 
@@ -18,7 +20,7 @@ def build():
     autotools.make()
 
 #def check():
-#    autotools.make("check")
+    #autotools.make("check")
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())

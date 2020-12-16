@@ -19,9 +19,9 @@ def setup():
     
     if get.buildTYPE() == "emul32":
         shelltools.export("PKG_CONFIG_PATH","/usr/lib32/pkgconfig")
-        #options += "--disable-libdebuginfod \
-                    #--disable-debuginfod \
-                   #"
+        options += " --libdir=/usr/lib32 \
+                     --bindir=/usr/emul32 \
+                   "
     
     elif get.ARCH() == "x86_64":
         pisitools.flags.add("-fexceptions")
@@ -50,6 +50,7 @@ def install():
         pisitools.remove("/usr/lib32/libelf.a")
         pisitools.remove("/usr/lib32/libasm.a")
         pisitools.remove("/usr/lib32/libdw.a")
+        pisitools.removeDir("/usr/emul32")
         
         
     elif get.ARCH() == "x86_64":

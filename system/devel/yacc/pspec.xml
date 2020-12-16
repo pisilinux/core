@@ -12,11 +12,11 @@
         <IsA>app:console</IsA>
         <Summary>Yacc: Yet Another Compiler-Compiler</Summary>
         <Description>Yacc provides a general tool for describing the input to a computer program. The Yacc user specifies the structures of his input, together with code to be invoked as each such structure is recognized. Yacc turns such a specification into a subroutine that handles the input process</Description>
-        <Archive sha1sum="2e260fe53dca89719102d3b45aa7f3a0e2d810c2" type="tarxz">https://sourceforge.net/projects/pisilinux/files/source/yacc-1.9.1.tar.xz</Archive>
+        <Archive sha1sum="ebdf2d1a8d1a558f8c2fb7cc372435ca0f5c21df" type="targz">ftp://ftp.invisible-island.net/byacc/byacc-20200910.tgz</Archive>
         <Patches>
-            <Patch>mkstemp.patch</Patch>
-            <Patch level="1">skeleton.c.diff</Patch>
-            <Patch level="1">yacc-1.9.1-ia64.patch</Patch>
+<!--             <Patch>mkstemp.patch</Patch> -->
+<!--             <Patch level="1">skeleton.c.diff</Patch> -->
+<!--             <Patch level="1">yacc-1.9.1-ia64.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -30,6 +30,13 @@
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2020-12-09</Date>
+            <Version>2.0.20200910</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
 		<Update release="5">
             <Date>2019-12-26</Date>
             <Version>1.9.1</Version>
