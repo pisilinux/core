@@ -6,9 +6,12 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
+    shelltools.system("sed -i 's:doc/testasciidoc.1::' Makefile.in")
+    shelltools.system("rm -rf doc/testasciidoc.1.txt")
     autotools.configure("--prefix=/usr \
                          --sysconfdir=/etc")
 
@@ -27,7 +30,7 @@ def install():
     pisitools.insinto("/usr/lib/%s/site-packages" % get.curPYTHON(), "asciidocapi.py")
 
     # Vim syntax and filetype plugins
-    pisitools.insinto("/usr/share/vim/vimfiles/syntax/" , "vim/syntax/asciidoc.vim")
+    #pisitools.insinto("/usr/share/vim/vimfiles/syntax/" , "vim/syntax/asciidoc.vim")
 
-    pisitools.dodoc("BUGS", "CHANGELOG", "COPYING", "README")
+    pisitools.dodoc("BUGS*", "CHANGELOG*", "README*")
     pisitools.dodoc("docbook-xsl/asciidoc-docbook-xsl.txt", "filters/code/code-filter-readme.txt")
