@@ -19,7 +19,7 @@ def setup():
     
 
 def build():
-    shelltools.export("LDFLAGS", "-lpthread")
+    #shelltools.export("LDFLAGS", "-lpthread")
     autotools.make()
 
 def check():
