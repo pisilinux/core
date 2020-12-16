@@ -1,0 +1,39 @@
+From fb0f702cbf958a5ee9097c1611212c9880b347ce Mon Sep 17 00:00:00 2001
+From: ikerexxe <ipedrosa@redhat.com>
+Date: Mon, 2 Nov 2020 17:08:55 +0100
+Subject: [PATCH] commonio: force lock file sync
+
+lib/commonio.c: after writing to the lock file, force a file sync to
+the storage system.
+
+Resolves: https://bugzilla.redhat.com/show_bug.cgi?id=1862056
+---
+ lib/commonio.c | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/lib/commonio.c b/lib/commonio.c
+index 16fa7e75..c5b3d104 100644
+--- a/lib/commonio.c
++++ b/lib/commonio.c
+@@ -157,7 +157,17 @@ static int do_lock_file (const char *file, const char *lock, bool log)
+ 	if (write (fd, buf, (size_t) len) != len) {
+ 		if (log) {
+ 			(void) fprintf (stderr,
+-			                "%s: %s: %s\n",
++			                "%s: %s file write error: %s\n",
++			                Prog, file, strerror (errno));
++		}
++		(void) close (fd);
++		unlink (file);
++		return 0;
++	}
++	if (fdatasync (fd) == -1) {
++		if (log) {
++			(void) fprintf (stderr,
++			                "%s: %s file sync error: %s\n",
+ 			                Prog, file, strerror (errno));
+ 		}
+ 		(void) close (fd);
+-- 
+2.26.2
+

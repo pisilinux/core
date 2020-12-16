@@ -1,0 +1,35 @@
+From 6543c600d841e4f7779269412d470e50eae25b13 Mon Sep 17 00:00:00 2001
+From: ikerexxe <ipedrosa@redhat.com>
+Date: Wed, 4 Mar 2020 14:50:04 +0100
+Subject: [PATCH] useradd: clarify the useradd -d parameter behavior in man
+ page
+
+Explanation: clarify the useradd -d parameter as it does create directory HOME_DIR if it doesn't exit.
+
+Resolves: https://bugzilla.redhat.com/show_bug.cgi?id=1677005
+
+Changelog: [serge] minor tweak to the text
+---
+ man/useradd.8.xml | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/man/useradd.8.xml b/man/useradd.8.xml
+index 03612ce8..023c0d69 100644
+--- a/man/useradd.8.xml
++++ b/man/useradd.8.xml
+@@ -181,8 +181,10 @@
+ 	    login directory. The default is to append the
+ 	    <replaceable>LOGIN</replaceable> name to
+ 	    <replaceable>BASE_DIR</replaceable> and use that as the login
+-	    directory name. The directory <replaceable>HOME_DIR</replaceable>
+-	    does not have to exist but will not be created if it is missing.
++	    directory name.  If the directory
++	    <replaceable>HOME_DIR</replaceable> does not exist, then it
++	    will be created unless the <option>-M</option> option is
++	    specified.
+ 	  </para>
+ 	</listitem>
+       </varlistentry>
+-- 
+2.25.1
+

@@ -12,10 +12,10 @@
         <IsA>app:console</IsA>
         <Summary>Keyboard and console utilities</Summary>
         <Description>The kbd package contains keytable files and keyboard utilities compatible with kernel version 1.1.54 and later.</Description>
-        <Archive sha1sum="0180f70c7d34452a04d106e0b8cfadebe0e1b2a8" type="tarxz">https://www.kernel.org/pub/linux/utils/kbd/kbd-2.2.0.tar.xz</Archive>
-        <Archive sha1sum="17625849ecf4dedf755aefa06d78406b92c31743" type="tarbz2" target="kbd-2.2.0">https://sourceforge.net/projects/pisilinux/files/source/kbd-latarcyrheb-16-fixed.tar.bz2</Archive>
-        <Archive sha1sum="a5f6d9dff7a8a484cd5014ec7ffdf1eaed27084a" type="tarbz2" target="kbd-2.2.0">https://sourceforge.net/projects/pisilinux/files/source/kbd-latsun-fonts.tar.bz2</Archive>
-        <Archive sha1sum="d52f95fdc761cead041d23992f8802be5ac4bc12" type="tarbz2" target="kbd-2.2.0">https://sourceforge.net/projects/pisilinux/files/source/ro_maps.tar.bz2</Archive>
+        <Archive sha1sum="1ebd128857e6dd097845a37324ffcb9ede8f457c" type="tarxz">https://www.kernel.org/pub/linux/utils/kbd/kbd-2.3.0.tar.xz</Archive>
+        <Archive sha1sum="17625849ecf4dedf755aefa06d78406b92c31743" type="tarbz2" target="kbd-2.3.0">https://sourceforge.net/projects/pisilinux/files/source/kbd-latarcyrheb-16-fixed.tar.bz2</Archive>
+        <Archive sha1sum="a5f6d9dff7a8a484cd5014ec7ffdf1eaed27084a" type="tarbz2" target="kbd-2.3.0">https://sourceforge.net/projects/pisilinux/files/source/kbd-latsun-fonts.tar.bz2</Archive>
+        <Archive sha1sum="d52f95fdc761cead041d23992f8802be5ac4bc12" type="tarbz2" target="kbd-2.3.0">https://sourceforge.net/projects/pisilinux/files/source/ro_maps.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>gettext</Dependency>
             <Dependency>gzip</Dependency>
@@ -35,7 +35,7 @@
             <!-- Archlinux patches -->
             <!--Patch level="1">archlinux/fix-dvorak-es.patch</Patch-->
             <Patch level="1">archlinux/fix-euro2.patch</Patch>
-			<Patch level="1">archlinux/kbd-fix-loadkmap-compat.patch</Patch>
+<!-- 			<Patch level="1">archlinux/kbd-fix-loadkmap-compat.patch</Patch> -->
 
             <!-- Pisi Linux patches -->
             <Patch level="1">pisilinux/unicode_start-default-font.patch</Patch>
@@ -57,10 +57,12 @@
         <Files>
             <Path fileType="executable">/bin</Path>
             <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="data">/usr/share/kbd/keymaps</Path>
             <Path fileType="localedata">/usr/share/kbd/locale</Path>
+            <Path fileType="locale">/usr/share/locale</Path>
             <Path fileType="data">/usr/share/kbd/unimaps</Path>
             <Path fileType="data">/usr/share/kbd/consolefonts</Path>
             <Path fileType="data">/usr/share/kbd/consoletrans</Path>
@@ -76,7 +78,14 @@
     </Package>
 
     <History>
-		<Update release="5">
+        <Update release="6">
+            <Date>2020-12-09</Date>
+            <Version>2.3.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="5">
             <Date>2019-12-25</Date>
             <Version>2.2.0</Version>
             <Comment>Version bump</Comment>

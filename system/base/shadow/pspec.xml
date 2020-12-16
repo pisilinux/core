@@ -21,6 +21,16 @@
             <!--<Dependency>skey-devel</Dependency>-->
         </BuildDependencies>
         <Patches>
+            <Patch level="1">fedora/shadow-4.8-crypt_h.patch</Patch>
+            <Patch level="1">fedora/shadow-4.8-goodname.patch</Patch>
+            <Patch level="1">fedora/shadow-4.8-ignore-login-prompt.patch</Patch>
+            <Patch level="1">fedora/shadow-4.8-long-entry.patch</Patch>
+<!--             <Patch level="1">fedora/shadow-4.8.1-audit-update.patch</Patch> -->
+<!--             <Patch level="1">fedora/shadow-4.8.1-check-local-groups.patch</Patch> -->
+            <Patch level="1">fedora/shadow-4.8.1-commonio-force-lock-file-sync.patch</Patch>
+            <Patch level="1">fedora/shadow-4.8.1-manfix.patch</Patch>
+            <Patch level="1">fedora/shadow-4.8.1-useradd-man-clarification.patch</Patch>
+            
              <Patch level="1">shadow-strncpy-usage.patch</Patch>
              <Patch level="1">xstrdup.patch</Patch>
         </Patches>
@@ -70,6 +80,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2020-12-09</Date>
+            <Version>4.8.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="8">
             <Date>2020-06-15</Date>
             <Version>4.8.1</Version>

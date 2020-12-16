@@ -13,16 +13,19 @@
         <Summary>A file archival tool which can also read and write tar files</Summary>
         <Description>GNU cpio copies files into or out of a cpio or tar archive. The archive can be another file on the disk, a magnetic tape, or a pipe. GNU cpio supports the following archive formats: binary, old ASCII, new ASCII, crc, HPUX binary, HPUX old ASCII, old tar, and POSIX.1 tar.</Description>
         <Archive sha1sum="60358408c76db354f6716724c4bcbcb6e18ab642" type="tarbz2">mirrors://gnu/cpio/cpio-2.12.tar.bz2</Archive>
+        <BuildDependencies>
+            <Dependency>texinfo</Dependency>
+        </BuildDependencies>
         <Patches>
             <!--Patch level="1">cpio-2.7-svr4compat.patch</Patch-->
             <Patch level="1">cpio-2.9-exitCode.patch</Patch>
             <Patch level="1">CVE-2010-0624-rpatelib-overflow.patch</Patch>
-			<Patch level="1">cpio-2.12-name-overflow.patch</Patch>
-			<Patch level="1">cpio-2.12-non-gnu-compilers.patch</Patch>
-			<Patch level="1">cpio-2.12-no-overwrite-symlinks.patch</Patch>
-			<Patch level="1">cpio-2.12-svr4compat.patch</Patch>
-			<Patch level="1">CVE-2010-0624-rpatelib-overflow.patch</Patch>
-
+            <Patch level="1">cpio-2.12-name-overflow.patch</Patch>
+            <Patch level="1">cpio-2.12-non-gnu-compilers.patch</Patch>
+            <Patch level="1">cpio-2.12-no-overwrite-symlinks.patch</Patch>
+            <Patch level="1">cpio-2.12-svr4compat.patch</Patch>
+            <Patch level="1">CVE-2010-0624-rpatelib-overflow.patch</Patch>
+            <Patch level="1">cpio-2.12-gcc-10.patch</Patch>
         </Patches>
     </Source>
 
@@ -38,7 +41,14 @@
     </Package>
 
     <History>
-		<Update release="5">
+        <Update release="6">
+            <Date>2020-12-09</Date>
+            <Version>2.12</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="5">
             <Date>2019-12-27</Date>
             <Version>2.12</Version>
             <Comment>Rebuild</Comment>

@@ -10,7 +10,12 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 
 def setup():
-    autotools.configure("--disable-static")
+    options = "--disable-static"
+    
+    if get.buildTYPE() == "emul32":
+        options += " --libdir=/usr/lib32"
+        
+    autotools.configure(options)
 
 def build():
     autotools.make()
@@ -21,6 +26,9 @@ def check():
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    
+    if get.buildTYPE() == "emul32":
+        return
 
     #if get.buildTYPE() == "emul32":
         ## Remove duplicated header files
@@ -30,4 +38,3 @@ def install():
         #"/usr/lib32/%s/include" % get.srcDIR())
 
     pisitools.dodoc("ChangeLog*", "LICENSE", "README*")
-

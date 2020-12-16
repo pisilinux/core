@@ -12,7 +12,7 @@ Libdir = "/usr/lib32" if get.buildTYPE() == "emul32" else "/usr/lib"
 
 def setup():
     autotools.autoreconf("-vif")
-    autotools.configure("--disable-static")
+    autotools.configure("--disable-static libdir=%s" % Libdir)
 
 def build():
     autotools.make()

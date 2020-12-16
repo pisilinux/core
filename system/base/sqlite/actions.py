@@ -40,7 +40,7 @@ def setup():
                          --enable-json1 \
                          --enable-threadsafe")
     # fix unused direct dependency analysis
-    pisitools.dosed("libtool", " -shared ", " -Wl,--as-needed -shared ")
+    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
     #shelltools.cd("tea")
     #autotools.configure(" \
@@ -64,9 +64,9 @@ def install():
 
     pisitools.dodoc("README*")
 
-    shelltools.cd("%s/sqlite-doc-3330000" % get.workDIR())
+    shelltools.cd("%s/sqlite-doc-3340000" % get.workDIR())
 
-    pisitools.insinto("/usr/share/doc/sqlite", "../sqlite-doc-3330000/*")
+    pisitools.insinto("/usr/share/doc/sqlite", "../sqlite-doc-3340000/*")
     """
     # fix permissions and remove obsolete files; https://bugs.archlinux.org/task/24605
     shelltools.system("find %s -type f -perm 755 -exec ls -lha {} \;" % get.installDIR())

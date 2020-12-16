@@ -7,18 +7,32 @@
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import autotools
 from pisi.actionsapi import shelltools
+from pisi.actionsapi import cmaketools
 from pisi.actionsapi import get
 
 def setup():
-    #autotools.autoreconf("-fi")
-    autotools.configure("--disable-static \
-                         --disable-rpath \
-                         --enable-shared")
-                         
+    shelltools.makedirs("build")
+    shelltools.cd("build")
+    options = "-DCMAKE_INSTALL_PREFIX=/usr \
+               -DCMAKE_INSTALL_LIBDIR=lib \
+               -DCMAKE_BUILD_TYPE=Release \
+               -DBUILD_STATIC_LIBS=OFF"
+               
+    if get.buildTYPE() == "emul32":
+        shelltools.export("CC", "gcc -m32")
+        shelltools.export("CXX", "g++ -m32")        
+        options = " -DCMAKE_INSTALL_LIBDIR=lib32 -DBUILD_STATIC_LIBS=OFF"
+    
+    cmaketools.configure(options, sourceDir=".." )
+
 def build():
-    autotools.make("-j1")
+    shelltools.cd("build")
+    cmaketools.make()
 
 def install():
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-
+    shelltools.cd("build")
+    cmaketools.rawInstall("DESTDIR=%s" % get.installDIR())
+    
+    
+    shelltools.cd("..")
     pisitools.dodoc("COPYING", "README", "ChangeLog", "AUTHORS", "NEWS")

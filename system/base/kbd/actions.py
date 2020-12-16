@@ -11,6 +11,7 @@ def setup():
     autotools.configure("--enable-nls \
                          --prefix=/usr \
                          --datadir=/usr/share/kbd \
+                         --localedir=/usr/share/locale/kbd \
                          --mandir=/usr/share/man")
 
 def build():

@@ -11,6 +11,7 @@ from pisi.actionsapi import get
 
 
 def setup():
+    pisitools.cflags.add("-fcommon")
     pisitools.flags.add("-U_FORTIFY_SOURCE")
     autotools.autoreconf("-vfi")
     
