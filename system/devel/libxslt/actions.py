@@ -10,17 +10,19 @@ from pisi.actionsapi import pisitools
 
 
 Libdir = "/usr/lib32" if get.buildTYPE() == "emul32" else "/usr/lib"
+bindir = "/usr/bin32" if get.buildTYPE() == "emul32" else "/usr/bin"
 
 def setup():
     python = "--without-python" if get.buildTYPE() == "emul32" else "--with-python=/usr/bin/python2.7 "
     # don't remove --with-debugger as it is needed for reverse dependencies
     autotools.configure("%s \
                          --with-crypto \
+                         --bindir=%s \
                          --with-debugger \
                          --disable-static \
                          --includedir=/usr/include \
                          --disable-silent-rules \
-                        " % python)
+                        " % (python, bindir))
 
     pisitools.dosed("libtool", "^(hardcode_libdir_flag_spec=).*", '\\1""')
     pisitools.dosed("libtool", "^(runpath_var=)LD_RUN_PATH", "\\1DIE_RPATH_DIE")
@@ -30,9 +32,12 @@ def build():
     autotools.make()
 
 #def check():
-#    autotools.make("check")
+    #autotools.make("check")
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    if get.buildTYPE() == "emul32":
+        pisitools.removeDir("/usr/bin32")
+        return
 
     pisitools.dodoc("AUTHORS", "ChangeLog", "Copyright", "FEATURES", "NEWS", "README", "TODO")
