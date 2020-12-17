@@ -10,7 +10,6 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
-    #shelltools.system("sed -i 's|servicedir = $(prefix)/lib/systemd/system|#servicedir = $(prefix)/lib/systemd/system|g'  modules/pam_namespace/Makefile*")
     shelltools.touch("ChangeLog")
     pisitools.flags.add("-fPIC -D_GNU_SOURCE")
     
@@ -21,7 +20,6 @@ def setup():
                          --enable-nls \
                          --disable-doc \
                          --disable-audit \
-                         --enable-cracklib \
                          --enable-usergroups \
                          --enable-securedir=/lib/security \
                          --enable-isadir=/lib/security")
@@ -45,15 +43,8 @@ def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
     
     #pisitools.removeDir("/usr/share/doc/Linux-PAM/")
-    #for f in ["system-password", "system-session", "other", "system-auth", "system-account"]:
     for f in ["system-password", "system-session", "system-account"]:
         pisitools.insinto("/etc/pam.d/", "%s" % f)
-        #pisitools.dodir("/etc/pam.d")
-        #pisitools.insinto(% f "/etc/pam.d")
     
-    #for dir in ["archive", "backup", "cache"]:
-        #pisitools.dodir("/etc/lvm/%s" % dir)
-        #shelltools.chmod(get.installDIR() + "/etc/lvm/%s" % dir, 0700)
-
     #pisitools.doman("doc/man/*.[0-9]")
     pisitools.dodoc("CHANGELOG", "Copyright", "README")
