@@ -12,9 +12,9 @@
         <IsA>driver</IsA>
         <Summary>Kernel modules for VirtualBox guest machines</Summary>
         <Description>This package provides the kernel modules needed for mouse integration and shared folder support between VirtualBox host and guest systems.</Description>
-        <Archive sha1sum="6123d1dbe407e0baa5f5a9e6dd3d0eb56700c766" type="tarxz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-6.1.16.tar.xz</Archive>
+        <Archive sha1sum="d10f2a9fee656c43d0f92d0a5e756e0611ce1d96" type="tarxz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-6.1.16.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency version="5.9.13">kernel-module-headers</Dependency>
+            <Dependency version="5.10.3">kernel-module-headers</Dependency>
         </BuildDependencies>
         <Patches>
 <!--             <Patch>vboxsf-make.patch</Patch> -->
@@ -24,7 +24,7 @@
     <Package>
         <Name>module-virtualbox-guest</Name>
         <RuntimeDependencies>
-            <Dependency version="5.9.13">kernel</Dependency>
+            <Dependency version="5.10.3">kernel</Dependency>
             <Dependency>baselayout</Dependency>
             <Dependency version="current">module-virtualbox-guest-userspace</Dependency>
         </RuntimeDependencies>
@@ -55,6 +55,13 @@
     </Package>
 
     <History>
+        <Update release="64">
+            <Date>2020-12-27</Date>
+            <Version>6.1.16</Version>
+            <Comment>Version bump.</Comment>
+            <Name>İdris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="63">
             <Date>2020-12-14</Date>
             <Version>6.1.16</Version>
