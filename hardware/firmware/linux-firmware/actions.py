@@ -9,10 +9,14 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
-WorkDir = "linux-firmware"
+#WorkDir = "linux-firmware"
 NoStrip = ["/lib"]
 
 def setup():
+    shelltools.cd("%s" % get.workDIR())
+    shelltools.move("linux-firmware/*", "linux-firmware-%s" % get.srcVERSION())
+    shelltools.cd("linux-firmware-%s" % get.srcVERSION())
+    
     # Remove source files
     shelltools.unlink("usbdux/*dux")
     shelltools.unlink("*/*.asm")
@@ -22,6 +26,7 @@ def setup():
         shelltools.unlinkDir(fw)
 
 def build():
+    #shelltools.cd("linux-firmware")
     autotools.make()
 
 
