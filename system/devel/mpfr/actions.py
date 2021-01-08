@@ -20,7 +20,7 @@ def check():
 
 def install():
     autotools.install()
-    pisitools.dosym("/usr/lib/libmpfr.so.6.0.2", "/usr/lib/libmpfr.so.4.1.5")
-    pisitools.dosym("/usr/lib/libmpfr.so.6.0.2", "/usr/lib/libmpfr.so.4")
+    #pisitools.dosym("/usr/lib/libmpfr.so.6.1.0", "/usr/lib/libmpfr.so.4.1.5")
+    #pisitools.dosym("/usr/lib/libmpfr.so.6.1.0", "/usr/lib/libmpfr.so.4")
 
     pisitools.dodoc("NEWS", "README", "TODO")
