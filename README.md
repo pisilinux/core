@@ -12,7 +12,7 @@ Pisi GNU/Linux; Pisi tabanlı son Pardus sürümünü temel alan, özgür yazıl
 # core repository
 
 ***********************************************************************************************
-Bu depo Pisi GNU/Linux projesinin X bağımlılığı olmadan çalışabilen minimum bişenlerini içerir.
+Bu depo Pisi GNU/Linux projesinin X bağımlılığı olmadan çalışabilen asgari bişenlerini içerir.
 ***********************************************************************************************
 
 Paketleme Kuralları;
