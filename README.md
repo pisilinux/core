@@ -17,11 +17,11 @@ Bu depo Pisi GNU/Linux projesinin X bağımlılığı olmadan çalışabilen min
 
 Paketleme Kuralları;
 
-1. 
+1. Ana sürümler dışında *toolchain* güncellemesinden kaçınılmalıdır.
 
-1. configure seçeneklerinde belge oluşturmaya yönelik seçenekler açılmamalı, bağımlılıklar yazılmalıdır.
+1. *configure* seçeneklerinde belge oluşturmaya yönelik seçenekler açılmamalı, bağımlılıklar yazılmalıdır.
 
-1. configure seçeneklerinde pakete yeni bağımlılık getirecek değişiklikler için mutlaka issue açılmalı, tartışılmadan pull request istenmemelidir.
+1. *configure* seçeneklerinde pakete yeni bağımlılık getirecek değişiklikler için mutlaka issue açılmalı, tartışılmadan pull request istenmemelidir.
 
 1. systemd olmadığı için paketleri yapılandırırken *"--with-systemdsystemunitdir=/lib/systemd/system"* yerine *"--with-systemdsystemunitdir=no"* kullanılmalıdır.
 
