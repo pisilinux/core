@@ -17,7 +17,7 @@ Bu depo Pisi GNU/Linux projesinin X bağımlılığı olmadan çalışabilen min
 
 Paketleme Kuralları;
 
-1. Core kaynak deposunda minimum X bağımlılığı hedeflenmiştir.
+1. 
 
 1. configure seçeneklerinde belge oluşturmaya yönelik seçenekler açılmamalı, bağımlılıklar yazılmalıdır.
 
@@ -33,10 +33,9 @@ Yardım için;
 kendi github hesabınıza fork edebilir, yaptığınız değişiklikleri pull request ile gönderebilirsiniz. 
 
 ------------------------------------------------------------------------------
+# Dikkat
+
 * Bu depodan derlenen pisi dosyalarını **Pisi-1.x serisi üzerine kurmayınız.**
 * Pisi-1.x sürüm pisi dosyalarını **pisi-2.0 kurulu sistemlere kurmayınız.** 
 
 ------------------------------------------------------------------------------
-
-
-[![Throughput Graph](https://graphs.waffle.io/pisilinux/core/throughput.svg)](https://waffle.io/pisilinux/core/metrics)
