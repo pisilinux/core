@@ -10,6 +10,7 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
+    shelltools.system("sed -i 's@DICTPATH.*@DICTPATH\t/lib/cracklib/pw_dict@' etc/login.defs")
     autotools.configure("--enable-shadowgrp \
                          --without-selinux \
                          --without-audit \
@@ -17,7 +18,6 @@ def setup():
                          --with-libpam \
                          --with-sha-crypt \
                          --enable-nls \
-                         --disable-account-tools-setuid \
                          --with-group-name-max-length=32 \
                          --disable-shared")
 def build():
