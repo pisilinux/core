@@ -16,7 +16,7 @@ def setup():
                -Dgtk_doc=false"
 
 
-    if get.buildTYPE() == "_emul32":
+    if get.buildTYPE() == "emul32":
         shelltools.export("CC", "%s -m32" % get.CC())
         shelltools.export("CXX", "%s -m32" % get.CXX())
         shelltools.export("PKG_CONFIG_PATH", "/usr/lib32/pkgconfig")
@@ -26,9 +26,15 @@ def setup():
                      --datadir=/usr/_emul32 \
                      --mandir=/usr/emul32 \
                      --localedir=/usr/emul32/locale \
+                     -Dsysprof=disabled \
                      -Dlibmount=disabled"
-        
+                     
         shelltools.system("patch -p1 < multilib.diff")
+                     
+    #else:
+        #options += " -Dsysprof=enabled"
+        
+        
     mesontools.configure(options)
 
 
@@ -38,13 +44,13 @@ def build():
 def install():
     mesontools.install()
 
-    if get.buildTYPE() == "_emul32":
+    if get.buildTYPE() == "emul32":
         pisitools.domove("/usr/emul32//gio-querymodules", "/usr/bin/32/")
-        pisitools.removeDir("usr/emul32")
-        pisitools.removeDir("usr/_emul32")
+        pisitools.removeDir("/usr/emul32")
+        pisitools.removeDir("/usr/_emul32")
         pisitools.removeDir("/usr/share/gdb")
         for f in shelltools.ls("%s/usr/lib32/pkgconfig" % get.installDIR()):
-            pisitools.dosed("%s/usr/lib32/pkgconfig/%s" % (get.installDIR(), f), "_emul32", "share")
+            pisitools.dosed("%s/usr/lib32/pkgconfig/%s" % (get.installDIR(), f), "emul32", "share")
             pisitools.dosed("%s/usr/lib32/pkgconfig/%s" % (get.installDIR(), f), "emul32", "bin")
         return
 
