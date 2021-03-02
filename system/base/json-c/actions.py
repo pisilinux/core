@@ -10,18 +10,23 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import cmaketools
 from pisi.actionsapi import get
 
+
+LIBDIR = "lib32" if get.buildTYPE() == "emul32" else "lib"
+
 def setup():
     shelltools.makedirs("build")
     shelltools.cd("build")
     options = "-DCMAKE_INSTALL_PREFIX=/usr \
-               -DCMAKE_INSTALL_LIBDIR=lib \
+               -DCMAKE_INSTALL_LIBDIR=%s \
                -DCMAKE_BUILD_TYPE=Release \
-               -DBUILD_STATIC_LIBS=OFF"
+               -DBUILD_STATIC_LIBS=OFF \
+               " % (LIBDIR)
                
     if get.buildTYPE() == "emul32":
         shelltools.export("CC", "gcc -m32")
         shelltools.export("CXX", "g++ -m32")        
-        options = " -DCMAKE_INSTALL_LIBDIR=lib32 -DBUILD_STATIC_LIBS=OFF"
+        options += " -DBUILD_STATIC_LIBS=OFF \
+                   "
     
     cmaketools.configure(options, sourceDir=".." )
 
@@ -32,6 +37,8 @@ def build():
 def install():
     shelltools.cd("build")
     cmaketools.rawInstall("DESTDIR=%s" % get.installDIR())
+    if get.buildTYPE() == "emul32":
+        return
     
     
     shelltools.cd("..")
