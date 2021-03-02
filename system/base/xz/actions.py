@@ -9,10 +9,14 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
+
+bindir = "/usr/bin32" if get.buildTYPE() == "emul32" else "/usr/bin"
+
 def setup():
     autotools.autoreconf("-vfi")
     autotools.configure("--disable-static \
-                         --disable-rpath")
+                         --bindir=%s \
+                         --disable-rpath" % (bindir))
     # Remove RPATH
     pisitools.dosed("libtool", "^hardcode_libdir_flag_spec=.*", "hardcode_libdir_flag_spec=\"\"")
     pisitools.dosed("libtool", "^runpath_var=LD_RUN_PATH", "runpath_var=DIE_RPATH_DIE")
@@ -28,7 +32,10 @@ def check():
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-
-    if not get.buildTYPE() == "emul32":
+    
+    if get.buildTYPE() == "emul32":
+        pisitools.removeDir("/usr/bin32")
         pisitools.remove("/usr/share/man/man1/lzmadec.1")
-        pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING*", "NEWS", "README")
+        return
+    
+    pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING*", "NEWS", "README")
