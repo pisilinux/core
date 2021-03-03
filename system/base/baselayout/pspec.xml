@@ -15,6 +15,9 @@
         <Summary>Filesystem baselayout</Summary>
         <Description>baselayout creates the Pisi Linux Linux main filesystem hierarchy.</Description>
         <Archive sha1sum="01938089490008e73aae63cf8917a848736e2f7c" type="targz">https://sourceforge.net/projects/pisilinux/files/source/baselayout-3.10.1.tar.gz</Archive>
+        <Patches>
+            <Patch>group_fstab.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
@@ -49,14 +52,12 @@
             <!-- Update these from fedora's setup package -->
             <AdditionalFile owner="root" permission="0644" target="/etc/services">services</AdditionalFile>
             <AdditionalFile owner="root" permission="0644" target="/etc/protocols">protocols</AdditionalFile>
-
             <AdditionalFile owner="root" permission="0644" target="/etc/sysctl.conf">sysctl.conf</AdditionalFile>
-
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/baselayout/inittab.live">inittab.live</AdditionalFile>
             <!-- Release file for Pisi Linux, there's another in lsb-release package -->
             <AdditionalFile owner="root" permission="0644" target="/etc/pisilinux-release">pisilinux-release</AdditionalFile>
             <!-- os-release file for same package need this (fwupd) -->
             <AdditionalFile owner="root" permission="0644" target="/etc/os-release">os-release</AdditionalFile>
-
             <!-- Should be dropped after switching to systemd as the only user is COMAR -->
             <AdditionalFile owner="root" permission="0644" target="/usr/share/man/man8/start-stop-daemon.8">start-stop-daemon.8</AdditionalFile>
         </AdditionalFiles>
@@ -69,6 +70,13 @@
     </Package>
 
     <History>
+        <Update release="13">
+            <Date>2021-02-12</Date>
+            <Version>3.10.1</Version>
+            <Comment>Rebuild.For 2.2</Comment>
+            <Name>Ali Cengiz Kurt</Name>
+            <Email>alicengizkurt@gmail.com</Email>
+        </Update>
 		<Update release="12">
             <Date>2019-12-26</Date>
             <Version>3.10.1</Version>
