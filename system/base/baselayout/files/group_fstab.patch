@@ -1,0 +1,22 @@
+--- root/usr/share/baselayout/fstab.orig	2012-10-20 01:50:00.000000000 +0300
++++ root/usr/share/baselayout/fstab	2012-10-20 20:05:53.495958636 +0300
+@@ -2,7 +2,7 @@
+ #
+ # <fs>      <mountpoint> <type> <opts>      <dump/pass>
+ 
+-# /dev/ROOT   /            ext3    noatime        0 1
++# /dev/ROOT   /            ext4    noatime        0 1
+ # /dev/SWAP   none         swap    sw             0 0
+ # /dev/fd0    /mnt/floppy  auto    noauto         0 0
+ 
+
+--- root/usr/share/baselayout/group.orig	2013-01-05 18:36:21.000000000 +0200
++++ root/usr/share/baselayout/group	2013-01-05 18:39:26.943644336 +0300
+@@ -24,6 +24,7 @@
+ at::25:at
+ tape::26:root
+ video::27:root
++users::100:
+ dbus:x:101:dbus
+ hal:x:102:hal
+ polkitd:x:103:polkitd

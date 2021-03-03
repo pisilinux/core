@@ -112,6 +112,7 @@ def postInstall(fromVersion, fromRelease, toVersion, toRelease):
     # addGroup(gid, name)
     groups = (
                 (7,   "lp"),
+                (10,  "wheel"),
                 (11,  "cdrom"),
                 (14,  "lpadmin"),
                 (19,  "floppy"),
