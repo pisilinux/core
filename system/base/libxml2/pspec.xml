@@ -15,6 +15,7 @@
         <Archive sha1sum="db6592ec9ca9708c4e71bf6bfd907bbb5cd40644" type="targz">ftp://xmlsoft.org/libxml2/libxml2-2.9.10.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>python-devel</Dependency>
+            <Dependency>python3-devel</Dependency>
             <Dependency>xz-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
             <Dependency versionFrom="8.0.1">readline-devel</Dependency>
@@ -93,6 +94,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2021-03-13</Date>
+            <Version>2.9.10</Version>
+            <Comment>Rebuild py3</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="9">
             <Date>2020-12-09</Date>
             <Version>2.9.10</Version>
