@@ -1,11 +1,12 @@
---- sysvinit-2.86/src/init.c.loginshell	2004-07-30 08:16:20.000000000 -0400
-+++ sysvinit-2.86/src/init.c	2005-12-19 15:41:29.000000000 -0500
-@@ -1153,7 +1153,7 @@
- 		for(old = newFamily; old; old = old->next)
- 			if (strpbrk(old->rlevel, "S")) break;
- 		if (old == NULL)
--			snprintf(buf, sizeof(buf), "~~:S:wait:%s\n", SULOGIN);
-+			snprintf(buf, sizeof(buf), "~~:S:wait:%s -l\n", SHELL);
- 		else
- 			continue;
- 	}
+diff -Nuar a/src/init.c b/src/init.c
+--- a/src/init.c	2021-02-21 21:02:25.000000000 +0300
++++ b/src/init.c	2021-03-04 21:59:54.200890526 +0300
+@@ -1492,7 +1492,7 @@
+ 			for(old = newFamily; old; old = old->next)
+ 				if (strpbrk(old->rlevel, "S"))  break;
+ 			if (old == NULL)
+-				snprintf(buf, sizeof(buf), "~~:S:wait:%s\n", SULOGIN);
++				snprintf(buf, sizeof(buf), "~~:S:wait:%s -l\n", SHELL);
+ 			else
+ 				continue;
+ 		}

@@ -12,7 +12,9 @@ from pisi.actionsapi import get
 WorkDir = "sysvinit-%s" % get.srcVERSION()
 
 def build():
-    pisitools.dosed("src/Makefile", "MNTPOINT=", "MNTPOINT= yes")
+    # These files conflict with util-linux
+    #pisitools.dosed("src/Makefile", "MNTPOINT=", "MNTPOINT= yes")
+    
     autotools.make("-C src CC=\"%s\" CFLAGS=\"%s -D_GNU_SOURCE\" LCRYPT=\"-lcrypt\"" % (get.CC(), get.CFLAGS()))
 
 def install():
