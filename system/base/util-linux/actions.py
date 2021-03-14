@@ -33,7 +33,6 @@ def setup():
                --disable-sulogin \
                --disable-utmpdump \
                --disable-chfn-chsh \
-               --disable-mountpoint \
                --disable-makeinstall-chown \
                --disable-socket-activation \
               "
@@ -52,6 +51,7 @@ def setup():
                      --disable-mount \
                      --disable-fsck \
                      --disable-libmount \
+                     --disable-mountpoint \
                      --with-audit=no \
                    "
     else:
@@ -65,6 +65,7 @@ def setup():
                      --enable-runuser \
                      --without-audit \
                      --with-udev \
+                     --enable-mountpoint \
                      --without-utempter \
                    "
 
