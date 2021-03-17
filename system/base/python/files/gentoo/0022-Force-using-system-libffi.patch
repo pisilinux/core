@@ -1,0 +1,47 @@
+From aa1369965c042751a50de159233faec3aa929700 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Micha=C5=82=20G=C3=B3rny?= <mgorny@gentoo.org>
+Date: Sun, 29 Dec 2019 10:58:36 +0100
+Subject: [PATCH 22/24] Force using system libffi
+
+---
+ setup.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index c240376e07..78740fbe6c 100644
+--- a/setup.py
++++ b/setup.py
+@@ -2130,7 +2130,7 @@ class PyBuildExt(build_ext):
+         return True
+ 
+     def detect_ctypes(self, inc_dirs, lib_dirs):
+-        self.use_system_libffi = False
++        self.use_system_libffi = ('--with-system-ffi' in sysconfig.get_config_var("CONFIG_ARGS"))
+         include_dirs = []
+         extra_compile_args = []
+         extra_link_args = []
+@@ -2174,7 +2174,7 @@ class PyBuildExt(build_ext):
+                              sources=['_ctypes/_ctypes_test.c'])
+         self.extensions.extend([ext, ext_test])
+ 
+-        if not '--with-system-ffi' in sysconfig.get_config_var("CONFIG_ARGS"):
++        if not self.use_system_libffi:
+             return
+ 
+         if host_platform == 'darwin':
+@@ -2204,10 +2204,10 @@ class PyBuildExt(build_ext):
+                     ffi_lib = lib_name
+                     break
+ 
+-        if ffi_inc and ffi_lib:
++        if ffi_inc:
+             ext.include_dirs.extend(ffi_inc)
++        if ffi_lib:
+             ext.libraries.append(ffi_lib)
+-            self.use_system_libffi = True
+ 
+         if sysconfig.get_config_var('HAVE_LIBDL'):
+             # for dlopen, see bpo-32647
+-- 
+2.30.1
+
