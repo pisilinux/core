@@ -41,6 +41,19 @@
             <!-- some Turkish locale fixes, usually caused by tolower() -->
             <Patch level="1">trfix_emaillib.patch</Patch>
 			<Patch level="1">allowZip64.patch</Patch>
+			
+            <!-- Gentoo patches -->
+            <Patch>gentoo/0001-bpo-39017-Avoid-infinite-loop-in-the-tarfile-module-.patch</Patch>
+            <Patch>gentoo/0002-bpo-39503-CVE-2020-8492-Fix-AbstractBasicAuthHandler.patch</Patch>
+            <Patch>gentoo/0003-bpo-39603-Prevent-header-injection-in-http-methods-G.patch</Patch>
+            <Patch>gentoo/0004-bpo-42051-Reject-XML-entity-declarations-in-plist-fi.patch</Patch>
+            <Patch>gentoo/0005-bpo-41944-No-longer-call-eval-on-content-received-vi.patch</Patch>
+            <Patch>gentoo/0006-bpo-40791-Make-compare_digest-more-constant-time.-GH.patch</Patch>
+            <Patch>gentoo/0007-3.6-closes-bpo-42938-Replace-snprintf-with-Python-un.patch</Patch>
+            <Patch>gentoo/0011-Non-zero-exit-status-on-failure.patch</Patch>
+            <Patch>gentoo/0015-Turkish-locale.patch</Patch>
+            <Patch>gentoo/0022-Force-using-system-libffi.patch</Patch>
+            <Patch>gentoo/0024-3.6-bpo-42967-only-use-as-a-query-string-separator-G.patch</Patch>
         </Patches>
     </Source>
 
@@ -136,6 +149,13 @@
     </Package>-->
 
     <History>
+    <Update release="10">
+            <Date>2021-03-18</Date>-
+            <Version>2.7.18</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>İdris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
 	<Update release="9">
             <Date>2021-03-02</Date>-
             <Version>2.7.18</Version>
