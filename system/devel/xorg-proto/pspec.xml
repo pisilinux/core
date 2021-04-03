@@ -16,7 +16,8 @@
         <BuildDependencies>
             <Dependency>meson</Dependency>
             <Dependency>util-macros</Dependency>
-            <Dependency>libxslt</Dependency>
+	    <!--remove for fix cycle dep-->
+            <!--Dependency>libxslt</Dependency-->
         </BuildDependencies>
         <Patches>
 <!--             <Patch level="1">docdir.patch</Patch> -->
