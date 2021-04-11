@@ -12,7 +12,7 @@
         <License>custom</License>
         <Summary>Next generation of the python high-level scripting language</Summary>
         <Description>Python is an accessible, high-level, dynamically typed, interpreted programming language, designed with an emphasis on code readability. It includes an extensive standard library, and has a vast ecosystem of third-party libraries.</Description>
-        <Archive sha1sum="d7dd8ef51ebe7ddd8ec41e39a607ac26d1834a8f" type="tarxz">https://www.python.org/ftp/python/3.8.8/Python-3.8.8.tar.xz</Archive>
+        <Archive sha1sum="ea40651135adc4126a60a45093d100722610f4de" type="tarxz">https://www.python.org/ftp/python/3.8.9/Python-3.8.9.tar.xz</Archive>
 <!--         <Archive sha1sum="bf7badf7e248e0ecf465d33c2f5aeec774209227" type="targz" target="Python-3.8.5">https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz</Archive> -->
         <BuildDependencies>
             <Dependency>bzip2</Dependency>
@@ -23,7 +23,7 @@
             <Dependency>libffi-devel</Dependency>
             <Dependency>sqlite-devel</Dependency>
             <Dependency>ncurses-devel</Dependency>
-            <Dependency versionFrom="1.1.1k">openssl-devel</Dependency>
+            <Dependency>openssl-devel</Dependency>
             <Dependency>readline-devel</Dependency>
             <Dependency>mpdecimal-devel</Dependency>
             <!--<Dependency>valgrind</Dependency>-->
@@ -128,6 +128,13 @@
     </Package>
 
     <History>
+        <Update release="14">
+            <Date>2021-04-11</Date>
+            <Version>3.8.9</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="13">
             <Date>2021-04-11</Date>
             <Version>3.8.8</Version>
