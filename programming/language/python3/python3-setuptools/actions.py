@@ -19,5 +19,4 @@ def build():
     
     
 def install():
-    #shelltools.system("python3 setup.py install --prefix=/usr --optimize=1 --skip-build")
     pythonmodules.install(pyVer="3")
