@@ -10,12 +10,14 @@ from pisi.actionsapi import pythonmodules
 
 WorkDir="setuptools-%s" % get.srcVERSION()
 
-def setup():
-    shelltools.makedirs("%s/setuptools-54.2.0/build/scripts-3.8" % get.workDIR())
+#def setup():
+    #shelltools.makedirs("%s/setuptools-54.2.0/build/scripts-3.8" % get.workDIR())
     
 def build():
     pythonmodules.compile(pyVer="3")
-
-
+    
+    
+    
 def install():
+    #shelltools.system("python3 setup.py install --prefix=/usr --optimize=1 --skip-build")
     pythonmodules.install(pyVer="3")
