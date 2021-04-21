@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>duktape</Name>
+        <Homepage>https://duktape.org/</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Packager>
+        <License>MIT</License>
+        <IsA>library</IsA>
+        <Summary>Embeddable Javascript engine</Summary>
+        <Description>Embeddable Javascript engine</Description>
+        <Archive sha1sum="5936bf5e9943128b53a9e534e0a6842532b52bb5" type="tarxz">https://duktape.org/duktape-2.6.0.tar.xz</Archive>
+        <AdditionalFiles>
+            <AdditionalFile target="Makefile">Makefile</AdditionalFile>
+<!--             <AdditionalFile target="duktape.pc.in">duktape.pc.in</AdditionalFile> -->
+        </AdditionalFiles>
+        <BuildDependencies>
+        </BuildDependencies>
+        <Patches>
+            <Patch level="1">duktape-build.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>duktape</Name>
+        <RuntimeDependencies>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/pkgconfig/duktape.pc">duktape.pc</AdditionalFile>
+        </AdditionalFiles>
+    </Package>
+
+    <Package>
+        <Name>duktape-devel</Name>
+        <Summary>Development files for duktape</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">duktape</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2021-04-20</Date>
+            <Version>2.6.0</Version>
+            <Comment>First release</Comment>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>

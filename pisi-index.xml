@@ -2781,7 +2781,7 @@
             <Summary xml:lang="tr">High productivity build system</Summary>
             <Description xml:lang="en">Yüksek verimli üretme sistemi</Description>
             <Description xml:lang="tr">Yüksek verimli üretme sistemi</Description>
-            <Archive type="targz" sha1sum="eb87a41d4265aec1223c446c344455b674d4538c" name="meson-0.57.1.tar.gz">https://github.com/mesonbuild/meson/releases/download/0.57.1/meson-0.57.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="9daf7c822ac641ff0d20ac3c051914af9ec8cb9d" name="meson-0.57.2.tar.gz">https://github.com/mesonbuild/meson/releases/download/0.57.2/meson-0.57.2.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>python3-devel</Dependency>
                 <Dependency>python3-setuptools</Dependency>
@@ -2805,6 +2805,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="17">
+                <Date>2021-04-11</Date>
+                <Version>0.57.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="16">
                 <Date>2021-03-01</Date>
                 <Version>0.57.1</Version>
@@ -4480,6 +4487,62 @@
                 <Comment>First release</Comment>
                 <Name>Yusuf Aydemir</Name>
                 <Email>yusuf.aydemir@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>duktape</Name>
+            <Homepage>https://duktape.org/</Homepage>
+            <Packager>
+                <Name>Pisi Linux Admins</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Packager>
+            <License>MIT</License>
+            <IsA>library</IsA>
+            <PartOf>system.devel</PartOf>
+            <Summary xml:lang="en">Embeddable Javascript engine</Summary>
+            <Summary xml:lang="tr">Embeddable Javascript engine</Summary>
+            <Description xml:lang="en">Embeddable Javascript engine</Description>
+            <Description xml:lang="tr">Embeddable Javascript engine</Description>
+            <Archive type="tarxz" sha1sum="5936bf5e9943128b53a9e534e0a6842532b52bb5" name="duktape-2.6.0.tar.xz">https://duktape.org/duktape-2.6.0.tar.xz</Archive>
+            <AdditionalFiles>
+                <AdditionalFile target="Makefile">Makefile</AdditionalFile>
+            </AdditionalFiles>
+            <Patches>
+                <Patch level="1">duktape-build.patch</Patch>
+            </Patches>
+            <SourceURI>system/devel/duktape/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>duktape</Name>
+            <Files>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="data">/usr/share</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+            <AdditionalFiles>
+                <AdditionalFile target="/usr/share/pkgconfig/duktape.pc" permission="0644" owner="root">duktape.pc</AdditionalFile>
+            </AdditionalFiles>
+        </Package>
+        <Package>
+            <Name>duktape-devel</Name>
+            <Summary xml:lang="en">Development files for duktape</Summary>
+            <RuntimeDependencies>
+                <Dependency release="1">duktape</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="header">/usr/include</Path>
+                <Path fileType="library">/usr/lib/pkgconfig</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="1">
+                <Date>2021-04-20</Date>
+                <Version>2.6.0</Version>
+                <Comment>First release</Comment>
+                <Name>Pisi Linux Admins</Name>
+                <Email>admin@pisilinux.org</Email>
             </Update>
         </History>
     </SpecFile>
@@ -9707,7 +9770,7 @@
             <Summary xml:lang="tr">Python3, gelecek nesil üst seviye betik programlama dili.</Summary>
             <Description xml:lang="en">Python is an accessible, high-level, dynamically typed, interpreted programming language, designed with an emphasis on code readability. It includes an extensive standard library, and has a vast ecosystem of third-party libraries.</Description>
             <Description xml:lang="tr">Python3 kod okuma rahatlığı ile tasarlanmış, erişilebilir, yüksek seviyeli, dinamik, yorumlamalı programlama dilidir. Python3 kapsamlı standart kütüphanesi ile beraber gelmekte ve  üçüncü parti kitaplıkların kolay bütünleştirilmesine olanak tanıyan yapısıylar en hızlı ve dinamik yaorumlamalı dillerden biri olmaktadır.</Description>
-            <Archive type="tarxz" sha1sum="d7dd8ef51ebe7ddd8ec41e39a607ac26d1834a8f" name="Python-3.8.8.tar.xz">https://www.python.org/ftp/python/3.8.8/Python-3.8.8.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="ea40651135adc4126a60a45093d100722610f4de" name="Python-3.8.9.tar.xz">https://www.python.org/ftp/python/3.8.9/Python-3.8.9.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>bzip2</Dependency>
                 <Dependency>xz-devel</Dependency>
@@ -9805,7 +9868,7 @@
             <Summary xml:lang="tr">Python3 için geliştime dosyaları</Summary>
             <Description xml:lang="tr">python3-devel, python3 için geliştime dosyaları içerir.</Description>
             <RuntimeDependencies>
-                <Dependency release="13">python3</Dependency>
+                <Dependency release="14">python3</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header" permanent="0">/usr/include/python3.8/*</Path>
@@ -9813,8 +9876,15 @@
             </Files>
         </Package>
         <History>
+            <Update release="14">
+                <Date>2021-04-11</Date>
+                <Version>3.8.9</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="13">
-                <Date>2021-03-01</Date>
+                <Date>2021-04-11</Date>
                 <Version>3.8.8</Version>
                 <Comment>Version bump</Comment>
                 <Name>İdris Kalp</Name>
@@ -21669,7 +21739,7 @@
             <Description xml:lang="en">OpenSSL is a cryptography toolkit implementing the Secure Sockets Layer (SSL v2/v3) and Transport Layer Security (TLS v1) network protocols and related cryptography standards required by them.</Description>
             <Description xml:lang="tr">OpenSSL, Güvenlik Soketleri Katmanı (SSL v2/v3) ve Aktarım Katmanı Güvenliği (TLSv1) ağ protokolleri ile bu protokollerin gerektirdiği şifreleme standartlarını uygulayan bir şifreleme aracıdır.</Description>
             <Description xml:lang="de">OpenSSL ist ein Kryptographie Werkzeug, das die Netzwerkprotokolle Secure Sockets Layer (SSL v2/v3) und Transport Layer Security (TLS v1) sowie deren erforderliche zugehörige Kryptographie Standards implementiert.</Description>
-            <Archive type="targz" sha1sum="04c340b086828eecff9df06dceff196790bb9268" name="openssl-1.1.1j.tar.gz">https://www.openssl.org/source/openssl-1.1.1j.tar.gz</Archive>
+            <Archive type="targz" sha1sum="bad9dc4ae6dcc1855085463099b5dacb0ec6130b" name="openssl-1.1.1k.tar.gz">https://www.openssl.org/source/openssl-1.1.1k.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>xorg-util</Dependency>
@@ -21707,7 +21777,7 @@
             <Summary xml:lang="tr">openssl için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="10">openssl</Dependency>
+                <Dependency release="11">openssl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -21726,7 +21796,7 @@
                 <Dependency>zlib-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="10">openssl</Dependency>
+                <Dependency release="11">openssl</Dependency>
                 <Dependency>zlib-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -21734,6 +21804,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2021-04-10</Date>
+                <Version>1.1.1k</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="10">
                 <Date>2021-03-01</Date>
                 <Version>1.1.1j</Version>
@@ -22284,7 +22361,7 @@
                 <Dependency>libffi-devel</Dependency>
                 <Dependency>sqlite-devel</Dependency>
                 <Dependency>ncurses-devel</Dependency>
-                <Dependency>openssl-devel</Dependency>
+                <Dependency versionFrom="1.1.1k">openssl-devel</Dependency>
                 <Dependency>readline-devel</Dependency>
                 <Dependency versionFrom="2.32">glibc-devel</Dependency>
             </BuildDependencies>
@@ -22324,7 +22401,6 @@
                 <Dependency>ncurses</Dependency>
                 <Dependency>openssl</Dependency>
                 <Dependency>readline</Dependency>
-                <Dependency versionFrom="2.32">glibc</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="config">/etc</Path>
@@ -23359,7 +23435,7 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78" name="v0.8.tar.gz">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="5.10.23">kernel-module-headers</Dependency>
+                <Dependency version="5.10.30">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">0001-proc_ops-struct.patch</Patch>
@@ -23370,8 +23446,8 @@
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="5.10.23">kernel</Dependency>
-                <Dependency release="44">bbswitch-common</Dependency>
+                <Dependency version="5.10.30">kernel</Dependency>
+                <Dependency release="45">bbswitch-common</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/lib/modules</Path>
@@ -23394,7 +23470,7 @@
         <Package>
             <Name>bbswitch-dkms</Name>
             <RuntimeDependencies>
-                <Dependency release="44">bbswitch-common</Dependency>
+                <Dependency release="45">bbswitch-common</Dependency>
                 <Dependency>dkms</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -23405,6 +23481,13 @@
             </Conflicts>
         </Package>
         <History>
+            <Update release="45">
+                <Date>2021-04-14</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="44">
                 <Date>2021-03-12</Date>
                 <Version>0.8</Version>
@@ -23732,7 +23815,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
             <Archive type="tarxz" sha1sum="aca02d2a260463400eaa3cbbe20431d1d2f4e78f" name="module-virtualbox-guest-6.1.18.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-6.1.18.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="5.10.23">kernel-module-headers</Dependency>
+                <Dependency version="5.10.30">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -23742,7 +23825,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.10.23">kernel</Dependency>
+                <Dependency version="5.10.30">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
                 <Dependency version="6.1.18">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
@@ -23769,6 +23852,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="70">
+                <Date>2021-04-14</Date>
+                <Version>6.1.18</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="69">
                 <Date>2021-03-12</Date>
                 <Version>6.1.18</Version>
@@ -24278,7 +24368,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox için çekirdek desteği sunar.</Description>
             <Archive type="tarxz" sha1sum="f211fa6c3af9436bd02533e03dd303f552327d81" name="module-virtualbox-6.1.18.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-6.1.18.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="5.10.23">kernel-module-headers</Dependency>
+                <Dependency version="5.10.30">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -24288,7 +24378,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.10.23">kernel</Dependency>
+                <Dependency version="5.10.30">kernel</Dependency>
                 <Dependency version="6.1.18">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -24310,6 +24400,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="70">
+                <Date>2021-04-14</Date>
+                <Version>6.1.18</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="69">
                 <Date>2021-03-12</Date>
                 <Version>6.1.18</Version>
@@ -24820,7 +24917,7 @@
             <Archive type="targz" sha1sum="8acbdbb4ab4ab4123d1773b616904798fbef9277" target="i686" name="hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <Archive type="targz" sha1sum="1f568bb989d175813c5631c6629d9479eae6f3be" target="x86_64" name="hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="5.10.23">kernel-module-headers</Dependency>
+                <Dependency version="5.10.30">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">broadcom-wl-6.30.223.271-debian-fix-kernel-warnings.patch</Patch>
@@ -24849,8 +24946,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.10.23">kernel</Dependency>
-                <Dependency release="43">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="5.10.30">kernel</Dependency>
+                <Dependency release="44">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -24874,6 +24971,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="44">
+                <Date>2021-04-14</Date>
+                <Version>6.30.223.271</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="43">
                 <Date>2021-03-12</Date>
                 <Version>6.30.223.271</Version>
@@ -25212,7 +25316,7 @@
                 <Dependency>elfutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-5.10.23.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-5.10.30.xz</Patch>
                 <Patch level="1">patches/mageia/fs-aufs5.10.patch</Patch>
                 <Patch level="1">patches/mageia/fs-aufs5.10-symbol-exports.patch</Patch>
                 <Patch level="1">patches/mageia/fs-aufs5.10-tristate.patch</Patch>
@@ -25276,7 +25380,7 @@
             <Description xml:lang="en">kernel-module-headers includes the C header files and the necessary Kbuild files for being able to build external kernel modules.</Description>
             <Description xml:lang="tr">kernel-module-headers, harici çekirdek modüllerinin derlenebilmesi için gereken başlık dosyaları ve Kbuild sistemini içeren pakettir.</Description>
             <RuntimeDependencies>
-                <Dependency release="51">kernel</Dependency>
+                <Dependency release="52">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/src/linux-headers*</Path>
@@ -25307,6 +25411,17 @@
             </Files>
         </Package>
         <History>
+            <Update release="52">
+                <Type package="kernel">security</Type>
+                <Date>2021-04-14</Date>
+                <Version>5.10.30</Version>
+                <Comment>Version bump</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
             <Update release="51">
                 <Type package="kernel">security</Type>
                 <Date>2021-03-12</Date>
@@ -25983,7 +26098,7 @@
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-5.10.23.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-5.10.30.xz</Patch>
                 <Patch level="1">patches/mageia/fs-aufs5.10.patch</Patch>
                 <Patch level="1">patches/mageia/fs-aufs5.10-symbol-exports.patch</Patch>
                 <Patch level="1">patches/mageia/fs-aufs5.10-tristate.patch</Patch>
@@ -26039,6 +26154,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="50">
+                <Date>2021-04-14</Date>
+                <Version>5.10.30</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="49">
                 <Date>2021-03-12</Date>
                 <Version>5.10.23</Version>
@@ -26630,9 +26752,10 @@
             <Summary xml:lang="tr">Python kurulum araçları</Summary>
             <Description xml:lang="en">python3-setuptools is a collection of enhancements to the Python distutils that allow you to more easily build and distribute Python packages, especially ones that have dependencies on other packages.</Description>
             <Description xml:lang="tr">python3-setuptools, Python distutils&apos;e yapılan, özellikle başka paketlere bağımlılığı olan Python paketlerini daha kolay oluşturmaya ve dağıtmaya yarayan iyileştirmeler koleksiyonudur.</Description>
-            <Archive type="targz" sha1sum="749e7a1d08e7afd0d3899eb56c2428e91a3bcf47" name="v50.3.2.tar.gz">https://github.com/pypa/setuptools/archive/v50.3.2.tar.gz</Archive>
+            <Archive type="targz" sha1sum="2855c2fa54b8b8c3309b6b004f7c6bd051a69c2b" name="v56.0.0.tar.gz">https://github.com/pypa/setuptools/archive/v56.0.0.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>python3-devel</Dependency>
+                <Dependency>python3-setuptools</Dependency>
             </BuildDependencies>
             <SourceURI>programming/language/python3/python3-setuptools/pspec.xml</SourceURI>
         </Source>
@@ -26649,6 +26772,20 @@
             </Files>
         </Package>
         <History>
+            <Update release="20">
+                <Date>2021-04-12</Date>
+                <Version>56.0.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="19">
+                <Date>2021-04-03</Date>
+                <Version>54.2.0</Version>
+                <Comment>Major version bump.</Comment>
+                <Name>Blue Devil</Name>
+                <Email>bluedevil@sctzine.com</Email>
+            </Update>
             <Update release="18">
                 <Date>2020-10-22</Date>
                 <Version>50.3.2</Version>
@@ -28172,6 +28309,7 @@
                 <Dependency>docbook-xsl</Dependency>
                 <Dependency>docbook-xml</Dependency>
                 <Dependency>util-linux</Dependency>
+                <Dependency>libxslt</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin</Path>
@@ -28182,7 +28320,7 @@
         </Package>
         <History>
             <Update release="8">
-                <Date>2020-12-09</Date>
+                <Date>2021-04-19</Date>
                 <Version>0.0.28</Version>
                 <Comment>Rebuild</Comment>
                 <Name>Mustafa Cinasal</Name>
