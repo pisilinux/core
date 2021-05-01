@@ -15095,7 +15095,7 @@
                 <Dependency>glib2</Dependency>
                 <Dependency>libgcc</Dependency>
                 <Dependency>expat</Dependency>
-                <Dependency>duktape</Dependency>
+                <Dependency versionFrom="2.6.0">duktape</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="config">/etc</Path>
@@ -18709,6 +18709,62 @@
                 <Comment>First release</Comment>
                 <Name>Alihan Öztürk</Name>
                 <Email>alihan@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>duktape</Name>
+            <Homepage>https://duktape.org/</Homepage>
+            <Packager>
+                <Name>Pisi Linux Admins</Name>
+                <Email>admin@pisilinux.org</Email>
+            </Packager>
+            <License>MIT</License>
+            <IsA>library</IsA>
+            <PartOf>system.base</PartOf>
+            <Summary xml:lang="en">Embeddable Javascript engine</Summary>
+            <Summary xml:lang="tr">Embeddable Javascript engine</Summary>
+            <Description xml:lang="en">Embeddable Javascript engine</Description>
+            <Description xml:lang="tr">Embeddable Javascript engine</Description>
+            <Archive type="tarxz" sha1sum="5936bf5e9943128b53a9e534e0a6842532b52bb5" name="duktape-2.6.0.tar.xz">https://duktape.org/duktape-2.6.0.tar.xz</Archive>
+            <AdditionalFiles>
+                <AdditionalFile target="Makefile">Makefile</AdditionalFile>
+            </AdditionalFiles>
+            <Patches>
+                <Patch level="1">duktape-build.patch</Patch>
+            </Patches>
+            <SourceURI>system/base/duktape/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>duktape</Name>
+            <Files>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="data">/usr/share</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+            <AdditionalFiles>
+                <AdditionalFile target="/usr/share/pkgconfig/duktape.pc" permission="0644" owner="root">duktape.pc</AdditionalFile>
+            </AdditionalFiles>
+        </Package>
+        <Package>
+            <Name>duktape-devel</Name>
+            <Summary xml:lang="en">Development files for duktape</Summary>
+            <RuntimeDependencies>
+                <Dependency release="1">duktape</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="header">/usr/include</Path>
+                <Path fileType="library">/usr/lib/pkgconfig</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="1">
+                <Date>2021-04-20</Date>
+                <Version>2.6.0</Version>
+                <Comment>First release</Comment>
+                <Name>Pisi Linux Admins</Name>
+                <Email>admin@pisilinux.org</Email>
             </Update>
         </History>
     </SpecFile>
