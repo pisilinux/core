@@ -17,6 +17,7 @@ def setup():
                          --with-dbus \
                          --enable-examples \
                          --enable-introspection \
+                         --disable-systemd \
                          --enable-libsystemd-login=no \
                          --enable-libelogind=no \
                          --with-systemdsystemunitdir=no \

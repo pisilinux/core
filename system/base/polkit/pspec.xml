@@ -14,7 +14,7 @@
         <IsA>app:console</IsA>
         <Summary>PolicyKit Authorization Framework</Summary>
         <Description>polkit is a toolkit for defining and handling authorizations. It is used for allowing unprivileged processes to speak to privileged processes.</Description>
-        <Archive sha1sum="0c375fa621bc9f74f2972e00fb517a408f419adf" type="targz">http://www.freedesktop.org/software/polkit/releases/polkit-0.117.tar.gz</Archive>
+        <Archive sha1sum="1c53d0ccacc6e6afd49ba14cb39d2514b943933d" type="targz">http://www.freedesktop.org/software/polkit/releases/polkit-0.118.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>python3</Dependency>	
             <Dependency>dbus-devel</Dependency>
@@ -28,8 +28,8 @@
             <Dependency>intltool</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">polkit-0.117-duktape.patch</Patch>
-            <Patch level="1">polkit-0.117-elogind.patch</Patch>
+            <Patch level="1">polkit-0.118-duktape.patch</Patch>
+            <Patch level="1">polkit-0.118-elogind.patch</Patch>
             <Patch level="1">use-system-locale-in-gobject-api.diff</Patch>
         </Patches>
     </Source>
@@ -90,6 +90,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2021-05-01</Date>
+            <Version>0.118</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="10">
             <Date>2021-04-30</Date>
             <Version>0.117</Version>
