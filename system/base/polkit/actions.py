@@ -10,6 +10,8 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
+    pisitools.dosed("configure.ac", "pardus-release", "pisilinux-release")
+    pisitools.dosed("configure", "pardus-release", "pisilinux-release")
     autotools.autoreconf("-fiv")
     autotools.configure("--with-pam-module-dir=/lib/security/ \
                          --with-os-type=pardus \
