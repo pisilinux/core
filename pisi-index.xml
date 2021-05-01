@@ -4855,7 +4855,7 @@
             <Description xml:lang="fr">CMake, système make open-source et multi-plateforme. CMake est utilisé pour contrôler le processus de compilation de logiciel en utilisant une plate-forme de fichiers de configuration simple et indépendante de compilateur. CMake génère des makefiles et un environnement de travail natifs pouvant être utilisés dans l&apos;environnement du compilateur de votre choix.</Description>
             <Description xml:lang="en">CMake, the cross-platform, open-source make system. CMake is used to control the software compilation process using simple platform and compiler independent configuration files. CMake generates native makefiles and workspaces that can be used in the compiler environment of your choice.</Description>
             <Description xml:lang="tr">Cmake, açık kaynak kodlu ve birden fazla platformda çalışan bir &apos;make&apos; sistemidir. Yazılım derleme sürecini kontrol etmek için kullanılan CMake, derleyici bağımsız yapılandırma dosyalarının oluşturulmasını sağlar.</Description>
-            <Archive type="targz" sha1sum="5ade1bb2652e8dc136935fdfd6f23261f2d8ece4" name="cmake-3.19.6.tar.gz">https://github.com/Kitware/CMake/releases/download/v3.19.6/cmake-3.19.6.tar.gz</Archive>
+            <Archive type="targz" sha1sum="fb9cc392165c6f54b0e773027ca43e0c8ceadeac" name="cmake-3.19.8.tar.gz">https://github.com/Kitware/CMake/releases/download/v3.19.8/cmake-3.19.8.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>curl-devel</Dependency>
                 <Dependency>expat-devel</Dependency>
@@ -4890,6 +4890,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="14">
+                <Date>2021-04-28</Date>
+                <Version>3.19.8</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="13">
                 <Date>2021-03-01</Date>
                 <Version>3.19.6</Version>
@@ -5788,7 +5795,7 @@
             <Summary xml:lang="de">X.Org Protokoll Header</Summary>
             <Description xml:lang="en">This package includes the protocol headers needed for X11 development.</Description>
             <Description xml:lang="tr">Bu paket, X11 geliştirme için gerekli protokol başlıklarını içerir.</Description>
-            <Archive type="tarbz2" sha1sum="1cdab4e9ab796760ddb9582071328469a8eca08a" name="xorgproto-2020.1.tar.bz2">mirrors://xorg/individual/proto/xorgproto-2020.1.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="6cff560a40ed151eaabbf221bb1713a635e128df" name="xorgproto-2021.3.tar.bz2">mirrors://xorg/individual/proto/xorgproto-2021.3.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>meson</Dependency>
                 <Dependency>util-macros</Dependency>
@@ -5805,6 +5812,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2021-04-27</Date>
+                <Version>2021.3</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="10">
                 <Date>2020-12-09</Date>
                 <Version>2020.1</Version>
@@ -6568,7 +6582,7 @@
             <Update release="7">
                 <Date>2020-12-09</Date>
                 <Version>0.10.0</Version>
-                <Comment>Rebuild</Comment>
+                <Comment>Rebuild.</Comment>
                 <Name>Pisi Linux Community</Name>
                 <Email>admin@pisilinux.org</Email>
             </Update>
@@ -13651,7 +13665,7 @@
             <Summary xml:lang="tr">X.Org X11 kitaplığı</Summary>
             <Summary xml:lang="de">X.Org X11 Bibliothek</Summary>
             <Description xml:lang="en">Core X11 protocol client library.</Description>
-            <Archive type="tarbz2" sha1sum="c8a553505588913196790cbe1ce0c6468db98911" name="libX11-1.6.12.tar.bz2">mirrors://xorg/individual/lib/libX11-1.6.12.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="48fd27a11572a7d3c1014368e1dc9f40a7b23e7d" name="libX11-1.7.0.tar.bz2">mirrors://xorg/individual/lib/libX11-1.7.0.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>libxcb-devel</Dependency>
                 <Dependency>xorg-proto</Dependency>
@@ -13679,7 +13693,7 @@
             <Summary xml:lang="en">Development files for X11 library</Summary>
             <Summary xml:lang="tr">libX11 için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="12">libX11</Dependency>
+                <Dependency release="13">libX11</Dependency>
                 <Dependency>libxcb-devel</Dependency>
                 <Dependency>xorg-proto</Dependency>
             </RuntimeDependencies>
@@ -13701,7 +13715,7 @@
                 <Dependency>libxslt-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="12">libX11</Dependency>
+                <Dependency release="13">libX11</Dependency>
                 <Dependency>libxcb-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -13709,6 +13723,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="13">
+                <Date>2021-04-27</Date>
+                <Version>1.7.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="12">
                 <Date>2020-12-09</Date>
                 <Version>1.6.12</Version>
@@ -15034,18 +15055,21 @@
             <Description xml:lang="fr">polkit est un cadre de développement (framework) pour définir des politiques à appliquer à des composants du système ainsi que fournir à des parties du bureau la possibilité de les configurer.</Description>
             <Description xml:lang="en">polkit is a toolkit for defining and handling authorizations. It is used for allowing unprivileged processes to speak to privileged processes.</Description>
             <Description xml:lang="tr">polkit, sistem genelindeki bileşenlerin ve masaüstü bileşenlerinin ayarlayabileceği şekilde ilkeler tanımlamak için araçlardan oluşur.</Description>
-            <Archive type="targz" sha1sum="0c375fa621bc9f74f2972e00fb517a408f419adf" name="polkit-0.117.tar.gz">http://www.freedesktop.org/software/polkit/releases/polkit-0.117.tar.gz</Archive>
+            <Archive type="targz" sha1sum="1c53d0ccacc6e6afd49ba14cb39d2514b943933d" name="polkit-0.118.tar.gz">http://www.freedesktop.org/software/polkit/releases/polkit-0.118.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>python3</Dependency>
                 <Dependency>dbus-devel</Dependency>
-                <Dependency>pam-devel</Dependency>
+                <Dependency versionFrom="1.5.1">pam-devel</Dependency>
                 <Dependency>glib2-devel</Dependency>
                 <Dependency>expat-devel</Dependency>
-                <Dependency versionFrom="68.12.0">spidermonkey-devel</Dependency>
+                <Dependency>duktape-devel</Dependency>
+                <Dependency>gettext-devel</Dependency>
                 <Dependency>gobject-introspection-devel</Dependency>
                 <Dependency>intltool</Dependency>
             </BuildDependencies>
             <Patches>
+                <Patch level="1">polkit-0.118-duktape.patch</Patch>
+                <Patch level="1">polkit-0.118-elogind.patch</Patch>
                 <Patch level="1">use-system-locale-in-gobject-api.diff</Patch>
             </Patches>
             <SourceURI>system/base/polkit/pspec.xml</SourceURI>
@@ -15056,7 +15080,7 @@
             <Summary xml:lang="tr">polkit geliştirme başlıkları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="9">polkit</Dependency>
+                <Dependency release="11">polkit</Dependency>
                 <Dependency>glib2-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -15071,7 +15095,7 @@
                 <Dependency>glib2</Dependency>
                 <Dependency>libgcc</Dependency>
                 <Dependency>expat</Dependency>
-                <Dependency versionFrom="60.9.0">spidermonkey</Dependency>
+                <Dependency>duktape</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="config">/etc</Path>
@@ -15100,6 +15124,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2021-05-01</Date>
+                <Version>0.118</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="10">
+                <Date>2021-04-30</Date>
+                <Version>0.117</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="9">
                 <Date>2020-12-09</Date>
                 <Version>0.117</Version>
@@ -22644,7 +22682,7 @@
             <Summary xml:lang="en">Pluggable Authentication Modules</Summary>
             <Summary xml:lang="tr">PAM - Eklenebilir Yetkilendirme Modülleri</Summary>
             <Description xml:lang="en">PAM (Pluggable Authentication Modules) is a system security tool that allows system administrators to set authentication policy without having to recompile programs that handle authentication.</Description>
-            <Archive type="targz" sha1sum="c18ddb2adf580484a58420e2c8db2f06fb827e68" name="v1.5.0.tar.gz">https://github.com/linux-pam/linux-pam/archive/v1.5.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="d0f72065b3b3978876b29d55aad6328c5db58247" name="v1.5.1.tar.gz">https://github.com/linux-pam/linux-pam/archive/v1.5.1.tar.gz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="conf.sh" permission="0755">conf.sh</AdditionalFile>
                 <AdditionalFile target="dlopen.sh" permission="0755">dlopen.sh</AdditionalFile>
@@ -22657,9 +22695,6 @@
                 <Dependency>libxslt-devel</Dependency>
                 <Dependency>docbook-xsl</Dependency>
             </BuildDependencies>
-            <Patches>
-                <Patch level="1">CVE-2020-27780.patch</Patch>
-            </Patches>
             <SourceURI>system/base/pam/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -22692,7 +22727,7 @@
             <Summary xml:lang="tr">pam için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="6">pam</Dependency>
+                <Dependency release="7">pam</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -22700,6 +22735,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2021-04-29</Date>
+                <Version>1.5.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2020-12-25</Date>
                 <Version>1.5.0</Version>
@@ -23435,7 +23477,7 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78" name="v0.8.tar.gz">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="5.10.30">kernel-module-headers</Dependency>
+                <Dependency version="5.10.33">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">0001-proc_ops-struct.patch</Patch>
@@ -23446,8 +23488,8 @@
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="5.10.30">kernel</Dependency>
-                <Dependency release="45">bbswitch-common</Dependency>
+                <Dependency version="5.10.33">kernel</Dependency>
+                <Dependency release="46">bbswitch-common</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/lib/modules</Path>
@@ -23470,7 +23512,7 @@
         <Package>
             <Name>bbswitch-dkms</Name>
             <RuntimeDependencies>
-                <Dependency release="45">bbswitch-common</Dependency>
+                <Dependency release="46">bbswitch-common</Dependency>
                 <Dependency>dkms</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -23481,6 +23523,13 @@
             </Conflicts>
         </Package>
         <History>
+            <Update release="46">
+                <Date>2021-04-29</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="45">
                 <Date>2021-04-14</Date>
                 <Version>0.8</Version>
@@ -23813,9 +23862,9 @@
             <Summary xml:lang="tr">VirtualBox misafir makineleri için çekirdek modülleri</Summary>
             <Description xml:lang="en">This package provides the kernel modules needed for mouse integration and shared folder support between VirtualBox host and guest systems.</Description>
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
-            <Archive type="tarxz" sha1sum="aca02d2a260463400eaa3cbbe20431d1d2f4e78f" name="module-virtualbox-guest-6.1.18.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-6.1.18.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="9eb5c2a881fb4668e02d01feb2f616a5872d4dc9" name="module-virtualbox-guest-6.1.20.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-6.1.20.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="5.10.30">kernel-module-headers</Dependency>
+                <Dependency version="5.10.33">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -23825,9 +23874,9 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.10.30">kernel</Dependency>
+                <Dependency version="5.10.33">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
-                <Dependency version="6.1.18">module-virtualbox-guest-userspace</Dependency>
+                <Dependency version="6.1.20">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -23852,6 +23901,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="71">
+                <Date>2021-04-29</Date>
+                <Version>6.1.20</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="70">
                 <Date>2021-04-14</Date>
                 <Version>6.1.18</Version>
@@ -24366,9 +24422,9 @@
             <Summary xml:lang="tr">VirtualBox için çekirdek modülleri</Summary>
             <Description xml:lang="en">This package provides the kernel support for VirtualBox.</Description>
             <Description xml:lang="tr">Bu paket VirtualBox için çekirdek desteği sunar.</Description>
-            <Archive type="tarxz" sha1sum="f211fa6c3af9436bd02533e03dd303f552327d81" name="module-virtualbox-6.1.18.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-6.1.18.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="24a1a7031895f837016421f642138d421482d147" name="module-virtualbox-6.1.20.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-6.1.20.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="5.10.30">kernel-module-headers</Dependency>
+                <Dependency version="5.10.33">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -24378,8 +24434,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.10.30">kernel</Dependency>
-                <Dependency version="6.1.18">module-virtualbox-userspace</Dependency>
+                <Dependency version="5.10.33">kernel</Dependency>
+                <Dependency version="6.1.20">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -24400,6 +24456,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="71">
+                <Date>2021-04-29</Date>
+                <Version>6.1.20</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="70">
                 <Date>2021-04-14</Date>
                 <Version>6.1.18</Version>
@@ -24917,7 +24980,7 @@
             <Archive type="targz" sha1sum="8acbdbb4ab4ab4123d1773b616904798fbef9277" target="i686" name="hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <Archive type="targz" sha1sum="1f568bb989d175813c5631c6629d9479eae6f3be" target="x86_64" name="hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="5.10.30">kernel-module-headers</Dependency>
+                <Dependency version="5.10.33">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">broadcom-wl-6.30.223.271-debian-fix-kernel-warnings.patch</Patch>
@@ -24946,8 +25009,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.10.30">kernel</Dependency>
-                <Dependency release="44">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="5.10.33">kernel</Dependency>
+                <Dependency release="45">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -24971,6 +25034,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="45">
+                <Date>2021-04-29</Date>
+                <Version>6.30.223.271</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="44">
                 <Date>2021-04-14</Date>
                 <Version>6.30.223.271</Version>
@@ -25316,7 +25386,7 @@
                 <Dependency>elfutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-5.10.30.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-5.10.33.xz</Patch>
                 <Patch level="1">patches/mageia/fs-aufs5.10.patch</Patch>
                 <Patch level="1">patches/mageia/fs-aufs5.10-symbol-exports.patch</Patch>
                 <Patch level="1">patches/mageia/fs-aufs5.10-tristate.patch</Patch>
@@ -25380,7 +25450,7 @@
             <Description xml:lang="en">kernel-module-headers includes the C header files and the necessary Kbuild files for being able to build external kernel modules.</Description>
             <Description xml:lang="tr">kernel-module-headers, harici çekirdek modüllerinin derlenebilmesi için gereken başlık dosyaları ve Kbuild sistemini içeren pakettir.</Description>
             <RuntimeDependencies>
-                <Dependency release="52">kernel</Dependency>
+                <Dependency release="53">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/src/linux-headers*</Path>
@@ -25411,6 +25481,17 @@
             </Files>
         </Package>
         <History>
+            <Update release="53">
+                <Type package="kernel">security</Type>
+                <Date>2021-04-29</Date>
+                <Version>5.10.33</Version>
+                <Comment>Version bump</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
             <Update release="52">
                 <Type package="kernel">security</Type>
                 <Date>2021-04-14</Date>
@@ -26098,7 +26179,7 @@
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-5.10.30.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-5.10.33.xz</Patch>
                 <Patch level="1">patches/mageia/fs-aufs5.10.patch</Patch>
                 <Patch level="1">patches/mageia/fs-aufs5.10-symbol-exports.patch</Patch>
                 <Patch level="1">patches/mageia/fs-aufs5.10-tristate.patch</Patch>
@@ -26154,6 +26235,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="51">
+                <Date>2021-04-29</Date>
+                <Version>5.10.33</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="50">
                 <Date>2021-04-14</Date>
                 <Version>5.10.30</Version>
