@@ -13,6 +13,7 @@ def setup():
     autotools.autoreconf("-fiv")
     autotools.configure("--with-pam-module-dir=/lib/security/ \
                          --with-os-type=pardus \
+                         --with-mozjs=mozjs-68 \
                          --with-duktape \
                          --with-dbus \
                          --enable-examples \
