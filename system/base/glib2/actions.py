@@ -23,7 +23,6 @@ def setup():
         options += " --libdir=/usr/lib32 \
                      --bindir=/usr/emul32 \
                      --sbindir=/usr/emul32 \
-                     --datadir=/usr/_emul32 \
                      --mandir=/usr/emul32 \
                      --localedir=/usr/emul32/locale \
                      -Dsysprof=disabled \
@@ -47,10 +46,10 @@ def install():
     if get.buildTYPE() == "emul32":
         pisitools.domove("/usr/emul32//gio-querymodules", "/usr/bin/32/")
         pisitools.removeDir("/usr/emul32")
-        pisitools.removeDir("/usr/_emul32")
+        #pisitools.removeDir("/usr/_emul32")
         pisitools.removeDir("/usr/share/gdb")
         for f in shelltools.ls("%s/usr/lib32/pkgconfig" % get.installDIR()):
-            pisitools.dosed("%s/usr/lib32/pkgconfig/%s" % (get.installDIR(), f), "_emul32", "share")
+            #pisitools.dosed("%s/usr/lib32/pkgconfig/%s" % (get.installDIR(), f), "_emul32", "share")
             pisitools.dosed("%s/usr/lib32/pkgconfig/%s" % (get.installDIR(), f), "emul32", "bin")
         return
 
