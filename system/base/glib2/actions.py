@@ -50,7 +50,7 @@ def install():
         pisitools.removeDir("/usr/_emul32")
         pisitools.removeDir("/usr/share/gdb")
         for f in shelltools.ls("%s/usr/lib32/pkgconfig" % get.installDIR()):
-            pisitools.dosed("%s/usr/lib32/pkgconfig/%s" % (get.installDIR(), f), "emul32", "share")
+            pisitools.dosed("%s/usr/lib32/pkgconfig/%s" % (get.installDIR(), f), "_emul32", "share")
             pisitools.dosed("%s/usr/lib32/pkgconfig/%s" % (get.installDIR(), f), "emul32", "bin")
         return
 
