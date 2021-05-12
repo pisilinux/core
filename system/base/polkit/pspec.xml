@@ -23,11 +23,13 @@
             <Dependency>expat-devel</Dependency>
             <Dependency>duktape-devel</Dependency>
             <Dependency>gettext-devel</Dependency>
+            <Dependency>elogind-devel</Dependency>
 <!--             <Dependency versionFrom="68.12.0">spidermonkey-devel</Dependency> -->
             <Dependency>gobject-introspection-devel</Dependency>
             <Dependency>intltool</Dependency>
         </BuildDependencies>
         <Patches>
+            <Patch level="1">0001-Updated-build-args-for-Pisi-Linux.patch</Patch>
             <Patch level="1">polkit-0.118-duktape.patch</Patch>
             <Patch level="1">polkit-0.118-elogind.patch</Patch>
             <Patch level="1">use-system-locale-in-gobject-api.diff</Patch>
@@ -55,7 +57,8 @@
             <Dependency>glib2</Dependency>
             <Dependency>libgcc</Dependency>
             <Dependency>expat</Dependency>
-	    <Dependency versionFrom="2.6.0">duktape</Dependency>
+            <Dependency>elogind</Dependency>
+            <Dependency versionFrom="2.6.0">duktape</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="config">/etc</Path>

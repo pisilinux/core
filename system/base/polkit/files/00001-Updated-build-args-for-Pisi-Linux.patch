@@ -1,0 +1,99 @@
+From dc3f89a7840c0ffab00d335f127b7d6ab67398d9 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Berk=20=C3=87akar?= <berk2238@hotmail.com>
+Date: Wed, 12 May 2021 23:02:55 +0300
+Subject: [PATCH] Updated build args for Pisi Linux
+
+---
+ configure.ac      | 12 ++++++------
+ meson.build       |  4 ++--
+ meson_options.txt |  2 +-
+ 3 files changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 4ac2219..722824d 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -396,14 +396,14 @@ fi
+ 
+ AC_SUBST(PAM_MODULE_DIR)
+ 
+-AC_ARG_WITH(os-type,     [  --with-os-type=<os>        distribution or OS (redhat/suse/gentoo/pardus/solaris/netbsd)])
++AC_ARG_WITH(os-type,     [  --with-os-type=<os>        distribution or OS (redhat/suse/gentoo/pisilinux/solaris/netbsd)])
+ 
+ #### Check our operating system (distro-tweaks required)
+ if test "z$with_os_type" = "z"; then
+ 	AC_CHECK_FILE(/etc/redhat-release,distro_type="redhat")
+ 	AC_CHECK_FILE(/etc/SuSE-release,distro_type="suse")
+ 	AC_CHECK_FILE(/etc/gentoo-release,distro_type="gentoo")
+-	AC_CHECK_FILE(/etc/pardus-release,distro_type="pardus")
++	AC_CHECK_FILE(/etc/pisilinux-release,distro_type="pisilinux")
+ 	if test "z$distro_type" = "z"; then
+ 		echo "Linux distribution autodetection failed, specify the distribution to target using --with-os-type="
+ 	else
+@@ -419,8 +419,8 @@ if test x$with_os_type = x; then
+         with_os_type=suse
+     elif test x$operating_system = xgentoo ; then
+         with_os_type=gentoo
+-    elif test x$operating_system = xpardus ; then
+-        with_os_type=pardus
++    elif test x$operating_system = xpisilinux ; then
++        with_os_type=pisilinux
+     elif test x$operating_system = xsolaris ; then
+ 	with_os_type=solaris
+     elif test x$operating_system = xfreebsd ; then
+@@ -444,7 +444,7 @@ AM_CONDITIONAL(OS_TYPE_UNKNOWN, test x$with_os_type = xunknown, [Running on unkn
+ AM_CONDITIONAL(OS_TYPE_RED_HAT, test x$with_os_type = xredhat, [Running on Red Hat OS'es])
+ AM_CONDITIONAL(OS_TYPE_SUSE, test x$with_os_type = xsuse, [Running on SUSE OS'es])
+ AM_CONDITIONAL(OS_TYPE_GENTOO, test x$with_os_type = xgentoo, [Running on Gentoo OS'es])
+-AM_CONDITIONAL(OS_TYPE_PARDUS, test x$with_os_type = xpardus, [Running on Pardus OS'es])
++AM_CONDITIONAL(OS_TYPE_PISI_LINUX, test x$with_os_type = xpisilinux, [Running on Pisi GNU/Linux OS'es])
+ AM_CONDITIONAL(OS_TYPE_SOLARIS, test x$with_os_type = xsolaris, [Running os Solaris OS'es])
+ AM_CONDITIONAL(OS_TYPE_FREEBSD, test x$with_os_type = xfreebsd, [Running on FreeBSD OS'es])
+ 
+@@ -456,7 +456,7 @@ if ! test -z "$with_pam_include"; then
+    PAM_FILE_INCLUDE_ACCOUNT=$with_pam_include
+    PAM_FILE_INCLUDE_PASSWORD=$with_pam_include
+    PAM_FILE_INCLUDE_SESSION=$with_pam_include
+-elif test x$with_os_type = xredhat -o x$with_os_type = xgentoo -o x$with_os_type = xpardus ; then
++elif test x$with_os_type = xredhat -o x$with_os_type = xgentoo -o x$with_os_type = xpisilinux ; then
+    PAM_FILE_INCLUDE_AUTH=system-auth
+    PAM_FILE_INCLUDE_ACCOUNT=system-auth
+    PAM_FILE_INCLUDE_PASSWORD=system-auth
+diff --git a/meson.build b/meson.build
+index ed75c61..104a80f 100644
+--- a/meson.build
++++ b/meson.build
+@@ -248,7 +248,7 @@ if os_type == ''
+     ['suse', '/etc/SuSE-release'],
+     ['debian', '/etc/debian_version'],
+     ['gentoo', '/etc/gentoo-release'],
+-    ['pardus', '/etc/pardus-release'],
++    ['pisilinux', '/etc/pisilinux-release'],
+   ]
+ 
+   foreach os_path: os_paths
+@@ -279,7 +279,7 @@ if pam_include == ''
+       'PAM_FILE_INCLUDE_PASSWORD': 'system',
+       'PAM_FILE_INCLUDE_SESSION': 'system',
+     }
+-  #if ['redhat', 'gentoo', 'pardus'].contains(os_type)
++  #if ['redhat', 'gentoo', 'pisilinux'].contains(os_type)
+   else
+     pam_conf = {
+       'PAM_FILE_INCLUDE_AUTH': 'system-auth',
+diff --git a/meson_options.txt b/meson_options.txt
+index 25e3e77..35cb829 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -4,7 +4,7 @@ option('systemdsystemunitdir', type: 'string', value: '', description: 'custom d
+ option('polkitd_user', type: 'string', value: 'polkitd', description: 'User for running polkitd (polkitd)')
+ 
+ option('authfw', type: 'combo', choices: ['pam', 'shadow', 'bsdauth'], value: 'pam', description: 'Authentication framework (pam/shadow)')
+-option('os_type', type: 'combo', choices: ['redhat', 'suse', 'gentoo', 'pardus', 'solaris', 'netbsd', ''], value: '', description: 'distribution or OS')
++option('os_type', type: 'combo', choices: ['redhat', 'suse', 'gentoo', 'pisilinux', 'solaris', 'netbsd', ''], value: '', description: 'distribution or OS')
+ 
+ option('pam_include', type: 'string', value: '', description: 'pam file to include')
+ option('pam_module_dir', type: 'string', value: '', description: 'directory to install PAM security module')
+-- 
+2.24.3 (Apple Git-128)
+

@@ -10,18 +10,18 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
-    pisitools.dosed("configure.ac", "pardus-release", "pisilinux-release")
-    pisitools.dosed("configure", "pardus-release", "pisilinux-release")
+    #pisitools.dosed("configure.ac", "pardus-release", "pisilinux-release")
+    #pisitools.dosed("configure", "pardus-release", "pisilinux-release")
     autotools.autoreconf("-fiv")
     autotools.configure("--with-pam-module-dir=/lib/security/ \
-                         --with-os-type=pardus \
+                         --with-os-type=pisilinux \
                          --with-duktape \
                          --with-dbus \
                          --enable-examples \
                          --enable-introspection \
                          --disable-systemd \
                          --enable-libsystemd-login=no \
-                         --enable-libelogind=no \
+                         --enable-libelogind=yes \
                          --with-systemdsystemunitdir=no \
                          --disable-man-pages \
                          --disable-gtk-doc \
