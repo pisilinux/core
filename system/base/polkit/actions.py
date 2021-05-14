@@ -21,7 +21,7 @@ def setup():
                          --enable-introspection \
                          --disable-systemd \
                          --enable-libsystemd-login=no \
-                         --enable-libelogind=yes \
+                         --enable-libelogind=no \
                          --with-systemdsystemunitdir=no \
                          --disable-man-pages \
                          --disable-gtk-doc \
