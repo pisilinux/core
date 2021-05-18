@@ -28,7 +28,7 @@
             <Dependency>patch</Dependency>
             <Dependency>sed</Dependency>
             <Dependency>texinfo</Dependency>
-            <Dependency>elfutils</Dependency>
+            <Dependency>elfutils-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
             <Dependency>gmp-devel</Dependency>
             <Dependency>mpfr-devel</Dependency>
@@ -69,14 +69,38 @@
         <Summary>Contains a shared library of support routines used by GCC's runtime, and thus by every program on the system</Summary>
         <Files>
             <Path fileType="config">/etc</Path>
+            <Path fileType="library">/usr/lib/libgo.so*</Path>
+            <Path fileType="library">/usr/lib/libitm.so*</Path>
+            <Path fileType="library">/usr/lib/libasan.so*</Path>
+            <Path fileType="library">/usr/lib/liblsan.so*</Path>
+            <Path fileType="library">/usr/lib/libtsan.so*</Path>
+            <Path fileType="library">/usr/lib/libatomic.so*</Path>
+            <Path fileType="library">/usr/lib/libgphobos.so*</Path>
+            <Path fileType="library">/usr/lib/libgdruntime.so*</Path>
+            
             <Path fileType="library">/usr/lib/libstdc++.so*</Path>
             <Path fileType="library">/usr/lib/libgcc_s.so*</Path>
+            <Path fileType="library">/usr/lib/libubsan.so*</Path>
+            
+            <Path fileType="library">/usr/lib32/libgo.so*</Path>
+            <Path fileType="library">/usr/lib32/libitm.so*</Path>
+            <Path fileType="library">/usr/lib32/libasan.so*</Path>
+            <Path fileType="library">/usr/lib32/liblsan.so*</Path>
+            <Path fileType="library">/usr/lib32/libtsan.so*</Path>
+            <Path fileType="library">/usr/lib32/libatomic.so*</Path>
+            <Path fileType="library">/usr/lib32/libgphobos.so*</Path>
+            <Path fileType="library">/usr/lib32/libgdruntime.so*</Path>
+            
             <Path fileType="library">/usr/lib32/libstdc++.so*</Path>
             <Path fileType="library">/usr/lib32/libgcc_s.so*</Path>
-            <Path fileType="library">/usr/lib/libubsan.so*</Path>
             <Path fileType="library">/usr/lib32/libubsan.so*</Path>
             <Path fileType="library">/usr/share/gcc-*</Path>
             <Path fileType="library">/usr/share/gdb</Path>
+            
+            <Path fileType="localedata">/usr/share/locale/de/LC_MESSAGES/libstdc++.mo</Path>
+            <Path fileType="localedata">/usr/share/locale/fr/LC_MESSAGES/libstdc++.mo</Path>
+            
+            <Path fileType="info">/usr/share/info/libitm.info</Path>
         </Files>
     </Package>
 
@@ -103,6 +127,7 @@
         <Files>
             <Path fileType="library">/usr/lib/libgfortran.so*</Path>
             <Path fileType="library">/usr/lib32/libgfortran.so*</Path>
+            <Path fileType="info">/usr/share/info/gfortran.info</Path>
         </Files>
     </Package>
 
@@ -155,7 +180,14 @@
     </Package>
 
     <History>
-	<Update release="10">
+        <Update release="11">
+            <Date>2021-05-18</Date>
+            <Version>10.2.1</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="10">
             <Date>2020-12-15</Date>
             <Version>10.2.1</Version>
             <Comment>Rebuild.</Comment>
