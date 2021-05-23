@@ -5,6 +5,7 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import get
 
 def setup():
     autotools.autoreconf("-vif")
@@ -14,6 +15,6 @@ def build():
     autotools.make()
 
 def install():
-    autotools.install()
+    autotools.rawInstall("DESTDIR=%s pkgconfigdir=/usr/lib/pkgconfig" % get.installDIR())
 
-    pisitools.dodoc("ChangeLog", "COPYING", "README")
+    pisitools.dodoc("ChangeLog", "COPYING", "README*")
