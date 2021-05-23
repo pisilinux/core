@@ -1,0 +1,12 @@
+diff -Nuar a/meson.build b/meson.build
+--- a/meson.build	2021-04-30 02:51:47.000000000 +0300
++++ b/meson.build	2021-05-22 12:42:23.227412930 +0300
+@@ -80,7 +80,7 @@
+              'resproto.txt',
+              'xv-protocol-v2.txt')
+ install_data(docs,
+-             install_dir: get_option('datadir') / 'doc' / 'xorgproto')
++             install_dir:  'share' / 'doc' / 'xorgproto')
+ 
+ 
+ if get_option('legacy') == true

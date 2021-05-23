@@ -12,15 +12,15 @@
         <IsA>library</IsA>
         <Summary>X.Org Protocol Headers</Summary>
         <Description>This package includes the protocol headers needed for X11 development.</Description>
-        <Archive sha1sum="6cff560a40ed151eaabbf221bb1713a635e128df" type="tarbz2">mirrors://xorg/individual/proto/xorgproto-2021.3.tar.bz2</Archive>
+        <Archive sha1sum="dec30f11deefa1e1655db24f4dc42fbafad368fd" type="tarbz2">mirrors://xorg/individual/proto/xorgproto-2021.4.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>meson</Dependency>
-            <Dependency>util-macros</Dependency>
+            <Dependency versionFrom="1.19.3">util-macros</Dependency>
 	    <!--remove for fix cycle dep-->
             <!--Dependency>libxslt</Dependency-->
         </BuildDependencies>
         <Patches>
-<!--             <Patch level="1">docdir.patch</Patch> -->
+            <Patch level="1">doc-install.patch</Patch>
         </Patches>
     </Source>
 
@@ -39,6 +39,13 @@
     </Package>
 
     <History>
+        <Update release="12">
+            <Date>2021-05-22</Date>
+            <Version>2021.4</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="11">
             <Date>2021-04-27</Date>
             <Version>2021.3</Version>
