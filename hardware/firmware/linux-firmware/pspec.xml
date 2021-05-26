@@ -18,14 +18,14 @@
         <Summary>Firmware files used by the Linux kernel</Summary>
         <Description>linux-firmware contains different firmware files required for some devices to operate correctly.</Description>
         <Archive sha1sum="96b6efc73d9fc5534764b535a14291313be6cc6e" type="targz">https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-20210208.tar.gz</Archive>
-        <Archive sha1sum="dd685266f7bc0acb0d455462637d23e3e895bc96" type="tarxz" target="linux-firmware/mix">http://source.pisilinux.org/common-fw/common-fw.tar.xz</Archive>
-        <Archive sha1sum="b2bb7fce3ea67d131f543a48134f7a65f2a8d834" type="tarxz" target="linux-firmware/mix">http://source.pisilinux.org/firmware-ipw/firmware-ipw.tar.xz</Archive>
-        <Archive sha1sum="a5a616a9f765cf9cbb224deb7ccefdc82a7fe4d9" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/firmware-nonfreebox/firmware-nonfreebox-2-tar.bz2</Archive>
-        <Archive sha1sum="6c18b28e62637fb809eaff89fff623ae1d470500" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/ar9170/ar9170.tar.bz2</Archive>
-        <Archive sha1sum="aa3b414c2948be5f226a25fa5f37e56fd659a3bb" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/ipw2x00-firmware/ipw2x00-firmware.tar.bz2</Archive>
-        <Archive sha1sum="f7ecf5412b7818871fa2798f1b314f8ddddb494e" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/aic94xx/aic94xx-seq.tar.bz2</Archive>
-        <Archive sha1sum="16d5f4dcc90f978732a9a5b3b0347672a6cc4c36" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/accessrunner/accessrunner-firmware.tar.bz2</Archive>
-        <Archive sha1sum="e40729d30ad6d7a6c88b90ee7bc5fbaeb9458cb7" type="tarbz2" target="linux-firmware/mix">http://source.pisilinux.org/rtl8192se/rtl8192se-firmware.tar.bz2</Archive>
+        <Archive sha1sum="dd685266f7bc0acb0d455462637d23e3e895bc96" type="tarxz" target="linux-firmware/mix">http://sourceforge.net/projects/pisilinux/files/source/common-fw.tar.xz</Archive>
+        <Archive sha1sum="b2bb7fce3ea67d131f543a48134f7a65f2a8d834" type="tarxz" target="linux-firmware/mix">http://sourceforge.net/projects/pisilinux/files/source/firmware-ipw.tar.xz</Archive>
+        <Archive sha1sum="a5a616a9f765cf9cbb224deb7ccefdc82a7fe4d9" type="tarbz2" target="linux-firmware/mix">http://sourceforge.net/projects/pisilinux/files/source/firmware-nonfreebox-2-tar.bz2</Archive>
+        <Archive sha1sum="6c18b28e62637fb809eaff89fff623ae1d470500" type="tarbz2" target="linux-firmware/mix">http://sourceforge.net/projects/pisilinux/files/source/ar9170.tar.bz2</Archive>
+        <Archive sha1sum="aa3b414c2948be5f226a25fa5f37e56fd659a3bb" type="tarbz2" target="linux-firmware/mix">http://sourceforge.net/projects/pisilinux/files/source/ipw2x00-firmware.tar.bz2</Archive>
+        <Archive sha1sum="f7ecf5412b7818871fa2798f1b314f8ddddb494e" type="tarbz2" target="linux-firmware/mix">http://sourceforge.net/projects/pisilinux/files/source/aic94xx-seq.tar.bz2</Archive>
+        <Archive sha1sum="16d5f4dcc90f978732a9a5b3b0347672a6cc4c36" type="tarbz2" target="linux-firmware/mix">http://sourceforge.net/projects/pisilinux/files/source/accessrunner-firmware.tar.bz2</Archive>
+        <Archive sha1sum="e40729d30ad6d7a6c88b90ee7bc5fbaeb9458cb7" type="tarbz2" target="linux-firmware/mix">http://sourceforge.net/projects/pisilinux/files/source/rtl8192se-firmware.tar.bz2</Archive>
         <Archive sha1sum="ff9e7f4b120476a90cd3fb69d76240166c4ff2a5" type="tarbz2" target="linux-firmware/mix">http://sourceforge.net/projects/pisilinux/files/source/zd12x1.tar.bz2</Archive>
         <Archive sha1sum="3239212ae7c5f60baa749764dcb8f5189e1e2f13" type="tarxz" target="linux-firmware/mix">http://sourceforge.net/projects/pisilinux/files/source/nouveau-340-32.tar.xz</Archive>
         <AdditionalFiles>
@@ -47,7 +47,22 @@
         </BuildFlags>
     </Package>
 
+    <Package>
+        <Name>amd-ucode</Name>
+        <Files>
+            <Path fileType="data">/boot</Path>
+            <Path fileType="data">/usr/share/licenses/amd-ucode</Path>
+        </Files>
+    </Package>
+
     <History>
+        <Update release="13">
+            <Date>2021-05-26</Date>
+            <Version>20210208</Version>
+            <Comment>Seperated amd-ucode package</Comment>
+            <Name>Berk Çakar</Name>
+            <Email>berk2238@hotmail.com</Email>
+        </Update>
         <Update release="12">
             <Date>2021-03-01</Date>
             <Version>20210208</Version>
