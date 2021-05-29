@@ -18,17 +18,16 @@ def setup():
    #shelltools.system("sed -i 's/(defined\((@TEMPLATE_FILE)\))/\1/' config/milestone.pl ")
    shelltools.export("CC", "gcc")
    shelltools.export("CXX", "g++")
-   
+
    shelltools.system("mkdir -p build-js")
    shelltools.cd("build-js")
-   
+
    shelltools.system("../js/src/configure \
-	                  --prefix=/usr       \
-					  --libdir=/usr/lib   \
-					  --enable-readline   \
-					  --enable-posix-nspr-emulation \
+	                  --prefix=/usr \
+					  --libdir=/usr/lib \
+					  --enable-readline \
 					  --with-intl-api \
-					  --disable-debug     \
+					  --disable-debug \
                       --disable-debug-symbols \
                       --disable-jemalloc \
                       --disable-strip  \
@@ -41,30 +40,31 @@ def setup():
                       --enable-tests \
                       --with-intl-api \
                       --with-system-zlib \
+                      --with-system-nspr \
                       --without-system-icu")
 
 def build():
     shelltools.cd("build-js")
     autotools.make()
-    
+
 def check():
     shelltools.cd("build-js")
-	
+
     #autotools.make("-C js/src check-jstests")
     #autotools.make("-C js/src check-jit-test")
-	
+
 
 def install():
     shelltools.cd("build-js")
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
     pisitools.remove("/usr/lib/*.ajs")
-   
+
     #for polkit
     #pisitools.rename("/usr/lib/pkgconfig/mozjs-..pc", "mozjs-17.0.pc")
     #pisitools.remove("usr/lib/libmozjs-..a")
-    
+
     shelltools.cd("..")
     pisitools.dodoc("README*")
-    
+
     # add link for polkit
     #pisitools.dosym("libmozjs-..so", "/usr/lib/libmozjs-17.0.so")
