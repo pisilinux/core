@@ -18,13 +18,16 @@ def build():
                        if ( j > 0 ) return j;\
                        ' src/ninja.cc""")
     
-    shelltools.system("python configure.py --bootstrap")
+    #shelltools.export("PYTHON","/usr/bin/python3")
+    shelltools.system("grep -rl '^#!.*python$' | xargs sed -i '1s/python/&3/'")
+    
+    shelltools.system("python3 configure.py --bootstrap")
     shelltools.system("asciidoc doc/manual.asciidoc")
     #shelltools.system("emacs -Q --batch -f batch-byte-compile misc/ninja-mode.el")
 
 def check():
     #needs new package gtest -> ignore it for now
-    shelltools.system("python ./configure.py")
+    shelltools.system("python3 ./configure.py")
     shelltools.system("./ninja ninja_test")
     shelltools.system("./ninja_test --gtest_filter=-SubprocessTest.SetWithLots")
 
