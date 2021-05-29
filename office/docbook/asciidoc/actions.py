@@ -27,7 +27,8 @@ def install():
         pisitools.dosym("/usr/share/asciidoc/%s" % d, "/etc/asciidoc/%s" % d)
 
     # Python module
-    pisitools.insinto("/usr/lib/%s/site-packages" % get.curPYTHON(), "asciidocapi.py")
+    #pisitools.insinto("/usr/lib/%s/site-packages" % get.curPYTHON(), "asciidocapi.py")
+    pisitools.insinto("/usr/lib/python3.8/site-packages", "asciidocapi.py")
 
     # Vim syntax and filetype plugins
     #pisitools.insinto("/usr/share/vim/vimfiles/syntax/" , "vim/syntax/asciidoc.vim")
