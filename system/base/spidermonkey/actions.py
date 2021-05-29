@@ -23,11 +23,11 @@ def setup():
    shelltools.cd("build-js")
 
    shelltools.system("../js/src/configure \
-	                  --prefix=/usr \
-					  --libdir=/usr/lib \
-					  --enable-readline \
-					  --with-intl-api \
-					  --disable-debug \
+	              --prefix=/usr \
+		      --libdir=/usr/lib \
+		      --enable-readline \
+		      --with-intl-api \
+		      --disable-debug \
                       --disable-debug-symbols \
                       --disable-jemalloc \
                       --disable-strip  \
