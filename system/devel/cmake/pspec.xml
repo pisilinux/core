@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Cross-platform, open-source make system</Summary>
         <Description>CMake, the cross-platform, open-source make system. CMake is used to control the software compilation process using simple platform and compiler independent configuration files. CMake generates native makefiles and workspaces that can be used in the compiler environment of your choice.</Description>
-        <Archive sha1sum="0c0c76bd90092bbc36288ffd25d8e7f7ebc3c2e5" type="targz">https://github.com/Kitware/CMake/releases/download/v3.20.2/cmake-3.20.2.tar.gz</Archive>
+        <Archive sha1sum="96e498c4d1ac238b6852b1113102bf2301bb88d8" type="targz">https://github.com/Kitware/CMake/releases/download/v3.20.3/cmake-3.20.3.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>curl-devel</Dependency>
             <Dependency>expat-devel</Dependency>
@@ -51,6 +51,13 @@
     </Package>
 
     <History>
+        <Update release="16">
+            <Date>2021-05-31</Date>
+            <Version>3.20.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="15">
             <Date>2021-05-23</Date>
             <Version>3.20.2</Version>
