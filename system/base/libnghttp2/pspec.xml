@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libnghttp2</Name>
+        <Homepage>https://nghttp2.org/</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Packager>
+        <License>MIT</License>
+        <IsA>app</IsA>
+        <Summary> Experimental HTTP/2 client, server and proxy</Summary>
+        <Description>Deneysel HTTP/2 istemci, sunucu ve proxy</Description>
+        <Archive sha1sum="0ed7652c0de7f8c2575e9544ae0d56d86d804d84" type="targz">https://github.com/nghttp2/nghttp2/archive/refs/tags/v1.43.0.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>zlib-devel</Dependency>
+            <Dependency>libxml2-devel</Dependency>
+            <Dependency>python3-devel</Dependency>
+            <Dependency>openssl-devel</Dependency>
+        </BuildDependencies>
+        <!--
+        <Patches>
+            <Patch>libnghttp2.patch</Patch>
+            <Patch level="1">libnghttp2.patch</Patch>
+        </Patches>
+        -->
+    </Source>
+
+    <Package>
+        <Name>libnghttp2</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share/nghttp2</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>libnghttp2-devel</Name>
+        <Summary>Development files for libnghttp2</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">libnghttp2</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2021-05-29</Date>
+            <Version>1.43.0</Version>
+            <Comment>First release</Comment>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
