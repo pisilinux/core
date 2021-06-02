@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Zstandard - Fast real-time compression algorithm</Summary>
         <Description>Zstandard is a fast compression algorithm, providing high compression ratios. It also offers a special mode for small data, called dictionary compression..</Description>
-        <Archive sha1sum="8059ef26c3d7dffa4d6dad64511c0675e46c0da6" type="targz">https://github.com/facebook/zstd/releases/download/v1.4.5/zstd-1.4.5.tar.gz</Archive>
+        <Archive sha1sum="c53019729e3a595f0104facab6533d78296a2945" type="targz">https://github.com/facebook/zstd/releases/download/v1.5.0/zstd-1.5.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>meson</Dependency>
             <Dependency>ninja</Dependency>
@@ -49,6 +49,13 @@
     </Package>
 
     <History>
+        <Update release="3">
+            <Date>2021-06-02</Date>
+            <Version>1.5.0</Version>
+            <Comment>Version bump</Comment>
+            <Name>İdris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="2">
             <Date>2020-12-09</Date>
             <Version>1.4.5</Version>
