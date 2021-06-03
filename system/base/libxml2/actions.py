@@ -63,11 +63,11 @@ def build():
     shelltools.cd("../build-py3")
     autotools.make()
 
-def check():
-    shelltools.cd("build-py2")
-    autotools.make("check")
-    shelltools.cd("../build-py3")
-    autotools.make("check")
+#def check():
+    #shelltools.cd("build-py2")
+    #autotools.make("check")
+    #shelltools.cd("../build-py3")
+    #autotools.make("check")
 
 def install():
     shelltools.cd("build-py2")
