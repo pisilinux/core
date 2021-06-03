@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Version 2 of the library to manipulate XML files</Summary>
         <Description>Libxml2 is the XML C parser and toolkit developed for the Gnome project (but usable outside of the Gnome platform).</Description>
-        <Archive sha1sum="db6592ec9ca9708c4e71bf6bfd907bbb5cd40644" type="targz">ftp://xmlsoft.org/libxml2/libxml2-2.9.10.tar.gz</Archive>
+        <Archive sha1sum="339fe5bb2a7d0c13f068c26d8f7cd194c13f9a2a" type="targz">ftp://xmlsoft.org/libxml2/libxml2-2.9.12.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>python-devel</Dependency>
             <Dependency>python3-devel</Dependency>
@@ -21,12 +21,8 @@
             <Dependency versionFrom="8.0.1">readline-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">fedora/fix-relaxed-approach-to-nested-documents.patch</Patch>
-            <Patch level="1">fedora/libxml2-2.9.10-CVE-2019-20388.patch</Patch>
-            <Patch level="1">fedora/libxml2-2.9.10-CVE-2020-24977.patch</Patch>
-            <Patch level="1">fedora/libxml2-2.9.10-CVE-2020-7595.patch</Patch>
-            <Patch level="1">fedora/libxml2-2.9.10-fix-integer-overflow.patch</Patch>
-            <Patch level="1">fedora/libxml2-2.9.10-parenthesize-type-checks.patch</Patch>
+            <Patch level="1">fedora/libxml2-2.9.12-fix-formatting-regression.patch </Patch>
+            <Patch level="1">fedora/libxml2-2.9.12-fix-lxml-corrupted-tree.patch </Patch>
             <Patch level="1">fedora/libxml2-2.9.8-python3-unicode-errors.patch</Patch>
         </Patches>
     </Source>
@@ -94,6 +90,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2021-06-04</Date>
+            <Version>2.9.12</Version>
+            <Comment>Upgrade to 2.9.12</Comment>
+            <Name>İdris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="10">
             <Date>2021-03-13</Date>
             <Version>2.9.10</Version>
