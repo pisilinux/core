@@ -14,6 +14,8 @@ def setup():
     # fix sandbox violations when attempt to read "/missing.xml"
     pisitools.dosed("testapi.c", "\/missing.xml", "missing.xml")
     
+    autotools.autoreconf("-fiv")
+    
     shelltools.system("mkdir build-py{2,3}")
     shelltools.cd("build-py2")
     shelltools.sym("../configure", "configure")
@@ -32,7 +34,7 @@ def setup():
                      --without-python"
     else: options += " --with-python=/usr/bin/python \
                        --libdir=/usr/lib"
-
+    
     autotools.configure(options)
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
     
@@ -63,11 +65,11 @@ def build():
     shelltools.cd("../build-py3")
     autotools.make()
 
-#def check():
-    #shelltools.cd("build-py2")
-    #autotools.make("check")
-    #shelltools.cd("../build-py3")
-    #autotools.make("check")
+def check():
+    shelltools.cd("build-py2")
+    autotools.make("check")
+    shelltools.cd("../build-py3")
+    autotools.make("check")
 
 def install():
     shelltools.cd("build-py2")

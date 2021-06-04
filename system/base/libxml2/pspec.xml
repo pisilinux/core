@@ -21,9 +21,10 @@
             <Dependency versionFrom="8.0.1">readline-devel</Dependency>
         </BuildDependencies>
         <Patches>
-<!--             <Patch level="1">fedora/libxml2-2.9.12-fix-formatting-regression.patch</Patch> -->
-            <Patch level="1">fedora/libxml2-2.9.12-fix-lxml-corrupted-tree.patch </Patch>
+            <Patch level="1">fedora/libxml2-2.9.12-fix-lxml-corrupted-tree.patch</Patch>
+            <Patch level="1">fedora/libxml2-2.9.12-fix-formatting-regression.patch</Patch>
             <Patch level="1">fedora/libxml2-2.9.8-python3-unicode-errors.patch</Patch>
+             <Patch level="1">libxml2-2.9.11-disable-fuzz-tests.patch</Patch>
         </Patches>
     </Source>
 
@@ -91,11 +92,11 @@
 
     <History>
         <Update release="11">
-            <Date>2021-06-04</Date>
+            <Date>2021-06-03</Date>
             <Version>2.9.12</Version>
-            <Comment>Upgrade to 2.9.12</Comment>
-            <Name>İdris Kalp</Name>
-            <Email>idriskalp@gmail.com</Email>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
         </Update>
         <Update release="10">
             <Date>2021-03-13</Date>
