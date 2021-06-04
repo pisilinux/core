@@ -20,13 +20,17 @@ def setup():
     #pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
     
     cmaketools.configure("-DBUILD_SHARED_LIBS=ON \
+                          -DSNAPPY_BUILD_TESTS=OFF \
+                          -DSNAPPY_BUILD_BENCHMARKS=OFF \
 		                  -DCMAKE_INSTALL_LIBDIR=lib")
+                          
+                    
 
 def build():
     cmaketools.make()
 
-def check():
-    cmaketools.make("test")
+#def check():
+    #cmaketools.make("test")
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())

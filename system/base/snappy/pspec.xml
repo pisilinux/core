@@ -14,12 +14,14 @@
         <Description>Snappy is a compression/decompression library. It does not aim for maximum compression, or compatibility with any other compression library; instead, it aims for very high speeds and reasonable compression.</Description>
         <BuildDependencies>
             <Dependency>lzo-devel</Dependency>
+            <Dependency>lz4-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
 			<Dependency>cmake</Dependency>
         </BuildDependencies>
-        <Archive sha1sum="1eeb144e7b564dd726136c97f869b453d2fb7924" type="targz">https://github.com/google/snappy/archive/1.1.8.tar.gz</Archive>
+        <Archive sha1sum="83f767c2bc1b0d9114273b883771491ae2bf6f4f" type="targz">https://github.com/google/snappy/archive/1.1.9.tar.gz</Archive>
         <Patches>
-<!--              <Patch level="1">snappy-unittest.patch</Patch> -->
+             <Patch level="1">snappy-thirdparty.patch</Patch>
+             <Patch level="1">snappy-inline.patch</Patch>
         </Patches>
     </Source>
     <Package>
@@ -47,6 +49,13 @@
         </Files>
     </Package>
     <History>
+        <Update release="7">
+            <Date>2021-06-03</Date>
+            <Version>1.1.9</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="6">
             <Date>2020-12-09</Date>
             <Version>1.1.8</Version>
