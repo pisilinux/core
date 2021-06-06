@@ -13,21 +13,21 @@ def setup():
     #pisitools.dosed("configure.ac", "pardus-release", "pisilinux-release")
     #pisitools.dosed("configure", "pardus-release", "pisilinux-release")
     autotools.autoreconf("-fiv")
-    autotools.configure("--with-pam-module-dir=/lib/security/ \
-                         --with-os-type=pisilinux \
+    autotools.configure("--prefix=/usr \
+                         --sysconfdir=/etc \
+                         --localstatedir=/var \
+                         --with-pam-module-dir=/lib/security/ \
                          --with-duktape \
                          --with-dbus \
                          --enable-examples \
                          --enable-introspection \
-                         --disable-systemd \
-                         --enable-libsystemd-login=no \
-                         --enable-libelogind=no \
+                         --disable-libsystemd-login \
                          --with-systemdsystemunitdir=no \
                          --disable-man-pages \
                          --disable-gtk-doc \
                          --disable-static")
-    
-    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ") 
+
+    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
 def build():
     shelltools.export('HOME', get.workDIR())
@@ -40,6 +40,6 @@ def install():
     shelltools.chmod("%s/var/lib/polkit-1" % get.installDIR(), mode=00700)
     shelltools.chmod("%s/etc/polkit-1/rules.d" % get.installDIR(), mode=00700)
     shelltools.chown("%s/etc/polkit-1/rules.d" % get.installDIR(),"polkitd","root") #yada? "polkitd","root"
-    shelltools.chown("%s/var/lib/polkit-1" % get.installDIR(),"polkitd","polkitd")  
+    shelltools.chown("%s/var/lib/polkit-1" % get.installDIR(),"polkitd","polkitd")
     shelltools.chown("%s/usr/share/polkit-1" % get.installDIR(),"polkitd","root") #yada? "polkitd","root"
     pisitools.dodoc("AUTHORS", "NEWS", "README", "HACKING", "COPYING")

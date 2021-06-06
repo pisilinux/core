@@ -16,15 +16,15 @@
         <Description>polkit is a toolkit for defining and handling authorizations. It is used for allowing unprivileged processes to speak to privileged processes.</Description>
         <Archive sha1sum="1c53d0ccacc6e6afd49ba14cb39d2514b943933d" type="targz">http://www.freedesktop.org/software/polkit/releases/polkit-0.118.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>python3</Dependency>	
+            <Dependency>python3</Dependency>
             <Dependency>dbus-devel</Dependency>
             <Dependency versionFrom="1.5.1">pam-devel</Dependency>
             <Dependency>glib2-devel</Dependency>
             <Dependency>expat-devel</Dependency>
             <Dependency>duktape-devel</Dependency>
             <Dependency>gettext-devel</Dependency>
-<!--             <Dependency>elogind-devel</Dependency> -->
-<!--             <Dependency versionFrom="68.12.0">spidermonkey-devel</Dependency> -->
+            <Dependency>elogind-devel</Dependency>
+            <!--Dependency versionFrom="68.12.0">spidermonkey-devel</Dependency-->
             <Dependency>gobject-introspection-devel</Dependency>
             <Dependency>intltool</Dependency>
         </BuildDependencies>
@@ -83,7 +83,7 @@
             <AdditionalFile owner="root" permission="0644" target="/usr/share/man/man1/pkaction.1">man/pkaction.1</AdditionalFile>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/man/man1/pkcheck.1">man/pkcheck.1</AdditionalFile>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/man/man1/pkexec.1">man/pkexec.1</AdditionalFile>
-
+            <AdditionalFile owner="root" permission="0644" target="/etc/pam.d/polkit-1">polkit-1</AdditionalFile>
             <AdditionalFile owner="root" permission="0644" target="/etc/polkit-1/rules.d/70-desktop-policy.conf">70-desktop-policy.conf</AdditionalFile>
             <!-- Example policy files from fedora
             <AdditionalFile owner="root" permission="0644" target="/var/lib/polkit-1/localauthority/10-vendor.d/10-desktop-policy.pkla">10-desktop-policy.pkla</AdditionalFile>

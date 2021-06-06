@@ -20,9 +20,12 @@ cat > system-session << "EOF"
 # Begin /etc/pam.d/system-session
 
 session   required    pam_unix.so
+session   required    pam_loginuid.so
+session   optional    pam_elogind.so
 
 # End /etc/pam.d/system-session
 EOF
+
 cat > system-password << "EOF"
 # Begin /etc/pam.d/system-password
 
