@@ -1,5 +1,5 @@
 From dc3f89a7840c0ffab00d335f127b7d6ab67398d9 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Berk=20=C3=87akar?= <berk2238@hotmail.com>
+From: Berk Cakar <berk2238@hotmail.com>
 Date: Wed, 12 May 2021 23:02:55 +0300
 Subject: [PATCH] Updated build args for Pisi Linux
 
@@ -14,12 +14,12 @@ index 4ac2219..722824d 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -396,14 +396,14 @@ fi
- 
+
  AC_SUBST(PAM_MODULE_DIR)
- 
+
 -AC_ARG_WITH(os-type,     [  --with-os-type=<os>        distribution or OS (redhat/suse/gentoo/pardus/solaris/netbsd)])
 +AC_ARG_WITH(os-type,     [  --with-os-type=<os>        distribution or OS (redhat/suse/gentoo/pisilinux/solaris/netbsd)])
- 
+
  #### Check our operating system (distro-tweaks required)
  if test "z$with_os_type" = "z"; then
  	AC_CHECK_FILE(/etc/redhat-release,distro_type="redhat")
@@ -49,7 +49,7 @@ index 4ac2219..722824d 100644
 +AM_CONDITIONAL(OS_TYPE_PISI_LINUX, test x$with_os_type = xpisilinux, [Running on Pisi GNU/Linux OS'es])
  AM_CONDITIONAL(OS_TYPE_SOLARIS, test x$with_os_type = xsolaris, [Running os Solaris OS'es])
  AM_CONDITIONAL(OS_TYPE_FREEBSD, test x$with_os_type = xfreebsd, [Running on FreeBSD OS'es])
- 
+
 @@ -456,7 +456,7 @@ if ! test -z "$with_pam_include"; then
     PAM_FILE_INCLUDE_ACCOUNT=$with_pam_include
     PAM_FILE_INCLUDE_PASSWORD=$with_pam_include

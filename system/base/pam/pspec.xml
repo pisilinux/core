@@ -14,27 +14,29 @@
         <Description>PAM (Pluggable Authentication Modules) is a system security tool that allows system administrators to set authentication policy without having to recompile programs that handle authentication.</Description>
         <Archive sha1sum="d0f72065b3b3978876b29d55aad6328c5db58247" type="targz">https://github.com/linux-pam/linux-pam/archive/v1.5.1.tar.gz</Archive>
         <AdditionalFiles>
-            <AdditionalFile target="conf.sh" permission="0755">conf.sh</AdditionalFile>
-            <AdditionalFile target="dlopen.sh" permission="0755">dlopen.sh</AdditionalFile>
-            <AdditionalFile target="dlopen-test.sh" permission="0755">dlopen-test.sh</AdditionalFile>
+            <AdditionalFile target="pisi-pambase.sh" permission="0755">pisi-pambase.sh</AdditionalFile>
+            <!--AdditionalFile target="dlopen.sh" permission="0755">dlopen.sh</AdditionalFile>
+            <AdditionalFile target="dlopen-test.sh" permission="0755">dlopen-test.sh</AdditionalFile-->
         </AdditionalFiles>
         <BuildDependencies>
-            <Dependency>perl</Dependency>
-            <Dependency>gettext-devel</Dependency>
-            <Dependency>cracklib-devel</Dependency>
-            <Dependency>libxslt-devel</Dependency>
-            <Dependency>docbook-xsl</Dependency>
+            <Dependency>libnsl-devel</Dependency>
+            <Dependency>libtirpc-devel</Dependency>
+            <Dependency>audit-devel</Dependency>
         </BuildDependencies>
-        <Patches>
-<!--             <Patch level="1">CVE-2020-27780.patch</Patch> -->
-<!--              <Patch level="1">fedora/pam-1.4.0-full-relro.patch</Patch> -->
-        </Patches>
+        <!--Patches>
+            <Patch level="1">CVE-2020-27780.patch</Patch>
+            <Patch level="1">fedora/pam-1.4.0-full-relro.patch</Patch>
+        </Patches-->
     </Source>
 
     <Package>
         <Name>pam</Name>
         <RuntimeDependencies>
+            <Dependency>libpwquality</Dependency>
             <Dependency>cracklib</Dependency>
+            <Dependency>audit</Dependency>
+            <Dependency>libnsl</Dependency>
+            <Dependency>libtirpc</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="config">/etc</Path>
@@ -70,6 +72,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2021-06-03</Date>
+            <Version>1.5.1</Version>
+            <Comment>PAM rebuild.</Comment>
+            <Name>Berk Çakar</Name>
+            <Email>berk2238@hotmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2021-04-29</Date>
             <Version>1.5.1</Version>
