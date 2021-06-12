@@ -8,7 +8,8 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.configure("--enable-nls \
+    autotools.configure("--disable-vlock \
+                         --enable-nls \
                          --prefix=/usr \
                          --datadir=/usr/share/kbd \
                          --localedir=/usr/share/locale/kbd \

@@ -39,14 +39,14 @@ diff -Naur kbd-1.15.orig/data/keymaps/i386/fgGIod/tr_f-latin5.map kbd-1.15/data/
 --- kbd-1.15.orig/data/keymaps/i386/fgGIod/tr_f-latin5.map	2008-10-23 20:03:58.000000000 +0100
 +++ kbd-1.15/data/keymaps/i386/fgGIod/tr_f-latin5.map	2008-12-03 22:40:32.000000000 +0000
 @@ -51,7 +51,7 @@
- 	alt     keycode  12 = Meta_minus
- keycode  13 = minus            underscore
- 	alt     keycode  13 = Meta_equal
--keycode  14 = BackSpace           Delete
-+keycode  14 = Delete           Delete
- 	alt     keycode  14 = Meta_Delete
- keycode  15 = Tab              Meta_Tab
- 	alt     keycode  15 = Meta_Tab
+ 	alt     keycode  12 = Meta_minus      
+ keycode  13 = minus            underscore      
+ 	alt     keycode  13 = Meta_equal      
+-keycode  14 = BackSpace           Delete          
++keycode  14 = Delete           Delete          
+ 	alt     keycode  14 = Meta_Delete     
+ keycode  15 = Tab              Meta_Tab             
+ 	alt     keycode  15 = Meta_Tab        
 diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/lt.l4.map kbd-1.15/data/keymaps/i386/qwerty/lt.l4.map
 --- kbd-1.15.orig/data/keymaps/i386/qwerty/lt.l4.map	2008-10-23 20:03:59.000000000 +0100
 +++ kbd-1.15/data/keymaps/i386/qwerty/lt.l4.map	2008-12-03 22:42:14.000000000 +0000
@@ -58,9 +58,9 @@ diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/lt.l4.map kbd-1.15/data/keymap
 +	      Delete	       Delete		Delete		 Delete	     \
  	      Delete	       Delete		Delete		 Delete	     \
  	      Meta_BackSpace   Meta_BackSpace	Meta_BackSpace Meta_BackSpace \
- 	      Meta_Delete      Meta_Delete	Meta_Delete	 Meta_Delete
+ 	      Meta_Delete      Meta_Delete	Meta_Delete	 Meta_Delete  
 @@ -506,7 +506,7 @@
-
+ 
  # Edit this if you want strict VT100 emulation.
  string F111 = "\033[3$"
 -keycode 111 = Delete	       F111		Delete		 F111	   \
@@ -79,9 +79,9 @@ diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/lt.map kbd-1.15/data/keymaps/i
 +	      Delete	       Delete		Delete		 Delete	     \
  	      Delete	       Delete		Delete		 Delete	     \
  	      Meta_BackSpace   Meta_BackSpace	Meta_BackSpace Meta_BackSpace \
- 	      Meta_Delete      Meta_Delete	Meta_Delete	 Meta_Delete
+ 	      Meta_Delete      Meta_Delete	Meta_Delete	 Meta_Delete  
 @@ -505,7 +505,7 @@
-
+ 
  # Edit this if you want strict VT100 emulation.
  string F111 = "\033[3$"
 -keycode 111 = Delete	       F111		Delete		 F111	   \
@@ -99,13 +99,13 @@ diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/no-latin1.map kbd-1.15/data/ke
 -	plain keycode 111 = Delete		# "Remove" originally, weird...
 +	plain keycode 111 = Remove
  strings as usual
-
+ 
  	keycode   1 = Escape
 diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/ru1.map kbd-1.15/data/keymaps/i386/qwerty/ru1.map
 --- kbd-1.15.orig/data/keymaps/i386/qwerty/ru1.map	2008-10-23 20:03:59.000000000 +0100
 +++ kbd-1.15/data/keymaps/i386/qwerty/ru1.map	2008-12-03 22:45:32.000000000 +0000
 @@ -143,8 +143,8 @@
-
+ 
  # The keycode "0xFF" is too dangerous for many programs (including emacs).
  # So let it be bracket instead of Hard Sign.
 -# altgr		keycode  27 = 	+0xDF
@@ -125,8 +125,8 @@ diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/ru2.map kbd-1.15/data/keymaps/
 -		keycode  14 =	BackSpace BackSpace	BackSpace BackSpace
 +		keycode  14 =	Delete Delete	Delete Delete
  	alt	keycode  14 =	Meta_Delete
- 		keycode  15 =	Tab	Tab		Tab	Tab
- 	alt	keycode  15 =	Meta_Tab
+ 		keycode  15 =	Tab	Tab		Tab	Tab	
+ 	alt	keycode  15 =	Meta_Tab	
 diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/ru-cp1251.map kbd-1.15/data/keymaps/i386/qwerty/ru-cp1251.map
 --- kbd-1.15.orig/data/keymaps/i386/qwerty/ru-cp1251.map	2008-10-23 20:03:59.000000000 +0100
 +++ kbd-1.15/data/keymaps/i386/qwerty/ru-cp1251.map	2008-12-03 22:47:12.000000000 +0000
@@ -138,7 +138,7 @@ diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/ru-cp1251.map kbd-1.15/data/ke
 +		keycode  14 =	Delete
  	alt	keycode  14 =	Meta_Delete
  		keycode  15 =	Tab
- 	alt	keycode  15 =	Meta_Tab
+ 	alt	keycode  15 =	Meta_Tab	
 diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/ru-ms.map kbd-1.15/data/keymaps/i386/qwerty/ru-ms.map
 --- kbd-1.15.orig/data/keymaps/i386/qwerty/ru-ms.map	2008-10-23 20:03:59.000000000 +0100
 +++ kbd-1.15/data/keymaps/i386/qwerty/ru-ms.map	2008-12-03 22:48:10.000000000 +0000
@@ -152,7 +152,7 @@ diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/ru-ms.map kbd-1.15/data/keymap
 +		keycode  14 = 	Delete  Delete  Delete  Delete
  	alt	keycode  14 =	Meta_Delete
  altgr	alt     keycode  14 = 	Meta_Delete
- 		keycode  15 =	Tab	Tab		Tab	Tab
+ 		keycode  15 =	Tab	Tab		Tab	Tab	
 diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/ru_win.map kbd-1.15/data/keymaps/i386/qwerty/ru_win.map
 --- kbd-1.15.orig/data/keymaps/i386/qwerty/ru_win.map	2008-10-23 20:03:59.000000000 +0100
 +++ kbd-1.15/data/keymaps/i386/qwerty/ru_win.map	2008-12-03 22:49:17.000000000 +0000
@@ -163,27 +163,27 @@ diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/ru_win.map kbd-1.15/data/keyma
 -		keycode  14 =	BackSpace BackSpace	BackSpace BackSpace
 +		keycode  14 =	Delete Delete	Delete Delete
  	alt	keycode  14 =	Meta_Delete
- 		keycode  15 =	Tab	Tab		Tab	Tab
- 	alt	keycode  15 =	Meta_Tab
+ 		keycode  15 =	Tab	Tab		Tab	Tab	
+ 	alt	keycode  15 =	Meta_Tab	
 diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/se-ir209.map kbd-1.15/data/keymaps/i386/qwerty/se-ir209.map
 --- kbd-1.15.orig/data/keymaps/i386/qwerty/se-ir209.map	2008-10-23 20:03:59.000000000 +0100
 +++ kbd-1.15/data/keymaps/i386/qwerty/se-ir209.map	2008-12-03 22:50:18.000000000 +0000
 @@ -345,7 +345,7 @@
  	keycode 109 = Next	Scroll_Forward
  	keycode 110 = Insert
-
+ 
 -	keycode 111 = Delete		# "Remove" originally, weird...
 +	keycode 111 = Remove
  control alt	keycode 111 = Boot
  control altgr	keycode 111 = Boot
-
+ 
 diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/se-lat6.map kbd-1.15/data/keymaps/i386/qwerty/se-lat6.map
 --- kbd-1.15.orig/data/keymaps/i386/qwerty/se-lat6.map	2008-10-23 20:03:59.000000000 +0100
 +++ kbd-1.15/data/keymaps/i386/qwerty/se-lat6.map	2008-12-03 22:50:44.000000000 +0000
 @@ -374,6 +374,6 @@
  	keycode 109 = Next	Scroll_Forward
  	keycode 110 = Insert
-
+ 
 -	keycode 111 = Delete		# "Remove" originally, weird...
 +	keycode 111 = Remove
  control alt	keycode 111 = Boot
@@ -207,10 +207,10 @@ diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/ua.map kbd-1.15/data/keymaps/i
  	shift ctrll ctrlr keycode  13 = plus
  	alt ctrll ctrlr keycode  13 = Meta_equal
  	shift alt ctrll ctrlr keycode  13 = Meta_plus
--keycode  14 = BackSpace           Delete
-+keycode  14 = Delete           Delete
- 	control	keycode  14 = BackSpace
- 	alt	keycode  14 = Meta_Delete
+-keycode  14 = BackSpace           Delete          
++keycode  14 = Delete           Delete          
+ 	control	keycode  14 = BackSpace       
+ 	alt	keycode  14 = Meta_Delete     
  	ctrlr	keycode  14 = BackSpace
 diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/ua-utf.map kbd-1.15/data/keymaps/i386/qwerty/ua-utf.map
 --- kbd-1.15.orig/data/keymaps/i386/qwerty/ua-utf.map	2008-10-23 20:03:59.000000000 +0100
@@ -219,10 +219,10 @@ diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/ua-utf.map kbd-1.15/data/keyma
  	shift ctrll ctrlr keycode  13 = plus
  	alt ctrll ctrlr keycode  13 = Meta_equal
  	shift alt ctrll ctrlr keycode  13 = Meta_plus
--keycode  14 = BackSpace           Delete
-+keycode  14 = Delete           Delete
- 	control	keycode  14 = BackSpace
- 	alt	keycode  14 = Meta_Delete
+-keycode  14 = BackSpace           Delete          
++keycode  14 = Delete           Delete          
+ 	control	keycode  14 = BackSpace       
+ 	alt	keycode  14 = Meta_Delete     
  	ctrlr	keycode  14 = BackSpace
 diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/ua-utf-ws.map kbd-1.15/data/keymaps/i386/qwerty/ua-utf-ws.map
 --- kbd-1.15.orig/data/keymaps/i386/qwerty/ua-utf-ws.map	2008-10-23 20:03:59.000000000 +0100
@@ -231,10 +231,10 @@ diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/ua-utf-ws.map kbd-1.15/data/ke
  	shift ctrll ctrlr keycode  13 = plus
  	alt ctrll ctrlr keycode  13 = Meta_equal
  	shift alt ctrll ctrlr keycode  13 = Meta_plus
--keycode  14 = BackSpace           Delete
-+keycode  14 = Delete           Delete
- 	control	keycode  14 = BackSpace
- 	alt	keycode  14 = Meta_Delete
+-keycode  14 = BackSpace           Delete          
++keycode  14 = Delete           Delete          
+ 	control	keycode  14 = BackSpace       
+ 	alt	keycode  14 = Meta_Delete     
  	ctrlr	keycode  14 = BackSpace
 diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/ua-ws.map kbd-1.15/data/keymaps/i386/qwerty/ua-ws.map
 --- kbd-1.15.orig/data/keymaps/i386/qwerty/ua-ws.map	2008-10-23 20:03:59.000000000 +0100
@@ -243,8 +243,8 @@ diff -Naur kbd-1.15.orig/data/keymaps/i386/qwerty/ua-ws.map kbd-1.15/data/keymap
  	shift ctrll ctrlr keycode  13 = plus
  	alt ctrll ctrlr keycode  13 = Meta_equal
  	shift alt ctrll ctrlr keycode  13 = Meta_plus
--keycode  14 = BackSpace           Delete
-+keycode  14 = Delete           Delete
- 	control	keycode  14 = BackSpace
- 	alt	keycode  14 = Meta_Delete
+-keycode  14 = BackSpace           Delete          
++keycode  14 = Delete           Delete          
+ 	control	keycode  14 = BackSpace       
+ 	alt	keycode  14 = Meta_Delete     
  	ctrlr	keycode  14 = BackSpace

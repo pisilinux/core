@@ -1,0 +1,52 @@
+diff -up kbd-2.3.0/docs/man/man1/showkey.1.orig kbd-2.3.0/docs/man/man1/showkey.1
+--- kbd-2.3.0/docs/man/man1/showkey.1.orig	2020-07-08 19:25:47.000000000 +0200
++++ kbd-2.3.0/docs/man/man1/showkey.1	2020-07-16 08:56:15.970254183 +0200
+@@ -84,6 +84,19 @@ corresponds to what the keyboard hardwar
+ to know the scan codes sent by various keys it is better to boot a
+ 2.4 kernel. Since 2.6.9 there also is the boot option atkbd.softraw=0
+ that tells the 2.6 kernel to return the actual scan codes.
++
++.SH NOTES
++The raw scan codes are available only on AT and PS/2 keyboards,
++and even then they are disabled unless the
++.B atkbd.softraw=0
++kernel parameter is used.
++When the raw scan codes are not available, the kernel uses a fixed built-in
++table to produce scan codes from keycodes.  Thus,
++.BR setkeycodes (8)
++can affect the output of
++.B showkey
++in scan code dump mode.
++
+ .SH "SEE ALSO"
+ .BR loadkeys (1),
+ .BR dumpkeys (1),
+diff -up kbd-2.3.0/docs/man/man8/setkeycodes.8.orig kbd-2.3.0/docs/man/man8/setkeycodes.8
+--- kbd-2.3.0/docs/man/man8/setkeycodes.8.orig	2020-07-08 19:35:35.000000000 +0200
++++ kbd-2.3.0/docs/man/man8/setkeycodes.8	2020-07-16 08:57:52.293900997 +0200
+@@ -42,6 +42,10 @@ the command
+ will assign the keycode 112 to it, and then
+ .BR loadkeys (1)
+ can be used to define the function of this key.
++
++USB keyboards have standardized keycodes and
++.B setkeycodes
++doesn't affect them at all.
+ .LP
+ Some older kernels might hardwire a low scancode range to the
+ equivalent keycodes; setkeycodes will fail when you try to remap
+@@ -60,6 +64,14 @@ None.
+ .SH BUGS
+ The keycodes of X have nothing to do with those of Linux.
+ Unusual keys can be made visible under Linux, but not under X.
++
++.B setkeycodes
++affects only the "first" input device
++that has modifiable scancode-to-keycode mapping.
++If there is more than one such device,
++.B setkeycodes
++cannot change the mapping of other devices than the "first" one.
++
+ .SH "SEE ALSO"
+ .BR dumpkeys (1),
+ .BR loadkeys (1),

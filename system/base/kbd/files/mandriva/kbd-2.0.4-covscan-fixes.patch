@@ -1,0 +1,11 @@
+diff -up kbd-2.3.0/src/libkfont/kdmapop.c.orig kbd-2.3.0/src/libkfont/kdmapop.c
+--- kbd-2.3.0/src/libkfont/kdmapop.c.orig	2020-04-27 17:53:01.000000000 +0200
++++ kbd-2.3.0/src/libkfont/kdmapop.c	2020-07-16 09:06:45.246742724 +0200
+@@ -166,6 +166,7 @@ kfont_get_unicodemap(struct kfont_contex
+ 
+ 		if (ioctl(fd, GIO_UNIMAP, &ud)) {
+ 			KFONT_ERR(ctx, "ioctl(GIO_UNIMAP): %m");
++			free(ud.entries);
+ 			return -1;
+ 		}
+ 		if (ct != ud.entry_ct)

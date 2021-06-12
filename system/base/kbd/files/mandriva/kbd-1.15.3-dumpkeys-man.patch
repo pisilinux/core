@@ -1,0 +1,18 @@
+diff -up kbd-2.0.4/docs/man/man1/dumpkeys.1.in.orig kbd-2.0.4/docs/man/man1/dumpkeys.1.in
+--- kbd-2.0.4/docs/man/man1/dumpkeys.1.in.orig	2017-01-11 11:12:22.884029413 +0100
++++ kbd-2.0.4/docs/man/man1/dumpkeys.1.in	2017-01-11 11:12:47.537040194 +0100
+@@ -164,6 +164,14 @@ output of
+ .BI \-S shape " " " " \-\-shape= shape
+ .LP
+ .TP
++.B \-1 \-\-separate-lines
++This forces
++.B dumpkeys
++to write one line per (modifier,keycode) pair. It prefixes the word
++.I plain
++for plain keycodes.
++.LP
++.TP
+ .B \-t \-\-funcs-only
+ When this option is given,
+ .B dumpkeys
