@@ -17,6 +17,9 @@ def setup():
     if get.buildTYPE() == "emul32":
         options += " --bindir=/usr/emul32 \
                      --libdir=/usr/lib32"
+
+    if get.buildTYPE() != "emul32":
+        options += " --with-zstd"
                          
     autotools.configure(options)
 
