@@ -31,9 +31,11 @@ def install():
     pisitools.dodir("/lib")
     pisitools.domove("/usr/lib/libfuse.so.*", "/lib")
     shelltools.system("ln -sfv %s/lib/libfuse.so.%s %s/usr/lib/libfuse.so" % (get.installDIR(), get.srcVERSION(), get.installDIR()))
+    shelltools.system("ln -sfv %s/lib/libfuse.so.%s %s/lib/libfuse.so" % (get.installDIR(), get.srcVERSION(), get.installDIR()))
     
     pisitools.domove("/usr/lib/libulockmgr.so.*", "/lib")
     shelltools.system("ln -sfv %s/lib/libulockmgr.so.%s %s/usr/lib/libulockmgr.so" % (get.installDIR(), get.srcVERSION(), get.installDIR()))
+    shelltools.system("ln -sfv %s/lib/libulockmgr.so.%s %s/lib/libulockmgr.so" % (get.installDIR(), get.srcVERSION(), get.installDIR()))
 
     shelltools.system("install -v -m755 -d %s/usr/share/doc/fuse-%s" % (get.installDIR(), get.srcVERSION()))
     shelltools.system("install -v -m644 doc/kernel.txt %s/usr/share/doc/fuse" % get.installDIR())
