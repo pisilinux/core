@@ -9,18 +9,18 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 
 def setup():
+    shelltools.export("MOUNT_FUSE_PATH", "/usr/bin")
     shelltools.system("sh makeconf.sh")
-    
+
     # Disable device node creation during build/install
-    pisitools.dosed("util/Makefile.in", "mknod", "echo Disabled: mknod ")
+    # pisitools.dosed("util/Makefile.in", "mknod", "echo Disabled: mknod ")
 
-
-    autotools.configure("--disable-static \
-                         --disable-rpath \
+    autotools.configure("--prefix=/usr \
+                         --libdir=/usr/lib \
                          --enable-lib \
                          --enable-util \
-                         --exec-prefix=/ \
-                         --bindir=/bin")
+                         --disable-example \
+                         --disable-static")
 
 def build():
     autotools.make()
@@ -28,14 +28,25 @@ def build():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
+    pisitools.dodir("/lib")
+    pisitools.domove("/usr/lib/libfuse.so.*", "/lib/")
+    shelltools.system("ln -sfv %s/lib/libfuse.so.%s %s/usr/lib/libfuse.so" % (get.installDIR(), get.srcVERSION(), get.installDIR()))
+
+    shelltools.system("install -v -m755 -d %s/usr/share/doc/fuse-%s" % (get.installDIR(), get.srcVERSION()))
+    shelltools.system("install -v -m644 doc/kernel.txt %s/usr/share/doc/fuse" % get.installDIR())
+    # shelltools.system("cp -Rv doc/html %s/usr/share/doc/fuse-%s" % (get.installDIR(), get.srcVERSION()))
+
+    pisitools.remove("/usr/lib/libfuse.la")
+    pisitools.remove("/usr/lib/libulockmgr.la")
+
     pisitools.removeDir("/dev")
-    pisitools.removeDir("/etc")
+    # pisitools.removeDir("/etc")
 
     # Make compat symlinks into /usr/bin
-    pisitools.dosym("/bin/fusermount", "/usr/bin/fusermount")
-    pisitools.dosym("/bin/ulockmgr_server", "/usr/bin/ulockmgr_server")
+    # pisitools.dosym("/bin/fusermount", "/usr/bin/fusermount")
+    # pisitools.dosym("/bin/ulockmgr_server", "/usr/bin/ulockmgr_server")
 
     # Move pkgconfig file to /usr/lib
-    pisitools.domove("/lib/pkgconfig", "/usr/lib/")
+    # pisitools.domove("/lib/pkgconfig", "/usr/lib/")
 
     pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING", "NEWS", "README.NFS")
