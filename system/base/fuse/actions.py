@@ -29,7 +29,7 @@ def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     pisitools.dodir("/lib")
-    pisitools.domove("/usr/lib/libfuse.so.*", "/lib/")
+    pisitools.domove("/usr/lib/libfuse.so.*", "/lib")
     shelltools.system("ln -sfv %s/lib/libfuse.so.%s %s/usr/lib/libfuse.so" % (get.installDIR(), get.srcVERSION(), get.installDIR()))
 
     shelltools.system("install -v -m755 -d %s/usr/share/doc/fuse-%s" % (get.installDIR(), get.srcVERSION()))
