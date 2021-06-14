@@ -53,5 +53,7 @@ def install():
 
     # Move pkgconfig file to /usr/lib
     # pisitools.domove("/lib/pkgconfig", "/usr/lib/")
+    
+    pisitools.dosed("%s/usr/lib/pkgconfig" % get.installDIR(), "/usr/lib", "/lib")
 
     pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING", "NEWS", "README.NFS")
