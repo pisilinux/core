@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>comar</Name>
@@ -12,7 +12,7 @@
         <IsA>service</IsA>
         <Summary>Manages system configuration</Summary>
         <Description>Pisi Linux programs are packaged with small scripts which configures them to entegrate with system and each other. Çomar is the tool which manages and executes these scripts.</Description>
-        <Archive sha1sum="27f01ddd80919067b295eb64de3cabb235f30d4f" type="targz">https://github.com/PisiLinuxNew/comar/archive/v3.0.3.tar.gz</Archive>
+        <Archive sha1sum="d2b8b5062fcccadbbe046240b152a92ad7db5f33" type="targz">https://github.com/PisiLinuxNew/comar/archive/refs/tags/3.0.3.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>dbus-devel</Dependency>
             <Dependency>python-devel</Dependency>
@@ -50,6 +50,13 @@
     </Package>
 
     <History>
+        <Update release="7">
+            <Date>2021-06-14</Date>
+            <Version>3.0.3.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>Kamil Atlıl</Name>
+            <Email>suvari@pisilinux.org</Email>
+        </Update>
         <Update release="6">
             <Date>2021-03-30</Date>
             <Version>3.0.3</Version>
