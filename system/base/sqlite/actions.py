@@ -64,9 +64,9 @@ def install():
 
     pisitools.dodoc("README*")
 
-    shelltools.cd("%s/sqlite-doc-3340000" % get.workDIR())
+    shelltools.cd("%s/sqlite-doc-3350500" % get.workDIR())
 
-    pisitools.insinto("/usr/share/doc/sqlite", "../sqlite-doc-3340000/*")
+    pisitools.insinto("/usr/share/doc/sqlite", "../sqlite-doc-3350500/*")
     """
     # fix permissions and remove obsolete files; https://bugs.archlinux.org/task/24605
     shelltools.system("find %s -type f -perm 755 -exec ls -lha {} \;" % get.installDIR())

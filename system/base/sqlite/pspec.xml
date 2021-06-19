@@ -14,8 +14,8 @@
         <IsA>app:console</IsA>
         <Summary>An SQL Database Engine in a C Library</Summary>
         <Description>SQLite is a small C library that implements a self-contained, embeddable, zero-configuration SQL database engine. Supports databases up to 2 terabytes in size.</Description>
-        <Archive sha1sum="1544957cf4bcc9606aef541054b1cb59480a4b4e" type="targz">https://sqlite.org/2020/sqlite-autoconf-3340000.tar.gz</Archive>
-        <Archive sha1sum="a3efec6b9bd7f339927f6c4fc391dfbe06e17807" type="zip">https://sqlite.org/2020/sqlite-doc-3340000.zip</Archive>
+        <Archive sha1sum="f6875472fc86c679400ede139d1dfc6937003abc" type="targz">https://sqlite.org/2021/sqlite-autoconf-3350500.tar.gz</Archive>
+        <Archive sha1sum="c973cdbbd171064260601fe7b65bbdd51a33337e" type="zip">https://sqlite.org/2021/sqlite-doc-3350500.zip</Archive>
         <BuildDependencies>
             <Dependency>readline-devel</Dependency>
         </BuildDependencies>
@@ -105,6 +105,13 @@
     </Package>-->
 
     <History>
+        <Update release="15">
+            <Date>2021-06-18</Date>
+            <Version>3.35.5</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="14">
             <Date>2020-11-07</Date>
             <Version>3.34.0</Version>
