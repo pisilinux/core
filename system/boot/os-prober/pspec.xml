@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Utility to detect other OSes on a set of drives</Summary>
         <Description>os-probe detects other OSes available on a system and outputs the results in a generic machine-readable format. Support for new OSes and Linux distributions can be added easily.</Description>
-        <Archive sha1sum="604118a2c85c019f26429d836053675f76a46063" type="tarxz">http://cdn-fastly.deb.debian.org/debian/pool/main/o/os-prober/os-prober_1.77.tar.xz</Archive>
+        <Archive sha1sum="ac9899b72f766f8351c10dec4213dc3017d34464" type="tarxz">http://cdn-fastly.deb.debian.org/debian/pool/main/o/os-prober/os-prober_1.78.tar.xz</Archive>
         <Patches>
             <Patch level="1">fedora/os-prober-bootpart-name-fix.patch</Patch>
             <Patch level="1">fedora/os-prober-btrfsfix.patch</Patch>
@@ -38,6 +38,13 @@
         </Files>
     </Package>
     <History>
+        <Update release="11">
+            <Date>2021-07-17</Date>
+            <Version>1.78</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="10">
             <Date>2020-12-09</Date>
             <Version>1.77</Version>
