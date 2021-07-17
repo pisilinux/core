@@ -15,7 +15,7 @@ from pisi.actionsapi import shelltools
 def setup():
     
     shelltools.copy("../unifont*.bdf", "./unifont.bdf")
-    shelltools.export("GRUB_CONTRIB", "%s/grub-2.04/grub-extras" % (get.workDIR()))
+    shelltools.export("GRUB_CONTRIB", "%s/grub-2.06/grub-extras" % (get.workDIR()))
 
     pisitools.cflags.remove("-fstack-protector", "-fasynchronous-unwind-tables", "-fexceptions", "-fPIC")
     pisitools.cflags.sub("\s?(-O[\ds]|-D_FORTIFY_SOURCE=\d)\s?", " ")
