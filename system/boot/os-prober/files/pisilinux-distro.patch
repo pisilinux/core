@@ -1,0 +1,13 @@
+diff -Nuar a/os-probes/mounted/common/90linux-distro b/os-probes/mounted/common/90linux-distro
+--- a/os-probes/mounted/common/90linux-distro	2018-08-10 22:23:18.000000000 +0300
++++ b/os-probes/mounted/common/90linux-distro	2021-07-18 02:11:39.137236954 +0300
+@@ -29,6 +29,9 @@
+ 	elif [ -e "$dir/etc/altlinux-release" ]; then
+ 		short="ALTLinux"
+ 		long="$(cat "$dir/etc/altlinux-release")"
++    elif [ -e "$dir/etc/pisilinux-release" ]; then
++		short="Pisilinux"
++		long="$(cat "$dir/etc/pisilinux-release")"
+ 	elif [ -e "$dir/etc/magic-release" ]; then
+ 		short="Magic"
+ 		long="$(cat "$dir/etc/magic-release")"
