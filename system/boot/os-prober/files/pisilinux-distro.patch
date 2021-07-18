@@ -6,7 +6,7 @@ diff -Nuar a/os-probes/mounted/common/90linux-distro b/os-probes/mounted/common/
  		short="ALTLinux"
  		long="$(cat "$dir/etc/altlinux-release")"
 +    elif [ -e "$dir/etc/pisilinux-release" ]; then
-+		short="Pisilinux"
++		short="PisiLinux"
 +		long="$(cat "$dir/etc/pisilinux-release")"
  	elif [ -e "$dir/etc/magic-release" ]; then
  		short="Magic"
