@@ -15,7 +15,7 @@ def build():
     shelltools.system("sed -i -e 's|grub-mount|grub2-mount|g' os-probes/common/50mounted-tests \
                        linux-boot-probes/common/50mounted-tests common.sh")
 
-    shelltools.system("sed -i -e 's|/boot/grub/|/boot/grub2/|g' linux-boot-probes/mounted/common/40grub2 \
+    shelltools.system("sed -i -e 's|/boot/grub/grub.cfg|/boot/grub2/grub.cfg|g' linux-boot-probes/mounted/common/40grub2 \
                                  linux-boot-probes/mounted/x86/40grub")
     shelltools.unlink("Makefile")
     autotools.make("newns")
