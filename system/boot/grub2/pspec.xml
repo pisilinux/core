@@ -13,8 +13,8 @@
         <Summary>GNU GRUB is a Multiboot boot loader.</Summary>
         <Description>GNU GRUB (short for GNU GRand Unified Bootloader) is a boot loader package from the GNU Project.</Description>
         <Archive sha1sum="c9f93f1e195ec7a5a21d36a13b469788c0b29f0f" type="tarxz">http://ftp.gnu.org/gnu/grub/grub-2.06.tar.xz</Archive>
-        <Archive sha1sum="4ec712aced1c2b4cb6cd1cbd83fc2154249d6977" type="tarxz" target="grub-2.06/grub-extras">https://sourceforge.net/projects/pisilinux/files/source/grub2_extras_915resolution_r10.tar.xz</Archive>
-        <Archive sha1sum="89bbdfcca0e22cecf43207ab96d1e17b3f64081c" type="gz">https://ftp.gnu.org/gnu/unifont/unifont-13.0.01/unifont_jp-13.0.01.bdf.gz</Archive>
+<!--         <Archive sha1sum="4ec712aced1c2b4cb6cd1cbd83fc2154249d6977" type="tarxz" target="grub-2.06/grub-extras">https://sourceforge.net/projects/pisilinux/files/source/grub2_extras_915resolution_r10.tar.xz</Archive> -->
+        <Archive sha1sum="c22f624573ee2c81c54324943e4d6c4a3a8b5cdc" type="gz">https://ftp.gnu.org/gnu/unifont/unifont-13.0.06/unifont-13.0.06.bdf.gz</Archive>
 <!--         <Archive sha1sum="30797ba7a86fc32213b9ae994c9fa45f37d01170" type="gz">http://ftp.gnu.org/gnu/unifont/unifont-6.3.20131217/unifont-6.3.20131217.bdf.gz</Archive> -->
         <Archive sha1sum="2977a0150526f3a13b116be8ae2ac5cbe9760f98" type="targz" target="grub-2.06/themes">https://github.com/sebo28/Vimix/archive/v0.1.tar.gz</Archive>
         <BuildDependencies>
@@ -49,6 +49,7 @@
             <Patch level="1">pisi_name_and_initramfs.patch</Patch>
 
             <Patch level="1">grub-2.06-test-words.patch</Patch>
+            <Patch level="1">grub-mkconfig_lib.patch</Patch>
 <!--             <Patch level="1">Allow_GRUB_to_mount_ext234_filesystems_that_have_the_encryption_feature.patch</Patch> -->
 <!--             <Patch level="1">tsc-Change-default-tsc-calibration-method-to-pmtimer-on-EFI-systems.patch</Patch> -->
 <!--             <Patch level="1">intel-ucode.patch</Patch> -->

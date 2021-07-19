@@ -1,0 +1,12 @@
+diff -Nuar a/util/grub-mkconfig_lib.in b/util/grub-mkconfig_lib.in
+--- a/util/grub-mkconfig_lib.in	2020-09-18 23:31:30.000000000 +0300
++++ b/util/grub-mkconfig_lib.in	2021-07-19 18:35:47.089881731 +0300
+@@ -14,6 +14,8 @@
+ # You should have received a copy of the GNU General Public License
+ # along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
+ 
++LC_ALL=C
++
+ prefix="@prefix@"
+ exec_prefix="@exec_prefix@"
+ datarootdir="@datarootdir@"
