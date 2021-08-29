@@ -12,7 +12,7 @@
         <License>custom</License>
         <Summary>Next generation of the python high-level scripting language</Summary>
         <Description>Python is an accessible, high-level, dynamically typed, interpreted programming language, designed with an emphasis on code readability. It includes an extensive standard library, and has a vast ecosystem of third-party libraries.</Description>
-        <Archive sha1sum="f6579351d42a81c77b55aa4ca8b1280b4f5b37f9" type="tarxz">https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tar.xz</Archive>
+        <Archive sha1sum="1561060627fd171de19c53eb374cd92d2f297bff" type="tarxz">https://www.python.org/ftp/python/3.8.11/Python-3.8.11.tar.xz</Archive>
 <!--         <Archive sha1sum="bf7badf7e248e0ecf465d33c2f5aeec774209227" type="targz" target="Python-3.8.5">https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz</Archive> -->
         <BuildDependencies>
             <Dependency>bzip2</Dependency>
@@ -31,10 +31,9 @@
             <!--<Dependency>tcltk-devel</Dependency>-->
         </BuildDependencies>
         <Patches>
-            <!--
-            <Patch level="1">dont-make-libpython-readonly.patch</Patch> 
-            <Patch level="1">0001-compileall-Fix-ddir-when-recursing.patch</Patch>
-            -->
+            <Patch level="1">gentoo/0014-bpo-36384-Leading-zeros-in-IPv4-addresses-are-no-lon.patch</Patch>
+            <Patch level="1">gentoo/0016-bpo-43650-Fix-MemoryError-on-zip.read-in-shutil._unp.patch</Patch>
+            <Patch level="1">gentoo/0017-bpo-43998-Default-to-TLS-1.2-and-increase-cipher-sui.patch</Patch>
         </Patches>
     </Source>
 
@@ -128,6 +127,13 @@
     </Package>
 
     <History>
+        <Update release="16">
+            <Date>2021-08-27</Date>
+            <Version>3.8.11</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="15">
             <Date>2021-06-19</Date>
             <Version>3.8.10</Version>
