@@ -14,7 +14,7 @@
         <Description>Python is a dynamic object-oriented programming language that can be used for many kinds of software development. It offers strong support for integration with other languages and tools, comes with extensive standard libraries, and can be learned in a few days.</Description>
         <Archive sha1sum="678d4cf483a1c92efd347ee8e1e79326dc82810b" type="tarxz">https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz</Archive>
 		<!--		<Archive sha1sum="bf7badf7e248e0ecf465d33c2f5aeec774209227" type="targz" target="Python-2.7.18">https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz</Archive> -->
-		<Archive sha1sum="bad9dc4ae6dcc1855085463099b5dacb0ec6130b" type="targz" target="Python-2.7.18">https://www.openssl.org/source/openssl-1.1.1k.tar.gz</Archive>
+		<Archive sha1sum="f8819dd31642eebea6cc1fa5c256fc9a4f40809b" type="targz" target="Python-2.7.18">https://www.openssl.org/source/openssl-1.1.1l.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>bzip2</Dependency>
             <!--<Dependency>tcl-devel</Dependency>-->
@@ -25,7 +25,7 @@
             <Dependency>libffi-devel</Dependency>
             <Dependency>sqlite-devel</Dependency>
             <Dependency>ncurses-devel</Dependency>
-            <Dependency versionFrom="1.1.1k">openssl-devel</Dependency>
+            <Dependency versionFrom="1.1.1l">openssl-devel</Dependency>
             <Dependency>readline-devel</Dependency>
             <Dependency versionFrom="2.32">glibc-devel</Dependency>
             <!-- Bootstrap -->
@@ -55,6 +55,10 @@
             <Patch>gentoo/0015-Turkish-locale.patch</Patch>
             <Patch>gentoo/0022-Force-using-system-libffi.patch</Patch>
             <Patch>gentoo/0024-3.6-bpo-42967-only-use-as-a-query-string-separator-G.patch</Patch>
+            <Patch>gentoo/0026-3.6-bpo-43285-Make-ftplib-not-trust-the-PASV-respons.patch</Patch>
+            <Patch>gentoo/0027-bpo-43075-Fix-ReDoS-in-urllib-AbstractBasicAuthHandl.patch</Patch>
+            <Patch>gentoo/0028-3.9-bpo-43882-urllib.parse-should-sanitize-urls-cont.patch</Patch>
+            <Patch>gentoo/0030-Backport-bpo-44022-Fix-http-client-infinite-line-rea.patch</Patch>
         </Patches>
     </Source>
 
@@ -150,6 +154,13 @@
     </Package>-->
 
     <History>
+        <Update release="13">
+            <Date>2021-08-27</Date>-
+            <Version>2.7.18</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="12">
             <Date>2021-06-19</Date>-
             <Version>2.7.18</Version>
