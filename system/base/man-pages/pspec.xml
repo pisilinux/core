@@ -12,8 +12,8 @@
         <IsA>data:doc</IsA>
         <Summary>A somewhat comprehensive collection of Linux man pages</Summary>
         <Description>A large collection of man pages (documentation) from the Linux Documentation Project (LDP).</Description>
-        <Archive sha1sum="5d69aab053e710fa519061313aea49821ab98a3a" type="targz">https://git.kernel.org/pub/scm/docs/man-pages/man-pages.git/snapshot/man-pages-5.04.tar.gz</Archive>
-        <Archive sha1sum="91b5b10a7a596615789782dad0adb477a8bf9f84" target="man-pages-5.04" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/docs/man-pages/man-pages-posix/man-pages-posix-2013-a.tar.xz</Archive>
+        <Archive sha1sum="33806c82426b36ff98056a9dbcc9dba9b5ecd957" type="targz">https://git.kernel.org/pub/scm/docs/man-pages/man-pages.git/snapshot/man-pages-5.13.tar.gz</Archive>
+        <Archive sha1sum="ee907694a6ac012adb856ce0342103311340fcec" target="man-pages-5.13" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/docs/man-pages/man-pages-posix/man-pages-posix-2017-a.tar.xz</Archive>
     </Source>
 
     <Package>
@@ -32,6 +32,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2021-08-31</Date>
+            <Version>5.13</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="9">
             <Date>2020-12-09</Date>
             <Version>5.04</Version>

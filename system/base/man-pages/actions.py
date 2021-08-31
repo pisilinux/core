@@ -9,33 +9,35 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def install():
+    pisitools.dosed("Makefile", "prefix := /usr/local", "prefix := /usr")
+
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    autotools.rawInstall("DESTDIR=%s -C man-pages-posix-2013-a" % get.installDIR())
+    autotools.rawInstall("DESTDIR=%s -C man-pages-posix-2017" % get.installDIR())
 
     # These come from attr
-    pisitools.remove("/usr/share/man/man2/flistxattr.2")
-    pisitools.remove("/usr/share/man/man2/removexattr.2")
-    pisitools.remove("/usr/share/man/man2/fgetxattr.2")
-    pisitools.remove("/usr/share/man/man2/fsetxattr.2")
-    pisitools.remove("/usr/share/man/man2/lsetxattr.2")
-    pisitools.remove("/usr/share/man/man2/lremovexattr.2")
-    pisitools.remove("/usr/share/man/man2/listxattr.2")
-    pisitools.remove("/usr/share/man/man2/getxattr.2")
-    pisitools.remove("/usr/share/man/man2/setxattr.2")
-    pisitools.remove("/usr/share/man/man2/llistxattr.2")
-    pisitools.remove("/usr/share/man/man2/fremovexattr.2")
-    pisitools.remove("/usr/share/man/man2/lgetxattr.2")
-    pisitools.remove("/usr/share/man/man5/attr.5")
+    #pisitools.remove("/usr/share/man/man2/flistxattr.2")
+    #pisitools.remove("/usr/share/man/man2/removexattr.2")
+    #pisitools.remove("/usr/share/man/man2/fgetxattr.2")
+    #pisitools.remove("/usr/share/man/man2/fsetxattr.2")
+    #pisitools.remove("/usr/share/man/man2/lsetxattr.2")
+    #pisitools.remove("/usr/share/man/man2/lremovexattr.2")
+    #pisitools.remove("/usr/share/man/man2/listxattr.2")
+    #pisitools.remove("/usr/share/man/man2/getxattr.2")
+    #pisitools.remove("/usr/share/man/man2/setxattr.2")
+    #pisitools.remove("/usr/share/man/man2/llistxattr.2")
+    #pisitools.remove("/usr/share/man/man2/fremovexattr.2")
+    #pisitools.remove("/usr/share/man/man2/lgetxattr.2")
+    #pisitools.remove("/usr/share/man/man5/attr.5")
 
     # These come from libcap
-    pisitools.remove("/usr/share/man/man2/capget.2")
-    pisitools.remove("/usr/share/man/man2/capset.2")
+    #pisitools.remove("/usr/share/man/man2/capget.2")
+    #pisitools.remove("/usr/share/man/man2/capset.2")
 
     # Comes from xorg-input
-    pisitools.remove("/usr/share/man/man4/mouse.4")
+    #pisitools.remove("/usr/share/man/man4/mouse.4")
     
     # Comes from keyutils
-    pisitools.remove("/usr/share/man/man7/*-keyring.7")
-    pisitools.remove("/usr/share/man/man7/keyrings.7")
+    #pisitools.remove("/usr/share/man/man7/*-keyring.7")
+    #pisitools.remove("/usr/share/man/man7/keyrings.7")
 
     pisitools.dodoc("man-pages-*.Announce", "README")
