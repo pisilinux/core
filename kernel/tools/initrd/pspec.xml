@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "https://pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>initrd</Name>
+        <Homepage>https://gitlab.com/sulinos/devel/initrd</Homepage>
+        <Packager>
+            <Name>Pisi Linux Admins</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <IsA>app:console</IsA>
+        <Summary>A tool for generating initial ramdisk images</Summary>
+        <Description>Initial ramdisk image creation utility with live boot support.</Description>
+        <Archive type="targz" sha1sum="247385149150087f20fb0eff65231029f611a15b">https://gitlab.com/sulinos/devel/initrd/-/archive/1.1.4/initrd-1.1.4.tar.gz</Archive>
+        <Patches>
+            <Patch level="1">0001-Adapted-to-Pisi-Linux.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>initrd</Name>
+        <RuntimeDependencies>
+            <Dependency>btrfs-progs</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/bin/update-initrd</Path>
+            <Path fileType="library">/lib/initrd</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2020-09-06</Date>
+            <Version>1.1.4</Version>
+            <Comment>First release for Pisi Linux</Comment>
+            <Name>Berk Çakar</Name>
+            <Email>berk2238@hotmail.com</Email>
+        </Update>
+    </History>
+</PISI>
