@@ -1,0 +1,24 @@
+diff --git a/src/addons/00-modules.sh b/src/addons/00-modules.sh
+index fbcf157..45df127 100644
+--- a/src/addons/00-modules.sh
++++ b/src/addons/00-modules.sh
+@@ -9,14 +9,15 @@ mkdir -p ${WORKDIR}/${MODDIR}
+ if [ "$allmodule" == true ] && [ "$skipglibc" != "true" ] && [ "$skipudev" != "true" ]; then
+ 	cp -prf ${MODDIR}/* ${WORKDIR}/${MODDIR}
+ elif [ "$minimal" == true ]; then
+-	cp -prf ${MODDIR}/kernel/{crypto,fs,lib,block} ${WORKDIR}/${MODDIR}
++	# In Pisi GNU/Linux, we do not have "block" at the kernel modules directory (located in drivers/block instead).
++	cp -prf ${MODDIR}/kernel/{crypto,fs,lib} ${WORKDIR}/${MODDIR}
+ 	cp -prf ${MODDIR}/kernel/drivers/input/{keyboard,serio} ${WORKDIR}/${MODDIR}
+ 	cp -prf ${MODDIR}/kernel/drivers/{ata,md,mmc,firewire} ${WORKDIR}/${MODDIR}
+ 	cp -prf ${MODDIR}/kernel/drivers/{scsi,pcmcia,virtio} ${WORKDIR}/${MODDIR}
+ 	cp -prf ${MODDIR}/kernel/drivers/usb/ ${WORKDIR}/${MODDIR}
+ 	cp -prf ${MODDIR}/kernel/drivers/acpi/ ${WORKDIR}/${MODDIR}
+-	# Some kernels not have this directories.
+-	cp -prf ${MODDIR}/kernel/drivers/{block,cdrom}/ ${WORKDIR}/${MODDIR} || true
++	# "cdrom" is not available at the kernel modules directory either.
++	cp -prf ${MODDIR}/kernel/drivers/{block}/ ${WORKDIR}/${MODDIR} || true
+ else
+ 	debug "Install main modules"
+ 	cp -prf ${MODDIR}/kernel/{crypto,fs,lib} ${WORKDIR}/${MODDIR}
+--
