@@ -17,7 +17,7 @@ index fbcf157..45df127 100644
 -	# Some kernels not have this directories.
 -	cp -prf ${MODDIR}/kernel/drivers/{block,cdrom}/ ${WORKDIR}/${MODDIR} || true
 +	# "cdrom" is not available at the kernel modules directory either.
-+	cp -prf ${MODDIR}/kernel/drivers/{block}/ ${WORKDIR}/${MODDIR} || true
++	cp -prf ${MODDIR}/kernel/drivers/block/ ${WORKDIR}/${MODDIR} || true
  else
  	debug "Install main modules"
  	cp -prf ${MODDIR}/kernel/{crypto,fs,lib} ${WORKDIR}/${MODDIR}
