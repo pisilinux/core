@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # Simple init script that should handle both
-# livecd/livedisk, thinclient and hdd boot
+# livecd/livedisk, thinclient and hdd boot
 #
 
 PATH=/usr/sbin:/usr/bin:/sbin:/bin
@@ -11,6 +11,7 @@ ROOT_LINKS="bin sbin lib boot usr opt"
 ROOT_TREES="etc root home var run"
 TMPFS_DIRS="dev mnt mnt/cdrom mnt/livecd mnt/thin tmp sys proc media"
 LOOPBACKFILE="/boot/pisi.sqfs"
+LOOPBACKEXTRA="/boot/pisi_extra.sqfs"
 
 NORESUME=0
 LIVE=0
@@ -263,8 +264,23 @@ mount_cdroot() {
     # These are not loaded automatically
     modprobe -q squashfs
 
+    # for writable fs
+    OVERLAY_DIR="/newroot/tmp"
+    # mkdir /newroot/tmp/
+    # mount -t tmpfs -o size=100M none /tmp/guest
+
+    mkdir ${OVERLAY_DIR}/upper ${OVERLAY_DIR}/loop ${OVERLAY_DIR}/loopextra ${OVERLAY_DIR}/work
+    loverdir=${OVERLAY_DIR}/loop
     # Loop type squashfs
-    mount -t squashfs -o loop,ro /newroot/mnt/cdrom/${LOOPBACKFILE} /newroot/mnt/livecd
+    # mount -t squashfs -o loop,ro /newroot/mnt/cdrom/${LOOPBACKFILE} /newroot/mnt/livecd
+    if [ -f "/newroot/mnt/cdrom/${LOOPBACKEXTRA}" ];then
+      loverdir=${OVERLAY_DIR}/loopextra:${loverdir}
+      mount -t squashfs -o loop,ro /newroot/mnt/cdrom/${LOOPBACKEXTRA} ${OVERLAY_DIR}/loopextra
+    fi
+    mount -t squashfs -o loop,ro /newroot/mnt/cdrom/${LOOPBACKFILE} ${OVERLAY_DIR}/loop
+
+    # for writable fs
+    mount -t overlay overlay -o lowerdir=${loverdir},upperdir=${OVERLAY_DIR}/upper,workdir=${OVERLAY_DIR}/work /newroot/mnt/livecd
 
     if [ "$?" != "0" ]
     then
@@ -286,6 +302,7 @@ mount_cdroot() {
 
     chmod 1777 tmp
     (cd /newroot/${FS_LOCATION}; cp -a ${ROOT_TREES} /newroot)
+    # (cd /newroot/${FS_LOCATION}; cp -a dev/lock /newroot/dev)
 
     # FIXME: the device list is taken from udev, we can't rely on sys entries since pluggable means different
     #        in kernel world. Suggestions that do not include this kind of regexp mania are welcome
@@ -294,7 +311,7 @@ mount_cdroot() {
     REAL_ROOT_TYPE=`echo "${ROOT_DEVICE}" | sed -e 's/^\/newroot\/dev\///' | grep -qE '^sr[0-9]*|^hd[a-z]|^pcd[0-9]|^xvd*' && echo "optical" || echo "harddisk"`
     echo "${REAL_ROOT_TYPE}" > /newroot/run/pisilinux/livemedia
 
-    # this is needed for yali
+    # this is needed for yali
     MNTDIR=`grep \/mnt\/cdrom\  /proc/mounts|sed 's/\/newroot//g'`
     echo "$MNTDIR" >> /newroot/etc/fstab
 }
@@ -572,6 +589,8 @@ else
     else
         mount_rootfs
     fi
+
+    # cp -a /newroot/dev/ /newroot/tmp/
 fi
 
 [ "${INIT}" == "" ] && INIT="/sbin/init";
@@ -587,8 +606,31 @@ mount --move /sys /newroot/sys
 #mount --move /run /newroot/run
 
 
-# And we start
+if [ "${LIVE}" -eq "1" ]
+then
+  FS_LOCATION="mnt/livecd"
+  for x in lock pisilinux shm
+  do
+    cp -a "/newroot/${FS_LOCATION}/dev/${x}" "/newroot/dev/${x}"
+  done
+# elif [ "${NFSROOT}" -eq "1" ]
+# then
+#   FS_LOCATION='mnt/thin'
+# else
+#   FS_LOCATION='tmp'
+fi
+
+# for x in lock pisilinux shm
+# do
+#   cp -a "/newroot/${FS_LOCATION}/dev/${x}" "/newroot/dev/${x}"
+# done
+#
+# if [ "${FS_LOCATION}" -eq "tmp" ]
+# then
+#   rm -rf "/newroot/${FS_LOCATION}"
+# fi
+
+# And we start
 info "Switching to the real root"
 test -x /bin/plymouth && /bin/plymouth update-root-fs --new-root-dir=/newroot
 exec /bin/switch_root -c /dev/console /newroot ${INIT} ${LEVEL}
-

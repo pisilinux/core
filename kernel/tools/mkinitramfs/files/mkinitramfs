@@ -381,15 +381,23 @@ class KernelModule:
 
     def addDRM(self):
         if self.addDRMModules:
-            for i in glob.glob("%s/*/*.ko" % os.path.join(self.modulesDir, self.drmDir)):
+            # for i in glob.glob("%s/*/*.ko" % os.path.join(self.modulesDir, self.drmDir)):
+            drms = glob.glob("%s/*/*.ko" % os.path.join(self.modulesDir, self.drmDir))
+            drms.extend(glob.glob("%s/*/*/*.ko" % os.path.join(self.modulesDir, self.drmDir)))
+            for i in drms:
                 # Check for drm_crtc_init symbol
-                if not os.system("grep -qw drm_crtc_init %s" % i):
-                    self.addModule(i.partition(self.modulesDir+'/')[-1])
+                # if not os.system("grep -qw drm_crtc_init %s" % i):
+                self.addModule(i.partition(self.modulesDir+'/')[-1])
 
             # Add uvesafb as a fallback
             if os.path.exists("/sbin/v86d"):
                 copy("/sbin/v86d", os.path.join(self.targetDir, "sbin/"))
-                self.addModule("kernel/drivers/video/uvesafb.ko")
+                # TODO: fbdev içerisindeki herşeyi almak gerekebilir!
+                self.addModule("kernel/drivers/video/fbdev/uvesafb.ko")
+                # vesa = glob.glob("%s/*/*.ko" % os.path.join(self.modulesDir, "kernel/drivers/video/fbdev/"))
+                # vesa.extend(glob.glob("%s/*.ko" % os.path.join(self.modulesDir, "kernel/drivers/video/fbdev/")))
+                # for i in vesa:
+                #     self.addModule(i.partition(self.modulesDir+"/")[-1])
 
     def addMd(self):
         for i in self.mdDirs:
@@ -583,4 +591,3 @@ if __name__ == "__main__":
     initramfs.create()
 
     tempdir.cleanup()
-
