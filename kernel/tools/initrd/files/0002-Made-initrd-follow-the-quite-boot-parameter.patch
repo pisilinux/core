@@ -18,13 +18,4 @@ index 609b82d..48eba59 100644
  }
  debug() {
      message=$(translate $1)
-@@ -43,7 +43,7 @@ err() {
- }
- translate(){
-     if [ ! -f ${LANGFILE} ] ; then
--        echo $*
-+        echo $*
-         return 0
-     fi
-     word=$(cat ${LANGFILE} | grep "$*::" | head -n 1 | sed "s/^.*:://g")
 --
