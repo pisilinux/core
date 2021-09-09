@@ -1,0 +1,28 @@
+diff --git a/src/functions.sh b/src/functions.sh
+index e296e2c..46bde4f 100644
+--- a/src/functions.sh
++++ b/src/functions.sh
+@@ -7,7 +7,12 @@ generate_rootfs(){
+ 	/busybox mkdir /run
+ 	/busybox --install -s /bin
+ 	msg 'Creating initrd'
+-	/busybox mkdir /dev || true
++	# For some reason, busybox is able to create (?)
++	# all of the directories above -which are already
++	# included in 'baselayout' together with /dev- but
++	# not /dev. So, pass the -p parameter for at least
++	# skipping the error message.
++	/busybox mkdir -p /dev || true
+ 	/busybox mdev -s 2>/dev/null || true
+ }
+ run_modules(){
+@@ -33,7 +38,7 @@ mount_handler(){
+ parse_cmdline(){
+ 	for i in $(cat /proc/cmdline)
+ 	do
+-		echo export $(echo $i | tr -d '-.,\!\(\[\{') >> /env
++		echo export $(echo $i | tr '\000' ' ' | awk -F= '{gsub(/\.|[,]|\-|[!]|\(|\[|\{/,"_",$1)}1' OFS==) >> /env
+ 	done
+ 	. /env || true
+ }
+-- 
