@@ -18,7 +18,7 @@ def setup():
                        -e 's@/var/spool/mail@/var/mail@'                 \
                        -e '/PATH=/{s@/sbin:@@;s@/bin:@@}'                \
                        -i etc/login.defs                                 && \
-                       sed -i 's/1000/999/' etc/useradd")
+                       sed -i 's/1000/100/' etc/useradd")
 
     shelltools.system("./pisi-shadowbase.sh")
 
