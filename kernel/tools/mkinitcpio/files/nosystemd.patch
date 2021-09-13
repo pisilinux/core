@@ -1,0 +1,49 @@
+ Makefile       |  6 +-----
+ init_functions | 11 -----------
+ 2 files changed, 1 insertion(+), 16 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 9ef0f6a..f6e322e 100644
+--- a/Makefile
++++ b/Makefile
+@@ -17,7 +17,6 @@ DIRS = \
+ 	/usr/share/man/man5 \
+ 	/usr/share/man/man1 \
+ 	/usr/share/mkinitcpio \
+-	/usr/lib/systemd/system/shutdown.target.wants \
+ 	/usr/lib/tmpfiles.d \
+ 	/usr/share/libalpm/hooks \
+ 	/usr/share/libalpm/scripts
+@@ -57,10 +56,7 @@ install: all
+
+ 	cp -at $(DESTDIR)/usr/lib/initcpio hooks install
+ 	install -m644 -t $(DESTDIR)/usr/share/mkinitcpio mkinitcpio.d/*
+-	install -m644 systemd/mkinitcpio-generate-shutdown-ramfs.service \
+-			$(DESTDIR)/usr/lib/systemd/system/mkinitcpio-generate-shutdown-ramfs.service
+-	ln -s ../mkinitcpio-generate-shutdown-ramfs.service \
+-			$(DESTDIR)/usr/lib/systemd/system/shutdown.target.wants/mkinitcpio-generate-shutdown-ramfs.service
++
+ 	install -m644 tmpfiles/mkinitcpio.conf $(DESTDIR)/usr/lib/tmpfiles.d/mkinitcpio.conf
+
+ 	install -m755 50-mkinitcpio.install $(DESTDIR)/usr/lib/kernel/install.d/50-mkinitcpio.install
+diff --git a/init_functions b/init_functions
+index 8ad10c7..5579a49 100644
+--- a/init_functions
++++ b/init_functions
+@@ -298,17 +298,6 @@ fsck_root() {
+         elif bitfield_has_bit "$fsckret" 128; then
+             err "fatal error invoking fsck"
+         fi
+-
+-        # ensure that root is going to be mounted rw. Otherwise, systemd
+-        # might fsck the device again. Annoy the user so that they fix this.
+-        if [ "${rwopt:-ro}" != 'rw' ]; then
+-            echo "********************** WARNING **********************"
+-            echo "*                                                   *"
+-            echo "*  The root device is not configured to be mounted  *"
+-            echo "*  read-write! It may be fsck'd again later.        *"
+-            echo "*                                                   *"
+-            echo "*****************************************************"
+-        fi
+     fi
+ }
