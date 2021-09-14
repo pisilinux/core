@@ -1,0 +1,13 @@
+diff --git a/init_functions b/init_functions
+index 8ad10c7..e8a88d8 100644
+--- a/init_functions
++++ b/init_functions
+@@ -477,6 +477,7 @@ mount_setup() {
+     mount -t proc proc /proc -o nosuid,noexec,nodev
+     mount -t sysfs sys /sys -o nosuid,noexec,nodev
+     mount -t devtmpfs dev /dev -o mode=0755,nosuid
++    mkdir -m 0755 /dev/pts && mount -t devpts -o gid=5,mode=620 devpts /dev/pts
+     mount -t tmpfs run /run -o nosuid,nodev,mode=0755
+     mkdir -m755 /run/initramfs
+ 
+-- 

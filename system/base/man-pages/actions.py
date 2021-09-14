@@ -40,4 +40,7 @@ def install():
     #pisitools.remove("/usr/share/man/man7/*-keyring.7")
     #pisitools.remove("/usr/share/man/man7/keyrings.7")
 
+    # Comes from libxcrypt
+    pisitools.remove("/usr/share/man/man3/crypt*.3")
+
     pisitools.dodoc("man-pages-*.Announce", "README")
