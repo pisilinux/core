@@ -266,18 +266,14 @@
             <BuildDependencies>
                 <Dependency>libutil-linux-devel</Dependency>
                 <Dependency>eudev-devel</Dependency>
-                <Dependency>autoconf-archive</Dependency>
                 <Dependency>libaio-devel</Dependency>
+                <Dependency>readline-devel</Dependency>
+                <Dependency>thin-provisioning-tools</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch level="1">lvm2-2.02.178-static-pkgconfig-libs.patch</Patch>
-                <Patch level="1">lvm2-2.02.56-lvm2create_initrd.patch</Patch>
-                <Patch level="1">lvm2-2.02.67-createinitrd.patch</Patch>
-                <Patch level="1">lvm2-2.02.99-locale-muck.patch</Patch>
-                <Patch level="1">lvm2-2.02.171-static-libm.patch</Patch>
-                <Patch level="1">lvm2-2.02.166-HPPA-no-O_DIRECT.patch</Patch>
-                <Patch level="1">lvm2-2.02.184-mksh_build.patch</Patch>
-                <Patch level="1">lvm2-2.02.186-udev_remove_unsupported_option.patch</Patch>
+                <Patch level="1">fix-stdio-usage.patch</Patch>
+                <Patch level="1">mlockall-default-config.patch</Patch>
+                <Patch level="1">portability.patch</Patch>
             </Patches>
             <SourceURI>hardware/disk/lvm2/pspec.xml</SourceURI>
         </Source>
@@ -298,8 +294,6 @@
                 <Path fileType="data">/lib/udev/rules.d/10-dm.rules</Path>
                 <Path fileType="data">/lib/udev/rules.d/13-dm-disk.rules</Path>
                 <Path fileType="data">/lib/udev/rules.d/95-dm-notify.rules</Path>
-                <Path fileType="doc">/usr/share/doc/VERSION_DM</Path>
-                <Path fileType="doc">/usr/share/doc/WHATS_NEW_DM</Path>
                 <Path fileType="man">/usr/share/man/man8/dmsetup.8</Path>
                 <Path fileType="man">/usr/share/man/man8/dmstats.8</Path>
             </Files>
@@ -310,7 +304,7 @@
             <Summary xml:lang="tr">device-mapper için geliştirme dosyaları</Summary>
             <Description xml:lang="en">Device-mapper-devel contains files needed to develop applications that use the device-mapper libraries.</Description>
             <RuntimeDependencies>
-                <Dependency release="7">device-mapper</Dependency>
+                <Dependency release="8">device-mapper</Dependency>
                 <Dependency>eudev-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -324,7 +318,7 @@
             <Summary xml:lang="tr">Device mapper durum servisi</Summary>
             <Description xml:lang="en">This package contains the dmeventd daemon for monitoring the state of device-mapper devices.</Description>
             <RuntimeDependencies>
-                <Dependency release="7">device-mapper</Dependency>
+                <Dependency release="8">device-mapper</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/sbin/dmeventd</Path>
@@ -343,7 +337,7 @@
             <Summary xml:lang="tr">device-mapper-event için geliştirme dosyaları</Summary>
             <Description xml:lang="en">This contains contains files needed to develop applications that use the device-mapper event library.</Description>
             <RuntimeDependencies>
-                <Dependency release="7">device-mapper-event</Dependency>
+                <Dependency release="8">device-mapper-event</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/libdevmapper-event.h</Path>
@@ -355,13 +349,15 @@
             <Summary xml:lang="en">Userland logical volume management tools</Summary>
             <Description xml:lang="en">LVM2 includes all of the support for handling read/write operations on physical volumes,creating volume groups from one or more physical volumes and creating one or more logical volumes in volume groups.</Description>
             <RuntimeDependencies>
-                <Dependency release="7">device-mapper</Dependency>
-                <Dependency release="7">device-mapper-event</Dependency>
-                <Dependency>libutil-linux</Dependency>
+                <Dependency release="8">device-mapper</Dependency>
+                <Dependency release="8">device-mapper-event</Dependency>
+                <Dependency>libaio</Dependency>
                 <Dependency>eudev</Dependency>
+                <Dependency>libutil-linux</Dependency>
+                <Dependency>readline</Dependency>
+                <Dependency>thin-provisioning-tools</Dependency>
             </RuntimeDependencies>
             <Files>
-                <Path fileType="executable">/sbin/lvmconf</Path>
                 <Path fileType="executable">/usr/sbin/blkdeactivate</Path>
                 <Path fileType="executable">/usr/sbin/fsadm</Path>
                 <Path fileType="executable">/usr/sbin/lv*</Path>
@@ -376,14 +372,20 @@
                 <Path fileType="library">/usr/lib/libdevmapper-event-lvm2snapshot.so</Path>
                 <Path fileType="library">/usr/lib/libdevmapper-event-lvm2raid.so</Path>
                 <Path fileType="library">/usr/lib/device-mapper/libdevmapper-event-lvm2raid.so</Path>
-                <Path fileType="config">/etc/lvm</Path>
+                <Path fileType="config">/etc/lvm/lvm.conf</Path>
+                <Path fileType="config">/etc/lvm/lvmlocal.conf</Path>
                 <Path fileType="data">/etc/lvm/archive</Path>
                 <Path fileType="data">/etc/lvm/backup</Path>
                 <Path fileType="data">/etc/lvm/cache</Path>
-                <Path fileType="data">/var/lock/lvm</Path>
+                <Path fileType="data">/etc/lvm/profile</Path>
                 <Path fileType="data">/lib/udev/rules.d/11-dm-lvm.rules</Path>
+                <Path fileType="data">/lib/udev/rules.d/69-dm-lvm-metad.rules</Path>
                 <Path fileType="data">/usr/lib/tmpfiles.d/lvm2.conf</Path>
-                <Path fileType="doc">/usr/share/doc</Path>
+                <Path fileType="doc">/usr/share/doc/lvm2/COPYING</Path>
+                <Path fileType="doc">/usr/share/doc/lvm2/COPYING.LIB</Path>
+                <Path fileType="doc">/usr/share/doc/lvm2/README</Path>
+                <Path fileType="doc">/usr/share/doc/lvm2/VERSION</Path>
+                <Path fileType="doc">/usr/share/doc/lvm2/WHATS_NEW</Path>
                 <Path fileType="man">/usr/share/man/man5/lvm.conf.5</Path>
                 <Path fileType="man">/usr/share/man/man7</Path>
                 <Path fileType="man">/usr/share/man/man8/fsadm.8</Path>
@@ -405,10 +407,10 @@
             <Summary xml:lang="tr">lvm2 için geliştirme dosyaları</Summary>
             <Description xml:lang="en">This package contains files needed to develop applications that use the lvm2 libraries.</Description>
             <RuntimeDependencies>
+                <Dependency release="8">lvm2</Dependency>
+                <Dependency release="8">device-mapper-devel</Dependency>
+                <Dependency release="8">device-mapper-event-devel</Dependency>
                 <Dependency>libutil-linux-devel</Dependency>
-                <Dependency release="7">lvm2</Dependency>
-                <Dependency release="7">device-mapper-devel</Dependency>
-                <Dependency release="7">device-mapper-event-devel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/lvm2cmd.h</Path>
@@ -416,39 +418,14 @@
                 <Path fileType="data">/usr/lib/pkgconfig/lvm2app.pc</Path>
             </Files>
         </Package>
-        <Package>
-            <Name>dietlibc-libdevmapper</Name>
-            <Summary xml:lang="en">Static devmapper library built with dietlibc</Summary>
-            <Summary xml:lang="tr">Statik bağlanmış device-mapper kütüphanesi</Summary>
-            <Description xml:lang="en">device mapper contains ioctl library and utilities for use with logical volume management (LVM2) built with dietlibc</Description>
-            <Description xml:lang="tr">Dietlibc kütüphanesiyle statik derlenmiş device-mapper kütüphanesidir.</Description>
-            <Files>
-                <Path fileType="library">/usr/lib/dietlibc/lib-i386/libdevmapper.a</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>device-mapper-static</Name>
-            <Summary xml:lang="en">Staticaly linked Device-mapper library and utility</Summary>
-            <Summary xml:lang="tr">Static bağlanmış device-mapper kütüphanesi ve aracı</Summary>
-            <Description xml:lang="en">device mapper contains statically linked libraries and utility for initramfs.</Description>
-            <Description xml:lang="tr">İnitramfs içinde kullanılan mantıksal hacim yönetimi için gerekli statik bağlanmış araçlardır.</Description>
-            <Files>
-                <Path fileType="executable">/sbin/dmsetup.static</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>lvm2-static</Name>
-            <Summary xml:lang="en">Staticaly linked Logical Volume Management utilities</Summary>
-            <Summary xml:lang="tr">Statik bağlanmış LVM araçları</Summary>
-            <Description xml:lang="en">Number of utilities for creating, checking, and repairing logical volumes - statically linked for initramfs.</Description>
-            <Description xml:lang="tr">İnitramfs içinde kullanılan statik bağlanmış mantıksal hacim yönetimi aracıdır.</Description>
-            <Files>
-                <Path fileType="executable">/sbin/lvm.static</Path>
-                <Path fileType="library">/usr/lib/liblvm2app.a</Path>
-                <Path fileType="library">/usr/lib/liblvm2cmd.a</Path>
-            </Files>
-        </Package>
         <History>
+            <Update release="8">
+                <Date>2021-09-14</Date>
+                <Version>2.02.186</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Berk Çakar</Name>
+                <Email>berk2238@hotmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2020-12-09</Date>
                 <Version>2.02.186</Version>
@@ -4598,6 +4575,8 @@
             <Archive type="targz" sha1sum="247385149150087f20fb0eff65231029f611a15b" name="initrd-1.1.4.tar.gz">https://gitlab.com/sulinos/devel/initrd/-/archive/1.1.4/initrd-1.1.4.tar.gz</Archive>
             <Patches>
                 <Patch level="1">0001-Adapted-to-Pisi-Linux.patch</Patch>
+                <Patch level="1">0002-Made-initrd-follow-the-quite-boot-parameter.patch</Patch>
+                <Patch level="1">0003-Improvements-for-continuous-live-boot.patch</Patch>
             </Patches>
             <SourceURI>kernel/tools/initrd/pspec.xml</SourceURI>
         </Source>
@@ -4610,8 +4589,50 @@
                 <Path fileType="executable">/bin/update-initrd</Path>
                 <Path fileType="library">/lib/initrd</Path>
             </Files>
+            <Conflicts>
+                <Package>mkinitramfs</Package>
+                <Package>mkinitcpio</Package>
+            </Conflicts>
+            <Provides>
+                <COMAR script="pakhandler.py">System.PackageHandler</COMAR>
+            </Provides>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2020-09-11</Date>
+                <Version>1.1.4</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Berk Çakar</Name>
+                <Email>berk2238@hotmail.com</Email>
+            </Update>
+            <Update release="5">
+                <Date>2020-09-09</Date>
+                <Version>1.1.4</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Berk Çakar</Name>
+                <Email>berk2238@hotmail.com</Email>
+            </Update>
+            <Update release="4">
+                <Date>2020-09-08</Date>
+                <Version>1.1.4</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Berk Çakar</Name>
+                <Email>berk2238@hotmail.com</Email>
+            </Update>
+            <Update release="3">
+                <Date>2020-09-08</Date>
+                <Version>1.1.4</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Berk Çakar</Name>
+                <Email>berk2238@hotmail.com</Email>
+            </Update>
+            <Update release="2">
+                <Date>2020-09-06</Date>
+                <Version>1.1.4</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Berk Çakar</Name>
+                <Email>berk2238@hotmail.com</Email>
+            </Update>
             <Update release="1">
                 <Date>2020-09-06</Date>
                 <Version>1.1.4</Version>
@@ -4624,53 +4645,89 @@
     <SpecFile>
         <Source>
             <Name>mkinitcpio</Name>
-            <Homepage>https://projects.archlinux.org/mkinitcpio.git/</Homepage>
+            <Homepage>https://github.com/archlinux/mkinitcpio</Homepage>
             <Packager>
                 <Name>Pisi Linux Admins</Name>
                 <Email>admin@pisilinux.org</Email>
             </Packager>
-            <License>GPL</License>
+            <License>GPLv2</License>
             <PartOf>kernel.tools</PartOf>
             <Summary xml:lang="en">Modular initramfs image creation utility</Summary>
             <Summary xml:lang="tr">İnitramfs oluşturmak için araç</Summary>
             <Description xml:lang="en">mkinitcpio is a generic, modular, cross-distribution initramfs generation tool.</Description>
             <Description xml:lang="tr">Mkinitcpio çapraz platform initramfs oluşturmak için kullanılan bir araçtır.</Description>
-            <Archive type="targz" sha1sum="678efaad52901aeb66f84e99f2ea86b24d2eea22" name="19.1.tar.gz">https://github.com/bferturk/mkinitcpio/archive/19.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="a1c8794c29b1da0811b5038dbcdb4a0b5d1e05cd" name="v30.tar.gz">https://github.com/archlinux/mkinitcpio/archive/refs/tags/v30.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency>libkmod-devel</Dependency>
-                <Dependency>kmod</Dependency>
                 <Dependency>asciidoc</Dependency>
                 <Dependency>libxslt-devel</Dependency>
-                <Dependency>man-pages</Dependency>
-                <Dependency>man-db</Dependency>
             </BuildDependencies>
+            <Patches>
+                <Patch level="1">nosystemd.patch</Patch>
+                <Patch level="1">gzip-default.patch</Patch>
+                <Patch level="1">mount-dev-pts.patch</Patch>
+            </Patches>
             <SourceURI>kernel/tools/mkinitcpio/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>mkinitcpio</Name>
             <RuntimeDependencies>
-                <Dependency>xz</Dependency>
-                <Dependency>bzip2</Dependency>
-                <Dependency>libarchive</Dependency>
-                <Dependency>kmod</Dependency>
-                <Dependency>libkmod</Dependency>
                 <Dependency>busybox-mkinitcpio</Dependency>
+                <Dependency>lvm2</Dependency>
             </RuntimeDependencies>
             <Files>
+                <Path fileType="data">/etc/initcpio</Path>
+                <Path fileType="config">/etc/mkinitcpio.conf</Path>
                 <Path fileType="executable">/usr/bin</Path>
-                <Path fileType="library">/usr/lib</Path>
-                <Path fileType="data">/usr/share</Path>
+                <Path fileType="library">/usr/lib/initcpio</Path>
+                <Path fileType="data">/usr/lib/tmpfiles.d/mkinitcpio.conf</Path>
+                <Path fileType="data">/usr/share/bash-completion</Path>
                 <Path fileType="doc">/usr/share/doc</Path>
-                <Path fileType="data">/etc</Path>
+                <Path fileType="man">/usr/share/man</Path>
+                <Path fileType="data">/usr/share/mkinitcpio</Path>
+                <Path fileType="data">/usr/share/zsh</Path>
             </Files>
             <Conflicts>
                 <Package>mkinitramfs</Package>
+                <Package>initrd</Package>
             </Conflicts>
             <Provides>
+                <COMAR script="package.py">System.Package</COMAR>
                 <COMAR script="pakhandler.py">System.PackageHandler</COMAR>
             </Provides>
+            <AdditionalFiles>
+                <AdditionalFile target="/usr/lib/initcpio/hooks/udev" permission="0644" owner="root">udev_hook</AdditionalFile>
+                <AdditionalFile target="/usr/lib/initcpio/install/udev" permission="0644" owner="root">udev_install</AdditionalFile>
+                <AdditionalFile target="/usr/lib/initcpio/hooks/lvm2" permission="0644" owner="root">lvm2_hook</AdditionalFile>
+                <AdditionalFile target="/usr/lib/initcpio/install/lvm2" permission="0644" owner="root">lvm2_install</AdditionalFile>
+                <AdditionalFile target="/usr/lib/initcpio/hooks/encrypt" permission="0644" owner="root">encrypt_hook</AdditionalFile>
+                <AdditionalFile target="/usr/lib/initcpio/install/encrypt" permission="0644" owner="root">encrypt_install</AdditionalFile>
+                <AdditionalFile target="/usr/lib/initcpio/hooks/mdadm" permission="0644" owner="root">mdadm_hook</AdditionalFile>
+                <AdditionalFile target="/usr/lib/initcpio/install/mdadm" permission="0644" owner="root">mdadm_install</AdditionalFile>
+                <AdditionalFile target="/usr/lib/initcpio/install/mdadm_udev" permission="0644" owner="root">mdadm_udev_install</AdditionalFile>
+                <AdditionalFile target="/usr/lib/initcpio/hooks/zfs" permission="0644" owner="root">zfs_hook</AdditionalFile>
+                <AdditionalFile target="/usr/lib/initcpio/install/zfs" permission="0644" owner="root">zfs_install</AdditionalFile>
+                <AdditionalFile target="/usr/lib/initcpio/hooks/live" permission="0644" owner="root">live_hook</AdditionalFile>
+                <AdditionalFile target="/usr/lib/initcpio/install/live" permission="0644" owner="root">live_install</AdditionalFile>
+                <AdditionalFile target="/usr/lib/initcpio/udev/11-dm-initramfs.rules" permission="0644" owner="root">11-dm-initramfs.rules</AdditionalFile>
+                <AdditionalFile target="/usr/lib/initcpio/udev/69-dm-lvm-metad.rules" permission="0644" owner="root">69-dm-lvm-metad.rules</AdditionalFile>
+                <AdditionalFile target="/etc/mkinitcpio.conf" permission="0644" owner="root">mkinitcpio.conf</AdditionalFile>
+            </AdditionalFiles>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2021-09-13</Date>
+                <Version>30</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Berk Çakar</Name>
+                <Email>berk2238@hotmail.com</Email>
+            </Update>
+            <Update release="10">
+                <Date>2021-09-13</Date>
+                <Version>30</Version>
+                <Comment>Version bump</Comment>
+                <Name>Berk Çakar</Name>
+                <Email>berk2238@hotmail.com</Email>
+            </Update>
             <Update release="9">
                 <Date>2021-06-09</Date>
                 <Version>19.1</Version>
@@ -4787,6 +4844,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2020-09-11</Date>
+                <Version>1.0.7</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Berk Çakar</Name>
+                <Email>berk2238@hotmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2020-01-18</Date>
                 <Version>1.0.7</Version>
@@ -7132,6 +7196,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="16">
+                <Date>2021-09-07</Date>
+                <Version>3.10.1</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Berk Çakar</Name>
+                <Email>berk2238@hotmail.com</Email>
+            </Update>
+            <Update release="15">
+                <Date>2021-09-07</Date>
+                <Version>3.10.1</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Berk Çakar</Name>
+                <Email>berk2238@hotmail.com</Email>
+            </Update>
             <Update release="14">
                 <Date>2021-06-09</Date>
                 <Version>3.10.1</Version>
@@ -17647,6 +17725,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2021-09-14</Date>
+                <Version>5.13</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Berk Çakar</Name>
+                <Email>berk2238@hotmail.com</Email>
+            </Update>
             <Update release="10">
                 <Date>2021-08-31</Date>
                 <Version>5.13</Version>
@@ -21720,6 +21805,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="12">
+                <Date>2021-09-10</Date>
+                <Version>4.8.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Berk Çakar</Name>
+                <Email>berk2238@hotmail.com</Email>
+            </Update>
             <Update release="11">
                 <Date>2021-06-03</Date>
                 <Version>4.8.1</Version>
@@ -24251,11 +24343,22 @@
         </Source>
         <Package>
             <Name>busybox-mkinitcpio</Name>
+            <RuntimeDependencies>
+                <Dependency>glibc</Dependency>
+                <Dependency>libxcrypt</Dependency>
+            </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/lib/initcpio/busybox</Path>
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2021-09-13</Date>
+                <Version>1.33.0</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Berk Çakar</Name>
+                <Email>berk2238@hotmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2021-06-09</Date>
                 <Version>1.33.0</Version>
