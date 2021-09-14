@@ -3,69 +3,91 @@
 <PISI>
     <Source>
         <Name>mkinitcpio</Name>
-        <Homepage>https://projects.archlinux.org/mkinitcpio.git/</Homepage>
+        <Homepage>https://github.com/archlinux/mkinitcpio</Homepage>
         <Packager>
             <Name>Pisi Linux Admins</Name>
             <Email>admin@pisilinux.org</Email>
         </Packager>
-        <License>GPL</License>
+        <License>GPLv2</License>
         <Summary>Modular initramfs image creation utility</Summary>
         <Description>mkinitcpio is a generic, modular, cross-distribution initramfs generation tool.</Description>
-        <Archive sha1sum="678efaad52901aeb66f84e99f2ea86b24d2eea22" type="targz">https://github.com/bferturk/mkinitcpio/archive/19.1.tar.gz</Archive>
+        <Archive sha1sum="a1c8794c29b1da0811b5038dbcdb4a0b5d1e05cd" type="targz">https://github.com/archlinux/mkinitcpio/archive/refs/tags/v30.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>libkmod-devel</Dependency>
-            <Dependency>kmod</Dependency>
             <Dependency>asciidoc</Dependency>
             <Dependency>libxslt-devel</Dependency>
-            <Dependency>man-pages</Dependency>
-            <Dependency>man-db</Dependency>
         </BuildDependencies>
+        <Patches>
+            <Patch level="1">nosystemd.patch</Patch>
+            <Patch level="1">gzip-default.patch</Patch>
+        </Patches>
     </Source>
-    
+
     <Package>
         <Name>mkinitcpio</Name>
         <RuntimeDependencies>
-            <Dependency>xz</Dependency>
-            <Dependency>bzip2</Dependency>
-            <Dependency>libarchive</Dependency>
-            <Dependency>kmod</Dependency>
-            <Dependency>libkmod</Dependency>
             <Dependency>busybox-mkinitcpio</Dependency>
         </RuntimeDependencies>
-        <!--Replaces>
-          <Package>mkinitramfs</Package>
-        </Replaces-->
         <Conflicts>
-          <Package>mkinitramfs</Package>
-        </Conflicts> 
+            <Package>mkinitramfs</Package>
+            <Package>initrd</Package>
+        </Conflicts>
         <Files>
+            <Path fileType="data">/etc/initcpio</Path>
+            <Path fileType="config">/etc/mkinitcpio.conf</Path>
+            <Path fileType="config">/etc/mkinitcpio.d</Path>
             <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="library">/usr/lib</Path>
-            <Path fileType="data">/usr/share</Path>
+            <Path fileType="library">/usr/lib/initcpio</Path>
+            <Path fileType="data">/usr/share/bash-completion</Path>
             <Path fileType="doc">/usr/share/doc</Path>
-            <Path fileType="data">/etc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="data">/usr/share/mkinitcpio</Path>
+            <Path fileType="data">/usr/share/zsh</Path>
         </Files>
+        <AdditionalFiles>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/initcpio/hooks/udev">udev_hook</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/initcpio/install/udev">udev_install</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/initcpio/hooks/lvm2">lvm2_hook</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/initcpio/install/lvm2">lvm2_install</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/initcpio/hooks/encrypt">encrypt_hook</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/initcpio/install/encrypt">encrypt_install</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/initcpio/hooks/mdadm">mdadm_hook</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/initcpio/install/mdadm">mdadm_install</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/initcpio/install/mdadm_udev">mdadm_udev_install</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/initcpio/hooks/zfs">zfs_hook</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/initcpio/install/zfs">zfs_install</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/initcpio/hooks/live">live_hook</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/initcpio/install/live">live_install</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/initcpio/udev/10-dm-initramfs.rules">10-dm-initramfs.rules</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/initcpio/udev/70-dm-lvm-metad.rules">70-dm-lvm-metad.rules</AdditionalFile>
+        </AdditionalFiles>
         <Provides>
             <COMAR script="pakhandler.py">System.PackageHandler</COMAR>
         </Provides>
     </Package>
-    
+
     <History>
-	<Update release="9">
+        <Update release="10">
+            <Date>2021-09-13</Date>
+            <Version>30</Version>
+            <Comment>Version bump</Comment>
+            <Name>Berk Çakar</Name>
+            <Email>berk2238@hotmail.com</Email>
+        </Update>
+        <Update release="9">
             <Date>2021-06-09</Date>
             <Version>19.1</Version>
             <Comment>Rebuild</Comment>
             <Name>Mustafa Cinasal</Name>
             <Email>muscnslp@gmail.com</Email>
         </Update>
-	<Update release="8">
+        <Update release="8">
             <Date>2020-12-26</Date>
             <Version>19.1</Version>
             <Comment>Rebuild</Comment>
             <Name>Mustafa Cinasal</Name>
             <Email>muscnslp@gmail.com</Email>
         </Update>
-	<Update release="7">
+        <Update release="7">
             <Date>2019-12-27</Date>
             <Version>19.1</Version>
             <Comment>Rebuild</Comment>

@@ -1,0 +1,26 @@
+#!/bin/bash
+# See: https://gitlab.com/tearch-linux/applications-and-tools/mkinitcpio-teaiso
+
+build() {
+   add_module "cdrom"
+   add_module "loop"
+   add_module "dm-snapshot"
+   add_module "overlay"
+   add_module "isofs"
+   add_module "squashfs"
+   add_module "hfsplus"
+   add_module "sr_mod"
+   add_module "dm_mod"
+
+   add_runscript
+
+   add_all_modules -f 'nls' '/kernel/fs'
+   add_all_modules -f 'overlayfs' '/kernel/fs'
+   add_all_modules -f 'squashfs' '/kernel/fs'
+   add_all_modules -f 'udf' '/kernel/fs'
+   add_all_modules -f 'ext4' '/kernel/fs'
+   add_all_modules -f 'hfsplus' '/kernel/fs'
+   add_all_modules -f 'usb-storage' '/kernel/drivers/usb'
+   
+   add_binary "timeout"
+}

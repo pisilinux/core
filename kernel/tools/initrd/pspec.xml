@@ -25,13 +25,27 @@
         <RuntimeDependencies>
             <Dependency>btrfs-progs</Dependency>
         </RuntimeDependencies>
+        <Conflicts>
+            <Package>mkinitramfs</Package>
+            <Package>mkinitcpio</Package>
+        </Conflicts>
         <Files>
             <Path fileType="executable">/bin/update-initrd</Path>
             <Path fileType="library">/lib/initrd</Path>
         </Files>
+        <Provides>
+            <COMAR script="pakhandler.py">System.PackageHandler</COMAR>
+        </Provides>
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2020-09-11</Date>
+            <Version>1.1.4</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Berk Çakar</Name>
+            <Email>berk2238@hotmail.com</Email>
+        </Update>
         <Update release="5">
             <Date>2020-09-09</Date>
             <Version>1.1.4</Version>

@@ -1,0 +1,62 @@
+#!/usr/bin/bash
+# See: https://gitlab.com/tearch-linux/applications-and-tools/mkinitcpio-teaiso
+
+live_mount(){
+    mkdir -p /pisi/a # upper
+    mkdir -p /pisi/b # workdir
+    mkdir -p /live_root/
+    mkdir -p /new_root/
+    mkdir -p /source/ # lower
+    mount $root /new_root/ 2> /dev/null
+    mount /new_root/live/pisi.sfs /source/ 2> /dev/null
+    mount -t overlay -o lowerdir=/source/,upperdir=/pisi/a/,workdir=/pisi/b overlay /live_root
+    mount -t tmpfs -o size=100% none /pisi/a
+    mount -t tmpfs -o size=100% none /pisi/b
+    [ -d /source/merge/ ] && cp -prfv /source/merge/* /live_root/
+    mount --bind /live_root /new_root/
+    mkdir /new_root/cdrom/ 2> /dev/null
+    mkdir /new_root/source/ 2> /dev/null
+    mount $root /new_root/cdrom/ 2> /dev/null
+    mount /new_root/cdrom/live/pisi.sfs /new_root/source/ 2> /dev/null
+    [ "$home" != "" ] && mount $home /new_root/home 2>/dev/null
+}
+
+is_file_avaiable(){
+    disktmp=$(mktemp)
+    rm -f $disktmp
+    mkdir -p $disktmp || true
+    timeout 10 mount -t auto "$1" $disktmp &>/dev/null
+    [ -f "$disktmp/$2" ] && [ -b "$1" ]
+    status=$?
+    umount -lf $disktmp 2>/dev/null
+    return $status
+}
+
+run_hook() {
+    # live-boot
+    if cat /proc/cmdline | grep "boot=live" >/dev/null ; then
+    while [ "$root" == "" ] ; do
+		list=$(ls /sys/class/block/ | grep ".*[0-9]$" | grep -v loop | grep -v ram | grep -v nbd | grep -v fd | sed "s|^|/dev/|g")
+		for part in $list
+		do
+			sleep 0.1
+			echo "Looking for: $part"
+			if is_file_avaiable "$part" "/live/pisi.sfs"
+			then
+				export root=$part
+            elif is_file_avaiable "$part" "/mount-me" 
+            then
+        		export home=$part
+			fi
+		done
+	done
+    export mount_handler="live_mount"
+    fi
+}
+
+run_latehook(){
+    if ! cat /proc/cmdline | grep "init=" ; then
+        export init=/sbin/init
+    fi
+    sleep 0.3
+}
