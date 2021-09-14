@@ -16,18 +16,18 @@
         <BuildDependencies>
             <Dependency>libutil-linux-devel</Dependency>
             <Dependency>eudev-devel</Dependency>
-            <Dependency>autoconf-archive</Dependency>
             <Dependency>libaio-devel</Dependency>
-<!--             <Dependency>thin-provisioning-tools</Dependency> -->
+            <Dependency>readline-devel</Dependency>
+            <Dependency>thin-provisioning-tools</Dependency>
         </BuildDependencies>
         <Patches>
-            <!--<Patch level="1">lvm2-2.02.63-always-make-static-libdm.patch</Patch>
+            <!--Patch level="1">lvm2-2.02.63-always-make-static-libdm.patch</Patch>
             <Patch level="1">lvm2-2.02.92-dynamic-static-ldflags.patch</Patch>
             <Patch level="1">lvm2-2.02.105-pthread-pkgconfig.patch</Patch>
-            <Patch>lvm2-2.02.106-static-pkgconfig-libs.patch</Patch>-->
-<!-- 			<Patch level="1">lvm2-2.03.05-pthread-pkgconfig.patch</Patch> -->
-<!-- 			<Patch level="1">lvm2-2.03.05-dynamic-static-ldflags.patch</Patch> -->
-<!-- 			<Patch level="1">lvm2-2.03.05-dmeventd-no-idle-exit.patch</Patch> -->
+            <Patch>lvm2-2.02.106-static-pkgconfig-libs.patch</Patch>
+            <Patch level="1">lvm2-2.03.05-pthread-pkgconfig.patch</Patch>
+            <Patch level="1">lvm2-2.03.05-dynamic-static-ldflags.patch</Patch>
+            <Patch level="1">lvm2-2.03.05-dmeventd-no-idle-exit.patch</Patch>
             <Patch level="1">lvm2-2.02.178-static-pkgconfig-libs.patch</Patch>
             <Patch level="1">lvm2-2.02.56-lvm2create_initrd.patch</Patch>
             <Patch level="1">lvm2-2.02.67-createinitrd.patch</Patch>
@@ -35,8 +35,10 @@
             <Patch level="1">lvm2-2.02.171-static-libm.patch</Patch>
             <Patch level="1">lvm2-2.02.166-HPPA-no-O_DIRECT.patch</Patch>
             <Patch level="1">lvm2-2.02.184-mksh_build.patch</Patch>
-            
-            <Patch level="1">lvm2-2.02.186-udev_remove_unsupported_option.patch</Patch>
+            <Patch level="1">lvm2-2.02.186-udev_remove_unsupported_option.patch</Patch-->
+            <Patch level="1">fix-stdio-usage.patch</Patch>
+            <Patch level="1">mlockall-default-config.patch</Patch>
+            <Patch level="1">portability.patch</Patch>
         </Patches>
     </Source>
 
@@ -55,8 +57,8 @@
             <Path fileType="data">/lib/udev/rules.d/10-dm.rules</Path>
             <Path fileType="data">/lib/udev/rules.d/13-dm-disk.rules</Path>
             <Path fileType="data">/lib/udev/rules.d/95-dm-notify.rules</Path>
-            <Path fileType="doc">/usr/share/doc/VERSION_DM</Path>
-            <Path fileType="doc">/usr/share/doc/WHATS_NEW_DM</Path>
+            <!--Path fileType="doc">/usr/share/doc/lvm2/VERSION_DM</Path>
+            <Path fileType="doc">/usr/share/doc/lvm2/WHATS_NEW_DM</Path-->
             <Path fileType="man">/usr/share/man/man8/dmsetup.8</Path>
             <Path fileType="man">/usr/share/man/man8/dmstats.8</Path>
         </Files>
@@ -67,7 +69,7 @@
         <Summary>Development libraries and headers for device-mapper</Summary>
         <Description>Device-mapper-devel contains files needed to develop applications that use the device-mapper libraries.</Description>
         <RuntimeDependencies>
-            <Dependency release="current" >device-mapper</Dependency>
+            <Dependency release="current">device-mapper</Dependency>
             <Dependency>eudev-devel</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -81,13 +83,12 @@
         <Summary>Device-mapper event daemon</Summary>
         <Description>This package contains the dmeventd daemon for monitoring the state of device-mapper devices.</Description>
         <RuntimeDependencies>
-            <Dependency release="current" >device-mapper</Dependency>
+            <Dependency release="current">device-mapper</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/sbin/dmeventd</Path>
             <Path fileType="library">/usr/lib/libdevmapper-event.a</Path>
             <Path fileType="library">/usr/lib/libdevmapper-event.so*</Path>
-			
             <Path fileType="library">/usr/lib/libdevmapper-event-lvm2vdo.so</Path>
             <Path fileType="library">/usr/lib/device-mapper/libdevmapper-event-lvm2vdo.so</Path>
             <Path fileType="library">/usr/lib/libdevmapper-event-lvm2thin.so</Path>
@@ -101,7 +102,7 @@
         <Summary>Development libraries and headers for the device-mapper event daemon</Summary>
         <Description>This contains contains files needed to develop applications that use the device-mapper event library.</Description>
         <RuntimeDependencies>
-            <Dependency release="current" >device-mapper-event</Dependency>
+            <Dependency release="current">device-mapper-event</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include/libdevmapper-event.h</Path>
@@ -116,11 +117,13 @@
         <RuntimeDependencies>
             <Dependency release="current">device-mapper</Dependency>
             <Dependency release="current">device-mapper-event</Dependency>
-            <Dependency>libutil-linux</Dependency>
+            <Dependency>libaio</Dependency>
             <Dependency>eudev</Dependency>
+            <Dependency>libutil-linux</Dependency>
+            <Dependency>readline</Dependency>
+            <Dependency>thin-provisioning-tools</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="executable">/sbin/lvmconf</Path>
             <Path fileType="executable">/usr/sbin/blkdeactivate</Path>
             <Path fileType="executable">/usr/sbin/fsadm</Path>
             <Path fileType="executable">/usr/sbin/lv*</Path>
@@ -135,14 +138,20 @@
             <Path fileType="library">/usr/lib/libdevmapper-event-lvm2snapshot.so</Path>
             <Path fileType="library">/usr/lib/libdevmapper-event-lvm2raid.so</Path>
             <Path fileType="library">/usr/lib/device-mapper/libdevmapper-event-lvm2raid.so</Path>
-            <Path fileType="config">/etc/lvm</Path>
+            <Path fileType="config">/etc/lvm/lvm.conf</Path>
+            <Path fileType="config">/etc/lvm/lvmlocal.conf</Path>
             <Path fileType="data">/etc/lvm/archive</Path>
             <Path fileType="data">/etc/lvm/backup</Path>
             <Path fileType="data">/etc/lvm/cache</Path>
-            <Path fileType="data">/var/lock/lvm</Path>
+            <Path fileType="data">/etc/lvm/profile</Path>
             <Path fileType="data">/lib/udev/rules.d/11-dm-lvm.rules</Path>
+            <Path fileType="data">/lib/udev/rules.d/69-dm-lvm-metad.rules</Path>
             <Path fileType="data">/usr/lib/tmpfiles.d/lvm2.conf</Path>
-            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="doc">/usr/share/doc/lvm2/COPYING</Path>
+            <Path fileType="doc">/usr/share/doc/lvm2/COPYING.LIB</Path>
+            <Path fileType="doc">/usr/share/doc/lvm2/README</Path>
+            <Path fileType="doc">/usr/share/doc/lvm2/VERSION</Path>
+            <Path fileType="doc">/usr/share/doc/lvm2/WHATS_NEW</Path>
             <Path fileType="man">/usr/share/man/man5/lvm.conf.5</Path>
             <Path fileType="man">/usr/share/man/man7</Path>
             <Path fileType="man">/usr/share/man/man8/fsadm.8</Path>
@@ -164,10 +173,10 @@
         <Summary>Development libraries and headers</Summary>
         <Description>This package contains files needed to develop applications that use the lvm2 libraries.</Description>
         <RuntimeDependencies>
-            <Dependency>libutil-linux-devel</Dependency>
             <Dependency release="current">lvm2</Dependency>
             <Dependency release="current">device-mapper-devel</Dependency>
             <Dependency release="current">device-mapper-event-devel</Dependency>
+            <Dependency>libutil-linux-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include/lvm2cmd.h</Path>
@@ -176,36 +185,14 @@
         </Files>
     </Package>
 
-    <Package>
-        <Name>dietlibc-libdevmapper</Name>
-        <Summary>Static devmapper library built with dietlibc</Summary>
-        <Description>device mapper contains ioctl library and utilities for use with logical volume management (LVM2) built with dietlibc</Description>
-        <Files>
-            <Path fileType="library">/usr/lib/dietlibc/lib-i386/libdevmapper.a</Path>
-        </Files>
-    </Package>
-
-    <Package>
-        <Name>device-mapper-static</Name>
-        <Summary>Staticaly linked Device-mapper library and utility</Summary>
-        <Description>device mapper contains statically linked libraries and utility for initramfs.</Description>
-        <Files>
-            <Path fileType="executable">/sbin/dmsetup.static</Path>
-        </Files>
-    </Package>
-
-    <Package>
-        <Name>lvm2-static</Name>
-        <Summary>Staticaly linked Logical Volume Management utilities</Summary>
-        <Description>Number of utilities for creating, checking, and repairing logical volumes - statically linked for initramfs.</Description>
-        <Files>
-            <Path fileType="executable">/sbin/lvm.static</Path>
-            <Path fileType="library">/usr/lib/liblvm2app.a</Path>
-            <Path fileType="library">/usr/lib/liblvm2cmd.a</Path>
-        </Files>
-    </Package>
-
     <History>
+        <Update release="8">
+            <Date>2021-09-14</Date>
+            <Version>2.02.186</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Berk Çakar</Name>
+            <Email>berk2238@hotmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2020-12-09</Date>
             <Version>2.02.186</Version>

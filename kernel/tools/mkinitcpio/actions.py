@@ -15,7 +15,7 @@ def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     pisitools.removeDir("/usr/lib/kernel")
-    pisitools.removeDir("/usr/lib/tmpfiles.d")
+    pisitools.removeDir("/etc/mkinitcpio.d")
     pisitools.remove("/usr/lib/initcpio/install/sd-*")
     pisitools.removeDir("/usr/share/libalpm")
 
