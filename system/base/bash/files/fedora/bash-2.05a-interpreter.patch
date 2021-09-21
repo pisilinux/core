@@ -1,8 +1,8 @@
 diff --git a/config.h.in b/config.h.in
-index a5ad9e7..62a6b32 100644
+index ab316d4..11d1d68 100644
 --- a/config.h.in
 +++ b/config.h.in
-@@ -748,6 +748,9 @@
+@@ -775,6 +775,9 @@
  /* Define if you have the pselect function.  */
  #undef HAVE_PSELECT
  
@@ -12,7 +12,7 @@ index a5ad9e7..62a6b32 100644
  /* Define if you have the putenv function.  */
  #undef HAVE_PUTENV
  
-@@ -946,6 +949,9 @@
+@@ -981,6 +984,9 @@
  /* Define if you have the <dlfcn.h> header file.  */
  #undef HAVE_DLFCN_H
  
@@ -23,29 +23,20 @@ index a5ad9e7..62a6b32 100644
  #undef HAVE_GRP_H
  
 diff --git a/configure.ac b/configure.ac
-index ce4e9b6..eda95d6 100644
+index 2fe3e7d..f1b7f1b 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -700,7 +700,7 @@ BASH_HEADER_INTTYPES
- AC_CHECK_HEADERS(unistd.h stdlib.h stdarg.h varargs.h limits.h string.h \
- 		 memory.h locale.h termcap.h termio.h termios.h dlfcn.h \
- 		 stdbool.h stddef.h stdint.h netdb.h pwd.h grp.h strings.h \
--		 regex.h syslog.h ulimit.h)
-+		 regex.h syslog.h ulimit.h elf.h)
- AC_CHECK_HEADERS(sys/pte.h sys/stream.h sys/select.h sys/file.h sys/ioctl.h \
- 		 sys/param.h sys/socket.h sys/stat.h \
- 		 sys/time.h sys/times.h sys/types.h sys/wait.h)
-@@ -771,7 +771,7 @@ dnl checks for system calls
- AC_CHECK_FUNCS(dup2 eaccess fcntl getdtablesize getgroups gethostname \
- 		getpagesize getpeername getrlimit getrusage gettimeofday \
- 		kill killpg lstat pselect readlink sbrk select setdtablesize \
--		setitimer tcgetpgrp uname ulimit waitpid)
-+		setitimer tcgetpgrp uname ulimit waitpid pread)
+@@ -827,7 +827,7 @@ dnl checks for system calls
+ AC_CHECK_FUNCS(dup2 eaccess fcntl getdtablesize getentropy getgroups \
+ 		gethostname getpagesize getpeername getrandom getrlimit \
+ 		getrusage gettimeofday kill killpg lstat pselect readlink \
+-		select setdtablesize setitimer tcgetpgrp uname ulimit waitpid)
++		select setdtablesize setitimer tcgetpgrp uname ulimit waitpid pread)
  AC_REPLACE_FUNCS(rename)
  
  dnl checks for c library functions
 diff --git a/execute_cmd.c b/execute_cmd.c
-index 2a3df6d..b5cd405 100644
+index d2a0dd7..d2555ad 100644
 --- a/execute_cmd.c
 +++ b/execute_cmd.c
 @@ -41,6 +41,10 @@
@@ -59,7 +50,7 @@ index 2a3df6d..b5cd405 100644
  #include "posixtime.h"
  
  #if defined (HAVE_SYS_RESOURCE_H) && !defined (RLIMTYPE)
-@@ -5486,6 +5490,14 @@ shell_execve (command, args, env)
+@@ -5832,6 +5836,14 @@ shell_execve (command, args, env)
  	{
  	  /* The file has the execute bits set, but the kernel refuses to
  	     run it for some reason.  See why. */
@@ -74,18 +65,19 @@ index 2a3df6d..b5cd405 100644
  #if defined (HAVE_HASH_BANG_EXEC)
  	  READ_SAMPLE_BUF (command, sample, sample_len);
  	  if (sample_len > 0)
-@@ -5495,6 +5507,7 @@ shell_execve (command, args, env)
+@@ -5841,6 +5853,7 @@ shell_execve (command, args, env)
  	      char *interp;
  	      int ilen;
  
-+              close (fd);
++          close (fd);
  	      interp = getinterp (sample, sample_len, (int *)NULL);
  	      ilen = strlen (interp);
  	      errno = i;
-@@ -5510,6 +5523,136 @@ shell_execve (command, args, env)
+@@ -5856,7 +5869,138 @@ shell_execve (command, args, env)
  	      return (EX_NOEXEC);
  	    }
  #endif
+-	  errno = i;
 +#if defined (HAVE_ELF_H)
 +	  if (i == ENOENT
 +	      && sample_len > EI_NIDENT
@@ -216,9 +208,8 @@ index 2a3df6d..b5cd405 100644
 +#if defined (HAVE_HASH_BANG_EXEC) || defined (HAVE_ELF_H)
 +	  close (fd);
 +#endif
- 	  errno = i;
++
++      errno = i;
  	  file_error (command);
  	}
--- 
-2.9.3
-
+       return (last_command_exit_value);

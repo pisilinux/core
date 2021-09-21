@@ -1,12 +1,13 @@
-diff -up bash-4.3/locale.c.old bash-4.3/locale.c
---- bash-4.3/locale.c.old	2015-07-15 11:55:00.002857301 +0200
-+++ bash-4.3/locale.c	2015-07-15 11:48:36.698086257 +0200
-@@ -77,8 +77,6 @@ set_default_locale ()
+diff --git a/locale.c b/locale.c
+index 17ccc58..a6c07a3 100644
+--- a/locale.c
++++ b/locale.c
+@@ -78,8 +78,6 @@ set_default_locale ()
  {
  #if defined (HAVE_SETLOCALE)
    default_locale = setlocale (LC_ALL, "");
 -  if (default_locale)
 -    default_locale = savestring (default_locale);
+ #else
+   default_locale = savestring ("C");
  #endif /* HAVE_SETLOCALE */
-   bindtextdomain (PACKAGE, LOCALEDIR);
-   textdomain (PACKAGE);
