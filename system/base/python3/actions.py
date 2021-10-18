@@ -56,3 +56,4 @@ def install():
     pisitools.removeDir("/usr/lib/python3.8/tkinter")
     pisitools.removeDir("/usr/lib/python3.8/turtledemo")
     pisitools.remove("/usr/bin/idle3*")
+    pisitools.remove("/usr/lib/libpython3.8.a")
