@@ -20,7 +20,6 @@ def setup():
                          --with-libssh2 \
                          --with-gssapi=no \
                          --with-nghttp2 \
-                         --with-libmetalink \
                          --without-librtmp \
                          --enable-ipv6 \
                          --enable-http \
@@ -35,6 +34,7 @@ def setup():
                          --enable-threaded-resolver \
                          --enable-hidden-symbols \
                          --disable-versioned-symbols \
+                         --without-libgsasl \
                          ac_cv_header_gss_h=no \
                          --with-ca-bundle=/etc/ssl/certs/ca-certificates.crt \
                          --prefix=/usr \
