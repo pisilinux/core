@@ -11,7 +11,7 @@
         <IsA>app:web</IsA>
         <Summary>Common CA certificates</Summary>
         <Description>Common CA certificates</Description>
-        <Archive sha1sum="47d4584eae85fc905e4994766eb3930a8a84e2e1" type="tarxz">http://ftp.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20190110.tar.xz</Archive>
+        <Archive sha1sum="c9875aa16e42981c6975e59a11727539053e2299" type="tarxz">http://ftp.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20210119.tar.xz</Archive>
         <Patches>
             <!--Patch>ca-certificates-undebianize.patch</Patch>
             <Patch>ca-certificates-more-certs.patch</Patch>
@@ -39,6 +39,13 @@
     </Package>
 
     <History>
+        <Update release="7">
+            <Date>2021-10-18</Date>
+            <Version>20210119</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="6">
             <Date>2020-12-09</Date>
             <Version>20190110</Version>
