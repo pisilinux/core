@@ -12,6 +12,9 @@
         <Summary>Common CA certificates</Summary>
         <Description>Common CA certificates</Description>
         <Archive sha1sum="c9875aa16e42981c6975e59a11727539053e2299" type="tarxz">http://ftp.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20210119.tar.xz</Archive>
+	<BuildDependencies>
+            <Dependency>python3</Dependency>
+        </BuildDependencies>
         <Patches>
             <!--Patch>ca-certificates-undebianize.patch</Patch>
             <Patch>ca-certificates-more-certs.patch</Patch>
