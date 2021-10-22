@@ -28,7 +28,7 @@ def install():
 
     # Python module
     #pisitools.insinto("/usr/lib/%s/site-packages" % get.curPYTHON(), "asciidocapi.py")
-    pisitools.insinto("/usr/lib/python3.8/site-packages", "asciidocapi.py")
+    pisitools.insinto("/usr/lib/python3.9/site-packages", "asciidocapi.py")
 
     # Vim syntax and filetype plugins
     #pisitools.insinto("/usr/share/vim/vimfiles/syntax/" , "vim/syntax/asciidoc.vim")
