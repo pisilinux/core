@@ -1,7 +1,7 @@
-From cb8a5266fd6cef5f523f64f95905d684766c68de Mon Sep 17 00:00:00 2001
+From c7d26e6881e6d305a9e2cb095b540a9062f84272 Mon Sep 17 00:00:00 2001
 From: Mike Gilbert <floppym@gentoo.org>
 Date: Fri, 5 Jan 2018 13:28:45 -0500
-Subject: [PATCH 01/16] Install libpythonX.Y.a in /usr/lib instead of
+Subject: [PATCH 01/14] Install libpythonX.Y.a in /usr/lib instead of
  /usr/lib/pythonX.Y/config
 
 https://bugs.gentoo.org/show_bug.cgi?id=252372
@@ -14,10 +14,10 @@ https://bugs.python.org/issue6103
  4 files changed, 4 insertions(+), 14 deletions(-)
 
 diff --git a/Makefile.pre.in b/Makefile.pre.in
-index 7e381283fe..37cbb02890 100644
+index 6ce7a614dc..27666e9d16 100644
 --- a/Makefile.pre.in
 +++ b/Makefile.pre.in
-@@ -1582,9 +1582,9 @@ libainstall:	@DEF_MAKE_RULE@ python-config
+@@ -1655,9 +1655,9 @@ libainstall:	@DEF_MAKE_RULE@ python-config
  	@if test -d $(LIBRARY); then :; else \
  		if test "$(PYTHONFRAMEWORKDIR)" = no-framework; then \
  			if test "$(SHLIB_SUFFIX)" = .dll; then \
@@ -30,7 +30,7 @@ index 7e381283fe..37cbb02890 100644
  		else \
  			echo Skip install of $(LIBRARY) - use make frameworkinstall; \
 diff --git a/Misc/python-config.in b/Misc/python-config.in
-index 727c4a8682..bab60cf2d1 100644
+index ebd99daa0c..ddcb9e0154 100644
 --- a/Misc/python-config.in
 +++ b/Misc/python-config.in
 @@ -56,12 +56,6 @@ for opt in opt_flags:

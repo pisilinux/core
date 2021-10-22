@@ -1,7 +1,7 @@
-From 5082bf6ec57eed8680eac679f6c3e6908031b3f7 Mon Sep 17 00:00:00 2001
+From a6d965d846dd989bfd9bcfa806575cadf5643656 Mon Sep 17 00:00:00 2001
 From: Mike Gilbert <floppym@gentoo.org>
 Date: Fri, 5 Jan 2018 13:34:21 -0500
-Subject: [PATCH 05/16] Improve distutils C++ support
+Subject: [PATCH 05/14] Improve distutils C++ support
 
 https://bugs.python.org/issue1222585
 ---
@@ -14,7 +14,7 @@ https://bugs.python.org/issue1222585
  6 files changed, 80 insertions(+), 52 deletions(-)
 
 diff --git a/Lib/_osx_support.py b/Lib/_osx_support.py
-index 9b127c2491..b13734a271 100644
+index 37975fe8a3..b4e46df29c 100644
 --- a/Lib/_osx_support.py
 +++ b/Lib/_osx_support.py
 @@ -14,13 +14,13 @@ __all__ = [
@@ -35,10 +35,10 @@ index 9b127c2491..b13734a271 100644
  # prefix added to original configuration variable names
  _INITPRE = '_OSX_SUPPORT_INITIAL_'
 diff --git a/Lib/distutils/cygwinccompiler.py b/Lib/distutils/cygwinccompiler.py
-index 6c5d77746b..640fa2da34 100644
+index 66c12dd358..dddb9fd2d4 100644
 --- a/Lib/distutils/cygwinccompiler.py
 +++ b/Lib/distutils/cygwinccompiler.py
-@@ -125,8 +125,10 @@ class CygwinCCompiler(UnixCCompiler):
+@@ -123,8 +123,10 @@ class CygwinCCompiler(UnixCCompiler):
          # dllwrap 2.10.90 is buggy
          if self.ld_version >= "2.10.90":
              self.linker_dll = "gcc"
@@ -49,7 +49,7 @@ index 6c5d77746b..640fa2da34 100644
  
          # ld_version >= "2.13" support -shared so use it instead of
          # -mdll -static
-@@ -140,9 +142,13 @@ class CygwinCCompiler(UnixCCompiler):
+@@ -138,9 +140,13 @@ class CygwinCCompiler(UnixCCompiler):
          self.set_executables(compiler='gcc -mcygwin -O -Wall',
                               compiler_so='gcc -mcygwin -mdll -O -Wall',
                               compiler_cxx='g++ -mcygwin -O -Wall',
@@ -64,7 +64,7 @@ index 6c5d77746b..640fa2da34 100644
  
          # cygwin and mingw32 need different sets of libraries
          if self.gcc_version == "2.91.57":
-@@ -166,8 +172,12 @@ class CygwinCCompiler(UnixCCompiler):
+@@ -164,8 +170,12 @@ class CygwinCCompiler(UnixCCompiler):
                  raise CompileError(msg)
          else: # for other files use the C-compiler
              try:
@@ -79,7 +79,7 @@ index 6c5d77746b..640fa2da34 100644
              except DistutilsExecError as msg:
                  raise CompileError(msg)
  
-@@ -302,9 +312,14 @@ class Mingw32CCompiler(CygwinCCompiler):
+@@ -300,9 +310,14 @@ class Mingw32CCompiler(CygwinCCompiler):
          self.set_executables(compiler='gcc -O -Wall',
                               compiler_so='gcc -mdll -O -Wall',
                               compiler_cxx='g++ -O -Wall',
@@ -95,10 +95,10 @@ index 6c5d77746b..640fa2da34 100644
          # Maybe we should also append -mthreads, but then the finished
          # dlls need another dll (mingwm10.dll see Mingw32 docs)
 diff --git a/Lib/distutils/sysconfig.py b/Lib/distutils/sysconfig.py
-index b51629eb94..c00870fb0f 100644
+index 37feae5df7..f78d01257a 100644
 --- a/Lib/distutils/sysconfig.py
 +++ b/Lib/distutils/sysconfig.py
-@@ -187,9 +187,12 @@ def customize_compiler(compiler):
+@@ -193,9 +193,12 @@ def customize_compiler(compiler):
                  _osx_support.customize_compiler(_config_vars)
                  _config_vars['CUSTOMIZED_OSX_COMPILER'] = 'True'
  
@@ -114,7 +114,7 @@ index b51629eb94..c00870fb0f 100644
  
          if 'CC' in os.environ:
              newcc = os.environ['CC']
-@@ -204,19 +207,27 @@ def customize_compiler(compiler):
+@@ -210,19 +213,27 @@ def customize_compiler(compiler):
              cxx = os.environ['CXX']
          if 'LDSHARED' in os.environ:
              ldshared = os.environ['LDSHARED']
@@ -143,7 +143,7 @@ index b51629eb94..c00870fb0f 100644
          if 'AR' in os.environ:
              ar = os.environ['AR']
          if 'ARFLAGS' in os.environ:
-@@ -225,13 +236,17 @@ def customize_compiler(compiler):
+@@ -231,13 +242,17 @@ def customize_compiler(compiler):
              archiver = ar + ' ' + ar_flags
  
          cc_cmd = cc + ' ' + cflags
@@ -312,10 +312,10 @@ index f0792de74a..16e7fbea83 100644
                  if sys.platform == 'darwin':
                      linker = _osx_support.compiler_fixup(linker, ld_args)
 diff --git a/Makefile.pre.in b/Makefile.pre.in
-index 37cbb02890..3d724dfb51 100644
+index 27666e9d16..abdb4a096f 100644
 --- a/Makefile.pre.in
 +++ b/Makefile.pre.in
-@@ -606,10 +606,10 @@ sharedmods: $(BUILDPYTHON) pybuilddir.txt Modules/_math.o
+@@ -630,10 +630,10 @@ sharedmods: $(BUILDPYTHON) pybuilddir.txt Modules/_math.o
  	    *\ -s*|s*) quiet="-q";; \
  	    *) quiet="";; \
  	esac; \

@@ -52,8 +52,8 @@ def install():
     pisitools.remove("/usr/bin/2to3")
     pisitools.dodoc("LICENSE", "README.*")
     
-    pisitools.removeDir("/usr/lib/python3.8/idlelib")
-    pisitools.removeDir("/usr/lib/python3.8/tkinter")
-    pisitools.removeDir("/usr/lib/python3.8/turtledemo")
+    pisitools.removeDir("/usr/lib/python3.9/idlelib")
+    pisitools.removeDir("/usr/lib/python3.9/tkinter")
+    pisitools.removeDir("/usr/lib/python3.9/turtledemo")
     pisitools.remove("/usr/bin/idle3*")
-    pisitools.remove("/usr/lib/libpython3.8.a")
+    pisitools.remove("/usr/lib/libpython3.9.a")
