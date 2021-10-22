@@ -13,7 +13,7 @@
         <IsA>app:console</IsA>
         <Summary>MIT Kerberos Library</Summary>
         <Description>Kerberos is a network authentication protocol. It is designed to provide strong authentication for client/server applications by using secret-key cryptography.</Description>
-        <Archive sha1sum="0c404b081db9c996c581f636ce450ee28778f338" type="targz">http://web.mit.edu/kerberos/dist/krb5/1.17/krb5-1.17.tar.gz</Archive>
+        <Archive sha1sum="f6980dafd31eac22a047ad34a2b918e4d12a8be5" type="targz">http://web.mit.edu/kerberos/dist/krb5/1.19/krb5-1.19.2.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>python3</Dependency>
             <Dependency>keyutils</Dependency>
@@ -61,6 +61,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2021-10-22</Date>
+            <Version>1.19.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2020-11-07</Date>
             <Version>1.17</Version>
