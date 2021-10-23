@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>scons</Name>
-        <Homepage>http://www.scons.org</Homepage>
+        <Homepage>https://www.scons.org/</Homepage>
         <Packager>
             <Name>PisiLinux Community</Name>
             <Email>admins@pisilinux.org</Email>
@@ -12,20 +12,20 @@
         <IsA>app:console</IsA>
         <Summary>An Open Source software construction tool</Summary>
         <Description>Think of SCons as an improved, cross-platform substitute for the classic Make utility with integrated functionality similar to autoconf/automake and compiler caches such as ccache.</Description>
-        <Archive sha1sum="d7541717d503266b37004a33246b6688fe87dec0" type="targz">mirrors://sourceforge/scons/scons-3.1.2.tar.gz</Archive>
+        <Archive sha1sum="d376f35a56da4076b05a5c7c6830828296a03ff4" type="targz">mirrors://sourceforge/scons/scons-4.2.0.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>python</Dependency>
+            <Dependency>python3</Dependency>
+            <Dependency>python3-setuptools</Dependency>
         </BuildDependencies>
         <Patches>
-            <!--Patch level="1">scons-1.0.0-qt-handle-missing-moc-files.patch</Patch>
-            <Patch level="1">fix-gnu-link-handling.patch</Patch-->
+            <!-- <Patch level="1">missing.patch</Patch> -->
         </Patches>
     </Source>
 
     <Package>
         <Name>scons</Name>
         <RuntimeDependencies>
-            <Dependency>python</Dependency>
+            <Dependency>python3</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -36,6 +36,13 @@
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2021-10-22</Date>
+            <Version>4.2.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="5">
             <Date>2020-12-09</Date>
             <Version>3.1.2</Version>

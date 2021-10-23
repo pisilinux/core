@@ -2,19 +2,20 @@
 # -*- coding: utf-8 -*-
 #
 # Licensed under the GNU General Public License, version 3.
-# See the file http://www.gnu.org/licenses/gpl.txt
+# See the file https://www.gnu.org/licenses/gpl-3.0.txt
 
 from pisi.actionsapi import pythonmodules
 from pisi.actionsapi import pisitools
 
+def setup():
+    # no install man pages into data dir.
+    pisitools.dosed("setup.cfg", ",\ \*.1", "")
+    pisitools.dosed("setup.cfg", "1$", deleteLine = True)
+
 def build():
-    pisitools.dosed("script/*", "/usr/bin/env python", "/usr/bin/python")
-    pythonmodules.compile()
+    pythonmodules.compile(pyVer = "3")
 
 def install():
-    pythonmodules.install("--no-version-script \
-                           --standalone-lib \
-                           --install-scripts=/usr/bin \
-                           --install-data=/usr/share")
+    pythonmodules.install("--install-scripts=/usr/bin --install-data=/usr/share", pyVer = "3")
 
-    pisitools.dodoc("CHANGES*", "LICENSE*", "README*", "RELEASE*")
+    pisitools.doman("scons.1", "scons-time.1", "sconsign.1")
