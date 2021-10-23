@@ -14,7 +14,7 @@
         <Description>Yüksek verimli üretme sistemi</Description>
         <Archive sha1sum="f3ba286899a29ca51549d800e5816745fe0efd45" type="targz">https://github.com/mesonbuild/meson/releases/download/0.59.2/meson-0.59.2.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>python3-devel</Dependency>
+            <Dependency versionFrom="3.9.7">python3-devel</Dependency>
             <Dependency>python3-setuptools</Dependency>
         </BuildDependencies>
         <Patches>
