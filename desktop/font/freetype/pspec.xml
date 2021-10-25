@@ -13,12 +13,23 @@
         <IsA>library</IsA>
         <Summary>A high-quality and portable font engine</Summary>
         <Description>FreeType 2 is a software font engine that is designed to be small, efficient, highly customizable, and portable while capable of producing high-quality output. It can be used in graphics libraries, display servers, font conversion tools, text image generation tools, and many other products as well.</Description>
-        <Archive sha1sum="0181862673f7216ad2b5074f95fc131209e30b27" type="tarxz">mirrors://sourceforge/freetype/freetype-2.10.4.tar.xz</Archive>
+        <Archive sha1sum="f1635a1ed68ee467be33036d8881b7b89177663f" type="tarxz">mirrors://sourceforge/freetype/freetype-2.11.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>zlib-devel</Dependency>
             <Dependency>bzip2</Dependency>
             <Dependency>libpng-devel</Dependency>
         </BuildDependencies>
+        <Patches>
+            <Patch level="1">arch/0001-Enable-table-validation-modules.patch</Patch>
+            <Patch level="1">arch/0002-Enable-subpixel-rendering.patch</Patch>
+            <Patch level="1">arch/0003-Enable-infinality-subpixel-hinting.patch</Patch>
+            <Patch level="1">arch/0004-Enable-long-PCF-family-names.patch</Patch>
+            <Patch level="1">arch/0006-Return_FT_Err_Ok_while_trying_to_render_bitmap.patch</Patch>
+            <Patch level="1">arch/0007-Restore_quiet_no-op_rendering_of_bitmap_glyphs.patch</Patch>
+            <Patch level="1">arch/0008-sfnt-Add-API-for-retrieving-a-COLR-v1-ClipBox-table.patch</Patch>
+            <Patch level="1">arch/0009-src-sfnt-ttcolr.c-tt_face_get_color_glyph_clipbox-Mi.patch</Patch>
+            <Patch level="1">arch/0010-sfnt-Add-missing-blend-mode-plus-to-COLR-v1.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
@@ -72,6 +83,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2021-10-25</Date>
+            <Version>2.11.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="9">
             <Date>2021-06-03</Date>
             <Version>2.10.4</Version>
