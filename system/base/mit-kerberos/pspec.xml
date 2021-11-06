@@ -45,7 +45,7 @@
         <Files>
             <Path fileType="config">/etc</Path>
             <Path fileType="data">/run/krb5kdc</Path>
-            <Path fileType="header">/usr/include</Path>
+<!--             <Path fileType="header">/usr/include</Path> -->
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="executable">/usr/sbin</Path>
             <Path fileType="library">/usr/lib</Path>
@@ -58,6 +58,20 @@
             <AdditionalFile owner="root" permission="0644" target="/etc/krb5.conf">krb5.conf</AdditionalFile>
             <AdditionalFile owner="root" permission="0644" target="/etc/kdc.conf">kdc.conf</AdditionalFile>
         </AdditionalFiles>
+    </Package>
+
+    <Package>
+        <Name>mit-kerberos-devel</Name>
+        <Summary>Development files for mit-kerberos</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">mit-kerberos</Dependency>
+            <Dependency>openssl-devel</Dependency>
+            <Dependency>e2fsprogs-devel</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
     </Package>
 
     <History>
