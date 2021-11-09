@@ -14,7 +14,7 @@
         <Description>This package provides the kernel support for VirtualBox.</Description>
         <Archive sha1sum="b46a9e803a55654fa276c2e0c4db917eb085de92" type="tarxz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-6.1.28.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency version="5.10.78">kernel-module-headers</Dependency>
+            <Dependency version="5.15.1">kernel-module-headers</Dependency>
         </BuildDependencies>
         <Patches>
             <!--Patch level="2">fixes_for_5.6.patch</Patch>
@@ -25,7 +25,7 @@
     <Package>
         <Name>module-virtualbox</Name>
         <RuntimeDependencies>
-            <Dependency version="5.10.78">kernel</Dependency>
+            <Dependency version="5.15.1">kernel</Dependency>
             <Dependency version="current">module-virtualbox-userspace</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -51,6 +51,13 @@
     </Package>
 
     <History>
+        <Update release="85">
+            <Date>2021-11-11</Date>
+            <Version>6.1.28</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>İdris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="84">
             <Date>2021-11-08</Date>
             <Version>6.1.28</Version>
