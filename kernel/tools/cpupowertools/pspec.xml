@@ -12,19 +12,28 @@
         <IsA>app:console</IsA>
         <Summary>CPU power management tools</Summary>
         <Description>cpupowertools contains utilities to manage power management and frequency scaling policies of modern CPUs.</Description>
-        <Archive sha1sum="baa841f624f6cfdafe01026963dcd32b334a3752" type="targz">https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.10.tar.gz</Archive>
+        <Archive sha1sum="01961045127c21f8a9dbaa9e7705dbb9e4cffbaa" type="targz">https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.15.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>pciutils-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-5.10.78.xz</Patch>
+            <Patch level="1" compressionType="xz">patches/linux/patch-5.15.1.xz</Patch>
             <!-- Mageia Linux patches-->
-            <Patch level="1">patches/mageia/fs-aufs5.10.patch</Patch>
-            <Patch level="1">patches/mageia/fs-aufs5.10-symbol-exports.patch</Patch>
-            <Patch level="1">patches/mageia/fs-aufs5.10-tristate.patch</Patch>
+            <Patch level="1">patches/mageia/fs-aufs5.15.patch</Patch>
+            <Patch level="1">patches/mageia/fs-aufs5.15-symbol-exports.patch</Patch>
+            <Patch level="1">patches/mageia/fs-aufs5.15-tristate.patch</Patch>			
+			
+            <Patch level="1">patches/mageia/fs-procfs-do-not-list-TID-0-in-proc-pid-task.patch</Patch>
+			
             <Patch level="1">patches/mageia/CVE-2019-12379.patch</Patch>
             <Patch level="1">patches/mageia/CVE-2020-16119-DCCP-CCID-structure-use-after-free.patch</Patch>
+			
+            <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
+            <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>	
+            <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>	
+            <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.13-buildfix.patch</Patch>	
+            <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-kernel-5.5.patch</Patch>	
             
             <Patch level="1">patches/mageia/3rd-3rdparty-tree.patch</Patch>
             <Patch level="1">patches/mageia/3rd-3rdparty-merge.patch</Patch>
@@ -37,7 +46,8 @@
             <Patch level="1">patches/mageia/3rd-rtl8812au.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8812au-Kconfig-Makefile.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8812au-rename.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8812au-kernel-5.10.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-rtl8812au-kernel-5.12.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-rtl8812au-kernel-5.15.patch</Patch>
             
             <Patch level="1">patches/mageia/3rd-rtl8723de.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8723de-Kconfig-Makefile.patch</Patch>
@@ -57,6 +67,8 @@
             <Patch level="1">patches/mageia/3rd-rtl8821ce-Kconfig-Makefile.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8821ce-5.8-fix.patch</Patch>
             <Patch level="1">patches/mageia/3rd-rtl8821ce-kernel-5.10.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-rtl8821ce-kernel-5.12.patch</Patch>
+            <Patch level="1">patches/mageia/3rd-rtl8821ce-kernel-5.15.patch</Patch>
             
             <Patch level="1">patches/mageia/3rd-fix-kconfig.patch</Patch>
             
@@ -90,6 +102,13 @@
     </Package>
    
     <History>
+        <Update release="61">
+            <Date>2021-11-10</Date>
+            <Version>5.15.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>İdris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="60">
             <Date>2021-11-08</Date>
             <Version>5.10.78</Version>
