@@ -22,7 +22,7 @@ def setup():
 
     pisitools.dosed('util/grub-mkconfig.in', 'GRUB_DISABLE_OS_PROBER="true"', 'GRUB_DISABLE_OS_PROBER="false"')
     #shelltools.system("./linguas.sh")
-    #shelltools.system("./autogen.sh")
+    shelltools.system("./bootstrap")
     autotools.configure("--disable-werror \
                          --with-grubdir=grub2 \
                          --program-transform-name='s,grub,grub2,'\
@@ -34,7 +34,7 @@ def setup():
     
     shelltools.copytree("../grub-%s" % (get.srcVERSION().replace("_", "~")), "../grub-%s-efi" % get.srcVERSION())
     shelltools.cd("../grub-%s-efi" % get.srcVERSION())
-    #shelltools.system("./autogen.sh")
+    shelltools.system("./bootstrap")
     autotools.configure("--disable-werror \
                          --with-grubdir=grub2 \
                          --program-transform-name='s,grub,grub2,'\
@@ -84,7 +84,7 @@ def install():
 
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    pisitools.dodoc("ABOUT-NLS", "AUTHORS", "BUGS", "ChangeLog", "COPYING", "TODO", "README")
+    pisitools.dodoc("ABOUT-NLS", "AUTHORS", "BUGS", "COPYING", "TODO", "README")
     
     shelltools.cd("../grub-%s-efi" % get.srcVERSION())
     

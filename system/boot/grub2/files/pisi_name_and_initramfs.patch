@@ -1,8 +1,9 @@
---- grub-2.02~beta2.orig/util/grub.d/10_linux.in	2013-12-24 18:45:34.000000000 +0200
-+++ grub-2.02~beta2/util/grub.d/10_linux.in	2016-04-28 19:10:54.268739535 +0300
+diff -Nuar a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
+--- a/util/grub.d/10_linux.in	2021-11-02 18:53:12.000000000 +0300
++++ b/util/grub.d/10_linux.in	2021-11-05 17:31:18.256241704 +0300
 @@ -29,7 +29,13 @@
  CLASS="--class gnu-linux --class gnu --class os"
- 
+
  if [ "x${GRUB_DISTRIBUTOR}" = "x" ] ; then
 -  OS=GNU/Linux
 +  if [ -f "/etc/pisilinux-release" ] ; then
@@ -15,9 +16,9 @@
  else
    OS="${GRUB_DISTRIBUTOR} GNU/Linux"
    CLASS="--class $(echo ${GRUB_DISTRIBUTOR} | tr 'A-Z' 'a-z' | cut -d' ' -f1|LC_ALL=C sed 's,[^[:alnum:]_],_,g') ${CLASS}"
-@@ -186,7 +192,8 @@
- 
-   initrd=
+@@ -216,7 +222,8 @@
+
+   initrd_real=
    for i in "initrd.img-${version}" "initrd-${version}.img" "initrd-${version}.gz" \
 -	   "initrd-${version}" "initramfs-${version}.img" \
 +	   "initrd-${version}" "initramfs-${version}.img" "initramfs-fallback-${version}.img"\
