@@ -1,39 +1,70 @@
-<?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>unzip</Name>
         <Homepage>ftp://ftp.info-zip.org/pub/infozip/UnZip.html</Homepage>
         <Packager>
-            <Name>Pisi Gnu/Linux Community</Name>
-            <Email>cpisimail@yandex.com</Email>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnslp@gmail.com</Email>
         </Packager>
         <License>Info-ZIP</License>
         <IsA>app:console</IsA>
         <Summary>Unzipper for pkzip-compressed files</Summary>
         <Description>UnZip enables us to extract archives compressed in .zip format (also called "zipfiles").</Description>
-        <Archive sha1sum="7736e6306f1bb8e51f894ca4670e94181a0f6de3" type="zip">mirrors://sourceforge/infozip/unzip60.zip</Archive>
         <BuildDependencies>
-            <Dependency>bzip2</Dependency>
             <Dependency>bash</Dependency>
+            <Dependency>bzip2</Dependency>
         </BuildDependencies>
+        <Archive type="zip" sha1sum="7736e6306f1bb8e51f894ca4670e94181a0f6de3">mirrors://sourceforge/infozip/unzip60.zip</Archive>
         <Patches>
-            <Patch level="1">overflow-fsize.patch</Patch>
-            <Patch level="1">cve20149636.patch</Patch>
-            <Patch>test_compr_eb.patch</Patch>
-            <Patch>getZip64Data.patch</Patch>
-            <Patch level="1">crc32.patch</Patch>
-            <Patch level="1">empty-input.patch</Patch>
-            <Patch level="1">csiz-underflow.patch</Patch>
-            <Patch level="1">nextbyte-overflow.patch</Patch>
-            </Patches>
-    </Source>
+            <Patch level="1">fedora/0001-Fix-CVE-2016-9844-rhbz-1404283.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-alt-iconv-utf8-print.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-alt-iconv-utf8.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-COVSCAN-fix-unterminated-string.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-attribs-overflow.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-bzip2-configure.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-close.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-configure.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-cve-2014-8139.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-cve-2014-8140.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-cve-2014-8141.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-format-secure.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-overflow-long-fsize.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-cve-2018-1000035-heap-based-overflow.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-heap-overflow-infloop.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-overflow.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-cve-2018-18384.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-exec-shield.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-manpage-fix.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-symlink.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-timestamp.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-valgrind.patch</Patch>
+            <Patch level="1">fedora/unzip-6.0-x-option.patch</Patch>
+            <Patch level="1">fedora/unzip-zipbomb-manpage.patch</Patch>
+            <Patch level="1">fedora/unzip-zipbomb-part1.patch</Patch>
+            <Patch level="1">fedora/unzip-zipbomb-part2.patch</Patch>
+            <Patch level="1">fedora/unzip-zipbomb-part3.patch</Patch>
+            <Patch level="1">fedora/unzip-zipbomb-part4.patch</Patch>
+            <Patch level="1">fedora/unzip-zipbomb-part5.patch</Patch>
+            <Patch level="1">fedora/unzip-zipbomb-part6.patch</Patch>
 
+<!--             <Patch level="1">overflow-fsize.patch</Patch> -->
+<!--             <Patch level="1">cve20149636.patch</Patch> -->
+<!--             <Patch>test_compr_eb.patch</Patch> -->
+<!--             <Patch>getZip64Data.patch</Patch> -->
+<!--             <Patch level="1">crc32.patch</Patch> -->
+<!--             <Patch level="1">empty-input.patch</Patch> -->
+<!--             <Patch level="1">csiz-underflow.patch</Patch> -->
+<!--             <Patch level="1">nextbyte-overflow.patch</Patch> -->
+<!--             <Patch level="1">fedora/unzip-6.0-fix-recmatch.patch</Patch> -->
+<!--             <Patch level="1">fedora/unzip-6.0-caseinsensitive.patch</Patch> -->
+        </Patches>
+    </Source>
     <Package>
         <Name>unzip</Name>
+        <Summary>Unzipper for pkzip-compressed files</Summary>
         <RuntimeDependencies>
-            <Dependency>bzip2</Dependency>
             <Dependency>bash</Dependency>
+            <Dependency>bzip2</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -41,8 +72,14 @@
             <Path fileType="man">/usr/share/man</Path>
         </Files>
     </Package>
-
     <History>
+        <Update release="8">
+            <Date>2021-11-23</Date>
+            <Version>60</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnslp@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2020-12-09</Date>
             <Version>60</Version>
