@@ -3,7 +3,6 @@
  fs/exec.c                |    1 +
  fs/fcntl.c               |    1 +
  fs/file_table.c          |    2 ++
- fs/inode.c               |    1 +
  fs/namespace.c           |    3 +++
  fs/notify/group.c        |    1 +
  fs/open.c                |    1 +
@@ -14,7 +13,7 @@
  kernel/locking/lockdep.c |    1 +
  kernel/task_work.c       |    1 +
  security/security.c      |    8 ++++++++
- 15 files changed, 28 insertions(+)
+ 14 files changed, 27 insertions(+)
 
 diff -Nurp linux-5.15.1-aufs/fs/dcache.c linux-5.15.1-aufs-mod/fs/dcache.c
 --- linux-5.15.1-aufs/fs/dcache.c	2021-11-08 23:01:48.275645778 +0200
@@ -76,17 +75,6 @@ diff -Nurp linux-5.15.1-aufs/fs/file_table.c linux-5.15.1-aufs-mod/fs/file_table
  
  void __init files_init(void)
  {
-diff -Nurp linux-5.15.1-aufs/fs/inode.c linux-5.15.1-aufs-mod/fs/inode.c
---- linux-5.15.1-aufs/fs/inode.c	2021-11-08 23:01:48.275645778 +0200
-+++ linux-5.15.1-aufs-mod/fs/inode.c	2021-11-08 23:02:45.270309130 +0200
-@@ -1788,6 +1788,7 @@ int update_time(struct inode *inode, str
- 		return inode->i_op->update_time(inode, time, flags);
- 	return generic_update_time(inode, time, flags);
- }
-+EXPORT_SYMBOL_GPL(update_time);
- 
- /**
-  *	atime_needs_update	-	update the access time
 diff -Nurp linux-5.15.1-aufs/fs/namespace.c linux-5.15.1-aufs-mod/fs/namespace.c
 --- linux-5.15.1-aufs/fs/namespace.c	2021-11-08 23:01:48.276645825 +0200
 +++ linux-5.15.1-aufs-mod/fs/namespace.c	2021-11-08 23:02:45.271309177 +0200
