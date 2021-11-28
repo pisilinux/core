@@ -15,7 +15,7 @@ def setup():
     # themselves, and they use -Werror.
    
     
-    options ='-disable-nls --program-prefix=\"eu-\" --with-zlib --disable-debuginfod'
+    options ='-disable-nls --program-prefix=\"eu-\" --with-zlib --disable-debuginfod --disable-libdebuginfod'
     
     if get.buildTYPE() == "emul32":
         shelltools.export("PKG_CONFIG_PATH","/usr/lib32/pkgconfig")

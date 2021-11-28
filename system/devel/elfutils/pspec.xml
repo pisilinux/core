@@ -13,10 +13,11 @@
         <IsA>library</IsA>
         <Summary>Libraries/utilities to handle ELF objects</Summary>
         <Description>elfutils contains libraries and utilities to handle ELF objects and is a replacement for libelf.</Description>
-        <Archive sha1sum="c1ed871515b0f7fcdf2d94fea23e4b8ba67e8fe3" type="tarbz2">ftp://sourceware.org/pub/elfutils/0.180/elfutils-0.180.tar.bz2</Archive>
+        <Archive sha1sum="650d52024be684dabf18a5261a69836a16f84f72" type="tarbz2">ftp://sourceware.org/pub/elfutils/0.186/elfutils-0.186.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>bzip2</Dependency>
             <Dependency>xz-devel</Dependency>
+            <Dependency>zstd-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -25,6 +26,7 @@
         <Name>elfutils</Name>
         <RuntimeDependencies>
             <Dependency>xz</Dependency>
+            <Dependency>zstd</Dependency>
             <Dependency>zlib</Dependency>
             <Dependency>bzip2</Dependency>
             <Dependency>libgcc</Dependency>
@@ -61,6 +63,7 @@
         <RuntimeDependencies>
             <Dependency release="current">elfutils</Dependency>
             <Dependency>xz-devel</Dependency>
+            <Dependency>zstd-devel</Dependency>
 		    <Dependency>zlib-devel</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -71,6 +74,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2021-11-26</Date>
+            <Version>0.186</Version>
+            <Comment>Version bump</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="10">
             <Date>2020-12-09</Date>
             <Version>0.180</Version>
