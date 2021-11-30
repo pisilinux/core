@@ -12,17 +12,17 @@
         <IsA>app:console</IsA>
         <Summary>Used to create autoconfiguration files</Summary>
         <Description>Used to create autoconfiguration files, Autoconf is an extensible package of m4 macros that produce shell scripts to automatically configure software source code packages.</Description>
-        <Archive sha1sum="e891c3193029775e83e0534ac0ee0c4c711f6d23" type="tarxz">mirrors://gnu/autoconf/autoconf-2.69.tar.xz</Archive>
+        <Archive sha1sum="1b5b1dbed849c6653be47c56d28d26fcf3f7238a" type="tarxz">mirrors://gnu/autoconf/autoconf-2.71.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>texinfo</Dependency>
             <Dependency>m4</Dependency>
             <Dependency>perl</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch>autoconf-2.69-perl-5.22-autoscan.patch</Patch>
-            <Patch>autoconf-2.69-bash-5-LINENO.patch</Patch>
-            <Patch>autoconf-2.69-perl-5.28.patch</Patch>
-            <Patch>0003-autoconf-2.69-libtool-compatibility.patch</Patch>
+<!--             <Patch>autoconf-2.69-perl-5.22-autoscan.patch</Patch> -->
+<!--             <Patch>autoconf-2.69-bash-5-LINENO.patch</Patch> -->
+<!--             <Patch>autoconf-2.69-perl-5.28.patch</Patch> -->
+<!--             <Patch>0003-autoconf-2.69-libtool-compatibility.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -42,6 +42,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2021-11-30</Date>
+            <Version>2.71</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2020-12-09</Date>
             <Version>2.69</Version>
