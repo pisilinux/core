@@ -71,13 +71,11 @@
         <Summary>32-bit shared libraries for libusb</Summary>
         <BuildType>emul32</BuildType>
         <BuildDependencies>
-            
             <Dependency>eudev-32bit</Dependency>
         </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">libusb</Dependency>
-	    <Dependency>eudev-32bit</Dependency>
-            
+	        <Dependency>eudev-32bit</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib32</Path>
@@ -85,6 +83,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2022-01-15</Date>
+            <Version>1.0.24</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="8">
             <Date>2021-10-11</Date>
             <Version>1.0.24</Version>

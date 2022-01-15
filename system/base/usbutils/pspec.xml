@@ -13,7 +13,7 @@
         <Summary>Linux USB utilities</Summary>
         <Description>usbutils provides utilities for inspecting devices connected to a USB bus.</Description>
         <Archive sha1sum="02fb81d84d194df6e735989656980b5e3c0a193d" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-014.tar.xz</Archive>
-        <Archive sha1sum="d928893495e5b67a875e72af5ac8aa64f572c866" type="binary" target="usbutils-014">http://www.linux-usb.org/usb.ids</Archive>
+        <Archive sha1sum="bd508b6f217c6d26ef78b1c4bc584e639b7f3dc3" type="binary" target="usbutils-014">http://www.linux-usb.org/usb.ids</Archive>
         <BuildDependencies>
             <Dependency versionFrom="1.0.24">libusb-devel</Dependency>
             <Dependency>eudev-devel</Dependency>
@@ -36,6 +36,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2022-01-15</Date>
+            <Version>014</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="10">
             <Date>2021-11-27</Date>
             <Version>014</Version>
