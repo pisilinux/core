@@ -33,7 +33,7 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-5.15.14.xz</Patch>
+            <Patch level="1" compressionType="xz">patches/linux/patch-5.15.18.xz</Patch>
             <!-- Mageia Linux patches-->
             <Patch level="1">patches/mageia/fs-aufs5.15.patch</Patch>
             <Patch level="1">patches/mageia/fs-aufs5.15-symbol-exports.patch</Patch>
@@ -154,6 +154,17 @@
     </Package>
 
     <History>
+        <Update release="68">
+            <Date>2022-01-31</Date>
+            <Version>5.15.18</Version>
+            <Comment>Version bump.</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="67">
             <Date>2022-01-15</Date>
             <Version>5.15.14</Version>
