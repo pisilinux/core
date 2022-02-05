@@ -14,7 +14,7 @@ def setup():
     autotools.autoreconf("-fi")
 
     shelltools.cd("build-python2")
-    shelltools.system("../configure --prefix=/usr \
+    shelltools.system("../configure --prefix=/usr PYTHON_VERSION=2 \
                        --localstatedir=/var \
                        --disable-api-docs \
                        --disable-html-docs \
