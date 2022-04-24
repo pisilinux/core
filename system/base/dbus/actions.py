@@ -26,6 +26,8 @@ def setup():
                --disable-silent-rules \
                --enable-inotify \
                --enable-user-session \
+               --with-systemduserunitdir=no \
+               --with-systemdsystemunitdir=no \
                --with-xml=expat \
                --with-system-pid-file=/run/dbus/pid \
                --with-system-socket=/run/dbus/system_bus_socket \
