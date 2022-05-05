@@ -11,7 +11,7 @@ from pisi.actionsapi import get
 
 def setup():
     shelltools.cd("build/meson")
-    mesontools.configure("-Dlegacy-level=7 \
+    mesontools.configure("-Dlegacy_level=7 \
                           -Dzlib=enabled \
                           -Dlzma=enabled \
                           -Dbin_contrib=true \
