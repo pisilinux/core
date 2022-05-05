@@ -16518,10 +16518,12 @@ diff -Nurp linux-5.15.37/fs/aufs/hbl.h linux-5.15.37-aufs/fs/aufs/hbl.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_HBL_H__ */
-diff -Nurp linux-5.15.37/fs/aufs/hfsnotify.c linux-5.15.37-aufs/fs/aufs/hfsnotify.c
---- linux-5.15.37/fs/aufs/hfsnotify.c	1970-01-01 02:00:00.000000000 +0200
-+++ linux-5.15.37-aufs/fs/aufs/hfsnotify.c	2022-04-08 20:22:30.613616524 +0300
-@@ -0,0 +1,276 @@
+diff --git a/fs/aufs/hfsnotify.c b/fs/aufs/hfsnotify.c
+new file mode 100644
+index 000000000000..c2c7766d6cf1
+--- /dev/null
++++ b/fs/aufs/hfsnotify.c
+@@ -0,0 +1,275 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * Copyright (C) 2005-2021 Junjiro R. Okajima
@@ -16681,8 +16683,7 @@ diff -Nurp linux-5.15.37/fs/aufs/hfsnotify.c linux-5.15.37-aufs/fs/aufs/hfsnotif
 +	struct inode *h_dir, *h_inode;
 +	struct fsnotify_mark *inode_mark;
 +
-+	AuDebugOn(!(data_type == FSNOTIFY_EVENT_INODE
-+		    || data_type == FSNOTIFY_EVENT_DENTRY));
++	AuDebugOn(data_type != FSNOTIFY_EVENT_INODE);
 +
 +	err = 0;
 +	/* if FS_UNMOUNT happens, there must be another bug */
