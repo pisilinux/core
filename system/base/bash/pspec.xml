@@ -12,21 +12,21 @@
         <IsA>app:console</IsA>
         <Summary>The standard GNU Bourne again shell</Summary>
         <Description>Bash is the GNU Project's Bourne Again SHell, a complete implementation of the IEEE POSIX and Open Group shell specification with interactive command line editing, csh-like features such as history substitution.</Description>
-        <Archive sha1sum="063019501ef1f30fad99d2b735a7ae2ce1d11423" type="targz">mirrors://gnu/bash/bash-5.1.tar.gz</Archive>
+        <Archive sha1sum="dc46d863c0410d9252f8fc3d356e47809b4bc46d" type="targz">mirrors://gnu/bash/bash-5.1.16.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>ncurses-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <!-- Official Patches -->
 
-            <Patch>official/bash51-001.patch</Patch>
+<!--            <Patch>official/bash51-001.patch</Patch>
             <Patch>official/bash51-002.patch</Patch>
             <Patch>official/bash51-003.patch</Patch>
             <Patch>official/bash51-004.patch</Patch>
             <Patch>official/bash51-005.patch</Patch>
             <Patch>official/bash51-006.patch</Patch>
             <Patch>official/bash51-007.patch</Patch>
-            <Patch>official/bash51-008.patch</Patch>
+            <Patch>official/bash51-008.patch</Patch>-->
 
         <!-- Fedora patches -->
             <Patch level="1">fedora/bash-2.03-paths.patch</Patch>
@@ -76,6 +76,13 @@
     </Package>
 
     <History>
+        <Update release="12">
+            <Date>2022-05-05</Date>
+            <Version>5.1.16</Version>
+            <Comment>Version bump.</Comment>
+            <Name>İdris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="11">
             <Date>2021-07-26</Date>
             <Version>5.1.8</Version>
