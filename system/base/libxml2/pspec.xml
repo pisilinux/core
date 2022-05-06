@@ -17,7 +17,7 @@
             <Dependency>python-devel</Dependency>
             <Dependency>python3-devel</Dependency>
             <Dependency>xz-devel</Dependency>
-            <Dependency>zlib-devel</Dependency>
+            <Dependency versionFrom="1.2.12">zlib-devel</Dependency>
             <Dependency versionFrom="8.0.1">readline-devel</Dependency>
         </BuildDependencies>
         <Patches>
@@ -77,7 +77,7 @@
         <BuildType>emul32</BuildType>
         <BuildDependencies>
             <Dependency>xz-32bit</Dependency>
-            <Dependency>zlib-32bit</Dependency>
+            <Dependency versionFrom="1.2.12">zlib-32bit</Dependency>
             <Dependency>readline-32bit</Dependency>
         </BuildDependencies>
         <RuntimeDependencies>
