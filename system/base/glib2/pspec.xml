@@ -16,7 +16,7 @@
         <BuildDependencies>
             <Dependency>meson</Dependency>
             <Dependency>ninja</Dependency>
-            <Dependency>zlib-devel</Dependency>
+            <Dependency versionFrom="1.2.12">zlib-devel</Dependency>
             <Dependency>docbook-xsl</Dependency>
             <Dependency>libffi-devel</Dependency>
             <Dependency>elfutils-devel</Dependency>
@@ -110,7 +110,7 @@
         <BuildType>emul32</BuildType>
         <BuildDependencies>
             <Dependency>libpcre-32bit</Dependency>
-            <Dependency>zlib-32bit</Dependency>
+            <Dependency versionFrom="1.2.12">zlib-32bit</Dependency>
             <Dependency>libffi-32bit</Dependency>
             <Dependency>dbus-32bit</Dependency>
             <Dependency>elfutils-32bit</Dependency>
