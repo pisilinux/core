@@ -17,7 +17,30 @@
             <Dependency>attr-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <!--<Patch level="1">patch-2.7.1-initialize-data-structures-early-enough.patch</Patch>-->
+            <Patch level="1">fedora/patch-2.7.6-CVE-2018-17942.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-CVE-2018-6952-fix-swapping-fake-lines-in-pch_swap.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-CVE-2019-13636-symlinks.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-abort_when_cleaning_up_fails.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-allow-input-files-to-be-missing-for-ed-style-patches.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-avoid-invalid-memory-access-in-context-format-diffs.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-avoid-set_file_attributes-sign-conversion-warnings.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-crash-RLIMIT_NOFILE.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-failed_assertion.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-fix-segfault-with-mangled-rename-patch.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-improve_support_for_memory_leak_detection.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-make-debug-output-more-useful.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-test-suite-compatibility-fixes.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-fix-korn-shell-incompatibility.patch</Patch>
+            <Patch level="1">fedora/patch-CVE-2018-1000156.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-CVE-2019-13638-invoked-ed-directly-instead-of-using-the-shell.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-check-of-return-value-of-fwrite.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-dont-leak-temporary-file-on-failed-multi-file-ed-style-patch.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-fix-ed-style-test-failure.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-switch-from-fork-execlp-to-execute.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-skip-ed-test-when-the-ed-utility-is-not-installed.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-cleanups-in-do_ed_script.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-avoid-warnings-gcc8.patch</Patch>
+            <Patch level="1">fedora/patch-2.7.6-dont-leak-temporary-file-on-failed-ed-style-patch.patch</Patch>
         </Patches>
     </Source>
 
@@ -34,6 +57,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2022-05-10</Date>
+            <Version>2.7.6</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="8">
             <Date>2020-12-15</Date>
             <Version>2.7.6</Version>
