@@ -15,7 +15,7 @@ def install():
     pisitools.insinto("/usr/share/xml/docbook/xsl-stylesheets/","VERSION.xsl")
 
     # Don't ship the extensions
-    pisitools.remove("/usr/share/xml/docbook/xsl-stylesheets/extensions/*")
+    #pisitools.remove("/usr/share/xml/docbook/xsl-stylesheets/extensions/*")
 
     pisitools.dodoc("AUTHORS", "BUGS", "COPYING", "NEWS", "README",
                     "RELEASE-NOTES.txt", "TODO", "VERSION")
