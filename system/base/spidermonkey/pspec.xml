@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Stand-alone JavaScript C Library</Summary>
         <Description>Spidermonkey is Mozilla's C implementation of JavaScript.</Description>
-        <Archive type="tarxz" sha1sum="83ae378d8bddd9efc5badb99a6246979313f7134">https://ftp.mozilla.org/pub/firefox/releases/78.12.0esr/source/firefox-78.12.0esr.source.tar.xz</Archive>
+        <Archive type="tarxz" sha1sum="6d889a16bf839da5a809e2d0c75426abbb62801d">https://ftp.mozilla.org/pub/firefox/releases/91.9.1esr/source/firefox-91.9.1esr.source.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>python3-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
@@ -23,7 +23,7 @@
             <Dependency>llvm</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">mozjs78-silence-sandbox-violations.patch</Patch>
+<!--             <Patch level="1">mozjs78-silence-sandbox-violations.patch</Patch> -->
             <Patch level="1">mozjs78-fix-soname.patch</Patch>
             <!--Patch level="1">Remove-unused-LLVM-and-Rust-build-dependencies.patch</Patch-->
         </Patches>
@@ -60,6 +60,13 @@
     </Package>
 
     <History>
+        <Update release="13">
+            <Date>2022-06-01</Date>
+            <Version>91.9.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="12">
             <Date>2021-08-07</Date>
             <Version>78.12.0</Version>

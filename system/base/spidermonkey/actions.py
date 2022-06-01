@@ -22,7 +22,7 @@ def setup():
    shelltools.system("mkdir -p build-js")
    shelltools.cd("build-js")
 
-   shelltools.system("../js/src/configure \
+   shelltools.system("sh ../js/src/configure.in \
                       --prefix=/usr \
                       --libdir=/usr/lib \
                       --enable-readline \
