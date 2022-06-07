@@ -1,0 +1,38 @@
+From cd7620a730413a48843e175d34dc408c152f8125 Mon Sep 17 00:00:00 2001
+From: "H.J. Lu" <hjl.tools@gmail.com>
+Date: Tue, 11 Jan 2022 07:28:25 -0800
+Subject: [PATCH] x86-64: Enable Intel CET
+
+Intel Control-flow Enforcement Technology (CET):
+
+https://en.wikipedia.org/wiki/Control-flow_integrity#Intel_Control-flow_Enforcement_Technology
+
+requires that on Linux, all linker input files are marked as CET enabled
+in .note.gnu.property section.  For high-level language source codes,
+.note.gnu.property section is added by compiler with the -fcf-protection
+option.  For assembly sources, include <cet.h> to add .note.gnu.property
+section.
+---
+ lib/common/portability_macros.h | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/lib/common/portability_macros.h b/lib/common/portability_macros.h
+index 627ef9eed4..6ac4b05510 100644
+--- a/lib/common/portability_macros.h
++++ b/lib/common/portability_macros.h
+@@ -128,4 +128,15 @@
+ # define ZSTD_ENABLE_ASM_X86_64_BMI2 0
+ #endif
+ 
++/*
++ * For x86 ELF targets, add .note.gnu.property section for Intel CET in
++ * assembly sources when CET is enabled.
++ */
++#if defined(__ELF__) && (defined(__x86_64__) || defined(__i386__)) \
++    && defined(__has_include)
++# if __has_include(<cet.h>)
++#  include <cet.h>
++# endif
++#endif
++
+ #endif /* ZSTD_PORTABILITY_MACROS_H */

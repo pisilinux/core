@@ -20,6 +20,10 @@
             <Dependency versionFrom="1.2.12">zlib-devel</Dependency>
             <Dependency>xz-devel</Dependency>
         </BuildDependencies>
+        <Patches>
+            <Patch level="1">enable-CET.patch</Patch>
+            <Patch level="1">zstd-1.5.2-upstream_fixes-1.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
@@ -49,6 +53,13 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2022-06-07</Date>
+            <Version>1.5.2</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="4">
             <Date>2022-05-05</Date>
             <Version>1.5.2</Version>
