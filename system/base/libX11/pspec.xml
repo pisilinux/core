@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>X.Org X11 library</Summary>
         <Description>Core X11 protocol client library.</Description>
-        <Archive sha1sum="47606da8bf70bfb78242af92dc40c68b2de2e04c" type="tarxz">mirrors://xorg/individual/lib/libX11-1.8.tar.xz</Archive>
+        <Archive sha1sum="595943e2c20553281a44f0b4bfa2fdadffe6df25" type="tarxz">mirrors://xorg/individual/lib/libX11-1.8.1.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>libxcb-devel</Dependency>
             <Dependency>xorg-proto</Dependency>
@@ -76,6 +76,13 @@
     </Package>
 
     <History>
+        <Update release="19">
+            <Date>2022-06-10</Date>
+            <Version>1.8.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="18">
             <Date>2022-05-04</Date>
             <Version>1.8</Version>
