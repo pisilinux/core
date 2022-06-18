@@ -10,8 +10,13 @@ from pisi.actionsapi import get
 
 def setup():
     shelltools.export("PYTHON","/usr/bin/python3")
+
+    pisitools.dosed("Makefile.in", "$(datarootdir)/pkgconfig", "$(libdir)/pkgconfig")
+    pisitools.dosed("Makefile.am", "$(datarootdir)/pkgconfig", "$(libdir)/pkgconfig")
     
     autotools.autoreconf("-vif")
+
+    #pisitools.dosed("Makefile", "pkgconfigdir = $(datarootdir)/pkgconfig", "pkgconfigdir = $(libdir)/pkgconfig")
     autotools.configure()
 
 def build():

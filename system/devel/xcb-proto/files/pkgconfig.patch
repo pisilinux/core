@@ -1,0 +1,23 @@
+diff -Nuar a/Makefile.am b/Makefile.am
+--- a/Makefile.am	2022-06-18 17:23:00.054397141 +0300
++++ b/Makefile.am	2022-06-18 17:24:02.238392654 +0300
+@@ -1,6 +1,6 @@
+ SUBDIRS = src xcbgen
+ 
+-pkgconfigdir = $(datarootdir)/pkgconfig
++pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = xcb-proto.pc
+ 
+ EXTRA_DIST=doc xcb-proto.pc.in autogen.sh README.md
+diff -Nuar a/Makefile.in b/Makefile.in
+--- a/Makefile.in	2022-06-18 17:23:14.143396124 +0300
++++ b/Makefile.in	2022-06-18 17:24:27.928390800 +0300
+@@ -313,7 +313,7 @@
+ top_srcdir = @top_srcdir@
+ xcbincludedir = @xcbincludedir@
+ SUBDIRS = src xcbgen
+-pkgconfigdir = $(datarootdir)/pkgconfig
++pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = xcb-proto.pc
+ EXTRA_DIST = doc xcb-proto.pc.in autogen.sh README.md
+ all: all-recursive
