@@ -12,7 +12,7 @@ Libdir = "/usr/lib32" if get.buildTYPE() == "emul32" else "/usr/lib"
 
 def setup():
     autotools.autoreconf("-vif")
-    autotools.configure("--disable-static libdir=%s" % Libdir)
+    autotools.configure("--disable-static --disable-thread-safety-constructor libdir=%s" % Libdir)
     
     pisitools.dosed("libtool", "^(hardcode_libdir_flag_spec=).*", '\\1""')
     pisitools.dosed("libtool", "^(runpath_var=)LD_RUN_PATH", "\\1DIE_RPATH_DIE")
