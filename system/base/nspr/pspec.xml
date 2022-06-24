@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Netscape Portable Runtime</Summary>
         <Description>Netscape Portable Runtime (NSPR) provides a platform-neutral API for system level and libc like functions. The API is used in the Mozilla client, many of Netscape/AOL/iPlanet's and other software offerings.</Description>
-        <Archive sha1sum="54c97f4ddc75d22cdad2a7a89c22d4d35938f7e9" type="targz">https://ftp.mozilla.org/pub/nspr/releases/v4.33/src/nspr-4.33.tar.gz</Archive>
+        <Archive sha1sum="efea1385dc83c55018183257036206b5f2c77c59" type="targz">https://ftp.mozilla.org/pub/nspr/releases/v4.34/src/nspr-4.34.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="nspr/config/nspr.pc.in">nspr.pc.in</AdditionalFile>
             <AdditionalFile permission="0755" target="generate-pc-config.sh">generate-pc-config.sh</AdditionalFile>
@@ -41,6 +41,13 @@
     </Package>
 
     <History>
+        <Update release="19">
+            <Date>2022-06-24</Date>
+            <Version>4.34</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="18">
             <Date>2022-02-14</Date>
             <Version>4.33</Version>
