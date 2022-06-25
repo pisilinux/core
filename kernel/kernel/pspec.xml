@@ -33,10 +33,10 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-5.15.41.xz</Patch>
+            <Patch level="1" compressionType="xz">patches/linux/patch-5.15.50.xz</Patch>
 
             <!-- aufs5 patchec -->
-            <Patch level="1">patches/aufs5/aufs5.15.36-20220509.patch</Patch>
+            <Patch level="1">patches/aufs5/aufs5.15.41-20220530.patch</Patch>
             <Patch level="1">patches/aufs5/aufs5-base.patch</Patch>
             <Patch level="1">patches/aufs5/aufs5-kbuild.patch</Patch>
             <Patch level="1">patches/aufs5/aufs5-loopback.patch</Patch>
@@ -161,6 +161,17 @@
     </Package>
 
     <History>
+        <Update release="73">
+            <Date>2022-06-25</Date>
+            <Version>5.15.50</Version>
+            <Comment>Version bump.</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="72">
             <Date>2022-05-22</Date>
             <Version>5.15.41</Version>
