@@ -14,7 +14,7 @@
         <Description>Python is a dynamic object-oriented programming language that can be used for many kinds of software development. It offers strong support for integration with other languages and tools, comes with extensive standard libraries, and can be learned in a few days.</Description>
         <Archive sha1sum="678d4cf483a1c92efd347ee8e1e79326dc82810b" type="tarxz">https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz</Archive>
 		<!--		<Archive sha1sum="bf7badf7e248e0ecf465d33c2f5aeec774209227" type="targz" target="Python-2.7.18">https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz</Archive> -->
-		<Archive sha1sum="860fa10381ff0a121833583ccaa011bf266bcc63" type="targz" target="Python-2.7.18">https://www.openssl.org/source/openssl-1.1.1o.tar.gz</Archive>
+		<Archive sha1sum="707daabab923ef2d9f05fdb8e0664944be7f5eba" type="targz" target="Python-2.7.18">https://www.openssl.org/source/openssl-1.1.1p.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>bzip2</Dependency>
             <!--<Dependency>tcl-devel</Dependency>-->
@@ -25,7 +25,7 @@
             <Dependency>libffi-devel</Dependency>
             <Dependency>sqlite-devel</Dependency>
             <Dependency>ncurses-devel</Dependency>
-            <Dependency versionFrom="1.1.1o">openssl-devel</Dependency>
+            <Dependency versionFrom="1.1.1p">openssl-devel</Dependency>
             <Dependency>readline-devel</Dependency>
             <Dependency versionFrom="2.32">glibc-devel</Dependency>
             <!-- Bootstrap -->
@@ -140,6 +140,13 @@
     </Package>-->
 
     <History>
+        <Update release="18">
+            <Date>2022-06-26</Date>-
+            <Version>2.7.18</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="17">
             <Date>2022-05-24</Date>-
             <Version>2.7.18</Version>
