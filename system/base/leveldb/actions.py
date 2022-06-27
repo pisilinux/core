@@ -14,6 +14,8 @@ def setup():
     shelltools.makedirs("build")
     shelltools.cd("build") 
     cmaketools.configure("-DCMAKE_BUILD_TYPE=Release \
+                          -DLEVELDB_BUILD_TESTS:BOOL=OFF \
+                          -DLEVELDB_BUILD_BENCHMARKS:BOOL=OFF \
                           -DBUILD_SHARED_LIBS=1", sourceDir="..")
 
 def build():
