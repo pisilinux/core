@@ -15,6 +15,6 @@ def build():
 
 def install():
     pythonmodules.install()
-    shelltools.chmod("%s/usr/lib/python2.7/site-packages/plyvel-1.2.0-py2.7.egg-info/top_level.txt" % get.installDIR(), 0644)
-    shelltools.chmod("%s/usr/lib/python2.7/site-packages/plyvel-1.2.0-py2.7.egg-info/PKG-INFO" % get.installDIR(), 0644)
+    shelltools.chmod("%s/usr/lib/python2.7/site-packages/plyvel-1.4.0-py2.7.egg-info/top_level.txt" % get.installDIR(), 0644)
+    shelltools.chmod("%s/usr/lib/python2.7/site-packages/plyvel-1.4.0-py2.7.egg-info/PKG-INFO" % get.installDIR(), 0644)
     pisitools.dodoc("*.rst")
