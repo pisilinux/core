@@ -13,10 +13,10 @@
         <IsA>library</IsA>
         <Summary>C extensions for the Python</Summary>
         <Description>Cython is a language that makes writing C extensions for the Python language as easy as Python itself.</Description>
-        <Archive sha1sum="3aafce4489a7bc7a48c843cdfb8dac4677fdac50" type="targz">https://files.pythonhosted.org/packages/6c/9f/f501ba9d178aeb1f5bf7da1ad5619b207c90ac235d9859961c11829d0160/Cython-0.29.21.tar.gz</Archive>
+        <Archive sha1sum="89c8413689f06c999caf4700fb8bab53ba6f860a" type="targz">https://files.pythonhosted.org/packages/d4/ad/7ce0cccd68824ac9623daf4e973c587aa7e2d23418cd028f8860c80651f5/Cython-0.29.30.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>python-devel</Dependency>
-			<Dependency>bzip2</Dependency>
+            <Dependency>bzip2</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch level="1">class-static-method-workaround.patch</Patch>
@@ -37,6 +37,13 @@
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2022-06-27</Date>
+            <Version>0.29.30</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="5">
             <Date>2020-12-09</Date>
             <Version>0.29.21</Version>
@@ -44,7 +51,7 @@
             <Name>Mustafa Cinasal</Name>
             <Email>muscnsl@gmail.com</Email>
         </Update>
-		<Update release="4">
+        <Update release="4">
             <Date>2019-12-26</Date>
             <Version>0.29.14</Version>
             <Comment>Version bump</Comment>
