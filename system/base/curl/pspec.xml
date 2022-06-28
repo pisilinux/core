@@ -14,7 +14,7 @@
         <IsA>library</IsA>
         <Summary>A utility for getting files from remote servers</Summary>
         <Description>curl is a command line tool for transferring data with URL syntax, supporting various protocols.</Description>
-        <Archive sha1sum="6bd0fa0dc961303f4443ef7fea80ab83cbcce800" type="tarbz2">http://curl.haxx.se/download/curl-7.79.1.tar.bz2</Archive>
+        <Archive sha1sum="0113fe762aed27d58c4e53ce2be7a98bc7f74957" type="tarbz2">http://curl.haxx.se/download/curl-7.84.0.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>glibc-devel</Dependency>
             <Dependency>zstd-devel</Dependency>
@@ -23,7 +23,7 @@
             <Dependency>libidn2-devel</Dependency>
             <Dependency>libssh2-devel</Dependency>
             <Dependency>ca-certificates</Dependency>
-            <Dependency>libnghttp2-devel</Dependency>
+            <Dependency versionFrom="1.48.0">libnghttp2-devel</Dependency>
         </BuildDependencies>
         <Patches>
 <!--             <Patch>curl-krb5flags.patch</Patch> -->
@@ -68,6 +68,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2022-06-27</Date>
+            <Version>7.84.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="9">
             <Date>2021-10-23</Date>
             <Version>7.79.1</Version>
