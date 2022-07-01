@@ -45,4 +45,4 @@ def install():
 
     pisitools.makedirs("%s/etc/depmod.d" % get.installDIR())
     pisitools.makedirs("%s/etc/modprobe.d" % get.installDIR())
-    pisitools.dodoc("NEWS", "README", "TODO", "COPYING")
+    pisitools.dodoc("NEWS", "README*", "TODO", "COPYING")
