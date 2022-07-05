@@ -21,8 +21,9 @@ def setup():
                          --with-dbus \
                          --enable-examples \
                          --enable-introspection \
-                         --disable-libsystemd-login \
                          --with-systemdsystemunitdir=no \
+                         --enable-libsystemd-login=no \
+                         --enable-libelogind=yes \
                          --disable-man-pages \
                          --disable-gtk-doc \
                          --disable-static")

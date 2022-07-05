@@ -64,9 +64,9 @@ index e48b739cc0a4e7606be0271ba4b4e3bd33b08545..9572b067effdf6f0dcd1c6b17b2e8c59
 -	$(LIBJS_CFLAGS)							\
 +	$(LIBJS_CFLAGS)						\
          $(NULL)
- 
+
  libpolkit_backend_1_la_CXXFLAGS = $(libpolkit_backend_1_la_CFLAGS)
- 
+
  libpolkit_backend_1_la_LIBADD =                               		\
          $(GLIB_LIBS)							\
 +        $(DUKTAPE_LIBS)							\
@@ -76,7 +76,7 @@ index e48b739cc0a4e7606be0271ba4b4e3bd33b08545..9572b067effdf6f0dcd1c6b17b2e8c59
 -	$(LIBJS_LIBS)							\
 +	$(LIBJS_LIBS)                                                   \
          $(NULL)
- 
+
 +if USE_DUKTAPE
 +libpolkit_backend_1_la_SOURCES += polkitbackendduktapeauthority.c
 +libpolkit_backend_1_la_LIBADD += -lm
@@ -86,7 +86,7 @@ index e48b739cc0a4e7606be0271ba4b4e3bd33b08545..9572b067effdf6f0dcd1c6b17b2e8c59
 +
  rulesdir = $(sysconfdir)/polkit-1/rules.d
  rules_DATA = 50-default.rules
- 
+
 diff --git a/src/polkitbackend/polkitbackendduktapeauthority.c b/src/polkitbackend/polkitbackendduktapeauthority.c
 new file mode 100644
 index 0000000000000000000000000000000000000000..ae984535ed88003ab1b0965e3e109a848479c047
