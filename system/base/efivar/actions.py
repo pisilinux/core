@@ -10,8 +10,11 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def build():
+    #needs mandoc
+    shelltools.system("sed -i -e 's|SUBDIRS := src docs|SUBDIRS := src|' Makefile")
+
     shelltools.export("CFLAGS", "-Os")
-    pisitools.dosed("Make.defaults","-O0","-Os")
+    #pisitools.dosed("Make.defaults","-O0","-Os")
     pisitools.dosed("src/test/Makefile","-rpath=$(TOPDIR)/src/","-rpath=$(libdir)|g")
     autotools.make("libdir=/usr/lib bindir=/usr/bin includedir=/usr/include/ V=1 -j1")
 
