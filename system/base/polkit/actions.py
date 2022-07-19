@@ -12,7 +12,7 @@ from pisi.actionsapi import get
 def setup():
     #pisitools.dosed("configure.ac", "pardus-release", "pisilinux-release")
     #pisitools.dosed("configure", "pardus-release", "pisilinux-release")
-    autotools.autoreconf("-fiv")
+    autotools.autoreconf("-f")
     autotools.configure("--prefix=/usr \
                          --sysconfdir=/etc \
                          --localstatedir=/var \
@@ -25,7 +25,9 @@ def setup():
                          --enable-libsystemd-login=no \
                          --enable-libelogind=yes \
                          --disable-man-pages \
-                         --disable-gtk-doc \
+                         --enable-gtk-doc=no \
+                         --enable-gtk-doc-html=no \
+                         --enable-gtk-doc-pdf=no \
                          --disable-static")
 
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
