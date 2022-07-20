@@ -313,6 +313,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2022-07-18</Date>
+                <Version>2.36.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="10">
                 <Date>2021-06-02</Date>
                 <Version>2.36.1</Version>
@@ -913,10 +920,10 @@
             <Description xml:lang="fr">CMake, système make open-source et multi-plateforme. CMake est utilisé pour contrôler le processus de compilation de logiciel en utilisant une plate-forme de fichiers de configuration simple et indépendante de compilateur. CMake génère des makefiles et un environnement de travail natifs pouvant être utilisés dans l&apos;environnement du compilateur de votre choix.</Description>
             <Description xml:lang="en">CMake, the cross-platform, open-source make system. CMake is used to control the software compilation process using simple platform and compiler independent configuration files. CMake generates native makefiles and workspaces that can be used in the compiler environment of your choice.</Description>
             <Description xml:lang="tr">Cmake, açık kaynak kodlu ve birden fazla platformda çalışan bir &apos;make&apos; sistemidir. Yazılım derleme sürecini kontrol etmek için kullanılan CMake, derleyici bağımsız yapılandırma dosyalarının oluşturulmasını sağlar.</Description>
-            <Archive type="targz" sha1sum="ee9fa906ce42707d28a045723480aadc49fd1126" name="cmake-3.22.4.tar.gz">https://github.com/Kitware/CMake/releases/download/v3.22.4/cmake-3.22.4.tar.gz</Archive>
+            <Archive type="targz" sha1sum="057d3d40d49fe1503edb62735a73de399d90c92c" name="cmake-3.22.5.tar.gz">https://github.com/Kitware/CMake/releases/download/v3.22.5/cmake-3.22.5.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>curl-devel</Dependency>
-                <Dependency>expat-devel</Dependency>
+                <Dependency versionFrom="2.4.8">expat-devel</Dependency>
                 <Dependency>libarchive-devel</Dependency>
                 <Dependency>ncurses-devel</Dependency>
                 <Dependency>zlib-devel</Dependency>
@@ -948,6 +955,20 @@
             </Files>
         </Package>
         <History>
+            <Update release="23">
+                <Date>2022-07-18</Date>
+                <Version>3.22.5</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="22">
+                <Date>2022-07-09</Date>
+                <Version>3.22.5</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="21">
                 <Date>2022-04-23</Date>
                 <Version>3.22.4</Version>
@@ -1555,11 +1576,14 @@
             <Summary xml:lang="en">XCB protocol descriptions</Summary>
             <Summary xml:lang="tr">XCB protokol tanımlamaları</Summary>
             <Description xml:lang="en">XCB is a project to enable efficient language bindings to the X11 protocol. This package contains the protocol descriptions themselves. Language bindings use these protocol descriptions to generate code for marshalling the protocol.</Description>
-            <Archive type="tarxz" sha1sum="184fe7a385ed913f1c3dcb01bc3947d2eb88b498" name="xcb-proto-1.15.tar.xz">https://xorg.freedesktop.org/archive/individual/proto/xcb-proto-1.15.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="d2499a55bf736c22bc6faeba1afe53e77f97e16f" name="xcb-proto-1.15.2.tar.xz">https://xorg.freedesktop.org/archive/individual/proto/xcb-proto-1.15.2.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>libxml2-devel</Dependency>
                 <Dependency>python3-devel</Dependency>
             </BuildDependencies>
+            <Patches>
+                <Patch level="1">pkgconfig.patch</Patch>
+            </Patches>
             <SourceURI>system/devel/xcb-proto/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -1572,6 +1596,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="12">
+                <Date>2022-06-18</Date>
+                <Version>1.15.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="11">
                 <Date>2022-05-04</Date>
                 <Version>1.15</Version>
@@ -1757,7 +1788,7 @@
             <Summary xml:lang="tr">Python için C eklentileri</Summary>
             <Description xml:lang="en">Cython is a language that makes writing C extensions for the Python language as easy as Python itself.</Description>
             <Description xml:lang="tr">Cython, Python için C eklentileri yazmayı kolaylaştıran bir dildir.</Description>
-            <Archive type="targz" sha1sum="3aafce4489a7bc7a48c843cdfb8dac4677fdac50" name="Cython-0.29.21.tar.gz">https://files.pythonhosted.org/packages/6c/9f/f501ba9d178aeb1f5bf7da1ad5619b207c90ac235d9859961c11829d0160/Cython-0.29.21.tar.gz</Archive>
+            <Archive type="targz" sha1sum="89c8413689f06c999caf4700fb8bab53ba6f860a" name="Cython-0.29.30.tar.gz">https://files.pythonhosted.org/packages/d4/ad/7ce0cccd68824ac9623daf4e973c587aa7e2d23418cd028f8860c80651f5/Cython-0.29.30.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>python-devel</Dependency>
                 <Dependency>bzip2</Dependency>
@@ -1780,6 +1811,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2022-06-27</Date>
+                <Version>0.29.30</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2020-12-09</Date>
                 <Version>0.29.21</Version>
@@ -1950,9 +1988,9 @@
             <Description xml:lang="en">The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, as well as libraries for these languages</Description>
             <Description xml:lang="tr">C, C++, Objective-C, Fortran programlama dilleri ile bu dillere ait kütüphaneleri içeren, GNU derleyici paketi</Description>
             <Archive type="tarxz" sha1sum="fb51ed1660c065898c75951fb38e1ebad7d49feb" name="gcc-10.3.0.tar.xz">https://sourceware.org/pub/gcc/releases/gcc-10.3.0/gcc-10.3.0.tar.xz</Archive>
-            <Archive type="tarbz2" sha1sum="33e366d59d32330432b5c7f2d0c2fb6664eff224" name="isl-0.21.tar.bz2">http://isl.gforge.inria.fr/isl-0.21.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="33e366d59d32330432b5c7f2d0c2fb6664eff224" name="isl-0.21.tar.bz2">https://mirror.sobukus.de/files/src/isl/isl-0.21.tar.bz2</Archive>
             <BuildDependencies>
-                <Dependency versionFrom="2.35.1">binutils</Dependency>
+                <Dependency versionFrom="2.36.1">binutils</Dependency>
                 <Dependency>bison</Dependency>
                 <Dependency>gettext</Dependency>
                 <Dependency>ncurses</Dependency>
@@ -2090,6 +2128,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="12">
+                <Date>2022-07-18</Date>
+                <Version>10.3.0</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="11">
                 <Date>2021-05-20</Date>
                 <Version>10.3.0</Version>
@@ -3179,7 +3224,7 @@
                 <Dependency>python3-devel</Dependency>
                 <Dependency>libffi-devel</Dependency>
                 <Dependency>python-devel</Dependency>
-                <Dependency versionFrom="2.72.1">glib2-devel</Dependency>
+                <Dependency versionFrom="2.72.2">glib2-devel</Dependency>
                 <Dependency>chrpath</Dependency>
             </BuildDependencies>
             <SourceURI>system/devel/gobject-introspection/pspec.xml</SourceURI>
@@ -3201,7 +3246,7 @@
             <Name>gobject-introspection-devel</Name>
             <Summary xml:lang="en">Development files for gobject-introspection</Summary>
             <RuntimeDependencies>
-                <Dependency release="12">gobject-introspection</Dependency>
+                <Dependency release="15">gobject-introspection</Dependency>
                 <Dependency>libffi</Dependency>
                 <Dependency>glib2</Dependency>
                 <Dependency>libffi-devel</Dependency>
@@ -3219,6 +3264,27 @@
             </Files>
         </Package>
         <History>
+            <Update release="15">
+                <Date>2022-06-30</Date>
+                <Version>1.72.0</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="14">
+                <Date>2022-05-31</Date>
+                <Version>1.72.0</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="13">
+                <Date>2022-05-20</Date>
+                <Version>1.72.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="12">
                 <Date>2022-04-24</Date>
                 <Version>1.72.0</Version>
@@ -3825,7 +3891,7 @@
             <Description xml:lang="es">Este módulo facilita una interfaz al parser XML de James Clark, expat. Como en expat, una sola instancia del parser puede analizar solamente un documento. Llamadas a parsestring después del primero de una instancia determinada morirán.</Description>
             <Archive type="targz" sha1sum="40cba8a10847b71804684e5c72a410277f47f8ce" name="XML-Parser-2.46.tar.gz">mirrors://cpan/authors/id/T/TO/TODDR/XML-Parser-2.46.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency>expat-devel</Dependency>
+                <Dependency versionFrom="2.4.8">expat-devel</Dependency>
                 <Dependency versionFrom="5.30.1">perl</Dependency>
             </BuildDependencies>
             <SourceURI>system/devel/perl-XML-Parser/pspec.xml</SourceURI>
@@ -3843,6 +3909,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2022-07-18</Date>
+                <Version>2.46</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2020-12-09</Date>
                 <Version>2.46</Version>
@@ -4349,7 +4422,7 @@
             <Summary xml:lang="tr">High productivity build system</Summary>
             <Description xml:lang="en">Yüksek verimli üretme sistemi</Description>
             <Description xml:lang="tr">Yüksek verimli üretme sistemi</Description>
-            <Archive type="targz" sha1sum="35dc36f75965222fd0c5f39932df9c250954bc75" name="meson-0.62.0.tar.gz">https://github.com/mesonbuild/meson/releases/download/0.62.0/meson-0.62.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="25a82635f5b4e43d3b126ecaaccc99bfff575a92" name="meson-0.62.2.tar.gz">https://github.com/mesonbuild/meson/releases/download/0.62.2/meson-0.62.2.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency versionFrom="3.9.11">python3-devel</Dependency>
                 <Dependency>python3-setuptools</Dependency>
@@ -4373,6 +4446,27 @@
             </Files>
         </Package>
         <History>
+            <Update release="30">
+                <Date>2022-06-28</Date>
+                <Version>0.62.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="29">
+                <Date>2022-06-28</Date>
+                <Version>0.62.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="28">
+                <Date>2022-05-20</Date>
+                <Version>0.62.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="27">
                 <Date>2022-03-23</Date>
                 <Version>0.62.0</Version>
@@ -5645,62 +5739,6 @@
     </SpecFile>
     <SpecFile>
         <Source>
-            <Name>duktape</Name>
-            <Homepage>https://duktape.org/</Homepage>
-            <Packager>
-                <Name>Pisi Linux Admins</Name>
-                <Email>admin@pisilinux.org</Email>
-            </Packager>
-            <License>MIT</License>
-            <IsA>library</IsA>
-            <PartOf>system.devel</PartOf>
-            <Summary xml:lang="en">Embeddable Javascript engine</Summary>
-            <Summary xml:lang="tr">Embeddable Javascript engine</Summary>
-            <Description xml:lang="en">Embeddable Javascript engine</Description>
-            <Description xml:lang="tr">Embeddable Javascript engine</Description>
-            <Archive type="tarxz" sha1sum="5936bf5e9943128b53a9e534e0a6842532b52bb5" name="duktape-2.6.0.tar.xz">https://duktape.org/duktape-2.6.0.tar.xz</Archive>
-            <AdditionalFiles>
-                <AdditionalFile target="Makefile">Makefile</AdditionalFile>
-            </AdditionalFiles>
-            <Patches>
-                <Patch level="1">duktape-build.patch</Patch>
-            </Patches>
-            <SourceURI>system/devel/duktape/pspec.xml</SourceURI>
-        </Source>
-        <Package>
-            <Name>duktape</Name>
-            <Files>
-                <Path fileType="library">/usr/lib</Path>
-                <Path fileType="data">/usr/share</Path>
-                <Path fileType="doc">/usr/share/doc</Path>
-            </Files>
-            <AdditionalFiles>
-                <AdditionalFile target="/usr/share/pkgconfig/duktape.pc" permission="0644" owner="root">duktape.pc</AdditionalFile>
-            </AdditionalFiles>
-        </Package>
-        <Package>
-            <Name>duktape-devel</Name>
-            <Summary xml:lang="en">Development files for duktape</Summary>
-            <RuntimeDependencies>
-                <Dependency release="1">duktape</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="header">/usr/include</Path>
-                <Path fileType="library">/usr/lib/pkgconfig</Path>
-            </Files>
-        </Package>
-        <History>
-            <Update release="1">
-                <Date>2021-04-20</Date>
-                <Version>2.6.0</Version>
-                <Comment>First release</Comment>
-                <Name>Pisi Linux Admins</Name>
-                <Email>admin@pisilinux.org</Email>
-            </Update>
-        </History>
-    </SpecFile>
-    <SpecFile>
-        <Source>
             <Name>grub2</Name>
             <Homepage>http://www.gnu.org/software/grub/</Homepage>
             <Packager>
@@ -5786,9 +5824,17 @@
                 <AdditionalFile target="/etc/default/grub" permission="0644" owner="root">grub-defaults</AdditionalFile>
                 <AdditionalFile target="/etc/grub.d/30_uefi-firmware" permission="0755" owner="root">30_uefi-firmware</AdditionalFile>
                 <AdditionalFile target="/usr/bin/update-grub" permission="0755" owner="root">update-grub</AdditionalFile>
+                <AdditionalFile target="/etc/grub.d/30_os-prober" permission="0755" owner="root">30_os-prober</AdditionalFile>
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="23">
+                <Date>2022-05-15</Date>
+                <Version>2.06</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="22">
                 <Date>2021-11-11</Date>
                 <Version>2.06</Version>
@@ -6869,7 +6915,7 @@
             <Summary xml:lang="tr"> Experimental HTTP/2 client, server and proxy</Summary>
             <Description xml:lang="en">Deneysel HTTP/2 istemci, sunucu ve proxy</Description>
             <Description xml:lang="tr">Deneysel HTTP/2 istemci, sunucu ve proxy</Description>
-            <Archive type="targz" sha1sum="7b3970b370988e16d8a57b58f3b814bbbc97c8d1" name="v1.45.1.tar.gz">https://github.com/nghttp2/nghttp2/archive/refs/tags/v1.45.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="8a32110564ad5bc5c49ecb7a7f220ac0c6f567ae" name="v1.48.0.tar.gz">https://github.com/nghttp2/nghttp2/archive/refs/tags/v1.48.0.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>libxml2-devel</Dependency>
@@ -6892,7 +6938,7 @@
             <Name>libnghttp2-devel</Name>
             <Summary xml:lang="en">Development files for libnghttp2</Summary>
             <RuntimeDependencies>
-                <Dependency release="3">libnghttp2</Dependency>
+                <Dependency release="4">libnghttp2</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -6900,6 +6946,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2022-06-27</Date>
+                <Version>1.48.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="3">
                 <Date>2021-10-22</Date>
                 <Version>1.45.1</Version>
@@ -7492,6 +7545,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2022-07-18</Date>
+                <Version>6.7</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2020-12-09</Date>
                 <Version>6.7</Version>
@@ -7768,13 +7828,16 @@
             <Summary xml:lang="tr">Hızlı ve hafif bir anahtar/değer veri kütüphanesi</Summary>
             <Description xml:lang="en">LevelDB is a fast key-value storage library written at Google that provides an ordered mapping from string keys to string values.</Description>
             <Description xml:lang="tr">LevelDB dize değerleri ile dize anahtarlarını eşleme sağlayan, Google&apos;da yazılmış hızlı bir anahtar-değer depolama kütüphanesidir.</Description>
-            <Archive type="targz" sha1sum="8d310af5cfb53dc836bfb412ff4b3c8aea578627" name="1.22.tar.gz">https://github.com/google/leveldb/archive/1.22.tar.gz</Archive>
+            <Archive type="targz" sha1sum="042e267eae6ab522fe29274f79ad45cde3977655" name="1.23.tar.gz">https://github.com/google/leveldb/archive/1.23.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>cmake</Dependency>
                 <Dependency>sqlite-devel</Dependency>
                 <Dependency>snappy-devel</Dependency>
                 <Dependency>gperftools-devel</Dependency>
             </BuildDependencies>
+            <Patches>
+                <Patch level="1">0006-revert-no-rtti.patch</Patch>
+            </Patches>
             <SourceURI>system/base/leveldb/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -7792,7 +7855,7 @@
         <Package>
             <Name>leveldb-devel</Name>
             <RuntimeDependencies>
-                <Dependency release="8">leveldb</Dependency>
+                <Dependency release="9">leveldb</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -7800,6 +7863,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2022-06-26</Date>
+                <Version>1.23</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2021-11-06</Date>
                 <Version>1.22</Version>
@@ -8316,17 +8386,17 @@
             <Summary xml:lang="tr">Python3, gelecek nesil üst seviye betik programlama dili.</Summary>
             <Description xml:lang="en">Python is an accessible, high-level, dynamically typed, interpreted programming language, designed with an emphasis on code readability. It includes an extensive standard library, and has a vast ecosystem of third-party libraries.</Description>
             <Description xml:lang="tr">Python3 kod okuma rahatlığı ile tasarlanmış, erişilebilir, yüksek seviyeli, dinamik, yorumlamalı programlama dilidir. Python3 kapsamlı standart kütüphanesi ile beraber gelmekte ve  üçüncü parti kitaplıkların kolay bütünleştirilmesine olanak tanıyan yapısıylar en hızlı ve dinamik yaorumlamalı dillerden biri olmaktadır.</Description>
-            <Archive type="tarxz" sha1sum="8c2e3a45febf695cbb4d1f02dc1e9d84c5224e52" name="Python-3.9.12.tar.xz">https://www.python.org/ftp/python/3.9.12/Python-3.9.12.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="d57e5c8b94fe42e2b403e6eced02b25ed47ca8da" name="Python-3.9.13.tar.xz">https://www.python.org/ftp/python/3.9.13/Python-3.9.13.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>bzip2</Dependency>
                 <Dependency>xz-devel</Dependency>
                 <Dependency>gdbm-devel</Dependency>
                 <Dependency>zlib-devel</Dependency>
-                <Dependency>expat-devel</Dependency>
+                <Dependency versionFrom="2.4.8">expat-devel</Dependency>
                 <Dependency>libffi-devel</Dependency>
                 <Dependency>sqlite-devel</Dependency>
                 <Dependency>ncurses-devel</Dependency>
-                <Dependency versionFrom="1.1.1n">openssl-devel</Dependency>
+                <Dependency versionFrom="1.1.1q">openssl-devel</Dependency>
                 <Dependency>readline-devel</Dependency>
                 <Dependency>mpdecimal-devel</Dependency>
             </BuildDependencies>
@@ -8421,7 +8491,7 @@
             <Summary xml:lang="tr">Python3 için geliştime dosyaları</Summary>
             <Description xml:lang="tr">python3-devel, python3 için geliştime dosyaları içerir.</Description>
             <RuntimeDependencies>
-                <Dependency release="21">python3</Dependency>
+                <Dependency release="26">python3</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header" permanent="0">/usr/include/python3.9/*</Path>
@@ -8429,6 +8499,41 @@
             </Files>
         </Package>
         <History>
+            <Update release="26">
+                <Date>2022-07-18</Date>
+                <Version>3.9.13</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="25">
+                <Date>2022-07-07</Date>
+                <Version>3.9.13</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="24">
+                <Date>2022-06-26</Date>
+                <Version>3.9.13</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="23">
+                <Date>2022-05-24</Date>
+                <Version>3.9.13</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="22">
+                <Date>2022-05-19</Date>
+                <Version>3.9.13</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="21">
                 <Date>2022-04-23</Date>
                 <Version>3.9.12</Version>
@@ -9344,6 +9449,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="20">
+                <Date>2022-06-27</Date>
+                <Version>2.7.2</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="19">
                 <Date>2021-11-27</Date>
                 <Version>2.7.2</Version>
@@ -10746,11 +10858,11 @@
             <Summary xml:lang="tr">Plyvel, LevelDB için, hızlı ve zengin özellikli Python arabirimi.</Summary>
             <Description xml:lang="en">Plyvel has a rich feature set, high performance, and a friendly Pythonic API.</Description>
             <Description xml:lang="tr">Plyvel zengin özelliklere sahip bir set, yüksek performanslı, ve kullanıcı dostu bir Pythonic API.</Description>
-            <Archive type="targz" sha1sum="084cc5d650a06072474bae34cf7844007c3a63be" name="plyvel-1.2.0.tar.gz">https://files.pythonhosted.org/packages/4c/14/3408e92e28f4a38f51573e5ba83017fde8e3ae70522555ee2b19347e0f6e/plyvel-1.2.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="5956ae01eaa20ada345449a85c6343e10f4a3bc5" name="1.4.0.tar.gz">https://github.com/wbolster/plyvel/archive/refs/tags/1.4.0.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>cython</Dependency>
                 <Dependency>python-devel</Dependency>
-                <Dependency versionFrom="1.18">leveldb-devel</Dependency>
+                <Dependency versionFrom="1.23">leveldb-devel</Dependency>
                 <Dependency>python-setuptools</Dependency>
             </BuildDependencies>
             <SourceURI>system/base/plyvel/pspec.xml</SourceURI>
@@ -10760,7 +10872,7 @@
             <RuntimeDependencies>
                 <Dependency>libgcc</Dependency>
                 <Dependency>python</Dependency>
-                <Dependency versionFrom="1.18">leveldb</Dependency>
+                <Dependency versionFrom="1.23">leveldb</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib</Path>
@@ -10768,6 +10880,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2022-06-26</Date>
+                <Version>1.4.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2020-12-09</Date>
                 <Version>1.2.0</Version>
@@ -11094,7 +11213,7 @@
             <Summary xml:lang="tr">Linux kernel modülleri yönetim araçları</Summary>
             <Description xml:lang="en">Linux kernel module management utilities</Description>
             <Description xml:lang="tr">Linux kernel modülleri yönetim araçları</Description>
-            <Archive type="tarxz" sha1sum="0acec2b6aea3e6eb71f0b549b0ff0abcac5da004" name="kmod-28.tar.xz">https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-28.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="e99d5a51c79d9ff3660722025f75770e1f4bf4b1" name="kmod-30.tar.xz">https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-30.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>chrpath</Dependency>
                 <Dependency>xz-devel</Dependency>
@@ -11113,7 +11232,7 @@
                 <Dependency>xz</Dependency>
                 <Dependency>zlib</Dependency>
                 <Dependency>zstd</Dependency>
-                <Dependency version="28">libkmod</Dependency>
+                <Dependency version="30">libkmod</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin</Path>
@@ -11142,7 +11261,7 @@
             <Name>libkmod-devel</Name>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency version="28">libkmod</Dependency>
+                <Dependency version="30">libkmod</Dependency>
                 <Dependency>zstd-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -11180,6 +11299,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="13">
+                <Date>2022-06-30</Date>
+                <Version>30</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="12">
                 <Date>2021-06-12</Date>
                 <Version>28</Version>
@@ -12320,7 +12446,7 @@
             <Summary xml:lang="tr">X.Org X11 kitaplığı</Summary>
             <Summary xml:lang="de">X.Org X11 Bibliothek</Summary>
             <Description xml:lang="en">Core X11 protocol client library.</Description>
-            <Archive type="tarxz" sha1sum="47606da8bf70bfb78242af92dc40c68b2de2e04c" name="libX11-1.8.tar.xz">mirrors://xorg/individual/lib/libX11-1.8.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="595943e2c20553281a44f0b4bfa2fdadffe6df25" name="libX11-1.8.1.tar.xz">mirrors://xorg/individual/lib/libX11-1.8.1.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>libxcb-devel</Dependency>
                 <Dependency>xorg-proto</Dependency>
@@ -12348,7 +12474,7 @@
             <Summary xml:lang="en">Development files for X11 library</Summary>
             <Summary xml:lang="tr">libX11 için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="18">libX11</Dependency>
+                <Dependency release="21">libX11</Dependency>
                 <Dependency>libxcb-devel</Dependency>
                 <Dependency>xorg-proto</Dependency>
             </RuntimeDependencies>
@@ -12370,7 +12496,7 @@
                 <Dependency>libxslt-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="18">libX11</Dependency>
+                <Dependency release="21">libX11</Dependency>
                 <Dependency>libxcb-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -12378,6 +12504,27 @@
             </Files>
         </Package>
         <History>
+            <Update release="21">
+                <Date>2022-07-05</Date>
+                <Version>1.8.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="20">
+                <Date>2022-06-18</Date>
+                <Version>1.8.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="19">
+                <Date>2022-06-10</Date>
+                <Version>1.8.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="18">
                 <Date>2022-05-04</Date>
                 <Version>1.8</Version>
@@ -12770,7 +12917,7 @@
             <Summary xml:lang="tr">gettext için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="9">gettext</Dependency>
+                <Dependency release="10">gettext</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/share/aclocal</Path>
@@ -12779,6 +12926,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2022-07-18</Date>
+                <Version>0.21</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="9">
                 <Date>2022-05-09</Date>
                 <Version>0.21</Version>
@@ -14105,16 +14259,16 @@
             <Description xml:lang="en">Python is a dynamic object-oriented programming language that can be used for many kinds of software development. It offers strong support for integration with other languages and tools, comes with extensive standard libraries, and can be learned in a few days.</Description>
             <Description xml:lang="tr">Python, yazılım geliştirmenin birçok aşamasında kullanılabilen, dinamik nesne tabanlı bir programlama dilidir. Diğer programlama dilleriyle bütünleşme için sağlam bir destek sunar, kapsamlı standart kütüphanelerle sunulur ve birkaç günde öğrenilebilir.</Description>
             <Archive type="tarxz" sha1sum="678d4cf483a1c92efd347ee8e1e79326dc82810b" name="Python-2.7.18.tar.xz">https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz</Archive>
-            <Archive type="targz" sha1sum="4b0936dd798f60c97c68fc62b73033ecba6dfb0c" target="Python-2.7.18" name="openssl-1.1.1n.tar.gz">https://www.openssl.org/source/openssl-1.1.1n.tar.gz</Archive>
+            <Archive type="targz" sha1sum="79511a8f46f267c533efd32f22ad3bf89a92d8e5" target="Python-2.7.18" name="openssl-1.1.1q.tar.gz">https://www.openssl.org/source/openssl-1.1.1q.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>bzip2</Dependency>
                 <Dependency>gdbm-devel</Dependency>
                 <Dependency>zlib-devel</Dependency>
-                <Dependency>expat-devel</Dependency>
+                <Dependency versionFrom="2.4.8">expat-devel</Dependency>
                 <Dependency>libffi-devel</Dependency>
                 <Dependency>sqlite-devel</Dependency>
                 <Dependency>ncurses-devel</Dependency>
-                <Dependency versionFrom="1.1.1n">openssl-devel</Dependency>
+                <Dependency versionFrom="1.1.1q">openssl-devel</Dependency>
                 <Dependency>readline-devel</Dependency>
                 <Dependency versionFrom="2.32">glibc-devel</Dependency>
             </BuildDependencies>
@@ -14167,7 +14321,7 @@
             <Summary xml:lang="tr">python için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="16">python</Dependency>
+                <Dependency release="20">python</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -14175,6 +14329,34 @@
             </Files>
         </Package>
         <History>
+            <Update release="20">
+                <Date>2022-07-18</Date>
+                <Version>2.7.18</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="19">
+                <Date>2022-07-07</Date>
+                <Version>2.7.18</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="18">
+                <Date>2022-06-26</Date>
+                <Version>2.7.18</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="17">
+                <Date>2022-05-24</Date>
+                <Version>2.7.18</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="16">
                 <Date>2022-04-23</Date>
                 <Version>2.7.18</Version>
@@ -14968,21 +15150,16 @@
             <Summary xml:lang="tr">EFI değişkenlerini işlemek için araçlar ve kütüphane</Summary>
             <Description xml:lang="en">Tools and library to manipulate EFI variables.</Description>
             <Description xml:lang="tr">EFI değişkenlerini işlemek için araçlar ve kütüphane</Description>
-            <Archive type="tarbz2" sha1sum="1ef24e0a06e1a42d7a93ba7a76b2970659c7c0c0" name="efivar-37.tar.bz2">https://github.com/rhinstaller/efivar/releases/download/37/efivar-37.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="64dc75cf71b7a989b8b4ac5cd46d1010430e89dc" name="efivar-38.tar.bz2">https://github.com/rhinstaller/efivar/releases/download/38/efivar-38.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>popt-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch level="1">fedora/0001-util.h-add-unlikely-and-likely-macros.patch</Patch>
-                <Patch level="1">fedora/0002-dp.h-make-format_guid-handle-misaligned-guid-pointer.patch</Patch>
-                <Patch level="1">fedora/0003-linux-pci-root-remove-an-unused-assignment.patch</Patch>
-                <Patch level="1">fedora/0004-Fix-all-the-places-Werror-address-of-packed-member-c.patch</Patch>
-                <Patch level="1">fedora/0005-Get-rid-of-the-arrows-in-our-debug-messages.patch</Patch>
-                <Patch level="1">fedora/0006-Define-strdupa-if-it-is-not-defined.patch</Patch>
-                <Patch level="1">fedora/0007-Android-inital-porting-of-libefivar.patch</Patch>
-                <Patch level="1">fedora/0008-Remove-an-unused-function.patch</Patch>
-                <Patch level="1">fedora/0009-Fix-another-error-of-Werror-address-of-packed-member.patch</Patch>
-                <Patch level="1">fedora/0010-Update-generated-ABI.patch</Patch>
+                <Patch level="1">gentoo/efivar-38-Makefile-dep.patch</Patch>
+                <Patch level="1">gentoo/efivar-38-binutils-2.36.patch</Patch>
+                <Patch level="1">gentoo/efivar-38-ia64-relro.patch</Patch>
+                <Patch level="1">gentoo/efivar-38-ld-locale.patch</Patch>
+                <Patch level="1">gentoo/efivar-38-march-native.patch</Patch>
             </Patches>
             <SourceURI>system/base/efivar/pspec.xml</SourceURI>
         </Source>
@@ -15001,7 +15178,7 @@
             <Name>efivar-devel</Name>
             <RuntimeDependencies>
                 <Dependency>popt-devel</Dependency>
-                <Dependency release="10">efivar</Dependency>
+                <Dependency release="11">efivar</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -15009,6 +15186,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2022-07-09</Date>
+                <Version>38</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="10">
                 <Date>2020-12-09</Date>
                 <Version>37</Version>
@@ -15925,7 +16109,7 @@
                 <Dependency>dbus-devel</Dependency>
                 <Dependency>glib2-devel</Dependency>
                 <Dependency>libpcre-devel</Dependency>
-                <Dependency>expat-devel</Dependency>
+                <Dependency versionFrom="2.4.8">expat-devel</Dependency>
                 <Dependency>libxml2</Dependency>
             </BuildDependencies>
             <Patches>
@@ -15958,7 +16142,7 @@
             <Summary xml:lang="tr">dbus-glib için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="13">dbus-glib</Dependency>
+                <Dependency release="15">dbus-glib</Dependency>
                 <Dependency>dbus-devel</Dependency>
                 <Dependency>glib2-devel</Dependency>
             </RuntimeDependencies>
@@ -15969,6 +16153,20 @@
             </Files>
         </Package>
         <History>
+            <Update release="15">
+                <Date>2022-07-18</Date>
+                <Version>0.112</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="14">
+                <Date>2022-06-30</Date>
+                <Version>0.112</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="13">
                 <Date>2022-04-24</Date>
                 <Version>0.112</Version>
@@ -16410,7 +16608,7 @@
             <Summary xml:lang="tr">XML ayrıştırıcı kütüphaneleri</Summary>
             <Summary xml:lang="de">XML Parser Bibliotheken</Summary>
             <Description xml:lang="en">This is expat, the C library for parsing XML, written by James Clark. Expat is a stream oriented XML parser. This means that you register handlers with the parser prior to starting the parse. These handlers are called when the parser discovers the associated structures in the document being parsed. A start tag is an example of the kind of structures for which you may register handlers.</Description>
-            <Archive type="tarbz2" sha1sum="b677b9a1cf3a1424fda183223fae2c58f50151af" name="expat-2.4.1.tar.bz2">mirrors://sourceforge/expat/expat-2.4.1.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="5bc8aed3107a04ba2a35d45646eb079e6abbfe1d" name="expat-2.4.8.tar.bz2">mirrors://sourceforge/expat/expat-2.4.8.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>gnuconfig</Dependency>
                 <Dependency>glibc-devel</Dependency>
@@ -16432,7 +16630,7 @@
             <Summary xml:lang="tr">expat için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="11">expat</Dependency>
+                <Dependency release="12">expat</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -16448,13 +16646,20 @@
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="11">expat</Dependency>
+                <Dependency release="12">expat</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="12">
+                <Date>2022-07-18</Date>
+                <Version>2.4.8</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="11">
                 <Date>2021-06-12</Date>
                 <Version>2.4.1</Version>
@@ -16635,9 +16840,9 @@
             <Summary xml:lang="tr">Python cURL Modülü</Summary>
             <Description xml:lang="en">PycURL is a Python interface to libcurl. PycURL can be used to fetch objects identified by a URL from a Python program.</Description>
             <Description xml:lang="tr">PycURL, python libcurl için python arayüzüdür. PycURL, URL tarafında tanımlanan nesneleri indirmek için bir python programı tarafından kullanılabilir.</Description>
-            <Archive type="targz" sha1sum="ef2dc64486b80ee8a984adbee450a72371cdc298" name="pycurl-7.44.1.tar.gz">https://files.pythonhosted.org/packages/47/f9/c41d6830f7bd4e70d5726d26f8564538d08ca3a7ac3db98b325f94cdcb7f/pycurl-7.44.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="c63d95443d2997430396a1d46921b646c16cd011" name="pycurl-7.45.1.tar.gz">https://files.pythonhosted.org/packages/09/ca/0b6da1d0f391acb8991ac6fdf8823ed9cf4c19680d4f378ab1727f90bd5c/pycurl-7.45.1.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency versionFrom="7.79.1">curl-devel</Dependency>
+                <Dependency versionFrom="7.84.0">curl-devel</Dependency>
                 <Dependency>python-devel</Dependency>
                 <Dependency>openssl-devel</Dependency>
             </BuildDependencies>
@@ -16646,7 +16851,7 @@
         <Package>
             <Name>pycurl</Name>
             <RuntimeDependencies>
-                <Dependency versionFrom="7.79.1">curl</Dependency>
+                <Dependency versionFrom="7.84.0">curl</Dependency>
                 <Dependency>python</Dependency>
                 <Dependency>openssl</Dependency>
             </RuntimeDependencies>
@@ -16656,6 +16861,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2022-06-27</Date>
+                <Version>7.45.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="9">
                 <Date>2021-10-18</Date>
                 <Version>7.44.1</Version>
@@ -17531,7 +17743,7 @@
             <Description xml:lang="tr">D-Bus, sistem ve kullanıcılar için olmak üzere iki tane artalan süreci (daemon) sunar. Mesaj yolu, bire bir mesaj geçiş araçları üzerine inşa edilmiştir. Bu sayede iki program birbiriyle bir mesaj yolu artalan süreci kullanmadan, direkt olarak haberleşebilir. Şu an için haberleşme araçları aynı bilgisayar üzerinde çalışabilmektedir, fakat TCP/IP ile uzaktan haberleşme de planlanmaktadır.</Description>
             <Archive type="targz" sha1sum="eb2590a18c7edc842084db15b2f7f3cfaeb1c6a6" name="dbus-1.12.22.tar.gz">https://dbus.freedesktop.org/releases/dbus/dbus-1.12.22.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency>expat-devel</Dependency>
+                <Dependency versionFrom="2.4.8">expat-devel</Dependency>
                 <Dependency>libX11-devel</Dependency>
                 <Dependency>libcap-ng-devel</Dependency>
                 <Dependency>autoconf-archive</Dependency>
@@ -17582,7 +17794,7 @@
             <Summary xml:lang="tr">dbus için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="14">dbus</Dependency>
+                <Dependency release="15">dbus</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -17607,6 +17819,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="15">
+                <Date>2022-07-18</Date>
+                <Version>1.12.22</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="14">
                 <Date>2022-04-24</Date>
                 <Version>1.12.22</Version>
@@ -17916,7 +18135,7 @@
             <Description xml:lang="fr">polkit est un cadre de développement (framework) pour définir des politiques à appliquer à des composants du système ainsi que fournir à des parties du bureau la possibilité de les configurer.</Description>
             <Description xml:lang="en">polkit is a toolkit for defining and handling authorizations. It is used for allowing unprivileged processes to speak to privileged processes.</Description>
             <Description xml:lang="tr">polkit, sistem genelindeki bileşenlerin ve masaüstü bileşenlerinin ayarlayabileceği şekilde ilkeler tanımlamak için araçlardan oluşur.</Description>
-            <Archive type="targz" sha1sum="0794825e31a0a6e4859f93596d3f475b9d08f9e1" name="polkit-0.119.tar.gz">http://www.freedesktop.org/software/polkit/releases/polkit-0.119.tar.gz</Archive>
+            <Archive type="targz" sha1sum="75d5885251eef36b28851e095120bc1f60714160" name="polkit-0.120.tar.gz">http://www.freedesktop.org/software/polkit/releases/polkit-0.120.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>python3</Dependency>
                 <Dependency>dbus-devel</Dependency>
@@ -17934,6 +18153,8 @@
                 <Patch level="1">polkit-0.118-duktape.patch</Patch>
                 <Patch level="1">polkit-0.118-elogind.patch</Patch>
                 <Patch level="1">use-system-locale-in-gobject-api.diff</Patch>
+                <Patch level="1">CVE-2021-4034.patch</Patch>
+                <Patch level="1">CVE-2021-4115.patch</Patch>
             </Patches>
             <SourceURI>system/base/polkit/pspec.xml</SourceURI>
         </Source>
@@ -17943,7 +18164,7 @@
             <Summary xml:lang="tr">polkit geliştirme başlıkları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="14">polkit</Dependency>
+                <Dependency release="16">polkit</Dependency>
                 <Dependency>glib2-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -17988,6 +18209,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="16">
+                <Date>2022-07-18</Date>
+                <Version>0.120</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="15">
+                <Date>2022-07-05</Date>
+                <Version>0.120</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="14">
                 <Date>2021-09-22</Date>
                 <Version>0.119</Version>
@@ -18107,7 +18342,7 @@
             <Summary xml:lang="de">Ein Client, der URLs versteht</Summary>
             <Description xml:lang="en">curl is a command line tool for transferring data with URL syntax, supporting various protocols.</Description>
             <Description xml:lang="tr">curl çeşitli protokolleri destekleyen, URL söz dizimini kullanarak uzak sunuculardan veri aktarmak için kullanılan bir komut satırı aracıdır.</Description>
-            <Archive type="tarbz2" sha1sum="6bd0fa0dc961303f4443ef7fea80ab83cbcce800" name="curl-7.79.1.tar.bz2">http://curl.haxx.se/download/curl-7.79.1.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="0113fe762aed27d58c4e53ce2be7a98bc7f74957" name="curl-7.84.0.tar.bz2">http://curl.haxx.se/download/curl-7.84.0.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>glibc-devel</Dependency>
                 <Dependency>zstd-devel</Dependency>
@@ -18116,7 +18351,7 @@
                 <Dependency>libidn2-devel</Dependency>
                 <Dependency>libssh2-devel</Dependency>
                 <Dependency>ca-certificates</Dependency>
-                <Dependency>libnghttp2-devel</Dependency>
+                <Dependency versionFrom="1.48.0">libnghttp2-devel</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch>curl-ac.patch</Patch>
@@ -18149,7 +18384,7 @@
             <Summary xml:lang="tr">curl için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="9">curl</Dependency>
+                <Dependency release="10">curl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/lib/pkgconfig</Path>
@@ -18159,6 +18394,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2022-06-27</Date>
+                <Version>7.84.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="9">
                 <Date>2021-10-23</Date>
                 <Version>7.79.1</Version>
@@ -18481,7 +18723,7 @@
             <Summary xml:lang="tr">MIT Kerberos kütüphanesi</Summary>
             <Description xml:lang="en">Kerberos is a network authentication protocol. It is designed to provide strong authentication for client/server applications by using secret-key cryptography.</Description>
             <Description xml:lang="tr">Kerberos bir ağ doğrulama protokolüdür. Sunucu/istemci uygulamalarında, gizli anahtar kriptoloji teknolojisini kullanarak, güçlü bir doğrulama sağlar.</Description>
-            <Archive type="targz" sha1sum="f6980dafd31eac22a047ad34a2b918e4d12a8be5" name="krb5-1.19.2.tar.gz">http://web.mit.edu/kerberos/dist/krb5/1.19/krb5-1.19.2.tar.gz</Archive>
+            <Archive type="targz" sha1sum="e6addc23e361798b9f1243e6809620449d7fcb38" name="krb5-1.20.tar.gz">http://web.mit.edu/kerberos/dist/krb5/1.20/krb5-1.20.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>python3</Dependency>
                 <Dependency>keyutils</Dependency>
@@ -18533,8 +18775,8 @@
         </Package>
         <History>
             <Update release="8">
-                <Date>2021-10-22</Date>
-                <Version>1.19.2</Version>
+                <Date>2022-05-28</Date>
+                <Version>1.20</Version>
                 <Comment>Version bump.</Comment>
                 <Name>Mustafa Cinasal</Name>
                 <Email>muscnsl@gmail.com</Email>
@@ -19335,8 +19577,8 @@
             <Description xml:lang="fr">SQLite est une petite librairie C implémentant un moteur de base de données SQL auto-configurée, auto-suffisante, pouvant être embarquée. Gère des bases de données de tailles allant jusqu&apos;à 2 téraOctets.</Description>
             <Description xml:lang="en">SQLite is a small C library that implements a self-contained, embeddable, zero-configuration SQL database engine. Supports databases up to 2 terabytes in size.</Description>
             <Description xml:lang="tr">SQLite hiçbir ayar gerektirmeyen, başka programların içine gömülebilir bir SQL veritabanı motorudur. 2 terabayta kadar büyüklükteki veritabanlarını tutabilir.</Description>
-            <Archive type="targz" sha1sum="a4bcf9e951bfb9745214241ba08476299fc2dc1e" name="sqlite-autoconf-3360000.tar.gz">https://sqlite.org/2021/sqlite-autoconf-3360000.tar.gz</Archive>
-            <Archive type="zip" sha1sum="d1d98e937d565c2f8fa585498d9fde463330d2be" name="sqlite-doc-3360000.zip">https://sqlite.org/2021/sqlite-doc-3360000.zip</Archive>
+            <Archive type="targz" sha1sum="a839c65452f7ea66e9ba9efa52b47ba1cd84225c" name="sqlite-autoconf-3390000.tar.gz">https://sqlite.org/2022/sqlite-autoconf-3390000.tar.gz</Archive>
+            <Archive type="zip" sha1sum="95b36247b51bf3841ab03fc33eae18024b943767" name="sqlite-doc-3390000.zip">https://sqlite.org/2022/sqlite-doc-3390000.zip</Archive>
             <BuildDependencies>
                 <Dependency>readline-devel</Dependency>
             </BuildDependencies>
@@ -19362,7 +19604,7 @@
             <Description xml:lang="tr">sqlite-devel, sqlite için geliştirme dosyalarını içerir.</Description>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="16">sqlite</Dependency>
+                <Dependency release="17">sqlite</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -19378,7 +19620,7 @@
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="16">sqlite</Dependency>
+                <Dependency release="17">sqlite</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
@@ -19390,13 +19632,20 @@
             <Summary xml:lang="tr">sqlite için belgelendirme dosyaları</Summary>
             <Description xml:lang="tr">sqlite-doc, sqlite için belgelendirme dosyalarını içerir.</Description>
             <RuntimeDependencies>
-                <Dependency release="16">sqlite</Dependency>
+                <Dependency release="17">sqlite</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/share/doc/sqlite/</Path>
             </Files>
         </Package>
         <History>
+            <Update release="17">
+                <Date>2022-06-26</Date>
+                <Version>3.39.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="16">
                 <Date>2021-11-06</Date>
                 <Version>3.36.0</Version>
@@ -19541,7 +19790,7 @@
             <Summary xml:lang="tr">C programlama dili için glib kütüphanesi</Summary>
             <Description xml:lang="en">glib2 is the low-level core library that forms the basis for projects such as GTK+ and GNOME. It provides data structure handling for C, portability wrappers, and interfaces for such runtime functionality as an event loop, threads, dynamic loading, and an object system.</Description>
             <Description xml:lang="tr">glib2, GTK+ ve GNOME gibi projelerin temelini oluşturan düşük seviyeli çekirdek kütüphanedir. C için veri yapıları, taşınabilirlik katmanları ve çeşitli çalışma zamanı işlevleri için arabirimler sunar.</Description>
-            <Archive type="tarxz" sha1sum="fe81078a5ae9d67645956b87d7ccc113b9f2b7e7" name="glib-2.72.1.tar.xz">mirrors://gnome/glib/2.72/glib-2.72.1.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="c53965bf8d867bacd9d5fe37d1378c03222ae5d3" name="glib-2.72.3.tar.xz">mirrors://gnome/glib/2.72/glib-2.72.3.tar.xz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="multilib.diff" permission="0644">multilib.diff</AdditionalFile>
             </AdditionalFiles>
@@ -19577,7 +19826,6 @@
                 <Path fileType="executable">/usr/share/bash-completion/completions/</Path>
                 <Path fileType="localedata">/usr/share/locale</Path>
                 <Path fileType="man">/usr/share/man</Path>
-                <Path fileType="doc">/usr/share/doc</Path>
                 <Path fileType="data">/usr/share/glib-2.0</Path>
                 <Path fileType="data">/usr/share/systemtap</Path>
                 <Path fileType="data">/usr/share/glib-2.0/schemas</Path>
@@ -19597,7 +19845,7 @@
             <Summary xml:lang="tr">glib2 için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="19">glib2</Dependency>
+                <Dependency release="21">glib2</Dependency>
                 <Dependency>libpcre-devel</Dependency>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>libffi-devel</Dependency>
@@ -19643,7 +19891,7 @@
                 <Dependency>elfutils-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="19">glib2</Dependency>
+                <Dependency release="21">glib2</Dependency>
                 <Dependency>libpcre-32bit</Dependency>
                 <Dependency>zlib-32bit</Dependency>
                 <Dependency>libffi-32bit</Dependency>
@@ -19661,10 +19909,24 @@
             <Summary xml:lang="en">Documentation files for glib2</Summary>
             <Description xml:lang="en">Extensive documentation for developers wanting to use the GLib Library</Description>
             <Files>
-                <Path fileType="doc">/usr/share/gtk-doc</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
             </Files>
         </Package>
         <History>
+            <Update release="21">
+                <Date>2022-06-30</Date>
+                <Version>2.72.3</Version>
+                <Comment>Version bump</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="20">
+                <Date>2022-05-31</Date>
+                <Version>2.72.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="19">
                 <Date>2022-05-05</Date>
                 <Version>2.72.1</Version>
@@ -20082,7 +20344,7 @@
             <Description xml:lang="en">Spidermonkey is Mozilla&apos;s C implementation of JavaScript.</Description>
             <Description xml:lang="tr">Mozilla&apos;nın Javascript&apos;in C implementasyonu.</Description>
             <Description xml:lang="es">Spidermonkey es la implementación de JavaScript con C de Mozilla.</Description>
-            <Archive type="tarxz" sha1sum="83ae378d8bddd9efc5badb99a6246979313f7134" name="firefox-78.12.0esr.source.tar.xz">https://ftp.mozilla.org/pub/firefox/releases/78.12.0esr/source/firefox-78.12.0esr.source.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="6d889a16bf839da5a809e2d0c75426abbb62801d" name="firefox-91.9.1esr.source.tar.xz">https://ftp.mozilla.org/pub/firefox/releases/91.9.1esr/source/firefox-91.9.1esr.source.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>python3-devel</Dependency>
                 <Dependency>zlib-devel</Dependency>
@@ -20093,7 +20355,6 @@
                 <Dependency>llvm</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch level="1">mozjs78-silence-sandbox-violations.patch</Patch>
                 <Patch level="1">mozjs78-fix-soname.patch</Patch>
             </Patches>
             <SourceURI>system/base/spidermonkey/pspec.xml</SourceURI>
@@ -20118,7 +20379,7 @@
             <Summary xml:lang="tr">spidermonkey için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="12">spidermonkey</Dependency>
+                <Dependency release="13">spidermonkey</Dependency>
                 <Dependency>nspr-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -20127,6 +20388,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="13">
+                <Date>2022-06-01</Date>
+                <Version>91.9.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="12">
                 <Date>2021-08-07</Date>
                 <Version>78.12.0</Version>
@@ -20234,6 +20502,10 @@
                 <Dependency versionFrom="1.2.12">zlib-devel</Dependency>
                 <Dependency>xz-devel</Dependency>
             </BuildDependencies>
+            <Patches>
+                <Patch level="1">enable-CET.patch</Patch>
+                <Patch level="1">zstd-1.5.2-upstream_fixes-1.patch</Patch>
+            </Patches>
             <SourceURI>system/base/zstd/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -20253,7 +20525,7 @@
             <Name>zstd-devel</Name>
             <Summary xml:lang="en">Development files for zstd</Summary>
             <RuntimeDependencies>
-                <Dependency release="4">zstd</Dependency>
+                <Dependency release="5">zstd</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -20261,6 +20533,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2022-06-07</Date>
+                <Version>1.5.2</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2022-05-05</Date>
                 <Version>1.5.2</Version>
@@ -20458,7 +20737,7 @@
             <Description xml:lang="en">Netscape Portable Runtime (NSPR) provides a platform-neutral API for system level and libc like functions. The API is used in the Mozilla client, many of Netscape/AOL/iPlanet&apos;s and other software offerings.</Description>
             <Description xml:lang="tr">Netscape Taşınabilir çalışma Zamanı (NSPR) sistem seviyesindeki libc ve benzeri fonksiyonlar için platform bağımsız bir programlama arayüzü sunar. Bu arayüz, Mozilla istemcilerinde, Netscape/AOL/iPlanet&apos;in diğer yazılımlarında kullanılmaktadır.</Description>
             <Description xml:lang="es">Netscape Portable Runtime (NSPR) provee un API independiente de la plataforma a nivel de sistema y funciones como libc. El API está usado en el cliente Mozilla, y muchos otros software de Netscape/AOL/iPlanet.</Description>
-            <Archive type="targz" sha1sum="54c97f4ddc75d22cdad2a7a89c22d4d35938f7e9" name="nspr-4.33.tar.gz">https://ftp.mozilla.org/pub/nspr/releases/v4.33/src/nspr-4.33.tar.gz</Archive>
+            <Archive type="targz" sha1sum="efea1385dc83c55018183257036206b5f2c77c59" name="nspr-4.34.tar.gz">https://ftp.mozilla.org/pub/nspr/releases/v4.34/src/nspr-4.34.tar.gz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="nspr/config/nspr.pc.in">nspr.pc.in</AdditionalFile>
                 <AdditionalFile target="generate-pc-config.sh" permission="0755">generate-pc-config.sh</AdditionalFile>
@@ -20477,7 +20756,7 @@
             <Summary xml:lang="tr">nspr için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="18">nspr</Dependency>
+                <Dependency release="19">nspr</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -20486,6 +20765,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="19">
+                <Date>2022-06-24</Date>
+                <Version>4.34</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="18">
                 <Date>2022-02-14</Date>
                 <Version>4.33</Version>
@@ -21492,7 +21778,7 @@
             <Description xml:lang="fr">Glibc, La librairie GNU X est utilisée comme la librairie C dans le système GNU et la plupart des système utilisant le noyau Linux. Elle définit les appels système et autres fonctionnalités du langage de programmation C.</Description>
             <Description xml:lang="en">The GNU C library is used as the C library in the GNU system and most systems with the Linux kernel. It defines the system calls and other basic C programming language facilities.</Description>
             <Description xml:lang="tr">Glibc, GNU C kitaplığı, GNU sisteminde ve Linux dağıtımlarının büyük çoğunluğunda C programlama dili kütüphanesi olarak kullanılır. İçinde sistem çağrıları ve C programlama dili için temel fonksiyonları bulundurur.</Description>
-            <Archive type="tarxz" sha1sum="71ff0af28bdf4525d7b91ec5d82d1fc002000e91" name="glibc-2.32.tar.xz">http://ftp.gnu.org/gnu/libc/glibc-2.32.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="7e2d857e427780a50133447f34dd84ab40fa4069" name="glibc-2.35.tar.xz">http://ftp.gnu.org/gnu/libc/glibc-2.35.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>kernel-headers</Dependency>
                 <Dependency>gettext</Dependency>
@@ -21500,9 +21786,6 @@
                 <Dependency>binutils</Dependency>
                 <Dependency>python3</Dependency>
             </BuildDependencies>
-            <Patches>
-                <Patch level="1">bz26534.patch</Patch>
-            </Patches>
             <SourceURI>system/base/glibc/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -21551,7 +21834,7 @@
             <Name>glibc-devel</Name>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="9">glibc</Dependency>
+                <Dependency release="10">glibc</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -21567,7 +21850,7 @@
             <PartOf>system.doc</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="9">glibc</Dependency>
+                <Dependency release="10">glibc</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="config">/usr/lib32/glibc32.txt</Path>
@@ -21884,6 +22167,7 @@
             <Name>glibc-locales-dv</Name>
             <IsA>locale:dv</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-dv</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/dv_*</Path>
                 <Path fileType="localedata">/usr/share/locale/dv*</Path>
@@ -21894,6 +22178,7 @@
             <Name>glibc-locales-dz</Name>
             <IsA>locale:dz</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-dz</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/dz_*</Path>
                 <Path fileType="localedata">/usr/share/locale/dz*</Path>
@@ -21904,6 +22189,7 @@
             <Name>glibc-locales-el</Name>
             <IsA>locale:el</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-el</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/el_*</Path>
                 <Path fileType="localedata">/usr/share/locale/el*</Path>
@@ -21914,6 +22200,7 @@
             <Name>glibc-locales-en</Name>
             <IsA>locale:en</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-en</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/en_AG</Path>
                 <Path fileType="localedata">/usr/share/locale/en_AG</Path>
@@ -21978,6 +22265,7 @@
             <Name>glibc-locales-es</Name>
             <IsA>locale:el</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-es</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/es*</Path>
                 <Path fileType="localedata">/usr/share/locale/es*</Path>
@@ -21988,6 +22276,7 @@
             <Name>glibc-locales-eo</Name>
             <IsA>locale:eo</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-eo</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/eo*</Path>
                 <Path fileType="localedata">/usr/share/locale/eo*</Path>
@@ -21998,6 +22287,7 @@
             <Name>glibc-locales-et</Name>
             <IsA>locale:et</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-et</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/et_*</Path>
                 <Path fileType="localedata">/usr/share/locale/et*</Path>
@@ -22008,6 +22298,7 @@
             <Name>glibc-locales-eu</Name>
             <IsA>locale:eu</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-eu</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/eu_*</Path>
                 <Path fileType="localedata">/usr/share/locale/eu*</Path>
@@ -22018,6 +22309,7 @@
             <Name>glibc-locales-fa</Name>
             <IsA>locale:fa</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-fa</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/fa_*</Path>
                 <Path fileType="localedata">/usr/share/locale/fa*</Path>
@@ -22028,6 +22320,7 @@
             <Name>glibc-locales-ff</Name>
             <IsA>locale:ff</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ff</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ff_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ff*</Path>
@@ -22038,6 +22331,7 @@
             <Name>glibc-locales-fi</Name>
             <IsA>locale:fi</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-fi</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/fi_*</Path>
                 <Path fileType="localedata">/usr/share/locale/fi*</Path>
@@ -22048,6 +22342,7 @@
             <Name>glibc-locales-fil</Name>
             <IsA>locale:fil</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-fil</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/fil_*</Path>
                 <Path fileType="localedata">/usr/share/locale/fil*</Path>
@@ -22058,6 +22353,7 @@
             <Name>glibc-locales-fo</Name>
             <IsA>locale:fo</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-fo</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/fo_*</Path>
                 <Path fileType="localedata">/usr/share/locale/fo*</Path>
@@ -22068,6 +22364,7 @@
             <Name>glibc-locales-fr</Name>
             <IsA>locale:fr</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-fr</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/fr_*</Path>
                 <Path fileType="localedata">/usr/share/locale/fr*</Path>
@@ -22078,6 +22375,7 @@
             <Name>glibc-locales-fur</Name>
             <IsA>locale:fur</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-fur</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/fur_*</Path>
                 <Path fileType="localedata">/usr/share/locale/fur*</Path>
@@ -22088,6 +22386,7 @@
             <Name>glibc-locales-fy</Name>
             <IsA>locale:fy</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-fy</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/fy_*</Path>
                 <Path fileType="localedata">/usr/share/locale/fy*</Path>
@@ -22098,6 +22397,7 @@
             <Name>glibc-locales-ga</Name>
             <IsA>locale:ga</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ga</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ga_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ga*</Path>
@@ -22108,6 +22408,7 @@
             <Name>glibc-locales-gd</Name>
             <IsA>locale:gd</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-gd</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/gd_*</Path>
                 <Path fileType="localedata">/usr/share/locale/gd*</Path>
@@ -22118,6 +22419,7 @@
             <Name>glibc-locales-gez</Name>
             <IsA>locale:gez</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-gez</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/gez_*</Path>
                 <Path fileType="localedata">/usr/share/locale/gez*</Path>
@@ -22128,6 +22430,7 @@
             <Name>glibc-locales-gl</Name>
             <IsA>locale:gl</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-gl</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/gl_*</Path>
                 <Path fileType="localedata">/usr/share/locale/gl*</Path>
@@ -22138,6 +22441,7 @@
             <Name>glibc-locales-gu</Name>
             <IsA>locale:gu</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-gu</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/gu_*</Path>
                 <Path fileType="localedata">/usr/share/locale/gu*</Path>
@@ -22148,6 +22452,7 @@
             <Name>glibc-locales-gv</Name>
             <IsA>locale:gv</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-gv</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/gv_*</Path>
                 <Path fileType="localedata">/usr/share/locale/gv*</Path>
@@ -22158,6 +22463,7 @@
             <Name>glibc-locales-ha</Name>
             <IsA>locale:ha</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ha</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ha_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ha*</Path>
@@ -22168,6 +22474,7 @@
             <Name>glibc-locales-he</Name>
             <IsA>locale:he</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-he</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/he_*</Path>
                 <Path fileType="localedata">/usr/share/locale/he*</Path>
@@ -22178,6 +22485,7 @@
             <Name>glibc-locales-hi</Name>
             <IsA>locale:hi</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-hi</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/hi_*</Path>
                 <Path fileType="localedata">/usr/share/locale/hi*</Path>
@@ -22188,6 +22496,7 @@
             <Name>glibc-locales-hne</Name>
             <IsA>locale:hne</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-hne</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/hne_*</Path>
                 <Path fileType="localedata">/usr/share/locale/hne*</Path>
@@ -22198,6 +22507,7 @@
             <Name>glibc-locales-hr</Name>
             <IsA>locale:hr</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-hr</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/hr_*</Path>
                 <Path fileType="localedata">/usr/share/locale/hr*</Path>
@@ -22208,6 +22518,7 @@
             <Name>glibc-locales-hsb</Name>
             <IsA>locale:hsb</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-hsb</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/hsb_*</Path>
                 <Path fileType="localedata">/usr/share/locale/hsb*</Path>
@@ -22218,6 +22529,7 @@
             <Name>glibc-locales-ht</Name>
             <IsA>locale:ht</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ht</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ht_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ht*</Path>
@@ -22228,6 +22540,7 @@
             <Name>glibc-locales-hu</Name>
             <IsA>locale:hu</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-hu</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/hu_*</Path>
                 <Path fileType="localedata">/usr/share/locale/hu*</Path>
@@ -22238,6 +22551,7 @@
             <Name>glibc-locales-hy</Name>
             <IsA>locale:hy</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-hy</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/hy_*</Path>
                 <Path fileType="localedata">/usr/share/locale/hy*</Path>
@@ -22248,6 +22562,7 @@
             <Name>glibc-locales-ia</Name>
             <IsA>locale:ia</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ia</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ia_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ia*</Path>
@@ -22258,6 +22573,7 @@
             <Name>glibc-locales-id</Name>
             <IsA>locale:id</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-id</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/id_*</Path>
                 <Path fileType="localedata">/usr/share/locale/id*</Path>
@@ -22268,6 +22584,7 @@
             <Name>glibc-locales-ig</Name>
             <IsA>locale:ig</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ig</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ig_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ig*</Path>
@@ -22278,6 +22595,7 @@
             <Name>glibc-locales-ik</Name>
             <IsA>locale:ik</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ik</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ik_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ik*</Path>
@@ -22288,6 +22606,7 @@
             <Name>glibc-locales-is</Name>
             <IsA>locale:is</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-is</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/is_*</Path>
                 <Path fileType="localedata">/usr/share/locale/is*</Path>
@@ -22298,6 +22617,7 @@
             <Name>glibc-locales-it</Name>
             <IsA>locale:it</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-it</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/it_*</Path>
                 <Path fileType="localedata">/usr/share/locale/it*</Path>
@@ -22308,6 +22628,7 @@
             <Name>glibc-locales-iu</Name>
             <IsA>locale:iu</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-iu</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/iu_*</Path>
                 <Path fileType="localedata">/usr/share/locale/iu*</Path>
@@ -22318,6 +22639,7 @@
             <Name>glibc-locales-ja</Name>
             <IsA>locale:ja</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ja</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ja_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ja*</Path>
@@ -22328,6 +22650,7 @@
             <Name>glibc-locales-ka</Name>
             <IsA>locale:ka</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ka</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ka_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ka*</Path>
@@ -22338,6 +22661,7 @@
             <Name>glibc-locales-kk</Name>
             <IsA>locale:kk</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-kk</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/kk_*</Path>
                 <Path fileType="localedata">/usr/share/locale/kk*</Path>
@@ -22348,6 +22672,7 @@
             <Name>glibc-locales-kl</Name>
             <IsA>locale:kl</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-kl</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/kl_*</Path>
                 <Path fileType="localedata">/usr/share/locale/kl*</Path>
@@ -22358,6 +22683,7 @@
             <Name>glibc-locales-km</Name>
             <IsA>locale:km</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-km</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/km_*</Path>
                 <Path fileType="localedata">/usr/share/locale/km*</Path>
@@ -22368,6 +22694,7 @@
             <Name>glibc-locales-kn</Name>
             <IsA>locale:kn</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-kn</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/kn_*</Path>
                 <Path fileType="localedata">/usr/share/locale/kn*</Path>
@@ -22378,6 +22705,7 @@
             <Name>glibc-locales-ko</Name>
             <IsA>locale:ko</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ko</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ko_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ko*</Path>
@@ -22388,6 +22716,7 @@
             <Name>glibc-locales-kok</Name>
             <IsA>locale:kok</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-kok</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/kok_*</Path>
                 <Path fileType="localedata">/usr/share/locale/kok*</Path>
@@ -22398,6 +22727,7 @@
             <Name>glibc-locales-ks</Name>
             <IsA>locale:ks</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ks</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ks_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ks*</Path>
@@ -22408,6 +22738,7 @@
             <Name>glibc-locales-ku</Name>
             <IsA>locale:ku</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ku</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ku_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ku*</Path>
@@ -22418,6 +22749,7 @@
             <Name>glibc-locales-kw</Name>
             <IsA>locale:kw</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-kw</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/kw_*</Path>
                 <Path fileType="localedata">/usr/share/locale/kw*</Path>
@@ -22428,6 +22760,7 @@
             <Name>glibc-locales-ky</Name>
             <IsA>locale:ky</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ky</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ky_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ky*</Path>
@@ -22438,6 +22771,7 @@
             <Name>glibc-locales-lb</Name>
             <IsA>locale:lb</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-lb</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/lb_*</Path>
                 <Path fileType="localedata">/usr/share/locale/lb*</Path>
@@ -22448,6 +22782,7 @@
             <Name>glibc-locales-lg</Name>
             <IsA>locale:lg</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-lg</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/lg_*</Path>
                 <Path fileType="localedata">/usr/share/locale/lg*</Path>
@@ -22458,6 +22793,7 @@
             <Name>glibc-locales-li</Name>
             <IsA>locale:li</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-li</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/li_*</Path>
                 <Path fileType="localedata">/usr/share/locale/li*</Path>
@@ -22468,6 +22804,7 @@
             <Name>glibc-locales-lo</Name>
             <IsA>locale:lo</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-lo</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/lo_*</Path>
                 <Path fileType="localedata">/usr/share/locale/lo_*</Path>
@@ -22478,6 +22815,7 @@
             <Name>glibc-locales-lt</Name>
             <IsA>locale:lt</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-lt</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/lt_*</Path>
                 <Path fileType="localedata">/usr/share/locale/lt*</Path>
@@ -22488,6 +22826,7 @@
             <Name>glibc-locales-lv</Name>
             <IsA>locale:lv</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-lv</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/lv_*</Path>
                 <Path fileType="localedata">/usr/share/locale/lv*</Path>
@@ -22498,6 +22837,7 @@
             <Name>glibc-locales-mag</Name>
             <IsA>locale:mag</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-mag</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/mag_*</Path>
                 <Path fileType="localedata">/usr/share/locale/mag*</Path>
@@ -22508,6 +22848,7 @@
             <Name>glibc-locales-mai</Name>
             <IsA>locale:mai</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-mai</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/mai_*</Path>
                 <Path fileType="localedata">/usr/share/locale/mai*</Path>
@@ -22518,6 +22859,7 @@
             <Name>glibc-locales-mg</Name>
             <IsA>locale:mg</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-mg</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/mg_*</Path>
                 <Path fileType="localedata">/usr/share/locale/mg*</Path>
@@ -22528,6 +22870,7 @@
             <Name>glibc-locales-mhr</Name>
             <IsA>locale:mhr</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-mhr</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/mhr_*</Path>
                 <Path fileType="localedata">/usr/share/locale/mhr*</Path>
@@ -22538,6 +22881,7 @@
             <Name>glibc-locales-mi</Name>
             <IsA>locale:mi</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-mi</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/mi_*</Path>
                 <Path fileType="localedata">/usr/share/locale/mi*</Path>
@@ -22548,6 +22892,7 @@
             <Name>glibc-locales-mk</Name>
             <IsA>locale:mk</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-mk</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/mk_*</Path>
                 <Path fileType="localedata">/usr/share/locale/mk*</Path>
@@ -22558,6 +22903,7 @@
             <Name>glibc-locales-ml</Name>
             <IsA>locale:ml</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ml</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ml_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ml*</Path>
@@ -22568,6 +22914,7 @@
             <Name>glibc-locales-mn</Name>
             <IsA>locale:mn</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-mn</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/mn_*</Path>
                 <Path fileType="localedata">/usr/share/locale/mn*</Path>
@@ -22578,6 +22925,7 @@
             <Name>glibc-locales-mr</Name>
             <IsA>locale:mr</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-mr</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/mr_*</Path>
                 <Path fileType="localedata">/usr/share/locale/mr*</Path>
@@ -22588,6 +22936,7 @@
             <Name>glibc-locales-ms</Name>
             <IsA>locale:ms</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ms</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ms_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ms*</Path>
@@ -22598,6 +22947,7 @@
             <Name>glibc-locales-mt</Name>
             <IsA>locale:mt</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-mt</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/mt_*</Path>
                 <Path fileType="localedata">/usr/share/locale/mt*</Path>
@@ -22608,6 +22958,7 @@
             <Name>glibc-locales-my</Name>
             <IsA>locale:my</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-my</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/my_*</Path>
                 <Path fileType="localedata">/usr/share/locale/my*</Path>
@@ -22618,6 +22969,7 @@
             <Name>glibc-locales-nan</Name>
             <IsA>locale:nan</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-nan</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/nan_*</Path>
                 <Path fileType="localedata">/usr/share/locale/nan*</Path>
@@ -22628,6 +22980,7 @@
             <Name>glibc-locales-nb</Name>
             <IsA>locale:nb</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-nb</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/nb_*</Path>
                 <Path fileType="localedata">/usr/share/locale/nb*</Path>
@@ -22638,6 +22991,7 @@
             <Name>glibc-locales-nds</Name>
             <IsA>locale:nds</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-nds</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/nds_*</Path>
                 <Path fileType="localedata">/usr/share/locale/nds*</Path>
@@ -22648,6 +23002,7 @@
             <Name>glibc-locales-ne</Name>
             <IsA>locale:ne</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ne</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ne_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ne*</Path>
@@ -22658,6 +23013,7 @@
             <Name>glibc-locales-nl</Name>
             <IsA>locale:nl</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-nl</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/nl_*</Path>
                 <Path fileType="localedata">/usr/share/locale/nl*</Path>
@@ -22668,6 +23024,7 @@
             <Name>glibc-locales-nn</Name>
             <IsA>locale:nn</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-nn</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/nn_*</Path>
                 <Path fileType="localedata">/usr/share/locale/nn*</Path>
@@ -22678,6 +23035,7 @@
             <Name>glibc-locales-nr</Name>
             <IsA>locale:nr</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-nr</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/nr_*</Path>
                 <Path fileType="localedata">/usr/share/locale/nr*</Path>
@@ -22688,6 +23046,7 @@
             <Name>glibc-locales-nso</Name>
             <IsA>locale:nso</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-nso</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/nso_*</Path>
                 <Path fileType="localedata">/usr/share/locale/nso*</Path>
@@ -22698,6 +23057,7 @@
             <Name>glibc-locales-oc</Name>
             <IsA>locale:oc</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-oc</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/oc_*</Path>
                 <Path fileType="localedata">/usr/share/locale/oc*</Path>
@@ -22708,6 +23068,7 @@
             <Name>glibc-locales-om</Name>
             <IsA>locale:om</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-om</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/om_*</Path>
                 <Path fileType="localedata">/usr/share/locale/om*</Path>
@@ -22718,6 +23079,7 @@
             <Name>glibc-locales-or</Name>
             <IsA>locale:or</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-or</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/or_*</Path>
                 <Path fileType="localedata">/usr/share/locale/or*</Path>
@@ -22728,6 +23090,7 @@
             <Name>glibc-locales-os</Name>
             <IsA>locale:os</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-os</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/os_*</Path>
                 <Path fileType="localedata">/usr/share/locale/os*</Path>
@@ -22738,6 +23101,7 @@
             <Name>glibc-locales-pa</Name>
             <IsA>locale:pa</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-pa</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/pa_*</Path>
                 <Path fileType="localedata">/usr/share/locale/pa*</Path>
@@ -22748,6 +23112,7 @@
             <Name>glibc-locales-pap</Name>
             <IsA>locale:pap</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-pap</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/pap_*</Path>
                 <Path fileType="localedata">/usr/share/locale/pap*</Path>
@@ -22758,6 +23123,7 @@
             <Name>glibc-locales-pl</Name>
             <IsA>locale:pl</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-pl</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/pl_*</Path>
                 <Path fileType="localedata">/usr/share/locale/pl*</Path>
@@ -22768,6 +23134,7 @@
             <Name>glibc-locales-ps</Name>
             <IsA>locale:ps</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ps</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ps_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ps*</Path>
@@ -22778,6 +23145,7 @@
             <Name>glibc-locales-pt</Name>
             <IsA>locale:pt</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-pt</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/pt_*</Path>
                 <Path fileType="localedata">/usr/share/locale/pt*</Path>
@@ -22788,6 +23156,7 @@
             <Name>glibc-locales-ro</Name>
             <IsA>locale:ro</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ro</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ro_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ro*</Path>
@@ -22798,6 +23167,7 @@
             <Name>glibc-locales-ru</Name>
             <IsA>locale:ru</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ru</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ru_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ru*</Path>
@@ -22808,6 +23178,7 @@
             <Name>glibc-locales-rw</Name>
             <IsA>locale:rw</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-rw</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/rw_*</Path>
                 <Path fileType="localedata">/usr/share/locale/rw*</Path>
@@ -22818,6 +23189,7 @@
             <Name>glibc-locales-sc</Name>
             <IsA>locale:sc</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-sc</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sc_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sc*</Path>
@@ -22828,6 +23200,7 @@
             <Name>glibc-locales-sd</Name>
             <IsA>locale:sd</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-sd</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sd_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sd*</Path>
@@ -22838,6 +23211,7 @@
             <Name>glibc-locales-se</Name>
             <IsA>locale:se</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-se</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/se_*</Path>
                 <Path fileType="localedata">/usr/share/locale/se*</Path>
@@ -22848,6 +23222,7 @@
             <Name>glibc-locales-shs</Name>
             <IsA>locale:shs</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-shs</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/shs_*</Path>
                 <Path fileType="localedata">/usr/share/locale/shs*</Path>
@@ -22858,6 +23233,7 @@
             <Name>glibc-locales-si</Name>
             <IsA>locale:si</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-si</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/si_*</Path>
                 <Path fileType="localedata">/usr/share/locale/si*</Path>
@@ -22868,6 +23244,7 @@
             <Name>glibc-locales-sid</Name>
             <IsA>locale:sid</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-sid</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sid_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sid*</Path>
@@ -22878,6 +23255,7 @@
             <Name>glibc-locales-sk</Name>
             <IsA>locale:sk</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-sk</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sk_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sk*</Path>
@@ -22888,6 +23266,7 @@
             <Name>glibc-locales-sl</Name>
             <IsA>locale:sl</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-sl</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sl_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sl*</Path>
@@ -22898,6 +23277,7 @@
             <Name>glibc-locales-so</Name>
             <IsA>locale:so</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-so</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/so_*</Path>
                 <Path fileType="localedata">/usr/share/locale/so*</Path>
@@ -22908,6 +23288,7 @@
             <Name>glibc-locales-sq</Name>
             <IsA>locale:sq</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-sq</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sq_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sq*</Path>
@@ -22918,6 +23299,7 @@
             <Name>glibc-locales-sr</Name>
             <IsA>locale:sr</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-sr</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sr_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sr*</Path>
@@ -22928,6 +23310,7 @@
             <Name>glibc-locales-ss</Name>
             <IsA>locale:ss</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ss</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ss_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ss*</Path>
@@ -22938,6 +23321,7 @@
             <Name>glibc-locales-st</Name>
             <IsA>locale:st</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-st</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/st_*</Path>
                 <Path fileType="localedata">/usr/share/locale/st*</Path>
@@ -22948,6 +23332,7 @@
             <Name>glibc-locales-sv</Name>
             <IsA>locale:sv</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-sv</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sv_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sv*</Path>
@@ -22958,6 +23343,7 @@
             <Name>glibc-locales-sw</Name>
             <IsA>locale:sw</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-sw</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/sw_*</Path>
                 <Path fileType="localedata">/usr/share/locale/sw*</Path>
@@ -22968,6 +23354,7 @@
             <Name>glibc-locales-ta</Name>
             <IsA>locale:ta</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ta</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ta_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ta*</Path>
@@ -22978,6 +23365,7 @@
             <Name>glibc-locales-te</Name>
             <IsA>locale:te</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-te</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/te_*</Path>
                 <Path fileType="localedata">/usr/share/locale/te*</Path>
@@ -22988,6 +23376,7 @@
             <Name>glibc-locales-tg</Name>
             <IsA>locale:tg</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-tg</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/tg_*</Path>
                 <Path fileType="localedata">/usr/share/locale/tg*</Path>
@@ -22998,6 +23387,7 @@
             <Name>glibc-locales-th</Name>
             <IsA>locale:th</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-th</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/th_*</Path>
                 <Path fileType="localedata">/usr/share/locale/th*</Path>
@@ -23008,6 +23398,7 @@
             <Name>glibc-locales-ti</Name>
             <IsA>locale:ti</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ti</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ti_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ti*</Path>
@@ -23018,6 +23409,7 @@
             <Name>glibc-locales-tig</Name>
             <IsA>locale:tig</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-tig</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/tig_*</Path>
                 <Path fileType="localedata">/usr/share/locale/tig*</Path>
@@ -23028,6 +23420,7 @@
             <Name>glibc-locales-tk</Name>
             <IsA>locale:tk</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-tk</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/tk_*</Path>
                 <Path fileType="localedata">/usr/share/locale/tk*</Path>
@@ -23038,6 +23431,7 @@
             <Name>glibc-locales-tl</Name>
             <IsA>locale:tl</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-tl</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/tl_*</Path>
                 <Path fileType="localedata">/usr/share/locale/tl*</Path>
@@ -23048,6 +23442,7 @@
             <Name>glibc-locales-tn</Name>
             <IsA>locale:tn</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-tn</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/tn_*</Path>
                 <Path fileType="localedata">/usr/share/locale/tn*</Path>
@@ -23058,6 +23453,7 @@
             <Name>glibc-locales-ts</Name>
             <IsA>locale:ts</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ts</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ts_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ts*</Path>
@@ -23068,6 +23464,7 @@
             <Name>glibc-locales-tt</Name>
             <IsA>locale:tt</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-tt</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/tt_*</Path>
                 <Path fileType="localedata">/usr/share/locale/tt*</Path>
@@ -23078,6 +23475,7 @@
             <Name>glibc-locales-ug</Name>
             <IsA>locale:ug</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ug</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ug_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ug*</Path>
@@ -23088,6 +23486,7 @@
             <Name>glibc-locales-uk</Name>
             <IsA>locale:uk</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-uk</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/uk_*</Path>
                 <Path fileType="localedata">/usr/share/locale/uk*</Path>
@@ -23098,6 +23497,7 @@
             <Name>glibc-locales-ur</Name>
             <IsA>locale:ur</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ur</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ur_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ur*</Path>
@@ -23108,6 +23508,7 @@
             <Name>glibc-locales-uz</Name>
             <IsA>locale:uz</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-uz</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/uz_*</Path>
                 <Path fileType="localedata">/usr/share/locale/uz*</Path>
@@ -23118,6 +23519,7 @@
             <Name>glibc-locales-ve</Name>
             <IsA>locale:ve</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-ve</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/ve_*</Path>
                 <Path fileType="localedata">/usr/share/locale/ve*</Path>
@@ -23128,6 +23530,7 @@
             <Name>glibc-locales-vi</Name>
             <IsA>locale:vi</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-vi</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/vi_*</Path>
                 <Path fileType="localedata">/usr/share/locale/vi*</Path>
@@ -23138,6 +23541,7 @@
             <Name>glibc-locales-wa</Name>
             <IsA>locale:wa</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-wa</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/wa_*</Path>
                 <Path fileType="localedata">/usr/share/locale/wa*</Path>
@@ -23148,6 +23552,7 @@
             <Name>glibc-locales-wae</Name>
             <IsA>locale:wae</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-wae</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/wae_*</Path>
                 <Path fileType="localedata">/usr/share/locale/wae*</Path>
@@ -23158,6 +23563,7 @@
             <Name>glibc-locales-wal</Name>
             <IsA>locale:wal</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-wal</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/wal_*</Path>
                 <Path fileType="localedata">/usr/share/locale/wal*</Path>
@@ -23168,6 +23574,7 @@
             <Name>glibc-locales-wo</Name>
             <IsA>locale:wo</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-wo</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/wo_*</Path>
                 <Path fileType="localedata">/usr/share/locale/wo*</Path>
@@ -23178,6 +23585,7 @@
             <Name>glibc-locales-xh</Name>
             <IsA>locale:xh</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-xh</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/xh_*</Path>
                 <Path fileType="localedata">/usr/share/locale/xh*</Path>
@@ -23188,6 +23596,7 @@
             <Name>glibc-locales-yi</Name>
             <IsA>locale:yi</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-yi</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/yi_*</Path>
                 <Path fileType="localedata">/usr/share/locale/yi*</Path>
@@ -23198,6 +23607,7 @@
             <Name>glibc-locales-yo</Name>
             <IsA>locale:yo</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-yo</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/yo_*</Path>
                 <Path fileType="localedata">/usr/share/locale/yo*</Path>
@@ -23208,6 +23618,7 @@
             <Name>glibc-locales-yue</Name>
             <IsA>locale:yue</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-yue</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/yue_*</Path>
                 <Path fileType="localedata">/usr/share/locale/yue*</Path>
@@ -23218,6 +23629,7 @@
             <Name>glibc-locales-zh</Name>
             <IsA>locale:zh</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-zh</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/zh_*</Path>
                 <Path fileType="localedata">/usr/share/locale/zh*</Path>
@@ -23228,6 +23640,7 @@
             <Name>glibc-locales-zu</Name>
             <IsA>locale:zu</IsA>
             <PartOf>system.locale</PartOf>
+            <Icon>lang-zu</Icon>
             <Files>
                 <Path fileType="localedata">/usr/lib/locale/zu_*</Path>
                 <Path fileType="localedata">/usr/share/locale/zu*</Path>
@@ -23235,6 +23648,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2022-07-18</Date>
+                <Version>2.35</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="9">
                 <Date>2021-05-19</Date>
                 <Version>2.32</Version>
@@ -23318,7 +23738,7 @@
             <Description xml:lang="en">OpenSSL is a cryptography toolkit implementing the Secure Sockets Layer (SSL v2/v3) and Transport Layer Security (TLS v1) network protocols and related cryptography standards required by them.</Description>
             <Description xml:lang="tr">OpenSSL, Güvenlik Soketleri Katmanı (SSL v2/v3) ve Aktarım Katmanı Güvenliği (TLSv1) ağ protokolleri ile bu protokollerin gerektirdiği şifreleme standartlarını uygulayan bir şifreleme aracıdır.</Description>
             <Description xml:lang="de">OpenSSL ist ein Kryptographie Werkzeug, das die Netzwerkprotokolle Secure Sockets Layer (SSL v2/v3) und Transport Layer Security (TLS v1) sowie deren erforderliche zugehörige Kryptographie Standards implementiert.</Description>
-            <Archive type="targz" sha1sum="4b0936dd798f60c97c68fc62b73033ecba6dfb0c" name="openssl-1.1.1n.tar.gz">https://www.openssl.org/source/openssl-1.1.1n.tar.gz</Archive>
+            <Archive type="targz" sha1sum="79511a8f46f267c533efd32f22ad3bf89a92d8e5" name="openssl-1.1.1q.tar.gz">https://www.openssl.org/source/openssl-1.1.1q.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>xorg-util</Dependency>
@@ -23356,7 +23776,7 @@
             <Summary xml:lang="tr">openssl için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="13">openssl</Dependency>
+                <Dependency release="16">openssl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -23375,7 +23795,7 @@
                 <Dependency>zlib-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="13">openssl</Dependency>
+                <Dependency release="16">openssl</Dependency>
                 <Dependency>zlib-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -23383,6 +23803,27 @@
             </Files>
         </Package>
         <History>
+            <Update release="16">
+                <Date>2022-07-07</Date>
+                <Version>1.1.1q</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="15">
+                <Date>2022-06-26</Date>
+                <Version>1.1.1p</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="14">
+                <Date>2022-05-24</Date>
+                <Version>1.1.1o</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="13">
                 <Date>2022-04-23</Date>
                 <Version>1.1.1n</Version>
@@ -24655,7 +25096,7 @@
             <Summary xml:lang="tr">Python kurulum araçları</Summary>
             <Description xml:lang="en">python3-setuptools is a collection of enhancements to the Python distutils that allow you to more easily build and distribute Python packages, especially ones that have dependencies on other packages.</Description>
             <Description xml:lang="tr">python3-setuptools, Python distutils&apos;e yapılan, özellikle başka paketlere bağımlılığı olan Python paketlerini daha kolay oluşturmaya ve dağıtmaya yarayan iyileştirmeler koleksiyonudur.</Description>
-            <Archive type="targz" sha1sum="3264091526246f594f3d75b59112397c6a38c800" name="setuptools-57.5.0.tar.gz">https://files.pythonhosted.org/packages/20/f7/205a71cc9cc68f23afd9f3083002d0fb0a8c2277baf41a528395552e13c0/setuptools-57.5.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="6857985d72c5b23fc37eaa9f254e8d66c2ead0ad" name="setuptools-62.6.0.tar.gz">https://files.pythonhosted.org/packages/dc/73/88920663229023b724a854d1ab7e3e50a1a28b63eeec399a604ba30f9242/setuptools-62.6.0.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>python3-devel</Dependency>
                 <Dependency>python3-setuptools</Dependency>
@@ -24675,6 +25116,27 @@
             </Files>
         </Package>
         <History>
+            <Update release="28">
+                <Date>2022-06-24</Date>
+                <Version>62.6.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="27">
+                <Date>2022-06-08</Date>
+                <Version>62.3.3</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="26">
+                <Date>2022-05-20</Date>
+                <Version>62.3.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="25">
                 <Date>2022-04-23</Date>
                 <Version>57.5.0</Version>
@@ -24878,6 +25340,7 @@
             <Summary xml:lang="en">Core utilities for Python packages.</Summary>
             <RuntimeDependencies>
                 <Dependency versionFrom="3.9.7">python3</Dependency>
+                <Dependency>python3-pyparsing</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib/python3*</Path>
@@ -26195,16 +26658,13 @@
             <Summary xml:lang="tr">Docbook XSL biçemyaprakları</Summary>
             <Description xml:lang="en">These XSL stylesheets allow you to transform any DocBook XML document to other formats such as HTML, FO and XHTML.</Description>
             <Description xml:lang="tr">Docbook XSL biçemyapraklarını (stylesheets) içerir.</Description>
-            <Archive type="tarbz2" sha1sum="7487b2acc7106253bb77fcddc7e1a9788601ad23" name="docbook-xsl-1.79.1.tar.bz2">http://sourceforge.net/projects/docbook/files/docbook-xsl/1.79.1/docbook-xsl-1.79.1.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="fb4f60b3968777b5a794d1e1f9e5867b04517425" name="docbook-xsl-nons-1.79.2.tar.bz2">https://github.com/docbook/xslt10-stylesheets/releases/download/release%2F1.79.2/docbook-xsl-nons-1.79.2.tar.bz2</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="Makefile">Makefile</AdditionalFile>
             </AdditionalFiles>
             <Patches>
                 <Patch level="1">docbook-xsl-pagesetup.patch</Patch>
-                <Patch level="1">docbook-xsl-newmethods.patch</Patch>
                 <Patch level="1">docbook-xsl-non-constant-expressions.patch</Patch>
-                <Patch level="1">docbook-xsl-list-item-body.patch</Patch>
-                <Patch level="1">nonrecursive-string-subst.patch</Patch>
             </Patches>
             <SourceURI>office/docbook/docbook-xsl/pspec.xml</SourceURI>
         </Source>
@@ -26222,6 +26682,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2022-05-31</Date>
+                <Version>1.79.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2020-12-09</Date>
                 <Version>1.79.1</Version>
@@ -26640,10 +27107,15 @@
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.37.xz</Patch>
-                <Patch level="1">patches/mageia/fs-aufs5.15.patch</Patch>
-                <Patch level="1">patches/mageia/fs-aufs5.15-symbol-exports.patch</Patch>
-                <Patch level="1">patches/mageia/fs-aufs5.15-tristate.patch</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.50.xz</Patch>
+                <Patch level="1">patches/aufs5/aufs5.15.41-20220530.patch</Patch>
+                <Patch level="1">patches/aufs5/aufs5-base.patch</Patch>
+                <Patch level="1">patches/aufs5/aufs5-kbuild.patch</Patch>
+                <Patch level="1">patches/aufs5/aufs5-loopback.patch</Patch>
+                <Patch level="1">patches/aufs5/aufs5-mmap.patch</Patch>
+                <Patch level="1">patches/aufs5/tmpfs-idr.patch</Patch>
+                <Patch level="1">patches/aufs5/vfs-ino.patch</Patch>
+                <Patch level="1">patches/aufs5/aufs5-standalone.patch</Patch>
                 <Patch level="1">patches/mageia/fs-procfs-do-not-list-TID-0-in-proc-pid-task.patch</Patch>
                 <Patch level="1">patches/mageia/CVE-2019-12379.patch</Patch>
                 <Patch level="1">patches/mageia/CVE-2020-16119-DCCP-CCID-structure-use-after-free.patch</Patch>
@@ -26705,6 +27177,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="71">
+                <Date>2022-05-25</Date>
+                <Version>5.15.50</Version>
+                <Comment>Version bump</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="70">
+                <Date>2022-05-22</Date>
+                <Version>5.15.41</Version>
+                <Comment>Version bump</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="69">
                 <Date>2022-05-05</Date>
                 <Version>5.15.37</Version>
@@ -27310,10 +27796,15 @@
                 <Dependency>elfutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.37.xz</Patch>
-                <Patch level="1">patches/mageia/fs-aufs5.15.patch</Patch>
-                <Patch level="1">patches/mageia/fs-aufs5.15-symbol-exports.patch</Patch>
-                <Patch level="1">patches/mageia/fs-aufs5.15-tristate.patch</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.50.xz</Patch>
+                <Patch level="1">patches/aufs5/aufs5.15.41-20220530.patch</Patch>
+                <Patch level="1">patches/aufs5/aufs5-base.patch</Patch>
+                <Patch level="1">patches/aufs5/aufs5-kbuild.patch</Patch>
+                <Patch level="1">patches/aufs5/aufs5-loopback.patch</Patch>
+                <Patch level="1">patches/aufs5/aufs5-mmap.patch</Patch>
+                <Patch level="1">patches/aufs5/tmpfs-idr.patch</Patch>
+                <Patch level="1">patches/aufs5/vfs-ino.patch</Patch>
+                <Patch level="1">patches/aufs5/aufs5-standalone.patch</Patch>
                 <Patch level="1">patches/mageia/fs-procfs-do-not-list-TID-0-in-proc-pid-task.patch</Patch>
                 <Patch level="1">patches/mageia/CVE-2019-12379.patch</Patch>
                 <Patch level="1">patches/mageia/CVE-2020-16119-DCCP-CCID-structure-use-after-free.patch</Patch>
@@ -27383,7 +27874,7 @@
             <Description xml:lang="en">kernel-module-headers includes the C header files and the necessary Kbuild files for being able to build external kernel modules.</Description>
             <Description xml:lang="tr">kernel-module-headers, harici çekirdek modüllerinin derlenebilmesi için gereken başlık dosyaları ve Kbuild sistemini içeren pakettir.</Description>
             <RuntimeDependencies>
-                <Dependency release="71">kernel</Dependency>
+                <Dependency release="73">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/src/linux-headers*</Path>
@@ -27414,6 +27905,28 @@
             </Files>
         </Package>
         <History>
+            <Update release="73">
+                <Type package="kernel">security</Type>
+                <Date>2022-06-25</Date>
+                <Version>5.15.50</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="72">
+                <Type package="kernel">security</Type>
+                <Date>2022-05-22</Date>
+                <Version>5.15.41</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
             <Update release="71">
                 <Type package="kernel">security</Type>
                 <Date>2022-05-05</Date>
@@ -28199,7 +28712,7 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78" name="v0.8.tar.gz">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.37">kernel-module-headers</Dependency>
+                <Dependency version="5.15.50">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">0001-proc_ops-struct.patch</Patch>
@@ -28210,8 +28723,8 @@
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="5.15.37">kernel</Dependency>
-                <Dependency release="64">bbswitch-common</Dependency>
+                <Dependency version="5.15.50">kernel</Dependency>
+                <Dependency release="66">bbswitch-common</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/lib/modules</Path>
@@ -28234,7 +28747,7 @@
         <Package>
             <Name>bbswitch-dkms</Name>
             <RuntimeDependencies>
-                <Dependency release="64">bbswitch-common</Dependency>
+                <Dependency release="66">bbswitch-common</Dependency>
                 <Dependency>dkms</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -28245,6 +28758,20 @@
             </Conflicts>
         </Package>
         <History>
+            <Update release="66">
+                <Date>2022-06-25</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="65">
+                <Date>2022-05-22</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="64">
                 <Date>2022-05-05</Date>
                 <Version>0.8</Version>
@@ -28712,7 +29239,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox için çekirdek desteği sunar.</Description>
             <Archive type="tarxz" sha1sum="e51516e3222fb282b6dcc451d2e0a36de51c7c77" name="module-virtualbox-6.1.34.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-6.1.34.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.37">kernel-module-headers</Dependency>
+                <Dependency version="5.15.50">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -28722,7 +29249,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.15.37">kernel</Dependency>
+                <Dependency version="5.15.50">kernel</Dependency>
                 <Dependency version="6.1.34">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -28744,6 +29271,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="98">
+                <Date>2022-06-25</Date>
+                <Version>6.1.34</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="97">
+                <Date>2022-05-22</Date>
+                <Version>6.1.34</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="96">
                 <Date>2022-05-05</Date>
                 <Version>6.1.34</Version>
@@ -29784,7 +30325,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
             <Archive type="tarxz" sha1sum="bbd176279b471cfcdcc2a6d61836b43a5c229c31" name="module-virtualbox-guest-6.1.34.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-6.1.34.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.37">kernel-module-headers</Dependency>
+                <Dependency version="5.15.50">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -29794,7 +30335,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.15.37">kernel</Dependency>
+                <Dependency version="5.15.50">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
                 <Dependency version="6.1.34">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
@@ -29821,6 +30362,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="98">
+                <Date>2022-06-25</Date>
+                <Version>6.1.34</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="97">
+                <Date>2022-05-22</Date>
+                <Version>6.1.34</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="96">
                 <Date>2022-05-05</Date>
                 <Version>6.1.34</Version>
@@ -30520,7 +31075,7 @@
             <Archive type="targz" sha1sum="8acbdbb4ab4ab4123d1773b616904798fbef9277" target="i686" name="hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <Archive type="targz" sha1sum="1f568bb989d175813c5631c6629d9479eae6f3be" target="x86_64" name="hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.37">kernel-module-headers</Dependency>
+                <Dependency version="5.15.50">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">broadcom-wl-6.30.223.271-debian-fix-kernel-warnings.patch</Patch>
@@ -30549,8 +31104,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.15.37">kernel</Dependency>
-                <Dependency release="63">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="5.15.50">kernel</Dependency>
+                <Dependency release="65">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -30574,6 +31129,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="65">
+                <Date>2022-06-25</Date>
+                <Version>6.30.223.271</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="64">
+                <Date>2022-05-22</Date>
+                <Version>6.30.223.271</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="63">
                 <Date>2022-05-05</Date>
                 <Version>6.30.223.271</Version>
@@ -31037,7 +31606,7 @@
             <Summary xml:lang="tr">Linux çekirdeği tarafından kullanılan firmware dosyaları</Summary>
             <Description xml:lang="en">linux-firmware contains different firmware files required for some devices to operate correctly.</Description>
             <Description xml:lang="tr">linux-firmware, bazı aygıtların düzgün çalışabilmesi için gerekli firmware dosyalarını içerir.</Description>
-            <Archive type="targz" sha1sum="143c3d27290c96bb36ffe2644295bc8fff204cea" name="linux-firmware-20220411.tar.gz">https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-20220411.tar.gz</Archive>
+            <Archive type="tarxz" sha1sum="bfa6bb5b68df73ce235ee49ca0d5b5b5f40e446f" name="linux-firmware-20220708.tar.xz">https://mirrors.edge.kernel.org/pub/linux/kernel/firmware/linux-firmware-20220708.tar.xz</Archive>
             <Archive type="tarxz" sha1sum="dd685266f7bc0acb0d455462637d23e3e895bc96" target="linux-firmware/mix" name="common-fw.tar.xz">http://sourceforge.net/projects/pisilinux/files/source/common-fw.tar.xz</Archive>
             <Archive type="tarxz" sha1sum="b2bb7fce3ea67d131f543a48134f7a65f2a8d834" target="linux-firmware/mix" name="firmware-ipw.tar.xz">http://sourceforge.net/projects/pisilinux/files/source/firmware-ipw.tar.xz</Archive>
             <Archive type="tarbz2" sha1sum="a5a616a9f765cf9cbb224deb7ccefdc82a7fe4d9" target="linux-firmware/mix" name="firmware-nonfreebox-2-tar.bz2">http://sourceforge.net/projects/pisilinux/files/source/firmware-nonfreebox-2-tar.bz2</Archive>
@@ -31073,6 +31642,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="17">
+                <Date>2022-07-09</Date>
+                <Version>20220708</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="16">
                 <Date>2022-05-05</Date>
                 <Version>20220411</Version>
@@ -31201,7 +31777,7 @@
             <Summary xml:lang="en">This package contains the wireless regulatory database used by all cfg80211 based Linux wireless drivers</Summary>
             <Description xml:lang="en">This package contains the wireless regulatory database used by all cfg80211 based Linux wireless drivers</Description>
             <Icon>wireless-regdb</Icon>
-            <Archive type="tarxz" sha1sum="7131e3d5e90055aa2313472e2bc83deda6fd9227" name="wireless-regdb-2020.04.29.tar.xz">https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-2020.04.29.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="96499744dc3e984a4a62486aebccb15599a43426" name="wireless-regdb-2022.06.06.tar.xz">https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-2022.06.06.tar.xz</Archive>
             <SourceURI>hardware/firmware/wireless-regdb/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -31215,6 +31791,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2022-06-10</Date>
+                <Version>2022.06.06</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="3">
                 <Date>2020-12-09</Date>
                 <Version>2020.04.29</Version>
@@ -31253,7 +31836,7 @@
             <Summary xml:lang="tr">MS-DOS (Windows) disketlerinize -mount ile bağlamadan- erişim araçları</Summary>
             <Description xml:lang="en">Mtools are utilities to access MS-DOS disks without mounting them.</Description>
             <Description xml:lang="tr">Mtools diskinizdeki MS-DOS (Windows) bölümlerine -mount komutu ile bağlamadan- erişebilmek için gereken araç setidir.</Description>
-            <Archive type="targz" sha1sum="2c5bfffbb4f9f35416b353493f28b13c767ef4ec" name="mtools-4.0.34.tar.gz">mirrors://gnu/mtools/mtools-4.0.34.tar.gz</Archive>
+            <Archive type="targz" sha1sum="9a64516b5a3fd1131c6b697c828a16654c8f3fcc" name="mtools-4.0.40.tar.gz">mirrors://gnu/mtools/mtools-4.0.40.tar.gz</Archive>
             <SourceURI>hardware/disk/mtools/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -31267,6 +31850,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2022-06-06</Date>
+                <Version>4.0.40</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2021-07-24</Date>
                 <Version>4.0.34</Version>
