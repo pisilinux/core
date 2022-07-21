@@ -2306,7 +2306,7 @@
             <Summary xml:lang="tr">Ninja, hız odaklı bir inşa sistemidir.</Summary>
             <Description xml:lang="en">Ninja is a small build system with a focus on speed.</Description>
             <Description xml:lang="tr">Ninja is a small build system with a focus on speed.</Description>
-            <Archive type="targz" sha1sum="8d2e8c1c070c27fb9dc46b4a6345bbb1de7ccbaf" name="ninja-1.10.2.tar.gz">https://github.com/ninja-build/ninja/archive/v1.10.2.tar.gz</Archive>
+            <Archive type="targz" sha1sum="f8c9279bdd4efc63b1a6be3b8c5a5031699af9ac" name="ninja-1.11.0.tar.gz">https://github.com/ninja-build/ninja/archive/v1.11.0.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>re2c</Dependency>
                 <Dependency>asciidoc</Dependency>
@@ -2325,6 +2325,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="16">
+                <Date>2022-07-20</Date>
+                <Version>1.11.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="15">
                 <Date>2021-10-24</Date>
                 <Version>1.10.2</Version>
@@ -3224,7 +3231,7 @@
                 <Dependency>python3-devel</Dependency>
                 <Dependency>libffi-devel</Dependency>
                 <Dependency>python-devel</Dependency>
-                <Dependency versionFrom="2.72.2">glib2-devel</Dependency>
+                <Dependency versionFrom="2.72.3">glib2-devel</Dependency>
                 <Dependency>chrpath</Dependency>
             </BuildDependencies>
             <SourceURI>system/devel/gobject-introspection/pspec.xml</SourceURI>
@@ -3246,7 +3253,7 @@
             <Name>gobject-introspection-devel</Name>
             <Summary xml:lang="en">Development files for gobject-introspection</Summary>
             <RuntimeDependencies>
-                <Dependency release="15">gobject-introspection</Dependency>
+                <Dependency release="16">gobject-introspection</Dependency>
                 <Dependency>libffi</Dependency>
                 <Dependency>glib2</Dependency>
                 <Dependency>libffi-devel</Dependency>
@@ -3264,6 +3271,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="16">
+                <Date>2022-07-21</Date>
+                <Version>1.72.0</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="15">
                 <Date>2022-06-30</Date>
                 <Version>1.72.0</Version>
@@ -4422,7 +4436,7 @@
             <Summary xml:lang="tr">High productivity build system</Summary>
             <Description xml:lang="en">Yüksek verimli üretme sistemi</Description>
             <Description xml:lang="tr">Yüksek verimli üretme sistemi</Description>
-            <Archive type="targz" sha1sum="25a82635f5b4e43d3b126ecaaccc99bfff575a92" name="meson-0.62.2.tar.gz">https://github.com/mesonbuild/meson/releases/download/0.62.2/meson-0.62.2.tar.gz</Archive>
+            <Archive type="targz" sha1sum="85b1c71b598686e40632b5a57ac7f2bdd1dcd926" name="meson-0.63.0.tar.gz">https://github.com/mesonbuild/meson/releases/download/0.63.0/meson-0.63.0.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency versionFrom="3.9.11">python3-devel</Dependency>
                 <Dependency>python3-setuptools</Dependency>
@@ -4446,6 +4460,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="31">
+                <Date>2022-07-21</Date>
+                <Version>0.63.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="30">
                 <Date>2022-06-28</Date>
                 <Version>0.62.2</Version>
@@ -11526,7 +11547,7 @@
             <BuildDependencies>
                 <Dependency>glibc-devel</Dependency>
                 <Dependency>libkmod-devel</Dependency>
-                <Dependency>libutil-linux-devel</Dependency>
+                <Dependency versionFrom="2.37.4">libutil-linux-devel</Dependency>
                 <Dependency>libpcre-devel</Dependency>
                 <Dependency>libxslt-devel</Dependency>
                 <Dependency>gperf</Dependency>
@@ -11569,7 +11590,7 @@
             <Summary xml:lang="en">Development files for eudev</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="14">eudev</Dependency>
+                <Dependency release="15">eudev</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/</Path>
@@ -11592,6 +11613,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="15">
+                <Date>2022-07-21</Date>
+                <Version>3.2.10</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="14">
                 <Date>2021-06-12</Date>
                 <Version>3.2.10</Version>
@@ -11810,7 +11838,7 @@
             <Summary xml:lang="tr">Çeşitli kullanışlı Linux araçları</Summary>
             <Description xml:lang="en">The util-linux package contains a large variety of low-level system utilities that are necessary for a Linux system to function.</Description>
             <Description xml:lang="tr">util-linux paketi, bir Linux sisteminin işlevsel olması için gerekli olan birçok düşük seviye sistem uygulamasını içerir.</Description>
-            <Archive type="tarxz" sha1sum="cf99c3df18cf0a13033ec2d3d1a31587eba825d9" name="util-linux-2.36.tar.xz">https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.36/util-linux-2.36.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="6e6c49c1dbb288b90b933e4328bde4786172f021" name="util-linux-2.37.4.tar.xz">https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.37/util-linux-2.37.4.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>eudev-devel</Dependency>
@@ -11830,9 +11858,10 @@
         <Package>
             <Name>util-linux</Name>
             <RuntimeDependencies>
-                <Dependency version="2.36">libutil-linux</Dependency>
+                <Dependency version="2.37.4">libutil-linux</Dependency>
                 <Dependency>zlib</Dependency>
                 <Dependency>pam</Dependency>
+                <Dependency>file</Dependency>
                 <Dependency>perl</Dependency>
                 <Dependency>ncurses</Dependency>
                 <Dependency>readline</Dependency>
@@ -11903,7 +11932,7 @@
             <IsA>header</IsA>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="15">libutil-linux</Dependency>
+                <Dependency release="16">libutil-linux</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/</Path>
@@ -11940,6 +11969,13 @@
             </Replaces>
         </Package>
         <History>
+            <Update release="16">
+                <Date>2022-07-21</Date>
+                <Version>2.37.4</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="15">
                 <Date>2021-03-14</Date>
                 <Version>2.36</Version>
@@ -13552,7 +13588,7 @@
                 <Dependency>libgpg-error-devel</Dependency>
                 <Dependency>libgcrypt-devel</Dependency>
                 <Dependency>python-devel</Dependency>
-                <Dependency>libutil-linux-devel</Dependency>
+                <Dependency versionFrom="2.37.4">libutil-linux-devel</Dependency>
                 <Dependency>popt-devel</Dependency>
                 <Dependency>popt</Dependency>
                 <Dependency>openssl-devel</Dependency>
@@ -13606,6 +13642,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2022-07-21</Date>
+                <Version>2.3.4</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="10">
                 <Date>2021-05-28</Date>
                 <Version>2.3.4</Version>
@@ -16106,6 +16149,7 @@
             <Archive type="targz" sha1sum="9eb81f50e36e349f57297d1a2a61b48707a551cc" name="dbus-glib-0.112.tar.gz">http://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.112.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>python3</Dependency>
+                <Dependency>gtk-doc</Dependency>
                 <Dependency>dbus-devel</Dependency>
                 <Dependency>glib2-devel</Dependency>
                 <Dependency>libpcre-devel</Dependency>
@@ -16156,7 +16200,7 @@
             <Update release="15">
                 <Date>2022-07-18</Date>
                 <Version>0.112</Version>
-                <Comment>Rebuild.</Comment>
+                <Comment>Rebuild</Comment>
                 <Name>Mustafa Cinasal</Name>
                 <Email>muscnsl@gmail.com</Email>
             </Update>
@@ -18135,26 +18179,22 @@
             <Description xml:lang="fr">polkit est un cadre de développement (framework) pour définir des politiques à appliquer à des composants du système ainsi que fournir à des parties du bureau la possibilité de les configurer.</Description>
             <Description xml:lang="en">polkit is a toolkit for defining and handling authorizations. It is used for allowing unprivileged processes to speak to privileged processes.</Description>
             <Description xml:lang="tr">polkit, sistem genelindeki bileşenlerin ve masaüstü bileşenlerinin ayarlayabileceği şekilde ilkeler tanımlamak için araçlardan oluşur.</Description>
-            <Archive type="targz" sha1sum="75d5885251eef36b28851e095120bc1f60714160" name="polkit-0.120.tar.gz">http://www.freedesktop.org/software/polkit/releases/polkit-0.120.tar.gz</Archive>
+            <Archive type="tarbz2" sha1sum="8961b976a5b6da141481593cb524da5b049fce2e" name="polkit-121.tar.bz2">https://gitlab.freedesktop.org/polkit/polkit/-/archive/121/polkit-121.tar.bz2</Archive>
             <BuildDependencies>
+                <Dependency>meson</Dependency>
                 <Dependency>python3</Dependency>
                 <Dependency>dbus-devel</Dependency>
                 <Dependency versionFrom="1.5.1">pam-devel</Dependency>
                 <Dependency>glib2-devel</Dependency>
                 <Dependency>expat-devel</Dependency>
-                <Dependency>duktape-devel</Dependency>
+                <Dependency versionFrom="2.7.0">duktape-devel</Dependency>
                 <Dependency>gettext-devel</Dependency>
                 <Dependency>elogind-devel</Dependency>
                 <Dependency>gobject-introspection-devel</Dependency>
                 <Dependency>intltool</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch level="1">0001-Updated-build-args-for-Pisi-Linux.patch</Patch>
-                <Patch level="1">polkit-0.118-duktape.patch</Patch>
-                <Patch level="1">polkit-0.118-elogind.patch</Patch>
                 <Patch level="1">use-system-locale-in-gobject-api.diff</Patch>
-                <Patch level="1">CVE-2021-4034.patch</Patch>
-                <Patch level="1">CVE-2021-4115.patch</Patch>
             </Patches>
             <SourceURI>system/base/polkit/pspec.xml</SourceURI>
         </Source>
@@ -18164,7 +18204,7 @@
             <Summary xml:lang="tr">polkit geliştirme başlıkları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="16">polkit</Dependency>
+                <Dependency release="17">polkit</Dependency>
                 <Dependency>glib2-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -18209,6 +18249,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="17">
+                <Date>2022-07-21</Date>
+                <Version>0.121</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="16">
                 <Date>2022-07-18</Date>
                 <Version>0.120</Version>
@@ -19129,7 +19176,7 @@
             <Description xml:lang="tr">e2fsprogs ext2 dosya sistemi için standart dosya sistemi uygulamaları sağlar. ext3/4 dosya sistemlerinin günlüğe kaydetme özelliklerini de destekler.</Description>
             <Archive type="targz" sha1sum="4eaeaa0dd3fe8e5d915ff241903a78f8b28c6b20" name="e2fsprogs-1.46.3.tar.gz">mirrors://sourceforge/e2fsprogs/e2fsprogs-1.46.3.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency>libutil-linux-devel</Dependency>
+                <Dependency versionFrom="2.37.4">libutil-linux-devel</Dependency>
                 <Dependency>gettext</Dependency>
                 <Dependency>texinfo</Dependency>
                 <Dependency>util-linux</Dependency>
@@ -19170,7 +19217,7 @@
             <Summary xml:lang="tr">e2fsprogs için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="11">e2fsprogs</Dependency>
+                <Dependency release="12">e2fsprogs</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -19179,6 +19226,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="12">
+                <Date>2022-07-21</Date>
+                <Version>1.46.3</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="11">
                 <Date>2021-08-06</Date>
                 <Version>1.46.3</Version>
@@ -19802,7 +19856,7 @@
                 <Dependency>libffi-devel</Dependency>
                 <Dependency>elfutils-devel</Dependency>
                 <Dependency>libxslt-devel</Dependency>
-                <Dependency>libutil-linux-devel</Dependency>
+                <Dependency versionFrom="2.37.4">libutil-linux-devel</Dependency>
                 <Dependency versionFrom="8.43">libpcre-devel</Dependency>
             </BuildDependencies>
             <Patches>
@@ -19845,7 +19899,7 @@
             <Summary xml:lang="tr">glib2 için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="21">glib2</Dependency>
+                <Dependency release="22">glib2</Dependency>
                 <Dependency>libpcre-devel</Dependency>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>libffi-devel</Dependency>
@@ -19891,7 +19945,7 @@
                 <Dependency>elfutils-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="21">glib2</Dependency>
+                <Dependency release="22">glib2</Dependency>
                 <Dependency>libpcre-32bit</Dependency>
                 <Dependency>zlib-32bit</Dependency>
                 <Dependency>libffi-32bit</Dependency>
@@ -19913,6 +19967,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="22">
+                <Date>2022-07-21</Date>
+                <Version>2.72.3</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="21">
                 <Date>2022-06-30</Date>
                 <Version>2.72.3</Version>
@@ -24421,10 +24482,7 @@
             <Summary xml:lang="tr">Embeddable Javascript engine</Summary>
             <Description xml:lang="en">Embeddable Javascript engine</Description>
             <Description xml:lang="tr">Embeddable Javascript engine</Description>
-            <Archive type="tarxz" sha1sum="5936bf5e9943128b53a9e534e0a6842532b52bb5" name="duktape-2.6.0.tar.xz">https://duktape.org/duktape-2.6.0.tar.xz</Archive>
-            <AdditionalFiles>
-                <AdditionalFile target="Makefile">Makefile</AdditionalFile>
-            </AdditionalFiles>
+            <Archive type="tarxz" sha1sum="8200c8e417dbab7adcc12c4dbdef7651cfc55794" name="duktape-2.7.0.tar.xz">https://duktape.org/duktape-2.7.0.tar.xz</Archive>
             <Patches>
                 <Patch level="1">duktape-build.patch</Patch>
             </Patches>
@@ -24437,15 +24495,12 @@
                 <Path fileType="data">/usr/share</Path>
                 <Path fileType="doc">/usr/share/doc</Path>
             </Files>
-            <AdditionalFiles>
-                <AdditionalFile target="/usr/share/pkgconfig/duktape.pc" permission="0644" owner="root">duktape.pc</AdditionalFile>
-            </AdditionalFiles>
         </Package>
         <Package>
             <Name>duktape-devel</Name>
             <Summary xml:lang="en">Development files for duktape</Summary>
             <RuntimeDependencies>
-                <Dependency release="1">duktape</Dependency>
+                <Dependency release="2">duktape</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -24453,6 +24508,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="2">
+                <Date>2022-07-20</Date>
+                <Version>2.7.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="1">
                 <Date>2021-04-20</Date>
                 <Version>2.6.0</Version>
@@ -26373,7 +26435,7 @@
             <Archive type="tarbz2" sha1sum="aa63af9a86ab6ed0c92ea8b177dc808c18902c73" name="xmlto-0.0.28.tar.bz2">https://releases.pagure.org/xmlto/xmlto-0.0.28.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>libxslt-devel</Dependency>
-                <Dependency>util-linux</Dependency>
+                <Dependency versionFrom="2.37.4">util-linux</Dependency>
                 <Dependency>docbook-xsl</Dependency>
                 <Dependency>docbook-xml</Dependency>
             </BuildDependencies>
@@ -26395,6 +26457,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2022-07-21</Date>
+                <Version>0.0.28</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2021-04-19</Date>
                 <Version>0.0.28</Version>
@@ -27107,7 +27176,7 @@
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.50.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.55.xz</Patch>
                 <Patch level="1">patches/aufs5/aufs5.15.41-20220530.patch</Patch>
                 <Patch level="1">patches/aufs5/aufs5-base.patch</Patch>
                 <Patch level="1">patches/aufs5/aufs5-kbuild.patch</Patch>
@@ -27177,6 +27246,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="72">
+                <Date>2022-07-21</Date>
+                <Version>5.15.55</Version>
+                <Comment>Version bump</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="71">
                 <Date>2022-05-25</Date>
                 <Version>5.15.50</Version>
@@ -27796,7 +27872,7 @@
                 <Dependency>elfutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.50.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.55.xz</Patch>
                 <Patch level="1">patches/aufs5/aufs5.15.41-20220530.patch</Patch>
                 <Patch level="1">patches/aufs5/aufs5-base.patch</Patch>
                 <Patch level="1">patches/aufs5/aufs5-kbuild.patch</Patch>
@@ -27874,7 +27950,7 @@
             <Description xml:lang="en">kernel-module-headers includes the C header files and the necessary Kbuild files for being able to build external kernel modules.</Description>
             <Description xml:lang="tr">kernel-module-headers, harici çekirdek modüllerinin derlenebilmesi için gereken başlık dosyaları ve Kbuild sistemini içeren pakettir.</Description>
             <RuntimeDependencies>
-                <Dependency release="73">kernel</Dependency>
+                <Dependency release="74">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/src/linux-headers*</Path>
@@ -27905,6 +27981,17 @@
             </Files>
         </Package>
         <History>
+            <Update release="74">
+                <Type package="kernel">security</Type>
+                <Date>2022-07-21</Date>
+                <Version>5.15.55</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
             <Update release="73">
                 <Type package="kernel">security</Type>
                 <Date>2022-06-25</Date>
@@ -28712,7 +28799,7 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78" name="v0.8.tar.gz">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.50">kernel-module-headers</Dependency>
+                <Dependency version="5.15.55">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">0001-proc_ops-struct.patch</Patch>
@@ -28723,8 +28810,8 @@
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="5.15.50">kernel</Dependency>
-                <Dependency release="66">bbswitch-common</Dependency>
+                <Dependency version="5.15.55">kernel</Dependency>
+                <Dependency release="67">bbswitch-common</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/lib/modules</Path>
@@ -28747,7 +28834,7 @@
         <Package>
             <Name>bbswitch-dkms</Name>
             <RuntimeDependencies>
-                <Dependency release="66">bbswitch-common</Dependency>
+                <Dependency release="67">bbswitch-common</Dependency>
                 <Dependency>dkms</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -28758,6 +28845,13 @@
             </Conflicts>
         </Package>
         <History>
+            <Update release="67">
+                <Date>2022-07-21</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="66">
                 <Date>2022-06-25</Date>
                 <Version>0.8</Version>
@@ -29237,9 +29331,9 @@
             <Summary xml:lang="tr">VirtualBox için çekirdek modülleri</Summary>
             <Description xml:lang="en">This package provides the kernel support for VirtualBox.</Description>
             <Description xml:lang="tr">Bu paket VirtualBox için çekirdek desteği sunar.</Description>
-            <Archive type="tarxz" sha1sum="e51516e3222fb282b6dcc451d2e0a36de51c7c77" name="module-virtualbox-6.1.34.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-6.1.34.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="8b5612187116e7772d6acde2753ce03d0720b40c" name="module-virtualbox-6.1.36.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-6.1.36.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.50">kernel-module-headers</Dependency>
+                <Dependency version="5.15.55">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -29249,8 +29343,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.15.50">kernel</Dependency>
-                <Dependency version="6.1.34">module-virtualbox-userspace</Dependency>
+                <Dependency version="5.15.55">kernel</Dependency>
+                <Dependency version="6.1.36">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -29271,6 +29365,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="99">
+                <Date>2022-07-21</Date>
+                <Version>6.1.36</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="98">
                 <Date>2022-06-25</Date>
                 <Version>6.1.34</Version>
@@ -30323,9 +30424,9 @@
             <Summary xml:lang="tr">VirtualBox misafir makineleri için çekirdek modülleri</Summary>
             <Description xml:lang="en">This package provides the kernel modules needed for mouse integration and shared folder support between VirtualBox host and guest systems.</Description>
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
-            <Archive type="tarxz" sha1sum="bbd176279b471cfcdcc2a6d61836b43a5c229c31" name="module-virtualbox-guest-6.1.34.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-6.1.34.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="fde0592dbcd9262dcdac8f585b7a366c1ca8b73d" name="module-virtualbox-guest-6.1.36.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-6.1.36.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.50">kernel-module-headers</Dependency>
+                <Dependency version="5.15.55">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -30335,9 +30436,9 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.15.50">kernel</Dependency>
+                <Dependency version="5.15.55">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
-                <Dependency version="6.1.34">module-virtualbox-guest-userspace</Dependency>
+                <Dependency version="6.1.36">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -30362,6 +30463,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="99">
+                <Date>2022-07-21</Date>
+                <Version>6.1.36</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="98">
                 <Date>2022-06-25</Date>
                 <Version>6.1.34</Version>
@@ -31075,7 +31183,7 @@
             <Archive type="targz" sha1sum="8acbdbb4ab4ab4123d1773b616904798fbef9277" target="i686" name="hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <Archive type="targz" sha1sum="1f568bb989d175813c5631c6629d9479eae6f3be" target="x86_64" name="hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.50">kernel-module-headers</Dependency>
+                <Dependency version="5.15.55">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">broadcom-wl-6.30.223.271-debian-fix-kernel-warnings.patch</Patch>
@@ -31104,8 +31212,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.15.50">kernel</Dependency>
-                <Dependency release="65">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="5.15.55">kernel</Dependency>
+                <Dependency release="66">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -31129,6 +31237,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="66">
+                <Date>2022-07-21</Date>
+                <Version>6.30.223.271</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="65">
                 <Date>2022-06-25</Date>
                 <Version>6.30.223.271</Version>
@@ -32004,7 +32119,7 @@
             <Description xml:lang="tr">LVM fiziksel ve mantıksal hacimler üzerinde gerçekleştirilen bütün okuma/yazma işlemlerini destekleyen araçları içerir.</Description>
             <Archive type="targz" sha1sum="7a3834ca1ddaa7c4edc3863f18ec604f45722c65" name="LVM2.2.02.186.tgz">http://mirrors.kernel.org/sourceware/lvm2/LVM2.2.02.186.tgz</Archive>
             <BuildDependencies>
-                <Dependency>libutil-linux-devel</Dependency>
+                <Dependency versionFrom="2.37.4">libutil-linux-devel</Dependency>
                 <Dependency>eudev-devel</Dependency>
                 <Dependency>libaio-devel</Dependency>
                 <Dependency>readline-devel</Dependency>
@@ -32044,7 +32159,7 @@
             <Summary xml:lang="tr">device-mapper için geliştirme dosyaları</Summary>
             <Description xml:lang="en">Device-mapper-devel contains files needed to develop applications that use the device-mapper libraries.</Description>
             <RuntimeDependencies>
-                <Dependency release="8">device-mapper</Dependency>
+                <Dependency release="9">device-mapper</Dependency>
                 <Dependency>eudev-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -32058,7 +32173,7 @@
             <Summary xml:lang="tr">Device mapper durum servisi</Summary>
             <Description xml:lang="en">This package contains the dmeventd daemon for monitoring the state of device-mapper devices.</Description>
             <RuntimeDependencies>
-                <Dependency release="8">device-mapper</Dependency>
+                <Dependency release="9">device-mapper</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/sbin/dmeventd</Path>
@@ -32077,7 +32192,7 @@
             <Summary xml:lang="tr">device-mapper-event için geliştirme dosyaları</Summary>
             <Description xml:lang="en">This contains contains files needed to develop applications that use the device-mapper event library.</Description>
             <RuntimeDependencies>
-                <Dependency release="8">device-mapper-event</Dependency>
+                <Dependency release="9">device-mapper-event</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/libdevmapper-event.h</Path>
@@ -32089,8 +32204,8 @@
             <Summary xml:lang="en">Userland logical volume management tools</Summary>
             <Description xml:lang="en">LVM2 includes all of the support for handling read/write operations on physical volumes,creating volume groups from one or more physical volumes and creating one or more logical volumes in volume groups.</Description>
             <RuntimeDependencies>
-                <Dependency release="8">device-mapper</Dependency>
-                <Dependency release="8">device-mapper-event</Dependency>
+                <Dependency release="9">device-mapper</Dependency>
+                <Dependency release="9">device-mapper-event</Dependency>
                 <Dependency>libaio</Dependency>
                 <Dependency>eudev</Dependency>
                 <Dependency>libutil-linux</Dependency>
@@ -32147,9 +32262,9 @@
             <Summary xml:lang="tr">lvm2 için geliştirme dosyaları</Summary>
             <Description xml:lang="en">This package contains files needed to develop applications that use the lvm2 libraries.</Description>
             <RuntimeDependencies>
-                <Dependency release="8">lvm2</Dependency>
-                <Dependency release="8">device-mapper-devel</Dependency>
-                <Dependency release="8">device-mapper-event-devel</Dependency>
+                <Dependency release="9">lvm2</Dependency>
+                <Dependency release="9">device-mapper-devel</Dependency>
+                <Dependency release="9">device-mapper-event-devel</Dependency>
                 <Dependency>libutil-linux-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -32159,6 +32274,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2022-07-21</Date>
+                <Version>2.02.186</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@pisilinux.org</Email>
+            </Update>
             <Update release="8">
                 <Date>2021-09-14</Date>
                 <Version>2.02.186</Version>
