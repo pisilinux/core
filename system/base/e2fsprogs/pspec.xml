@@ -14,7 +14,7 @@
         <Description>e2fsprogs provides the filesystem utilities for use with the ext2 filesystem. It also supports the ext3/4 filesystem with journaling support.</Description>
         <Archive sha1sum="4eaeaa0dd3fe8e5d915ff241903a78f8b28c6b20" type="targz">mirrors://sourceforge/e2fsprogs/e2fsprogs-1.46.3.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency>libutil-linux-devel</Dependency>
+            <Dependency versionFrom="2.37.4">libutil-linux-devel</Dependency>
             <!-- The first release shipped within util-linux -->
             <Dependency>gettext</Dependency>
             <Dependency>texinfo</Dependency>
@@ -70,6 +70,13 @@
     </Package>
 
     <History>
+        <Update release="12">
+            <Date>2022-07-21</Date>
+            <Version>1.46.3</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="11">
             <Date>2021-08-06</Date>
             <Version>1.46.3</Version>
