@@ -15,9 +15,10 @@ from pisi.actionsapi import get
     #pisitools.dosed("Makefile.sharedlibrary", "INSTALL_PREFIX = /usr/local", "INSTALL_PREFIX = /usr")
     
 def build():
-    autotools.make()
+    shelltools.sym("Makefile.sharedlibrary", "Makefile")
+    autotools.make("INSTALL_PREFIX=/usr")
 
 def install():
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    autotools.rawInstall("DESTDIR=%s INSTALL_PREFIX=/usr" % get.installDIR())
 
     pisitools.dodoc("AUTHORS*", "LICENSE*", "README*")

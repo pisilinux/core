@@ -12,9 +12,9 @@
         <IsA>library</IsA>
         <Summary>Embeddable Javascript engine</Summary>
         <Description>Embeddable Javascript engine</Description>
-        <Archive sha1sum="5936bf5e9943128b53a9e534e0a6842532b52bb5" type="tarxz">https://duktape.org/duktape-2.6.0.tar.xz</Archive>
+        <Archive sha1sum="8200c8e417dbab7adcc12c4dbdef7651cfc55794" type="tarxz">https://duktape.org/duktape-2.7.0.tar.xz</Archive>
         <AdditionalFiles>
-            <AdditionalFile target="Makefile">Makefile</AdditionalFile>
+<!--             <AdditionalFile target="Makefile">Makefile</AdditionalFile> -->
 <!--             <AdditionalFile target="duktape.pc.in">duktape.pc.in</AdditionalFile> -->
         </AdditionalFiles>
         <BuildDependencies>
@@ -32,7 +32,7 @@
             <Path fileType="doc">/usr/share/doc</Path>
         </Files>
         <AdditionalFiles>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/pkgconfig/duktape.pc">duktape.pc</AdditionalFile>
+<!--             <AdditionalFile owner="root" permission="0644" target="/usr/share/pkgconfig/duktape.pc">duktape.pc</AdditionalFile> -->
         </AdditionalFiles>
     </Package>
 
@@ -49,6 +49,13 @@
     </Package>
 
     <History>
+        <Update release="2">
+            <Date>2022-07-20</Date>
+            <Version>2.7.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="1">
             <Date>2021-04-20</Date>
             <Version>2.6.0</Version>
