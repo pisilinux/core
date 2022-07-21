@@ -16,6 +16,7 @@
         <Archive sha1sum="9eb81f50e36e349f57297d1a2a61b48707a551cc" type="targz">http://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.112.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>python3</Dependency>
+            <Dependency>gtk-doc</Dependency>
             <Dependency>dbus-devel</Dependency>
             <!-- New dbus uses GVariant data structure. We need glib2 >= 2.24 -->
             <Dependency>glib2-devel</Dependency>

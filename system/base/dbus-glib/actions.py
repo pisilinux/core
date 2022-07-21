@@ -10,14 +10,13 @@ from pisi.actionsapi import libtools
 from pisi.actionsapi import get
 
 def setup():
-    #libtools.libtoolize("--force --copy")
-    autotools.autoreconf("-f")
+    libtools.libtoolize("--force --copy")
+    autotools.autoreconf("-fi")
 
     autotools.configure("--localstatedir=/var \
                          --enable-bash-completion \
                          --disable-doxygen-docs \
                          --enable-gtk-doc=no \
-                         --without-gtk-doc \
                          --enable-gtk-doc-html=no \
                          --disable-static")
 
