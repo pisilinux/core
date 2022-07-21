@@ -14,8 +14,9 @@
         <IsA>app:console</IsA>
         <Summary>PolicyKit Authorization Framework</Summary>
         <Description>polkit is a toolkit for defining and handling authorizations. It is used for allowing unprivileged processes to speak to privileged processes.</Description>
-        <Archive sha1sum="75d5885251eef36b28851e095120bc1f60714160" type="targz">http://www.freedesktop.org/software/polkit/releases/polkit-0.120.tar.gz</Archive>
+        <Archive sha1sum="8961b976a5b6da141481593cb524da5b049fce2e" type="tarbz2">https://gitlab.freedesktop.org/polkit/polkit/-/archive/121/polkit-121.tar.bz2</Archive>
         <BuildDependencies>
+            <Dependency>meson</Dependency>
             <Dependency>python3</Dependency>
             <Dependency>dbus-devel</Dependency>
             <Dependency versionFrom="1.5.1">pam-devel</Dependency>
@@ -29,12 +30,12 @@
             <Dependency>intltool</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">0001-Updated-build-args-for-Pisi-Linux.patch</Patch>
-            <Patch level="1">polkit-0.118-duktape.patch</Patch>
-            <Patch level="1">polkit-0.118-elogind.patch</Patch>
+<!--             <Patch level="1">0001-Updated-build-args-for-Pisi-Linux.patch</Patch> -->
+<!--             <Patch level="1">polkit-0.118-duktape.patch</Patch> -->
+<!--             <Patch level="1">polkit-0.118-elogind.patch</Patch> -->
             <Patch level="1">use-system-locale-in-gobject-api.diff</Patch>
-            <Patch level="1">CVE-2021-4034.patch</Patch>
-            <Patch level="1">CVE-2021-4115.patch</Patch>
+<!--             <Patch level="1">CVE-2021-4034.patch</Patch> -->
+<!--             <Patch level="1">CVE-2021-4115.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -94,6 +95,13 @@
     </Package>
 
     <History>
+        <Update release="17">
+            <Date>2022-07-21</Date>
+            <Version>0.121</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="16">
             <Date>2022-07-18</Date>
             <Version>0.120</Version>
