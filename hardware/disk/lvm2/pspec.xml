@@ -14,7 +14,7 @@
         <Description>LVM2 includes all of the support for handling read/write operations physical and logical volumes.</Description>
         <Archive sha1sum="7a3834ca1ddaa7c4edc3863f18ec604f45722c65" type="targz">http://mirrors.kernel.org/sourceware/lvm2/LVM2.2.02.186.tgz</Archive>
         <BuildDependencies>
-            <Dependency>libutil-linux-devel</Dependency>
+            <Dependency versionFrom="2.37.4">libutil-linux-devel</Dependency>
             <Dependency>eudev-devel</Dependency>
             <Dependency>libaio-devel</Dependency>
             <Dependency>readline-devel</Dependency>
@@ -186,6 +186,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2022-07-21</Date>
+            <Version>2.02.186</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@pisilinux.org</Email>
+        </Update>
         <Update release="8">
             <Date>2021-09-14</Date>
             <Version>2.02.186</Version>
