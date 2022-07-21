@@ -21,7 +21,7 @@
             <Dependency>libffi-devel</Dependency>
             <Dependency>elfutils-devel</Dependency>
             <Dependency>libxslt-devel</Dependency><!-- for man=true  -->
-            <Dependency>libutil-linux-devel</Dependency>
+            <Dependency versionFrom="2.37.4">libutil-linux-devel</Dependency>
             <Dependency versionFrom="8.43">libpcre-devel</Dependency>
         </BuildDependencies>
         <Patches>
@@ -141,7 +141,7 @@
 
     <History>
         <Update release="22">
-            <Date>2022-07-19</Date>
+            <Date>2022-07-21</Date>
             <Version>2.72.3</Version>
             <Comment>Rebuild.</Comment>
             <Name>Mustafa Cinasal</Name>
