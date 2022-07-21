@@ -33,8 +33,10 @@ def setup():
                --disable-sulogin \
                --disable-utmpdump \
                --disable-chfn-chsh \
+               --enable-gtk-doc-html=no \
                --disable-makeinstall-chown \
                --disable-socket-activation \
+               --without-systemdsystemunitdir \
               "
 
     if get.buildTYPE() == "emul32":
@@ -59,7 +61,7 @@ def setup():
                      --bindir=/bin \
                      --sbindir=/sbin \
                      --enable-partx \
-                     --enable-raw \
+                     --disable-raw \
                      --enable-write \
                      --enable-tunelp \
                      --enable-runuser \
@@ -68,8 +70,8 @@ def setup():
                      --enable-mountpoint \
                      --without-utempter \
                    "
-
-    autotools.autoreconf("-fi")
+    shelltools.system("NOCONFIGURE=1 ./autogen.sh")
+    #autotools.autoreconf("-fi")
     autotools.configure(options)
     pisitools.dosed("libtool", "( -shared )", r" -Wl,--as-needed\1")
 

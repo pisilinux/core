@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>Various useful Linux utilities</Summary>
         <Description>The util-linux package contains a large variety of low-level system utilities that are necessary for a Linux system to function.</Description>
-        <Archive sha1sum="cf99c3df18cf0a13033ec2d3d1a31587eba825d9" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.36/util-linux-2.36.tar.xz</Archive>
+        <Archive sha1sum="6e6c49c1dbb288b90b933e4328bde4786172f021" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.37/util-linux-2.37.4.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>zlib-devel</Dependency>
             <Dependency>eudev-devel</Dependency>
@@ -41,6 +41,7 @@
             <Dependency version="current">libutil-linux</Dependency>
             <Dependency>zlib</Dependency>
             <Dependency>pam</Dependency>
+            <Dependency>file</Dependency>
             <Dependency>perl</Dependency>
             <Dependency>ncurses</Dependency>
             <Dependency>readline</Dependency>
@@ -151,6 +152,13 @@
     </Package>
 
     <History>
+        <Update release="16">
+            <Date>2022-07-21</Date>
+            <Version>2.37.4</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="15">
             <Date>2021-03-14</Date>
             <Version>2.36</Version>
