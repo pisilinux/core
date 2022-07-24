@@ -11,12 +11,13 @@
         <License>FTL</License>
         <License>GPLv2</License>
         <IsA>library</IsA>
+        <Icon>freetype2</Icon>
         <Summary>A high-quality and portable font engine</Summary>
         <Description>FreeType 2 is a software font engine that is designed to be small, efficient, highly customizable, and portable while capable of producing high-quality output. It can be used in graphics libraries, display servers, font conversion tools, text image generation tools, and many other products as well.</Description>
-        <Archive sha1sum="86bdc98b37efe447cf53420bf2c18402ff905112" type="tarxz">mirrors://sourceforge/freetype/freetype-2.11.1.tar.xz</Archive>
+        <Archive sha1sum="5133eed28a7624ffabbf6d00aa3f68b841d62d80" type="tarxz">mirrors://sourceforge/freetype/freetype-2.12.1.tar.xz</Archive>
         <BuildDependencies>
-            <Dependency>zlib-devel</Dependency>
             <Dependency>bzip2</Dependency>
+            <Dependency>zlib-devel</Dependency>
             <Dependency>libpng-devel</Dependency>
         </BuildDependencies>
         <Patches>
@@ -78,6 +79,13 @@
     </Package>
 
     <History>
+        <Update release="12">
+            <Date>2022-07-24</Date>
+            <Version>2.12.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="11">
             <Date>2021-12-05</Date>
             <Version>2.11.1</Version>
