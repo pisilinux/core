@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>Various useful Linux utilities</Summary>
         <Description>The util-linux package contains a large variety of low-level system utilities that are necessary for a Linux system to function.</Description>
-        <Archive sha1sum="6e6c49c1dbb288b90b933e4328bde4786172f021" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.37/util-linux-2.37.4.tar.xz</Archive>
+        <Archive sha1sum="f62a7b6fe64ce7f4569b57d7d2d0875b39f79836" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.1.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>zlib-devel</Dependency>
             <Dependency>eudev-devel</Dependency>
@@ -28,6 +28,7 @@
         </BuildDependencies>
         <Patches>
              <Patch level="1">upstream/util-linux-ng-2.21-login-lastlog.patch</Patch>
+<!--              <Patch level="1">util-linux-2.37.2-ioctl_ns-test-hang.patch</Patch> -->
 <!--              <Patch level="1">0001-libfdisk-script-accept-sector-size-ignore-unknown-he.patch</Patch> -->
 <!--              <Patch level="1">0003-lsblk-fix-P-regression-from-v2.34.patch</Patch> -->
 <!-- 			 <Patch level="1">0001-lsblk-force-to-print-PKNAME-for-partition.patch</Patch> -->
@@ -152,6 +153,20 @@
     </Package>
 
     <History>
+        <Update release="18">
+            <Date>2022-08-07</Date>
+            <Version>2.38.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="17">
+            <Date>2022-08-04</Date>
+            <Version>2.37.4</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="16">
             <Date>2022-07-21</Date>
             <Version>2.37.4</Version>

@@ -33,6 +33,7 @@ def setup():
                --disable-sulogin \
                --disable-utmpdump \
                --disable-chfn-chsh \
+               --without-systemd \
                --enable-gtk-doc-html=no \
                --disable-makeinstall-chown \
                --disable-socket-activation \
