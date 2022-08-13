@@ -34,6 +34,7 @@ def setup():
                --disable-utmpdump \
                --disable-chfn-chsh \
                --without-systemd \
+               --without-selinux \
                --enable-gtk-doc-html=no \
                --disable-makeinstall-chown \
                --disable-socket-activation \
