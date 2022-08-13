@@ -20,7 +20,7 @@ def setup():
     pisitools.cflags.remove("-fstack-protector", "-fasynchronous-unwind-tables", "-fexceptions", "-fPIC")
     pisitools.cflags.sub("\s?(-O[\ds]|-D_FORTIFY_SOURCE=\d)\s?", " ")
 
-    pisitools.dosed('util/grub-mkconfig.in', 'GRUB_DISABLE_OS_PROBER="true"', 'GRUB_DISABLE_OS_PROBER="false"')
+    #pisitools.dosed('util/grub-mkconfig.in', 'GRUB_DISABLE_OS_PROBER="true"', 'GRUB_DISABLE_OS_PROBER="false"')
     #shelltools.system("./linguas.sh")
     shelltools.system("./bootstrap")
     autotools.configure("--disable-werror \
