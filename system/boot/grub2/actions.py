@@ -21,9 +21,13 @@ def setup():
     pisitools.cflags.sub("\s?(-O[\ds]|-D_FORTIFY_SOURCE=\d)\s?", " ")
 
     #pisitools.dosed('util/grub-mkconfig.in', 'GRUB_DISABLE_OS_PROBER="true"', 'GRUB_DISABLE_OS_PROBER="false"')
-    #shelltools.system("./linguas.sh")
+    shelltools.system("./linguas.sh")
     shelltools.system("./bootstrap")
+    shelltools.system('echo "Make translations reproducible..."')
+    shelltools.system("sed -i '1i /^PO-Revision-Date:/ d' po/*.sed")
+
     autotools.configure("--disable-werror \
+                         --with-bootdir='/boot' \
                          --with-grubdir=grub2 \
                          --program-transform-name='s,grub,grub2,'\
                          --program-prefix= \
@@ -36,6 +40,7 @@ def setup():
     shelltools.cd("../grub-%s-efi" % get.srcVERSION())
     shelltools.system("./bootstrap")
     autotools.configure("--disable-werror \
+                         --with-bootdir='/boot' \
                          --with-grubdir=grub2 \
                          --program-transform-name='s,grub,grub2,'\
                          --program-prefix= \
@@ -45,7 +50,7 @@ def setup():
     
     
     shelltools.cd("..")
-    
+
     
 def build():
     #make-dist for creating all updated translation files
