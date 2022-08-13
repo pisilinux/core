@@ -24,6 +24,7 @@ def setup():
          --with-rootlibdir=/lib \
          --enable-split-usr     \
          --enable-static        \
+         --disable-selinux \
          --disable-manpages "
 
     if get.buildTYPE() == "emul32":
