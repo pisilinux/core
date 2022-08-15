@@ -920,7 +920,8 @@
             <Description xml:lang="fr">CMake, système make open-source et multi-plateforme. CMake est utilisé pour contrôler le processus de compilation de logiciel en utilisant une plate-forme de fichiers de configuration simple et indépendante de compilateur. CMake génère des makefiles et un environnement de travail natifs pouvant être utilisés dans l&apos;environnement du compilateur de votre choix.</Description>
             <Description xml:lang="en">CMake, the cross-platform, open-source make system. CMake is used to control the software compilation process using simple platform and compiler independent configuration files. CMake generates native makefiles and workspaces that can be used in the compiler environment of your choice.</Description>
             <Description xml:lang="tr">Cmake, açık kaynak kodlu ve birden fazla platformda çalışan bir &apos;make&apos; sistemidir. Yazılım derleme sürecini kontrol etmek için kullanılan CMake, derleyici bağımsız yapılandırma dosyalarının oluşturulmasını sağlar.</Description>
-            <Archive type="targz" sha1sum="057d3d40d49fe1503edb62735a73de399d90c92c" name="cmake-3.22.5.tar.gz">https://github.com/Kitware/CMake/releases/download/v3.22.5/cmake-3.22.5.tar.gz</Archive>
+            <Icon>cmake</Icon>
+            <Archive type="targz" sha1sum="66a03a086f7e24f5734cce59214a3144e4e2fc87" name="cmake-3.22.6.tar.gz">https://github.com/Kitware/CMake/releases/download/v3.22.6/cmake-3.22.6.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>curl-devel</Dependency>
                 <Dependency versionFrom="2.4.8">expat-devel</Dependency>
@@ -955,6 +956,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="24">
+                <Date>2022-07-30</Date>
+                <Version>3.22.6</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="23">
                 <Date>2022-07-18</Date>
                 <Version>3.22.5</Version>
@@ -2463,7 +2471,7 @@
             <Summary xml:lang="de">X.Org Protokoll Header</Summary>
             <Description xml:lang="en">This package includes the protocol headers needed for X11 development.</Description>
             <Description xml:lang="tr">Bu paket, X11 geliştirme için gerekli protokol başlıklarını içerir.</Description>
-            <Archive type="tarbz2" sha1sum="27fdd97a7c559446c0e25c1d9149a4a00bde1cfd" name="xorgproto-2022.1.tar.bz2">mirrors://xorg/individual/proto/xorgproto-2022.1.tar.bz2</Archive>
+            <Archive type="tarxz" sha1sum="c04081d31e06e771a673c7af9df989bf95ac2d8c" name="xorgproto-2022.2.tar.xz">mirrors://xorg/individual/proto/xorgproto-2022.2.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>meson</Dependency>
                 <Dependency versionFrom="1.19.3">util-macros</Dependency>
@@ -2483,6 +2491,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="15">
+                <Date>2022-08-11</Date>
+                <Version>2022.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="14">
                 <Date>2022-05-05</Date>
                 <Version>2022.1</Version>
@@ -5224,7 +5239,7 @@
             <Description xml:lang="fr">Automake est un outil de génération automatique de Makefiles compatibles avec les standards de Codage GNU. Vous aurez également besoin d&apos;installer le paquet GNU AutoConf</Description>
             <Description xml:lang="en">Automake is a tool for automatically generating Makefile.in files compliant with the GNU Coding Standards.</Description>
             <Description xml:lang="tr">Makefile.am yapılandırma dosyalarından GNU kodlama standartlarına uygun Makefile.in dosyası üreten program. Bununla birlikte Autoconf paketini de yüklemelisiniz.</Description>
-            <Archive type="tarxz" sha1sum="f87fd355c6142e4e87d7a69702697f3a30c922d8" name="automake-1.16.2.tar.xz">mirrors://gnu/automake/automake-1.16.2.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="32fb36e73568271ff506b60c55a6170b67681375" name="automake-1.16.5.tar.xz">mirrors://gnu/automake/automake-1.16.5.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>perl</Dependency>
                 <Dependency>autoconf</Dependency>
@@ -5250,6 +5265,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2022-08-05</Date>
+                <Version>1.16.5</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2020-12-09</Date>
                 <Version>1.16.2</Version>
@@ -5316,7 +5338,7 @@
             <Summary xml:lang="tr">Python kurulum araçları</Summary>
             <Description xml:lang="en">python-setuptools is a collection of enhancements to the Python distutils that allow you to more easily build and distribute Python packages, especially ones that have dependencies on other packages.</Description>
             <Description xml:lang="tr">python-setuptools, Python distutils&apos;e yapılan, özellikle başka paketlere bağımlılığı olan Python paketlerini daha kolay oluşturmaya ve dağıtmaya yarayan iyileştirmeler koleksiyonudur.</Description>
-            <Archive type="targz" sha1sum="abed68517b8e1c8b6c641d340f18118d080829dc" name="v45.2.0.tar.gz">https://github.com/pypa/setuptools/archive/v45.2.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="d1f7197659bb37a30c198908a723d58abc882724" name="v44.1.1.tar.gz">https://github.com/pypa/setuptools/archive/refs/tags/v44.1.1.tar.gz</Archive>
             <SourceURI>system/devel/python-setuptools/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -5330,6 +5352,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2022-07-29</Date>
+                <Version>44.1.1</Version>
+                <Comment>Downgrade for better software compatible.</Comment>
+                <Name>fury</Name>
+                <Email>uglyside@yandex.ru</Email>
+            </Update>
             <Update release="8">
                 <Date>2020-12-09</Date>
                 <Version>45.2.0</Version>
@@ -5849,6 +5878,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="24">
+                <Date>2022-08-13</Date>
+                <Version>2.06</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="23">
                 <Date>2022-05-15</Date>
                 <Version>2.06</Version>
@@ -6710,6 +6746,9 @@
             <Description xml:lang="en">XZ Utils provide a general purpose data compression library and command line tools. The .xz format supports multiple compression algorithms, which are called &quot;filters&quot; in context of XZ Utils. The primary filter is currently LZMA2.</Description>
             <Description xml:lang="tr">xz, genel amaçlı bir veri sıkıştırma kütüphanesi ve konut satırı araçları içerir. xz dosya biçimi filtre adı verilen sıkıştırma algoritmalarını destekler, öntanımlı filtre ise LZMA2 algoritmasıdır.</Description>
             <Archive type="tarxz" sha1sum="0b9d1e06b59f7fe0796afe1d93851b9306b4a3b6" name="xz-5.2.5.tar.xz">http://tukaani.org/xz/xz-5.2.5.tar.xz</Archive>
+            <Patches>
+                <Patch level="1">xzgrep-ZDI-CAN-16587.patch</Patch>
+            </Patches>
             <SourceURI>system/base/xz/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -6728,7 +6767,7 @@
             <Summary xml:lang="tr">XZ için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="7">xz</Dependency>
+                <Dependency release="8">xz</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -6743,13 +6782,20 @@
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="7">xz</Dependency>
+                <Dependency release="8">xz</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2022-08-08</Date>
+                <Version>5.2.5</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2020-12-09</Date>
                 <Version>5.2.5</Version>
@@ -9470,6 +9516,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="21">
+                <Date>2022-07-23</Date>
+                <Version>2.7.2</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="20">
                 <Date>2022-06-27</Date>
                 <Version>2.7.2</Version>
@@ -10336,6 +10389,7 @@
                 <Patch level="1">dont-call-ldconfig.patch</Patch>
                 <Patch level="1">ec3df00224d4.patch</Patch>
                 <Patch level="1">05796d3d8d55.patch</Patch>
+                <Patch level="1">e490ddad3091574a0c2e3b5a66a8fee9a7ab212f.diff</Patch>
             </Patches>
             <SourceURI>system/base/zlib/pspec.xml</SourceURI>
         </Source>
@@ -10346,7 +10400,7 @@
             <PartOf>util.archive</PartOf>
             <BuildType>minizip</BuildType>
             <RuntimeDependencies>
-                <Dependency release="10">zlib</Dependency>
+                <Dependency release="11">zlib</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib/libminizip*</Path>
@@ -10359,8 +10413,8 @@
             <PartOf>util.archive</PartOf>
             <BuildType>minizip</BuildType>
             <RuntimeDependencies>
-                <Dependency release="10">minizip</Dependency>
-                <Dependency release="10">zlib-devel</Dependency>
+                <Dependency release="11">minizip</Dependency>
+                <Dependency release="11">zlib-devel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/minizip</Path>
@@ -10382,7 +10436,7 @@
             <Summary xml:lang="tr">zlib için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="10">zlib</Dependency>
+                <Dependency release="11">zlib</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/lib/pkgconfig/zlib.pc</Path>
@@ -10400,13 +10454,20 @@
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="10">zlib</Dependency>
+                <Dependency release="11">zlib</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32/libz.so*</Path>
             </Files>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2022-08-08</Date>
+                <Version>1.2.12</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="10">
                 <Date>2022-05-05</Date>
                 <Version>1.2.12</Version>
@@ -11540,14 +11601,14 @@
             <Summary xml:lang="tr">eudev sistemd-udev uygulamasının çatalı</Summary>
             <Description xml:lang="en">eudev is a fork of system-udev with the goal of obtaining better compatibility with existing software such as OpenRC and Upstart, older kernels, various toolchains and anything else required by users and various distributions.</Description>
             <Description xml:lang="tr">eudev sistem-udev uygulamasının OpenRC, Upstart gibi başlangıç sistemleri ile uyumu için  hazırlanmış çatalı</Description>
-            <Archive type="targz" sha1sum="fae85739e3c1e3bdf9fe74e1fecad7ee1e3a2fa4" name="v3.2.10.tar.gz">https://github.com/gentoo/eudev/archive/v3.2.10.tar.gz</Archive>
+            <Archive type="targz" sha1sum="f84fba92bd1dd6c49ee0054ae336862e38cea46b" name="v3.2.11.tar.gz">https://github.com/gentoo/eudev/archive/v3.2.11.tar.gz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="config.cache">config.cache</AdditionalFile>
             </AdditionalFiles>
             <BuildDependencies>
                 <Dependency>glibc-devel</Dependency>
                 <Dependency>libkmod-devel</Dependency>
-                <Dependency versionFrom="2.37.4">libutil-linux-devel</Dependency>
+                <Dependency versionFrom="2.38.1">libutil-linux-devel</Dependency>
                 <Dependency>libpcre-devel</Dependency>
                 <Dependency>libxslt-devel</Dependency>
                 <Dependency>gperf</Dependency>
@@ -11590,7 +11651,7 @@
             <Summary xml:lang="en">Development files for eudev</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="15">eudev</Dependency>
+                <Dependency release="16">eudev</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/</Path>
@@ -11613,6 +11674,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="16">
+                <Date>2022-08-13</Date>
+                <Version>3.2.11</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="15">
                 <Date>2022-07-21</Date>
                 <Version>3.2.10</Version>
@@ -11838,7 +11906,7 @@
             <Summary xml:lang="tr">Çeşitli kullanışlı Linux araçları</Summary>
             <Description xml:lang="en">The util-linux package contains a large variety of low-level system utilities that are necessary for a Linux system to function.</Description>
             <Description xml:lang="tr">util-linux paketi, bir Linux sisteminin işlevsel olması için gerekli olan birçok düşük seviye sistem uygulamasını içerir.</Description>
-            <Archive type="tarxz" sha1sum="6e6c49c1dbb288b90b933e4328bde4786172f021" name="util-linux-2.37.4.tar.xz">https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.37/util-linux-2.37.4.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="f62a7b6fe64ce7f4569b57d7d2d0875b39f79836" name="util-linux-2.38.1.tar.xz">https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.1.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>eudev-devel</Dependency>
@@ -11858,7 +11926,7 @@
         <Package>
             <Name>util-linux</Name>
             <RuntimeDependencies>
-                <Dependency version="2.37.4">libutil-linux</Dependency>
+                <Dependency version="2.38.1">libutil-linux</Dependency>
                 <Dependency>zlib</Dependency>
                 <Dependency>pam</Dependency>
                 <Dependency>file</Dependency>
@@ -11932,7 +12000,7 @@
             <IsA>header</IsA>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="16">libutil-linux</Dependency>
+                <Dependency release="17">libutil-linux</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/</Path>
@@ -11969,6 +12037,13 @@
             </Replaces>
         </Package>
         <History>
+            <Update release="17">
+                <Date>2022-08-07</Date>
+                <Version>2.38.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="16">
                 <Date>2022-07-21</Date>
                 <Version>2.37.4</Version>
@@ -12541,7 +12616,7 @@
         </Package>
         <History>
             <Update release="21">
-                <Date>2022-07-05</Date>
+                <Date>2022-07-22</Date>
                 <Version>1.8.1</Version>
                 <Comment>Rebuild.</Comment>
                 <Name>Mustafa Cinasal</Name>
@@ -13240,7 +13315,7 @@
             <Summary xml:lang="tr">ncurses için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="9">ncurses</Dependency>
+                <Dependency release="10">ncurses</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13257,7 +13332,7 @@
             <PartOf>emul32</PartOf>
             <BuildType>_emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="9">ncurses</Dependency>
+                <Dependency release="10">ncurses</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
@@ -13265,6 +13340,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2022-07-24</Date>
+                <Version>6.3</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="9">
                 <Date>2022-05-05</Date>
                 <Version>6.3</Version>
@@ -14364,7 +14446,7 @@
             <Summary xml:lang="tr">python için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="20">python</Dependency>
+                <Dependency release="21">python</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -14372,6 +14454,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="21">
+                <Date>2022-07-23</Date>
+                <Version>2.7.18</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="20">
                 <Date>2022-07-18</Date>
                 <Version>2.7.18</Version>
@@ -16449,6 +16538,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2022-07-25</Date>
+                <Version>3.0.3.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Kamil Atlıl</Name>
+                <Email>suvari@pisilinux.org</Email>
+            </Update>
             <Update release="7">
                 <Date>2021-06-14</Date>
                 <Version>3.0.3.1</Version>
@@ -18565,6 +18661,8 @@
                 <Patch level="1">fedora/unzip-zipbomb-part4.patch</Patch>
                 <Patch level="1">fedora/unzip-zipbomb-part5.patch</Patch>
                 <Patch level="1">fedora/unzip-zipbomb-part6.patch</Patch>
+                <Patch level="1">fedora/unzip-zipbomb-switch.patch</Patch>
+                <Patch level="1">unzip-6.0_CVE-2021-4217.patch</Patch>
             </Patches>
             <SourceURI>system/base/unzip/pspec.xml</SourceURI>
         </Source>
@@ -18582,6 +18680,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2022-08-10</Date>
+                <Version>60</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnslp@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2021-11-23</Date>
                 <Version>60</Version>
@@ -24423,6 +24528,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2022-07-25</Date>
+                <Version>2.4.9</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2020-12-09</Date>
                 <Version>2.4.9</Version>
@@ -24920,10 +25032,11 @@
             <Description xml:lang="fr">FreeType2 est un moteur logiciel de fontes conçu pour être petit, efficace, très flexible et portable tout en étant capable de produire une sortie de très haute qualité. Il peut être utilisé dans les librairies graphiques, les serveurs d&apos;affichage, les outils de conversion, les outils de génération d&apos;images textuelles, ainsi que beaucoup d&apos;autres produits.</Description>
             <Description xml:lang="en">FreeType 2 is a software font engine that is designed to be small, efficient, highly customizable, and portable while capable of producing high-quality output. It can be used in graphics libraries, display servers, font conversion tools, text image generation tools, and many other products as well.</Description>
             <Description xml:lang="tr">FreeType 2; küçük, verimli, özelleştirilebilir, taşınabilir ve yüksek kaliteli çıktı oluşturan bir yazıtipi düzeneğidir. Grafik kütüphaneleri, görüntü sunucuları ve yazıtipi değiştirme araçları gibi birçok üründe kullanılabilir.</Description>
-            <Archive type="tarxz" sha1sum="86bdc98b37efe447cf53420bf2c18402ff905112" name="freetype-2.11.1.tar.xz">mirrors://sourceforge/freetype/freetype-2.11.1.tar.xz</Archive>
+            <Icon>freetype2</Icon>
+            <Archive type="tarxz" sha1sum="5133eed28a7624ffabbf6d00aa3f68b841d62d80" name="freetype-2.12.1.tar.xz">mirrors://sourceforge/freetype/freetype-2.12.1.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency>zlib-devel</Dependency>
                 <Dependency>bzip2</Dependency>
+                <Dependency>zlib-devel</Dependency>
                 <Dependency>libpng-devel</Dependency>
             </BuildDependencies>
             <Patches>
@@ -24952,7 +25065,7 @@
             <Summary xml:lang="en">Development files for freetype</Summary>
             <Summary xml:lang="tr">freetype için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="11">freetype</Dependency>
+                <Dependency release="12">freetype</Dependency>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>libpng-devel</Dependency>
             </RuntimeDependencies>
@@ -24983,6 +25096,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="12">
+                <Date>2022-07-24</Date>
+                <Version>2.12.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="11">
                 <Date>2021-12-05</Date>
                 <Version>2.11.1</Version>
