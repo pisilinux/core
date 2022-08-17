@@ -10,6 +10,9 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
+    pisitools.dosed("configure.ac", "man/uk/Makefile", deleteLine=True)
+    #pisitools.dosed("configure", "man/uk/Makefile", deleteLine=True)
+    shelltools.unlink('po/uk.*')
     shelltools.system("sed -i 's/groups$(EXEEXT) //' src/Makefile.in && \
                        find man -name Makefile.in -exec sed -i 's/groups\.1 / /'   {} \; && \
                        find man -name Makefile.in -exec sed -i 's/getspnam\.3 / /' {} \; && \
@@ -17,15 +20,16 @@ def setup():
                        sed -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD SHA512@' \
                        -e 's@/var/spool/mail@/var/mail@'                 \
                        -e '/PATH=/{s@/sbin:@@;s@/bin:@@}'                \
-                       -i etc/login.defs                                 && \
-                       sed -i 's/1000/100/' etc/useradd")
+                       -i etc/login.defs")
 
     shelltools.system("./pisi-shadowbase.sh")
 
+    #autotools.autoreconf("-fiv")
     autotools.configure("--sysconfdir=/etc \
                          --with-group-name-max-length=32 \
                          --with-audit \
                          --with-libcrack \
+                         --without-selinux \
                          --with-acl")
 
 def build():
@@ -34,7 +38,7 @@ def build():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    shelltools.system("sed -i 's/yes/no/' " + get.installDIR() + "/etc/default/useradd")
+    #shelltools.system("sed -i 's/yes/no/' " + get.installDIR() + "/etc/default/useradd")
     shelltools.system("install -v -m644 " + get.installDIR() + "/etc/login.defs{,.orig}")
 
     for f in ["login", "passwd", "su", "chage", "system-login"]:
