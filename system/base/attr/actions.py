@@ -19,6 +19,7 @@ def setup():
                             --mandir=/usr/share/man \
                             --libexecdir=/lib%s \
                             --bindir=%s" % (suffix, suffix, bindir))
+
 def build():
     autotools.make()
 
