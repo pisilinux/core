@@ -6863,7 +6863,7 @@
             <Summary xml:lang="en">POSIX 1003.1e capabilities library</Summary>
             <Summary xml:lang="tr">POSIX 1003.1e desteği</Summary>
             <Description xml:lang="en">libcap is a library for getting and setting POSIX.1e (formerly POSIX 6) draft 15 capabilities.</Description>
-            <Archive type="tarxz" sha1sum="f2419ebf19b7bf682d346f28c2faf4635450c6fd" name="libcap-2.27.tar.xz">https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.27.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="cb4ec7d2b43a96c6c64991363239939528e495da" name="libcap-2.65.tar.xz">https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.65.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>attr-devel</Dependency>
                 <Dependency>pam-devel</Dependency>
@@ -6891,7 +6891,7 @@
             <Summary xml:lang="tr">libcap için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="7">libcap</Dependency>
+                <Dependency release="8">libcap</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -6916,6 +6916,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2022-08-02</Date>
+                <Version>2.65</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2021-06-16</Date>
                 <Version>2.27</Version>
@@ -11675,7 +11682,7 @@
         </Package>
         <History>
             <Update release="16">
-                <Date>2022-08-13</Date>
+                <Date>2022-08-17</Date>
                 <Version>3.2.11</Version>
                 <Comment>Version bump.</Comment>
                 <Name>Mustafa Cinasal</Name>
@@ -15065,7 +15072,7 @@
             <Description xml:lang="fr">Le paquet des utilitaires pour le fichier de mot de passe Shadow regroupe les programmes nécessaires à convertir les fichiers de mots de passe traditionnels V7*NIX au format de mot passe shadow SVR4 ainsi que d&apos;autres outils destinés à la gestion des fichiers des groupes et de mots de passe (qui fonctionnent aussi bien pour les mots de passe shadow que non-shadow).</Description>
             <Description xml:lang="en">The Shadow password file utilities package includes programs necessary to convert traditional V7 *NIX password files to the SVR4 shadow password format, and additional tools to maintain password and group files (that work with both shadow and non-shadow passwords).</Description>
             <Description xml:lang="tr">Shadow parola dosyası yardımcı uygulamalar paketi, geleneksel V7 *nix parola dosyalarını SVR4 shadow parola biçimine dönüştüren programlar ile parola ve grup dosyalarının bakımı için ilave araçlar içerir.</Description>
-            <Archive type="tarxz" sha1sum="63457a0ba58dc4e81b2663b839dc6c89d3343f12" name="shadow-4.8.1.tar.xz">https://github.com/shadow-maint/shadow/releases/download/4.8.1/shadow-4.8.1.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="5115fbdd86a6ce611485eebed081546d4e958815" name="shadow-4.12.1.tar.xz">https://github.com/shadow-maint/shadow/releases/download/4.12.1/shadow-4.12.1.tar.xz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="pisi-shadowbase.sh" permission="0755">pisi-shadowbase.sh</AdditionalFile>
             </AdditionalFiles>
@@ -15099,9 +15106,20 @@
                 <Path fileType="doc">/usr/share/doc</Path>
                 <Path fileType="info">/usr/share/info</Path>
                 <Path fileType="localedata">/usr/share/locale</Path>
+                <Path fileType="header">/usr/include</Path>
             </Files>
+            <AdditionalFiles>
+                <AdditionalFile target="/etc/default/useradd" permission="0600" owner="root">default/useradd</AdditionalFile>
+            </AdditionalFiles>
         </Package>
         <History>
+            <Update release="14">
+                <Date>2022-08-15</Date>
+                <Version>4.12.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="13">
                 <Date>2021-10-21</Date>
                 <Version>4.8.1</Version>
@@ -16618,7 +16636,7 @@
             <Summary xml:lang="tr">Standart dosya, metin ve kabuk uygulamaları</Summary>
             <Description xml:lang="en">Utilitaires standards GNU pour fichiers (chmod, cp, dd, dir, ls...), utilitaires texte (sort, tr, head, wc...) et utilitaires d&apos;interpréteur de commande (shell) (whoami, who...)</Description>
             <Description xml:lang="tr">GNU dosya uygulamaları (chmod, cp, dd, dir, ls...), sh uygulamaları (whoami, who,...) ve metin uygulamalarının (sort, tr, head, wc..) birlikteliğinden oluşmaktadır.</Description>
-            <Archive type="tarxz" sha1sum="c62b5034a5b65daca33c50a60df87ebc44159faf" name="coreutils-8.31.tar.xz">http://ftp.gnu.org/gnu/coreutils/coreutils-8.31.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="aa7bf0be95eef29d98eb5c76d4455698b3b705b3" name="coreutils-9.1.tar.xz">http://ftp.gnu.org/gnu/coreutils/coreutils-9.1.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>acl-devel</Dependency>
                 <Dependency>attr-devel</Dependency>
@@ -16631,11 +16649,9 @@
                 <Dependency>texinfo</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch level="1">coreutils-8.31-i18n-1.patch</Patch>
+                <Patch level="1">coreutils-8.32-i18n-1.patch</Patch>
                 <Patch level="0">remove_am_silent_rules.patch</Patch>
                 <Patch level="1">coreutils-8.26-test-lock.patch</Patch>
-                <Patch level="1">coreutils-8.31-improve-test-cp-proc-short-read.patch</Patch>
-                <Patch level="1">coreutils-8.31-root-tests.patch</Patch>
             </Patches>
             <SourceURI>system/base/coreutils/pspec.xml</SourceURI>
         </Source>
@@ -16660,6 +16676,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2022-08-03</Date>
+                <Version>9.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="10">
                 <Date>2021-01-20</Date>
                 <Version>8.31</Version>
@@ -17401,7 +17424,7 @@
             <Description xml:lang="fr">attr offre des utilitaires qui servent à manipuler les attributs étendus des objects de système de fichier.</Description>
             <Description xml:lang="en">attr contains a set of tools for manipulating extended attributes on filesystem objects, in particular getfattr and setfattr.</Description>
             <Description xml:lang="tr">attr dosya sistemi nesnelerinin özniteliklerini değiştirmek için gerekli bir dizi araç sunar.</Description>
-            <Archive type="targz" sha1sum="d7c88cb5db51c5e255a511b0a15e832fcdda5b4f" name="attr-2.4.48.tar.gz">http://download.savannah.nongnu.org/releases/attr/attr-2.4.48.tar.gz</Archive>
+            <Archive type="targz" sha1sum="72fea2dee5f481bfe7c9da84a2a1ace063a6c82d" name="attr-2.5.1.tar.gz">http://download.savannah.nongnu.org/releases/attr/attr-2.5.1.tar.gz</Archive>
             <SourceURI>system/base/attr/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -17421,7 +17444,7 @@
             <Summary xml:lang="tr">attr için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="8">attr</Dependency>
+                <Dependency release="9">attr</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -17436,7 +17459,7 @@
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="8">attr</Dependency>
+                <Dependency release="9">attr</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/lib32</Path>
@@ -17446,6 +17469,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2022-08-11</Date>
+                <Version>2.5.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2020-12-09</Date>
                 <Version>2.4.48</Version>

@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>A set of basic GNU tools commonly used in shell scripts</Summary>
         <Description>Standard GNU file utilities (chmod, cp, dd, dir, ls...), text utilities (sort, tr, head, wc..), and shell utilities (whoami, who,...)</Description>
-        <Archive sha1sum="c62b5034a5b65daca33c50a60df87ebc44159faf" type="tarxz">http://ftp.gnu.org/gnu/coreutils/coreutils-8.31.tar.xz</Archive>
+        <Archive sha1sum="aa7bf0be95eef29d98eb5c76d4455698b3b705b3" type="tarxz">http://ftp.gnu.org/gnu/coreutils/coreutils-9.1.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>acl-devel</Dependency>
             <Dependency>attr-devel</Dependency>
@@ -25,14 +25,14 @@
             <Dependency>texinfo</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">coreutils-8.31-i18n-1.patch</Patch>
+            <Patch level="1">coreutils-8.32-i18n-1.patch</Patch>
             <!-- PisiLinux patches -->
             <Patch level="0">remove_am_silent_rules.patch</Patch>
 <!--             <Patch level="0">add-more-dircolors.patch</Patch> -->
 <!--             <Patch level="1">0001-cp-don-t-reserve-a-device-number.patch</Patch> -->
             <Patch level="1">coreutils-8.26-test-lock.patch</Patch>
-            <Patch level="1">coreutils-8.31-improve-test-cp-proc-short-read.patch</Patch>
-            <Patch level="1">coreutils-8.31-root-tests.patch</Patch>
+<!--             <Patch level="1">coreutils-8.31-improve-test-cp-proc-short-read.patch</Patch> -->
+<!--             <Patch level="1">coreutils-8.31-root-tests.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -58,6 +58,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2022-08-03</Date>
+            <Version>9.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="10">
             <Date>2021-01-20</Date>
             <Version>8.31</Version>
