@@ -6070,13 +6070,15 @@
             <Summary xml:lang="pl">Narzędzie do wykrywania innych systemów operacyjnych na dyskach</Summary>
             <Description xml:lang="en">os-probe detects other OSes available on a system and outputs the results in a generic machine-readable format. Support for new OSes and Linux distributions can be added easily.</Description>
             <Description xml:lang="pl">os-prober wykrywa inne systemy operacyjne dostępne na komputerze i przekazuje rezultaty w standardowym, odczytywalnym maszynowo, formacie. </Description>
-            <Archive type="tarxz" sha1sum="70ca0c778b413b63eb0a025cdbc661a12355c166" name="os-prober_1.79.tar.xz">http://cdn-fastly.deb.debian.org/debian/pool/main/o/os-prober/os-prober_1.79.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="367c67d952ea9c354e40357addbb1ee54b43e91f" name="os-prober_1.81.tar.xz">http://cdn-fastly.deb.debian.org/debian/pool/main/o/os-prober/os-prober_1.81.tar.xz</Archive>
             <Patches>
                 <Patch level="1">fedora/os-prober-bootpart-name-fix.patch</Patch>
                 <Patch level="1">fedora/os-prober-btrfsfix.patch</Patch>
                 <Patch level="1">fedora/os-prober-factor-out-logger.patch</Patch>
                 <Patch level="1">fedora/os-prober-factored-logger-efi-fix.patch</Patch>
-                <Patch level="1">fedora/os-prober-gentoo-fix.patch</Patch>
+                <Patch level="1">fedora/os-prober-grub2-mount-workaround.patch</Patch>
+                <Patch level="1">fedora/os-prober-efi-shell.patch</Patch>
+                <Patch level="1">fedora/os-prober-arm64-win11.patch</Patch>
                 <Patch level="1">fedora/os-prober-grepfix.patch</Patch>
                 <Patch level="1">fedora/os-prober-grub2-parsefix.patch</Patch>
                 <Patch level="1">fedora/os-prober-mdraidfix.patch</Patch>
@@ -6098,6 +6100,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="13">
+                <Date>2022-08-17</Date>
+                <Version>1.81</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="12">
                 <Date>2021-07-18</Date>
                 <Version>1.79</Version>
@@ -10001,11 +10010,10 @@
             <Summary xml:lang="tr">Unicode karakter dizisi kitaplığı</Summary>
             <Description xml:lang="en">This library provides functions for manipulating Unicode strings and for manipulating C strings according to the Unicode standard.</Description>
             <Description xml:lang="tr">Bu kitaplığı unicode standartına göre unicode ve C karakter dizilerinde değişiklik yapmak için kullanılabilecek fonksiyonlar sunar.</Description>
-            <Archive type="targz" sha1sum="1e7493a3ad8c4a1e514600b768c7229576fe5125" name="libunistring-0.9.10.tar.gz">mirrors://gnu/libunistring/libunistring-0.9.10.tar.gz</Archive>
+            <Archive type="tarxz" sha1sum="ebae3103346745bef3534910a5c5afbf72099b2a" name="libunistring-1.0.tar.xz">mirrors://gnu/libunistring/libunistring-1.0.tar.xz</Archive>
             <Patches>
                 <Patch level="1">0100-float-endian-detection.patch</Patch>
                 <Patch level="1">0700-multiarch-libc.patch</Patch>
-                <Patch level="1">0705-gcc-9.patch</Patch>
             </Patches>
             <SourceURI>system/base/libunistring/pspec.xml</SourceURI>
         </Source>
@@ -10023,13 +10031,20 @@
             <Summary xml:lang="tr">libunistring için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="6">libunistring</Dependency>
+                <Dependency release="7">libunistring</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2022-08-18</Date>
+                <Version>1.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2020-12-09</Date>
                 <Version>0.9.10</Version>
@@ -13131,11 +13146,17 @@
             <PartOf>system.base</PartOf>
             <Summary xml:lang="en">Internationalized Domain Names (IDN) implementation</Summary>
             <Description xml:lang="en">GNU Libidn is an implementation of the Stringprep, Punycode and IDNA specifications defined by the IETF Internationalized Domain Names (IDN) working group, used for internationalized domain names. The C library is available under the GNU Lesser General Public License.</Description>
-            <Archive type="targz" sha1sum="53f54fd3c305d871ed5716406c0695fad5c34c45" name="libidn2-2.3.0.tar.gz">http://ftp.gnu.org/gnu/libidn/libidn2-2.3.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="e4b8ab8b705c8b0dd187af894f81f4667fb5a3ef" name="libidn2-2.3.3.tar.gz">http://ftp.gnu.org/gnu/libidn/libidn2-2.3.3.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency versionFrom="1.0">libunistring-devel</Dependency>
+            </BuildDependencies>
             <SourceURI>system/base/libidn2/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>libidn2</Name>
+            <RuntimeDependencies>
+                <Dependency versionFrom="1.0">libunistring</Dependency>
+            </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin</Path>
                 <Path fileType="library">/usr/lib/libidn2*</Path>
@@ -13152,7 +13173,7 @@
             <Summary xml:lang="en">Development files for libidn2</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="4">libidn2</Dependency>
+                <Dependency release="5">libidn2</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13167,13 +13188,20 @@
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="4">libidn2</Dependency>
+                <Dependency release="5">libidn2</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32/libidn2*</Path>
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2022-08-19</Date>
+                <Version>2.3.3</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2020-12-09</Date>
                 <Version>2.3.0</Version>
@@ -15072,7 +15100,7 @@
             <Description xml:lang="fr">Le paquet des utilitaires pour le fichier de mot de passe Shadow regroupe les programmes nécessaires à convertir les fichiers de mots de passe traditionnels V7*NIX au format de mot passe shadow SVR4 ainsi que d&apos;autres outils destinés à la gestion des fichiers des groupes et de mots de passe (qui fonctionnent aussi bien pour les mots de passe shadow que non-shadow).</Description>
             <Description xml:lang="en">The Shadow password file utilities package includes programs necessary to convert traditional V7 *NIX password files to the SVR4 shadow password format, and additional tools to maintain password and group files (that work with both shadow and non-shadow passwords).</Description>
             <Description xml:lang="tr">Shadow parola dosyası yardımcı uygulamalar paketi, geleneksel V7 *nix parola dosyalarını SVR4 shadow parola biçimine dönüştüren programlar ile parola ve grup dosyalarının bakımı için ilave araçlar içerir.</Description>
-            <Archive type="tarxz" sha1sum="5115fbdd86a6ce611485eebed081546d4e958815" name="shadow-4.12.1.tar.xz">https://github.com/shadow-maint/shadow/releases/download/4.12.1/shadow-4.12.1.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="a96cb2d9707663567031463e4eed654e873bb27d" name="shadow-4.12.2.tar.xz">https://github.com/shadow-maint/shadow/releases/download/4.12.2/shadow-4.12.2.tar.xz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="pisi-shadowbase.sh" permission="0755">pisi-shadowbase.sh</AdditionalFile>
             </AdditionalFiles>
@@ -15113,6 +15141,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="15">
+                <Date>2022-08-19</Date>
+                <Version>4.12.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="14">
                 <Date>2022-08-15</Date>
                 <Version>4.12.1</Version>
@@ -27326,7 +27361,7 @@
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.55.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.61.xz</Patch>
                 <Patch level="1">patches/aufs5/aufs5.15.41-20220530.patch</Patch>
                 <Patch level="1">patches/aufs5/aufs5-base.patch</Patch>
                 <Patch level="1">patches/aufs5/aufs5-kbuild.patch</Patch>
@@ -27396,6 +27431,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="73">
+                <Date>2022-08-17</Date>
+                <Version>5.15.61</Version>
+                <Comment>Version bump</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="72">
                 <Date>2022-07-21</Date>
                 <Version>5.15.55</Version>
@@ -28022,7 +28064,7 @@
                 <Dependency>elfutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.55.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.61.xz</Patch>
                 <Patch level="1">patches/aufs5/aufs5.15.41-20220530.patch</Patch>
                 <Patch level="1">patches/aufs5/aufs5-base.patch</Patch>
                 <Patch level="1">patches/aufs5/aufs5-kbuild.patch</Patch>
@@ -28100,7 +28142,7 @@
             <Description xml:lang="en">kernel-module-headers includes the C header files and the necessary Kbuild files for being able to build external kernel modules.</Description>
             <Description xml:lang="tr">kernel-module-headers, harici çekirdek modüllerinin derlenebilmesi için gereken başlık dosyaları ve Kbuild sistemini içeren pakettir.</Description>
             <RuntimeDependencies>
-                <Dependency release="74">kernel</Dependency>
+                <Dependency release="75">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/src/linux-headers*</Path>
@@ -28131,6 +28173,17 @@
             </Files>
         </Package>
         <History>
+            <Update release="75">
+                <Type package="kernel">security</Type>
+                <Date>2022-08-17</Date>
+                <Version>5.15.61</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
             <Update release="74">
                 <Type package="kernel">security</Type>
                 <Date>2022-07-21</Date>
@@ -28949,7 +29002,7 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78" name="v0.8.tar.gz">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.55">kernel-module-headers</Dependency>
+                <Dependency version="5.15.61">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">0001-proc_ops-struct.patch</Patch>
@@ -28960,8 +29013,8 @@
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="5.15.55">kernel</Dependency>
-                <Dependency release="67">bbswitch-common</Dependency>
+                <Dependency version="5.15.61">kernel</Dependency>
+                <Dependency release="68">bbswitch-common</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/lib/modules</Path>
@@ -28984,7 +29037,7 @@
         <Package>
             <Name>bbswitch-dkms</Name>
             <RuntimeDependencies>
-                <Dependency release="67">bbswitch-common</Dependency>
+                <Dependency release="68">bbswitch-common</Dependency>
                 <Dependency>dkms</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -28995,6 +29048,13 @@
             </Conflicts>
         </Package>
         <History>
+            <Update release="68">
+                <Date>2022-08-17</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="67">
                 <Date>2022-07-21</Date>
                 <Version>0.8</Version>
@@ -29483,7 +29543,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox için çekirdek desteği sunar.</Description>
             <Archive type="tarxz" sha1sum="8b5612187116e7772d6acde2753ce03d0720b40c" name="module-virtualbox-6.1.36.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-6.1.36.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.55">kernel-module-headers</Dependency>
+                <Dependency version="5.15.61">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -29493,7 +29553,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.15.55">kernel</Dependency>
+                <Dependency version="5.15.61">kernel</Dependency>
                 <Dependency version="6.1.36">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -29515,6 +29575,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="100">
+                <Date>2022-08-17</Date>
+                <Version>6.1.36</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="99">
                 <Date>2022-07-21</Date>
                 <Version>6.1.36</Version>
@@ -30576,7 +30643,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
             <Archive type="tarxz" sha1sum="fde0592dbcd9262dcdac8f585b7a366c1ca8b73d" name="module-virtualbox-guest-6.1.36.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-6.1.36.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.55">kernel-module-headers</Dependency>
+                <Dependency version="5.15.61">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -30586,7 +30653,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.15.55">kernel</Dependency>
+                <Dependency version="5.15.61">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
                 <Dependency version="6.1.36">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
@@ -30613,6 +30680,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="100">
+                <Date>2022-08-17</Date>
+                <Version>6.1.36</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="99">
                 <Date>2022-07-21</Date>
                 <Version>6.1.36</Version>
@@ -31333,7 +31407,7 @@
             <Archive type="targz" sha1sum="8acbdbb4ab4ab4123d1773b616904798fbef9277" target="i686" name="hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <Archive type="targz" sha1sum="1f568bb989d175813c5631c6629d9479eae6f3be" target="x86_64" name="hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.55">kernel-module-headers</Dependency>
+                <Dependency version="5.15.61">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">broadcom-wl-6.30.223.271-debian-fix-kernel-warnings.patch</Patch>
@@ -31362,8 +31436,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.15.55">kernel</Dependency>
-                <Dependency release="66">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="5.15.61">kernel</Dependency>
+                <Dependency release="67">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -31387,6 +31461,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="67">
+                <Date>2022-08-17</Date>
+                <Version>6.30.223.271</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="66">
                 <Date>2022-07-21</Date>
                 <Version>6.30.223.271</Version>
