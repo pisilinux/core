@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>Unicode string library</Summary>
         <Description>This library provides functions for manipulating Unicode strings and for manipulating C strings according to the Unicode standard.</Description>
-        <Archive sha1sum="1e7493a3ad8c4a1e514600b768c7229576fe5125" type="targz">mirrors://gnu/libunistring/libunistring-0.9.10.tar.gz</Archive>
+        <Archive sha1sum="ebae3103346745bef3534910a5c5afbf72099b2a" type="tarxz">mirrors://gnu/libunistring/libunistring-1.0.tar.xz</Archive>
         <BuildDependencies>
 <!--             <Dependency>glibc-devel</Dependency> -->
 <!--             <Dependency versionFrom="8.0.1">readline-devel</Dependency> -->
@@ -21,7 +21,7 @@
         <Patches>
             <Patch level="1">0100-float-endian-detection.patch</Patch>
             <Patch level="1">0700-multiarch-libc.patch</Patch>
-            <Patch level="1">0705-gcc-9.patch</Patch>
+<!--             <Patch level="1">0705-gcc-9.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -47,6 +47,20 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2022-08-18</Date>
+            <Version>1.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="7">
+            <Date>2021-12-08</Date>
+            <Version>0.9.10</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="6">
             <Date>2020-12-09</Date>
             <Version>0.9.10</Version>
