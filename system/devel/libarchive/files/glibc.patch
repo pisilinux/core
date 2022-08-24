@@ -1,0 +1,14 @@
+diff -Nuar a/tar/write.c b/tar/write.c
+--- a/tar/write.c	2022-04-08 14:40:26.000000000 +0300
++++ b/tar/write.c	2022-08-24 11:26:50.499748792 +0300
+@@ -33,7 +33,9 @@
+ #ifdef HAVE_SYS_STAT_H
+ #include <sys/stat.h>
+ #endif
+-#ifdef HAVE_ATTR_XATTR_H
++#if HAVE_SYS_XATTR_H
++#include <sys/xattr.h>
++#elif HAVE_ATTR_XATTR_H
+ #include <attr/xattr.h>
+ #endif
+ #ifdef HAVE_ERRNO_H
