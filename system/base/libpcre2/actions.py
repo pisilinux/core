@@ -14,7 +14,7 @@ bindir = "/usr/bin32" if get.buildTYPE() == "emul32" else "/usr/bin"
 
 def setup():
     autotools.autoreconf("-vif")
-    autotools.configure("--enable-jit \
+    options = "--enable-jit \
                          --libdir=%s \
                          --bindir=%s \
                          --enable-pcre2test-libreadline \
@@ -22,8 +22,13 @@ def setup():
                          --enable-pcre2-16 \
                          --enable-unicode \
                          --docdir=/%s/%s \
-                         --disable-static" % (LIBDIR, bindir, get.docDIR(), get.srcNAME()))
-    
+                         --disable-static" % (LIBDIR, bindir, get.docDIR(), get.srcNAME())
+
+    if get.buildTYPE() != "emul32":
+        options += " --enable-pcre2grep-libz \
+                     --enable-pcre2grep-libbz2 \
+                   "
+    autotools.configure(options)
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
 def build():
