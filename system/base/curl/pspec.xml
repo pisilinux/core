@@ -26,7 +26,7 @@
             <Dependency versionFrom="1.48.0">libnghttp2-devel</Dependency>
         </BuildDependencies>
         <Patches>
-<!--             <Patch>curl-krb5flags.patch</Patch> -->
+            <Patch>52e822173aa3cd4f610531d32fbf943f026cdca6.diff</Patch>
             <Patch>curl-ac.patch</Patch>
         </Patches>
     </Source>
@@ -68,6 +68,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2022-06-27</Date>
+            <Version>7.84.0</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="10">
             <Date>2022-06-27</Date>
             <Version>7.84.0</Version>
