@@ -11,12 +11,12 @@ from pisi.actionsapi import get
 
 def setup():
     pisitools.dosed("Makefile", "(?m)^(COPTS =.*)", "COPTS = %s -fPIE" % get.CFLAGS())
-    pisitools.dosed("Makefile", "(?m)^(LOPTS =.*)", "LOPTS = %s -pie" % get.LDFLAGS())
+    pisitools.dosed("Makefile", "(?m)^(LOPTS =.*)", "LOPTS = %s -pie -Wl,-z,now" % get.LDFLAGS())
 
 def build():
     shelltools.export("CC", get.CC())
 
-    autotools.make("libdir")
+    autotools.make('libdir')
     autotools.make()
     autotools.make("ether-wake")
     autotools.make("i18ndir")
@@ -27,4 +27,4 @@ def install():
     pisitools.dosbin("ether-wake")
     pisitools.dosym("/bin/hostname", "/usr/bin/hostname")
 
-    pisitools.dodoc("README", "README.ipv6", "TODO")
+    pisitools.dodoc("README", "README*", "TODO")
