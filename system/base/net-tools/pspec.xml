@@ -12,34 +12,34 @@
         <IsA>app:console</IsA>
         <Summary>Standard Linux networking tools</Summary>
         <Description>net-tools is a collection of programs that form the base set of the networking tools for the Linux operating system. It includes arp, hostname, ifconfig, ipmaddr, iptunnel, mii-tool, nameif, netstat, plipconfig, rarp, route and slattach.</Description>
-        <Archive sha1sum="944fb70641505d5d1139dba3aeb81ba124574b83" type="tarbz2">https://sourceforge.net/projects/net-tools/files/net-tools-1.60.tar.bz2</Archive>
+        <Archive sha1sum="4080baab0486dc882c3b293d5559c27251ae4268" type="tarxz">https://sourceforge.net/projects/net-tools/files/net-tools-2.10.tar.xz</Archive>
         <Patches>
-            <Patch compressionType="bz2" level="1">01_all_net-tools-1.60-2.6-compilefix.patch.bz2</Patch>
-            <Patch compressionType="bz2">02_all_net-tools-1.60-gcc34.patch.bz2</Patch>
-            <Patch compressionType="bz2">03_all_net-tools-1.60-cleanup-list-handling.patch.bz2</Patch>
-            <Patch compressionType="bz2" level="1">04_all_net-tools-1.60-get_name.patch.bz2</Patch>
-            <Patch compressionType="bz2" level="1">20_all_net-tools-1.54-ipvs.patch.bz2</Patch>
-            <Patch compressionType="bz2" level="1">21_all_net-tools-1.57-bug22040.patch.bz2</Patch>
-            <Patch compressionType="bz2">22_all_net-tools-1.60-manydevs.patch.bz2</Patch>
-            <Patch compressionType="bz2" level="1">23_all_net-tools-1.60-miiioctl.patch.bz2</Patch>
-            <Patch compressionType="bz2" level="1">24_all_net-tools-1.60-virtualname.patch.bz2</Patch>
-            <Patch compressionType="bz2" level="1">25_all_net-tools-1.60-cycle.patch.bz2</Patch>
-            <Patch compressionType="bz2" level="1">26_all_net-tools-1.60-overflow.patch.bz2</Patch>
-            <Patch compressionType="bz2" level="1">27_all_net-tools-1.60-netstat_ulong.patch.bz2</Patch>
-            <Patch compressionType="bz2" level="1">50_all_net-tools-1.60-multiline-string.patch.bz2</Patch>
-            <Patch compressionType="bz2">51_all_net-tools-1.60-man.patch.bz2</Patch>
-            <Patch compressionType="bz2" level="1">52_all_net-tools-1.60-numeric-ports.patch.bz2</Patch>
-            <Patch compressionType="bz2" level="1">53_all_net-tools-1.60-appletalk.patch.bz2</Patch>
-            <Patch compressionType="bz2" level="1">54_all_net-tools-1.60-wide.patch.bz2</Patch>
-            <Patch compressionType="bz2">55_all_net-tools-1.60-Makefile.patch.bz2</Patch>
-            <Patch compressionType="bz2">56_all_net-tools-1.60-ipv6-hostname.patch.bz2</Patch>
-            <Patch compressionType="bz2" level="1">57_all_net-tools-1.60-ifconfig-infiniband.patch.bz2</Patch>
-            <Patch compressionType="bz2" level="1">60_all_net-tools-1.60-headers.patch.bz2</Patch>
+<!--             <Patch compressionType="bz2" level="1">01_all_net-tools-1.60-2.6-compilefix.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2">02_all_net-tools-1.60-gcc34.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2">03_all_net-tools-1.60-cleanup-list-handling.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2" level="1">04_all_net-tools-1.60-get_name.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2" level="1">20_all_net-tools-1.54-ipvs.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2" level="1">21_all_net-tools-1.57-bug22040.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2">22_all_net-tools-1.60-manydevs.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2" level="1">23_all_net-tools-1.60-miiioctl.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2" level="1">24_all_net-tools-1.60-virtualname.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2" level="1">25_all_net-tools-1.60-cycle.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2" level="1">26_all_net-tools-1.60-overflow.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2" level="1">27_all_net-tools-1.60-netstat_ulong.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2" level="1">50_all_net-tools-1.60-multiline-string.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2">51_all_net-tools-1.60-man.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2" level="1">52_all_net-tools-1.60-numeric-ports.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2" level="1">53_all_net-tools-1.60-appletalk.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2" level="1">54_all_net-tools-1.60-wide.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2">55_all_net-tools-1.60-Makefile.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2">56_all_net-tools-1.60-ipv6-hostname.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2" level="1">57_all_net-tools-1.60-ifconfig-infiniband.patch.bz2</Patch> -->
+<!--             <Patch compressionType="bz2" level="1">60_all_net-tools-1.60-headers.patch.bz2</Patch> -->
             <Patch level="1">net-tools-missing.patch</Patch>
-            <Patch level="1">net-tools-linux48.patch</Patch><!--fedora-->
+            <Patch level="1">pisilinux-Makefile.patch</Patch>
             <Patch level="1">kernel_headers.patch</Patch>
             <Patch>gcc-4.3.patch</Patch>
-            <Patch>large-buffer.patch</Patch>
+            <Patch>net-tools-configure.patch</Patch>
         </Patches>
     </Source>
 
@@ -61,6 +61,13 @@
     </Package>
 
     <History>
+        <Update release="7">
+            <Date>2022-08-25</Date>
+            <Version>2.10</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="6">
             <Date>2020-12-09</Date>
             <Version>1.60</Version>

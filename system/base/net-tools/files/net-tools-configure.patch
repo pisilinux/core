@@ -1,0 +1,28 @@
+Index: net-tools-2.10/config.in
+===================================================================
+--- net-tools-2.10.orig/config.in
++++ net-tools-2.10/config.in
+@@ -42,7 +42,7 @@
+ * course, welcome.  Answer `n' here if you have no support for
+ * internationalization on your system.
+ *
+-bool 'Does your system support GNU gettext?' I18N n
++bool 'Does your system support GNU gettext?' I18N y
+ *
+ *
+ *             Protocol Families.
+===================================================================
+--- net-tools-2.10.orig/configure.sh
++++ net-tools-2.10/configure.sh
+@@ -66,9 +66,8 @@ config_fd_redir='<&7'
+ #
+ function readln()
+ {
+-  echo -n "$1"
+-  IFS='@' read ans || exit 1
+-  [ -z "$ans" ] && ans=$2
++  echo "$1"
++  ans=$2
+ }
+
+ # bool processes a boolean argument
