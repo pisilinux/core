@@ -40,4 +40,4 @@ def install():
         pisitools.removeDir("/usr/bin32")
         return
 
-    pisitools.dodoc("AUTHORS", "ChangeLog", "Copyright", "FEATURES", "NEWS", "README", "TODO")
+    pisitools.dodoc("AUTHORS", "Copyright", "FEATURES", "NEWS", "README", "TODO")
