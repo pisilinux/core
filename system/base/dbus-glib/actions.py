@@ -16,8 +16,7 @@ def setup():
     autotools.configure("--localstatedir=/var \
                          --enable-bash-completion \
                          --disable-doxygen-docs \
-                         --enable-gtk-doc=no \
-                         --enable-gtk-doc-html=no \
+                         --disable-gtk-doc \
                          --disable-static")
 
 def build():
