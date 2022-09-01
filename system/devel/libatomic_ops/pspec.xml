@@ -13,8 +13,7 @@
         <IsA>library</IsA>
         <Summary>Atomic memory update operations library</Summary>
         <Description>libatomic_ops provides implementations for atomic memory update operations on a number of architectures. This allows direct use of these in reasonably portable code.</Description>
-        <Archive sha1sum="8d4c69e8b2ed098ce4e056170fd96fc590c2b885" type="targz">https://github.com/ivmai/libatomic_ops/releases/download/v7.6.12/libatomic_ops-7.6.12.tar.gz</Archive>
-        <!-- look gc package version before version bump -->
+        <Archive sha1sum="6385dc214e48f70a501c334d4143ead98b171f31" type="targz">https://github.com/ivmai/libatomic_ops/releases/download/v7.6.14/libatomic_ops-7.6.14.tar.gz</Archive>
     </Source>
 
     <Package>
@@ -38,6 +37,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2022-08-25</Date>
+            <Version>7.6.14</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Ivan Maidanski</Name>
+            <Email>ivmai@mail.ru</Email>
+        </Update>
         <Update release="7">
             <Date>2021-10-04</Date>
             <Version>7.6.12</Version>
