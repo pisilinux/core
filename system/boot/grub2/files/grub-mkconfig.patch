@@ -1,0 +1,12 @@
+diff -Nuar a/util/grub-mkconfig.in b/util/grub-mkconfig.in
+--- a/util/grub-mkconfig.in	2022-09-01 22:32:28.455672599 +0300
++++ b/util/grub-mkconfig.in	2022-09-01 22:32:49.527671079 +0300
+@@ -1,6 +1,8 @@
+ #! /bin/sh
+ set -e
+ 
++export LC_ALL=C
++
+ # Generate grub.cfg by inspecting /boot contents.
+ # Copyright (C) 2006,2007,2008,2009,2010 Free Software Foundation, Inc.
+ #
