@@ -13,7 +13,6 @@ from pisi.actionsapi import shelltools
 
 
 def setup():
-    
     shelltools.copy("../unifont*.bdf", "./unifont.bdf")
     #shelltools.export("GRUB_CONTRIB", "%s/grub-2.06/grub-extras" % (get.workDIR()))
 
@@ -21,10 +20,13 @@ def setup():
     pisitools.cflags.sub("\s?(-O[\ds]|-D_FORTIFY_SOURCE=\d)\s?", " ")
 
     #pisitools.dosed('util/grub-mkconfig.in', 'GRUB_DISABLE_OS_PROBER="true"', 'GRUB_DISABLE_OS_PROBER="false"')
-    shelltools.system("./linguas.sh")
-    shelltools.system("./bootstrap")
-    shelltools.system('echo "Make translations reproducible..."')
-    shelltools.system("sed -i '1i /^PO-Revision-Date:/ d' po/*.sed")
+    #shelltools.system("./linguas.sh")
+    #shelltools.system("./bootstrap")
+    #shelltools.system('echo "Make translations reproducible..."')
+    #shelltools.system("sed -i '1i /^PO-Revision-Date:/ d' po/*.sed")
+    shelltools.copytree("../grub-%s" % (get.srcVERSION().replace("_", "~")), "../grub-%s-efi" % get.srcVERSION())
+
+    autotools.autoreconf("-fi")
 
     autotools.configure("--disable-werror \
                          --with-bootdir='/boot' \
@@ -34,11 +36,12 @@ def setup():
                          --with-platform=pc \
                          --target='i386' \
                          --htmldir='/usr/share/doc/grub2/html' ")
-    
-    
-    shelltools.copytree("../grub-%s" % (get.srcVERSION().replace("_", "~")), "../grub-%s-efi" % get.srcVERSION())
+
+
     shelltools.cd("../grub-%s-efi" % get.srcVERSION())
-    shelltools.system("./bootstrap")
+    #shelltools.system("./autogen.sh")
+
+    autotools.autoreconf("-fi")
     autotools.configure("--disable-werror \
                          --with-bootdir='/boot' \
                          --with-grubdir=grub2 \
@@ -47,27 +50,27 @@ def setup():
                          --with-platform=efi \
                          --target=x86_64  \
                          --htmldir='/usr/share/doc/grub2/html' ")
-    
-    
+
+
     shelltools.cd("..")
 
-    
+
 def build():
     #make-dist for creating all updated translation files
     #autotools.make("dist")
     autotools.make()
-    
+
     shelltools.cd("../grub-%s-efi" % get.srcVERSION())
     autotools.make()
     shelltools.cd("..")
 
 def install():
-    # Install unicode.pf2 using downloaded font source. 
+    # Install unicode.pf2 using downloaded font source.
     #shelltools.system("./grub-mkfont -o unicode.pf2 unifont.bdf")
 
     # Create directory for grub.cfg file
     #pisitools.dodir("/boot/grub2")
-    
+
     #pisitools.insinto("/boot/grub2", "unicode.pf2")
 
     # Insall our theme
