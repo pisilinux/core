@@ -34,7 +34,6 @@ def setup():
     autotools.rawConfigure("LDSHARED='x86_64-pc-linux-gnu-gcc -Wl,-O1,--as-needed -shared -lpthread'\
                             --prefix=/usr \
                             --enable-shared \
-                            --with-threads \
                             --with-computed-gotos \
                             --enable-ipv6 \
                             --with-system-expat \
