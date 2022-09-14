@@ -14,6 +14,6 @@ diff -urNp docbook-xsl-1.76.1-orig/manpages/other.xsl docbook-xsl-1.76.1/manpage
 +              <xsl:value-of select="'.so '"/> <!-- added case -->
 +              </xsl:otherwise>
 +              </xsl:choose>
-             <xsl:call-template name="make.adjusted.man.filename">
-               <xsl:with-param name="name" select="$first.refname"/>
-               <xsl:with-param name="section" select="$section"/>
+             <xsl:variable name="full.filename">
+               <xsl:call-template name="make.adjusted.man.filename">
+                 <xsl:with-param name="name" select="$first.refname"/>
