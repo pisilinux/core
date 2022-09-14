@@ -12,12 +12,12 @@
         <IsA>library</IsA>
         <Summary>Userspace access to USB devices</Summary>
         <Description>Project's main aim is to create a library for use by user level applications to access USB devices regardless of OS.</Description>
-        <Archive sha1sum="d8d614b538f7c953b6e3b73f1eea5dc70820a7e2" type="tarbz2">https://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.24/libusb-1.0.24.tar.bz2</Archive>
+        <Archive sha1sum="0e25981dafb69729e5d976017d113410078f6f6d" type="tarbz2">https://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.26/libusb-1.0.26.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>eudev-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">libusb-1.0.24-multi_device_config_parsing.patch</Patch>
+<!--             <Patch level="1">libusb-1.0.24-multi_device_config_parsing.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -83,6 +83,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2022-09-13</Date>
+            <Version>1.0.26</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="9">
             <Date>2022-01-15</Date>
             <Version>1.0.24</Version>
