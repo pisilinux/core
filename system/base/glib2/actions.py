@@ -54,4 +54,4 @@ def install():
         return
 
     
-    pisitools.dodoc("AUTHORS", "COPYING", "README*")
+    pisitools.dodoc("COPYING", "README*")
