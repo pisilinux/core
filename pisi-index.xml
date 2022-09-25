@@ -752,7 +752,7 @@
             <Description xml:lang="fr">Libxslt est la librairie XSLT C développée pour le projet GNOME. XSLT étant lui-même un langage XML permettant de définir une transformation de contenu XML.</Description>
             <Description xml:lang="en">Libxslt is the XSLT C library developed for the GNOME project. XSLT itself is a an XML language to define transformation for XML.</Description>
             <Description xml:lang="tr">Libxslt, GNOME projesi için geliştirilen XSLT C kitaplığıdır. XSLT&apos;nin kendisi, XML oluşumunu tanımlayan bir XML dilidir.</Description>
-            <Archive type="tarxz" sha1sum="9e4e7f884f8ac88c17df0f9475201bef985d42e4" name="libxslt-1.1.35.tar.xz">https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.35.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="8979f263d869e44010664a53cfc444740fe5a3b8" name="libxslt-1.1.37.tar.xz">https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.37.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency versionFrom="2.9.13">libxml2-devel</Dependency>
                 <Dependency>libgcrypt-devel</Dependency>
@@ -764,7 +764,7 @@
             <Name>libxslt-docs</Name>
             <Summary xml:lang="tr">libxslt için belgelendirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="12">libxslt</Dependency>
+                <Dependency release="13">libxslt</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="doc">/usr/share/doc</Path>
@@ -776,7 +776,7 @@
             <Summary xml:lang="tr">libxslt için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
                 <Dependency>libxml2-devel</Dependency>
-                <Dependency release="12">libxslt</Dependency>
+                <Dependency release="13">libxslt</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/usr/bin/*-config</Path>
@@ -809,7 +809,7 @@
                 <Dependency>libgcrypt-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="12">libxslt</Dependency>
+                <Dependency release="13">libxslt</Dependency>
                 <Dependency>libxml2-32bit</Dependency>
                 <Dependency>libgcrypt-32bit</Dependency>
             </RuntimeDependencies>
@@ -818,6 +818,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="13">
+                <Date>2022-09-01</Date>
+                <Version>1.1.37</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="12">
                 <Date>2022-04-24</Date>
                 <Version>1.1.35</Version>
@@ -921,7 +928,7 @@
             <Description xml:lang="en">CMake, the cross-platform, open-source make system. CMake is used to control the software compilation process using simple platform and compiler independent configuration files. CMake generates native makefiles and workspaces that can be used in the compiler environment of your choice.</Description>
             <Description xml:lang="tr">Cmake, açık kaynak kodlu ve birden fazla platformda çalışan bir &apos;make&apos; sistemidir. Yazılım derleme sürecini kontrol etmek için kullanılan CMake, derleyici bağımsız yapılandırma dosyalarının oluşturulmasını sağlar.</Description>
             <Icon>cmake</Icon>
-            <Archive type="targz" sha1sum="66a03a086f7e24f5734cce59214a3144e4e2fc87" name="cmake-3.22.6.tar.gz">https://github.com/Kitware/CMake/releases/download/v3.22.6/cmake-3.22.6.tar.gz</Archive>
+            <Archive type="targz" sha1sum="c2441ed6e00ba2c5ad0b7cd06afa8057769b9c1b" name="cmake-3.24.2.tar.gz">https://github.com/Kitware/CMake/releases/download/v3.24.2/cmake-3.24.2.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>curl-devel</Dependency>
                 <Dependency versionFrom="2.4.8">expat-devel</Dependency>
@@ -956,6 +963,20 @@
             </Files>
         </Package>
         <History>
+            <Update release="26">
+                <Date>2022-09-14</Date>
+                <Version>3.24.2</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="25">
+                <Date>2022-09-12</Date>
+                <Version>3.24.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="24">
                 <Date>2022-07-30</Date>
                 <Version>3.22.6</Version>
@@ -1461,6 +1482,9 @@
                 <Dependency>lzo-devel</Dependency>
                 <Dependency>zlib-devel</Dependency>
             </BuildDependencies>
+            <Patches>
+                <Patch level="1">glibc.patch</Patch>
+            </Patches>
             <SourceURI>system/devel/libarchive/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -1489,7 +1513,7 @@
             <Summary xml:lang="en">Development files for libarchive</Summary>
             <Summary xml:lang="tr">libarchive için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="10">libarchive</Dependency>
+                <Dependency release="11">libarchive</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -1498,6 +1522,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="11">
+                <Date>202-07-24</Date>
+                <Version>3.6.1</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="10">
                 <Date>202-05-05</Date>
                 <Version>3.6.1</Version>
@@ -1873,13 +1904,12 @@
     <SpecFile>
         <Source>
             <Name>gc</Name>
-            <Homepage>http://www.hboehm.info/gc/</Homepage>
+            <Homepage>https://www.hboehm.info/gc/</Homepage>
             <Packager>
                 <Name>PisiLinux Community</Name>
                 <Email>admins@pisilinux.org</Email>
             </Packager>
-            <License>BSD</License>
-            <License>GPLv2</License>
+            <License>MIT</License>
             <IsA>library</IsA>
             <PartOf>system.devel</PartOf>
             <Summary xml:lang="en">A garbage collector for C and C++</Summary>
@@ -1888,7 +1918,7 @@
             <Description xml:lang="en">The Boehm-Demers-Weiser conservative garbage collector can be used as a garbage collecting replacement for C malloc or C++ new.</Description>
             <Description xml:lang="tr">gc, C malloc veya C++ new yerine kullanılabilecek, Boehm-Demers-Weiser çöp toplayıcısı kitaplığıdır.</Description>
             <Description xml:lang="pl">Boehm&apos;s GC jest odśmiecającym alokatorem pamięci, który został zaprojektowany z zamiarem używania jako zastępcza wtyczka dla funkcji C malloc.</Description>
-            <Archive type="targz" sha1sum="094b74e21c9091cb48e2a225924597b3db163c7c" name="gc-8.0.6.tar.gz">https://github.com/ivmai/bdwgc/releases/download/v8.0.6/gc-8.0.6.tar.gz</Archive>
+            <Archive type="targz" sha1sum="77e2294086c8a3281958338f0c60e830c228a203" name="gc-8.2.2.tar.gz">https://github.com/ivmai/bdwgc/releases/download/v8.2.2/gc-8.2.2.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>libatomic_ops-devel</Dependency>
             </BuildDependencies>
@@ -1911,7 +1941,7 @@
             <Summary xml:lang="tr">gc için geliştirme dosyaları</Summary>
             <Summary xml:lang="pl">Pliki nagłówkowe gc</Summary>
             <RuntimeDependencies>
-                <Dependency release="8">gc</Dependency>
+                <Dependency release="9">gc</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/</Path>
@@ -1919,6 +1949,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2022-09-01</Date>
+                <Version>8.2.2</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ivan Maidanski</Name>
+                <Email>ivmai@mail.ru</Email>
+            </Update>
             <Update release="8">
                 <Date>2021-10-06</Date>
                 <Version>8.0.6</Version>
@@ -2314,7 +2351,7 @@
             <Summary xml:lang="tr">Ninja, hız odaklı bir inşa sistemidir.</Summary>
             <Description xml:lang="en">Ninja is a small build system with a focus on speed.</Description>
             <Description xml:lang="tr">Ninja is a small build system with a focus on speed.</Description>
-            <Archive type="targz" sha1sum="f8c9279bdd4efc63b1a6be3b8c5a5031699af9ac" name="ninja-1.11.0.tar.gz">https://github.com/ninja-build/ninja/archive/v1.11.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="938723cdfc7a6f7c8f84c83b9a2cecdf1e5e1ad3" name="ninja-1.11.1.tar.gz">https://github.com/ninja-build/ninja/archive/v1.11.1.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>re2c</Dependency>
                 <Dependency>asciidoc</Dependency>
@@ -2333,6 +2370,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="17">
+                <Date>2022-09-02</Date>
+                <Version>1.11.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="16">
                 <Date>2022-07-20</Date>
                 <Version>1.11.0</Version>
@@ -3240,13 +3284,13 @@
             <PartOf>system.devel</PartOf>
             <Summary xml:lang="en">Introspection system for GObject-based libraries</Summary>
             <Description xml:lang="en">gobject-introspection can scan C header and source files in order to generate introspection typelib files. It also provides an API to examine typelib files, useful for creating language bindings among other things.</Description>
-            <Archive type="tarxz" sha1sum="e4b69f2d9ea311d1f0788df00c6e9c5bbb3fdeb5" name="gobject-introspection-1.72.0.tar.xz">mirrors://gnome/gobject-introspection/1.72/gobject-introspection-1.72.0.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="e5af80651b2a39aa89bcbf7523e3f62cb7b7d3ca" name="gobject-introspection-1.74.0.tar.xz">mirrors://gnome/gobject-introspection/1.74/gobject-introspection-1.74.0.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>meson</Dependency>
                 <Dependency>python3-devel</Dependency>
                 <Dependency>libffi-devel</Dependency>
                 <Dependency>python-devel</Dependency>
-                <Dependency versionFrom="2.72.3">glib2-devel</Dependency>
+                <Dependency versionFrom="2.74.0">glib2-devel</Dependency>
                 <Dependency>chrpath</Dependency>
             </BuildDependencies>
             <SourceURI>system/devel/gobject-introspection/pspec.xml</SourceURI>
@@ -3268,7 +3312,7 @@
             <Name>gobject-introspection-devel</Name>
             <Summary xml:lang="en">Development files for gobject-introspection</Summary>
             <RuntimeDependencies>
-                <Dependency release="16">gobject-introspection</Dependency>
+                <Dependency release="18">gobject-introspection</Dependency>
                 <Dependency>libffi</Dependency>
                 <Dependency>glib2</Dependency>
                 <Dependency>libffi-devel</Dependency>
@@ -3286,6 +3330,20 @@
             </Files>
         </Package>
         <History>
+            <Update release="18">
+                <Date>2022-09-18</Date>
+                <Version>1.74.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="17">
+                <Date>2022-09-12</Date>
+                <Version>1.72.0</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="16">
                 <Date>2022-07-21</Date>
                 <Version>1.72.0</Version>
@@ -3920,7 +3978,7 @@
             <Description xml:lang="es">Este módulo facilita una interfaz al parser XML de James Clark, expat. Como en expat, una sola instancia del parser puede analizar solamente un documento. Llamadas a parsestring después del primero de una instancia determinada morirán.</Description>
             <Archive type="targz" sha1sum="40cba8a10847b71804684e5c72a410277f47f8ce" name="XML-Parser-2.46.tar.gz">mirrors://cpan/authors/id/T/TO/TODDR/XML-Parser-2.46.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency versionFrom="2.4.8">expat-devel</Dependency>
+                <Dependency versionFrom="2.4.9">expat-devel</Dependency>
                 <Dependency versionFrom="5.30.1">perl</Dependency>
             </BuildDependencies>
             <SourceURI>system/devel/perl-XML-Parser/pspec.xml</SourceURI>
@@ -3938,6 +3996,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2022-09-21</Date>
+                <Version>2.46</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2022-07-18</Date>
                 <Version>2.46</Version>
@@ -5063,7 +5128,7 @@
             <Summary xml:lang="tr">Atomik bellek işlemleri kütüphanesi</Summary>
             <Description xml:lang="en">libatomic_ops provides implementations for atomic memory update operations on a number of architectures. This allows direct use of these in reasonably portable code.</Description>
             <Description xml:lang="tr">libatomic_ops, çeşitli mimarilerde atomik bellek işlemleri yapılmasını sağlayarak taşınabilir kod yazma olanağı veren bir kütüphanedir.</Description>
-            <Archive type="targz" sha1sum="8d4c69e8b2ed098ce4e056170fd96fc590c2b885" name="libatomic_ops-7.6.12.tar.gz">https://github.com/ivmai/libatomic_ops/releases/download/v7.6.12/libatomic_ops-7.6.12.tar.gz</Archive>
+            <Archive type="targz" sha1sum="6385dc214e48f70a501c334d4143ead98b171f31" name="libatomic_ops-7.6.14.tar.gz">https://github.com/ivmai/libatomic_ops/releases/download/v7.6.14/libatomic_ops-7.6.14.tar.gz</Archive>
             <SourceURI>system/devel/libatomic_ops/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -5078,7 +5143,7 @@
             <Summary xml:lang="en">libatomic_ops için geliştirme dosyaları</Summary>
             <Summary>libatomic_ops için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="7">libatomic_ops</Dependency>
+                <Dependency release="8">libatomic_ops</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -5086,6 +5151,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2022-08-25</Date>
+                <Version>7.6.14</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Ivan Maidanski</Name>
+                <Email>ivmai@mail.ru</Email>
+            </Update>
             <Update release="7">
                 <Date>2021-10-04</Date>
                 <Version>7.6.12</Version>
@@ -5800,7 +5872,7 @@
             <PartOf>system.boot</PartOf>
             <Summary xml:lang="en">GNU GRUB is a Multiboot boot loader.</Summary>
             <Description xml:lang="en">GNU GRUB (short for GNU GRand Unified Bootloader) is a boot loader package from the GNU Project.</Description>
-            <Archive type="zip" sha1sum="aa62465ad119a328662af87c969a3e7ca1f81e1d" name="grub-2.06.zip">https://sourceforge.net/projects/pisilinux/files/source/grub-2.06.zip</Archive>
+            <Archive type="tarxz" sha1sum="c9f93f1e195ec7a5a21d36a13b469788c0b29f0f" name="grub-2.06.tar.xz">https://ftp.gnu.org/gnu/grub/grub-2.06.tar.xz</Archive>
             <Archive type="gz" sha1sum="c22f624573ee2c81c54324943e4d6c4a3a8b5cdc" name="unifont-13.0.06.bdf.gz">https://ftp.gnu.org/gnu/unifont/unifont-13.0.06/unifont-13.0.06.bdf.gz</Archive>
             <Archive type="targz" sha1sum="2977a0150526f3a13b116be8ae2ac5cbe9760f98" target="grub-2.06/themes" name="v0.1.tar.gz">https://github.com/sebo28/Vimix/archive/v0.1.tar.gz</Archive>
             <BuildDependencies>
@@ -5829,6 +5901,7 @@
             <Patches>
                 <Patch level="1">gfxpayload.patch</Patch>
                 <Patch level="1">grub-2.02_beta2-KERNEL_GLOBS.patch</Patch>
+                <Patch level="1">grub-mkconfig.patch</Patch>
                 <Patch>pisi_name_and_initramfs.patch</Patch>
                 <Patch level="1">grub-2.06-test-words.patch</Patch>
                 <Patch level="1">0001-Revert-templates-Fix-user-facing-typo-with-an-incorr.patch</Patch>
@@ -5879,7 +5952,7 @@
         </Package>
         <History>
             <Update release="24">
-                <Date>2022-08-13</Date>
+                <Date>2022-09-02</Date>
                 <Version>2.06</Version>
                 <Comment>Rebuild.</Comment>
                 <Name>Mustafa Cinasal</Name>
@@ -6437,6 +6510,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="18">
+                <Date>2022-08-21</Date>
+                <Version>3.10.1</Version>
+                <Comment>Rebuild.For 2.3</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="17">
+                <Date>2022-08-21</Date>
+                <Version>3.10.1</Version>
+                <Comment>Rebuild.For 2.3</Comment>
+                <Name>Ali Cengiz Kurt</Name>
+                <Email>alicengizkurt@gmail.com</Email>
+            </Update>
             <Update release="16">
                 <Date>2021-09-07</Date>
                 <Version>3.10.1</Version>
@@ -7021,7 +7108,7 @@
             <Name>libnghttp2-devel</Name>
             <Summary xml:lang="en">Development files for libnghttp2</Summary>
             <RuntimeDependencies>
-                <Dependency release="4">libnghttp2</Dependency>
+                <Dependency release="5">libnghttp2</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -7029,6 +7116,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2022-08-20</Date>
+                <Version>1.48.0</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2022-06-27</Date>
                 <Version>1.48.0</Version>
@@ -8469,7 +8563,7 @@
             <Summary xml:lang="tr">Python3, gelecek nesil üst seviye betik programlama dili.</Summary>
             <Description xml:lang="en">Python is an accessible, high-level, dynamically typed, interpreted programming language, designed with an emphasis on code readability. It includes an extensive standard library, and has a vast ecosystem of third-party libraries.</Description>
             <Description xml:lang="tr">Python3 kod okuma rahatlığı ile tasarlanmış, erişilebilir, yüksek seviyeli, dinamik, yorumlamalı programlama dilidir. Python3 kapsamlı standart kütüphanesi ile beraber gelmekte ve  üçüncü parti kitaplıkların kolay bütünleştirilmesine olanak tanıyan yapısıylar en hızlı ve dinamik yaorumlamalı dillerden biri olmaktadır.</Description>
-            <Archive type="tarxz" sha1sum="d57e5c8b94fe42e2b403e6eced02b25ed47ca8da" name="Python-3.9.13.tar.xz">https://www.python.org/ftp/python/3.9.13/Python-3.9.13.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="fa48bd60aee6abf2d41aafb273ebf9fb6b790458" name="Python-3.9.14.tar.xz">https://www.python.org/ftp/python/3.9.14/Python-3.9.14.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>bzip2</Dependency>
                 <Dependency>xz-devel</Dependency>
@@ -8574,7 +8668,7 @@
             <Summary xml:lang="tr">Python3 için geliştime dosyaları</Summary>
             <Description xml:lang="tr">python3-devel, python3 için geliştime dosyaları içerir.</Description>
             <RuntimeDependencies>
-                <Dependency release="26">python3</Dependency>
+                <Dependency release="27">python3</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header" permanent="0">/usr/include/python3.9/*</Path>
@@ -8582,6 +8676,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="27">
+                <Date>2022-09-12</Date>
+                <Version>3.9.14</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="26">
                 <Date>2022-07-18</Date>
                 <Version>3.9.13</Version>
@@ -9321,13 +9422,10 @@
             <PartOf>system.base</PartOf>
             <Summary xml:lang="en">Userspace access to USB devices</Summary>
             <Description xml:lang="en">Project&apos;s main aim is to create a library for use by user level applications to access USB devices regardless of OS.</Description>
-            <Archive type="tarbz2" sha1sum="d8d614b538f7c953b6e3b73f1eea5dc70820a7e2" name="libusb-1.0.24.tar.bz2">https://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.24/libusb-1.0.24.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="0e25981dafb69729e5d976017d113410078f6f6d" name="libusb-1.0.26.tar.bz2">https://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.26/libusb-1.0.26.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>eudev-devel</Dependency>
             </BuildDependencies>
-            <Patches>
-                <Patch level="1">libusb-1.0.24-multi_device_config_parsing.patch</Patch>
-            </Patches>
             <SourceURI>system/base/libusb/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -9352,7 +9450,7 @@
             <Summary xml:lang="en">Development files for libusb</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="9">libusb</Dependency>
+                <Dependency release="10">libusb</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -9375,7 +9473,7 @@
                 <Dependency>eudev-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="9">libusb</Dependency>
+                <Dependency release="10">libusb</Dependency>
                 <Dependency>eudev-32bit</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -9389,6 +9487,13 @@
             </Replaces>
         </Package>
         <History>
+            <Update release="10">
+                <Date>2022-09-13</Date>
+                <Version>1.0.26</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="9">
                 <Date>2022-01-15</Date>
                 <Version>1.0.24</Version>
@@ -9818,7 +9923,7 @@
             <Description xml:lang="fr">Un client daemon DHCP conforme aux RFC2131 et RFC1541. dhcpcd obtient une adresse IP ainsi que d&apos;autres informations depuis le serveur DHCP correspondant, configure l&apos;interface réseau automatiquement et essaie de renouveler le bail selont les RFC2131 et EFC1541 en fonction des options de la ligne de commande.</Description>
             <Description xml:lang="en">An RFC2131 and RFC1541 compliant DHCP client daemon. dhcpcd gets an IP address and other information from a corresponding DHCP server, configures the network interface automatically, and tries to renew the lease time according to RFC2131 or RFC1541 depending on the command line option.</Description>
             <Description xml:lang="tr">RFC2131 ve RFC1541 uyumlu bir DHCP istemci servisi.dhcpcd ilgili bir DHCP sunucusundan bir IP adresi ve gerekli diğer bilgileri alır, ağ arayüzünü otomatik olarak yapılandırır ve RFC2131 veya RFC1541 komut satırı özelliğine bağlı olarak kiralama zamanını yenilemeyi dener.</Description>
-            <Archive type="tarxz" sha1sum="e03a2249178f9446e81918428334b4ce7da41928" name="dhcpcd-8.1.6.tar.xz">http://ftp.osuosl.org/pub/blfs/conglomeration/dhcpcd/dhcpcd-8.1.6.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="263256a561c92601370a0764bd08dae0ba9c12d4" name="dhcpcd-9.4.1.tar.xz">http://ftp.osuosl.org/pub/blfs/conglomeration/dhcpcd/dhcpcd-9.4.1.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>eudev-devel</Dependency>
             </BuildDependencies>
@@ -9845,6 +9950,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2022-08-28</Date>
+                <Version>9.4.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2020-12-09</Date>
                 <Version>8.1.6</Version>
@@ -10113,7 +10225,6 @@
                 <Dependency>libcap-ng-devel</Dependency>
                 <Dependency>tcp-wrappers-devel</Dependency>
                 <Dependency>swig</Dependency>
-                <Dependency>openldap-client</Dependency>
             </BuildDependencies>
             <SourceURI>system/base/audit/pspec.xml</SourceURI>
         </Source>
@@ -10144,7 +10255,7 @@
             <Summary xml:lang="en">Python bindings for audit</Summary>
             <Summary xml:lang="tr">audit için Python bağlayıcısı</Summary>
             <RuntimeDependencies>
-                <Dependency release="8">audit</Dependency>
+                <Dependency release="9">audit</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib/python3*</Path>
@@ -10156,7 +10267,7 @@
             <Summary xml:lang="tr">audit için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="8">audit</Dependency>
+                <Dependency release="9">audit</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -10165,6 +10276,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2022-09-25</Date>
+                <Version>3.0.6</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2021-10-21</Date>
                 <Version>3.0.6</Version>
@@ -11631,7 +11749,6 @@
                 <Dependency>glibc-devel</Dependency>
                 <Dependency>libkmod-devel</Dependency>
                 <Dependency versionFrom="2.38.1">libutil-linux-devel</Dependency>
-                <Dependency>libpcre-devel</Dependency>
                 <Dependency>libxslt-devel</Dependency>
                 <Dependency>gperf</Dependency>
                 <Dependency>intltool</Dependency>
@@ -11673,7 +11790,7 @@
             <Summary xml:lang="en">Development files for eudev</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="16">eudev</Dependency>
+                <Dependency release="17">eudev</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/</Path>
@@ -11696,6 +11813,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="17">
+                <Date>2022-09-25</Date>
+                <Version>3.2.11</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="16">
                 <Date>2022-08-17</Date>
                 <Version>3.2.11</Version>
@@ -13699,14 +13823,14 @@
             <Description xml:lang="en">Userspace setup tool for transparent encryption of block devices using dm-crypt</Description>
             <Description xml:lang="tr">cryptsetup device mapper kullanarak şifrelenmiş dosya sistemleri yaratmak için gerekli bir araçtır.</Description>
             <Icon>cryptsetup</Icon>
-            <Archive type="tarxz" sha1sum="d662fef15536f9555ecd61663aa22dd803e65357" name="cryptsetup-2.3.4.tar.xz">https://mirrors.edge.kernel.org/pub/linux/utils/cryptsetup/v2.3/cryptsetup-2.3.4.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="004a2c185f8ea45f78b9a171c9b96850081d0ad8" name="cryptsetup-2.3.6.tar.xz">https://mirrors.edge.kernel.org/pub/linux/utils/cryptsetup/v2.3/cryptsetup-2.3.6.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency versionFrom="2.02.186">device-mapper-devel</Dependency>
                 <Dependency>libgpg-error-devel</Dependency>
                 <Dependency>libgcrypt-devel</Dependency>
                 <Dependency>python-devel</Dependency>
-                <Dependency versionFrom="2.37.4">libutil-linux-devel</Dependency>
-                <Dependency>popt-devel</Dependency>
+                <Dependency>libutil-linux-devel</Dependency>
+                <Dependency versionFrom="1.19">popt-devel</Dependency>
                 <Dependency>popt</Dependency>
                 <Dependency>openssl-devel</Dependency>
                 <Dependency>json-c-devel</Dependency>
@@ -13717,7 +13841,7 @@
             <Name>cryptsetup</Name>
             <PartOf>util.crypt</PartOf>
             <RuntimeDependencies>
-                <Dependency version="2.3.4">libcryptsetup</Dependency>
+                <Dependency version="2.3.6">libcryptsetup</Dependency>
                 <Dependency>popt</Dependency>
                 <Dependency>libutil-linux</Dependency>
             </RuntimeDependencies>
@@ -13751,7 +13875,7 @@
             <Summary xml:lang="tr">libcryptsetup için geliştirme dosyaları</Summary>
             <PartOf>programming.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency version="2.3.4">libcryptsetup</Dependency>
+                <Dependency version="2.3.6">libcryptsetup</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13759,6 +13883,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="12">
+                <Date>2022-09-21</Date>
+                <Version>2.3.6</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="11">
                 <Date>2022-07-21</Date>
                 <Version>2.3.4</Version>
@@ -13952,10 +14083,9 @@
             <Archive type="targz" sha1sum="ab94729c940f0d95dde2503a96e5c3e2f4644b76" name="dbus-python-1.2.18.tar.gz">https://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.18.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>python-devel</Dependency>
-                <Dependency>dbus-devel</Dependency>
+                <Dependency versionFrom="1.14.0">dbus-devel</Dependency>
                 <Dependency>dbus-glib-devel</Dependency>
                 <Dependency>glib2-devel</Dependency>
-                <Dependency>libpcre-devel</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">suppress-warnings.patch</Patch>
@@ -13968,7 +14098,7 @@
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
                 <Dependency>dbus-devel</Dependency>
-                <Dependency release="15">dbus-python</Dependency>
+                <Dependency release="17">dbus-python</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13989,6 +14119,20 @@
             </Files>
         </Package>
         <History>
+            <Update release="17">
+                <Date>2022-09-25</Date>
+                <Version>1.2.18</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="16">
+                <Date>2022-09-01</Date>
+                <Version>1.2.18</Version>
+                <Comment>Rebuild</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="15">
                 <Date>2022-03-24</Date>
                 <Version>1.2.18</Version>
@@ -15100,7 +15244,7 @@
             <Description xml:lang="fr">Le paquet des utilitaires pour le fichier de mot de passe Shadow regroupe les programmes nécessaires à convertir les fichiers de mots de passe traditionnels V7*NIX au format de mot passe shadow SVR4 ainsi que d&apos;autres outils destinés à la gestion des fichiers des groupes et de mots de passe (qui fonctionnent aussi bien pour les mots de passe shadow que non-shadow).</Description>
             <Description xml:lang="en">The Shadow password file utilities package includes programs necessary to convert traditional V7 *NIX password files to the SVR4 shadow password format, and additional tools to maintain password and group files (that work with both shadow and non-shadow passwords).</Description>
             <Description xml:lang="tr">Shadow parola dosyası yardımcı uygulamalar paketi, geleneksel V7 *nix parola dosyalarını SVR4 shadow parola biçimine dönüştüren programlar ile parola ve grup dosyalarının bakımı için ilave araçlar içerir.</Description>
-            <Archive type="tarxz" sha1sum="a96cb2d9707663567031463e4eed654e873bb27d" name="shadow-4.12.2.tar.xz">https://github.com/shadow-maint/shadow/releases/download/4.12.2/shadow-4.12.2.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="058a21a7216280102585885a481b32ccda2f5e90" name="shadow-4.12.3.tar.xz">https://github.com/shadow-maint/shadow/releases/download/4.12.3/shadow-4.12.3.tar.xz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="pisi-shadowbase.sh" permission="0755">pisi-shadowbase.sh</AdditionalFile>
             </AdditionalFiles>
@@ -15141,6 +15285,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="16">
+                <Date>2022-08-25</Date>
+                <Version>4.12.3</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="15">
                 <Date>2022-08-19</Date>
                 <Version>4.12.2</Version>
@@ -16292,10 +16443,9 @@
             <BuildDependencies>
                 <Dependency>python3</Dependency>
                 <Dependency>gtk-doc</Dependency>
-                <Dependency>dbus-devel</Dependency>
+                <Dependency versionFrom="1.14.0">dbus-devel</Dependency>
                 <Dependency>glib2-devel</Dependency>
-                <Dependency>libpcre-devel</Dependency>
-                <Dependency versionFrom="2.4.8">expat-devel</Dependency>
+                <Dependency versionFrom="2.4.9">expat-devel</Dependency>
                 <Dependency>libxml2</Dependency>
             </BuildDependencies>
             <Patches>
@@ -16328,7 +16478,7 @@
             <Summary xml:lang="tr">dbus-glib için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="15">dbus-glib</Dependency>
+                <Dependency release="18">dbus-glib</Dependency>
                 <Dependency>dbus-devel</Dependency>
                 <Dependency>glib2-devel</Dependency>
             </RuntimeDependencies>
@@ -16339,6 +16489,27 @@
             </Files>
         </Package>
         <History>
+            <Update release="18">
+                <Date>2022-09-25</Date>
+                <Version>0.112</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="17">
+                <Date>2022-09-21</Date>
+                <Version>0.112</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="16">
+                <Date>2022-09-01</Date>
+                <Version>0.112</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="15">
                 <Date>2022-07-18</Date>
                 <Version>0.112</Version>
@@ -16561,7 +16732,7 @@
             <Description xml:lang="de">Pisi Linux Programme werden mit einem kleinen Skript paketiert, welches sie konfiguriert, um die Integrität mit dem System und anderen Programmen sicherzustellen. Comar ist das Werkzeug, das diese Skripte verwaltet und ausführt.</Description>
             <Archive type="targz" sha1sum="d2b8b5062fcccadbbe046240b152a92ad7db5f33" name="3.0.3.1.tar.gz">https://github.com/PisiLinuxNew/comar/archive/refs/tags/3.0.3.1.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency>dbus-devel</Dependency>
+                <Dependency versionFrom="1.14.0">dbus-devel</Dependency>
                 <Dependency>python-devel</Dependency>
                 <Dependency>cmake</Dependency>
                 <Dependency versionFrom="2.32">glibc-devel</Dependency>
@@ -16591,6 +16762,13 @@
             </Provides>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2022-09-01</Date>
+                <Version>3.0.3.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Kamil Atlıl</Name>
+                <Email>suvari@pisilinux.org</Email>
+            </Update>
             <Update release="8">
                 <Date>2022-07-25</Date>
                 <Version>3.0.3.1</Version>
@@ -16806,7 +16984,7 @@
             <Summary xml:lang="tr">XML ayrıştırıcı kütüphaneleri</Summary>
             <Summary xml:lang="de">XML Parser Bibliotheken</Summary>
             <Description xml:lang="en">This is expat, the C library for parsing XML, written by James Clark. Expat is a stream oriented XML parser. This means that you register handlers with the parser prior to starting the parse. These handlers are called when the parser discovers the associated structures in the document being parsed. A start tag is an example of the kind of structures for which you may register handlers.</Description>
-            <Archive type="tarbz2" sha1sum="5bc8aed3107a04ba2a35d45646eb079e6abbfe1d" name="expat-2.4.8.tar.bz2">mirrors://sourceforge/expat/expat-2.4.8.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="83fe72970e5f95faaa00d868fa3b701dc31e5022" name="expat-2.4.9.tar.bz2">mirrors://sourceforge/expat/expat-2.4.9.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>gnuconfig</Dependency>
                 <Dependency>glibc-devel</Dependency>
@@ -16828,7 +17006,7 @@
             <Summary xml:lang="tr">expat için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="12">expat</Dependency>
+                <Dependency release="13">expat</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -16844,13 +17022,20 @@
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="12">expat</Dependency>
+                <Dependency release="13">expat</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="13">
+                <Date>2022-09-21</Date>
+                <Version>2.4.9</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="12">
                 <Date>2022-07-18</Date>
                 <Version>2.4.8</Version>
@@ -17665,17 +17850,17 @@
             <Description xml:lang="fr">La commande grep recherche dans un ou plusieurs fichiers les lignes correspondant à un motif défini. Par défaut grep affiche les lignes éligibles.</Description>
             <Description xml:lang="en">The grep command searches one or more input files for lines containing a match to a specified pattern. By default, grep prints the matching lines.</Description>
             <Description xml:lang="tr">Grep komutu bir veya daha fazla verilen dosyada aranan parçayı bulmaya yarayan bir programdır. Ön tanımlı olarak grep eşleşen satırları çıktıya verir.</Description>
-            <Archive type="tarxz" sha1sum="a66cc5ddac0b8fe2fbdea4dd9bf74ab3d2ebefcd" name="grep-3.5.tar.xz">http://ftp.gnu.org/gnu/grep/grep-3.5.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="6d0d32cabaf44efac9e1d2c449eb041525c54b2e" name="grep-3.8.tar.xz">http://ftp.gnu.org/gnu/grep/grep-3.8.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>gettext</Dependency>
-                <Dependency>libpcre-devel</Dependency>
+                <Dependency>libpcre2-devel</Dependency>
             </BuildDependencies>
             <SourceURI>system/base/grep/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>grep</Name>
             <RuntimeDependencies>
-                <Dependency>libpcre</Dependency>
+                <Dependency>libpcre2</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/bin</Path>
@@ -17686,6 +17871,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2022-09-25</Date>
+                <Version>3.8</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2020-12-09</Date>
                 <Version>3.5</Version>
@@ -17843,7 +18035,7 @@
             <Description xml:lang="fr">La librairie PCRE (Expressions Régulières Compatible avec Perl) est un ensemble de fonctions implémentant la recherche de motifs de texte à l&apos;aide d&apos;expressions régulières utilisant la même syntaxe et la même sémantique que Perl5.</Description>
             <Description xml:lang="en">The PCRE (Perl Compatible Regular Expressions) library is a set of functions that implement regular expression pattern matching using the same syntax and semantics as Perl 5.</Description>
             <Description xml:lang="tr">PCRE kütüphanesi, Perl 5 programlama dili sözdizimi ve semantiği ile kalıp eşleştirme (pattern matching) görevini yürüten fonksiyonları barındırır.</Description>
-            <Archive type="tarbz2" sha1sum="2e5ee2dd397fa8c3ce9aed1a986e51d66a88bdb0" name="pcre2-10.35.tar.bz2">https://ftp.pcre.org/pub/pcre/pcre2-10.35.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="5a433f92b29083d0d8ccd4ec56e3afbe1fa09863" name="pcre2-10.40.tar.bz2">https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.40/pcre2-10.40.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>readline-devel</Dependency>
             </BuildDependencies>
@@ -17852,6 +18044,8 @@
         <Package>
             <Name>libpcre2</Name>
             <RuntimeDependencies>
+                <Dependency>zlib</Dependency>
+                <Dependency>bzip2</Dependency>
                 <Dependency>libgcc</Dependency>
                 <Dependency>readline</Dependency>
             </RuntimeDependencies>
@@ -17868,7 +18062,7 @@
             <Summary xml:lang="tr">libpcre için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="4">libpcre2</Dependency>
+                <Dependency release="5">libpcre2</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -17892,13 +18086,20 @@
             </BuildDependencies>
             <RuntimeDependencies>
                 <Dependency>libgcc</Dependency>
-                <Dependency release="4">libpcre2</Dependency>
+                <Dependency release="5">libpcre2</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
             </Files>
         </Package>
         <History>
+            <Update release="5">
+                <Date>2022-08-23</Date>
+                <Version>10.40</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="4">
                 <Date>2020-12-09</Date>
                 <Version>10.35</Version>
@@ -17946,9 +18147,9 @@
             <Description xml:lang="fr">D-Bus fourni à la fois un daemon système (pour les événements els que l&apos;&quot;ajout d&apos;un nouveau périphérique&quot; ou &quot;file d&apos;impression changée&quot;) et un daemon propre à chaque session utilisateur (pour les besoins généraux de communication entre processus utilisateurs). De plus, le bus de message est construit en se basant sur un framework (cadre de développement) de passage de message de un-vers-un pouvant être utilisé par n&apos;importe quelles applications pour communiquer directement (sans passer par le daemon de bus de message). Pour l&apos;instant les applications pouvant communiquer doivent être situées sur le même ordinateur, mais l&apos;option TCP/IP est disponible et le support de processus distant est prévu.</Description>
             <Description xml:lang="en">D-Bus supplies both a system daemon (for events such as &quot;new hardware device added&quot; or &quot;printer queue changed&quot;) and a per-user-login-session daemon (for general IPC needs among user applications). Also, the message bus is built on top of a general one-to-one message passing framework, which can be used by any two apps to communicate directly (without going through the message bus daemon). Currently the communicating applications are on one computer, but TCP/IP option is available and remote support planned.</Description>
             <Description xml:lang="tr">D-Bus, sistem ve kullanıcılar için olmak üzere iki tane artalan süreci (daemon) sunar. Mesaj yolu, bire bir mesaj geçiş araçları üzerine inşa edilmiştir. Bu sayede iki program birbiriyle bir mesaj yolu artalan süreci kullanmadan, direkt olarak haberleşebilir. Şu an için haberleşme araçları aynı bilgisayar üzerinde çalışabilmektedir, fakat TCP/IP ile uzaktan haberleşme de planlanmaktadır.</Description>
-            <Archive type="targz" sha1sum="eb2590a18c7edc842084db15b2f7f3cfaeb1c6a6" name="dbus-1.12.22.tar.gz">https://dbus.freedesktop.org/releases/dbus/dbus-1.12.22.tar.gz</Archive>
+            <Archive type="tarxz" sha1sum="66b7d8ad719dadf6611879790da6939bc7d70121" name="dbus-1.14.0.tar.xz">https://dbus.freedesktop.org/releases/dbus/dbus-1.14.0.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency versionFrom="2.4.8">expat-devel</Dependency>
+                <Dependency versionFrom="2.4.9">expat-devel</Dependency>
                 <Dependency>libX11-devel</Dependency>
                 <Dependency>libcap-ng-devel</Dependency>
                 <Dependency>autoconf-archive</Dependency>
@@ -17999,7 +18200,7 @@
             <Summary xml:lang="tr">dbus için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="15">dbus</Dependency>
+                <Dependency release="17">dbus</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -18024,6 +18225,20 @@
             </Files>
         </Package>
         <History>
+            <Update release="17">
+                <Date>2022-09-21</Date>
+                <Version>1.14.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="16">
+                <Date>2022-09-01</Date>
+                <Version>1.14.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="15">
                 <Date>2022-07-18</Date>
                 <Version>1.12.22</Version>
@@ -18344,7 +18559,7 @@
             <BuildDependencies>
                 <Dependency>meson</Dependency>
                 <Dependency>python3</Dependency>
-                <Dependency>dbus-devel</Dependency>
+                <Dependency versionFrom="1.14.0">dbus-devel</Dependency>
                 <Dependency versionFrom="1.5.1">pam-devel</Dependency>
                 <Dependency>glib2-devel</Dependency>
                 <Dependency>expat-devel</Dependency>
@@ -18365,7 +18580,7 @@
             <Summary xml:lang="tr">polkit geliştirme başlıkları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="17">polkit</Dependency>
+                <Dependency release="18">polkit</Dependency>
                 <Dependency>glib2-devel</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -18410,6 +18625,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="18">
+                <Date>2022-09-01</Date>
+                <Version>0.121</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="17">
                 <Date>2022-07-21</Date>
                 <Version>0.121</Version>
@@ -18562,6 +18784,7 @@
                 <Dependency versionFrom="1.48.0">libnghttp2-devel</Dependency>
             </BuildDependencies>
             <Patches>
+                <Patch>52e822173aa3cd4f610531d32fbf943f026cdca6.diff</Patch>
                 <Patch>curl-ac.patch</Patch>
             </Patches>
             <SourceURI>system/base/curl/pspec.xml</SourceURI>
@@ -18592,7 +18815,7 @@
             <Summary xml:lang="tr">curl için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="10">curl</Dependency>
+                <Dependency release="11">curl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="data">/usr/lib/pkgconfig</Path>
@@ -18602,6 +18825,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2022-06-27</Date>
+                <Version>7.84.0</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="10">
                 <Date>2022-06-27</Date>
                 <Version>7.84.0</Version>
@@ -20014,7 +20244,7 @@
             <Summary xml:lang="tr">C programlama dili için glib kütüphanesi</Summary>
             <Description xml:lang="en">glib2 is the low-level core library that forms the basis for projects such as GTK+ and GNOME. It provides data structure handling for C, portability wrappers, and interfaces for such runtime functionality as an event loop, threads, dynamic loading, and an object system.</Description>
             <Description xml:lang="tr">glib2, GTK+ ve GNOME gibi projelerin temelini oluşturan düşük seviyeli çekirdek kütüphanedir. C için veri yapıları, taşınabilirlik katmanları ve çeşitli çalışma zamanı işlevleri için arabirimler sunar.</Description>
-            <Archive type="tarxz" sha1sum="c53965bf8d867bacd9d5fe37d1378c03222ae5d3" name="glib-2.72.3.tar.xz">mirrors://gnome/glib/2.72/glib-2.72.3.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="c7900f6b6baaa1321b856605aa1b7fd35046eac3" name="glib-2.74.0.tar.xz">mirrors://gnome/glib/2.74/glib-2.74.0.tar.xz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="multilib.diff" permission="0644">multilib.diff</AdditionalFile>
             </AdditionalFiles>
@@ -20027,7 +20257,7 @@
                 <Dependency>elfutils-devel</Dependency>
                 <Dependency>libxslt-devel</Dependency>
                 <Dependency versionFrom="2.37.4">libutil-linux-devel</Dependency>
-                <Dependency versionFrom="8.43">libpcre-devel</Dependency>
+                <Dependency versionFrom="10.40">libpcre2-devel</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">noisy-glib-compile-schemas.diff</Patch>
@@ -20040,13 +20270,14 @@
             <RuntimeDependencies>
                 <Dependency>zlib</Dependency>
                 <Dependency>libffi</Dependency>
-                <Dependency>libpcre</Dependency>
+                <Dependency>libpcre2</Dependency>
                 <Dependency>libutil-linux</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/etc/profile.d</Path>
                 <Path fileType="executable">/usr/bin</Path>
                 <Path fileType="library">/usr/lib</Path>
+                <Path fileType="executable">/usr/libexec/gio-launch-desktop</Path>
                 <Path fileType="executable">/usr/share/bash-completion/completions/</Path>
                 <Path fileType="localedata">/usr/share/locale</Path>
                 <Path fileType="man">/usr/share/man</Path>
@@ -20069,8 +20300,8 @@
             <Summary xml:lang="tr">glib2 için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="22">glib2</Dependency>
-                <Dependency>libpcre-devel</Dependency>
+                <Dependency release="23">glib2</Dependency>
+                <Dependency>libpcre2-devel</Dependency>
                 <Dependency>zlib-devel</Dependency>
                 <Dependency>libffi-devel</Dependency>
                 <Dependency>libutil-linux-devel</Dependency>
@@ -20108,15 +20339,15 @@
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
             <BuildDependencies>
-                <Dependency>libpcre-32bit</Dependency>
+                <Dependency>libpcre2-32bit</Dependency>
                 <Dependency versionFrom="1.2.12">zlib-32bit</Dependency>
                 <Dependency>libffi-32bit</Dependency>
                 <Dependency>dbus-32bit</Dependency>
                 <Dependency>elfutils-32bit</Dependency>
             </BuildDependencies>
             <RuntimeDependencies>
-                <Dependency release="22">glib2</Dependency>
-                <Dependency>libpcre-32bit</Dependency>
+                <Dependency release="23">glib2</Dependency>
+                <Dependency>libpcre2-32bit</Dependency>
                 <Dependency>zlib-32bit</Dependency>
                 <Dependency>libffi-32bit</Dependency>
             </RuntimeDependencies>
@@ -20137,6 +20368,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="23">
+                <Date>2022-09-18</Date>
+                <Version>2.74.0</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="22">
                 <Date>2022-07-21</Date>
                 <Version>2.72.3</Version>
@@ -20756,7 +20994,8 @@
             <Name>zstd-devel</Name>
             <Summary xml:lang="en">Development files for zstd</Summary>
             <RuntimeDependencies>
-                <Dependency release="5">zstd</Dependency>
+                <Dependency>lz4-devel</Dependency>
+                <Dependency release="6">zstd</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -20764,6 +21003,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2022-08-24</Date>
+                <Version>1.5.2</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2022-06-07</Date>
                 <Version>1.5.2</Version>
@@ -20968,7 +21214,7 @@
             <Description xml:lang="en">Netscape Portable Runtime (NSPR) provides a platform-neutral API for system level and libc like functions. The API is used in the Mozilla client, many of Netscape/AOL/iPlanet&apos;s and other software offerings.</Description>
             <Description xml:lang="tr">Netscape Taşınabilir çalışma Zamanı (NSPR) sistem seviyesindeki libc ve benzeri fonksiyonlar için platform bağımsız bir programlama arayüzü sunar. Bu arayüz, Mozilla istemcilerinde, Netscape/AOL/iPlanet&apos;in diğer yazılımlarında kullanılmaktadır.</Description>
             <Description xml:lang="es">Netscape Portable Runtime (NSPR) provee un API independiente de la plataforma a nivel de sistema y funciones como libc. El API está usado en el cliente Mozilla, y muchos otros software de Netscape/AOL/iPlanet.</Description>
-            <Archive type="targz" sha1sum="efea1385dc83c55018183257036206b5f2c77c59" name="nspr-4.34.tar.gz">https://ftp.mozilla.org/pub/nspr/releases/v4.34/src/nspr-4.34.tar.gz</Archive>
+            <Archive type="targz" sha1sum="71267859a581d61fea8d7d36c25f716750271cac" name="nspr-4.35.tar.gz">https://ftp.mozilla.org/pub/nspr/releases/v4.35/src/nspr-4.35.tar.gz</Archive>
             <AdditionalFiles>
                 <AdditionalFile target="nspr/config/nspr.pc.in">nspr.pc.in</AdditionalFile>
                 <AdditionalFile target="generate-pc-config.sh" permission="0755">generate-pc-config.sh</AdditionalFile>
@@ -20987,7 +21233,7 @@
             <Summary xml:lang="tr">nspr için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="19">nspr</Dependency>
+                <Dependency release="20">nspr</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -20996,6 +21242,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="20">
+                <Date>2022-09-13</Date>
+                <Version>4.35</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="19">
                 <Date>2022-06-24</Date>
                 <Version>4.34</Version>
@@ -21691,34 +21944,13 @@
             <Description xml:lang="fr">net-tools est une collection de programmes représentant les outils réseau de base du système d&apos;exploitation Linux. S&apos;y trouvent arp, hostname, ifconfig, ipmaddr, iptunnel, mii-tool, nameif, netstat, plipconfig, rarp, route et slattach.</Description>
             <Description xml:lang="en">net-tools is a collection of programs that form the base set of the networking tools for the Linux operating system. It includes arp, hostname, ifconfig, ipmaddr, iptunnel, mii-tool, nameif, netstat, plipconfig, rarp, route and slattach.</Description>
             <Description xml:lang="tr">Net-tools, Linux işletim sisteminde kullanılan ağ ile ilgili temel araçların bir birleşimidir. Arp, hostname, ifconfig, ipmaddr, iptunnel, mii-tool, nameif, netstat, plipconfig, rarp, route ve slattach programlarını içerir.</Description>
-            <Archive type="tarbz2" sha1sum="944fb70641505d5d1139dba3aeb81ba124574b83" name="net-tools-1.60.tar.bz2">https://sourceforge.net/projects/net-tools/files/net-tools-1.60.tar.bz2</Archive>
+            <Archive type="tarxz" sha1sum="4080baab0486dc882c3b293d5559c27251ae4268" name="net-tools-2.10.tar.xz">https://sourceforge.net/projects/net-tools/files/net-tools-2.10.tar.xz</Archive>
             <Patches>
-                <Patch compressionType="bz2" level="1">01_all_net-tools-1.60-2.6-compilefix.patch.bz2</Patch>
-                <Patch compressionType="bz2">02_all_net-tools-1.60-gcc34.patch.bz2</Patch>
-                <Patch compressionType="bz2">03_all_net-tools-1.60-cleanup-list-handling.patch.bz2</Patch>
-                <Patch compressionType="bz2" level="1">04_all_net-tools-1.60-get_name.patch.bz2</Patch>
-                <Patch compressionType="bz2" level="1">20_all_net-tools-1.54-ipvs.patch.bz2</Patch>
-                <Patch compressionType="bz2" level="1">21_all_net-tools-1.57-bug22040.patch.bz2</Patch>
-                <Patch compressionType="bz2">22_all_net-tools-1.60-manydevs.patch.bz2</Patch>
-                <Patch compressionType="bz2" level="1">23_all_net-tools-1.60-miiioctl.patch.bz2</Patch>
-                <Patch compressionType="bz2" level="1">24_all_net-tools-1.60-virtualname.patch.bz2</Patch>
-                <Patch compressionType="bz2" level="1">25_all_net-tools-1.60-cycle.patch.bz2</Patch>
-                <Patch compressionType="bz2" level="1">26_all_net-tools-1.60-overflow.patch.bz2</Patch>
-                <Patch compressionType="bz2" level="1">27_all_net-tools-1.60-netstat_ulong.patch.bz2</Patch>
-                <Patch compressionType="bz2" level="1">50_all_net-tools-1.60-multiline-string.patch.bz2</Patch>
-                <Patch compressionType="bz2">51_all_net-tools-1.60-man.patch.bz2</Patch>
-                <Patch compressionType="bz2" level="1">52_all_net-tools-1.60-numeric-ports.patch.bz2</Patch>
-                <Patch compressionType="bz2" level="1">53_all_net-tools-1.60-appletalk.patch.bz2</Patch>
-                <Patch compressionType="bz2" level="1">54_all_net-tools-1.60-wide.patch.bz2</Patch>
-                <Patch compressionType="bz2">55_all_net-tools-1.60-Makefile.patch.bz2</Patch>
-                <Patch compressionType="bz2">56_all_net-tools-1.60-ipv6-hostname.patch.bz2</Patch>
-                <Patch compressionType="bz2" level="1">57_all_net-tools-1.60-ifconfig-infiniband.patch.bz2</Patch>
-                <Patch compressionType="bz2" level="1">60_all_net-tools-1.60-headers.patch.bz2</Patch>
                 <Patch level="1">net-tools-missing.patch</Patch>
-                <Patch level="1">net-tools-linux48.patch</Patch>
+                <Patch level="1">pisilinux-Makefile.patch</Patch>
                 <Patch level="1">kernel_headers.patch</Patch>
                 <Patch>gcc-4.3.patch</Patch>
-                <Patch>large-buffer.patch</Patch>
+                <Patch>net-tools-configure.patch</Patch>
             </Patches>
             <SourceURI>system/base/net-tools/pspec.xml</SourceURI>
         </Source>
@@ -21739,6 +21971,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2022-08-25</Date>
+                <Version>2.10</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2020-12-09</Date>
                 <Version>1.60</Version>
@@ -21800,7 +22039,7 @@
             <Description xml:lang="fr">La librairie popt existe essentiellement pour analyser des options de ligne de commande. Elle procure de nombreux avantages tels que l&apos;absence de variables globales, la possibilité d&apos;analyser un tableau arbitraire d&apos;éléments de type argv, d&apos;exécuter des filtres d&apos;options extérieurs, la génération automaituqe des messages d&apos;aide et d&apos;utilisation ainsi qu&apos;un méthode standard pour synonymes d&apos;options.</Description>
             <Description xml:lang="en">The popt library exists essentially for parsing command line options with advantages such as there are no global variables, ability to parse an arbitrary array of argv-style elements, to exec external option filters, and automatic generation of help and usage messages, a standard method of option aliasing.</Description>
             <Description xml:lang="tr">Popt, komut satırında seçenek ayrıştırma için gerekli bir kütüphanedir. Genel değişken olmaması, dağınık dizi bileşenlerini ayrıştırabilmesi, harici uygulama filtreleri kullanabilmesi, otomatik mesaj ve yardım dosyaları üretimi gibi başarılı özellikleri bulunur.</Description>
-            <Archive type="targz" sha1sum="0bf05488e151228fce9c0c9601162a9f432f69d9" name="popt-1.18.tar.gz">https://ftp.osuosl.org/pub/rpm/popt/releases/popt-1.x/popt-1.18.tar.gz</Archive>
+            <Archive type="targz" sha1sum="75654eebd67791f6c58059d0ac552230d81b09d9" name="popt-1.19.tar.gz">https://ftp.osuosl.org/pub/rpm/popt/releases/popt-1.x/popt-1.19.tar.gz</Archive>
             <SourceURI>system/base/popt/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -21821,7 +22060,7 @@
             <Summary xml:lang="tr">popt için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="6">popt</Dependency>
+                <Dependency release="7">popt</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include/popt.h</Path>
@@ -21830,6 +22069,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="7">
+                <Date>2022-09-20</Date>
+                <Version>1.19</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="6">
                 <Date>2020-12-09</Date>
                 <Version>1.18</Version>
@@ -24852,7 +25098,7 @@
             <Summary xml:lang="de">X.Org Au Bibliothek</Summary>
             <Description xml:lang="en">libXau provides functions to manage X authorization files</Description>
             <Description xml:lang="tr">libXau, X yetkilendirme dosyalarını yönetmek için işlevler sağlar.</Description>
-            <Archive type="targz" sha1sum="45ad25454e05cdc1ed5144b2abf1ae9e0f8fc95e" name="libXau-1.0.9.tar.gz">http://xorg.freedesktop.org/archive/individual/lib/libXau-1.0.9.tar.gz</Archive>
+            <Archive type="tarxz" sha1sum="fbfef1a4abe2f1d3aa3d8e2252b65f5824627138" name="libXau-1.0.10.tar.xz">http://xorg.freedesktop.org/archive/individual/lib/libXau-1.0.10.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>util-macros</Dependency>
                 <Dependency>xorg-proto</Dependency>
@@ -24873,7 +25119,7 @@
             <Summary xml:lang="en">Development files for libXau</Summary>
             <Summary xml:lang="tr">libXau için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
-                <Dependency release="8">libXau</Dependency>
+                <Dependency release="9">libXau</Dependency>
                 <Dependency>xorg-proto</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -24894,6 +25140,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2022-09-06</Date>
+                <Version>1.0.10</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2020-12-09</Date>
                 <Version>1.0.9</Version>
@@ -25363,6 +25616,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="29">
+                <Date>2022-09-12</Date>
+                <Version>62.6.0</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="28">
                 <Date>2022-06-24</Date>
                 <Version>62.6.0</Version>
@@ -26902,8 +27162,8 @@
             <Name>docbook-xsl</Name>
             <Homepage>https://docbook.org/</Homepage>
             <Packager>
-                <Name>PisiLinux Community</Name>
-                <Email>admins@pisilinux.org</Email>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
             </Packager>
             <License>BSD</License>
             <IsA>data</IsA>
@@ -26917,13 +27177,20 @@
                 <AdditionalFile target="Makefile">Makefile</AdditionalFile>
             </AdditionalFiles>
             <Patches>
-                <Patch level="1">docbook-xsl-pagesetup.patch</Patch>
-                <Patch level="1">docbook-xsl-non-constant-expressions.patch</Patch>
+                <Patch level="1">feodra/docbook-style-xsl-1.79.2-fix-gtk-doc-multilib.patch</Patch>
+                <Patch level="1">feodra/docbook-xsl-list-item-body.patch</Patch>
+                <Patch level="1">feodra/docbook-xsl-mandir.patch</Patch>
+                <Patch level="1">feodra/docbook-xsl-marginleft.patch</Patch>
+                <Patch level="1">feodra/docbook-xsl-newmethods.patch</Patch>
+                <Patch level="1">feodra/docbook-xsl-non-constant-expressions.patch</Patch>
+                <Patch level="1">feodra/docbook-xsl-pagesetup.patch</Patch>
+                <Patch>feodra/docbook-style-xsl-non-recursive-string-subst.patch</Patch>
             </Patches>
             <SourceURI>office/docbook/docbook-xsl/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>docbook-xsl</Name>
+            <Summary xml:lang="en">Norman Walsh&apos;s XSL stylesheets for DocBook XML</Summary>
             <RuntimeDependencies>
                 <Dependency>docbook-xml</Dependency>
             </RuntimeDependencies>
@@ -26931,11 +27198,15 @@
                 <Path fileType="doc">/usr/share/doc/docbook-xsl</Path>
                 <Path fileType="data">/usr/share/xml</Path>
             </Files>
-            <Provides>
-                <COMAR script="package.py">System.Package</COMAR>
-            </Provides>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2022-09-14</Date>
+                <Version>1.79.2</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2022-05-31</Date>
                 <Version>1.79.2</Version>
@@ -27361,8 +27632,8 @@
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.61.xz</Patch>
-                <Patch level="1">patches/aufs5/aufs5.15.41-20220530.patch</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.67.xz</Patch>
+                <Patch level="1">patches/aufs5/aufs5.15.41-20220620.patch</Patch>
                 <Patch level="1">patches/aufs5/aufs5-base.patch</Patch>
                 <Patch level="1">patches/aufs5/aufs5-kbuild.patch</Patch>
                 <Patch level="1">patches/aufs5/aufs5-loopback.patch</Patch>
@@ -27431,6 +27702,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="74">
+                <Date>2022-09-12</Date>
+                <Version>5.15.67</Version>
+                <Comment>Version bump</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="73">
                 <Date>2022-08-17</Date>
                 <Version>5.15.61</Version>
@@ -28064,8 +28342,8 @@
                 <Dependency>elfutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.61.xz</Patch>
-                <Patch level="1">patches/aufs5/aufs5.15.41-20220530.patch</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.67.xz</Patch>
+                <Patch level="1">patches/aufs5/aufs5.15.41-20220620.patch</Patch>
                 <Patch level="1">patches/aufs5/aufs5-base.patch</Patch>
                 <Patch level="1">patches/aufs5/aufs5-kbuild.patch</Patch>
                 <Patch level="1">patches/aufs5/aufs5-loopback.patch</Patch>
@@ -28142,7 +28420,7 @@
             <Description xml:lang="en">kernel-module-headers includes the C header files and the necessary Kbuild files for being able to build external kernel modules.</Description>
             <Description xml:lang="tr">kernel-module-headers, harici çekirdek modüllerinin derlenebilmesi için gereken başlık dosyaları ve Kbuild sistemini içeren pakettir.</Description>
             <RuntimeDependencies>
-                <Dependency release="75">kernel</Dependency>
+                <Dependency release="76">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/src/linux-headers*</Path>
@@ -28173,6 +28451,17 @@
             </Files>
         </Package>
         <History>
+            <Update release="76">
+                <Type package="kernel">security</Type>
+                <Date>2022-09-12</Date>
+                <Version>5.15.67</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
             <Update release="75">
                 <Type package="kernel">security</Type>
                 <Date>2022-08-17</Date>
@@ -29002,7 +29291,7 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78" name="v0.8.tar.gz">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.61">kernel-module-headers</Dependency>
+                <Dependency version="5.15.67">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">0001-proc_ops-struct.patch</Patch>
@@ -29013,8 +29302,8 @@
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="5.15.61">kernel</Dependency>
-                <Dependency release="68">bbswitch-common</Dependency>
+                <Dependency version="5.15.67">kernel</Dependency>
+                <Dependency release="69">bbswitch-common</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/lib/modules</Path>
@@ -29037,7 +29326,7 @@
         <Package>
             <Name>bbswitch-dkms</Name>
             <RuntimeDependencies>
-                <Dependency release="68">bbswitch-common</Dependency>
+                <Dependency release="69">bbswitch-common</Dependency>
                 <Dependency>dkms</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -29048,6 +29337,13 @@
             </Conflicts>
         </Package>
         <History>
+            <Update release="69">
+                <Date>2022-09-12</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="68">
                 <Date>2022-08-17</Date>
                 <Version>0.8</Version>
@@ -29541,9 +29837,9 @@
             <Summary xml:lang="tr">VirtualBox için çekirdek modülleri</Summary>
             <Description xml:lang="en">This package provides the kernel support for VirtualBox.</Description>
             <Description xml:lang="tr">Bu paket VirtualBox için çekirdek desteği sunar.</Description>
-            <Archive type="tarxz" sha1sum="8b5612187116e7772d6acde2753ce03d0720b40c" name="module-virtualbox-6.1.36.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-6.1.36.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="bbe72d9da1da24ff174f65b3dbb3ae28ca2f9e9e" name="module-virtualbox-6.1.38.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-6.1.38.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.61">kernel-module-headers</Dependency>
+                <Dependency version="5.15.67">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -29553,8 +29849,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.15.61">kernel</Dependency>
-                <Dependency version="6.1.36">module-virtualbox-userspace</Dependency>
+                <Dependency version="5.15.67">kernel</Dependency>
+                <Dependency version="6.1.38">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -29575,6 +29871,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="102">
+                <Date>2022-09-16</Date>
+                <Version>6.1.38</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="101">
+                <Date>2022-09-12</Date>
+                <Version>6.1.36</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="100">
                 <Date>2022-08-17</Date>
                 <Version>6.1.36</Version>
@@ -30641,9 +30951,9 @@
             <Summary xml:lang="tr">VirtualBox misafir makineleri için çekirdek modülleri</Summary>
             <Description xml:lang="en">This package provides the kernel modules needed for mouse integration and shared folder support between VirtualBox host and guest systems.</Description>
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
-            <Archive type="tarxz" sha1sum="fde0592dbcd9262dcdac8f585b7a366c1ca8b73d" name="module-virtualbox-guest-6.1.36.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-6.1.36.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="51ffbddfbda6f0d7518103f485c0eb6c485293a9" name="module-virtualbox-guest-6.1.38.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-6.1.38.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.61">kernel-module-headers</Dependency>
+                <Dependency version="5.15.67">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -30653,9 +30963,9 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.15.61">kernel</Dependency>
+                <Dependency version="5.15.67">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
-                <Dependency version="6.1.36">module-virtualbox-guest-userspace</Dependency>
+                <Dependency version="6.1.38">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -30680,6 +30990,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="102">
+                <Date>2022-09-16</Date>
+                <Version>6.1.38</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="101">
+                <Date>2022-09-12</Date>
+                <Version>6.1.36</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="100">
                 <Date>2022-08-17</Date>
                 <Version>6.1.36</Version>
@@ -31407,7 +31731,7 @@
             <Archive type="targz" sha1sum="8acbdbb4ab4ab4123d1773b616904798fbef9277" target="i686" name="hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <Archive type="targz" sha1sum="1f568bb989d175813c5631c6629d9479eae6f3be" target="x86_64" name="hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.61">kernel-module-headers</Dependency>
+                <Dependency version="5.15.67">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">broadcom-wl-6.30.223.271-debian-fix-kernel-warnings.patch</Patch>
@@ -31436,8 +31760,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.15.61">kernel</Dependency>
-                <Dependency release="67">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="5.15.67">kernel</Dependency>
+                <Dependency release="68">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -31461,6 +31785,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="68">
+                <Date>2022-09-12</Date>
+                <Version>6.30.223.271</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="67">
                 <Date>2022-08-17</Date>
                 <Version>6.30.223.271</Version>
@@ -32182,7 +32513,7 @@
             <Summary xml:lang="tr">MS-DOS (Windows) disketlerinize -mount ile bağlamadan- erişim araçları</Summary>
             <Description xml:lang="en">Mtools are utilities to access MS-DOS disks without mounting them.</Description>
             <Description xml:lang="tr">Mtools diskinizdeki MS-DOS (Windows) bölümlerine -mount komutu ile bağlamadan- erişebilmek için gereken araç setidir.</Description>
-            <Archive type="targz" sha1sum="9a64516b5a3fd1131c6b697c828a16654c8f3fcc" name="mtools-4.0.40.tar.gz">mirrors://gnu/mtools/mtools-4.0.40.tar.gz</Archive>
+            <Archive type="targz" sha1sum="925d9d9acff8a9eefcbf88b684b683626d8d9228" name="mtools-4.0.41.tar.gz">mirrors://gnu/mtools/mtools-4.0.41.tar.gz</Archive>
             <SourceURI>hardware/disk/mtools/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -32196,6 +32527,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2022-09-20</Date>
+                <Version>4.0.41</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2022-06-06</Date>
                 <Version>4.0.40</Version>
