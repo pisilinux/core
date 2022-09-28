@@ -13666,45 +13666,39 @@
     </SpecFile>
     <SpecFile>
         <Source>
-            <Name>libtirpc</Name>
-            <Homepage>http://libtirpc.sourceforge.net/</Homepage>
+            <Name>libnsl</Name>
+            <Homepage>https://github.com/thkukuk/libnsl</Homepage>
             <Packager>
                 <Name>PisiLinux Community</Name>
                 <Email>admins@pisilinux.org</Email>
             </Packager>
-            <License>BSD</License>
+            <License>LGPLv2.1</License>
             <IsA>library</IsA>
             <PartOf>system.base</PartOf>
-            <Summary xml:lang="en">Transport Independent RPC library</Summary>
-            <Summary xml:lang="tr">Transport Independent RPC library</Summary>
-            <Description xml:lang="en">Transport Independent RPC library</Description>
-            <Description xml:lang="tr">Transport Independent RPC library</Description>
-            <Archive type="tarbz2" sha1sum="51d75be0e5acc094a888f40042b23e128d163cb5" name="libtirpc-1.3.2.tar.bz2">https://sourceforge.net/projects/libtirpc/files/libtirpc/1.3.2/libtirpc-1.3.2.tar.bz2</Archive>
+            <Summary xml:lang="en">Public client interface library for NIS(YP) and NIS+</Summary>
+            <Description xml:lang="en">Public client interface library for NIS(YP) and NIS+</Description>
+            <Archive type="targz" sha1sum="f141c7cf0ff96d96e369dda36af8ed19af0fc3ca" name="libnsl-1.2.0.tar.gz">https://github.com/thkukuk/libnsl/archive/v1.2.0/libnsl-1.2.0.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency>mit-kerberos-devel</Dependency>
-                <Dependency>e2fsprogs-devel</Dependency>
+                <Dependency>libtirpc-devel</Dependency>
             </BuildDependencies>
             <SourceURI>system/base/libtirpc/pspec.xml</SourceURI>
         </Source>
         <Package>
-            <Name>libtirpc</Name>
+            <Name>libnsl</Name>
             <RuntimeDependencies>
-                <Dependency>e2fsprogs</Dependency>
-                <Dependency>mit-kerberos</Dependency>
+                <Dependency>libtirpc</Dependency>
             </RuntimeDependencies>
             <Files>
-                <Path fileType="config">/etc</Path>
                 <Path fileType="library">/usr/lib</Path>
                 <Path fileType="data">/usr/share</Path>
-                <Path fileType="man">/usr/share/man</Path>
                 <Path fileType="doc">/usr/share/doc</Path>
             </Files>
         </Package>
         <Package>
-            <Name>libtirpc-devel</Name>
-            <Summary xml:lang="en">Development files for libtirpc</Summary>
+            <Name>libnsl-devel</Name>
+            <Summary xml:lang="en">Development files for libnsl</Summary>
             <RuntimeDependencies>
-                <Dependency release="6">libtirpc</Dependency>
+                <Dependency release="4">libnsl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13712,44 +13706,30 @@
             </Files>
         </Package>
         <History>
-            <Update release="6">
-                <Date>2022-09-28</Date>
-                <Version>1.3.2</Version>
-                <Comment>Rebuild.</Comment>
-                <Name>Mustafa Cinasal</Name>
-                <Email>muscnsl@gmail.com</Email>
-            </Update>
-            <Update release="5">
-                <Date>2021-10-22</Date>
-                <Version>1.3.2</Version>
-                <Comment>Rebuild.</Comment>
-                <Name>Mustafa Cinasal</Name>
-                <Email>muscnsl@gmail.com</Email>
-            </Update>
             <Update release="4">
-                <Date>2021-06-08</Date>
-                <Version>1.3.2</Version>
-                <Comment>Version bump.</Comment>
-                <Name>Mustafa Cinasal</Name>
-                <Email>muscnsl@gmail.com</Email>
+                <Date>2022-09-28</Date>
+                <Version>1.2.0</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
             </Update>
             <Update release="3">
-                <Date>2020-01-19</Date>
-                <Version>1.2.5</Version>
-                <Comment>Version bump</Comment>
-                <Name>İdris Kalp</Name>
-                <Email>idriskalp@gmail.com</Email>
+                <Date>2021-06-16</Date>
+                <Version>1.2.0</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
             </Update>
             <Update release="2">
-                <Date>2019-03-29</Date>
-                <Version>1.1.4</Version>
-                <Comment>First release</Comment>
+                <Date>2020-01-27</Date>
+                <Version>1.2.0</Version>
+                <Comment>Rebuild.</Comment>
                 <Name>PisiLinux Community</Name>
                 <Email>admins@pisilinux.org</Email>
             </Update>
             <Update release="1">
                 <Date>2018-08-29</Date>
-                <Version>1.0.2</Version>
+                <Version>1.2.0</Version>
                 <Comment>First release</Comment>
                 <Name>PisiLinux Community</Name>
                 <Email>admins@pisilinux.org</Email>
@@ -19245,7 +19225,6 @@
             <RuntimeDependencies>
                 <Dependency release="9">mit-kerberos</Dependency>
                 <Dependency>openssl-devel</Dependency>
-                <Dependency>e2fsprogs-devel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
