@@ -20,7 +20,6 @@
         </AdditionalFiles>
         <BuildDependencies>
             <Dependency>libnsl-devel</Dependency>
-            <Dependency>libtirpc-devel</Dependency>
             <Dependency>audit-devel</Dependency>
         </BuildDependencies>
         <!--Patches>
@@ -32,7 +31,6 @@
     <Package>
         <Name>pam</Name>
         <RuntimeDependencies>
-            <Dependency>cracklib</Dependency>
             <Dependency>audit</Dependency>
             <Dependency>libnsl</Dependency>
             <Dependency>libtirpc</Dependency>
@@ -71,6 +69,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2022-09-28</Date>
+            <Version>1.5.2</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="10">
             <Date>2021-10-21</Date>
             <Version>1.5.2</Version>
