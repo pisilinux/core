@@ -5874,7 +5874,7 @@
             <Description xml:lang="en">GNU GRUB (short for GNU GRand Unified Bootloader) is a boot loader package from the GNU Project.</Description>
             <Archive type="tarxz" sha1sum="c9f93f1e195ec7a5a21d36a13b469788c0b29f0f" name="grub-2.06.tar.xz">https://ftp.gnu.org/gnu/grub/grub-2.06.tar.xz</Archive>
             <Archive type="gz" sha1sum="c22f624573ee2c81c54324943e4d6c4a3a8b5cdc" name="unifont-13.0.06.bdf.gz">https://ftp.gnu.org/gnu/unifont/unifont-13.0.06/unifont-13.0.06.bdf.gz</Archive>
-            <Archive type="targz" sha1sum="2977a0150526f3a13b116be8ae2ac5cbe9760f98" target="grub-2.06/themes" name="v0.1.tar.gz">https://github.com/sebo28/Vimix/archive/v0.1.tar.gz</Archive>
+            <Archive type="targz" sha1sum="2742c9bec049d73de26fc82ca7d2c0c75a0b495f" target="grub-2.06/themes" name="pisinar-grub2-theme-v1.2.tar.gz">https://github.com/erkanisik1/PisiNar-Grub2-Themes/archive/refs/tags/pisinar-grub2-theme-v1.2.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>git</Dependency>
                 <Dependency>autogen</Dependency>
@@ -5947,10 +5947,17 @@
                 <AdditionalFile target="/etc/default/grub" permission="0644" owner="root">grub-defaults</AdditionalFile>
                 <AdditionalFile target="/etc/grub.d/30_uefi-firmware" permission="0755" owner="root">30_uefi-firmware</AdditionalFile>
                 <AdditionalFile target="/usr/bin/update-grub" permission="0755" owner="root">update-grub</AdditionalFile>
-                <AdditionalFile target="/etc/grub.d/30_os-prober" permission="0755" owner="root">30_os-prober</AdditionalFile>
+                <AdditionalFile target="/etc/grub.d/30_os-prober" permission="0755" owner="root">30_os-prober2</AdditionalFile>
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="25">
+                <Date>2022-09-26</Date>
+                <Version>2.06</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="24">
                 <Date>2022-09-02</Date>
                 <Version>2.06</Version>
@@ -9264,8 +9271,7 @@
             <Name>libnsl-devel</Name>
             <Summary xml:lang="en">Development files for libnsl</Summary>
             <RuntimeDependencies>
-                <Dependency release="3">libnsl</Dependency>
-                <Dependency>libtirpc-devel</Dependency>
+                <Dependency release="4">libnsl</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -9273,6 +9279,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="4">
+                <Date>2022-09-28</Date>
+                <Version>1.2.0</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
             <Update release="3">
                 <Date>2021-06-16</Date>
                 <Version>1.2.0</Version>
@@ -13691,8 +13704,7 @@
             <Name>libtirpc-devel</Name>
             <Summary xml:lang="en">Development files for libtirpc</Summary>
             <RuntimeDependencies>
-                <Dependency release="5">libtirpc</Dependency>
-                <Dependency>mit-kerberos-devel</Dependency>
+                <Dependency release="6">libtirpc</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -13700,6 +13712,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="6">
+                <Date>2022-09-28</Date>
+                <Version>1.3.2</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="5">
                 <Date>2021-10-22</Date>
                 <Version>1.3.2</Version>
@@ -15005,7 +15024,6 @@
             </AdditionalFiles>
             <BuildDependencies>
                 <Dependency>libnsl-devel</Dependency>
-                <Dependency>libtirpc-devel</Dependency>
                 <Dependency>audit-devel</Dependency>
             </BuildDependencies>
             <SourceURI>system/base/pam/pspec.xml</SourceURI>
@@ -15013,7 +15031,6 @@
         <Package>
             <Name>pam</Name>
             <RuntimeDependencies>
-                <Dependency>cracklib</Dependency>
                 <Dependency>audit</Dependency>
                 <Dependency>libnsl</Dependency>
                 <Dependency>libtirpc</Dependency>
@@ -15043,7 +15060,7 @@
             <Summary xml:lang="tr">pam için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="10">pam</Dependency>
+                <Dependency release="11">pam</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -15051,6 +15068,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="11">
+                <Date>2022-09-28</Date>
+                <Version>1.5.2</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="10">
                 <Date>2021-10-21</Date>
                 <Version>1.5.2</Version>
@@ -15266,6 +15290,7 @@
                 <Dependency>attr</Dependency>
                 <Dependency>pam</Dependency>
                 <Dependency>audit</Dependency>
+                <Dependency>cracklib</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/bin</Path>
@@ -15285,6 +15310,13 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="17">
+                <Date>2022-09-28</Date>
+                <Version>4.12.3</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="16">
                 <Date>2022-08-25</Date>
                 <Version>4.12.3</Version>
@@ -19211,7 +19243,7 @@
             <Summary xml:lang="en">Development files for mit-kerberos</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="8">mit-kerberos</Dependency>
+                <Dependency release="9">mit-kerberos</Dependency>
                 <Dependency>openssl-devel</Dependency>
                 <Dependency>e2fsprogs-devel</Dependency>
             </RuntimeDependencies>
@@ -19221,6 +19253,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2022-09-26</Date>
+                <Version>1.20</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="8">
                 <Date>2022-05-28</Date>
                 <Version>1.20</Version>
@@ -19314,6 +19353,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="8">
+                <Date>2022-09-26</Date>
+                <Version>1.6.1</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="7">
                 <Date>2021-05-31</Date>
                 <Version>1.6.1</Version>
