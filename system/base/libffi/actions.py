@@ -28,6 +28,8 @@ def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
     
     if get.buildTYPE() == "emul32":
+        pisitools.dosym("/usr/lib/libffi.so.8", "/usr/lib/libffi.so.7")
+        pisitools.dosym("/usr/lib32/libffi.so.8", "/usr/lib32/libffi.so.7")
         return
 
     #if get.buildTYPE() == "emul32":
