@@ -60,6 +60,8 @@
             <AdditionalFile owner="root" permission="0644" target="/etc/os-release">os-release</AdditionalFile>
             <!-- Should be dropped after switching to systemd as the only user is COMAR -->
             <AdditionalFile owner="root" permission="0644" target="/usr/share/man/man8/start-stop-daemon.8">start-stop-daemon.8</AdditionalFile>
+
+            <AdditionalFile owner="root" permission="0644" target="/etc/hostname">01hostname</AdditionalFile>
         </AdditionalFiles>
         <Provides>
             <COMAR script="pakhandler.py">System.PackageHandler</COMAR>
@@ -70,6 +72,13 @@
     </Package>
 
     <History>
+        <Update release="19">
+            <Date>2022-10-01</Date>
+            <Version>3.10.1</Version>
+            <Comment>Rebuild.For 2.3</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="18">
             <Date>2022-08-21</Date>
             <Version>3.10.1</Version>
