@@ -1,60 +1,21 @@
 diff -Nuar a/pisi/actionsapi/qt6.py b/pisi/actionsapi/qt6.py
 --- a/pisi/actionsapi/qt6.py	1970-01-01 02:00:00.000000000 +0200
-+++ b/pisi/actionsapi/qt6.py	2020-12-31 20:28:31.441916203 +0300
-@@ -0,0 +1,76 @@
++++ b/pisi/actionsapi/qt6.py	2022-10-06 16:46:17.525050669 +0300
+@@ -0,0 +1,134 @@
 +# -*- coding: utf-8 -*-
-+#
-+# Copyright (C) 2010 TUBITAK/UEKAE
-+#
-+# This program is free software; you can redistribute it and/or modify it under
-+# the terms of the GNU General Public License as published by the Free
-+# Software Foundation; either version 2 of the License, or (at your option)
-+# any later version.
-+#
-+# Please read the COPYING file.
 +
-+import glob
++import os
++
 +import gettext
++
++import pisi.actionsapi
++import pisi.context as ctx
++from pisi.actionsapi import get
++from pisi.actionsapi.shelltools import system
++
 +__trans = gettext.translation('pisi', fallback=True)
 +_ = __trans.ugettext
 +
-+# Pisi Modules
-+import pisi.context as ctx
-+
-+# ActionsAPI Modules
-+import pisi.actionsapi
-+
-+# ActionsAPI Modules
-+from pisi.actionsapi import get
-+from pisi.actionsapi import cmaketools
-+from pisi.actionsapi import shelltools
-+
-+basename = "qt6"
-+
-+prefix = "/%s" % get.defaultprefixDIR()
-+libdir = "%s/lib" % prefix
-+libexecdir = "%s/libexec" % prefix
-+sysconfdir= "/etc"
-+bindir = "%s/bin" % prefix
-+includedir = "%s/include" % prefix
-+
-+# qt6 spesific variables
-+
-+headerdir = "%s/include/%s" % (prefix, basename)
-+datadir = "%s/share/%s" % (prefix, basename)
-+docdir = "/%s/%s" % (get.docDIR(), basename)
-+archdatadir = "%s/%s" % (libdir, basename)
-+mkspecsdir = "%s/%s/mkspecs" % (libdir, basename)
-+examplesdir = "%s/%s/examples" % (libdir, basename)
-+importdir = "%s/%s/imports" % (libdir, basename)
-+plugindir = "%s/%s/plugins" % (libdir, basename)
-+qmldir = "%s/%s/qml" % (libdir, basename)
-+testdir = "%s/share/%s" % (prefix, basename)
-+translationdir = "%s/translations" % datadir
-+
-+#Temporary bindir to avoid qt5 conflicts
-+qmake = "%s/qmake-qt6" % bindir
-+#qmake = "%s/qmake-qt6" % bindir
 +
 +class ConfigureError(pisi.actionsapi.Error):
 +    def __init__(self, value=''):
@@ -62,19 +23,116 @@ diff -Nuar a/pisi/actionsapi/qt6.py b/pisi/actionsapi/qt6.py
 +        self.value = value
 +        ctx.ui.error(value)
 +
-+def configure(projectfile='', parameters='', installPrefix=prefix):
-+    if projectfile != '' and not shelltools.can_access_file(projectfile):
-+        raise ConfigureError(_("Project file '%s' not found.") % projectfile)
 +
-+    profiles = glob.glob("*.pro")
-+    if len(profiles) > 1 and projectfile == '':
-+        raise ConfigureError(_("It seems there are more than one .pro file, you must specify one. (Possible .pro files: %s)") % ", ".join(profiles))
++class CompileError(pisi.actionsapi.Error):
++    def __init__(self, value=''):
++        pisi.actionsapi.Error.__init__(self, value)
++        self.value = value
++        ctx.ui.error(value)
 +
-+    shelltools.system("%s -makefile %s PREFIX='%s' QMAKE_CFLAGS+='%s' QMAKE_CXXFLAGS+='%s' %s" % (qmake, projectfile, installPrefix, get.CFLAGS(), get.CXXFLAGS(), parameters))
 +
-+def make(parameters=''):
-+    cmaketools.make(parameters)
++class InstallError(pisi.actionsapi.Error):
++    def __init__(self, value=''):
++        pisi.actionsapi.Error.__init__(self, value)
++        self.value = value
++        ctx.ui.error(value)
 +
-+def install(parameters='', argument='install'):
-+    cmaketools.install('INSTALL_ROOT="%s" %s' % (get.installDIR(), parameters), argument)
++basename = "qt6"
 +
++prefix = "/%s" % get.defaultprefixDIR()
++libdir = "%s/lib" % prefix
++bindirQt6 = "%s/%s" % (libdir, basename)
++libexecdir = "%s/libexec" % prefix
++sysconfdir= "/etc"
++bindir = "%s/bin" % prefix
++includedir = "%s/include" % prefix
++
++# qt5 spesific variables
++
++headerdir = "%s/include/%s" % (prefix, basename)
++datadir = "%s/share/%s" % (prefix, basename)
++docdir = "/%s/%s" % (get.docDIR(), basename)
++archdatadir = "%s/%s" % (libdir, basename)
++mkspecsdir = "%s/%s/mkspecs" % (libdir, basename)
++examplesdir = "%s/%s/examples" % (libdir, basename)
++testdir = "%s/share/%s" % (prefix, basename)
++translationdir = "%s/translations" % datadir
++
++#Temporary bindir to avoid qt5 conflicts
++# qmake = "%s/qt-configure-module-qt6" % bindir
++qmake = "%s/qmake-qt6" % bindir
++
++
++def configure(parameters='', build_dir='build'):
++    """
++    Configures the project into the build directory with the parameters using meson.
++
++    Args:
++        parameters (str): Extra parameters for the command. Default is empty string.
++        build_dir (str): Build directory. Default is 'build'.
++
++    Examples:
++        >>> mesontools.configure()
++        >>> mesontools.configure('extra parameters')
++        >>> mesontools.configure('extra parameters', 'custom_build_dir')
++    """
++    default_parameters = ' '.join([
++                    '-DCMAKE_INSTALL_PREFIX=%s' % prefix,
++                    '-DCMAKE_C_FLAGS="%s"' % get.CFLAGS() ,
++                    '-DCMAKE_CXX_FLAGS="%s"' % get.CXXFLAGS(),
++                    '-DCMAKE_LD_FLAGS="%s"' % get.LDFLAGS(),
++                    '-DCMAKE_BUILD_TYPE=RelWithDebInfo' ,
++                    '-DINSTALL_BINDIR=%s' % bindirQt6,
++                    '-DINSTALL_INCLUDEDIR=%s' % headerdir,
++                    '-DINSTALL_ARCHDATADIR=%s' % archdatadir,
++                    '-DINSTALL_DOCDIR=%s' % docdir,
++                    '-DINSTALL_DATADIR=%s' % datadir,
++                    '-DINSTALL_MKSPECSDIR=%s' % mkspecsdir,
++                    '-DINSTALL_EXAMPLESDIR=%s' % examplesdir,
++                    '-DQT_FEATURE_libproxy=ON' ,
++                    '-DQT_FEATURE_vulkan=ON' ,
++                    '-DQT_FEATURE_system_freetype=ON' ,
++                    '-DQT_FEATURE_system_harfbuzz=ON' ,
++                    '-DQT_FEATURE_system_sqlite=ON' ,
++                    '-DQT_FEATURE_dbus_linked=ON' ,
++                    '-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON' ,
++                    '-DCMAKE_MESSAGE_LOG_LEVEL=STATUS' ,
++                    '-DQT_FEATURE_openssl_linked=ON' ,
++    ])
++    if system('cmake -B %s -G Ninja %s %s' % (build_dir, default_parameters, parameters)):
++        raise ConfigureError(_('Configuration failed.'))
++
++
++def make(parameters='', build_dir='build'):
++    """
++    Builds the project into the build directory with the parameters using ninja. Instead of letting ninja
++    to detect number of cores, this function gets the number from PISI configurations.
++
++    Args:
++        parameters (str): Extra parameters for the command. Default is empty string.
++        build_dir (str): Build directory. Default is 'build'.
++
++    Examples:
++        >>> mesontools.build()
++        >>> mesontools.build('extra parameters')
++        >>> mesontools.build('extra parameters', 'custom_build_dir')
++    """
++    if system('ninja -C %s %s %s' % (build_dir, parameters, get.makeJOBS())):
++        raise CompileError(_('Make failed.'))
++
++
++def install(parameters='', build_dir='build'):
++    """
++    Installs the project to the destination directory.
++
++    Args:
++        parameters (str): Extra parameters for the command. Default is empty string.
++        build_dir (str): Build directory. Default is 'build'.
++
++    Examples:
++        >>> mesontools.install()
++        >>> mesontools.install('extra parameters')
++        >>> mesontools.install('extra parameters', 'custom_build_dir')
++    """
++    if system('DESTDIR=%s ninja -C %s %s install' % (get.installDIR(), build_dir, parameters, )):
++        raise InstallError(_('Install failed.'))
