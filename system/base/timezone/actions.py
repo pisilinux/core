@@ -19,8 +19,7 @@ PosixDir = "%s/posix" % TargetDir
 
 
 timezones = ["etcetera", "southamerica", "northamerica", "europe", "africa", "antarctica", \
-             "asia", "australasia", "factory", "backward", "pacificnew", \
-             "systemv" ]
+             "asia", "australasia", "factory", "backward" ]
 
 def setup():
     pisitools.dodir (ZoneDir)
