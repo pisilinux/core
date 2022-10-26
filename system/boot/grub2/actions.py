@@ -74,7 +74,7 @@ def install():
     #pisitools.insinto("/boot/grub2", "unicode.pf2")
 
     # Insall our theme
-    pisitools.insinto("/usr/share/grub/themes/pisilinux","themes/PisiNar-Grub2-Themes-pisinar-grub2-theme-v1.2/*")
+    pisitools.insinto("/usr/share/grub/themes/pisilinux","themes/PisiNar-Grub2-Themes-pisinar-grub2-theme-v1.3/*")
 
     #remove -r 0x0-0x7F entries to fix ugly fonts or find a suitable range parameter -r ***
     shelltools.system("./grub-mkfont -o DejaVuSans-10.pf2 -r 0x0-0x7F -s 10 /usr/share/fonts/dejavu/DejaVuSans.ttf")
