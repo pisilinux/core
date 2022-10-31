@@ -15,7 +15,7 @@ shelltools.export("LC_ALL", "C")
 
 def setup():
     # autoreconf breaks linker, graaaaaaaaggggghhhhhhh
-    autotools.autoreconf("-vfi")
+    autotools.autoreconf("-fi")
     autotools.configure("--without-emacs \
                          --enable-nls \
                          --disable-static \
