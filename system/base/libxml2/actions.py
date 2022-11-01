@@ -32,7 +32,8 @@ def setup():
         options += " --bindir=/emul32/bin \
                      --libdir=/usr/lib32 \
                      --without-python"
-    else: options += " --with-python=/usr/bin/python \
+    else: options += " --with-python \
+                       pythondir=/usr/bin/python2.7 \
                        --libdir=/usr/lib"
     
     autotools.configure(options)
@@ -40,6 +41,7 @@ def setup():
     
     shelltools.cd("../build-py3")
     shelltools.sym("../configure", "configure")
+    shelltools.export("PYTHON", "/usr/bin/python3")
     options = "--with-zlib \
                --with-readline \
                --enable-ipv6 \
@@ -53,7 +55,8 @@ def setup():
         options += " --bindir=/emul32/bin \
                      --libdir=/usr/lib32 \
                      --without-python"
-    else: options += " --with-python=/usr/bin/python3 \
+    else: options += " --with-python \
+                       pythondir=/usr/bin/python3 \
                        --libdir=/usr/lib"
 
     autotools.configure(options)
