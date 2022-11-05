@@ -35,6 +35,7 @@ def setup():
                     --with-bzlib \
                     --with-lzma"
     #shelltools.export("LDFLAGS", "-L/lib -lbz2")
+    autotools.autoreconf("-fiv")
     autotools.configure(options)
 
 def build():
