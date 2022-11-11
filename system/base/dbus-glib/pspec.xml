@@ -21,7 +21,7 @@
             <!-- New dbus uses GVariant data structure. We need glib2 >= 2.24 -->
             <Dependency>glib2-devel</Dependency>
 <!--             <Dependency>libpcre-devel</Dependency> -->
-            <Dependency versionFrom="2.4.9">expat-devel</Dependency>
+            <Dependency versionFrom="2.5.0">expat-devel</Dependency>
             <Dependency>libxml2</Dependency>
         </BuildDependencies>
         <Patches>
@@ -67,6 +67,13 @@
     </Package>
 
     <History>
+        <Update release="21">
+            <Date>2022-11-11</Date>
+            <Version>0.112</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="20">
             <Date>2022-10-31</Date>
             <Version>0.112</Version>
