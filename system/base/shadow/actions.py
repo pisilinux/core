@@ -30,6 +30,7 @@ def setup():
                          --with-audit \
                          --with-libcrack \
                          --without-selinux \
+                         --with-yescrypt=yes \
                          --with-acl")
 
 def build():
