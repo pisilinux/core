@@ -28,9 +28,9 @@ def install():
 
     # Dirty fix for now... (especially for flatpak)
     shelltools.system("mv %s/run/* %s/dev" % (get.installDIR(), get.installDIR()))
-    pisitools.remove("/var/lock")
+    # pisitools.remove("/var/lock")
     # shelltools.cd("%s/var" % get.installDIR())
-    shelltools.system("ln -rs %s/dev/lock %s/var/lock" % (get.installDIR(), get.installDIR()))
+    # shelltools.system("ln -rs %s/dev/lock %s/var/lock" % (get.installDIR(), get.installDIR()))
     # shelltools.cd("%s/baselayout/src" % get.workDIR())
 
     # Adjust permissions
