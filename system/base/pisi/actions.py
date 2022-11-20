@@ -11,11 +11,12 @@ from pisi.actionsapi import pythonmodules
 
 
 def build():
-    pythonmodules.compile()
+    shelltools.export("PYTHON", "/usr/bin/python3")
+    pythonmodules.compile(pyVer="3")
 
 
 def install():
-    pythonmodules.install("--install-lib=/usr/lib/pisilinux")
+    pythonmodules.install(pyVer="3", "--install-lib=/usr/lib/pisilinux")
 
     pisitools.dosym("pisi-cli", "/usr/bin/pisi")
 
