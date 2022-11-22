@@ -25,6 +25,21 @@
     </Package>
 
     <Package>
+        <Name>libbsd-32bit</Name>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for libbsd</Summary>
+        <BuildType>emul32</BuildType>
+        <BuildDependencies>
+        </BuildDependencies>
+        <RuntimeDependencies>
+            <Dependency release="current">libbsd</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib32</Path>
+        </Files>
+    </Package>
+
+    <Package>
         <Name>libbsd-devel</Name>
         <Summary>Development files for libbsd</Summary>
         <RuntimeDependencies>
@@ -33,12 +48,20 @@
         <Files>
             <Path fileType="header">/usr/include</Path>
             <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="data">/usr/lib32/pkgconfig</Path>
             <Path fileType="man">/usr/share/man/man3</Path>
             <Path fileType="man">/usr/share/man/man7</Path>
         </Files>
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2022-11-22</Date>
+            <Version>0.10.0</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="7">
             <Date>2020-12-09</Date>
             <Version>0.10.0</Version>
