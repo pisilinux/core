@@ -53,11 +53,11 @@
         <Summary>32-bit shared libraries for libXdmcp</Summary>
         <BuildType>emul32</BuildType>
         <BuildDependencies>
-            
+            <Dependency>libbsd-32bit</Dependency>
         </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">libXdmcp</Dependency>
-            
+            <Dependency>libbsd-32bit</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib32</Path>
