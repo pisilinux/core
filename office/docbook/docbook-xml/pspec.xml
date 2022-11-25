@@ -17,8 +17,9 @@
         <Archive sha1sum="5e3a35663cd028c5c5fbb959c3858fec2d7f8b9e" type="zip" target="4.2">https://www.oasis-open.org/docbook/xml/4.2/docbook-xml-4.2.zip</Archive>
         <Archive sha1sum="e79a59e9164c1013b8cc9f64f96f909a184ca016" type="zip" target="4.3">https://www.oasis-open.org/docbook/xml/4.3/docbook-xml-4.3.zip</Archive>
         <Archive sha1sum="7c4d91c82ad3747e1b5600c91782758e5d91c22b" type="zip" target="4.4">https://www.oasis-open.org/docbook/xml/4.4/docbook-xml-4.4.zip</Archive>
-        <Archive sha1sum="b9124233b50668fb508773aa2b3ebc631d7c1620" type="zip">https://www.oasis-open.org/docbook/xml/4.5/docbook-xml-4.5.zip</Archive>
+        <Archive sha1sum="b9124233b50668fb508773aa2b3ebc631d7c1620" type="zip" target="4.5">https://www.oasis-open.org/docbook/xml/4.5/docbook-xml-4.5.zip</Archive>
         <Archive sha1sum="49f274e67efdee771300cba4da1f3e4bc00be1ec" type="zip">http://www.docbook.org/xml/5.0/docbook-5.0.zip</Archive>
+        <Archive sha1sum="31ee986a9f173b782f9d45b93165de46288c63f5" type="zip" target="5.1">https://docbook.org/xml/5.1/docbook-v5.1-os.zip</Archive>
     </Source>
 
     <Package>
@@ -28,19 +29,35 @@
             <Dependency>libxml2</Dependency>
         </RuntimeDependencies>
         <Files>
+            <Path fileType="executable">/usr/bin</Path>
             <Path fileType="doc">/usr/share/doc/</Path>
             <Path fileType="data">/usr/share/xml</Path>
             <Path fileType="data">/etc/xml/docbook</Path>
             <Path fileType="data">/etc/xml/catalog</Path>
+            <Path fileType="data">/etc/xml/docbook-5.0</Path>
+            <Path fileType="data">/etc/xml/docbook-5.1</Path>
         </Files>
         <AdditionalFiles>
-            <AdditionalFile owner="root" permission="0644" target="/etc/xml/docbook">docbook</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/etc/xml/catalog">catalog</AdditionalFile>
-            <AdditionalFile owner="root" permission="0644" target="/usr/share/xml/docbook/xml-dtd-5.0/catalog.xml">5.0-catalog.xml</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/xml/docbook">xml/docbook</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/xml/docbook-5.0">xml/docbook-5.0</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/xml/docbook-5.1">xml/docbook-5.1</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/etc/xml/catalog">xml/catalog</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/xml/docbook/schema/dtd/5.0/catalog.xml">5.0/dtd/catalog.xml</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/xml/docbook/schema/rng/5.0/catalog.xml">5.0/rng/catalog.xml</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/xml/docbook/schema/sch/5.0/catalog.xml">5.0/sch/catalog.xml</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/xml/docbook/schema/xsd/5.0/catalog.xml">5.0/xsd/catalog.xml</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/share/xml/docbook/schema/rng/5.1/catalog.xml">5.1/rng/catalog.xml</AdditionalFile>
         </AdditionalFiles>
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2022-11-24</Date>
+            <Version>5.1</Version>
+            <Comment>Rebuild</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="7">
             <Date>2020-12-09</Date>
             <Version>5.0</Version>
