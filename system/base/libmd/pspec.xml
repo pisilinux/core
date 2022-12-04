@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libmd</Name>
+        <Homepage>https://www.hadrons.org/software/libmd/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>BSD</License>
+        <IsA>library</IsA>
+        <Summary>Message Digest functions from BSD systems</Summary>
+        <Icon>libmd</Icon>
+        <Description>Message Digest functions from BSD systems</Description>
+        <Archive sha1sum="c412a6cb3792e00927127b85cb99b46f493eecce" type="tarxz">https://libbsd.freedesktop.org/releases/libmd-1.0.4.tar.xz</Archive>
+        <!--
+        <Patches>
+            <Patch>libmd.patch</Patch>
+            <Patch level="1">libmd.patch</Patch>
+        </Patches>
+        -->
+    </Source>
+
+    <Package>
+        <Name>libmd</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>libmd-32bit</Name>
+        <PartOf>emul32</PartOf>
+        <Summary>32-bit shared libraries for libmd</Summary>
+        <BuildType>emul32</BuildType>
+        <RuntimeDependencies>
+            <Dependency release="current">libmd</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib32</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>libmd-devel</Name>
+        <Summary>Development files for libmd</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">libmd</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+            <Path fileType="library">/usr/lib32/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2022-12-04</Date>
+            <Version>1.0.4</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
