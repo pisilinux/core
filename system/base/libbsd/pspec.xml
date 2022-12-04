@@ -13,11 +13,17 @@
         <IsA>library</IsA>
         <Summary>Provides useful functions commonly found on BSD systems</Summary>
         <Description>This library provides useful functions commonly found on BSD systems, and lacking on others like GNU systems, thus making it easier to port projects with strong BSD origins, without needing to embed the same code over and over again on each project.</Description>
-        <Archive sha1sum="9cb8f0b717da13c8aa13b9f3f5f8105ee6e5ccb5" type="tarxz">https://libbsd.freedesktop.org/releases/libbsd-0.10.0.tar.xz</Archive>
+        <Archive sha1sum="e5f5fffcc2094661a105074c1538f1e434990490" type="tarxz">https://libbsd.freedesktop.org/releases/libbsd-0.11.7.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>libmd-devel</Dependency>
+        </BuildDependencies>
     </Source>
 
     <Package>
         <Name>libbsd</Name>
+        <RuntimeDependencies>
+            <Dependency>libmd</Dependency>
+        </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib</Path>
             <Path fileType="doc">/usr/share/doc</Path>
@@ -30,11 +36,13 @@
         <Summary>32-bit shared libraries for libbsd</Summary>
         <BuildType>emul32</BuildType>
         <BuildDependencies>
+            <Dependency>libmd-32bit</Dependency>
         </BuildDependencies>
         <RuntimeDependencies>
             <Dependency release="current">libbsd</Dependency>
         </RuntimeDependencies>
         <Files>
+            <Dependency>libmd-32bit</Dependency>
             <Path fileType="library">/usr/lib32</Path>
         </Files>
     </Package>
@@ -55,6 +63,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2022-12-04</Date>
+            <Version>0.11.7</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="8">
             <Date>2022-11-22</Date>
             <Version>0.10.0</Version>
