@@ -1,0 +1,49 @@
+diff --git a/lib/test_process.c b/lib/test_process.c
+index e20b270d..f8ff5ed0 100644
+--- a/lib/test_process.c
++++ b/lib/test_process.c
+@@ -69,6 +69,7 @@ signal_handler(int signum, siginfo_t *siginfo, void *ucontext)
+ 	    exit(EXIT_FAILURE);
+     }
+ 
++    free(signame);
+ }
+ 
+ int main(int argc, char *argv[])
+diff --git a/pmap.c b/pmap.c
+index 49a2a6a8..d8565fc3 100644
+--- a/pmap.c
++++ b/pmap.c
+@@ -346,6 +346,9 @@ static void print_extended_maps (FILE *f)
+ 			if (listnode == NULL) {
+ 				assert(firstmapping == 2);
+ 				listnode = calloc(1, sizeof *listnode);
++				if (listnode == NULL)
++					xerrx(EXIT_FAILURE, _("ERROR: memory allocation failed"));
++
+ 				if (listhead == NULL) {
+ 					assert(listtail == NULL);
+ 					listhead = listnode;
+diff --git a/watch.c b/watch.c
+index 1a95454e..772879cd 100644
+--- a/watch.c
++++ b/watch.c
+@@ -124,8 +124,6 @@ static void reset_ansi(void)
+ 
+ static void init_ansi_colors(void)
+ {
+-	int color;
+-
+ 	short ncurses_colors[] = {
+ 		-1, COLOR_BLACK, COLOR_RED, COLOR_GREEN, COLOR_YELLOW,
+ 		COLOR_BLUE, COLOR_MAGENTA, COLOR_CYAN, COLOR_WHITE
+@@ -172,6 +170,9 @@ static int process_ansi_color_escape_sequence(char** escape_sequence) {
+ 	// ESC[ 48;2;⟨r⟩;⟨g⟩;⟨b⟩ m Select RGB background color
+ 	int num;
+ 
++	if (!escape_sequence)
++		return 0; /* avoid NULLPTR dereference, return "not understood" */
++
+ 	if ((*escape_sequence)[0] != ';')
+ 		return 0; /* not understood */
+ 
