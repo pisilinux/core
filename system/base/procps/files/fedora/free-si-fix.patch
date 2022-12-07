@@ -1,0 +1,12 @@
+diff -up ./free.c.ori ./free.c
+--- ./free.c.ori	2022-09-20 15:02:22.469320938 +0200
++++ ./free.c	2022-09-20 15:03:33.767710892 +0200
+@@ -120,7 +120,7 @@ static const char *scale_size(unsigned l
+ 
+ 	/* default output */
+ 	if (args.exponent == 0 && !(flags & FREE_HUMANREADABLE)) {
+-		snprintf(buf, sizeof(buf), "%ld", size);
++		snprintf(buf, sizeof(buf), "%ld", (long)( ((long long int)size) * 1024 / (long long int)base));
+ 		return buf;
+ 	}
+ 

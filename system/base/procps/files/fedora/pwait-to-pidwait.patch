@@ -1,0 +1,286 @@
+From 52afb3a8d31871d28b1c39573a7ed5196c2d5023 Mon Sep 17 00:00:00 2001
+From: Craig Small <csmall@dropbear.xyz>
+Date: Mon, 15 Feb 2021 21:10:06 +1100
+Subject: [PATCH] pidwait: Rename from pwait
+
+pwait is already in at least Debian in a different package
+
+References:
+ https://bugs.debian.org/982391
+---
+diff --git a/Makefile.am b/Makefile.am
+index e037e4c..de15e13 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -49,8 +49,8 @@ bin_PROGRAMS = \
+ 	uptime \
+ 	vmstat \
+ 	w
+-if BUILD_PWAIT
+-bin_PROGRAMS += pwait
++if BUILD_PIDWAIT
++bin_PROGRAMS += pidwait
+ endif
+ else
+ usrbin_exec_PROGRAMS += \
+@@ -85,8 +85,8 @@ dist_man_MANS += \
+ 	sysctl.conf.5 \
+ 	ps/ps.1
+ 
+-if BUILD_PWAIT
+-dist_man_MANS += pwait.1
++if BUILD_PIDWAIT
++dist_man_MANS += pidwait.1
+ endif
+ endif
+ 
+@@ -199,8 +199,8 @@ free_SOURCES = free.c lib/strutils.c lib/fileutils.c
+ pgrep_SOURCES = pgrep.c lib/fileutils.c lib/nsutils.c
+ pkill_SOURCES = pgrep.c lib/fileutils.c lib/nsutils.c
+ pmap_SOURCES = pmap.c lib/fileutils.c
+-if BUILD_PWAIT
+-pwait_SOURCES = pgrep.c lib/fileutils.c lib/nsutils.c
++if BUILD_PIDWAIT
++pidwait_SOURCES = pgrep.c lib/fileutils.c lib/nsutils.c
+ endif
+ if !CYGWIN
+ pwdx_SOURCES = pwdx.c lib/fileutils.c
+diff --git a/NEWS b/NEWS
+index da63c9c..5fe6761 100644
+--- a/NEWS
++++ b/NEWS
+@@ -1,3 +1,7 @@
++procps-ng-NEXT
++---------------
++  * Rename pwait to pidwait
++
+ procps-ng-3.3.17
+ ---------------
+   * library: Incremented to 8:3:0
+diff --git a/configure.ac b/configure.ac
+index 56a8669..750c0fb 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -132,20 +132,20 @@ AC_TRY_COMPILE([#include <errno.h>],
+ 		AC_MSG_RESULT(yes),
+ 		AC_MSG_RESULT(no))
+ 
+-AC_CHECK_FUNC([pidfd_open], [enable_pwait=yes], [
++AC_CHECK_FUNC([pidfd_open], [enable_pidwait=yes], [
+   AC_MSG_CHECKING([for __NR_pidfd_open])
+   AC_COMPILE_IFELSE([AC_LANG_SOURCE([
+ #include <sys/syscall.h>
+ #ifndef __NR_pidfd_open
+ #error __NR_pidfd_open not defined
+ #endif
+-    ])], [enable_pwait=yes], [enable_pwait=no])
+-  AC_MSG_RESULT([$enable_pwait])
++    ])], [enable_pidwait=yes], [enable_pidwait=no])
++  AC_MSG_RESULT([$enable_pidwait])
+ ])
+-if test "$enable_pwait" = yes; then
+-  AC_DEFINE([ENABLE_PWAIT], [1], [Enable pwait])
++if test "$enable_pidwait" = yes; then
++  AC_DEFINE([ENABLE_PIDWAIT], [1], [Enable pidwait])
+ fi
+-AM_CONDITIONAL([BUILD_PWAIT], [test x$enable_pwait = xyes])
++AM_CONDITIONAL([BUILD_PIDWAIT], [test x$enable_pidwait = xyes])
+ 
+ dnl watch8bit must be before the AC_ARG_WITH set as it sets up ncurses
+ AC_SUBST([WITH_WATCH8BIT])
+diff --git a/pgrep.1 b/pgrep.1
+index 4f8907b..af6dcd5 100644
+--- a/pgrep.1
++++ b/pgrep.1
+@@ -9,7 +9,7 @@
+ .\"
+ .TH PGREP "1" "2020-06-04" "procps-ng" "User Commands"
+ .SH NAME
+-pgrep, pkill, pwait \- look up, signal, or wait for processes based on name and other attributes
++pgrep, pkill, pidwait \- look up, signal, or wait for processes based on name and other attributes
+ .SH SYNOPSIS
+ .B pgrep
+ [options] pattern
+@@ -17,7 +17,7 @@ pgrep, pkill, pwait \- look up, signal, or wait for processes based on name and
+ .B pkill
+ [options] pattern
+ .br
+-.B pwait
++.B pidwait
+ [options] pattern
+ .SH DESCRIPTION
+ .B pgrep
+@@ -45,7 +45,7 @@ will send the specified signal (by default
+ .BR SIGTERM )
+ to each process instead of listing them on stdout.
+ .PP
+-.B pwait
++.B pidwait
+ will wait for each process instead of listing them on stdout.
+ .SH OPTIONS
+ .TP
+@@ -60,7 +60,7 @@ only.)
+ \fB\-c\fR, \fB\-\-count\fR
+ Suppress normal output; instead print a count of matching processes.  When
+ count does not match anything, e.g. returns zero, the command will return
+-non-zero value. Note that for pkill and pwait, the count is the number of
++non-zero value. Note that for pkill and pidwait, the count is the number of
+ matching processes, not the processes that were successfully signaled or waited
+ for.
+ .TP
+@@ -88,7 +88,7 @@ translated into
+ .BR pgrep 's,
+ .BR pkill 's,
+ or
+-.BR pwait 's
++.BR pidwait 's
+ own process group.
+ .TP
+ \fB\-G\fR, \fB\-\-group\fR \fIgid\fP,...
+@@ -126,7 +126,7 @@ is translated into
+ .BR pgrep 's,
+ .BR pkill 's,
+ or
+-.BR pwait 's
++.BR pidwait 's
+ own session ID.
+ .TP
+ \fB\-t\fR, \fB\-\-terminal\fR \fIterm\fP,...
+@@ -145,7 +145,7 @@ symbolical value may be used.
+ Negates the matching.  This option is usually used in
+ .BR pgrep 's
+ or
+-.BR pwait 's
++.BR pidwait 's
+ context.  In
+ .BR pkill 's
+ context the short option is disabled to avoid accidental usage of the option.
+@@ -154,7 +154,7 @@ context the short option is disabled to avoid accidental usage of the option.
+ Shows all thread ids instead of pids in
+ .BR pgrep 's
+ or
+-.BR pwait 's
++.BR pidwait 's
+ context.  In
+ .BR pkill 's
+ context this option is disabled.
+@@ -167,7 +167,7 @@ match the
+ .TP
+ \fB\-F\fR, \fB\-\-pidfile\fR \fIfile\fR
+ Read \fIPID\fRs from \fIfile\fR.  This option is more useful for
+-.BR pkill or pwait
++.BR pkill or pidwait
+ than
+ .BR pgrep .
+ .TP
+@@ -237,7 +237,7 @@ $ renice +4 $(pgrep chrome)
+ .PD 0
+ .TP
+ 0
+-One or more processes matched the criteria. For pkill and pwait, one or more
++One or more processes matched the criteria. For pkill and pidwait, one or more
+ processes must also have been successfully signalled or waited for.
+ .TP
+ 1
+@@ -258,7 +258,7 @@ The running
+ .BR pgrep ,
+ .BR pkill ,
+ or
+-.B pwait
++.B pidwait
+ process will never report itself as a
+ match.
+ .SH BUGS
+diff --git a/pgrep.c b/pgrep.c
+index 4fe5e8a..1905cd1 100644
+--- a/pgrep.c
++++ b/pgrep.c
+@@ -38,7 +38,7 @@
+ #include <stdbool.h>
+ #include <time.h>
+ 
+-#if defined(ENABLE_PWAIT) && !defined(HAVE_PIDFD_OPEN)
++#if defined(ENABLE_PIDWAIT) && !defined(HAVE_PIDFD_OPEN)
+ #include <sys/epoll.h>
+ #include <sys/syscall.h>
+ #endif
+@@ -68,8 +68,8 @@
+ static enum {
+     PGREP = 0,
+     PKILL,
+-#ifdef ENABLE_PWAIT
+-    PWAIT,
++#ifdef ENABLE_PIDWAIT
++    PIDWAIT,
+ #endif
+ } prog_mode;
+ 
+@@ -136,8 +136,8 @@ static int __attribute__ ((__noreturn__)) usage(int opt)
+ 		fputs(_(" -q, --queue <value>       integer value to be sent with the signal\n"), fp);
+ 		fputs(_(" -e, --echo                display what is killed\n"), fp);
+ 		break;
+-#ifdef ENABLE_PWAIT
+-	case PWAIT:
++#ifdef ENABLE_PIDWAIT
++	case PIDWAIT:
+ 		fputs(_(" -e, --echo                display PIDs before waiting\n"), fp);
+ 		break;
+ #endif
+@@ -687,7 +687,7 @@ static struct el * select_procs (int *num)
+ 				xerrx(EXIT_FAILURE, _("internal error"));
+ 			}
+ 
+-			// pkill and pwait don't support -w, but this is checked in getopt
++			// pkill and pidwait don't support -w, but this is checked in getopt
+ 			if (opt_threads) {
+ 				while (readtask(ptp, &task, &subtask)){
+ 					// don't add redundant tasks
+@@ -742,7 +742,7 @@ static int signal_option(int *argc, char **argv)
+ 	return -1;
+ }
+ 
+-#if defined(ENABLE_PWAIT) && !defined(HAVE_PIDFD_OPEN)
++#if defined(ENABLE_PIDWAIT) && !defined(HAVE_PIDFD_OPEN)
+ static int pidfd_open (pid_t pid, unsigned int flags)
+ {
+ 	return syscall(__NR_pidfd_open, pid, flags);
+@@ -793,9 +793,9 @@ static void parse_opts (int argc, char **argv)
+ 		{NULL, 0, NULL, 0}
+ 	};
+ 
+-#ifdef ENABLE_PWAIT
+-	if (strcmp (program_invocation_short_name, "pwait") == 0) {
+-		prog_mode = PWAIT;
++#ifdef ENABLE_PIDWAIT
++	if (strcmp (program_invocation_short_name, "pidwait") == 0) {
++		prog_mode = PIDWAIT;
+ 		strcat (opts, "e");
+ 	} else
+ #endif
+@@ -1008,7 +1008,7 @@ int main (int argc, char **argv)
+ 	int num;
+ 	int i;
+ 	int kill_count = 0;
+-#ifdef ENABLE_PWAIT
++#ifdef ENABLE_PIDWAIT
+ 	int poll_count = 0;
+ 	int wait_count = 0;
+ 	int epollfd = epoll_create(1);
+@@ -1055,8 +1055,8 @@ int main (int argc, char **argv)
+ 			fprintf(stdout, "%d\n", num);
+ 		return !kill_count;
+ 
+-#ifdef ENABLE_PWAIT
+-	case PWAIT:
++#ifdef ENABLE_PIDWAIT
++	case PIDWAIT:
+ 		if (opt_count)
+ 			fprintf(stdout, "%d\n", num);
+ 
+diff --git a/pwait.1 b/pidwait.1
+similarity index 100%
+rename from pwait.1
+rename to pidwait.1
+-- 
+GitLab
+
