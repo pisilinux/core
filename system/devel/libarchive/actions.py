@@ -27,4 +27,6 @@ def build():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
+    pisitools.dosed("%s/usr/lib/pkgconfig/libarchive.pc" % get.installDIR(), "iconv", "")
+
     pisitools.dodoc("COPYING","NEWS")
