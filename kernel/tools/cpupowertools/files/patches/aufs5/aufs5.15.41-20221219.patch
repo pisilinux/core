@@ -1,6 +1,6 @@
 diff -Naur null/Documentation/ABI/testing/debugfs-aufs linux-5.15.41/Documentation/ABI/testing/debugfs-aufs
 --- /dev/null
-+++ linux-5.15.41/Documentation/ABI/testing/debugfs-aufs	2022-09-06 12:51:51.030710012 +0300
++++ linux-5.15.41/Documentation/ABI/testing/debugfs-aufs	2023-01-03 20:33:04.499529241 +0300
 @@ -0,0 +1,55 @@
 +What:		/debug/aufs/si_<id>/
 +Date:		March 2009
@@ -59,7 +59,7 @@ diff -Naur null/Documentation/ABI/testing/debugfs-aufs linux-5.15.41/Documentati
 +		will be empty. About XINO files, see the aufs manual.
 diff -Naur null/Documentation/ABI/testing/sysfs-aufs linux-5.15.41/Documentation/ABI/testing/sysfs-aufs
 --- /dev/null
-+++ linux-5.15.41/Documentation/ABI/testing/sysfs-aufs	2022-09-06 12:51:51.030710012 +0300
++++ linux-5.15.41/Documentation/ABI/testing/sysfs-aufs	2023-01-03 20:33:04.499529241 +0300
 @@ -0,0 +1,31 @@
 +What:		/sys/fs/aufs/si_<id>/
 +Date:		March 2009
@@ -94,7 +94,7 @@ diff -Naur null/Documentation/ABI/testing/sysfs-aufs linux-5.15.41/Documentation
 +		will be empty. About XINO files, see the aufs manual.
 diff -Naur null/Documentation/filesystems/aufs/design/01intro.txt linux-5.15.41/Documentation/filesystems/aufs/design/01intro.txt
 --- /dev/null
-+++ linux-5.15.41/Documentation/filesystems/aufs/design/01intro.txt	2022-09-06 12:51:51.031709999 +0300
++++ linux-5.15.41/Documentation/filesystems/aufs/design/01intro.txt	2023-01-03 20:33:04.499529241 +0300
 @@ -0,0 +1,171 @@
 +
 +# Copyright (C) 2005-2021 Junjiro R. Okajima
@@ -269,7 +269,7 @@ diff -Naur null/Documentation/filesystems/aufs/design/01intro.txt linux-5.15.41/
 +about it. But currently I have implemented it in kernel space.
 diff -Naur null/Documentation/filesystems/aufs/design/02struct.txt linux-5.15.41/Documentation/filesystems/aufs/design/02struct.txt
 --- /dev/null
-+++ linux-5.15.41/Documentation/filesystems/aufs/design/02struct.txt	2022-09-06 12:51:51.031709999 +0300
++++ linux-5.15.41/Documentation/filesystems/aufs/design/02struct.txt	2023-01-03 20:33:04.499529241 +0300
 @@ -0,0 +1,258 @@
 +
 +# Copyright (C) 2005-2021 Junjiro R. Okajima
@@ -531,7 +531,7 @@ diff -Naur null/Documentation/filesystems/aufs/design/02struct.txt linux-5.15.41
 +For this purpose, use "aumvdown" command in aufs-util.git.
 diff -Naur null/Documentation/filesystems/aufs/design/03atomic_open.txt linux-5.15.41/Documentation/filesystems/aufs/design/03atomic_open.txt
 --- /dev/null
-+++ linux-5.15.41/Documentation/filesystems/aufs/design/03atomic_open.txt	2022-09-06 12:51:51.031709999 +0300
++++ linux-5.15.41/Documentation/filesystems/aufs/design/03atomic_open.txt	2023-01-03 20:33:04.500529229 +0300
 @@ -0,0 +1,85 @@
 +
 +# Copyright (C) 2015-2021 Junjiro R. Okajima
@@ -620,7 +620,7 @@ diff -Naur null/Documentation/filesystems/aufs/design/03atomic_open.txt linux-5.
 +       be implemented in aufs, but not all I am afraid.
 diff -Naur null/Documentation/filesystems/aufs/design/03lookup.txt linux-5.15.41/Documentation/filesystems/aufs/design/03lookup.txt
 --- /dev/null
-+++ linux-5.15.41/Documentation/filesystems/aufs/design/03lookup.txt	2022-09-06 12:51:51.031709999 +0300
++++ linux-5.15.41/Documentation/filesystems/aufs/design/03lookup.txt	2023-01-03 20:33:04.500529229 +0300
 @@ -0,0 +1,113 @@
 +
 +# Copyright (C) 2005-2021 Junjiro R. Okajima
@@ -737,7 +737,7 @@ diff -Naur null/Documentation/filesystems/aufs/design/03lookup.txt linux-5.15.41
 +   by over-mounting something (or another method).
 diff -Naur null/Documentation/filesystems/aufs/design/04branch.txt linux-5.15.41/Documentation/filesystems/aufs/design/04branch.txt
 --- /dev/null
-+++ linux-5.15.41/Documentation/filesystems/aufs/design/04branch.txt	2022-09-06 12:51:51.031709999 +0300
++++ linux-5.15.41/Documentation/filesystems/aufs/design/04branch.txt	2023-01-03 20:33:04.500529229 +0300
 @@ -0,0 +1,74 @@
 +
 +# Copyright (C) 2005-2021 Junjiro R. Okajima
@@ -815,7 +815,7 @@ diff -Naur null/Documentation/filesystems/aufs/design/04branch.txt linux-5.15.41
 +    same named entry on the upper branch.
 diff -Naur null/Documentation/filesystems/aufs/design/05wbr_policy.txt linux-5.15.41/Documentation/filesystems/aufs/design/05wbr_policy.txt
 --- /dev/null
-+++ linux-5.15.41/Documentation/filesystems/aufs/design/05wbr_policy.txt	2022-09-06 12:51:51.032709987 +0300
++++ linux-5.15.41/Documentation/filesystems/aufs/design/05wbr_policy.txt	2023-01-03 20:33:04.500529229 +0300
 @@ -0,0 +1,64 @@
 +
 +# Copyright (C) 2005-2021 Junjiro R. Okajima
@@ -883,7 +883,7 @@ diff -Naur null/Documentation/filesystems/aufs/design/05wbr_policy.txt linux-5.1
 +  copyup policy.
 diff -Naur null/Documentation/filesystems/aufs/design/06dirren.dot linux-5.15.41/Documentation/filesystems/aufs/design/06dirren.dot
 --- /dev/null
-+++ linux-5.15.41/Documentation/filesystems/aufs/design/06dirren.dot	2022-09-06 12:51:51.032709987 +0300
++++ linux-5.15.41/Documentation/filesystems/aufs/design/06dirren.dot	2023-01-03 20:33:04.500529229 +0300
 @@ -0,0 +1,31 @@
 +
 +// to view this graph, run dot(1) command in GRAPHVIZ.
@@ -918,7 +918,7 @@ diff -Naur null/Documentation/filesystems/aufs/design/06dirren.dot linux-5.15.41
 +}
 diff -Naur null/Documentation/filesystems/aufs/design/06dirren.txt linux-5.15.41/Documentation/filesystems/aufs/design/06dirren.txt
 --- /dev/null
-+++ linux-5.15.41/Documentation/filesystems/aufs/design/06dirren.txt	2022-09-06 12:51:51.032709987 +0300
++++ linux-5.15.41/Documentation/filesystems/aufs/design/06dirren.txt	2023-01-03 20:33:04.500529229 +0300
 @@ -0,0 +1,102 @@
 +
 +# Copyright (C) 2017-2021 Junjiro R. Okajima
@@ -1024,7 +1024,7 @@ diff -Naur null/Documentation/filesystems/aufs/design/06dirren.txt linux-5.15.41
 +equivalen to udba=reval case.
 diff -Naur null/Documentation/filesystems/aufs/design/06fhsm.txt linux-5.15.41/Documentation/filesystems/aufs/design/06fhsm.txt
 --- /dev/null
-+++ linux-5.15.41/Documentation/filesystems/aufs/design/06fhsm.txt	2022-09-06 12:51:51.032709987 +0300
++++ linux-5.15.41/Documentation/filesystems/aufs/design/06fhsm.txt	2023-01-03 20:33:04.500529229 +0300
 @@ -0,0 +1,120 @@
 +
 +# Copyright (C) 2011-2021 Junjiro R. Okajima
@@ -1148,7 +1148,7 @@ diff -Naur null/Documentation/filesystems/aufs/design/06fhsm.txt linux-5.15.41/D
 +should restore the original file state after an error happens.
 diff -Naur null/Documentation/filesystems/aufs/design/06mmap.txt linux-5.15.41/Documentation/filesystems/aufs/design/06mmap.txt
 --- /dev/null
-+++ linux-5.15.41/Documentation/filesystems/aufs/design/06mmap.txt	2022-09-06 12:51:51.032709987 +0300
++++ linux-5.15.41/Documentation/filesystems/aufs/design/06mmap.txt	2023-01-03 20:33:04.500529229 +0300
 @@ -0,0 +1,72 @@
 +
 +# Copyright (C) 2005-2021 Junjiro R. Okajima
@@ -1224,7 +1224,7 @@ diff -Naur null/Documentation/filesystems/aufs/design/06mmap.txt linux-5.15.41/D
 +I have to give up this "looks-smater" approach.
 diff -Naur null/Documentation/filesystems/aufs/design/06xattr.txt linux-5.15.41/Documentation/filesystems/aufs/design/06xattr.txt
 --- /dev/null
-+++ linux-5.15.41/Documentation/filesystems/aufs/design/06xattr.txt	2022-09-06 12:51:51.032709987 +0300
++++ linux-5.15.41/Documentation/filesystems/aufs/design/06xattr.txt	2023-01-03 20:33:04.500529229 +0300
 @@ -0,0 +1,96 @@
 +
 +# Copyright (C) 2014-2021 Junjiro R. Okajima
@@ -1324,7 +1324,7 @@ diff -Naur null/Documentation/filesystems/aufs/design/06xattr.txt linux-5.15.41/
 +now, aufs implements the branch attributes to ignore the error.
 diff -Naur null/Documentation/filesystems/aufs/design/07export.txt linux-5.15.41/Documentation/filesystems/aufs/design/07export.txt
 --- /dev/null
-+++ linux-5.15.41/Documentation/filesystems/aufs/design/07export.txt	2022-09-06 12:51:51.032709987 +0300
++++ linux-5.15.41/Documentation/filesystems/aufs/design/07export.txt	2023-01-03 20:33:04.500529229 +0300
 @@ -0,0 +1,58 @@
 +
 +# Copyright (C) 2005-2021 Junjiro R. Okajima
@@ -1386,7 +1386,7 @@ diff -Naur null/Documentation/filesystems/aufs/design/07export.txt linux-5.15.41
 +  lookup_one_len(), vfs_getattr(), encode_fh() and others.
 diff -Naur null/Documentation/filesystems/aufs/design/08shwh.txt linux-5.15.41/Documentation/filesystems/aufs/design/08shwh.txt
 --- /dev/null
-+++ linux-5.15.41/Documentation/filesystems/aufs/design/08shwh.txt	2022-09-06 12:51:51.032709987 +0300
++++ linux-5.15.41/Documentation/filesystems/aufs/design/08shwh.txt	2023-01-03 20:33:04.500529229 +0300
 @@ -0,0 +1,52 @@
 +
 +# Copyright (C) 2005-2021 Junjiro R. Okajima
@@ -1442,7 +1442,7 @@ diff -Naur null/Documentation/filesystems/aufs/design/08shwh.txt linux-5.15.41/D
 +initramfs will use it to replace the old one at the next boot.
 diff -Naur null/Documentation/filesystems/aufs/design/10dynop.txt linux-5.15.41/Documentation/filesystems/aufs/design/10dynop.txt
 --- /dev/null
-+++ linux-5.15.41/Documentation/filesystems/aufs/design/10dynop.txt	2022-09-06 12:51:51.032709987 +0300
++++ linux-5.15.41/Documentation/filesystems/aufs/design/10dynop.txt	2023-01-03 20:33:04.500529229 +0300
 @@ -0,0 +1,47 @@
 +
 +# Copyright (C) 2010-2021 Junjiro R. Okajima
@@ -1493,7 +1493,7 @@ diff -Naur null/Documentation/filesystems/aufs/design/10dynop.txt linux-5.15.41/
 +regular files only.
 diff -Naur null/Documentation/filesystems/aufs/README linux-5.15.41/Documentation/filesystems/aufs/README
 --- /dev/null
-+++ linux-5.15.41/Documentation/filesystems/aufs/README	2022-09-06 12:51:51.031709999 +0300
++++ linux-5.15.41/Documentation/filesystems/aufs/README	2023-01-03 20:33:04.499529241 +0300
 @@ -0,0 +1,397 @@
 +
 +Aufs5 -- advanced multi layered unification filesystem version 5.x
@@ -1894,7 +1894,7 @@ diff -Naur null/Documentation/filesystems/aufs/README linux-5.15.41/Documentatio
 +# End: ;
 diff -Naur null/fs/aufs/aufs.h linux-5.15.41/fs/aufs/aufs.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/aufs.h	2022-09-06 12:51:51.034709962 +0300
++++ linux-5.15.41/fs/aufs/aufs.h	2023-01-03 20:33:04.501529216 +0300
 @@ -0,0 +1,62 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -1960,7 +1960,7 @@ diff -Naur null/fs/aufs/aufs.h linux-5.15.41/fs/aufs/aufs.h
 +#endif /* __AUFS_H__ */
 diff -Naur null/fs/aufs/branch.c linux-5.15.41/fs/aufs/branch.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/branch.c	2022-09-06 12:51:51.034709962 +0300
++++ linux-5.15.41/fs/aufs/branch.c	2023-01-03 20:33:04.502529204 +0300
 @@ -0,0 +1,1427 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -3391,7 +3391,7 @@ diff -Naur null/fs/aufs/branch.c linux-5.15.41/fs/aufs/branch.c
 +}
 diff -Naur null/fs/aufs/branch.h linux-5.15.41/fs/aufs/branch.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/branch.h	2022-09-06 12:51:51.034709962 +0300
++++ linux-5.15.41/fs/aufs/branch.h	2023-01-03 20:33:04.502529204 +0300
 @@ -0,0 +1,375 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -3770,7 +3770,7 @@ diff -Naur null/fs/aufs/branch.h linux-5.15.41/fs/aufs/branch.h
 +#endif /* __AUFS_BRANCH_H__ */
 diff -Naur null/fs/aufs/conf.mk linux-5.15.41/fs/aufs/conf.mk
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/conf.mk	2022-09-06 12:51:51.035709949 +0300
++++ linux-5.15.41/fs/aufs/conf.mk	2023-01-03 20:33:04.502529204 +0300
 @@ -0,0 +1,40 @@
 +# SPDX-License-Identifier: GPL-2.0
 +
@@ -3814,7 +3814,7 @@ diff -Naur null/fs/aufs/conf.mk linux-5.15.41/fs/aufs/conf.mk
 +-include ${srctree}/${src}/conf_priv.mk
 diff -Naur null/fs/aufs/cpup.c linux-5.15.41/fs/aufs/cpup.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/cpup.c	2022-09-06 12:51:51.035709949 +0300
++++ linux-5.15.41/fs/aufs/cpup.c	2023-01-03 20:33:04.502529204 +0300
 @@ -0,0 +1,1459 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -4407,7 +4407,7 @@ diff -Naur null/fs/aufs/cpup.c linux-5.15.41/fs/aufs/cpup.c
 + * regardless 'acl' option, reset all ACL.
 + * All ACL will be copied up later from the original entry on the lower branch.
 + */
-+static int au_reset_acl(struct inode *h_dir, struct path *h_path, umode_t mode)
++static int au_reset_acl(struct path *h_path, umode_t mode)
 +{
 +	int err;
 +	struct dentry *h_dentry;
@@ -4529,7 +4529,7 @@ diff -Naur null/fs/aufs/cpup.c linux-5.15.41/fs/aufs/cpup.c
 +		err = -EIO;
 +	}
 +	if (!err)
-+		err = au_reset_acl(h_dir, &h_path, mode);
++		err = au_reset_acl(&h_path, mode);
 +
 +	mnt_flags = au_mntflags(sb);
 +	if (!au_opt_test(mnt_flags, UDBA_NONE)
@@ -5277,7 +5277,7 @@ diff -Naur null/fs/aufs/cpup.c linux-5.15.41/fs/aufs/cpup.c
 +}
 diff -Naur null/fs/aufs/cpup.h linux-5.15.41/fs/aufs/cpup.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/cpup.h	2022-09-06 12:51:51.035709949 +0300
++++ linux-5.15.41/fs/aufs/cpup.h	2023-01-03 20:33:04.502529204 +0300
 @@ -0,0 +1,100 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -5381,7 +5381,7 @@ diff -Naur null/fs/aufs/cpup.h linux-5.15.41/fs/aufs/cpup.h
 +#endif /* __AUFS_CPUP_H__ */
 diff -Naur null/fs/aufs/dbgaufs.c linux-5.15.41/fs/aufs/dbgaufs.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/dbgaufs.c	2022-09-06 12:51:51.035709949 +0300
++++ linux-5.15.41/fs/aufs/dbgaufs.c	2023-01-03 20:33:04.502529204 +0300
 @@ -0,0 +1,526 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -5911,7 +5911,7 @@ diff -Naur null/fs/aufs/dbgaufs.c linux-5.15.41/fs/aufs/dbgaufs.c
 +}
 diff -Naur null/fs/aufs/dbgaufs.h linux-5.15.41/fs/aufs/dbgaufs.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/dbgaufs.h	2022-09-06 12:51:51.035709949 +0300
++++ linux-5.15.41/fs/aufs/dbgaufs.h	2023-01-03 20:33:04.502529204 +0300
 @@ -0,0 +1,53 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -5968,7 +5968,7 @@ diff -Naur null/fs/aufs/dbgaufs.h linux-5.15.41/fs/aufs/dbgaufs.h
 +#endif /* __DBGAUFS_H__ */
 diff -Naur null/fs/aufs/dcsub.c linux-5.15.41/fs/aufs/dcsub.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/dcsub.c	2022-09-06 12:51:51.035709949 +0300
++++ linux-5.15.41/fs/aufs/dcsub.c	2023-01-03 20:33:04.502529204 +0300
 @@ -0,0 +1,225 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -6197,7 +6197,7 @@ diff -Naur null/fs/aufs/dcsub.c linux-5.15.41/fs/aufs/dcsub.c
 +}
 diff -Naur null/fs/aufs/dcsub.h linux-5.15.41/fs/aufs/dcsub.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/dcsub.h	2022-09-06 12:51:51.035709949 +0300
++++ linux-5.15.41/fs/aufs/dcsub.h	2023-01-03 20:33:04.502529204 +0300
 @@ -0,0 +1,137 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -6338,7 +6338,7 @@ diff -Naur null/fs/aufs/dcsub.h linux-5.15.41/fs/aufs/dcsub.h
 +#endif /* __AUFS_DCSUB_H__ */
 diff -Naur null/fs/aufs/debug.c linux-5.15.41/fs/aufs/debug.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/debug.c	2022-09-06 12:51:51.036709937 +0300
++++ linux-5.15.41/fs/aufs/debug.c	2023-01-03 20:33:04.502529204 +0300
 @@ -0,0 +1,444 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -6786,7 +6786,7 @@ diff -Naur null/fs/aufs/debug.c linux-5.15.41/fs/aufs/debug.c
 +}
 diff -Naur null/fs/aufs/debug.h linux-5.15.41/fs/aufs/debug.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/debug.h	2022-09-06 12:51:51.036709937 +0300
++++ linux-5.15.41/fs/aufs/debug.h	2023-01-03 20:33:04.503529191 +0300
 @@ -0,0 +1,226 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -7016,7 +7016,7 @@ diff -Naur null/fs/aufs/debug.h linux-5.15.41/fs/aufs/debug.h
 +#endif /* __AUFS_DEBUG_H__ */
 diff -Naur null/fs/aufs/dentry.c linux-5.15.41/fs/aufs/dentry.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/dentry.c	2022-09-06 12:51:51.036709937 +0300
++++ linux-5.15.41/fs/aufs/dentry.c	2023-01-03 20:33:04.503529191 +0300
 @@ -0,0 +1,1168 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -8188,7 +8188,7 @@ diff -Naur null/fs/aufs/dentry.c linux-5.15.41/fs/aufs/dentry.c
 +};
 diff -Naur null/fs/aufs/dentry.h linux-5.15.41/fs/aufs/dentry.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/dentry.h	2022-09-06 12:51:51.036709937 +0300
++++ linux-5.15.41/fs/aufs/dentry.h	2023-01-03 20:33:04.503529191 +0300
 @@ -0,0 +1,269 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -8461,7 +8461,7 @@ diff -Naur null/fs/aufs/dentry.h linux-5.15.41/fs/aufs/dentry.h
 +#endif /* __AUFS_DENTRY_H__ */
 diff -Naur null/fs/aufs/dinfo.c linux-5.15.41/fs/aufs/dinfo.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/dinfo.c	2022-09-06 12:51:51.037709924 +0300
++++ linux-5.15.41/fs/aufs/dinfo.c	2023-01-03 20:33:04.503529191 +0300
 @@ -0,0 +1,554 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -9019,7 +9019,7 @@ diff -Naur null/fs/aufs/dinfo.c linux-5.15.41/fs/aufs/dinfo.c
 +}
 diff -Naur null/fs/aufs/dir.c linux-5.15.41/fs/aufs/dir.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/dir.c	2022-09-06 12:51:51.037709924 +0300
++++ linux-5.15.41/fs/aufs/dir.c	2023-01-03 20:33:04.503529191 +0300
 @@ -0,0 +1,765 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -9788,7 +9788,7 @@ diff -Naur null/fs/aufs/dir.c linux-5.15.41/fs/aufs/dir.c
 +};
 diff -Naur null/fs/aufs/dir.h linux-5.15.41/fs/aufs/dir.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/dir.h	2022-09-06 12:51:51.037709924 +0300
++++ linux-5.15.41/fs/aufs/dir.h	2023-01-03 20:33:04.503529191 +0300
 @@ -0,0 +1,134 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -9926,7 +9926,7 @@ diff -Naur null/fs/aufs/dir.h linux-5.15.41/fs/aufs/dir.h
 +#endif /* __AUFS_DIR_H__ */
 diff -Naur null/fs/aufs/dirren.c linux-5.15.41/fs/aufs/dirren.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/dirren.c	2022-09-06 12:51:51.037709924 +0300
++++ linux-5.15.41/fs/aufs/dirren.c	2023-01-03 20:33:04.503529191 +0300
 @@ -0,0 +1,1315 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -11245,7 +11245,7 @@ diff -Naur null/fs/aufs/dirren.c linux-5.15.41/fs/aufs/dirren.c
 +}
 diff -Naur null/fs/aufs/dirren.h linux-5.15.41/fs/aufs/dirren.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/dirren.h	2022-09-06 12:51:51.037709924 +0300
++++ linux-5.15.41/fs/aufs/dirren.h	2023-01-03 20:33:04.503529191 +0300
 @@ -0,0 +1,140 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -11389,7 +11389,7 @@ diff -Naur null/fs/aufs/dirren.h linux-5.15.41/fs/aufs/dirren.h
 +#endif /* __AUFS_DIRREN_H__ */
 diff -Naur null/fs/aufs/dynop.c linux-5.15.41/fs/aufs/dynop.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/dynop.c	2022-09-06 12:51:51.037709924 +0300
++++ linux-5.15.41/fs/aufs/dynop.c	2023-01-03 20:33:04.504529179 +0300
 @@ -0,0 +1,368 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -11761,7 +11761,7 @@ diff -Naur null/fs/aufs/dynop.c linux-5.15.41/fs/aufs/dynop.c
 +}
 diff -Naur null/fs/aufs/dynop.h linux-5.15.41/fs/aufs/dynop.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/dynop.h	2022-09-06 12:51:51.038709912 +0300
++++ linux-5.15.41/fs/aufs/dynop.h	2023-01-03 20:33:04.504529179 +0300
 @@ -0,0 +1,77 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -11842,7 +11842,7 @@ diff -Naur null/fs/aufs/dynop.h linux-5.15.41/fs/aufs/dynop.h
 +#endif /* __AUFS_DYNOP_H__ */
 diff -Naur null/fs/aufs/export.c linux-5.15.41/fs/aufs/export.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/export.c	2022-09-06 12:51:51.038709912 +0300
++++ linux-5.15.41/fs/aufs/export.c	2023-01-03 20:33:04.504529179 +0300
 @@ -0,0 +1,830 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -12676,7 +12676,7 @@ diff -Naur null/fs/aufs/export.c linux-5.15.41/fs/aufs/export.c
 +}
 diff -Naur null/fs/aufs/fhsm.c linux-5.15.41/fs/aufs/fhsm.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/fhsm.c	2022-09-06 12:51:51.038709912 +0300
++++ linux-5.15.41/fs/aufs/fhsm.c	2023-01-03 20:33:04.504529179 +0300
 @@ -0,0 +1,427 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -13107,7 +13107,7 @@ diff -Naur null/fs/aufs/fhsm.c linux-5.15.41/fs/aufs/fhsm.c
 +}
 diff -Naur null/fs/aufs/file.c linux-5.15.41/fs/aufs/file.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/file.c	2022-09-06 12:51:51.039709899 +0300
++++ linux-5.15.41/fs/aufs/file.c	2023-01-03 20:33:04.504529179 +0300
 @@ -0,0 +1,863 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -13974,7 +13974,7 @@ diff -Naur null/fs/aufs/file.c linux-5.15.41/fs/aufs/file.c
 +};
 diff -Naur null/fs/aufs/file.h linux-5.15.41/fs/aufs/file.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/file.h	2022-09-06 12:51:51.039709899 +0300
++++ linux-5.15.41/fs/aufs/file.h	2023-01-03 20:33:04.504529179 +0300
 @@ -0,0 +1,342 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -14320,7 +14320,7 @@ diff -Naur null/fs/aufs/file.h linux-5.15.41/fs/aufs/file.h
 +#endif /* __AUFS_FILE_H__ */
 diff -Naur null/fs/aufs/finfo.c linux-5.15.41/fs/aufs/finfo.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/finfo.c	2022-09-06 12:51:51.039709899 +0300
++++ linux-5.15.41/fs/aufs/finfo.c	2023-01-03 20:33:04.504529179 +0300
 @@ -0,0 +1,149 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -14473,8 +14473,8 @@ diff -Naur null/fs/aufs/finfo.c linux-5.15.41/fs/aufs/finfo.c
 +}
 diff -Naur null/fs/aufs/f_op.c linux-5.15.41/fs/aufs/f_op.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/f_op.c	2022-09-06 12:51:51.038709912 +0300
-@@ -0,0 +1,771 @@
++++ linux-5.15.41/fs/aufs/f_op.c	2023-01-03 20:33:04.504529179 +0300
+@@ -0,0 +1,775 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * Copyright (C) 2005-2021 Junjiro R. Okajima
@@ -14920,6 +14920,10 @@ diff -Naur null/fs/aufs/f_op.c linux-5.15.41/fs/aufs/f_op.c
 +	lockdep_off();
 +	err = vfs_fallocate(h_file, mode, offset, len);
 +	lockdep_on();
++	/*
++	 * we don't need to call file_modifed() here since au_write_post()
++	 * is equivalent and copies-up all timestamps and permission bits.
++	 */
 +	au_write_post(inode, h_file, &wpre, /*written*/1);
 +
 +out:
@@ -15248,7 +15252,7 @@ diff -Naur null/fs/aufs/f_op.c linux-5.15.41/fs/aufs/f_op.c
 +};
 diff -Naur null/fs/aufs/fsctx.c linux-5.15.41/fs/aufs/fsctx.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/fsctx.c	2022-09-06 12:51:51.039709899 +0300
++++ linux-5.15.41/fs/aufs/fsctx.c	2023-01-03 20:33:04.505529166 +0300
 @@ -0,0 +1,1242 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -16494,7 +16498,7 @@ diff -Naur null/fs/aufs/fsctx.c linux-5.15.41/fs/aufs/fsctx.c
 +}
 diff -Naur null/fs/aufs/fstype.h linux-5.15.41/fs/aufs/fstype.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/fstype.h	2022-09-06 12:51:51.039709899 +0300
++++ linux-5.15.41/fs/aufs/fstype.h	2023-01-03 20:33:04.505529166 +0300
 @@ -0,0 +1,401 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -16899,7 +16903,7 @@ diff -Naur null/fs/aufs/fstype.h linux-5.15.41/fs/aufs/fstype.h
 +#endif /* __AUFS_FSTYPE_H__ */
 diff -Naur null/fs/aufs/hbl.h linux-5.15.41/fs/aufs/hbl.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/hbl.h	2022-09-06 12:51:51.039709899 +0300
++++ linux-5.15.41/fs/aufs/hbl.h	2023-01-03 20:33:04.505529166 +0300
 @@ -0,0 +1,65 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -16968,7 +16972,7 @@ diff -Naur null/fs/aufs/hbl.h linux-5.15.41/fs/aufs/hbl.h
 +#endif /* __AUFS_HBL_H__ */
 diff -Naur null/fs/aufs/hfsnotify.c linux-5.15.41/fs/aufs/hfsnotify.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/hfsnotify.c	2022-09-06 12:51:51.040709887 +0300
++++ linux-5.15.41/fs/aufs/hfsnotify.c	2023-01-03 20:33:04.505529166 +0300
 @@ -0,0 +1,288 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -17260,7 +17264,7 @@ diff -Naur null/fs/aufs/hfsnotify.c linux-5.15.41/fs/aufs/hfsnotify.c
 +};
 diff -Naur null/fs/aufs/hfsplus.c linux-5.15.41/fs/aufs/hfsplus.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/hfsplus.c	2022-09-06 12:51:51.040709887 +0300
++++ linux-5.15.41/fs/aufs/hfsplus.c	2023-01-03 20:33:04.505529166 +0300
 @@ -0,0 +1,60 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -17324,7 +17328,7 @@ diff -Naur null/fs/aufs/hfsplus.c linux-5.15.41/fs/aufs/hfsplus.c
 +}
 diff -Naur null/fs/aufs/hnotify.c linux-5.15.41/fs/aufs/hnotify.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/hnotify.c	2022-09-06 12:51:51.040709887 +0300
++++ linux-5.15.41/fs/aufs/hnotify.c	2023-01-03 20:33:04.505529166 +0300
 @@ -0,0 +1,715 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -18043,7 +18047,7 @@ diff -Naur null/fs/aufs/hnotify.c linux-5.15.41/fs/aufs/hnotify.c
 +}
 diff -Naur null/fs/aufs/iinfo.c linux-5.15.41/fs/aufs/iinfo.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/iinfo.c	2022-09-06 12:51:51.041709874 +0300
++++ linux-5.15.41/fs/aufs/iinfo.c	2023-01-03 20:33:04.506529154 +0300
 @@ -0,0 +1,286 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -18333,7 +18337,7 @@ diff -Naur null/fs/aufs/iinfo.c linux-5.15.41/fs/aufs/iinfo.c
 +}
 diff -Naur null/fs/aufs/inode.c linux-5.15.41/fs/aufs/inode.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/inode.c	2022-09-06 12:51:51.041709874 +0300
++++ linux-5.15.41/fs/aufs/inode.c	2023-01-03 20:33:04.506529154 +0300
 @@ -0,0 +1,531 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -18868,7 +18872,7 @@ diff -Naur null/fs/aufs/inode.c linux-5.15.41/fs/aufs/inode.c
 +}
 diff -Naur null/fs/aufs/inode.h linux-5.15.41/fs/aufs/inode.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/inode.h	2022-09-06 12:51:51.042709862 +0300
++++ linux-5.15.41/fs/aufs/inode.h	2023-01-03 20:33:04.506529154 +0300
 @@ -0,0 +1,705 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -19577,7 +19581,7 @@ diff -Naur null/fs/aufs/inode.h linux-5.15.41/fs/aufs/inode.h
 +#endif /* __AUFS_INODE_H__ */
 diff -Naur null/fs/aufs/ioctl.c linux-5.15.41/fs/aufs/ioctl.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/ioctl.c	2022-09-06 12:51:51.042709862 +0300
++++ linux-5.15.41/fs/aufs/ioctl.c	2023-01-03 20:33:04.506529154 +0300
 @@ -0,0 +1,220 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -19801,7 +19805,7 @@ diff -Naur null/fs/aufs/ioctl.c linux-5.15.41/fs/aufs/ioctl.c
 +#endif
 diff -Naur null/fs/aufs/i_op_add.c linux-5.15.41/fs/aufs/i_op_add.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/i_op_add.c	2022-09-06 12:51:51.041709874 +0300
++++ linux-5.15.41/fs/aufs/i_op_add.c	2023-01-03 20:33:04.505529166 +0300
 @@ -0,0 +1,941 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -20746,7 +20750,7 @@ diff -Naur null/fs/aufs/i_op_add.c linux-5.15.41/fs/aufs/i_op_add.c
 +}
 diff -Naur null/fs/aufs/i_op.c linux-5.15.41/fs/aufs/i_op.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/i_op.c	2022-09-06 12:51:51.040709887 +0300
++++ linux-5.15.41/fs/aufs/i_op.c	2023-01-03 20:33:04.505529166 +0300
 @@ -0,0 +1,1512 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -22262,7 +22266,7 @@ diff -Naur null/fs/aufs/i_op.c linux-5.15.41/fs/aufs/i_op.c
 +};
 diff -Naur null/fs/aufs/i_op_del.c linux-5.15.41/fs/aufs/i_op_del.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/i_op_del.c	2022-09-06 12:51:51.041709874 +0300
++++ linux-5.15.41/fs/aufs/i_op_del.c	2023-01-03 20:33:04.506529154 +0300
 @@ -0,0 +1,522 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -22788,7 +22792,7 @@ diff -Naur null/fs/aufs/i_op_del.c linux-5.15.41/fs/aufs/i_op_del.c
 +}
 diff -Naur null/fs/aufs/i_op_ren.c linux-5.15.41/fs/aufs/i_op_ren.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/i_op_ren.c	2022-09-06 12:51:51.041709874 +0300
++++ linux-5.15.41/fs/aufs/i_op_ren.c	2023-01-03 20:33:04.506529154 +0300
 @@ -0,0 +1,1257 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -24049,7 +24053,7 @@ diff -Naur null/fs/aufs/i_op_ren.c linux-5.15.41/fs/aufs/i_op_ren.c
 +}
 diff -Naur null/fs/aufs/Kconfig linux-5.15.41/fs/aufs/Kconfig
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/Kconfig	2022-09-06 12:51:51.034709962 +0300
++++ linux-5.15.41/fs/aufs/Kconfig	2023-01-03 20:33:04.501529216 +0300
 @@ -0,0 +1,199 @@
 +# SPDX-License-Identifier: GPL-2.0
 +config AUFS_FS
@@ -24252,7 +24256,7 @@ diff -Naur null/fs/aufs/Kconfig linux-5.15.41/fs/aufs/Kconfig
 +endif
 diff -Naur null/fs/aufs/lcnt.h linux-5.15.41/fs/aufs/lcnt.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/lcnt.h	2022-09-06 12:51:51.042709862 +0300
++++ linux-5.15.41/fs/aufs/lcnt.h	2023-01-03 20:33:04.506529154 +0300
 @@ -0,0 +1,186 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -24442,7 +24446,7 @@ diff -Naur null/fs/aufs/lcnt.h linux-5.15.41/fs/aufs/lcnt.h
 +#endif /* __AUFS_LCNT_H__ */
 diff -Naur null/fs/aufs/loop.c linux-5.15.41/fs/aufs/loop.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/loop.c	2022-09-06 12:51:51.042709862 +0300
++++ linux-5.15.41/fs/aufs/loop.c	2023-01-03 20:33:04.506529154 +0300
 @@ -0,0 +1,148 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -24594,7 +24598,7 @@ diff -Naur null/fs/aufs/loop.c linux-5.15.41/fs/aufs/loop.c
 +}
 diff -Naur null/fs/aufs/loop.h linux-5.15.41/fs/aufs/loop.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/loop.h	2022-09-06 12:51:51.042709862 +0300
++++ linux-5.15.41/fs/aufs/loop.h	2023-01-03 20:33:04.506529154 +0300
 @@ -0,0 +1,55 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -24653,7 +24657,7 @@ diff -Naur null/fs/aufs/loop.h linux-5.15.41/fs/aufs/loop.h
 +#endif /* __AUFS_LOOP_H__ */
 diff -Naur null/fs/aufs/magic.mk linux-5.15.41/fs/aufs/magic.mk
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/magic.mk	2022-09-06 12:51:51.042709862 +0300
++++ linux-5.15.41/fs/aufs/magic.mk	2023-01-03 20:33:04.507529141 +0300
 @@ -0,0 +1,31 @@
 +# SPDX-License-Identifier: GPL-2.0
 +
@@ -24688,7 +24692,7 @@ diff -Naur null/fs/aufs/magic.mk linux-5.15.41/fs/aufs/magic.mk
 +endif
 diff -Naur null/fs/aufs/Makefile linux-5.15.41/fs/aufs/Makefile
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/Makefile	2022-09-06 12:51:51.034709962 +0300
++++ linux-5.15.41/fs/aufs/Makefile	2023-01-03 20:33:04.501529216 +0300
 @@ -0,0 +1,46 @@
 +# SPDX-License-Identifier: GPL-2.0
 +
@@ -24738,7 +24742,7 @@ diff -Naur null/fs/aufs/Makefile linux-5.15.41/fs/aufs/Makefile
 +aufs-$(CONFIG_AUFS_MAGIC_SYSRQ) += sysrq.o
 diff -Naur null/fs/aufs/module.c linux-5.15.41/fs/aufs/module.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/module.c	2022-09-06 12:51:51.042709862 +0300
++++ linux-5.15.41/fs/aufs/module.c	2023-01-03 20:33:04.507529141 +0300
 @@ -0,0 +1,273 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -25015,7 +25019,7 @@ diff -Naur null/fs/aufs/module.c linux-5.15.41/fs/aufs/module.c
 +module_exit(aufs_exit);
 diff -Naur null/fs/aufs/module.h linux-5.15.41/fs/aufs/module.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/module.h	2022-09-06 12:51:51.042709862 +0300
++++ linux-5.15.41/fs/aufs/module.h	2023-01-03 20:33:04.507529141 +0300
 @@ -0,0 +1,166 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -25185,7 +25189,7 @@ diff -Naur null/fs/aufs/module.h linux-5.15.41/fs/aufs/module.h
 +#endif /* __AUFS_MODULE_H__ */
 diff -Naur null/fs/aufs/mvdown.c linux-5.15.41/fs/aufs/mvdown.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/mvdown.c	2022-09-06 12:51:51.043709849 +0300
++++ linux-5.15.41/fs/aufs/mvdown.c	2023-01-03 20:33:04.507529141 +0300
 @@ -0,0 +1,706 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -25895,7 +25899,7 @@ diff -Naur null/fs/aufs/mvdown.c linux-5.15.41/fs/aufs/mvdown.c
 +}
 diff -Naur null/fs/aufs/opts.c linux-5.15.41/fs/aufs/opts.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/opts.c	2022-09-06 12:51:51.043709849 +0300
++++ linux-5.15.41/fs/aufs/opts.c	2023-01-03 20:33:04.507529141 +0300
 @@ -0,0 +1,1032 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -26931,7 +26935,7 @@ diff -Naur null/fs/aufs/opts.c linux-5.15.41/fs/aufs/opts.c
 +}
 diff -Naur null/fs/aufs/opts.h linux-5.15.41/fs/aufs/opts.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/opts.h	2022-09-06 12:51:51.043709849 +0300
++++ linux-5.15.41/fs/aufs/opts.h	2023-01-03 20:33:04.507529141 +0300
 @@ -0,0 +1,263 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -27198,7 +27202,7 @@ diff -Naur null/fs/aufs/opts.h linux-5.15.41/fs/aufs/opts.h
 +#endif /* __AUFS_OPTS_H__ */
 diff -Naur null/fs/aufs/plink.c linux-5.15.41/fs/aufs/plink.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/plink.c	2022-09-06 12:51:51.043709849 +0300
++++ linux-5.15.41/fs/aufs/plink.c	2023-01-03 20:33:04.507529141 +0300
 @@ -0,0 +1,516 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -27718,7 +27722,7 @@ diff -Naur null/fs/aufs/plink.c linux-5.15.41/fs/aufs/plink.c
 +}
 diff -Naur null/fs/aufs/poll.c linux-5.15.41/fs/aufs/poll.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/poll.c	2022-09-06 12:51:51.044709837 +0300
++++ linux-5.15.41/fs/aufs/poll.c	2023-01-03 20:33:04.507529141 +0300
 @@ -0,0 +1,51 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -27773,7 +27777,7 @@ diff -Naur null/fs/aufs/poll.c linux-5.15.41/fs/aufs/poll.c
 +}
 diff -Naur null/fs/aufs/posix_acl.c linux-5.15.41/fs/aufs/posix_acl.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/posix_acl.c	2022-09-06 12:51:51.044709837 +0300
++++ linux-5.15.41/fs/aufs/posix_acl.c	2023-01-03 20:33:04.508529129 +0300
 @@ -0,0 +1,111 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -27888,7 +27892,7 @@ diff -Naur null/fs/aufs/posix_acl.c linux-5.15.41/fs/aufs/posix_acl.c
 +}
 diff -Naur null/fs/aufs/procfs.c linux-5.15.41/fs/aufs/procfs.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/procfs.c	2022-09-06 12:51:51.044709837 +0300
++++ linux-5.15.41/fs/aufs/procfs.c	2023-01-03 20:33:04.508529129 +0300
 @@ -0,0 +1,170 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -28062,7 +28066,7 @@ diff -Naur null/fs/aufs/procfs.c linux-5.15.41/fs/aufs/procfs.c
 +}
 diff -Naur null/fs/aufs/rdu.c linux-5.15.41/fs/aufs/rdu.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/rdu.c	2022-09-06 12:51:51.044709837 +0300
++++ linux-5.15.41/fs/aufs/rdu.c	2023-01-03 20:33:04.508529129 +0300
 @@ -0,0 +1,384 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -28450,7 +28454,7 @@ diff -Naur null/fs/aufs/rdu.c linux-5.15.41/fs/aufs/rdu.c
 +#endif
 diff -Naur null/fs/aufs/rwsem.h linux-5.15.41/fs/aufs/rwsem.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/rwsem.h	2022-09-06 12:51:51.044709837 +0300
++++ linux-5.15.41/fs/aufs/rwsem.h	2023-01-03 20:33:04.508529129 +0300
 @@ -0,0 +1,85 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -28539,7 +28543,7 @@ diff -Naur null/fs/aufs/rwsem.h linux-5.15.41/fs/aufs/rwsem.h
 +#endif /* __AUFS_RWSEM_H__ */
 diff -Naur null/fs/aufs/sbinfo.c linux-5.15.41/fs/aufs/sbinfo.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/sbinfo.c	2022-09-06 12:51:51.044709837 +0300
++++ linux-5.15.41/fs/aufs/sbinfo.c	2023-01-03 20:33:04.508529129 +0300
 @@ -0,0 +1,316 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -28859,7 +28863,7 @@ diff -Naur null/fs/aufs/sbinfo.c linux-5.15.41/fs/aufs/sbinfo.c
 +}
 diff -Naur null/fs/aufs/super.c linux-5.15.41/fs/aufs/super.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/super.c	2022-09-06 12:51:51.044709837 +0300
++++ linux-5.15.41/fs/aufs/super.c	2023-01-03 20:33:04.508529129 +0300
 @@ -0,0 +1,871 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -29734,7 +29738,7 @@ diff -Naur null/fs/aufs/super.c linux-5.15.41/fs/aufs/super.c
 +};
 diff -Naur null/fs/aufs/super.h linux-5.15.41/fs/aufs/super.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/super.h	2022-09-06 12:51:51.045709824 +0300
++++ linux-5.15.41/fs/aufs/super.h	2023-01-03 20:33:04.508529129 +0300
 @@ -0,0 +1,592 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -30330,7 +30334,7 @@ diff -Naur null/fs/aufs/super.h linux-5.15.41/fs/aufs/super.h
 +#endif /* __AUFS_SUPER_H__ */
 diff -Naur null/fs/aufs/sysaufs.c linux-5.15.41/fs/aufs/sysaufs.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/sysaufs.c	2022-09-06 12:51:51.045709824 +0300
++++ linux-5.15.41/fs/aufs/sysaufs.c	2023-01-03 20:33:04.508529129 +0300
 @@ -0,0 +1,93 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -30427,7 +30431,7 @@ diff -Naur null/fs/aufs/sysaufs.c linux-5.15.41/fs/aufs/sysaufs.c
 +}
 diff -Naur null/fs/aufs/sysaufs.h linux-5.15.41/fs/aufs/sysaufs.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/sysaufs.h	2022-09-06 12:51:51.045709824 +0300
++++ linux-5.15.41/fs/aufs/sysaufs.h	2023-01-03 20:33:04.508529129 +0300
 @@ -0,0 +1,102 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -30533,7 +30537,7 @@ diff -Naur null/fs/aufs/sysaufs.h linux-5.15.41/fs/aufs/sysaufs.h
 +#endif /* __SYSAUFS_H__ */
 diff -Naur null/fs/aufs/sysfs.c linux-5.15.41/fs/aufs/sysfs.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/sysfs.c	2022-09-06 12:51:51.045709824 +0300
++++ linux-5.15.41/fs/aufs/sysfs.c	2023-01-03 20:33:04.508529129 +0300
 @@ -0,0 +1,374 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -30911,7 +30915,7 @@ diff -Naur null/fs/aufs/sysfs.c linux-5.15.41/fs/aufs/sysfs.c
 +}
 diff -Naur null/fs/aufs/sysrq.c linux-5.15.41/fs/aufs/sysrq.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/sysrq.c	2022-09-06 12:51:51.045709824 +0300
++++ linux-5.15.41/fs/aufs/sysrq.c	2023-01-03 20:33:04.508529129 +0300
 @@ -0,0 +1,149 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -31064,7 +31068,7 @@ diff -Naur null/fs/aufs/sysrq.c linux-5.15.41/fs/aufs/sysrq.c
 +}
 diff -Naur null/fs/aufs/vdir.c linux-5.15.41/fs/aufs/vdir.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/vdir.c	2022-09-06 12:51:51.045709824 +0300
++++ linux-5.15.41/fs/aufs/vdir.c	2023-01-03 20:33:04.509529116 +0300
 @@ -0,0 +1,896 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -31964,7 +31968,7 @@ diff -Naur null/fs/aufs/vdir.c linux-5.15.41/fs/aufs/vdir.c
 +}
 diff -Naur null/fs/aufs/vfsub.c linux-5.15.41/fs/aufs/vfsub.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/vfsub.c	2022-09-06 12:51:51.045709824 +0300
++++ linux-5.15.41/fs/aufs/vfsub.c	2023-01-03 20:33:04.509529116 +0300
 @@ -0,0 +1,918 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -32886,7 +32890,7 @@ diff -Naur null/fs/aufs/vfsub.c linux-5.15.41/fs/aufs/vfsub.c
 +}
 diff -Naur null/fs/aufs/vfsub.h linux-5.15.41/fs/aufs/vfsub.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/vfsub.h	2022-09-06 12:51:51.046709812 +0300
++++ linux-5.15.41/fs/aufs/vfsub.h	2023-01-03 20:33:04.509529116 +0300
 @@ -0,0 +1,358 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -33248,7 +33252,7 @@ diff -Naur null/fs/aufs/vfsub.h linux-5.15.41/fs/aufs/vfsub.h
 +#endif /* __AUFS_VFSUB_H__ */
 diff -Naur null/fs/aufs/wbr_policy.c linux-5.15.41/fs/aufs/wbr_policy.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/wbr_policy.c	2022-09-06 12:51:51.046709812 +0300
++++ linux-5.15.41/fs/aufs/wbr_policy.c	2023-01-03 20:33:04.509529116 +0300
 @@ -0,0 +1,830 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -34082,7 +34086,7 @@ diff -Naur null/fs/aufs/wbr_policy.c linux-5.15.41/fs/aufs/wbr_policy.c
 +};
 diff -Naur null/fs/aufs/whout.c linux-5.15.41/fs/aufs/whout.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/whout.c	2022-09-06 12:51:51.046709812 +0300
++++ linux-5.15.41/fs/aufs/whout.c	2023-01-03 20:33:04.509529116 +0300
 @@ -0,0 +1,1072 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -35158,7 +35162,7 @@ diff -Naur null/fs/aufs/whout.c linux-5.15.41/fs/aufs/whout.c
 +}
 diff -Naur null/fs/aufs/whout.h linux-5.15.41/fs/aufs/whout.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/whout.h	2022-09-06 12:51:51.046709812 +0300
++++ linux-5.15.41/fs/aufs/whout.h	2023-01-03 20:33:04.509529116 +0300
 @@ -0,0 +1,87 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -35249,7 +35253,7 @@ diff -Naur null/fs/aufs/whout.h linux-5.15.41/fs/aufs/whout.h
 +#endif /* __AUFS_WHOUT_H__ */
 diff -Naur null/fs/aufs/wkq.c linux-5.15.41/fs/aufs/wkq.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/wkq.c	2022-09-06 12:51:51.046709812 +0300
++++ linux-5.15.41/fs/aufs/wkq.c	2023-01-03 20:33:04.509529116 +0300
 @@ -0,0 +1,372 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -35625,7 +35629,7 @@ diff -Naur null/fs/aufs/wkq.c linux-5.15.41/fs/aufs/wkq.c
 +}
 diff -Naur null/fs/aufs/wkq.h linux-5.15.41/fs/aufs/wkq.h
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/wkq.h	2022-09-06 12:51:51.047709799 +0300
++++ linux-5.15.41/fs/aufs/wkq.h	2023-01-03 20:33:04.510529104 +0300
 @@ -0,0 +1,89 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
@@ -35718,7 +35722,7 @@ diff -Naur null/fs/aufs/wkq.h linux-5.15.41/fs/aufs/wkq.h
 +#endif /* __AUFS_WKQ_H__ */
 diff -Naur null/fs/aufs/xattr.c linux-5.15.41/fs/aufs/xattr.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/xattr.c	2022-09-06 12:51:51.047709799 +0300
++++ linux-5.15.41/fs/aufs/xattr.c	2023-01-03 20:33:04.510529104 +0300
 @@ -0,0 +1,368 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -36090,7 +36094,7 @@ diff -Naur null/fs/aufs/xattr.c linux-5.15.41/fs/aufs/xattr.c
 +}
 diff -Naur null/fs/aufs/xino.c linux-5.15.41/fs/aufs/xino.c
 --- /dev/null
-+++ linux-5.15.41/fs/aufs/xino.c	2022-09-06 12:51:51.047709799 +0300
++++ linux-5.15.41/fs/aufs/xino.c	2023-01-03 20:33:04.510529104 +0300
 @@ -0,0 +1,1926 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
@@ -38020,7 +38024,7 @@ diff -Naur null/fs/aufs/xino.c linux-5.15.41/fs/aufs/xino.c
 +}
 diff -Naur null/include/uapi/linux/aufs_type.h linux-5.15.41/include/uapi/linux/aufs_type.h
 --- /dev/null
-+++ linux-5.15.41/include/uapi/linux/aufs_type.h	2022-09-06 12:51:51.048709787 +0300
++++ linux-5.15.41/include/uapi/linux/aufs_type.h	2023-01-03 20:33:04.510529104 +0300
 @@ -0,0 +1,452 @@
 +/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
 +/*
@@ -38064,7 +38068,7 @@ diff -Naur null/include/uapi/linux/aufs_type.h linux-5.15.41/include/uapi/linux/
 +#include <limits.h>
 +#endif /* __KERNEL__ */
 +
-+#define AUFS_VERSION	"5.15.41-20220620"
++#define AUFS_VERSION	"5.15.41-20221219"
 +
 +/* todo? move this to linux-2.6.19/include/magic.h */
 +#define AUFS_SUPER_MAGIC	('a' << 24 | 'u' << 16 | 'f' << 8 | 's')
