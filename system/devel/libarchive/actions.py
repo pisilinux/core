@@ -8,15 +8,17 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
-import os
+#import os
+j = ''.join([
+    ' --with-lzo2',
+    ' --disable-static '
+    ])
 
 def setup():
     autotools.autoreconf("-fi")
-    autotools.configure("--disable-static \
-		                 --with-lzo2 \
-		                 ")
-    
-    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")    
+    autotools.configure(j)
+
+    #pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")    
 
 def build():
     autotools.make()
@@ -27,4 +29,4 @@ def build():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
-    pisitools.dodoc("COPYING","NEWS")
+    pisitools.dodoc("COPYING", "NEWS")
