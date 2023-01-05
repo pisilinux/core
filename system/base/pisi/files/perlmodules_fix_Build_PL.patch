@@ -1,0 +1,13 @@
+diff --git a/pisi/actionsapi/perlmodules.py b/pisi/actionsapi/perlmodules.py
+index cd59b76..2bfb9d5 100644
+--- a/pisi/actionsapi/perlmodules.py
++++ b/pisi/actionsapi/perlmodules.py
+@@ -72,7 +72,7 @@ def install(parameters = 'install'):
+         if system('make %s' % parameters):
+             raise InstallError, _('Make failed.')
+     else:
+-        if system('perl Build install'):
++        if system('perl Build install %s' % parameters):
+             raise MakeError, _('perl install failed.')
+ 
+     removePacklist()
