@@ -12,12 +12,16 @@
         <IsA>app:console</IsA>
         <Summary>Standard informational utilities and process-handling tools</Summary>
         <Description>procps is the package that has a bunch of small useful utilities that give information about processes using the /proc filesystem. The package includes the programs ps, top, vmstat, w, kill, free, slabtop, and skill.</Description>
-        <Archive sha1sum="1645168d28b70837d787f4337fd85f6f82f0a251" type="tarxz">http://downloads.sourceforge.net/project/procps-ng/Production/procps-ng-3.3.16.tar.xz</Archive>
+        <Archive sha1sum="a52952e8bc6aaab812176c00d25adc4d4e1552e2" type="tarxz">http://downloads.sourceforge.net/project/procps-ng/Production/procps-ng-3.3.17.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>ncurses-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">fs66093.patch</Patch>
+            <Patch level="1">fedora/covscan-findings.patch</Patch>
+            <Patch level="1">fedora/free-si-fix.patch</Patch>
+            <Patch level="1">fedora/pwait-to-pidwait.patch</Patch>
+            <Patch level="1">fedora/sysctl-hyphen-param.patch</Patch>
+            <Patch level="1">fedora/sysctl-print-dotted-keys-again.patch</Patch>
         </Patches>
     </Source>
 
@@ -41,6 +45,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2022-12-07</Date>
+            <Version>3.3.17</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2020-12-09</Date>
             <Version>3.3.16</Version>

@@ -37,16 +37,25 @@ def install():
         pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s/ent" % version, "4.4/ent/*.ent")
         
     for version in ["4.5"]:
-        pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s" % version, "*.dtd")
-        pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s" % version, "*.mod")
-        pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s" % version, "docbook.cat")
-        pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s/ent" % version, "ent/*.ent")
+        pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s" % version, "4.5/*.dtd")
+        pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s" % version, "4.5/*.mod")
+        pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s" % version, "4.5/docbook.cat")
+        pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s/ent" % version, "4.5/ent/*.ent")
         
     for version in ["5.0"]:
-        pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s/dtd" % version, "docbook-5.0/dtd/*.dtd")
-        pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s/rng" % version, "docbook-5.0/rng/*.rng")
-        pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s/rng" % version, "docbook-5.0/rng/*.rnc")
-        pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s/xsd" % version, "docbook-5.0/xsd/*.xsd")
-        pisitools.insinto("/usr/share/xml/docbook/xml-dtd-%s/sch" % version, "docbook-5.0/sch/*.sch")
-    
+        pisitools.insinto("/usr/share/xml/docbook/schema/dtd/%s/" % version, "docbook-5.0/dtd/*.dtd")
+        pisitools.insinto("/usr/share/xml/docbook/schema/rng/%s/" % version, "docbook-5.0/rng/*.rng")
+        pisitools.insinto("/usr/share/xml/docbook/schema/rng/%s/" % version, "docbook-5.0/rng/*.rnc")
+        pisitools.insinto("/usr/share/xml/docbook/schema/xsd/%s/" % version, "docbook-5.0/xsd/*.xsd")
+        pisitools.insinto("/usr/share/xml/docbook/schema/sch/%s/" % version, "docbook-5.0/sch/*.sch")
+
+    for version in ["5.1"]:
+        pisitools.insinto("/usr/share/xml/docbook/schema/sch/%s/" % version, "5.1/schemas/*.xml")
+        pisitools.insinto("/usr/share/xml/docbook/schema/rng/%s/" % version, "5.1/schemas/rng/*.rng")
+        pisitools.insinto("/usr/share/xml/docbook/schema/rng/%s/" % version, "5.1/schemas/rng/*.rnc")
+        pisitools.insinto("/usr/share/xml/docbook/schema/sch/%s/" % version, "5.1/schemas/sch/*.sch")
+        pisitools.insinto("/usr/share/xml/docbook/stylesheet/docbook5", "5.1/tools/db4-upgrade.xsl")
+        pisitools.dobin("5.1/tools/db4-entities.pl")
+
+    shelltools.cd("docbook-5.0")
     pisitools.dodoc("ChangeLog", "README")

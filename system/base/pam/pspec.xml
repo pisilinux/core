@@ -19,8 +19,9 @@
             <AdditionalFile target="dlopen-test.sh" permission="0755">dlopen-test.sh</AdditionalFile-->
         </AdditionalFiles>
         <BuildDependencies>
-            <Dependency>libnsl-devel</Dependency>
+            <Dependency versionFrom="2.0.0">libnsl-devel</Dependency>
             <Dependency>audit-devel</Dependency>
+            <Dependency>libtirpc-devel</Dependency>
         </BuildDependencies>
         <!--Patches>
             <Patch level="1">CVE-2020-27780.patch</Patch>
@@ -69,6 +70,13 @@
     </Package>
 
     <History>
+        <Update release="12">
+            <Date>2022-12-31</Date>
+            <Version>1.5.2</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="11">
             <Date>2022-09-28</Date>
             <Version>1.5.2</Version>

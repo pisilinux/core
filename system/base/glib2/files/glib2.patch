@@ -1,0 +1,11 @@
+diff -Nuar a/glib/gthreadprivate.h b/glib/gthreadprivate.h
+--- a/glib/gthreadprivate.h	2022-12-22 00:16:58.000000000 +0300
++++ b/glib/gthreadprivate.h	2022-12-22 13:34:01.816585997 +0300
+@@ -44,6 +44,7 @@
+ #include <linux/futex.h>
+ #include <sys/syscall.h>
+ #include <unistd.h>
++#include <errno.h>
+ 
+ #ifndef FUTEX_WAIT_PRIVATE
+ #define FUTEX_WAIT_PRIVATE FUTEX_WAIT
