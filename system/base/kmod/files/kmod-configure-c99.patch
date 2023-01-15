@@ -1,0 +1,37 @@
+configure.ac: In _Noreturn check, include <stdlib.h> for exit
+
+Otherwise, an implicit functiona declaration is used, causing
+a C99 compatibility issue.
+
+Submitted upstream:
+
+<https://lore.kernel.org/linux-modules/877cyq6kh9.fsf@oldenburg.str.redhat.com/>
+
+diff --git a/configure b/configure
+index d053310a8b4a313a..ec1f12d02428f848 100755
+--- a/configure
++++ b/configure
+@@ -14021,7 +14021,8 @@ rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
+ printf %s "checking whether _Noreturn is supported... " >&6; }
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+-_Noreturn int foo(void) { exit(0); }
++#include <stdlib.h>
++	_Noreturn int foo(void) { exit(0); }
+ _ACEOF
+ if ac_fn_c_try_compile "$LINENO"
+ then :
+diff --git a/configure.ac b/configure.ac
+index 6989e9360da23721..12e0518533201ccf 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -68,7 +68,8 @@ AC_COMPILE_IFELSE(
+ 
+ AC_MSG_CHECKING([whether _Noreturn is supported])
+ AC_COMPILE_IFELSE(
+-	[AC_LANG_SOURCE([[_Noreturn int foo(void) { exit(0); }]])],
++	[AC_LANG_SOURCE([[#include <stdlib.h>
++	_Noreturn int foo(void) { exit(0); }]])],
+         [AC_DEFINE([HAVE_NORETURN], [1], [Define if _Noreturn is available])
+ 	 AC_MSG_RESULT([yes])],
+ 	[AC_MSG_RESULT([no])])
