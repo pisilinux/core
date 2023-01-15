@@ -17,7 +17,12 @@
             <Dependency>gettext-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <!--Patch>skip_umount_test.patch</Patch-->
+            <Patch level="1">fedora/fuse2-0002-add-fix-for-namespace-conflict-in-fuse_kernel.h.patch</Patch>
+            <Patch level="1">fedora/fuse2-0003-make-buffer-size-match-kernel-max-transfer-size.patch</Patch>
+            <Patch level="1">fedora/fuse2-0004-Whitelist-SMB2-found-on-some-NAS-devices.patch</Patch>
+            <Patch level="1">fedora/fuse2-0005-Whitelist-UFSD-backport-to-2.9-branch-452.patch</Patch>
+            <Patch level="1">fedora/fuse2-0006-Correct-errno-comparison-571.patch</Patch>
+            <Patch level="1">fedora/fuse2-0007-util-ulockmgr_server.c-conditionally-define-closefro.patch</Patch>
         </Patches>
     </Source>
 
@@ -50,6 +55,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2023-01-13</Date>
+            <Version>2.9.9</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="8">
             <Date>2021-07-17</Date>
             <Version>2.9.9</Version>
