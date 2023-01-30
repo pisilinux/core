@@ -14,7 +14,7 @@
         <IsA>library</IsA>
         <Summary>Access control list utilities</Summary>
         <Description>acl contains the getfacl and setfacl utilities needed for manipulating access control lists along with the needed libraries.</Description>
-        <Archive sha1sum="6c9e46602adece1c2dae91ed065899d7f810bf01" type="targz">http://download.savannah.gnu.org/releases/acl/acl-2.2.53.tar.gz</Archive>
+        <Archive sha1sum="a5343e9f75326ffe5aa8d5d042e52227a3fd66cb" type="targz">http://download.savannah.gnu.org/releases/acl/acl-2.3.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>attr-devel</Dependency>
 <!--             <Dependency versionFrom="8.0.1">readline-devel</Dependency> -->
@@ -48,6 +48,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2023-01-28</Date>
+            <Version>2.3.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2020-12-09</Date>
             <Version>2.2.53</Version>

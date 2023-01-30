@@ -12,19 +12,19 @@
         <IsA>app:console</IsA>
         <Summary>GNU utilities to find files</Summary>
         <Description>The GNU Find Utilities are the basic directory searching utilities of the GNU operating system. These programs are typically used in conjunction with other programs to provide modular and powerful directory search and file locating capabilities to other commands.</Description>
-        <Archive sha1sum="bd2fae4add80334173e03272aeed5635d4a0fa03" type="tarxz">http://ftp.gnu.org/pub/gnu/findutils/findutils-4.7.0.tar.xz</Archive>
+        <Archive sha1sum="2a7830f1c25c3c7179150084748099c3c31f819b" type="tarxz">http://ftp.gnu.org/pub/gnu/findutils/findutils-4.9.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>gettext</Dependency>
             <Dependency>texinfo</Dependency>
         </BuildDependencies>
         <Patches>
+            <Patch level="1">findutils-fedora-4.5.15-no-locate.patch</Patch>
             <Patch level="1">findutils-fedora-4.4.2-xautofs.patch</Patch>
             <Patch level="1">findutils-fedora-4.5.13-warnings.patch</Patch>
-            <Patch level="1">findutils-fedora-4.5.15-no-locate.patch</Patch>
             <Patch level="1">findutils-fedora-4.6.0-leaf-opt.patch</Patch>
             <Patch level="1">findutils-fedora-4.6.0-test-lock.patch</Patch>
-            <Patch level="1">findutils-4.7.0-leaf-opt-xfs.patch</Patch>
-            <Patch level="1">findutils-4.7.0-root-tests.patch</Patch>
+<!--             <Patch level="1">findutils-4.7.0-leaf-opt-xfs.patch</Patch> -->
+<!--             <Patch level="1">findutils-4.7.0-root-tests.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -43,6 +43,13 @@
     </Package>
 
     <History>
+        <Update release="7">
+            <Date>2023-01-28</Date>
+            <Version>4.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="6">
             <Date>2020-12-09</Date>
             <Version>4.7.0</Version>
