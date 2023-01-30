@@ -78,7 +78,9 @@
         <Files>
             <Path fileType="header">/usr/include</Path>
             <Path fileType="library">/usr/lib/*.o</Path>
+            <Path fileType="library">/usr/lib/*.so</Path>
             <Path fileType="library">/usr/lib32/*.o</Path>
+            <Path fileType="library">/usr/lib32/*.so</Path>
             <Path fileType="library">/usr/lib/*.a</Path>
             <Path fileType="library">/usr/lib32/*.a</Path>
         </Files>
@@ -2083,6 +2085,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2023-01-28</Date>
+            <Version>2.35</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="10">
             <Date>2022-07-18</Date>
             <Version>2.35</Version>
