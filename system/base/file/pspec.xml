@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Program to identify a file's format by scanning binary data for patterns</Summary>
         <Description>Program to identify a file's format by scanning binary data for patterns.</Description>
-        <Archive sha1sum="57cad9341c3f74f8681c2ef931786c420105f35e" type="targz">ftp://ftp.astron.com/pub/file/file-5.38.tar.gz</Archive>
+        <Archive sha1sum="c48facbf0db3be64166c35566d605e43bbe2bb82" type="targz">ftp://ftp.astron.com/pub/file/file-5.44.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>zlib-devel</Dependency>
             <!-- remove python dependencies while bootstrap -->
@@ -20,8 +20,8 @@
             <Dependency>python-setuptools</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">file-5.38-seccomp-tcgets.patch</Patch>
-            <Patch level="1">0001-Revert-Don-t-depend-on-the-execute-bit-to-determine-.patch</Patch>
+<!--             <Patch level="1">file-5.38-seccomp-tcgets.patch</Patch> -->
+<!--             <Patch level="1">0001-Revert-Don-t-depend-on-the-execute-bit-to-determine-.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -42,6 +42,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2023-01-28</Date>
+            <Version>5.44</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="9">
             <Date>2020-12-09</Date>
             <Version>5.38</Version>

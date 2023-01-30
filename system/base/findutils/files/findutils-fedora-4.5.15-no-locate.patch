@@ -14,7 +14,7 @@ index f6f7443..6fbf57b 100644
 --- a/doc/Makefile.am
 +++ b/doc/Makefile.am
 @@ -16,11 +16,9 @@ AM_CFLAGS = $(WARN_CFLAGS)
- 
+
  info_TEXINFOS = find.texi find-maint.texi
  find_TEXINFOS = perm.texi parse-datetime.texi regexprops.texi fdl.texi
 -BUILT_SOURCES = dblocation.texi
@@ -24,19 +24,19 @@ index f6f7443..6fbf57b 100644
 -CLEANFILES = find.txt find_mono.html findutils.texi_html_node.tar.gz dblocation.texi \
 +CLEANFILES = find.txt find_mono.html findutils.texi_html_node.tar.gz \
  	find_mono.html findutils.texi_html_node.tar.gz \
- 	find-info.tar.gz find.texi find.texi.tar.gz \
+ 	find-info.tar.gz find.texi.tar.gz \
  	find.txt  tmp-doc-install find_mono.html.gz
 @@ -73,9 +71,6 @@ findutils.texi_html_node.tar.gz: find.html
- 	tar zcf $@ $<
- 
- 
+ 	tar zcf $@ find.html
+
+
 -dblocation.texi: ../locate/dblocation.texi
 -	$(LN_S) ../locate/dblocation.texi $@
 -
  find-info.tar.gz:
  	$(MKDIR_P) tmp-doc-install/info
  	$(MAKE) $(AM_MAKEFLAGS) \
--- 
+--
 2.5.0
 
 
@@ -57,14 +57,14 @@ index af82d54..6ad453b 100644
 --- a/Makefile.am
 +++ b/Makefile.am
 @@ -35,7 +35,7 @@ DISTCLEANFILES = tool-versions.txt
- 
- 
+
+
  # "gnulib-tests" is the gnulib unit test dir.
 -SUBDIRS = gl build-aux lib find xargs locate doc po m4 gnulib-tests
 +SUBDIRS = gl build-aux lib find xargs doc po m4 gnulib-tests
- 
+
  ALL_RECURSIVE_TARGETS =
- 
+
 diff --git a/configure.ac b/configure.ac
 index ce0e768..521e665 100644
 --- a/configure.ac
@@ -83,42 +83,42 @@ index c2714dd..01367a4 100644
 --- a/doc/find.texi
 +++ b/doc/find.texi
 @@ -7,7 +7,6 @@
+ @c @setchapternewpage odd
  @c %**end of header
- 
- @include version.texi
+
 -@include dblocation.texi
- 
+
  @iftex
  @finalout
-@@ -575,8 +574,7 @@ the databases are updated, and the directories for which they contain
+@@ -661,8 +660,7 @@ the databases are updated, and the directories for which they contain
  entries.
- 
+
  Here is how to select which file name databases @code{locate}
 -searches.  The default is system-dependent.  At the time this document
 -was generated, the default was @file{@value{LOCATE_DB}}.
 +searches.  The default is system-dependent.
- 
+
  @table @code
  @item --database=@var{path}
-@@ -2929,13 +2927,9 @@ thrashing the network.
+@@ -3112,13 +3110,9 @@ thrashing the network.
  directories are indexed by each database file.
- 
+
  The default location for the locate database depends on how findutils
 -is built, but the findutils installation accompanying this manual uses
 -the default location @file{@value{LOCATE_DB}}.
 -
 -If no database exists at @file{@value{LOCATE_DB}} but the user did not
 -specify where to look (by using @samp{-d} or setting
--@code{LOCATE_PATH}), then @code{locate} will also check for a
+-@env{LOCATE_PATH}), then @code{locate} will also check for a
 -``secure'' database in @file{/var/lib/slocate/slocate.db}.
 +is built.  If user did not specify where to look (by using @samp{-d}
 +or setting @code{LOCATE_PATH}), then @code{locate} will also check for
 +a ``secure'' database in @file{/var/lib/slocate/slocate.db}.
- 
+
  @node Database Formats
  @section Database Formats
-@@ -3460,8 +3454,7 @@ present.
- 
+@@ -3627,8 +3621,7 @@ present.
+
  @item --database=@var{path}
  @itemx -d @var{path}
 -Instead of searching the default @code{locate} database
@@ -126,30 +126,30 @@ index c2714dd..01367a4 100644
 +@code{locate} searches the file
  name databases in @var{path}, which is a colon-separated list of
  database file names.  You can also use the environment variable
- @code{LOCATE_PATH} to set the list of database files to search.  The
-@@ -3636,8 +3629,7 @@ The environment variable @code{PRUNEFS} also sets this value.  Default
+ @env{LOCATE_PATH} to set the list of database files to search.  The
+@@ -3803,8 +3796,7 @@ The environment variable @env{PRUNEFS} also sets this value.  Default
  is @file{nfs NFS proc}.
- 
+
  @item --output=@var{dbfile}
 -The database file to build.  The default is system-dependent, but
 -when this document was formatted it was @file{@value{LOCATE_DB}}.
 +The database file to build.
- 
+
  @item --localuser=@var{user}
  The user to search the non-network directories as, using @code{su}.
-@@ -5631,7 +5623,7 @@ See the manual of the system call @code{dup2(2)}.
+@@ -5828,7 +5820,7 @@ See the manual of the system call @code{dup2(2)}.
  @section Error Messages From @code{locate}
- 
+
  @table @samp
 -@item warning: database @file{@value{LOCATE_DB}} is more than 8 days old
 +@item warning: database @file{LOCATE_DB} is more than 8 days old
  The @code{locate} program relies on a database which is periodically
  built by the @code{updatedb} program.  That hasn't happened in a long
  time.  To fix this problem, run @code{updatedb} manually.  This can
-@@ -5639,7 +5631,7 @@ often happen on systems that are generally not left on, so the
+@@ -5836,7 +5828,7 @@ often happen on systems that are generally not left on, so the
  periodic ``cron'' task which normally does this doesn't get a chance
  to run.
- 
+
 -@item locate database @file{@value{LOCATE_DB}} is corrupt or invalid
 +@item locate database @file{LOCATE_DB} is corrupt or invalid
  This should not happen.  Re-run @code{updatedb}.  If that works, but
@@ -162,12 +162,12 @@ index 7e52a04..ae08a56 100644
 @@ -15,7 +15,7 @@
  ## You should have received a copy of the GNU General Public License
  ## along with this program.  If not, see <https://www.gnu.org/licenses/>.
- 
--built_programs = find oldfind xargs frcode locate updatedb
-+built_programs = find oldfind xargs
- 
+
+-built_programs = find xargs frcode locate updatedb
++built_programs = find xargs
+
  # Indirections required so that we'll still be able to know the
  # complete list of our tests even if the user overrides TESTS
--- 
+--
 2.5.0
 

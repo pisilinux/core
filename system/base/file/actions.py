@@ -32,4 +32,4 @@ def install():
     pythonmodules.install()
 
     shelltools.cd("..")
-    pisitools.dodoc("ChangeLog", "MAINT", "README")
+    pisitools.dodoc("ChangeLog", "MAINT", "README*")
