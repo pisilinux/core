@@ -1,33 +1,33 @@
-diff -Nuar gcc-4.7.1.old/gcc/output.h gcc-4.7.1/gcc/output.h
---- gcc-4.7.1.old/gcc/output.h	2012-03-22 12:40:31.000000000 +0200
-+++ gcc-4.7.1/gcc/output.h	2012-07-22 08:03:30.669774211 +0300
-@@ -661,6 +661,7 @@
+diff -Nuar a/gcc/output.h b/gcc/output.h
+--- a/gcc/output.h	2022-08-19 11:09:52.000000000 +0300
++++ b/gcc/output.h	2023-01-28 19:08:24.361651050 +0300
+@@ -616,6 +616,7 @@
  extern void default_file_start (void);
  extern void file_end_indicate_exec_stack (void);
  extern void file_end_indicate_split_stack (void);
 +extern void pisilinux_file_end_indicate_optflags (void);
- 
+
  extern void default_elf_asm_output_external (FILE *file, tree,
  					     const char *);
-diff -Nuar gcc-4.7.1.old/gcc/toplev.c gcc-4.7.1/gcc/toplev.c
---- gcc-4.7.1.old/gcc/toplev.c	2012-01-05 17:08:42.000000000 +0200
-+++ gcc-4.7.1/gcc/toplev.c	2012-07-22 08:05:04.729598301 +0300
-@@ -674,6 +674,8 @@
- 
+diff -Nuar a/gcc/toplev.cc b/gcc/toplev.cc
+--- a/gcc/toplev.cc	2022-08-19 11:09:54.000000000 +0300
++++ b/gcc/toplev.cc	2023-01-28 19:09:28.469849588 +0300
+@@ -582,6 +582,8 @@
    /* Invoke registered plugin callbacks.  */
    invoke_plugin_callbacks (PLUGIN_FINISH_UNIT, NULL);
-+  
+
 +  pisilinux_file_end_indicate_optflags ();
- 
++
    /* This must be at the end.  Some target ports emit end of file directives
-      into the assembly file here, and hence we can not output anything to the
-diff -Nuar gcc-4.7.1.old/gcc/varasm.c gcc-4.7.1/gcc/varasm.c
---- gcc-4.7.1.old/gcc/varasm.c	2012-04-24 09:10:53.000000000 +0300
-+++ gcc-4.7.1/gcc/varasm.c	2012-07-22 08:01:31.878259309 +0300
-@@ -7165,14 +7165,34 @@
+      into the assembly file here, and hence we cannot output anything to the
+      assembly file after this point.  */
+diff -Nuar a/gcc/varasm.cc b/gcc/varasm.cc
+--- a/gcc/varasm.cc	2022-08-19 11:09:54.000000000 +0300
++++ b/gcc/varasm.cc	2023-01-28 19:11:30.730321121 +0300
+@@ -7762,14 +7762,34 @@
    switch_to_section (get_section (".note.GNU-stack", flags, NULL));
  }
- 
+
 -/* Emit a special section directive to indicate that this object file
 -   was compiled with -fsplit-stack.  This is used to let the linker
 -   detect calls between split-stack code and non-split-stack code, so
@@ -64,6 +64,6 @@ diff -Nuar gcc-4.7.1.old/gcc/varasm.c gcc-4.7.1/gcc/varasm.c
 +  switch_to_section (get_section (".comment.PISILINUX.OPTs", flags, NULL));
 +  ASM_OUTPUT_ASCII (asm_out_file, opts_buffer, strlen (opts_buffer) + 1);
 +}
- 
+
  void
  file_end_indicate_split_stack (void)

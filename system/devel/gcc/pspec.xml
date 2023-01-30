@@ -14,13 +14,14 @@
         <IsA>library</IsA>
         <Summary>The GNU Compiler Collection, includes C, C++, Objective-C and Fortran compilers</Summary>
         <Description>The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, as well as libraries for these languages</Description>
-        <Archive sha1sum="fb51ed1660c065898c75951fb38e1ebad7d49feb" type="tarxz">https://sourceware.org/pub/gcc/releases/gcc-10.3.0/gcc-10.3.0.tar.xz</Archive>
-<!--         <Archive sha1sum="159c3a58705662bfde4dc93f2617f3660855ead6" target="gcc-10.2.0" type="tarxz">http://ftp.gnu.org/gnu/mpfr/mpfr-4.1.0.tar.xz</Archive> -->
-<!--         <Archive sha1sum="0abdc94acab0c9bfdaa391347cdfd7bbdb1cf017" target="gcc-10.2.0" type="targz">http://ftp.gnu.org/gnu/mpc/mpc-1.2.0.tar.gz</Archive> -->
-        <Archive sha1sum="33e366d59d32330432b5c7f2d0c2fb6664eff224" type="tarbz2">https://mirror.sobukus.de/files/src/isl/isl-0.21.tar.bz2</Archive>
-<!--         <Archive sha1sum="052a5411dc74054240eec58132d2cf41211d0ff6" target="gcc-10.2.0" type="tarxz">mirrors://gnu/gmp/gmp-6.2.0.tar.xz</Archive> -->
+        <Archive sha1sum="5dce6dc0091b8049b530d1587513a07201691760" type="tarxz">https://sourceware.org/pub/gcc/releases/gcc-12.2.0/gcc-12.2.0.tar.xz</Archive>
+
+<!--         <Archive sha1sum="4f734ca3ebceac28e2f944b131a47133b19e2c5e" target="gcc-12.2.0" type="tarxz">http://ftp.gnu.org/gnu/mpfr/mpfr-4.2.0.tar.xz</Archive> -->
+<!--        <Archive sha1sum="bac1c1fa79f5602df1e29e4684e103ad55714e02" target="gcc-12.2.0" type="targz">http://ftp.gnu.org/gnu/mpc/mpc-1.3.1.tar.gz</Archive> -->
+<!--        <Archive sha1sum="0578d48607ec0e272177d175fd1807c30b00fdf2" target="gcc-12.2.0" type="tarxz">mirrors://gnu/gmp/gmp-6.2.1.tar.xz</Archive> --> --> -->
+<!--         <Archive sha1sum="247eecb538ff310e8fb77badd629ee32a3895a98" target="gcc-12.2.0"  type="tarxz">https://mirror.sobukus.de/files/src/isl/isl-0.25.tar.xz</Archive> -->
         <BuildDependencies>
-            <Dependency versionFrom="2.36.1">binutils</Dependency>
+            <Dependency versionFrom="2.40">binutils</Dependency>
             <Dependency>bison</Dependency>
             <Dependency>gettext</Dependency>
             <Dependency>ncurses</Dependency>
@@ -33,7 +34,7 @@
             <Dependency>gmp-devel</Dependency>
             <Dependency>mpfr-devel</Dependency>
             <Dependency>libmpc-devel</Dependency>
-<!--             <Dependency>isl-devel</Dependency> -->
+            <Dependency>isl-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <!-- Pisilinux Patches -->
@@ -161,7 +162,7 @@
             
             <Dependency>mpfr</Dependency>
             <Dependency>libmpc</Dependency>
-<!--             <Dependency>isl</Dependency> -->
+            <Dependency>isl</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/lib</Path>
@@ -180,6 +181,13 @@
     </Package>
 
     <History>
+        <Update release="13">
+            <Date>2023-01-28</Date>
+            <Version>12.2.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="12">
             <Date>2022-07-18</Date>
             <Version>10.3.0</Version>
