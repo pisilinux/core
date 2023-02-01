@@ -19,6 +19,7 @@ def setup():
     # Build binutils with LD_SYMBOLIC_FUNCTIONS=1 and reduce PLT relocations in libfd.so by 84%.
     #shelltools.export("LD_SYMBOLIC_FUNCTIONS", "1")
     shelltools.system('sed -i "/ac_cpp=/s/\$CPPFLAGS/\$CPPFLAGS -O2/" libiberty/configure')
+    shelltools.system("sed -i '/^development=/s/true/false/' bfd/development.sh")
     
     autotools.configure('--enable-shared \
                          --build=%s \
@@ -28,7 +29,8 @@ def setup():
                          --enable-plugins \
                          --enable-targets=x86_64-pep \
                          --with-pkgversion="Pisi Linux" \
-                         --with-bugurl=http://bugs.pisilinux.org/ \
+                         --with-bugurl=https://bugs.pisilinux.org/ \
+                         --without-stage1-ldflags \
                          %s \
                          --with-pic \
                          --disable-nls \

@@ -16,6 +16,7 @@
             <Dependency>texinfo</Dependency>
         </BuildDependencies>
         <Patches>
+            <Patch  level="1">fedora/binutils-gold-warn-unsupported.patch</Patch>
         </Patches>
     </Source>
 
@@ -35,6 +36,13 @@
     </Package>
 
     <History>
+        <Update release="13">
+            <Date>2023-02-01</Date>
+            <Version>2.40</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="12">
             <Date>2023-01-30</Date>
             <Version>2.40</Version>
