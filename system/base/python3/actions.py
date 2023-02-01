@@ -26,7 +26,7 @@ def setup():
     #shelltools.unlinkDir("Modules/_ctypes/libffi")
     #shelltools.unlinkDir("Modules/_ctypes/libffi_msvc")
     shelltools.unlinkDir("Modules/_ctypes/libffi_osx")
-    shelltools.unlinkDir("Modules/_decimal/libmpdec")
+    # shelltools.unlinkDir("Modules/_decimal/libmpdec")
     
     #shelltools.export("CFLAGS", "-I%s/temp/include -O3" %get.workDIR())
     #shelltools.export("LDFLAGS", "-L%s/temp/lib -lbz2 -lpthread -ldl" %get.workDIR())
@@ -39,9 +39,9 @@ def setup():
                             --with-system-expat \
                             --with-dbmliborder=gdbm:ndbm \
                             --with-system-ffi \
-                            --with-system-libmpdec \
                             --enable-loadable-sqlite-extensions \
                             --without-ensurepip")
+                            # --with-system-libmpdec \
 
 def build():
     autotools.make()
