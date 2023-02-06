@@ -12,10 +12,10 @@
         <IsA>app:console</IsA>
         <Summary>Linux USB utilities</Summary>
         <Description>usbutils provides utilities for inspecting devices connected to a USB bus.</Description>
-        <Archive sha1sum="02fb81d84d194df6e735989656980b5e3c0a193d" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-014.tar.xz</Archive>
-        <Archive sha1sum="bd508b6f217c6d26ef78b1c4bc584e639b7f3dc3" type="binary" target="usbutils-014">http://www.linux-usb.org/usb.ids</Archive>
+        <Archive sha1sum="6c110419a3651cdeb882eeac6e989d4effbf73f3" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-015.tar.xz</Archive>
+        <Archive sha1sum="b80e911f4cab820802c0d01fb30eb7ac299cf8d7" type="binary" target="usbutils-015">http://www.linux-usb.org/usb.ids</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="1.0.24">libusb-devel</Dependency>
+            <Dependency versionFrom="1.0.26">libusb-devel</Dependency>
             <Dependency>eudev-devel</Dependency>
         </BuildDependencies>
     </Source>
@@ -23,8 +23,9 @@
     <Package>
         <Name>usbutils</Name>
         <RuntimeDependencies>
-            <Dependency>libusb</Dependency>
+            <Dependency versionFrom="1.0.26">libusb</Dependency>
             <Dependency>eudev</Dependency>
+            <Dependency>python3</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -35,6 +36,13 @@
     </Package>
 
     <History>
+        <Update release="12">
+            <Date>2023-02-06</Date>
+            <Version>015</Version>
+            <Comment>Version bump.</Comment>
+            <Name>fury</Name>
+            <Email>uglyside@yandex.ru</Email>
+        </Update>
         <Update release="11">
             <Date>2022-01-19</Date>
             <Version>014</Version>
