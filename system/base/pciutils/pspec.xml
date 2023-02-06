@@ -12,8 +12,8 @@
         <IsA>app:console</IsA>
         <Summary>Various utilities dealing with the PCI bus</Summary>
         <Description>The PCI Utilities are a collection of programs for inspecting and manipulating configuration of PCI devices.</Description>
-        <Archive sha1sum="f7d6860ffe405b4ebb23b013866a64c9f80c2fa3" type="tarxz">https://mirrors.edge.kernel.org/pub/software/utils/pciutils/pciutils-3.7.0.tar.xz</Archive>
-        <Archive sha1sum="dceac2605b238cb558aa2e80b0a4686e5a8eab74" type="binary" target="pciutils-3.7.0">https://github.com/pciutils/pciids/raw/master/pci.ids</Archive>
+        <Archive sha1sum="b6e58a532844007bf930ab2c88b4a6366ddbe7b0" type="tarxz">https://mirrors.edge.kernel.org/pub/software/utils/pciutils/pciutils-3.9.0.tar.xz</Archive>
+        <Archive sha1sum="98d43ec4909b9de0204f53a4995ec32336df9f5f" type="binary" target="pciutils-3.9.0">https://github.com/pciutils/pciids/raw/master/pci.ids</Archive>
         <BuildDependencies>
             <Dependency>eudev-devel</Dependency>
             <Dependency>libkmod-devel</Dependency>
@@ -21,7 +21,7 @@
         <Patches>
             <!-- Disable gz support of pciids file -->
             <Patch level="1">pciutils-nogz.patch</Patch>
-            <Patch level="1">pciutils-3.1.9-static-pc.patch</Patch>
+            <!-- <Patch level="1">pciutils-3.1.9-static-pc.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -33,7 +33,8 @@
             <Dependency>libkmod</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="executable">/usr/bin/lspci</Path>
+            <Path fileType="executable">/usr/sbin/setpci</Path>
             <Path fileType="library">/usr/lib</Path>
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="data">/usr/share/hwdata</Path>
@@ -54,6 +55,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2023-02-06</Date>
+            <Version>3.9.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>fury</Name>
+            <Email>uglyside@yandex.ru</Email>
+        </Update>
         <Update release="9">
             <Date>2021-11-27</Date>
             <Version>3.7.0</Version>
