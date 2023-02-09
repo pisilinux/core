@@ -22,8 +22,7 @@
 <!--             <Dependency>guile-devel</Dependency> -->
         </BuildDependencies>
         <Patches>
-<!--             <Patch>glibc_2_27.patch</Patch> -->
-<!--             <Patch>guile-2.2.patch</Patch> -->
+            <Patch>make-4.4-sigpipe.patch</Patch>
         </Patches>
     </Source>
 
@@ -43,6 +42,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2023-02-09</Date>
+            <Version>4.4</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2023-01-28</Date>
             <Version>4.4</Version>
