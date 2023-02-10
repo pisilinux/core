@@ -17,7 +17,7 @@
         <BuildDependencies>
             <Dependency>python3</Dependency>
             <Dependency>gtk-doc</Dependency>
-            <Dependency versionFrom="1.14.4">dbus-devel</Dependency>
+            <Dependency versionFrom="1.14.6">dbus-devel</Dependency>
             <!-- New dbus uses GVariant data structure. We need glib2 >= 2.24 -->
             <Dependency>glib2-devel</Dependency>
 <!--             <Dependency>libpcre-devel</Dependency> -->
@@ -67,6 +67,13 @@
     </Package>
 
     <History>
+        <Update release="23">
+            <Date>2023-02-10</Date>
+            <Version>0.112</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="22">
             <Date>2022-11-25</Date>
             <Version>0.112</Version>
