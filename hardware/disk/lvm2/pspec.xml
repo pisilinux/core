@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Userland logical volume management tools</Summary>
         <Description>LVM2 includes all of the support for handling read/write operations physical and logical volumes.</Description>
-        <Archive sha1sum="b3b19cc26c8792fe853083c4ad19b4987123d61a" type="targz">http://mirrors.kernel.org/sourceware/lvm2/LVM2.2.03.18.tgz</Archive>
+        <Archive sha1sum="ea1f9bfb98546027259c24d370ab559c8487d3c0" type="targz">http://mirrors.kernel.org/sourceware/lvm2/LVM2.2.03.19.tgz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="2.37.4">libutil-linux-devel</Dependency>
             <Dependency>eudev-devel</Dependency>
@@ -188,6 +188,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2023-02-21</Date>
+            <Version>2.03.19</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="10">
             <Date>2022-12-25</Date>
             <Version>2.03.18</Version>
