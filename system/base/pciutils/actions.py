@@ -19,7 +19,7 @@ def build():
 
 def install():
     autotools.rawInstall('DESTDIR="%s" %s install-lib' % (get.installDIR(), j))
-   
+
     # remove update-pciids
     pisitools.remove("/usr/sbin/update-pciids")
     pisitools.remove("/usr/share/man/man8/update-pciids.8")
