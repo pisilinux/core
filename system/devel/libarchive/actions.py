@@ -6,6 +6,7 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 #import os
@@ -15,6 +16,7 @@ j = ''.join([
     ])
 
 def setup():
+    shelltools.system("patch -p1 -R < 1723.patch")
     autotools.autoreconf("-fi")
     autotools.configure(j)
 
