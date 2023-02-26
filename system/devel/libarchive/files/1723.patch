@@ -1,0 +1,53 @@
+From a83f3d327aefe8d628230f326621b014d82f55b4 Mon Sep 17 00:00:00 2001
+From: Biswapriyo Nath <nathbappai@gmail.com>
+Date: Wed, 13 Apr 2022 09:48:44 +0530
+Subject: [PATCH] autotools: Fix static linking when openssl is enabled in
+ windows
+
+This adds Requires.private field in pkgconfig file. Using that field,
+pkgconfig pulls all the private cflags or libs while static linking.
+OpenSSL static libraries require some windows system libraies. Otherwise
+static liking fails with libarchive.
+---
+ build/pkgconfig/libarchive.pc.in | 1 +
+ configure.ac                     | 4 ++++
+ 2 files changed, 5 insertions(+)
+
+diff --git a/build/pkgconfig/libarchive.pc.in b/build/pkgconfig/libarchive.pc.in
+index 4b631e635..1f51e77f1 100644
+--- a/build/pkgconfig/libarchive.pc.in
++++ b/build/pkgconfig/libarchive.pc.in
+@@ -10,3 +10,4 @@ Cflags: -I${includedir}
+ Cflags.private: -DLIBARCHIVE_STATIC
+ Libs: -L${libdir} -larchive
+ Libs.private: @LIBS@
++Requires.private: @LIBSREQUIRED@
+diff --git a/configure.ac b/configure.ac
+index 2f53fae39..b30430d21 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -378,6 +378,7 @@ if test "x$with_iconv" != "xno"; then
+     AC_CHECK_HEADERS([localcharset.h])
+     am_save_LIBS="$LIBS"
+     LIBS="${LIBS} ${LIBICONV}"
++    LIBSREQUIRED="$LIBSREQUIRED${LIBSREQUIRED:+ }iconv"
+     AC_CHECK_FUNCS([locale_charset])
+     LIBS="${am_save_LIBS}"
+     if test "x$ac_cv_func_locale_charset" != "xyes"; then
+@@ -1209,6 +1210,7 @@ fi
+ if test "x$with_openssl" != "xno"; then
+     AC_CHECK_HEADERS([openssl/evp.h])
+     saved_LIBS=$LIBS
++    LIBSREQUIRED="$LIBSREQUIRED${LIBSREQUIRED:+ }libssl libcrypto"
+     AC_CHECK_LIB(crypto,OPENSSL_config)
+     CRYPTO_CHECK(MD5, OPENSSL, md5)
+     CRYPTO_CHECK(RMD160, OPENSSL, rmd160)
+@@ -1219,6 +1221,8 @@ if test "x$with_openssl" != "xno"; then
+     AC_CHECK_FUNCS([PKCS5_PBKDF2_HMAC_SHA1])
+ fi
+ 
++AC_SUBST(LIBSREQUIRED)
++
+ # Probe libmd AFTER OpenSSL/libcrypto.
+ # The two are incompatible and OpenSSL is more complete.
+ AC_CHECK_HEADERS([md5.h ripemd.h sha.h sha256.h sha512.h])
