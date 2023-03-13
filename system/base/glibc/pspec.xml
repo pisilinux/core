@@ -22,9 +22,10 @@
             <Dependency>python3</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">gentoo/0032-Makerules-fix-MAKEFLAGS-make.patch</Patch>
-<!--             <Patch level="1">glibc-2.30-fhs-1.patch</Patch> -->
-<!--             <Patch level="1">bz26534.patch</Patch> -->
+            <!-- not required with make-4.4.1 <Patch level="1">gentoo/0032-Makerules-fix-MAKEFLAGS-make.patch</Patch> -->
+            <Patch level="1">0001-localedef-Update-LC_MONETARY-handling-Bug-28845.patch</Patch>
+            <!-- <Patch level="1">glibc-2.30-fhs-1.patch</Patch> -->
+            <!-- <Patch level="1">bz26534.patch</Patch> -->
         </Patches>
     </Source>
     <Package>
@@ -79,9 +80,11 @@
         <Files>
             <Path fileType="header">/usr/include</Path>
             <Path fileType="library">/usr/lib/*.o</Path>
-            <Path fileType="library">/usr/lib/*.so</Path>
+            <!-- prevent files recursive addition. must explicitly specify full path to files -->
+            <!-- <Path fileType="library">/usr/lib/*.so</Path> -->
             <Path fileType="library">/usr/lib32/*.o</Path>
-            <Path fileType="library">/usr/lib32/*.so</Path>
+            <!-- prevent files recursive addition. must explicitly specify full path to files -->
+            <!-- <Path fileType="library">/usr/lib32/*.so</Path> -->
             <Path fileType="library">/usr/lib/*.a</Path>
             <Path fileType="library">/usr/lib32/*.a</Path>
         </Files>
@@ -2086,6 +2089,13 @@
     </Package>
 
     <History>
+        <Update release="12">
+            <Date>2023-03-13</Date>
+            <Version>2.35</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>fury</Name>
+            <Email>uglyside@yandex.ru</Email>
+        </Update>
         <Update release="11">
             <Date>2023-01-28</Date>
             <Version>2.35</Version>
