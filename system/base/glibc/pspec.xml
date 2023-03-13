@@ -80,10 +80,10 @@
         <Files>
             <Path fileType="header">/usr/include</Path>
             <Path fileType="library">/usr/lib/*.o</Path>
-            <!-- prevent files recursive addition. must explicitly specify full path to files -->
+            <!-- prevent files recursive addition in multiple packages. must explicitly specify full path to files -->
             <!-- <Path fileType="library">/usr/lib/*.so</Path> -->
             <Path fileType="library">/usr/lib32/*.o</Path>
-            <!-- prevent files recursive addition. must explicitly specify full path to files -->
+            <!-- prevent files recursive addition in multiple packages. must explicitly specify full path to files -->
             <!-- <Path fileType="library">/usr/lib32/*.so</Path> -->
             <Path fileType="library">/usr/lib/*.a</Path>
             <Path fileType="library">/usr/lib32/*.a</Path>
