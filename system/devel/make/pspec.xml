@@ -3,7 +3,7 @@
 <PISI>
     <Source>
         <Name>make</Name>
-        <Homepage>http://www.gnu.org/software/make/make.html</Homepage>
+        <Homepage>https://www.gnu.org/software/make/</Homepage>
         <Packager>
             <Name>PisiLinux Community</Name>
             <Email>admins@pisilinux.org</Email>
@@ -12,24 +12,24 @@
         <IsA>app:console</IsA>
         <Summary>Standard tool to compile source trees</Summary>
         <Description>Standard tool to compile source trees. Make gets its knowledge of how to build your program from a file called the makefile. When you write a program, you should write a makefile for it, so that it is possible to use Make to build and install the program</Description>
-        <Archive sha1sum="02910501c2065479c6c7a4855b6ecdf3ac4464d8" type="targz">mirrors://gnu/make/make-4.4.tar.gz</Archive>
+        <Archive sha1sum="5ca41d365c35a4ded07d616190baf38814c25f2a" type="targz">mirrors://gnu/make/make-4.4.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>texinfo</Dependency>
             <Dependency>gettext</Dependency>
             <Dependency>gnuconfig</Dependency>
             <Dependency>patch</Dependency>
             <Dependency>gc-devel</Dependency>
-<!--             <Dependency>guile-devel</Dependency> -->
+            <!-- <Dependency>guile-devel</Dependency> -->
         </BuildDependencies>
         <Patches>
-            <Patch>make-4.4-sigpipe.patch</Patch>
+            <!-- <Patch>make-4.4-sigpipe.patch</Patch> -->
         </Patches>
     </Source>
 
     <Package>
         <Name>make</Name>
         <RuntimeDependencies>
-            <!--Dependency>guile</Dependency-->
+            <!-- <Dependency>guile</Dependency> -->
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
@@ -42,6 +42,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2023-03-13</Date>
+            <Version>4.4.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>fury</Name>
+            <Email>uglyside@yandex.ru</Email>
+        </Update>
         <Update release="8">
             <Date>2023-02-09</Date>
             <Version>4.4</Version>

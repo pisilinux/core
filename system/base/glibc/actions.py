@@ -100,6 +100,8 @@ def check():
         pass
 
 def install():
+    # maybe use system ldconfig executable?
+    #pisitools.dosed("Makefile", "\$\(elf-objpfx\)ldconfig", "ldconfig")
     shelltools.cd("build")
 
     autotools.rawInstall("install_root=%s" % get.installDIR())
