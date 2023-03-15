@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>rtl88x2bu</Name>
+        <Homepage>https://github.com/RinCat/rtl88x2bu-Linux-Driver</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>driver</IsA>
+        <Summary>REALTEK RTL88x2B USB Linux Driver</Summary>
+        <Icon>rtl88x2bu</Icon>
+        <Description>REALTEK RTL88x2B USB Linux Driver</Description>
+        <Archive sha1sum="7259596df268750373e3a8bef261790158bf59e8" type="zip">https://github.com/morrownr/88x2bu-20210702/archive/refs/heads/main.zip</Archive>
+        <BuildDependencies>
+            <Dependency>bc</Dependency>
+            <Dependency version="5.15.102">kernel-module-headers</Dependency>
+        </BuildDependencies>
+        <!--
+        <Patches>
+            <Patch>rtl88x2bu.patch</Patch>
+            <Patch level="1">rtl88x2bu.patch</Patch>
+        </Patches>
+        -->
+    </Source>
+
+    <Package>
+        <Name>rtl88x2bu</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2023-03-15</Date>
+            <Version>2023.03.14</Version>
+            <Comment>First release</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
