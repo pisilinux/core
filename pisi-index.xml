@@ -1023,7 +1023,7 @@
             <Description xml:lang="en">CMake, the cross-platform, open-source make system. CMake is used to control the software compilation process using simple platform and compiler independent configuration files. CMake generates native makefiles and workspaces that can be used in the compiler environment of your choice.</Description>
             <Description xml:lang="tr">Cmake, açık kaynak kodlu ve birden fazla platformda çalışan bir &apos;make&apos; sistemidir. Yazılım derleme sürecini kontrol etmek için kullanılan CMake, derleyici bağımsız yapılandırma dosyalarının oluşturulmasını sağlar.</Description>
             <Icon>cmake</Icon>
-            <Archive type="targz" sha1sum="2f444bb9951aad09452b692d8b3b9e33309e1641" name="cmake-3.25.2.tar.gz">https://github.com/Kitware/CMake/releases/download/v3.25.2/cmake-3.25.2.tar.gz</Archive>
+            <Archive type="targz" sha1sum="9e5613f727e1e623ed3c0672fbefe7c894f9ef0d" name="cmake-3.25.3.tar.gz">https://github.com/Kitware/CMake/releases/download/v3.25.3/cmake-3.25.3.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>curl-devel</Dependency>
                 <Dependency versionFrom="2.5.0">expat-devel</Dependency>
@@ -1058,6 +1058,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="29">
+                <Date>2023-03-10</Date>
+                <Version>3.25.3</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="28">
                 <Date>2023-01-28</Date>
                 <Version>3.25.2</Version>
@@ -1592,6 +1599,9 @@
             <Description xml:lang="en">libarchive includes a library and command-line tools for reading and writing tar, cpio, zip, ISO, and other archive formats.</Description>
             <Description xml:lang="tr">libarchive, tar, cpio, zip, ISO ve diğer arşiv biçimlerini okumak ve yazmak için bir kitaplık ve komut satırı araçları içerir.</Description>
             <Archive type="tarxz" sha1sum="35c971132e4ecb1679418d1713e328e415aac569" name="libarchive-3.6.2.tar.xz">https://github.com/libarchive/libarchive/releases/download/v3.6.2/libarchive-3.6.2.tar.xz</Archive>
+            <AdditionalFiles>
+                <AdditionalFile target="1723.patch">1723.patch</AdditionalFile>
+            </AdditionalFiles>
             <BuildDependencies>
                 <Dependency>acl-devel</Dependency>
                 <Dependency>nettle-devel</Dependency>
@@ -1638,7 +1648,7 @@
             <Summary xml:lang="tr">libarchive için geliştirme dosyaları</Summary>
             <RuntimeDependencies>
                 <Dependency>openssl-devel</Dependency>
-                <Dependency release="14">libarchive</Dependency>
+                <Dependency release="15">libarchive</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -1647,6 +1657,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="15">
+                <Date>2023-02-26</Date>
+                <Version>3.6.2</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="14">
                 <Date>2023-01-28</Date>
                 <Version>3.6.2</Version>
@@ -3877,7 +3894,7 @@
     <SpecFile>
         <Source>
             <Name>make</Name>
-            <Homepage>http://www.gnu.org/software/make/make.html</Homepage>
+            <Homepage>https://www.gnu.org/software/make/</Homepage>
             <Packager>
                 <Name>PisiLinux Community</Name>
                 <Email>admins@pisilinux.org</Email>
@@ -3891,7 +3908,7 @@
             <Description xml:lang="fr">Outil standard de compilation de hiérarchie de sources. Make détermine ce qu&apos;il faut faire pour construire votre programme à partir d&apos;un fichier appelé makefile. Une fois votre programme écrit, il suffit d&apos;éditer un makefile pour lui afin de pouvoir utiliser Make pour le compiler et l&apos;installer.</Description>
             <Description xml:lang="en">Standard tool to compile source trees. Make gets its knowledge of how to build your program from a file called the makefile. When you write a program, you should write a makefile for it, so that it is possible to use Make to build and install the program</Description>
             <Description xml:lang="tr">Geleneksel kaynak kod ağaçlarını derleme aracı. Make, programınızı nasıl derleyeceği konusundaki bilgiyi &quot;makefile&quot; dosyasından alır. Bir uygulama yazdığınızda bunun için &quot;makefile&quot; dosyasını da hazırlamalısınız ki uygulamanız derlenebilsin ve yüklenebilsin.</Description>
-            <Archive type="targz" sha1sum="02910501c2065479c6c7a4855b6ecdf3ac4464d8" name="make-4.4.tar.gz">mirrors://gnu/make/make-4.4.tar.gz</Archive>
+            <Archive type="targz" sha1sum="5ca41d365c35a4ded07d616190baf38814c25f2a" name="make-4.4.1.tar.gz">mirrors://gnu/make/make-4.4.1.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency>texinfo</Dependency>
                 <Dependency>gettext</Dependency>
@@ -3899,9 +3916,6 @@
                 <Dependency>patch</Dependency>
                 <Dependency>gc-devel</Dependency>
             </BuildDependencies>
-            <Patches>
-                <Patch>make-4.4-sigpipe.patch</Patch>
-            </Patches>
             <SourceURI>system/devel/make/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -3916,6 +3930,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="9">
+                <Date>2023-03-13</Date>
+                <Version>4.4.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>fury</Name>
+                <Email>uglyside@yandex.ru</Email>
+            </Update>
             <Update release="8">
                 <Date>2023-02-09</Date>
                 <Version>4.4</Version>
@@ -4809,7 +4830,7 @@
             <Summary xml:lang="tr">High productivity build system</Summary>
             <Description xml:lang="en">Yüksek verimli üretme sistemi</Description>
             <Description xml:lang="tr">Yüksek verimli üretme sistemi</Description>
-            <Archive type="targz" sha1sum="0a4f243c0a760a6b08459b0626a581d5c4085667" name="meson-1.0.0.tar.gz">https://github.com/mesonbuild/meson/releases/download/1.0.0/meson-1.0.0.tar.gz</Archive>
+            <Archive type="targz" sha1sum="a2d102eb6a37307c9b67283e9764ed57cf286223" name="meson-1.0.1.tar.gz">https://github.com/mesonbuild/meson/releases/download/1.0.1/meson-1.0.1.tar.gz</Archive>
             <BuildDependencies>
                 <Dependency versionFrom="3.9.15">python3-devel</Dependency>
                 <Dependency>python3-setuptools</Dependency>
@@ -4833,6 +4854,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="36">
+                <Date>2023-02-25</Date>
+                <Version>1.0.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="35">
                 <Date>2022-12-24</Date>
                 <Version>1.0.0</Version>
@@ -5184,7 +5212,7 @@
             <Summary xml:lang="tr">Derlenmiş objeleri işlemek için gereken aletler koleksiyonu</Summary>
             <Description xml:lang="en">elfutils contains libraries and utilities to handle ELF objects and is a replacement for libelf.</Description>
             <Description xml:lang="tr">elfutils derlenmiş objeleri işlemek için gereken çeşitli araçlar içerir.</Description>
-            <Archive type="tarbz2" sha1sum="5e23c010b7f9f45140a43e95d8d1f7fb04aa8302" name="elfutils-0.188.tar.bz2">ftp://sourceware.org/pub/elfutils/0.188/elfutils-0.188.tar.bz2</Archive>
+            <Archive type="tarbz2" sha1sum="a4b4a20bf3976e71c280b6dfb8443dbdcdd3f2f0" name="elfutils-0.189.tar.bz2">ftp://sourceware.org/pub/elfutils/0.189/elfutils-0.189.tar.bz2</Archive>
             <BuildDependencies>
                 <Dependency>bzip2</Dependency>
                 <Dependency>xz-devel</Dependency>
@@ -5221,7 +5249,7 @@
             <RuntimeDependencies>
                 <Dependency>xz-32bit</Dependency>
                 <Dependency>zlib-32bit</Dependency>
-                <Dependency release="12">elfutils</Dependency>
+                <Dependency release="13">elfutils</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
@@ -5231,7 +5259,7 @@
             <Name>elfutils-devel</Name>
             <Summary xml:lang="en">Development files for elfutils</Summary>
             <RuntimeDependencies>
-                <Dependency release="12">elfutils</Dependency>
+                <Dependency release="13">elfutils</Dependency>
                 <Dependency>xz-devel</Dependency>
                 <Dependency>zstd-devel</Dependency>
                 <Dependency>zlib-devel</Dependency>
@@ -5243,6 +5271,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="13">
+                <Date>2023-03-04</Date>
+                <Version>0.189</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="12">
                 <Date>2022-11-05</Date>
                 <Version>0.188</Version>
@@ -9124,7 +9159,7 @@
             <Summary xml:lang="tr">Python3 için geliştime dosyaları</Summary>
             <Description xml:lang="tr">python3-devel, python3 için geliştime dosyaları içerir.</Description>
             <RuntimeDependencies>
-                <Dependency release="33">python3</Dependency>
+                <Dependency release="34">python3</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header" permanent="0">/usr/include/python3.9/*</Path>
@@ -9132,6 +9167,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="34">
+                <Date>2023-03-11</Date>
+                <Version>3.9.16</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="33">
                 <Date>2023-02-08</Date>
                 <Version>3.9.16</Version>
@@ -15466,7 +15508,7 @@
             <Summary xml:lang="tr">python için geliştirme dosyaları</Summary>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="25">python</Dependency>
+                <Dependency release="26">python</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -15474,6 +15516,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="26">
+                <Date>2023-03-11</Date>
+                <Version>2.7.18</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="25">
                 <Date>2023-02-08</Date>
                 <Version>2.7.18</Version>
@@ -16385,6 +16434,7 @@
             <Description xml:lang="tr">EFI değişkenlerini işlemek için araçlar ve kütüphane</Description>
             <Archive type="tarbz2" sha1sum="64dc75cf71b7a989b8b4ac5cd46d1010430e89dc" name="efivar-38.tar.bz2">https://github.com/rhinstaller/efivar/releases/download/38/efivar-38.tar.bz2</Archive>
             <BuildDependencies>
+                <Dependency>mandoc</Dependency>
                 <Dependency>popt-devel</Dependency>
             </BuildDependencies>
             <Patches>
@@ -16411,7 +16461,7 @@
             <Name>efivar-devel</Name>
             <RuntimeDependencies>
                 <Dependency>popt-devel</Dependency>
-                <Dependency release="11">efivar</Dependency>
+                <Dependency release="12">efivar</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -16419,6 +16469,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="12">
+                <Date>2023-03-12</Date>
+                <Version>38</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="11">
                 <Date>2022-07-09</Date>
                 <Version>38</Version>
@@ -21127,8 +21184,8 @@
             <Description xml:lang="fr">SQLite est une petite librairie C implémentant un moteur de base de données SQL auto-configurée, auto-suffisante, pouvant être embarquée. Gère des bases de données de tailles allant jusqu&apos;à 2 téraOctets.</Description>
             <Description xml:lang="en">SQLite is a small C library that implements a self-contained, embeddable, zero-configuration SQL database engine. Supports databases up to 2 terabytes in size.</Description>
             <Description xml:lang="tr">SQLite hiçbir ayar gerektirmeyen, başka programların içine gömülebilir bir SQL veritabanı motorudur. 2 terabayta kadar büyüklükteki veritabanlarını tutabilir.</Description>
-            <Archive type="targz" sha1sum="b8c2d4bc0094f5c0ce985dc0e237dfcbaa1f6275" name="sqlite-autoconf-3400100.tar.gz">https://www.sqlite.org/2022/sqlite-autoconf-3400100.tar.gz</Archive>
-            <Archive type="zip" sha1sum="493e28d3afe1cd676c2eaafcae83af50181b08a3" name="sqlite-doc-3400100.zip">https://www.sqlite.org/2022/sqlite-doc-3400100.zip</Archive>
+            <Archive type="targz" sha1sum="e77599a2df4c5b114c942ddba4483550d8982bf2" name="sqlite-autoconf-3410100.tar.gz">https://www.sqlite.org/2023/sqlite-autoconf-3410100.tar.gz</Archive>
+            <Archive type="zip" sha1sum="d41721b41212d5b77178f5dda927e50a5a5427c1" name="sqlite-doc-3410100.zip">https://www.sqlite.org/2023/sqlite-doc-3410100.zip</Archive>
             <BuildDependencies>
                 <Dependency>readline-devel</Dependency>
             </BuildDependencies>
@@ -21154,7 +21211,7 @@
             <Description xml:lang="tr">sqlite-devel, sqlite için geliştirme dosyalarını içerir.</Description>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="19">sqlite</Dependency>
+                <Dependency release="20">sqlite</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
@@ -21170,7 +21227,7 @@
             <PartOf>emul32</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="19">sqlite</Dependency>
+                <Dependency release="20">sqlite</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/lib32</Path>
@@ -21182,13 +21239,20 @@
             <Summary xml:lang="tr">sqlite için belgelendirme dosyaları</Summary>
             <Description xml:lang="tr">sqlite-doc, sqlite için belgelendirme dosyalarını içerir.</Description>
             <RuntimeDependencies>
-                <Dependency release="19">sqlite</Dependency>
+                <Dependency release="20">sqlite</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/usr/share/doc/sqlite/</Path>
             </Files>
         </Package>
         <History>
+            <Update release="20">
+                <Date>2023-03-11</Date>
+                <Version>3.41.1</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="19">
                 <Date>2023-01-28</Date>
                 <Version>3.40.1</Version>
@@ -23452,7 +23516,7 @@
                 <Dependency>python3</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch level="1">gentoo/0032-Makerules-fix-MAKEFLAGS-make.patch</Patch>
+                <Patch level="1">0001-localedef-Update-LC_MONETARY-handling-Bug-28845.patch</Patch>
             </Patches>
             <SourceURI>system/base/glibc/pspec.xml</SourceURI>
         </Source>
@@ -23502,14 +23566,12 @@
             <Name>glibc-devel</Name>
             <PartOf>system.devel</PartOf>
             <RuntimeDependencies>
-                <Dependency release="11">glibc</Dependency>
+                <Dependency release="12">glibc</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/include</Path>
                 <Path fileType="library">/usr/lib/*.o</Path>
-                <Path fileType="library">/usr/lib/*.so</Path>
                 <Path fileType="library">/usr/lib32/*.o</Path>
-                <Path fileType="library">/usr/lib32/*.so</Path>
                 <Path fileType="library">/usr/lib/*.a</Path>
                 <Path fileType="library">/usr/lib32/*.a</Path>
             </Files>
@@ -23520,7 +23582,7 @@
             <PartOf>system.doc</PartOf>
             <BuildType>emul32</BuildType>
             <RuntimeDependencies>
-                <Dependency release="11">glibc</Dependency>
+                <Dependency release="12">glibc</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="config">/usr/lib32/glibc32.txt</Path>
@@ -25318,6 +25380,13 @@
             </Files>
         </Package>
         <History>
+            <Update release="12">
+                <Date>2023-03-13</Date>
+                <Version>2.35</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>fury</Name>
+                <Email>uglyside@yandex.ru</Email>
+            </Update>
             <Update release="11">
                 <Date>2023-01-28</Date>
                 <Version>2.35</Version>
@@ -28926,7 +28995,7 @@
                 <Dependency>pciutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.86.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.102.xz</Patch>
                 <Patch level="1">patches/aufs5/aufs5.15.41-20221219.patch</Patch>
                 <Patch level="1">patches/aufs5/aufs5-base.patch</Patch>
                 <Patch level="1">patches/aufs5/aufs5-kbuild.patch</Patch>
@@ -28999,6 +29068,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="80">
+                <Date>2023-03-15</Date>
+                <Version>5.15.102</Version>
+                <Comment>Version bump</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="79">
+                <Date>2023-03-02</Date>
+                <Version>5.15.96</Version>
+                <Comment>Version bump</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="78">
                 <Date>2023-01-28</Date>
                 <Version>5.15.90</Version>
@@ -29667,7 +29750,7 @@
                 <Dependency>elfutils-devel</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.90.xz</Patch>
+                <Patch compressionType="xz" level="1">patches/linux/patch-5.15.102.xz</Patch>
                 <Patch level="1">patches/aufs5/aufs5.15.41-20221219.patch</Patch>
                 <Patch level="1">patches/aufs5/aufs5-base.patch</Patch>
                 <Patch level="1">patches/aufs5/aufs5-kbuild.patch</Patch>
@@ -29748,7 +29831,7 @@
             <Description xml:lang="en">kernel-module-headers includes the C header files and the necessary Kbuild files for being able to build external kernel modules.</Description>
             <Description xml:lang="tr">kernel-module-headers, harici çekirdek modüllerinin derlenebilmesi için gereken başlık dosyaları ve Kbuild sistemini içeren pakettir.</Description>
             <RuntimeDependencies>
-                <Dependency release="80">kernel</Dependency>
+                <Dependency release="82">kernel</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="header">/usr/src/linux-headers*</Path>
@@ -29779,6 +29862,28 @@
             </Files>
         </Package>
         <History>
+            <Update release="82">
+                <Type package="kernel">security</Type>
+                <Date>2023-03-15</Date>
+                <Version>5.15.102</Version>
+                <Comment>Version bump</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
+            <Update release="81">
+                <Type package="kernel">security</Type>
+                <Date>2023-03-02</Date>
+                <Version>5.15.96</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+                <Requires>
+                    <Action package="kernel">systemRestart</Action>
+                </Requires>
+            </Update>
             <Update release="80">
                 <Type package="kernel">security</Type>
                 <Date>2023-01-28</Date>
@@ -30663,7 +30768,7 @@
             <Description xml:lang="tr">Eski ve yeni optimus teknolojisine sahip dizüstü bilgisyarlarda çalışabilmektedir.</Description>
             <Archive type="targz" sha1sum="e282ee682d794e3962baa4dead01917c42571e78" name="v0.8.tar.gz">https://github.com/Bumblebee-Project/bbswitch/archive/v0.8.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.90">kernel-module-headers</Dependency>
+                <Dependency version="5.15.102">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">0001-proc_ops-struct.patch</Patch>
@@ -30674,8 +30779,8 @@
         <Package>
             <Name>module-bbswitch</Name>
             <RuntimeDependencies>
-                <Dependency version="5.15.90">kernel</Dependency>
-                <Dependency release="73">bbswitch-common</Dependency>
+                <Dependency version="5.15.102">kernel</Dependency>
+                <Dependency release="75">bbswitch-common</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library">/lib/modules</Path>
@@ -30698,7 +30803,7 @@
         <Package>
             <Name>bbswitch-dkms</Name>
             <RuntimeDependencies>
-                <Dependency release="73">bbswitch-common</Dependency>
+                <Dependency release="75">bbswitch-common</Dependency>
                 <Dependency>dkms</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -30709,6 +30814,20 @@
             </Conflicts>
         </Package>
         <History>
+            <Update release="75">
+                <Date>2023-03-15</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="74">
+                <Date>2023-03-02</Date>
+                <Version>0.8</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="73">
                 <Date>2023-01-28</Date>
                 <Version>0.8</Version>
@@ -31224,6 +31343,45 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>rtl88x2bu</Name>
+            <Homepage>https://github.com/RinCat/rtl88x2bu-Linux-Driver</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>GPLv2</License>
+            <IsA>driver</IsA>
+            <PartOf>kernel.drivers</PartOf>
+            <Summary xml:lang="en">REALTEK RTL88x2B USB Linux Driver</Summary>
+            <Description xml:lang="en">REALTEK RTL88x2B USB Linux Driver</Description>
+            <Icon>rtl88x2bu</Icon>
+            <Archive type="zip" sha1sum="7259596df268750373e3a8bef261790158bf59e8" name="main.zip">https://github.com/morrownr/88x2bu-20210702/archive/refs/heads/main.zip</Archive>
+            <BuildDependencies>
+                <Dependency>bc</Dependency>
+                <Dependency version="5.15.102">kernel-module-headers</Dependency>
+            </BuildDependencies>
+            <SourceURI>kernel/drivers/rtl88x2bu/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>rtl88x2bu</Name>
+            <Files>
+                <Path fileType="config">/etc</Path>
+                <Path fileType="library">/lib</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="1">
+                <Date>2023-03-15</Date>
+                <Version>2023.03.14</Version>
+                <Comment>First release</Comment>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>module-virtualbox</Name>
             <Homepage>https://www.virtualbox.org</Homepage>
             <Packager>
@@ -31239,7 +31397,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox için çekirdek desteği sunar.</Description>
             <Archive type="tarxz" sha1sum="9f27845db9f21781b5b86ac2ffbb20ec8547b6f2" name="module-virtualbox-7.0.6.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-7.0.6.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.90">kernel-module-headers</Dependency>
+                <Dependency version="5.15.102">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox/pspec.xml</SourceURI>
         </Source>
@@ -31249,7 +31407,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.15.90">kernel</Dependency>
+                <Dependency version="5.15.102">kernel</Dependency>
                 <Dependency version="7.0.6">module-virtualbox-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
@@ -31271,6 +31429,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="111">
+                <Date>2023-03-15</Date>
+                <Version>7.0.6</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="110">
+                <Date>2023-03-02</Date>
+                <Version>7.0.6</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="109">
                 <Date>2023-01-28</Date>
                 <Version>7.0.6</Version>
@@ -32402,7 +32574,7 @@
             <Description xml:lang="tr">Bu paket VirtualBox sunucu makinesi ile misafir sistemler arası fare entegrasyonu ve paylaşımlı dizin desteği için gerekli çekirdek modüllerini içerir.</Description>
             <Archive type="tarxz" sha1sum="90fc6eedc35077783876c1b893766dd437347659" name="module-virtualbox-guest-7.0.6.tar.xz">https://sourceforge.net/projects/pisilinux/files/source/module-virtualbox-guest-7.0.6.tar.xz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.90">kernel-module-headers</Dependency>
+                <Dependency version="5.15.102">kernel-module-headers</Dependency>
             </BuildDependencies>
             <SourceURI>kernel/drivers/module-virtualbox-guest/pspec.xml</SourceURI>
         </Source>
@@ -32412,7 +32584,7 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.15.90">kernel</Dependency>
+                <Dependency version="5.15.102">kernel</Dependency>
                 <Dependency>baselayout</Dependency>
                 <Dependency version="7.0.6">module-virtualbox-guest-userspace</Dependency>
             </RuntimeDependencies>
@@ -32439,6 +32611,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="111">
+                <Date>2023-03-15</Date>
+                <Version>7.0.6</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="110">
+                <Date>2023-03-02</Date>
+                <Version>7.0.6</Version>
+                <Comment>Version bump.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="109">
                 <Date>2023-01-28</Date>
                 <Version>7.0.6</Version>
@@ -33229,7 +33415,7 @@
             <Archive type="targz" sha1sum="8acbdbb4ab4ab4123d1773b616904798fbef9277" target="i686" name="hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <Archive type="targz" sha1sum="1f568bb989d175813c5631c6629d9479eae6f3be" target="x86_64" name="hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
             <BuildDependencies>
-                <Dependency version="5.15.90">kernel-module-headers</Dependency>
+                <Dependency version="5.15.102">kernel-module-headers</Dependency>
             </BuildDependencies>
             <Patches>
                 <Patch level="1">broadcom-wl-6.30.223.271-debian-fix-kernel-warnings.patch</Patch>
@@ -33258,8 +33444,8 @@
                 <Flag>noDelta</Flag>
             </BuildFlags>
             <RuntimeDependencies>
-                <Dependency version="5.15.90">kernel</Dependency>
-                <Dependency release="72">module-broadcom-wl-userspace</Dependency>
+                <Dependency version="5.15.102">kernel</Dependency>
+                <Dependency release="74">module-broadcom-wl-userspace</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="library" permanent="true">/lib/modules</Path>
@@ -33283,6 +33469,20 @@
             </AdditionalFiles>
         </Package>
         <History>
+            <Update release="74">
+                <Date>2023-03-15</Date>
+                <Version>6.30.223.271</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
+            <Update release="73">
+                <Date>2023-03-02</Date>
+                <Version>6.30.223.271</Version>
+                <Comment>Rebuild.</Comment>
+                <Name>Mustafa Cinasal</Name>
+                <Email>muscnsl@gmail.com</Email>
+            </Update>
             <Update release="72">
                 <Date>2023-01-28</Date>
                 <Version>6.30.223.271</Version>
