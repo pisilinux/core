@@ -28,7 +28,7 @@ def setup():
                      -Dsysprof=disabled \
                      -Dlibmount=disabled"
                      
-        shelltools.system("patch -p1 < multilib.diff")
+        # shelltools.system("patch -p1 < multilib.diff")
                      
     #else:
         #options += " -Dsysprof=enabled"
