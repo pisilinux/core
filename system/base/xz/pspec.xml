@@ -15,7 +15,7 @@
         <IsA>library</IsA>
         <Summary>XZ compression utilities</Summary>
         <Description>XZ Utils provide a general purpose data compression library and command line tools. The .xz format supports multiple compression algorithms, which are called "filters" in context of XZ Utils. The primary filter is currently LZMA2.</Description>
-        <Archive sha1sum="8facb914772e5963d86f9cdd781c928009879b3b" type="tarxz">https://tukaani.org/xz/xz-5.4.1.tar.xz</Archive>
+        <Archive sha1sum="9a830e67c114263ee4ebe8e8305dbea3ff34868f" type="tarxz">https://tukaani.org/xz/xz-5.4.2.tar.xz</Archive>
         <BuildDependencies>
 <!--             <Dependency versionFrom="8.0.1">readline-devel</Dependency> -->
 <!--             <Dependency versionFrom="2.30">glibc-devel</Dependency> -->
@@ -67,6 +67,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2023-03-19</Date>
+            <Version>5.4.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="9">
             <Date>2023-01-28</Date>
             <Version>5.4.1</Version>
