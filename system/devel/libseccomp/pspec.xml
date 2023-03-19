@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>libseccomp</Name>
@@ -12,8 +12,13 @@
         <IsA>app:library</IsA>
         <Summary>Enhanced seccomp library</Summary>
         <Description>High level interface to the Linux Kernel's seccomp filter.</Description>
-        <Archive sha1sum="10966d0d31eefd302710994e017aa14054640680" type="targz">https://github.com/seccomp/libseccomp/releases/download/v2.4.2/libseccomp-2.4.2.tar.gz</Archive>
+        <Archive sha1sum="a238b99356180de849e38b21aaad871b7630ae0e" type="targz">
+            https://github.com/seccomp/libseccomp/releases/download/v2.5.4/libseccomp-2.5.4.tar.gz
+        </Archive>
         <BuildDependencies>
+            <Dependency>gperf</Dependency>
+            <Dependency>python3</Dependency>
+            <Dependency>cython3</Dependency>
             <Dependency>glibc-devel</Dependency>
             <Dependency>libutil-linux-devel</Dependency>
         </BuildDependencies>
@@ -40,6 +45,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2023-03-18</Date>
+            <Version>2.5.4</Version>
+            <Comment>Version bump.</Comment>
+            <Name>fury</Name>
+            <Email>uglyside@yandex.ru</Email>
+        </Update>
         <Update release="8">
             <Date>2020-12-09</Date>
             <Version>2.4.2</Version>
