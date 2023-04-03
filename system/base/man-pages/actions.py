@@ -11,7 +11,7 @@ from pisi.actionsapi import get
 def install():
     pisitools.dosed("Makefile", "prefix := /usr/local", "prefix := /usr")
 
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    autotools.rawInstall("DESTDIR=%s prefix=/usr" % get.installDIR())
     autotools.rawInstall("DESTDIR=%s -C man-pages-posix-2017" % get.installDIR())
 
     # These come from attr
@@ -43,4 +43,4 @@ def install():
     # Comes from libxcrypt
     pisitools.remove("/usr/share/man/man3/crypt*.3")
 
-    pisitools.dodoc("man-pages-*.Announce", "README")
+    pisitools.dodoc("README")
