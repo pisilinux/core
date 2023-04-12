@@ -25,7 +25,7 @@ def setup():
         options += " --libdir=/usr/lib32 --bindir=/usr/bin32"
 
         # Use 32-bit assembler, another option is to use --disable-asm option
-        #pisitools.dosed("mpi/config.links", "path=\"amd64\"", "path=\"i586 i386\"")
+        # pisitools.dosed("mpi/config.links", "path=\"amd64\"", "path=\"i586 i386\"")
         
 
     autotools.configure(options)
