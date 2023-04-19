@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>A set of basic GNU tools commonly used in shell scripts</Summary>
         <Description>Standard GNU file utilities (chmod, cp, dd, dir, ls...), text utilities (sort, tr, head, wc..), and shell utilities (whoami, who,...)</Description>
-        <Archive sha1sum="3769071b357890dc36d820c597c1c626a1073fcb" type="tarxz">http://ftp.gnu.org/gnu/coreutils/coreutils-9.2.tar.xz</Archive>
+        <Archive sha1sum="cd1fd7e27d46fd2497b8f2a670b54785530ef7d2" type="tarxz">http://ftp.gnu.org/gnu/coreutils/coreutils-9.3.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>acl-devel</Dependency>
             <Dependency>attr-devel</Dependency>
@@ -58,6 +58,13 @@
     </Package>
 
     <History>
+        <Update release="14">
+            <Date>2023-04-19</Date>
+            <Version>9.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="13">
             <Date>2023-03-25</Date>
             <Version>9.2</Version>
