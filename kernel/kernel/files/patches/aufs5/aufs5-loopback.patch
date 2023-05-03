@@ -72,7 +72,7 @@ index 7a9e40b97831..5ed06240cc9c 100644
  	fput(file);
 +	if (virt_file)
 +		fput(virt_file);
- 	return error;
+ 	goto done;
  }
  
 @@ -1201,6 +1224,7 @@ static int loop_configure(struct loop_device *lo, fmode_t mode,
