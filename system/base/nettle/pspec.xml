@@ -35,6 +35,7 @@
         <Name>nettle-devel</Name>
         <Summary>Nettle için geliştirme dosyaları</Summary>
         <RuntimeDependencies>
+            <Dependency>gmp-devel</Dependency>
             <Dependency release="current">nettle</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -64,6 +65,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2023-05-06</Date>
+            <Version>3.7.1</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>İdris Kalp</Name>
+            <Email>idriskalp@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>20201-03-01</Date>
             <Version>3.7.1</Version>
