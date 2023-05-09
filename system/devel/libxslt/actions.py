@@ -7,13 +7,15 @@
 from pisi.actionsapi import get
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import shelltools
 
 
 Libdir = "/usr/lib32" if get.buildTYPE() == "emul32" else "/usr/lib"
 bindir = "/usr/bin32" if get.buildTYPE() == "emul32" else "/usr/bin"
 
 def setup():
-    python = "--without-python" if get.buildTYPE() == "emul32" else "--with-python=/usr/bin/python2.7 "
+    shelltools.export("PYTHON", "/usr/bin/python3")
+    python = "--without-python" if get.buildTYPE() == "emul32" else "--with-python=/usr/bin/python3 "
     # don't remove --with-debugger as it is needed for reverse dependencies
     autotools.configure("%s \
                          --with-crypto \
@@ -40,4 +42,4 @@ def install():
         pisitools.removeDir("/usr/bin32")
         return
 
-    pisitools.dodoc("AUTHORS", "Copyright", "FEATURES", "NEWS", "README", "TODO")
+    pisitools.dodoc("AUTHORS", "Copyright", "FEATURES", "NEWS", "README*", "TODO")
