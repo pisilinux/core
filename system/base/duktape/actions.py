@@ -9,7 +9,8 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
-#def setup():
+def setup():
+    shelltools.system("sed -i 's/duktape\.c/& -lm/' Makefile.sharedlibrary")
     #shelltools.copy("Makefile.sharedlibrary", "Makefile")
     #pisitools.dosed("Makefile", "INSTALL_PREFIX = /usr/local", "INSTALL_PREFIX = /usr")
     #pisitools.dosed("Makefile.sharedlibrary", "INSTALL_PREFIX = /usr/local", "INSTALL_PREFIX = /usr")
