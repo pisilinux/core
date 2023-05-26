@@ -39,10 +39,12 @@
         <PartOf>system.devel</PartOf>
         <Summary>Development files for readline</Summary>
         <RuntimeDependencies>
+            <Dependency>ncurses-devel</Dependency>
             <Dependency release="current">readline</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
             <Path fileType="man">/usr/share/man/man3</Path>
         </Files>
     </Package>
@@ -66,6 +68,13 @@
         </Files>
     </Package>
     <History>
+        <Update release="10">
+            <Date>2023-01-28</Date>
+            <Version>8.2.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="9">
             <Date>2023-01-28</Date>
             <Version>8.2.1</Version>
