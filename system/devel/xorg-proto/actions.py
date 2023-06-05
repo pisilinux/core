@@ -11,8 +11,8 @@ from pisi.actionsapi import mesontools
 from pisi.actionsapi import get
 
 def setup():
-    #shelltools.system("sed -i 's|datadir|libdir|g' meson.build")
-    mesontools.configure("--datadir=/usr/lib -Dlegacy=true")
+    # shelltools.system("sed -i 's|get_option('datadir') + '/pkgconfig|get_option('libdir') + '/pkgconfig|g' meson.build")
+    mesontools.configure("-Dlegacy=true")
 
 def build():
     mesontools.build()
