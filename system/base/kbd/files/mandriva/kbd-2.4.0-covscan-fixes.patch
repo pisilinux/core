@@ -1,0 +1,49 @@
+diff -up kbd-2.4.0/src/libkfont/psffontop.c.orig kbd-2.4.0/src/libkfont/psffontop.c
+--- kbd-2.4.0/src/libkfont/psffontop.c.orig	2020-04-27 17:53:01.000000000 +0200
++++ kbd-2.4.0/src/libkfont/psffontop.c	2021-04-27 09:59:14.170153676 +0200
+@@ -235,6 +235,7 @@ kfont_read_psffont(struct kfont_context
+ 
+ 		if (psfhdr->mode > PSF1_MAXMODE) {
+ 			KFONT_ERR(ctx, _("Unsupported psf file mode (%d)"), psfhdr->mode);
++			free(psfhdr);
+ 			return -EX_DATAERR;
+ 		}
+ 		fontlen   = ((psfhdr->mode & PSF1_MODE512) ? 512 : 256);
+@@ -251,6 +252,7 @@ kfont_read_psffont(struct kfont_context
+ 
+ 		if (psfhdr.version > PSF2_MAXVERSION) {
+ 			KFONT_ERR(ctx, _("Unsupported psf version (%d)"), psfhdr.version);
++			free(inputbuf);
+ 			return -EX_DATAERR;
+ 		}
+ 		fontlen   = assemble_uint32((unsigned char *)&psfhdr.length);
+@@ -260,16 +262,20 @@ kfont_read_psffont(struct kfont_context
+ 		ftoffset  = assemble_uint32((unsigned char *)&psfhdr.headersize);
+ 		fontwidth = assemble_uint32((unsigned char *)&psfhdr.width);
+ 		utf8      = 1;
+-	} else
++	} else {
++		free(inputbuf);
+ 		return -EX_DATAERR; /* not psf */
++	}
+ 
+ 	/* tests required - we divide by these */
+ 	if (fontlen == 0) {
+ 		KFONT_ERR(ctx, _("zero input font length?"));
++		free(inputbuf);
+ 		return -EX_DATAERR;
+ 	}
+ 	if (charsize == 0) {
+ 		KFONT_ERR(ctx, _("zero input character size?"));
++		free(inputbuf);
+ 		return -EX_DATAERR;
+ 	}
+ 
+@@ -277,6 +283,7 @@ kfont_read_psffont(struct kfont_context
+ 
+ 	if (i > inputlth || (!hastable && i != inputlth)) {
+ 		KFONT_ERR(ctx, _("Input file: bad input length (%d)"), inputlth);
++		free(inputbuf);
+ 		return -EX_DATAERR;
+ 	}
+ 
