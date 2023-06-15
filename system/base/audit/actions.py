@@ -10,6 +10,7 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
+    shelltools.export("PYTHON", "/usr/bin/python3")
     autotools.autoreconf("-vif")
     autotools.configure("--with-libcap-ng=yes \
                          --enable-gssapi-krb5=no \
