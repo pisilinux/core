@@ -25,6 +25,9 @@
             <Dependency versionFrom="2.76.3">glib2-devel</Dependency>
             <Dependency>chrpath</Dependency>
         </BuildDependencies>
+        <Patches>
+            <Patch level="1">gobject-introspection-1.76.1-revert-failing-test.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
@@ -65,6 +68,13 @@
     </Package>
 
     <History>
+        <Update release="31">
+            <Date>2023-06-09</Date>
+            <Version>1.76.1</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="30">
             <Date>2023-05-23</Date>
             <Version>1.76.1</Version>
