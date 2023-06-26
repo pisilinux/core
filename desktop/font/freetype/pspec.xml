@@ -14,7 +14,7 @@
         <Icon>freetype2</Icon>
         <Summary>A high-quality and portable font engine</Summary>
         <Description>FreeType 2 is a software font engine that is designed to be small, efficient, highly customizable, and portable while capable of producing high-quality output. It can be used in graphics libraries, display servers, font conversion tools, text image generation tools, and many other products as well.</Description>
-        <Archive sha1sum="6393c1451c2f1c5f83aed5ea92d280af078e27d9" type="tarxz">mirrors://sourceforge/freetype/freetype-2.13.0.tar.xz</Archive>
+        <Archive sha1sum="af9b6b754320a0526179f166e3f8cffce78526ca" type="tarxz">mirrors://sourceforge/freetype/freetype-2.13.1.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>bzip2</Dependency>
             <Dependency>zlib-devel</Dependency>
@@ -23,8 +23,7 @@
         <Patches>
             <Patch level="1">arch/0001-Enable-table-validation-modules.patch</Patch>
             <Patch level="1">arch/0002-Enable-subpixel-rendering.patch</Patch>
-            <Patch level="1">arch/0003-Enable-infinality-subpixel-hinting.patch</Patch>
-            <Patch level="1">arch/0004-Enable-long-PCF-family-names.patch</Patch>
+            <Patch level="1">arch/0003-Enable-long-PCF-family-names.patch</Patch>
         </Patches>
     </Source>
 
@@ -79,6 +78,13 @@
     </Package>
 
     <History>
+        <Update release="14">
+            <Date>2023-06-25</Date>
+            <Version>2.13.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="13">
             <Date>2023-02-09</Date>
             <Version>2.13.0</Version>
