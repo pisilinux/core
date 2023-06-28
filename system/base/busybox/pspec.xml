@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Statically linked binary providing simplified versions of system commands</Summary>
         <Description>busybox is a single binary which includes versions of a large number of system commands, including a shell.</Description>
-        <Archive sha1sum="fe45411ce31909b0674c64b455d9772a8d8e45a3" type="tarbz2">https://busybox.net/downloads/busybox-1.33.1.tar.bz2</Archive>
+        <Archive sha1sum="a5d40ca0201b20909f7a8a561adf57adccc8a877" type="tarbz2">https://busybox.net/downloads/busybox-1.36.1.tar.bz2</Archive>
         <AdditionalFiles>
             <AdditionalFile target=".config">config</AdditionalFile>
         </AdditionalFiles>
@@ -33,6 +33,13 @@
     </Package>
 
     <History>
+        <Update release="12">
+            <Date>2023-06-28</Date>
+            <Version>1.36.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="11">
             <Date>2021-12-19</Date>
             <Version>1.33.1</Version>
