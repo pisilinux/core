@@ -12,6 +12,7 @@ from pisi.actionsapi import get
 LIBDIR = "/usr/lib32" if get.buildTYPE() == "emul32" else "/usr/lib"
 
 def setup():
+    autotools.autoreconf("-fiv")
     autotools.rawConfigure("--libdir=%s \
                             --includedir=/usr/include \
                             --prefix=/usr \
