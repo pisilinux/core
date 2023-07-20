@@ -16,7 +16,7 @@ j = ''.join([
     ])
 
 def setup():
-    shelltools.system("patch -p1 -R < 1723.patch")
+    # shelltools.system("patch -p1 -R < 1723.patch")
     autotools.autoreconf("-fi")
     autotools.configure(j)
 
