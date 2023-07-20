@@ -94,11 +94,11 @@ def install():
     pisitools.dosym("libncurses.a", "%s/libcurses.a" % LIB)
 
     #for fix 
-    pisitools.dosym("libncursesw.so.6.2", "%s/libncursesw.so.5" % LIB)
-    pisitools.dosym("libncurses.so.6.2", "%s/libncurses.so.5" % LIB)
-    pisitools.dosym("libpanelw.so.6.2", "%s/libpanelw.so.5" % LIB)
-    pisitools.dosym("libformw.so.6.2", "%s/libformw.so.5" % LIB)
-    pisitools.dosym("libmenuw.so.6.2", "%s/libmenuw.so.5" % LIB)
+    pisitools.dosym("libncursesw.so.6.4", "%s/libncursesw.so.5" % LIB)
+    pisitools.dosym("libncurses.so.6.4", "%s/libncurses.so.5" % LIB)
+    pisitools.dosym("libpanelw.so.6.4", "%s/libpanelw.so.5" % LIB)
+    pisitools.dosym("libformw.so.6.4", "%s/libformw.so.5" % LIB)
+    pisitools.dosym("libmenuw.so.6.4", "%s/libmenuw.so.5" % LIB)
 
     shelltools.cd("../%s" % NCURSES)
     for lib in ["ncurses", "form", "panel", "menu"]:
