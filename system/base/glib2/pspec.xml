@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>A library of handy utility functions</Summary>
         <Description>glib2 is the low-level core library that forms the basis for projects such as GTK+ and GNOME. It provides data structure handling for C, portability wrappers, and interfaces for such runtime functionality as an event loop, threads, dynamic loading, and an object system.</Description>
-        <Archive sha1sum="e0ae1800652903015561157d4dd7c8cf82136264" type="tarxz">mirrors://gnome/glib/2.77/glib-2.77.0.tar.xz</Archive>
+        <Archive sha1sum="a5e6913821419d273e09a46f0a6ef06d044fa6ad" type="tarxz">mirrors://gnome/glib/2.77/glib-2.77.1.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>meson</Dependency>
             <Dependency>ninja</Dependency>
@@ -28,8 +28,6 @@
             <Patch level="1">noisy-glib-compile-schemas.diff</Patch>
             <Patch level="1">glib-2.68.2-skip_warnings-1.patch</Patch>
             <Patch level="1">glib2.patch</Patch>
-            <Patch level="1">fedora/0001-gmain-Add-a-missing-return-on-error-path-in-g_main_c.patch</Patch>
-            <Patch level="1">fedora/fix-missing-exported-symbols.patch</Patch>
         </Patches>
         <AdditionalFiles>
             <AdditionalFile target="multilib.diff" permission="0644">multilib.diff</AdditionalFile>
@@ -143,6 +141,13 @@
     </Package>
 
     <History>
+        <Update release="38">
+            <Date>2023-07-31</Date>
+            <Version>2.77.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="37">
             <Date>2023-07-22</Date>
             <Version>2.77.0</Version>
