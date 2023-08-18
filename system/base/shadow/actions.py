@@ -10,6 +10,7 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
+    pisitools.flags.add("-lcrypt")
     pisitools.dosed("configure.ac", "man/uk/Makefile", deleteLine=True)
     #pisitools.dosed("configure", "man/uk/Makefile", deleteLine=True)
     shelltools.unlink('po/uk.*')
@@ -31,6 +32,7 @@ def setup():
                          --with-libcrack \
                          --without-selinux \
                          --with-yescrypt=yes \
+                         --enable-shared \
                          --with-acl")
 
 def build():
