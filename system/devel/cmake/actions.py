@@ -14,8 +14,9 @@ def setup():
     autotools.rawConfigure("--parallel=%s \
                             --system-libs \
                             --no-qt-gui \
-                            --no-system-jsoncpp \
                             --prefix=/usr \
+                            --no-system-jsoncpp  \
+                            --no-system-cppdap   \
                             --no-system-librhash \
                             --datadir=/share/cmake \
                             --docdir=/share/doc/cmake \
