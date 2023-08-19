@@ -16,7 +16,6 @@ def setup():
                             --no-qt-gui \
                             --prefix=/usr \
                             --no-system-jsoncpp  \
-                            --no-system-cppdap   \
                             --no-system-librhash \
                             --datadir=/share/cmake \
                             --docdir=/share/doc/cmake \
