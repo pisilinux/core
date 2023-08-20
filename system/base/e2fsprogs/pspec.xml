@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Standard ext2/3/4 filesystem utilities</Summary>
         <Description>e2fsprogs provides the filesystem utilities for use with the ext2 filesystem. It also supports the ext3/4 filesystem with journaling support.</Description>
-        <Archive sha1sum="666630bc70066be642becfbd4cec6f32ae2bf918" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.46.6/e2fsprogs-1.46.6.tar.xz</Archive>
+        <Archive sha1sum="58f5d1835947a683814ffe19dd61e489cd609383" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.47.0/e2fsprogs-1.47.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="2.37.4">libutil-linux-devel</Dependency>
             <!-- The first release shipped within util-linux -->
@@ -70,6 +70,13 @@
     </Package>
 
     <History>
+        <Update release="14">
+            <Date>2023-08-20</Date>
+            <Version>1.47.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="13">
             <Date>2023-02-05</Date>
             <Version>1.46.6</Version>
