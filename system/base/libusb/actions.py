@@ -11,9 +11,13 @@ from pisi.actionsapi import get
 Libdir = "/usr/lib32" if get.buildTYPE() == "emul32" else "/usr/lib"
 
 def setup():
+    autotools.autoreconf("-fiv")
     autotools.configure("--disable-static \
                          --libdir=%s \
                          --enable-udev" % (Libdir))
+
+
+    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
 def build():
     autotools.make("-j1")
