@@ -14,7 +14,7 @@
         <IsA>app:console</IsA>
         <Summary>Introspection system for GObject-based libraries</Summary>
         <Description>gobject-introspection can scan C header and source files in order to generate introspection typelib files. It also provides an API to examine typelib files, useful for creating language bindings among other things.</Description>
-        <Archive sha1sum="48c579d98462ebf0b1b62e083b701fc54226e49a" type="tarxz">mirrors://gnome/gobject-introspection/1.76/gobject-introspection-1.76.1.tar.xz</Archive>
+        <Archive sha1sum="c1c3cf251f0348e0fcd0223e9eeea4bba6355842" type="tarxz">mirrors://gnome/gobject-introspection/1.78/gobject-introspection-1.78.0.tar.xz</Archive>
         <BuildDependencies>
             <!--<Dependency>cairo-devel</Dependency>-->
             <Dependency>meson</Dependency>	
@@ -22,11 +22,11 @@
             <Dependency>libffi-devel</Dependency>
             <Dependency>python-devel</Dependency>
             <!--<Dependency>python-mako</Dependency>--><!--for enable-doctool-->
-            <Dependency versionFrom="2.77.2">glib2-devel</Dependency>
+            <Dependency versionFrom="2.78.0">glib2-devel</Dependency>
             <Dependency>chrpath</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">gobject-introspection-1.76.1-revert-failing-test.patch</Patch>
+<!--             <Patch level="1">gobject-introspection-1.76.1-revert-failing-test.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -68,6 +68,13 @@
     </Package>
 
     <History>
+        <Update release="36">
+            <Date>2023-09-08</Date>
+            <Version>1.78.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="35">
             <Date>2023-08-13</Date>
             <Version>1.76.1</Version>
