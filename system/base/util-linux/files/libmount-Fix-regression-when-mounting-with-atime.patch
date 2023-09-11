@@ -1,0 +1,133 @@
+From 2b99ee2526ae61be761b0e31c50e106dbec5e9e4 Mon Sep 17 00:00:00 2001
+From: Filipe Manana <fdmanana@kernel.org>
+Date: Thu, 17 Aug 2023 10:20:13 +0100
+Subject: [PATCH] libmount: Fix regression when mounting with atime
+
+A regression was introduced in v2.39 that causes mounting with the atime
+option to fail:
+
+  $ mkfs.ext4 -F /dev/sdi
+  $ mount -o atime /dev/sdi /mnt/sdi
+  mount: /mnt/sdi: not mount point or bad option.
+         dmesg(1) may have more information after failed mount system call.
+
+The failure comes from the mount_setattr(2) call returning -EINVAL. This
+is because we pass an invalid value for the attr_clr argument. From a
+strace capture we have:
+
+  mount_setattr(4, "", AT_EMPTY_PATH, {attr_set=0, attr_clr=MOUNT_ATTR_NOATIME, propagation=0 /* MS_??? */, userns_fd=0}, 32) = -1 EINVAL (Invalid argument)
+
+We can't pass MOUNT_ATTR_NOATIME to mount_setattr(2) through the attr_clr
+argument because all atime options are exclusive, so in order to set atime
+one has to pass MOUNT_ATTR__ATIME to attr_clr and leave attr_set as
+MOUNT_ATTR_RELATIME (which is defined as a value of 0).
+
+This can be read from the man page for mount_setattr(2) and also from the
+kernel source:
+
+  $ cat fs/namespace.c
+  static int build_mount_kattr(const struct mount_attr *attr, size_t usize,
+                               struct mount_kattr *kattr, unsigned int flags)
+  {
+      (...)
+      /*
+       * Since the MOUNT_ATTR_<atime> values are an enum, not a bitmap,
+       * users wanting to transition to a different atime setting cannot
+       * simply specify the atime setting in @attr_set, but must also
+       * specify MOUNT_ATTR__ATIME in the @attr_clr field.
+       * So ensure that MOUNT_ATTR__ATIME can't be partially set in
+       * @attr_clr and that @attr_set can't have any atime bits set if
+       * MOUNT_ATTR__ATIME isn't set in @attr_clr.
+       */
+      if (attr->attr_clr & MOUNT_ATTR__ATIME) {
+          if ((attr->attr_clr & MOUNT_ATTR__ATIME) != MOUNT_ATTR__ATIME)
+              return -EINVAL;
+
+              /*
+               * Clear all previous time settings as they are mutually
+               * exclusive.
+               */
+              kattr->attr_clr |= MNT_RELATIME | MNT_NOATIME;
+              switch (attr->attr_set & MOUNT_ATTR__ATIME) {
+              case MOUNT_ATTR_RELATIME:
+                  kattr->attr_set |= MNT_RELATIME;
+                  break;
+              case MOUNT_ATTR_NOATIME:
+                  kattr->attr_set |= MNT_NOATIME;
+                  break;
+              case MOUNT_ATTR_STRICTATIME:
+                  break;
+              default:
+                  return -EINVAL;
+              }
+    (...)
+
+So fix this by setting attr_clr MOUNT_ATTR__ATIME if we want to clear any
+atime related option.
+
+Signed-off-by: Filipe Manana <fdmanana@kernel.org>
+---
+ libmount/src/optlist.c                      | 13 ++++++++++++-
+ tests/expected/libmount/context-mount-flags |  3 +++
+ tests/ts/libmount/context                   |  9 ++++++++-
+ 3 files changed, 23 insertions(+), 2 deletions(-)
+
+diff --git a/libmount/src/optlist.c b/libmount/src/optlist.c
+index e93810b47..d0afc94f7 100644
+--- a/libmount/src/optlist.c
++++ b/libmount/src/optlist.c
+@@ -875,7 +875,18 @@ int mnt_optlist_get_attrs(struct libmnt_optlist *ls, uint64_t *set, uint64_t *cl
+ 
+ 		if (opt->ent->mask & MNT_INVERT) {
+ 			DBG(OPTLIST, ul_debugobj(ls, " clr: %s", opt->ent->name));
+-			*clr |= x;
++			/*
++			 * All atime settings are mutually exclusive so *clr must
++			 * have MOUNT_ATTR__ATIME set.
++			 *
++			 * See the function fs/namespace.c:build_mount_kattr()
++			 * in the linux kernel source.
++			 */
++			if (x == MOUNT_ATTR_RELATIME || x == MOUNT_ATTR_NOATIME ||
++			    x == MOUNT_ATTR_STRICTATIME)
++				*clr |= MOUNT_ATTR__ATIME;
++			else
++				*clr |= x;
+ 		} else {
+ 			DBG(OPTLIST, ul_debugobj(ls, " set: %s", opt->ent->name));
+ 			*set |= x;
+diff --git a/tests/expected/libmount/context-mount-flags b/tests/expected/libmount/context-mount-flags
+index 960641863..eb71323dd 100644
+--- a/tests/expected/libmount/context-mount-flags
++++ b/tests/expected/libmount/context-mount-flags
+@@ -3,3 +3,6 @@ ro,nosuid,noexec
+ successfully mounted
+ rw,nosuid,noexec
+ successfully umounted
++successfully mounted
++rw,relatime
++successfully umounted
+diff --git a/tests/ts/libmount/context b/tests/ts/libmount/context
+index f5b47185e..a5d2e81a3 100755
+--- a/tests/ts/libmount/context
++++ b/tests/ts/libmount/context
+@@ -116,8 +116,15 @@ $TS_CMD_FINDMNT --kernel --mountpoint $MOUNTPOINT -o VFS-OPTIONS -n >> $TS_OUTPU
+ 
+ ts_run $TESTPROG --umount $MOUNTPOINT >> $TS_OUTPUT 2>> $TS_ERRLOG
+ is_mounted $DEVICE && echo "$DEVICE still mounted" >> $TS_OUTPUT 2>> $TS_ERRLOG
+-ts_finalize_subtest
+ 
++# Test that the atime option works after the migration to use the new kernel mount APIs.
++ts_run $TESTPROG --mount -o atime $DEVICE $MOUNTPOINT >> $TS_OUTPUT 2>> $TS_ERRLOG
++$TS_CMD_FINDMNT --kernel --mountpoint $MOUNTPOINT -o VFS-OPTIONS -n >> $TS_OUTPUT 2>> $TS_ERRLOG
++is_mounted $DEVICE || echo "$DEVICE not mounted" >> $TS_OUTPUT 2>> $TS_ERRLOG
++ts_run $TESTPROG --umount $MOUNTPOINT >> $TS_OUTPUT 2>> $TS_ERRLOG
++is_mounted $DEVICE && echo "$DEVICE still mounted" >> $TS_OUTPUT 2>> $TS_ERRLOG
++
++ts_finalize_subtest
+ 
+ ts_init_subtest "mount-loopdev"
+ mkdir -p $MOUNTPOINT &> /dev/null
+-- 
+2.40.1
+
