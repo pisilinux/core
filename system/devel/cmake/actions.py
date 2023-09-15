@@ -17,6 +17,7 @@ def setup():
                             --prefix=/usr \
                             --no-system-jsoncpp  \
                             --no-system-librhash \
+                            --no-system-cppdap   \
                             --datadir=/share/cmake \
                             --docdir=/share/doc/cmake \
                             --mandir=/share/man" % get.makeJOBS().replace("-j", ""))
