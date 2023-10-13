@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Version 2 of the library to manipulate XML files</Summary>
         <Description>Libxml2 is the XML C parser and toolkit developed for the Gnome project (but usable outside of the Gnome platform).</Description>
-        <Archive sha1sum="bb5754302b08086e6824dfe350b61523b238a11e" type="tarxz">https://download.gnome.org/sources/libxml2/2.10/libxml2-2.10.4.tar.xz</Archive>
+        <Archive sha1sum="0e450a086ce491d64db9fabe8e76a7b49b05c025" type="tarxz">https://download.gnome.org/sources/libxml2/2.11/libxml2-2.11.5.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>python-devel</Dependency>
             <Dependency>python3-devel</Dependency>
@@ -21,9 +21,9 @@
             <Dependency versionFrom="8.0.1">readline-devel</Dependency>
         </BuildDependencies>
         <Patches>
-<!--             <Patch level="1">fedora/libxml2-2.9.12-fix-lxml-corrupted-tree.patch</Patch> -->
+            <Patch level="1">libxml2-2.11.5-CVE-2023-45322.patch</Patch>
 <!--             <Patch level="1">fedora/libxml2-2.9.12-fix-formatting-regression.patch</Patch> -->
-            <Patch level="1">fedora/libxml2-2.9.8-python3-unicode-errors.patch</Patch>
+<!--             <Patch level="1">fedora/libxml2-2.9.8-python3-unicode-errors.patch</Patch> -->
 <!--              <Patch level="1">libxml2-2.9.11-disable-fuzz-tests.patch</Patch> --> -->
         </Patches>
     </Source>
@@ -91,6 +91,13 @@
     </Package>
 
     <History>
+        <Update release="19">
+            <Date>2023-10-13</Date>
+            <Version>2.11.5</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="18">
             <Date>2023-04-11</Date>
             <Version>2.10.4</Version>
