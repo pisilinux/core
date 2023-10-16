@@ -14,7 +14,7 @@
         <Description>Yüksek verimli üretme sistemi</Description>
         <Archive sha1sum="39b8a4bff467fdaa5f9ee87e04715bd97a148378" type="targz">https://github.com/mesonbuild/meson/releases/download/1.2.2/meson-1.2.2.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="3.9.15">python3-devel</Dependency>
+            <Dependency versionFrom="3.11.6">python3-devel</Dependency>
             <Dependency>python3-setuptools</Dependency>
         </BuildDependencies>
         <Patches>
@@ -38,6 +38,13 @@
         </Files>
     </Package>
     <History>
+        <Update release="42">
+            <Date>2023-10-15</Date>
+            <Version>1.2.2</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="41">
             <Date>2023-09-29</Date>
             <Version>1.2.2</Version>

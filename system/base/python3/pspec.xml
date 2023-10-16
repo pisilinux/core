@@ -12,7 +12,7 @@
         <License>custom</License>
         <Summary>Next generation of the python high-level scripting language</Summary>
         <Description>Python is an accessible, high-level, dynamically typed, interpreted programming language, designed with an emphasis on code readability. It includes an extensive standard library, and has a vast ecosystem of third-party libraries.</Description>
-        <Archive sha1sum="abe4a20dcc11798495b17611ef9f8f33d6975722" type="tarxz">https://www.python.org/ftp/python/3.9.18/Python-3.9.18.tar.xz</Archive>
+        <Archive sha1sum="932f9833ee6d70a530a21d7c12c490a42c8b1574" type="tarxz">https://www.python.org/ftp/python/3.11.6/Python-3.11.6.tar.xz</Archive>
 <!--         <Archive sha1sum="bf7badf7e248e0ecf465d33c2f5aeec774209227" type="targz" target="Python-3.8.5">https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz</Archive> -->
         <BuildDependencies>
             <Dependency>bzip2</Dependency>
@@ -31,10 +31,10 @@
             <!--<Dependency>tcltk-devel</Dependency>-->
         </BuildDependencies>
         <Patches>
-            <Patch level="1">gentoo/0001-Install-libpythonX.Y.a-in-usr-lib-instead-of-usr-lib.patch</Patch>
-            <Patch level="1">gentoo/0004-setup.py-exit-with-non-zero-status-on-failure.patch</Patch>
-            <Patch level="1">gentoo/0005-Improve-distutils-C-support.patch</Patch>
-            <Patch level="1">gentoo/0007-distutils-make-OO-enable-both-opt-1-and-opt-2-optimi.patch</Patch>
+<!--             <Patch level="1">gentoo/0001-Install-libpythonX.Y.a-in-usr-lib-instead-of-usr-lib.patch</Patch> -->
+<!--             <Patch level="1">gentoo/0004-setup.py-exit-with-non-zero-status-on-failure.patch</Patch> -->
+<!--             <Patch level="1">gentoo/0005-Improve-distutils-C-support.patch</Patch> -->
+<!--             <Patch level="1">gentoo/0007-distutils-make-OO-enable-both-opt-1-and-opt-2-optimi.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -57,60 +57,63 @@
         <Files>
             <Path fileType="executable" permanent="0">/usr/bin/p*</Path>
             <Path fileType="executable" permanent="0">/usr/bin/2to3*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/a*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/c*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/d*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/e*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/h*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/imp*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/j*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib2*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/log*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/m*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/p*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/s*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/te*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/u*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/v*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/w*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/x*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/*.py</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/*.txt</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/_a*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/a*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/b*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/_b*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/c*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/_c*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/_d*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/_e*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/f*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/g*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/_g*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/_h*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/_j*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/_l*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/m*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/_m*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/n*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/o*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/_o*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/_p*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/p*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/r*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/_r*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/_s*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/s*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/te*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/_te*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/ti*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/u*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/x*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/lib-dynload/z*</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/__pycache__</Path>
-            <Path fileType="library" permanent="0">/usr/lib/python3.9/zoneinfo/__pycache__/*.pyc</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/a*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/c*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/d*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/e*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/h*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/imp*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/j*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib2*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/log*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/m*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/p*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/s*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/te*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/u*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/v*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/w*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/x*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/*.py</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/*.txt</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/_a*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/a*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/b*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/_b*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/c*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/_c*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/_d*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/_e*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/f*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/g*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/_g*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/_h*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/_j*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/_l*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/m*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/_m*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/n*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/o*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/_o*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/_p*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/p*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/r*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/_r*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/_s*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/s*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/te*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/_te*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/ti*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/u*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/x*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/z*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/__pycache__</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/zoneinfo/__pycache__/*.pyc</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/re</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/__phello__/</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/tomllib</Path>
             <Path fileType="library" permanent="0">/usr/lib/*.so</Path>
-            <Path fileType="library" permanent="0">/usr/lib/libpython3.9.so*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/libpython3.11.so*</Path>
             <Path fileType="man" permanent="0">/usr/share/man/man1/*</Path>
             <Path fileType="doc" permanent="0">/usr/share/doc</Path>
         </Files>
@@ -123,12 +126,19 @@
             <Dependency release="current">python3</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="header" permanent="0">/usr/include/python3.9/*</Path>
+            <Path fileType="header" permanent="0">/usr/include/python3.11/*</Path>
             <Path fileType="library" permanent="0">/usr/lib/pkgconfig/*</Path>
         </Files>
     </Package>
 
     <History>
+        <Update release="43">
+            <Date>2023-10-15</Date>
+            <Version>3.11.6</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="42">
             <Date>2023-10-12</Date>
             <Version>3.9.18</Version>
