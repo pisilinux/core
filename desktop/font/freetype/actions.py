@@ -23,6 +23,8 @@ def setup():
         options += " --with-brotli=yes \
                    "
 
+    autotools.configure(options)
+
 def build():
     autotools.make()
 
