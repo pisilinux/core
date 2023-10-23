@@ -17,6 +17,7 @@ def setup():
 
     if get.buildTYPE() == "emul32":
         options += " --libdir=/usr/lib32 \
+                     --without-brotli \
                    "
 
     else:
