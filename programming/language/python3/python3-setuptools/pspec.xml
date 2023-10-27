@@ -20,6 +20,9 @@
             <Dependency>python3-setuptools</Dependency>
             <!--<Dependency>python3-packaging</Dependency>-->
         </BuildDependencies>
+        <Patches>
+            <Patch level="1">gentoo/setuptools-62.4.0-py-compile.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
@@ -36,6 +39,13 @@
     </Package>
 
     <History>
+        <Update release="36">
+            <Date>2023-10-27</Date>
+            <Version>68.2.2</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="35">
             <Date>2023-10-16</Date>
             <Version>68.2.2</Version>
