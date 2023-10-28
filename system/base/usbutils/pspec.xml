@@ -12,8 +12,8 @@
         <IsA>app:console</IsA>
         <Summary>Linux USB utilities</Summary>
         <Description>usbutils provides utilities for inspecting devices connected to a USB bus.</Description>
-        <Archive sha1sum="6c110419a3651cdeb882eeac6e989d4effbf73f3" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-015.tar.xz</Archive>
-        <Archive sha1sum="6a71ccb46185c27bf7bd8e39f8fec97007a31f05" type="binary" target="usbutils-015">http://www.linux-usb.org/usb.ids</Archive>
+        <Archive sha1sum="74e1e686b8cabfb5c335c32e8b1f46770718fe19" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-016.tar.xz</Archive>
+        <Archive sha1sum="8e59b43c6888898bc07f57f7df5148cec6843082" type="binary" target="usbutils-016">http://www.linux-usb.org/usb.ids</Archive>
         <BuildDependencies>
             <Dependency versionFrom="1.0.26">libusb-devel</Dependency>
             <Dependency>eudev-devel</Dependency>
@@ -31,10 +31,18 @@
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="data">/usr/share/hwdata</Path>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
         </Files>
     </Package>
 
     <History>
+        <Update release="15">
+            <Date>2023-10-28</Date>
+            <Version>016</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="14">
             <Date>2023-08-20</Date>
             <Version>015</Version>
