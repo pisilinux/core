@@ -22,7 +22,7 @@ def build():
     # fix build with gcc-4.9.0
     pisitools.dosed("Makefile", "(Wall) -Werror", "\\1")
     # Not sure about MDASSEMBLE_AUTO=1. Need to investigate.
-    autotools.make("SYSCONFDIR=/%s MDASSEMBLE_AUTO=1 mdassemble mdadm mdmon" % get.confDIR())
+    autotools.make("SYSCONFDIR=/%s MDASSEMBLE_AUTO=1  mdadm mdmon" % get.confDIR())
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())

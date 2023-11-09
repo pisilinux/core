@@ -12,12 +12,12 @@
         <IsA>app:console</IsA>
         <Summary>Utility to control Linux MD devices (software RAID arrays)</Summary>
         <Description>mdadm is used to create, manage, and monitor Linux MD (software RAID) devices.</Description>
-        <Archive sha1sum="0b6c284970567bfa30dbc14ea5c0e2320582b80c" type="tarxz">https://www.kernel.org/pub/linux/utils/raid/mdadm/mdadm-3.4.tar.xz</Archive>
+        <Archive sha1sum="27f240cff200e00c28a486a028bcdb14f67f8790" type="tarxz">https://www.kernel.org/pub/linux/utils/raid/mdadm/mdadm-4.2.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>dietlibc</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">sysmacros.patch</Patch>
+            <Patch>disable-werror.patch</Patch>
         </Patches>
     </Source>
 
@@ -57,6 +57,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2023-11-08</Date>
+            <Version>4.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="7">
             <Date>2020-12-09</Date>
             <Version>3.4</Version>
