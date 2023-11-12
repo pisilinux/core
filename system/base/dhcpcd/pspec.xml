@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>A dhcp client only</Summary>
         <Description>An RFC2131 and RFC1541 compliant DHCP client daemon. dhcpcd gets an IP address and other information from a corresponding DHCP server, configures the network interface automatically, and tries to renew the lease time according to RFC2131 or RFC1541 depending on the command line option.</Description>
-        <Archive sha1sum="4178f5d2ba7c6132b80b2c00549d04bf05442418" type="tarxz">https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.0.3/dhcpcd-10.0.3.tar.xz</Archive>
+        <Archive sha1sum="eb2acf760adf10226a9a1c40532c35e133fcf02f" type="tarxz">https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.0.5/dhcpcd-10.0.5.tar.xz</Archive>
         <!--<Patches>
             <Patch>dhcpcd-7.1.1-disable_inet6_fix.patch</Patch>
             <Patch>dhcpcd-7.1.1-overflows.patch</Patch>
@@ -45,6 +45,13 @@
     </Package>
 
     <History>
+        <Update release="13">
+            <Date>2023-11-12</Date>
+            <Version>10.0.5</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="12">
             <Date>2023-10-10</Date>
             <Version>10.0.3</Version>
