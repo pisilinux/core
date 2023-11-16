@@ -27,6 +27,7 @@ def setup():
                          "-DSQLITE_SOUNDEX",
                          "-DSQLITE_ENABLE_RTREE",
                          "-DSQLITE_ENABLE_API_ARMOR",
+                         "-DSQLITE_ENABLE_MATH_FUNCTIONS",
                          "-Wno-stringop-overflow")
 
     pisitools.cflags.sub("-O[s\d]", "-O3")
@@ -64,9 +65,9 @@ def install():
 
     pisitools.dodoc("README*")
 
-    shelltools.cd("%s/sqlite-doc-3430200" % get.workDIR())
+    shelltools.cd("%s/sqlite-doc-3440000" % get.workDIR())
 
-    pisitools.insinto("/usr/share/doc/sqlite", "../sqlite-doc-3430200/*")
+    pisitools.insinto("/usr/share/doc/sqlite", "../sqlite-doc-3440000/*")
     """
     # fix permissions and remove obsolete files; https://bugs.archlinux.org/task/24605
     shelltools.system("find %s -type f -perm 755 -exec ls -lha {} \;" % get.installDIR())
