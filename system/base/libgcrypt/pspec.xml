@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>General purpose crypto library</Summary>
         <Description>Libgcrypt is a general purpose crypto library based on the code used in GNU Privacy Guard.</Description>
-        <Archive sha1sum="0b9555960d84a09ea14e52360808f2e02e9c12d2" type="tarbz2">https://www.gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.10.2.tar.bz2</Archive>
+        <Archive sha1sum="359e1d01ad2eb9cd2db964ea96ef3712d0c2c649" type="tarbz2">https://www.gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.10.3.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency versionFrom="1.47">libgpg-error-devel</Dependency>
         </BuildDependencies>
@@ -70,6 +70,13 @@
     </Package>
 
     <History>
+        <Update release="12">
+            <Date>2023-11-16</Date>
+            <Version>1.10.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="11">
             <Date>2023-04-08</Date>
             <Version>1.10.2</Version>
