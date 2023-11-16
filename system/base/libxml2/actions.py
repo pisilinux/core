@@ -25,6 +25,7 @@ def setup():
                --includedir=/usr/include \
                --disable-static \
                --with-threads \
+               --with-legacy \
                --with-history \
               "
 
