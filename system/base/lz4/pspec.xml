@@ -12,14 +12,14 @@
         <IsA>library</IsA>
         <Summary>Extremely fast compression algorithm</Summary>
         <Description>LZ4 is an extremely fast loss-less compression algorithm, providing compression speed at 400 MB/s per core, scalable with multi-core CPU. It also features an extremely fast decoder, with speed in multiple GB/s per core, typically reaching RAM speed limits on multi-core systems.</Description>
-        <Archive sha1sum="5a19554ef404a609123b756ddcbbb677df838f05" type="targz">https://github.com/lz4/lz4/archive/v1.9.3.tar.gz</Archive>
+        <Archive sha1sum="1d262fd78a0dbaa409e764979c6a643d0370f8d1" type="targz">https://github.com/lz4/lz4/archive/v1.9.4.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>make</Dependency>
             <Dependency>glibc-devel</Dependency>
             <Dependency>diffutils</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">8301a21.patch</Patch>
+<!--             <Patch level="1">8301a21.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -48,6 +48,13 @@
     </Package>
 
     <History>
+        <Update release="4">
+            <Date>2023-11-17</Date>
+            <Version>1.9.4</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="3">
             <Date>2021-09-28</Date>
             <Version>1.9.3</Version>
