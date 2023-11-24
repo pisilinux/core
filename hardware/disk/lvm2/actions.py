@@ -9,6 +9,8 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 
+shelltools.export("LC_ALL", "en_US.UTF-8")
+
 def setup():
     shelltools.export("CONFIG_SHELL", "/bin/bash")
     autotools.configure("--with-usrlibdir=/usr/lib \
