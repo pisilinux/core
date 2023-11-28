@@ -13,10 +13,10 @@
         <Summary>REALTEK RTL88x2B USB Linux Driver</Summary>
         <Icon>rtl88x2bu</Icon>
         <Description>REALTEK RTL88x2B USB Linux Driver</Description>
-        <Archive sha1sum="3411863bbfbda5bd5896bdd180461498feda68d2" type="zip">https://github.com/morrownr/88x2bu-20210702/archive/refs/heads/main.zip</Archive>
+        <Archive sha1sum="851937f318ad3cf414e340da34ee76950dcbf19d" type="zip">https://github.com/morrownr/88x2bu-20210702/archive/refs/heads/main.zip</Archive>
         <BuildDependencies>
             <Dependency>bc</Dependency>
-            <Dependency version="5.15.131">kernel-module-headers</Dependency>
+            <Dependency version="5.15.140">kernel-module-headers</Dependency>
         </BuildDependencies>
         <!--
         <Patches>
@@ -36,6 +36,13 @@
     </Package>
 
     <History>
+        <Update release="7">
+            <Date>2023-11-28</Date>
+            <Version>2023.07.23</Version>
+            <Comment>Rebuild</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
         <Update release="6">
             <Date>2023-09-11</Date>
             <Version>2023.07.23</Version>
