@@ -1,0 +1,96 @@
+From bdfef59dea2964f285487262cb1c1507a82d509f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Giuseppe=20Ghib=C3=B2?= <ghibo@mageia.org>
+Date: Wed, 19 Oct 2022 10:08:19 +0200
+Subject: [PATCH] Fix fgrep/grep -F warnings
+
+---
+ grub-core/lib/libgcrypt/src/libgcrypt-config.in | 4 ++--
+ util/grub.d/10_hurd.in                          | 2 +-
+ util/grub.d/10_kfreebsd.in                      | 2 +-
+ util/grub.d/10_linux.in                         | 2 +-
+ util/grub.d/20_linux_xen.in                     | 4 ++--
+ 5 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/grub-core/lib/libgcrypt/src/libgcrypt-config.in b/grub-core/lib/libgcrypt/src/libgcrypt-config.in
+index c052638..84f3b26 100644
+--- a/grub-core/lib/libgcrypt/src/libgcrypt-config.in
++++ b/grub-core/lib/libgcrypt/src/libgcrypt-config.in
+@@ -142,7 +142,7 @@ if test "$echo_cflags" = "yes"; then
+ 
+     tmp=""
+     for i in $includes $cflags_final; do
+-       if echo "$tmp" | fgrep -v -- "$i" >/dev/null; then
++       if echo "$tmp" | grep -F -v -- "$i" >/dev/null; then
+            tmp="$tmp $i"
+        fi
+     done
+@@ -163,7 +163,7 @@ if test "$echo_libs" = "yes"; then
+ 
+     tmp=""
+     for i in $libdirs $libs_final; do
+-       if echo "$tmp" | fgrep -v -- "$i" >/dev/null; then
++       if echo "$tmp" | grep -F -v -- "$i" >/dev/null; then
+            tmp="$tmp $i"
+        fi
+     done
+diff --git a/util/grub.d/10_hurd.in b/util/grub.d/10_hurd.in
+index 3663d36..c566821 100644
+--- a/util/grub.d/10_hurd.in
++++ b/util/grub.d/10_hurd.in
+@@ -176,7 +176,7 @@ while [ "x$kernels" != "x" ] ; do
+   hurd_entry "$kernel" advanced
+   hurd_entry "$kernel" recovery
+ 
+-  kernels=`echo $kernels | tr ' ' '\n' | fgrep -vx "$kernel" | tr '\n' ' '`
++  kernels=`echo $kernels | tr ' ' '\n' | grep -F -vx "$kernel" | tr '\n' ' '`
+ done
+ 
+ # If at least one kernel was found, then we need to
+diff --git a/util/grub.d/10_kfreebsd.in b/util/grub.d/10_kfreebsd.in
+index 199b20e..0ed082f 100644
+--- a/util/grub.d/10_kfreebsd.in
++++ b/util/grub.d/10_kfreebsd.in
+@@ -239,7 +239,7 @@ while [ "x$list" != "x" ] ; do
+     kfreebsd_entry "${OS}" "${version}" recovery "-s"
+   fi
+ 
+-  list=`echo $list | tr ' ' '\n' | fgrep -vx "$kfreebsd" | tr '\n' ' '`
++  list=`echo $list | tr ' ' '\n' | grep -F -vx "$kfreebsd" | tr '\n' ' '`
+ done
+ 
+ # If at least one kernel was found, then we need to
+diff --git a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
+index b9623a3..d97655c 100644
+--- a/util/grub.d/10_linux.in
++++ b/util/grub.d/10_linux.in
+@@ -343,7 +343,7 @@ while [ "x$list" != "x" ] ; do
+                 "failsafe ${GRUB_CMDLINE_LINUX}"
+   fi
+ 
+-  list=`echo $list | tr ' ' '\n' | fgrep -vx "$linux" | tr '\n' ' '`
++  list=`echo $list | tr ' ' '\n' | grep -F -vx "$linux" | tr '\n' ' '`
+ done
+ 
+ # If at least one kernel was found, then we need to
+diff --git a/util/grub.d/20_linux_xen.in b/util/grub.d/20_linux_xen.in
+index c23b064..b8238f7 100644
+--- a/util/grub.d/20_linux_xen.in
++++ b/util/grub.d/20_linux_xen.in
+@@ -355,12 +355,12 @@ while [ "x${xen_list}" != "x" ] ; do
+ 		"single ${GRUB_CMDLINE_LINUX}" "${GRUB_CMDLINE_XEN}"
+ 	fi
+ 
+-	list=`echo $list | tr ' ' '\n' | fgrep -vx "$linux" | tr '\n' ' '`
++	list=`echo $list | tr ' ' '\n' | grep -F -vx "$linux" | tr '\n' ' '`
+     done
+     if [ x"$is_top_level" != xtrue ]; then
+ 	echo '	}'
+     fi
+-    xen_list=`echo $xen_list | tr ' ' '\n' | fgrep -vx "$current_xen" | tr '\n' ' '`
++    xen_list=`echo $xen_list | tr ' ' '\n' | grep -F -vx "$current_xen" | tr '\n' ' '`
+ done
+ 
+ # If at least one kernel was found, then we need to
+-- 
+2.38.0
+
