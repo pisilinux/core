@@ -1,0 +1,11 @@
+diff -Nuar a/modules/pam_namespace/pam_namespace.c b/modules/pam_namespace/pam_namespace.c
+--- a/modules/pam_namespace/pam_namespace.c	2024-01-17 11:00:00.000000000 +0300
++++ b/modules/pam_namespace/pam_namespace.c	2024-01-19 12:35:58.760987871 +0300
+@@ -38,6 +38,7 @@
+ #include "pam_inline.h"
+ #include "pam_namespace.h"
+ #include "argv_parse.h"
++#include <stdint.h>
+ 
+ /* --- evaluating all files in VENDORDIR/security/namespace.d and /etc/security/namespace.d --- */
+ static const char *base_name(const char *path)
