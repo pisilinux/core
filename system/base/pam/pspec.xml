@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Pluggable Authentication Modules</Summary>
         <Description>PAM (Pluggable Authentication Modules) is a system security tool that allows system administrators to set authentication policy without having to recompile programs that handle authentication.</Description>
-        <Archive sha1sum="e61f6795ea81584917301d99c564d610e827295a" type="targz">https://github.com/linux-pam/linux-pam/archive/v1.5.3.tar.gz</Archive>
+        <Archive sha1sum="b91e60a7f55df5f4fd1fafe1d42177f5d8460b2f" type="targz">https://github.com/linux-pam/linux-pam/archive/v1.6.0.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="pisi-pambase.sh" permission="0755">pisi-pambase.sh</AdditionalFile>
             <!--AdditionalFile target="dlopen.sh" permission="0755">dlopen.sh</AdditionalFile>
@@ -24,7 +24,7 @@
             <Dependency>libtirpc-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">gentoo/pam-1.5.3-termios.patch</Patch>
+            <Patch level="1">glibc.patch</Patch>
         </Patches>
     </Source>
 
@@ -69,6 +69,13 @@
     </Package>
 
     <History>
+        <Update release="14">
+            <Date>2024-01-19</Date>
+            <Version>1.6.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="13">
             <Date>2023-06-13</Date>
             <Version>1.5.3</Version>
