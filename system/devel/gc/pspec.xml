@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>A garbage collector for C and C++</Summary>
         <Description>The Boehm-Demers-Weiser conservative garbage collector can be used as a garbage collecting replacement for C malloc or C++ new.</Description>
-        <Archive sha1sum="41c88cbc4bc9bf76e1a95a1500ea5b0360bc4f55" type="targz">https://github.com/ivmai/bdwgc/releases/download/v8.2.4/gc-8.2.4.tar.gz</Archive>
+        <Archive sha1sum="3f543532c47e592a8f5ea6f7a529c8ed7465a5c7" type="targz">https://github.com/ivmai/bdwgc/releases/download/v8.2.6/gc-8.2.6.tar.gz</Archive>
         <BuildDependencies>
           <Dependency>libatomic_ops-devel</Dependency>
         </BuildDependencies>
@@ -46,6 +46,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2024-02-06</Date>
+            <Version>8.2.6</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Ivan Maidanski</Name>
+            <Email>ivmai@mail.ru</Email>
+        </Update>
         <Update release="10">
             <Date>2023-05-28</Date>
             <Version>8.2.4</Version>
