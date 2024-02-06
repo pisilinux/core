@@ -12,7 +12,7 @@ from pisi.actionsapi import get
 def setup():
     shelltools.system("./autogen.sh")
     
-    autotools.configure("--prefix=/usr")
+    autotools.configure("--prefix=/usr --enable-shared")
 
 def build():
     autotools.make()
