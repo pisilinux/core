@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>The X protocol C-language Binding (XCB)</Summary>
         <Description>The X protocol C-language Binding (XCB) is a replacement for Xlib featuring a small footprint, latency hiding, direct access to the protocol, improved threading support, and extensibility.</Description>
-        <Archive sha1sum="c6e9b7235f7db529531fa65cabef7363b32c53ce" type="tarxz">https://xorg.freedesktop.org/releases/individual/lib/libxcb-1.16.1.tar.xz</Archive>
+        <Archive sha1sum="ebb3197ac4c75c51c4e7e3278e8406d9441a4d47" type="tarxz">https://xorg.freedesktop.org/releases/individual/lib/libxcb-1.17.0.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>libXau-devel</Dependency>
             <Dependency>libXdmcp-devel</Dependency>
@@ -20,7 +20,7 @@
             <Dependency>libxslt-devel</Dependency>
             <Dependency>util-macros</Dependency>
             <Dependency>xorg-proto</Dependency>
-            <Dependency versionFrom="1.16.0">xcb-proto</Dependency>
+            <Dependency versionFrom="1.17.0">xcb-proto</Dependency>
         </BuildDependencies>
         <Patches>
 <!--             <Patch level="1">libxcb-1.1-no-pthread-stubs.patch</Patch> -->
@@ -79,6 +79,13 @@
     </Package>
 
     <History>
+        <Update release="19">
+            <Date>2024-04-15</Date>
+            <Version>1.17.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="18">
             <Date>2024-03-05</Date>
             <Version>1.16.1</Version>
