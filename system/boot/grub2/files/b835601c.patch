@@ -1,0 +1,40 @@
+From b835601c7639ed1890f2d3db91900a8506011a8e Mon Sep 17 00:00:00 2001
+From: Oskari Pirhonen <xxc3ncoredxx@gmail.com>
+Date: Thu, 21 Dec 2023 01:17:35 -0600
+Subject: build: Include grub-core/extra_deps.lst in dist
+
+Fixes build failure due to the extra_deps.lst file not existing in the
+tarball. Found while trying to package GRUB 2.12 for Gentoo.
+
+  make[3]: *** No rule to make target '/var/tmp/portage/sys-boot/grub-2.12/work/grub-2.12/grub-core/extra_deps.lst', needed by 'syminfo.lst'.  Stop.
+
+Fixes: 89fbe0cac (grub-core/Makefile.am: Make path to extra_deps.lst relative to $(top_srcdir)/grub-core)
+Fixes: 154dcb1ae (build: Allow explicit module dependencies)
+
+Signed-off-by: Oskari Pirhonen <xxc3ncoredxx@gmail.com>
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
+---
+ conf/Makefile.extra-dist | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/conf/Makefile.extra-dist b/conf/Makefile.extra-dist
+index 5e7126f..d9e2b8c 100644
+--- a/conf/Makefile.extra-dist
++++ b/conf/Makefile.extra-dist
+@@ -21,6 +21,7 @@ EXTRA_DIST += conf/i386-cygwin-img-ld.sc
+ EXTRA_DIST += grub-core/Makefile.core.def
+ EXTRA_DIST += grub-core/Makefile.gcry.def
+ 
++EXTRA_DIST += grub-core/extra_deps.lst
+ EXTRA_DIST += grub-core/genmoddep.awk
+ EXTRA_DIST += grub-core/genmod.sh.in
+ EXTRA_DIST += grub-core/gensyminfo.sh.in
+-- 
+cgit v1.1
+
+diff -Nuar a/grub-core/extra_deps.lst b/grub-core/extra_deps.lst
+--- a/grub-core/extra_deps.lst	1970-01-01 02:00:00.000000000 +0200
++++ b/grub-core/extra_deps.lst	2023-12-22 18:07:36.000000000 +0300
+@@ -0,0 +1 @@
++depends bli part_gpt
+
