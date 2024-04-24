@@ -1,0 +1,29 @@
+diff -Nuar a/util/grub.d/10_linux.in b/util/grub.d/10_linux.in
+--- a/util/grub.d/10_linux.in	2022-12-07 16:47:11.000000000 +0300
++++ b/util/grub.d/10_linux.in	2023-12-23 13:55:45.671987034 +0300
+@@ -29,7 +29,13 @@
+ CLASS="--class gnu-linux --class gnu --class os"
+ 
+ if [ "x${GRUB_DISTRIBUTOR}" = "x" ] ; then
+-  OS=GNU/Linux
++   if [ -f "/etc/pisilinux-release" ] ; then
++     OS="$(sed 's, release .*$,,g' /etc/pisilinux-release)"
++   elif [ -e "/etc/system-release" ] ; then
++     OS="$(sed 's, release .*$,,g' /etc/system-release)"
++   else
++     OS=GNU/Linux
++   fi
+ else
+   OS="${GRUB_DISTRIBUTOR} GNU/Linux"
+   CLASS="--class $(echo ${GRUB_DISTRIBUTOR} | tr 'A-Z' 'a-z' | cut -d' ' -f1|LC_ALL=C sed 's,[^[:alnum:]_],_,g') ${CLASS}"
+@@ -223,7 +229,9 @@
+   done
+
+   initrd_real=
+-  for i in "initrd.img-${version}" "initrd-${version}.img" \
++  for i in "initrd.img-${version}" "initrd-${version}.img" "initrd-${version}.gz" \
++       "initrd-${version}" "initramfs-${version}.img" "initramfs-fallback-${version}.img"\
++       "initramfs-${version}.gz" "initramfs-${version}" \
+ 	   "initrd-${alt_version}.img.old" "initrd-${version}.gz" \
+ 	   "initrd-${alt_version}.gz.old" "initrd-${version}" \
+ 	   "initramfs-${version}.img" "initramfs-${alt_version}.img.old" \
