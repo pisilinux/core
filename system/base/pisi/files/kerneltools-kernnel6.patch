@@ -1,0 +1,13 @@
+diff -Nuar a/pisi/actionsapi/kerneltools.py b/pisi/actionsapi/kerneltools.py
+--- a/pisi/actionsapi/kerneltools.py	2020-01-13 21:53:04.000000000 +0300
++++ b/pisi/actionsapi/kerneltools.py	2024-05-04 15:47:53.174446091 +0300
+@@ -182,7 +182,8 @@
+                          "DEPMOD=/bin/true modules_install mod-fw=")
+ 
+     # Remove symlinks first
+-    pisitools.remove("/lib/modules/%s/source" % suffix)
++    # kernel 6.0 da kapatıldı line 186
++    # pisitools.remove("/lib/modules/%s/source" % suffix)
+     pisitools.remove("/lib/modules/%s/build" % suffix)
+ 
+     # Install Module.symvers and System.map here too
