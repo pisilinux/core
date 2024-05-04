@@ -12,7 +12,7 @@
         <IsA>kernel</IsA>
         <Summary>The Linux kernel (the core of the Linux operating system) for Pisi Linux</Summary>
         <Description>kernel contains the Linux kernel, the core of any Linux operating system. The kernel handles the basic functions of the operating system: memory allocation, process allocation, device input and output, etc.</Description>
-        <Archive sha1sum="01961045127c21f8a9dbaa9e7705dbb9e4cffbaa" type="targz">https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.15.tar.gz</Archive>
+        <Archive sha1sum="026a9f37b498ab533f843d4a3a85c40f9d108431" type="targz">https://mirrors.edge.kernel.org/pub/linux/kernel/v6.x/linux-6.6.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
             <AdditionalFile permission="0755" target="generate-module-list">scripts/generate-module-list</AdditionalFile>
@@ -33,71 +33,38 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-5.15.158.xz</Patch>
+            <Patch level="1" compressionType="xz">patches/linux/patch-6.6.30.xz</Patch>
 
-            <!-- aufs5 patchec -->
-            <Patch level="1">patches/aufs5/aufs5.15.41-20230828.patch</Patch>
-            <Patch level="1">patches/aufs5/aufs5-base.patch</Patch>
-            <Patch level="1">patches/aufs5/aufs5-loopback.patch</Patch>
-            <Patch level="1">patches/aufs5/aufs5-kbuild.patch</Patch>
-            <Patch level="1">patches/aufs5/lockdep-debug.patch</Patch>
-            <Patch level="1">patches/aufs5/aufs5-mmap.patch</Patch>
-            <Patch level="1">patches/aufs5/tmpfs-idr.patch</Patch>
-            <Patch level="1">patches/aufs5/vfs-ino.patch</Patch>
-            <Patch level="1">patches/aufs5/aufs5-standalone.patch</Patch>
+            <!-- aufs6 patchec -->
+            <Patch level="1">patches/aufs6/aufs6.6-20240226.patch</Patch>
+            <Patch level="1">patches/aufs6/aufs6-base.patch</Patch>
+            <Patch level="1">patches/aufs6/aufs6-kbuild.patch</Patch>
+            <Patch level="1">patches/aufs6/aufs6-loopback.patch</Patch>
+            <Patch level="1">patches/aufs6/aufs6-mmap.patch</Patch>
+            <Patch level="1">patches/aufs6/tmpfs-idr.patch</Patch>
+            <Patch level="1">patches/aufs6/vfs-ino.patch</Patch>
+            <Patch level="1">patches/aufs6/aufs6-standalone.patch</Patch>
 
             <!-- Mageia Linux patches-->
-            <Patch level="1">patches/mageia/fs-procfs-do-not-list-TID-0-in-proc-pid-task.patch</Patch>
-			
-            <Patch level="1">patches/mageia/CVE-2019-12379.patch</Patch>
-            <Patch level="1">patches/mageia/CVE-2020-16119-DCCP-CCID-structure-use-after-free.patch</Patch>
-			
             <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
-            <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>	
-            <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>	
-            <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.13-buildfix.patch</Patch>	
-            <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-kernel-5.5.patch</Patch>	
-            
-            <Patch level="1">patches/mageia/3rd-3rdparty-tree.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-3rdparty-merge.patch</Patch>
-            
-            <Patch level="1">patches/mageia/3rd-ndiswrapper-1.63.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-ndiswrapper-Kconfig.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-ndiswrapper-Makefile-build-fix.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-niswrapper-Kconfig-Makefile.patch</Patch>
-            
-            <Patch level="1">patches/mageia/3rd-rtl8812au.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8812au-Kconfig-Makefile.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8812au-rename.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8812au-kernel-5.12.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8812au-kernel-5.15.patch</Patch>
-            
-            <Patch level="1">patches/mageia/3rd-rtl8723de.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8723de-Kconfig-Makefile.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8723de-fix-redefine.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8723de-nodebug.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8223de-kernel-5.6.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8723de-add-kernel-5.8-support.patch</Patch>
-            
-            <Patch level="1">patches/mageia/3rd-viahss-0.92.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-viahss-config.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-viahss-module-license.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-viahss-2.6.35-buildfix.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-viahss-3.0-buildfix.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-viahss-Kconfig-Makefile.patch</Patch>
-            
-            <Patch level="1">patches/mageia/3rd-rtl8821ce.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8821ce-Kconfig-Makefile.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8821ce-5.8-fix.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8821ce-kernel-5.10.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8821ce-kernel-5.12.patch</Patch>
-            <Patch level="1">patches/mageia/3rd-rtl8821ce-kernel-5.15.patch</Patch>
-            
-            <Patch level="1">patches/mageia/3rd-fix-kconfig.patch</Patch>
+            <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.13-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
+            <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
+            <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-kernel-5.5.patch</Patch>
 
-            <Patch level="1">patches/mageia/net-wireless-rtw88-dont-check-CRC-of-VHT-SIG-B-in-802.11ac-signal.patch</Patch>
-            <Patch level="1">patches/mageia/net-wireless-rtw89-add-Realtek-802.11ax-driver.patch</Patch>
+            <Patch level="1">patches/mageia/staging-rtl8812au.patch</Patch>
+            <Patch level="1">patches/mageia/staging-rtl8812au-rename.patch</Patch>
+            <Patch level="1">patches/mageia/staging-rtl8812au-Kconfig-Makefile.patch</Patch>
+            <Patch level="1">patches/mageia/staging-rtl8812au-20231117.patch</Patch>
+
+            <Patch level="1">patches/mageia/net-wireless-rtw88-add-8723de-alias.patch</Patch>
             <Patch level="1">patches/mageia/net-wireless-rtw88-add-r8822be-alias.patch</Patch>
+
+            <Patch level="1">patches/mageia/net-wireless-iwlwifi-add-new-pci-id-for-6235.patch</Patch>
+            <Patch level="1">patches/mageia/wifi-iwlwifi-pcie-add-support-for-AX101NGW.patch</Patch>
+<!--             <Patch level="1">patches/mageia/iwlwifi-cfg-Add-missing-MODULE_FIRMWARE-for-pnvm.patch</Patch> -->
+
+            <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
         </Patches>
     </Source>
 
@@ -158,7 +125,7 @@
     <History>
         <Update release="90">
             <Date>2024-05-04</Date>
-            <Version>5.15.158</Version>
+            <Version>6.6.30</Version>
             <Comment>Version bump</Comment>
             <Type package="kernel">security</Type>
             <Requires>
