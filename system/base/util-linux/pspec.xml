@@ -23,6 +23,7 @@
             <Dependency>ncurses-devel</Dependency>
             <Dependency>libcap-ng-devel</Dependency>
             <Dependency>pam-devel</Dependency>
+            <Dependency>sqlite-devel</Dependency>
             <Dependency>libpcre2-devel</Dependency>
             <!-- <Dependency releaseFrom="2">utempter-devel</Dependency>-->
         </BuildDependencies>
@@ -91,6 +92,7 @@
         <Summary>util-linux runtime library</Summary>
         <RuntimeDependencies>
             <Dependency>python</Dependency>
+            <Dependency>sqlite</Dependency>
         </RuntimeDependencies>
         <Replaces>
             <Package>libblkid</Package>
@@ -112,6 +114,7 @@
         <Summary>libutil-linux header files</Summary>
         <RuntimeDependencies>
             <Dependency release="current">libutil-linux</Dependency>
+            <Dependency>sqlite-devel</Dependency>
         </RuntimeDependencies>
         <Replaces>
             <Package>libblkid-devel</Package>
