@@ -133,11 +133,13 @@
         <Summary>32-bit shared libraries for libutil-linux</Summary>
         <BuildType>emul32</BuildType>
         <BuildDependencies>
+            <Dependency>sqlite-32bit</Dependency>
             <Dependency>ncurses-32bit</Dependency>
 			<Dependency>libpcre2-32bit</Dependency>
 			<Dependency>libutil-linux-devel</Dependency>
         </BuildDependencies>
         <RuntimeDependencies>
+            <Dependency>sqlite-32bit</Dependency>
 			<Dependency>ncurses-32bit</Dependency>
 			<Dependency>libpcre2-32bit</Dependency>
 			<Dependency>libutil-linux</Dependency>
