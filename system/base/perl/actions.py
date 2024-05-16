@@ -55,12 +55,18 @@ def setup():
                       -Di_db \
                       -Ubincompat5005 \
                       -Uversiononly \
+                      -Dprivlib=/usr/share/perl5/core_perl \
+                      -Darchlib=/usr/lib/perl5/%s/core_perl \
+                      -Dsitelib=/usr/share/perl5/site_perl \
+                      -Dsitearch=/usr/lib/perl5/%s/site_perl \
+                      -Dvendorlib=/usr/share/perl5/vendor_perl \
+                      -Dvendorarch=/usr/lib/perl5/%s/vendor_perl \
                       -Dpager="/usr/bin/less -isr" \
                       -Dd_gethostent_r_proto -Ud_endhostent_r_proto -Ud_sethostent_r_proto \
                       -Ud_endprotoent_r_proto -Ud_setprotoent_r_proto \
                       -Ud_endservent_r_proto -Ud_setservent_r_proto \
                       -Dlibpth="/lib /usr/lib" \
-                      ' %(get.ARCH(), get.CC(), get.CFLAGS(), get.installDIR(), get.installDIR(), get.srcVERSION()))
+                      ' %(get.ARCH(), get.CC(), get.CFLAGS(), get.installDIR(), get.installDIR(), get.srcVERSION(), get.srcVERSION(), get.srcVERSION(), get.srcVERSION()))
     
 
 def build():
@@ -88,8 +94,8 @@ def install():
     # NEEDS MODIFICATION FOR NEW VERSION
     pisitools.dosym("/usr/lib/perl5/%s/%s-linux-thread-multi/CORE/libperl.so.%s" % (get.srcVERSION(), get.ARCH(), get.srcVERSION()), "/usr/lib/libperl.so")
     pisitools.dosym("/usr/lib/perl5/%s/%s-linux-thread-multi/CORE/libperl.so.%s" % (get.srcVERSION(), get.ARCH(), get.srcVERSION()), "/usr/lib/libperl.so.5")
-    pisitools.dosym("/usr/lib/perl5/%s/%s-linux-thread-multi/CORE/libperl.so.%s" % (get.srcVERSION(), get.ARCH(), get.srcVERSION()), "/usr/lib/libperl.so.5.32")
-    pisitools.dosym("/usr/lib/perl5/%s/%s-linux-thread-multi/CORE/libperl.so.%s" % (get.srcVERSION(), get.ARCH(), get.srcVERSION()), "/usr/lib/libperl.so.5.32.0")
+    pisitools.dosym("/usr/lib/perl5/%s/%s-linux-thread-multi/CORE/libperl.so.%s" % (get.srcVERSION(), get.ARCH(), get.srcVERSION()), "/usr/lib/libperl.so.5.38")
+    pisitools.dosym("/usr/lib/perl5/%s/%s-linux-thread-multi/CORE/libperl.so.%s" % (get.srcVERSION(), get.ARCH(), get.srcVERSION()), "/usr/lib/libperl.so.5.38.2")
 
     # Docs
     pisitools.dodir("/usr/share/doc/%s/html" % get.srcNAME())
@@ -98,6 +104,19 @@ def install():
                        --podpath="lib:ext:pod:vms" \
                        --recurse \
                        --htmldir="%s/usr/share/doc/%s/html"' % (get.curDIR(), get.installDIR(), get.srcNAME()))
+
+    ### Arch linux Perl Settings ###
+    # Change man page extensions for site and vendor module builds.
+    # Set no mail address since bug reports should go to the bug tracker
+    # and not someone's email.
+    shelltools.system("""sed -e '/^man1ext=/ s/1perl/1p/' -e '/^man3ext=/ s/3perl/3pm/' \
+                           -e "/^cf_email=/ s/'.*'/''/" \
+                           -e "/^perladmin=/ s/'.*'/''/" \
+                           -i %s/usr/lib/perl5/%s/core_perl/Config_heavy.pl""" % (get.installDIR(), get.srcVERSION()))
+
+    shelltools.system("""sed -e '/(makepl_arg =>/   s/""/"INSTALLDIRS=site"/' \
+                           -e '/(mbuildpl_arg =>/ s/""/"installdirs=site"/' \
+                           -i %s/usr/share/perl5/core_perl/CPAN/FirstTime.pm""" % get.installDIR())
 
     perlmodules.removePodfiles()
     perlmodules.removePacklist()
