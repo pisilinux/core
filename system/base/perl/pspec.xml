@@ -50,11 +50,19 @@
         </Files>
         <AdditionalFiles>
             <!-- FIXME: Update perl version in target path  when Perl version changes! -->
-            <AdditionalFile owner="root" permission="0644" target="/usr/lib/perl5/vendor_perl/5.38.2/Turkish.pm">Turkish.pm</AdditionalFile>
+            <AdditionalFile owner="root" permission="0644" target="/usr/lib/perl5/5.38.2/vendor_perl/Turkish.pm">Turkish.pm</AdditionalFile>
+<!--             <AdditionalFile owner="root" permission="0644" target="/usr/lib/perl5/vendor_perl/5.38.2/Turkish.pm">Turkish.pm</AdditionalFile> -->
         </AdditionalFiles>
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2024-05-14</Date>
+            <Version>5.38.2</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="9">
             <Date>2024-05-14</Date>
             <Version>5.38.2</Version>
