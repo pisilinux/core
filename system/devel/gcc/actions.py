@@ -62,9 +62,9 @@ def setup():
     pisitools.dosed("libiberty/configure", "^(ac_cpp='\$CPP\s\$CPPFLAGS)", r"\1 -O2")
     
     # shelltools.move("isl-0.25", "isl")
-    # shelltools.move("mpfr-4.2.0", "mpfr")
+    # shelltools.move("mpfr-4.2.1", "mpfr")
     # shelltools.move("mpc-1.3.1", "mpc")
-    # shelltools.move("gmp-6.2.1", "gmp")
+    # shelltools.move("gmp-6.3.0", "gmp")
     
     #shelltools.cd("../")
     shelltools.makedirs("build")
@@ -116,8 +116,8 @@ def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
     #autotools.install()
 
-    for header in ["limits.h","syslimits.h"]:
-        pisitools.insinto("/usr/lib/gcc/%s/%s/include" % (get.HOST(), verMajor) , "gcc/include-fixed/%s" % header)
+    # for header in ["limits.h","syslimits.h"]:
+        # pisitools.insinto("/usr/lib/gcc/%s/%s/include" % (get.HOST(), verMajor) , "gcc/include-fixed/%s" % header)
 
     # Not needed
     pisitools.removeDir("/usr/lib/gcc/*/*/include-fixed")
