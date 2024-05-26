@@ -60,7 +60,7 @@ def install():
     autotools.make("-C bfd clean")
     autotools.make('CFLAGS="-fPIC %s" -C bfd' % get.CFLAGS())
 
-    pisitools.insinto("/usr/lib", "bfd/libbfd.a")
+    # pisitools.insinto("/usr/lib", "bfd/libbfd.a")
     pisitools.insinto("/usr/lib", "libiberty/libiberty.a")
     pisitools.insinto("/usr/include", "include/libiberty.h")
     pisitools.insinto("/usr/include", "include/demangle.h")
