@@ -14,7 +14,7 @@
         <IsA>app:console</IsA>
         <Summary>Introspection system for GObject-based libraries</Summary>
         <Description>gobject-introspection can scan C header and source files in order to generate introspection typelib files. It also provides an API to examine typelib files, useful for creating language bindings among other things.</Description>
-        <Archive sha1sum="0241bb51bf6ed0c7d63d612eb79d4258c874abd2" type="tarxz">mirrors://gnome/gobject-introspection/1.78/gobject-introspection-1.78.1.tar.xz</Archive>
+        <Archive sha1sum="175e675d09eae3a997e4cd4cfb19228e1cbd508c" type="tarxz">mirrors://gnome/gobject-introspection/1.80/gobject-introspection-1.80.1.tar.xz</Archive>
         <BuildDependencies>
             <!--<Dependency>cairo-devel</Dependency>-->
             <Dependency>meson</Dependency>	
@@ -22,7 +22,7 @@
             <Dependency>libffi-devel</Dependency>
             <Dependency>python-devel</Dependency>
             <!--<Dependency>python-mako</Dependency>--><!--for enable-doctool-->
-            <Dependency versionFrom="2.78.0">glib2-devel</Dependency>
+            <Dependency versionFrom="2.80.2">glib2-devel</Dependency>
             <Dependency>chrpath</Dependency>
         </BuildDependencies>
         <Patches>
@@ -68,6 +68,13 @@
     </Package>
 
     <History>
+        <Update release="39">
+            <Date>2024-06-01</Date>
+            <Version>1.80.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="38">
             <Date>2023-10-16</Date>
             <Version>1.78.1</Version>
