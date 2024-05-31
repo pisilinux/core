@@ -26,6 +26,7 @@ def setup():
                      --mandir=/usr/emul32 \
                      --localedir=/usr/emul32/locale \
                      -Dsysprof=disabled \
+                     -Dintrospection=disabled \
                      -Dlibmount=disabled"
                      
         # shelltools.system("patch -p1 < multilib.diff")
