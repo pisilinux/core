@@ -12,7 +12,8 @@
         <IsA>library</IsA>
         <Summary>Console display library</Summary>
         <Description>The NCurses is a library of functions that manage an application's display on character-cell terminals. The NCurses library defines many functions such as moving mouse and cursor, keyboard mapping and dispaying in color.</Description>
-        <Archive sha1sum="bb5eb3f34b3ecd5bac8d0b58164b847f135b3d62" type="targz">mirrors://gnu/ncurses/ncurses-6.4.tar.gz</Archive>
+<!--         <Archive sha1sum="bb5eb3f34b3ecd5bac8d0b58164b847f135b3d62" type="targz">mirrors://gnu/ncurses/ncurses-6.4.tar.gz</Archive> -->
+        <Archive sha1sum="cb68a5d2404d9050bfaf46c586c24902207a4c01" type="targz">https://github.com/ThomasDickey/ncurses-snapshots/archive/refs/tags/v6_4_20240420.tar.gz</Archive>
         <BuildDependencies>
 <!--             <Dependency>gnuconfig</Dependency> -->
 <!--             <Dependency>readline-devel</Dependency> -->
@@ -67,6 +68,13 @@
     </Package>
 
     <History>
+        <Update release="13">
+            <Date>2024-06-03</Date>
+            <Version>6.4</Version>
+            <Comment>Version bump 20240420.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="12">
             <Date>2023-07-20</Date>
             <Version>6.4</Version>
