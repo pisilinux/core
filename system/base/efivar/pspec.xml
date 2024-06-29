@@ -12,17 +12,17 @@
         <IsA>app:console</IsA>
         <Summary>Tools and library to manipulate EFI variables</Summary>
         <Description>Tools and library to manipulate EFI variables.</Description>
-        <Archive sha1sum="64dc75cf71b7a989b8b4ac5cd46d1010430e89dc" type="tarbz2">https://github.com/rhinstaller/efivar/releases/download/38/efivar-38.tar.bz2</Archive>
+        <Archive sha1sum="107fbb2a8bb936bf791d5c9e8cc229c05d08f3dd" type="targz">https://github.com/rhboot/efivar/archive/refs/tags/39.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>mandoc</Dependency>
            <Dependency>popt-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">gentoo/efivar-38-Makefile-dep.patch</Patch>
-            <Patch level="1">gentoo/efivar-38-binutils-2.36.patch</Patch>
-            <Patch level="1">gentoo/efivar-38-ia64-relro.patch</Patch>
-            <Patch level="1">gentoo/efivar-38-ld-locale.patch</Patch>
-            <Patch level="1">gentoo/efivar-38-march-native.patch</Patch>
+<!--             <Patch level="1">gentoo/efivar-38-Makefile-dep.patch</Patch> -->
+<!--             <Patch level="1">gentoo/efivar-38-binutils-2.36.patch</Patch> -->
+<!--             <Patch level="1">gentoo/efivar-38-ia64-relro.patch</Patch> -->
+<!--             <Patch level="1">gentoo/efivar-38-ld-locale.patch</Patch> -->
+<!--             <Patch level="1">gentoo/efivar-38-march-native.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -50,6 +50,13 @@
     </Package>
 
     <History>
+        <Update release="13">
+            <Date>2024-06-29</Date>
+            <Version>39</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="12">
             <Date>2023-03-12</Date>
             <Version>38</Version>
