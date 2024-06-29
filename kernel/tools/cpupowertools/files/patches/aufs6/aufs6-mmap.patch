@@ -1,5 +1,5 @@
 SPDX-License-Identifier: GPL-2.0
-aufs6.6 mmap patch
+aufs6.6.4 mmap patch
 
 diff --git a/fs/proc/base.c b/fs/proc/base.c
 index ffd54617c354..29ec720c8038 100644
@@ -144,7 +144,7 @@ index 36c5b43999e6..ce93e97f76a6 100644
  
  #ifdef CONFIG_ANON_VMA_NAME
 diff --git a/kernel/fork.c b/kernel/fork.c
-index 3b6d20dfb9a8..ccad0325cfa9 100644
+index 177ce7438db6..869467885640 100644
 --- a/kernel/fork.c
 +++ b/kernel/fork.c
 @@ -731,7 +731,7 @@ static __latent_entropy int dup_mmap(struct mm_struct *mm,
