@@ -1,5 +1,5 @@
 SPDX-License-Identifier: GPL-2.0
-aufs6.6 standalone patch
+aufs6.6.4 standalone patch
 
 diff --git a/fs/dcache.c b/fs/dcache.c
 index 6c930ceed526..576ad162cdec 100644
@@ -154,7 +154,7 @@ index efd4736bc94b..ce1a2c39ab23 100644
  ssize_t
  __vfs_getxattr(struct dentry *dentry, struct inode *inode, const char *name,
 diff --git a/kernel/locking/lockdep.c b/kernel/locking/lockdep.c
-index db4297f60bd3..9aca18312afb 100644
+index 2223ee909c10..d0ac4fc69a31 100644
 --- a/kernel/locking/lockdep.c
 +++ b/kernel/locking/lockdep.c
 @@ -239,6 +239,7 @@ inline struct lock_class *lockdep_hlock_class(struct held_lock *hlock)

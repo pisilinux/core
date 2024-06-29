@@ -1,5 +1,5 @@
 SPDX-License-Identifier: GPL-2.0
-aufs6.6 base patch
+aufs6.6.4 base patch
 
 diff --git a/MAINTAINERS b/MAINTAINERS
 index dd5de540ec0b..1b495555a80c 100644
@@ -187,7 +187,7 @@ index 6c461573434d..f08de3775987 100644
 +			   loff_t *ppos, size_t len, unsigned int flags);
  #endif
 diff --git a/kernel/locking/lockdep.c b/kernel/locking/lockdep.c
-index e85b5ad3e206..db4297f60bd3 100644
+index 151bd3de5936..2223ee909c10 100644
 --- a/kernel/locking/lockdep.c
 +++ b/kernel/locking/lockdep.c
 @@ -218,7 +218,7 @@ unsigned long max_lock_class_idx;
