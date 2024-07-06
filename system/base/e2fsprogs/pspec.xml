@@ -12,14 +12,14 @@
         <IsA>app:console</IsA>
         <Summary>Standard ext2/3/4 filesystem utilities</Summary>
         <Description>e2fsprogs provides the filesystem utilities for use with the ext2 filesystem. It also supports the ext3/4 filesystem with journaling support.</Description>
-        <Archive sha1sum="58f5d1835947a683814ffe19dd61e489cd609383" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.47.0/e2fsprogs-1.47.0.tar.xz</Archive>
+        <Archive sha1sum="cdfd1ab7b04c8d92f79d8356e3edaa62cc4948f0" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.47.1/e2fsprogs-1.47.1.tar.xz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="2.37.4">libutil-linux-devel</Dependency>
             <!-- The first release shipped within util-linux -->
             <Dependency>gettext</Dependency>
             <Dependency>texinfo</Dependency>
             <Dependency>util-linux</Dependency>
-            <Dependency>fuse-devel</Dependency>
+            <Dependency>fuse3-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch level="1">ntfs-3g.patch</Patch>
@@ -33,7 +33,7 @@
         <Name>e2fsprogs</Name>
         <RuntimeDependencies>
             <Dependency>libutil-linux</Dependency>
-            <Dependency>fuse</Dependency>
+            <Dependency>fuse3</Dependency>
             <!-- The first release shipped within util-linux -->
 	    <!--<Dependency>libuuid</Dependency>-->
         </RuntimeDependencies>
@@ -45,6 +45,7 @@
             <Path fileType="library">/usr/lib</Path>
             <Path fileType="executable">/sbin</Path>
             <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="executable">/usr/libexec</Path>
             <Path fileType="data">/usr/share/et</Path>
             <Path fileType="data">/usr/share/ss</Path>
             <Path fileType="localedata">/usr/share/locale</Path>
@@ -69,6 +70,13 @@
     </Package>
 
     <History>
+        <Update release="16">
+            <Date>2024-07-06</Date>
+            <Version>1.47.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="15">
             <Date>2023-08-25</Date>
             <Version>1.47.0</Version>
