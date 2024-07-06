@@ -12,6 +12,7 @@ from pisi.actionsapi import get
 
 def setup():
     autotools.rawConfigure("--enable-elf-shlibs \
+                            --with-root-prefix='' \
                             --enable-nls \
                             --disable-e2initrd-helper \
                             --disable-libblkid \
