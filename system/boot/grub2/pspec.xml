@@ -105,13 +105,20 @@
         <AdditionalFiles>
             <AdditionalFile owner="root" permission="0644" target="/usr/share/grub/pisi-grub-bg.png">pisi-grub-bg.png</AdditionalFile>
             <AdditionalFile owner="root" permission="0644" target="/etc/default/grub">grub-defaults</AdditionalFile>
-            <AdditionalFile owner="root" permission="0755" target="/etc/grub.d/30_uefi-firmware">30_uefi-firmware</AdditionalFile>
+            <AdditionalFile owner="root" permission="0755" target="/etc/grub.d/30_uefi-firmware">30_uefi-firmware-new</AdditionalFile>
             <AdditionalFile owner="root" permission="0755" target="/usr/bin/update-grub">update-grub</AdditionalFile>
             <AdditionalFile owner="root" permission="0755" target="/etc/grub.d/30_os-prober">30_os-prober2</AdditionalFile>
         </AdditionalFiles>
     </Package>
 
     <History>
+        <Update release="32">
+            <Date>2024-07-11</Date>
+            <Version>2.12</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="31">
             <Date>2024-06-09</Date>
             <Version>2.12</Version>
