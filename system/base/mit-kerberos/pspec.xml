@@ -13,7 +13,7 @@
         <IsA>app:console</IsA>
         <Summary>MIT Kerberos Library</Summary>
         <Description>Kerberos is a network authentication protocol. It is designed to provide strong authentication for client/server applications by using secret-key cryptography.</Description>
-        <Archive sha1sum="b88e9f819974a82d156654dccbd5ee3d1de8a98e" type="targz">https://kerberos.org/dist/krb5/1.21/krb5-1.21.2.tar.gz</Archive>
+        <Archive sha1sum="3e383bbe88cbed56bdad4ba655c40abf0e961cf7" type="targz">https://kerberos.org/dist/krb5/1.21/krb5-1.21.3.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>python3</Dependency>
             <Dependency>keyutils</Dependency>
@@ -76,6 +76,13 @@
     </Package>
 
     <History>
+        <Update release="14">
+            <Date>2024-07-10</Date>
+            <Version>1.21.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="13">
             <Date>2023-08-16</Date>
             <Version>1.21.2</Version>
