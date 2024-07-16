@@ -13,11 +13,11 @@
         <IsA>app:cli</IsA>
         <Summary>Userspace setup tool for transparent encryption of block devices using dm-crypt</Summary>
         <Description>Userspace setup tool for transparent encryption of block devices using dm-crypt</Description>
-        <Archive sha1sum="db48bcfaf135b627d9d5f0447d746e253a190843" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/cryptsetup/v2.7/cryptsetup-2.7.2.tar.xz</Archive>
+        <Archive sha1sum="7e1f94e2bbbef12797e057d755caa18c7442de93" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/cryptsetup/v2.7/cryptsetup-2.7.3.tar.xz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="2.02.186">device-mapper-devel</Dependency>
             <Dependency>libgpg-error-devel</Dependency>
-            <Dependency>libgcrypt-devel</Dependency>
+            <Dependency versionFrom="1.11.0">libgcrypt-devel</Dependency>
             <Dependency>python-devel</Dependency>
             <Dependency>libutil-linux-devel</Dependency>
             <Dependency versionFrom="1.19">popt-devel</Dependency>
@@ -92,6 +92,13 @@
     </Package>-->
 
     <History>
+        <Update release="17">
+            <Date>2024-07-15</Date>
+            <Version>2.7.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="16">
             <Date>2024-04-09</Date>
             <Version>2.7.2</Version>
