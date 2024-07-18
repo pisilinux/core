@@ -9,7 +9,7 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def install():
-    pisitools.dosed("Makefile", "prefix := /usr/local", "prefix := /usr")
+    pisitools.dosed("GNUmakefile", "prefix := /usr/local", "prefix := /usr")
 
     autotools.rawInstall("DESTDIR=%s prefix=/usr" % get.installDIR())
     autotools.rawInstall("DESTDIR=%s -C man-pages-posix-2017" % get.installDIR())
