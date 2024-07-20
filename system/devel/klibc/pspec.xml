@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>A minimal libc subset for use with initramfs</Summary>
         <Description>klibc, or "early userspace", is library part of an effort which tries to move as much initialization code in Linux as possible out of the kernel.</Description>
-        <Archive sha1sum="eaa050b663783e1278c9038a76c21a605af701c9" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/libs/klibc/2.0/klibc-2.0.8.tar.xz</Archive>
+        <Archive sha1sum="f2f9c892740636efa51a52f6e11903171076c75f" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/libs/klibc/2.0/klibc-2.0.13.tar.xz</Archive>
         <!--Archive sha1sum="18a30cecd740f118013839333d9774e79b6a7510" type="tarxz">http://www.kernel.org/pub/linux/kernel/v3.0/linux-3.7.tar.xz</Archive-->
         <BuildDependencies>
             <Dependency>perl</Dependency>
@@ -43,6 +43,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2024-07-20</Date>
+            <Version>2.0.13</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="7">
             <Date>2020-12-09</Date>
             <Version>2.0.8</Version>
