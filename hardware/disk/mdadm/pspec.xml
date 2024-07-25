@@ -12,12 +12,13 @@
         <IsA>app:console</IsA>
         <Summary>Utility to control Linux MD devices (software RAID arrays)</Summary>
         <Description>mdadm is used to create, manage, and monitor Linux MD (software RAID) devices.</Description>
-        <Archive sha1sum="4bbbd02674ac67dc9773f41aace7677aa5374c1c" type="tarxz">https://www.kernel.org/pub/linux/utils/raid/mdadm/mdadm-4.1.tar.xz</Archive>
+        <Archive sha1sum="fb0bace919325b42a005372b5a5cfa999da6567a" type="tarxz">https://www.kernel.org/pub/linux/utils/raid/mdadm/mdadm-4.3.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>dietlibc</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch level="1">sysmacros.patch</Patch>
+            <Patch level="1">mdadm-4.3-no-udev.patch</Patch>
         </Patches>
     </Source>
 
@@ -57,6 +58,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2024-07-25</Date>
+            <Version>4.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
          <Update release="8">
             <Date>2023-11-08</Date>
             <Version>4.1</Version>

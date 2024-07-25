@@ -12,7 +12,7 @@ from pisi.actionsapi import shelltools
 def builddiet():
     autotools.make("clean")
     shelltools.export("GCC", "diet %s %s %s %s -DHAVE_STDINT_H -Os -static" % (get.CC(), get.CFLAGS(), get.CXXFLAGS(), get.LDFLAGS()))
-    autotools.make("mdadm.static")
+    autotools.make("CXFLAGS='%s -DNO_LIBUDEV' mdadm.static" % get.CFLAGS())
     #autotools.make("mdassemble.static")
 
     pisitools.insinto("/sbin", "mdadm.static")
@@ -22,7 +22,7 @@ def build():
     # fix build with gcc-4.9.0
     pisitools.dosed("Makefile", "(Wall) -Werror", "\\1")
     # Not sure about MDASSEMBLE_AUTO=1. Need to investigate.
-    autotools.make("SYSCONFDIR=/%s MDASSEMBLE_AUTO=1 mdadm mdmon" % get.confDIR())
+    autotools.make("CXFLAGS='%s -DNO_LIBUDEV' SYSCONFDIR=/%s MDASSEMBLE_AUTO=1 mdadm mdmon" % (get.CFLAGS(), get.confDIR()))
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
