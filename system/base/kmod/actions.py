@@ -9,10 +9,15 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
+
+Libdir = "/usr/lib32" if get.buildTYPE() == "emul32" else "/usr/lib"
+
 def setup():
     options = "--sysconfdir=/etc \
                --with-zlib \
-               --with-xz"
+               --with-pkgconfigdir=/%s/pkgconfig \
+               --with-noarch-pkgconfigdir=/%s/pkgconfig \
+               --with-xz" % (Libdir, Libdir)
                
     if get.buildTYPE() == "emul32":
         options += " --bindir=/usr/emul32 \
@@ -46,4 +51,4 @@ def install():
 
     pisitools.makedirs("%s/etc/depmod.d" % get.installDIR())
     pisitools.makedirs("%s/etc/modprobe.d" % get.installDIR())
-    pisitools.dodoc("NEWS", "README*", "TODO", "COPYING")
+    pisitools.dodoc("NEWS", "README*", "COPYING")
