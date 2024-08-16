@@ -12,8 +12,9 @@
         <IsA>app:console</IsA>
         <Summary>Linux kernel module management utilities</Summary>
         <Description>Linux kernel module management utilities</Description>
-        <Archive sha1sum="e99d5a51c79d9ff3660722025f75770e1f4bf4b1" type="tarxz">https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-30.tar.xz</Archive>
+        <Archive sha1sum="d863f1dc0f87654fb5a09087a21a8e4e155ed023" type="tarxz">https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-33.tar.xz</Archive>
         <BuildDependencies>
+            <Dependency>scdoc</Dependency>
             <Dependency>chrpath</Dependency>
             <!--<Dependency>libxslt</Dependency>-->
             <Dependency>xz-devel</Dependency>
@@ -22,7 +23,7 @@
             <Dependency>kernel-module-headers</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">kmod-configure-c99.patch</Patch>
+<!--             <Patch level="1">kmod-configure-c99.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -83,6 +84,7 @@
         <RuntimeDependencies>
             <Dependency>xz</Dependency>
             <Dependency>zlib</Dependency>
+            <Dependency>zstd</Dependency>
         </RuntimeDependencies>
         <Summary>kmod libraries</Summary>
         <Files>
@@ -111,6 +113,13 @@
     </Package>
 
     <History>
+        <Update release="15">
+            <Date>2024-08-16</Date>
+            <Version>33</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="14">
             <Date>2023-01-14</Date>
             <Version>30</Version>
