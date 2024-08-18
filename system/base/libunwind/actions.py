@@ -10,19 +10,23 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 
+Libdir = "/usr/lib32" if get.buildTYPE() == "emul32" else "/usr/lib"
+
 def setup():
     pisitools.cflags.add("-fcommon")
     pisitools.flags.add("-U_FORTIFY_SOURCE")
     autotools.autoreconf("-vfi")
     
     options = "--enable-shared \
+               --libexecdir=%s \
                --disable-static \
-              "
+              " % Libdir
               
     if get.buildTYPE() == "emul32":
         shelltools.export("CC", "%s -m32" % get.CC())
         shelltools.export("CXX", "%s -m32" % get.CXX())
         shelltools.export("PKG_CONFIG_PATH", "/usr/lib32/pkgconfig")
+        shelltools.system('export PKG_CONFIG="i686-pc-linux-gnu-pkg-config"')
         
         options += "--build=i686-pc-linux-gnu \
                     --host=i686-pc-linux-gnu \
