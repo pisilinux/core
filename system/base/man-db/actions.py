@@ -31,4 +31,4 @@ def install():
     #pisitools.remove("/usr/bin/zsoelim")
     #pisitools.remove("/usr/share/man/man1/zsoelim.1")
 
-    pisitools.dodoc("README")
+    pisitools.dodoc("README*")
