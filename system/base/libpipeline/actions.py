@@ -20,4 +20,4 @@ def check():
 def install():
     autotools.install()
 
-    pisitools.dodoc("COPYING", "NEWS", "README")
+    pisitools.dodoc("COPYING", "README*")
