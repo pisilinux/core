@@ -53,7 +53,10 @@ def install():
         shelltools.chmod(get.installDIR() + "/etc/lvm/%s" % dir, 0755)
         shelltools.chown(get.installDIR() + "/etc/lvm/%s" % dir, uid = 'root', gid = 'root')
 
+
     shelltools.system("sed -i 's,use_lvmetad = 1,use_lvmetad = 1,' %s/etc/lvm/lvm.conf" % get.installDIR())
+    # no systemd
+    pisitools.remove("/lib/udev/rules.d/69-dm-lvm.rules")
 
     #pisitools.move("/sbin/lvmconf","scripts/lvmconf.sh")
 
