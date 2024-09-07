@@ -13,6 +13,7 @@ from pisi.actionsapi import shelltools
 
 
 def setup():
+    shelltools.export("PYTHON", "/usr/bin/python3")
     shelltools.copy("../unifont*.bdf", "./unifont.bdf")
     # shelltools.export("GRUB_CONTRIB", "%s/grub-2.06/grub-extras" % (get.workDIR()))
 
