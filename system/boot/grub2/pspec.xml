@@ -14,7 +14,7 @@
         <Description>GNU GRUB (short for GNU GRand Unified Bootloader) is a boot loader package from the GNU Project.</Description>
         <Archive sha1sum="9a5cd9860a02d479ff65461b710a4d85ea46b9f4" type="tarxz">https://ftp.gnu.org/gnu/grub/grub-2.12.tar.xz</Archive>
         <Archive sha1sum="cf7c7bab9a970e7153bd3a46c0cdf1d0dda4bf8a" type="gz">https://ftp.gnu.org/gnu/unifont/unifont-15.1.05/unifont-15.1.05.bdf.gz</Archive>
-        <Archive sha1sum="55a09d92f39dcc87d516066d21ffcb8677479f1c" type="targz" target="grub-2.12/themes">https://github.com/erkanisik1/Pisilinux2.4-Grub2-Themes/archive/refs/tags/v1.1.tar.gz</Archive>
+        <Archive sha1sum="35e7ae9ff69bc19b12bd7b40d373e258fdb468d0" type="targz" target="grub-2.12/themes">https://github.com/erkanisik1/Pisilinux2.4-Grub2-Themes/archive/refs/tags/v1.2.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>git</Dependency>
             <Dependency>autogen-devel</Dependency>
@@ -113,6 +113,13 @@
     </Package>
 
     <History>
+         <Update release="34">
+            <Date>2024-09-10</Date>
+            <Version>2.12</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="33">
             <Date>2024-09-07</Date>
             <Version>2.12</Version>
