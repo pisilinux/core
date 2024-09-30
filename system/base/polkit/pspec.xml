@@ -14,7 +14,7 @@
         <IsA>app:console</IsA>
         <Summary>PolicyKit Authorization Framework</Summary>
         <Description>polkit is a toolkit for defining and handling authorizations. It is used for allowing unprivileged processes to speak to privileged processes.</Description>
-        <Archive sha1sum="c531e5c831f752c706f5243e6ad6c772d0149c9e" type="tarbz2">https://gitlab.freedesktop.org/polkit/polkit/-/archive/124/polkit-124.tar.bz2</Archive>
+        <Archive sha1sum="d602241d6f2c783e5e63001960665929704ec16a" type="targz">https://github.com/polkit-org/polkit/archive/125/polkit-125.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>meson</Dependency>
             <Dependency>python3</Dependency>
@@ -34,8 +34,8 @@
 <!--             <Patch level="1">polkit-0.118-duktape.patch</Patch> -->
 <!--             <Patch level="1">polkit-0.118-elogind.patch</Patch> -->
             <Patch level="1">use-system-locale-in-gobject-api.diff</Patch>
-            <Patch level="1">gentoo/polkit-124-systemd.patch</Patch>
-            <Patch level="1">gentoo/polkit-124-systemd-fixup.patch</Patch>
+<!--             <Patch level="1">gentoo/polkit-124-systemd.patch</Patch> -->
+<!--             <Patch level="1">gentoo/polkit-124-systemd-fixup.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -95,6 +95,13 @@
     </Package>
 
     <History>
+        <Update release="21">
+            <Date>2024-09-30</Date>
+            <Version>125</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="20">
             <Date>2024-06-01</Date>
             <Version>124</Version>
