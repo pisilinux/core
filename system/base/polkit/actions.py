@@ -11,6 +11,7 @@ from pisi.actionsapi import mesontools
 from pisi.actionsapi import get
 
 def setup():
+    shelltools.system("sed -i '/systemd_sysusers_dir/s/^/#/' meson.build")
     pisitools.dosed("meson.build", "pardus", "pisilinux")
     pisitools.dosed("meson_options.txt", "pardus", "pisilinux")
     #pisitools.dosed("configure", "pardus-release", "pisilinux-release")
@@ -20,7 +21,7 @@ def setup():
                           -Dexamples=true \
                           -Dauthfw='pam' \
                           -Djs_engine='duktape' \
-                          -Dsession_tracking=libelogind")
+                          -Dsession_tracking=elogind")
 
 def build():
     shelltools.export('HOME', get.workDIR())
