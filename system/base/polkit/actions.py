@@ -37,6 +37,7 @@ def install():
     shelltools.chown("%s/var/lib/polkit-1" % get.installDIR(),"polkitd","polkitd")
     shelltools.chown("%s/usr/share/polkit-1" % get.installDIR(),"polkitd","root") #yada? "polkitd","root"
 
-    # pisitools.removeDir("/tmp")
+    pisitools.removeDir("/usr/lib/systemd")
+    pisitools.removeDir("/usr/lib/sysusers.d")
 
     pisitools.dodoc("AUTHORS", "NEWS*", "README*", "HACKING*", "COPYING*")
