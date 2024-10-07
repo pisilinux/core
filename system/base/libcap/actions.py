@@ -48,4 +48,4 @@ def install():
 
     pisitools.insinto("/etc/security", "pam_cap/capability.conf")
 
-    pisitools.dodoc("CHANGELOG", "License", "README", "doc/capability.notes")
+    pisitools.dodoc("CHANGELOG", "License", "README", "doc/capability.md")
