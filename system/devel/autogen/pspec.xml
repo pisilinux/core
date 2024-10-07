@@ -21,8 +21,10 @@
             <Dependency>which</Dependency>
         </BuildDependencies>
         <Patches>
-<!--             <Patch level="1">allow-guile-2.2.diff</Patch> -->
-<!--             <Patch level="1">x.patch</Patch> -->
+            <Patch level="1">0001-guile-3.0.patch</Patch>
+            <Patch level="1">autogen-5.18.16-no-which.patch</Patch>
+            <Patch level="1">autogen-5.18.16-rpath.patch</Patch>
+            <Patch level="1">autogen-5.18.16-configure-c99.patch</Patch>
         </Patches>
     </Source>
 
@@ -59,6 +61,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2024-10-05</Date>
+            <Version>5.18.16</Version>
+            <Comment>Revuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="10">
             <Date>2023-10-15</Date>
             <Version>5.18.16</Version>

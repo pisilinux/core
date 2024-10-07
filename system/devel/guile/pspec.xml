@@ -14,7 +14,7 @@
         <IsA>library</IsA>
         <Summary>GNU Scheme interpreter and library</Summary>
         <Description>GUILE (GNU's Ubiquitous Intelligent Language for Extension) is a library implementation of the Scheme programming language, written in C. GUILE provides a machine-independent execution platform that can be linked in as a library during the building of extensible programs.</Description>
-        <Archive sha1sum="6a90d47244952af062996286cf9b8d609b7d0d75" type="tarxz">mirrors://gnu/guile/guile-2.2.7.tar.xz</Archive>
+        <Archive sha1sum="e95e37f681dae692de52242929cbc7092eef3eb4" type="tarxz">mirrors://gnu/guile/guile-3.0.10.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>gc-devel</Dependency>
             <Dependency>gettext-devel</Dependency>
@@ -47,7 +47,7 @@
             <Path fileType="data">/usr/share/guile</Path>
             <Path fileType="data">/usr/share/emacs</Path>
             <Path fileType="data">/usr/share/gdb/auto-load</Path>
-            <Path fileType="library">/usr/lib/guile/2.2</Path>
+            <Path fileType="library">/usr/lib/guile/3.0</Path>
         </Files>
     </Package>
 
@@ -69,6 +69,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2024-10-05</Date>
+            <Version>3.0.10</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="7">
             <Date>2023-10-15</Date>
             <Version>2.2.7</Version>
