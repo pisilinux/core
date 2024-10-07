@@ -23,5 +23,6 @@ def build():
 def install():
     autotools.install()
     
-    pisitools.dosym("libunistring.so.2.2.0", "/usr/lib/libunistring.so.0")
+    pisitools.dosym("libunistring.so.5.1.0", "/usr/lib/libunistring.so.0")
+    # pisitools.dosym("libunistring.so.5.1.0", "/usr/lib/libunistring.so.2")
     pisitools.dodoc("AUTHORS", "BUGS", "ChangeLog", "COPYING", "COPYING.LIB", "HACKING", "NEWS", "README",  "THANKS")

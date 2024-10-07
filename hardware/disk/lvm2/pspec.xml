@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Userland logical volume management tools</Summary>
         <Description>LVM2 includes all of the support for handling read/write operations physical and logical volumes.</Description>
-        <Archive sha1sum="c30809d77988d9f23654e702fe66b816c5d425ad" type="targz">http://mirrors.kernel.org/sourceware/lvm2/LVM2.2.03.26.tgz</Archive>
+        <Archive sha1sum="8e10ec429efd8fec5577783d2b2b19329f7ebe54" type="targz">http://mirrors.kernel.org/sourceware/lvm2/LVM2.2.03.27.tgz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="2.37.4">libutil-linux-devel</Dependency>
             <Dependency>eudev-devel</Dependency>
@@ -188,6 +188,13 @@
     </Package>
 
     <History>
+        <Update release="15">
+            <Date>2024-10-04</Date>
+            <Version>2.03.27</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="14">
             <Date>2024-09-03</Date>
             <Version>2.03.26</Version>

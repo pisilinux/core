@@ -11,10 +11,11 @@ from pisi.actionsapi import get
 
 
 def setup():
+    pisitools.cflags.add("  -Wno-implicit-fallthrough -Wno-format-overflow -Wno-format-truncation")
     shelltools.system("sed -i 's/ -Werror / /' configure")
-    #autotools.autoreconf("-vfi")
+    # autotools.autoreconf("-vfi")
     autotools.configure("--prefix=/usr \
-                         --disable-static")
+                         --disable-static --disable-dependency-tracking")
     
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
