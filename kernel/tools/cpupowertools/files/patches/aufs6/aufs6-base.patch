@@ -1,8 +1,8 @@
 SPDX-License-Identifier: GPL-2.0
-aufs6.6.4 base patch
+aufs6.6.54 base patch
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index dd5de540ec0b..1b495555a80c 100644
+index ae4c0cec5073..2b5edd2836a7 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
 @@ -3334,6 +3334,19 @@ F:	include/uapi/linux/audit.h
@@ -26,10 +26,10 @@ index dd5de540ec0b..1b495555a80c 100644
  M:	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  R:	Dave Ertman <david.m.ertman@intel.com>
 diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index 9f2d412fc560..1fefc6a8d049 100644
+index 552f56a84a7e..ad953bc6d08a 100644
 --- a/drivers/block/loop.c
 +++ b/drivers/block/loop.c
-@@ -645,6 +645,24 @@ static int loop_change_fd(struct loop_device *lo, struct block_device *bdev,
+@@ -643,6 +643,24 @@ static int loop_change_fd(struct loop_device *lo, struct block_device *bdev,
  	goto done;
  }
  
@@ -55,10 +55,10 @@ index 9f2d412fc560..1fefc6a8d049 100644
  
  static ssize_t loop_attr_show(struct device *dev, char *page,
 diff --git a/fs/dcache.c b/fs/dcache.c
-index 25ac74d30bff..6c930ceed526 100644
+index 4030c010a768..e2877ac9a1e6 100644
 --- a/fs/dcache.c
 +++ b/fs/dcache.c
-@@ -1345,7 +1345,7 @@ enum d_walk_ret {
+@@ -1350,7 +1350,7 @@ enum d_walk_ret {
   *
   * The @enter() callbacks are called with d_lock held.
   */
@@ -68,7 +68,7 @@ index 25ac74d30bff..6c930ceed526 100644
  {
  	struct dentry *this_parent;
 diff --git a/fs/fcntl.c b/fs/fcntl.c
-index e871009f6c88..d62e114c1b1a 100644
+index 1484f062ee65..1e44fc9b0f70 100644
 --- a/fs/fcntl.c
 +++ b/fs/fcntl.c
 @@ -34,7 +34,7 @@
@@ -90,7 +90,7 @@ index e871009f6c88..d62e114c1b1a 100644
  		return error;
  
 diff --git a/fs/namespace.c b/fs/namespace.c
-index e157efc54023..6c57487f126b 100644
+index b4385e2413d5..c9347fc5e14a 100644
 --- a/fs/namespace.c
 +++ b/fs/namespace.c
 @@ -872,6 +872,12 @@ static inline int check_mnt(struct mount *mnt)
@@ -122,10 +122,10 @@ index d983d375ff11..7216ef993b5f 100644
  	if (unlikely(!out->f_op->splice_write))
  		return warn_unsupported(out, "write");
 diff --git a/include/linux/fs.h b/include/linux/fs.h
-index 4a40823c3c67..a46e516bfc32 100644
+index 6c3d86532e3f..c572420129a5 100644
 --- a/include/linux/fs.h
 +++ b/include/linux/fs.h
-@@ -1099,6 +1099,7 @@ extern void fasync_free(struct fasync_struct *);
+@@ -1101,6 +1101,7 @@ extern void fasync_free(struct fasync_struct *);
  /* can be called from interrupts */
  extern void kill_fasync(struct fasync_struct **, int, int);
  
@@ -133,7 +133,7 @@ index 4a40823c3c67..a46e516bfc32 100644
  extern void __f_setown(struct file *filp, struct pid *, enum pid_type, int force);
  extern int f_setown(struct file *filp, int who, int force);
  extern void f_delown(struct file *filp);
-@@ -1872,6 +1873,7 @@ struct file_operations {
+@@ -1934,6 +1935,7 @@ struct file_operations {
  	int (*lock) (struct file *, int, struct file_lock *);
  	unsigned long (*get_unmapped_area)(struct file *, unsigned long, unsigned long, unsigned long, unsigned long);
  	int (*check_flags)(int);
@@ -187,7 +187,7 @@ index 6c461573434d..f08de3775987 100644
 +			   loff_t *ppos, size_t len, unsigned int flags);
  #endif
 diff --git a/kernel/locking/lockdep.c b/kernel/locking/lockdep.c
-index 151bd3de5936..2223ee909c10 100644
+index 3468d8230e5f..64b9aedbe941 100644
 --- a/kernel/locking/lockdep.c
 +++ b/kernel/locking/lockdep.c
 @@ -218,7 +218,7 @@ unsigned long max_lock_class_idx;
