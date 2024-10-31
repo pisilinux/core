@@ -12,9 +12,10 @@
         <IsA>app:console</IsA>
         <Summary>Linux USB utilities</Summary>
         <Description>usbutils provides utilities for inspecting devices connected to a USB bus.</Description>
-        <Archive sha1sum="f463eda53c473f16e5a3b704dbcec665f86f6549" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-017.tar.xz</Archive>
-        <Archive sha1sum="8e59b43c6888898bc07f57f7df5148cec6843082" type="binary" target="usbutils-017">http://www.linux-usb.org/usb.ids</Archive>
+        <Archive sha1sum="3d2dd8720c3668dc2664512c796c5a9f2438eae3" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-018.tar.xz</Archive>
+        <Archive sha1sum="7148160da321218237d45b211eddb4fd1c434d92" type="binary" target="usbutils-018">http://www.linux-usb.org/usb.ids</Archive>
         <BuildDependencies>
+            <Dependency>meson</Dependency>
             <Dependency versionFrom="1.0.26">libusb-devel</Dependency>
             <Dependency>eudev-devel</Dependency>
         </BuildDependencies>
@@ -36,6 +37,13 @@
     </Package>
 
     <History>
+        <Update release="17">
+            <Date>2024-10-30</Date>
+            <Version>018</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="16">
             <Date>2023-10-31</Date>
             <Version>017</Version>
