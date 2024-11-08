@@ -35,6 +35,7 @@ def setup():
                          --enable-hidden-symbols \
                          --disable-versioned-symbols \
                          --without-libgsasl \
+                         --without-libpsl \
                          ac_cv_header_gss_h=no \
                          --with-ca-bundle=/etc/ssl/certs/ca-certificates.crt \
                          --prefix=/usr \
