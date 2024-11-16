@@ -11,7 +11,7 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import kerneltools
 
 KDIR = kerneltools.getKernelVersion()
-KVER ="6.6.56"
+KVER ="6.6.61"
 
 def build():
     autotools.make("KVER=%s" % KVER )
