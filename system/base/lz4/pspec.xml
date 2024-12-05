@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Extremely fast compression algorithm</Summary>
         <Description>LZ4 is an extremely fast loss-less compression algorithm, providing compression speed at 400 MB/s per core, scalable with multi-core CPU. It also features an extremely fast decoder, with speed in multiple GB/s per core, typically reaching RAM speed limits on multi-core systems.</Description>
-        <Archive sha1sum="1d262fd78a0dbaa409e764979c6a643d0370f8d1" type="targz">https://github.com/lz4/lz4/archive/v1.9.4.tar.gz</Archive>
+        <Archive sha1sum="e6a01c6d457365f9e26bc440394daab80ab0aff0" type="targz">https://github.com/lz4/lz4/archive/v1.10.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>make</Dependency>
             <Dependency>glibc-devel</Dependency>
@@ -48,6 +48,13 @@
     </Package>
 
     <History>
+        <Update release="5">
+            <Date>2024-12-04</Date>
+            <Version>1.10.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="4">
             <Date>2023-11-17</Date>
             <Version>1.9.4</Version>
