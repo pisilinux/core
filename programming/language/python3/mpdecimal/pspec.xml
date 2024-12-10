@@ -13,7 +13,7 @@
         <IsA>app:console</IsA>
         <Summary>Package for correctly-rounded arbitrary precision decimal floating point arithmetic</Summary>
         <Description>mpdecimal is a package for correctly-rounded arbitrary precision decimal floating point arithmetic.</Description>
-        <Archive sha1sum="16d0b8df9be8cacda90dd4cd041e3f5838e17074" type="targz">http://www.bytereef.org/software/mpdecimal/releases/mpdecimal-2.5.1.tar.gz</Archive>
+        <Archive sha1sum="157b6fc58ffd8e27f1e2e675b16d19fcd535689b" type="targz">http://www.bytereef.org/software/mpdecimal/releases/mpdecimal-4.0.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>glibc-devel</Dependency>
         </BuildDependencies>
@@ -24,6 +24,7 @@
         <Files>
             <Path fileType="library">/usr/lib</Path>
             <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
         </Files>
     </Package>
 
@@ -40,6 +41,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2024-12-10</Date>
+            <Version>4.0.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="7">
             <Date>2023-02-01</Date>
             <Version>2.5.1</Version>
