@@ -1,0 +1,25 @@
+--- openssl-1.0.0/Makefile.org.orig	2010-04-10 11:05:35.900993086 +0200
++++ openssl-1.0.0/Makefile.org	2010-04-10 11:16:15.052993924 +0200
+@@ -610,7 +610,7 @@
+ 			--release=$(VERSION) `basename $$i`") \
+ 			>  $(INSTALL_PREFIX)$(MANDIR)/man$$sec/$$fn.$${sec}$(MANSUFFIX); \
+ 		$(PERL) util/extract-names.pl < $$i | \
+-			(grep -v $$filecase "^$$fn\$$"; true) | \
++			(grep -v -E $$filecase "^$${fn}|$${fn#openssl-}\$$"; true) | \
+ 			(grep -v "[	]"; true) | \
+ 			(cd $(INSTALL_PREFIX)$(MANDIR)/man$$sec/; \
+ 			 while read n; do \
+@@ -627,11 +627,11 @@
+ 			--release=$(VERSION) `basename $$i`") \
+ 			>  $(INSTALL_PREFIX)$(MANDIR)/man$$sec/$$fn.$${sec}$(MANSUFFIX); \
+ 		$(PERL) util/extract-names.pl < $$i | \
+-			(grep -v $$filecase "^$$fn\$$"; true) | \
++			(grep -v -E $$filecase "^$${fn#openssl-}\$$"; true) | \
+ 			(grep -v "[	]"; true) | \
+ 			(cd $(INSTALL_PREFIX)$(MANDIR)/man$$sec/; \
+ 			 while read n; do \
+-				PLATFORM=$(PLATFORM) $$here/util/point.sh $$fn.$${sec}$(MANSUFFIX) "$$n".$${sec}$(MANSUFFIX); \
++				PLATFORM=$(PLATFORM) $$here/util/point.sh $$fn.$${sec}$(MANSUFFIX) openssl-"$$n".$${sec}$(MANSUFFIX); \
+ 			 done); \
+ 	done
+ 
