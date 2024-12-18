@@ -40,7 +40,7 @@ def setup():
 
 def build():
     autotools.make("depend")
-    autotools.make("-j1")
+    autotools.make()
     #autotools.make("rehash")
 
 def check():
@@ -59,7 +59,7 @@ def install():
     autotools.rawInstall("DESTDIR=%s MANDIR=/usr/share/man" % get.installDIR())
 
     # Rename conflicting manpages
-    pisitools.rename("/usr/share/man/man1/passwd.1", "ssl-passwd.1")
+    # pisitools.rename("/usr/share/man/man1/passwd.1", "ssl-passwd.1")
     #pisitools.rename("/usr/share/man/man3/rand.3", "ssl-rand.3")
     #pisitools.rename("/usr/share/man/man3/err.3", "ssl-err.3")
 
@@ -88,4 +88,4 @@ def install():
     pisitools.remove("/usr/lib/*.a")
 
     pisitools.dohtml("doc/*")
-    pisitools.dodoc("CHANGES*", "FAQ", "LICENSE", "NEWS", "README", "doc/*.txt")
+    pisitools.dodoc("CHANGES*", "LICENSE*", "NEWS*", "README*", "doc/*.txt")
