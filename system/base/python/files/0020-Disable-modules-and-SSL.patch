@@ -1,0 +1,108 @@
+From 89fc66ee9aea78f3d5ee7ffacb94030cd21cc551 Mon Sep 17 00:00:00 2001
+From: Mike Gilbert <floppym@gentoo.org>
+Date: Sun, 17 Jun 2018 11:14:43 -0400
+Subject: [PATCH 20/36] Disable modules and SSL
+
+---
+ setup.py | 50 +++++++++++++++++++++++++++++++-------------------
+ 1 file changed, 31 insertions(+), 19 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index f764223d06..cc423edcb2 100644
+--- a/setup.py
++++ b/setup.py
+@@ -33,7 +33,18 @@ host_platform = get_platform()
+ COMPILED_WITH_PYDEBUG = ('--with-pydebug' in sysconfig.get_config_var("CONFIG_ARGS"))
+ 
+ # This global variable is used to hold the list of modules to be disabled.
+-disabled_module_list = []
++pdm_env = "PYTHON_DISABLE_MODULES"
++if pdm_env in os.environ:
++    disabled_module_list = os.environ[pdm_env].split()
++else:
++    disabled_module_list = []
++
++pds_env = "PYTHON_DISABLE_SSL"
++if pds_env in os.environ:
++    disable_ssl = os.environ[pds_env]
++else:
++    disable_ssl = 0
++ 
+ 
+ def add_dir_to_list(dirlist, dir):
+     """Add the directory 'dir' to the list 'dirlist' (at the front) if
+@@ -500,6 +511,7 @@ class PyBuildExt(build_ext):
+             os.unlink(tmpfile)
+ 
+     def detect_modules(self):
++        global disable_ssl
+         # Ensure that /usr/local is always used
+         if not cross_compiling:
+             add_dir_to_list(self.compiler.library_dirs, '/usr/local/lib')
+@@ -861,7 +873,7 @@ class PyBuildExt(build_ext):
+         ssl_incs = find_file('openssl/ssl.h', inc_dirs,
+                              search_for_ssl_incs_in
+                              )
+-        if ssl_incs is not None:
++        if ssl_incs is not None and not disable_ssl:
+             krb5_h = find_file('krb5.h', inc_dirs,
+                                ['/usr/kerberos/include'])
+             if krb5_h:
+@@ -872,7 +884,8 @@ class PyBuildExt(build_ext):
+                                      ] )
+ 
+         if (ssl_incs is not None and
+-            ssl_libs is not None):
++            ssl_libs is not None and
++            not disable_ssl):
+             exts.append( Extension('_ssl', ['_ssl.c'],
+                                    include_dirs = ssl_incs,
+                                    library_dirs = ssl_libs,
+@@ -904,7 +917,7 @@ class PyBuildExt(build_ext):
+                 pass
+ 
+         min_openssl_ver = 0x00907000
+-        have_any_openssl = ssl_incs is not None and ssl_libs is not None
++        have_any_openssl = ssl_incs is not None and ssl_libs is not None and not disable_ssl
+         have_usable_openssl = (have_any_openssl and
+                                openssl_ver >= min_openssl_ver)
+ 
+@@ -920,21 +933,20 @@ class PyBuildExt(build_ext):
+                 print ("warning: openssl 0x%08x is too old for _hashlib" %
+                        openssl_ver)
+                 missing.append('_hashlib')
+-        if COMPILED_WITH_PYDEBUG or not have_usable_openssl:
+-            # The _sha module implements the SHA1 hash algorithm.
+-            exts.append( Extension('_sha', ['shamodule.c']) )
+-            # The _md5 module implements the RSA Data Security, Inc. MD5
+-            # Message-Digest Algorithm, described in RFC 1321.  The
+-            # necessary files md5.c and md5.h are included here.
+-            exts.append( Extension('_md5',
+-                            sources = ['md5module.c', 'md5.c'],
+-                            depends = ['md5.h']) )
+-
+-        min_sha2_openssl_ver = 0x00908000
+-        if COMPILED_WITH_PYDEBUG or openssl_ver < min_sha2_openssl_ver:
+-            # OpenSSL doesn't do these until 0.9.8 so we'll bring our own hash
+-            exts.append( Extension('_sha256', ['sha256module.c']) )
+-            exts.append( Extension('_sha512', ['sha512module.c']) )
++
++        ### Build these unconditionally so emerge won't fail
++        ### when openssl is dropped/broken etc.
++        # The _sha module implements the SHA1 hash algorithm.
++        exts.append( Extension('_sha', ['shamodule.c']) )
++        # The _md5 module implements the RSA Data Security, Inc. MD5
++        # Message-Digest Algorithm, described in RFC 1321.  The
++        # necessary files md5.c and md5.h are included here.
++        exts.append( Extension('_md5',
++                        sources = ['md5module.c', 'md5.c'],
++                        depends = ['md5.h']) )
++
++        exts.append( Extension('_sha256', ['sha256module.c']) )
++        exts.append( Extension('_sha512', ['sha512module.c']) )
+ 
+         # Modules that provide persistent dictionary-like semantics.  You will
+         # probably want to arrange for at least one of them to be available on
+-- 
+2.38.1
+

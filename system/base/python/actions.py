@@ -15,6 +15,7 @@ WorkDir = "Python-%s" % get.srcVERSION()
 PythonVersion = "2.7"
 
 def setup():
+    # shelltools.system("export PYTHON_DISABLE_SSL='1'")
     #shelltools.system("echo -e '\033[0;36mBuilding Bzip2\033[0m' ")
     #shelltools.makedirs("%s/temp/lib" %get.workDIR())
     #shelltools.cd("bzip2-1.0.8")
@@ -50,6 +51,17 @@ def setup():
     
     #pisitools.cflags.add("-I%s/temp/include -O3" %get.workDIR())
     #pisitools.ldflags.add("-L%s/temp/lib -lssl -lcrypto -lpthread -ldl" %get.workDIR())
+
+    # shelltools.export("CFLAGS", "-I/usr/include/openssl-1.1 -O3")
+    # shelltools.export("LDFLAGS", "-L/usr/lib/openssl-1.1")
+    # shelltools.system('export OPT="${CFLAGS}"')
+
+    # shelltools.export("CFLAGS", "-I/usr/include/openssl-1.1 -O3")
+    # shelltools.export("LDFLAGS", "-L/usr/lib/openssl-1.1 -lssl -lcrypto -lpthread -ldl")
+    # shelltools.export("PKG_CONFIG_PATH", "$PKG_CONFIG_PATH:/usr/lib/openssl-1.1/pkgconfig")
+
+    # pisitools.cflags.add("-I/usr/include/openssl-1.1 -O3")
+    # pisitools.ldflags.add("-L/usr/lib/openssl-1.1 -lssl -lcrypto -lpthread -ldl")
 
     autotools.autoreconf("-vif")
 
