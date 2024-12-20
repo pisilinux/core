@@ -1,5 +1,5 @@
 SPDX-License-Identifier: GPL-2.0
-aufs6.6.54 base patch
+aufs6.6.63 base patch
 
 diff --git a/MAINTAINERS b/MAINTAINERS
 index ae4c0cec5073..2b5edd2836a7 100644
@@ -26,10 +26,10 @@ index ae4c0cec5073..2b5edd2836a7 100644
  M:	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  R:	Dave Ertman <david.m.ertman@intel.com>
 diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index 552f56a84a7e..ad953bc6d08a 100644
+index 886c63599037..73dae3b1bd4e 100644
 --- a/drivers/block/loop.c
 +++ b/drivers/block/loop.c
-@@ -643,6 +643,24 @@ static int loop_change_fd(struct loop_device *lo, struct block_device *bdev,
+@@ -640,6 +640,24 @@ static int loop_change_fd(struct loop_device *lo, struct block_device *bdev,
  	goto done;
  }
  
