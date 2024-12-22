@@ -9,7 +9,7 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
-    pisitools.dosed("watch.c", "ncursesw/ncurses.h", "ncurses.h")
+    # pisitools.dosed("watch.c", "ncursesw/ncurses.h", "ncurses.h")
     
     autotools.configure("--prefix=/usr \
                          --exec-prefix=/ \
@@ -41,4 +41,4 @@ def install():
 
     #pisitools.dosym("libproc-%s.so" % get.srcVERSION(), "/lib/libproc.so")
 
-    pisitools.dodoc("NEWS", "ps/HACKING")
+    pisitools.dodoc("NEWS", "src/ps/HACKING")
