@@ -27,5 +27,5 @@ def install():
 
     pisitools.remove("/usr/share/kbd/keymaps/i386/qwerty/trf.map.gz")
 
-    pisitools.dohtml("docs/doc/*.html")
+    # pisitools.dohtml("docs/doc/*.html")
     pisitools.dodoc("AUTHORS", "ChangeLog", "COPYING", "README")

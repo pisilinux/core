@@ -12,10 +12,10 @@
         <IsA>app:console</IsA>
         <Summary>Keyboard and console utilities</Summary>
         <Description>The kbd package contains keytable files and keyboard utilities compatible with kernel version 1.1.54 and later.</Description>
-        <Archive sha1sum="03f675adcfd28d76fa21ad32630ae736934c08de" type="tarxz">https://www.kernel.org/pub/linux/utils/kbd/kbd-2.6.3.tar.xz</Archive>
-        <Archive sha1sum="17625849ecf4dedf755aefa06d78406b92c31743" type="tarbz2" target="kbd-2.6.3">https://sourceforge.net/projects/pisilinux/files/source/kbd-latarcyrheb-16-fixed.tar.bz2</Archive>
-        <Archive sha1sum="a5f6d9dff7a8a484cd5014ec7ffdf1eaed27084a" type="tarbz2" target="kbd-2.6.3">https://sourceforge.net/projects/pisilinux/files/source/kbd-latsun-fonts.tar.bz2</Archive>
-        <Archive sha1sum="d52f95fdc761cead041d23992f8802be5ac4bc12" type="tarbz2" target="kbd-2.6.3">https://sourceforge.net/projects/pisilinux/files/source/ro_maps.tar.bz2</Archive>
+        <Archive sha1sum="e677b18be7f7413ce1d5a2cba5ecb5d6952dc6e9" type="tarxz">https://www.kernel.org/pub/linux/utils/kbd/kbd-2.7.1.tar.xz</Archive>
+        <Archive sha1sum="17625849ecf4dedf755aefa06d78406b92c31743" type="tarbz2" target="kbd-2.7.1">https://sourceforge.net/projects/pisilinux/files/source/kbd-latarcyrheb-16-fixed.tar.bz2</Archive>
+        <Archive sha1sum="a5f6d9dff7a8a484cd5014ec7ffdf1eaed27084a" type="tarbz2" target="kbd-2.7.1">https://sourceforge.net/projects/pisilinux/files/source/kbd-latsun-fonts.tar.bz2</Archive>
+        <Archive sha1sum="d52f95fdc761cead041d23992f8802be5ac4bc12" type="tarbz2" target="kbd-2.7.1">https://sourceforge.net/projects/pisilinux/files/source/ro_maps.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>gettext</Dependency>
             <Dependency>gzip</Dependency>
@@ -32,11 +32,11 @@
             <Patch level="1">mandriva/kbd-1.12-data_thai.patch</Patch>
             <Patch level="1">mandriva/kbd-1.15-remove-unneeded-calls.patch</Patch-->
 
-            <Patch level="1">mandriva/kbd-1.15-keycodes-man.patch</Patch>
-            <Patch level="1">mandriva/kbd-1.15-sparc.patch</Patch>
+<!--             <Patch level="1">mandriva/kbd-1.15-keycodes-man.patch</Patch> -->
+<!--             <Patch level="1">mandriva/kbd-1.15-sparc.patch</Patch> -->
             <Patch level="1">mandriva/kbd-1.15-unicode_start.patch</Patch>
-            <Patch level="1">mandriva/kbd-1.15.3-dumpkeys-man.patch</Patch>
-            <Patch level="1">mandriva/kbd-1.15.5-loadkeys-search-path.patch</Patch>
+<!--             <Patch level="1">mandriva/kbd-1.15.3-dumpkeys-man.patch</Patch> -->
+<!--             <Patch level="1">mandriva/kbd-1.15.5-loadkeys-search-path.patch</Patch> -->
             <Patch level="1">mandriva/kbd-1.15.5-sg-decimal-separator.patch</Patch>
             <Patch level="1">mandriva/kbd-2.0.2-unicode-start-font.patch</Patch>
             <Patch level="1">mandriva/kbd-2.4.0-covscan-fixes.patch</Patch>
@@ -89,6 +89,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2024-12-21</Date>
+            <Version>2.7.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="10">
             <Date>2023-09-21</Date>
             <Version>2.6.3</Version>
