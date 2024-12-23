@@ -8,57 +8,54 @@ from pisi.actionsapi import get
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
+from pisi.actionsapi import mesontools
+
 
 def setup():
-    pisitools.dosed("configure.ac", '(AS_AC_EXPAND\(EXPANDED_LOCALSTATEDIR, )"\$localstatedir"\)', r'\1 "")')
-    for f in ["bus/Makefile.am", "bus/Makefile.in"]:
-        pisitools.dosed(f, "\$\(localstatedir\)(\/run\/dbus)", "\\1")
+    # pisitools.dosed("configure.ac", '(AS_AC_EXPAND\(EXPANDED_LOCALSTATEDIR, )"\$localstatedir"\)', r'\1 "")')
+    # for f in ["bus/Makefile.am", "bus/Makefile.in"]:
+        # pisitools.dosed(f, "\$\(localstatedir\)(\/run\/dbus)", "\\1")
     options = "\
-               --disable-selinux \
-               --disable-static \
-               --disable-tests \
-               --disable-asserts \
-               --disable-checks \
-               --disable-embedded-tests \
-               --disable-modular-tests \
-               --disable-doxygen-docs \
-               --disable-libaudit \
-               --disable-silent-rules \
-               --enable-inotify \
-               --enable-user-session \
-               --with-systemduserunitdir=no \
-               --with-systemdsystemunitdir=no \
-               --with-xml=expat \
-               --with-system-pid-file=/run/dbus/pid \
-               --with-system-socket=/run/dbus/system_bus_socket \
-               --with-console-auth-dir=/run/console/ \
-               --with-session-socket-dir=/tmp \
-               --with-dbus-user=dbus \
-               --enable-abstract-sockets=auto \
-               --disable-xml-docs"
+               -Dselinux=disabled \
+               -Dasserts=false \
+               -Dchecks=false \
+               -Dmodular_tests=disabled \
+               -Ddoxygen_docs=disabled \
+               -Dlibaudit=disabled \
+               -Dinotify=enabled \
+               -Duser_session=true \
+               -Dsystemd=disabled \
+               -Dsystemd_system_unitdir=disabled \
+               -Dsystemd_user_unitdir=disabled \
+               -Dsystem_pid_file=/run/dbus/pid \
+               -Dsystem_socket=/run/dbus/system_bus_socket \
+               -Dsession_socket_dir=/tmp \
+               -Ddbus_user=dbus \
+               -Dxml_docs=disabled"
 
-    if get.buildTYPE() == "emul32":
+                # --with-console-auth-dir=/run/console/ \
+                # --enable-abstract-sockets=auto \
+
+    if get.buildTYPE() == "_emul32":
         options += " \
                      --libdir=/usr/lib32 \
-                     --disable-xml-docs \
-                     --without-elogind \
-                     --disable-doxygen-docs \
+                    -Druntime_dir=/run \
+                     -Ddoxygen_docs=disabled \
                    "
-        # Build only libdbus
-        pisitools.dosed("Makefile.am", "(.*SUBDIRS=dbus) .*", "\\1")
 
-    autotools.autoreconf("-vif")
-    autotools.configure(options)
+    mesontools.configure(options)
 
 def build():
-    autotools.make()
+    mesontools.build()
 
 def check():
-    autotools.make("check")
+    mesontools.build("test")
 
 def install():
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    if get.buildTYPE() == "emul32":
+    mesontools.install()
+    if get.buildTYPE() == "_emul32":
+        # pisitools.removeDir("/usr/bin32")
+        pisitools.dosed("%s/usr/lib32/pkgconfig/*.pc" % get.installDIR(), "bin32", "bin")
         return
 
     # needs to exist for the system socket
