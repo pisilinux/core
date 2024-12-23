@@ -7,33 +7,36 @@
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
+from pisi.actionsapi import mesontools
 from pisi.actionsapi import get
 
 def setup():
     pisitools.flags.add("-fPIC -D_GNU_SOURCE")
-    shelltools.system("sed -e /service_DATA/d \
-                       -i modules/pam_namespace/Makefile.am && NOCONFIGURE=1 ./autogen.sh")
+    # shelltools.system("sed -e /service_DATA/d \
+                       # -i modules/pam_namespace/Makefile.am && NOCONFIGURE=1 ./autogen.sh")
 
     shelltools.system("./pisi-pambase.sh")
 
-    autotools.configure("--prefix=/usr \
-                         --sysconfdir=/etc \
-                         --libdir=/usr/lib \
-                         --disable-regenerate-docu \
-                         --disable-doc \
-                         --enable-securedir=/lib/security \
-                         --docdir=/usr/share/doc/Linux-PAM-" + get.srcVERSION())
+    mesontools.configure("--buildtype=release \
+                          --sbindir=/sbin \
+                          -Ddocs=disabled \
+                          -Dselinux=disabled \
+                          -Dlogind=disabled \
+                          -Dpam_userdb=disabled \
+                          -Dsecuredir=/lib/security \
+                          -Ddocdir=/usr/share/doc/Linux-PAM-" + get.srcVERSION())
 
 def build():
-    autotools.make()
+    mesontools.build()
 
 def check():
-    autotools.make("check")
+    mesontools.build("test")
 
 def install():
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    mesontools.install()
 
-    #pisitools.removeDir("/usr/share/doc/Linux-PAM/")
+    pisitools.removeDir("/usr/lib/systemd")
+
     for f in ["system-password", "system-session", "system-account", "system-auth", "other"]:
         shelltools.system("chmod 755 " + f)
         pisitools.insinto("/etc/pam.d/", "%s" % f)
@@ -41,4 +44,4 @@ def install():
     shelltools.system("chmod -v 4755 " + get.installDIR() + "/sbin/unix_chkpwd")
 
     #pisitools.doman("doc/man/*.[0-9]")
-    pisitools.dodoc("CHANGELOG", "Copyright", "README")
+    pisitools.dodoc("COPYING", "Copyright", "README")
