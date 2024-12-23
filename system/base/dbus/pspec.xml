@@ -13,8 +13,9 @@
         <IsA>service</IsA>
         <Summary>A message bus system, a simple way for applications to talk to each other</Summary>
         <Description>D-Bus supplies both a system daemon (for events such as "new hardware device added" or "printer queue changed") and a per-user-login-session daemon (for general IPC needs among user applications). Also, the message bus is built on top of a general one-to-one message passing framework, which can be used by any two apps to communicate directly (without going through the message bus daemon). Currently the communicating applications are on one computer, but TCP/IP option is available and remote support planned.</Description>
-        <Archive sha1sum="47f03306a491509cdebacded837e51b086835252" type="tarxz">https://dbus.freedesktop.org/releases/dbus/dbus-1.14.10.tar.xz</Archive>
+        <Archive sha1sum="29a3de47fef882e620b7b2ff275250fa3fd442be" type="tarxz">https://dbus.freedesktop.org/releases/dbus/dbus-1.16.0.tar.xz</Archive>
         <BuildDependencies>
+            <Dependency>meson</Dependency>
             <Dependency versionFrom="2.5.0">expat-devel</Dependency>
             <Dependency>libX11-devel</Dependency>
             <!--<Dependency>doxygen</Dependency>-->
@@ -85,9 +86,9 @@
 
     <Package>
         <Name>dbus-32bit</Name>
-        <PartOf>emul32</PartOf>
+        <PartOf>_emul32</PartOf>
         <Summary>32-bit shared libraries for dbus</Summary>
-        <BuildType>emul32</BuildType>
+        <BuildType>_emul32</BuildType>
         <BuildDependencies>
             <Dependency>expat-32bit</Dependency>
         </BuildDependencies>
@@ -99,6 +100,13 @@
     </Package>
 
     <History>
+        <Update release="25">
+            <Date>2024-12-21</Date>
+            <Version>1.16.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="24">
             <Date>2024-07-16</Date>
             <Version>1.14.10</Version>
