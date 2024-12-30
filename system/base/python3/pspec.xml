@@ -16,6 +16,7 @@
 <!--         <Archive sha1sum="bf7badf7e248e0ecf465d33c2f5aeec774209227" type="targz" target="Python-3.8.5">https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz</Archive> -->
         <BuildDependencies>
             <Dependency>bzip2</Dependency>
+            <Dependency>timezone</Dependency>
             <Dependency>xz-devel</Dependency>
             <Dependency>gdbm-devel</Dependency>
             <Dependency>zlib-devel</Dependency>
@@ -104,6 +105,7 @@
             <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/u*</Path>
             <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/x*</Path>
             <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/z*</Path>
+            <Path fileType="library" permanent="0">/usr/lib/python3.11/lib-dynload/_z*</Path>
             <Path fileType="library" permanent="0">/usr/lib/python3.11/__pycache__</Path>
             <Path fileType="library" permanent="0">/usr/lib/python3.11/zoneinfo/__pycache__/*.pyc</Path>
             <Path fileType="library" permanent="0">/usr/lib/python3.11/re</Path>
@@ -129,6 +131,13 @@
     </Package>
 
     <History>
+        <Update release="56">
+            <Date>2024-12-30</Date>
+            <Version>3.11.11</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="55">
             <Date>2024-12-17</Date>
             <Version>3.11.11</Version>
