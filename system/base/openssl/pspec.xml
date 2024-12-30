@@ -14,6 +14,7 @@
         <Summary>Toolkit for SSL v2/v3 and TLS v1</Summary>
         <Description>OpenSSL is a cryptography toolkit implementing the Secure Sockets Layer (SSL v2/v3) and Transport Layer Security (TLS v1) network protocols and related cryptography standards required by them.</Description>
         <Archive sha1sum="5c2f33c3f3601676f225109231142cdc30d44127" type="targz">https://github.com/openssl/openssl/releases/download/openssl-3.4.0/openssl-3.4.0.tar.gz</Archive>
+        <Archive sha1sum="76fbf3ca4370e12894a408ef75718f32cdab9671" type="targz">https://www.openssl.org/source/openssl-1.1.1w.tar.gz</Archive>
         <AdditionalFiles>
             <!--<AdditionalFile target="openssl-1.0.0-beta4-ca-dir.patch">openssl-1.0.0-beta4-ca-dir.patch</AdditionalFile>-->
 <!-- 			<AdditionalFile target="ca-dir.patch">ca-dir.patch</AdditionalFile> -->
@@ -46,6 +47,9 @@
 
     <Package>
         <Name>openssl</Name>
+        <Replaces>
+            <Package>openssl-1.1</Package>
+        </Replaces>
         <RuntimeDependencies>
             <Dependency>zlib</Dependency>
             <Dependency>ca-certificates</Dependency>
@@ -67,21 +71,31 @@
 
     <Package>
         <Name>openssl-devel</Name>
+        <Replaces>
+            <Package>openssl-1.1-devel</Package>
+        </Replaces>
         <PartOf>system.devel</PartOf>
         <Summary>Development files for openssl</Summary>
         <RuntimeDependencies>
             <Dependency release="current">openssl</Dependency>
         </RuntimeDependencies>
         <Files>
-            <Path fileType="header">/usr/include</Path>
+            <Path fileType="header">/usr/include/openssl</Path>
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="data">/usr/lib/pkgconfig</Path>
             <Path fileType="data">/usr/lib32/pkgconfig</Path>
+<!--             openssl-1.1 -->
+            <Path fileType="header">/usr/include/openssl-1.1</Path>
+            <Path fileType="data">/usr/lib/openssl-1.1/pkgconfig</Path>
+            <Path fileType="data">/usr/lib32/openssl-1.1/pkgconfig</Path>
         </Files>
     </Package>
 
     <Package>
         <Name>openssl-32bit</Name>
+        <Replaces>
+            <Package>openssl-1.1-32bit</Package>
+        </Replaces>
         <PartOf>emul32</PartOf>
         <Summary>32-bit shared libraries for openssl</Summary>
         <BuildType>_emul32</BuildType>
@@ -98,6 +112,13 @@
     </Package>
 
     <History>
+        <Update release="25">
+            <Date>2024-12-30</Date>
+            <Version>3.4.0</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="24">
             <Date>2024-12-01</Date>
             <Version>3.4.0</Version>
@@ -105,7 +126,7 @@
             <Name>Pisi Linux Community</Name>
             <Email>admin@pisilinux.org</Email>
         </Update>
-	<Update release="23">
+        <Update release="23">
             <Date>2024-05-18</Date>
             <Version>1.1.1w</Version>
             <Comment>Rebuild.</Comment>
