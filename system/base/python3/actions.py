@@ -40,6 +40,7 @@ def setup():
                             --with-dbmliborder=gdbm:ndbm \
                             --with-system-ffi \
                             --enable-loadable-sqlite-extensions \
+                            --with-tzpath=/usr/share/zoneinfo \
                             --without-ensurepip")
                             # --with-system-libmpdec \
 
