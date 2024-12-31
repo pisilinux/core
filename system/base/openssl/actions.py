@@ -75,14 +75,14 @@ def build():
     autotools.make("depend")
     autotools.make()
 
-# def check():
+def check():
     #Revert ca-dir patch not to fail test
     #shelltools.system("patch -p1 -R < openssl-1.0.0-beta4-ca-dir.patch")
 
-    # homeDir = "%s/test-home" % get.workDIR()
-    # shelltools.export("HOME", homeDir)
-    # shelltools.makedirs(homeDir)
-    # autotools.make("-j1 test")
+    homeDir = "%s/test-home" % get.workDIR()
+    shelltools.export("HOME", homeDir)
+    shelltools.makedirs(homeDir)
+    autotools.make("-j1 test")
 
     #Passed. So, re-patch
     #shelltools.system("patch -p1 < openssl-1.0.0-beta4-ca-dir.patch")
