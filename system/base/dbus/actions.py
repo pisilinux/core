@@ -17,6 +17,7 @@ def setup():
         # pisitools.dosed(f, "\$\(localstatedir\)(\/run\/dbus)", "\\1")
     options = "\
                -Dselinux=disabled \
+               -Druntime_dir=/run \
                -Dasserts=false \
                -Dchecks=false \
                -Dmodular_tests=disabled \
@@ -37,6 +38,10 @@ def setup():
                 # --enable-abstract-sockets=auto \
 
     if get.buildTYPE() == "_emul32":
+        shelltools.export("CC", "gcc -m32")
+        shelltools.export("CXX", "g++ -m32")
+        shelltools.export("LDFLAGS", "%s -L/usr/lib32"  % get.LDFLAGS())
+        shelltools.export("PKG_CONFIG_PATH", "/usr/lib32/pkgconfig")
         options += " \
                      --libdir=/usr/lib32 \
                      -Ddoxygen_docs=disabled \
