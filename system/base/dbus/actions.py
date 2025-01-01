@@ -44,6 +44,7 @@ def setup():
         shelltools.export("PKG_CONFIG_PATH", "/usr/lib32/pkgconfig")
         options += " \
                      --libdir=/usr/lib32 \
+                     -Dx11_autolaunch=disabled \
                      -Ddoxygen_docs=disabled \
                    "
 
