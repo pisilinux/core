@@ -39,7 +39,6 @@ def setup():
     if get.buildTYPE() == "_emul32":
         options += " \
                      --libdir=/usr/lib32 \
-                    -Druntime_dir=/run \
                      -Ddoxygen_docs=disabled \
                    "
 
