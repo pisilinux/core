@@ -44,6 +44,8 @@ def setup():
         shelltools.export("PKG_CONFIG_PATH", "/usr/lib32/pkgconfig")
         options += " \
                      --libdir=/usr/lib32 \
+                     --bindir=/usr/bin32 \
+                     --libexecdir=/usr/libexec32 \
                      -Dx11_autolaunch=disabled \
                      -Ddoxygen_docs=disabled \
                    "
@@ -59,7 +61,8 @@ def check():
 def install():
     mesontools.install()
     if get.buildTYPE() == "_emul32":
-        # pisitools.removeDir("/usr/bin32")
+        pisitools.removeDir("/usr/bin32")
+        pisitools.removeDir("/usr/libexec32")
         pisitools.dosed("%s/usr/lib32/pkgconfig/*.pc" % get.installDIR(), "bin32", "bin")
         return
 
