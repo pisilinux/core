@@ -15,8 +15,7 @@ def setup():
     # pisitools.dosed("configure.ac", '(AS_AC_EXPAND\(EXPANDED_LOCALSTATEDIR, )"\$localstatedir"\)', r'\1 "")')
     # for f in ["bus/Makefile.am", "bus/Makefile.in"]:
         # pisitools.dosed(f, "\$\(localstatedir\)(\/run\/dbus)", "\\1")
-    options = "\
-               -Dselinux=disabled \
+    options = "-Dselinux=disabled \
                -Druntime_dir=/run \
                -Dasserts=false \
                -Dchecks=false \
@@ -38,14 +37,24 @@ def setup():
                 # --enable-abstract-sockets=auto \
 
     if get.buildTYPE() == "emul32":
-        options += " \
-                     --libdir=/usr/lib32 \
-                     --bindir=/usr/bin32 \
-                     --datadir=/tmp \
-                     --libexecdir=/usr/libexec32 \
-                     -Dx11_autolaunch=disabled \
-                     -Ddoxygen_docs=disabled \
+        options += " --libdir=/usr/lib32 \
+                    -Dapparmor=disabled \
+                    -Ddoxygen_docs=disabled \
+                    -Dducktype_docs=disabled \
+                    -Dkqueue=disabled \
+                    -Dlaunchd=disabled \
+                    -Dlibaudit=disabled \
+                    -Dmessage_bus=false \
+                    -Dqt_help=disabled \
+                    -Drelocation=disabled \
+                    -Dselinux=disabled \
+                    -Dtools=false \
+                    -Dx11_autolaunch=disabled \
+                    -Dxml_docs=disabled \
                    "
+               # --datadir=/tmp \
+                # --bindir=/usr/bin32 \
+               # --libexecdir=/usr/libexec32 \
 
     mesontools.configure(options)
 
@@ -58,10 +67,10 @@ def check():
 def install():
     mesontools.install()
     if get.buildTYPE() == "emul32":
-        pisitools.removeDir("/usr/bin32")
-        pisitools.removeDir("/usr/libexec32")
-        pisitools.removeDir("/tmp")
-        pisitools.dosed("%s/usr/lib32/pkgconfig/*.pc" % get.installDIR(), "bin32", "bin")
+        # pisitools.removeDir("/usr/bin32")
+        # pisitools.removeDir("/usr/libexec32")
+        # pisitools.removeDir("/tmp")
+        # pisitools.dosed("%s/usr/lib32/pkgconfig/*.pc" % get.installDIR(), "bin32", "bin")
         return
 
     # needs to exist for the system socket
