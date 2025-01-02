@@ -86,13 +86,14 @@
 
     <Package>
         <Name>dbus-32bit</Name>
-        <PartOf>_emul32</PartOf>
+        <PartOf>emul32</PartOf>
         <Summary>32-bit shared libraries for dbus</Summary>
-        <BuildType>_emul32</BuildType>
+        <BuildType>emul32</BuildType>
         <BuildDependencies>
             <Dependency>expat-32bit</Dependency>
         </BuildDependencies>
         <RuntimeDependencies>
+            <Dependency>expat-32bit</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="library">/usr/lib32</Path>
