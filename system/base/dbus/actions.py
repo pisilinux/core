@@ -37,15 +37,11 @@ def setup():
                 # --with-console-auth-dir=/run/console/ \
                 # --enable-abstract-sockets=auto \
 
-    if get.buildTYPE() == "_emul32":
-        shelltools.export("CC", "gcc -m32")
-        shelltools.export("CXX", "g++ -m32")
-        shelltools.export("LDFLAGS", "%s -L/usr/lib32"  % get.LDFLAGS())
-        shelltools.export("PKG_CONFIG_PATH", "/usr/lib32/pkgconfig")
+    if get.buildTYPE() == "emul32":
         options += " \
                      --libdir=/usr/lib32 \
                      --bindir=/usr/bin32 \
-                     --libexecdir=/usr/libexec32 \
+                     --libexecdir=/usr/lib32 \
                      -Dx11_autolaunch=disabled \
                      -Ddoxygen_docs=disabled \
                    "
@@ -60,9 +56,8 @@ def check():
 
 def install():
     mesontools.install()
-    if get.buildTYPE() == "_emul32":
+    if get.buildTYPE() == "emul32":
         pisitools.removeDir("/usr/bin32")
-        pisitools.removeDir("/usr/libexec32")
         pisitools.dosed("%s/usr/lib32/pkgconfig/*.pc" % get.installDIR(), "bin32", "bin")
         return
 
