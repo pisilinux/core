@@ -32,6 +32,7 @@ def setup():
                          --with-libcrack \
                          --without-selinux \
                          --with-yescrypt=yes \
+                         --with-bcrypt \
                          --enable-shared \
                          --with-acl")
 

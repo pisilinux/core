@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Utilities to deal with user accounts</Summary>
         <Description>The Shadow password file utilities package includes programs necessary to convert traditional V7 *NIX password files to the SVR4 shadow password format, and additional tools to maintain password and group files (that work with both shadow and non-shadow passwords).</Description>
-        <Archive sha1sum="44b7b497b6a0ddd1c269b775548895336f68b906" type="tarxz">https://github.com/shadow-maint/shadow/releases/download/4.15.1/shadow-4.15.1.tar.xz</Archive>
+        <Archive sha1sum="275c111bd045a115b62dd9023d29c73589482020" type="tarxz">https://github.com/shadow-maint/shadow/releases/download/4.17.1/shadow-4.17.1.tar.xz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="pisi-shadowbase.sh" permission="0755">pisi-shadowbase.sh</AdditionalFile>
         </AdditionalFiles>
@@ -88,6 +88,13 @@
     </Package>
 
     <History>
+        <Update release="28">
+            <Date>2025-01-04</Date>
+            <Version>4.17.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="27">
             <Date>2024-05-26</Date>
             <Version>4.15.1</Version>
