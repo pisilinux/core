@@ -17,7 +17,7 @@
         <IsA>data</IsA>
         <Summary>Firmware files used by the Linux kernel</Summary>
         <Description>linux-firmware contains different firmware files required for some devices to operate correctly.</Description>
-        <Archive sha1sum="c45e10dbd69b4ff039845bc4f782d3b11c38c3a4" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/kernel/firmware/linux-firmware-20241110.tar.xz</Archive>
+        <Archive sha1sum="a0c3c804920c85f8a2ad72076fabbc970a5b39f8" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/kernel/firmware/linux-firmware-20250109.tar.xz</Archive>
         <Archive sha1sum="dd685266f7bc0acb0d455462637d23e3e895bc96" type="tarxz" target="linux-firmware/mix">http://sourceforge.net/projects/pisilinux/files/source/common-fw.tar.xz</Archive>
         <Archive sha1sum="b2bb7fce3ea67d131f543a48134f7a65f2a8d834" type="tarxz" target="linux-firmware/mix">http://sourceforge.net/projects/pisilinux/files/source/firmware-ipw.tar.xz</Archive>
         <Archive sha1sum="a5a616a9f765cf9cbb224deb7ccefdc82a7fe4d9" type="tarbz2" target="linux-firmware/mix">http://sourceforge.net/projects/pisilinux/files/source/firmware-nonfreebox-2-tar.bz2</Archive>
@@ -36,6 +36,7 @@
         </AdditionalFiles>
         <BuildDependencies>
             <Dependency>rdfind</Dependency>
+            <Dependency>parallel</Dependency>
         </BuildDependencies>
     </Source>
 
@@ -59,6 +60,13 @@
     </Package>
 
     <History>
+        <Update release="30">
+            <Date>2025-01-13</Date>
+            <Version>20250109</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="29">
             <Date>2024-11-12</Date>
             <Version>20241110</Version>
