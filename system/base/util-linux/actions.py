@@ -11,6 +11,7 @@ from pisi.actionsapi import shelltools
 
 pisitools.cflags.add("-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64")
 pisitools.cflags.sub("-O[\d]", "-Os")
+shelltools.export("PYTHON", "/usr/bin/python3")
 
 def setup():
     shelltools.export("SUID_CFLAGS", "-fpie")
