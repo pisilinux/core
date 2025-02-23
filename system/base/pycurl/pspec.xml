@@ -14,7 +14,7 @@
         <Description>PycURL is a Python interface to libcurl. PycURL can be used to fetch objects identified by a URL from a Python program.</Description>
         <Archive sha1sum="8c9aef418f55f27ae7b40d0cb5f9ee0bbb78e48d" type="targz">https://files.pythonhosted.org/packages/85/59/8f4169b1d91505c106fff5a9b01e505ab8798fbc7b5b2104ac8445d61a44/pycurl-7.45.4.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="8.11.1">curl-devel</Dependency>
+            <Dependency versionFrom="8.12.1">curl-devel</Dependency>
             <Dependency>python-devel</Dependency>
             <Dependency>openssl-devel</Dependency>
             <Dependency>python-setuptools</Dependency>
@@ -24,7 +24,7 @@
     <Package>
         <Name>pycurl</Name>
         <RuntimeDependencies>
-            <Dependency versionFrom="8.11.1">curl</Dependency>
+            <Dependency versionFrom="8.12.1">curl</Dependency>
             <Dependency>python</Dependency>
             <Dependency>openssl</Dependency>
         </RuntimeDependencies>
@@ -35,6 +35,13 @@
     </Package>
 
     <History>
+        <Update release="19">
+            <Date>2025-02-23</Date>
+            <Version>7.45.4</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="18">
             <Date>2025-01-02</Date>
             <Version>7.45.4</Version>
