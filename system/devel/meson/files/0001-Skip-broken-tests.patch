@@ -1,0 +1,43 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: "Jan Alexander Steffens (heftig)" <heftig@archlinux.org>
+Date: Thu, 14 Apr 2022 14:08:15 +0000
+Subject: [PATCH] Skip broken tests
+
+---
+ test cases/linuxlike/13 cmake dependency/meson.build | 2 ++
+ unittests/linuxliketests.py                          | 2 ++
+ 2 files changed, 4 insertions(+)
+
+diff --git a/test cases/linuxlike/13 cmake dependency/meson.build b/test cases/linuxlike/13 cmake dependency/meson.build
+index 812dcf9c5c19..cb25be2f36bd 100644
+--- a/test cases/linuxlike/13 cmake dependency/meson.build	
++++ b/test cases/linuxlike/13 cmake dependency/meson.build	
+@@ -4,6 +4,8 @@ project('external CMake dependency', ['c', 'cpp'])
+ 
+ cmake = find_program('cmake')
+ 
++error('MESON_SKIP_TEST flaky, see https://github.com/mesonbuild/meson/issues/10104')
++
+ # Zlib is probably on all dev machines.
+ 
+ dep = dependency('ZLIB', version : '>=1.2', method : 'cmake')
+diff --git a/unittests/linuxliketests.py b/unittests/linuxliketests.py
+index 90387f5ebd39..f714b6badf18 100644
+--- a/unittests/linuxliketests.py
++++ b/unittests/linuxliketests.py
+@@ -313,6 +313,7 @@ class LinuxlikeTests(BasePlatformTests):
+             raise SkipTest('asan not available on Cygwin')
+         if is_openbsd():
+             raise SkipTest('-fsanitize=address is not supported on OpenBSD')
++        raise SkipTest('cannot run sanitizers in containers without ptrace')
+ 
+         testdir = os.path.join(self.framework_test_dir, '7 gnome')
+         self.init(testdir, extra_args=['-Db_sanitize=address', '-Db_lundef=false'])
+@@ -991,6 +992,7 @@ class LinuxlikeTests(BasePlatformTests):
+             raise SkipTest('asan not available on Cygwin')
+         if is_openbsd():
+             raise SkipTest('-fsanitize=address is not supported on OpenBSD')
++        raise SkipTest('cannot run sanitizers in containers without ptrace')
+ 
+         testdir = os.path.join(self.common_test_dir, '13 pch')
+         self.init(testdir, extra_args=['-Db_sanitize=address', '-Db_lundef=false'])
