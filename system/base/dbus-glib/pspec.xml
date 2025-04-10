@@ -13,11 +13,11 @@
         <IsA>library</IsA>
         <Summary>Glib bindings for D-Bus</Summary>
         <Description>dbus-glib is an add-on library to integrate the standard D-Bus library with the GLib thread abstraction and main loop.</Description>
-        <Archive sha1sum="9eb81f50e36e349f57297d1a2a61b48707a551cc" type="targz">http://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.112.tar.gz</Archive>
+        <Archive sha1sum="b15e8484722f1504c69e174b134bd75c5036f90d" type="targz">http://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.114.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>python3</Dependency>
             <Dependency>gtk-doc</Dependency>
-            <Dependency versionFrom="1.16.0">dbus-devel</Dependency>
+            <Dependency versionFrom="1.16.2">dbus-devel</Dependency>
             <!-- New dbus uses GVariant data structure. We need glib2 >= 2.24 -->
             <Dependency versionFrom="2.77.1">glib2-devel</Dependency>
 <!--             <Dependency>libpcre-devel</Dependency> -->
@@ -67,6 +67,13 @@
     </Package>
 
     <History>
+        <Update release="33">
+            <Date>2025-04-08</Date>
+            <Version>0.114</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="32">
             <Date>2025-01-02</Date>
             <Version>0.112</Version>
