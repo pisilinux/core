@@ -15,7 +15,7 @@
         <IsA>library</IsA>
         <Summary>XZ compression utilities</Summary>
         <Description>XZ Utils provide a general purpose data compression library and command line tools. The .xz format supports multiple compression algorithms, which are called "filters" in context of XZ Utils. The primary filter is currently LZMA2.</Description>
-        <Archive sha1sum="d6945a437f30ad0687d35cc24379fa371fb19b09" type="targz">https://github.com/tukaani-project/xz/releases/download/v5.6.3/xz-5.6.3.tar.gz</Archive>
+        <Archive sha1sum="ed4d5589c4cfe84e1697bd02a9954b76af336931" type="targz">https://github.com/tukaani-project/xz/releases/download/v5.8.1/xz-5.8.1.tar.gz</Archive>
         <BuildDependencies>
 <!--             <Dependency versionFrom="8.0.1">readline-devel</Dependency> -->
 <!--             <Dependency versionFrom="2.30">glibc-devel</Dependency> -->
@@ -67,6 +67,13 @@
     </Package>
 
     <History>
+        <Update release="18">
+            <Date>2025-04-08</Date>
+            <Version>5.8.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="17">
             <Date>2024-10-04</Date>
             <Version>5.6.3</Version>
