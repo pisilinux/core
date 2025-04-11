@@ -8,6 +8,7 @@ from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
 
 def setup():
+    autotools.autoreconf("-i")
     autotools.configure("BASH=/bin/bash")
 
 def build():
@@ -19,4 +20,4 @@ def check():
 def install():
     autotools.install()
 
-    pisitools.dodoc("ChangeLog", "NEWS", "FAQ", "README", "AUTHORS", "doc/*")
+    pisitools.dodoc("ChangeLog", "README*", "doc/*")
