@@ -15,7 +15,7 @@
         <Summary>Python setuptools</Summary>
         <Description>python3-setuptools is a collection of enhancements to the Python distutils that allow you to more easily build and distribute Python packages, especially ones that have dependencies on other packages.</Description>
 <!--         <Archive sha1sum="6a2d255c2cb3421a3192dd7fa46f9f62bce76924" type="targz">https://github.com/pypa/setuptools/archive/refs/tags/v75.6.0.tar.gz</Archive> -->
-        <Archive sha1sum="4c0469d7a2c11055dd77a83e9154b443bdcd06fd" type="targz">https://github.com/pypa/setuptools/archive/refs/tags/v78.1.0.tar.gz</Archive>
+        <Archive sha1sum="d16843abeb600c96f1398385e512fdd7fa165045" type="targz">https://github.com/pypa/setuptools/archive/refs/tags/v78.1.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="3.11.11">python3-devel</Dependency>
             <Dependency>python3-setuptools</Dependency>
@@ -27,7 +27,8 @@
             <!--<Dependency>python3-packaging</Dependency>-->
         </BuildDependencies>
         <Patches>
-            <Patch level="1">gentoo/setuptools-62.4.0-py-compile.patch</Patch>
+            <Patch level="1">fedora/Adjust-the-setup.py-install-deprecation-message.patch</Patch>
+            <Patch level="1">fedora/Revert-Always-rewrite-a-Python-shebang-to-python.patch</Patch>
         </Patches>
     </Source>
 
@@ -53,6 +54,13 @@
     </Package>
 
     <History>
+        <Update release="43">
+            <Date>2025-04-20</Date>
+            <Version>78.1.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="42">
             <Date>2025-04-13</Date>
             <Version>78.1.0</Version>
