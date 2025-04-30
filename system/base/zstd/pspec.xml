@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Zstandard - Fast real-time compression algorithm</Summary>
         <Description>Zstandard is a fast compression algorithm, providing high compression ratios. It also offers a special mode for small data, called dictionary compression..</Description>
-        <Archive sha1sum="459ab8de8c24fc3ce648a35a07b31fcd6616ade2" type="targz">https://github.com/facebook/zstd/releases/download/v1.5.6/zstd-1.5.6.tar.gz</Archive>
+        <Archive sha1sum="6c7dd9c829561ac5475b72592a079a01ab7f3eab" type="targz">https://github.com/facebook/zstd/releases/download/v1.5.7/zstd-1.5.7.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>meson</Dependency>
             <Dependency>ninja</Dependency>
@@ -54,6 +54,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2025-04-14</Date>
+            <Version>1.5.7</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2024-05-29</Date>
             <Version>1.5.6</Version>
