@@ -38,10 +38,10 @@ def setup():
                          --enable-fts4 \
                          --enable-fts5 \
                          --enable-rtree \
-                         --enable-json1 \
                          --enable-threadsafe")
+                         # --enable-json1 \
     # fix unused direct dependency analysis
-    pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
+    # pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
 
     #shelltools.cd("tea")
     #autotools.configure(" \
@@ -65,9 +65,9 @@ def install():
 
     pisitools.dodoc("README*")
 
-    shelltools.cd("%s/sqlite-doc-3470200" % get.workDIR())
+    shelltools.cd("%s/sqlite-doc-3490100" % get.workDIR())
 
-    pisitools.insinto("/usr/share/doc/sqlite", "../sqlite-doc-3470200/*")
+    pisitools.insinto("/usr/share/doc/sqlite", "../sqlite-doc-3490100/*")
     """
     # fix permissions and remove obsolete files; https://bugs.archlinux.org/task/24605
     shelltools.system("find %s -type f -perm 755 -exec ls -lha {} \;" % get.installDIR())
