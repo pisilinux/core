@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>lvm2</Name>
@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Userland logical volume management tools</Summary>
         <Description>LVM2 includes all of the support for handling read/write operations physical and logical volumes.</Description>
-        <Archive sha1sum="a502838f2205eb775a1b691de60efbbeac2bb9ec" type="targz">http://mirrors.kernel.org/sourceware/lvm2/LVM2.2.03.30.tgz</Archive>
+        <Archive sha1sum="8baf9eca72990f52e714823eb2f30943258d29b2" type="targz">http://mirrors.kernel.org/sourceware/lvm2/LVM2.2.03.31.tgz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="2.40.4">libutil-linux-devel</Dependency>
             <Dependency>eudev-devel</Dependency>
@@ -188,6 +188,13 @@
     </Package>
 
     <History>
+        <Update release="19">
+            <Date>2025-05-01</Date>
+            <Version>2.03.31</Version>
+            <Comment>Version bump</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="18">
             <Date>2025-01-16</Date>
             <Version>2.03.30</Version>
