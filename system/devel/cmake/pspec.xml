@@ -13,7 +13,7 @@
         <Icon>cmake</Icon>
         <Summary>Cross-platform, open-source make system</Summary>
         <Description>CMake, the cross-platform, open-source make system. CMake is used to control the software compilation process using simple platform and compiler independent configuration files. CMake generates native makefiles and workspaces that can be used in the compiler environment of your choice.</Description>
-        <Archive sha1sum="1ae4e1f2e569dd7971a5269b63dbd023be254e3d" type="targz">https://github.com/Kitware/CMake/releases/download/v3.31.4/cmake-3.31.4.tar.gz</Archive>
+        <Archive sha1sum="a856e9ae570abf7c62137287c8f162e69ffd6954" type="targz">https://github.com/Kitware/CMake/releases/download/v3.31.7/cmake-3.31.7.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>curl-devel</Dependency>
             <Dependency versionFrom="2.5.0">expat-devel</Dependency>
@@ -51,6 +51,13 @@
     </Package>
 
     <History>
+        <Update release="55">
+            <Date>2025-05-08</Date>
+            <Version>3.31.7</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="54">
             <Date>2025-01-13</Date>
             <Version>3.31.4</Version>
