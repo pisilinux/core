@@ -12,8 +12,8 @@
         <IsA>app:console</IsA>
         <Summary>Various utilities dealing with the PCI bus</Summary>
         <Description>The PCI Utilities are a collection of programs for inspecting and manipulating configuration of PCI devices.</Description>
-        <Archive sha1sum="eccfdfa377042852ad92a3a91038721eca71640e" type="tarxz">https://mirrors.edge.kernel.org/pub/software/utils/pciutils/pciutils-3.12.0.tar.xz</Archive>
-        <Archive sha1sum="f781eef33bb46bc484bc55eeb18b7d07468b0956" type="binary" target="pciutils-3.12.0">https://github.com/pciutils/pciids/raw/master/pci.ids</Archive>
+        <Archive sha1sum="83ea1394a2095442731f639b16f38292be67201f" type="tarxz">https://mirrors.edge.kernel.org/pub/software/utils/pciutils/pciutils-3.13.0.tar.xz</Archive>
+        <Archive sha1sum="ccca1e2ee40e35e29879dcd51e1cf7c8673ed876" type="binary" target="pciutils-3.13.0">https://github.com/pciutils/pciids/raw/master/pci.ids</Archive>
         <BuildDependencies>
             <Dependency>eudev-devel</Dependency>
             <Dependency>libkmod-devel</Dependency>
@@ -56,6 +56,13 @@
     </Package>
 
     <History>
+        <Update release="12">
+            <Date>2025-05-12</Date>
+            <Version>3.13.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="11">
             <Date>2024-04-07</Date>
             <Version>3.12.0</Version>
