@@ -12,7 +12,7 @@
         <IsA>kernel</IsA>
         <Summary>The Linux kernel (the core of the Linux operating system) for Pisi Linux</Summary>
         <Description>kernel contains the Linux kernel, the core of any Linux operating system. The kernel handles the basic functions of the operating system: memory allocation, process allocation, device input and output, etc.</Description>
-        <Archive sha1sum="026a9f37b498ab533f843d4a3a85c40f9d108431" type="targz">https://mirrors.edge.kernel.org/pub/linux/kernel/v6.x/linux-6.6.tar.gz</Archive>
+        <Archive sha1sum="43084a92e6734be9f90d514283a9bdf2c053dfff" type="tarxz">https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.15.1.tar.xz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
             <AdditionalFile permission="0755" target="generate-module-list">scripts/generate-module-list</AdditionalFile>
@@ -33,10 +33,11 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-6.6.92.xz</Patch>
+            <!-- Pisi Linux specific patch for 6.6.92. Needs review for 6.15.1. Check if fixes are upstream or if a new version of this patch is needed. -->
+            <!-- <Patch level="1" compressionType="xz">patches/linux/patch-6.6.92.xz</Patch> -->
 
-            <!-- aufs6 patchec -->
-            <Patch level="1">patches/aufs6/aufs6.6.84-20250414.patch</Patch>
+            <!-- AUFS6 Patches: These will likely need to be updated from AUFS project sources for kernel 6.15.1 if AUFS support is to be continued. -->
+            <Patch level="1" comment="Needs update for 6.15.1">patches/aufs6/aufs6.15.1-20250604.patch</Patch>
             <Patch level="1">patches/aufs6/aufs6-base.patch</Patch>
             <Patch level="1">patches/aufs6/aufs6-kbuild.patch</Patch>
             <!--             <Patch level="1">patches/aufs6/aufs6-loopback.patch</Patch> -->
@@ -46,25 +47,30 @@
             <!--             <Patch level="1">patches/aufs6/aufs6-standalone.patch</Patch> -->
 
             <!-- Mageia Linux patches-->
-            <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
-            <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.13-buildfix.patch</Patch>
-            <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
-            <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
-            <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-kernel-5.5.patch</Patch>
+            <!-- Mageia - Shuttle WMI: Likely upstreamed or for very old hardware. Verify if still needed for 6.15.1. -->
+            <!-- <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch> -->
+            <!-- <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.13-buildfix.patch</Patch> -->
+            <!-- <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch> -->
+            <!-- <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch> -->
+            <!-- <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-kernel-5.5.patch</Patch> -->
 
-            <Patch level="1">patches/mageia/staging-rtl8812au.patch</Patch>
-            <Patch level="1">patches/mageia/staging-rtl8812au-rename.patch</Patch>
-            <Patch level="1">patches/mageia/staging-rtl8812au-Kconfig-Makefile.patch</Patch>
-            <Patch level="1">patches/mageia/staging-rtl8812au-20231117.patch</Patch>
+            <!-- Mageia - rtl8812au: Check mainline kernel 6.15.1 for rtl8812au support. These patches may no longer be needed or may require significant rebasing. -->
+            <!-- <Patch level="1">patches/mageia/staging-rtl8812au.patch</Patch> -->
+            <!-- <Patch level="1">patches/mageia/staging-rtl8812au-rename.patch</Patch> -->
+            <!-- <Patch level="1">patches/mageia/staging-rtl8812au-Kconfig-Makefile.patch</Patch> -->
+            <!-- <Patch level="1">patches/mageia/staging-rtl8812au-20231117.patch</Patch> -->
 
+            <!-- Mageia - rtw88 aliases: Verify if these PCI IDs are present in the mainline rtw88 driver in kernel 6.15.1. -->
             <Patch level="1">patches/mageia/net-wireless-rtw88-add-8723de-alias.patch</Patch>
             <Patch level="1">patches/mageia/net-wireless-rtw88-add-r8822be-alias.patch</Patch>
 
+            <!-- Mageia - iwlwifi PCI IDs: Verify if these PCI IDs are present in the mainline iwlwifi driver in kernel 6.15.1. -->
             <Patch level="1">patches/mageia/net-wireless-iwlwifi-add-new-pci-id-for-6235.patch</Patch>
             <Patch level="1">patches/mageia/wifi-iwlwifi-pcie-add-support-for-AX101NGW.patch</Patch>
             <!--             <Patch level="1">patches/mageia/iwlwifi-cfg-Add-missing-MODULE_FIRMWARE-for-pnvm.patch</Patch> -->
 
-            <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
+            <!-- Mageia - Toshiba PCI: Likely upstreamed or for very old hardware. Verify if still needed. -->
+            <!-- <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -123,6 +129,17 @@
     </Package>
 
     <History>
+        <Update release="103">
+            <Date>2025-06-04</Date>
+            <Version>6.15.1</Version>
+            <Comment>Update to Linux kernel 6.15.1.</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="102">
             <Date>2025-05-23</Date>
             <Version>6.6.92</Version>
