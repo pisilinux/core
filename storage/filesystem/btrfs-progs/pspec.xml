@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "https://pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>btrfs-progs</Name>
+        <Homepage>https://btrfs.readthedocs.io</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>Userspace utilities for Btrfs</Summary>
+        <Description>btrfs-progs contains all userspace programs needed to control the Btrfs filesystem.</Description>
+        <Archive sha1sum="00f9215cecffab3c3c6018085d700f5e0594e8c0" type="tarxz">https://www.kernel.org/pub/linux/kernel/people/kdave/btrfs-progs/btrfs-progs-v6.3.3.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>util-linux-devel</Dependency>
+            <Dependency>zlib-devel</Dependency>
+            <Dependency>lzo-devel</Dependency>
+            <Dependency>zstd-devel</Dependency>
+            <Dependency>libuuid-devel</Dependency>
+            <Dependency>asciidoc</Dependency>
+            <Dependency>xmlto</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>btrfs-progs</Name>
+        <RuntimeDependencies>
+            <Dependency>util-linux</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency>lzo</Dependency>
+            <Dependency>zstd</Dependency>
+            <Dependency>libuuid</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2023-10-27</Date>
+            <Version>6.3.3</Version>
+            <Comment>First release</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
