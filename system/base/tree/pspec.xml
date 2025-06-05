@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>tree</Name>
+        <Homepage>http://oldmanprogrammer.net/source.php?dir=projects/tree</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <Summary>Recursive directory listing command</Summary>
+        <Description>Tree is a recursive directory listing command that produces a depth indented listing of files. Color is supported ala dircolors if the LS_COLORS environment variable is set and output is to tty.</Description>
+        <Archive sha1sum="17caabcce65f80975a0442ad049176d9099cd45e" type="targz">http://oldmanprogrammer.net/projects/tree/tree-2.2.1.tgz</Archive>
+        <BuildDependencies>
+            <!-- tree has no explicit build dependencies beyond a standard C compiler and libc -->
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>tree</Name>
+        <RuntimeDependencies>
+            <!-- tree has no explicit runtime dependencies beyond libc -->
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="man">/usr/share/man/man1</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2025-06-05</Date> <!-- Use current date or adjust as needed -->
+            <Version>2.2.1</Version>
+            <Comment>First release</Comment>
+            <Name>Jules Agent</Name>
+            <Email>jules@example.com</Email>
+        </Update>
+    </History>
+</PISI>
