@@ -12,7 +12,7 @@
         <License>custom</License>
         <Summary>Next generation of the python high-level scripting language</Summary>
         <Description>Python is an accessible, high-level, dynamically typed, interpreted programming language, designed with an emphasis on code readability. It includes an extensive standard library, and has a vast ecosystem of third-party libraries.</Description>
-        <Archive sha1sum="85370474d7d0268c46ba5cf0d1473e3d06c17dd6" type="tarxz">https://www.python.org/ftp/python/3.11.12/Python-3.11.12.tar.xz</Archive>
+        <Archive sha1sum="fec9a494efd3520f7efe6f822111f22249549d0a" type="tarxz">https://www.python.org/ftp/python/3.11.13/Python-3.11.13.tar.xz</Archive>
 <!--         <Archive sha1sum="bf7badf7e248e0ecf465d33c2f5aeec774209227" type="targz" target="Python-3.8.5">https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz</Archive> -->
         <BuildDependencies>
             <Dependency>bzip2</Dependency>
@@ -22,7 +22,7 @@
             <Dependency>zlib-devel</Dependency>
             <Dependency versionFrom="2.6.0">expat-devel</Dependency>
             <Dependency>libffi-devel</Dependency>
-            <Dependency versionFrom="3.50.0">sqlite-devel</Dependency>
+            <Dependency versionFrom="3.50.1">sqlite-devel</Dependency>
             <Dependency>ncurses-devel</Dependency>
             <Dependency versionFrom="1.1.1w">openssl-devel</Dependency>
             <Dependency>readline-devel</Dependency>
@@ -132,6 +132,13 @@
     </Package>
 
     <History>
+        <Update release="60">
+            <Date>2025-06-08</Date>
+            <Version>3.11.13</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="59">
             <Date>2025-05-31</Date>
             <Version>3.11.12</Version>
