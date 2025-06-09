@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>coreutils</Name>
@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>A set of basic GNU tools commonly used in shell scripts</Summary>
         <Description>Standard GNU file utilities (chmod, cp, dd, dir, ls...), text utilities (sort, tr, head, wc..), and shell utilities (whoami, who,...)</Description>
-        <Archive sha1sum="867fed7ce2ee15c5150a355a5f3a3b50578cf78d" type="tarxz">http://ftp.gnu.org/gnu/coreutils/coreutils-9.5.tar.xz</Archive>
+        <Archive sha1sum="920791e12e7471479565a066e116a087edcc0df9" type="tarxz">http://ftp.gnu.org/gnu/coreutils/coreutils-9.7.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>acl-devel</Dependency>
             <Dependency>attr-devel</Dependency>
@@ -58,6 +58,13 @@
     </Package>
 
     <History>
+        <Update release="16">
+            <Date>2025-06-09</Date>
+            <Version>9.7</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="15">
             <Date>2024-04-02</Date>
             <Version>9.5</Version>
