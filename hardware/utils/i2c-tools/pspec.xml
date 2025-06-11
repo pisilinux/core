@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>i2c-tools</Name>
+        <Homepage>https://www.kernel.org/pub/software/utils/i2c-tools/</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2+</License>
+        <IsA>app:console</IsA>
+        <IsA>library</IsA>
+        <Summary>Command-line tools and library for I2C bus interaction</Summary>
+        <Description>i2c-tools is a collection of command-line utilities and a library that allow users to detect I2C devices, read from and write to I2C device registers, and dump I2C device data. These tools are helpful for hardware debugging and system bring-up.</Description>
+        <Archive type="tarxz" sha1sum="deadbeefdeadbeefdeadbeefdeadbeefdeadbeef">https://www.kernel.org/pub/software/utils/i2c-tools/i2c-tools-4.3.tar.xz</Archive>
+        <BuildDependencies>
+            <Dependency>kernel-headers</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>i2c-tools</Name>
+        <RuntimeDependencies>
+            <Dependency>glibc</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/sbin/i2cdetect</Path>
+            <Path fileType="executable">/usr/sbin/i2cdump</Path>
+            <Path fileType="executable">/usr/sbin/i2cget</Path>
+            <Path fileType="executable">/usr/sbin/i2cset</Path>
+            <Path fileType="executable">/usr/sbin/i2ctransfer</Path>
+            <Path fileType="library">/usr/lib/libi2c.so*</Path>
+            <Path fileType="man">/usr/share/man/man8/i2cdetect.8</Path>
+            <Path fileType="man">/usr/share/man/man8/i2cdump.8</Path>
+            <Path fileType="man">/usr/share/man/man8/i2cget.8</Path>
+            <Path fileType="man">/usr/share/man/man8/i2cset.8</Path>
+            <Path fileType="man">/usr/share/man/man8/i2ctransfer.8</Path>
+            <Path fileType="doc">/usr/share/doc/i2c-tools</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>i2c-tools-devel</Name>
+        <Summary>Development files for i2c-tools</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">i2c-tools</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include/i2c</Path>
+            <Path fileType="data">/usr/lib/pkgconfig/i2c-tools.pc</Path>
+            <Path fileType="library">/usr/lib/libi2c.a</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2024-07-28</Date>
+            <Version>4.3</Version>
+            <Comment>First release of i2c-tools.</Comment>
+            <Name>Jules Agent</Name>
+            <Email>jules@example.com</Email>
+        </Update>
+    </History>
+</PISI>
