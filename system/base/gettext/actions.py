@@ -17,6 +17,7 @@ def setup():
     # autoreconf breaks linker, graaaaaaaaggggghhhhhhh
     autotools.autoreconf("-fi")
     autotools.configure("--without-emacs \
+                         --libexecdir=/usr/lib \
                          --enable-nls \
                          --disable-static \
                          --enable-shared \

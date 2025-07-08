@@ -94,8 +94,8 @@ def install():
     # NEEDS MODIFICATION FOR NEW VERSION
     pisitools.dosym("/usr/lib/perl5/%s/core_perl/CORE/libperl.so.%s" % (get.srcVERSION(),  get.srcVERSION()), "/usr/lib/libperl.so")
     pisitools.dosym("/usr/lib/perl5/%s/core_perl/CORE/libperl.so.%s" % (get.srcVERSION(),  get.srcVERSION()), "/usr/lib/libperl.so.5")
-    pisitools.dosym("/usr/lib/perl5/%s/core_perl/CORE/libperl.so.%s" % (get.srcVERSION(),  get.srcVERSION()), "/usr/lib/libperl.so.5.38")
-    pisitools.dosym("/usr/lib/perl5/%s/core_perl/CORE/libperl.so.%s" % (get.srcVERSION(),  get.srcVERSION()), "/usr/lib/libperl.so.5.38.2")
+    pisitools.dosym("/usr/lib/perl5/%s/core_perl/CORE/libperl.so.%s" % (get.srcVERSION(),  get.srcVERSION()), "/usr/lib/libperl.so.5.40")
+    pisitools.dosym("/usr/lib/perl5/%s/core_perl/CORE/libperl.so.%s" % (get.srcVERSION(),  get.srcVERSION()), "/usr/lib/libperl.so.5.40.2")
     # pisitools.dosym("/usr/lib/perl5/%s/%s-linux-thread-multi/CORE/libperl.so.%s" % (get.srcVERSION(), get.ARCH(), get.srcVERSION()), "/usr/lib/libperl.so")
     # pisitools.dosym("/usr/lib/perl5/%s/%s-linux-thread-multi/CORE/libperl.so.%s" % (get.srcVERSION(), get.ARCH(), get.srcVERSION()), "/usr/lib/libperl.so.5")
     # pisitools.dosym("/usr/lib/perl5/%s/%s-linux-thread-multi/CORE/libperl.so.%s" % (get.srcVERSION(), get.ARCH(), get.srcVERSION()), "/usr/lib/libperl.so.5.38")
