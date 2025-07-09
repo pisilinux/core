@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>The GNU info program and utilities</Summary>
         <Description>Texinfo is a documentation system that can produce both online information and printed output from a single source file. The GNU Project uses the Texinfo file format for most of its documentation.</Description>
-        <Archive sha1sum="a59f3d7686d18fc707fa17bf01d086caa81a2e2a" type="targz">mirrors://gnu/texinfo/texinfo-7.1.1.tar.gz</Archive>
+        <Archive sha1sum="4dcf2858735275098bf07591f232984e8b6ba4fb" type="targz">mirrors://gnu/texinfo/texinfo-7.2.tar.gz</Archive>
         <BuildDependencies>
 		<Dependency>ncurses-devel</Dependency>
 		<Dependency>perl</Dependency>
@@ -34,14 +34,15 @@
         </AdditionalFiles>
         <Files>
             <Path fileType="executable">/usr/bin</Path>
-            <Path fileType="library">/usr/lib/texinfo</Path>
+            <Path fileType="library">/usr/lib/texi2any</Path>
             <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="man">/usr/share/man</Path>
             <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="data">/usr/share/texi2any</Path>
             <Path fileType="data">/usr/share/texinfo</Path>
-	    <Path fileType="data">/usr/share/texmf/tex/texinfo</Path>
+            <Path fileType="data">/usr/share/texmf/tex/texinfo</Path>
             <Path fileType="localedata">/usr/share/locale</Path>
-	    <Path fileType="data">/usr/share/texmf/</Path>
+            <Path fileType="data">/usr/share/texmf/</Path>
         </Files>
         <Provides>
             <COMAR script="pakhandler.py">System.PackageHandler</COMAR>
@@ -49,6 +50,13 @@
     </Package>
 
     <History>
+        <Update release="14">
+            <Date>2025-07-09</Date>
+            <Version>7.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="13">
             <Date>2024-09-09</Date>
             <Version>7.1.1</Version>
