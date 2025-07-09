@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Pluggable Authentication Modules</Summary>
         <Description>PAM (Pluggable Authentication Modules) is a system security tool that allows system administrators to set authentication policy without having to recompile programs that handle authentication.</Description>
-        <Archive sha1sum="50625c6b5e3c9b89d105c1e820ae434c90f6013c" type="targz">https://github.com/linux-pam/linux-pam/archive/v1.7.0.tar.gz</Archive>
+        <Archive sha1sum="8708766f49d04da3250941437bafd36bd45c2b88" type="targz">https://github.com/linux-pam/linux-pam/archive/v1.7.1.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="pisi-pambase.sh" permission="0755">pisi-pambase.sh</AdditionalFile>
             <!--AdditionalFile target="dlopen.sh" permission="0755">dlopen.sh</AdditionalFile>
@@ -71,6 +71,13 @@
     </Package>
 
     <History>
+        <Update release="17">
+            <Date>2025-06-18</Date>
+            <Version>1.7.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="16">
             <Date>2024-11-21</Date>
             <Version>1.7.0</Version>
