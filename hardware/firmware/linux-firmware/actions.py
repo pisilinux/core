@@ -50,8 +50,8 @@ def install():
 
     # Remove installed and LIC* files from /lib/firmware
     #pisitools.remove("/lib/firmware/GPL-3")
-    pisitools.remove("/lib/firmware/LICENCE*")
-    pisitools.remove("/lib/firmware/LICENSE*")
+    # pisitools.remove("/lib/firmware/LICENCE*")
+    # pisitools.remove("/lib/firmware/LICENSE*")
     #pisitools.remove("/lib/firmware/configure")
     #pisitools.remove("/lib/firmware/Makefile")
     #pisitools.removeDir("/lib/firmware/mix")
