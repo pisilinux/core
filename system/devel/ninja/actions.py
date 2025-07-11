@@ -34,7 +34,7 @@ def install():
     pisitools.dobin("ninja", "/usr/bin")
 
     pisitools.insinto("/usr/share/bash-completion/completions", "misc/bash-completion", "ninja")
-    pisitools.insinto("/usr/share/emacs/site-lisp", "misc/ninja-mode.el")
+    # pisitools.insinto("/usr/share/emacs/site-lisp", "misc/ninja-mode.el")
     #pisitools.insinto("/usr/share/emacs/site-lisp", "misc/ninja-mode.elc")
     pisitools.insinto("/usr/share/vim/vimfiles/syntax", "misc/ninja.vim")
     pisitools.insinto("/usr/share/zsh/site-functions", "misc/zsh-completion", "_ninja")
