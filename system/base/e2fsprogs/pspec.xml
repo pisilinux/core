@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Standard ext2/3/4 filesystem utilities</Summary>
         <Description>e2fsprogs provides the filesystem utilities for use with the ext2 filesystem. It also supports the ext3/4 filesystem with journaling support.</Description>
-        <Archive sha1sum="7b57c40d048ca0c4a2151d1c5aa1d973b2a3bc34" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.47.2/e2fsprogs-1.47.2.tar.xz</Archive>
+        <Archive sha1sum="6a6b3712ab8b9e68d0f1bb786e1a9edb87e89ad1" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.47.3/e2fsprogs-1.47.3.tar.xz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="2.37.4">libutil-linux-devel</Dependency>
             <!-- The first release shipped within util-linux -->
@@ -70,6 +70,13 @@
     </Package>
 
     <History>
+        <Update release="18">
+            <Date>2025-07-10</Date>
+            <Version>1.47.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="17">
             <Date>2025-01-03</Date>
             <Version>1.47.2</Version>
