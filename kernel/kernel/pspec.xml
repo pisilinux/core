@@ -12,7 +12,7 @@
         <IsA>kernel</IsA>
         <Summary>The Linux kernel (the core of the Linux operating system) for Pisi Linux</Summary>
         <Description>kernel contains the Linux kernel, the core of any Linux operating system. The kernel handles the basic functions of the operating system: memory allocation, process allocation, device input and output, etc.</Description>
-        <Archive sha1sum="026a9f37b498ab533f843d4a3a85c40f9d108431" type="targz">https://mirrors.edge.kernel.org/pub/linux/kernel/v6.x/linux-6.6.tar.gz</Archive>
+        <Archive sha1sum="42188f7e49564f5ed4fcf8591c6f7477a063fc54" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/kernel/v6.x/linux-6.12.tar.xz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
             <AdditionalFile permission="0755" target="generate-module-list">scripts/generate-module-list</AdditionalFile>
@@ -33,10 +33,10 @@
         </BuildDependencies>
         <Patches>
             <!-- Linux patches -->
-            <Patch level="1" compressionType="xz">patches/linux/patch-6.6.92.xz</Patch>
+            <Patch level="1" compressionType="xz">patches/linux/patch-6.12.40.xz</Patch>
 
             <!-- aufs6 patchec -->
-            <Patch level="1">patches/aufs6/aufs6.6.84-20250414.patch</Patch>
+            <Patch level="1">patches/aufs6/aufs6.12-20250414.patch</Patch>
             <Patch level="1">patches/aufs6/aufs6-base.patch</Patch>
             <Patch level="1">patches/aufs6/aufs6-kbuild.patch</Patch>
             <!--             <Patch level="1">patches/aufs6/aufs6-loopback.patch</Patch> -->
@@ -46,23 +46,45 @@
             <!--             <Patch level="1">patches/aufs6/aufs6-standalone.patch</Patch> -->
 
             <!-- Mageia Linux patches-->
+            <!--             <Patch level="1">patches/mageia/fs-procfs-do-not-list-TID-0-in-proc-pid-task.patch</Patch> -->
+
+            <!--             <Patch level="1">patches/mageia/CVE-2019-12379.patch</Patch> -->
+            <!--             <Patch level="1">patches/mageia/CVE-2020-16119-DCCP-CCID-structure-use-after-free.patch</Patch> -->
             <Patch level="1">patches/mageia/platform-x86-add-shuttle-wmi-driver.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.13-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-4.2-buildfix.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-drop-devinit-exit.patch</Patch>
             <Patch level="1">patches/mageia/platform-x86-shuttle-wmi-kernel-5.5.patch</Patch>
 
+            <!--             rtl8812 -->
             <Patch level="1">patches/mageia/staging-rtl8812au.patch</Patch>
             <Patch level="1">patches/mageia/staging-rtl8812au-rename.patch</Patch>
             <Patch level="1">patches/mageia/staging-rtl8812au-Kconfig-Makefile.patch</Patch>
             <Patch level="1">patches/mageia/staging-rtl8812au-20231117.patch</Patch>
 
+            <Patch level="1">patches/mageia/0001-Pull-device-0x0821-from-list-of-device-supported-by-.patch</Patch>
+            <Patch level="1">patches/mageia/0122-Fix-change_beacon-for-kernel-6.7.patch</Patch>
+            <Patch level="1">patches/mageia/0123-Update-os_intfs.c-for-kernel-6.8.patch</Patch>
+            <Patch level="1">patches/mageia/0124-Update-usb_intf.c-for-kernel-6.8.patch</Patch>
+            <Patch level="1">patches/mageia/0128-Update-ioctl_cfg80211.c-support-for-kernel-6.9.patch</Patch>
+
+            <Patch level="1">patches/mageia/0001-rtl8812au-add-missed-prototypes.patch</Patch>
+            <Patch level="1">patches/mageia/0005-rtl8812au-add-missed-prototypes.patch</Patch>
+            <Patch level="1">patches/mageia/0006-rtl8812au-add-suggested-braces-around-empty-body-in-.patch</Patch>
+            <Patch level="1">patches/mageia/0007-rtl8812au-add-suggested-braces-around-empty-body-in-.patch</Patch>
+            <Patch level="1">patches/mageia/0008-rtl8812au-add-suggested-braces-around-empty-body-in-.patch</Patch>
+            <Patch level="1">patches/mageia/0009-rtl8812au-add-suggested-braces-around-empty-body-in-.patch</Patch>
+            <Patch level="1">patches/mageia/0010-rtl8812au-add-missed-prototypes.patch</Patch>
+            <Patch level="1">patches/mageia/0002-rtl8812au-fix-warnings.patch</Patch>
+
+            <!--             rtw88 -->
             <Patch level="1">patches/mageia/net-wireless-rtw88-add-8723de-alias.patch</Patch>
             <Patch level="1">patches/mageia/net-wireless-rtw88-add-r8822be-alias.patch</Patch>
 
+            <!--             iwlfiwi -->
             <Patch level="1">patches/mageia/net-wireless-iwlwifi-add-new-pci-id-for-6235.patch</Patch>
             <Patch level="1">patches/mageia/wifi-iwlwifi-pcie-add-support-for-AX101NGW.patch</Patch>
-            <!--             <Patch level="1">patches/mageia/iwlwifi-cfg-Add-missing-MODULE_FIRMWARE-for-pnvm.patch</Patch> -->
+            <!--             <Patch level="1">patches/mageia/wifi-iwlwifi-fw-skip-ppag-for-jf.patch</Patch> -->
 
             <Patch level="1">patches/mageia/x86-pci-toshiba-equium-a60-assign-busses.patch</Patch>
         </Patches>
@@ -123,6 +145,17 @@
     </Package>
 
     <History>
+        <Update release="104">
+            <Date>2025-07-24</Date>
+            <Version>6.12.40</Version>
+            <Comment>Version bump.</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="102">
             <Date>2025-05-23</Date>
             <Version>6.6.92</Version>
