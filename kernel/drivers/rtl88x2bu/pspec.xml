@@ -30,12 +30,22 @@
         <Name>rtl88x2bu</Name>
         <Files>
             <Path fileType="config">/etc</Path>
-            <Path fileType="library">/lib</Path>
             <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="library" permanent="true">/lib/modules</Path>
         </Files>
+        <BuildFlags>
+            <Flag>noDelta</Flag>
+        </BuildFlags>
     </Package>
 
     <History>
+        <Update release="23">
+            <Date>2025-07-29</Date>
+            <Version>2023.07.23</Version>
+            <Comment>Rebuild</Comment>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Update>
         <Update release="22">
             <Date>2025-07-24</Date>
             <Version>2023.07.23</Version>
