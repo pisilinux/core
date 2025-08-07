@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>libffi</Name>
@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>A portable foreign function interface library</Summary>
         <Description>The libffi library provides a portable, high level programming interface to various calling conventions.</Description>
-        <Archive sha1sum="5375e956b0d662e118e47758bd656861e43ba3ef" type="targz">https://github.com/libffi/libffi/releases/download/v3.5.1/libffi-3.5.1.tar.gz</Archive>
+        <Archive sha1sum="2bd35b135b0eeb5c631e02422c9dbe786ddb626a" type="targz">https://github.com/libffi/libffi/releases/download/v3.5.2/libffi-3.5.2.tar.gz</Archive>
     </Source>
 
     <Package>
@@ -56,6 +56,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2025-08-04</Date>
+            <Version>3.5.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="10">
             <Date>2025-06-18</Date>
             <Version>3.5.1</Version>
