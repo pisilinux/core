@@ -43571,4 +43571,37 @@
         <LocalName xml:lang="es">Todos</LocalName>
         <Icon>media-optical</Icon>
     </Group>
+    <SpecFile>
+        <Source>
+            <Name>tree</Name>
+            <Homepage>http://oldmanprogrammer.net/source.php?dir=projects/tree</Homepage>
+            <Packager>
+                <Name>PisiLinux Community</Name>
+                <Email>admins@pisilinux.org</Email>
+            </Packager>
+            <License>GPLv2</License>
+            <IsA>app:console</IsA>
+            <PartOf>system.base</PartOf>
+            <Summary xml:lang="en">Recursive directory listing command</Summary>
+            <Description xml:lang="en">Tree is a recursive directory listing command that produces a depth indented listing of files. Color is supported ala dircolors if the LS_COLORS environment variable is set and output is to tty.</Description>
+            <Archive sha1sum="17caabcce65f80975a0442ad049176d9099cd45e" type="targz">http://oldmanprogrammer.net/projects/tree/tree-2.2.1.tgz</Archive>
+            <SourceURI>system/base/tree/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>tree</Name>
+            <Files>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="man">/usr/share/man/man1</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="1">
+                <Date>2025-06-05</Date>
+                <Version>2.2.1</Version>
+                <Comment>First release</Comment>
+                <Name>Jules Agent</Name>
+                <Email>jules@example.com</Email>
+            </Update>
+        </History>
+    </SpecFile>
 </PISI>
