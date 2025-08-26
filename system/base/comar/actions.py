@@ -8,9 +8,11 @@
 from pisi.actionsapi import cmaketools
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
+    shelltools.system("sed -i 's|VERSION 2.6|VERSION 3.5|g' CMakeLists.txt")
     cmaketools.configure("-DPYTHON_INCLUDE_DIR=/usr/include/python2.7 \
                           -DPYTHON_LIBRARY=/usr/lib/libpython2.7.so")
 
