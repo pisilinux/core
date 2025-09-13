@@ -10,25 +10,20 @@ from pisi.actionsapi import pythonmodules
 
 WorkDir="setuptools-%s" % get.srcVERSION()
 
-shelltools.export("SETUPTOOLS_SCM_PRETEND_VERSION","75.8.2")
+shelltools.export("SETUPTOOLS_SCM_PRETEND_VERSION","78.1.1")
 
 #def setup():
     #shelltools.makedirs("%s/setuptools-54.2.0/build/scripts-3.8" % get.workDIR())
     
 def build():
-    # shelltools.system("export SETUPTOOLS_INSTALL_WINDOWS_SPECIFIC_FILES=0")
-    pythonmodules.compile(pyVer="3")
+    pythonmodules.compile(pyVer="3 -B")
     
     
     
 def install():
-    pythonmodules.install(pyVer="3")
+    pythonmodules.install(pyVer="3 -B")
 
     pisitools.removeDir("/usr/lib/python3.11/site-packages/setuptools/_vendor")
-    # pisitools.removeDir("/usr/lib/python3.11/site-packages/pkg_resources/_vendor")
-
-    # pisitools.removeDir("/usr/lib/python3.11/site-packages/setuptools/extern")
-    # pisitools.removeDir("/usr/lib/python3.11/site-packages/pkg_resources/extern")
 
     shelltools.system("find %s -name '*.py' -exec sed \
                                           -e 's:from \w*[.]\+extern ::' -e 's:\w*[.]\+extern[.]::' \
