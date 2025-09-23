@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Utilities to deal with user accounts</Summary>
         <Description>The Shadow password file utilities package includes programs necessary to convert traditional V7 *NIX password files to the SVR4 shadow password format, and additional tools to maintain password and group files (that work with both shadow and non-shadow passwords).</Description>
-        <Archive sha1sum="e2ba4e89914d2e4a5e433af523c52d064f4adf42" type="tarxz">https://github.com/shadow-maint/shadow/releases/download/4.17.2/shadow-4.17.2.tar.xz</Archive>
+        <Archive sha1sum="8921a4b3f43c80adba4eb240590e0f29b8cff80a" type="tarxz">https://github.com/shadow-maint/shadow/releases/download/4.18.0/shadow-4.18.0.tar.xz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="pisi-shadowbase.sh" permission="0755">pisi-shadowbase.sh</AdditionalFile>
         </AdditionalFiles>
@@ -22,7 +22,7 @@
             <Dependency>acl-devel</Dependency>
             <Dependency>audit-devel</Dependency>
             <Dependency>attr-devel</Dependency>
-            <Dependency>libbsd-devel</Dependency>
+<!--             <Dependency>libbsd-devel</Dependency> -->
         </BuildDependencies>
         <Patches>
 <!--             <Patch level="1">uk3.patch</Patch> -->
@@ -47,7 +47,7 @@
             <Dependency>attr</Dependency>
             <Dependency>pam</Dependency>
             <Dependency>audit</Dependency>
-            <Dependency>libbsd</Dependency>
+<!--             <Dependency>libbsd</Dependency> -->
             <Dependency>cracklib</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -88,6 +88,13 @@
     </Package>
 
     <History>
+        <Update release="30">
+            <Date>2025-09-23</Date>
+            <Version>4.18.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="29">
             <Date>2025-01-13</Date>
             <Version>4.17.2</Version>
