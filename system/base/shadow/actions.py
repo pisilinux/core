@@ -34,6 +34,7 @@ def setup():
                          --with-yescrypt=yes \
                          --with-bcrypt \
                          --enable-shared \
+                         --without-libbsd \
                          --with-acl")
 
 def build():
