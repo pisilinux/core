@@ -9,11 +9,12 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import get
 
 def setup():
-    autotools.autoreconf("-i")
+    autotools.autoreconf("-fi")
     autotools.configure("--disable-hpack-tools \
                          --disable-python-bindings \
                          --disable-static \
-                         --with-libxml2")
+                         --with-libxml2 \
+                         --enable-lib-only")
 
 def build():
     autotools.make()
