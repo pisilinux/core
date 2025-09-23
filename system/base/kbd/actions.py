@@ -5,9 +5,11 @@
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
+    shelltools.export("LDFLAGS", "-lbsd %s" % get.LDFLAGS())
     autotools.configure("--disable-vlock \
                          --enable-nls \
                          --prefix=/usr \
