@@ -12,15 +12,18 @@
         <IsA>app:console</IsA>
         <Summary>Keyboard and console utilities</Summary>
         <Description>The kbd package contains keytable files and keyboard utilities compatible with kernel version 1.1.54 and later.</Description>
-        <Archive sha1sum="e677b18be7f7413ce1d5a2cba5ecb5d6952dc6e9" type="tarxz">https://www.kernel.org/pub/linux/utils/kbd/kbd-2.7.1.tar.xz</Archive>
-        <Archive sha1sum="17625849ecf4dedf755aefa06d78406b92c31743" type="tarbz2" target="kbd-2.7.1">https://sourceforge.net/projects/pisilinux/files/source/kbd-latarcyrheb-16-fixed.tar.bz2</Archive>
-        <Archive sha1sum="a5f6d9dff7a8a484cd5014ec7ffdf1eaed27084a" type="tarbz2" target="kbd-2.7.1">https://sourceforge.net/projects/pisilinux/files/source/kbd-latsun-fonts.tar.bz2</Archive>
-        <Archive sha1sum="d52f95fdc761cead041d23992f8802be5ac4bc12" type="tarbz2" target="kbd-2.7.1">https://sourceforge.net/projects/pisilinux/files/source/ro_maps.tar.bz2</Archive>
+        <Archive sha1sum="15a9d1617fc708761027b18a65f6e5dbbc1dfdaf" type="tarxz">https://www.kernel.org/pub/linux/utils/kbd/kbd-2.8.0.tar.xz</Archive>
+        <Archive sha1sum="17625849ecf4dedf755aefa06d78406b92c31743" type="tarbz2" target="kbd-2.8.0">https://sourceforge.net/projects/pisilinux/files/source/kbd-latarcyrheb-16-fixed.tar.bz2</Archive>
+        <Archive sha1sum="a5f6d9dff7a8a484cd5014ec7ffdf1eaed27084a" type="tarbz2" target="kbd-2.8.0">https://sourceforge.net/projects/pisilinux/files/source/kbd-latsun-fonts.tar.bz2</Archive>
+        <Archive sha1sum="d52f95fdc761cead041d23992f8802be5ac4bc12" type="tarbz2" target="kbd-2.8.0">https://sourceforge.net/projects/pisilinux/files/source/ro_maps.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>gettext</Dependency>
             <Dependency>gzip</Dependency>
             <Dependency>pam-devel</Dependency>
 	        <Dependency>check-devel</Dependency>
+
+            <Dependency>libbsd</Dependency>
+            <Dependency>libmd</Dependency>
         </BuildDependencies>
         <Patches>
 			<!-- BLFS patches -->
@@ -89,6 +92,13 @@
     </Package>
 
     <History>
+        <Update release="13">
+            <Date>2025-09-23</Date>
+            <Version>2.8.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="12">
             <Date>2025-09-23</Date>
             <Version>2.7.1</Version>
