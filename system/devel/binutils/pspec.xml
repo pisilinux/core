@@ -11,18 +11,16 @@
         <IsA>app:console</IsA>
         <Summary>Assembler and linker tools</Summary>
         <Description>Contains commands like as, ld, nm, objdump, ar, ranlib for compiling assembly code to the machine language, and for linking and manipulating the binary object files.</Description>
-        <Archive sha1sum="44da41792c60419863d7e13fa1deaf6b24dd69b8" type="tarxz">https://ftp.gnu.org/gnu/binutils/binutils-2.42.tar.xz</Archive>
+        <Archive sha1sum="09fd8a50a95be4a94412fe3847d16280996679c5" type="tarxz">https://ftp.gnu.org/gnu/binutils/binutils-2.45.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>texinfo</Dependency>
         </BuildDependencies>
-        <Patches>
-            <Patch  level="1">fedora/binutils-gold-warn-unsupported.patch</Patch>
-        </Patches>
     </Source>
 
     <Package>
         <Name>binutils</Name>
         <RuntimeDependencies>
+            <Dependency>libgcc</Dependency>
             <Dependency>zlib</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -30,12 +28,20 @@
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="library">/usr/lib</Path>
             <Path fileType="header">/usr/include</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
             <Path fileType="info">/usr/share/info</Path>
             <Path fileType="man">/usr/share/man</Path>
         </Files>
     </Package>
 
     <History>
+        <Update release="15">
+            <Date>2025-10-04</Date>
+            <Version>2.45</Version>
+            <Comment>Version bump</Comment>
+            <Name>Ercan Ersoy</Name>
+            <Email>ercanersoy@ercanersoy.net</Email>
+        </Update>
         <Update release="14">
             <Date>2024-05-30</Date>
             <Version>2.42</Version>
