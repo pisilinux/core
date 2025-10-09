@@ -20,7 +20,7 @@
             <!-- This patch is essential for udhcp to request root-path from dhcpd and required by ptsp -->
             <Patch level="1">udhcp-rootpath-rq.patch</Patch>
             <Patch level="1">suppress-job-control-warning.patch</Patch>
-<!--             <Patch level="1">busybox-1.33.0-CVE-2021-28831.patch</Patch> -->
+            <Patch level="1">busybox-1.36.1-kernel-6.8.patch</Patch> -->
             <!--Patch>ifplugd.patch</Patch-->
         </Patches>
     </Source>
@@ -33,6 +33,13 @@
     </Package>
 
     <History>
+        <Update release="13">
+            <Date>2025-10-09</Date>
+            <Version>1.36.1</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="12">
             <Date>2023-06-28</Date>
             <Version>1.36.1</Version>
