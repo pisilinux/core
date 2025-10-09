@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "https://pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>piksemel</Name>
+        <Homepage>https://pisilinux.org</Homepage>
+        <Packager>
+            <Name>PisiLinux Community</Name>
+            <Email>admins@pisilinux.org</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>library</IsA>
+        <Summary>Python binding for iksemel</Summary>
+        <Description>A simple, fast, small and robust XML parser for Python, based on iksemel.</Description>
+        <Archive sha1sum="4d90f286eab6a33a8d5974b79b2308f1e86a1dfc" type="targz">
+            https://github.com/erkanisik1/python3-piksemel/archive/refs/tags/2.1.tar.gz
+        </Archive>
+        <BuildDependencies>
+            <Dependency>python3-devel</Dependency>
+        </BuildDependencies>
+        <Patches>
+            <Patch>symbol-visibility.patch</Patch>
+        </Patches>
+    </Source>
+
+    <Package>
+        <Name>piksemel</Name>
+        <RuntimeDependencies>
+            <Dependency>python3</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2025-10-09</Date>
+            <Version>2.1</Version>
+            <Comment>First release</Comment>
+            <Name>Erkan İşik</Name>
+            <Email>erkanisik@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
