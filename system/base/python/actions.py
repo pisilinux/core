@@ -14,7 +14,9 @@ WorkDir = "Python-%s" % get.srcVERSION()
 
 PythonVersion = "2.7"
 
+
 def setup():
+    # shelltools.system("sed -i 's/#include <linux\/soundcard.h>/#include <sys\/soundcard.h>/' Modules/linuxaudiodev.c")
     # shelltools.system("export PYTHON_DISABLE_SSL='1'")
     #shelltools.system("echo -e '\033[0;36mBuilding Bzip2\033[0m' ")
     #shelltools.makedirs("%s/temp/lib" %get.workDIR())
@@ -32,7 +34,7 @@ def setup():
     
     #os.system("echo -e '\033[0;36mBuilding Python\033[0m' ")
 	
-    pisitools.cflags.add("-fwrapv")
+    pisitools.cflags.add("-fwrapv -std=c17")
 
     # no rpath
     pisitools.dosed("configure.ac", "-rpath \$\(LIBDIR\) ")
