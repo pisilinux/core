@@ -62,7 +62,7 @@ def setup():
     pisitools.dosed("libiberty/configure", "^(ac_cpp='\$CPP\s\$CPPFLAGS)", r"\1 -O2")
     
     # shelltools.move("isl-0.25", "isl")
-    # shelltools.move("mpfr-4.2.1", "mpfr")
+    # shelltools.move("mpfr-4.2.2", "mpfr")
     # shelltools.move("mpc-1.3.1", "mpc")
     # shelltools.move("gmp-6.3.0", "gmp")
     
