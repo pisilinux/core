@@ -16,6 +16,8 @@ def setup():
     if get.buildTYPE() == "emul32":
         shelltools.export("ABI", "32")
 
+    autotools.autoreconf("-vfi")
+
     autotools.configure(options)
 
 def build():
