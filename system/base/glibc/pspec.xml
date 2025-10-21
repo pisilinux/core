@@ -23,7 +23,7 @@
         </BuildDependencies>
         <Patches>
             <!-- not required with make-4.4.1 <Patch level="1">gentoo/0032-Makerules-fix-MAKEFLAGS-make.patch</Patch> -->
-            <Patch level="1">0001-localedef-Update-LC_MONETARY-handling-Bug-28845.patch</Patch>
+            <Patch level="1">glibc-4e5004-git.patch</Patch>
             <!-- <Patch level="1">glibc-2.30-fhs-1.patch</Patch> -->
             <!-- <Patch level="1">bz26534.patch</Patch> -->
         </Patches>
@@ -2089,6 +2089,13 @@
     </Package>
 
     <History>
+        <Update release="15">
+            <Date>2025-10-20</Date>
+            <Version>2.35</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="14">
             <Date>2025-07-25</Date>
             <Version>2.35</Version>
