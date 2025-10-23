@@ -12,12 +12,12 @@
         <IsA>library</IsA>
         <Summary>Portable Network Graphics library</Summary>
         <Description>The Portable Network Graphics (PNG) format was designed to replace the older and simpler GIF format and, to some extent, the much more complex TIFF format. Project's main aim is to concentrate on two major uses: the World Wide Web (WWW) and image-editing.</Description>
-        <Archive sha1sum="132bfa1a68e3d8f741d0b3fe03809e181fe57b7d" type="tarxz">mirrors://sourceforge/libpng/libpng-1.6.48.tar.xz</Archive>
+        <Archive sha1sum="ecd92ba84628a8ace430706c85fd2fb26ba0882c" type="tarxz">mirrors://sourceforge/libpng/libpng-1.6.50.tar.xz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="1.2.12">zlib-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1" compressionType="gz">libpng-1.6.47-apng.patch.gz</Patch>
+            <Patch level="1" compressionType="gz">libpng-1.6.50-apng.patch.gz</Patch>
             <Patch level="1">libpng-multilib.patch</Patch>
         </Patches>
     </Source>
@@ -67,6 +67,13 @@
     </Package>
 
     <History>
+        <Update release="16">
+            <Date>2025-10-23</Date>
+            <Version>1.6.50</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="15">
             <Date>2025-05-03</Date>
             <Version>1.6.48</Version>
