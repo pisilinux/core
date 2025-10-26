@@ -20,7 +20,6 @@ def setup():
                           -Dpam_module_dir=/lib/security \
                           -Dexamples=true \
                           -Dauthfw='pam' \
-                          -Djs_engine='duktape' \
                           -Dsession_tracking=elogind")
 
 def build():
