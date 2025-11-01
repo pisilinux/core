@@ -1,0 +1,140 @@
+diff -Nuar a/pisi/operations/install.py b/pisi/operations/install.py
+--- a/pisi/operations/install.py	2020-01-13 21:53:04.000000000 +0300
++++ b/pisi/operations/install.py	2025-11-01 16:42:51.410617888 +0300
+@@ -27,6 +27,27 @@
+ import pisi.ui as ui
+ import pisi.db
+ 
++def reorder_for_glibc_priority(order):
++    """GLIBC ve glibc-devel'i EN SONA al, glibc-devel glibc'den SONRA gelsin"""
++    
++    glibc_packages = ["glibc", "glibc-devel"]
++    found_packages = [pkg for pkg in glibc_packages if pkg in order]
++    
++    if found_packages:
++        # Tüm glibc paketlerini listeden çıkar
++        for pkg in found_packages:
++            order.remove(pkg)
++        
++        # Önce glibc, sonra glibc-devel şeklinde sona ekle
++        # Bu sayede glibc-devel glibc'den sonra kurulur
++        order.append("glibc")
++        if "glibc-devel" in found_packages:
++            order.append("glibc-devel")
++        
++        ctx.ui.debug("Reordered glibc packages to the end: %s" % found_packages)
++    
++    return order
++
+ def install_pkg_names(A, reinstall = False, extra = False):
+     """This is the real thing. It installs packages from
+     the repository, trying to perform a minimum number of
+@@ -61,12 +82,18 @@
+         G_f = None
+         order = list(A)
+ 
++    # GLIBC ÖNCELİĞİ - EN SONA al
++    order = reorder_for_glibc_priority(order)
++
+     componentdb = pisi.db.componentdb.ComponentDB()
+ 
+     # Bug 4211
+     if componentdb.has_component('system.base'):
+         order = operations.helper.reorder_base_packages(order)
+ 
++    # GLIBC ÖNCELİĞİ - system.base düzenlemesinden sonra tekrar kontrol
++    order = reorder_for_glibc_priority(order)
++
+     if len(order) > 1:
+         ctx.ui.info(util.colorize(_("Following packages will be installed:"), "brightblue"))
+         ctx.ui.info(util.format_by_columns(sorted(order)))
+@@ -251,11 +278,19 @@
+     if ctx.config.get_option('debug'):
+         G_f.write_graphviz(sys.stdout)
+     order = G_f.topological_sort()
++    
++    # GLIBC ÖNCELİĞİ - PAKET DOSYALARI İÇİN (EN SONA al)
++    order = reorder_for_glibc_priority(order)
++    
+     if not ctx.get_option('ignore_package_conflicts'):
+         conflicts = operations.helper.check_conflicts(order, packagedb)
+         if conflicts:
+             operations.remove.remove_conflicting_packages(conflicts)
+     order.reverse()
++    
++    # GLIBC ÖNCELİĞİ - ters çevirdikten sonra tekrar kontrol (EN SONA al)
++    order = reorder_for_glibc_priority(order)
++    
+     ctx.ui.info(_('Installation order: ') + util.strlist(order) )
+ 
+     if ctx.get_option('dry_run'):
+@@ -300,4 +335,8 @@
+         G_f.write_graphviz(sys.stdout)
+     order = G_f.topological_sort()
+     order.reverse()
++    
++    # GLIBC ÖNCELİĞİ - plan_install_pkg_names için (EN SONA al)
++    order = reorder_for_glibc_priority(order)
++    
+     return G_f, order
+diff -Nuar a/pisi/operations/upgrade.py b/pisi/operations/upgrade.py
+--- a/pisi/operations/upgrade.py	2020-01-13 21:53:04.000000000 +0300
++++ b/pisi/operations/upgrade.py	2025-11-01 16:45:13.016847566 +0300
+@@ -26,6 +26,27 @@
+ import pisi.db
+ import pisi.blacklist
+ 
++def reorder_for_glibc_priority(order):
++    """GLIBC ve glibc-devel'i EN SONA al, glibc-devel glibc'den SONRA gelsin"""
++    
++    glibc_packages = ["glibc", "glibc-devel"]
++    found_packages = [pkg for pkg in glibc_packages if pkg in order]
++    
++    if found_packages:
++        # Tüm glibc paketlerini listeden çıkar
++        for pkg in found_packages:
++            order.remove(pkg)
++        
++        # Önce glibc, sonra glibc-devel şeklinde sona ekle
++        # Bu sayede glibc-devel glibc'den sonra kurulur
++        order.append("glibc")
++        if "glibc-devel" in found_packages:
++            order.append("glibc-devel")
++        
++        ctx.ui.debug("Reordered glibc packages to the end: %s" % found_packages)
++    
++    return order
++
+ def check_update_actions(packages):
+     installdb = pisi.db.installdb.InstallDB()
+     packagedb = pisi.db.packagedb.PackageDB()
+@@ -167,12 +188,18 @@
+         G_f = None
+         order = list(A)
+ 
++    # GLIBC ÖNCELİĞİ - EN SONA al
++    order = reorder_for_glibc_priority(order)
++
+     componentdb = pisi.db.componentdb.ComponentDB()
+ 
+     # Bug 4211
+     if componentdb.has_component('system.base'):
+         order = operations.helper.reorder_base_packages(order)
+ 
++    # GLIBC ÖNCELİĞİ - system.base düzenlemesinden sonra tekrar kontrol
++    order = reorder_for_glibc_priority(order)
++
+     ctx.ui.status(_('The following packages will be upgraded:'))
+     ctx.ui.info(util.format_by_columns(sorted(order)))
+ 
+@@ -348,6 +375,10 @@
+ 
+     order = G_f.topological_sort()
+     order.reverse()
++    
++    # GLIBC ÖNCELİĞİ - plan_upgrade için (EN SONA al)
++    order = reorder_for_glibc_priority(order)
++    
+     return G_f, order
+ 
+ def upgrade_base(A = set()):
