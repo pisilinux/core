@@ -14,11 +14,11 @@
         <IsA>library</IsA>
         <Summary>The GNU Compiler Collection, includes C, C++, Objective-C and Fortran compilers</Summary>
         <Description>The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, as well as libraries for these languages</Description>
-        <Archive sha1sum="e9265c98ae18a6d952a636749d98c475ba2ca006" type="tarxz">https://sourceware.org/pub/gcc/releases/gcc-15.2.0/gcc-15.2.0.tar.xz</Archive>
+        <Archive sha1sum="421da7323b5ec252c0f5772f9c1c584c2b05f7a3" type="tarxz">https://gcc.gnu.org/pub/gcc/snapshots/15-20251025/gcc-15-20251025.tar.xz</Archive>
 
-<!--         <Archive sha1sum="a63a264b273a652e27518443640e69567da498ce" target="gcc-15.2.0" type="tarxz">http://ftp.gnu.org/gnu/mpfr/mpfr-4.2.2.tar.xz</Archive> -->
-<!--         <Archive sha1sum="bac1c1fa79f5602df1e29e4684e103ad55714e02" target="gcc-15.2.0" type="targz">http://ftp.gnu.org/gnu/mpc/mpc-1.3.1.tar.gz</Archive> -->
-<!--         <Archive sha1sum="b4043dd2964ab1a858109da85c44de224384f352" target="gcc-15.2.0" type="tarxz">mirrors://gnu/gmp/gmp-6.3.0.tar.xz</Archive> -->
+<!--         <Archive sha1sum="a63a264b273a652e27518443640e69567da498ce" target="gcc-15-20251025" type="tarxz">http://ftp.gnu.org/gnu/mpfr/mpfr-4.2.2.tar.xz</Archive> -->
+<!--         <Archive sha1sum="bac1c1fa79f5602df1e29e4684e103ad55714e02" target="gcc-15-20251025" type="targz">http://ftp.gnu.org/gnu/mpc/mpc-1.3.1.tar.gz</Archive> -->
+<!--         <Archive sha1sum="b4043dd2964ab1a858109da85c44de224384f352" target="gcc-15-20251025" type="tarxz">mirrors://gnu/gmp/gmp-6.3.0.tar.xz</Archive> -->
 <!--         <Archive sha1sum="247eecb538ff310e8fb77badd629ee32a3895a98" target="gcc-12.2.0"  type="tarxz">https://mirror.sobukus.de/files/src/isl/isl-0.25.tar.xz</Archive> -->
         <BuildDependencies>
             <Dependency versionFrom="2.45">binutils</Dependency>
@@ -182,6 +182,13 @@
     </Package>
 
     <History>
+        <Update release="16">
+            <Date>2025-10-29</Date>
+            <Version>15.2.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="15">
             <Date>2025-10-20</Date>
             <Version>15.2.0</Version>
