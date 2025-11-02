@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>GNU libraries and utilities for producing multi-lingual messages</Summary>
         <Description>The GNU gettext package provides a set of tools and documentation for producing multi-lingual messages in programs. Tools include a set of conventions about how programs should be written to support message catalogs, a directory and file naming organization for the message catalogs, a runtime library which supports the retrieval of translated messages, and stand-alone programs for handling the translatable and the already translated strings. Gettext provides an easy to use library and tools for creating, using, and modifying natural language catalogs and is a powerful and simple method for internationalizing programs.</Description>
-        <Archive sha1sum="750ea7d98fbf7dc73d7264f02711c3daaf60536b" type="targz">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.24.2.tar.gz</Archive>
+        <Archive sha1sum="303f56fa7f0acba9400b6e92afe2f9cdcf0ce8e7" type="targz">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.26.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>acl-devel</Dependency>
             <Dependency>glib2-devel</Dependency>
@@ -79,6 +79,13 @@
     </Package>
 
     <History>
+        <Update release="23">
+            <Date>2025-10-28</Date>
+            <Version>0.26</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="22">
             <Date>2025-07-07</Date>
             <Version>0.24.2</Version>

@@ -10,6 +10,7 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
+    pisitools.flags.add(" -std=gnu17")
     autotools.autoreconf("-vif")
     autotools.configure("--disable-error-on-warning \
                          --disable-static \
