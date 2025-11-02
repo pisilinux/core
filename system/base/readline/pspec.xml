@@ -12,24 +12,12 @@
         <IsA>library</IsA>
         <Summary>Another cute console display library</Summary>
         <Description>The GNU Readline library provides a set of functions for use by applications that allow users to edit command lines as they are typed in. Both Emacs and vi editing modes are available. The Readline library includes additional functions to maintain a list of previously-entered command lines, to recall and perhaps reedit those lines, and perform csh-like history expansion on previous commands.</Description>
-        <Archive sha1sum="97ad98be243a857b639c0f3da2fe7d81c6d1d36e" type="targz">mirrors://gnu/readline/readline-8.2.tar.gz</Archive>
+        <Archive sha1sum="2c05ae9350b695f69d70b47f17f092611de2081f" type="targz">mirrors://gnu/readline/readline-8.3.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>ncurses-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch>readline82-001.patch</Patch>
-            <Patch>readline82-002.patch</Patch>
-            <Patch>readline82-003.patch</Patch>
-            <Patch>readline82-004.patch</Patch>
-            <Patch>readline82-005.patch</Patch>
-            <Patch>readline82-006.patch</Patch>
-            <Patch>readline82-007.patch</Patch>
-            <Patch>readline82-008.patch</Patch>
-            <Patch>readline82-009.patch</Patch>
-            <Patch>readline82-010.patch</Patch>
-            <Patch>readline82-011.patch</Patch>
-            <Patch>readline82-012.patch</Patch>
-            <Patch>readline82-013.patch</Patch>
+            <Patch>readline83-001.patch</Patch>
         </Patches>
     </Source>
 
@@ -80,6 +68,13 @@
         </Files>
     </Package>
     <History>
+        <Update release="14">
+            <Date>2025-10-30</Date>
+            <Version>8.3.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="13">
             <Date>2024-08-03</Date>
             <Version>8.2.13</Version>

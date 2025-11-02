@@ -26,6 +26,7 @@
             <Dependency>ncurses-devel</Dependency>
             <Dependency versionFrom="3.5.2">openssl-devel</Dependency>
             <Dependency>readline-devel</Dependency>
+            <Dependency>libxcrypt-devel</Dependency>
             <Dependency>mpdecimal-devel</Dependency>
             <!--<Dependency>valgrind</Dependency>-->
             <!--<Dependency>tcl-devel</Dependency>-->
@@ -51,6 +52,7 @@
             <Dependency>openssl</Dependency>
             <Dependency>readline</Dependency>
             <Dependency>mpdecimal</Dependency>
+            <Dependency versionFrom="4.4.38">libxcrypt</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="executable" permanent="0">/usr/bin/p*</Path>
@@ -132,6 +134,13 @@
     </Package>
 
     <History>
+        <Update release="66">
+            <Date>2025-10-30</Date>
+            <Version>3.11.14</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="65">
             <Date>2025-10-16</Date>
             <Version>3.11.14</Version>
