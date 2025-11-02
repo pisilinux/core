@@ -1,10 +1,10 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86_64 6.12.51 Kernel Configuration
+# Linux/x86_64 6.12.54 Kernel Configuration
 #
-CONFIG_CC_VERSION_TEXT="gcc (Pisi Linux) 15.2.0"
+CONFIG_CC_VERSION_TEXT="gcc (Pisi Linux) 15.2.1 20251025"
 CONFIG_CC_IS_GCC=y
-CONFIG_GCC_VERSION=150200
+CONFIG_GCC_VERSION=150201
 CONFIG_CLANG_VERSION=0
 CONFIG_AS_IS_GNU=y
 CONFIG_AS_VERSION=24500
@@ -11737,7 +11737,7 @@ CONFIG_EVM=y
 # CONFIG_EVM_ADD_XATTRS is not set
 CONFIG_DEFAULT_SECURITY_APPARMOR=y
 # CONFIG_DEFAULT_SECURITY_DAC is not set
-CONFIG_LSM=""
+CONFIG_LSM="landlock,lockdown,yama,integrity,apparmor,bpf"
 
 #
 # Kernel hardening options
