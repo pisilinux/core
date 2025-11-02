@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>GNU libc6 (also called glibc2) C library</Summary>
         <Description>The GNU C library is used as the C library in the GNU system and most systems with the Linux kernel. It defines the system calls and other basic C programming language facilities.</Description>
-        <Archive sha1sum="7e2d857e427780a50133447f34dd84ab40fa4069" type="tarxz">http://ftp.gnu.org/gnu/libc/glibc-2.35.tar.xz</Archive>
+        <Archive sha1sum="59e16da77e6ea9be9dd4bb997eb4ebfde557a1b0" type="tarxz">https://snapshots.sourceware.org/glibc/trunk/2025-10-27_13-23_1761571381/src/glibc-2.42.9000-361-g013f5167b9.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>kernel-headers</Dependency>
             <Dependency>gettext</Dependency>
@@ -23,7 +23,7 @@
         </BuildDependencies>
         <Patches>
             <!-- not required with make-4.4.1 <Patch level="1">gentoo/0032-Makerules-fix-MAKEFLAGS-make.patch</Patch> -->
-            <Patch level="1">glibc-4e5004-git.patch</Patch>
+<!--             <Patch level="1">0001-localedef-Update-LC_MONETARY-handling-Bug-28845.patch</Patch> -->
             <!-- <Patch level="1">glibc-2.30-fhs-1.patch</Patch> -->
             <!-- <Patch level="1">bz26534.patch</Patch> -->
         </Patches>
@@ -2089,6 +2089,13 @@
     </Package>
 
     <History>
+        <Update release="16">
+            <Date>2024-12-05</Date>
+            <Version>2.42</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="15">
             <Date>2025-10-20</Date>
             <Version>2.35</Version>
