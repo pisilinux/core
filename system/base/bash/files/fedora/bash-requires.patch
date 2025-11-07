@@ -12,7 +12,7 @@ diff --git a/builtins.h b/builtins.h
 diff --git a/builtins/mkbuiltins.c b/builtins/mkbuiltins.c
 --- a/builtins/mkbuiltins.c
 +++ b/builtins/mkbuiltins.c
-@@ -69,11 +69,16 @@ extern char *strcpy ();
+@@ -62,11 +62,16 @@ static void *xrealloc (void *, size_t);
  #define whitespace(c) (((c) == ' ') || ((c) == '\t'))
  
  /* Flag values that builtins can have. */
@@ -29,7 +29,7 @@ diff --git a/builtins/mkbuiltins.c b/builtins/mkbuiltins.c
  
  #define BASE_INDENT	4
  
-@@ -189,13 +194,21 @@ char *arrayvar_builtins[] =
+@@ -183,13 +188,21 @@ char *arrayvar_builtins[] =
    "typeset", "unset", "wait",		/*]*/
    (char *)NULL
  };
@@ -43,16 +43,16 @@ diff --git a/builtins/mkbuiltins.c b/builtins/mkbuiltins.c
 +};
 +
  /* Forward declarations. */
- static int is_special_builtin ();
- static int is_assignment_builtin ();
- static int is_localvar_builtin ();
- static int is_posix_builtin ();
- static int is_arrayvar_builtin ();
+ static int is_special_builtin (char *);
+ static int is_assignment_builtin (char *);
+ static int is_localvar_builtin (char *);
+ static int is_posix_builtin (char *);
+ static int is_arrayvar_builtin (char *);
 +static int is_requires_builtin ();
  
  #if !defined (HAVE_RENAME)
- static int rename ();
-@@ -856,6 +869,8 @@ builtin_handler (self, defs, arg)
+ static int rename (char *, char *);
+@@ -826,6 +839,8 @@ builtin_handler (char *self, DEF_FILE *defs, char *arg)
      new->flags |= BUILTIN_FLAG_POSIX_BUILTIN;
    if (is_arrayvar_builtin (name))
      new->flags |= BUILTIN_FLAG_ARRAYREF_ARG;
@@ -61,7 +61,7 @@ diff --git a/builtins/mkbuiltins.c b/builtins/mkbuiltins.c
  
    array_add ((char *)new, defs->builtins);
    building_builtin = 1;
-@@ -1275,13 +1290,14 @@ write_builtins (defs, structfile, externfile)
+@@ -1212,13 +1227,14 @@ write_builtins (DEF_FILE *defs, FILE *structfile, FILE *externfile)
  		  else
  		    fprintf (structfile, "(sh_builtin_func_t *)0x0, ");
  
@@ -77,7 +77,7 @@ diff --git a/builtins/mkbuiltins.c b/builtins/mkbuiltins.c
  		    document_name (builtin));
  
  		  /* Don't translate short document summaries that are identical
-@@ -1678,6 +1694,13 @@ is_arrayvar_builtin (name)
+@@ -1597,6 +1613,13 @@ is_arrayvar_builtin (char *name)
    return (_find_in_table (name, arrayvar_builtins));
  }
  
@@ -90,11 +90,11 @@ diff --git a/builtins/mkbuiltins.c b/builtins/mkbuiltins.c
 +
  #if !defined (HAVE_RENAME)
  static int
- rename (from, to)
+ rename (char *from, char *to)
 diff --git a/doc/bash.1 b/doc/bash.1
 --- a/doc/bash.1
 +++ b/doc/bash.1
-@@ -239,6 +239,14 @@ The shell becomes restricted (see
+@@ -276,6 +276,14 @@ The shell becomes restricted (see
  .B "RESTRICTED SHELL"
  below).
  .TP
@@ -112,8 +112,8 @@ diff --git a/doc/bash.1 b/doc/bash.1
 diff --git a/doc/bashref.texi b/doc/bashref.texi
 --- a/doc/bashref.texi
 +++ b/doc/bashref.texi
-@@ -6927,6 +6927,13 @@ standard.  @xref{Bash POSIX Mode}, for a description of the Bash
- @item --restricted
+@@ -7812,6 +7812,13 @@ standard.
+ Equivalent to @option{-r}.
  Make the shell a restricted shell (@pxref{The Restricted Shell}).
  
 +@item --rpm-requires
@@ -124,12 +124,12 @@ diff --git a/doc/bashref.texi b/doc/bashref.texi
 +are not parsed so some dependencies may be missed.
 +
  @item --verbose
- Equivalent to @option{-v}.  Print shell input lines as they're read.
- 
+ Equivalent to @option{-v}.
+ Print shell input lines as they're read.
 diff --git a/eval.c b/eval.c
 --- a/eval.c
 +++ b/eval.c
-@@ -138,7 +138,8 @@ reader_loop ()
+@@ -146,7 +146,8 @@ reader_loop (void)
  
        if (read_command () == 0)
  	{
@@ -142,7 +142,7 @@ diff --git a/eval.c b/eval.c
 diff --git a/execute_cmd.c b/execute_cmd.c
 --- a/execute_cmd.c
 +++ b/execute_cmd.c
-@@ -561,6 +561,8 @@ async_redirect_stdin ()
+@@ -612,6 +612,8 @@ async_redirect_stdin (void)
  
  #define DESCRIBE_PID(pid) do { if (interactive) describe_pid (pid); } while (0)
  
@@ -151,7 +151,7 @@ diff --git a/execute_cmd.c b/execute_cmd.c
  /* Execute the command passed in COMMAND, perhaps doing it asynchronously.
     COMMAND is exactly what read_command () places into GLOBAL_COMMAND.
     ASYNCHRONOUS, if non-zero, says to do this command in the background.
-@@ -592,7 +594,13 @@ execute_command_internal (command, asynchronous, pipe_in, pipe_out,
+@@ -638,7 +640,13 @@ execute_command_internal (COMMAND *command, int asynchronous, int pipe_in, int p
  
    if (breaking || continuing)
      return (last_command_exit_value);
@@ -166,9 +166,9 @@ diff --git a/execute_cmd.c b/execute_cmd.c
      return (last_command_exit_value);
    if (command == 0)
      return (EXECUTION_SUCCESS);
-@@ -2883,7 +2891,7 @@ execute_for_command (for_command)
-   save_line_number = line_number;
-   if (check_identifier (for_command->name, 1) == 0)
+@@ -3505,7 +3513,7 @@ execute_select_command (SELECT_COM *select_command)
+ 
+   if (check_identifier (select_command->name, 1) == 0)
      {
 -      if (posixly_correct && interactive_shell == 0)
 +      if (posixly_correct && interactive_shell == 0 && rpm_requires == 0)
@@ -200,7 +200,7 @@ diff --git a/make_cmd.c b/make_cmd.c
  #include "execute_cmd.h"
  #include "parser.h"
  #include "flags.h"
-@@ -839,6 +841,30 @@ make_coproc_command (name, command)
+@@ -797,6 +799,30 @@ make_coproc_command (char *name, COMMAND *command)
    return (make_command (cm_coproc, (SIMPLE_COM *)temp));
  }
  
@@ -231,7 +231,7 @@ diff --git a/make_cmd.c b/make_cmd.c
  /* Reverse the word list and redirection list in the simple command
     has just been parsed.  It seems simpler to do this here the one
     time then by any other method that I can think of. */
-@@ -856,6 +882,28 @@ clean_simple_command (command)
+@@ -813,6 +839,28 @@ clean_simple_command (COMMAND *command)
  	REVERSE_LIST (command->value.Simple->redirects, REDIRECT *);
      }
  
@@ -263,9 +263,9 @@ diff --git a/make_cmd.c b/make_cmd.c
 diff --git a/shell.c b/shell.c
 --- a/shell.c
 +++ b/shell.c
-@@ -196,6 +196,9 @@ int have_devfd = 0;
- /* The name of the .(shell)rc file. */
- static char *bashrc_file = DEFAULT_BASHRC;
+@@ -205,6 +205,9 @@ int have_devfd = 0;
+ /* The name of the .(shell)rc file, DEFAULT_BASHRC is sourced by default */
+ static char *bashrc_file;
  
 +/* Non-zero if we are finding the scripts requirements. */
 +int rpm_requires;
@@ -273,7 +273,7 @@ diff --git a/shell.c b/shell.c
  /* Non-zero means to act more like the Bourne shell on startup. */
  static int act_like_sh;
  
-@@ -266,6 +269,7 @@ static const struct {
+@@ -272,6 +275,7 @@ static const struct {
    { "protected", Int, &protected_mode, (char **)0x0 },
  #endif
    { "rcfile", Charp, (int *)0x0, &bashrc_file },
@@ -281,7 +281,7 @@ diff --git a/shell.c b/shell.c
  #if defined (RESTRICTED_SHELL)
    { "restricted", Int, &restricted, (char **)0x0 },
  #endif
-@@ -510,6 +514,12 @@ main (argc, argv, env)
+@@ -510,6 +514,12 @@ main (int argc, char **argv, char **env)
      read_but_dont_execute = 1;
  #endif
  
@@ -297,9 +297,9 @@ diff --git a/shell.c b/shell.c
 diff --git a/shell.h b/shell.h
 --- a/shell.h
 +++ b/shell.h
-@@ -100,6 +100,7 @@ extern int interactive, interactive_shell;
- extern int startup_state;
+@@ -105,6 +105,7 @@ extern int startup_state;
  extern int reading_shell_script;
+ extern int ssh_reading_startup_files;
  extern int shell_initialized;
 +extern int rpm_requires;
  extern int bash_argv_initialized;
