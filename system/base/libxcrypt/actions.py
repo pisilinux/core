@@ -9,8 +9,23 @@ from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
+import os
+
+arch = "x86-64" if get.ARCH() == "x86_64" and not get.buildTYPE() == "emul32" else "i686"
+defaultflags = "-O3 -g -fasynchronous-unwind-tables -mtune=generic -march=%s" % arch
+if get.buildTYPE() == "emul32": defaultflags += " -m32"
 
 def setup():
+    shelltools.export("LANGUAGE","C")
+    shelltools.export("LANG","C")
+    shelltools.export("LC_ALL","C")
+
+    shelltools.export("CC", "gcc %s " % defaultflags)
+    shelltools.export("CXX", "g++ %s " % defaultflags)
+
+    shelltools.export("CFLAGS", defaultflags)
+    shelltools.export("CXXFLAGS", defaultflags)
+
     shelltools.system("mkdir build-libxcrypt build-libxcrypt-compat")
 
     if not get.buildTYPE() == "emul32":
@@ -35,7 +50,7 @@ def setup():
         shelltools.cd("..")
 
     if get.buildTYPE() == "emul32":
-        shelltools.export("CC", "%s -m32" % get.CC())
+        # shelltools.export("CC", "%s -m32" % get.CC())
         shelltools.export("PKG_CONFIG_PATH", "/usr/lib32/pkgconfig")
 
         shelltools.cd("build-libxcrypt")
@@ -45,7 +60,8 @@ def setup():
                            --disable-static \
                            --enable-hashes=strong,glibc \
                            --enable-obsolete-api=no \
-                           --disable-failure-tokens")
+                           --disable-failure-tokens \
+                           --enable-multi-arch i686-pc-linux-gnu")
 
         shelltools.cd("..")
 
@@ -57,7 +73,8 @@ def setup():
                           --disable-static \
                           --enable-hashes=strong,glibc \
                           --enable-obsolete-api=glibc \
-                          --disable-failure-tokens")
+                          --disable-failure-tokens \
+                          --enable-multi-arch i686-pc-linux-gnu")
 
         # shelltools.cd("..")
 
@@ -78,6 +95,8 @@ def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     if get.buildTYPE() == "emul32":
+        pisitools.dosym("/usr/lib/libcrypt.so.1.1.0", "/lib/libcrypt.so.1")
+        pisitools.dosym("/usr/lib32/libcrypt.so.1.1.0", "/lib32/libcrypt.so.1")
         return
 
     # Fix conflicts with glibc
