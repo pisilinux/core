@@ -12,50 +12,16 @@
         <IsA>app:console</IsA>
         <Summary>The standard GNU Bourne again shell</Summary>
         <Description>Bash is the GNU Project's Bourne Again SHell, a complete implementation of the IEEE POSIX and Open Group shell specification with interactive command line editing, csh-like features such as history substitution.</Description>
-        <Archive sha1sum="a799460be16c01aeab492b9aa88f5eb7f35c1b9b" type="targz">mirrors://gnu/bash/bash-5.2.tar.gz</Archive>
+        <Archive sha1sum="f55ec1fd62ae33f1b8bf4eb6527e0fa53363e481" type="targz">mirrors://gnu/bash/bash-5.3.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>ncurses-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <!-- Official Patches -->
 
-            <Patch>official/bash52-001.patch</Patch>
-            <Patch>official/bash52-002.patch</Patch>
-            <Patch>official/bash52-003.patch</Patch>
-            <Patch>official/bash52-004.patch</Patch>
-            <Patch>official/bash52-005.patch</Patch>
-            <Patch>official/bash52-006.patch</Patch>
-            <Patch>official/bash52-007.patch</Patch>
-            <Patch>official/bash52-008.patch</Patch>
-            <Patch>official/bash52-009.patch</Patch>
-            <Patch>official/bash52-010.patch</Patch>
-            <Patch>official/bash52-011.patch</Patch>
-            <Patch>official/bash52-012.patch</Patch>
-            <Patch>official/bash52-013.patch</Patch>
-            <Patch>official/bash52-014.patch</Patch>
-            <Patch>official/bash52-015.patch</Patch>
-            <Patch>official/bash52-016.patch</Patch>
-            <Patch>official/bash52-017.patch</Patch>
-            <Patch>official/bash52-018.patch</Patch>
-            <Patch>official/bash52-019.patch</Patch>
-            <Patch>official/bash52-020.patch</Patch>
-            <Patch>official/bash52-021.patch</Patch>
-            <Patch>official/bash52-022.patch</Patch>
-            <Patch>official/bash52-023.patch</Patch>
-            <Patch>official/bash52-024.patch</Patch>
-            <Patch>official/bash52-025.patch</Patch>
-            <Patch>official/bash52-026.patch</Patch>
-            <Patch>official/bash52-027.patch</Patch>
-            <Patch>official/bash52-028.patch</Patch>
-            <Patch>official/bash52-029.patch</Patch>
-            <Patch>official/bash52-030.patch</Patch>
-            <Patch>official/bash52-031.patch</Patch>
-            <Patch>official/bash52-032.patch</Patch>
-            <Patch>official/bash52-033.patch</Patch>
-            <Patch>official/bash52-034.patch</Patch>
-            <Patch>official/bash52-035.patch</Patch>
-            <Patch>official/bash52-036.patch</Patch>
-            <Patch>official/bash52-037.patch</Patch>
+            <Patch>official/bash53-001.patch</Patch>
+            <Patch>official/bash53-002.patch</Patch>
+            <Patch>official/bash53-003.patch</Patch>
 
         <!-- Fedora patches -->
 <!--             <Patch level="1">fedora/bash-2.03-paths.patch</Patch> -->
@@ -71,13 +37,13 @@
             <Patch level="1">fedora/bash-4.2-coverity.patch</Patch>
             <Patch level="1">fedora/bash-4.2-manpage_trap.patch</Patch>
             <Patch level="1">fedora/bash-4.2-rc2-logout.patch</Patch>
-            <Patch level="1">fedora/bash-4.2-size_type.patch</Patch>
+<!--             <Patch level="1">fedora/bash-4.2-size_type.patch</Patch> -->
             <Patch level="1">fedora/bash-4.3-man-ulimit.patch</Patch>
             <Patch level="1">fedora/bash-4.3-memleak-lc_all.patch</Patch>
             <Patch level="1">fedora/bash-4.3-noecho.patch</Patch>
             <Patch level="1">fedora/bash-4.4-no-loadable-builtins.patch</Patch>
             <Patch level="1">fedora/bash-5.0-syslog-history.patch</Patch>
-            <Patch level="1">fedora/bash-requires.patch</Patch>
+<!--             <Patch level="1">fedora/bash-requires.patch</Patch> -->
             <Patch level="1">fedora/bash-setlocale.patch</Patch>
             <Patch level="1">fedora/bash-tty-tests.patch</Patch>
             
@@ -105,6 +71,13 @@
     </Package>
 
     <History>
+        <Update release="19">
+            <Date>2025-11-05</Date>
+            <Version>5.3.3</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="18">
             <Date>2024-09-24</Date>
             <Version>5.2.37</Version>
