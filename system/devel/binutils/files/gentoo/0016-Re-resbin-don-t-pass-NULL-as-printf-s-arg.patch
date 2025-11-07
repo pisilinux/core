@@ -1,0 +1,62 @@
+From 3dbec0d8fd2fe3e9549c8ff15c7e6c42a987222d Mon Sep 17 00:00:00 2001
+From: Alan Modra <amodra@gmail.com>
+Date: Sat, 2 Aug 2025 10:12:21 +0930
+Subject: [PATCH 16/23] Re: resbin: don't pass NULL as printf %s arg
+
+Commit c6c8d0b82175 went completely the wrong way.  "key" needs to be
+NULL as that reads a different type of data.
+
+	PR 33244
+	* resbin.c (get_version_header): Don't pass a NULL key on to
+	toosmall.
+	(bin_to_res_version): Restore NULL key cases.
+
+(cherry picked from commit 891d1654d7314fa520f708dbc5f1bf855d15bd40)
+(cherry picked from commit b09f71c1c4680a639ab83bb273aea1f3f4380a6a)
+---
+ binutils/resbin.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/binutils/resbin.c b/binutils/resbin.c
+index 889126e9e32..fa77cd43d23 100644
+--- a/binutils/resbin.c
++++ b/binutils/resbin.c
+@@ -1052,7 +1052,7 @@ get_version_header (windres_bfd *wrbfd, const bfd_byte *data,
+ {
+   if (length < 8)
+     {
+-      toosmall (key);
++      toosmall (key ? key : _("version header"));
+       return false;
+     }
+ 
+@@ -1250,7 +1250,7 @@ bin_to_res_version (windres_bfd *wrbfd, const bfd_byte *data,
+ 
+ 	      vst = res_alloc (sizeof (rc_ver_stringtable));
+ 
+-	      if (!get_version_header (wrbfd, data, length, "version stringtable",
++	      if (!get_version_header (wrbfd, data, length, NULL,
+ 				       &vst->language, &stverlen, &vallen,
+ 				       &type, &off))
+ 		return NULL;
+@@ -1284,7 +1284,7 @@ bin_to_res_version (windres_bfd *wrbfd, const bfd_byte *data,
+ 
+ 		  vs = res_alloc (sizeof (rc_ver_stringinfo));
+ 
+-		  if (!get_version_header (wrbfd, data, length, "version string",
++		  if (!get_version_header (wrbfd, data, length, NULL,
+ 					   &vs->key, &sverlen, &vallen,
+ 					   &type, &off))
+ 		    return NULL;
+@@ -1348,7 +1348,7 @@ bin_to_res_version (windres_bfd *wrbfd, const bfd_byte *data,
+ 	  data += off;
+ 	  length -= off;
+ 
+-	  if (!get_version_header (wrbfd, data, length, "version varfileinfo",
++	  if (!get_version_header (wrbfd, data, length, NULL,
+ 				   &vi->u.var.key, &verlen, &vallen,
+ 				   &type, &off))
+ 	    return NULL;
+-- 
+2.49.1
+

@@ -1,0 +1,194 @@
+From e6c0416cd6abd3b7493630fd1ead68a46121ff74 Mon Sep 17 00:00:00 2001
+From: Nick Alcock <nick.alcock@oracle.com>
+Date: Wed, 23 Jul 2025 14:20:26 +0100
+Subject: [PATCH 23/23] libctf: link: rejig lazy opening to not need weak
+ symbols
+
+The ctf_link_add_ctf API function has a 'lazy opening' feature whereby,
+if you pass in the file but not a CTF archive, the archive is opened
+as late as possible during links.  This is valuable mostly in
+cu-mapped links (a feature not accessible via GNU ld), where it
+ensures that, rather than eventually needing memory for the original
+link inputs, the smushed-together cu-mapped intermediate outputs,
+*and* the final output, we only need enough memory for the smushed-
+together outputs, the final output, and one input, since the inputs
+can be closed immediately after they are smushed together.
+
+(In GNU ld, the feature is useless because it loads all sections into
+memory anyway.)
+
+The lazy-opening feature uses libctf's ctf_open function, which uses
+BFD: so it is not available in libctf-nobfd -- except that I thought I
+had a cunning trick, and used a weak symbol so that if you linked
+libctf-nobfd into your program and then also linked in bfd, the feature
+stayed enabled.
+
+This is silly -- if your program is licensed such that you can link in
+BFD, you can just link in libctf.so and not bother with libctf-nobfd.so
+in the first place.  Worse, the weak symbol usage broke MacOS builds,
+since MacOS's system compiler uses a different means of introducing weak
+symbols.  We could test for and use it, but this is the only place in
+libctf to use weak symbols at all, and the feature of lazy-opening with
+libctf-nobfd is so marginal we might as well drop it: it's almost
+certain there are zero users, certainly fewer users than users of MacOS
+with the system compiler.
+
+While we're at it, simplify things by deleting the never-implemented
+feature (not exposed in the API) to allow linking together raw buffers
+of CTF data.  If we need it we can bring it back, but all it's doing
+right now is complicating the code to no end at all.
+
+libctf/
+	PR libctf/33194
+	* ctf-link.c (ctf_open): Delete weak pragma.
+	(ctf_link_add): Fuse with...
+	(ctf_link_add_ctf): ... this function.  Drop BUF, N args
+	and corresponding unimplemented feature warnings.  Only check
+	NOBFD to see whether lazy loading is available, not PIC as
+	well.
+	(ctf_link_lazy_open): Likewise.
+
+(cherry picked from commit d3e582895b2038feb47b68f1e03efaa0d9dae325)
+(cherry picked from commit 2b2e51a31ec7c48ef830f7e8415b42d4b95e335a)
+---
+ libctf/ctf-link.c | 88 +++++++++++++++--------------------------------
+ 1 file changed, 27 insertions(+), 61 deletions(-)
+
+diff --git a/libctf/ctf-link.c b/libctf/ctf-link.c
+index 2d4401d2210..524ed7e2466 100644
+--- a/libctf/ctf-link.c
++++ b/libctf/ctf-link.c
+@@ -20,10 +20,6 @@
+ #include <ctf-impl.h>
+ #include <string.h>
+ 
+-#if defined (PIC)
+-#pragma weak ctf_open
+-#endif
+-
+ /* CTF linking consists of adding CTF archives full of content to be merged into
+    this one to the current file (which must be writable) by calling
+    ctf_link_add_ctf.  Once this is done, a call to ctf_link will merge the type
+@@ -145,56 +141,33 @@ ctf_link_add_ctf_internal (ctf_dict_t *fp, ctf_archive_t *ctf,
+   return ctf_set_errno (fp, ENOMEM);
+ }
+ 
+-/* Add a file, memory buffer, or unopened file (by name) to a link.
+-
+-   You can call this with:
+-
+-    CTF and NAME: link the passed ctf_archive_t, with the given NAME.
+-    NAME alone: open NAME as a CTF file when needed.
+-    BUF and NAME: open the BUF (of length N) as CTF, with the given NAME.  (Not
+-    yet implemented.)
++/* Add an opened CTF archive or unopened file (by name) to a link.
++   If CTF is NULL and NAME is non-null, an unopened file is meant:
++   otherwise, the specified archive is assumed to have the given NAME.
+ 
+-    Passed in CTF args are owned by the dictionary and will be freed by it.
+-    The BUF arg is *not* owned by the dictionary, and the user should not free
+-    its referent until the link is done.
++   If CTF is NULL, the NAME is only opened when needed, and is closed when no
++   longer needed, so that large cu-mapped links will only use memory for their
++   cu-mapped inputs briefly (compensating for the memory usage of the
++   smushed-together cu-mapped verion).
+ 
+-    The order of calls to this function influences the order of types in the
+-    final link output, but otherwise is not important.
++   Passed in CTF args are owned by the dictionary and will be freed by it.
+ 
+-    Repeated additions of the same NAME have no effect; repeated additions of
+-    different dicts with the same NAME add all the dicts with unique NAMEs
+-    derived from NAME.
++   The order of calls to this function influences the order of types in the
++   final link output, but otherwise is not important.
+ 
+-    Private for now, but may in time become public once support for BUF is
+-    implemented.  */
++   Repeated additions of the same NAME have no effect; repeated additions of
++   different dicts with the same NAME add all the dicts with unique NAMEs
++   derived from NAME.  */
+ 
+-static int
+-ctf_link_add (ctf_dict_t *fp, ctf_archive_t *ctf, const char *name,
+-	      void *buf _libctf_unused_, size_t n _libctf_unused_)
++int
++ctf_link_add_ctf (ctf_dict_t *fp, ctf_archive_t *ctf, const char *name)
+ {
+-  if (buf)
+-    return (ctf_set_errno (fp, ECTF_NOTYET));
+-
+-  if (!((ctf && name && !buf)
+-	|| (name && !buf && !ctf)
+-	|| (buf && name && !ctf)))
++  if (!name)
+     return (ctf_set_errno (fp, EINVAL));
+ 
+-  /* We can only lazily open files if libctf.so is in use rather than
+-     libctf-nobfd.so.  This is a little tricky: in shared libraries, we can use
+-     a weak symbol so that -lctf -lctf-nobfd works, but in static libraries we
+-     must distinguish between the two libraries explicitly.  */
+-
+-#if defined (PIC)
+-  if (!buf && !ctf && name && !ctf_open)
+-    return (ctf_set_errno (fp, ECTF_NEEDSBFD));
+-#elif NOBFD
+-  if (!buf && !ctf && name)
+-    return (ctf_set_errno (fp, ECTF_NEEDSBFD));
+-#endif
+-
+   if (fp->ctf_link_outputs)
+     return (ctf_set_errno (fp, ECTF_LINKADDEDLATE));
++
+   if (fp->ctf_link_inputs == NULL)
+     fp->ctf_link_inputs = ctf_dynhash_create (ctf_hash_string,
+ 					      ctf_hash_eq_string, free,
+@@ -203,22 +176,15 @@ ctf_link_add (ctf_dict_t *fp, ctf_archive_t *ctf, const char *name,
+   if (fp->ctf_link_inputs == NULL)
+     return (ctf_set_errno (fp, ENOMEM));
+ 
+-  return ctf_link_add_ctf_internal (fp, ctf, NULL, name);
+-}
+-
+-/* Add an opened CTF archive or unopened file (by name) to a link.
+-   If CTF is NULL and NAME is non-null, an unopened file is meant:
+-   otherwise, the specified archive is assumed to have the given NAME.
+-
+-    Passed in CTF args are owned by the dictionary and will be freed by it.
++  /* We can only lazily open files if libctf.so is in use rather than
++     libctf-nobfd.so.  */
+ 
+-    The order of calls to this function influences the order of types in the
+-    final link output, but otherwise is not important.  */
++#if NOBFD
++  if (!ctf)
++    return (ctf_set_errno (fp, ECTF_NEEDSBFD));
++#endif
+ 
+-int
+-ctf_link_add_ctf (ctf_dict_t *fp, ctf_archive_t *ctf, const char *name)
+-{
+-  return ctf_link_add (fp, ctf, name, NULL, 0);
++  return ctf_link_add_ctf_internal (fp, ctf, NULL, name);
+ }
+ 
+ /* Lazily open a CTF archive for linking, if not already open.
+@@ -238,12 +204,12 @@ ctf_link_lazy_open (ctf_dict_t *fp, ctf_link_input_t *input)
+     return 1;
+ 
+   /* See ctf_link_add_ctf.  */
+-#if defined (PIC) || !NOBFD
+-  input->clin_arc = ctf_open (input->clin_filename, NULL, &err);
+-#else
++#if NOBFD
+   ctf_err_warn (fp, 0, ECTF_NEEDSBFD, _("cannot open %s lazily"),
+ 		input->clin_filename);
+   return ctf_set_errno (fp, ECTF_NEEDSBFD);
++#else
++  input->clin_arc = ctf_open (input->clin_filename, NULL, &err);
+ #endif
+ 
+   /* Having no CTF sections is not an error.  We just don't need to do
+-- 
+2.49.1
+

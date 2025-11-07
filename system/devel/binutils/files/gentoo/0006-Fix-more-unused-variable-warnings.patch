@@ -1,0 +1,185 @@
+From 879eabba0fcfd56738ecb91743236eda0fb08dde Mon Sep 17 00:00:00 2001
+From: Alan Modra <amodra@gmail.com>
+Date: Fri, 18 Jul 2025 16:53:38 +0930
+Subject: [PATCH 06/23] Fix more unused variable warnings
+
+(cherry picked from commit 9472a0558d67610b07776d34b1dbdcc8e40f393c)
+---
+ gas/config/tc-cr16.c    | 3 ---
+ gas/config/tc-mn10200.c | 5 ++---
+ gas/config/tc-v850.c    | 5 -----
+ gas/config/tc-xgate.c   | 2 --
+ gas/config/tc-z8k.c     | 3 +--
+ gas/ecoff.c             | 3 ---
+ gas/write.c             | 6 +++---
+ 7 files changed, 6 insertions(+), 21 deletions(-)
+
+diff --git a/gas/config/tc-cr16.c b/gas/config/tc-cr16.c
+index 99bc1bdd506..f2d110868f8 100644
+--- a/gas/config/tc-cr16.c
++++ b/gas/config/tc-cr16.c
+@@ -119,7 +119,6 @@ const size_t md_longopts_size = sizeof (md_longopts);
+ static void
+ l_cons (int nbytes)
+ {
+-  int c;
+   expressionS exp;
+ 
+ #ifdef md_flush_pending_output
+@@ -141,7 +140,6 @@ l_cons (int nbytes)
+   md_cons_align (nbytes);
+ #endif
+ 
+-  c = 0;
+   do
+     {
+       unsigned int bits_available = BITS_PER_CHAR * nbytes;
+@@ -236,7 +234,6 @@ l_cons (int nbytes)
+       if ((*(input_line_pointer) == '@') && (*(input_line_pointer +1) == 'c'))
+ 	code_label = 1;
+       emit_expr (&exp, nbytes);
+-      ++c;
+       if ((*(input_line_pointer) == '@') && (*(input_line_pointer +1) == 'c'))
+ 	{
+ 	  input_line_pointer +=3;
+diff --git a/gas/config/tc-mn10200.c b/gas/config/tc-mn10200.c
+index 1eb470295a4..fe54d2161eb 100644
+--- a/gas/config/tc-mn10200.c
++++ b/gas/config/tc-mn10200.c
+@@ -896,7 +896,6 @@ md_assemble (char *str)
+   for (;;)
+     {
+       const char *errmsg = NULL;
+-      int op_idx;
+       char *hold;
+       int extra_shift = 0;
+ 
+@@ -906,9 +905,9 @@ md_assemble (char *str)
+       next_opindex = 0;
+       insn = opcode->opcode;
+       extension = 0;
+-      for (op_idx = 1, opindex_ptr = opcode->operands;
++      for (opindex_ptr = opcode->operands;
+ 	   *opindex_ptr != 0;
+-	   opindex_ptr++, op_idx++)
++	   opindex_ptr++)
+ 	{
+ 	  const struct mn10200_operand *operand;
+ 	  expressionS ex;
+diff --git a/gas/config/tc-v850.c b/gas/config/tc-v850.c
+index f73c3bfbab3..176910dfaff 100644
+--- a/gas/config/tc-v850.c
++++ b/gas/config/tc-v850.c
+@@ -344,15 +344,10 @@ v850_comm (int area)
+ 	  int old_subsec;
+ 	  char *pfrag;
+ 	  int align;
+-	  flagword applicable;
+ 
+ 	  old_sec = now_seg;
+ 	  old_subsec = now_subseg;
+ 
+-	  applicable = bfd_applicable_section_flags (stdoutput);
+-
+-	  applicable &= SEC_ALLOC;
+-
+ 	  switch (area)
+ 	    {
+ 	    case SCOMMON_SECTION:
+diff --git a/gas/config/tc-xgate.c b/gas/config/tc-xgate.c
+index 0823ecd93a4..4a7829f4e60 100644
+--- a/gas/config/tc-xgate.c
++++ b/gas/config/tc-xgate.c
+@@ -1123,7 +1123,6 @@ xgate_scan_operands (struct xgate_opcode *opcode, s_operand oprs[])
+   unsigned short oper_mask = 0;
+   int operand_bit_length = 0;
+   unsigned int operand = 0;
+-  char n_operand_bits = 0;
+   char first_operand_equals_second = 0;
+   int i = 0;
+   char c = 0;
+@@ -1139,7 +1138,6 @@ xgate_scan_operands (struct xgate_opcode *opcode, s_operand oprs[])
+ 	{
+ 	  oper_mask <<= 1;
+ 	  oper_mask += 1;
+-	  n_operand_bits++;
+ 	}
+     }
+ 
+diff --git a/gas/config/tc-z8k.c b/gas/config/tc-z8k.c
+index 2980cffd59a..83a732f1335 100644
+--- a/gas/config/tc-z8k.c
++++ b/gas/config/tc-z8k.c
+@@ -1032,7 +1032,6 @@ build_bytes (opcode_entry_type *this_try, struct z8k_op *operand ATTRIBUTE_UNUSE
+ {
+   unsigned char *output_ptr = buffer;
+   int c;
+-  int nibble;
+   unsigned int *class_ptr;
+ 
+   frag_wane (frag_now);
+@@ -1044,7 +1043,7 @@ build_bytes (opcode_entry_type *this_try, struct z8k_op *operand ATTRIBUTE_UNUSE
+   memset (buffer, 0, sizeof (buffer));
+   class_ptr = this_try->byte_info;
+ 
+-  for (nibble = 0; (c = *class_ptr++); nibble++)
++  while ((c = *class_ptr++) != 0)
+     {
+ 
+       switch (c & CLASS_MASK)
+diff --git a/gas/ecoff.c b/gas/ecoff.c
+index 74115959f94..97b909364a9 100644
+--- a/gas/ecoff.c
++++ b/gas/ecoff.c
+@@ -3606,7 +3606,6 @@ ecoff_build_lineno (const struct ecoff_debug_swap *backend,
+   efdr_t *file;
+   proc_t *proc;
+   unsigned long c;
+-  long iline;
+   long totcount;
+   lineno_list_t first;
+   lineno_list_t *local_first_lineno = first_lineno;
+@@ -3620,7 +3619,6 @@ ecoff_build_lineno (const struct ecoff_debug_swap *backend,
+   proc = NULL;
+   last = NULL;
+   c = offset;
+-  iline = 0;
+   totcount = 0;
+ 
+   /* FIXME?  Now that MIPS embedded-PIC is gone, it may be safe to
+@@ -3800,7 +3798,6 @@ ecoff_build_lineno (const struct ecoff_debug_swap *backend,
+ 	  ++c;
+ 	}
+ 
+-      ++iline;
+       last = l;
+     }
+ 
+diff --git a/gas/write.c b/gas/write.c
+index 455dc446a01..c56ad28ea51 100644
+--- a/gas/write.c
++++ b/gas/write.c
+@@ -2242,7 +2242,7 @@ write_object_file (void)
+ 	char *table_ptr;
+ 	addressT table_addr;
+ 	addressT from_addr, to_addr;
+-	int n, m;
++	int n;
+ 
+ 	subseg_change (lie->seg, lie->subseg);
+ 	fragP = lie->dispfrag;
+@@ -2267,9 +2267,9 @@ write_object_file (void)
+ 	table_ptr += md_short_jump_size;
+ 	table_addr += md_short_jump_size;
+ 
+-	for (m = 0;
++	for (;
+ 	     lie && lie->dispfrag == fragP;
+-	     m++, lie = lie->next_broken_word)
++	     lie = lie->next_broken_word)
+ 	  {
+ 	    if (lie->added == 2)
+ 	      continue;
+-- 
+2.49.1
+

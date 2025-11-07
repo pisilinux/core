@@ -1,0 +1,200 @@
+From 29996106c19da84c522dbfa9d986f0e18540a9fc Mon Sep 17 00:00:00 2001
+From: Alan Modra <amodra@gmail.com>
+Date: Fri, 18 Jul 2025 14:40:17 +0930
+Subject: [PATCH 05/23] Fix unused variable warnings
+
+(cherry picked from commit 1cfce7750aefc84768e143076bac239134ceb40d)
+---
+ bfd/coff-mips.c        | 3 +--
+ bfd/elf32-arm.c        | 5 ++---
+ bfd/elf32-bfin.c       | 3 +--
+ bfd/elf32-csky.c       | 5 ++---
+ bfd/elf32-microblaze.c | 7 ++-----
+ bfd/elf32-nds32.c      | 5 ++---
+ bfd/elf64-ppc.c        | 5 ++---
+ bfd/elfnn-aarch64.c    | 3 +--
+ 8 files changed, 13 insertions(+), 23 deletions(-)
+
+diff --git a/bfd/coff-mips.c b/bfd/coff-mips.c
+index 8c4d4f7bf73..1213a159358 100644
+--- a/bfd/coff-mips.c
++++ b/bfd/coff-mips.c
+@@ -801,7 +801,6 @@ mips_relocate_section (bfd *output_bfd,
+   bool gp_undefined;
+   struct external_reloc *ext_rel;
+   struct external_reloc *ext_rel_end;
+-  unsigned int i;
+   bool got_lo;
+   struct internal_reloc lo_int_rel;
+   bfd_size_type amt;
+@@ -861,7 +860,7 @@ mips_relocate_section (bfd *output_bfd,
+ 
+   ext_rel = (struct external_reloc *) external_relocs;
+   ext_rel_end = ext_rel + input_section->reloc_count;
+-  for (i = 0; ext_rel < ext_rel_end; ext_rel++, i++)
++  for (; ext_rel < ext_rel_end; ext_rel++)
+     {
+       struct internal_reloc int_rel;
+       bool use_lo = false;
+diff --git a/bfd/elf32-arm.c b/bfd/elf32-arm.c
+index c913f2b4c7d..a8fca76eb09 100644
+--- a/bfd/elf32-arm.c
++++ b/bfd/elf32-arm.c
+@@ -6527,16 +6527,15 @@ elf32_arm_size_stubs (bfd *output_bfd,
+   while (1)
+     {
+       bfd *input_bfd;
+-      unsigned int bfd_indx;
+       asection *stub_sec;
+       enum elf32_arm_stub_type stub_type;
+       bool stub_changed = false;
+       unsigned prev_num_a8_fixes = num_a8_fixes;
+ 
+       num_a8_fixes = 0;
+-      for (input_bfd = info->input_bfds, bfd_indx = 0;
++      for (input_bfd = info->input_bfds;
+ 	   input_bfd != NULL;
+-	   input_bfd = input_bfd->link.next, bfd_indx++)
++	   input_bfd = input_bfd->link.next)
+ 	{
+ 	  Elf_Internal_Shdr *symtab_hdr;
+ 	  asection *section;
+diff --git a/bfd/elf32-bfin.c b/bfd/elf32-bfin.c
+index 7ac95a0634e..3cb554a717d 100644
+--- a/bfd/elf32-bfin.c
++++ b/bfd/elf32-bfin.c
+@@ -1376,7 +1376,6 @@ bfin_relocate_section (bfd * output_bfd,
+   asection *sgot;
+   Elf_Internal_Rela *rel;
+   Elf_Internal_Rela *relend;
+-  int i = 0;
+ 
+   dynobj = elf_hash_table (info)->dynobj;
+   symtab_hdr = &elf_tdata (input_bfd)->symtab_hdr;
+@@ -1387,7 +1386,7 @@ bfin_relocate_section (bfd * output_bfd,
+ 
+   rel = relocs;
+   relend = relocs + input_section->reloc_count;
+-  for (; rel < relend; rel++, i++)
++  for (; rel < relend; rel++)
+     {
+       int r_type;
+       reloc_howto_type *howto;
+diff --git a/bfd/elf32-csky.c b/bfd/elf32-csky.c
+index 47a63895b55..3f55e7cbbac 100644
+--- a/bfd/elf32-csky.c
++++ b/bfd/elf32-csky.c
+@@ -3446,13 +3446,12 @@ elf32_csky_size_stubs (bfd *output_bfd,
+   while (1)
+     {
+       bfd *input_bfd;
+-      unsigned int bfd_indx;
+       asection *stub_sec;
+       bool stub_changed = false;
+ 
+-      for (input_bfd = info->input_bfds, bfd_indx = 0;
++      for (input_bfd = info->input_bfds;
+ 	   input_bfd != NULL;
+-	   input_bfd = input_bfd->link.next, bfd_indx++)
++	   input_bfd = input_bfd->link.next)
+ 	{
+ 	  Elf_Internal_Shdr *symtab_hdr;
+ 	  asection *section;
+diff --git a/bfd/elf32-microblaze.c b/bfd/elf32-microblaze.c
+index 57c37c53074..db7ed465779 100644
+--- a/bfd/elf32-microblaze.c
++++ b/bfd/elf32-microblaze.c
+@@ -1765,7 +1765,6 @@ microblaze_elf_relax_section (bfd *abfd,
+   Elf_Internal_Rela *irel, *irelend;
+   bfd_byte *contents = NULL;
+   bfd_byte *free_contents = NULL;
+-  int rel_count;
+   unsigned int shndx;
+   size_t i, sym_index;
+   asection *o;
+@@ -1818,8 +1817,7 @@ microblaze_elf_relax_section (bfd *abfd,
+     goto error_return;
+ 
+   irelend = internal_relocs + sec->reloc_count;
+-  rel_count = 0;
+-  for (irel = internal_relocs; irel < irelend; irel++, rel_count++)
++  for (irel = internal_relocs; irel < irelend; irel++)
+     {
+       bfd_vma symval;
+       if ((ELF32_R_TYPE (irel->r_info) != (int) R_MICROBLAZE_64_PCREL)
+@@ -1935,10 +1933,9 @@ microblaze_elf_relax_section (bfd *abfd,
+   if (sdata->relax_count > 0)
+     {
+       shndx = _bfd_elf_section_from_bfd_section (abfd, sec);
+-      rel_count = 0;
+       sdata->relax[sdata->relax_count].addr = sec->size;
+ 
+-      for (irel = internal_relocs; irel < irelend; irel++, rel_count++)
++      for (irel = internal_relocs; irel < irelend; irel++)
+ 	{
+ 	  bfd_vma nraddr;
+ 
+diff --git a/bfd/elf32-nds32.c b/bfd/elf32-nds32.c
+index 3627b30af9c..bcd7c42e300 100644
+--- a/bfd/elf32-nds32.c
++++ b/bfd/elf32-nds32.c
+@@ -4344,7 +4344,6 @@ nds32_elf_late_size_sections (bfd *output_bfd ATTRIBUTE_UNUSED,
+       Elf_Internal_Shdr *symtab_hdr;
+       asection *sgot;
+       char *local_tls_type;
+-      unsigned long symndx;
+       bfd_vma *local_tlsdesc_gotent;
+ 
+       if (bfd_get_flavour (ibfd) != bfd_target_elf_flavour)
+@@ -4386,8 +4385,8 @@ nds32_elf_late_size_sections (bfd *output_bfd ATTRIBUTE_UNUSED,
+       sgot = elf_hash_table (info)->sgot;
+       local_tls_type = elf32_nds32_local_got_tls_type (ibfd);
+       local_tlsdesc_gotent = elf32_nds32_local_tlsdesc_gotent (ibfd);
+-      for (symndx = 0; local_got < end_local_got;
+-	   ++local_got, ++local_tls_type, ++local_tlsdesc_gotent, ++symndx)
++      for (; local_got < end_local_got;
++	   ++local_got, ++local_tls_type, ++local_tlsdesc_gotent)
+ 	{
+ 	  if (*local_got > 0)
+ 	    {
+diff --git a/bfd/elf64-ppc.c b/bfd/elf64-ppc.c
+index 3e768dca8d6..00c1c32ffd2 100644
+--- a/bfd/elf64-ppc.c
++++ b/bfd/elf64-ppc.c
+@@ -13819,15 +13819,14 @@ ppc64_elf_size_stubs (struct bfd_link_info *info)
+   while (1)
+     {
+       bfd *input_bfd;
+-      unsigned int bfd_indx;
+       struct map_stub *group;
+ 
+       htab->stub_iteration += 1;
+       htab->relr_count = 0;
+ 
+-      for (input_bfd = info->input_bfds, bfd_indx = 0;
++      for (input_bfd = info->input_bfds;
+ 	   input_bfd != NULL;
+-	   input_bfd = input_bfd->link.next, bfd_indx++)
++	   input_bfd = input_bfd->link.next)
+ 	{
+ 	  Elf_Internal_Shdr *symtab_hdr;
+ 	  asection *section;
+diff --git a/bfd/elfnn-aarch64.c b/bfd/elfnn-aarch64.c
+index 9e98215d638..e86f0280c2a 100644
+--- a/bfd/elfnn-aarch64.c
++++ b/bfd/elfnn-aarch64.c
+@@ -8464,10 +8464,9 @@ elfNN_aarch64_modify_headers (bfd *abfd,
+ 			      struct bfd_link_info *info)
+ {
+   struct elf_segment_map *m;
+-  unsigned int segment_count = 0;
+   Elf_Internal_Phdr *p;
+ 
+-  for (m = elf_seg_map (abfd); m != NULL; m = m->next, segment_count++)
++  for (m = elf_seg_map (abfd); m != NULL; m = m->next)
+     {
+       /* We are only interested in the memory tag segment that will be dumped
+ 	 to a core file.  If we have no memory tags or this isn't a core file we
+-- 
+2.49.1
+

@@ -1,0 +1,135 @@
+From b7396b55f673d68766a95f9e60e000d62b398ed0 Mon Sep 17 00:00:00 2001
+From: "H.J. Lu" <hjl.tools@gmail.com>
+Date: Wed, 30 Jul 2025 08:53:11 -0700
+Subject: [PATCH 13/23] strip: Don't check target_defaulted in input BFD
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+The target_defaulted field in BFD is set to true if the target isn't
+specified.  After
+
+commit 717a38e9a02109fcbcb18bb2ec3aa251e2ad0a0d
+Author: H.J. Lu <hjl.tools@gmail.com>
+Date:   Sun May 4 05:12:46 2025 +0800
+
+    strip: Add GCC LTO IR support
+
+the target is set to "plugin" if BFD supports plugin when the target
+isn't specified nor default.  Update strip to check the input target,
+instead of the target_defaulted field in input BFD.
+
+	PR binutils/33230
+	* objcopy.c (copy_object): Add a bool argument, target_defaulted,
+	to indicate if the input target isn't specified nor default.
+	Check it instead of ibfd->target_defaulted.
+	(copy_archive): Add a bool argument, target_defaulted, and pass
+	it to copy_object.
+	(copy_file): Set target_defaulted to true if the input target
+	isn't specified and pass it to copy_archive and copy_object.
+	* testsuite/binutils-all/x86-64/pr33230.obj.bz2: New file.
+	* testsuite/binutils-all/x86-64/x86-64.exp: Run PR binutils/33230
+	tests.
+
+The test case has been removed in Gentoo since it generates a git
+binary diff. -Andreas K. Hüttel (dilfridge)
+
+Signed-off-by: H.J. Lu <hjl.tools@gmail.com>
+(cherry picked from commit 8e885fece150ee97e5b0e78363e7fe9888ae9c29)
+---
+ binutils/objcopy.c | 23 +++++++++++++++--------
+ 1 file changed, 15 insertions(+), 8 deletions(-)
+
+diff --git a/binutils/objcopy.c b/binutils/objcopy.c
+index 905ce917708..5774711abe6 100644
+--- a/binutils/objcopy.c
++++ b/binutils/objcopy.c
+@@ -2661,7 +2661,8 @@ set_long_section_mode (bfd *output_bfd, bfd *input_bfd, enum long_section_name_h
+    Returns TRUE upon success, FALSE otherwise.  */
+ 
+ static bool
+-copy_object (bfd *ibfd, bfd *obfd, const bfd_arch_info_type *input_arch)
++copy_object (bfd *ibfd, bfd *obfd, const bfd_arch_info_type *input_arch,
++	     bool target_defaulted)
+ {
+   bfd_vma start;
+   long symcount;
+@@ -2812,7 +2813,7 @@ copy_object (bfd *ibfd, bfd *obfd, const bfd_arch_info_type *input_arch)
+       imach = 0;
+     }
+   if (!bfd_set_arch_mach (obfd, iarch, imach)
+-      && (ibfd->target_defaulted
++      && (target_defaulted
+ 	  || bfd_get_arch (ibfd) != bfd_get_arch (obfd)))
+     {
+       if (bfd_get_arch (ibfd) == bfd_arch_unknown)
+@@ -3615,7 +3616,8 @@ fail:
+ static bool
+ copy_archive (bfd *ibfd, bfd *obfd, const char *output_target,
+ 	      bool force_output_target,
+-	      const bfd_arch_info_type *input_arch)
++	      const bfd_arch_info_type *input_arch,
++	      bool target_defaulted)
+ {
+   struct name_list
+     {
+@@ -3772,7 +3774,8 @@ copy_archive (bfd *ibfd, bfd *obfd, const char *output_target,
+ #endif
+       if (ok_object)
+ 	{
+-	  ok = copy_object (this_element, output_element, input_arch);
++	  ok = copy_object (this_element, output_element, input_arch,
++			    target_defaulted);
+ 
+ 	  if (!ok && bfd_get_arch (this_element) == bfd_arch_unknown)
+ 	    /* Try again as an unknown object file.  */
+@@ -3872,6 +3875,8 @@ copy_file (const char *input_filename, const char *output_filename, int ofd,
+   char **core_matching;
+   off_t size = get_file_size (input_filename);
+   const char *target = input_target;
++  bool target_defaulted = (!input_target
++			   || strcmp (input_target, "default") == 0);
+ 
+   if (size < 1)
+     {
+@@ -3948,7 +3953,8 @@ copy_file (const char *input_filename, const char *output_filename, int ofd,
+ 
+       /* bfd_get_target does not return the correct value until
+ 	 bfd_check_format succeeds.  */
+-      if (output_target == NULL)
++      if (output_target == NULL
++	  || strcmp (output_target, "default") == 0)
+ 	{
+ 	  output_target = bfd_get_target (ibfd);
+ 	  force_output_target = false;
+@@ -3979,7 +3985,7 @@ copy_file (const char *input_filename, const char *output_filename, int ofd,
+ 	}
+ 
+       if (!copy_archive (ibfd, obfd, output_target, force_output_target,
+-			 input_arch))
++			 input_arch, target_defaulted))
+ 	status = 1;
+     }
+   else if (
+@@ -4003,7 +4009,8 @@ copy_file (const char *input_filename, const char *output_filename, int ofd,
+ 
+       /* bfd_get_target does not return the correct value until
+ 	 bfd_check_format succeeds.  */
+-      if (output_target == NULL)
++      if (output_target == NULL
++	  || strcmp (output_target, "default") == 0)
+ 	output_target = bfd_get_target (ibfd);
+ 
+       if (ofd >= 0)
+@@ -4034,7 +4041,7 @@ copy_file (const char *input_filename, const char *output_filename, int ofd,
+       else
+ #endif
+ 	{
+-	  if (! copy_object (ibfd, obfd, input_arch))
++	  if (! copy_object (ibfd, obfd, input_arch, target_defaulted))
+ 	    status = 1;
+ 
+ 	  /* PR 17512: file: 0f15796a.
+-- 
+2.49.1
+
