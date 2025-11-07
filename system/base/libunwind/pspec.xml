@@ -12,10 +12,13 @@
         <IsA>library</IsA>
         <Summary>Call chain tracer of a program</Summary>
         <Description>libunwind is a portable and efficient C programming interface (API) to determine the call chain of a program.</Description>
-        <Archive sha1sum="5c061a408d4b196dcb97212c819179a9983194ab" type="targz">https://github.com/libunwind/libunwind/releases/download/v1.8.1/libunwind-1.8.1.tar.gz</Archive>
+        <Archive sha1sum="db8a09f488d628072cb67df3a6eb6fa224b0af5e" type="targz">https://github.com/libunwind/libunwind/releases/download/v1.8.2/libunwind-1.8.2.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>xz-devel</Dependency>
         </BuildDependencies>
+        <Patches>
+            <Patch level="1">b67d508a.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
@@ -61,6 +64,13 @@
     </Package>
     
     <History>
+        <Update release="13">
+            <Date>2025-11-06</Date>
+            <Version>1.8.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="12">
             <Date>2024-08-17</Date>
             <Version>1.8.1</Version>
