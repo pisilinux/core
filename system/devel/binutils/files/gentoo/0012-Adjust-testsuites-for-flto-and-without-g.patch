@@ -1,0 +1,210 @@
+From 3d6a0b4a3f6b0582781979062cc6730e858997ae Mon Sep 17 00:00:00 2001
+From: "H.J. Lu" <hjl.tools@gmail.com>
+Date: Mon, 10 Mar 2025 17:07:16 -0700
+Subject: [PATCH 12/23] Adjust testsuites for -flto and without -g
+
+Adjust testsuites for binutils built with -flto and without -g:
+
+1. Pass -fno-lto to objcopy tests which don't work with LTO.
+2. Update gprof testsuite to avoid LTO and compile with -g for line
+number info checked by tst-gmon-gprof-l.sh.
+3. Append $NOLTO_CFLAGS in ctf.exp.
+4. For libctf, filter out -flto in CFLAGS for "make check" and also
+prune lto-wrapper warnings.
+
+binutils/
+
+	PR binutils/32773
+	* testsuite/binutils-all/objcopy.exp (no_lto_flags): New.
+	(strip_test): Pass $no_lto_flags to target_compile.
+	(strip_test_with_saving_a_symbol): Likewise.
+	(objcopy_test_without_global_symbol): Likewise.
+
+gprof/
+
+	PR binutils/32773
+	PR gprof/32779
+	* testsuite/Makefile.am (GPROF_FLAGS): Add -g.
+	(COMPILE): Set to "$(CC) $(AM_CFLAGS) $(GPROF_FLAGS)".
+	(LINK) Set to "$(CC) $(AM_CFLAGS) $(GPROF_FLAGS) $(AM_LDFLAGS)
+	$(LDFLAGS) -o $@".
+	* testsuite/Makefile.in: Regenerated.
+
+ld/
+
+	PR binutils/32773
+	* testsuite/ld-ctf/ctf.exp (old_CFLAGS): New.
+	(CFLAGS_FOR_TARGET): Append $NOLTO_CFLAGS.
+
+libctf/
+
+	PR binutils/32773
+	* Makefile.am (check-DEJAGNU): Filter out -flto in CFLAGS.
+	* Makefile.in: Regenerated.
+	* testsuite/lib/ctf-lib.exp (prune_warnings_lto): New.
+	(run_lookup_test): Replace prune_warnings with
+	prune_warnings_lto.
+	(run_lookup_test): Likewise.
+
+Signed-off-by: H.J. Lu <hjl.tools@gmail.com>
+---
+ binutils/testsuite/binutils-all/objcopy.exp | 14 +++++++++++---
+ ld/testsuite/ld-ctf/ctf.exp                 |  5 +++++
+ libctf/Makefile.am                          |  3 ++-
+ libctf/Makefile.in                          |  3 ++-
+ libctf/testsuite/lib/ctf-lib.exp            | 14 ++++++++++++--
+ 5 files changed, 32 insertions(+), 7 deletions(-)
+
+diff --git a/binutils/testsuite/binutils-all/objcopy.exp b/binutils/testsuite/binutils-all/objcopy.exp
+index 6aa6d2d9fe7..9371d928d60 100644
+--- a/binutils/testsuite/binutils-all/objcopy.exp
++++ b/binutils/testsuite/binutils-all/objcopy.exp
+@@ -36,6 +36,11 @@ if ![is_remote host] {
+     set copyfile copy
+ }
+ 
++set no_lto_flags "additional_flags=-fno-lto"
++if { [target_compile $srcdir/$subdir/testprog.c tmpdir/testprog.o object $no_lto_flags] != "" } {
++    set no_lto_flags ""
++}
++
+ # Test that objcopy does not modify a file when copying it.
+ # "object" or "executable" values for type are supported.
+ 
+@@ -516,10 +521,11 @@ proc strip_test { } {
+     global srcdir
+     global subdir
+     global READELF
++    global no_lto_flags
+ 
+     set test "strip"
+ 
+-    if { [target_compile $srcdir/$subdir/testprog.c tmpdir/testprog.o object debug] != "" } {
++    if { [target_compile $srcdir/$subdir/testprog.c tmpdir/testprog.o object "debug $no_lto_flags"] != "" } {
+ 	untested $test
+ 	return
+     }
+@@ -628,10 +634,11 @@ proc strip_test_with_saving_a_symbol { } {
+     global NMFLAGS
+     global srcdir
+     global subdir
++    global no_lto_flags
+ 
+     set test "strip with saving a symbol"
+ 
+-    if { [target_compile $srcdir/$subdir/testprog.c tmpdir/testprog.o object debug] != "" } {
++    if { [target_compile $srcdir/$subdir/testprog.c tmpdir/testprog.o object "debug $no_lto_flags"] != "" } {
+ 	untested $test
+ 	return
+     }
+@@ -1462,10 +1469,11 @@ proc objcopy_test_without_global_symbol { } {
+     global OBJDUMPFLAGS
+     global srcdir
+     global subdir
++    global no_lto_flags
+ 
+     set test "strip without global symbol "
+ 
+-    if { [target_compile $srcdir/$subdir/pr19547.c tmpdir/pr19547.o object debug] != "" } {
++    if { [target_compile $srcdir/$subdir/pr19547.c tmpdir/pr19547.o object "debug $no_lto_flags"] != "" } {
+ 	untested $test
+ 	return
+     }
+diff --git a/ld/testsuite/ld-ctf/ctf.exp b/ld/testsuite/ld-ctf/ctf.exp
+index c314f2995af..08b47d2db18 100644
+--- a/ld/testsuite/ld-ctf/ctf.exp
++++ b/ld/testsuite/ld-ctf/ctf.exp
+@@ -33,6 +33,9 @@ if ![check_shared_lib_support] {
+     return 0
+ }
+ 
++set old_CFLAGS "$CFLAGS_FOR_TARGET"
++append CFLAGS_FOR_TARGET " $NOLTO_CFLAGS"
++
+ if {[info exists env(LC_ALL)]} {
+     set old_lc_all $env(LC_ALL)
+ }
+@@ -55,3 +58,5 @@ if {[info exists old_lc_all]} {
+ } else {
+     unset env(LC_ALL)
+ }
++
++set CFLAGS_FOR_TARGET "$old_CFLAGS"
+diff --git a/libctf/Makefile.am b/libctf/Makefile.am
+index 12301277275..26980667cc3 100644
+--- a/libctf/Makefile.am
++++ b/libctf/Makefile.am
+@@ -114,11 +114,12 @@ check-DEJAGNU: site.exp development.exp
+ 	else \
+ 	  TEST_CROSS=yes; \
+ 	fi; \
++	TEST_CFLAGS=`echo "$(CFLAGS)" | sed -e "s/-flto[^ \t]*//"`; \
+ 	runtest=$(RUNTEST); \
+ 	if $(SHELL) -c "$$runtest --version" > /dev/null 2>&1; then \
+ 	  $$runtest --tool $(DEJATOOL) --srcdir $${srcroot}/testsuite \
+ 		CC="$(CC)" CC_FOR_TARGET="$(CC_FOR_TARGET)" TEST_CROSS="$${TEST_CROSS}" \
+-		CFLAGS="$(CFLAGS) -I$(INCDIR) -I$(srcdir) -I$(builddir) -I$(builddir)/../bfd $(ZLIBINC)" \
++		CFLAGS="$$TEST_CFLAGS -I$(INCDIR) -I$(srcdir) -I$(builddir) -I$(builddir)/../bfd $(ZLIBINC)" \
+ 		LIBS="$(libctf_nobfd_la_LIBADD) $(LIBS)" $(RUNTESTFLAGS); \
+ 	else echo "WARNING: could not find \`runtest'" 1>&2; :;\
+ 	fi
+diff --git a/libctf/Makefile.in b/libctf/Makefile.in
+index 639d7147b02..812134c70c9 100644
+--- a/libctf/Makefile.in
++++ b/libctf/Makefile.in
+@@ -1826,11 +1826,12 @@ check-DEJAGNU: site.exp development.exp
+ 	else \
+ 	  TEST_CROSS=yes; \
+ 	fi; \
++	TEST_CFLAGS=`echo "$(CFLAGS)" | sed -e "s/-flto[^ \t]*//"`; \
+ 	runtest=$(RUNTEST); \
+ 	if $(SHELL) -c "$$runtest --version" > /dev/null 2>&1; then \
+ 	  $$runtest --tool $(DEJATOOL) --srcdir $${srcroot}/testsuite \
+ 		CC="$(CC)" CC_FOR_TARGET="$(CC_FOR_TARGET)" TEST_CROSS="$${TEST_CROSS}" \
+-		CFLAGS="$(CFLAGS) -I$(INCDIR) -I$(srcdir) -I$(builddir) -I$(builddir)/../bfd $(ZLIBINC)" \
++		CFLAGS="$$TEST_CFLAGS -I$(INCDIR) -I$(srcdir) -I$(builddir) -I$(builddir)/../bfd $(ZLIBINC)" \
+ 		LIBS="$(libctf_nobfd_la_LIBADD) $(LIBS)" $(RUNTESTFLAGS); \
+ 	else echo "WARNING: could not find \`runtest'" 1>&2; :;\
+ 	fi
+diff --git a/libctf/testsuite/lib/ctf-lib.exp b/libctf/testsuite/lib/ctf-lib.exp
+index 64d2a40ad9f..6d3b75e22a2 100644
+--- a/libctf/testsuite/lib/ctf-lib.exp
++++ b/libctf/testsuite/lib/ctf-lib.exp
+@@ -54,6 +54,16 @@ proc compile_link_one_host_cc { src output additional_args } {
+     return [run_native_host_cmd "./libtool --quiet --tag=CC --mode=link $CC $CFLAGS $src -o $output $additional_args" ]
+ }
+ 
++# Also prune lto-wrapper warnings, like
++# lto-wrapper: warning: using serial compilation of 16 LTRANS jobs
++# lto-wrapper: note: see the '-flto' option documentation for more information
++#
++proc prune_warnings_lto { msg } {
++    set msgx "lto-wrapper: (?:warning\:\[^\n\r\]+|note\:\[^\n\r\]+)"
++    regsub -all "$msgx\[\n\r\]*" $msg {} msg
++    return [prune_warnings $msg]
++}
++
+ # run_lookup_test FILE
+ #
+ # Compile with the host compiler and link a .c file into a "lookup" binary, then
+@@ -208,7 +218,7 @@ proc run_lookup_test { name } {
+     set testname $file4log
+ 
+     # Compile and link the lookup program.
+-    set comp_output [prune_warnings [compile_link_one_host_cc $opts(lookup) "tmpdir/lookup" "libctf.la $opts(lookup_link)"]]
++    set comp_output [prune_warnings_lto [compile_link_one_host_cc $opts(lookup) "tmpdir/lookup" "libctf.la $opts(lookup_link)"]]
+ 
+     if { $comp_output != ""} {
+ 	send_log "compilation of lookup program $opts(lookup) failed with <$comp_output>"
+@@ -244,7 +254,7 @@ proc run_lookup_test { name } {
+ 	    }
+ 	}
+ 
+-	set comp_output [prune_warnings [run_host_cmd "$CC_FOR_TARGET" "$CFLAGS_FOR_TARGET $lookup_flags [concat $src] -o $lookup_output"]]
++	set comp_output [prune_warnings_lto [run_host_cmd "$CC_FOR_TARGET" "$CFLAGS_FOR_TARGET $lookup_flags [concat $src] -o $lookup_output"]]
+ 
+ 	if { $comp_output != ""} {
+ 	    send_log "compilation of CTF program [concat $src] failed with <$comp_output>"
+-- 
+2.49.1
+

@@ -1,0 +1,52 @@
+From ad51ff9367bf6111cdb959dec8be10fa336b2fe1 Mon Sep 17 00:00:00 2001
+From: Nick Alcock <nick.alcock@oracle.com>
+Date: Wed, 16 Jul 2025 14:43:25 +0100
+Subject: [PATCH 20/23] libctf: get libctf-nobfd.ver from the right place with
+ Solaris ld
+
+We generate de-commented version scripts for Solaris ld (whose
+-z gnu-version-script linker option does not support comments),
+but after we switched to generating libctf-nobfd.ver itself, we
+failed to adjust this code to pick it up from the new location.
+
+libctf/
+	PR libctf/33161
+	* configure.ac: Fix libctf-nobfd.ver path on Solaris.
+	* configure: Regenerated.
+
+(cherry picked from commit 3ff8956e4bf46ffd638bf12ea4788a858e905023)
+(cherry picked from commit 32830073ea0086ad6f258cd536de680d9c546157)
+---
+ libctf/configure    | 2 +-
+ libctf/configure.ac | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/libctf/configure b/libctf/configure
+index c53c15ec6b8..8ba9d47127e 100755
+--- a/libctf/configure
++++ b/libctf/configure
+@@ -17050,7 +17050,7 @@ if test -n "$decommented_version_script"; then
+    # used by GNU ld.  Use cpp to strip the comments out.  (cpp exists under this
+    # name on all platforms that support ld -z gnu-version-script.)
+    /lib/cpp < $srcdir/libctf.ver > libctf-decommented.ver
+-   /lib/cpp < $srcdir/libctf-nobfd.ver > libctf-nobfd-decommented.ver
++   /lib/cpp < libctf-nobfd.ver > libctf-nobfd-decommented.ver
+    VERSION_FLAGS="$ac_cv_libctf_version_script='libctf-decommented.ver'"
+    VERSION_FLAGS_NOBFD="$ac_cv_libctf_version_script='libctf-nobfd-decommented.ver'"
+ elif test -z "$no_version_script"; then
+diff --git a/libctf/configure.ac b/libctf/configure.ac
+index 435967132d9..3824812e49a 100644
+--- a/libctf/configure.ac
++++ b/libctf/configure.ac
+@@ -311,7 +311,7 @@ if test -n "$decommented_version_script"; then
+    # used by GNU ld.  Use cpp to strip the comments out.  (cpp exists under this
+    # name on all platforms that support ld -z gnu-version-script.)
+    /lib/cpp < $srcdir/libctf.ver > libctf-decommented.ver
+-   /lib/cpp < $srcdir/libctf-nobfd.ver > libctf-nobfd-decommented.ver
++   /lib/cpp < libctf-nobfd.ver > libctf-nobfd-decommented.ver
+    VERSION_FLAGS="$ac_cv_libctf_version_script='libctf-decommented.ver'"
+    VERSION_FLAGS_NOBFD="$ac_cv_libctf_version_script='libctf-nobfd-decommented.ver'"
+ elif test -z "$no_version_script"; then
+-- 
+2.49.1
+

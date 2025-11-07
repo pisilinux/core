@@ -1,0 +1,176 @@
+From 2330d43c431ed74cd12fbba51896eabc5760df81 Mon Sep 17 00:00:00 2001
+From: Nick Alcock <nick.alcock@oracle.com>
+Date: Thu, 17 Jul 2025 17:45:02 +0100
+Subject: [PATCH 22/23] libctf: don't run tests requiring deduplicating linker
+ unless one is in use
+
+Before now, we were relying on gcc -B to repoint GCC at our freshly-built
+linker, and assuming we could use this to run tests that do linker dedup.
+
+This is, alas, not reliable (building --with-ld=/an/absolute/path bypasses
+-B searches for the linker), and we would like the libctf tests in
+particular to not fail if the compiler uses a linker that cannot deduplicate
+(simply skipping such tests).
+
+Add a new testsuite function that tries to link one of the lookup tests'
+testcases (which is known to produce conflicting types, i.e. a dict with
+per-translation-unit children) and then does an objdump and greps it for
+signs of the per-translation-unit children.  If there are none, the linker
+probably just concatenated the sections: i.e., it is not a linker that
+can deduplicate CTF.
+
+libctf/
+	PR libctf/33162
+	* testsuite/config/default.exp (objdump): Introduce.
+	(OBJDUMPFLAGS): Likewise.
+	* testsuite/lib/ctf-lib.exp (check_ctf_linker_dedup): New.
+	* testsuite/libctf-lookup/lookup.exp: Use it.
+	* testsuite/libctf-regression/libctf-repeat-cu.exp: Likewise.
+	* testsuite/libctf-regression/regression.exp: Likewise.
+
+(cherry picked from commit 4983bb052d3a57fe1b43334071ba61a8443bb5aa)
+(cherry picked from commit ae8c1b4241ada295a2a914311c03b239327285b9)
+---
+ libctf/testsuite/config/default.exp           |  8 +++-
+ libctf/testsuite/lib/ctf-lib.exp              | 45 +++++++++++++++++++
+ libctf/testsuite/libctf-lookup/lookup.exp     |  5 +++
+ .../libctf-regression/libctf-repeat-cu.exp    |  5 +++
+ .../libctf-regression/regression.exp          |  5 +++
+ 5 files changed, 67 insertions(+), 1 deletion(-)
+
+diff --git a/libctf/testsuite/config/default.exp b/libctf/testsuite/config/default.exp
+index f24482620b6..d5e51f418ca 100644
+--- a/libctf/testsuite/config/default.exp
++++ b/libctf/testsuite/config/default.exp
+@@ -34,6 +34,10 @@ if ![info exists as] then {
+     set as [findfile $base_dir/../gas/as-new $base_dir/../gas/as-new [transform as]]
+ }
+ 
++if ![info exists objdump] then {
++    set objdump [findfile $base_dir/../binutils/objdump]
++}
++
+ remote_exec host "mkdir -p tmpdir"
+ 
+ # Make symlinks from tmpdir/libctf to the linker and assembler in the
+@@ -63,10 +67,12 @@ if {![info exists CFLAGS_FOR_TARGET]} {
+ if ![info exists AR] then {
+     set AR [findfile $base_dir/../binutils/ar]
+ }
+-
+ if {![info exists OBJDUMP]} {
+     set OBJDUMP [findfile $base_dir/../binutils/objdump]
+ }
++if ![info exists OBJDUMPFLAGS] then {
++    set OBJDUMPFLAGS {}
++}
+ 
+ # load the utility procedures
+ load_lib ctf-lib.exp
+diff --git a/libctf/testsuite/lib/ctf-lib.exp b/libctf/testsuite/lib/ctf-lib.exp
+index 6d3b75e22a2..a50235bf8d7 100644
+--- a/libctf/testsuite/lib/ctf-lib.exp
++++ b/libctf/testsuite/lib/ctf-lib.exp
+@@ -20,6 +20,51 @@
+ 
+ load_file $srcdir/../../ld/testsuite/lib/ld-lib.exp
+ 
++# Returns true if the target linker deduplicates CTF.
++proc check_ctf_linker_dedup { } {
++    global ctf_linker_dedup_saved
++
++    if {![info exists ctf_linker_dedup_saved]} {
++	set ctf_linker_dedup_saved 0
++
++	if ([check_ctf_available]) {
++	    global objdump srcdir
++
++	    set basename "tmpdir/ctf_linker_dedups[pid]"
++	    compile_one_cc $srcdir/libctf-lookup/ambiguous-struct-A.c ${basename}-A.o "-gctf -fPIC -c"
++	    compile_one_cc $srcdir/libctf-lookup/ambiguous-struct-B.c ${basename}-B.o "-gctf -fPIC -c"
++	    compile_one_cc "${basename}-A.o ${basename}-B.o" $basename.so "-gctf -fPIC -shared"
++	    if {! [remote_file host exists $basename.so] } {
++		return 0
++	    }
++
++	    # Don't use run_host_cmd: it dumps the entire output into the log,
++	    # even on success.
++	    set cmdret [remote_exec host [concat sh -c [list "$objdump --ctf $basename.so >dump.out 2>dump.err"]] "" "/dev/null"]
++	    set cmdret [lindex $cmdret 0]
++	    remote_upload host "dump.out"
++	    remote_upload host "dump.err"
++	    set dump_out [prune_warnings [file_contents "dump.out"]]
++	    set dump_err [prune_warnings [file_contents "dump.err"]]
++	    remote_file host delete "dump.out" "dump.err"
++	    remote_file build delete "dump.out" "dump.err"
++
++	    if {$cmdret != 0} {
++		verbose -log "failed with $cmdret: stderr: $dump_err"
++		verbose -log "output: $dump_out"
++		return 0;
++	    }
++
++	    remote_file host delete $basename.so ${basename}-A.o ${basename}-B.o
++	    if [regexp {CTF archive member: } $dump_out] {
++		set ctf_linker_dedup_saved 1
++	    }
++	}
++    }
++    return $ctf_linker_dedup_saved
++}
++
++
+ proc run_native_host_cmd { command } {
+     global link_output
+     global ld
+diff --git a/libctf/testsuite/libctf-lookup/lookup.exp b/libctf/testsuite/libctf-lookup/lookup.exp
+index a8b09c2df78..d15c315729d 100644
+--- a/libctf/testsuite/libctf-lookup/lookup.exp
++++ b/libctf/testsuite/libctf-lookup/lookup.exp
+@@ -28,6 +28,11 @@ if {![check_ctf_available]} {
+     return 0
+ }
+ 
++if {![check_ctf_linker_dedup]} {
++    unsupported "no CTF deduplication support in the linker"
++    return 0
++}
++
+ if {[info exists env(LC_ALL)]} {
+     set old_lc_all $env(LC_ALL)
+ }
+diff --git a/libctf/testsuite/libctf-regression/libctf-repeat-cu.exp b/libctf/testsuite/libctf-regression/libctf-repeat-cu.exp
+index e29cf63fce9..7c19fe8f6a7 100644
+--- a/libctf/testsuite/libctf-regression/libctf-repeat-cu.exp
++++ b/libctf/testsuite/libctf-regression/libctf-repeat-cu.exp
+@@ -37,6 +37,11 @@ if {![check_ctf_available]} {
+     return 0
+ }
+ 
++if {![check_ctf_linker_dedup]} {
++    unsupported "no CTF deduplication support in the linker"
++    return 0
++}
++
+ if {[info exists env(LC_ALL)]} {
+     set old_lc_all $env(LC_ALL)
+ }
+diff --git a/libctf/testsuite/libctf-regression/regression.exp b/libctf/testsuite/libctf-regression/regression.exp
+index e4b63473691..0270cca0cba 100644
+--- a/libctf/testsuite/libctf-regression/regression.exp
++++ b/libctf/testsuite/libctf-regression/regression.exp
+@@ -23,6 +23,11 @@ if {![check_ctf_available]} {
+     return 0
+ }
+ 
++if {![check_ctf_linker_dedup]} {
++    unsupported "no CTF deduplication support in the linker"
++    return 0
++}
++
+ if ![is_elf_format] {
+     unsupported "CTF needs bfd changes to be emitted on non-ELF"
+     return 0
+-- 
+2.49.1
+

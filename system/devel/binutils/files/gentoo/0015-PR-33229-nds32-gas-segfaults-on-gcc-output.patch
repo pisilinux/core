@@ -1,0 +1,147 @@
+From 5f3b1671d35130038b2267daddecea4aa084685b Mon Sep 17 00:00:00 2001
+From: Alan Modra <amodra@gmail.com>
+Date: Wed, 30 Jul 2025 08:18:19 +0930
+Subject: [PATCH 15/23] PR 33229 nds32 gas segfaults on gcc output
+
+Commit 1ac26e9f7ac2 replaced ISSPACE with is_whitespace, but the
+former returns true on EOL while the latter does not.  Sprinkle
+is_end_of_stmt tests to fix this bug.
+
+The same segfault can be triggered by a ".relax_hint" with no
+following instructions.  Fix that too.
+
+	* config/tc-nds32.c (nds32_lookup_pseudo_opcode): Use
+	is_end_of_stmt along with is_whitespace.
+	(nds32_relax_relocs, nds32_relax_hint, nds32_flag),
+	(ict_model: Likewise.
+	(nds32_elf_append_relax_relocs): Return on no opcode.
+	* testsuite/gas/nds32/nds32.exp: Find .d files automatically.
+	* testsuite/gas/nds32/pr33229.d,
+	* testsuite/gas/nds32/pr33229.s: New test.
+
+(cherry picked from commit 303045d9539d9032208b8b67f222943ff4c96b05)
+(cherry picked from commit 72d7cfff264820841f469e3bf34ff1b76efa5240)
+---
+ gas/config/tc-nds32.c             | 17 +++++++++++------
+ gas/testsuite/gas/nds32/nds32.exp | 22 +++++++++-------------
+ gas/testsuite/gas/nds32/pr33229.d |  2 ++
+ gas/testsuite/gas/nds32/pr33229.s |  3 +++
+ 4 files changed, 25 insertions(+), 19 deletions(-)
+ create mode 100644 gas/testsuite/gas/nds32/pr33229.d
+ create mode 100644 gas/testsuite/gas/nds32/pr33229.s
+
+diff --git a/gas/config/tc-nds32.c b/gas/config/tc-nds32.c
+index 647744fd6d1..d107555e373 100644
+--- a/gas/config/tc-nds32.c
++++ b/gas/config/tc-nds32.c
+@@ -3452,8 +3452,9 @@ nds32_lookup_pseudo_opcode (const char *str)
+ 
+   for (i = 0; i < maxlen; i++)
+     {
+-      if (is_whitespace (op[i] = str[i]))
++      if (is_end_of_stmt (str[i]) || is_whitespace (str[i]))
+ 	break;
++      op[i] = str[i];
+     }
+   op[i] = '\0';
+ 
+@@ -4093,7 +4094,8 @@ nds32_relax_relocs (int relax)
+     {"", "",};
+ 
+   name = input_line_pointer;
+-  while (*input_line_pointer && !is_whitespace (*input_line_pointer))
++  while (!is_end_of_stmt (*input_line_pointer)
++	 && !is_whitespace (*input_line_pointer))
+     input_line_pointer++;
+   saved_char = *input_line_pointer;
+   *input_line_pointer = 0;
+@@ -4228,7 +4230,8 @@ nds32_relax_hint (int mode ATTRIBUTE_UNUSED)
+   struct relax_hint_id *record_id;
+ 
+   name = input_line_pointer;
+-  while (*input_line_pointer && !is_whitespace (*input_line_pointer))
++  while (!is_end_of_stmt (*input_line_pointer)
++	 && !is_whitespace (*input_line_pointer))
+     input_line_pointer++;
+   saved_char = *input_line_pointer;
+   *input_line_pointer = 0;
+@@ -4361,7 +4364,8 @@ nds32_flag (int ignore ATTRIBUTE_UNUSED)
+ 
+   /* Skip whitespaces.  */
+   name = input_line_pointer;
+-  while (*input_line_pointer && !is_whitespace (*input_line_pointer))
++  while (!is_end_of_stmt (*input_line_pointer)
++	 && !is_whitespace (*input_line_pointer))
+     input_line_pointer++;
+   saved_char = *input_line_pointer;
+   *input_line_pointer = 0;
+@@ -4398,7 +4402,8 @@ ict_model (int ignore ATTRIBUTE_UNUSED)
+ 
+   /* Skip whitespaces.  */
+   name = input_line_pointer;
+-  while (*input_line_pointer && !is_whitespace (*input_line_pointer))
++  while (!is_end_of_stmt (*input_line_pointer)
++	 && !is_whitespace (*input_line_pointer))
+     input_line_pointer++;
+   saved_char = *input_line_pointer;
+   *input_line_pointer = 0;
+@@ -5944,7 +5949,7 @@ nds32_elf_append_relax_relocs (const char *key, const void *value)
+   char *where;
+   int pcrel;
+ 
+-  if (!relocs_pattern)
++  if (!relocs_pattern || !relocs_pattern->opcode)
+     return;
+ 
+   if (!nds32_find_reloc_table (relocs_pattern, &hint_info))
+diff --git a/gas/testsuite/gas/nds32/nds32.exp b/gas/testsuite/gas/nds32/nds32.exp
+index 82934cee605..216fcf185bf 100644
+--- a/gas/testsuite/gas/nds32/nds32.exp
++++ b/gas/testsuite/gas/nds32/nds32.exp
+@@ -16,17 +16,13 @@
+ # Foundation, Inc., 51 Franklin Street - Fifth Floor, Boston,
+ # MA 02110-1301, USA.
+ 
+-if { [istarget nds32*] } {
+-    run_dump_test "alu-1"
+-    run_dump_test "alu-2"
+-    run_dump_test "lsi"
+-    run_dump_test "ls"
+-    run_dump_test "br-1"
+-    run_dump_test "br-2"
+-    run_dump_test "ji-jr"
+-    run_dump_test "to-16bit-v1"
+-    run_dump_test "to-16bit-v2"
+-    run_dump_test "to-16bit-v3"
+-    run_dump_test "usr-spe-reg"
+-    run_dump_test "sys-reg"
++if { ![istarget nds32*] } {
++    return
++}
++
++set test_list [lsort [glob -nocomplain $srcdir/$subdir/*.d]]
++foreach t $test_list {
++    # We need to strip the ".d", but can leave the dirname.
++    verbose [file rootname $t]
++    run_dump_test [file rootname $t]
+ }
+diff --git a/gas/testsuite/gas/nds32/pr33229.d b/gas/testsuite/gas/nds32/pr33229.d
+new file mode 100644
+index 00000000000..e65ca413d55
+--- /dev/null
++++ b/gas/testsuite/gas/nds32/pr33229.d
+@@ -0,0 +1,2 @@
++#as: --fatal-warnings
++#error: .*relax hint.*
+diff --git a/gas/testsuite/gas/nds32/pr33229.s b/gas/testsuite/gas/nds32/pr33229.s
+new file mode 100644
+index 00000000000..3127d6da65b
+--- /dev/null
++++ b/gas/testsuite/gas/nds32/pr33229.s
+@@ -0,0 +1,3 @@
++ .relax_hint 0
++ ret5
++ .relax_hint 1
+-- 
+2.49.1
+

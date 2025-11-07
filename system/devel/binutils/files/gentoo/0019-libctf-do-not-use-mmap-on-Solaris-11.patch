@@ -1,0 +1,66 @@
+From a998d99a7ea659565f69c0b4412c17c69bcc083a Mon Sep 17 00:00:00 2001
+From: Rainer Orth <ro@CeBiTec.Uni-Bielefeld.DE>
+Date: Wed, 16 Jul 2025 13:10:05 +0100
+Subject: [PATCH 19/23] libctf: do not use mmap on Solaris 11
+
+Writable mmaps and read are inconsistent with each other on Solaris 11.4,
+which breaks archive writing.  Simply assert that Solaris 2.11 doesn't have
+mmap, falling back to read(): the archive format is being bumped shortly, to
+one with completely different writeout code, so this workaround need not
+stay for long.
+
+[nca: added commit log]
+
+libctf/
+	PR libctf/29292
+	* configure.ac: Turn off mmap on Solaris 2.11.
+	* configure: Regenerated.
+
+(cherry picked from commit 00d853d1fe7885d0a685584f32b7ed70485c6def)
+(cherry picked from commit 404cb58a92f5a0e52b9e148e188760397a062dc8)
+---
+ libctf/configure    | 8 ++++++++
+ libctf/configure.ac | 8 ++++++++
+ 2 files changed, 16 insertions(+)
+
+diff --git a/libctf/configure b/libctf/configure
+index 54c86592b70..c53c15ec6b8 100755
+--- a/libctf/configure
++++ b/libctf/configure
+@@ -15973,6 +15973,14 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+ 
+ 
+ 
++case "${host}" in
++  # PR libctf/29292
++  # libctf's use of mmap doesn't work on Solaris 11.4, so disable it.
++  *-*-solaris2.11*)
++    ac_cv_func_mmap_fixed_mapped=no
++  ;;
++esac
++
+ 
+ 
+ 
+diff --git a/libctf/configure.ac b/libctf/configure.ac
+index 3e83f43ba13..435967132d9 100644
+--- a/libctf/configure.ac
++++ b/libctf/configure.ac
+@@ -65,6 +65,14 @@ AM_MAINTAINER_MODE
+ AM_INSTALL_LIBBFD
+ ACX_PROG_CC_WARNING_OPTS([-Wall], [ac_libctf_warn_cflags])
+ 
++case "${host}" in
++  # PR libctf/29292
++  # libctf's use of mmap doesn't work on Solaris 11.4, so disable it.
++  *-*-solaris2.11*)
++    ac_cv_func_mmap_fixed_mapped=no
++  ;;
++esac
++
+ GCC_AC_FUNC_MMAP
+ # Needed for BFD capability checks.
+ AC_SEARCH_LIBS(dlsym, dl)
+-- 
+2.49.1
+

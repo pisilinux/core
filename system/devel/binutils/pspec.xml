@@ -16,7 +16,24 @@
             <Dependency>texinfo</Dependency>
         </BuildDependencies>
         <Patches>
-<!--             <Patch  level="1">fedora/binutils-gold-warn-unsupported.patch</Patch> -->
+            <Patch level="1">gentoo/0001-Re-enable-development-on-the-2.45-branch.patch</Patch>
+            <Patch level="1">gentoo/0002-Re-Re-enable-development-on-the-2.45-branch.patch</Patch>
+            <Patch level="1">gentoo/0003-bfd-drop-unused-elt_no.patch</Patch>
+            <Patch level="1">gentoo/0004-binutils-drop-unused-note_size-contents-old-variable.patch</Patch>
+            <Patch level="1">gentoo/0005-Fix-unused-variable-warnings.patch</Patch>
+            <Patch level="1">gentoo/0006-Fix-more-unused-variable-warnings.patch</Patch>
+            <Patch level="1">gentoo/0012-Adjust-testsuites-for-flto-and-without-g.patch</Patch>
+            <Patch level="1">gentoo/0013-strip-Don-t-check-target_defaulted-in-input-BFD.patch</Patch>
+            <Patch level="1">gentoo/0014-strip-Don-t-treat-fat-IR-objects-as-plugin-object.patch</Patch>
+            <Patch level="1">gentoo/0015-PR-33229-nds32-gas-segfaults-on-gcc-output.patch</Patch>
+            <Patch level="1">gentoo/0016-Re-resbin-don-t-pass-NULL-as-printf-s-arg.patch</Patch>
+            <Patch level="1">gentoo/0017-libiberty-sync-with-gcc.patch</Patch>
+            <Patch level="1">gentoo/0018-LoongArch-Fix-symbol-size-after-relaxation.patch</Patch>
+            <Patch level="1">gentoo/0019-libctf-do-not-use-mmap-on-Solaris-11.patch</Patch>
+            <Patch level="1">gentoo/0020-libctf-get-libctf-nobfd.ver-from-the-right-place-wit.patch</Patch>
+            <Patch level="1">gentoo/0021-libctf-exclude-always-emitted-Solaris-symbols-from-t.patch</Patch>
+            <Patch level="1">gentoo/0022-libctf-don-t-run-tests-requiring-deduplicating-linke.patch</Patch>
+            <Patch level="1">gentoo/0023-libctf-link-rejig-lazy-opening-to-not-need-weak-symb.patch</Patch>
         </Patches>
     </Source>
 
@@ -38,6 +55,13 @@
     </Package>
 
     <History>
+        <Update release="17">
+            <Date>2025-11-06</Date>
+            <Version>2.45</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="16">
             <Date>2025-10-29</Date>
             <Version>2.45</Version>
