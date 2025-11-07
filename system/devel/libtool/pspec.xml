@@ -12,14 +12,14 @@
         <IsA>library</IsA>
         <Summary>A shared library tool for developers</Summary>
         <Description>Libtool is a shared library tool for developers.</Description>
-        <Archive sha1sum="0c90f1b046ea9cd7b32a4b5a6a9df4b46ddb637a" type="tarxz">mirrors://gnu/libtool/libtool-2.4.7.tar.xz</Archive>
+        <Archive sha1sum="9781a113fe6af1b150571410b29d3eee2e792516" type="tarxz">mirrors://gnu/libtool/libtool-2.5.4.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>gnuconfig</Dependency>
             <Dependency>autoconf</Dependency>
             <Dependency>automake</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">libtool-2.4.7-grep-3.8.patch</Patch>
+<!--             <Patch level="1">libtool-2.4.7-grep-3.8.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -64,6 +64,13 @@
     </Package>
 
     <History>
+        <Update release="8">
+            <Date>2025-11-05</Date>
+            <Version>2.5.4</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="7">
             <Date>2023-02-10</Date>
             <Version>2.4.7</Version>
