@@ -11,7 +11,7 @@ from pisi.actionsapi import shelltools
 
 
 def build():
-
+    pisitools.cflags.add("-std=gnu17")
     shelltools.system('sed -i "/MANDIR =/s#)/#)/share/#" unix/Makefile')
 
     opt='-DACORN_FTYPE_NFS \
