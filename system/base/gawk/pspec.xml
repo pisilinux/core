@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>GNU awk pattern-matching language</Summary>
         <Description>The awk utility interprets a special-purpose programming language that makes it possible to handle simple data-reformatting jobs with just a few lines of code. It helps you to make changes in various text files wherever certain patterns appear, or extract data from parts of certain lines while discarding the rest. Gawk is the GNU implementation of awk.</Description>
-        <Archive sha1sum="98c37c82d0d7370354e4e789406d6060c75c402a" type="tarxz">http://mirrors.kernel.org/gnu/gawk/gawk-5.3.0.tar.xz</Archive>
+        <Archive sha1sum="d0c7810d1bef2d78944c83b65e66aaeb2e956cde" type="tarxz">http://mirrors.kernel.org/gnu/gawk/gawk-5.3.2.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>gettext</Dependency>
             <Dependency>gmp-devel</Dependency>
@@ -46,6 +46,13 @@
     </Package>
 
     <History>
+        <Update release="12">
+            <Date>2025-11-11</Date>
+            <Version>5.3.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="11">
             <Date>2024-10-04</Date>
             <Version>5.3.0</Version>
