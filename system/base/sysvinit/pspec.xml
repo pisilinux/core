@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>sysvinit</Name>
@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Programs which control basic system processes</Summary>
         <Description>sysvinit package contains a group of utilities that control the very basic functions of your system. sysvinit contains the init program, the first program started by the Linux kernel when the system boots.</Description>
-        <Archive sha1sum="cd6873d3147eaf8f86d3402c2487d8a74d7a3541" type="tarxz">https://github.com/slicer69/sysvinit/releases/download/3.09/sysvinit-3.09.tar.xz</Archive>
+        <Archive sha1sum="32da26466edc6c510d0bde3955a0ed6ef3e8e3f2" type="targz">https://github.com/slicer69/sysvinit/archive/refs/tags/3.15.tar.gz</Archive>
         <Patches>
             <!--<Patch>makefile.patch</Patch>-->
             <!--<Patch>sysvinit-2.86-docs.patch</Patch>-->
@@ -67,6 +67,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2025-11-12</Date>
+            <Version>3.15</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="8">
             <Date>2024-07-17</Date>
             <Version>3.09</Version>
