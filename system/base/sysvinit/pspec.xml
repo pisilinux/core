@@ -13,6 +13,9 @@
         <Summary>Programs which control basic system processes</Summary>
         <Description>sysvinit package contains a group of utilities that control the very basic functions of your system. sysvinit contains the init program, the first program started by the Linux kernel when the system boots.</Description>
         <Archive sha1sum="32da26466edc6c510d0bde3955a0ed6ef3e8e3f2" type="targz">https://github.com/slicer69/sysvinit/archive/refs/tags/3.15.tar.gz</Archive>
+        <BuildDependencies>
+            <Dependency>libxcrypt-devel</Dependency>
+        </BuildDependencies>
         <Patches>
             <!--<Patch>makefile.patch</Patch>-->
             <!--<Patch>sysvinit-2.86-docs.patch</Patch>-->
