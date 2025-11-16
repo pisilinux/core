@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>GNU libc6 (also called glibc2) C library</Summary>
         <Description>The GNU C library is used as the C library in the GNU system and most systems with the Linux kernel. It defines the system calls and other basic C programming language facilities.</Description>
-        <Archive sha1sum="59e16da77e6ea9be9dd4bb997eb4ebfde557a1b0" type="tarxz">https://snapshots.sourceware.org/glibc/trunk/2025-10-27_13-23_1761571381/src/glibc-2.42.9000-361-g013f5167b9.tar.xz</Archive>
+        <Archive sha1sum="b5c170f2941cd39292ee0b986921334c004dd562" type="tarxz">https://ftp.gnu.org/gnu/libc/glibc-2.42.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>kernel-headers</Dependency>
             <Dependency>gettext</Dependency>
@@ -97,7 +97,7 @@
         <Summary>32-bit doc for glibc</Summary>
         <BuildType>emul32</BuildType>
         <RuntimeDependencies>
-            <!--Dependency release="current">glibc</Dependency-->
+            <Dependency release="current">glibc</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="config">/usr/lib32/glibc32.txt</Path>
@@ -2089,6 +2089,13 @@
     </Package>
 
     <History>
+        <Update release="17">
+            <Date>2025-11-06</Date>
+            <Version>2.42</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="16">
             <Date>2024-12-05</Date>
             <Version>2.42</Version>
