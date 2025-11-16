@@ -17,13 +17,13 @@
         <Archive sha1sum="06f2c7c511f6ae476971106d9456f73a6121ff11" type="tarxz">mirrors://gnome/gobject-introspection/1.86/gobject-introspection-1.86.0.tar.xz</Archive>
         <BuildDependencies>
             <!--<Dependency>cairo-devel</Dependency>-->
-            <Dependency>meson</Dependency>	
+<!--             <Dependency>meson</Dependency> -->
             <Dependency versionFrom="3.11.11">python3-devel</Dependency>
             <Dependency>libffi-devel</Dependency>
             <Dependency>python-devel</Dependency>
             <!--<Dependency>python-mako</Dependency>--><!--for enable-doctool-->
             <Dependency versionFrom="2.86.1">glib2-devel</Dependency>
-            <Dependency>chrpath</Dependency>
+<!--             <Dependency>chrpath</Dependency> -->
         </BuildDependencies>
         <Patches>
 <!--             <Patch level="1">gobject-introspection-1.76.1-revert-failing-test.patch</Patch> -->
@@ -68,6 +68,13 @@
     </Package>
 
     <History>
+        <Update release="53">
+            <Date>2025-11-06</Date>
+            <Version>1.86.0</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="52">
             <Date>2025-10-30</Date>
             <Version>1.86.0</Version>

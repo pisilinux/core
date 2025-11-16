@@ -25,12 +25,8 @@
             <Dependency>libunistring-devel</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">guile-3.0.10-c23.patch</Patch>
-            <Patch level="1">gcc14.patch</Patch>
-            <Patch level="1">gcc15.patch</Patch>
-            <Patch level="1">gcc10-x86-disable-one-test.patch</Patch>
-            <Patch level="1">disable-test-out-of-memory.patch</Patch>
-            <Patch level="1">guile-3.0.10-32bit_fixes-1.patch</Patch>
+<!--             <Patch level="1">guile-3.0.10-backport-issue72913.patch</Patch> -->
+<!--             <Patch level="1">guile-3.0.10-c23.patch</Patch> -->
         </Patches>
     </Source>
 
@@ -77,6 +73,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2024-11-16</Date>
+            <Version>3.0.10</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="10">
             <Date>2024-11-06</Date>
             <Version>3.0.10</Version>
