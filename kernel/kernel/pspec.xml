@@ -145,10 +145,21 @@
     </Package>
 
     <History>
-        <Update release="111">
-            <Date>2025-11-14</Date>
+        <Update release="112">
+            <Date>2025-11-17</Date>
             <Version>6.12.58</Version>
             <Comment>Version bump.</Comment>
+            <Type package="kernel">security</Type>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
+        <Update release="111">
+            <Date>2025-11-06</Date>
+            <Version>6.12.54</Version>
+            <Comment>Rebuild.</Comment>
             <Type package="kernel">security</Type>
             <Requires>
                 <Action package="kernel">systemRestart</Action>
