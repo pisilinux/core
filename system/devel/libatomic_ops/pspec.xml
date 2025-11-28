@@ -3,7 +3,7 @@
 <PISI>
     <Source>
         <Name>libatomic_ops</Name>
-        <Homepage>https://github.com/ivmai/libatomic_ops/</Homepage>
+        <Homepage>https://github.com/bdwgc/libatomic_ops/</Homepage>
         <Packager>
             <Name>Pisi Linux Admins</Name>
             <Email>admins@pisilinux.org</Email>
@@ -13,7 +13,7 @@
         <IsA>library</IsA>
         <Summary>Atomic memory update operations library</Summary>
         <Description>libatomic_ops provides implementations for atomic memory update operations on a number of architectures. This allows direct use of these in reasonably portable code.</Description>
-        <Archive sha1sum="aaa44f2b182a05a7cdc6778a0f26976cc925acfe" type="targz">https://github.com/ivmai/libatomic_ops/releases/download/v7.8.2/libatomic_ops-7.8.2.tar.gz</Archive>
+        <Archive sha1sum="047f0087fd33445fb547836e7be6523825aae760" type="targz">https://github.com/bdwgc/libatomic_ops/releases/download/v7.10.0/libatomic_ops-7.10.0.tar.gz</Archive>
     </Source>
 
     <Package>
@@ -37,6 +37,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2025-11-28</Date>
+            <Version>7.10.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Ivan Maidanski</Name>
+            <Email>ivmai@mail.ru</Email>
+        </Update>
         <Update release="10">
             <Date>2023-12-17</Date>
             <Version>7.8.2</Version>
