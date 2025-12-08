@@ -1,0 +1,53 @@
+From e5369595076dbe5b8d0ab2d255735dc31f9060e9 Mon Sep 17 00:00:00 2001
+Message-ID: <e5369595076dbe5b8d0ab2d255735dc31f9060e9.1732215453.git.sam@gentoo.org>
+In-Reply-To: <7c6c50c037d9b969762062f26cafe833d6fced3f.1732215453.git.sam@gentoo.org>
+References: <7c6c50c037d9b969762062f26cafe833d6fced3f.1732215453.git.sam@gentoo.org>
+From: Olly Betts <olly@survex.com>
+Date: Thu, 17 Oct 2024 16:35:37 +1300
+Subject: [PATCH 11/16] AX_CXX_COMPILE_STDCXX: Add missing quoting
+
+5b0d43b767bf3f800f97892905b6d1ba50150f1a added quoting to the
+definitions of _AX_CXX_COMPILE_STDCXX_testbody_11, etc
+but _AX_CXX_COMPILE_STDCXX_testbody_23 was missed.  I haven't found
+a situation in which this quoting actually makes a difference, but it
+does seem more correct to quote here and it really should be done
+consistently for all the _AX_CXX_COMPILE_STDCXX_testbody_* definitions.
+
+See #308
+---
+ m4/ax_cxx_compile_stdcxx.m4 | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/m4/ax_cxx_compile_stdcxx.m4 b/m4/ax_cxx_compile_stdcxx.m4
+index 25645c3..fe6ae17 100644
+--- a/m4/ax_cxx_compile_stdcxx.m4
++++ b/m4/ax_cxx_compile_stdcxx.m4
+@@ -44,7 +44,7 @@
+ #   and this notice are preserved.  This file is offered as-is, without any
+ #   warranty.
+ 
+-#serial 24
++#serial 25
+ 
+ dnl  This macro is based on the code from the AX_CXX_COMPILE_STDCXX_11 macro
+ dnl  (serial version number 13).
+@@ -191,11 +191,11 @@ m4_define([_AX_CXX_COMPILE_STDCXX_testbody_20],
+ dnl  Test body for checking C++23 support
+ 
+ m4_define([_AX_CXX_COMPILE_STDCXX_testbody_23],
+-  _AX_CXX_COMPILE_STDCXX_testbody_new_in_11
+-  _AX_CXX_COMPILE_STDCXX_testbody_new_in_14
+-  _AX_CXX_COMPILE_STDCXX_testbody_new_in_17
+-  _AX_CXX_COMPILE_STDCXX_testbody_new_in_20
+-  _AX_CXX_COMPILE_STDCXX_testbody_new_in_23
++  [_AX_CXX_COMPILE_STDCXX_testbody_new_in_11
++   _AX_CXX_COMPILE_STDCXX_testbody_new_in_14
++   _AX_CXX_COMPILE_STDCXX_testbody_new_in_17
++   _AX_CXX_COMPILE_STDCXX_testbody_new_in_20
++   _AX_CXX_COMPILE_STDCXX_testbody_new_in_23]
+ )
+ 
+ 
+-- 
+2.47.0
+
