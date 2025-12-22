@@ -1,3 +1,5 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "https://pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>libbsd</Name>
@@ -13,7 +15,7 @@
         <IsA>library</IsA>
         <Summary>Provides useful functions commonly found on BSD systems</Summary>
         <Description>This library provides useful functions commonly found on BSD systems, and lacking on others like GNU systems, thus making it easier to port projects with strong BSD origins, without needing to embed the same code over and over again on each project.</Description>
-        <Archive sha1sum="29459f982ca5fd64f7034c95cb06b2e27876ab0d" type="tarxz">https://libbsd.freedesktop.org/releases/libbsd-0.11.8.tar.xz</Archive>
+        <Archive sha1sum="c8f49920dec71e8e72f2b19f6c209b440a367d3a" type="tarxz">https://libbsd.freedesktop.org/releases/libbsd-0.12.2.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>libmd-devel</Dependency>
         </BuildDependencies>
@@ -63,6 +65,13 @@
     </Package>
 
     <History>
+        <Update release="12">
+            <Date>2025-12-22</Date>
+            <Version>0.12.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="11">
             <Date>2024-01-10</Date>
             <Version>0.11.8</Version>
