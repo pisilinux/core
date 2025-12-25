@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>A set of basic GNU tools commonly used in shell scripts</Summary>
         <Description>Standard GNU file utilities (chmod, cp, dd, dir, ls...), text utilities (sort, tr, head, wc..), and shell utilities (whoami, who,...)</Description>
-        <Archive sha1sum="920791e12e7471479565a066e116a087edcc0df9" type="tarxz">http://ftp.gnu.org/gnu/coreutils/coreutils-9.7.tar.xz</Archive>
+        <Archive sha1sum="456b5c69f3ce8fbdbe926a11652673ecf12bfc44" type="tarxz">http://ftp.gnu.org/gnu/coreutils/coreutils-9.9.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>acl-devel</Dependency>
             <Dependency>attr-devel</Dependency>
@@ -58,6 +58,13 @@
     </Package>
 
     <History>
+        <Update release="17">
+            <Date>2025-12-16</Date>
+            <Version>9.9</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="16">
             <Date>2025-06-09</Date>
             <Version>9.7</Version>
