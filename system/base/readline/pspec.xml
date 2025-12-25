@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>readline</Name>
@@ -18,8 +18,8 @@
         </BuildDependencies>
         <Patches>
             <Patch>readline83-001.patch</Patch>
-
-            <Patch>readline-8.3-iwd-crash.patch</Patch>
+            <Patch>readline83-002.patch</Patch>
+            <Patch>readline83-003.patch</Patch>
         </Patches>
     </Source>
 
@@ -70,6 +70,13 @@
         </Files>
     </Package>
     <History>
+        <Update release="17">
+            <Date>2025-12-17</Date>
+            <Version>8.3.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="16">
             <Date>2025-11-16</Date>
             <Version>8.3.1</Version>
