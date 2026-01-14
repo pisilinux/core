@@ -14,7 +14,7 @@
         <IsA>library</IsA>
         <Summary>A utility for getting files from remote servers</Summary>
         <Description>curl is a command line tool for transferring data with URL syntax, supporting various protocols.</Description>
-        <Archive sha1sum="51fb1a8f8a9f6313364fa94c1f8e3a62431648ba" type="tarbz2">http://curl.haxx.se/download/curl-8.16.0.tar.bz2</Archive>
+        <Archive sha1sum="88c6353add6a74e48167869c0899b1448d637997" type="tarbz2">http://curl.haxx.se/download/curl-8.18.0.tar.bz2</Archive>
         <BuildDependencies>
             <Dependency>glibc-devel</Dependency>
             <Dependency>zstd-devel</Dependency>
@@ -74,6 +74,13 @@
     </Package>
 
     <History>
+        <Update release="21">
+            <Date>2026-01-11</Date>
+            <Version>8.18.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="20">
             <Date>2025-09-22</Date>
             <Version>8.16.0</Version>
