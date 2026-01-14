@@ -11,6 +11,9 @@ from pisi.actionsapi import get
 
 shelltools.export("PYCURL_SSL_LIBRARY", "openssl")
 
+shelltools.export("CC", "gcc -std=gnu99")
+shelltools.export("CFLAGS", "%s -Wno-error=declaration-missing-parameter-type" % get.CFLAGS())
+
 def install():
     # no static libs
     pisitools.dosed("setup.py", ", \"--static-libs\"")
