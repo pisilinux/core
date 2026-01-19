@@ -40,7 +40,6 @@
             <Dependency>mtools</Dependency>
             <Dependency>dosfstools</Dependency>
             <Dependency>python3-devel</Dependency>
-            <Dependency>autoconf-archive</Dependency>
         </BuildDependencies>
         <Replaces>
             <Package>grub</Package>
@@ -76,6 +75,7 @@
 <!--             <Patch level="1">0001-grub-install-fix-inverted-test-for-NLS-enabled-when-.patch</Patch> -->
 <!--             <Patch level="1">0006-BootHole.patch</Patch> -->
             <Patch level="1">b835601c.patch</Patch>
+            <Patch level="1">grub-2.14-revert-image-base.patch</Patch>
         </Patches>
     </Source>
 
