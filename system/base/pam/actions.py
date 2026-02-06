@@ -23,7 +23,9 @@ def setup():
                           -Dselinux=disabled \
                           -Dlogind=disabled \
                           -Dpam_userdb=disabled \
+                          -Dpwaccess=disabled \
                           -Dsecuredir=/lib/security \
+                          -Dvendordir='' \
                           -Ddocdir=/usr/share/doc/Linux-PAM-" + get.srcVERSION())
 
 def build():
