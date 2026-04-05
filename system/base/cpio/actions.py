@@ -10,6 +10,7 @@ from pisi.actionsapi import shelltools
 from pisi.actionsapi import get
 
 def setup():
+    pisitools.cflags.add("-std=gnu17")
     #who knows pisitools.dosed :)
     cmd="sed -i '/gets is a security hole/d' gnu/stdio.in.h"
     shelltools.system(cmd)
@@ -17,6 +18,7 @@ def setup():
                          --bindir=/bin \
                          --with-rmt=/usr/sbin/rmt \
                          --disable-rpath")
+
 
 def build():
     autotools.make()
