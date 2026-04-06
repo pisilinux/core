@@ -57,6 +57,7 @@ def setup():
                      --disable-fsck \
                      --disable-libmount \
                      --disable-mountpoint \
+                     --disable-pam-lastlog2 \
                      --with-audit=no \
                    "
     else:
