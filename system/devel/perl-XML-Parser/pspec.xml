@@ -14,8 +14,9 @@
         <Description>This module provides an interface to James Clark's XML parser, expat. As in expat, a single instance of the parser can only parse one document. Calls to parsestring after the first for a given instance will die.</Description>
         <Archive sha1sum="caa4cc51930cc6bd14c1d5bb1dbf5aeae4ab952b" type="targz">mirrors://cpan/authors/id/T/TO/TODDR/XML-Parser-2.47.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency versionFrom="2.5.0">expat-devel</Dependency>
             <Dependency versionFrom="5.42.2">perl</Dependency>
+            <Dependency versionFrom="2.5.0">expat-devel</Dependency>
+            <Dependency>libxcrypt-devel</Dependency>
         </BuildDependencies>
     </Source>
 
