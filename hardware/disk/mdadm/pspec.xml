@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>mdadm</Name>
@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Utility to control Linux MD devices (software RAID arrays)</Summary>
         <Description>mdadm is used to create, manage, and monitor Linux MD (software RAID) devices.</Description>
-        <Archive sha1sum="ae07142643a4a841b6a4568696ae6c9594583ad3" type="tarxz">https://www.kernel.org/pub/linux/utils/raid/mdadm/mdadm-4.4.tar.xz</Archive>
+        <Archive sha1sum="f9cb777fb97ba846f4645b1c16b6c2661a4aa6a5" type="targz">https://github.com/md-raid-utilities/mdadm/archive/refs/tags/mdadm-4.6.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>dietlibc</Dependency>
         </BuildDependencies>
@@ -58,6 +58,13 @@
     </Package>
 
     <History>
+        <Update release="11">
+            <Date>2026-03-23</Date>
+            <Version>4.6</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="10">
             <Date>2025-12-19</Date>
             <Version>4.4</Version>
