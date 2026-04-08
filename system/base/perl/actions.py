@@ -84,6 +84,8 @@ def build():
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
+    pisitools.insinto("/usr/lib/perl5/%s/vendor_perl" % get.srcVERSION(), "Turkish.pm")
+
     pisitools.remove("/usr/bin/perl")
     # Conflicts with perl-Module-Build
     # pisitools.remove("/usr/bin/config_data")
@@ -92,14 +94,14 @@ def install():
 
     # Perl5 library
     # NEEDS MODIFICATION FOR NEW VERSION
+    src_ver = get.srcVERSION()
+    short_ver = '.'.join(src_ver.split('.')[:2])  # 5.40.2 -> 5.40
+
     pisitools.dosym("/usr/lib/perl5/%s/core_perl/CORE/libperl.so.%s" % (get.srcVERSION(),  get.srcVERSION()), "/usr/lib/libperl.so")
     pisitools.dosym("/usr/lib/perl5/%s/core_perl/CORE/libperl.so.%s" % (get.srcVERSION(),  get.srcVERSION()), "/usr/lib/libperl.so.5")
-    pisitools.dosym("/usr/lib/perl5/%s/core_perl/CORE/libperl.so.%s" % (get.srcVERSION(),  get.srcVERSION()), "/usr/lib/libperl.so.5.40")
-    pisitools.dosym("/usr/lib/perl5/%s/core_perl/CORE/libperl.so.%s" % (get.srcVERSION(),  get.srcVERSION()), "/usr/lib/libperl.so.5.40.2")
-    # pisitools.dosym("/usr/lib/perl5/%s/%s-linux-thread-multi/CORE/libperl.so.%s" % (get.srcVERSION(), get.ARCH(), get.srcVERSION()), "/usr/lib/libperl.so")
-    # pisitools.dosym("/usr/lib/perl5/%s/%s-linux-thread-multi/CORE/libperl.so.%s" % (get.srcVERSION(), get.ARCH(), get.srcVERSION()), "/usr/lib/libperl.so.5")
-    # pisitools.dosym("/usr/lib/perl5/%s/%s-linux-thread-multi/CORE/libperl.so.%s" % (get.srcVERSION(), get.ARCH(), get.srcVERSION()), "/usr/lib/libperl.so.5.38")
-    # pisitools.dosym("/usr/lib/perl5/%s/%s-linux-thread-multi/CORE/libperl.so.%s" % (get.srcVERSION(), get.ARCH(), get.srcVERSION()), "/usr/lib/libperl.so.5.38.2")
+    pisitools.dosym("/usr/lib/perl5/%s/core_perl/CORE/libperl.so.%s" % (get.srcVERSION(),  get.srcVERSION()), "/usr/lib/libperl.so.%s" % short_ver)
+    pisitools.dosym("/usr/lib/perl5/%s/core_perl/CORE/libperl.so.%s" % (get.srcVERSION(),  get.srcVERSION()), "/usr/lib/libperl.so.%s" % get.srcVERSION())
+
 
     # Docs
     pisitools.dodir("/usr/share/doc/%s/html" % get.srcNAME())
