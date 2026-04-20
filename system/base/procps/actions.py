@@ -10,7 +10,7 @@ from pisi.actionsapi import get
 
 def setup():
     # pisitools.dosed("watch.c", "ncursesw/ncurses.h", "ncurses.h")
-    
+    autotools.autoreconf("-fiv")
     autotools.configure("--prefix=/usr \
                          --exec-prefix=/ \
                          --disable-static \
@@ -31,9 +31,12 @@ def install():
     
     #remove conflicts
     pisitools.remove("/usr/bin/kill")
-    pisitools.remove("/usr/bin/pidof")
-    pisitools.remove("/usr/share/man/man1/kill.1")
-    pisitools.remove("/usr/share/man/man1/pidof.1")
+
+    # ????????????????????????????????????????????????????????
+
+    # pisitools.remove("/usr/bin/pidof")
+    # pisitools.remove("/usr/share/man/man1/kill.1")
+    # pisitools.remove("/usr/share/man/man1/pidof.1")
     
     # for mudur and comar
     pisitools.dosym("/usr/bin/sysctl", "/sbin/sysctl")
