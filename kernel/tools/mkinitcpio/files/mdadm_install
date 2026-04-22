@@ -9,7 +9,7 @@ build() {
         add_file "/etc/mdadm.conf"
     fi
     add_binary "/usr/bin/mdassemble"
-    add_file "/usr/lib/udev/rules.d/63-md-raid-arrays.rules"
+    add_file "/lib/udev/rules.d/63-md-raid-arrays.rules"
 
     add_runscript
 }
