@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>sed</Name>
@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>GNU Stream Editor</Summary>
         <Description>Sed is a stream editor. A stream editor is used to perform basic text transformations on an input stream (a file or input from a pipeline).</Description>
-        <Archive sha1sum="8ded1b543f1f558cbd5d7b713602f6a8ee84bde4" type="tarxz">mirrors://gnu/sed/sed-4.9.tar.xz</Archive>
+        <Archive sha1sum="15f5d702ae4360c3e6a79c48984830aa55396855" type="tarxz">mirrors://gnu/sed/sed-4.10.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>gettext</Dependency>
             <Dependency>attr-devel</Dependency>
@@ -36,6 +36,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2026-04-22</Date>
+            <Version>4.10</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2023-01-28</Date>
             <Version>4.9</Version>
