@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Userland logical volume management tools</Summary>
         <Description>LVM2 includes all of the support for handling read/write operations physical and logical volumes.</Description>
-        <Archive sha1sum="27eb30dd0a8e7f8f91a1e77eda58469ccba3d53a" type="targz">http://mirrors.kernel.org/sourceware/lvm2/LVM2.2.03.38.tgz</Archive>
+        <Archive sha1sum="7e6148c166f0dac66a5da55ce9de31db602d98fe" type="targz">http://mirrors.kernel.org/sourceware/lvm2/LVM2.2.03.40.tgz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="2.40.4">libutil-linux-devel</Dependency>
             <Dependency>eudev-devel</Dependency>
@@ -52,6 +52,7 @@
         <Files>
             <Path fileType="executable">/usr/sbin/dmsetup</Path>
             <Path fileType="executable">/usr/sbin/dmstats</Path>
+            <Path fileType="executable">/usr/sbin/dmvdostats</Path>
             <Path fileType="library">/usr/lib/libdevmapper.a</Path>
             <Path fileType="library">/usr/lib/libdevmapper.so*</Path>
             <Path fileType="data">/lib/udev/rules.d/10-dm.rules</Path>
@@ -62,6 +63,7 @@
             <Path fileType="doc">/usr/share/doc/lvm2/WHATS_NEW_DM</Path-->
             <Path fileType="man">/usr/share/man/man8/dmsetup.8</Path>
             <Path fileType="man">/usr/share/man/man8/dmstats.8</Path>
+            <Path fileType="man">/usr/share/man/man8/dmvdostats.8</Path>
         </Files>
     </Package>
 
@@ -188,6 +190,13 @@
     </Package>
 
     <History>
+        <Update release="26">
+            <Date>2026-04-28</Date>
+            <Version>2.03.40</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="25">
             <Date>2025-12-17</Date>
             <Version>2.03.38</Version>
