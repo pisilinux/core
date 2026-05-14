@@ -15,6 +15,7 @@
         <BuildDependencies>
             <Dependency>asciidoc</Dependency>
             <Dependency>libxslt-devel</Dependency>
+            <Dependency>libarchive-devel</Dependency>
         </BuildDependencies>
         <Patches>
             <Patch level="1">nosystemd.patch</Patch>
@@ -26,8 +27,9 @@
     <Package>
         <Name>mkinitcpio</Name>
         <RuntimeDependencies>
-            <Dependency>busybox-mkinitcpio</Dependency>
             <Dependency>lvm2</Dependency>
+            <Dependency>libarchive</Dependency>
+            <Dependency>busybox-mkinitcpio</Dependency>
         </RuntimeDependencies>
         <Conflicts>
             <Package>mkinitramfs</Package>
@@ -70,8 +72,8 @@
     </Package>
 
     <History>
-        <Update release="12">
-            <Date>2026-04-22</Date>
+        <Update release="13">
+            <Date>2026-05-14</Date>
             <Version>30</Version>
             <Comment>Rebuild</Comment>
             <Name>Mustafa Cinasal</Name>
