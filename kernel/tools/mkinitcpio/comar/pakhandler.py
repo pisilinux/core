@@ -3,29 +3,26 @@
 import os
 import piksemel
 import subprocess
-import os
 
-def updateInitrd(filepath):
-    patterns = ("/lib/modules", "/usr/lib/initcpio", "/boot/kernel", "/bin/busybox")
-    parse = piksemel.parse(filepath)
-    for xmlfile in parse.tags("File"):
-        path = xmlfile.getTagData("Path")
-        if not path.startswith("/"):
-            path = "/%s" % path
-        if path.startswith(patterns):
-            version = path.split("/")[3]
-            os.environ['PATH'] = '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin'
-            subprocess.call(["mkinitcpio","-k","%s"% version ,"-g","/boot/initramfs-%s-fallback.img"% version,"-S","autodetect"])
-            subprocess.call(["mkinitcpio","-k","%s"% version ,"-c","/etc/mkinitcpio.conf","-g","/boot/initramfs-%s.img"% version])
-            if os.path.exists("/proc/cmdline"):
-                os.system("/usr/bin/update-grub")
-            break
+
+def generateinitrd(filepath):
+    doc = piksemel.parse(filepath)
+    for item in doc.tags("File"):
+        path = item.getTagData("Path")
+        if path.startswith("lib/modules/"):
+            kver = path.split("/")[2]
+            subprocess.call(["/usr/bin/mkinitcpio","-k","%s"% kver ,"-g","/boot/initramfs-%s-fallback.img"% kver,"-S","autodetect"])
+            subprocess.call(["/usr/bin/mkinitcpio","-k","%s"% kver ,"-c","/etc/mkinitcpio.conf","-g","/boot/initramfs-%s.img"% kver])
+            return
 
 def setupPackage(metapath, filepath):
-    updateInitrd(filepath)
+    generateinitrd(filepath)
 
 def cleanupPackage(metapath, filepath):
     pass
 
 def postCleanupPackage(metapath, filepath):
     pass
+    
+
+

@@ -1,0 +1,49 @@
+From 4d7fef2176fdd66457e007486bddc24d7ac0f610 Mon Sep 17 00:00:00 2001
+From: artoo <artoo@artixlinux.org>
+Date: Wed, 6 May 2026 19:45:32 +0200
+Subject: [PATCH 1/1] no systemd meson
+
+---
+ meson.build | 8 +-------
+ 1 file changed, 1 insertion(+), 7 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index 46ae333..21172bd 100644
+--- a/meson.build
++++ b/meson.build
+@@ -66,7 +66,7 @@ else
+ endif
+ 
+ udevd = find_program('systemd-udevd', 'udevd', dirs: udevd_dirs, required: true)
+-tmpfiles = find_program('systemd-tmpfiles', required: want_systemd)
++tmpfiles = find_program('etmpfiles', required: false)
+ shellcheck = find_program('shellcheck', required: false)
+ 
+ conf_data.set('UDEVD_PATH', udevd.full_path())
+@@ -166,14 +166,9 @@ shellcheck_files = [
+     'install/microcode',
+     'install/modconf',
+     'install/resume',
+-    'install/sd-encrypt',
+-    'install/sd-encrypt-opensc',
+-    'install/sd-shutdown',
+-    'install/sd-vconsole',
+     'install/shutdown',
+     'install/sleep',
+     'install/strip',
+-    'install/systemd',
+     'install/udev',
+     'install/usr',
+     'lsinitcpio',
+@@ -222,7 +217,6 @@ subdir('libalpm')
+ subdir('man')
+ subdir('mkinitcpio.d')
+ subdir('shell')
+-subdir('systemd')
+ subdir('test')
+ subdir('tmpfiles')
+ subdir('udev')
+-- 
+2.54.0
+
+

@@ -7,16 +7,20 @@
 from pisi.actionsapi import autotools
 from pisi.actionsapi import get
 from pisi.actionsapi import pisitools
+from pisi.actionsapi import mesontools
+
+
+def setup():
+    mesontools.configure("-Dsystemd=disabled")
 
 def build():
-    autotools.make()
+    mesontools.build()
+
 
 def install():
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+    mesontools.install()
 
     pisitools.removeDir("/usr/lib/kernel")
-    pisitools.removeDir("/etc/mkinitcpio.d")
-    pisitools.remove("/usr/lib/initcpio/install/sd-*")
     pisitools.removeDir("/usr/share/libalpm")
 
-    pisitools.dodoc("LICENSE", "README")
+    pisitools.dodoc("LICENSE", "README.*")
