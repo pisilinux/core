@@ -1,0 +1,221 @@
+diff -Nuar mkinitcpio-v41.orig/hooks/meson.build mkinitcpio-v41/hooks/meson.build
+--- mkinitcpio-v41.orig/hooks/meson.build	2026-04-30 00:02:10.000000000 +0300
++++ mkinitcpio-v41/hooks/meson.build	2026-05-14 22:53:55.935962384 +0300
+@@ -10,6 +10,7 @@
+     'sleep',
+     'udev',
+     'usr',
++    'plymouth',
+ ]
+ 
+ foreach hook: hooks
+diff -Nuar mkinitcpio-v41.orig/hooks/plymouth mkinitcpio-v41/hooks/plymouth
+--- mkinitcpio-v41.orig/hooks/plymouth	1970-01-01 02:00:00.000000000 +0200
++++ mkinitcpio-v41/hooks/plymouth	2026-05-14 22:32:24.104992307 +0300
+@@ -0,0 +1,22 @@
++run_earlyhook(){
++        # first trigger graphics subsystem
++        udevadm trigger --action=add --attr-match=class=0x030000 >/dev/null 2>&1
++        # first trigger graphics and tty subsystem
++        udevadm trigger --action=add --subsystem-match=graphics --subsystem-match=drm --subsystem-match=tty >/dev/null 2>&1
++ 
++        udevadm settle --timeout=30 2>&1
++       
++	/bin/mknod /dev/fb c 29 &>/dev/null
++        /bin/plymouthd --mode=boot --pid-file=/run/plymouth/pid --attach-to-session
++}
++ 
++run_hook() {
++        /bin/plymouth --show-splash
++}
++ 
++run_latehook(){
++        /bin/plymouth update-root-fs --new-root-dir=/new_root      
++}
++
++# vim: set ft=sh:
++
+diff -Nuar mkinitcpio-v41.orig/init_functions mkinitcpio-v41/init_functions
+--- mkinitcpio-v41.orig/init_functions	2026-04-30 00:02:10.000000000 +0300
++++ mkinitcpio-v41/init_functions	2026-05-14 20:47:27.520167347 +0300
+@@ -536,6 +536,8 @@
+     mount -t sysfs sys /sys -o nosuid,noexec,nodev
+     mount -t devtmpfs dev /dev -o mode=0755,nosuid
+     mount -t tmpfs run /run -o nosuid,nodev,mode=0755
++    mkdir -m 0755 /dev/pts
++    mount -t devpts -o gid=5,mode=620 devpts /dev/pts
+     mkdir -m755 /run/initramfs
+ 
+     if [ -e /sys/firmware/efi ]; then
+diff -Nuar mkinitcpio-v41.orig/install/base mkinitcpio-v41/install/base
+--- mkinitcpio-v41.orig/install/base	2026-04-30 00:02:10.000000000 +0300
++++ mkinitcpio-v41/install/base	2026-05-14 22:01:27.047961678 +0300
+@@ -16,9 +16,9 @@
+         add_symlink "/usr/bin/$applet" kmod
+     done
+ 
+-    add_binary blkid
++    add_binary /sbin/blkid
+     map add_binary mount umount
+-    add_binary switch_root
++    add_binary /sbin/switch_root
+ 
+     add_initcpio_binary "init_functions" "/init_functions"
+     add_initcpio_binary "init" "/init" 755
+diff -Nuar mkinitcpio-v41.orig/install/fsck mkinitcpio-v41/install/fsck
+--- mkinitcpio-v41.orig/install/fsck	2026-04-30 00:02:10.000000000 +0300
++++ mkinitcpio-v41/install/fsck	2026-05-14 22:01:55.887960342 +0300
+@@ -7,7 +7,7 @@
+     add_fsck() {
+         case "$1" in
+             ext[234])
+-                add_binary e2fsck
++                add_binary /sbin/e2fsck
+                 add_symlink /usr/bin/fsck.ext2 e2fsck
+                 add_symlink /usr/bin/fsck.ext3 e2fsck
+                 add_symlink /usr/bin/fsck.ext4 e2fsck
+@@ -49,7 +49,7 @@
+         return
+     fi
+ 
+-    add_binary fsck
++    add_binary /sbin/fsck
+ }
+ 
+ help() {
+diff -Nuar mkinitcpio-v41.orig/install/meson.build mkinitcpio-v41/install/meson.build
+--- mkinitcpio-v41.orig/install/meson.build	2026-04-30 00:02:10.000000000 +0300
++++ mkinitcpio-v41/install/meson.build	2026-05-14 22:54:12.156962008 +0300
+@@ -24,6 +24,7 @@
+     'strip',
+     'udev',
+     'usr',
++    'plymouth',
+ ]
+ 
+ systemd_hooks = [
+diff -Nuar mkinitcpio-v41.orig/install/plymouth mkinitcpio-v41/install/plymouth
+--- mkinitcpio-v41.orig/install/plymouth	1970-01-01 02:00:00.000000000 +0200
++++ mkinitcpio-v41/install/plymouth	2026-05-14 22:42:32.523978214 +0300
+@@ -0,0 +1,63 @@
++#!/usr/bin/env bash
++# SPDX-License-Identifier: GPL-2.0-only
++
++
++build() {
++	add_dir /dev/pts
++	add_dir /usr/share/plymouth/themes
++	add_dir /var/run/plymouth
++
++	DATADIR="/usr/share"
++	PLYMOUTH_LOGO_FILE="${DATADIR}/pixmaps/plymouth-pisilinux.png"
++	PLYMOUTH_THEME_NAME="$(/usr/sbin/plymouth-set-default-theme)"
++	PLYMOUTH_MODULE_NAME="$(grep "ModuleName *= *" ${DATADIR}/plymouth/themes/${PLYMOUTH_THEME_NAME}/${PLYMOUTH_THEME_NAME}.plymouth | sed 's/ModuleName *= *//')"
++	PLYMOUTH_PLUGIN_PATH="$(plymouth --get-splash-plugin-path)"
++
++	add_binary /sbin/plymouthd
++	add_binary /bin/plymouth
++
++	add_file ${DATADIR}/plymouth/themes/text/text.plymouth
++	add_binary ${PLYMOUTH_PLUGIN_PATH}/text.so
++	add_file ${DATADIR}/plymouth/themes/details/details.plymouth
++	add_binary ${PLYMOUTH_PLUGIN_PATH}/details.so
++
++	add_file "${PLYMOUTH_LOGO_FILE}"
++	add_file /etc/pisilinux-release
++	add_file /etc/plymouth/plymouthd.conf
++    add_file ${DATADIR}/plymouth/plymouthd.defaults
++
++	if [ ! -f ${PLYMOUTH_PLUGIN_PATH}/${PLYMOUTH_MODULE_NAME}.so ]; then
++	    echo "The default plymouth plugin (${PLYMOUTH_MODULE_NAME}) doesn't exist" > /dev/stderr
++	    exit 1
++	fi
++
++	add_binary ${PLYMOUTH_PLUGIN_PATH}/${PLYMOUTH_MODULE_NAME}.so
++
++	add_binary ${PLYMOUTH_PLUGIN_PATH}/renderers/drm.so
++	add_binary ${PLYMOUTH_PLUGIN_PATH}/renderers/frame-buffer.so
++
++	if [ -d ${DATADIR}/plymouth/themes/${PLYMOUTH_THEME_NAME} ]; then
++	    for x in ${DATADIR}/plymouth/themes/${PLYMOUTH_THEME_NAME}/* ; do
++		[ ! -f "$x" ] && break
++		add_file $x
++	    done
++	fi
++	
++
++	# suppress a warning in glib (which the label control uses)
++	# about uid 0 by building a dummy NSS stack (LP #649917)
++	add_file /etc/passwd
++	add_file /etc/nsswitch.conf
++	add_binary "$(readlink -e /lib/libnss_files.so.2)"
++	add_file /lib/libnss_files.so.2
++
++	add_runscript
++}
++
++help() {
++	echo "This hook includes plymouth in the initramfs image."
++}
++
++# vim: set ft=sh:
++#EOF
++
+diff -Nuar mkinitcpio-v41.orig/install/udev mkinitcpio-v41/install/udev
+--- mkinitcpio-v41.orig/install/udev	2026-04-30 00:02:10.000000000 +0300
++++ mkinitcpio-v41/install/udev	2026-05-14 22:02:22.933959089 +0300
+@@ -1,18 +1,12 @@
+ #!/bin/bash
+ 
+ build() {
+-    map add_binary \
+-        '@UDEVD_PATH@' \
+-        '/usr/bin/udevadm' \
+-        '/usr/lib/udev/ata_id' \
+-        '/usr/lib/udev/scsi_id' \
+-        '/usr/lib/libkmod.so.2'
++    add_binary /bin/udevadm
++    add_binary /sbin/udevd
++    add_file /lib/udev/ata_id
++    add_file /lib/udev/scsi_id
++    add_file /lib/libkmod.so.2
+ 
+-    # meson-templated path
+-    # shellcheck disable=SC2157
+-    if [[ -n '@TMPFILES_PATH@' ]]; then
+-        add_binary '@TMPFILES_PATH@'
+-    fi
+ 
+     map add_udev_rule \
+         '50-udev-default.rules' \
+@@ -20,11 +14,6 @@
+         '64-btrfs.rules' \
+         '80-drivers.rules'
+ 
+-    # add hwdb binaries to the initramfs
+-    map add_file \
+-        /usr/lib/udev/hwdb.bin \
+-        /etc/udev/hwdb.bin
+-
+     add_runscript
+ }
+ 
+diff -Nuar mkinitcpio-v41.orig/meson.build mkinitcpio-v41/meson.build
+--- mkinitcpio-v41.orig/meson.build	2026-04-30 00:02:10.000000000 +0300
++++ mkinitcpio-v41/meson.build	2026-05-14 22:53:03.882963590 +0300
+@@ -146,6 +146,7 @@
+     'hooks/sleep',
+     'hooks/udev',
+     'hooks/usr',
++    'hooks/plymouth',
+     'init',
+     'init_functions',
+     'install/acpi_override',
+@@ -175,6 +176,7 @@
+     'install/strip',
+     'install/systemd',
+     'install/udev',
++    'install/plymouth',
+     'install/usr',
+     'lsinitcpio',
+     'mkinitcpio',

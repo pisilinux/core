@@ -1,0 +1,488 @@
+From 1f0f3a593616e8d12bdb2d81975f982b895afa8a Mon Sep 17 00:00:00 2001
+From: artoo <artoo@artixlinux.org>
+Date: Wed, 6 May 2026 19:39:47 +0200
+Subject: [PATCH 1/1] no systemd
+
+---
+ hooks/resume              |   7 ---
+ init_functions            |  11 ----
+ install/lvm2              |   6 +-
+ install/mdadm_udev        |   6 --
+ install/resume            |   7 ---
+ install/sd-encrypt        |  67 --------------------
+ install/sd-encrypt-opensc |  59 ------------------
+ install/sd-shutdown       |  21 -------
+ install/sd-vconsole       | 124 --------------------------------------
+ install/sd-verity         |  38 ------------
+ install/sd-volatile       |  22 -------
+ 11 files changed, 1 insertion(+), 367 deletions(-)
+ delete mode 100644 install/sd-encrypt
+ delete mode 100644 install/sd-encrypt-opensc
+ delete mode 100644 install/sd-shutdown
+ delete mode 100644 install/sd-vconsole
+ delete mode 100644 install/sd-verity
+ delete mode 100644 install/sd-volatile
+
+diff --git a/hooks/resume b/hooks/resume
+index 2a58c4f..6a63a96 100644
+--- a/hooks/resume
++++ b/hooks/resume
+@@ -9,13 +9,6 @@ run_hook() {
+         return 0
+     fi
+ 
+-    # systemd-hibernate-resume supports resuming from 'HibernateLocation'
+-    # EFI variable. $resume can be empty in this case.
+-    if [ -x /usr/lib/systemd/systemd-hibernate-resume ]; then
+-        /usr/lib/systemd/systemd-hibernate-resume
+-        return
+-    fi
+-
+     resume="$(getarg resume)"
+     if [ -z "$resume" ]; then
+         err 'resume: no device specified for hibernation'
+diff --git a/init_functions b/init_functions
+index 1260f84..2d80426 100644
+--- a/init_functions
++++ b/init_functions
+@@ -350,17 +350,6 @@ fsck_root() {
+         elif bitfield_has_bit "$fsckret" 128; then
+             err "fatal error invoking fsck"
+         fi
+-
+-        # ensure that root is going to be mounted rw. Otherwise, systemd
+-        # might fsck the device again. Annoy the user so that they fix this.
+-        if [ "${rwopt:-ro}" != 'rw' ]; then
+-            echo "********************** WARNING **********************"
+-            echo "*                                                   *"
+-            echo "*  The root device is not configured to be mounted  *"
+-            echo "*  read-write! It may be fsck'd again later.        *"
+-            echo "*                                                   *"
+-            echo "*****************************************************"
+-        fi
+     fi
+ }
+ 
+diff --git a/install/lvm2 b/install/lvm2
+index 0c2e456..90d7ceb 100644
+--- a/install/lvm2
++++ b/install/lvm2
+@@ -34,11 +34,7 @@ build() {
+         '95-dm-notify.rules'
+ 
+     # this udev rule is specific for systemd and non-systemd systems
+-    if declare -F add_systemd_unit &>/dev/null; then
+-        add_udev_rule '69-dm-lvm.rules'
+-    else
+-        add_udev_rule '/usr/lib/initcpio/udev/69-dm-lvm.rules'
+-    fi
++    add_udev_rule '/usr/lib/initcpio/udev/69-dm-lvm.rules'
+ 
+     # config file
+     sed -e 's/^[[:space:]#]*monitoring = [[:digit:]]\+\s*$/\tmonitoring = 0/' \
+diff --git a/install/mdadm_udev b/install/mdadm_udev
+index dad7f7b..7c2b1a8 100644
+--- a/install/mdadm_udev
++++ b/install/mdadm_udev
+@@ -15,12 +15,6 @@ build() {
+ 
+     # For external metadata arrays (e.g. IMSM)
+     add_binary mdmon
+-    if declare -F add_systemd_unit &>/dev/null; then
+-        add_systemd_unit 'mdmon@.service'
+-        # support activation of degraded arrays
+-        add_systemd_unit 'mdadm-last-resort@.service'
+-        add_systemd_unit 'mdadm-last-resort@.timer'
+-    fi
+ }
+ 
+ help() {
+diff --git a/install/resume b/install/resume
+index 4d9622e..97fb9ec 100644
+--- a/install/resume
++++ b/install/resume
+@@ -6,13 +6,6 @@ build() {
+ 
+     map add_module 'crypto-lzo' 'crypto-lz4'
+ 
+-    if command -v systemctl &>/dev/null; then
+-        IFS=' .-~^' read -r _ systemd_ver _ < <(SYSTEMD_COLORS=0 systemctl --version)
+-        if (( systemd_ver >= 255 )); then
+-            add_binary /usr/lib/systemd/systemd-hibernate-resume
+-        fi
+-    fi
+-
+     add_runscript
+ }
+ 
+diff --git a/install/sd-encrypt b/install/sd-encrypt
+deleted file mode 100644
+index 856f640..0000000
+--- a/install/sd-encrypt
++++ /dev/null
+@@ -1,67 +0,0 @@
+-#!/bin/bash
+-
+-build() {
+-    local mod
+-
+-    map add_module 'dm-crypt' 'dm-integrity' 'hid-generic?'
+-    if [[ -n "$CRYPTO_MODULES" ]]; then
+-        for mod in $CRYPTO_MODULES; do
+-            add_module "$mod"
+-        done
+-    else
+-        add_all_modules '/crypto/'
+-    fi
+-    add_checked_modules '/drivers/char/tpm/'
+-
+-    map add_udev_rule \
+-        '10-dm.rules' \
+-        '13-dm-disk.rules' \
+-        '60-fido-id.rules' \
+-        '95-dm-notify.rules'
+-
+-    map add_systemd_unit 'cryptsetup.target' \
+-        'systemd-ask-password-console.path' \
+-        'systemd-ask-password-console.service'
+-    map add_binary \
+-        '/usr/lib/systemd/system-generators/systemd-cryptsetup-generator' \
+-        '/usr/lib/systemd/systemd-cryptsetup' \
+-        '/usr/lib/systemd/systemd-makefs' \
+-        '/usr/lib/cryptsetup/libcryptsetup-token-systemd-fido2.so' \
+-        '/usr/lib/cryptsetup/libcryptsetup-token-systemd-tpm2.so'
+-
+-    # cryptsetup calls pthread_create(), which dlopen()s libgcc_s.so.1
+-    add_binary '/usr/lib/libgcc_s.so.1'
+-
+-    # cryptsetup loads the legacy provider which is required for whirlpool
+-    add_binary '/usr/lib/ossl-modules/legacy.so'
+-
+-    # add libraries dlopen()ed by systemd-cryptsetup
+-    LC_ALL=C.UTF-8 find /usr/lib/ -maxdepth 1 -name "libfido2.so*" | while read -r FILE; do
+-        if [[ -L "${FILE}" ]]; then
+-            add_symlink "${FILE}"
+-        else
+-            add_binary "${FILE}"
+-        fi
+-    done
+-
+-    # add mkswap for creating swap space on the fly (see 'swap' in crypttab(5))
+-    add_binary 'mkswap'
+-
+-    # add NVPCR definition files
+-    map add_file /usr/lib/nvpcr/*.nvpcr
+-
+-    [[ -f /etc/crypttab.initramfs ]] && add_file '/etc/crypttab.initramfs' '/etc/crypttab'
+-}
+-
+-help() {
+-    cat <<HELPEOF
+-This hook allows systemd to unlock encrypted LUKS1 volumes with a password, and encrypted LUKS2 volumes with a password, FIDO2 token or TPM2 key. Unlocking of LUKS2 volumes with a PKCS#11 token is supported for some tokens by additional 'sd-encrypt-opensc' hook.
+-
+-See the manpage of systemd-cryptsetup-generator(8) for available kernel
+-command line options. Alternatively, if the file /etc/crypttab.initramfs
+-exists, it will be added to the initramfs as /etc/crypttab. See the
+-crypttab(5) manpage for more information on crypttab syntax.
+-HELPEOF
+-}
+-
+-# vim: set ft=sh ts=4 sw=4 et:
+diff --git a/install/sd-encrypt-opensc b/install/sd-encrypt-opensc
+deleted file mode 100644
+index 08c1be9..0000000
+--- a/install/sd-encrypt-opensc
++++ /dev/null
+@@ -1,59 +0,0 @@
+-#!/usr/bin/bash
+-
+-build() {
+-    add_binary '/usr/lib/cryptsetup/libcryptsetup-token-systemd-pkcs11.so'
+-
+-    for FILE in /usr/lib/libp11-kit.so* /usr/lib/libpcsclite.so* /usr/lib/libpcsclite_real.so*; do
+-        if [[ -L "${FILE}" ]]; then
+-            add_symlink "${FILE}"
+-        else
+-            add_binary "${FILE}"
+-        fi
+-    done
+-
+-    printf 'module: opensc-pkcs11.so\n' | add_file - '/usr/share/p11-kit/modules/opensc.module' 644
+-
+-    add_binary '/usr/lib/pkcs11/opensc-pkcs11.so'
+-
+-    printf '%s\n' \
+-        '[Unit]' \
+-        'Description=PC/SC Smart Card Daemon' \
+-        'DefaultDependencies=no' \
+-        'Requires=pcscd.socket' \
+-        '[Service]' \
+-        'ExecStart=/usr/bin/pcscd --foreground --disable-polkit' \
+-        'ExecReload=/usr/bin/pcscd --hotplug' \
+-        'RuntimeDirectory=pcscd' \
+-        'RuntimeDirectoryPreserve=true' \
+-        'PIDFile=/run/pcscd/pcscd.pid' \
+-    | add_file - '/usr/lib/systemd/system/pcscd.service' 644
+-
+-    add_binary '/usr/bin/pcscd'
+-
+-    printf '%s\n' \
+-        '[Unit]' \
+-        'Description=PC/SC Smart Card Daemon Activation Socket' \
+-        'DefaultDependencies=no' \
+-        '[Socket]' \
+-        'ListenStream=/run/pcscd/pcscd.comm' \
+-    | add_file - '/usr/lib/systemd/system/pcscd.socket' 644
+-
+-    # pcscd.socket -> cryptsetup-pre.target -> systemd-cryptsetup@.service -> cryptsetup.target
+-    add_systemd_unit 'cryptsetup-pre.target'
+-    add_symlink '/usr/lib/systemd/system/cryptsetup-pre.target.wants/pcscd.socket' '/usr/lib/systemd/system/pcscd.socket'
+-    add_symlink '/usr/lib/systemd/system/cryptsetup.target.wants/cryptsetup-pre.target' '/usr/lib/systemd/system/cryptsetup-pre.target'
+-
+-    add_file '/usr/lib/pcsc/drivers/ifd-ccid.bundle/Contents/Info.plist'
+-    add_binary '/usr/lib/pcsc/drivers/ifd-ccid.bundle/Contents/Linux/libccid.so'
+-}
+-
+-help() {
+-    cat <<HELPEOF
+-This hook allows systemd to unlock LUKS2 volumes with the OpenSC PKCS#11 module and CCID driver.
+-
+-The full list of supported devices is available on [1], but be aware that the device may require a different PC/SC driver. Information about some drivers is available on [2].
+-
+-[1] https://github.com/OpenSC/OpenSC/wiki/Supported-hardware-%28smart-cards-and-USB-tokens%29
+-[2] https://github.com/OpenSC/OpenSC/wiki/Smart-card-readers-%28Linux-and-Mac-OS-X%29
+-HELPEOF
+-}
+diff --git a/install/sd-shutdown b/install/sd-shutdown
+deleted file mode 100644
+index 238a946..0000000
+--- a/install/sd-shutdown
++++ /dev/null
+@@ -1,21 +0,0 @@
+-#!/usr/bin/env bash
+-# SPDX-License-Identifier: GPL-2.0-only
+-
+-build() {
+-    # TODO: should be pulled inn by .notes.dlopen in the future
+-    add_binary /usr/lib/libmount.so
+-    add_binary /usr/lib/systemd/systemd-shutdown /shutdown
+-
+-    if type -P kexec >/dev/null; then
+-        add_binary kexec
+-    fi
+-}
+-
+-help() {
+-    cat <<HELPEOF
+-This hook adds systemd-shutdown to the initramfs. This is only
+-if the image is extracted to /run/initramfs before shutdown.
+-HELPEOF
+-}
+-
+-# vim: set ft=sh ts=4 sw=4 et:
+diff --git a/install/sd-vconsole b/install/sd-vconsole
+deleted file mode 100644
+index c6ed1e0..0000000
+--- a/install/sd-vconsole
++++ /dev/null
+@@ -1,124 +0,0 @@
+-#!/usr/bin/env bash
+-# SPDX-License-Identifier: GPL-2.0-only
+-
+-build() {
+-    # prevent conflicting variables from affecting vconsole.conf values
+-    # shellcheck disable=SC2034
+-    local KEYMAP KEYMAP_TOGGLE FONT FONT_MAP FONT_UNIMAP XKBLAYOUT XKBMODEL XKBVARIANT XKBOPTIONS
+-
+-    add_systemd_unit systemd-vconsole-setup.service
+-    add_binary /usr/lib/systemd/systemd-vconsole-setup
+-    add_binary loadkeys
+-    add_binary setfont
+-    if [[ -s /etc/vconsole.conf ]]; then
+-        add_file /etc/vconsole.conf
+-    else
+-        warning 'sd-vconsole: "/etc/vconsole.conf" not found, will use default values'
+-    fi
+-
+-    add_udev_rule 90-vconsole.rules
+-
+-    # subshell to avoid namespace pollution
+-    (
+-        shopt -s extglob nullglob
+-
+-        get_decompressor() {
+-            case "$1" in
+-                *.gz)
+-                    cat='zcat'
+-                    of="${1%.gz}"
+-                    ;;
+-                *.bz2)
+-                    cat='bzcat'
+-                    of="${1%.bz2}"
+-                    ;;
+-                *.zst)
+-                    cat='zstdcat'
+-                    of="${1%.zst}"
+-                    ;;
+-                *)
+-                    cat='cat'
+-                    of="$1"
+-                    ;;
+-            esac
+-        }
+-
+-        add_keymap_file() {
+-            local cat cmd rest f of
+-
+-            while read -r f; do
+-                get_decompressor "$f"
+-                while read -r cmd rest; do
+-                    if [[ "$cmd" == 'include' ]]; then
+-                        eval set "$rest"
+-                        add_keymap_file "$1"
+-                    fi
+-                done < <("$cat" "$f")
+-                add_dir "${of%/*}"
+-                "$cat" "$f" | add_file - "$of" 644
+-            done < <(LC_ALL=C.UTF-8 find /usr/share/kbd/keymaps/ -type f -regex ".*/$1\(\.inc\)?\(\.gz\|\.bz2|\.zst\)?")
+-        }
+-
+-        add_font_file() {
+-            local cat file filename fontfile="$1"
+-            get_decompressor "$fontfile"
+-            add_dir "${of%/*}"
+-            "$cat" "$fontfile" | add_file - "$of" 644
+-            if [[ "$("$cat" "$fontfile" | head -c 23 | tr -d '\0')" == '# combine partial fonts' ]]; then
+-                while read -r filename; do
+-                    for file in "/usr/share/kbd/consolefonts/partialfonts/$filename"?('.gz'|'.bz2'|'.zst'); do
+-                        add_font_file "$file"
+-                    done
+-                done < <("$cat" "$fontfile" | sed '/^#/d')
+-            fi
+-        }
+-
+-        # shellcheck disable=SC1091
+-        [[ -s /etc/vconsole.conf ]] && . /etc/vconsole.conf
+-
+-        [[ "$KEYMAP" != '@kernel' ]] && add_keymap_file "${KEYMAP:-us}.map"
+-        [[ -n "$KEYMAP_TOGGLE" ]] && add_keymap_file "${KEYMAP_TOGGLE}.map"
+-
+-        if [[ -n "$FONT_MAP" ]]; then
+-            FONT_MAP="${FONT_MAP%.trans}"
+-            if [[ -f "/usr/share/kbd/consoletrans/$FONT_MAP" ]]; then
+-                add_file "/usr/share/kbd/consoletrans/$FONT_MAP"
+-            elif [[ -f "/usr/share/kbd/consoletrans/$FONT_MAP.trans" ]]; then
+-                add_file "/usr/share/kbd/consoletrans/$FONT_MAP.trans"
+-            elif [[ -f "/usr/share/kbd/consoletrans/${FONT_MAP}_to_uni.trans" ]]; then
+-                add_file "/usr/share/kbd/consoletrans/${FONT_MAP}_to_uni.trans"
+-            else
+-                error "sd-vconsole: requested font map not found: '%s'" "$FONT_MAP"
+-                return 1
+-            fi
+-        fi
+-
+-        if [[ -n "$FONT_UNIMAP" ]]; then
+-            FONT_UNIMAP="${FONT_UNIMAP%.uni}"
+-            if [[ -f "/usr/share/kbd/unimaps/$FONT_UNIMAP.uni" ]]; then
+-                add_file "/usr/share/kbd/unimaps/$FONT_UNIMAP.uni"
+-            else
+-                error "sd-vconsole: requested font unimap not found: '%s'" "$FONT_UNIMAP"
+-                return 1
+-            fi
+-        fi
+-
+-        if [[ -n "$FONT" ]]; then
+-            for file in "/usr/share/kbd/consolefonts/$FONT"?('.psfu'|'.psf'|'.cp'|'.fnt')?('.gz'|'.bz2'|'.zst'); do
+-                add_font_file "$file"
+-                return
+-            done
+-            error "sd-vconsole: requested font not found: '%s'" "$FONT"
+-            return 1
+-        fi
+-    )
+-}
+-
+-help() {
+-    cat <<HELPEOF
+-This hook adds the keymap(s) and font specified in vconsole.conf to the image and
+-loads them during early userspace.
+-HELPEOF
+-}
+-
+-# vim: set ft=sh ts=4 sw=4 et:
+diff --git a/install/sd-verity b/install/sd-verity
+deleted file mode 100644
+index e944137..0000000
+--- a/install/sd-verity
++++ /dev/null
+@@ -1,38 +0,0 @@
+-#!/bin/bash
+-
+-build() {
+-    local mod
+-
+-    map add_module 'dm-verity' 'sha256' 'sha512'
+-
+-    map add_udev_rule \
+-        '10-dm.rules' \
+-        '13-dm-disk.rules' \
+-        '95-dm-notify.rules'
+-
+-    map add_systemd_unit 'veritysetup-pre.target' \
+-        'veritysetup.target' \
+-        'systemd-veritysetup@.service'
+-
+-    # Add systemd verity-related binaries
+-    map add_binary '/usr/lib/systemd/system-generators/systemd-veritysetup-generator' \
+-        '/usr/lib/systemd/systemd-veritysetup'
+-
+-    # Add veritysetup binary from cryptsetup package
+-    add_binary '/usr/bin/veritysetup'
+-
+-    # Add veritytab if present
+-    [[ -f /etc/veritytab.initramfs ]] && add_file '/etc/veritytab.initramfs' '/etc/veritytab'
+-}
+-
+-help() {
+-    cat <<HELPEOF
+-This hook sets up dm-verity in the initramfs environment.
+-
+-Ensure your kernel command line contains valid parameters for dm-verity.
+-If /etc/veritytab.initramfs exists, it will be included in the initramfs as
+-/etc/veritytab. See veritytab(5) for details.
+-HELPEOF
+-}
+-
+-# vim: set ft=sh ts=4 sw=4 et:
+diff --git a/install/sd-volatile b/install/sd-volatile
+deleted file mode 100644
+index 134443e..0000000
+--- a/install/sd-volatile
++++ /dev/null
+@@ -1,22 +0,0 @@
+-#!/bin/bash
+-
+-build() {
+-    local mod
+-
+-    map add_module 'overlay'
+-
+-    map add_systemd_unit 'systemd-volatile-root.service'
+-
+-    # Add systemd volatile binary
+-    map add_binary '/usr/lib/systemd/systemd-volatile-root'
+-}
+-
+-help() {
+-    cat <<HELPEOF
+-This hook sets up systemd-volatile in the initramfs environment.
+-
+-Ensure your kernel command line contains valid parameters for it.
+-HELPEOF
+-}
+-
+-# vim: set ft=sh ts=4 sw=4 et:
+-- 
+2.54.0
+
+
