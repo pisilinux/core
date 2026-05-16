@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>groff</Name>
@@ -14,7 +14,7 @@
         <IsA>app:console</IsA>
         <Summary>A document formatting system</Summary>
         <Description>groff is a document formatting system. Groff takes standard text and formatting commands as input and produces formatted output.</Description>
-        <Archive sha1sum="2ce4ab107e3fab1414fef2c5b5312f562a4e4d35" type="targz">http://ftp.gnu.org/gnu/groff/groff-1.22.4.tar.gz</Archive>
+        <Archive sha1sum="6bba283f8b55b74bbcafd56653876ec5d567de63" type="targz">http://ftp.gnu.org/gnu/groff/groff-1.24.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>texinfo</Dependency>
         </BuildDependencies>
@@ -52,6 +52,13 @@
     </Package>
 
     <History>
+        <Update release="6">
+            <Date>2026-05-15</Date>
+            <Version>1.24.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="5">
             <Date>2020-12-09</Date>
             <Version>1.22.4</Version>
