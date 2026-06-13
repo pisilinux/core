@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Netscape Portable Runtime</Summary>
         <Description>Netscape Portable Runtime (NSPR) provides a platform-neutral API for system level and libc like functions. The API is used in the Mozilla client, many of Netscape/AOL/iPlanet's and other software offerings.</Description>
-        <Archive sha1sum="618ff1680294e215424c5d117fb7e4d5c8fdf504" type="targz">https://ftp.mozilla.org/pub/nspr/releases/v4.37/src/nspr-4.37.tar.gz</Archive>
+        <Archive sha1sum="206929c5e067573fd20d31a72eb9dc2b46fa166e" type="targz">https://ftp.mozilla.org/pub/nspr/releases/v4.39/src/nspr-4.39.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="nspr/config/nspr.pc.in">nspr.pc.in</AdditionalFile>
             <AdditionalFile permission="0755" target="generate-pc-config.sh">generate-pc-config.sh</AdditionalFile>
@@ -41,6 +41,13 @@
     </Package>
 
     <History>
+        <Update release="23">
+            <Date>2026-06-12</Date>
+            <Version>4.39</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="22">
             <Date>2025-07-18</Date>
             <Version>4.37</Version>
