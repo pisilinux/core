@@ -22,7 +22,8 @@ def setup():
     shelltools.unlink("*/*.asm")
 
     # These + a lot of other firmware are shipped within alsa-firmware
-    for fw in ("ess", "korg", "sb16", "yamaha"):
+    # "ess", "korg",
+    for fw in ("sb16", "yamaha"):
         shelltools.unlinkDir(fw)
 
 def build():
@@ -34,7 +35,7 @@ def build():
     shelltools.system("touch kernel/x86/microcode/AuthenticAMD.bin")
     shelltools.system("echo kernel/x86/microcode/AuthenticAMD.bin | cpio -o -H newc -R 0:0 > amd-ucode.img")
     shelltools.chmod(get.curDIR() + "/amd-ucode.img", 0644)
-    shelltools.chmod(get.curDIR() + "/LICENSE.amd-ucode", 0644)
+    shelltools.chmod(get.curDIR() + "/LICENSES/LICENSE.amd-ucode", 0644)
 
     autotools.make()
 
@@ -45,8 +46,9 @@ def install():
     
     # Install amd-ucode
     pisitools.insinto("/boot", "amd-ucode.img")
-    shelltools.system("mv LICENSE.amd-ucode LICENSE")
+    # shelltools.system("mv LICENSE.amd-ucode LICENSE")
     pisitools.insinto("/usr/share/licenses/amd-ucode/", "LICENSE")
+    pisitools.insinto("/usr/share/licenses/amd-ucode/", "LICENSES/LICENSE.amd-ucode")
 
     # Remove installed and LIC* files from /lib/firmware
     #pisitools.remove("/lib/firmware/GPL-3")
@@ -60,4 +62,4 @@ def install():
     pisitools.remove("/lib/firmware/ctspeq.bin")
 
     # Install LICENSE files
-    pisitools.dodoc("WHENCE", "LICENCE.*", "LICENSE.*")
+    pisitools.dodoc("WHENCE", "LICENSES/*")
