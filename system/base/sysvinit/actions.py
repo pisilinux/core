@@ -26,7 +26,7 @@ def install():
     pisitools.remove("/sbin/logsave")
     pisitools.remove("/usr/share/man/man8/logsave.8")
     # procps conflicts
-    pisitools.remove("usr/share/man/pl/man5")
-    pisitools.remove("usr/share/man/fr/man5")
+    pisitools.removeDir("usr/share/man/pl/man5")
+    pisitools.removeDir("usr/share/man/fr/man5")
     
     pisitools.dosym("killall5", "/sbin/pidof")
