@@ -25,5 +25,8 @@ def install():
     # These files conflict with e2fsprogs
     pisitools.remove("/sbin/logsave")
     pisitools.remove("/usr/share/man/man8/logsave.8")
+    # procps conflicts
+    pisitools.remove("usr/share/man/pl/man5")
+    pisitools.remove("usr/share/man/fr/man5")
     
     pisitools.dosym("killall5", "/sbin/pidof")
