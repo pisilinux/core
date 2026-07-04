@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>cryptsetup</Name>
@@ -13,7 +13,7 @@
         <IsA>app:cli</IsA>
         <Summary>Userspace setup tool for transparent encryption of block devices using dm-crypt</Summary>
         <Description>Userspace setup tool for transparent encryption of block devices using dm-crypt</Description>
-        <Archive sha1sum="b0c1dbdb9f36ef96048904ee69f9ff98a53aedf9" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/cryptsetup/v2.8/cryptsetup-2.8.4.tar.xz</Archive>
+        <Archive sha1sum="93d10c31d603edf33e0ee26e9060428b608b7fd1" type="tarxz">https://mirrors.edge.kernel.org/pub/linux/utils/cryptsetup/v2.8/cryptsetup-2.8.6.tar.xz</Archive>
         <BuildDependencies>
             <Dependency versionFrom="2.03.26">device-mapper-devel</Dependency>
             <Dependency>libgpg-error-devel</Dependency>
@@ -92,6 +92,13 @@
     </Package>-->
 
     <History>
+        <Update release="23">
+            <Date>2026-07-03</Date>
+            <Version>2.8.6</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="22">
             <Date>2026-03-23</Date>
             <Version>2.8.4</Version>
