@@ -1,0 +1,3183 @@
+From 945953ed03aaee685f10c02df93bb3afd2074d36 Mon Sep 17 00:00:00 2001
+From: Sam James <sam@gentoo.org>
+Date: Thu, 25 Jun 2026 13:40:54 +0100
+Subject: [PATCH 1/4] Drop G_GNUC_CONST for *_get_type
+
+g_type_ensure has a large comment saying _get_type shouldn't be
+marked with G_GNUC_CONST because it has side-effects on the first
+run, but it's OK if you consistently call g_type_ensure first.
+
+Unfortunately, this isn't accurate. GCC trunk (observed at r17-1725-ge259a182e1f100)
+now analyses points-to information more effectively and propagates its
+findings, so it sees the function modifies some global state, concludes
+that can't be possible (because of the const attribute), and deletes
+the stores.
+
+pure unfortunately is unsuitable for *_get_type too as it has a side-effect
+(writes to global memory).
+
+Mesa had a similar issue which I fixed recently [0]. glib and glibmm likely
+want the (not-yet-implemented) 'idempotent' attribute instead [1]. In fact,
+this exact problem is what motivated that request! :)
+
+ebassi mentions an alternative to the current setup as well, using
+atomics [2].
+
+This problem has gone back many years but the compiler has finally
+fully outsmarted us here, so give in.
+
+[0] https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/42361
+[1] https://gcc.gnu.org/PR32911
+[2] https://gitlab.gnome.org/GNOME/glib/-/merge_requests/4249#note_2583110
+
+Fixes: https://gitlab.gnome.org/GNOME/glib/-/work_items/3984
+Signed-off-by: Sam James <sam@gentoo.org>
+---
+ docs/reference/gobject/glib-mkenums.rst  |  2 +-
+ gio/gaction.h                            |  2 +-
+ gio/gactiongroup.h                       |  2 +-
+ gio/gactionmap.h                         |  2 +-
+ gio/gappinfo.h                           |  4 +-
+ gio/gapplication.h                       |  2 +-
+ gio/gapplicationcommandline.h            |  2 +-
+ gio/gasyncinitable.h                     |  2 +-
+ gio/gasyncresult.h                       |  2 +-
+ gio/gbufferedinputstream.h               |  2 +-
+ gio/gbufferedoutputstream.h              |  2 +-
+ gio/gbytesicon.h                         |  2 +-
+ gio/gcancellable.h                       |  2 +-
+ gio/gcharsetconverter.h                  |  2 +-
+ gio/gconverter.h                         |  2 +-
+ gio/gconverterinputstream.h              |  2 +-
+ gio/gconverteroutputstream.h             |  2 +-
+ gio/gcredentials.h                       |  2 +-
+ gio/gdatainputstream.h                   |  2 +-
+ gio/gdataoutputstream.h                  |  2 +-
+ gio/gdbus-2.0/codegen/codegen.py         | 22 +++----
+ gio/gdbusactiongroup.h                   |  2 +-
+ gio/gdbusauth.h                          |  2 +-
+ gio/gdbusauthmechanism.h                 |  2 +-
+ gio/gdbusauthmechanismanon.h             |  2 +-
+ gio/gdbusauthmechanismexternal.h         |  2 +-
+ gio/gdbusauthmechanismsha1.h             |  2 +-
+ gio/gdbusauthobserver.h                  |  2 +-
+ gio/gdbusconnection.h                    |  2 +-
+ gio/gdbusdaemon.h                        |  2 +-
+ gio/gdbusinterface.h                     |  2 +-
+ gio/gdbusinterfaceskeleton.h             |  2 +-
+ gio/gdbusintrospection.h                 | 14 ++---
+ gio/gdbusmenumodel.h                     |  2 +-
+ gio/gdbusmessage.h                       |  2 +-
+ gio/gdbusmethodinvocation.h              |  2 +-
+ gio/gdbusobject.h                        |  2 +-
+ gio/gdbusobjectmanager.h                 |  2 +-
+ gio/gdbusobjectmanagerclient.h           |  2 +-
+ gio/gdbusobjectmanagerserver.h           |  2 +-
+ gio/gdbusobjectproxy.h                   |  2 +-
+ gio/gdbusobjectskeleton.h                |  2 +-
+ gio/gdbusproxy.h                         |  2 +-
+ gio/gdbusserver.h                        |  2 +-
+ gio/gdesktopappinfo.h                    |  4 +-
+ gio/gdrive.h                             |  2 +-
+ gio/gdtlsclientconnection.h              |  2 +-
+ gio/gdtlsconnection.h                    |  2 +-
+ gio/gdtlsserverconnection.h              |  2 +-
+ gio/gdummyfile.h                         |  2 +-
+ gio/gemblem.h                            |  2 +-
+ gio/gemblemedicon.h                      |  2 +-
+ gio/gfile.h                              |  2 +-
+ gio/gfiledescriptorbased.h               |  2 +-
+ gio/gfileenumerator.h                    |  2 +-
+ gio/gfileicon.h                          |  2 +-
+ gio/gfileinfo.h                          |  4 +-
+ gio/gfileinputstream.h                   |  2 +-
+ gio/gfileiostream.h                      |  2 +-
+ gio/gfilemonitor.h                       |  2 +-
+ gio/gfilenamecompleter.h                 |  2 +-
+ gio/gfileoutputstream.h                  |  2 +-
+ gio/gfilterinputstream.h                 |  2 +-
+ gio/gfilteroutputstream.h                |  2 +-
+ gio/gicon.h                              |  2 +-
+ gio/ginetaddress.h                       |  2 +-
+ gio/ginetaddressmask.h                   |  2 +-
+ gio/ginetsocketaddress.h                 |  2 +-
+ gio/ginitable.h                          |  2 +-
+ gio/ginputstream.h                       |  2 +-
+ gio/gioenumtypes.h.template              |  2 +-
+ gio/giomodule.h                          |  2 +-
+ gio/giostream.h                          |  2 +-
+ gio/gloadableicon.h                      |  2 +-
+ gio/glocalfile.h                         |  2 +-
+ gio/glocalfileenumerator.h               |  2 +-
+ gio/glocalfileinputstream.h              |  2 +-
+ gio/glocalfileiostream.h                 |  2 +-
+ gio/glocalfilemonitor.h                  |  2 +-
+ gio/glocalfileoutputstream.h             |  2 +-
+ gio/glocalvfs.h                          |  2 +-
+ gio/gmemoryinputstream.h                 |  2 +-
+ gio/gmemoryoutputstream.h                |  2 +-
+ gio/gmenu.h                              |  4 +-
+ gio/gmenumodel.h                         |  6 +-
+ gio/gmount.h                             |  2 +-
+ gio/gmountoperation.h                    |  2 +-
+ gio/gnativesocketaddress.h               |  2 +-
+ gio/gnativevolumemonitor.h               |  2 +-
+ gio/gnetworkaddress.h                    |  2 +-
+ gio/gnetworkmonitor.h                    |  2 +-
+ gio/gnetworkservice.h                    |  2 +-
+ gio/gnotification.h                      |  2 +-
+ gio/gosxappinfo.h                        |  2 +-
+ gio/goutputstream.h                      |  2 +-
+ gio/gpollableinputstream.h               |  2 +-
+ gio/gpollableoutputstream.h              |  2 +-
+ gio/gpollfilemonitor.h                   |  2 +-
+ gio/gpropertyaction.h                    |  2 +-
+ gio/gproxy.h                             |  2 +-
+ gio/gproxyaddress.h                      |  2 +-
+ gio/gproxyaddressenumerator.h            |  2 +-
+ gio/gproxyresolver.h                     |  2 +-
+ gio/gremoteactiongroup.h                 |  2 +-
+ gio/gresolver.h                          |  2 +-
+ gio/gresource.h                          |  2 +-
+ gio/gresourcefile.c                      |  2 +-
+ gio/gresourcefile.h                      |  2 +-
+ gio/gseekable.h                          |  2 +-
+ gio/gsettingsschema.h                    |  6 +-
+ gio/gsimpleaction.h                      |  2 +-
+ gio/gsimpleactiongroup.h                 |  2 +-
+ gio/gsimpleasyncresult.h                 |  2 +-
+ gio/gsimpleiostream.h                    |  2 +-
+ gio/gsimpleproxyresolver.h               |  2 +-
+ gio/gsocket.h                            |  2 +-
+ gio/gsocketaddress.h                     |  2 +-
+ gio/gsocketaddressenumerator.h           |  2 +-
+ gio/gsocketclient.h                      |  2 +-
+ gio/gsocketconnectable.h                 |  2 +-
+ gio/gsocketconnection.h                  |  2 +-
+ gio/gsocketcontrolmessage.h              |  2 +-
+ gio/gsocketinputstream.h                 |  2 +-
+ gio/gsocketlistener.h                    |  2 +-
+ gio/gsocketoutputstream.h                |  2 +-
+ gio/gsrvtarget.h                         |  2 +-
+ gio/gsubprocess.h                        |  2 +-
+ gio/gsubprocesslauncher.h                |  2 +-
+ gio/gtask.h                              |  2 +-
+ gio/gtcpconnection.h                     |  2 +-
+ gio/gtcpwrapperconnection.h              |  2 +-
+ gio/gtestdbus.h                          |  2 +-
+ gio/gthemedicon.h                        |  2 +-
+ gio/gtlsbackend.h                        |  2 +-
+ gio/gtlscertificate.h                    |  2 +-
+ gio/gtlsclientconnection.h               |  2 +-
+ gio/gtlsconnection.h                     |  2 +-
+ gio/gtlsdatabase.h                       |  2 +-
+ gio/gtlsfiledatabase.h                   |  2 +-
+ gio/gtlsinteraction.h                    |  2 +-
+ gio/gtlspassword.h                       |  2 +-
+ gio/gtlsserverconnection.h               |  2 +-
+ gio/gunionvolumemonitor.h                |  2 +-
+ gio/gunixcredentialsmessage.h            |  2 +-
+ gio/gunixfdlist.h                        |  2 +-
+ gio/gunixfdmessage.h                     |  2 +-
+ gio/gunixinputstream.h                   |  2 +-
+ gio/gunixmount.h                         |  2 +-
+ gio/gunixmounts.h                        |  6 +-
+ gio/gunixoutputstream.h                  |  2 +-
+ gio/gunixsocketaddress.h                 |  2 +-
+ gio/gunixvolume.h                        |  2 +-
+ gio/gunixvolumemonitor.h                 |  2 +-
+ gio/gvfs.h                               |  2 +-
+ gio/gvolume.h                            |  2 +-
+ gio/gvolumemonitor.h                     |  2 +-
+ gio/gwin32appinfo.c                      | 10 ++--
+ gio/gwin32appinfo.h                      |  2 +-
+ gio/gwin32inputstream.h                  |  2 +-
+ gio/gwin32mount.h                        |  2 +-
+ gio/gwin32outputstream.h                 |  2 +-
+ gio/gwin32registrykey.h                  |  4 +-
+ gio/gwin32volumemonitor.h                |  2 +-
+ gio/gzlibcompressor.h                    |  2 +-
+ gio/gzlibdecompressor.h                  |  2 +-
+ gio/tests/converter-stream.c             |  6 +-
+ gio/tests/file-enumerator.c              |  2 +-
+ gio/tests/gdbus-bz627724.c               |  2 +-
+ gio/tests/gdbus-close-pending.c          |  4 +-
+ gio/tests/gdbus-connection-flush.c       |  2 +-
+ gio/tests/gdbus-example-proxy-subclass.c |  2 +-
+ gio/tests/gtlsconsoleinteraction.h       |  2 +-
+ gio/tests/test-io-stream.h               |  2 +-
+ gio/win32/gwinhttpfile.h                 |  2 +-
+ gio/win32/gwinhttpfileinputstream.h      |  2 +-
+ gio/win32/gwinhttpfileoutputstream.h     |  2 +-
+ gio/win32/gwinhttpvfs.h                  |  2 +-
+ girepository/gibaseinfo.h                |  2 +-
+ girepository/gitypelib.h                 |  2 +-
+ gobject/gbinding.h                       |  4 +-
+ gobject/gbindinggroup.h                  |  2 +-
+ gobject/gboxed.h                         |  4 +-
+ gobject/glib-enumtypes.h.template        |  2 +-
+ gobject/glib-types.h                     | 74 ++++++++++++------------
+ gobject/gobject.h                        |  2 +-
+ gobject/gsignalgroup.h                   |  2 +-
+ gobject/gtype.c                          | 21 ++++---
+ gobject/gtype.h                          |  2 +-
+ gobject/gtypemodule.h                    |  2 +-
+ gobject/gtypeplugin.h                    |  2 +-
+ gobject/gvaluearray.h                    |  2 +-
+ gobject/tests/properties.c               |  2 +-
+ 192 files changed, 271 insertions(+), 276 deletions(-)
+
+diff --git a/docs/reference/gobject/glib-mkenums.rst b/docs/reference/gobject/glib-mkenums.rst
+index d6a5ccef6c..bedccde1d2 100644
+--- a/docs/reference/gobject/glib-mkenums.rst
++++ b/docs/reference/gobject/glib-mkenums.rst
+@@ -328,7 +328,7 @@ A C header template file will typically look like this::
+    /*** END file-production ***/
+ 
+    /*** BEGIN value-header ***/
+-   GType @enum_name@_get_type (void) G_GNUC_CONST;
++   GType @enum_name@_get_type (void);
+    #define @ENUMPREFIX@_TYPE_@ENUMSHORT@ (@enum_name@_get_type ())
+    /*** END value-header ***/
+ 
+diff --git a/gio/gaction.h b/gio/gaction.h
+index c3666b49db..c30f6e8920 100644
+--- a/gio/gaction.h
++++ b/gio/gaction.h
+@@ -59,7 +59,7 @@ struct _GActionInterface
+ };
+ 
+ GIO_AVAILABLE_IN_2_30
+-GType                   g_action_get_type                               (void) G_GNUC_CONST;
++GType                   g_action_get_type                               (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ const gchar *           g_action_get_name                               (GAction            *action);
+diff --git a/gio/gactiongroup.h b/gio/gactiongroup.h
+index 06213df8a9..5025672c36 100644
+--- a/gio/gactiongroup.h
++++ b/gio/gactiongroup.h
+@@ -97,7 +97,7 @@ struct _GActionGroupInterface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                   g_action_group_get_type                         (void) G_GNUC_CONST;
++GType                   g_action_group_get_type                         (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ gboolean                g_action_group_has_action                       (GActionGroup *action_group,
+diff --git a/gio/gactionmap.h b/gio/gactionmap.h
+index 4d5a816b7d..3a079b215c 100644
+--- a/gio/gactionmap.h
++++ b/gio/gactionmap.h
+@@ -75,7 +75,7 @@ struct _GActionEntry
+ };
+ 
+ GIO_AVAILABLE_IN_2_32
+-GType                   g_action_map_get_type                           (void) G_GNUC_CONST;
++GType                   g_action_map_get_type                           (void);
+ 
+ GIO_AVAILABLE_IN_2_32
+ GAction *               g_action_map_lookup_action                      (GActionMap         *action_map,
+diff --git a/gio/gappinfo.h b/gio/gappinfo.h
+index f42ebdddf7..89c60b9c53 100644
+--- a/gio/gappinfo.h
++++ b/gio/gappinfo.h
+@@ -155,7 +155,7 @@ struct _GAppInfoIface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType       g_app_info_get_type                     (void) G_GNUC_CONST;
++GType       g_app_info_get_type                     (void);
+ GIO_AVAILABLE_IN_ALL
+ GAppInfo *  g_app_info_create_from_commandline      (const char           *commandline,
+                                                      const char           *application_name,
+@@ -332,7 +332,7 @@ struct _GAppLaunchContextClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType              g_app_launch_context_get_type              (void) G_GNUC_CONST;
++GType              g_app_launch_context_get_type              (void);
+ GIO_AVAILABLE_IN_ALL
+ GAppLaunchContext *g_app_launch_context_new                   (void);
+ 
+diff --git a/gio/gapplication.h b/gio/gapplication.h
+index 6df0bb4ff5..884cf7bb1a 100644
+--- a/gio/gapplication.h
++++ b/gio/gapplication.h
+@@ -124,7 +124,7 @@ struct _GApplicationClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                   g_application_get_type                          (void) G_GNUC_CONST;
++GType                   g_application_get_type                          (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ gboolean                g_application_id_is_valid                       (const gchar              *application_id);
+diff --git a/gio/gapplicationcommandline.h b/gio/gapplicationcommandline.h
+index 51133c4e9d..2645dd63f6 100644
+--- a/gio/gapplicationcommandline.h
++++ b/gio/gapplicationcommandline.h
+@@ -73,7 +73,7 @@ struct _GApplicationCommandLineClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                   g_application_command_line_get_type             (void) G_GNUC_CONST;
++GType                   g_application_command_line_get_type             (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ gchar **                g_application_command_line_get_arguments        (GApplicationCommandLine   *cmdline,
+diff --git a/gio/gasyncinitable.h b/gio/gasyncinitable.h
+index eb9b026f89..d6b8bbabae 100644
+--- a/gio/gasyncinitable.h
++++ b/gio/gasyncinitable.h
+@@ -68,7 +68,7 @@ struct _GAsyncInitableIface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType    g_async_initable_get_type    (void) G_GNUC_CONST;
++GType    g_async_initable_get_type    (void);
+ 
+ 
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gasyncresult.h b/gio/gasyncresult.h
+index 8e96011a8e..715ca3f228 100644
+--- a/gio/gasyncresult.h
++++ b/gio/gasyncresult.h
+@@ -62,7 +62,7 @@ struct _GAsyncResultIface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType    g_async_result_get_type          (void) G_GNUC_CONST;
++GType    g_async_result_get_type          (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ gpointer g_async_result_get_user_data     (GAsyncResult *res);
+diff --git a/gio/gbufferedinputstream.h b/gio/gbufferedinputstream.h
+index eced51f5e1..3eabc8e511 100644
+--- a/gio/gbufferedinputstream.h
++++ b/gio/gbufferedinputstream.h
+@@ -80,7 +80,7 @@ struct _GBufferedInputStreamClass
+ 
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType         g_buffered_input_stream_get_type        (void) G_GNUC_CONST;
++GType         g_buffered_input_stream_get_type        (void);
+ GIO_AVAILABLE_IN_ALL
+ GInputStream* g_buffered_input_stream_new             (GInputStream          *base_stream);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gbufferedoutputstream.h b/gio/gbufferedoutputstream.h
+index 339b916f98..989f859517 100644
+--- a/gio/gbufferedoutputstream.h
++++ b/gio/gbufferedoutputstream.h
+@@ -61,7 +61,7 @@ struct _GBufferedOutputStreamClass
+ 
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType          g_buffered_output_stream_get_type        (void) G_GNUC_CONST;
++GType          g_buffered_output_stream_get_type        (void);
+ GIO_AVAILABLE_IN_ALL
+ GOutputStream* g_buffered_output_stream_new             (GOutputStream         *base_stream);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gbytesicon.h b/gio/gbytesicon.h
+index 1d5ccd72ae..0b6af3ea2b 100644
+--- a/gio/gbytesicon.h
++++ b/gio/gbytesicon.h
+@@ -36,7 +36,7 @@ G_BEGIN_DECLS
+ #define G_IS_BYTES_ICON(inst)     (G_TYPE_CHECK_INSTANCE_TYPE ((inst), G_TYPE_BYTES_ICON))
+ 
+ GIO_AVAILABLE_IN_2_38
+-GType   g_bytes_icon_get_type   (void) G_GNUC_CONST;
++GType   g_bytes_icon_get_type   (void);
+ 
+ GIO_AVAILABLE_IN_2_38
+ GIcon * g_bytes_icon_new        (GBytes     *bytes);
+diff --git a/gio/gcancellable.h b/gio/gcancellable.h
+index 6a76b59025..ab73aa8096 100644
+--- a/gio/gcancellable.h
++++ b/gio/gcancellable.h
+@@ -65,7 +65,7 @@ struct _GCancellableClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType         g_cancellable_get_type               (void) G_GNUC_CONST;
++GType         g_cancellable_get_type               (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GCancellable *g_cancellable_new                    (void);
+diff --git a/gio/gcharsetconverter.h b/gio/gcharsetconverter.h
+index 455ca7cb55..c37d47b738 100644
+--- a/gio/gcharsetconverter.h
++++ b/gio/gcharsetconverter.h
+@@ -46,7 +46,7 @@ struct _GCharsetConverterClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType              g_charset_converter_get_type      (void) G_GNUC_CONST;
++GType              g_charset_converter_get_type      (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GCharsetConverter *g_charset_converter_new            (const gchar  *to_charset,
+diff --git a/gio/gconverter.h b/gio/gconverter.h
+index 2ec9440d88..c655609488 100644
+--- a/gio/gconverter.h
++++ b/gio/gconverter.h
+@@ -69,7 +69,7 @@ struct _GConverterIface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType            g_converter_get_type     (void) G_GNUC_CONST;
++GType            g_converter_get_type     (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GConverterResult g_converter_convert (GConverter       *converter,
+diff --git a/gio/gconverterinputstream.h b/gio/gconverterinputstream.h
+index 96f4dc075c..06db4a2a09 100644
+--- a/gio/gconverterinputstream.h
++++ b/gio/gconverterinputstream.h
+@@ -64,7 +64,7 @@ struct _GConverterInputStreamClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                  g_converter_input_stream_get_type      (void) G_GNUC_CONST;
++GType                  g_converter_input_stream_get_type      (void);
+ GIO_AVAILABLE_IN_ALL
+ GInputStream          *g_converter_input_stream_new           (GInputStream          *base_stream,
+                                                                GConverter            *converter);
+diff --git a/gio/gconverteroutputstream.h b/gio/gconverteroutputstream.h
+index e184500b00..ec494465d1 100644
+--- a/gio/gconverteroutputstream.h
++++ b/gio/gconverteroutputstream.h
+@@ -64,7 +64,7 @@ struct _GConverterOutputStreamClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                   g_converter_output_stream_get_type      (void) G_GNUC_CONST;
++GType                   g_converter_output_stream_get_type      (void);
+ GIO_AVAILABLE_IN_ALL
+ GOutputStream          *g_converter_output_stream_new           (GOutputStream         *base_stream,
+                                                                  GConverter            *converter);
+diff --git a/gio/gcredentials.h b/gio/gcredentials.h
+index c30f31fc1a..4875623de8 100644
+--- a/gio/gcredentials.h
++++ b/gio/gcredentials.h
+@@ -47,7 +47,7 @@ G_BEGIN_DECLS
+ typedef struct _GCredentialsClass   GCredentialsClass;
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType            g_credentials_get_type           (void) G_GNUC_CONST;
++GType            g_credentials_get_type           (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GCredentials    *g_credentials_new                (void);
+diff --git a/gio/gdatainputstream.h b/gio/gdatainputstream.h
+index 2e14a55104..07831208ab 100644
+--- a/gio/gdatainputstream.h
++++ b/gio/gdatainputstream.h
+@@ -63,7 +63,7 @@ struct _GDataInputStreamClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                  g_data_input_stream_get_type             (void) G_GNUC_CONST;
++GType                  g_data_input_stream_get_type             (void);
+ GIO_AVAILABLE_IN_ALL
+ GDataInputStream *     g_data_input_stream_new                  (GInputStream            *base_stream);
+ 
+diff --git a/gio/gdataoutputstream.h b/gio/gdataoutputstream.h
+index 9fad093e6a..51ab24957b 100644
+--- a/gio/gdataoutputstream.h
++++ b/gio/gdataoutputstream.h
+@@ -65,7 +65,7 @@ struct _GDataOutputStreamClass
+ 
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                g_data_output_stream_get_type       (void) G_GNUC_CONST;
++GType                g_data_output_stream_get_type       (void);
+ GIO_AVAILABLE_IN_ALL
+ GDataOutputStream *  g_data_output_stream_new            (GOutputStream         *base_stream);
+ 
+diff --git a/gio/gdbus-2.0/codegen/codegen.py b/gio/gdbus-2.0/codegen/codegen.py
+index 4173bf802c..2add4c810b 100644
+--- a/gio/gdbus-2.0/codegen/codegen.py
++++ b/gio/gdbus-2.0/codegen/codegen.py
+@@ -278,9 +278,7 @@ class HeaderCodeGenerator:
+                 self.outfile.write("\n")
+             if self.symbol_decorator is not None:
+                 self.outfile.write("%s\n" % self.symbol_decorator)
+-            self.outfile.write(
+-                "GType %s_get_type (void) G_GNUC_CONST;\n" % (i.name_lower)
+-            )
++            self.outfile.write("GType %s_get_type (void);\n" % (i.name_lower))
+             self.outfile.write("\n")
+             if self.symbol_decorator is not None:
+                 self.outfile.write("%s\n" % self.symbol_decorator)
+@@ -509,9 +507,7 @@ class HeaderCodeGenerator:
+             self.outfile.write("\n")
+             if self.symbol_decorator is not None:
+                 self.outfile.write("%s\n" % self.symbol_decorator)
+-            self.outfile.write(
+-                "GType %s_proxy_get_type (void) G_GNUC_CONST;\n" % (i.name_lower)
+-            )
++            self.outfile.write("GType %s_proxy_get_type (void);\n" % (i.name_lower))
+             self.outfile.write("\n")
+             if self.generate_autocleanup in ("objects", "all"):
+                 self.outfile.write("#if GLIB_CHECK_VERSION(2, 44, 0)\n")
+@@ -655,9 +651,7 @@ class HeaderCodeGenerator:
+             self.outfile.write("\n")
+             if self.symbol_decorator is not None:
+                 self.outfile.write("%s\n" % self.symbol_decorator)
+-            self.outfile.write(
+-                "GType %s_skeleton_get_type (void) G_GNUC_CONST;\n" % (i.name_lower)
+-            )
++            self.outfile.write("GType %s_skeleton_get_type (void);\n" % (i.name_lower))
+             self.outfile.write("\n")
+             if self.generate_autocleanup in ("objects", "all"):
+                 self.outfile.write("#if GLIB_CHECK_VERSION(2, 44, 0)\n")
+@@ -714,7 +708,7 @@ class HeaderCodeGenerator:
+             if self.symbol_decorator is not None:
+                 self.outfile.write("%s\n" % self.symbol_decorator)
+             self.outfile.write(
+-                "GType %sobject_get_type (void) G_GNUC_CONST;\n" "\n" % (self.ns_lower)
++                "GType %sobject_get_type (void);\n" "\n" % (self.ns_lower)
+             )
+             if self.generate_autocleanup == "all":
+                 self.outfile.write("#if GLIB_CHECK_VERSION(2, 44, 0)\n")
+@@ -806,7 +800,7 @@ class HeaderCodeGenerator:
+             if self.symbol_decorator is not None:
+                 self.outfile.write("%s\n" % self.symbol_decorator)
+             self.outfile.write(
+-                "GType %sobject_proxy_get_type (void) G_GNUC_CONST;\n" % (self.ns_lower)
++                "GType %sobject_proxy_get_type (void);\n" % (self.ns_lower)
+             )
+             self.outfile.write("\n")
+             if self.generate_autocleanup in ("objects", "all"):
+@@ -877,8 +871,7 @@ class HeaderCodeGenerator:
+             if self.symbol_decorator is not None:
+                 self.outfile.write("%s\n" % self.symbol_decorator)
+             self.outfile.write(
+-                "GType %sobject_skeleton_get_type (void) G_GNUC_CONST;\n"
+-                % (self.ns_lower)
++                "GType %sobject_skeleton_get_type (void);\n" % (self.ns_lower)
+             )
+             self.outfile.write("\n")
+             if self.generate_autocleanup in ("objects", "all"):
+@@ -978,8 +971,7 @@ class HeaderCodeGenerator:
+             if self.symbol_decorator is not None:
+                 self.outfile.write("%s\n" % self.symbol_decorator)
+             self.outfile.write(
+-                "GType %sobject_manager_client_get_type (void) G_GNUC_CONST;\n"
+-                % (self.ns_lower)
++                "GType %sobject_manager_client_get_type (void);\n" % (self.ns_lower)
+             )
+             self.outfile.write("\n")
+             if self.symbol_decorator is not None:
+diff --git a/gio/gdbusactiongroup.h b/gio/gdbusactiongroup.h
+index 84868f07ec..f35f1c514b 100644
+--- a/gio/gdbusactiongroup.h
++++ b/gio/gdbusactiongroup.h
+@@ -44,7 +44,7 @@ G_BEGIN_DECLS
+                                                              G_TYPE_DBUS_ACTION_GROUP, GDBusActionGroupClass))
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                   g_dbus_action_group_get_type                  (void) G_GNUC_CONST;
++GType                   g_dbus_action_group_get_type                  (void);
+ 
+ GIO_AVAILABLE_IN_2_32
+ GDBusActionGroup *      g_dbus_action_group_get                       (GDBusConnection        *connection,
+diff --git a/gio/gdbusauth.h b/gio/gdbusauth.h
+index 8fa89444a8..96b75bf849 100644
+--- a/gio/gdbusauth.h
++++ b/gio/gdbusauth.h
+@@ -54,7 +54,7 @@ struct _GDBusAuth
+   GDBusAuthPrivate *priv;
+ };
+ 
+-GType       _g_dbus_auth_get_type (void) G_GNUC_CONST;
++GType       _g_dbus_auth_get_type (void);
+ GDBusAuth  *_g_dbus_auth_new      (GIOStream *stream);
+ 
+ /* TODO: need a way to set allowed authentication mechanisms */
+diff --git a/gio/gdbusauthmechanism.h b/gio/gdbusauthmechanism.h
+index e906a47ac5..9f6bccd6c3 100644
+--- a/gio/gdbusauthmechanism.h
++++ b/gio/gdbusauthmechanism.h
+@@ -110,7 +110,7 @@ struct _GDBusAuthMechanism
+   GDBusAuthMechanismPrivate *priv;
+ };
+ 
+-GType                     _g_dbus_auth_mechanism_get_type                 (void) G_GNUC_CONST;
++GType                     _g_dbus_auth_mechanism_get_type                 (void);
+ 
+ gint                      _g_dbus_auth_mechanism_get_priority             (GType                 mechanism_type);
+ const gchar              *_g_dbus_auth_mechanism_get_name                 (GType                 mechanism_type);
+diff --git a/gio/gdbusauthmechanismanon.h b/gio/gdbusauthmechanismanon.h
+index 3b43031054..44ad4a513d 100644
+--- a/gio/gdbusauthmechanismanon.h
++++ b/gio/gdbusauthmechanismanon.h
+@@ -55,7 +55,7 @@ struct _GDBusAuthMechanismAnon
+   GDBusAuthMechanismAnonPrivate *priv;
+ };
+ 
+-GType _g_dbus_auth_mechanism_anon_get_type (void) G_GNUC_CONST;
++GType _g_dbus_auth_mechanism_anon_get_type (void);
+ 
+ 
+ G_END_DECLS
+diff --git a/gio/gdbusauthmechanismexternal.h b/gio/gdbusauthmechanismexternal.h
+index 9d11a65477..252290e084 100644
+--- a/gio/gdbusauthmechanismexternal.h
++++ b/gio/gdbusauthmechanismexternal.h
+@@ -55,7 +55,7 @@ struct _GDBusAuthMechanismExternal
+   GDBusAuthMechanismExternalPrivate *priv;
+ };
+ 
+-GType _g_dbus_auth_mechanism_external_get_type (void) G_GNUC_CONST;
++GType _g_dbus_auth_mechanism_external_get_type (void);
+ 
+ 
+ G_END_DECLS
+diff --git a/gio/gdbusauthmechanismsha1.h b/gio/gdbusauthmechanismsha1.h
+index 574ca36ccf..1ebafdce7c 100644
+--- a/gio/gdbusauthmechanismsha1.h
++++ b/gio/gdbusauthmechanismsha1.h
+@@ -55,7 +55,7 @@ struct _GDBusAuthMechanismSha1
+   GDBusAuthMechanismSha1Private *priv;
+ };
+ 
+-GType _g_dbus_auth_mechanism_sha1_get_type (void) G_GNUC_CONST;
++GType _g_dbus_auth_mechanism_sha1_get_type (void);
+ 
+ 
+ G_END_DECLS
+diff --git a/gio/gdbusauthobserver.h b/gio/gdbusauthobserver.h
+index 715095d408..8c7ecfd110 100644
+--- a/gio/gdbusauthobserver.h
++++ b/gio/gdbusauthobserver.h
+@@ -36,7 +36,7 @@ G_BEGIN_DECLS
+ #define G_IS_DBUS_AUTH_OBSERVER(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), G_TYPE_DBUS_AUTH_OBSERVER))
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType              g_dbus_auth_observer_get_type                     (void) G_GNUC_CONST;
++GType              g_dbus_auth_observer_get_type                     (void);
+ GIO_AVAILABLE_IN_ALL
+ GDBusAuthObserver *g_dbus_auth_observer_new                          (void);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gdbusconnection.h b/gio/gdbusconnection.h
+index 231289ec2f..47d4e10d3d 100644
+--- a/gio/gdbusconnection.h
++++ b/gio/gdbusconnection.h
+@@ -36,7 +36,7 @@ G_BEGIN_DECLS
+ #define G_IS_DBUS_CONNECTION(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), G_TYPE_DBUS_CONNECTION))
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType            g_dbus_connection_get_type                   (void) G_GNUC_CONST;
++GType            g_dbus_connection_get_type                   (void);
+ 
+ /* ---------------------------------------------------------------------------------------------------- */
+ 
+diff --git a/gio/gdbusdaemon.h b/gio/gdbusdaemon.h
+index e2babfcd7c..96f8084ff3 100644
+--- a/gio/gdbusdaemon.h
++++ b/gio/gdbusdaemon.h
+@@ -33,7 +33,7 @@ typedef struct _GDBusDaemonClass GDBusDaemonClass;
+ 
+ G_DEFINE_AUTOPTR_CLEANUP_FUNC(GDBusDaemon, g_object_unref)
+ 
+-GType _g_dbus_daemon_get_type (void) G_GNUC_CONST;
++GType _g_dbus_daemon_get_type (void);
+ 
+ GDBusDaemon *_g_dbus_daemon_new (const char *address,
+ 				 GCancellable *cancellable,
+diff --git a/gio/gdbusinterface.h b/gio/gdbusinterface.h
+index 44889754b8..7a84368193 100644
+--- a/gio/gdbusinterface.h
++++ b/gio/gdbusinterface.h
+@@ -59,7 +59,7 @@ struct _GDBusInterfaceIface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                 g_dbus_interface_get_type         (void) G_GNUC_CONST;
++GType                 g_dbus_interface_get_type         (void);
+ GIO_AVAILABLE_IN_ALL
+ GDBusInterfaceInfo   *g_dbus_interface_get_info         (GDBusInterface      *interface_);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gdbusinterfaceskeleton.h b/gio/gdbusinterfaceskeleton.h
+index 51fa6bd37d..27036f318a 100644
+--- a/gio/gdbusinterfaceskeleton.h
++++ b/gio/gdbusinterfaceskeleton.h
+@@ -87,7 +87,7 @@ struct _GDBusInterfaceSkeletonClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                        g_dbus_interface_skeleton_get_type        (void) G_GNUC_CONST;
++GType                        g_dbus_interface_skeleton_get_type        (void);
+ GIO_AVAILABLE_IN_ALL
+ GDBusInterfaceSkeletonFlags  g_dbus_interface_skeleton_get_flags       (GDBusInterfaceSkeleton      *interface_);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gdbusintrospection.h b/gio/gdbusintrospection.h
+index 7b17c1af0a..6008b6dd86 100644
+--- a/gio/gdbusintrospection.h
++++ b/gio/gdbusintrospection.h
+@@ -308,19 +308,19 @@ void                 g_dbus_annotation_info_unref          (GDBusAnnotationInfo
+ #define G_TYPE_DBUS_ANNOTATION_INFO (g_dbus_annotation_info_get_type ())
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType g_dbus_node_info_get_type       (void) G_GNUC_CONST;
++GType g_dbus_node_info_get_type       (void);
+ GIO_AVAILABLE_IN_ALL
+-GType g_dbus_interface_info_get_type  (void) G_GNUC_CONST;
++GType g_dbus_interface_info_get_type  (void);
+ GIO_AVAILABLE_IN_ALL
+-GType g_dbus_method_info_get_type     (void) G_GNUC_CONST;
++GType g_dbus_method_info_get_type     (void);
+ GIO_AVAILABLE_IN_ALL
+-GType g_dbus_signal_info_get_type     (void) G_GNUC_CONST;
++GType g_dbus_signal_info_get_type     (void);
+ GIO_AVAILABLE_IN_ALL
+-GType g_dbus_property_info_get_type   (void) G_GNUC_CONST;
++GType g_dbus_property_info_get_type   (void);
+ GIO_AVAILABLE_IN_ALL
+-GType g_dbus_arg_info_get_type        (void) G_GNUC_CONST;
++GType g_dbus_arg_info_get_type        (void);
+ GIO_AVAILABLE_IN_ALL
+-GType g_dbus_annotation_info_get_type (void) G_GNUC_CONST;
++GType g_dbus_annotation_info_get_type (void);
+ 
+ G_END_DECLS
+ 
+diff --git a/gio/gdbusmenumodel.h b/gio/gdbusmenumodel.h
+index 73489b5bb1..c2c6e294bc 100644
+--- a/gio/gdbusmenumodel.h
++++ b/gio/gdbusmenumodel.h
+@@ -35,7 +35,7 @@ G_BEGIN_DECLS
+ typedef struct _GDBusMenuModel GDBusMenuModel;
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                   g_dbus_menu_model_get_type     (void) G_GNUC_CONST;
++GType                   g_dbus_menu_model_get_type     (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GDBusMenuModel *        g_dbus_menu_model_get          (GDBusConnection *connection,
+diff --git a/gio/gdbusmessage.h b/gio/gdbusmessage.h
+index 643aca0745..7cc633b2e3 100644
+--- a/gio/gdbusmessage.h
++++ b/gio/gdbusmessage.h
+@@ -36,7 +36,7 @@ G_BEGIN_DECLS
+ #define G_IS_DBUS_MESSAGE(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), G_TYPE_DBUS_MESSAGE))
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                     g_dbus_message_get_type           (void) G_GNUC_CONST;
++GType                     g_dbus_message_get_type           (void);
+ GIO_AVAILABLE_IN_ALL
+ GDBusMessage             *g_dbus_message_new                (void);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gdbusmethodinvocation.h b/gio/gdbusmethodinvocation.h
+index 6266f38a31..6320a750ac 100644
+--- a/gio/gdbusmethodinvocation.h
++++ b/gio/gdbusmethodinvocation.h
+@@ -71,7 +71,7 @@ G_BEGIN_DECLS
+ #define G_DBUS_METHOD_INVOCATION_UNHANDLED FALSE GIO_AVAILABLE_MACRO_IN_2_68
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                  g_dbus_method_invocation_get_type             (void) G_GNUC_CONST;
++GType                  g_dbus_method_invocation_get_type             (void);
+ GIO_AVAILABLE_IN_ALL
+ const gchar           *g_dbus_method_invocation_get_sender           (GDBusMethodInvocation *invocation);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gdbusobject.h b/gio/gdbusobject.h
+index b8186afc46..4614fa9c2f 100644
+--- a/gio/gdbusobject.h
++++ b/gio/gdbusobject.h
+@@ -66,7 +66,7 @@ struct _GDBusObjectIface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType            g_dbus_object_get_type        (void) G_GNUC_CONST;
++GType            g_dbus_object_get_type        (void);
+ GIO_AVAILABLE_IN_ALL
+ const gchar     *g_dbus_object_get_object_path (GDBusObject  *object);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gdbusobjectmanager.h b/gio/gdbusobjectmanager.h
+index 7bfa2ae024..ab94bef113 100644
+--- a/gio/gdbusobjectmanager.h
++++ b/gio/gdbusobjectmanager.h
+@@ -78,7 +78,7 @@ struct _GDBusObjectManagerIface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType            g_dbus_object_manager_get_type        (void) G_GNUC_CONST;
++GType            g_dbus_object_manager_get_type        (void);
+ GIO_AVAILABLE_IN_ALL
+ const gchar     *g_dbus_object_manager_get_object_path (GDBusObjectManager    *manager);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gdbusobjectmanagerclient.h b/gio/gdbusobjectmanagerclient.h
+index f02c69389a..403d4acab1 100644
+--- a/gio/gdbusobjectmanagerclient.h
++++ b/gio/gdbusobjectmanagerclient.h
+@@ -77,7 +77,7 @@ struct _GDBusObjectManagerClientClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                         g_dbus_object_manager_client_get_type           (void) G_GNUC_CONST;
++GType                         g_dbus_object_manager_client_get_type           (void);
+ GIO_AVAILABLE_IN_ALL
+ void                          g_dbus_object_manager_client_new                (GDBusConnection               *connection,
+                                                                                GDBusObjectManagerClientFlags  flags,
+diff --git a/gio/gdbusobjectmanagerserver.h b/gio/gdbusobjectmanagerserver.h
+index a4b7418fb2..57422ef964 100644
+--- a/gio/gdbusobjectmanagerserver.h
++++ b/gio/gdbusobjectmanagerserver.h
+@@ -61,7 +61,7 @@ struct _GDBusObjectManagerServerClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                     g_dbus_object_manager_server_get_type            (void) G_GNUC_CONST;
++GType                     g_dbus_object_manager_server_get_type            (void);
+ GIO_AVAILABLE_IN_ALL
+ GDBusObjectManagerServer *g_dbus_object_manager_server_new                 (const gchar               *object_path);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gdbusobjectproxy.h b/gio/gdbusobjectproxy.h
+index 8397dba379..73de1ca569 100644
+--- a/gio/gdbusobjectproxy.h
++++ b/gio/gdbusobjectproxy.h
+@@ -61,7 +61,7 @@ struct _GDBusObjectProxyClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType             g_dbus_object_proxy_get_type       (void) G_GNUC_CONST;
++GType             g_dbus_object_proxy_get_type       (void);
+ GIO_AVAILABLE_IN_ALL
+ GDBusObjectProxy *g_dbus_object_proxy_new            (GDBusConnection   *connection,
+                                                       const gchar       *object_path);
+diff --git a/gio/gdbusobjectskeleton.h b/gio/gdbusobjectskeleton.h
+index f902d54bb9..dc65b1dd72 100644
+--- a/gio/gdbusobjectskeleton.h
++++ b/gio/gdbusobjectskeleton.h
+@@ -67,7 +67,7 @@ struct _GDBusObjectSkeletonClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                g_dbus_object_skeleton_get_type                  (void) G_GNUC_CONST;
++GType                g_dbus_object_skeleton_get_type                  (void);
+ GIO_AVAILABLE_IN_ALL
+ GDBusObjectSkeleton *g_dbus_object_skeleton_new                       (const gchar            *object_path);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gdbusproxy.h b/gio/gdbusproxy.h
+index d74cf75952..204aca943d 100644
+--- a/gio/gdbusproxy.h
++++ b/gio/gdbusproxy.h
+@@ -79,7 +79,7 @@ struct _GDBusProxyClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType            g_dbus_proxy_get_type                  (void) G_GNUC_CONST;
++GType            g_dbus_proxy_get_type                  (void);
+ GIO_AVAILABLE_IN_ALL
+ void             g_dbus_proxy_new                       (GDBusConnection     *connection,
+                                                          GDBusProxyFlags      flags,
+diff --git a/gio/gdbusserver.h b/gio/gdbusserver.h
+index 8d460e360a..cdf5c47c9f 100644
+--- a/gio/gdbusserver.h
++++ b/gio/gdbusserver.h
+@@ -36,7 +36,7 @@ G_BEGIN_DECLS
+ #define G_IS_DBUS_SERVER(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), G_TYPE_DBUS_SERVER))
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType             g_dbus_server_get_type           (void) G_GNUC_CONST;
++GType             g_dbus_server_get_type           (void);
+ GIO_AVAILABLE_IN_ALL
+ GDBusServer      *g_dbus_server_new_sync           (const gchar       *address,
+                                                     GDBusServerFlags   flags,
+diff --git a/gio/gdesktopappinfo.h b/gio/gdesktopappinfo.h
+index 7981a026f7..3a44836edc 100644
+--- a/gio/gdesktopappinfo.h
++++ b/gio/gdesktopappinfo.h
+@@ -46,7 +46,7 @@ struct _GDesktopAppInfoClass
+ 
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType            g_desktop_app_info_get_type          (void) G_GNUC_CONST;
++GType            g_desktop_app_info_get_type          (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GDesktopAppInfo *g_desktop_app_info_new_from_filename (const char      *filename);
+@@ -144,7 +144,7 @@ struct _GDesktopAppInfoLookupIface
+ };
+ 
+ GIO_DEPRECATED
+-GType     g_desktop_app_info_lookup_get_type                   (void) G_GNUC_CONST;
++GType     g_desktop_app_info_lookup_get_type                   (void);
+ 
+ GIO_DEPRECATED
+ GAppInfo *g_desktop_app_info_lookup_get_default_for_uri_scheme (GDesktopAppInfoLookup *lookup,
+diff --git a/gio/gdrive.h b/gio/gdrive.h
+index 7551a4025a..9d14c49c09 100644
+--- a/gio/gdrive.h
++++ b/gio/gdrive.h
+@@ -171,7 +171,7 @@ struct _GDriveIface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType    g_drive_get_type                 (void) G_GNUC_CONST;
++GType    g_drive_get_type                 (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ char *   g_drive_get_name                 (GDrive               *drive);
+diff --git a/gio/gdtlsclientconnection.h b/gio/gdtlsclientconnection.h
+index f8ee1f49ec..abcaac96ca 100644
+--- a/gio/gdtlsclientconnection.h
++++ b/gio/gdtlsclientconnection.h
+@@ -51,7 +51,7 @@ struct _GDtlsClientConnectionInterface
+ };
+ 
+ GIO_AVAILABLE_IN_2_48
+-GType                g_dtls_client_connection_get_type             (void) G_GNUC_CONST;
++GType                g_dtls_client_connection_get_type             (void);
+ 
+ GIO_AVAILABLE_IN_2_48
+ GDatagramBased      *g_dtls_client_connection_new                  (GDatagramBased         *base_socket,
+diff --git a/gio/gdtlsconnection.h b/gio/gdtlsconnection.h
+index c7513ee9e8..029519b0ca 100644
+--- a/gio/gdtlsconnection.h
++++ b/gio/gdtlsconnection.h
+@@ -108,7 +108,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
+ };
+ 
+ GIO_AVAILABLE_IN_2_48
+-GType                 g_dtls_connection_get_type                    (void) G_GNUC_CONST;
++GType                 g_dtls_connection_get_type                    (void);
+ 
+ GIO_AVAILABLE_IN_2_48
+ void                  g_dtls_connection_set_database                (GDtlsConnection       *conn,
+diff --git a/gio/gdtlsserverconnection.h b/gio/gdtlsserverconnection.h
+index 3832818fa1..6500e7bf2a 100644
+--- a/gio/gdtlsserverconnection.h
++++ b/gio/gdtlsserverconnection.h
+@@ -51,7 +51,7 @@ struct _GDtlsServerConnectionInterface
+ };
+ 
+ GIO_AVAILABLE_IN_2_48
+-GType           g_dtls_server_connection_get_type (void) G_GNUC_CONST;
++GType           g_dtls_server_connection_get_type (void);
+ 
+ GIO_AVAILABLE_IN_2_48
+ GDatagramBased *g_dtls_server_connection_new      (GDatagramBased   *base_socket,
+diff --git a/gio/gdummyfile.h b/gio/gdummyfile.h
+index 405c299bf7..9af82d3b44 100644
+--- a/gio/gdummyfile.h
++++ b/gio/gdummyfile.h
+@@ -42,7 +42,7 @@ struct _GDummyFileClass
+   GObjectClass parent_class;
+ };
+ 
+-GType   _g_dummy_file_get_type (void) G_GNUC_CONST;
++GType   _g_dummy_file_get_type (void);
+ 
+ GFile * _g_dummy_file_new      (const char *uri);
+ 
+diff --git a/gio/gemblem.h b/gio/gemblem.h
+index 3fa6b610be..282d30c4a8 100644
+--- a/gio/gemblem.h
++++ b/gio/gemblem.h
+@@ -41,7 +41,7 @@ typedef struct _GEmblem        GEmblem;
+ typedef struct _GEmblemClass   GEmblemClass;
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType          g_emblem_get_type        (void) G_GNUC_CONST;
++GType          g_emblem_get_type        (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GEmblem       *g_emblem_new             (GIcon         *icon);
+diff --git a/gio/gemblemedicon.h b/gio/gemblemedicon.h
+index 7145efdf6e..865e7df34f 100644
+--- a/gio/gemblemedicon.h
++++ b/gio/gemblemedicon.h
+@@ -58,7 +58,7 @@ struct _GEmblemedIconClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType  g_emblemed_icon_get_type    (void) G_GNUC_CONST;
++GType  g_emblemed_icon_get_type    (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GIcon *g_emblemed_icon_new         (GIcon         *icon,
+diff --git a/gio/gfile.h b/gio/gfile.h
+index 74e50db839..eaa856bc71 100644
+--- a/gio/gfile.h
++++ b/gio/gfile.h
+@@ -605,7 +605,7 @@ struct _GFileIface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                   g_file_get_type                   (void) G_GNUC_CONST;
++GType                   g_file_get_type                   (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GFile *                 g_file_new_for_path               (const char                 *path);
+diff --git a/gio/gfiledescriptorbased.h b/gio/gfiledescriptorbased.h
+index 7c7c78afb9..b1c078ffed 100644
+--- a/gio/gfiledescriptorbased.h
++++ b/gio/gfiledescriptorbased.h
+@@ -52,7 +52,7 @@ struct _GFileDescriptorBasedIface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType    g_file_descriptor_based_get_type     (void) G_GNUC_CONST;
++GType    g_file_descriptor_based_get_type     (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ int      g_file_descriptor_based_get_fd       (GFileDescriptorBased *fd_based);
+diff --git a/gio/gfileenumerator.h b/gio/gfileenumerator.h
+index 274d8ed152..edc4882c3f 100644
+--- a/gio/gfileenumerator.h
++++ b/gio/gfileenumerator.h
+@@ -92,7 +92,7 @@ struct _GFileEnumeratorClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType      g_file_enumerator_get_type          (void) G_GNUC_CONST;
++GType      g_file_enumerator_get_type          (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GFileInfo *g_file_enumerator_next_file         (GFileEnumerator      *enumerator,
+diff --git a/gio/gfileicon.h b/gio/gfileicon.h
+index 971cf0c9df..9355adcff5 100644
+--- a/gio/gfileicon.h
++++ b/gio/gfileicon.h
+@@ -41,7 +41,7 @@ G_BEGIN_DECLS
+ typedef struct _GFileIconClass   GFileIconClass;
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType   g_file_icon_get_type (void) G_GNUC_CONST;
++GType   g_file_icon_get_type (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GIcon * g_file_icon_new      (GFile     *file);
+diff --git a/gio/gfileinfo.h b/gio/gfileinfo.h
+index 66667a7b5c..6ca6f0ee9b 100644
+--- a/gio/gfileinfo.h
++++ b/gio/gfileinfo.h
+@@ -1300,7 +1300,7 @@ typedef struct _GFileInfoClass   GFileInfoClass;
+ #define G_FILE_ATTRIBUTE_RECENT_MODIFIED "recent::modified"          /* int64 (time_t) */
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType              g_file_info_get_type                  (void) G_GNUC_CONST;
++GType              g_file_info_get_type                  (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GFileInfo *        g_file_info_new                       (void);
+@@ -1523,7 +1523,7 @@ void              g_file_info_set_sort_order         (GFileInfo         *info,
+ 
+ #define G_TYPE_FILE_ATTRIBUTE_MATCHER (g_file_attribute_matcher_get_type ())
+ GIO_AVAILABLE_IN_ALL
+-GType g_file_attribute_matcher_get_type (void) G_GNUC_CONST;
++GType g_file_attribute_matcher_get_type (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GFileAttributeMatcher *g_file_attribute_matcher_new            (const char            *attributes);
+diff --git a/gio/gfileinputstream.h b/gio/gfileinputstream.h
+index a1227654a7..07c65784ee 100644
+--- a/gio/gfileinputstream.h
++++ b/gio/gfileinputstream.h
+@@ -84,7 +84,7 @@ struct _GFileInputStreamClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType      g_file_input_stream_get_type          (void) G_GNUC_CONST;
++GType      g_file_input_stream_get_type          (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GFileInfo *g_file_input_stream_query_info        (GFileInputStream     *stream,
+diff --git a/gio/gfileiostream.h b/gio/gfileiostream.h
+index c516fb25ed..7bb8c4cc00 100644
+--- a/gio/gfileiostream.h
++++ b/gio/gfileiostream.h
+@@ -89,7 +89,7 @@ struct _GFileIOStreamClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType      g_file_io_stream_get_type          (void) G_GNUC_CONST;
++GType      g_file_io_stream_get_type          (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GFileInfo *g_file_io_stream_query_info        (GFileIOStream    *stream,
+diff --git a/gio/gfilemonitor.h b/gio/gfilemonitor.h
+index 63ab1e04d8..67e9dac27c 100644
+--- a/gio/gfilemonitor.h
++++ b/gio/gfilemonitor.h
+@@ -72,7 +72,7 @@ struct _GFileMonitorClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType    g_file_monitor_get_type       (void) G_GNUC_CONST;
++GType    g_file_monitor_get_type       (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ gboolean g_file_monitor_cancel         (GFileMonitor      *monitor);
+diff --git a/gio/gfilenamecompleter.h b/gio/gfilenamecompleter.h
+index d835af8d94..aeddb60ac7 100644
+--- a/gio/gfilenamecompleter.h
++++ b/gio/gfilenamecompleter.h
+@@ -56,7 +56,7 @@ struct _GFilenameCompleterClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType               g_filename_completer_get_type              (void) G_GNUC_CONST;
++GType               g_filename_completer_get_type              (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GFilenameCompleter *g_filename_completer_new                   (void);
+diff --git a/gio/gfileoutputstream.h b/gio/gfileoutputstream.h
+index edc9b10326..db27d97bf4 100644
+--- a/gio/gfileoutputstream.h
++++ b/gio/gfileoutputstream.h
+@@ -89,7 +89,7 @@ struct _GFileOutputStreamClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType      g_file_output_stream_get_type          (void) G_GNUC_CONST;
++GType      g_file_output_stream_get_type          (void);
+ 
+ 
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gfilterinputstream.h b/gio/gfilterinputstream.h
+index 6009eea8d1..7009b94762 100644
+--- a/gio/gfilterinputstream.h
++++ b/gio/gfilterinputstream.h
+@@ -61,7 +61,7 @@ struct _GFilterInputStreamClass
+ 
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType          g_filter_input_stream_get_type              (void) G_GNUC_CONST;
++GType          g_filter_input_stream_get_type              (void);
+ GIO_AVAILABLE_IN_ALL
+ GInputStream * g_filter_input_stream_get_base_stream       (GFilterInputStream *stream);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gfilteroutputstream.h b/gio/gfilteroutputstream.h
+index 160e80daf1..58ed2d55a7 100644
+--- a/gio/gfilteroutputstream.h
++++ b/gio/gfilteroutputstream.h
+@@ -61,7 +61,7 @@ struct _GFilterOutputStreamClass
+ 
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType           g_filter_output_stream_get_type              (void) G_GNUC_CONST;
++GType           g_filter_output_stream_get_type              (void);
+ GIO_AVAILABLE_IN_ALL
+ GOutputStream * g_filter_output_stream_get_base_stream       (GFilterOutputStream *stream);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gicon.h b/gio/gicon.h
+index 9d129a26bc..c271c4b756 100644
+--- a/gio/gicon.h
++++ b/gio/gicon.h
+@@ -105,7 +105,7 @@ struct _GIconIface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType    g_icon_get_type  (void) G_GNUC_CONST;
++GType    g_icon_get_type  (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ guint    g_icon_hash            (gconstpointer  icon);
+diff --git a/gio/ginetaddress.h b/gio/ginetaddress.h
+index 9d2f21b1e6..29b62c5bad 100644
+--- a/gio/ginetaddress.h
++++ b/gio/ginetaddress.h
+@@ -59,7 +59,7 @@ struct _GInetAddressClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                 g_inet_address_get_type             (void) G_GNUC_CONST;
++GType                 g_inet_address_get_type             (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GInetAddress *        g_inet_address_new_from_string      (const gchar          *string);
+diff --git a/gio/ginetaddressmask.h b/gio/ginetaddressmask.h
+index 25cce7500c..d59e29c032 100644
+--- a/gio/ginetaddressmask.h
++++ b/gio/ginetaddressmask.h
+@@ -54,7 +54,7 @@ struct _GInetAddressMaskClass
+ };
+ 
+ GIO_AVAILABLE_IN_2_32
+-GType g_inet_address_mask_get_type (void) G_GNUC_CONST;
++GType g_inet_address_mask_get_type (void);
+ 
+ GIO_AVAILABLE_IN_2_32
+ GInetAddressMask *g_inet_address_mask_new             (GInetAddress      *addr,
+diff --git a/gio/ginetsocketaddress.h b/gio/ginetsocketaddress.h
+index a983abef2b..793fee31a3 100644
+--- a/gio/ginetsocketaddress.h
++++ b/gio/ginetsocketaddress.h
+@@ -56,7 +56,7 @@ struct _GInetSocketAddressClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType           g_inet_socket_address_get_type        (void) G_GNUC_CONST;
++GType           g_inet_socket_address_get_type        (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GSocketAddress *g_inet_socket_address_new             (GInetAddress       *address,
+diff --git a/gio/ginitable.h b/gio/ginitable.h
+index 5eee369e17..fe28b0a8a3 100644
+--- a/gio/ginitable.h
++++ b/gio/ginitable.h
+@@ -62,7 +62,7 @@ struct _GInitableIface
+ 
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType    g_initable_get_type   (void) G_GNUC_CONST;
++GType    g_initable_get_type   (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ gboolean g_initable_init       (GInitable     *initable,
+diff --git a/gio/ginputstream.h b/gio/ginputstream.h
+index f5cce1708d..1a48617748 100644
+--- a/gio/ginputstream.h
++++ b/gio/ginputstream.h
+@@ -107,7 +107,7 @@ struct _GInputStreamClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType    g_input_stream_get_type      (void) G_GNUC_CONST;
++GType    g_input_stream_get_type      (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ gssize   g_input_stream_read          (GInputStream          *stream,
+diff --git a/gio/gioenumtypes.h.template b/gio/gioenumtypes.h.template
+index 6811757035..9daf50c140 100644
+--- a/gio/gioenumtypes.h.template
++++ b/gio/gioenumtypes.h.template
+@@ -35,7 +35,7 @@ G_BEGIN_DECLS
+ /*** END file-production ***/
+ 
+ /*** BEGIN value-header ***/
+-GIO_AVAILABLE_IN_ALL GType @enum_name@_get_type (void) G_GNUC_CONST;
++GIO_AVAILABLE_IN_ALL GType @enum_name@_get_type (void);
+ #define @ENUMPREFIX@_TYPE_@ENUMSHORT@ (@enum_name@_get_type ())
+ /*** END value-header ***/
+ 
+diff --git a/gio/giomodule.h b/gio/giomodule.h
+index f1460dece3..f342bde59c 100644
+--- a/gio/giomodule.h
++++ b/gio/giomodule.h
+@@ -52,7 +52,7 @@ void               g_io_module_scope_block   (GIOModuleScope      *scope,
+ typedef struct _GIOModuleClass GIOModuleClass;
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType              g_io_module_get_type                       (void) G_GNUC_CONST;
++GType              g_io_module_get_type                       (void);
+ GIO_AVAILABLE_IN_ALL
+ GIOModule         *g_io_module_new                            (const gchar       *filename);
+ 
+diff --git a/gio/giostream.h b/gio/giostream.h
+index f8a958b25f..08b13f749a 100644
+--- a/gio/giostream.h
++++ b/gio/giostream.h
+@@ -81,7 +81,7 @@ struct _GIOStreamClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType          g_io_stream_get_type          (void)  G_GNUC_CONST;
++GType          g_io_stream_get_type          (void) ;
+ 
+ GIO_AVAILABLE_IN_ALL
+ GInputStream * g_io_stream_get_input_stream  (GIOStream            *stream);
+diff --git a/gio/gloadableicon.h b/gio/gloadableicon.h
+index bde104b07e..b3a86dcd46 100644
+--- a/gio/gloadableicon.h
++++ b/gio/gloadableicon.h
+@@ -70,7 +70,7 @@ struct _GLoadableIconIface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType         g_loadable_icon_get_type    (void) G_GNUC_CONST;
++GType         g_loadable_icon_get_type    (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GInputStream *g_loadable_icon_load        (GLoadableIcon        *icon,
+diff --git a/gio/glocalfile.h b/gio/glocalfile.h
+index 94b2b2d2e6..83b44eaf4d 100644
+--- a/gio/glocalfile.h
++++ b/gio/glocalfile.h
+@@ -42,7 +42,7 @@ struct _GLocalFileClass
+   GObjectClass parent_class;
+ };
+ 
+-GType   _g_local_file_get_type (void) G_GNUC_CONST;
++GType   _g_local_file_get_type (void);
+ 
+ GFile * _g_local_file_new      (const char *filename);
+ 
+diff --git a/gio/glocalfileenumerator.h b/gio/glocalfileenumerator.h
+index 1e696538b7..dae62a17eb 100644
+--- a/gio/glocalfileenumerator.h
++++ b/gio/glocalfileenumerator.h
+@@ -44,7 +44,7 @@ struct _GLocalFileEnumeratorClass
+   GFileEnumeratorClass parent_class;
+ };
+ 
+-GType             _g_local_file_enumerator_get_type (void) G_GNUC_CONST;
++GType             _g_local_file_enumerator_get_type (void);
+ 
+ GFileEnumerator * _g_local_file_enumerator_new      (GLocalFile           *file,
+                                                      const char           *attributes,
+diff --git a/gio/glocalfileinputstream.h b/gio/glocalfileinputstream.h
+index a2ca8b09e7..5d9233b0f2 100644
+--- a/gio/glocalfileinputstream.h
++++ b/gio/glocalfileinputstream.h
+@@ -51,7 +51,7 @@ struct _GLocalFileInputStreamClass
+   GFileInputStreamClass parent_class;
+ };
+ 
+-GType              _g_local_file_input_stream_get_type (void) G_GNUC_CONST;
++GType              _g_local_file_input_stream_get_type (void);
+ 
+ GFileInputStream *_g_local_file_input_stream_new          (int                    fd);
+ void              _g_local_file_input_stream_set_do_close (GLocalFileInputStream *in,
+diff --git a/gio/glocalfileiostream.h b/gio/glocalfileiostream.h
+index 495e04e1f7..cdf9ac4e45 100644
+--- a/gio/glocalfileiostream.h
++++ b/gio/glocalfileiostream.h
+@@ -52,7 +52,7 @@ struct _GLocalFileIOStreamClass
+   GFileIOStreamClass parent_class;
+ };
+ 
+-GType           _g_local_file_io_stream_get_type (void) G_GNUC_CONST;
++GType           _g_local_file_io_stream_get_type (void);
+ GFileIOStream * _g_local_file_io_stream_new (GLocalFileOutputStream *output_stream);
+ 
+ G_END_DECLS
+diff --git a/gio/glocalfilemonitor.h b/gio/glocalfilemonitor.h
+index 9a776dd86e..5153f18dfd 100644
+--- a/gio/glocalfilemonitor.h
++++ b/gio/glocalfilemonitor.h
+@@ -68,7 +68,7 @@ struct _GLocalFileMonitorClass
+ #ifdef G_OS_UNIX
+ GIO_AVAILABLE_IN_ALL
+ #endif
+-GType           g_local_file_monitor_get_type (void) G_GNUC_CONST;
++GType           g_local_file_monitor_get_type (void);
+ 
+ /* for glocalfile.c */
+ GFileMonitor *
+diff --git a/gio/glocalfileoutputstream.h b/gio/glocalfileoutputstream.h
+index 877d80ece5..65f8302c47 100644
+--- a/gio/glocalfileoutputstream.h
++++ b/gio/glocalfileoutputstream.h
+@@ -51,7 +51,7 @@ struct _GLocalFileOutputStreamClass
+   GFileOutputStreamClass parent_class;
+ };
+ 
+-GType               _g_local_file_output_stream_get_type (void) G_GNUC_CONST;
++GType               _g_local_file_output_stream_get_type (void);
+ 
+ void     _g_local_file_output_stream_set_do_close (GLocalFileOutputStream *out,
+ 						   gboolean do_close);
+diff --git a/gio/glocalvfs.h b/gio/glocalvfs.h
+index 2769bf15de..b002039d7a 100644
+--- a/gio/glocalvfs.h
++++ b/gio/glocalvfs.h
+@@ -37,7 +37,7 @@ G_BEGIN_DECLS
+ typedef struct _GLocalVfs       GLocalVfs;
+ typedef struct _GLocalVfsClass  GLocalVfsClass;
+ 
+-GType   _g_local_vfs_get_type  (void) G_GNUC_CONST;
++GType   _g_local_vfs_get_type  (void);
+ 
+ GVfs  * _g_local_vfs_new       (void);
+ 
+diff --git a/gio/gmemoryinputstream.h b/gio/gmemoryinputstream.h
+index b346567003..2d2c739741 100644
+--- a/gio/gmemoryinputstream.h
++++ b/gio/gmemoryinputstream.h
+@@ -63,7 +63,7 @@ struct _GMemoryInputStreamClass
+ 
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType          g_memory_input_stream_get_type      (void) G_GNUC_CONST;
++GType          g_memory_input_stream_get_type      (void);
+ GIO_AVAILABLE_IN_ALL
+ GInputStream * g_memory_input_stream_new           (void);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gmemoryoutputstream.h b/gio/gmemoryoutputstream.h
+index 6fb077bebb..948ade5184 100644
+--- a/gio/gmemoryoutputstream.h
++++ b/gio/gmemoryoutputstream.h
+@@ -78,7 +78,7 @@ typedef gpointer (* GReallocFunc) (gpointer data,
+                                    gsize    size);
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType          g_memory_output_stream_get_type      (void) G_GNUC_CONST;
++GType          g_memory_output_stream_get_type      (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GOutputStream *g_memory_output_stream_new           (gpointer             data,
+diff --git a/gio/gmenu.h b/gio/gmenu.h
+index 68e0684293..58997b6719 100644
+--- a/gio/gmenu.h
++++ b/gio/gmenu.h
+@@ -42,7 +42,7 @@ typedef struct _GMenuItem GMenuItem;
+ typedef struct _GMenu     GMenu;
+ 
+ GIO_AVAILABLE_IN_2_32
+-GType       g_menu_get_type                         (void) G_GNUC_CONST;
++GType       g_menu_get_type                         (void);
+ GIO_AVAILABLE_IN_2_32
+ GMenu *     g_menu_new                              (void);
+ 
+@@ -110,7 +110,7 @@ void        g_menu_append_submenu                   (GMenu       *menu,
+ 
+ 
+ GIO_AVAILABLE_IN_2_32
+-GType       g_menu_item_get_type                    (void) G_GNUC_CONST;
++GType       g_menu_item_get_type                    (void);
+ GIO_AVAILABLE_IN_2_32
+ GMenuItem * g_menu_item_new                         (const gchar *label,
+                                                      const gchar *detailed_action);
+diff --git a/gio/gmenumodel.h b/gio/gmenumodel.h
+index 0ef7c9dc33..8b8428c28e 100644
+--- a/gio/gmenumodel.h
++++ b/gio/gmenumodel.h
+@@ -183,7 +183,7 @@ struct _GMenuModelClass
+ };
+ 
+ GIO_AVAILABLE_IN_2_32
+-GType                   g_menu_model_get_type                           (void) G_GNUC_CONST;
++GType                   g_menu_model_get_type                           (void);
+ 
+ GIO_AVAILABLE_IN_2_32
+ gboolean                g_menu_model_is_mutable                         (GMenuModel         *model);
+@@ -247,7 +247,7 @@ struct _GMenuAttributeIterClass
+ };
+ 
+ GIO_AVAILABLE_IN_2_32
+-GType                   g_menu_attribute_iter_get_type                  (void) G_GNUC_CONST;
++GType                   g_menu_attribute_iter_get_type                  (void);
+ 
+ GIO_AVAILABLE_IN_2_32
+ gboolean                g_menu_attribute_iter_get_next                  (GMenuAttributeIter  *iter,
+@@ -289,7 +289,7 @@ struct _GMenuLinkIterClass
+ };
+ 
+ GIO_AVAILABLE_IN_2_32
+-GType                   g_menu_link_iter_get_type                       (void) G_GNUC_CONST;
++GType                   g_menu_link_iter_get_type                       (void);
+ 
+ GIO_AVAILABLE_IN_2_32
+ gboolean                g_menu_link_iter_get_next                       (GMenuLinkIter  *iter,
+diff --git a/gio/gmount.h b/gio/gmount.h
+index c17f79b33c..4fc95f86e2 100644
+--- a/gio/gmount.h
++++ b/gio/gmount.h
+@@ -164,7 +164,7 @@ struct _GMountIface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType       g_mount_get_type                  (void) G_GNUC_CONST;
++GType       g_mount_get_type                  (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GFile     * g_mount_get_root                  (GMount              *mount);
+diff --git a/gio/gmountoperation.h b/gio/gmountoperation.h
+index 3302ec5671..5fbb528467 100644
+--- a/gio/gmountoperation.h
++++ b/gio/gmountoperation.h
+@@ -115,7 +115,7 @@ struct _GMountOperationClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType             g_mount_operation_get_type      (void) G_GNUC_CONST;
++GType             g_mount_operation_get_type      (void);
+ GIO_AVAILABLE_IN_ALL
+ GMountOperation * g_mount_operation_new           (void);
+ 
+diff --git a/gio/gnativesocketaddress.h b/gio/gnativesocketaddress.h
+index cd174ec861..130913b264 100644
+--- a/gio/gnativesocketaddress.h
++++ b/gio/gnativesocketaddress.h
+@@ -56,7 +56,7 @@ struct _GNativeSocketAddressClass
+ };
+ 
+ GIO_AVAILABLE_IN_2_46
+-GType           g_native_socket_address_get_type        (void) G_GNUC_CONST;
++GType           g_native_socket_address_get_type        (void);
+ 
+ GIO_AVAILABLE_IN_2_46
+ GSocketAddress *g_native_socket_address_new            (gpointer        native,
+diff --git a/gio/gnativevolumemonitor.h b/gio/gnativevolumemonitor.h
+index 9cea184b60..0c6b06ae4b 100644
+--- a/gio/gnativevolumemonitor.h
++++ b/gio/gnativevolumemonitor.h
+@@ -56,7 +56,7 @@ struct _GNativeVolumeMonitorClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType g_native_volume_monitor_get_type (void) G_GNUC_CONST;
++GType g_native_volume_monitor_get_type (void);
+ 
+ G_END_DECLS
+ 
+diff --git a/gio/gnetworkaddress.h b/gio/gnetworkaddress.h
+index 0a12d852b3..1007ed937a 100644
+--- a/gio/gnetworkaddress.h
++++ b/gio/gnetworkaddress.h
+@@ -54,7 +54,7 @@ struct _GNetworkAddressClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType               g_network_address_get_type     (void) G_GNUC_CONST;
++GType               g_network_address_get_type     (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GSocketConnectable *g_network_address_new          (const gchar      *hostname,
+diff --git a/gio/gnetworkmonitor.h b/gio/gnetworkmonitor.h
+index 387c04529f..091ff2e036 100644
+--- a/gio/gnetworkmonitor.h
++++ b/gio/gnetworkmonitor.h
+@@ -67,7 +67,7 @@ struct _GNetworkMonitorInterface {
+ };
+ 
+ GIO_AVAILABLE_IN_2_32
+-GType                 g_network_monitor_get_type              (void) G_GNUC_CONST;
++GType                 g_network_monitor_get_type              (void);
+ GIO_AVAILABLE_IN_2_32
+ GNetworkMonitor      *g_network_monitor_get_default           (void);
+ 
+diff --git a/gio/gnetworkservice.h b/gio/gnetworkservice.h
+index ac00986d95..63b4a7952a 100644
+--- a/gio/gnetworkservice.h
++++ b/gio/gnetworkservice.h
+@@ -54,7 +54,7 @@ struct _GNetworkServiceClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                g_network_service_get_type      (void) G_GNUC_CONST;
++GType                g_network_service_get_type      (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GSocketConnectable  *g_network_service_new           (const gchar     *service,
+diff --git a/gio/gnotification.h b/gio/gnotification.h
+index cef00a737f..94087e5ca4 100644
+--- a/gio/gnotification.h
++++ b/gio/gnotification.h
+@@ -36,7 +36,7 @@ G_BEGIN_DECLS
+ #define G_IS_NOTIFICATION(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), G_TYPE_NOTIFICATION))
+ 
+ GIO_AVAILABLE_IN_2_40
+-GType                   g_notification_get_type                         (void) G_GNUC_CONST;
++GType                   g_notification_get_type                         (void);
+ 
+ GIO_AVAILABLE_IN_2_40
+ GNotification *         g_notification_new                              (const gchar *title);
+diff --git a/gio/gosxappinfo.h b/gio/gosxappinfo.h
+index b029853fd0..3def792c78 100644
+--- a/gio/gosxappinfo.h
++++ b/gio/gosxappinfo.h
+@@ -42,7 +42,7 @@ struct _GOsxAppInfoClass
+ };
+ 
+ GIO_AVAILABLE_IN_2_52
+-GType   g_osx_app_info_get_type           (void) G_GNUC_CONST;
++GType   g_osx_app_info_get_type           (void);
+ 
+ GIO_AVAILABLE_IN_2_52
+ const char *g_osx_app_info_get_filename   (GOsxAppInfo *info);
+diff --git a/gio/goutputstream.h b/gio/goutputstream.h
+index 2ee1cbb042..335ee463e0 100644
+--- a/gio/goutputstream.h
++++ b/gio/goutputstream.h
+@@ -142,7 +142,7 @@ struct _GOutputStreamClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType    g_output_stream_get_type      (void) G_GNUC_CONST;
++GType    g_output_stream_get_type      (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ gssize   g_output_stream_write         (GOutputStream             *stream,
+diff --git a/gio/gpollableinputstream.h b/gio/gpollableinputstream.h
+index 924b52ee6a..04da01f1ed 100644
+--- a/gio/gpollableinputstream.h
++++ b/gio/gpollableinputstream.h
+@@ -75,7 +75,7 @@ struct _GPollableInputStreamInterface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType    g_pollable_input_stream_get_type         (void) G_GNUC_CONST;
++GType    g_pollable_input_stream_get_type         (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ gboolean g_pollable_input_stream_can_poll         (GPollableInputStream  *stream);
+diff --git a/gio/gpollableoutputstream.h b/gio/gpollableoutputstream.h
+index e20c2f3b8e..85b234f7a6 100644
+--- a/gio/gpollableoutputstream.h
++++ b/gio/gpollableoutputstream.h
+@@ -88,7 +88,7 @@ struct _GPollableOutputStreamInterface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType    g_pollable_output_stream_get_type          (void) G_GNUC_CONST;
++GType    g_pollable_output_stream_get_type          (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ gboolean g_pollable_output_stream_can_poll          (GPollableOutputStream  *stream);
+diff --git a/gio/gpollfilemonitor.h b/gio/gpollfilemonitor.h
+index b196b70dee..37e8c4ee21 100644
+--- a/gio/gpollfilemonitor.h
++++ b/gio/gpollfilemonitor.h
+@@ -41,7 +41,7 @@ struct _GPollFileMonitorClass
+   GFileMonitorClass parent_class;
+ };
+ 
+-GType          _g_poll_file_monitor_get_type (void) G_GNUC_CONST;
++GType          _g_poll_file_monitor_get_type (void);
+ 
+ GFileMonitor * _g_poll_file_monitor_new      (GFile *file);
+ 
+diff --git a/gio/gpropertyaction.h b/gio/gpropertyaction.h
+index f746e741fc..8fdbbfd085 100644
+--- a/gio/gpropertyaction.h
++++ b/gio/gpropertyaction.h
+@@ -37,7 +37,7 @@ G_BEGIN_DECLS
+                                                              G_TYPE_PROPERTY_ACTION))
+ 
+ GIO_AVAILABLE_IN_2_38
+-GType                   g_property_action_get_type                      (void) G_GNUC_CONST;
++GType                   g_property_action_get_type                      (void);
+ 
+ GIO_AVAILABLE_IN_2_38
+ GPropertyAction *       g_property_action_new                           (const gchar *name,
+diff --git a/gio/gproxy.h b/gio/gproxy.h
+index 6acecbccf2..ee7291e998 100644
+--- a/gio/gproxy.h
++++ b/gio/gproxy.h
+@@ -90,7 +90,7 @@ struct _GProxyInterface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType      g_proxy_get_type                 (void) G_GNUC_CONST;
++GType      g_proxy_get_type                 (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GProxy    *g_proxy_get_default_for_protocol (const gchar *protocol);
+diff --git a/gio/gproxyaddress.h b/gio/gproxyaddress.h
+index a0176d657c..55ce414701 100644
+--- a/gio/gproxyaddress.h
++++ b/gio/gproxyaddress.h
+@@ -56,7 +56,7 @@ struct _GProxyAddressClass
+ 
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType           g_proxy_address_get_type    (void) G_GNUC_CONST;
++GType           g_proxy_address_get_type    (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GSocketAddress *g_proxy_address_new         (GInetAddress *inetaddr,
+diff --git a/gio/gproxyaddressenumerator.h b/gio/gproxyaddressenumerator.h
+index 7d36ef03ec..4e03503f4b 100644
+--- a/gio/gproxyaddressenumerator.h
++++ b/gio/gproxyaddressenumerator.h
+@@ -68,7 +68,7 @@ struct _GProxyAddressEnumeratorClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType           g_proxy_address_enumerator_get_type    (void) G_GNUC_CONST;
++GType           g_proxy_address_enumerator_get_type    (void);
+ 
+ G_END_DECLS
+ 
+diff --git a/gio/gproxyresolver.h b/gio/gproxyresolver.h
+index 9e76442045..851b6187f5 100644
+--- a/gio/gproxyresolver.h
++++ b/gio/gproxyresolver.h
+@@ -69,7 +69,7 @@ struct _GProxyResolverInterface {
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType		g_proxy_resolver_get_type       (void) G_GNUC_CONST;
++GType		g_proxy_resolver_get_type       (void);
+ GIO_AVAILABLE_IN_ALL
+ GProxyResolver *g_proxy_resolver_get_default    (void);
+ 
+diff --git a/gio/gremoteactiongroup.h b/gio/gremoteactiongroup.h
+index fb0847efcf..8ec2a38231 100644
+--- a/gio/gremoteactiongroup.h
++++ b/gio/gremoteactiongroup.h
+@@ -58,7 +58,7 @@ struct _GRemoteActionGroupInterface
+ };
+ 
+ GIO_AVAILABLE_IN_2_32
+-GType                   g_remote_action_group_get_type                  (void) G_GNUC_CONST;
++GType                   g_remote_action_group_get_type                  (void);
+ 
+ GIO_AVAILABLE_IN_2_32
+ void                    g_remote_action_group_activate_action_full      (GRemoteActionGroup *remote,
+diff --git a/gio/gresolver.h b/gio/gresolver.h
+index 3eb5ab4f02..46ceb69de1 100644
+--- a/gio/gresolver.h
++++ b/gio/gresolver.h
+@@ -184,7 +184,7 @@ struct _GResolverClass {
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType      g_resolver_get_type                         (void) G_GNUC_CONST;
++GType      g_resolver_get_type                         (void);
+ GIO_AVAILABLE_IN_ALL
+ GResolver *g_resolver_get_default                      (void);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gresource.h b/gio/gresource.h
+index 56f92e1ff8..26b5fca661 100644
+--- a/gio/gresource.h
++++ b/gio/gresource.h
+@@ -62,7 +62,7 @@ struct _GStaticResource {
+ };
+ 
+ GIO_AVAILABLE_IN_2_32
+-GType         g_resource_get_type            (void) G_GNUC_CONST;
++GType         g_resource_get_type            (void);
+ GIO_AVAILABLE_IN_2_32
+ GResource *   g_resource_new_from_data       (GBytes                *data,
+ 					      GError               **error);
+diff --git a/gio/gresourcefile.c b/gio/gresourcefile.c
+index da1f368e52..72dee7f4ab 100644
+--- a/gio/gresourcefile.c
++++ b/gio/gresourcefile.c
+@@ -107,7 +107,7 @@ static GFileEnumerator *_g_resource_file_enumerator_new (GResourceFile *file,
+ 							 GError              **error);
+ 
+ 
+-static GType              _g_resource_file_input_stream_get_type (void) G_GNUC_CONST;
++static GType              _g_resource_file_input_stream_get_type (void);
+ 
+ static GFileInputStream *_g_resource_file_input_stream_new (GInputStream *stream, GFile *file);
+ 
+diff --git a/gio/gresourcefile.h b/gio/gresourcefile.h
+index b5b6ca703d..913d7ef5a1 100644
+--- a/gio/gresourcefile.h
++++ b/gio/gresourcefile.h
+@@ -42,7 +42,7 @@ struct _GResourceFileClass
+   GObjectClass parent_class;
+ };
+ 
+-GType   _g_resource_file_get_type (void) G_GNUC_CONST;
++GType   _g_resource_file_get_type (void);
+ 
+ GFile * _g_resource_file_new      (const char *uri);
+ 
+diff --git a/gio/gseekable.h b/gio/gseekable.h
+index e9978016be..6b2081ac59 100644
+--- a/gio/gseekable.h
++++ b/gio/gseekable.h
+@@ -74,7 +74,7 @@ struct _GSeekableIface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType    g_seekable_get_type     (void) G_GNUC_CONST;
++GType    g_seekable_get_type     (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ goffset  g_seekable_tell         (GSeekable     *seekable);
+diff --git a/gio/gsettingsschema.h b/gio/gsettingsschema.h
+index a3bb7df805..8ffa4f5a4e 100644
+--- a/gio/gsettingsschema.h
++++ b/gio/gsettingsschema.h
+@@ -32,7 +32,7 @@ typedef struct _GSettingsSchemaKey                          GSettingsSchemaKey;
+ 
+ #define                 G_TYPE_SETTINGS_SCHEMA_SOURCE                   (g_settings_schema_source_get_type ())
+ GIO_AVAILABLE_IN_2_32
+-GType                   g_settings_schema_source_get_type               (void) G_GNUC_CONST;
++GType                   g_settings_schema_source_get_type               (void);
+ 
+ GIO_AVAILABLE_IN_2_32
+ GSettingsSchemaSource * g_settings_schema_source_get_default            (void);
+@@ -60,7 +60,7 @@ void                    g_settings_schema_source_list_schemas           (GSettin
+ 
+ #define                 G_TYPE_SETTINGS_SCHEMA                          (g_settings_schema_get_type ())
+ GIO_AVAILABLE_IN_2_32
+-GType                   g_settings_schema_get_type                      (void) G_GNUC_CONST;
++GType                   g_settings_schema_get_type                      (void);
+ 
+ GIO_AVAILABLE_IN_2_32
+ GSettingsSchema *       g_settings_schema_ref                           (GSettingsSchema        *schema);
+@@ -86,7 +86,7 @@ gchar **                g_settings_schema_list_children                 (GSettin
+ 
+ #define                 G_TYPE_SETTINGS_SCHEMA_KEY                      (g_settings_schema_key_get_type ())
+ GIO_AVAILABLE_IN_2_40
+-GType                   g_settings_schema_key_get_type                  (void) G_GNUC_CONST;
++GType                   g_settings_schema_key_get_type                  (void);
+ 
+ GIO_AVAILABLE_IN_2_40
+ GSettingsSchemaKey *    g_settings_schema_key_ref                       (GSettingsSchemaKey     *key);
+diff --git a/gio/gsimpleaction.h b/gio/gsimpleaction.h
+index ce80e7ae23..20af15a1d3 100644
+--- a/gio/gsimpleaction.h
++++ b/gio/gsimpleaction.h
+@@ -37,7 +37,7 @@ G_BEGIN_DECLS
+                                                              G_TYPE_SIMPLE_ACTION))
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                   g_simple_action_get_type                        (void) G_GNUC_CONST;
++GType                   g_simple_action_get_type                        (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GSimpleAction *         g_simple_action_new                             (const gchar        *name,
+diff --git a/gio/gsimpleactiongroup.h b/gio/gsimpleactiongroup.h
+index 48f669db80..029d8a4994 100644
+--- a/gio/gsimpleactiongroup.h
++++ b/gio/gsimpleactiongroup.h
+@@ -64,7 +64,7 @@ struct _GSimpleActionGroupClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                   g_simple_action_group_get_type                  (void) G_GNUC_CONST;
++GType                   g_simple_action_group_get_type                  (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GSimpleActionGroup *    g_simple_action_group_new                       (void);
+diff --git a/gio/gsimpleasyncresult.h b/gio/gsimpleasyncresult.h
+index 94ad35571f..4a9702cb7a 100644
+--- a/gio/gsimpleasyncresult.h
++++ b/gio/gsimpleasyncresult.h
+@@ -42,7 +42,7 @@ typedef struct _GSimpleAsyncResultClass   GSimpleAsyncResultClass;
+ 
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType               g_simple_async_result_get_type         (void) G_GNUC_CONST;
++GType               g_simple_async_result_get_type         (void);
+ 
+ GIO_DEPRECATED_IN_2_46_FOR(g_task_new)
+ GSimpleAsyncResult *g_simple_async_result_new              (GObject                 *source_object,
+diff --git a/gio/gsimpleiostream.h b/gio/gsimpleiostream.h
+index 1d98ffe911..14c1050110 100644
+--- a/gio/gsimpleiostream.h
++++ b/gio/gsimpleiostream.h
+@@ -36,7 +36,7 @@ G_BEGIN_DECLS
+ #define G_IS_SIMPLE_IO_STREAM(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), G_TYPE_SIMPLE_IO_STREAM))
+ 
+ GIO_AVAILABLE_IN_2_44
+-GType                g_simple_io_stream_get_type         (void) G_GNUC_CONST;
++GType                g_simple_io_stream_get_type         (void);
+ 
+ GIO_AVAILABLE_IN_2_44
+ GIOStream           *g_simple_io_stream_new              (GInputStream  *input_stream,
+diff --git a/gio/gsimpleproxyresolver.h b/gio/gsimpleproxyresolver.h
+index 113b491185..66a0a4e0f9 100644
+--- a/gio/gsimpleproxyresolver.h
++++ b/gio/gsimpleproxyresolver.h
+@@ -62,7 +62,7 @@ struct _GSimpleProxyResolverClass
+ };
+ 
+ GIO_AVAILABLE_IN_2_36
+-GType           g_simple_proxy_resolver_get_type          (void) G_GNUC_CONST;
++GType           g_simple_proxy_resolver_get_type          (void);
+ 
+ GIO_AVAILABLE_IN_2_36
+ GProxyResolver *g_simple_proxy_resolver_new               (const gchar           *default_proxy,
+diff --git a/gio/gsocket.h b/gio/gsocket.h
+index 341e23e3bc..f0fa6baa56 100644
+--- a/gio/gsocket.h
++++ b/gio/gsocket.h
+@@ -74,7 +74,7 @@ struct _GSocket
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                  g_socket_get_type                (void) G_GNUC_CONST;
++GType                  g_socket_get_type                (void);
+ GIO_AVAILABLE_IN_ALL
+ GSocket *              g_socket_new                     (GSocketFamily            family,
+ 							 GSocketType              type,
+diff --git a/gio/gsocketaddress.h b/gio/gsocketaddress.h
+index b2dcef2427..34a9633de7 100644
+--- a/gio/gsocketaddress.h
++++ b/gio/gsocketaddress.h
+@@ -61,7 +61,7 @@ struct _GSocketAddressClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                 g_socket_address_get_type        (void) G_GNUC_CONST;
++GType                 g_socket_address_get_type        (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GSocketFamily         g_socket_address_get_family      (GSocketAddress *address);
+diff --git a/gio/gsocketaddressenumerator.h b/gio/gsocketaddressenumerator.h
+index b3ff71c677..0569947ffd 100644
+--- a/gio/gsocketaddressenumerator.h
++++ b/gio/gsocketaddressenumerator.h
+@@ -74,7 +74,7 @@ struct _GSocketAddressEnumeratorClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType           g_socket_address_enumerator_get_type        (void) G_GNUC_CONST;
++GType           g_socket_address_enumerator_get_type        (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GSocketAddress *g_socket_address_enumerator_next        (GSocketAddressEnumerator  *enumerator,
+diff --git a/gio/gsocketclient.h b/gio/gsocketclient.h
+index e9f815eef3..c5f0fee00d 100644
+--- a/gio/gsocketclient.h
++++ b/gio/gsocketclient.h
+@@ -71,7 +71,7 @@ struct _GSocketClient
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                   g_socket_client_get_type                        (void) G_GNUC_CONST;
++GType                   g_socket_client_get_type                        (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GSocketClient          *g_socket_client_new                             (void);
+diff --git a/gio/gsocketconnectable.h b/gio/gsocketconnectable.h
+index bedef569e4..b36ab3a297 100644
+--- a/gio/gsocketconnectable.h
++++ b/gio/gsocketconnectable.h
+@@ -61,7 +61,7 @@ struct _GSocketConnectableIface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                     g_socket_connectable_get_type  (void) G_GNUC_CONST;
++GType                     g_socket_connectable_get_type  (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GSocketAddressEnumerator *g_socket_connectable_enumerate (GSocketConnectable *connectable);
+diff --git a/gio/gsocketconnection.h b/gio/gsocketconnection.h
+index 45de5ba989..c7b99678e7 100644
+--- a/gio/gsocketconnection.h
++++ b/gio/gsocketconnection.h
+@@ -71,7 +71,7 @@ struct _GSocketConnection
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType              g_socket_connection_get_type                  (void) G_GNUC_CONST;
++GType              g_socket_connection_get_type                  (void);
+ 
+ GIO_AVAILABLE_IN_2_32
+ gboolean           g_socket_connection_is_connected              (GSocketConnection  *connection);
+diff --git a/gio/gsocketcontrolmessage.h b/gio/gsocketcontrolmessage.h
+index 18f7713129..223cf90b09 100644
+--- a/gio/gsocketcontrolmessage.h
++++ b/gio/gsocketcontrolmessage.h
+@@ -93,7 +93,7 @@ struct _GSocketControlMessage
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                  g_socket_control_message_get_type     (void) G_GNUC_CONST;
++GType                  g_socket_control_message_get_type     (void);
+ GIO_AVAILABLE_IN_ALL
+ gsize                  g_socket_control_message_get_size     (GSocketControlMessage *message);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gsocketinputstream.h b/gio/gsocketinputstream.h
+index b23c32afaf..45821e2911 100644
+--- a/gio/gsocketinputstream.h
++++ b/gio/gsocketinputstream.h
+@@ -52,7 +52,7 @@ struct _GSocketInputStream
+   GSocketInputStreamPrivate *priv;
+ };
+ 
+-GType                   _g_socket_input_stream_get_type                  (void) G_GNUC_CONST;
++GType                   _g_socket_input_stream_get_type                  (void);
+ GSocketInputStream *    _g_socket_input_stream_new                      (GSocket *socket);
+ 
+ G_END_DECLS
+diff --git a/gio/gsocketlistener.h b/gio/gsocketlistener.h
+index 9ad6c8fe6f..49ea583f3c 100644
+--- a/gio/gsocketlistener.h
++++ b/gio/gsocketlistener.h
+@@ -82,7 +82,7 @@ struct _GSocketListener
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                   g_socket_listener_get_type                      (void) G_GNUC_CONST;
++GType                   g_socket_listener_get_type                      (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GSocketListener *       g_socket_listener_new                           (void);
+diff --git a/gio/gsocketoutputstream.h b/gio/gsocketoutputstream.h
+index 3d07723a1c..57f2683dca 100644
+--- a/gio/gsocketoutputstream.h
++++ b/gio/gsocketoutputstream.h
+@@ -52,7 +52,7 @@ struct _GSocketOutputStream
+   GSocketOutputStreamPrivate *priv;
+ };
+ 
+-GType                   _g_socket_output_stream_get_type                 (void) G_GNUC_CONST;
++GType                   _g_socket_output_stream_get_type                 (void);
+ GSocketOutputStream *   _g_socket_output_stream_new                     (GSocket *socket);
+ 
+ G_END_DECLS
+diff --git a/gio/gsrvtarget.h b/gio/gsrvtarget.h
+index 92bb256bc1..13d0777961 100644
+--- a/gio/gsrvtarget.h
++++ b/gio/gsrvtarget.h
+@@ -30,7 +30,7 @@
+ G_BEGIN_DECLS
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType g_srv_target_get_type (void) G_GNUC_CONST;
++GType g_srv_target_get_type (void);
+ #define G_TYPE_SRV_TARGET (g_srv_target_get_type ())
+ 
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gsubprocess.h b/gio/gsubprocess.h
+index 4d5b488650..02e455a1fa 100644
+--- a/gio/gsubprocess.h
++++ b/gio/gsubprocess.h
+@@ -36,7 +36,7 @@ G_BEGIN_DECLS
+ #define G_IS_SUBPROCESS(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), G_TYPE_SUBPROCESS))
+ 
+ GIO_AVAILABLE_IN_2_40
+-GType            g_subprocess_get_type                  (void) G_GNUC_CONST;
++GType            g_subprocess_get_type                  (void);
+ 
+ /**** Core API ****/
+ 
+diff --git a/gio/gsubprocesslauncher.h b/gio/gsubprocesslauncher.h
+index 0ab91452a2..6340cdd7ec 100644
+--- a/gio/gsubprocesslauncher.h
++++ b/gio/gsubprocesslauncher.h
+@@ -38,7 +38,7 @@ G_BEGIN_DECLS
+ #define G_IS_SUBPROCESS_LAUNCHER(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), G_TYPE_SUBPROCESS_LAUNCHER))
+ 
+ GIO_AVAILABLE_IN_2_40
+-GType                   g_subprocess_launcher_get_type                  (void) G_GNUC_CONST;
++GType                   g_subprocess_launcher_get_type                  (void);
+ 
+ GIO_AVAILABLE_IN_2_40
+ GSubprocessLauncher *   g_subprocess_launcher_new                       (GSubprocessFlags       flags);
+diff --git a/gio/gtask.h b/gio/gtask.h
+index 9fabddce1d..9526591ec5 100644
+--- a/gio/gtask.h
++++ b/gio/gtask.h
+@@ -39,7 +39,7 @@ G_BEGIN_DECLS
+ typedef struct _GTaskClass   GTaskClass;
+ 
+ GIO_AVAILABLE_IN_2_36
+-GType         g_task_get_type              (void) G_GNUC_CONST;
++GType         g_task_get_type              (void);
+ 
+ GIO_AVAILABLE_IN_2_36
+ GTask        *g_task_new                   (gpointer             source_object,
+diff --git a/gio/gtcpconnection.h b/gio/gtcpconnection.h
+index 03aa28ad30..43a7546684 100644
+--- a/gio/gtcpconnection.h
++++ b/gio/gtcpconnection.h
+@@ -58,7 +58,7 @@ struct _GTcpConnection
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType    g_tcp_connection_get_type                (void) G_GNUC_CONST;
++GType    g_tcp_connection_get_type                (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ void     g_tcp_connection_set_graceful_disconnect (GTcpConnection *connection,
+diff --git a/gio/gtcpwrapperconnection.h b/gio/gtcpwrapperconnection.h
+index 1027154fb0..d1128e4c0b 100644
+--- a/gio/gtcpwrapperconnection.h
++++ b/gio/gtcpwrapperconnection.h
+@@ -58,7 +58,7 @@ struct _GTcpWrapperConnection
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType              g_tcp_wrapper_connection_get_type (void) G_GNUC_CONST;
++GType              g_tcp_wrapper_connection_get_type (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GSocketConnection *g_tcp_wrapper_connection_new                (GIOStream             *base_io_stream,
+diff --git a/gio/gtestdbus.h b/gio/gtestdbus.h
+index f52ea1eb11..ca8915f12b 100644
+--- a/gio/gtestdbus.h
++++ b/gio/gtestdbus.h
+@@ -42,7 +42,7 @@ G_BEGIN_DECLS
+     (G_TYPE_CHECK_INSTANCE_TYPE ((obj), G_TYPE_TEST_DBUS))
+ 
+ GIO_AVAILABLE_IN_2_34
+-GType          g_test_dbus_get_type        (void) G_GNUC_CONST;
++GType          g_test_dbus_get_type        (void);
+ 
+ GIO_AVAILABLE_IN_2_34
+ GTestDBus *    g_test_dbus_new             (GTestDBusFlags flags);
+diff --git a/gio/gthemedicon.h b/gio/gthemedicon.h
+index 432896d586..b9edcc9678 100644
+--- a/gio/gthemedicon.h
++++ b/gio/gthemedicon.h
+@@ -41,7 +41,7 @@ G_BEGIN_DECLS
+ typedef struct _GThemedIconClass   GThemedIconClass;
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType  g_themed_icon_get_type                   (void) G_GNUC_CONST;
++GType  g_themed_icon_get_type                   (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GIcon *g_themed_icon_new                        (const char  *iconname);
+diff --git a/gio/gtlsbackend.h b/gio/gtlsbackend.h
+index 2ad24f6fc5..7bb458d96e 100644
+--- a/gio/gtlsbackend.h
++++ b/gio/gtlsbackend.h
+@@ -80,7 +80,7 @@ struct _GTlsBackendInterface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType          g_tls_backend_get_type                   (void) G_GNUC_CONST;
++GType          g_tls_backend_get_type                   (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GTlsBackend *  g_tls_backend_get_default                (void);
+diff --git a/gio/gtlscertificate.h b/gio/gtlscertificate.h
+index c8d10bff8e..793344a8ab 100644
+--- a/gio/gtlscertificate.h
++++ b/gio/gtlscertificate.h
+@@ -59,7 +59,7 @@ struct _GTlsCertificateClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                 g_tls_certificate_get_type           (void) G_GNUC_CONST;
++GType                 g_tls_certificate_get_type           (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GTlsCertificate      *g_tls_certificate_new_from_pem       (const gchar         *data,
+diff --git a/gio/gtlsclientconnection.h b/gio/gtlsclientconnection.h
+index 32d6274df3..b34fd367c6 100644
+--- a/gio/gtlsclientconnection.h
++++ b/gio/gtlsclientconnection.h
+@@ -54,7 +54,7 @@ struct _GTlsClientConnectionInterface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                 g_tls_client_connection_get_type             (void) G_GNUC_CONST;
++GType                 g_tls_client_connection_get_type             (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GIOStream *           g_tls_client_connection_new                  (GIOStream               *base_io_stream,
+diff --git a/gio/gtlsconnection.h b/gio/gtlsconnection.h
+index a266d61bb2..05d9db3a23 100644
+--- a/gio/gtlsconnection.h
++++ b/gio/gtlsconnection.h
+@@ -97,7 +97,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                 g_tls_connection_get_type                    (void) G_GNUC_CONST;
++GType                 g_tls_connection_get_type                    (void);
+ 
+ GIO_DEPRECATED
+ void                  g_tls_connection_set_use_system_certdb       (GTlsConnection       *conn,
+diff --git a/gio/gtlsdatabase.h b/gio/gtlsdatabase.h
+index 4ae6dc330c..92d34186a3 100644
+--- a/gio/gtlsdatabase.h
++++ b/gio/gtlsdatabase.h
+@@ -146,7 +146,7 @@ struct _GTlsDatabaseClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                g_tls_database_get_type                              (void) G_GNUC_CONST;
++GType                g_tls_database_get_type                              (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GTlsCertificateFlags g_tls_database_verify_chain                          (GTlsDatabase            *self,
+diff --git a/gio/gtlsfiledatabase.h b/gio/gtlsfiledatabase.h
+index 57db68e4b7..d9623e2f34 100644
+--- a/gio/gtlsfiledatabase.h
++++ b/gio/gtlsfiledatabase.h
+@@ -49,7 +49,7 @@ struct _GTlsFileDatabaseInterface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                        g_tls_file_database_get_type              (void) G_GNUC_CONST;
++GType                        g_tls_file_database_get_type              (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GTlsDatabase*                g_tls_file_database_new                   (const gchar  *anchors,
+diff --git a/gio/gtlsinteraction.h b/gio/gtlsinteraction.h
+index 68e3662ba2..78409ba704 100644
+--- a/gio/gtlsinteraction.h
++++ b/gio/gtlsinteraction.h
+@@ -92,7 +92,7 @@ struct _GTlsInteractionClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                  g_tls_interaction_get_type            (void) G_GNUC_CONST;
++GType                  g_tls_interaction_get_type            (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GTlsInteractionResult  g_tls_interaction_invoke_ask_password (GTlsInteraction    *interaction,
+diff --git a/gio/gtlspassword.h b/gio/gtlspassword.h
+index a33ec731d9..0afa52856a 100644
+--- a/gio/gtlspassword.h
++++ b/gio/gtlspassword.h
+@@ -79,7 +79,7 @@ struct _GTlsPasswordClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType             g_tls_password_get_type            (void) G_GNUC_CONST;
++GType             g_tls_password_get_type            (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GTlsPassword *    g_tls_password_new                 (GTlsPasswordFlags  flags,
+diff --git a/gio/gtlsserverconnection.h b/gio/gtlsserverconnection.h
+index 7c4e2832d2..924e2cb273 100644
+--- a/gio/gtlsserverconnection.h
++++ b/gio/gtlsserverconnection.h
+@@ -51,7 +51,7 @@ struct _GTlsServerConnectionInterface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                 g_tls_server_connection_get_type                 (void) G_GNUC_CONST;
++GType                 g_tls_server_connection_get_type                 (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GIOStream *           g_tls_server_connection_new                      (GIOStream        *base_io_stream,
+diff --git a/gio/gunionvolumemonitor.h b/gio/gunionvolumemonitor.h
+index b35d61bac9..bf578d680c 100644
+--- a/gio/gunionvolumemonitor.h
++++ b/gio/gunionvolumemonitor.h
+@@ -42,7 +42,7 @@ struct _GUnionVolumeMonitorClass
+   GVolumeMonitorClass parent_class;
+ };
+ 
+-GType _g_union_volume_monitor_get_type (void) G_GNUC_CONST;
++GType _g_union_volume_monitor_get_type (void);
+ 
+ G_END_DECLS
+ 
+diff --git a/gio/gunixcredentialsmessage.h b/gio/gunixcredentialsmessage.h
+index 8f63bd2538..cbe7639487 100644
+--- a/gio/gunixcredentialsmessage.h
++++ b/gio/gunixcredentialsmessage.h
+@@ -65,7 +65,7 @@ struct _GUnixCredentialsMessage
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                  g_unix_credentials_message_get_type             (void) G_GNUC_CONST;
++GType                  g_unix_credentials_message_get_type             (void);
+ GIO_AVAILABLE_IN_ALL
+ GSocketControlMessage *g_unix_credentials_message_new                  (void);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gunixfdlist.h b/gio/gunixfdlist.h
+index df5587eea9..de685a7f82 100644
+--- a/gio/gunixfdlist.h
++++ b/gio/gunixfdlist.h
+@@ -64,7 +64,7 @@ struct _GUnixFDList
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                   g_unix_fd_list_get_type                         (void) G_GNUC_CONST;
++GType                   g_unix_fd_list_get_type                         (void);
+ GIO_AVAILABLE_IN_ALL
+ GUnixFDList *           g_unix_fd_list_new                              (void);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gunixfdmessage.h b/gio/gunixfdmessage.h
+index 0424b1150d..58b9b3a8b6 100644
+--- a/gio/gunixfdmessage.h
++++ b/gio/gunixfdmessage.h
+@@ -64,7 +64,7 @@ struct _GUnixFDMessage
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                   g_unix_fd_message_get_type                      (void) G_GNUC_CONST;
++GType                   g_unix_fd_message_get_type                      (void);
+ GIO_AVAILABLE_IN_ALL
+ GSocketControlMessage * g_unix_fd_message_new_with_fd_list              (GUnixFDList     *fd_list);
+ GIO_AVAILABLE_IN_ALL
+diff --git a/gio/gunixinputstream.h b/gio/gunixinputstream.h
+index 0c2af4f032..6abaa74a3d 100644
+--- a/gio/gunixinputstream.h
++++ b/gio/gunixinputstream.h
+@@ -62,7 +62,7 @@ struct _GUnixInputStreamClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType          g_unix_input_stream_get_type     (void) G_GNUC_CONST;
++GType          g_unix_input_stream_get_type     (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GInputStream * g_unix_input_stream_new          (gint              fd,
+diff --git a/gio/gunixmount.h b/gio/gunixmount.h
+index 2cb27c4168..952152a624 100644
+--- a/gio/gunixmount.h
++++ b/gio/gunixmount.h
+@@ -44,7 +44,7 @@ struct _GUnixMountClass
+   GObjectClass parent_class;
+ };
+ 
+-GType        _g_unix_mount_get_type       (void) G_GNUC_CONST;
++GType        _g_unix_mount_get_type       (void);
+ 
+ GUnixMount * _g_unix_mount_new            (GVolumeMonitor  *volume_monitor,
+                                            GUnixMountEntry *mount_entry,
+diff --git a/gio/gunixmounts.h b/gio/gunixmounts.h
+index 3c35fd3493..fba6e8a759 100644
+--- a/gio/gunixmounts.h
++++ b/gio/gunixmounts.h
+@@ -38,7 +38,7 @@ typedef struct _GUnixMountEntry GUnixMountEntry;
+ 
+ #define G_TYPE_UNIX_MOUNT_ENTRY (g_unix_mount_entry_get_type ())
+ GIO_AVAILABLE_IN_2_54
+-GType g_unix_mount_entry_get_type (void) G_GNUC_CONST;
++GType g_unix_mount_entry_get_type (void);
+ 
+ /**
+  * GUnixMountPoint:
+@@ -50,7 +50,7 @@ typedef struct _GUnixMountPoint GUnixMountPoint;
+ 
+ #define G_TYPE_UNIX_MOUNT_POINT (g_unix_mount_point_get_type ())
+ GIO_AVAILABLE_IN_2_54
+-GType g_unix_mount_point_get_type (void) G_GNUC_CONST;
++GType g_unix_mount_point_get_type (void);
+ 
+ /**
+  * GUnixMountMonitor:
+@@ -232,7 +232,7 @@ GIO_AVAILABLE_IN_ALL
+ gboolean       g_unix_mount_points_changed_since    (guint64             time);
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType              g_unix_mount_monitor_get_type       (void) G_GNUC_CONST;
++GType              g_unix_mount_monitor_get_type       (void);
+ GIO_AVAILABLE_IN_2_44
+ GUnixMountMonitor *g_unix_mount_monitor_get            (void);
+ GIO_DEPRECATED_IN_2_44_FOR(g_unix_mount_monitor_get)
+diff --git a/gio/gunixoutputstream.h b/gio/gunixoutputstream.h
+index 55e33f68f9..60da872902 100644
+--- a/gio/gunixoutputstream.h
++++ b/gio/gunixoutputstream.h
+@@ -62,7 +62,7 @@ struct _GUnixOutputStreamClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType           g_unix_output_stream_get_type     (void) G_GNUC_CONST;
++GType           g_unix_output_stream_get_type     (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GOutputStream * g_unix_output_stream_new          (gint     fd,
+diff --git a/gio/gunixsocketaddress.h b/gio/gunixsocketaddress.h
+index 705674b0f9..1c449beae8 100644
+--- a/gio/gunixsocketaddress.h
++++ b/gio/gunixsocketaddress.h
+@@ -55,7 +55,7 @@ struct _GUnixSocketAddressClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType           g_unix_socket_address_get_type    (void) G_GNUC_CONST;
++GType           g_unix_socket_address_get_type    (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GSocketAddress *g_unix_socket_address_new             (const gchar        *path);
+diff --git a/gio/gunixvolume.h b/gio/gunixvolume.h
+index 8e3a17a57f..b29dfdac76 100644
+--- a/gio/gunixvolume.h
++++ b/gio/gunixvolume.h
+@@ -44,7 +44,7 @@ struct _GUnixVolumeClass
+   GObjectClass parent_class;
+ };
+ 
+-GType         _g_unix_volume_get_type       (void) G_GNUC_CONST;
++GType         _g_unix_volume_get_type       (void);
+ 
+ GUnixVolume * _g_unix_volume_new            (GVolumeMonitor  *volume_monitor,
+                                              GUnixMountPoint *mountpoint);
+diff --git a/gio/gunixvolumemonitor.h b/gio/gunixvolumemonitor.h
+index 589202af26..dc73648308 100644
+--- a/gio/gunixvolumemonitor.h
++++ b/gio/gunixvolumemonitor.h
+@@ -52,7 +52,7 @@ struct _GUnixVolumeMonitorClass
+   GNativeVolumeMonitorClass parent_class;
+ };
+ 
+-GType            _g_unix_volume_monitor_get_type                     (void) G_GNUC_CONST;
++GType            _g_unix_volume_monitor_get_type                     (void);
+ 
+ GVolumeMonitor * _g_unix_volume_monitor_new                          (void);
+ GUnixVolume    * _g_unix_volume_monitor_lookup_volume_for_mount_path (GUnixVolumeMonitor *monitor,
+diff --git a/gio/gvfs.h b/gio/gvfs.h
+index 18909c6b2d..7ac4e7eb21 100644
+--- a/gio/gvfs.h
++++ b/gio/gvfs.h
+@@ -124,7 +124,7 @@ struct _GVfsClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType                 g_vfs_get_type                  (void) G_GNUC_CONST;
++GType                 g_vfs_get_type                  (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ gboolean              g_vfs_is_active                 (GVfs       *vfs);
+diff --git a/gio/gvolume.h b/gio/gvolume.h
+index 7b5a81a0ce..698d483475 100644
+--- a/gio/gvolume.h
++++ b/gio/gvolume.h
+@@ -184,7 +184,7 @@ struct _GVolumeIface
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType    g_volume_get_type              (void) G_GNUC_CONST;
++GType    g_volume_get_type              (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ char *   g_volume_get_name              (GVolume              *volume);
+diff --git a/gio/gvolumemonitor.h b/gio/gvolumemonitor.h
+index 4edb6ce119..12288d02d4 100644
+--- a/gio/gvolumemonitor.h
++++ b/gio/gvolumemonitor.h
+@@ -126,7 +126,7 @@ struct _GVolumeMonitorClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType           g_volume_monitor_get_type             (void) G_GNUC_CONST;
++GType           g_volume_monitor_get_type             (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GVolumeMonitor *g_volume_monitor_get                  (void);
+diff --git a/gio/gwin32appinfo.c b/gio/gwin32appinfo.c
+index 46f74c1830..a14a9e32af 100644
+--- a/gio/gwin32appinfo.c
++++ b/gio/gwin32appinfo.c
+@@ -372,11 +372,11 @@ struct _GWin32AppInfoApplication {
+ #define G_TYPE_WIN32_APPINFO_SHELL_VERB           (g_win32_appinfo_shell_verb_get_type ())
+ #define G_WIN32_APPINFO_SHELL_VERB(obj)          (G_TYPE_CHECK_INSTANCE_CAST ((obj), G_TYPE_WIN32_APPINFO_SHELL_VERB, GWin32AppInfoShellVerb))
+ 
+-GType g_win32_appinfo_url_schema_get_type (void) G_GNUC_CONST;
+-GType g_win32_appinfo_file_extension_get_type (void) G_GNUC_CONST;
+-GType g_win32_appinfo_shell_verb_get_type (void) G_GNUC_CONST;
+-GType g_win32_appinfo_handler_get_type (void) G_GNUC_CONST;
+-GType g_win32_appinfo_application_get_type (void) G_GNUC_CONST;
++GType g_win32_appinfo_url_schema_get_type (void);
++GType g_win32_appinfo_file_extension_get_type (void);
++GType g_win32_appinfo_shell_verb_get_type (void);
++GType g_win32_appinfo_handler_get_type (void);
++GType g_win32_appinfo_application_get_type (void);
+ 
+ G_DEFINE_TYPE (GWin32AppInfoURLSchema, g_win32_appinfo_url_schema, G_TYPE_OBJECT)
+ G_DEFINE_TYPE (GWin32AppInfoFileExtension, g_win32_appinfo_file_extension, G_TYPE_OBJECT)
+diff --git a/gio/gwin32appinfo.h b/gio/gwin32appinfo.h
+index fff199f1b6..f330f7ea0f 100644
+--- a/gio/gwin32appinfo.h
++++ b/gio/gwin32appinfo.h
+@@ -46,7 +46,7 @@ struct _GWin32AppInfoClass
+   GObjectClass parent_class;
+ };
+ 
+-GType g_win32_app_info_get_type (void) G_GNUC_CONST;
++GType g_win32_app_info_get_type (void);
+ 
+ G_END_DECLS
+ 
+diff --git a/gio/gwin32inputstream.h b/gio/gwin32inputstream.h
+index 53c7d78cff..a1fd1077ad 100644
+--- a/gio/gwin32inputstream.h
++++ b/gio/gwin32inputstream.h
+@@ -63,7 +63,7 @@ struct _GWin32InputStreamClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType          g_win32_input_stream_get_type         (void) G_GNUC_CONST;
++GType          g_win32_input_stream_get_type         (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GInputStream * g_win32_input_stream_new              (void              *handle,
+diff --git a/gio/gwin32mount.h b/gio/gwin32mount.h
+index 25ce5479c1..eabde2497f 100644
+--- a/gio/gwin32mount.h
++++ b/gio/gwin32mount.h
+@@ -44,7 +44,7 @@ struct _GWin32MountClass
+   GObjectClass parent_class;
+ };
+ 
+-GType         _g_win32_mount_get_type     (void) G_GNUC_CONST;
++GType         _g_win32_mount_get_type     (void);
+ 
+ GWin32Mount * _g_win32_mount_new          (GVolumeMonitor *volume_monitor,
+                                            const char     *path,
+diff --git a/gio/gwin32outputstream.h b/gio/gwin32outputstream.h
+index 35942ca884..74a0d57a1f 100644
+--- a/gio/gwin32outputstream.h
++++ b/gio/gwin32outputstream.h
+@@ -63,7 +63,7 @@ struct _GWin32OutputStreamClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType           g_win32_output_stream_get_type         (void) G_GNUC_CONST;
++GType           g_win32_output_stream_get_type         (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GOutputStream * g_win32_output_stream_new              (void               *handle,
+diff --git a/gio/gwin32registrykey.h b/gio/gwin32registrykey.h
+index 0950618e66..c32c951173 100644
+--- a/gio/gwin32registrykey.h
++++ b/gio/gwin32registrykey.h
+@@ -144,7 +144,7 @@ GIO_AVAILABLE_IN_2_46
+ void                      g_win32_registry_subkey_iter_assign   (GWin32RegistrySubkeyIter       *iter,
+                                                                  const GWin32RegistrySubkeyIter *other);
+ GIO_AVAILABLE_IN_2_46
+-GType                     g_win32_registry_subkey_iter_get_type (void) G_GNUC_CONST;
++GType                     g_win32_registry_subkey_iter_get_type (void);
+ 
+ 
+ GIO_AVAILABLE_IN_2_46
+@@ -155,7 +155,7 @@ GIO_AVAILABLE_IN_2_46
+ void                      g_win32_registry_value_iter_assign    (GWin32RegistryValueIter       *iter,
+                                                                  const GWin32RegistryValueIter *other);
+ GIO_AVAILABLE_IN_2_46
+-GType                     g_win32_registry_value_iter_get_type  (void) G_GNUC_CONST;
++GType                     g_win32_registry_value_iter_get_type  (void);
+ 
+ 
+ GIO_AVAILABLE_IN_2_46
+diff --git a/gio/gwin32volumemonitor.h b/gio/gwin32volumemonitor.h
+index 149946de47..10abd8cdd2 100644
+--- a/gio/gwin32volumemonitor.h
++++ b/gio/gwin32volumemonitor.h
+@@ -54,7 +54,7 @@ struct _GWin32VolumeMonitorClass
+   GNativeVolumeMonitorClass parent_class;
+ };
+ 
+-GType            _g_win32_volume_monitor_get_type                     (void) G_GNUC_CONST;
++GType            _g_win32_volume_monitor_get_type                     (void);
+ 
+ GVolumeMonitor * _g_win32_volume_monitor_new                          (void);
+ GWin32Volume   * _g_win32_volume_monitor_lookup_volume_for_mount_path (GWin32VolumeMonitor *monitor,
+diff --git a/gio/gzlibcompressor.h b/gio/gzlibcompressor.h
+index acb8efa489..386238ae4a 100644
+--- a/gio/gzlibcompressor.h
++++ b/gio/gzlibcompressor.h
+@@ -47,7 +47,7 @@ struct _GZlibCompressorClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType            g_zlib_compressor_get_type (void) G_GNUC_CONST;
++GType            g_zlib_compressor_get_type (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GZlibCompressor *g_zlib_compressor_new (GZlibCompressorFormat format,
+diff --git a/gio/gzlibdecompressor.h b/gio/gzlibdecompressor.h
+index ef97439f21..ec79e1d4ca 100644
+--- a/gio/gzlibdecompressor.h
++++ b/gio/gzlibdecompressor.h
+@@ -47,7 +47,7 @@ struct _GZlibDecompressorClass
+ };
+ 
+ GIO_AVAILABLE_IN_ALL
+-GType              g_zlib_decompressor_get_type (void) G_GNUC_CONST;
++GType              g_zlib_decompressor_get_type (void);
+ 
+ GIO_AVAILABLE_IN_ALL
+ GZlibDecompressor *g_zlib_decompressor_new (GZlibCompressorFormat format);
+diff --git a/gio/tests/converter-stream.c b/gio/tests/converter-stream.c
+index 761be0c671..2c6befba3f 100644
+--- a/gio/tests/converter-stream.c
++++ b/gio/tests/converter-stream.c
+@@ -42,7 +42,7 @@ struct _GExpanderConverterClass
+   GObjectClass parent_class;
+ };
+ 
+-GType       g_expander_converter_get_type (void) G_GNUC_CONST;
++GType       g_expander_converter_get_type (void);
+ GConverter *g_expander_converter_new      (void);
+ 
+ 
+@@ -158,7 +158,7 @@ struct _GCompressorConverterClass
+   GObjectClass parent_class;
+ };
+ 
+-GType       g_compressor_converter_get_type (void) G_GNUC_CONST;
++GType       g_compressor_converter_get_type (void);
+ GConverter *g_compressor_converter_new      (void);
+ 
+ 
+@@ -582,7 +582,7 @@ struct _GLeftoverConverterClass
+   GObjectClass parent_class;
+ };
+ 
+-GType       g_leftover_converter_get_type (void) G_GNUC_CONST;
++GType       g_leftover_converter_get_type (void);
+ GConverter *g_leftover_converter_new      (void);
+ 
+ 
+diff --git a/gio/tests/file-enumerator.c b/gio/tests/file-enumerator.c
+index 9d43285ec5..dbed20947d 100644
+--- a/gio/tests/file-enumerator.c
++++ b/gio/tests/file-enumerator.c
+@@ -35,7 +35,7 @@ typedef struct
+   GFileEnumeratorClass parent_class;
+ } TestFileEnumeratorClass;
+ 
+-GType test_file_enumerator_get_type (void) G_GNUC_CONST;
++GType test_file_enumerator_get_type (void);
+ 
+ G_DEFINE_TYPE (TestFileEnumerator, test_file_enumerator, G_TYPE_FILE_ENUMERATOR)
+ 
+diff --git a/gio/tests/gdbus-bz627724.c b/gio/tests/gdbus-bz627724.c
+index 82d9e80d3a..b4c1280f37 100644
+--- a/gio/tests/gdbus-bz627724.c
++++ b/gio/tests/gdbus-bz627724.c
+@@ -40,7 +40,7 @@ typedef struct {
+   GObjectClass parent_class;
+ } MyObjectClass;
+ 
+-GType my_object_get_type (void) G_GNUC_CONST;
++GType my_object_get_type (void);
+ 
+ G_DEFINE_TYPE (MyObject, my_object, G_TYPE_OBJECT)
+ 
+diff --git a/gio/tests/gdbus-close-pending.c b/gio/tests/gdbus-close-pending.c
+index 61f1faa794..f6cfdbaf4c 100644
+--- a/gio/tests/gdbus-close-pending.c
++++ b/gio/tests/gdbus-close-pending.c
+@@ -63,7 +63,7 @@ typedef struct
+   GIOStreamClass parent_class;
+ } MyIOStreamClass;
+ 
+-static GType my_io_stream_get_type (void) G_GNUC_CONST;
++static GType my_io_stream_get_type (void);
+ 
+ G_DEFINE_TYPE (MyIOStream, my_io_stream, G_TYPE_IO_STREAM)
+ 
+@@ -142,7 +142,7 @@ typedef struct
+ #define MY_IS_SLOW_CLOSE_OUTPUT_STREAM(o) \
+   (G_TYPE_CHECK_INSTANCE_TYPE ((o), MY_TYPE_SLOW_CLOSE_OUTPUT_STREAM))
+ 
+-static GType my_slow_close_output_stream_get_type (void) G_GNUC_CONST;
++static GType my_slow_close_output_stream_get_type (void);
+ 
+ G_DEFINE_TYPE (MySlowCloseOutputStream, my_slow_close_output_stream,
+                G_TYPE_FILTER_OUTPUT_STREAM)
+diff --git a/gio/tests/gdbus-connection-flush.c b/gio/tests/gdbus-connection-flush.c
+index 27a35d9788..18e86a1aa3 100644
+--- a/gio/tests/gdbus-connection-flush.c
++++ b/gio/tests/gdbus-connection-flush.c
+@@ -56,7 +56,7 @@ typedef struct {
+     GFilterOutputStreamClass parent;
+ } MyOutputStreamClass;
+ 
+-static GType my_output_stream_get_type (void) G_GNUC_CONST;
++static GType my_output_stream_get_type (void);
+ 
+ G_DEFINE_TYPE (MyOutputStream, my_output_stream, G_TYPE_FILTER_OUTPUT_STREAM)
+ 
+diff --git a/gio/tests/gdbus-example-proxy-subclass.c b/gio/tests/gdbus-example-proxy-subclass.c
+index 91b377c489..4a457b9bf6 100644
+--- a/gio/tests/gdbus-example-proxy-subclass.c
++++ b/gio/tests/gdbus-example-proxy-subclass.c
+@@ -49,7 +49,7 @@ struct _AccountsUserClass
+   void (*changed) (AccountsUser *user);
+ };
+ 
+-GType        accounts_user_get_type            (void) G_GNUC_CONST;
++GType        accounts_user_get_type            (void);
+ 
+ const gchar *accounts_user_get_user_name       (AccountsUser        *user);
+ const gchar *accounts_user_get_real_name       (AccountsUser        *user);
+diff --git a/gio/tests/gtlsconsoleinteraction.h b/gio/tests/gtlsconsoleinteraction.h
+index b366cf97ee..de3e6f7ebb 100644
+--- a/gio/tests/gtlsconsoleinteraction.h
++++ b/gio/tests/gtlsconsoleinteraction.h
+@@ -47,7 +47,7 @@ struct _GTlsConsoleInteractionClass
+   GTlsInteractionClass parent_class;
+ };
+ 
+-GType                  g_tls_console_interaction_get_type    (void) G_GNUC_CONST;
++GType                  g_tls_console_interaction_get_type    (void);
+ 
+ GTlsInteraction *      g_tls_console_interaction_new         (void);
+ 
+diff --git a/gio/tests/test-io-stream.h b/gio/tests/test-io-stream.h
+index db2f82db93..3f18e9b47c 100644
+--- a/gio/tests/test-io-stream.h
++++ b/gio/tests/test-io-stream.h
+@@ -39,7 +39,7 @@ typedef struct
+   GIOStreamClass parent_class;
+ } TestIOStreamClass;
+ 
+-GType test_io_stream_get_type (void) G_GNUC_CONST;
++GType test_io_stream_get_type (void);
+ 
+ #define TEST_TYPE_IO_STREAM  (test_io_stream_get_type ())
+ #define TEST_IO_STREAM(o)    (G_TYPE_CHECK_INSTANCE_CAST ((o), \
+diff --git a/gio/win32/gwinhttpfile.h b/gio/win32/gwinhttpfile.h
+index 69b9d15d4b..c5abe3a603 100644
+--- a/gio/win32/gwinhttpfile.h
++++ b/gio/win32/gwinhttpfile.h
+@@ -53,7 +53,7 @@ struct _GWinHttpFileClass
+   GObjectClass parent_class;
+ };
+ 
+-GType _g_winhttp_file_get_type (void) G_GNUC_CONST;
++GType _g_winhttp_file_get_type (void);
+   
+ GFile * _g_winhttp_file_new (GWinHttpVfs *vfs, const char *uri);
+ 
+diff --git a/gio/win32/gwinhttpfileinputstream.h b/gio/win32/gwinhttpfileinputstream.h
+index e27ea549a0..df4af5dc99 100644
+--- a/gio/win32/gwinhttpfileinputstream.h
++++ b/gio/win32/gwinhttpfileinputstream.h
+@@ -39,7 +39,7 @@ G_BEGIN_DECLS
+ typedef struct _GWinHttpFileInputStream         GWinHttpFileInputStream;
+ typedef struct _GWinHttpFileInputStreamClass    GWinHttpFileInputStreamClass;
+ 
+-GType _g_winhttp_file_input_stream_get_type (void) G_GNUC_CONST;
++GType _g_winhttp_file_input_stream_get_type (void);
+ 
+ GFileInputStream *_g_winhttp_file_input_stream_new (GWinHttpFile *file,
+                                                     HINTERNET     connection,
+diff --git a/gio/win32/gwinhttpfileoutputstream.h b/gio/win32/gwinhttpfileoutputstream.h
+index fc7019cb23..0c3c0daf22 100644
+--- a/gio/win32/gwinhttpfileoutputstream.h
++++ b/gio/win32/gwinhttpfileoutputstream.h
+@@ -39,7 +39,7 @@ G_BEGIN_DECLS
+ typedef struct _GWinHttpFileOutputStream         GWinHttpFileOutputStream;
+ typedef struct _GWinHttpFileOutputStreamClass    GWinHttpFileOutputStreamClass;
+ 
+-GType _g_winhttp_file_output_stream_get_type (void) G_GNUC_CONST;
++GType _g_winhttp_file_output_stream_get_type (void);
+ 
+ GFileOutputStream *_g_winhttp_file_output_stream_new (GWinHttpFile *file,
+                                                       HINTERNET     connection);
+diff --git a/gio/win32/gwinhttpvfs.h b/gio/win32/gwinhttpvfs.h
+index fdac94a5fb..80671336a2 100644
+--- a/gio/win32/gwinhttpvfs.h
++++ b/gio/win32/gwinhttpvfs.h
+@@ -79,7 +79,7 @@ struct _GWinHttpVfsClass
+ };
+ 
+ 
+-GType   _g_winhttp_vfs_get_type  (void) G_GNUC_CONST;
++GType   _g_winhttp_vfs_get_type  (void);
+ 
+ GVfs *_g_winhttp_vfs_new (void);
+ 
+diff --git a/girepository/gibaseinfo.h b/girepository/gibaseinfo.h
+index 4f87b9f50c..73e7d1494e 100644
+--- a/girepository/gibaseinfo.h
++++ b/girepository/gibaseinfo.h
+@@ -86,7 +86,7 @@ typedef struct {
+ #define GI_IS_BASE_INFO(info)    (G_TYPE_CHECK_INSTANCE_TYPE ((info), GI_TYPE_BASE_INFO))
+ 
+ GI_AVAILABLE_IN_ALL
+-GType                  gi_base_info_get_type         (void) G_GNUC_CONST;
++GType                  gi_base_info_get_type         (void);
+ 
+ GI_AVAILABLE_IN_ALL
+ GIBaseInfo *           gi_base_info_ref              (void         *info);
+diff --git a/girepository/gitypelib.h b/girepository/gitypelib.h
+index add5804de0..eb9c0e0d7c 100644
+--- a/girepository/gitypelib.h
++++ b/girepository/gitypelib.h
+@@ -38,7 +38,7 @@ typedef struct _GITypelib GITypelib;
+ 
+ #define GI_TYPE_TYPELIB (gi_typelib_get_type ())
+ GI_AVAILABLE_IN_ALL
+-GType gi_typelib_get_type (void) G_GNUC_CONST;
++GType gi_typelib_get_type (void);
+ 
+ GI_AVAILABLE_IN_ALL
+ GITypelib *    gi_typelib_new_from_bytes       (GBytes  *bytes,
+diff --git a/gobject/gbinding.h b/gobject/gbinding.h
+index f63e2bf800..c5ddbf819c 100644
+--- a/gobject/gbinding.h
++++ b/gobject/gbinding.h
+@@ -97,9 +97,9 @@ typedef enum { /*< prefix=G_BINDING >*/
+ } G_GNUC_FLAG_ENUM GBindingFlags;
+ 
+ GOBJECT_AVAILABLE_IN_ALL
+-GType                 g_binding_flags_get_type      (void) G_GNUC_CONST;
++GType                 g_binding_flags_get_type      (void);
+ GOBJECT_AVAILABLE_IN_ALL
+-GType                 g_binding_get_type            (void) G_GNUC_CONST;
++GType                 g_binding_get_type            (void);
+ 
+ GOBJECT_AVAILABLE_IN_ALL
+ GBindingFlags         g_binding_get_flags           (GBinding *binding);
+diff --git a/gobject/gbindinggroup.h b/gobject/gbindinggroup.h
+index 3985791953..79c53ecfe0 100644
+--- a/gobject/gbindinggroup.h
++++ b/gobject/gbindinggroup.h
+@@ -39,7 +39,7 @@ G_BEGIN_DECLS
+ typedef struct _GBindingGroup GBindingGroup;
+ 
+ GOBJECT_AVAILABLE_IN_2_72
+-GType          g_binding_group_get_type           (void) G_GNUC_CONST;
++GType          g_binding_group_get_type           (void);
+ GOBJECT_AVAILABLE_IN_2_72
+ GBindingGroup *g_binding_group_new                (void);
+ GOBJECT_AVAILABLE_IN_2_72
+diff --git a/gobject/gboxed.h b/gobject/gboxed.h
+index d7b3d4e91e..b78d9270ec 100644
+--- a/gobject/gboxed.h
++++ b/gobject/gboxed.h
+@@ -115,9 +115,9 @@ GType    g_boxed_type_register_static     (const gchar   *name,
+ #define G_TYPE_VALUE (g_value_get_type ())
+ 
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_closure_get_type         (void) G_GNUC_CONST;
++GType   g_closure_get_type         (void);
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_value_get_type           (void) G_GNUC_CONST;
++GType   g_value_get_type           (void);
+ 
+ G_END_DECLS
+ 
+diff --git a/gobject/glib-enumtypes.h.template b/gobject/glib-enumtypes.h.template
+index 8e3ab384e3..06ae88dbba 100644
+--- a/gobject/glib-enumtypes.h.template
++++ b/gobject/glib-enumtypes.h.template
+@@ -13,7 +13,7 @@ G_BEGIN_DECLS
+ /*** END file-production ***/
+ 
+ /*** BEGIN value-header ***/
+-GOBJECT_AVAILABLE_IN_2_60 GType @enum_name@_get_type (void) G_GNUC_CONST;
++GOBJECT_AVAILABLE_IN_2_60 GType @enum_name@_get_type (void);
+ #define @ENUMPREFIX@_TYPE_@ENUMSHORT@ (@enum_name@_get_type ())
+ /*** END value-header ***/
+ 
+diff --git a/gobject/glib-types.h b/gobject/glib-types.h
+index d3c8d00937..693c1184b4 100644
+--- a/gobject/glib-types.h
++++ b/gobject/glib-types.h
+@@ -373,80 +373,80 @@ typedef gsize GType;
+ #define G_TYPE_STRV_BUILDER (g_strv_builder_get_type ())
+ 
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_date_get_type            (void) G_GNUC_CONST;
++GType   g_date_get_type            (void);
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_strv_get_type            (void) G_GNUC_CONST;
++GType   g_strv_get_type            (void);
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_gstring_get_type         (void) G_GNUC_CONST;
++GType   g_gstring_get_type         (void);
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_hash_table_get_type      (void) G_GNUC_CONST;
++GType   g_hash_table_get_type      (void);
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_array_get_type           (void) G_GNUC_CONST;
++GType   g_array_get_type           (void);
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_byte_array_get_type      (void) G_GNUC_CONST;
++GType   g_byte_array_get_type      (void);
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_ptr_array_get_type       (void) G_GNUC_CONST;
++GType   g_ptr_array_get_type       (void);
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_bytes_get_type           (void) G_GNUC_CONST;
++GType   g_bytes_get_type           (void);
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_variant_type_get_gtype   (void) G_GNUC_CONST;
++GType   g_variant_type_get_gtype   (void);
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_regex_get_type           (void) G_GNUC_CONST;
++GType   g_regex_get_type           (void);
+ GOBJECT_AVAILABLE_IN_2_30
+-GType   g_match_info_get_type      (void) G_GNUC_CONST;
++GType   g_match_info_get_type      (void);
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_error_get_type           (void) G_GNUC_CONST;
++GType   g_error_get_type           (void);
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_date_time_get_type       (void) G_GNUC_CONST;
++GType   g_date_time_get_type       (void);
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_time_zone_get_type       (void) G_GNUC_CONST;
++GType   g_time_zone_get_type       (void);
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_io_channel_get_type      (void) G_GNUC_CONST;
++GType   g_io_channel_get_type      (void);
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_io_condition_get_type    (void) G_GNUC_CONST;
++GType   g_io_condition_get_type    (void);
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_variant_builder_get_type (void) G_GNUC_CONST;
++GType   g_variant_builder_get_type (void);
+ GOBJECT_AVAILABLE_IN_2_40
+-GType   g_variant_dict_get_type    (void) G_GNUC_CONST;
++GType   g_variant_dict_get_type    (void);
+ GOBJECT_AVAILABLE_IN_ALL
+-GType   g_key_file_get_type        (void) G_GNUC_CONST;
++GType   g_key_file_get_type        (void);
+ GOBJECT_AVAILABLE_IN_2_30
+-GType   g_main_loop_get_type       (void) G_GNUC_CONST;
++GType   g_main_loop_get_type       (void);
+ GOBJECT_AVAILABLE_IN_2_30
+-GType   g_main_context_get_type    (void) G_GNUC_CONST;
++GType   g_main_context_get_type    (void);
+ GOBJECT_AVAILABLE_IN_2_30
+-GType   g_source_get_type          (void) G_GNUC_CONST;
++GType   g_source_get_type          (void);
+ GOBJECT_AVAILABLE_IN_2_36
+-GType   g_pollfd_get_type          (void) G_GNUC_CONST;
++GType   g_pollfd_get_type          (void);
+ GOBJECT_AVAILABLE_IN_2_36
+-GType   g_thread_get_type          (void) G_GNUC_CONST;
++GType   g_thread_get_type          (void);
+ GOBJECT_AVAILABLE_IN_2_36
+-GType   g_checksum_get_type        (void) G_GNUC_CONST;
++GType   g_checksum_get_type        (void);
+ GOBJECT_AVAILABLE_IN_2_36
+-GType   g_markup_parse_context_get_type (void) G_GNUC_CONST;
++GType   g_markup_parse_context_get_type (void);
+ GOBJECT_AVAILABLE_IN_2_40
+-GType   g_mapped_file_get_type (void) G_GNUC_CONST;
++GType   g_mapped_file_get_type (void);
+ GOBJECT_AVAILABLE_IN_2_44
+-GType   g_option_group_get_type    (void) G_GNUC_CONST;
++GType   g_option_group_get_type    (void);
+ GOBJECT_AVAILABLE_IN_2_66
+-GType   g_uri_get_type             (void) G_GNUC_CONST;
++GType   g_uri_get_type             (void);
+ GOBJECT_AVAILABLE_IN_2_68
+-GType   g_tree_get_type            (void) G_GNUC_CONST;
++GType   g_tree_get_type            (void);
+ GOBJECT_AVAILABLE_IN_2_70
+-GType g_pattern_spec_get_type (void) G_GNUC_CONST;
++GType g_pattern_spec_get_type (void);
+ GOBJECT_AVAILABLE_IN_2_76
+-GType   g_bookmark_file_get_type   (void) G_GNUC_CONST;
++GType   g_bookmark_file_get_type   (void);
+ GOBJECT_AVAILABLE_IN_2_80
+-GType   g_hmac_get_type (void) G_GNUC_CONST;
++GType   g_hmac_get_type (void);
+ GOBJECT_AVAILABLE_IN_2_80
+-GType   g_dir_get_type (void) G_GNUC_CONST;
++GType   g_dir_get_type (void);
+ GOBJECT_AVAILABLE_IN_2_80
+-GType   g_rand_get_type (void) G_GNUC_CONST;
++GType   g_rand_get_type (void);
+ GOBJECT_AVAILABLE_IN_2_80
+-GType   g_strv_builder_get_type (void) G_GNUC_CONST;
++GType   g_strv_builder_get_type (void);
+ 
+ GOBJECT_DEPRECATED_FOR('G_TYPE_VARIANT')
+-GType   g_variant_get_gtype        (void) G_GNUC_CONST;
++GType   g_variant_get_gtype        (void);
+ 
+ G_END_DECLS
+ 
+diff --git a/gobject/gobject.h b/gobject/gobject.h
+index 19d408920b..e0d3a4fa3f 100644
+--- a/gobject/gobject.h
++++ b/gobject/gobject.h
+@@ -427,7 +427,7 @@ GParamSpec**g_object_interface_list_properties  (gpointer     g_iface,
+ 						 guint       *n_properties_p);
+ 
+ GOBJECT_AVAILABLE_IN_ALL
+-GType       g_object_get_type                 (void) G_GNUC_CONST;
++GType       g_object_get_type                 (void);
+ GOBJECT_AVAILABLE_IN_ALL
+ gpointer    g_object_new                      (GType           object_type,
+ 					       const gchar    *first_property_name,
+diff --git a/gobject/gsignalgroup.h b/gobject/gsignalgroup.h
+index 38fd2e0325..4e2fc16bc5 100644
+--- a/gobject/gsignalgroup.h
++++ b/gobject/gsignalgroup.h
+@@ -39,7 +39,7 @@ G_BEGIN_DECLS
+ typedef struct _GSignalGroup GSignalGroup;
+ 
+ GOBJECT_AVAILABLE_IN_2_72
+-GType         g_signal_group_get_type        (void) G_GNUC_CONST;
++GType         g_signal_group_get_type        (void);
+ GOBJECT_AVAILABLE_IN_2_72
+ GSignalGroup *g_signal_group_new             (GType           target_type);
+ GOBJECT_AVAILABLE_IN_2_72
+diff --git a/gobject/gtype.c b/gobject/gtype.c
+index 9d42a8e00e..a2e9661a98 100644
+--- a/gobject/gtype.c
++++ b/gobject/gtype.c
+@@ -4825,15 +4825,18 @@ g_type_class_get_private (GTypeClass *klass,
+  * Ensures that the indicated @type has been registered with the
+  * type system, and its _class_init() method has been run.
+  *
+- * In theory, simply calling the type's _get_type() method (or using
+- * the corresponding macro) is supposed take care of this. However,
+- * _get_type() methods are often marked %G_GNUC_CONST for performance
+- * reasons, even though this is technically incorrect (since
+- * %G_GNUC_CONST requires that the function not have side effects,
+- * which _get_type() methods do on the first call). As a result, if
+- * you write a bare call to a _get_type() macro, it may get optimized
+- * out by the compiler. Using g_type_ensure() guarantees that the
+- * type's _get_type() method is called.
++ * Typically, calling the type’s `_get_type()` method (or using the
++ * corresponding macro) will take care of this. In situations where a
++ * type is looked up dynamically, however, you may need to explicitly call
++ * `g_type_ensure()` to ensure expected types are registered before the
++ * first lookup. This can happen when using custom widgets from a GTK
++ * `.ui` file, for example.
++ *
++ * Historically, `_get_type()` methods have sometimes been marked as
++ * [`G_GNUC_CONST`](macros.html#compiler). This is incorrect, as the
++ * first call to a `_get_type()` method has side-effects. These
++ * annotations should be removed, as they can cause code to be optimized
++ * out in unexpected ways by the compiler.
+  *
+  * Since: 2.34
+  */
+diff --git a/gobject/gtype.h b/gobject/gtype.h
+index f62760f36c..defecf0b01 100644
+--- a/gobject/gtype.h
++++ b/gobject/gtype.h
+@@ -2393,7 +2393,7 @@ type_name##_get_type (void) \
+  *
+  * |[<!-- language="C" -->
+  * #define MY_TYPE_STRUCT my_struct_get_type ()
+- * GType my_struct_get_type (void) G_GNUC_CONST;
++ * GType my_struct_get_type (void);
+  *
+  * MyStruct *    my_struct_new (void);
+  * void          my_struct_free (MyStruct *self);
+diff --git a/gobject/gtypemodule.h b/gobject/gtypemodule.h
+index fba714bc28..9d575df008 100644
+--- a/gobject/gtypemodule.h
++++ b/gobject/gtypemodule.h
+@@ -262,7 +262,7 @@ type_name##_register_type (GTypeModule *type_module) \
+ }
+ 
+ GOBJECT_AVAILABLE_IN_ALL
+-GType    g_type_module_get_type       (void) G_GNUC_CONST;
++GType    g_type_module_get_type       (void);
+ GOBJECT_AVAILABLE_IN_ALL
+ gboolean g_type_module_use            (GTypeModule          *module);
+ GOBJECT_AVAILABLE_IN_ALL
+diff --git a/gobject/gtypeplugin.h b/gobject/gtypeplugin.h
+index c950dfbd14..4cf4166013 100644
+--- a/gobject/gtypeplugin.h
++++ b/gobject/gtypeplugin.h
+@@ -109,7 +109,7 @@ struct _GTypePluginClass
+ 
+ /* --- prototypes --- */
+ GOBJECT_AVAILABLE_IN_ALL
+-GType	g_type_plugin_get_type			(void)	G_GNUC_CONST;
++GType	g_type_plugin_get_type			(void);
+ GOBJECT_AVAILABLE_IN_ALL
+ void	g_type_plugin_use			(GTypePlugin	 *plugin);
+ GOBJECT_AVAILABLE_IN_ALL
+diff --git a/gobject/gvaluearray.h b/gobject/gvaluearray.h
+index d6052c0ae9..766d153030 100644
+--- a/gobject/gvaluearray.h
++++ b/gobject/gvaluearray.h
+@@ -52,7 +52,7 @@ struct _GValueArray
+ 
+ /* --- prototypes --- */
+ GOBJECT_DEPRECATED_IN_2_32_FOR(GArray)
+-GType           g_value_array_get_type       (void) G_GNUC_CONST;
++GType           g_value_array_get_type       (void);
+ 
+ GOBJECT_DEPRECATED_IN_2_32_FOR(GArray)
+ GValue*		g_value_array_get_nth	     (GValueArray	*value_array,
+diff --git a/gobject/tests/properties.c b/gobject/tests/properties.c
+index ddb9c3ea90..14db32c611 100644
+--- a/gobject/tests/properties.c
++++ b/gobject/tests/properties.c
+@@ -277,7 +277,7 @@ typedef GObjectClass ManyPropsClass;
+ 
+ static GParamSpec *props[16];
+ 
+-GType many_props_get_type (void) G_GNUC_CONST;
++GType many_props_get_type (void);
+ 
+ G_DEFINE_TYPE(ManyProps, many_props, G_TYPE_OBJECT)
+ 
+-- 
+GitLab
+
+
+From 5c2f36682acb8408bf9630e2390a02e1e9320588 Mon Sep 17 00:00:00 2001
+From: Sam James <sam@gentoo.org>
+Date: Thu, 25 Jun 2026 13:51:04 +0100
+Subject: [PATCH 2/4] gtype: downgrade some (non-*_get_type) G_GNUC_CONST ->
+ G_GNUC_PURE
+
+g_type_check_is_value_type and g_type_test_flags both read global memory,
+so can't be const. They only seem to write for the purpose of a lock, which
+they undo at the end, so maybe we can get away with G_GNUC_PURE here.
+
+Bug: https://gitlab.gnome.org/GNOME/glib/-/work_items/3984
+Signed-off-by: Sam James <sam@gentoo.org>
+---
+ gobject/gtype.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/gobject/gtype.h b/gobject/gtype.h
+index defecf0b01..cef46a2344 100644
+--- a/gobject/gtype.h
++++ b/gobject/gtype.h
+@@ -2639,7 +2639,7 @@ GOBJECT_AVAILABLE_IN_ALL
+ gboolean         g_type_check_class_is_a        (GTypeClass         *g_class,
+ 						 GType               is_a_type) G_GNUC_PURE;
+ GOBJECT_AVAILABLE_IN_ALL
+-gboolean	 g_type_check_is_value_type     (GType		     type) G_GNUC_CONST;
++gboolean	 g_type_check_is_value_type     (GType		     type) G_GNUC_PURE;
+ GOBJECT_AVAILABLE_IN_ALL
+ gboolean	 g_type_check_value             (const GValue       *value) G_GNUC_PURE;
+ GOBJECT_AVAILABLE_IN_ALL
+@@ -2647,7 +2647,7 @@ gboolean	 g_type_check_value_holds	(const GValue	    *value,
+ 						 GType		     type) G_GNUC_PURE;
+ GOBJECT_AVAILABLE_IN_ALL
+ gboolean         g_type_test_flags              (GType               type,
+-						 guint               flags) G_GNUC_CONST;
++						 guint               flags) G_GNUC_PURE;
+ 
+ 
+ /* --- debugging functions --- */
+-- 
+GitLab
+
+
+From fc6e8e3b277ba697c90ffc1fd3387601a002e7d9 Mon Sep 17 00:00:00 2001
+From: Philip Withnall <pwithnall@gnome.org>
+Date: Thu, 25 Jun 2026 18:02:00 +0100
+Subject: [PATCH 3/4] gquark: Fix an incorrect G_GNUC_CONST annotation on
+ g_quark_to_string()
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+It’s actually `G_GNUC_PURE` as its return value depends on the global
+quark table.
+
+Signed-off-by: Philip Withnall <pwithnall@gnome.org>
+---
+ glib/gquark.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/glib/gquark.h b/glib/gquark.h
+index d0c44039f9..8df3503855 100644
+--- a/glib/gquark.h
++++ b/glib/gquark.h
+@@ -46,7 +46,7 @@ GQuark                g_quark_from_static_string (const gchar *string);
+ GLIB_AVAILABLE_IN_ALL
+ GQuark                g_quark_from_string        (const gchar *string);
+ GLIB_AVAILABLE_IN_ALL
+-const gchar *         g_quark_to_string          (GQuark       quark) G_GNUC_CONST;
++const gchar *         g_quark_to_string          (GQuark       quark) G_GNUC_PURE;
+ 
+ #define G_DEFINE_QUARK(QN, q_n)                                         \
+ GQuark                                                                  \
+-- 
+GitLab
+
+
+From b7cea87cc419f8d1d09ba388ffba6e9fbfc6d65e Mon Sep 17 00:00:00 2001
+From: Philip Withnall <pwithnall@gnome.org>
+Date: Thu, 25 Jun 2026 18:04:16 +0100
+Subject: [PATCH 4/4] codegen: Drop an inappropriate G_GNUC_CONST from inside a
+ code comment
+
+Might as well have this comment reflect reality (see the previous few
+commits).
+
+Signed-off-by: Philip Withnall <pwithnall@gnome.org>
+---
+ gio/gdbus-2.0/codegen/dbustypes.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gio/gdbus-2.0/codegen/dbustypes.py b/gio/gdbus-2.0/codegen/dbustypes.py
+index 21f0901fe5..ae6c048c6c 100644
+--- a/gio/gdbus-2.0/codegen/dbustypes.py
++++ b/gio/gdbus-2.0/codegen/dbustypes.py
+@@ -595,7 +595,7 @@ class Property:
+             self.name_lower = utils.camel_case_to_uscore(name).lower().replace("-", "_")
+         self.name_hyphen = self.name_lower.replace("_", "-")
+         # don't clash with the GType getter, e.g.:
+-        # GType foo_bar_get_type (void); G_GNUC_CONST
++        # GType foo_bar_get_type (void);
+         if self.name_lower == "type":
+             self.name_lower = "type_"
+ 
+-- 
+GitLab
+
