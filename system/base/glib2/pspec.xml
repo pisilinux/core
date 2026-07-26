@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>A library of handy utility functions</Summary>
         <Description>glib2 is the low-level core library that forms the basis for projects such as GTK+ and GNOME. It provides data structure handling for C, portability wrappers, and interfaces for such runtime functionality as an event loop, threads, dynamic loading, and an object system.</Description>
-        <Archive sha1sum="03242a38f6f7c6dac634ec35668f395eceeaaa6a" type="tarxz">mirrors://gnome/glib/2.86/glib-2.86.5.tar.xz</Archive>
+        <Archive sha1sum="22d4dc5d697dd3af238b81468a3f0540229390c7" type="tarxz">mirrors://gnome/glib/2.88/glib-2.88.2.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>meson</Dependency>
             <Dependency>ninja</Dependency>
@@ -31,6 +31,7 @@
             <Patch level="1">noisy-glib-compile-schemas.diff</Patch>
             <Patch level="1">glib-2.68.2-skip_warnings-1.patch</Patch>
             <Patch level="1">glib2.patch</Patch>
+            <Patch level="1">5225.patch</Patch>
         </Patches>
         <AdditionalFiles>
             <AdditionalFile target="multilib.diff" permission="0644">multilib.diff</AdditionalFile>
@@ -145,6 +146,13 @@
     </Package>
 
     <History>
+        <Update release="69">
+            <Date>2026-07-18</Date>
+            <Version>2.88.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="68">
             <Date>2026-04-04</Date>
             <Version>2.86.5</Version>
