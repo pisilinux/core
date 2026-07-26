@@ -35,7 +35,9 @@ def setup():
     #os.system("echo -e '\033[0;36mBuilding Python\033[0m' ")
 	
     # pisitools.cflags.add("-fwrapv -std=c++17")
-    pisitools.cflags.add("-fwrapv -std=gnu17")
+    # pisitools.cflags.add("-fwrapv -std=gnu17")
+    # gcc15 patch
+    pisitools.cflags.add("-fwrapv ")
 
     # no rpath
     pisitools.dosed("configure.ac", "-rpath \$\(LIBDIR\) ")

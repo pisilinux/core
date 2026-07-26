@@ -1,0 +1,46 @@
+From 899b065e776226af56036054465bdbe197bdc12d Mon Sep 17 00:00:00 2001
+From: Logan Jones <loganasherjones@gmail.com>
+Date: Mon, 26 Jul 2021 11:21:09 -0400
+Subject: [PATCH] bpo-44734: Fix precision in turtle tests
+
+---
+ Lib/test/test_turtle.py                            | 14 +++-----------
+ .../Tests/2021-07-24-20-09-15.bpo-44734.KKsNOV.rst |  1 +
+ 2 files changed, 4 insertions(+), 11 deletions(-)
+ create mode 100644 Misc/NEWS.d/next/Tests/2021-07-24-20-09-15.bpo-44734.KKsNOV.rst
+
+diff --git a/Lib/test/test_turtle.py b/Lib/test/test_turtle.py
+index 8f8434c..143175c 100644
+--- a/Lib/test/test_turtle.py
++++ b/Lib/test/test_turtle.py
+@@ -215,17 +215,9 @@ class TestVec2D(VectorComparisonMixin, unittest.TestCase):
+         self.assertVectorsAlmostEqual(-vec, expected)
+ 
+     def test_distance(self):
+-        vec = Vec2D(6, 8)
+-        expected = 10
+-        self.assertEqual(abs(vec), expected)
+-
+-        vec = Vec2D(0, 0)
+-        expected = 0
+-        self.assertEqual(abs(vec), expected)
+-
+-        vec = Vec2D(2.5, 6)
+-        expected = 6.5
+-        self.assertEqual(abs(vec), expected)
++        self.assertEqual(abs(Vec2D(6, 8)), 10)
++        self.assertEqual(abs(Vec2D(0, 0)), 0)
++        self.assertAlmostEqual(abs(Vec2D(2.5, 6)), 6.5)
+ 
+     def test_rotate(self):
+ 
+diff --git a/Misc/NEWS.d/next/Tests/2021-07-24-20-09-15.bpo-44734.KKsNOV.rst b/Misc/NEWS.d/next/Tests/2021-07-24-20-09-15.bpo-44734.KKsNOV.rst
+new file mode 100644
+index 0000000..94e9ce0
+--- /dev/null
++++ b/Misc/NEWS.d/next/Tests/2021-07-24-20-09-15.bpo-44734.KKsNOV.rst
+@@ -0,0 +1 @@
++Fixed floating point precision issue in turtle tests.
+-- 
+2.33.0
+
