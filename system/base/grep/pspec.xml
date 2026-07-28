@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>grep</Name>
@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>GNU regular expression matcher</Summary>
         <Description>The grep command searches one or more input files for lines containing a match to a specified pattern. By default, grep prints the matching lines.</Description>
-        <Archive sha1sum="955146a0a4887eca33606e391481bbef37055b86" type="tarxz">https://fossies.org/linux/misc/grep-3.11.tar.xz</Archive>
+        <Archive sha1sum="4b4df79f5963041d515ef64cfa245e0193a33009" type="tarxz">https://ftp.wayne.edu/gnu/grep/grep-3.12.tar.xz</Archive>
         <BuildDependencies>
             <Dependency>gettext</Dependency>
             <Dependency>libpcre2-devel</Dependency>
@@ -34,6 +34,13 @@
     </Package>
 
     <History>
+        <Update release="12">
+            <Date>2026-07-28</Date>
+            <Version>3.12</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="11">
             <Date>2023-05-17</Date>
             <Version>3.11</Version>
