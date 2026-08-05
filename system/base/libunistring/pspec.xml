@@ -1,121 +1,153 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
-        <Name>libunistring</Name>
-        <Homepage>https://www.gnu.org/software/libunistring</Homepage>
+        <Name>libraw</Name>
+        <Homepage>https://www.libraw.org/</Homepage>
         <Packager>
-            <Name>PisiLinux Community</Name>
-            <Email>admins@pisilinux.org</Email>
+            <Name>Yücel KILIÇ</Name>
+            <Email>yucel.kilic@linux.org.tr</Email>
         </Packager>
-        <License>GPLv3</License>
-        <License>LGPLv3</License>
+        <License>LGPLv2.1</License>
+        <License>CDDL</License>
         <IsA>library</IsA>
-        <Summary>Unicode string library</Summary>
-        <Description>This library provides functions for manipulating Unicode strings and for manipulating C strings according to the Unicode standard.</Description>
-        <Archive sha1sum="55a0c8607ee3753a0cf716135b95f87482946e5b" type="tarxz">mirrors://gnu/libunistring/libunistring-1.3.tar.xz</Archive>
+        <Summary>Raw image decoder</Summary>
+        <Description>LibRaw is a library for reading RAW files obtained from digital photo cameras (CRW/CR2, NEF, RAF, DNG, and others).</Description>
+        <Archive sha1sum="ad2eee2e12714ef7b86733690931b0edc085294a" type="targz">https://www.libraw.org/data/LibRaw-0.22.0.tar.gz</Archive>
         <BuildDependencies>
-<!--             <Dependency>glibc-devel</Dependency> -->
-<!--             <Dependency versionFrom="8.0.1">readline-devel</Dependency> -->
-        </BuildDependencies>
-        <Patches>
-<!--             <Patch level="1">0100-float-endian-detection.patch</Patch> -->
-            <Patch level="1">0700-multiarch-libc.patch</Patch>
-<!--             <Patch level="1">0705-gcc-9.patch</Patch> -->
-        </Patches>
+            <Dependency>libgomp</Dependency>
+            <Dependency>mit-kerberos</Dependency>
+            <Dependency>lcms2-devel</Dependency>
+            <Dependency>jasper-devel</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
+         </BuildDependencies>
     </Source>
 
     <Package>
-        <Name>libunistring</Name>
+        <Name>libraw</Name>
+        <RuntimeDependencies>
+            <Dependency>zlib</Dependency>
+            <Dependency>lcms2</Dependency>
+            <Dependency>libgcc</Dependency>
+            <Dependency>jasper</Dependency>
+            <Dependency>libgomp</Dependency>
+            <Dependency>libjpeg-turbo</Dependency>
+        </RuntimeDependencies>
         <Files>
+            <Path fileType="executable">/usr/bin</Path>
             <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/lib/libraw.so.20</Path>
+            <Path fileType="library">/usr/lib/libraw_r.so.20</Path>
             <Path fileType="doc">/usr/share/doc</Path>
-            <Path fileType="info">/usr/share/info</Path>
         </Files>
     </Package>
 
     <Package>
-        <Name>libunistring-devel</Name>
-        <PartOf>system.devel</PartOf>
-        <Summary>Development files for libunistring</Summary>
+        <Name>libraw-devel</Name>
+        <Summary>Development files for libraw</Summary>
         <RuntimeDependencies>
-            <Dependency release="current">libunistring</Dependency>
+            <Dependency release="current">libraw</Dependency>
+            <Dependency>lcms2-devel</Dependency>
+            <Dependency>jasper-devel</Dependency>
+            <Dependency>libjpeg-turbo-devel</Dependency>
         </RuntimeDependencies>
         <Files>
             <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
         </Files>
     </Package>
 
     <History>
+        <Update release="13">
+            <Date>2026-08-05</Date>
+            <Version>0.22.0</Version>
+            <Comment>Rebuild.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+        <Update release="12">
+            <Date>2026-01-14</Date>
+            <Version>0.22.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+        <Update release="11">
+            <Date>2025-12-24</Date>
+            <Version>0.21.5</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="10">
-            <Date>2025-11-05</Date>
-            <Version>1.3</Version>
-            <Comment>Version bump.</Comment>
-            <Name>Pisi Linux Community</Name>
-            <Email>admin@pisilinux.org</Email>
-        </Update>
-        <Update release="9">
-            <Date>2024-10-05</Date>
-            <Version>1.2</Version>
-            <Comment>Version bump.</Comment>
-            <Name>Pisi Linux Community</Name>
-            <Email>admin@pisilinux.org</Email>
-        </Update>
-        <Update release="8">
-            <Date>2023-07-20</Date>
-            <Version>1.0</Version>
+            <Date>2023-01-30</Date>
+            <Version>0.21.1</Version>
             <Comment>Rebuild.</Comment>
             <Name>Mustafa Cinasal</Name>
             <Email>muscnsl@gmail.com</Email>
         </Update>
-        <Update release="7">
-            <Date>2022-08-18</Date>
-            <Version>1.0</Version>
+        <Update release="9">
+            <Date>2023-01-27</Date>
+            <Version>0.21.1</Version>
+            <Comment>Version bump</Comment>
+            <Name>fury</Name>
+            <Email>uglyside@yandex.ru</Email>
+        </Update>
+        <Update release="8">
+            <Date>2022-01-17</Date>
+            <Version>0.20.2</Version>
             <Comment>Version bump.</Comment>
+            <Name>fury</Name>
+            <Email>uglyside@yandex.ru</Email>
+        </Update>
+        <Update release="7">
+            <Date>2020-03-15</Date>
+            <Version>0.19.5</Version>
+            <Comment>Rebuild.</Comment>
             <Name>Mustafa Cinasal</Name>
             <Email>muscnsl@gmail.com</Email>
         </Update>
         <Update release="6">
-            <Date>2020-12-09</Date>
-            <Version>0.9.10</Version>
-            <Comment>Rebuild.</Comment>
+            <Date>2020-02-11</Date>
+            <Version>0.19.5</Version>
+            <Comment>Version bump.</Comment>
             <Name>Mustafa Cinasal</Name>
             <Email>muscnsl@gmail.com</Email>
         </Update>
         <Update release="5">
-            <Date>2019-12-11</Date>
-            <Version>0.9.10</Version>
-            <Comment>Version bump.</Comment>
-            <Name>idris Kalp</Name>
-            <Email>idriskalp@gmail.com</Email>
+            <Date>2018-08-07</Date>
+            <Version>0.18.8</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
         </Update>
         <Update release="4">
-            <Date>2018-07-15</Date>
-            <Version>0.9.8</Version>
-            <Comment>Version bump.</Comment>
-            <Name>Ertuğrul Erata</Name>
-            <Email>ertugrulerata@gmail.com</Email>
+            <Date>2018-03-21</Date>
+            <Version>0.18.8</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
         </Update>
         <Update release="3">
-            <Date>2017-01-08</Date>
-            <Version>0.9.7</Version>
-            <Comment>Version bump.</Comment>
-            <Name>Ertuğrul Erata</Name>
-            <Email>ertugrulerata@gmail.com</Email>
+            <Date>2017-03-02</Date>
+            <Version>0.18.1</Version>
+            <Comment>Version Bump</Comment>
+            <Name>Ayhan Yalçınsoy</Name>
+            <Email>ayhanyalcinsoy@pisilinux.org</Email>
         </Update>
         <Update release="2">
-            <Date>2016-04-27</Date>
-            <Version>0.9.6</Version>
+            <Date>2016-06-09</Date>
+            <Version>0.16.2</Version>
             <Comment>Release Bump</Comment>
-            <Name>PisiLinux Community</Name>
+            <Name>Pisi Linux Community</Name>
             <Email>admin@pisilinux.org</Email>
         </Update>
         <Update release="1">
-            <Date>2016-03-08</Date>
-            <Version>0.9.6</Version>
+            <Date>2015-08-13</Date>
+            <Version>0.16.2</Version>
             <Comment>First release</Comment>
-            <Name>Alihan Öztürk</Name>
-            <Email>alihan@pisilinux.org</Email>
+            <Name>Ertuğrul Erata</Name>
+            <Email>ertugrulerata@gmail.com</Email>
         </Update>
     </History>
 </PISI>

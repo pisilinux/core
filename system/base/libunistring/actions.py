@@ -2,27 +2,23 @@
 # -*- coding: utf-8 -*-
 #
 # Licensed under the GNU General Public License, version 3.
-# See the file http://www.gnu.org/licenses/gpl.txt
+# See the file https://www.gnu.org/licenses/gpl-3.0.txt
 
 from pisi.actionsapi import autotools
 from pisi.actionsapi import pisitools
-from pisi.actionsapi import shelltools
+from pisi.actionsapi import get
 
 def setup():
-    autotools.autoreconf("-vfi")
-    autotools.configure("--disable-static \
-                         --disable-rpath")
-    #shelltools.system("sed -i '/pragma weak pthread_create/d' tests/glthread/thread.h")
+    autotools.autoreconf("-fiv")
+    autotools.configure("--disable-static --enable-jpeg --enable-jasper --enable-lcms")
 
 def build():
     autotools.make()
 
-#def check():
-    #autotools.make("check")
-
 def install():
-    autotools.install()
-    
-    pisitools.dosym("libunistring.so.5.1.0", "/usr/lib/libunistring.so.0")
-    # pisitools.dosym("libunistring.so.5.1.0", "/usr/lib/libunistring.so.2")
-    pisitools.dodoc("AUTHORS", "BUGS", "ChangeLog", "COPYING", "COPYING.LIB", "HACKING", "NEWS", "README",  "THANKS")
+    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+
+    pisitools.dosym("/usr/lib/libraw.so.24.0.0", "/usr/lib/libraw.so.20")
+    pisitools.dosym("/usr/lib/libraw_r.so.24.0.0", "/usr/lib/libraw_r.so.20")
+
+    pisitools.dodoc("README*")
