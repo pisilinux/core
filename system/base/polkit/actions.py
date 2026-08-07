@@ -32,9 +32,16 @@ def install():
     pisitools.dodir("/var/lib/polkit-1")
     shelltools.chmod("%s/var/lib/polkit-1" % get.installDIR(), mode=00700)
     shelltools.chmod("%s/etc/polkit-1/rules.d" % get.installDIR(), mode=00700)
-    shelltools.chown("%s/etc/polkit-1/rules.d" % get.installDIR(),"polkitd","root") #yada? "polkitd","root"
+    shelltools.chown("%s/etc/polkit-1/rules.d" % get.installDIR(),"root","root")
     shelltools.chown("%s/var/lib/polkit-1" % get.installDIR(),"polkitd","polkitd")
-    shelltools.chown("%s/usr/share/polkit-1" % get.installDIR(),"polkitd","root") #yada? "polkitd","root"
+    shelltools.chown("%s/usr/share/polkit-1" % get.installDIR(),"polkitd","root")
+
+    tf = "%s/usr/lib/tmpfiles.d/polkit-tmpfiles.conf" % get.installDIR()
+    try:
+        data = open(tf).read().replace("root polkitd", "root root")
+        open(tf, "w").write(data)
+    except IOError:
+        pass
 
     pisitools.removeDir("/usr/lib/systemd")
     pisitools.removeDir("/usr/lib/sysusers.d")

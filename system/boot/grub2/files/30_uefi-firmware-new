@@ -1,22 +1,7 @@
-#! /bin/sh
+#!/bin/sh
 set -e
 
-# grub-mkconfig helper script.
-# Copyright (C) 2012  Free Software Foundation, Inc.
-#
-# GRUB is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# GRUB is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
-
+# GRUB2 Helper Script - Pisi Linux / Custom ISO
 prefix="/usr"
 exec_prefix="/usr"
 datarootdir="/usr/share"
@@ -26,6 +11,7 @@ export TEXTDOMAINDIR="${datarootdir}/locale"
 
 . "${datarootdir}/grub/grub-mkconfig_lib"
 
+# 1. EFI Firmware (BIOS Setup) Menü Eklentisi
 efi_vars_dir=/sys/firmware/efi/efivars
 EFI_GLOBAL_VARIABLE=8be4df61-93ca-11d2-aa0d-00e098032b8c
 OsIndications="$efi_vars_dir/OsIndicationsSupported-$EFI_GLOBAL_VARIABLE"
@@ -33,10 +19,6 @@ OsIndications="$efi_vars_dir/OsIndicationsSupported-$EFI_GLOBAL_VARIABLE"
 if [ -e "$OsIndications" ] && \
    [ "$(( $(printf 0x%x \'"$(cat $OsIndications | cut -b1)") & 1 ))" = 1 ]; then
   LABEL="System setup"
-
-  gettext_printf "Adding boot menu entry for EFI firmware configuration\n" >&2
-
-  onstr="$(gettext_printf "(on %s)" "${DEVICE}")"
 
   cat << EOF
 if [ "\$grub_platform" = "efi" ]; then
@@ -50,35 +32,52 @@ fi
 EOF
 fi
 
-#See for EFI present
 if [ -d /sys/firmware/efi ]; then
 
-. "/usr/share/grub/grub-mkconfig_lib"
+  TEMP_MOUNT="/tmp/grub_win_detect"
+  WIN_UUID=""
 
-#See for Windows EFI string in EFI BIOS
-WINDOWS_EFI=$(/usr/sbin/efibootmgr -v | grep -E -m 1 '(WINDOWS|Windows Boot Manager)' | sed 's/.*\(HD([^()]*)File([^()]*)\).*/\1/i')
-if [ -z "$WINDOWS_EFI" ]; then
-        exit 0
-fi
-WIN_EFI_PATH_LINUX=/EFI/Microsoft/Boot/bootmgfw.efi
+  EFI_PARTS=$(lsblk -list -no NAME,FSTYPE 2>/dev/null | awk '$2=="vfat" {print $1}')
 
-#Determine EFI UUID
-WIN_EFI_UUID=$(grub2-probe --target=fs_uuid /boot/efi/EFI/Microsoft/Boot/bootmgfw.efi)
+  for part in $EFI_PARTS; do
+      DEV="/dev/$part"
 
-ESP_SEARCH_HINTS=$(grub2-probe --target=hints_string /boot/efi/EFI/Microsoft/Boot/bootmgfw.efi)
+      MNT=$(findmnt -n -o TARGET "$DEV" 2>/dev/null || true)
+      WAS_MOUNTED=1
 
+      if [ -z "$MNT" ]; then
+          WAS_MOUNTED=0
+          MNT="$TEMP_MOUNT"
+          mkdir -p "$MNT"
+          mount -o ro "$DEV" "$MNT" 2>/dev/null || continue
+      fi
+
+      if [ -f "$MNT/EFI/Microsoft/Boot/bootmgfw.efi" ]; then
+          WIN_UUID=$(blkid -s UUID -o value "$DEV" 2>/dev/null || true)
+          if [ "$WAS_MOUNTED" -eq 0 ]; then
+              umount "$MNT" 2>/dev/null || true
+          fi
+          break
+      fi
+
+      if [ "$WAS_MOUNTED" -eq 0 ]; then
+          umount "$MNT" 2>/dev/null || true
+      fi
+  done
+
+  rm -rf "$TEMP_MOUNT"
+
+  if [ -n "$WIN_UUID" ]; then
 cat << EOF
-menuentry "Windows Boot Manager" {
-EOF
-save_default_entry | sed -e "s/^/  /"
-cat << EOF
+menuentry "Windows Boot Manager (UEFI)" --class windows --class os {
   insmod part_gpt
   insmod fat
   insmod search_fs_uuid
   insmod chain
-  search --fs-uuid --set=root ${ESP_SEARCH_HINTS} ${WIN_EFI_UUID}
-  chainloader $WIN_EFI_PATH_LINUX
+  search --fs-uuid --set=root ${WIN_UUID}
+  chainloader /EFI/Microsoft/Boot/bootmgfw.efi
 }
 EOF
+  fi
 
 fi
