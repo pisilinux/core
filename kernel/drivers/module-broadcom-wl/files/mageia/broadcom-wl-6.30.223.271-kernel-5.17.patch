@@ -1,0 +1,27 @@
+diff -Nurp broadcom-wl-6.30.223.271.orig/src/wl/sys/wl_linux.c broadcom-wl-6.30.223.271/src/wl/sys/wl_linux.c
+--- broadcom-wl-6.30.223.271.orig/src/wl/sys/wl_linux.c	2022-04-09 01:39:49.485478188 +0300
++++ broadcom-wl-6.30.223.271/src/wl/sys/wl_linux.c	2022-04-09 01:42:02.385008114 +0300
+@@ -3295,7 +3295,11 @@ wl_proc_read(char *buffer, char **start,
+ static ssize_t
+ wl_proc_read(struct file *filp, char __user *buffer, size_t length, loff_t *offp)
+ {
++#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 17, 0)
+ 	wl_info_t * wl = PDE_DATA(file_inode(filp));
++#else
++	wl_info_t * wl = pde_data(file_inode(filp));
++#endif
+ #endif
+ 	int bcmerror, len;
+ 	int to_user = 0;
+@@ -3352,7 +3356,11 @@ wl_proc_write(struct file *filp, const c
+ static ssize_t
+ wl_proc_write(struct file *filp, const char __user *buff, size_t length, loff_t *offp)
+ {
++#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 17, 0)
+ 	wl_info_t * wl = PDE_DATA(file_inode(filp));
++#else
++	wl_info_t * wl = pde_data(file_inode(filp));
++#endif
+ #endif
+ 	int from_user = 0;
+ 	int bcmerror;

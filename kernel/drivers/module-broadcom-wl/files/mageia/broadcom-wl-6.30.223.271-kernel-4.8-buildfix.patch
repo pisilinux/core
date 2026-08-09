@@ -1,0 +1,62 @@
+
+From d3f93542326a06d920c6eb89b703384290d37b8b Mon Sep 17 00:00:00 2001
+From: Alberto Milone <alberto.milone@canonical.com>
+Date: Fri, 2 Sep 2016 17:35:34 +0200
+Subject: [PATCH 1/1] Add support for Linux 4.8
+
+Orginal author: Krzysztof Kolasa
+
+---
+ src/wl/sys/wl_cfg80211_hybrid.c |   22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+diff -Nurp broadcom-wl-6.30.223.271.orig/src/wl/sys/wl_cfg80211_hybrid.c broadcom-wl-6.30.223.271/src/wl/sys/wl_cfg80211_hybrid.c
+--- broadcom-wl-6.30.223.271.orig/src/wl/sys/wl_cfg80211_hybrid.c	2020-01-11 01:51:44.376938673 +0200
++++ broadcom-wl-6.30.223.271/src/wl/sys/wl_cfg80211_hybrid.c	2020-01-11 01:52:02.644772879 +0200
+@@ -2386,8 +2386,16 @@ wl_bss_connect_done(struct wl_cfg80211_p
+ 	s32 err = 0;
+ 
+ 	if (wl->scan_request) {
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
++		struct cfg80211_scan_info info = {
++			.aborted = true,
++		};
++		WL_DBG(("%s: Aborting scan\n", __FUNCTION__));
++		cfg80211_scan_done(wl->scan_request, &info);
++#else
+ 		WL_DBG(("%s: Aborting scan\n", __FUNCTION__));
+ 		cfg80211_scan_done(wl->scan_request, true);     
++#endif
+ 		wl->scan_request = NULL;
+ 	}
+ 
+@@ -2488,7 +2496,14 @@ wl_notify_scan_status(struct wl_cfg80211
+ 
+ scan_done_out:
+ 	if (wl->scan_request) {
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
++		struct cfg80211_scan_info info = {
++			.aborted = false,
++		};
++		cfg80211_scan_done(wl->scan_request, &info);
++#else
+ 		cfg80211_scan_done(wl->scan_request, false);
++#endif
+ 		wl->scan_request = NULL;
+ 	}
+ 	rtnl_unlock();
+@@ -2913,7 +2928,14 @@ s32 wl_cfg80211_down(struct net_device *
+ 	s32 err = 0;
+ 
+ 	if (wl->scan_request) {
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
++		struct cfg80211_scan_info info = {
++			.aborted = true,
++		};
++		cfg80211_scan_done(wl->scan_request, &info);
++#else
+ 		cfg80211_scan_done(wl->scan_request, true);	
++#endif
+ 		wl->scan_request = NULL;
+ 	}
+ 
