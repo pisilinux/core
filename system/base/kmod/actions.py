@@ -21,11 +21,12 @@ def setup():
                
     if get.buildTYPE() == "emul32":
         options += " --bindir=/usr/emul32 \
+                     --mandir=/emul32/man \
                      --with-rootlibdir=/lib32 \
-                     --libdir=/usr/lib32"
+                     --libdir=/lib32"
 
     if get.buildTYPE() != "emul32":
-        options += " --with-zstd --with-rootlibdir=/lib"
+        options += " --with-zstd --with-rootlibdir=/lib --libdir=/lib --sbindir=/sbin"
                          
     autotools.configure(options)
 
@@ -33,7 +34,7 @@ def build():
     autotools.make()
 
 # need git for check
-#def check():     
+#def check():
 #    autotools.make("check")
 
 def install():
@@ -45,7 +46,7 @@ def install():
 
     pisitools.dosym("modprobe.d.5.gz","/usr/share/man/man5/modprobe.conf.5.gz")
     for sym in ["modinfo","insmod","rmmod","depmod","modprobe"]:
-        pisitools.dosym("/usr/bin/kmod","/sbin/%s" % sym)
+        pisitools.dosym("/usr/bin/kmod","/usr/bin/%s" % sym)
 
     pisitools.dosym("/usr/bin/kmod","/bin/lsmod")
 
