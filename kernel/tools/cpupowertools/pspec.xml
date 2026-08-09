@@ -69,9 +69,12 @@
         </RuntimeDependencies>
         <Files>
             <Path fileType="config">/etc/conf.d</Path>
+            <Path fileType="config">/etc/cpupower-service.conf</Path>
             <Path fileType="executable">/usr/bin/cpupower</Path>
             <Path fileType="executable">/usr/bin/*-decode</Path>
+            <Path fileType="executable">/usr/libexec/cpupower</Path>
             <Path fileType="library">/usr/lib/libcpupower*</Path>
+            <Path fileType="library">/usr/lib/systemd/system/cpupower.service</Path>
             <Path fileType="header">/usr/include</Path>
             <Path fileType="man">/usr/share/man/man1/cpupower*</Path>
             <Path fileType="locale">/usr/share/locale/*/*/cpupower.mo</Path>
