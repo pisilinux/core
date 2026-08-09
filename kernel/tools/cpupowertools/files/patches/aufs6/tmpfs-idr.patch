@@ -1,10 +1,10 @@
 SPDX-License-Identifier: GPL-2.0
 
 diff --git a/include/linux/shmem_fs.h b/include/linux/shmem_fs.h
-index 515a9a6a3c6f..b23b4b5a61dd 100644
+index 0e47465ef0fd..b03c12ffb5a4 100644
 --- a/include/linux/shmem_fs.h
 +++ b/include/linux/shmem_fs.h
-@@ -55,8 +55,12 @@ struct shmem_quota_limits {
+@@ -57,8 +57,12 @@ struct shmem_quota_limits {
  };
  
  struct shmem_sb_info {
@@ -18,10 +18,10 @@ index 515a9a6a3c6f..b23b4b5a61dd 100644
  	unsigned long free_ispace;  /* How much ispace left for allocation */
  	raw_spinlock_t stat_lock;   /* Serialize shmem_sb_info changes */
 diff --git a/mm/shmem.c b/mm/shmem.c
-index 568bb290bdce..ea14faf65e87 100644
+index 5a3f0f754dc0..6bbe28d8d56f 100644
 --- a/mm/shmem.c
 +++ b/mm/shmem.c
-@@ -147,9 +147,11 @@ static unsigned long shmem_default_max_blocks(void)
+@@ -151,9 +151,11 @@ static unsigned long shmem_default_max_blocks(void)
  static unsigned long shmem_default_max_inodes(void)
  {
  	unsigned long nr_pages = totalram_pages();
@@ -35,7 +35,7 @@ index 568bb290bdce..ea14faf65e87 100644
  }
  #endif
  
-@@ -1291,6 +1293,11 @@ static void shmem_evict_inode(struct inode *inode)
+@@ -1378,6 +1380,11 @@ static void shmem_evict_inode(struct inode *inode)
  	}
  
  	simple_xattrs_free(&info->xattrs, sbinfo->max_inodes ? &freed : NULL);
@@ -47,7 +47,7 @@ index 568bb290bdce..ea14faf65e87 100644
  	shmem_free_inode(inode->i_sb, freed);
  	WARN_ON(inode->i_blocks);
  	clear_inode(inode);
-@@ -2854,6 +2861,26 @@ static struct inode *__shmem_get_inode(struct mnt_idmap *idmap,
+@@ -3107,6 +3114,26 @@ static struct inode *__shmem_get_inode(struct mnt_idmap *idmap,
  		break;
  	}
  
@@ -74,7 +74,7 @@ index 568bb290bdce..ea14faf65e87 100644
  	lockdep_annotate_inode_mutex_key(inode);
  	return inode;
  }
-@@ -4259,7 +4286,7 @@ static int shmem_parse_one(struct fs_context *fc, struct fs_parameter *param)
+@@ -4613,7 +4640,7 @@ static int shmem_parse_one(struct fs_context *fc, struct fs_parameter *param)
  		break;
  	case Opt_nr_inodes:
  		ctx->inodes = memparse(param->string, &rest);
@@ -83,7 +83,7 @@ index 568bb290bdce..ea14faf65e87 100644
  			goto bad_value;
  		ctx->seen |= SHMEM_SEEN_INODES;
  		break;
-@@ -4613,6 +4640,8 @@ static void shmem_put_super(struct super_block *sb)
+@@ -4972,6 +4999,8 @@ static void shmem_put_super(struct super_block *sb)
  #ifdef CONFIG_TMPFS_QUOTA
  	shmem_disable_quotas(sb);
  #endif
@@ -92,16 +92,16 @@ index 568bb290bdce..ea14faf65e87 100644
  	free_percpu(sbinfo->ino_batch);
  	percpu_counter_destroy(&sbinfo->used_blocks);
  	mpol_put(sbinfo->mpol);
-@@ -4657,6 +4686,8 @@ static int shmem_fill_super(struct super_block *sb, struct fs_context *fc)
+@@ -5039,6 +5068,8 @@ static int shmem_fill_super(struct super_block *sb, struct fs_context *fc)
  #else
  	sb->s_flags |= SB_NOUSER;
- #endif
+ #endif /* CONFIG_TMPFS */
 +	mutex_init(&sbinfo->idr_lock);
 +	idr_init(&sbinfo->idr);
+ 	sb->s_d_flags |= DCACHE_DONTCACHE;
  	sbinfo->max_blocks = ctx->blocks;
  	sbinfo->max_inodes = ctx->inodes;
- 	sbinfo->free_ispace = sbinfo->max_inodes * BOGO_INODE_SIZE;
-@@ -4804,6 +4835,15 @@ static int shmem_error_remove_folio(struct address_space *mapping,
+@@ -5192,6 +5223,15 @@ static int shmem_error_remove_folio(struct address_space *mapping,
  	return 0;
  }
  
@@ -115,13 +115,13 @@ index 568bb290bdce..ea14faf65e87 100644
 +}
 +
  static const struct address_space_operations shmem_aops = {
- 	.writepage	= shmem_writepage,
  	.dirty_folio	= noop_dirty_folio,
-@@ -4968,6 +5008,7 @@ void __init shmem_init(void)
+ #ifdef CONFIG_TMPFS
+@@ -5422,6 +5462,7 @@ void __init shmem_init(void)
  		pr_err("Could not kern_mount tmpfs\n");
  		goto out1;
  	}
 +	shmem_no_idr(shm_mnt->mnt_sb);
  
- #ifdef CONFIG_TRANSPARENT_HUGEPAGE
- 	if (has_transparent_hugepage() && shmem_huge > SHMEM_HUGE_DENY)
+ #if defined(CONFIG_SYSFS) && defined(CONFIG_TMPFS)
+ 	error = tmpfs_sysfs_init();
