@@ -7,7 +7,8 @@ from pardus.fileutils import FileLock
 
 DIRECTORY_BLACKLIST = "/etc/modprobe.d"
 MODULES_DIR = "/lib/modules"
-MODULES_CONF = "/etc/modprobe.conf"
+# MODULES_CONF = "/etc/modprobe.conf"
+MODULES_CONF = "/etc/modprobe.d/modprobe.conf"
 MODULES_CONF_DIR = "/etc/modules.d"
 MODULES_AUTOLOAD = "/etc/modules.autoload.d/kernel-%s"
 MODULES_BLACKLIST = "/etc/modprobe.d/blacklist-compat"
