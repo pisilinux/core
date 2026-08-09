@@ -1,0 +1,25 @@
+Adjust for this in upstream 6.0.0
+
+commit efbabc11650040c64884ff3019b88c7bcc0ceb1d
+Author: Veerendranath Jakkam <quic_vjakkam@quicinc.com>
+Date:   Wed Jun 8 14:46:37 2022 +0530
+
+    cfg80211: Indicate MLO connection info in connect and roam callbacks
+
+Signed-off-by: Thomas Backlund <tmb@mageia.org>
+
+diff -Nurp broadcom-wl-6.30.223.271.orig/src/wl/sys/wl_cfg80211_hybrid.c broadcom-wl-6.30.223.271/src/wl/sys/wl_cfg80211_hybrid.c
+--- broadcom-wl-6.30.223.271.orig/src/wl/sys/wl_cfg80211_hybrid.c	2022-10-08 16:43:22.989444532 +0300
++++ broadcom-wl-6.30.223.271/src/wl/sys/wl_cfg80211_hybrid.c	2022-10-08 16:47:54.453417053 +0300
+@@ -2382,7 +2382,11 @@ wl_bss_roaming_done(struct wl_cfg80211_p
+ 	bss = cfg80211_get_bss(wl_to_wiphy(wl), NULL, (s8 *)&wl->bssid,
+ 	ssid->SSID, ssid->SSID_len, WLAN_CAPABILITY_ESS, WLAN_CAPABILITY_ESS);
+ 	struct cfg80211_roam_info roam_info = {
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)
++		.links[0].bss = bss,
++#else
+ 		.bss = bss,
++#endif
+ 		.req_ie = conn_info->req_ie,
+ 		.req_ie_len = conn_info->req_ie_len,
+ 		.resp_ie = conn_info->resp_ie,

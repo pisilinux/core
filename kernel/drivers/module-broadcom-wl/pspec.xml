@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>module-broadcom-wl</Name>
@@ -15,30 +15,43 @@
         <Archive sha1sum="8acbdbb4ab4ab4123d1773b616904798fbef9277" type="targz" target="i686">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
         <Archive sha1sum="1f568bb989d175813c5631c6629d9479eae6f3be" type="targz" target="x86_64">https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35_64-nodebug-pcoem-6_30_223_271.tar.gz</Archive>
         <BuildDependencies>
-            <Dependency version="6.12.94">kernel-module-headers</Dependency>
+            <Dependency version="6.18.43">kernel-module-headers</Dependency>
         </BuildDependencies>
         <Patches>
-            <Patch level="1">patch/linux-recent.patch</Patch>
-
-            <Patch level="1">broadcom-wl-6.30.223.271-debian-fix-kernel-warnings.patch</Patch>
-            <Patch level="1">patch/license.patch</Patch>
-            <Patch level="1">broadcom-wl-6.30.223.271-kernel-4.3-rdtscl-buildfix.patch</Patch>
-            <Patch level="1">kernel-4.14-buildfix.patch</Patch>
-            <Patch level="1">broadcom-wl-6.30.223.271-ifname-wlan.patch</Patch>
-            <Patch level="1">broadcom-wl-6.30.223.271-allow-user_ioctl.patch</Patch>
-            <Patch level="1">broadcom-wl-6.30.223.271-debian-fix-dkms-build-error.patch</Patch>
-            <Patch level="1">broadcom-wl-6.30.223.271-no-date-time.patch</Patch>
-
-            <Patch level="1">patch/broadcom-wl-6.30.223.271-kernel-6.0.0.patch</Patch>
-            <Patch level="1">patch/broadcom-wl-fix-linux-6.1.patch</Patch>
-            <Patch level="1">patch/017-handle-new-header-name-6.12.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-allow-user_ioctl.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-debian-fix-dkms-build-error.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-debian-fix-kernel-warnings.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-fix-null-pointer-crash.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-fix_mac_profile_discrepancy.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-ifname-wlan.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-4.11-buildfix.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-4.12-buildfix.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-4.14-buildfix.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-4.15-buildfix.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-4.3-rdtscl-buildfix.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-4.7-buildfix.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-4.8-buildfix.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-5.1-buildfix.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-5.17-fix2.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-5.17.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-5.18.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-5.6-buildfix.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-5.9-buildfix.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-6.0.0.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-6.1.0.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-6.13.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-6.14.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-6.15.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-kernel-6.17.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-6.30.223.271-no-date-time.patch</Patch>
+            <Patch level="1">mageia/broadcom-wl-kernel-6.12-fix.patch</Patch>
         </Patches>
     </Source>
 
     <Package>
         <Name>module-broadcom-wl</Name>
         <RuntimeDependencies>
-            <Dependency version="6.12.94">kernel</Dependency>
+            <Dependency version="6.18.43">kernel</Dependency>
             <Dependency release="current">module-broadcom-wl-userspace</Dependency>
         </RuntimeDependencies>
         <Files>
@@ -67,6 +80,13 @@
     </Package>
 
     <History>
+        <Update release="111">
+            <Date>2026-08-09</Date>
+            <Version>6.30.223.271</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="110">
             <Date>2026-06-20</Date>
             <Version>6.30.223.271</Version>

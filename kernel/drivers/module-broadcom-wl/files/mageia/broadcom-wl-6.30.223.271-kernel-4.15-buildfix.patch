@@ -1,0 +1,54 @@
+
+Fix for 4.15
+
+---
+ src/wl/sys/wl_linux.c |   15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff -Nurp broadcom-wl-6.30.223.271.orig/src/wl/sys/wl_linux.c broadcom-wl-6.30.223.271/src/wl/sys/wl_linux.c
+--- broadcom-wl-6.30.223.271.orig/src/wl/sys/wl_linux.c	2020-01-11 01:25:39.086492699 +0200
++++ broadcom-wl-6.30.223.271/src/wl/sys/wl_linux.c	2020-01-11 01:41:15.885238901 +0200
+@@ -93,7 +93,11 @@ struct iw_statistics *wl_get_wireless_st
+ 
+ #include <wlc_wowl.h>
+ 
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0)
++static void wl_timer(struct timer_list *tl);
++#else
+ static void wl_timer(ulong data);
++#endif
+ static void _wl_timer(wl_timer_t *t);
+ static struct net_device *wl_alloc_linux_if(wl_if_t *wlif);
+ 
+@@ -2297,10 +2301,17 @@ wl_timer_task(wl_task_t *task)
+ 	atomic_dec(&t->wl->callbacks);
+ }
+ 
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0)
++static void
++wl_timer(struct timer_list *tl)
++{
++	wl_timer_t *t = (wl_timer_t *)tl;
++#else
+ static void
+ wl_timer(ulong data)
+ {
+ 	wl_timer_t *t = (wl_timer_t *)data;
++#endif
+ 
+ 	if (!WL_ALL_PASSIVE_ENAB(t->wl))
+ 		_wl_timer(t);
+@@ -2352,9 +2363,13 @@ wl_init_timer(wl_info_t *wl, void (*fn)(
+ 
+ 	bzero(t, sizeof(wl_timer_t));
+ 
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0)
++	timer_setup(&t->timer, wl_timer, 0);
++#else
+ 	init_timer(&t->timer);
+ 	t->timer.data = (ulong) t;
+ 	t->timer.function = wl_timer;
++#endif
+ 	t->wl = wl;
+ 	t->fn = fn;
+ 	t->arg = arg;
