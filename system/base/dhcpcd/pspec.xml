@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>dhcpcd</Name>
@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>A dhcp client only</Summary>
         <Description>An RFC2131 and RFC1541 compliant DHCP client daemon. dhcpcd gets an IP address and other information from a corresponding DHCP server, configures the network interface automatically, and tries to renew the lease time according to RFC2131 or RFC1541 depending on the command line option.</Description>
-        <Archive sha1sum="8a641e230aed1f0d5c815aa3452e8b4bd7b717ec" type="tarxz">https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.0.10/dhcpcd-10.0.10.tar.xz</Archive>
+        <Archive sha1sum="f2c6e194eac8af0616f1e45f47b17e3cfbcbbf2d" type="tarxz">https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.5.2/dhcpcd-10.5.2.tar.xz</Archive>
         <!--<Patches>
             <Patch>dhcpcd-7.1.1-disable_inet6_fix.patch</Patch>
             <Patch>dhcpcd-7.1.1-overflows.patch</Patch>
@@ -45,6 +45,13 @@
     </Package>
 
     <History>
+        <Update release="16">
+            <Date>2026-08-20</Date>
+            <Version>10.5.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="15">
             <Date>2024-10-14</Date>
             <Version>10.0.10</Version>
