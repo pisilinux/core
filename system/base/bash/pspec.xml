@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>bash</Name>
@@ -34,6 +34,11 @@
             <Patch>official/bash53-013.patch</Patch>
             <Patch>official/bash53-014.patch</Patch>
             <Patch>official/bash53-015.patch</Patch>
+            <Patch>official/bash53-016.patch</Patch>
+            <Patch>official/bash53-017.patch</Patch>
+            <Patch>official/bash53-018.patch</Patch>
+            <Patch>official/bash53-019.patch</Patch>
+            <Patch>official/bash53-020.patch</Patch>
 
         <!-- Fedora patches -->
 <!--             <Patch level="1">fedora/bash-2.03-paths.patch</Patch> -->
@@ -82,6 +87,13 @@
     </Package>
 
     <History>
+        <Update release="24">
+            <Date>2026-09-16</Date>
+            <Version>5.3.20</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="23">
             <Date>2026-06-13</Date>
             <Version>5.3.15</Version>
