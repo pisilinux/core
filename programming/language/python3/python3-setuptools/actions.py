@@ -10,7 +10,7 @@ from pisi.actionsapi import python3modules
 
 WorkDir="setuptools-%s" % get.srcVERSION()
 
-# shelltools.export("SETUPTOOLS_SCM_PRETEND_VERSION","80.9.0")
+shelltools.export("SETUPTOOLS_SCM_PRETEND_VERSION","%s" % get.srcVERSION())
 
 #def setup():
     #shelltools.makedirs("%s/setuptools-54.2.0/build/scripts-3.8" % get.workDIR())
