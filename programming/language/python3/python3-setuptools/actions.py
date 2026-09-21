@@ -6,7 +6,7 @@
 from pisi.actionsapi import get
 from pisi.actionsapi import pisitools
 from pisi.actionsapi import shelltools
-from pisi.actionsapi import pythonmodules
+from pisi.actionsapi import python3modules
 
 WorkDir="setuptools-%s" % get.srcVERSION()
 
@@ -16,12 +16,12 @@ WorkDir="setuptools-%s" % get.srcVERSION()
     #shelltools.makedirs("%s/setuptools-54.2.0/build/scripts-3.8" % get.workDIR())
 
 def build():
-    pythonmodules.compile(pyVer="3 -B")
+    python3modules.compile(pyVer="3 -B")
 
 
 
 def install():
-    pythonmodules.install(pyVer="3 -B")
+    python3modules.install(pyVer="3 -B")
 
     pisitools.removeDir("/usr/lib/python3.11/site-packages/setuptools/_vendor")
 
