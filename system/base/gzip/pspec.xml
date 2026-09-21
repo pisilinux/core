@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>gzip</Name>
@@ -13,7 +13,7 @@
         <IsA>app:console</IsA>
         <Summary>Standard GNU compressor</Summary>
         <Description>gzip (GNU zip) is a popular data compression program written for the GNU project.</Description>
-        <Archive sha1sum="05f44a8a589df0171e75769e3d11f8b11d692f58" type="tarxz">http://ftp.gnu.org/gnu/gzip/gzip-1.14.tar.xz</Archive>
+        <Archive sha1sum="e40bf2f5f9782ea0e6278fa757e62be56c88ac4a" type="tarxz">http://ftp.gnu.org/gnu/gzip/gzip-1.15.tar.xz</Archive>
     </Source>
 
     <Package>
@@ -27,6 +27,13 @@
     </Package>
 
     <History>
+        <Update release="13">
+            <Date>2026-09-20</Date>
+            <Version>1.15</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="12">
             <Date>2025-11-11</Date>
             <Version>1.14</Version>
