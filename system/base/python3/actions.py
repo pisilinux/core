@@ -18,14 +18,14 @@ def setup():
     
     pisitools.flags.add("-fwrapv")
 
-    pisitools.dosed("Lib/cgi.py","^#.* /usr/local/bin/python","#!/usr/bin/python")
+    # pisitools.dosed("Lib/cgi.py","^#.* /usr/local/bin/python","#!/usr/bin/python")
 
     shelltools.unlinkDir("Modules/expat")
     #shelltools.unlinkDir("Modules/zlib")
-    shelltools.unlinkDir("Modules/_ctypes/darwin")
+    # shelltools.unlinkDir("Modules/_ctypes/darwin")
     #shelltools.unlinkDir("Modules/_ctypes/libffi")
     #shelltools.unlinkDir("Modules/_ctypes/libffi_msvc")
-    shelltools.unlinkDir("Modules/_ctypes/libffi_osx")
+    # shelltools.unlinkDir("Modules/_ctypes/libffi_osx")
     # shelltools.unlinkDir("Modules/_decimal/libmpdec")
     
     #shelltools.export("CFLAGS", "-I%s/temp/include -O3" %get.workDIR())
@@ -49,11 +49,15 @@ def build():
 
 def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    pisitools.remove("/usr/bin/2to3")
+    # pisitools.remove("/usr/bin/2to3")
     pisitools.dodoc("LICENSE", "README.*")
     
-    pisitools.removeDir("/usr/lib/python3.11/idlelib")
-    pisitools.removeDir("/usr/lib/python3.11/tkinter")
-    pisitools.removeDir("/usr/lib/python3.11/turtledemo")
+    pisitools.removeDir("/usr/lib/python3.14/idlelib")
+    pisitools.removeDir("/usr/lib/python3.14/tkinter")
+    pisitools.removeDir("/usr/lib/python3.14/turtledemo")
     pisitools.remove("/usr/bin/idle3*")
     # pisitools.remove("/usr/lib/libpython3.11.a")
+
+    # __pycache__ dizinlerini temizle
+    shelltools.system("find %s -name '__pycache__' -type d -exec rm -rf {} +" % get.installDIR())
+    shelltools.system("find %s -name '*.pyc' -delete" % get.installDIR())
