@@ -10,7 +10,7 @@ from pisi.actionsapi import pisitools
 
 
 def setup():
-    mesontools.configure()
+    mesontools.configure("-D python=python3")
 
 def build():
     mesontools.build()
