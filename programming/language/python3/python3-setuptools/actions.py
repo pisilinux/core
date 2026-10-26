@@ -23,7 +23,7 @@ def build():
 def install():
     python3modules.install(pyVer="3 -B")
 
-    pisitools.removeDir("/usr/lib/python3.11/site-packages/setuptools/_vendor")
+    pisitools.removeDir("/usr/lib/python3.14/site-packages/setuptools/_vendor")
 
     shelltools.system("find %s -name '*.py' -exec sed \
                                           -e 's:from \w*[.]\+extern ::' -e 's:\w*[.]\+extern[.]::' \
