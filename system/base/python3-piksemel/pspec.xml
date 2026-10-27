@@ -14,7 +14,7 @@
         <Summary xml:lang="tr">iksemel için python3 bağlama</Summary>
         <Description xml:lang="en">A simple, fast, small and robust XML parser for Python3, based on iksemel.</Description>
         <Description xml:lang="tr">Python3 için, iksemel tabanlı basit, hızlı, küçük ve sağlam bir XML ayrıştırıcısı.</Description>
-        <Archive sha1sum="56a349aedec685729d470e93d2d8dd4505d3e6db" type="targz">
+        <Archive sha1sum="8ca56767f71417bc50ac1bd1f7ef7e8ee89ac67b" type="targz">
             https://github.com/erkanisik1/python3-piksemel/archive/refs/tags/v2.1.tar.gz
         </Archive>
         <BuildDependencies>
@@ -30,12 +30,19 @@
             <Dependency>python3</Dependency>           
         </RuntimeDependencies>
         <Files>
-            <Path fileType="library">/usr/lib/python3.11/site-packages</Path>
+            <Path fileType="library">/usr/lib/python3.*/site-packages</Path>
             <Path fileType="doc">/usr/share/doc</Path>
         </Files>
     </Package>
 
     <History>
+        <Update release="2">
+            <Date>2026-10-14</Date>
+            <Version>2.1</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="1">
             <Date>2025-10-09</Date>
             <Version>2.1</Version>
