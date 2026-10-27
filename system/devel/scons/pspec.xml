@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>An Open Source software construction tool</Summary>
         <Description>Think of SCons as an improved, cross-platform substitute for the classic Make utility with integrated functionality similar to autoconf/automake and compiler caches such as ccache.</Description>
-        <Archive sha1sum="df25d199c53bbd75b7bae2170a13da2aac8b8a4e" type="targz">mirrors://sourceforge/scons/4.6.0/SCons-4.6.0.tar.gz</Archive>
+        <Archive sha1sum="7d242e9ea44c9262313b5b7201d3a61e0f902329" type="targz">https://sourceforge.net/projects/scons/files/scons/4.11.1/SCons-4.11.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>pip3</Dependency>
             <Dependency>python3-tomli</Dependency>
@@ -38,6 +38,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2026-10-14</Date>
+            <Version>4.11.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="8">
             <Date>2023-11-21</Date>
             <Version>4.6.0</Version>
