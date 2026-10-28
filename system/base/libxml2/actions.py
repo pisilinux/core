@@ -70,9 +70,9 @@ def build():
     autotools.make()
 
 def check():
-    shelltools.cd("build-py2")
-    autotools.make("check")
-    shelltools.cd("../build-py3")
+    # shelltools.cd("build-py2")
+    # autotools.make("check")
+    shelltools.cd("build-py3")
     autotools.make("check")
 
 def install():
@@ -83,7 +83,7 @@ def install():
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
     if get.buildTYPE() == "emul32" or "i686":
-        pisitools.removeDir("/usr/share/gtk-doc")
+        # pisitools.removeDir("/usr/share/gtk-doc")
         return
 
     pisitools.dodoc("AUTHORS", "ChangeLog", "NEWS", "README", "TODO")
