@@ -31,7 +31,7 @@ def build():
 def install():
     autotools.rawInstall("DESTDIR=%s docdir=/%s/html" % (get.installDIR(), docdir))
 
-    pisitools.doexe("gettext-tools/misc/gettextize", "/usr/bin")
+    # pisitools.doexe("gettext-tools/misc/gettextize", "/usr/bin")
 
     # Remove C# & Java stuff
     pisitools.remove("%s/html/examples/build-aux/csharp*" % docdir)
