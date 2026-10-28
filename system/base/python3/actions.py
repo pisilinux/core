@@ -59,5 +59,5 @@ def install():
     # pisitools.remove("/usr/lib/libpython3.11.a")
 
     # __pycache__ dizinlerini temizle
-    shelltools.system("find %s -name '__pycache__' -type d -exec rm -rf {} +" % get.installDIR())
-    shelltools.system("find %s -name '*.pyc' -delete" % get.installDIR())
+    # shelltools.system("find %s -name '__pycache__' -type d -exec rm -rf {} +" % get.installDIR())
+    # shelltools.system("find %s -name '*.pyc' -delete" % get.installDIR())
