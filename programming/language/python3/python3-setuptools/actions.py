@@ -25,6 +25,6 @@ def install():
 
     pisitools.removeDir("/usr/lib/python3.14/site-packages/setuptools/_vendor")
 
-    shelltools.system("find %s -name '*.py' -exec sed \
-                                          -e 's:from \w*[.]\+extern ::' -e 's:\w*[.]\+extern[.]::' \
-                                          -i {} + || die" % get.installDIR())
+    # shelltools.system("find %s -name '*.py' -exec sed \
+                                         # -e 's:from \w*[.]\+extern ::' -e 's:\w*[.]\+extern[.]::' \
+                                         # -i {} + || die" % get.installDIR())
