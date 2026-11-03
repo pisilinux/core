@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>libnghttp3</Name>
+        <Homepage>https://github.com/ngtcp2/nghttp3/</Homepage>
+        <Packager>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Packager>
+        <License>MIT</License>
+        <IsA>library</IsA>
+        <Summary>HTTP/3 library written in C</Summary>
+        <Description>C dilinde yazılmış HTTP/3 kütüphanesi</Description>
+        <Archive sha1sum="59228e2266dcf810af1fcd6e8b6f94d1c96f1550" type="tarxz">https://github.com/ngtcp2/nghttp3/releases/download/v1.19.0/nghttp3-1.19.0.tar.xz</Archive>
+        <!--
+        <Patches>
+            <Patch>libnghttp3.patch</Patch>
+            <Patch level="1">libnghttp3.patch</Patch>
+        </Patches>
+        -->
+    </Source>
+
+    <Package>
+        <Name>libnghttp3</Name>
+        <Files>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+        </Files>
+    </Package>
+
+    <Package>
+        <Name>libnghttp3-devel</Name>
+        <Summary>Development files for libnghttp3</Summary>
+        <RuntimeDependencies>
+            <Dependency release="current">libnghttp3</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="header">/usr/include</Path>
+            <Path fileType="library">/usr/lib/pkgconfig</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2026-11-02</Date>
+            <Version>1.19.0</Version>
+            <Comment>First release</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
+    </History>
+</PISI>
