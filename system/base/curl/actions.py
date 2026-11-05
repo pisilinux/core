@@ -20,6 +20,8 @@ def setup():
                          --with-libssh2 \
                          --with-gssapi=no \
                          --with-nghttp2 \
+                         --with-nghttp3 \
+                         --with-ngtcp2 \
                          --without-librtmp \
                          --enable-ipv6 \
                          --enable-http \
