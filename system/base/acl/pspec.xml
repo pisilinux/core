@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>acl</Name>
@@ -14,7 +14,7 @@
         <IsA>library</IsA>
         <Summary>Access control list utilities</Summary>
         <Description>acl contains the getfacl and setfacl utilities needed for manipulating access control lists along with the needed libraries.</Description>
-        <Archive sha1sum="5de165db26d8f03cebf26fd70cff294e0af925df" type="targz">http://download.savannah.gnu.org/releases/acl/acl-2.3.2.tar.gz</Archive>
+        <Archive sha1sum="2f433ff32b2cf277ff08361e482ed03fe4be6b0d" type="targz">https://download.savannah.nongnu.org/releases/acl/acl-2.4.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>attr-devel</Dependency>
 <!--             <Dependency versionFrom="8.0.1">readline-devel</Dependency> -->
@@ -47,6 +47,14 @@
         </Files>
     </Package>
 
+    <History>
+        <Update release="10">
+            <Date>2024-01-24</Date>
+            <Version>2.4.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
     <History>
         <Update release="9">
             <Date>2024-01-24</Date>
