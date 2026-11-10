@@ -12,8 +12,8 @@
         <IsA>app:library</IsA>
         <Summary>Enhanced seccomp library</Summary>
         <Description>High level interface to the Linux Kernel's seccomp filter.</Description>
-        <Archive sha1sum="a238b99356180de849e38b21aaad871b7630ae0e" type="targz">
-            https://github.com/seccomp/libseccomp/releases/download/v2.5.4/libseccomp-2.5.4.tar.gz
+        <Archive sha1sum="5659bfb01b31b8e797316598016239d51de60f0b" type="targz">
+            https://github.com/seccomp/libseccomp/archive/refs/tags/v2.6.1.tar.gz
         </Archive>
         <BuildDependencies>
             <Dependency>gperf</Dependency>
@@ -44,6 +44,14 @@
         </Files>
     </Package>
 
+    <History>
+        <Update release="9">
+            <Date>2026-11-10</Date>
+            <Version>2.6.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>fury</Name>
+            <Email>uglyside@yandex.ru</Email>
+        </Update>
     <History>
         <Update release="9">
             <Date>2023-03-18</Date>
