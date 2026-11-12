@@ -7,6 +7,7 @@
 from pisi.actionsapi import autotools, get
 
 def setup():
+    autotools.autoreconf("-fiv")
     autotools.configure("PYTHON=python3")
 
 def build():
