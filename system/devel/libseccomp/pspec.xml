@@ -12,9 +12,7 @@
         <IsA>app:library</IsA>
         <Summary>Enhanced seccomp library</Summary>
         <Description>High level interface to the Linux Kernel's seccomp filter.</Description>
-        <Archive sha1sum="5659bfb01b31b8e797316598016239d51de60f0b" type="targz">
-            https://github.com/seccomp/libseccomp/archive/refs/tags/v2.6.1.tar.gz
-        </Archive>
+        <Archive sha1sum="5659bfb01b31b8e797316598016239d51de60f0b" type="targz">https://github.com/seccomp/libseccomp/archive/refs/tags/v2.6.1.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>gperf</Dependency>
             <Dependency>python3</Dependency>
@@ -45,6 +43,13 @@
     </Package>
 
     <History>
+        <Update release="10">
+            <Date>2026-11-09</Date>
+            <Version>2.6.1</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="9">
             <Date>2026-11-10</Date>
             <Version>2.6.1</Version>
