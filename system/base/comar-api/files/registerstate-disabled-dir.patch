@@ -1,0 +1,11 @@
+diff -Naur comar-api-2.4.9.orig/comar/service.py comar-api-2.4.9/comar/service.py
+--- comar-api-2.4.9.orig/comar/service.py	2016-07-24 21:19:21.000000000 +1000
++++ comar-api-2.4.9/comar/service.py	2026-11-13 11:19:10.161410132 +1100
+@@ -446,6 +446,7 @@
+         file(_file, "w").close()
+ 
+     makeDir("/etc/mudur/services/enabled")
++    makeDir("/etc/mudur/services/disabled")
+     makeDir("/etc/mudur/services/conditional")
+ 
+     state = None
