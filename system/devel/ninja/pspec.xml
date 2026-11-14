@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
-<!DOCTYPE PISI SYSTEM "http://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
+<!DOCTYPE PISI SYSTEM "https://www.pisilinux.org/projeler/pisi/pisi-spec.dtd">
 <PISI>
     <Source>
         <Name>ninja</Name>
-        <Homepage>https://ninja-build.org/</Homepage>
+        <Homepage>https://ninja-build.org</Homepage>
         <Packager>
             <Name>Stefan Gronewold(groni)</Name>
             <Email>groni@pisilinux.org</Email>
@@ -12,7 +12,7 @@
         <IsA>app:console</IsA>
         <Summary>Ninja is a small build system with a focus on speed.</Summary>
         <Description>Ninja is a small build system with a focus on speed.</Description>
-        <Archive sha1sum="2a4d0b3e47b7bcd7468524bf17318e814c6a3984" type="targz" name="ninja-1.13.1.tar.gz">https://github.com/ninja-build/ninja/archive/refs/tags/v1.13.1.tar.gz</Archive>
+        <Archive sha1sum="814c89873e905fd07dfb13c3ebbcfbc0dfc277ca" type="targz" name="ninja-1.13.1.tar.gz">https://github.com/ninja-build/ninja/archive/refs/tags/v1.13.2.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>re2c</Dependency>
             <Dependency>asciidoc</Dependency>
@@ -36,7 +36,14 @@
         </Files>
     </Package>
 
-    <History>
+	    <History>
+        <Update release="21">
+            <Date>2026-11-13</Date>
+            <Version>1.13.2</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="20">
             <Date>2025-07-11</Date>
             <Version>1.13.1</Version>
