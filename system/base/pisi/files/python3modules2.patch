@@ -1,0 +1,110 @@
+diff -Nuar a/pisi/actionsapi/python3modules.py b/pisi/actionsapi/python3modules.py
+--- a/pisi/actionsapi/python3modules.py	1970-01-01 02:00:00.000000000 +0200
++++ b/pisi/actionsapi/python3modules.py	2026-11-16 16:51:37.114542461 +0300
+@@ -0,0 +1,106 @@
++# -*- coding: utf-8 -*-
++#
++# Copyright (C) 2005-2010 TUBITAK/UEKAE
++#
++# This program is free software; you can redistribute it and/or modify it under
++# the terms of the GNU General Public License as published by the Free
++# Software Foundation; either version 2 of the License, or (at your option)
++# any later version.
++#
++# Please read the COPYING file.
++
++# standard python modules
++import os
++import glob
++
++import gettext
++__trans = gettext.translation('pisi', fallback=True)
++_ = __trans.ugettext
++
++# Pisi Modules
++import pisi.context as ctx
++
++# ActionsAPI Modules
++import pisi.actionsapi
++import pisi.actionsapi.get as get
++from pisi.actionsapi.shelltools import system, can_access_file, unlink, isEmpty
++from pisi.actionsapi.pisitools import dodoc
++
++class ConfigureError(pisi.actionsapi.Error):
++    def __init__(self, value=''):
++        pisi.actionsapi.Error.__init__(self, value)
++        self.value = value
++        ctx.ui.error(value)
++
++class CompileError(pisi.actionsapi.Error):
++    def __init__(self, value=''):
++        pisi.actionsapi.Error.__init__(self, value)
++        self.value = value
++        ctx.ui.error(value)
++
++class InstallError(pisi.actionsapi.Error):
++    def __init__(self, value=''):
++        pisi.actionsapi.Error.__init__(self, value)
++        self.value = value
++        ctx.ui.error(value)
++
++class RunTimeError(pisi.actionsapi.Error):
++    def __init__(self, value=''):
++        pisi.actionsapi.Error.__init__(self, value)
++        self.value = value
++        ctx.ui.error(value)
++
++def configure(parameters = '', pyVer = '3'):
++    '''
++    Modern Python paketlerinde 'configure' adimi yoktur.
++    Eger proje eski usul setup.py kullaniyorsa ekstra parametreler (ornegin --prefix) burada verilebilir.
++    Ancak cogu modern proje icin bu fonksiyonun bos gecmesi guvenlidir.
++    '''
++    # Eger gercekten bir configure adimina ihtiyac varsa setup.py kullanilabilir:
++    # system('python%s setup.py configure %s' % (pyVer, parameters))
++    pass
++
++def compile(parameters = '', pyVer = '3'):
++    '''
++    Kaynak kodu wheel (tekerlek) formatinda derler.
++    Gereksinim: python3-build paketi kurulu olmalidir.
++    '''
++    if system('python%s -m build --wheel --no-isolation %s' % (pyVer, parameters)):
++        raise CompileError, _('Compilation failed.')
++
++def install(parameters = '', pyVer = '3'):
++    '''
++    Derlenen wheel dosyasini hedef dizine kurar.
++    Gereksinim: python3-installer paketi kurulu olmalidir.
++    '''
++    # dist/ dizinindeki .whl dosyalarini hedefler
++    if system('python%s -m installer --destdir=%s dist/*.whl %s' % (pyVer, get.installDIR(), parameters)):
++        raise InstallError, _('Installation failed.')
++
++    docFiles = ('AUTHORS', 'CHANGELOG', 'CONTRIBUTORS', 'COPYING*', 'COPYRIGHT',
++                'Change*', 'KNOWN_BUGS', 'LICENSE', 'MAINTAINERS', 'NEWS',
++                'README*', 'PKG-INFO')
++
++    for docGlob in docFiles:
++        for doc in glob.glob(docGlob):
++            if not isEmpty(doc):
++                dodoc(doc)
++
++def run(parameters = '', pyVer = '3'):
++    '''executes parameters with python'''
++    if system('python%s %s' % (pyVer, parameters)):
++        raise RunTimeError, _('Running %s failed.') % parameters
++
++def fixCompiledPy(lookInto = '/usr/lib/%s/' % get.curPYTHON()):
++    ''' cleans *.py[co] from packages '''
++    # Eger dizin yoksa (ornegin 32-bit derlemede), hata vermesini engelle
++    target_dir = '%s/%s' % (get.installDIR(), lookInto)
++    if not os.path.exists(target_dir):
++        return
++
++    for root, dirs, files in os.walk(target_dir):
++        for compiledFile in files:
++            if compiledFile.endswith('.pyc') or compiledFile.endswith('.pyo'):
++                file_path = '%s/%s' % (root, compiledFile)
++                if can_access_file(file_path):
++                    unlink(file_path)

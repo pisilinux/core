@@ -1,0 +1,110 @@
+diff -Nuar a/pisi/actionsapi/qt6.py b/pisi/actionsapi/qt6.py
+--- a/pisi/actionsapi/qt6.py	1970-01-01 02:00:00.000000000 +0200
++++ b/pisi/actionsapi/qt6.py	2026-11-15 22:58:31.951556776 +0300
+@@ -0,0 +1,105 @@
++# -*- coding: utf-8 -*-
++
++import os
++
++import gettext
++
++import pisi.actionsapi
++import pisi.context as ctx
++from pisi.actionsapi import get
++from pisi.actionsapi.shelltools import system
++
++__trans = gettext.translation('pisi', fallback=True)
++_ = __trans.ugettext
++
++
++class ConfigureError(pisi.actionsapi.Error):
++    def __init__(self, value=''):
++        pisi.actionsapi.Error.__init__(self, value)
++        self.value = value
++        ctx.ui.error(value)
++
++
++class CompileError(pisi.actionsapi.Error):
++    def __init__(self, value=''):
++        pisi.actionsapi.Error.__init__(self, value)
++        self.value = value
++        ctx.ui.error(value)
++
++
++class InstallError(pisi.actionsapi.Error):
++    def __init__(self, value=''):
++        pisi.actionsapi.Error.__init__(self, value)
++        self.value = value
++        ctx.ui.error(value)
++
++basename = "qt6"
++
++prefix = "/%s" % get.defaultprefixDIR()
++libdir = "%s/lib" % prefix
++bindirQt6 = "%s/%s/bin" % (libdir, basename)  # Bin dizini eklendi: /usr/lib/qt6/bin
++libexecdir = "%s/libexec" % prefix
++sysconfdir= "/etc"
++bindir = "%s/bin" % prefix
++includedir = "%s/include" % prefix
++
++headerdir = "%s/include/%s" % (prefix, basename)
++datadir = "%s/share/%s" % (prefix, basename)
++docdir = "/%s/%s" % (get.docDIR(), basename)
++archdatadir = "%s/%s" % (libdir, basename)
++mkspecsdir = "%s/%s/mkspecs" % (libdir, basename)
++examplesdir = "%s/%s/examples" % (libdir, basename)
++testdir = "%s/share/%s" % (prefix, basename)
++translationdir = "%s/translations" % datadir
++
++qmake = "%s/qmake-qt6" % bindir
++
++
++def configure(parameters='', build_dir='build'):
++    """
++    Configures the project into the build directory with the parameters using CMake.
++    """
++    default_parameters = ' '.join([
++                    '-DCMAKE_INSTALL_PREFIX=%s' % prefix,
++                    '-DCMAKE_C_FLAGS="%s"' % get.CFLAGS() ,
++                    '-DCMAKE_CXX_FLAGS="%s"' % get.CXXFLAGS(),
++                    # LD_FLAGS dogru CMake degiskenlerine aktarildi
++                    '-DCMAKE_EXE_LINKER_FLAGS="%s"' % get.LDFLAGS(),
++                    '-DCMAKE_SHARED_LINKER_FLAGS="%s"' % get.LDFLAGS(),
++                    '-DCMAKE_MODULE_LINKER_FLAGS="%s"' % get.LDFLAGS(),
++                    '-DCMAKE_BUILD_TYPE=RelWithDebInfo' ,
++                    '-DINSTALL_BINDIR=%s' % bindirQt6,
++                    '-DINSTALL_LIBDIR=%s' % libdir,      # Kutuphane dizini eklendi
++                    '-DINSTALL_INCLUDEDIR=%s' % headerdir,
++                    '-DINSTALL_ARCHDATADIR=%s' % archdatadir,
++                    '-DINSTALL_DOCDIR=%s' % docdir,
++                    '-DINSTALL_DATADIR=%s' % datadir,
++                    '-DINSTALL_MKSPECSDIR=%s' % mkspecsdir,
++                    '-DINSTALL_EXAMPLESDIR=%s' % examplesdir,
++                    '-DQT_FEATURE_libproxy=ON' ,
++                    '-DQT_FEATURE_vulkan=ON' ,
++                    '-DQT_FEATURE_system_freetype=ON' ,
++                    '-DQT_FEATURE_system_harfbuzz=ON' ,
++                    '-DQT_FEATURE_system_sqlite=ON' ,
++                    '-DQT_FEATURE_dbus_linked=ON' ,
++                    '-DCMAKE_MESSAGE_LOG_LEVEL=STATUS' ,
++                    '-DQT_FEATURE_openssl_linked=ON' ,
++    ])
++    if system('cmake -B %s -G Ninja %s %s' % (build_dir, default_parameters, parameters)):
++        raise ConfigureError(_('Configuration failed.'))
++
++
++def make(parameters='', build_dir='build'):
++    """
++    Builds the project into the build directory with the parameters using Ninja.
++    """
++    if system('ninja -C %s %s %s' % (build_dir, parameters, get.makeJOBS())):
++        raise CompileError(_('Make failed.'))
++
++
++def install(parameters='', build_dir='build'):
++    """
++    Installs the project to the destination directory.
++    """
++    if system('DESTDIR=%s ninja -C %s %s install' % (get.installDIR(), build_dir, parameters, )):
++        raise InstallError(_('Install failed.'))
+\ Dosya sonunda yenisatır yok
