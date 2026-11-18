@@ -25,10 +25,10 @@
         <Patches>
             <Patch level="1">0001-PackageKit-Search-Bug-Fix.patch</Patch>
             <Patch level="1">pot_file_and_ru_translation.patch</Patch>
-            <Patch level="1">qt6-actionsapi.patch</Patch>
+            <Patch level="1">qt6-actionsapi2.patch</Patch>
             <Patch level="1">perlmodules_fix_Build_PL.patch</Patch>
-            <Patch level="1">python3modules.patch</Patch>
-            <Patch level="1">kde6-tools.patch</Patch>
+            <Patch level="1">python3modules2.patch</Patch>
+            <Patch level="1">kde6-tools2.patch</Patch>
             <Patch level="1">kerneltools-kernnel6.patch</Patch>
             <Patch level="1">glibc-upgrade2.patch</Patch>
         </Patches>
@@ -81,6 +81,17 @@
     </Package>
 
     <History>
+        <Update release="31">
+            <Date>2025-11-18</Date>
+            <Version>2.7.2</Version>
+            <Comment>Rebuild</Comment>
+            <Type package="pisi">security</Type>
+            <Requires>
+                <Action package="pisi">systemRestart</Action>
+            </Requires>
+            <Name>Mustafa Cinasal</Name>
+            <Email>muscnsl@gmail.com</Email>
+        </Update>
         <Update release="30">
             <Date>2025-11-03</Date>
             <Version>2.7.2</Version>
