@@ -50,6 +50,7 @@ def setup():
                          --enable-pmaixforwardedfrom \
                          --enable-cached-man-pages \
                          --with-systemdsystemunitdir=no \
+                         --disable-impstats-push \
                         ")
 
     pisitools.dosed("libtool", " -shared ", " -Wl,-O1,--as-needed -shared ")
