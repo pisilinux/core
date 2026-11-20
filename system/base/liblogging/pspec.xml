@@ -3,7 +3,7 @@
 <PISI>
     <Source>
         <Name>liblogging</Name>
-        <Homepage>https://www.rsyslog.com/liblogging-0-3-1-is-now-available/</Homepage>
+        <Homepage>https://github.com/rsyslog/liblogging</Homepage>
         <Packager>
             <Name>Marcin Bojara</Name>
             <Email>marcin@pisilinux.org</Email>
@@ -12,7 +12,7 @@
         <IsA>library</IsA>
         <Summary>Easy to use, portable, open source library for system logging</Summary>
         <Description>Liblogging offers an enhanced replacement for the syslog() call, but retains its ease of use.</Description>
-        <Archive sha1sum="96cecdf1e6e990656863fd69428440b5870d72a8" type="targz">https://github.com/rsyslog/liblogging/archive/v1.0.6.tar.gz</Archive>
+        <Archive sha1sum="1f28a9607ccc866fae58ed553748caf71ba37f3e" type="targz">https://github.com/rsyslog/liblogging/archive/refs/tags/v1.0.8.tar.gz</Archive>
     </Source>
 
     <Package>
@@ -39,6 +39,13 @@
     </Package>
 
     <History>
+        <Update release="7">
+            <Date>2026-11-18</Date>
+            <Version>1.0.8</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
         <Update release="6">
             <Date>2020-12-09</Date>
             <Version>1.0.6</Version>
