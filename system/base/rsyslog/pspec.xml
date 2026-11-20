@@ -12,7 +12,7 @@
         <IsA>service</IsA>
         <Summary>Enhanced system logging and kernel message trapping daemons</Summary>
         <Description>rsyslog is an enhanced multi-threaded syslogd supporting, among others, MySQL, syslog/tcp, RFC 3195, permitted sender lists, filtering on any message part, and fine grain output format control. It is quite compatible with stock sysklogd and can be used as a drop-in replacement.</Description>
-        <Archive sha1sum="4c7364dbcd6683fe238fbac54a3293960a700ebd" type="targz">https://www.rsyslog.com/files/download/rsyslog/rsyslog-8.2008.0.tar.gz</Archive>
+        <Archive sha1sum="40158129fa8151a551f11dd174ea33acdb3d1294" type="targz">https://www.rsyslog.com/files/download/rsyslog/rsyslog-8.2610.0.tar.gz</Archive>
         <BuildDependencies>
             <Dependency>zlib-devel</Dependency>
 			<Dependency>curl-devel</Dependency>
@@ -58,6 +58,13 @@
     </Package>
 
     <History>
+        <Update release="9">
+            <Date>2026-11-20</Date>
+            <Version>8.2610.0</Version>
+            <Comment>Version bump.</Comment>
+            <Name>Pisi Linux Community</Name>
+            <Email>admin@pisilinux.org</Email>
+        </Update>
 	<Update release="8">
             <Date>2021-05-29</Date>
             <Version>8.2008.0</Version>
