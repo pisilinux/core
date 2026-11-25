@@ -12,7 +12,9 @@
         <IsA>app:console</IsA>
         <Summary>Pisi Linux boot and initialization system</Summary>
         <Description>mudur handles mounting of the filesystems, loading of the device drivers, starting of the system services, and other jobs during the Pisi Linux boot and shutdown sequences.</Description>
-        <Archive sha1sum="8808b017cd09597bf32c3e81a1b602eca1afb7e0" type="targz">https://github.com/PisiLinuxNew/mudur/archive/v4.4.0.tar.gz</Archive>
+        <Archive sha1sum="47480d76c5479aab154d1154da011aa090d51a45" type="targz">
+            https://github.com/PisiLinuxNew/mudur/archive/refs/tags/v4.4.1.tar.gz
+        </Archive>
         <Patches>
             <!--Patch>set_file_mode.patch</Patch>
             <Patch>no_err-no_msg.patch</Patch>
@@ -61,6 +63,13 @@
     </Package>
 
     <History>
+        <Update release="7">
+            <Date>2026-11-26</Date>
+            <Version>4.4.1</Version>
+            <Comment>Rebuild</Comment>
+            <Name>Erkan IŞIK</Name>
+            <Email>erkanisik@pisilinux.org</Email>
+        </Update>
         <Update release="6">
             <Date>2020-12-09</Date>
             <Version>4.4.0</Version>
