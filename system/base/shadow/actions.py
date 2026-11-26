@@ -64,7 +64,7 @@ def install():
     shelltools.system("sed -i 's;#CREATE_HOME;CREATE_HOME;g' " + get.installDIR() + "/etc/login.defs")
     ###
 
-    for f in ["chfn", "chgpasswd", "chpasswd", "chsh" "groupadd", "groupdel",
+    for f in ["chfn", "chgpasswd", "chpasswd", "chsh", "groupadd", "groupdel",
               "groupmems", "groupmod", "newusers", "useradd", "userdel", "usermod"]:
         shelltools.system("install -v -m644 " + get.installDIR() + "/etc/pam.d/chage " + get.installDIR() + "/etc/pam.d/" + f)
         shelltools.system('sed -i "s/chage/' + f + '/" ' + get.installDIR() + "/etc/pam.d/" + f)
